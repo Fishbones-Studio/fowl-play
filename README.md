@@ -14,6 +14,7 @@ Fowl Play is a 3D Roguelike Arena Fighter game about hatching and mutating chick
 2. Fetch the submodules:
      ```bash
      git submodule init
+     git submodule update
      ```
 3. Open the project in Godot Engine.
 4. Click the "Run" button or press F5 to start the game
