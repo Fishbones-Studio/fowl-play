@@ -15,8 +15,8 @@ Fowl Play is a 3D Roguelike Arena Fighter game about hatching and mutating chick
      ```bash
      git submodule init
      ```
-4. Open the project in Godot Engine.
-5. Click the "Run" button or press F5 to start the game
+3. Open the project in Godot Engine.
+4. Click the "Run" button or press F5 to start the game
 
 <hr/> 2025 Studio Fishbones
 <br/> Created for the game development minor, at The Hague University of Applied Sciences, location Zoetemeer
