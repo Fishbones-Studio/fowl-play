@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cggqb75a8w8r"]
+[gd_scene load_steps=3 format=3 uid="uid://cggqb75a8w8r"]
 
 [ext_resource type="Script" uid="uid://hmkoflj1g8p4" path="res://addons/debug_menu/debug_menu.gd" id="1_p440y"]
-[ext_resource type="PackedScene" uid="uid://bjr4b02aehry4" path="res://ui/player_debug_menu/player_debug_menu.tscn" id="2_mp16e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki0n8"]
 bg_color = Color(0, 0, 0, 0.25098)
@@ -35,11 +34,14 @@ settings = NodePath("DebugMenu/VBoxContainer/Settings")
 [node name="DebugMenu" type="Control" parent="."]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 3
-anchors_preset = 0
-offset_left = 752.0
-offset_top = 4.0
-offset_right = 1152.0
-offset_bottom = 404.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -416.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = 408.0
+grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_filter = 2
@@ -396,14 +398,5 @@ Glow: On
 Volumetric Fog: On
 2D Antialiasing: 2× MSAA"
 horizontal_alignment = 2
-
-[node name="PlayerDebugMenu" parent="." instance=ExtResource("2_mp16e")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 576.0
-offset_right = 576.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
