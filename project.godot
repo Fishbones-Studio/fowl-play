@@ -1,0 +1,20 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Fowl Play"
+run/main_scene="uid://dab0i61vj1n23"
+config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://caypnb5v7do1g"
+config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2500
