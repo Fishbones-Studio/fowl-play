@@ -1,0 +1,37 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# Idea
+.idea
+
+#vscode
+.vscode/*
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Ignore everything in any addons directory
+**/addons/*
+
+# Specifically allow markdown files in any addons directory
+!**/addons/*.md
+
+# Temp files
+*.TMP
+
+# Compiled binaries
+*.so
+*.dll
+*.exe
