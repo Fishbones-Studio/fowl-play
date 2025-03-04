@@ -11,10 +11,24 @@ config_version=5
 [application]
 
 config/name="Fowl Play"
+config/version="1.0.0"
 run/main_scene="uid://dab0i61vj1n23"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/use_filter=false
 boot_splash/image="uid://caypnb5v7do1g"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2500
+
+[autoload]
+
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+Panku="*res://addons/panku_console/console.tscn"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/panku_console/plugin.cfg")
