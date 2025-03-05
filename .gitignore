@@ -25,9 +25,6 @@ mono_crash.*.json
 # Temp files
 *.TMP
 
-# Panko uid files
-addons/panku_console/**/*.gd.uid
-
 # Compiled binaries
 *.so
 *.dll
