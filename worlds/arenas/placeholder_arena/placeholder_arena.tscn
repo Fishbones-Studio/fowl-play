@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsx7lytfj8571"]
+
+[ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="1_mlvld"]
+[ext_resource type="Script" uid="uid://cw7lyropg43p3" path="res://worlds/arenas/placeholder_arena/state_label.gd" id="2_2cplc"]
+[ext_resource type="Script" uid="uid://rogmpcpqcuix" path="res://worlds/arenas/placeholder_arena/player_location_label.gd" id="3_hc6wf"]
+
+[node name="PlaceholderArena" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59561, -1.95356, -1.7984)
+use_collision = true
+size = Vector3(100, 0.2, 100)
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.995509, -0.00619844, 0.0944599, 0.00475659, 0.999869, 0.0154817, -0.0945434, -0.0149629, 0.995408, 0, 3.84457, 3.79587)
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_mlvld")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50721, 0)
+camera = NodePath("../PlayerCamera")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.953533, -0.243062, 0.178032, 0, 0.590901, 0.806744, -0.301288, -0.769257, 0.563444, 0, 18.5033, 24.5322)
+
+[node name="DebugMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StateLabel" type="Label" parent="DebugMenu/VBoxContainer"]
+layout_mode = 2
+text = "State: "
+script = ExtResource("2_2cplc")
+
+[node name="PlayerLocationLabel" type="Label" parent="DebugMenu/VBoxContainer"]
+layout_mode = 2
+text = "Location"
+script = ExtResource("3_hc6wf")
