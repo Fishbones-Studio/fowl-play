@@ -9,5 +9,6 @@ enum PlayerStates{
 	JUMP_STATE,
 	GLIDE_STATE,
 	DASH_STATE, 
-	HURT_STATE
+	HURT_STATE,
+	FALL_STATE
 }
