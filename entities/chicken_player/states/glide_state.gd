@@ -2,11 +2,11 @@ extends BasePlayerState
 
 @export_range(0, 1, 0.01) var glide_gravity: float = 0.4
 @export var glide_fall_speed: float = 1.5
-@export var glide_speed: float = 40
+@export var glide_movement_speed: float = 35
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
+	movement_speed = glide_movement_speed
 	super.enter(_previous_state)
-	movement_speed = glide_speed
 	
 func process(_delta: float) -> void:
 	# check if the player is holding the jump button
