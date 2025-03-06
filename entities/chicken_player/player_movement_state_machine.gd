@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 
-func _transition_to_next_state(target_state: PlayerEnums.PlayerStates) -> void:
+func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, information : Dictionary = {}) -> void:
 	var previous_state := current_state
 	previous_state.exit()
 	
@@ -58,7 +58,7 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates) -> void:
 	
 	# TODO: start animation of the state
 		
-	current_state.enter(previous_state.STATE_TYPE)
+	current_state.enter(previous_state.STATE_TYPE, information)
 
 func _input(event: InputEvent) -> void:
 	if current_state == null:
