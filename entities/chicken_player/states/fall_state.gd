@@ -8,7 +8,6 @@ var dashed: bool = false
 func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
 	super.enter(_previous_state)
 	
-	# TODO: Do we want double jump or not?
 	if (previous_state == PlayerEnums.PlayerStates.WALK_STATE or previous_state == PlayerEnums.PlayerStates.SPRINT_STATE):
 		jump_available = true
 		coyote_timer.start()
