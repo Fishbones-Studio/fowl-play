@@ -1,9 +1,13 @@
 extends BasePlayerState
 
+@export var glide_hold_threshold: float = 0.3  # Seconds to hold for glide
+
 @onready var coyote_timer : Timer = $CoyoteTimer ## Timer to manage jump availability after leaving the ground, so the player can jump when just barely off the platform
 
 var jump_available: bool = false
 var dashed: bool = false
+var is_jump_held: bool = false
+var jump_press_time: float = 0.0
 
 func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
 	super.enter(_previous_state)
@@ -16,14 +20,24 @@ func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
 	else:
 		dashed = false
 		
+		# TODO fix double jump with coyote time
+		
 func process(_delta: float) -> void:
 	# state transitions
-	if Input.is_action_pressed("jump"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE)
-	elif jump_available and Input.is_action_just_pressed("jump"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE)
-	elif not dashed and Input.is_action_pressed("dash"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE)
+	if  Input.is_action_just_pressed("jump"):
+		jump_press_time = Time.get_ticks_msec()
+		is_jump_held = true
+
+	if is_jump_held:
+		if Input.is_action_pressed("jump"):
+			# Check if held longer than threshold
+			if Time.get_ticks_msec() - jump_press_time > glide_hold_threshold * 1000:
+				SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE)
+				is_jump_held = false
+		else:
+			# Button released before threshold
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE)
+			is_jump_held = false
 
 	# check for landing
 	if player.is_on_floor():

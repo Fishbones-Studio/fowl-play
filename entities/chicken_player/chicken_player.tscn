@@ -23,7 +23,7 @@ script = ExtResource("1_abrql")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44468, 0.0170182)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraOrigin"]
-spring_length = 2.0
+spring_length = 4.0
 margin = 0.5
 
 [node name="PlayerCameraTransformer" type="RemoteTransform3D" parent="CameraOrigin/SpringArm3D"]
@@ -32,6 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258536, -0.133833)
 remote_path = NodePath("../../..")
 
 [node name="StandardChickenModel" parent="." instance=ExtResource("1_symyc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.219971, 0)
@@ -50,7 +51,7 @@ STATE_TYPE = 5
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="MovementStateMachine/Dash"]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Glide" type="Node" parent="MovementStateMachine"]
