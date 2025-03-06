@@ -1,6 +1,7 @@
 extends BasePlayerState
 
 @export var glide_hold_threshold: float = 0.25  # Seconds to hold for glide
+@export var fall_movement_speed: float = 35
 
 @onready var coyote_timer : Timer = $CoyoteTimer ## Timer to manage jump availability after leaving the ground, so the player can jump when just barely off the platform
 
@@ -10,6 +11,7 @@ var is_jump_held: bool = false
 var jump_press_time: float = 0.0
 
 func enter(_previous_state: PlayerEnums.PlayerStates, information : Dictionary = {}) -> void:
+	movement_speed = fall_movement_speed
 	super.enter(_previous_state)
 	
 	# check for jump availability and dash in information
