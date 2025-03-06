@@ -26,7 +26,7 @@ func _ready():
 func _input(event):
 	# TODO add controller support
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(event.relative.x))
+		rotate_y(deg_to_rad(-event.relative.x))
 		camera_origin.rotate_x(deg_to_rad(-event.relative.y))
 		camera_origin.rotation.x = clamp(camera_origin.rotation.x, deg_to_rad(-90), deg_to_rad(45))
 		
