@@ -13,6 +13,10 @@ func process(delta: float) -> void:
 	if not Input.is_action_pressed("sprint") or player.stamina <= 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 
+	# Handle dash transition
+	if Input.is_action_just_pressed("dash"):
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
+
 func physics_process(delta: float) -> void:
 	super(delta)
 
@@ -30,7 +34,3 @@ func input(event: InputEvent) -> void:
 	# Check for jump input
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
-	
-	# Check for dash input
-	if event.is_action_pressed("dash"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
