@@ -1,12 +1,17 @@
 extends BasePlayerState
 
-@export var glide_gravity: float = 1.5
-@export var glide_fall_speed: float = 2
-@export var glide_speed: float = 15
+@export_range(0, 1, 0.01) var glide_gravity: float = 0.4
+@export var glide_fall_speed: float = 1.5
+@export var glide_speed: float = 40
 
-func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
+func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
 	super.enter(_previous_state)
 	movement_speed = glide_speed
+	
+func process(_delta: float) -> void:
+	# check if the player is holding the jump button
+	if Input.is_action_just_released("jump"):
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 
 func physics_process(delta: float) -> void:
 	# Applying default player movement
@@ -21,6 +26,5 @@ func physics_process(delta: float) -> void:
 	
 	# Check for state transitions
 	if player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE)
-	
-	
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		

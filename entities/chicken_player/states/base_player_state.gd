@@ -20,7 +20,7 @@ func setup(_player: ChickenPlayer) -> void:
 ##
 ## Parameters:
 ## _previous_state: The state that was active before this one.
-func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
+func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
 	previous_state = _previous_state
 	
 # Providing default player movement

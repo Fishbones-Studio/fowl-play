@@ -4,7 +4,7 @@ var knockback_force: Vector3
 @export var KNOCKBACK_STRENGTH: float = 5.0
 @export var VERTICAL_KNOCKBACK: float = 8.0
 
-func enter(_previous_state: PlayerEnums.PlayerStates) -> void:
+func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
 	# Calculate knockback direction 
 	var knockback_direction: Vector3 = -player.transform.basis.z
 	
@@ -23,4 +23,4 @@ func physics_process(delta: float) -> void:
 
 	# Check for landing
 	if player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE)
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
