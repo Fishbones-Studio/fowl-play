@@ -25,7 +25,6 @@ func _ready() -> void:
 	# Get all states in the scene tree
 	for state_node: BasePlayerState in get_children():
 		states[state_node.STATE_TYPE] = state_node
-		print(player.name)
 		state_node.setup(player)
 
 	print(states)

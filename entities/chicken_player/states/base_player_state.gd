@@ -12,7 +12,7 @@ var previous_state: PlayerEnums.PlayerStates
 ## Parameters:
 ## _player: The player reference to set.
 func setup(_player: ChickenPlayer) -> void:
-	if player == null:
+	if _player == null:
 		push_error(owner.name + ": No player reference set" + str(STATE_TYPE))
 	player = _player
 
