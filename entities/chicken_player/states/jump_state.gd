@@ -16,6 +16,10 @@ func process(_delta: float) -> void:
 		air_jumps_used += 1
 		player.velocity.y = jump_velocity
 
+	# Handle dash transition
+	if Input.is_action_just_pressed("dash"):
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
+
 func physics_process(delta: float) -> void:
 	super(delta)
 
@@ -31,11 +35,4 @@ func physics_process(delta: float) -> void:
 		air_jumps_used = 0  # Reset air jumps when landing
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
-
-func input(event: InputEvent) -> void:
-
-
-	# Handle dash transition
-	if event.is_action_pressed("dash"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		

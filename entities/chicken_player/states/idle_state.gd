@@ -7,6 +7,11 @@ func enter(_previous_state : PlayerEnums.PlayerStates, _information : Dictionary
 	if player.velocity.x != 0 or player.velocity.z != 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 		return
+		
+func process(_delta: float) -> void:
+	# Handle dash transition
+	if Input.is_action_just_pressed("dash"):
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 
 func physics_process(_delta: float) -> void:
 	# Check for state transitions
@@ -23,5 +28,3 @@ func input(event: InputEvent) -> void:
 	# Check for jump input
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"jump_available": true})
-	elif event.is_action_pressed("dash"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})

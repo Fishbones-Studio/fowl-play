@@ -15,10 +15,21 @@ var dash_available: bool = true
 var dash_direction: Vector3
 	
 	
-func enter(_previous_state : PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
-	print("Player: " + str(player))
+func enter(_previous_state : PlayerEnums.PlayerStates, information : Dictionary = {}) -> void:
+	player.velocity.y = 0
+	
+	# check if already dashed
+	if information.get("dashed", false):
+		print("already dashed")
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
+		return
+	
+		
 	if not dash_available or player.stamina < stamina_cost:
-		SignalManager.player_transition_state.emit(_previous_state, _information)
+		if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
+		else:
+			SignalManager.player_transition_state.emit(_previous_state, information)
 		return
 		
 	super.enter(_previous_state)	
@@ -44,7 +55,11 @@ func exit() -> void:
 
 func _on_dash_timer_timeout():
 	# Transition back to the previous state
-	SignalManager.player_transition_state.emit(previous_state, {"dashed": true})
+	var information: Dictionary = {"dashed": true}
+	if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
+	else:
+			SignalManager.player_transition_state.emit(previous_state, information)
 
 
 func _on_dash_cooldown_timer_timeout():

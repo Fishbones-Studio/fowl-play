@@ -16,12 +16,10 @@ var health: int = max_health
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	print("stamina: ", stamina)
 	if (!camera):
 		push_error("No Camera3D set")
 
 	player_camera_transformer.remote_path = camera.get_path()
-	print(get_gravity())
 	
 func _input(event):
 	# TODO add controller support
