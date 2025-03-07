@@ -1,21 +1,24 @@
 extends BasePlayerState
 
-var knockback_force: Vector3
-@export var KNOCKBACK_STRENGTH: float = 5.0
-@export var VERTICAL_KNOCKBACK: float = 8.0
+@export var knockback_strength: float = 5.0
+@export var vertical_knockback: float = 8.0
 
-func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
+var _knockback_force: Vector3
+
+
+func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
 	# Calculate knockback direction 
 	var knockback_direction: Vector3 = -player.transform.basis.z
-	
-	knockback_force = Vector3(
-		knockback_direction.x * KNOCKBACK_STRENGTH,
-		VERTICAL_KNOCKBACK,
-		knockback_direction.z * KNOCKBACK_STRENGTH
+
+	_knockback_force = Vector3(
+		knockback_direction.x * knockback_strength,
+		vertical_knockback,
+		knockback_direction.z * knockback_strength
 	)
 
 	# Apply initial knockback force
-	player.velocity = knockback_force
+	player.velocity = _knockback_force
+
 
 func physics_process(delta: float) -> void:
 	# Apply gravity
