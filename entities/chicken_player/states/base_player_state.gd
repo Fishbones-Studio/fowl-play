@@ -32,8 +32,8 @@ func physics_process(_delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("move_left", "move_right",  "move_backward", "move_forward")
 
 	# Calculate camera-relative movement direction
-	var cam_basis: Basis = player.camera.global_transform.basis
-	var direction: Vector3 = (cam_basis.x * input_dir.x + cam_basis.z * -input_dir.y).normalized()
+	var player_basis: Basis = player.global_transform.basis
+	var direction: Vector3 = (player_basis.x * input_dir.x + player_basis.z * -input_dir.y).normalized()
 
 	# Apply horizontal movement
 	player.velocity.x = direction.x * movement_speed
