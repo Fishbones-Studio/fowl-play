@@ -40,5 +40,3 @@ func physics_process(_delta: float) -> void:
 ## **Must be overridden** in child classes if needed.
 func exit() -> void:
 	pass
-
-

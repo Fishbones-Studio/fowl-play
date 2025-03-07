@@ -1,5 +1,4 @@
 extends BasePlayerState
-# TODO fix double jump with coyote time
 
 @export var glide_hold_threshold: float = 0.25  # Seconds to hold for glide
 @export var fall_movement_speed: float = 35
@@ -19,6 +18,10 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 	# check for jump availability and dash in information
 	_jump_available = information.get("jump_available", false)
 	_dashed = information.get("dashed", false)
+	var active_coyote_time = information.get("coyote_time", false)
+	if active_coyote_time:
+		coyote_timer.start(active_coyote_time)
+		_jump_available = true
 
 
 func process(_delta: float) -> void:
@@ -54,4 +57,5 @@ func exit() -> void:
 
 
 func _on_coyote_timer_timeout():
+	print("coyote timer expired")
 	_jump_available = false
