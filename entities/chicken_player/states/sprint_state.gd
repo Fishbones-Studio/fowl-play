@@ -31,11 +31,8 @@ func physics_process(delta: float) -> void:
 
 	# Check for state transitions
 	if not player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {"jump_available": true})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {"coyote_time": true})
 		return
 
 	if player.velocity.x == 0 and player.velocity.z == 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
-
-
-

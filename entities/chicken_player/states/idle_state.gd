@@ -13,7 +13,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 func input(event: InputEvent) -> void:
 	# Check for jump input
 	if event.is_action_pressed("jump") and player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"jump_available": true})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"coyote_time": true})
 
 
 func process(_delta: float) -> void:
@@ -31,5 +31,3 @@ func physics_process(_delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if input_dir.length() > movement_deadzone:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
-
-
