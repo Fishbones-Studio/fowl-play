@@ -3,19 +3,15 @@ extends Node
 @export var starting_state: BasePlayerState
 @export var player: ChickenPlayer
 
-@onready var current_state: BasePlayerState = get_initial_state()
-
 var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerState] = {}
 
-
-func get_initial_state() -> BasePlayerState:
-	return starting_state if starting_state != null else get_child(0)
+@onready var current_state: BasePlayerState = _get_initial_state()
 
 
 func _ready() -> void:
 	if player == null:
 		push_error(owner.name + ": No player reference set")
-		
+
 	# Connect the signal to the transition function
 	SignalManager.player_transition_state.connect(_transition_to_next_state)
 
@@ -33,6 +29,13 @@ func _ready() -> void:
 		current_state.enter(current_state.STATE_TYPE)
 
 
+func _input(event: InputEvent) -> void:
+	if current_state == null:
+		push_error(owner.name + ": No state set.")
+		return
+	current_state.input(event)
+
+
 func _process(delta: float) -> void:
 	if current_state == null:
 		push_error(owner.name + ": No state set.")
@@ -47,21 +50,19 @@ func _physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 
-func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, information : Dictionary = {}) -> void:
+func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
 	var previous_state := current_state
 	previous_state.exit()
-	
+
 	current_state = states.get(target_state)
 	if current_state == null:
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
-	
+
 	# TODO: start animation of the state
-		
+
 	current_state.enter(previous_state.STATE_TYPE, information)
 
-func _input(event: InputEvent) -> void:
-	if current_state == null:
-		push_error(owner.name + ": No state set.")
-		return
-	current_state.input(event)
+
+func _get_initial_state() -> BasePlayerState:
+	return starting_state if starting_state != null else get_child(0)

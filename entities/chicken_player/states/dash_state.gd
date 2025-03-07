@@ -7,11 +7,11 @@ extends BasePlayerState
 
 @export_range(1.0, 20.0) var dash_distance: float = 30.0
 
+var _dash_available: bool = true
+var _dash_direction: Vector3
+
 @onready var dash_duration_timer: Timer = $DashDurationTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
-
-var dash_available: bool = true
-var dash_direction: Vector3
 
 
 func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
@@ -21,7 +21,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
 		return
 
-	if not dash_available or player.stamina < stamina_cost:
+	if not _dash_available or player.stamina < stamina_cost:
 		if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
 		else:
@@ -39,26 +39,26 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 
 	if input_dir != Vector2.ZERO:
 		# Use movement direction from input (matches player-relative movement)
-		dash_direction = -(player_basis.x * input_dir.x + player_basis.z * -input_dir.y).normalized()
+		_dash_direction = -(player_basis.x * input_dir.x + player_basis.z * -input_dir.y).normalized()
 	else:
 		# Fallback to player's forward direction
-		dash_direction = player_basis.z.normalized()
+		_dash_direction = player_basis.z.normalized()
 
 	# Ensure vertical component is flat
-	dash_direction.y = 0
+	_dash_direction.y = 0
 
 	# Initial velocity burst
-	player.velocity = -dash_direction * dash_distance
+	player.velocity = -_dash_direction * dash_distance
 
 	dash_duration_timer.start()
 
 
 func physics_process(_delta: float) -> void:
-	player.velocity = -dash_direction * dash_distance
+	player.velocity = -_dash_direction * dash_distance
 
 
 func exit() -> void:
-	dash_available = false
+	_dash_available = false
 	dash_cooldown_timer.start()
 
 
@@ -73,4 +73,4 @@ func _on_dash_timer_timeout():
 
 func _on_dash_cooldown_timer_timeout():
 	print("dash available again")
-	dash_available = true
+	_dash_available = true

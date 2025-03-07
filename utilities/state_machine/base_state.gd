@@ -1,14 +1,16 @@
 ## Base class for all state implementations in a state machine pattern.
 ##
 ## **Note:** This class should not be used directly. Always create child classes.
-extends Node
 class_name BaseState
+extends Node
 
-## Called when leaving this state.
+## Handles input events for state-specific behavior.
 ##
-## Use this to clean up any state-specific resources or reset temporary state.
-## **Must be overridden** in child classes if needed.
-func exit() -> void:
+## **Must be overridden** in child classes that need input handling.
+##
+## Parameters:
+##  _event: Input event to process.
+func input(_event: InputEvent) -> void:
 	pass
 
 
@@ -32,11 +34,11 @@ func physics_process(_delta: float) -> void:
 	pass
 
 
-## Handles input events for state-specific behavior.
+## Called when leaving this state.
 ##
-## **Must be overridden** in child classes that need input handling.
-##
-## Parameters:
-##  _event: Input event to process.
-func input(_event: InputEvent) -> void:
+## Use this to clean up any state-specific resources or reset temporary state.
+## **Must be overridden** in child classes if needed.
+func exit() -> void:
 	pass
+
+
