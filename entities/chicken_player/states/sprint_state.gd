@@ -3,7 +3,7 @@ extends BasePlayerState
 @export var sprint_speed: float = 60.0
 @export var sprint_stamina_cost: float = 0.5
 
-# TODO fix: why is camera zooming in when sprinting?
+# TODO fix: why is camera zooming in when sprinting?, seems to do with the speed
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information : Dictionary = {}) -> void:
 	movement_speed = sprint_speed
