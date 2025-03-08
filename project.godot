@@ -18,3 +18,8 @@ boot_splash/use_filter=false
 boot_splash/image="uid://caypnb5v7do1g"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2500
+
+[autoload]
+
+Gamemanager="*res://globals/gamemanager.gd"
+ItemDatabase="*res://globals/item_database.gd"
