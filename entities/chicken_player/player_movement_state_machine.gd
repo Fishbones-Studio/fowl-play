@@ -1,3 +1,7 @@
+## State machine for the player movement system.
+##
+## This script manages the different states of the player movement system, for the chicken player.
+
 extends Node
 
 @export var starting_state: BasePlayerState

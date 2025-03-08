@@ -5,7 +5,6 @@ extends SpringArm3D
 ## The follow camera uses a SpringArm3D to maintain a specific distance from the target,
 ## while handling collision avoidance. It updates the camera position based on the target's
 ## movement and can apply the camera's Y rotation to the followed entity.
-##
 
 
 
