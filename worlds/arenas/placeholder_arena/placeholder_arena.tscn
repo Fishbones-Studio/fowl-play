@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="1_mlvld"]
 [ext_resource type="PackedScene" uid="uid://bjr4b02aehry4" path="res://ui/debug_menu/debug_menu.tscn" id="2_2cplc"]
-[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/folow_camera.tscn" id="3_hc6wf"]
+[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_hc6wf"]
 
 [node name="PlaceholderArena" type="Node3D"]
 
@@ -25,4 +25,5 @@ transform = Transform3D(0.953533, -0.243062, 0.178032, 0, 0.590901, 0.806744, -0
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_hc6wf")]
 transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 7.08687, 3.80724, 4.36455)
 camera_reference = NodePath("../PlayerCamera")
+camera_spring_length = 6.0
 entity_to_follow = NodePath("../Player")
