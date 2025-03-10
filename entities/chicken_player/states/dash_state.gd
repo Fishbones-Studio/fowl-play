@@ -34,15 +34,14 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 	player.stamina -= stamina_cost
 
 	# Get dash direction (player-relative input or player forward)
-	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var player_basis: Basis = player.global_basis
+	var input_dir: Vector2 = get_player_input_dir()
 
 	if input_dir != Vector2.ZERO:
 		# Use movement direction from input (matches player-relative movement)
-		_dash_direction = -(player_basis.x * input_dir.x + player_basis.z * input_dir.y).normalized()
+		_dash_direction = get_player_direction(input_dir)
 	else:
 		# Fallback to player's forward direction
-		_dash_direction = player_basis.z.normalized()
+		_dash_direction = player.global_basis.z.normalized()
 
 	# Ensure vertical component is flat
 	_dash_direction.y = 0
