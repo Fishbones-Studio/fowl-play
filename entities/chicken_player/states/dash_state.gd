@@ -41,19 +41,19 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		_dash_direction = get_player_direction(input_dir)
 	else:
 		# Fallback to player's forward direction
-		_dash_direction = player.global_basis.z.normalized()
+		_dash_direction = -player.global_basis.z.normalized()
 
 	# Ensure vertical component is flat
 	_dash_direction.y = 0
 
 	# Initial velocity burst
-	player.velocity = -_dash_direction * dash_distance
+	player.velocity = _dash_direction * dash_distance
 
 	dash_duration_timer.start()
 
 
 func physics_process(_delta: float) -> void:
-	player.velocity = -_dash_direction * dash_distance
+	player.velocity = _dash_direction * dash_distance
 
 
 func exit() -> void:
