@@ -13,16 +13,14 @@ extends Node3D
 
 @export_category("Sensitity")
 @export_range(0.1, 2.0) var horizontal_sensitivity: float = 0.5
-
 @export_range(0.1, 2.0) var vertical_sensitivity: float = 0.5
-
-@export_range(-180, 0 ) var min_degrees: float = -90.0
-@export_range(0, 180) var max_degrees: float = 45.0
+@export_range(-90, 0 ) var min_degrees: float = -90.0
+@export_range(0, 90) var max_degrees: float = 45.0
 @export_group("Entity")
 @export var entity_to_follow: CharacterBody3D
+@export var entity_follow_horizontal_offset: float = 1.2
 @export var entity_follow_height: float = 3.0
 @export var entity_follow_distance: float = 0.0
-@export var entity_follow_horizontal_offset: float = 0.0
 
 @onready var spring_arm_3d: SpringArm3D = $SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
@@ -46,7 +44,7 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		# Mouse sensitivity control
-		rotate_y(deg_to_rad(-event.relative.x) * horizontal_sensitivity)
+		entity_to_follow.rotate_y(deg_to_rad(-event.relative.x) * horizontal_sensitivity)
 		rotate_x(deg_to_rad(-event.relative.y) * vertical_sensitivity)
 		_apply_camera_clamp()
 
@@ -57,7 +55,7 @@ func _process(delta):
 	var y_axis: float = Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down")
 
 	# Apply controller input with sensitivity
-	rotation.y += -x_axis * horizontal_sensitivity * delta
+	entity_to_follow.rotation.y += -x_axis * horizontal_sensitivity * delta
 	rotation.x += y_axis * vertical_sensitivity * delta
 
 	_apply_camera_clamp()

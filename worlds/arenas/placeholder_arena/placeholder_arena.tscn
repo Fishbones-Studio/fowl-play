@@ -9,6 +9,7 @@
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59561, -1.95356, -1.7984)
 use_collision = true
+collision_layer = 3
 size = Vector3(250, 0.2, 250)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
@@ -25,5 +26,4 @@ transform = Transform3D(0.953533, -0.243062, 0.178032, 0, 0.590901, 0.806744, -0
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_hc6wf")]
 transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 7.08687, 3.80724, 4.36455)
 camera_reference = NodePath("../PlayerCamera")
-camera_spring_length = 6.0
 entity_to_follow = NodePath("../Player")
