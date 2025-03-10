@@ -7,7 +7,15 @@ extends BasePlayerState
 var _air_jumps_used: int = 0
 
 
-func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
+func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
+
+	# checking if jump is available, otherwise go to falling state
+	if !information.get("jump_available", true):
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		return
+
+	super.enter(_previous_state)
+
 	movement_speed = air_movement_speed
 	player.velocity.y = jump_velocity
 

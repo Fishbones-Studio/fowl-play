@@ -21,14 +21,17 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
 		return
 
+	super.enter(_previous_state)
+
 	if not _dash_available or player.stamina < stamina_cost:
+		print("dash not available")
 		if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
 		else:
-			SignalManager.player_transition_state.emit(_previous_state, information)
+			# adding dashed true to the information dictionary
+			information.set("dashed", true)
+			SignalManager.player_transition_state.emit(previous_state, information)
 		return
-
-	super.enter(_previous_state)
 
 	# Consume stamina
 	player.stamina -= stamina_cost
@@ -58,6 +61,7 @@ func physics_process(_delta: float) -> void:
 
 func exit() -> void:
 	_dash_available = false
+	dash_duration_timer.stop()
 	dash_cooldown_timer.start()
 
 

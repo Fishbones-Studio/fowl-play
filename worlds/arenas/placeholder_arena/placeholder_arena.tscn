@@ -9,7 +9,7 @@
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59561, -1.95356, -1.7984)
 use_collision = true
-size = Vector3(100, 0.2, 100)
+size = Vector3(250, 0.2, 250)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.995509, -0.00619845, 0.0944599, 0.00475659, 0.999869, 0.0154817, -0.0945434, -0.0149629, 0.995408, 0, 3.84457, 8.32513)
