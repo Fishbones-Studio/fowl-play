@@ -4,12 +4,12 @@
 
 extends Node
 
-@export var starting_state: BasePlayerMovementState
+@export var starting_state: BasePlayerState
 @export var player: ChickenPlayer
 
-var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerMovementState] = {}
+var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerState] = {}
 
-@onready var current_state: BasePlayerMovementState = _get_initial_state()
+@onready var current_state: BasePlayerState = _get_initial_state()
 
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func _ready() -> void:
 	await owner.ready
 
 	# Get all states in the scene tree
-	for state_node: BasePlayerMovementState in get_children():
+	for state_node: BasePlayerState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		state_node.setup(player)
 
@@ -55,10 +55,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
-	if target_state == current_state.STATE_TYPE:
-		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
-		target_state = PlayerEnums.PlayerStates.IDLE_STATE
-
 	var previous_state := current_state
 	previous_state.exit()
 
@@ -72,5 +68,5 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, informati
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 
-func _get_initial_state() -> BasePlayerMovementState:
+func _get_initial_state() -> BasePlayerState:
 	return starting_state if starting_state != null else get_child(0)

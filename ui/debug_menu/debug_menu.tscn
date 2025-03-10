@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjr4b02aehry4"]
+
+[ext_resource type="Script" uid="uid://cw7lyropg43p3" path="res://ui/debug_menu/state_label.gd" id="1_bvele"]
+[ext_resource type="Script" uid="uid://rogmpcpqcuix" path="res://ui/debug_menu/player_location_label.gd" id="2_oh284"]
+
+[node name="DebugMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StateLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "State: "
+script = ExtResource("1_bvele")
+
+[node name="PlayerLocationLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Location"
+script = ExtResource("2_oh284")
