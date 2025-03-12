@@ -2,7 +2,8 @@ class_name WeaponEnums
 extends Node
 
 enum WeaponStates {
-	IDLE,      
+	IDLE,
+	WINDUP,      
 	ATTACKING, 
-	DISABLED    
+	COOLDOWN   
 }
