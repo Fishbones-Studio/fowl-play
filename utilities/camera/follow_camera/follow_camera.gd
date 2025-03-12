@@ -7,19 +7,21 @@ extends Node3D
 
 @export_category("Camera")
 @export var camera_reference: Camera3D
-@export var camera_spring_length: float = 6.0
+@export var camera_spring_length: float = 4.8
 @export var camera_margin: float = 0.5
 @export var camera_smoothness: float = 6.0
 
 @export_category("Sensitity")
 @export_range(0.1, 2.0) var horizontal_sensitivity: float = 0.5
+
 @export_range(0.1, 2.0) var vertical_sensitivity: float = 0.5
+
 @export_range(-90, 0 ) var min_degrees: float = -90.0
 @export_range(0, 90) var max_degrees: float = 45.0
 @export_group("Entity")
 @export var entity_to_follow: CharacterBody3D
-@export var entity_follow_horizontal_offset: float = 1.2
-@export var entity_follow_height: float = 3.0
+@export var entity_follow_horizontal_offset: float = 3.0
+@export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
 
 @onready var spring_arm_3d: SpringArm3D = $SpringArm3D
