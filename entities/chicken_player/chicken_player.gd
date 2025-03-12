@@ -11,11 +11,12 @@ class_name ChickenPlayer
 
 # Player stats
 var stamina: float = max_stamina
-var health: int = max_health
+var health: int    = max_health
 
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # TODO: move this somewhere ekse
+	GameManager.chicken_player = self
 
 
 func _process(delta: float) -> void:
@@ -25,3 +26,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
+
+
+func _exit_tree() -> void:
+	GameManager.chicken_player = null
