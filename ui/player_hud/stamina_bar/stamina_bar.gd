@@ -1,16 +1,16 @@
 extends ProgressBar
 class_name StaminaBar
 
-var stamina: int:
+var stamina: float:
 	set = set_stamina
 
 
-func set_stamina(_stamina: int):
+func set_stamina(_stamina: float):
 	stamina = min(max_value, _stamina)
 	value = stamina
 
 
-func init_stamina(_max_stamina: int, _stamina: int) -> void:
+func init_stamina(_max_stamina: float, _stamina: float) -> void:
 	stamina = _stamina
 	max_value = _max_stamina
 	value = stamina

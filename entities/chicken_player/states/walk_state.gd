@@ -16,7 +16,8 @@ func input(event: InputEvent) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 
 
-func process(_delta: float) -> void:
+func process(delta: float) -> void:
+	player.regen_stamina(delta)
 	# Handle dash transition
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
