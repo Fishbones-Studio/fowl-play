@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxqe8ptih6fxs"]
+
+[ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
+[ext_resource type="PackedScene" uid="uid://b64jekug7b3i8" path="res://entities/chicken_player/art/chicken.glb" id="1_symyc"]
+[ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
+[ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/dash_state.gd" id="4_7thud"]
+[ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/glide_state.gd" id="5_a1qjk"]
+[ext_resource type="Script" uid="uid://dvihu8iywlyx1" path="res://entities/chicken_player/states/hurt_state.gd" id="6_j3ovn"]
+[ext_resource type="Script" uid="uid://bjte651aelkuy" path="res://entities/chicken_player/states/idle_state.gd" id="7_afbqv"]
+[ext_resource type="Script" uid="uid://dio0ctxnagxrr" path="res://entities/chicken_player/states/jump_state.gd" id="8_gx6sm"]
+[ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/sprint_state.gd" id="9_yqrof"]
+[ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/walk_state.gd" id="10_3wlsy"]
+[ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/fall_state.gd" id="11_jgbvq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
+radius = 0.871595
+height = 3.14525
+
+[node name="ChickenPlayer" type="CharacterBody3D"]
+script = ExtResource("1_abrql")
+
+[node name="StandardChickenModel" parent="." instance=ExtResource("1_symyc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.219971, 0)
+shape = SubResource("CapsuleShape3D_abrql")
+
+[node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "player")]
+script = ExtResource("3_wvtmh")
+starting_state = NodePath("Idle")
+player = NodePath("..")
+
+[node name="Dash" type="Node" parent="MovementStateMachine"]
+script = ExtResource("4_7thud")
+STATE_TYPE = 5
+
+[node name="DashDurationTimer" type="Timer" parent="MovementStateMachine/Dash"]
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="MovementStateMachine/Dash"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Glide" type="Node" parent="MovementStateMachine"]
+script = ExtResource("5_a1qjk")
+STATE_TYPE = 4
+
+[node name="Hurt" type="Node" parent="MovementStateMachine"]
+script = ExtResource("6_j3ovn")
+STATE_TYPE = 6
+
+[node name="Idle" type="Node" parent="MovementStateMachine"]
+script = ExtResource("7_afbqv")
+
+[node name="Jump" type="Node" parent="MovementStateMachine"]
+script = ExtResource("8_gx6sm")
+STATE_TYPE = 3
+
+[node name="Sprint" type="Node" parent="MovementStateMachine"]
+script = ExtResource("9_yqrof")
+STATE_TYPE = 2
+
+[node name="Walk" type="Node" parent="MovementStateMachine"]
+script = ExtResource("10_3wlsy")
+STATE_TYPE = 1
+
+[node name="Fall" type="Node" parent="MovementStateMachine"]
+script = ExtResource("11_jgbvq")
+STATE_TYPE = 7
+
+[node name="CoyoteTimer" type="Timer" parent="MovementStateMachine/Fall"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="MovementStateMachine/Fall/CoyoteTimer" to="MovementStateMachine/Fall" method="_on_coyote_timer_timeout"]
