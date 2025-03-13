@@ -8,3 +8,5 @@ extends Node
 
 # Player signals
 signal player_transition_state(target_state: PlayerEnums.PlayerStates, information: Dictionary)
+signal init_health(max_health: int, health: int)
+signal hurt_player(damage: int)

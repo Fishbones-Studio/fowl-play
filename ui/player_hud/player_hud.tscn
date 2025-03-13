@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=2 format=3 uid="uid://xhakfqnxgnrr"]
+
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -20,5 +22,24 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="HealthBar" parent="MarginContainer/HBoxContainer/PlayerBarContainer" instance=ExtResource("1_vyppb")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/PlayerBarContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
