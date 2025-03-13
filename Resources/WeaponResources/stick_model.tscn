@@ -1,14 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://8bqvublk1ovr"]
+[gd_scene load_steps=2 format=3 uid="uid://8bqvublk1ovr"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_7casd"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e3t5b"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://Resources/WeaponResources/leek.glb" id="1_e3t5b"]
 
 [node name="StickModel" type="StaticBody3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_7casd")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConcavePolygonShape3D_e3t5b")
+[node name="leek" parent="." instance=ExtResource("1_e3t5b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79052, 0)

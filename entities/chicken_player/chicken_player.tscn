@@ -98,7 +98,7 @@ current_weapon = SubResource("Resource_4hg1i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66208, 0, 0)
 
 [node name="HitArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.42516)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
 shape = SubResource("SphereShape3D_5aj8x")
