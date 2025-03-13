@@ -15,7 +15,7 @@ signal canceled
 
 var pending_item = null #Variable to store the item in waiting for conformation
 
-func show_confirmation(existing_item, new_item):
+func show_confirmation(existing_item: Dictionary, new_item : Dictionary):
 	pending_item = new_item
 	
 	existing_item_name.text = existing_item.name
