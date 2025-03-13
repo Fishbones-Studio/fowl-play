@@ -1,15 +1,11 @@
 extends ProgressBar
+class_name HealthBar
 
 @onready var timer := $Timer
 @onready var damage_bar := $DamageBar
 
 var health: int:
 	set = set_health
-
-
-func _ready() -> void:
-	SignalManager.hurt_player.connect(func (damage): health -= damage)
-	SignalManager.init_health.connect(_init_health)
 
 
 func set_health(_health: int):
@@ -23,7 +19,7 @@ func set_health(_health: int):
 		_on_timer_timeout()
 
 
-func _init_health(_max_health: int, _health: int) -> void:
+func init_health(_max_health: int, _health: int) -> void:
 	health = _health
 	max_value = _max_health
 	value = health

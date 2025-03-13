@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=4 format=3 uid="uid://xhakfqnxgnrr"]
 
+[ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
+[ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -29,8 +31,17 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 25
+script = ExtResource("1_sqrx6")
 
 [node name="HealthBar" parent="MarginContainer/HBoxContainer/PlayerBarContainer" instance=ExtResource("1_vyppb")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="StaminaBar" parent="MarginContainer/HBoxContainer/PlayerBarContainer" instance=ExtResource("2_rtdb5")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
