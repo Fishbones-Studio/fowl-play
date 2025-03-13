@@ -23,8 +23,11 @@ boot_splash/minimum_display_time=2500
 
 GameManager="*res://utilities/autoload/game_manager.gd"
 SignalManager="*res://utilities/autoload/signal_manager.gd"
-DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+Gamemanager="*res://utilities/autoload/game_manager.gd"
+Inventory="*res://utilities/autoload/inventory.gd"
+ItemDatabase="*res://utilities/autoload/item_database.gd"
 Panku="*res://addons/panku_console/console.tscn"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [editor]
 
