@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://n7ew83nu7xpl"]
+[gd_scene load_steps=2 format=3 uid="uid://n7ew83nu7xpl"]
+
+[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="1_2ose2"]
 
 [node name="Fights_UI" type="Control"]
 layout_mode = 3
@@ -70,3 +72,6 @@ offset_right = 620.0
 offset_bottom = 630.0
 theme_override_font_sizes/font_size = 25
 text = "Exit"
+script = ExtResource("1_2ose2")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,39 +1,20 @@
 extends Control
-
-var shop_items: Array[Resource]
-
-@onready var shop_items_container: HBoxContainer = %ShopItemsContainer
-
-
-func _ready() -> void:
-	GameManager.prosperity_eggs = 9000
+@onready var shop_slots: HBoxContainer = $shop_slots
+func _ready():
 	randomize()
 	refresh_shop()
 
-
-## Repopulate the shop's items
-func refresh_shop() -> void:
-	var items_in_shop = 0
-	while items_in_shop < 5:
-		var shop_item = load("uid://cc5vmtbby4xy0").instantiate()
-		
-		if not shop_item and not shop_item is ShopItem :
-			push_error("Shop item path is not correctly assigned")
-			return
-		
-		var random_item: Resource = ItemDatabase.get_random_item()
-		
-		if random_item in Inventory.items_in_inventory: # Prevent population with owned items
+#Function to refresh the shop
+func refresh_shop():
+	#loop over the shop_slots to get all the Item_Templates and fill them with a item
+	
+	for slot in shop_slots.get_children():
+		if slot == null:
+			print("Error: Found a Nil slot!")
 			continue
-		if random_item in shop_items: # Prevent duplicate shop items
-			continue
-		
-		shop_items.append(random_item)
-		shop_items_container.add_child(shop_item)
-		shop_item.set_item(random_item)
-		
-		items_in_shop += 1
+			
+		if slot is Item_Template:
+			var random_item = ItemDatabase.get_random_item()
+			slot.set_item(random_item)
 
-
-func _on_exit_button_button_button_up() -> void:
-	queue_free()
+			

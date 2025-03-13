@@ -1,18 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=3 format=3 uid="uid://dvkxcgdk0goul"]
 
-[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
+[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="1_4dq8u"]
+[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/chicken_inventory/chicken_inventory.gd" id="1_j5p5e"]
 
-[node name="ChickenInventory" type="Control"]
+[node name="Chicken_Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_uruig")
+script = ExtResource("1_j5p5e")
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(800, 400)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,42 +20,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.0
+offset_top = 61.0
+offset_right = 65.0
+offset_bottom = 142.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Inventory
+"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 2
-
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_type_variation = &"HeaderLarge"
-text = "Inventory"
-
-[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 113.0
+offset_top = 79.0
+offset_right = 113.0
+offset_bottom = 733.0
+grow_horizontal = 2
+scale = Vector2(0.817635, 0.730713)
 columns = 3
 
-[node name="ExitButton" type="Button" parent="Panel/MarginContainer"]
+[node name="Melee" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Exit"
 
-[connection signal="pressed" from="Panel/MarginContainer/ExitButton" to="." method="_on_button_pressed"]
+[node name="Ranged" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
+layout_mode = 2
+
+[node name="Armor 1" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
+layout_mode = 2
+
+[node name="Armor 2" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
+layout_mode = 2
+
+[node name="Ability 1" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
+layout_mode = 2
+
+[node name="Ability 2" type="VBoxContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(380, 325)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.5
+offset_top = -73.0
+offset_right = 26.5
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Exit"
+script = ExtResource("1_4dq8u")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

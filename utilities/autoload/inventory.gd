@@ -1,39 +1,18 @@
 extends Node
-## Autoload script to manage the inventory
 
-var items_in_inventory: Array[Resource] = []
+var items_in_inventory: Array = []
 
-
-## Add an item to the player's inventory
-func add_item(item: Resource) -> void:
+func add_item(item: Dictionary):
 	items_in_inventory.append(item)
-
-
-## Get all items from the player's inventory
-func get_items() -> Array[Resource]:
+	
+func get_items():
 	return items_in_inventory
-
-
-## Get an item based on the name, else return null
-func get_item_by_name(item_name: String) -> Resource:
-	for item in items_in_inventory:
-		if item.name == item_name:
-			print("item found: ", item)
-			return item
 	
-	return null
-
-
-## Get all items with the same type
-func get_item_by_type(item_type: ItemEnums.ItemTypes) -> Array[Resource]:
-	var matching_items: Array[Resource] = []
-	
+func get_item_by_type(item_type : String):
 	for item in items_in_inventory:
 		if item.type == item_type:
-			matching_items.append(item)
+			return item
+	return null
 	
-	return matching_items
-
-
-func remove_item(item: Resource) -> void:
-	items_in_inventory = items_in_inventory.filter(func(i): return i != item)
+func remove_item_by_type(item_type : String):
+	items_in_inventory = items_in_inventory.filter(func(i): return i.type != item_type)

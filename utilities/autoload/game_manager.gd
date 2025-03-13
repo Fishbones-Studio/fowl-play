@@ -1,7 +1,6 @@
 extends Node
 
-var chicken_player : ChickenPlayer = null
-var prosperity_eggs : int
+var prosperity_eggs = 900
 var feathers_of_rebirth: int
 
 

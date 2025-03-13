@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=17 format=3 uid="uid://21r458rvciqo"]
 
-[ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
+[ext_resource type="Script" uid="uid://b4p5qknvtsxmn" path="res://ui/game_menu/chicken_inventory/chicken.gd" id="1_isj0k"]
+[ext_resource type="Script" uid="uid://dduulsvf3cbei" path="res://ui/game_menu/flyers/flyer_area_3d.gd" id="2_at3e2"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
+[ext_resource type="Script" uid="uid://cf7w0qpoidrnw" path="res://ui/game_menu/shop/shop_area_3d.gd" id="5_hvp38"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y7cqx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,23 +23,23 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvpcr"]
 albedo_color = Color(0.25498, 0.16922, 0, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_x5ia0"]
+radius = 0.575365
+
 [sub_resource type="BoxMesh" id="BoxMesh_efok4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_efok4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ms4yg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48rgb"]
 albedo_texture = ExtResource("3_l20ko")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkxcn"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_t1gii"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q8q2c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yeww"]
 
-[node name="GameMenu" type="Node3D"]
-script = ExtResource("1_5qgdc")
+[node name="UI_Menu" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -55,36 +57,37 @@ mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Chicken" type="Area3D" parent="."]
-transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
+transform = Transform3D(0.111717, -0.00354512, 0.152391, -0.00252068, 0.232893, 0.00440244, -0.185714, -0.00529366, 0.0916122, -1.49409, 2.72444, -0.0533764)
+script = ExtResource("1_isj0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
+transform = Transform3D(2.70342, -3.72529e-09, 2.38419e-07, -3.72529e-09, 2.07165, 2.98023e-08, 7.15256e-07, 3.35276e-08, 4.00841, -0.00341058, 0.272626, 0.00883865)
+shape = SubResource("SphereShape3D_x5ia0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
 mesh = SubResource("BoxMesh_efok4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
-shape = SubResource("BoxShape3D_efok4")
+[node name="Flyer_Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.874184, 0, -0.565526, 0, 0.0332706, 0, 0.50471, 0, 0.97952, 1.21534, 3.51637, -0.344299)
+script = ExtResource("2_at3e2")
 
-[node name="Flyer" type="Area3D" parent="."]
-transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer_Area3D"]
+transform = Transform3D(1, 0, 0, 0, 2.96206, 0, 0, 0, 1, 0, -30.9129, 0)
+shape = SubResource("BoxShape3D_ms4yg")
 
-[node name="Flyers" type="MeshInstance3D" parent="Flyer"]
-transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0, 0, 0)
+[node name="Flyers" type="MeshInstance3D" parent="Flyer_Area3D"]
+transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0.0128475, -30.729, -0.00524253)
 material_override = SubResource("StandardMaterial3D_48rgb")
 mesh = SubResource("BoxMesh_rkxcn")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer"]
-shape = SubResource("BoxShape3D_t1gii")
+[node name="Shop_Area3D" type="Area3D" parent="."]
+transform = Transform3D(1.06649, 0, 0, 0, 0.521614, 0, 0, 0, 1, -0.229324, 2.74119, -0.784794)
+script = ExtResource("5_hvp38")
 
-[node name="Shop" type="Area3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
-
-[node name="Shop" type="MeshInstance3D" parent="Shop"]
+[node name="Shop" type="MeshInstance3D" parent="Shop_Area3D"]
 mesh = SubResource("CapsuleMesh_q8q2c")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop_Area3D"]
 shape = SubResource("CapsuleShape3D_6yeww")
-
-[connection signal="input_event" from="Chicken" to="." method="_on_chicken_input_event"]
-[connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
-[connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]
