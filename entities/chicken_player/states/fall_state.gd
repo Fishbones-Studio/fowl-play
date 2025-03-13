@@ -24,7 +24,9 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		_jump_available = true
 
 
-func process(_delta: float) -> void:
+func process(delta: float) -> void:
+	# apply movement
+	player.regen_stamina(delta)
 	# state transitions
 	if  Input.is_action_pressed("jump") and not _is_jump_held:
 		_jump_press_time = Time.get_ticks_msec()
