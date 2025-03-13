@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvkxcgdk0goul"]
 
 [ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="1_4dq8u"]
-[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/player/chicken_inventory.gd" id="1_j5p5e"]
+[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/chicken_inventory/chicken_inventory.gd" id="1_j5p5e"]
 
 [node name="Chicken_Inventory" type="Control"]
 layout_mode = 3
