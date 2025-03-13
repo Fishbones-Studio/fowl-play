@@ -15,13 +15,12 @@ var health: int = max_health
 
 # reference to the weapon and attack states
 @export_group("Weapon and Attack")
-@export var weapon_state_machine: WeaponStateMachine
 @export var attack_state_machine: Node
 
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	weapon_state_machine.equip_weapon(weapon_state_machine.WeaponState.WINGS)
+	
 
 
 func _process(delta: float) -> void:
