@@ -1,5 +1,6 @@
 extends Control
 class_name Item_Template
+
 @onready var item_name: Label = $VBoxContainer/item_name
 @onready var item_cost: Label = $VBoxContainer/item_cost
 @onready var item_type: Label = $VBoxContainer/item_type
@@ -9,9 +10,6 @@ func set_item(item : Dictionary):
 	item_name.text = item.name
 	item_type.text = item.type
 	item_cost.text = str(item.cost)
-	
-	
-
 
 func _on_buy_item_pressed() -> void:
 	if Gamemanager.prosperity_eggs >= int(item_cost.text):
@@ -40,7 +38,7 @@ func _on_buy_item_pressed() -> void:
 		else:
 			#runs if the item type does not excist in inventory
 			Inventory.add_item(new_item)
-			Gamemanager.update_prosperityEggs(-int(item_cost.text))
+			Gamemanager.update_prosperity_eggs(-int(item_cost.text))
 			print("Item Bought!")
 		
 	else:
@@ -50,7 +48,7 @@ func _on_buy_item_pressed() -> void:
 func _on_confirmation_accepted(new_item : Dictionary):
 	Inventory.remove_item_by_type(new_item.type)
 	Inventory.add_item(new_item)
-	Gamemanager.update_prosperityEggs(-new_item.cost)
+	Gamemanager.update_prosperity_eggs(-new_item.cost)
 	print("Replaced item with:", new_item)
 #Runs when user presses the 'Cancel' button
 func _on_confirmation_canceled():
