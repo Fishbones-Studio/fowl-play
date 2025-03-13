@@ -2,10 +2,9 @@ extends Control
 @onready var grid_container: GridContainer = $GridContainer
 
 func _ready():
-	update_inventory()
+	_update_inventory()
 
-#
-func update_inventory():
+func _update_inventory():
 	#Emptys the UI of the inventory
 	for child in grid_container.get_children():
 		child.queue_free()
