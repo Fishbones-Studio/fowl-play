@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://c742rhgrg2wc2"]
+
+[ext_resource type="Script" uid="uid://bosw4dioc5vhy" path="res://ui/keybind_menu/panel_container.gd" id="1_jghxt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0ll4"]
+bg_color = Color(1, 1, 1, 0.588235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jghxt"]
+bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0)
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 9
+theme_override_constants/h_separation = 10
+columns = 4
+
+[node name="ActionLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "action"
+vertical_alignment = 1
+
+[node name="PrimaryPanelContainer" type="PanelContainer" parent="GridContainer" node_paths=PackedStringArray("label_path", "button_path")]
+layout_mode = 2
+script = ExtResource("1_jghxt")
+label_path = NodePath("PrimaryInputLabel")
+button_path = NodePath("PrimaryInputButton")
+
+[node name="PrimaryInputLabel" type="Label" parent="GridContainer/PrimaryPanelContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "input"
+vertical_alignment = 1
+
+[node name="PrimaryInputButton" type="Button" parent="GridContainer/PrimaryPanelContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jghxt")
+
+[node name="SecondaryPanelContainer" type="PanelContainer" parent="GridContainer" node_paths=PackedStringArray("label_path", "button_path")]
+layout_mode = 2
+script = ExtResource("1_jghxt")
+label_path = NodePath("SecondaryInputLabel")
+button_path = NodePath("SecondaryInputButton")
+input_type = 1
+
+[node name="SecondaryInputLabel" type="Label" parent="GridContainer/SecondaryPanelContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "input"
+vertical_alignment = 1
+
+[node name="SecondaryInputButton" type="Button" parent="GridContainer/SecondaryPanelContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jghxt")
+
+[node name="ControllerPanelContainer" type="PanelContainer" parent="GridContainer" node_paths=PackedStringArray("label_path", "button_path")]
+layout_mode = 2
+script = ExtResource("1_jghxt")
+label_path = NodePath("ControllerInputLabel")
+button_path = NodePath("InputButton")
+input_type = 2
+
+[node name="ControllerInputLabel" type="Label" parent="GridContainer/ControllerPanelContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "input"
+vertical_alignment = 1
+
+[node name="InputButton" type="Button" parent="GridContainer/ControllerPanelContainer"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j0ll4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jghxt")
