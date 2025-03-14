@@ -58,4 +58,5 @@ text = "Quit
 "
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/PlayButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/SettingsButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/QuitButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_quit_button_pressed"]
