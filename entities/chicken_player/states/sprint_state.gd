@@ -1,10 +1,16 @@
 extends BasePlayerState
 
 @export var sprint_speed: float = 60.0
-@export var sprint_stamina_cost: float = 0.5
+@export var sprint_stamina_cost: float = 5.0
 
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
+	# Check for stamina
+	if player.stamina < sprint_stamina_cost:
+		print("Not enough stamina to sprint")
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+		return
+
 	movement_speed = sprint_speed
 
 

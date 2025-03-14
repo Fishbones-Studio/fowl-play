@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://djppnnip15vqi"]
+
+[ext_resource type="Script" uid="uid://6g2at2l4u6sk" path="res://ui/player_hud/stamina_bar/stamina_bar.gd" id="1_cas2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grqgw"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cas2i"]
+bg_color = Color(0.95761, 0.700387, 0, 1)
+
+[node name="StaminaBar" type="ProgressBar"]
+offset_right = 360.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_grqgw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cas2i")
+value = 50.0
+show_percentage = false
+script = ExtResource("1_cas2i")
