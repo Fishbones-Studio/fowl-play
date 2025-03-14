@@ -29,6 +29,6 @@ func physics_process(_delta: float) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 
-	var input_dir := Input.get_vector("move_left", "move_right", "move_backward", "move_forward")
+	var input_dir := get_player_input_dir()
 	if input_dir.length() > movement_deadzone:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})

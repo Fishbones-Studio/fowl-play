@@ -10,12 +10,9 @@ extends Node3D
 @export var camera_spring_length: float = 4.8
 @export var camera_margin: float = 0.5
 @export var camera_smoothness: float = 6.0
-
 @export_category("Sensitity")
 @export_range(0.1, 2.0) var horizontal_sensitivity: float = 0.5
-
 @export_range(0.1, 2.0) var vertical_sensitivity: float = 0.5
-
 @export_range(-90, 0 ) var min_degrees: float = -90.0
 @export_range(0, 90) var max_degrees: float = 45.0
 @export_group("Entity")
@@ -66,4 +63,4 @@ func _process(delta):
 func _apply_camera_clamp():
 	# Clamp the rotation to prevent flipping
 	rotation.z = 0
-	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(45))
+	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))

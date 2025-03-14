@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
-[ext_resource type="PackedScene" uid="uid://bh05kwe6gc6sh" path="res://entities/chicken_player/art/Chicken.glb" id="2_jgbvq"]
+[ext_resource type="PackedScene" uid="uid://bh05kwe6gc6sh" path="res://entities/chicken_player/art/chicken.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/dash_state.gd" id="4_7thud"]
 [ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/glide_state.gd" id="5_a1qjk"]
