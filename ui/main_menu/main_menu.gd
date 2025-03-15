@@ -1,11 +1,12 @@
-extends VBoxContainer
+extends Control
 
 func _on_quit_button_pressed():
 	get_tree().quit()
 
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("uid://21r458rvciqo")
+	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+	queue_free()
 
 
 func _on_settings_button_pressed() -> void:

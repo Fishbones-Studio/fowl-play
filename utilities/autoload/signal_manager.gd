@@ -11,4 +11,8 @@ signal player_transition_state(target_state: PlayerEnums.PlayerStates, informati
 signal init_health(max_health: int, health: int)
 signal hurt_player(damage: int)
 signal init_stamina(max_stamina: float, stamina: float)
-	
+# Loader signals
+signal switch_ui_scene(scene: PackedScene) ## This signal is used to switch the UI scene, replacing all current
+signal add_ui_scene(scene: PackedScene) ## This signal is used to add an (additional) UI scene
+signal switch_game_scene(scene: PackedScene) ## This signal is used to switch the game scene, replacing all current
+signal add_game_scene(scene: PackedScene) ## This signal is used to add an (additional) game scene
