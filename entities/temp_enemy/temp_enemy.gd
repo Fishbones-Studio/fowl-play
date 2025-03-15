@@ -1,5 +1,4 @@
-extends CharacterBody3D
-
+class_name Enemy extends CharacterBody3D
 
 @export var health: int = 100
 
@@ -12,4 +11,4 @@ func take_damage(amount: int):
 
 func die():
 	print("Enemy died!")
-	queue_free()  
+	queue_free()

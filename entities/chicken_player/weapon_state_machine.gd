@@ -1,56 +1,50 @@
 extends Node3D
 
-var current_weapon_instance : Node3D
-var WeaponState = WeaponEnums.WeaponState
-var current_state = WeaponState.IDLE
-
+var current_weapon_instance: Node3D
 @export var current_weapon: WeaponResource
 
-var windup_timer
-var attack_duration
-var cooldown_timer
+var current_state: BaseState
 
-@onready var HitBox: Area3D = $"../HitArea"
+## Dictionary to map WeaponState enum values to state instances.
+var states: Dictionary = {}
+
+@onready var hitbox: Area3D = $"../HitArea"
 
 func _ready():
 	if not current_weapon:
-		print(current_weapon)
-		push_error("no weapon")
+		push_error("No weapon assigned!")
 		return
 
+	# Initialize states becouse we cant set states as child nodes of our statemachine
+	states = {
+		WeaponEnums.WeaponState.IDLE: IdleState.new(),
+		WeaponEnums.WeaponState.WINDUP: WindupState.new(),
+		WeaponEnums.WeaponState.ATTACKING: AttackingState.new(),
+		WeaponEnums.WeaponState.COOLDOWN: CooldownState.new()
+	}
+
+	# Set the owner of each state to this state machine
+	for state in states.values():
+		state.weapon_state_machine = self
+
+	# Equip the weapon and start in the Idle state
 	equip_weapon(current_weapon)
+	transition_to(WeaponEnums.WeaponState.IDLE)
 
-	HitBox.area_entered.connect(on_area_entered) # Connect the signal
+func _process(delta: float):
+	if current_state:
+		current_state.process(delta)
 
-func _process(delta):
-	match current_state:
-		WeaponState.IDLE:
-			if Input.is_action_just_pressed("attack"): # Check for mouse click
-				current_state = WeaponState.WINDUP
-				windup_timer = current_weapon.windup_time #reset timer
-				
+## Transition to a new state using the WeaponState enum.
+func transition_to(new_state: WeaponEnums.WeaponState):
+	if current_state:
+		current_state.exit()
 
-		WeaponState.WINDUP:
-			windup_timer -= delta
-			if windup_timer <= 0:
-				current_state = WeaponState.ATTACKING
-				current_weapon.attack()
-				attack_duration = current_weapon.attack_duration #reset timer
-				
+	current_state = states.get(new_state)
+	if current_state:
+		current_state.enter()
 
-		WeaponState.ATTACKING:
-			attack_duration -= delta
-			if attack_duration <= 0:
-				current_state = WeaponState.COOLDOWN
-				cooldown_timer = current_weapon.cooldown_time #reset timer
-				
-
-		WeaponState.COOLDOWN:
-			cooldown_timer -= delta
-			if cooldown_timer <= 0:
-				current_state = WeaponState.IDLE
-				
-
+## Equip a weapon.
 func equip_weapon(weapon_resource: WeaponResource):
 	if current_weapon_instance:
 		current_weapon_instance.queue_free()
@@ -64,17 +58,12 @@ func equip_weapon(weapon_resource: WeaponResource):
 		current_weapon_instance = weapon_resource.instantiate()
 		add_child(current_weapon_instance)
 
-	
-	current_state = WeaponState.IDLE
+	transition_to(WeaponEnums.WeaponState.IDLE)
 
-func on_area_entered(area):
-	if area.is_in_group(area.get_parent()):
-		print("enemy found")
-		if current_weapon:
-			if current_weapon.damage:
-				
-				area.get_parent().take_damage(current_weapon.damage)
-			else:
-				print("Weapon damage is not set")
-		else:
-			print("Current weapon is not set")
+
+func attack():
+	var enemies = hitbox.get_overlapping_bodies()
+	# we search for an class named enemy within our hitbox
+	for enemy in enemies:
+		if enemy is Enemy: 
+			enemy.take_damage(current_weapon.damage)

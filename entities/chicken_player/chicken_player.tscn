@@ -22,11 +22,10 @@ height = 3.14525
 [sub_resource type="Resource" id="Resource_4hg1i"]
 script = ExtResource("13_5aj8x")
 name = "stick"
-damage = 0
-attack_range = 0.0
-windup_time = 0.0
-attack_duration = 0.0
-cooldown_time = 0.0
+damage = 10
+windup_time = 1.0
+attack_duration = 0.5
+cooldown_time = 1.0
 model = ExtResource("13_4hg1i")
 metadata/_custom_type_script = "uid://bwivmv3wqxk4o"
 
@@ -90,17 +89,17 @@ wait_time = 0.3
 one_shot = true
 
 [node name="WeaponStateMachine" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63468, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0058, 0, 0)
 script = ExtResource("12_k8bkn")
 current_weapon = SubResource("Resource_4hg1i")
 
 [node name="WeaponSlot" type="Node3D" parent="WeaponStateMachine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66208, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000414371, 0, 0)
 
 [node name="HitArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.09238)
 shape = SubResource("SphereShape3D_5aj8x")
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
