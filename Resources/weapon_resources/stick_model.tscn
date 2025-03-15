@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8bqvublk1ovr"]
 
-[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://Resources/WeaponResources/leek.glb" id="1_e3t5b"]
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://resources/weapon_resources/leek.glb" id="1_e3t5b"]
 
 [node name="StickModel" type="StaticBody3D"]
 
