@@ -1,9 +1,12 @@
+## AttackingState: Handles the attack phase of the weapon state machine.
 class_name AttackingState extends BaseState
 
+## Public Variables
 var weapon_state_machine: Node3D
-var attack_duration: float
+var attack_duration: float = 0.0
 
-func enter():
+
+func enter() -> void:
 	print("Entering Attacking State")
    
 	attack_duration = weapon_state_machine.current_weapon.attack_duration

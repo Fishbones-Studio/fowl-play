@@ -1,21 +1,24 @@
+## Weapon State Machine: Manages weapon state transitions and behavior.
 extends Node3D
 
-var current_weapon_instance: Node3D
+## Exported Variables
 @export var current_weapon: WeaponResource
 
+## Public Variables
+var current_weapon_instance: Node3D
 var current_state: BaseState
-
-## Dictionary to map WeaponState enum values to state instances.
 var states: Dictionary = {}
 
+## Onready Variables
 @onready var hitbox: Area3D = $"../HitArea"
+
 
 func _ready():
 	if not current_weapon:
 		push_error("No weapon assigned!")
 		return
 
-	# Initialize states becouse we cant set states as child nodes of our statemachine
+	# Initialize states because we can't set states as child nodes of our state machine
 	states = {
 		WeaponEnums.WeaponState.IDLE: IdleState.new(),
 		WeaponEnums.WeaponState.WINDUP: WindupState.new(),
@@ -35,7 +38,7 @@ func _process(delta: float):
 	if current_state:
 		current_state.process(delta)
 
-## Transition to a new state using the WeaponState enum.
+## Public Methods
 func transition_to(new_state: WeaponEnums.WeaponState):
 	if current_state:
 		current_state.exit()
@@ -44,7 +47,6 @@ func transition_to(new_state: WeaponEnums.WeaponState):
 	if current_state:
 		current_state.enter()
 
-## Equip a weapon.
 func equip_weapon(weapon_resource: WeaponResource):
 	if current_weapon_instance:
 		current_weapon_instance.queue_free()
@@ -60,10 +62,9 @@ func equip_weapon(weapon_resource: WeaponResource):
 
 	transition_to(WeaponEnums.WeaponState.IDLE)
 
-
 func attack():
 	var enemies = hitbox.get_overlapping_bodies()
-	# we search for an class named enemy within our hitbox
+	# We search for a class named Enemy within our hitbox
 	for enemy in enemies:
-		if enemy is Enemy: 
+		if enemy is Enemy:
 			enemy.take_damage(current_weapon.damage)

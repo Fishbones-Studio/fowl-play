@@ -13,9 +13,7 @@ class_name ChickenPlayer
 var stamina: float = max_stamina
 var health: int = max_health
 
-# reference to the weapon and attack states
-@export_group("Weapon and Attack")
-@export var attack_state_machine: Node
+
 
 
 func _ready():

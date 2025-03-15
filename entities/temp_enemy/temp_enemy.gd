@@ -1,14 +1,17 @@
+## Enemy: A basic enemy that can take damage and die.
 class_name Enemy extends CharacterBody3D
 
+## Exported Variables
 @export var health: int = 100
 
-func take_damage(amount: int):
+## Public Methods
+func take_damage(amount: int) -> void:
 	health -= amount
-	print("Enemy took ", amount, " damage! Remaining health: ", health)
+	print("Enemy took %d damage! Remaining health: %d" % [amount, health])
 	
 	if health <= 0:
 		die()
 
-func die():
+func die() -> void:
 	print("Enemy died!")
 	queue_free()
