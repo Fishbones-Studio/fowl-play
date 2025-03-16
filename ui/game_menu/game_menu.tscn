@@ -23,17 +23,16 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvpcr"]
 albedo_color = Color(0.25498, 0.16922, 0, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_x5ia0"]
-radius = 0.575365
-
 [sub_resource type="BoxMesh" id="BoxMesh_efok4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ms4yg"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_efok4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48rgb"]
 albedo_texture = ExtResource("3_l20ko")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkxcn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t1gii"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q8q2c"]
 
@@ -57,32 +56,30 @@ mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Chicken" type="Area3D" parent="."]
-transform = Transform3D(0.111717, -0.00354512, 0.152391, -0.00252068, 0.232893, 0.00440244, -0.185714, -0.00529366, 0.0916122, -1.49409, 2.72444, -0.0533764)
+transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
 script = ExtResource("1_isj0k")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
-transform = Transform3D(2.70342, -3.72529e-09, 2.38419e-07, -3.72529e-09, 2.07165, 2.98023e-08, 7.15256e-07, 3.35276e-08, 4.00841, -0.00341058, 0.272626, 0.00883865)
-shape = SubResource("SphereShape3D_x5ia0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
 mesh = SubResource("BoxMesh_efok4")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
+shape = SubResource("BoxShape3D_efok4")
+
 [node name="Flyer_Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.874184, 0, -0.565526, 0, 0.0332706, 0, 0.50471, 0, 0.97952, 1.21534, 3.51637, -0.344299)
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
 script = ExtResource("2_at3e2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer_Area3D"]
-transform = Transform3D(1, 0, 0, 0, 2.96206, 0, 0, 0, 1, 0, -30.9129, 0)
-shape = SubResource("BoxShape3D_ms4yg")
-
 [node name="Flyers" type="MeshInstance3D" parent="Flyer_Area3D"]
-transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0.0128475, -30.729, -0.00524253)
+transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_48rgb")
 mesh = SubResource("BoxMesh_rkxcn")
 skeleton = NodePath("../..")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer_Area3D"]
+shape = SubResource("BoxShape3D_t1gii")
+
 [node name="Shop_Area3D" type="Area3D" parent="."]
-transform = Transform3D(1.06649, 0, 0, 0, 0.521614, 0, 0, 0, 1, -0.229324, 2.74119, -0.784794)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
 script = ExtResource("5_hvp38")
 
 [node name="Shop" type="MeshInstance3D" parent="Shop_Area3D"]

@@ -1,4 +1,6 @@
-# ui_manager.gd
+## UI manager
+## This script manages the UI scenes in the game.
+## It handles switching between different UI scenes and loading them dynamically.
 extends CanvasLayer
 
 @export var initial_ui_scene: PackedScene
@@ -6,16 +8,21 @@ extends CanvasLayer
 
 func _ready():
 	SignalManager.switch_ui_scene.connect(_on_switch_ui)
+	SignalManager.add_ui_scene.connect(_on_add_ui_scene)
 	if initial_ui_scene:
 		add_child(initial_ui_scene.instantiate())
 
 
-# TODO: a function that adds ui child, in case multiple ui's are needed at once.
 func _on_switch_ui(new_ui_scene_path: String) -> void:
 	# Remove the current children
 	for child in get_children():
 		child.queue_free()
 
+	# Load the new UI scene from the path
+	_on_add_ui_scene(new_ui_scene_path)
+
+
+func _on_add_ui_scene(new_ui_scene_path: String) -> void:
 	# Load the UI scene from the path
 	var new_ui_scene_resource: Resource = ResourceLoader.load(new_ui_scene_path)
 
