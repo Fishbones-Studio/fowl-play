@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl7lgd5wptiik"
-path="res://.godot/imported/chicken_Sphere_7.png-8df45f2e674a20eeec4701ac504e9bb3.ctex"
+path.s3tc="res://.godot/imported/chicken_Sphere_7.png-8df45f2e674a20eeec4701ac504e9bb3.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://entities/chicken_player/art/chicken_Sphere_7.png"
-dest_files=["res://.godot/imported/chicken_Sphere_7.png-8df45f2e674a20eeec4701ac504e9bb3.ctex"]
+dest_files=["res://.godot/imported/chicken_Sphere_7.png-8df45f2e674a20eeec4701ac504e9bb3.s3tc.ctex"]
 
 [params]
 
