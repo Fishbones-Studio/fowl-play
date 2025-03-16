@@ -30,11 +30,11 @@ var items = [
 	{"name": "Jordans", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
 	{"name": "Helmet", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
 	{"name": "Mohawk", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
-	{"name": "Helicoter blades", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Mechenical butt", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Chamovlage Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Necromancer Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Blink Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
+	{"name": "Helicoter blades", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Mechenical butt", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Chamovlage Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Necromancer Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Blink Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
 	
 ]
 #Function to get a random item from the list above

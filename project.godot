@@ -21,7 +21,7 @@ boot_splash/minimum_display_time=2500
 
 [autoload]
 
-Gamemanager="*res://globals/gamemanager.gd"
+Gamemanager="*res://globals/game_manager.gd"
 ItemDatabase="*res://globals/item_database.gd"
 SignalManager="*res://utilities/autoload/signal_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"

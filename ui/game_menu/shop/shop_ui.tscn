@@ -72,8 +72,6 @@ layout_mode = 2
 [node name="Item5" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-
 [node name="ConfirmationPopup" parent="." instance=ExtResource("4_gly3t")]
 visible = false
 custom_minimum_size = Vector2(400, 300)
