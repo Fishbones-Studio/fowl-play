@@ -17,7 +17,6 @@ var health: int    = max_health
 
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # TODO: move this somewhere ekse
 	GameManager.chicken_player = self
 	SignalManager.init_health.emit(max_health, health)
 	SignalManager.init_stamina.emit(max_stamina, stamina)
