@@ -7,5 +7,5 @@ func _ready():
 func _input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked on", name)
-		SignalManager.switch_game_scene.emit("uid://bsx7lytfj8571")
 		SignalManager.switch_ui_scene.emit("uid://xhakfqnxgnrr")
+		SignalManager.switch_game_scene.emit("uid://bsx7lytfj8571")

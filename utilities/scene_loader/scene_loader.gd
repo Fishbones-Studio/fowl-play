@@ -29,6 +29,8 @@ func _on_add_game_scene(scene_path: String) -> void:
 		# Instance the new scene
 		var new_scene: Node = new_scene_resource.instantiate()
 
+		await get_tree().process_frame ## Waits one frame to ensure the scene is fully loaded, can help with some issues
+
 		# Add it as a child of the scene loader
 		add_child(new_scene)
 	else:
