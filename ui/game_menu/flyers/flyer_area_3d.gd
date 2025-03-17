@@ -4,7 +4,7 @@ func _ready():
 	set_process_input(true)
 
 
-func _input(event: InputEvent):
+func _input_event(camera, event, postion, normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked on", name)
 		SignalManager.switch_ui_scene.emit("uid://xhakfqnxgnrr")

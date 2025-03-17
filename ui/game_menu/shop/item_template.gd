@@ -53,3 +53,4 @@ func _on_confirmation_accepted(new_item : Dictionary):
 #Runs when user presses the 'Cancel' button
 func _on_confirmation_canceled():
 	print("Item replacement canceled.")
+	

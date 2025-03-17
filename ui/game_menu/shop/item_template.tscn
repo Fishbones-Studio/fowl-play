@@ -1,15 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc5vmtbby4xy0"]
+[gd_scene load_steps=3 format=3 uid="uid://cc5vmtbby4xy0"]
 
 [ext_resource type="Script" uid="uid://74xofhorearv" path="res://ui/game_menu/shop/item_template.gd" id="1_lvin6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_128bs"]
-bg_color = Color(0.125911, 0.125911, 0.125911, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvin6"]
-bg_color = Color(0.133196, 0.133196, 0.133196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fbhr"]
-bg_color = Color(0.129558, 0.129559, 0.129558, 1)
+[ext_resource type="StyleBox" uid="uid://c30nkhe5wie3g" path="res://ui/game_menu/shop/item_template.tres" id="2_wibli"]
 
 [node name="Item" type="Control"]
 layout_mode = 3
@@ -29,31 +21,47 @@ size_flags_vertical = 3
 [node name="item_name" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
-theme_override_styles/normal = SubResource("StyleBoxFlat_128bs")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("2_wibli")
 text = "Title of Item"
 
 [node name="item_buff" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_lvin6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("2_wibli")
 text = "Item buff"
 
 [node name="item_type" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_lvin6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("2_wibli")
 text = "Item type"
 
 [node name="item_cost" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_0fbhr")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("2_wibli")
 text = "Cost"
 
 [node name="buy_item" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.864675, 0.864675, 0.864675, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 18
 text = "BUY"
 
 [connection signal="pressed" from="VBoxContainer/buy_item" to="." method="_on_buy_item_pressed"]
