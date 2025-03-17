@@ -25,31 +25,23 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.0
-offset_top = 33.0
-offset_right = 34.0
-offset_bottom = 72.0
-grow_horizontal = 2
+
+layout_mode = 0
+offset_left = 545.0
+offset_top = 18.0
+offset_right = 613.0
+offset_bottom = 57.0
 theme_override_font_sizes/font_size = 28
 text = "Shop"
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -26.5
-offset_top = -57.0
-offset_right = 26.5
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 0
+
+layout_mode = 0
+offset_left = 545.0
+offset_top = 587.0
+offset_right = 598.0
+offset_bottom = 630.0
+
 theme_override_font_sizes/font_size = 25
 text = "Exit"
 script = ExtResource("2_gly3t")
@@ -67,7 +59,10 @@ offset_bottom = 141.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 46
+
+=======
 alignment = 1
+
 
 [node name="Item1" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
@@ -84,7 +79,7 @@ layout_mode = 2
 [node name="Item5" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+
 
 [node name="ConfirmationPopup" parent="." instance=ExtResource("4_gly3t")]
 visible = false
