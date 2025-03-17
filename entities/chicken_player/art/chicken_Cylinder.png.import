@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnbsberphgowi"
+uid="uid://dqp0d5wbxttjx"
 path.s3tc="res://.godot/imported/chicken_Cylinder.png-1a7cdc8e80973b1e2d71693cf5051af0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "4eb704e37fd6f0ec0d1574b1f419c4aa"
 }
 
 [deps]
