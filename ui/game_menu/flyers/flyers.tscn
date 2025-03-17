@@ -1,16 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=2 format=3 uid="uid://n7ew83nu7xpl"]
 
-[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="1_4dq8u"]
-[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/player/chicken_inventory.gd" id="1_j5p5e"]
+[ext_resource type="Script" uid="uid://bhyqa7o3ne0su" path="res://ui/game_menu/flyers/flyers.gd" id="1_dii2u"]
 
-[node name="Chicken_Inventory" type="Control"]
+[node name="Flyers" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j5p5e")
+script = ExtResource("1_dii2u")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -22,12 +21,12 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 523.0
-offset_top = 21.0
-offset_right = 653.0
-offset_bottom = 60.0
+offset_left = 444.0
+offset_top = 23.0
+offset_right = 687.0
+offset_bottom = 62.0
 theme_override_font_sizes/font_size = 28
-text = "Inventory
+text = "Choose your Fight
 "
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -42,31 +41,31 @@ grow_horizontal = 2
 scale = Vector2(0.817635, 0.730713)
 columns = 3
 
-[node name="Melee" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 1" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Ranged" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 2" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Armor 1" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 3" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Armor 2" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 4" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Ability 1" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 5" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Ability 2" type="VBoxContainer" parent="GridContainer"]
+[node name="Item 6" type="VBoxContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 567.0
 offset_top = 587.0
@@ -74,6 +73,5 @@ offset_right = 620.0
 offset_bottom = 630.0
 theme_override_font_sizes/font_size = 25
 text = "Exit"
-script = ExtResource("1_4dq8u")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
