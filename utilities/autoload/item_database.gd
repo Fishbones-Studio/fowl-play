@@ -1,5 +1,5 @@
 extends Node
-
+#Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
 enum Rarity {COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 
 var items = [
@@ -22,19 +22,19 @@ var items = [
 	{"name": "Sniper", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
 	{"name": "Lazet eyes", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
 	{"name": "Flamethrower", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Cap", "rarity": Rarity.COMMON, "type": "Helemt", "cost": 100},
-	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Boots", "cost": 100},
-	{"name": "Bubblewrap Helmet", "rarity": Rarity.COMMON, "type": "Helemt", "cost": 100},
-	{"name": "Bubblewrap Boots", "rarity": Rarity.UNCOMMON, "type": "Boots", "cost": 200},
-	{"name": "Rollerblades", "rarity": Rarity.RARE, "type": "Boots", "cost": 500},
-	{"name": "Jordans", "rarity": Rarity.RARE, "type": "Boots", "cost": 1000},
-	{"name": "Helmet", "rarity": Rarity.RARE, "type": "Helmet", "cost": 1000},
-	{"name": "Mohawk", "rarity": Rarity.RARE, "type": "Helmet", "cost": 1000},
-	{"name": "Helicoter blades", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Mechenical butt", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Chamovlage Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Necromancer Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Blink Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
+	{"name": "Cap", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
+	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
+	{"name": "Bubblewrap Helmet", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
+	{"name": "Bubblewrap Boots", "rarity": Rarity.UNCOMMON, "type": "Passive", "cost": 200},
+	{"name": "Rollerblades", "rarity": Rarity.RARE, "type": "Passive", "cost": 500},
+	{"name": "Jordans", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
+	{"name": "Helmet", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
+	{"name": "Mohawk", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
+	{"name": "Helicoter blades", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Mechenical butt", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Chamovlage Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Necromancer Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
+	{"name": "Blink Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
 	
 ]
 #Function to get a random item from the list above

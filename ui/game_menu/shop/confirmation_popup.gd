@@ -10,7 +10,7 @@ signal canceled
 @onready var replace_item_1: Button = $HBoxContainer/VBoxContainerExisting1/replace_item1
 @onready var cancel1: Button = $HBoxContainer/VBoxContainerExisting1/cancel
 
-@onready var label: Label = $HBoxContainer/VBoxContainerExisting2/Label
+@onready var existing_item2_label: Label = $HBoxContainer/VBoxContainerExisting2/Label
 @onready var existing_item_name2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_name
 @onready var existing_item_buff2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_buff
 @onready var existing_item_type2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_type
@@ -31,19 +31,16 @@ func show_confirmation(existing_item, new_item : Dictionary):
 	pending_item = new_item
 	if existing_item is Array and existing_item.size() == 2:
 		existing_item_name.text = existing_item[0].name
-		#existing_item_buff.text = existing_item[0].buff
 		existing_item_type.text = existing_item[0].type
 		existing_item_cost.text = str(existing_item[0].cost)
 		
 		existing_item_name2.text = existing_item[1].name
-		#existing_item_buff2.text = existing_item[1].buff
 		existing_item_type2.text = existing_item[1].type
 		existing_item_cost2.text = str(existing_item[1].cost)
 		replace_item_1.visible = true
 		replace_item_2.visible = true
 		
 		new_item_name.text = new_item.name
-#		new_item_buff.text = new_item.buff
 		new_item_type.text = new_item.type
 		new_item_cost.text = str(new_item.cost)
 		
@@ -53,18 +50,16 @@ func show_confirmation(existing_item, new_item : Dictionary):
 		replace_item_2.pressed.connect(func(): _on_replace_pressed(existing_item[1], new_item))
 	else:
 		existing_item_name.text = existing_item.name
-		#existing_item_buff.text = existing_item.buff
 		existing_item_type.text = existing_item.type
 		existing_item_cost.text = str(existing_item.cost)
 		
 		new_item_name.text = new_item.name
-	#	new_item_buff.text = new_item.buff
 		new_item_type.text = new_item.type
 		new_item_cost.text = str(new_item.cost)
 		
 		replace_item_1.visible = true
 		replace_item_2.visible = false
-		label.visible = false
+		existing_item2_label.visible = false
 		cancel2.visible = false
 		replace_item_1.pressed.connect(func(): _on_replace_pressed(existing_item, new_item))
 		cancel1.pressed.connect(func(): _on_cancel_pressed())
