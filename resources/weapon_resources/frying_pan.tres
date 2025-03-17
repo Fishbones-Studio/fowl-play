@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cyp7vbd07snqh"]
+
+[ext_resource type="Script" uid="uid://u2yw34jmrc7i" path="res://resources/weapon_resources/weapon_resource.gd" id="1_45b4c"]
+
+[resource]
+script = ExtResource("1_45b4c")
+damage = 50
+windup_time = 0.5
+attack_duration = 1.0
+cooldown_time = 0.5
+type = null
+name = "frying pan"
+drop_chance = 60
+cost = 100
+description = "frying pan placeholder"
