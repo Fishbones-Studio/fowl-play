@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd0mcxdwbc8ej"
-path.s3tc="res://.godot/imported/Chicken_Cylinder.png-448e70c902bd60189d36ac4af132b057.s3tc.ctex"
+uid="uid://dvjymvrkr81e6"
+path.s3tc="res://.godot/imported/chicken_default_Cylinder.png-fc42ea021c14a7e33abc44d40ef8b244.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "4eb704e37fd6f0ec0d1574b1f419c4aa"
+}
 
 [deps]
 
-source_file="res://entities/chicken_player/art/Chicken_Cylinder.png"
-dest_files=["res://.godot/imported/Chicken_Cylinder.png-448e70c902bd60189d36ac4af132b057.s3tc.ctex"]
+source_file="res://entities/chicken_player/art/chicken_default_Cylinder.png"
+dest_files=["res://.godot/imported/chicken_default_Cylinder.png-fc42ea021c14a7e33abc44d40ef8b244.s3tc.ctex"]
 
 [params]
 
