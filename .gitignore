@@ -35,3 +35,7 @@ mono_crash.*.json
 *.so
 *.dll
 *.exe
+
+# Hate to MacOs
+.DS_Store
+*.DS_Store
