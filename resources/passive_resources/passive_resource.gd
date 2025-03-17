@@ -1,7 +1,7 @@
-extends BaseResource
 class_name PassiveResource
+extends BaseResource
 
-## stat effects
+# stat effects
 @export var HPShift: int
 @export var DefenseShift: int
 @export var WeightShift: int
