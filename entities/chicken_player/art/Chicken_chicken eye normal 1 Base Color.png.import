@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcped3m0tvrj6"
+uid="uid://d1rsewlffqd5r"
 path.s3tc="res://.godot/imported/Chicken_chicken eye normal 1 Base Color.png-d83f0dc101f91bdd9b9f479dcac9c822.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "aee29d6753b028262a7397279c54801a"
 }
 
 [deps]

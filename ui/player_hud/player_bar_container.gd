@@ -5,6 +5,8 @@ extends VBoxContainer
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 	# Initializing the health and stamina bars
 	SignalManager.hurt_player.connect(func (damage): health_bar.health -= damage)
 	SignalManager.init_health.connect(health_bar.init_health)

@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk50hyn7g53vw"
+uid="uid://cts6bk65you0m"
 path.s3tc="res://.godot/imported/Chicken_Chicken body normal 1 Base Color.png-0b7d6dd15850fc95d7683544424f21aa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "0d2283b18ed1d8b9b80d38fd7c5f0d9a"
 }
 
 [deps]

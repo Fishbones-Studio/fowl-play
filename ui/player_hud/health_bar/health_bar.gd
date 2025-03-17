@@ -20,6 +20,7 @@ func set_health(_health: int):
 
 
 func init_health(_max_health: int, _health: int) -> void:
+	print("init_health")
 	health = _health
 	max_value = _max_health
 	value = health
