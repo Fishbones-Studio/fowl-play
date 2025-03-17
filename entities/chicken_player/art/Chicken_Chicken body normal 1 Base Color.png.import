@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cts6bk65you0m"
-path.s3tc="res://.godot/imported/chicken_Chicken body normal 1 Base Color.png-c0deb68b7d3a1c79a66f4bbebd83ab7f.s3tc.ctex"
+path.s3tc="res://.godot/imported/Chicken_Chicken body normal 1 Base Color.png-0b7d6dd15850fc95d7683544424f21aa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/chicken_player/art/chicken_Chicken body normal 1 Base Color.png"
-dest_files=["res://.godot/imported/chicken_Chicken body normal 1 Base Color.png-c0deb68b7d3a1c79a66f4bbebd83ab7f.s3tc.ctex"]
+source_file="res://entities/chicken_player/art/Chicken_Chicken body normal 1 Base Color.png"
+dest_files=["res://.godot/imported/Chicken_Chicken body normal 1 Base Color.png-0b7d6dd15850fc95d7683544424f21aa.s3tc.ctex"]
 
 [params]
 

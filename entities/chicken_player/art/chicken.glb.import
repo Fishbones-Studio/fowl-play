@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d0e8qmt1q8ljq"
-path="res://.godot/imported/Chicken.glb-d0cb1d23d57b53a1eb01918c50af27e3.scn"
+path="res://.godot/imported/chicken.glb-621b2fb26a209f0ba18f7f1ee809610b.scn"
 
 [deps]
 
-source_file="res://entities/chicken_player/art/Chicken.glb"
-dest_files=["res://.godot/imported/Chicken.glb-d0cb1d23d57b53a1eb01918c50af27e3.scn"]
+source_file="res://entities/chicken_player/art/chicken.glb"
+dest_files=["res://.godot/imported/chicken.glb-621b2fb26a209f0ba18f7f1ee809610b.scn"]
 
 [params]
 
