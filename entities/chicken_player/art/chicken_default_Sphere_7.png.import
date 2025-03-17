@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4w320l1il7q8"
-path.s3tc="res://.godot/imported/chicken_chicken eye normal 1 Base Color.png-bf65b44738547182e700333ab282ed92.s3tc.ctex"
+uid="uid://flvthulm14c3"
+path.s3tc="res://.godot/imported/chicken_default_Sphere_7.png-bf65fab5e9a67c66bc9588471ef2beb3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "aee29d6753b028262a7397279c54801a"
+"md5": "621a8127298b26a969c4deb705d72767"
 }
 
 [deps]
 
-source_file="res://entities/chicken_player/art/chicken_chicken eye normal 1 Base Color.png"
-dest_files=["res://.godot/imported/chicken_chicken eye normal 1 Base Color.png-bf65b44738547182e700333ab282ed92.s3tc.ctex"]
+source_file="res://entities/chicken_player/art/chicken_default_Sphere_7.png"
+dest_files=["res://.godot/imported/chicken_default_Sphere_7.png-bf65fab5e9a67c66bc9588471ef2beb3.s3tc.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dfqrxdeu6o0lr"
-path="res://.godot/imported/chicken.glb-621b2fb26a209f0ba18f7f1ee809610b.scn"
+uid="uid://cosl5b7xy6ps1"
+path="res://.godot/imported/chicken_default.glb-89d231206e6645b000c968a621b891d7.scn"
 
 [deps]
 
-source_file="res://entities/chicken_player/art/chicken.glb"
-dest_files=["res://.godot/imported/chicken.glb-621b2fb26a209f0ba18f7f1ee809610b.scn"]
+source_file="res://entities/chicken_player/art/chicken_default.glb"
+dest_files=["res://.godot/imported/chicken_default.glb-89d231206e6645b000c968a621b891d7.scn"]
 
 [params]
 
