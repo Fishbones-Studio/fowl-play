@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg3ncxyvgspq4"]
+
+[ext_resource type="Script" uid="uid://dm8j45ey6wgbd" path="res://utilities/autoload/ui_manager/ui_manager.gd" id="1_ws3sq"]
+[ext_resource type="PackedScene" uid="uid://dab0i61vj1n23" path="res://ui/main_menu/main_menu.tscn" id="2_6momb"]
+
+[node name="UIManager" type="CanvasLayer"]
+script = ExtResource("1_ws3sq")
+initial_ui_scene = ExtResource("2_6momb")

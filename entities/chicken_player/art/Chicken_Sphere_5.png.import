@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hpw4sj1gqofn"
+uid="uid://bljwlps00dcas"
 path.s3tc="res://.godot/imported/Chicken_Sphere_5.png-b26e6150608650b5c4f1862c5aa9dc22.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "e0eb85b0253ce8286b83f7786deb4156"
 }
 
 [deps]

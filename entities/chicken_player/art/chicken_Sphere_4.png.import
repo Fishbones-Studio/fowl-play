@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hdgokerevs1c"
-path.s3tc="res://.godot/imported/Chicken_Cylinder Base Color.png-cf10aff485ac0bb3d4fadad30da8b559.s3tc.ctex"
+uid="uid://b6i1auu5re3ur"
+path.s3tc="res://.godot/imported/chicken_Sphere_4.png-90dc95cd414ad9923f495196c65c07d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/chicken_player/art/Chicken_Cylinder Base Color.png"
-dest_files=["res://.godot/imported/Chicken_Cylinder Base Color.png-cf10aff485ac0bb3d4fadad30da8b559.s3tc.ctex"]
+source_file="res://entities/chicken_player/art/chicken_Sphere_4.png"
+dest_files=["res://.godot/imported/chicken_Sphere_4.png-90dc95cd414ad9923f495196c65c07d7.s3tc.ctex"]
 
 [params]
 
