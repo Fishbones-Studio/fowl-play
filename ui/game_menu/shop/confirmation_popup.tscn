@@ -1,0 +1,115 @@
+[gd_scene load_steps=2 format=3 uid="uid://da6m7g6ijjyop"]
+
+[ext_resource type="Script" uid="uid://dghqqfddvq86h" path="res://ui/game_menu/shop/confirmation_popup.gd" id="1_wha5l"]
+
+[node name="ConformationPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wha5l")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_right = 48.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 29
+text = "Swap Items?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 79.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.996413, 0.628547)
+theme_override_constants/separation = 0
+
+[node name="VBoxContainerExisting" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+text = "Item in inventory"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+
+[node name="existing_item_name" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+
+[node name="existing_item_buff" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+
+[node name="existing_item_type" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+
+[node name="existing_item_cost" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+layout_mode = 2
+
+[node name="VBoxContainerNew" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+text = "New Item"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+
+[node name="new_item_name" type="Label" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+
+[node name="new_item_buff" type="Label" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+
+[node name="new_item_type" type="Label" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+
+[node name="new_item_cost" type="Label" parent="HBoxContainer/VBoxContainerNew"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.406684
+anchor_top = 0.899691
+anchor_right = 0.593316
+anchor_bottom = 0.966049
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 25
+metadata/_edit_use_anchors_ = true
+
+[node name="replace" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Replace"
+
+[node name="cancel" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Cancel"
+
+[connection signal="pressed" from="HBoxContainer2/replace" to="." method="_on_replace_pressed"]
+[connection signal="pressed" from="HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

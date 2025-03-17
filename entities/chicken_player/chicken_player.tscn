@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
-[ext_resource type="PackedScene" uid="uid://b64jekug7b3i8" path="res://entities/chicken_player/art/chicken.glb" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/dash_state.gd" id="4_7thud"]
 [ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/glide_state.gd" id="5_a1qjk"]
@@ -14,19 +14,17 @@
 [ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/chicken_player/weapon_state_machine.gd" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
-radius = 0.871595
-height = 3.14525
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5aj8x"]
+radius = 0.9
+height = 3.5
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 script = ExtResource("1_abrql")
 
-[node name="StandardChickenModel" parent="." instance=ExtResource("1_symyc")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="chicken_default" parent="." instance=ExtResource("2_jgbvq")]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 0, 0.345436, 0)
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.219971, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350985, 0)
 shape = SubResource("CapsuleShape3D_abrql")
 
 [node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "player")]

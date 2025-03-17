@@ -1,3 +1,7 @@
+## State machine for the player movement system.
+##
+## This script manages the different states of the player movement system, for the chicken player.
+
 extends Node
 
 @export var starting_state: BasePlayerState
@@ -51,6 +55,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
+	if target_state == current_state.STATE_TYPE:
+		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
+		target_state = PlayerEnums.PlayerStates.IDLE_STATE
+
 	var previous_state := current_state
 	previous_state.exit()
 

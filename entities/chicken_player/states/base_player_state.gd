@@ -31,13 +31,19 @@ func physics_process(_delta: float) -> void:
 	if movement_speed == 0.0:
 		push_error("BasePlayerState: movement_speed is null. Please set it in the child class before calling super.")
 
-	# Get 3D movement input
-	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_backward", "move_forward")
-
-	# Calculate camera-relative movement direction
-	var player_basis: Basis = player.global_transform.basis
-	var direction: Vector3 = (player_basis.x * input_dir.x + player_basis.z * -input_dir.y).normalized()
+	var direction: Vector3 = get_player_direction( get_player_input_dir())
 
 	# Apply horizontal movement
 	player.velocity.x = direction.x * movement_speed
 	player.velocity.z = direction.z * movement_speed
+
+
+func get_player_input_dir() -> Vector2:
+	# Get 3D movement input
+	return Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+
+
+func get_player_direction(input_dir: Vector2) -> Vector3:
+	# Calculate camera-relative movement direction
+	var player_basis: Basis = player.global_basis
+	return (player_basis.x * input_dir.x + player_basis.z * input_dir.y).normalized()
