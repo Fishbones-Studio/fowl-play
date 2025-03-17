@@ -1,5 +1,5 @@
 extends Node
-
+#Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
 enum Rarity {COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 
 var items = [

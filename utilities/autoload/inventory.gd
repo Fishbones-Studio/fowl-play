@@ -1,5 +1,5 @@
 extends Node
-
+#Autoload script to manage the inventory
 var items_in_inventory: Array = []
 
 func add_item(item):
