@@ -22,6 +22,12 @@ mono_crash.*.json
 # Built Visual Studio Code Extensions
 *.vsix
 
+# Ignore everything in any addons directory
+**/addons/*
+
+# Specifically allow markdown files in any addons directory
+!**/addons/*.md
+
 # Temp files
 *.TMP
 
@@ -29,11 +35,7 @@ mono_crash.*.json
 *.so
 *.dll
 *.exe
-.x86_64
 
 # Hate to MacOs
 .DS_Store
 *.DS_Store
-
-# exports
-/export/
