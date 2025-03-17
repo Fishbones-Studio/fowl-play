@@ -9,7 +9,7 @@ extends Resource
 @export var drop_chance: int
 @export var cost: int
 @export var description: String # Flavour text
-@export var type : ItemEnums.ItemTypes # Defines what item slot it uses, extends to other resources
+var type : ItemEnums.ItemTypes # Defines what item slot it uses, extends to other resources
 
 # Visual & UI Elements
 @export var icon: Texture  # The icon for the shop/inventory
