@@ -1,5 +1,5 @@
 ---
-name: Bug Report
+name: Godot Bug Report
 about: Report a reproducible bug
 title: ''
 labels: ''
@@ -8,31 +8,39 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+
+_A clear and concise description of the issue._
 
 **To Reproduce**
+
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. Open the project in Godot version [e.g. 4.3].  
+2. Run the scene [e.g. `player.tscn`].  
+3. Perform [specific action] (e.g., jump, interact).  
+4. Observe the error. 
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+
+_A clear and concise description of what should happen instead._
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+_If applicable, add screenshots to help explain your problem._
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**System Information**  
+- OS: [e.g. Windows 10, macOS Ventura]  
+- Godot Version: [e.g. 4.3, 4.4]  
+- Renderer: [e.g. Forward+, GLES3, GLES2]  
+- Hardware: [e.g. GTX 3060, Apple M1]  
 
-**Additional context**
-Add any other context about the problem here.
+**Error Output (if applicable)**  
+
+_Paste any relevant error messages from the **Output Log** or **Debugger**._
+
+```plaintext
+Error message here...
+```
+
+**Additional Context**
+
+_Add any other relevant information, such as related scripts, specific node setups, or plugin dependencies._

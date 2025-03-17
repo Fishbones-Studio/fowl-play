@@ -25,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel"]
+
 layout_mode = 0
 offset_left = 545.0
 offset_top = 18.0
@@ -34,11 +35,13 @@ theme_override_font_sizes/font_size = 28
 text = "Shop"
 
 [node name="Button" type="Button" parent="."]
+
 layout_mode = 0
 offset_left = 545.0
 offset_top = 587.0
 offset_right = 598.0
 offset_bottom = 630.0
+
 theme_override_font_sizes/font_size = 25
 text = "Exit"
 script = ExtResource("2_gly3t")
@@ -57,6 +60,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 46
 
+=======
+alignment = 1
+
+
 [node name="Item1" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
@@ -71,6 +78,8 @@ layout_mode = 2
 
 [node name="Item5" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
+
+
 
 [node name="ConfirmationPopup" parent="." instance=ExtResource("4_gly3t")]
 visible = false

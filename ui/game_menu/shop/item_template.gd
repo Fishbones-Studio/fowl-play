@@ -1,18 +1,22 @@
 extends Control
 class_name Item_Template
+
 @onready var item_name: Label = $VBoxContainer/item_name
 @onready var item_cost: Label = $VBoxContainer/item_cost
 @onready var item_type: Label = $VBoxContainer/item_type
 @onready var ConfirmationPopup: Control = get_tree().get_root().find_child("ConfirmationPopup", true, false)
 
+
 var purchase_in_progress = false
 
 func set_item(item):
+
 	item_name.text = item.name
 	item_type.text = item.type
 	item_cost.text = str(item.cost)
 
 func _on_buy_item_pressed() -> void:
+
 	
 	if purchase_in_progress:
 		return
@@ -20,6 +24,7 @@ func _on_buy_item_pressed() -> void:
 	#Prevent the purchase from happening multiple times
 	purchase_in_progress = true
 	
+
 	if Gamemanager.prosperity_eggs >= int(item_cost.text):
 		var new_item = {
 			"name": item_name.text,
@@ -29,6 +34,7 @@ func _on_buy_item_pressed() -> void:
 		
 		var existing_item = Inventory.get_item_by_type(new_item.type)
 		
+
 		#Special case for ability type
 		if new_item.type == "Ability":
 			#check if ability already exists in inventory
@@ -103,3 +109,4 @@ func _disconnect_confirmation_signals():
 		ConfirmationPopup.confirmed.disconnect(_on_confirmation_accepted)
 	if ConfirmationPopup.canceled.is_connected(_on_confirmation_canceled):
 		ConfirmationPopup.canceled.disconnect(_on_confirmation_canceled)
+

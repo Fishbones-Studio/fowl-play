@@ -18,12 +18,14 @@ signal canceled
 @onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item2
 @onready var cancel2: Button = $HBoxContainer/VBoxContainerExisting2/cancel
 
+
 @onready var new_item_name: Label = $HBoxContainer/VBoxContainerNew/new_item_name
 @onready var new_item_buff: Label = $HBoxContainer/VBoxContainerNew/new_item_buff
 @onready var new_item_type: Label = $HBoxContainer/VBoxContainerNew/new_item_type
 @onready var new_item_cost: Label = $HBoxContainer/VBoxContainerNew/new_item_cost
 
 var pending_item = null #Variable to store the item in waiting for conformation
+
 
 func show_confirmation(existing_item, new_item : Dictionary):
 	pending_item = new_item
@@ -71,8 +73,10 @@ func show_confirmation(existing_item, new_item : Dictionary):
 	
 
 
+
 func _on_replace_pressed(old_item : Dictionary, new_item: Dictionary) -> void:
 	emit_signal("confirmed", old_item, new_item)
+
 	visible = false
 
 

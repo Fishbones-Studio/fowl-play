@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://xhakfqnxgnrr"]
+
+[ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
+[ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
+
+[node name="PlayerHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_constants/separation = 8
+script = ExtResource("1_sqrx6")
+
+[node name="HealthBar" parent="MarginContainer/HBoxContainer/PlayerBarContainer" instance=ExtResource("1_vyppb")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StaminaBar" parent="MarginContainer/HBoxContainer/PlayerBarContainer" instance=ExtResource("2_rtdb5")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/PlayerBarContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 35.0
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0

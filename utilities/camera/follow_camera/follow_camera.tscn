@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c28ev5h14ds8v"]
+
+[ext_resource type="Script" uid="uid://dbnlvxkemhjtj" path="res://utilities/camera/follow_camera/follow_camera.gd" id="1_qayld"]
+[ext_resource type="Script" uid="uid://c72g0626sewrj" path="res://utilities/camera/follow_camera/follow_camera_transformer.gd" id="2_oopg5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oopg5"]
+
+[node name="FollowCamera" type="Node3D"]
+script = ExtResource("1_qayld")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+collision_mask = 2
+shape = SubResource("SphereShape3D_oopg5")
+
+[node name="CameraPosition" type="Node3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258536, -0.133833)
+
+[node name="FollowCameraTransformer" type="RemoteTransform3D" parent="." node_paths=PackedStringArray("camera")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258536, -0.133833)
+remote_path = NodePath("..")
+script = ExtResource("2_oopg5")
+camera = NodePath("../SpringArm3D/CameraPosition")
