@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c28ev5h14ds8v"]
 
 [ext_resource type="Script" uid="uid://dbnlvxkemhjtj" path="res://utilities/camera/follow_camera/follow_camera.gd" id="1_qayld"]
-[ext_resource type="Script" uid="uid://eku8g2o8drr" path="res://utilities/camera/follow_camera/follow_camera_transformer.gd" id="2_87ivn"]
+[ext_resource type="Script" uid="uid://c72g0626sewrj" path="res://utilities/camera/follow_camera/follow_camera_transformer.gd" id="2_87ivn"]
 
 [node name="FollowCamera" type="SpringArm3D"]
 spring_length = 3.0

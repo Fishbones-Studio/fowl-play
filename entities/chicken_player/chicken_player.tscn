@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
@@ -12,10 +12,25 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/chicken_player/weapon_state_machine.gd" id="12_k8bkn"]
+[ext_resource type="PackedScene" uid="uid://8bqvublk1ovr" path="res://resources/weapon_resources/leek/stick_model.tscn" id="13_4hg1i"]
+[ext_resource type="Script" uid="uid://bwivmv3wqxk4o" path="res://resources/weapon_resources/leek/stick.gd" id="13_5aj8x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
 height = 3.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8bkn"]
+size = Vector3(0.9, 2.8, 1.6)
+
+[sub_resource type="Resource" id="Resource_4hg1i"]
+script = ExtResource("13_5aj8x")
+name = ""
+damage = 0
+windup_time = 0.0
+attack_duration = 0.0
+cooldown_time = 0.0
+model = ExtResource("13_4hg1i")
+metadata/_custom_type_script = "uid://bwivmv3wqxk4o"
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 script = ExtResource("1_abrql")
@@ -74,18 +89,20 @@ STATE_TYPE = 7
 wait_time = 0.3
 one_shot = true
 
-[node name="WeaponStateMachine" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0058, 0, 0)
-script = ExtResource("12_k8bkn")
-
-[node name="WeaponSlot" type="Node3D" parent="WeaponStateMachine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000414371, 0, 0)
-
 [node name="HitArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0058, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.09238)
-shape = SubResource("SphereShape3D_5aj8x")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01575, 0, 0)
+shape = SubResource("BoxShape3D_k8bkn")
+
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0058, 0, 0)
+script = ExtResource("12_k8bkn")
+current_weapon = SubResource("Resource_4hg1i")
+
+[node name="WeaponSlot" type="Node3D" parent="Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000414371, 0, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]

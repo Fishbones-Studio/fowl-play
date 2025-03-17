@@ -21,7 +21,7 @@ extends Node3D
 @export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
 
-@onready var spring_arm_3d: SpringArm3D = $SpringArm3D
+@onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
 
 
