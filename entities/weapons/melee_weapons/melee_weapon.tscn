@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfbarshp3p5gi"]
+
+[ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/chicken_player/current_weapon.gd" id="1_ugll4"]
+[ext_resource type="PackedScene" uid="uid://8bqvublk1ovr" path="res://resources/weapon_resources/leek/stick_model.tscn" id="2_jk4mf"]
+[ext_resource type="Script" uid="uid://kk30wx1g1hsr" path="res://entities/weapons/melee_weapons/melee_weapon_state_machine.gd" id="2_ycty3"]
+[ext_resource type="Script" uid="uid://bwivmv3wqxk4o" path="res://resources/weapon_resources/leek/stick.gd" id="3_32jyy"]
+[ext_resource type="Script" uid="uid://dlgfsk2b6j0us" path="res://entities/chicken_player/states/combat_states/idle_state.gd" id="5_l7vwy"]
+[ext_resource type="Script" uid="uid://ccb1xp7bs0efp" path="res://entities/chicken_player/states/combat_states/attacking_state.gd" id="6_hs04l"]
+[ext_resource type="Script" uid="uid://dv8nlk4ss2qnp" path="res://entities/chicken_player/states/combat_states/cooldown_state.gd" id="7_mq8tj"]
+[ext_resource type="Script" uid="uid://cck8pm0t4q5sw" path="res://entities/chicken_player/states/combat_states/windup_state.gd" id="8_6pe85"]
+
+[sub_resource type="Resource" id="Resource_7770a"]
+script = ExtResource("3_32jyy")
+name = ""
+damage = 0
+windup_time = 0.0
+attack_duration = 0.0
+cooldown_time = 0.0
+model = ExtResource("2_jk4mf")
+metadata/_custom_type_script = "uid://bwivmv3wqxk4o"
+
+[node name="MeleeWeapon" type="Node3D"]
+
+[node name="CurrentWeapon" type="Node3D" parent="."]
+script = ExtResource("1_ugll4")
+current_weapon = SubResource("Resource_7770a")
+
+[node name="Node3D" type="Node3D" parent="CurrentWeapon"]
+
+[node name="MeleeStateMachine" type="Node" parent="."]
+script = ExtResource("2_ycty3")
+
+[node name="Idle" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("5_l7vwy")
+
+[node name="Attacking" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("6_hs04l")
+
+[node name="Cooldown" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("7_mq8tj")
+
+[node name="Windup" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("8_6pe85")

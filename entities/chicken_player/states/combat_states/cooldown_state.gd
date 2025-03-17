@@ -17,6 +17,3 @@ func process(delta: float) -> void:
 	# If cooldown timer reaches 0, switch to the idle state.
 	if cooldown_timer <= 0:
 		weapon_state_machine.transition_to(WeaponEnums.WeaponState.IDLE)
-
-func exit() -> void:
-	pass

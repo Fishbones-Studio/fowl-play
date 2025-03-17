@@ -17,6 +17,3 @@ func process(delta: float) -> void:
 	# If the windup timer reaches 0, switch to the attacking state.
 	if windup_timer <= 0:
 		weapon_state_machine.transition_to(WeaponEnums.WeaponState.ATTACKING)
-
-func exit() -> void:
-	pass

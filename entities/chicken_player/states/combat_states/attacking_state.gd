@@ -3,6 +3,7 @@ class_name AttackingState extends BaseState
 
 ## Public Variables
 var weapon_state_machine: Node3D
+var current_weapon: Node3D
 var attack_duration: float = 0.0
 
 
@@ -12,7 +13,7 @@ func enter() -> void:
 	attack_duration = weapon_state_machine.current_weapon.attack_duration
 
 	# Call the attack logic once when entering the ATTACKING state.
-	weapon_state_machine.attack()
+	attack()
 
 func process(delta: float) -> void:
 	# Reduce the attack duration by the time passed since the last frame.
@@ -22,6 +23,11 @@ func process(delta: float) -> void:
 	if attack_duration <= 0:
 		# Transition to the Cooldown State.
 		weapon_state_machine.transition_to(WeaponEnums.WeaponState.COOLDOWN)
+		
 
-func exit() -> void:
-	pass
+func attack():
+	var enemies = current_weapon.hitbox.get_overlapping_bodies()
+	# We search for a class named Enemy within our hitbox
+	for enemy in enemies:
+		if enemy is Enemy:
+			enemy.take_damage(current_weapon.damage)
