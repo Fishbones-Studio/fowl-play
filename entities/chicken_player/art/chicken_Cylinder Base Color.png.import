@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btg6gku82w707"
+uid="uid://pa8557400l8r"
 path.s3tc="res://.godot/imported/chicken_Cylinder Base Color.png-fbd9fee1eb01a24b989fa84337bc4f1c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "53a263ea32bf80f2dc1840f2f803d5dc"
 }
 
 [deps]
