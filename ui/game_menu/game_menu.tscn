@@ -1,7 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://21r458rvciqo"]
 
-
-[ext_resource type="Script" uid="uid://b4p5qknvtsxmn" path="res://ui/game_menu/chicken_inventory/chicken.gd" id="1_isj0k"]
+[ext_resource type="Script" uid="uid://b4p5qknvtsxmn" path="res://ui/game_menu/player/chicken.gd" id="1_isj0k"]
 [ext_resource type="Script" uid="uid://dduulsvf3cbei" path="res://ui/game_menu/flyers/flyer_area_3d.gd" id="2_at3e2"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
 [ext_resource type="Script" uid="uid://cf7w0qpoidrnw" path="res://ui/game_menu/shop/shop_area_3d.gd" id="5_hvp38"]
@@ -57,7 +56,6 @@ mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Chicken" type="Area3D" parent="."]
-
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
 script = ExtResource("1_isj0k")
 
@@ -73,18 +71,15 @@ script = ExtResource("2_at3e2")
 
 [node name="Flyers" type="MeshInstance3D" parent="Flyer_Area3D"]
 transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0, 0, 0)
-
 material_override = SubResource("StandardMaterial3D_48rgb")
 mesh = SubResource("BoxMesh_rkxcn")
 skeleton = NodePath("../..")
-
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer_Area3D"]
 shape = SubResource("BoxShape3D_t1gii")
 
 [node name="Shop_Area3D" type="Area3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
-
 script = ExtResource("5_hvp38")
 
 [node name="Shop" type="MeshInstance3D" parent="Shop_Area3D"]

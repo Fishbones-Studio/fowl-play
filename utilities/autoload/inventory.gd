@@ -1,22 +1,23 @@
 extends Node
 #Autoload script to manage the inventory
+# TODO: typing with the item resource
 var items_in_inventory: Array = []
 
 func add_item(item):
 	items_in_inventory.append(item)
 	
-func get_items():
+func get_items() -> Array:
 	return items_in_inventory
 
-func get_item_by_name(item_name):
+func get_item_by_name(item_name) -> Variant:
 	for item in items_in_inventory:
 		if item.name == item_name:
 			print("item found: ", item)
 			return item
 	return null
 	
-func get_item_by_type(item_type):
-	var matching_items = []
+func get_item_by_type(item_type) -> Array[Variant]:
+	var matching_items: Array[Variant] = []
 	
 	for item in items_in_inventory:
 		if item.type == item_type:
