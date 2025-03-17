@@ -1,6 +1,6 @@
 extends BasePlayerState
 
-@export var walk_speed: float = 40.0
+@export var walk_speed: float = 20.0
 
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:

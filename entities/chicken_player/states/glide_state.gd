@@ -3,11 +3,11 @@ extends BasePlayerState
 @export_range(0, 1, 0.01) var glide_gravity: float = 0.4
 @export var glide_fall_speed: float = 1.5
 @export var glide_movement_speed: float = 25
-@export var glide_stamina_cost: float = 5.0
+@export var glide_stamina_cost: int = 35
 
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
-	
+
 	# check for stamina
 	if player.stamina < glide_stamina_cost:
 		print("Not enough stamina to glide")

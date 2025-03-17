@@ -1,7 +1,7 @@
 extends BasePlayerState
 
 @export var sprint_speed: float = 60.0
-@export var sprint_stamina_cost: float = 5.0
+@export var sprint_stamina_cost: int = 30
 
 
 func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:

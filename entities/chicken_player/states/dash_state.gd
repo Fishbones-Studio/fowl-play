@@ -5,7 +5,8 @@ extends BasePlayerState
 
 @export_range(10, 100) var stamina_cost: int = 30
 
-@export_range(1.0, 20.0) var dash_distance: float = 30.0
+@export_range(1.0, 20.0) var dash_distance: float = 50.0
+@export var dash_movement_speed: float = 0
 
 var _dash_available: bool = true
 var _dash_direction: Vector3
@@ -21,6 +22,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
 		return
 
+	movement_speed = dash_movement_speed
 	super.enter(_previous_state)
 
 	if not _dash_available or player.stamina < stamina_cost:
@@ -55,8 +57,8 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 	dash_duration_timer.start()
 
 
-func physics_process(_delta: float) -> void:
-	player.velocity = _dash_direction * dash_distance
+func physics_process(delta: float) -> void:
+	player.velocity = _dash_direction * dash_distance * delta * DELTA_MODIFIER # We multiply by delta here, so that the dash stays the same speed if the physics tick is not met/changed
 
 
 func exit() -> void:

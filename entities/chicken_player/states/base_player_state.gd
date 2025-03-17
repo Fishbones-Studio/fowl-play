@@ -2,6 +2,7 @@ class_name BasePlayerState
 extends BaseState
 
 @export var STATE_TYPE: PlayerEnums.PlayerStates
+@export var DELTA_MODIFIER: float = 100 ## Used to modify when delta time is used, so movement speed does not need to be in the thousands
 
 var player: ChickenPlayer
 var movement_speed: float = 0.0
@@ -27,15 +28,15 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 
 
 # Providing default player movement
-func physics_process(_delta: float) -> void:
+func physics_process(delta: float) -> void:
 	if movement_speed == 0.0:
 		push_error("BasePlayerState: movement_speed is null. Please set it in the child class before calling super.")
 
 	var direction: Vector3 = get_player_direction( get_player_input_dir())
 
 	# Apply horizontal movement
-	player.velocity.x = direction.x * movement_speed
-	player.velocity.z = direction.z * movement_speed
+	player.velocity.x = direction.x * movement_speed * delta * DELTA_MODIFIER
+	player.velocity.z = direction.z * movement_speed * delta * DELTA_MODIFIER
 
 
 func get_player_input_dir() -> Vector2:
