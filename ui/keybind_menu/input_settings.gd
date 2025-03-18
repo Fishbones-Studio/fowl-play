@@ -6,12 +6,23 @@ extends Control
 @onready var input_button_scene: PackedScene = preload("uid://c742rhgrg2wc2") ## scene for the clickable button row
 @onready var action_list: GridContainer = %ActionList ## container for the clickable button rows
 @onready var error_text: Label = %ErrorText
+@onready var back_button: Button = %BackButton
 
 var config_path: String = "user://keybinds.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
 
+func _unhandled_input(_event: InputEvent) -> void:
+	get_viewport().set_input_as_handled()
+
+
 func _ready():
+	# Make this block input to lower layers
+	self.mouse_filter = Control.MOUSE_FILTER_STOP
+	self.focus_mode = Control.FOCUS_ALL
+
+	back_button.grab_focus()
+
 	# Initial load of saved settings when scene enters tree
 	_load_input_settings()
 
