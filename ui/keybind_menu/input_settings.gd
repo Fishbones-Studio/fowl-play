@@ -31,6 +31,11 @@ func _input(event: InputEvent) -> void:
 	if not SaveManager.is_remapping || event is InputEventMouseMotion:
 		return
 
+	get_viewport().set_input_as_handled()
+
+	if back_button.has_focus():
+		back_button.release_focus()
+
 	var input_type = SaveManager.input_type
 	var action_to_remap = SaveManager.action_to_remap
 
@@ -193,9 +198,9 @@ func _split_events_by_type(events: Array[InputEvent]) -> Dictionary:
 
 
 func _is_event_already_assigned(event: InputEvent, current_action: String) -> bool:
-	# Check all actions except current one for duplicate bindings
+	# Check all actions except current one for duplicate bindings. Also ignore built-in UI actions
 	for action in InputMap.get_actions():
-		if action == current_action:
+		if action == current_action || action.begins_with("ui_"):
 			continue
 
 		for existing_event in InputMap.action_get_events(action):
