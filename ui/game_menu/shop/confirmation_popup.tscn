@@ -43,28 +43,76 @@ grow_vertical = 2
 scale = Vector2(0.996413, 0.628547)
 theme_override_constants/separation = 0
 
-[node name="VBoxContainerExisting" type="VBoxContainer" parent="HBoxContainer"]
+
+[node name="VBoxContainerExisting1" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
 text = "Item in inventory"
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
 
-[node name="existing_item_name" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="existing_item_name" type="Label" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
 
-[node name="existing_item_buff" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="existing_item_buff" type="Label" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
 
-[node name="existing_item_type" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="existing_item_type" type="Label" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
 
-[node name="existing_item_cost" type="Label" parent="HBoxContainer/VBoxContainerExisting"]
+[node name="existing_item_cost" type="Label" parent="HBoxContainer/VBoxContainerExisting1"]
 layout_mode = 2
+
+[node name="replace_item1" type="Button" parent="HBoxContainer/VBoxContainerExisting1"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 25
+text = "Replace"
+
+[node name="cancel" type="Button" parent="HBoxContainer/VBoxContainerExisting1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Cancel"
+
+[node name="VBoxContainerExisting2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+text = "Item in Inventory"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+
+[node name="existing_item_name" type="Label" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+
+[node name="existing_item_buff" type="Label" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+
+[node name="existing_item_type" type="Label" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+
+[node name="existing_item_cost" type="Label" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+
+[node name="replace_item2" type="Button" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 25
+text = "Replace"
+
+[node name="cancel" type="Button" parent="HBoxContainer/VBoxContainerExisting2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "Cancel"
+
 
 [node name="VBoxContainerNew" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -101,15 +149,6 @@ grow_vertical = 0
 theme_override_constants/separation = 25
 metadata/_edit_use_anchors_ = true
 
-[node name="replace" type="Button" parent="HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Replace"
+[connection signal="pressed" from="HBoxContainer/VBoxContainerExisting1/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainerExisting2/cancel" to="." method="_on_cancel_pressed"]
 
-[node name="cancel" type="Button" parent="HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Cancel"
-
-[connection signal="pressed" from="HBoxContainer2/replace" to="." method="_on_replace_pressed"]
-[connection signal="pressed" from="HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

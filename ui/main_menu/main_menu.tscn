@@ -1,14 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://dab0i61vj1n23"]
 
-[ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/button_container.gd" id="1_uhj5c"]
+[ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
 
-[node name="Main Menu" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uhj5c")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -41,7 +42,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 25
-script = ExtResource("1_uhj5c")
 
 [node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
 layout_mode = 2
@@ -57,6 +57,6 @@ layout_mode = 2
 text = "Quit
 "
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/PlayButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_play_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/SettingsButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/QuitButton" to="MarginContainer/VBoxContainer/ButtonContainer" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]

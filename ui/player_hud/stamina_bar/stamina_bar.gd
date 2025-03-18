@@ -11,6 +11,7 @@ func set_stamina(_stamina: float):
 
 
 func init_stamina(_max_stamina: float, _stamina: float) -> void:
+	print("init_stamina")
 	stamina = _stamina
 	max_value = _max_stamina
 	value = stamina

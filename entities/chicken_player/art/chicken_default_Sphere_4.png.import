@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ph6ynieoquo0"
-path.s3tc="res://.godot/imported/Chicken_Sphere_7.png-c11fcd8a5152f6fd38709de7c2391069.s3tc.ctex"
+uid="uid://bwrx6b3f1c7wi"
+path.s3tc="res://.godot/imported/chicken_default_Sphere_4.png-62aadf525fef83731eb091b18e7385bf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "621a8127298b26a969c4deb705d72767"
+"md5": "b7356d546ddc879ec49342d0e1df3427"
 }
 
 [deps]
 
-source_file="res://entities/chicken_player/art/Chicken_Sphere_7.png"
-dest_files=["res://.godot/imported/Chicken_Sphere_7.png-c11fcd8a5152f6fd38709de7c2391069.s3tc.ctex"]
+source_file="res://entities/chicken_player/art/chicken_default_Sphere_4.png"
+dest_files=["res://.godot/imported/chicken_default_Sphere_4.png-62aadf525fef83731eb091b18e7385bf.s3tc.ctex"]
 
 [params]
 
