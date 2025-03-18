@@ -18,3 +18,7 @@ func _update_inventory():
 		label.text = item.name + " (" + item.type + ") - Cost: " + str(item.cost)
 		grid_container.add_child(label)
 		
+
+
+func _on_button_pressed():
+	queue_free()
