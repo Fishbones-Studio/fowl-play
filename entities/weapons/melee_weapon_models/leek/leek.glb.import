@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ne7iiotato7p"
-path="res://.godot/imported/leek.glb-4cfd82690eb064341185722a335f7cca.scn"
+path="res://.godot/imported/leek.glb-e59718adeca41990a651e3c81aef4d35.scn"
 
 [deps]
 
-source_file="res://resources/weapon_resources/leek/leek.glb"
-dest_files=["res://.godot/imported/leek.glb-4cfd82690eb064341185722a335f7cca.scn"]
+source_file="res://entities/weapons/melee_weapon_models/leek/leek.glb"
+dest_files=["res://.godot/imported/leek.glb-e59718adeca41990a651e3c81aef4d35.scn"]
 
 [params]
 

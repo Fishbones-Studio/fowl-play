@@ -7,9 +7,8 @@ extends Node3D
 ## Public Variables
 var current_weapon_instance: Node3D
 
-
 ## Onready Variables
-@onready var hitbox: Area3D = $"../HitArea"
+@export var hitbox: Area3D
 
 
 func _ready():
@@ -28,7 +27,4 @@ func equip_weapon(weapon_resource: WeaponResource):
 
 	if weapon_resource.model:
 		current_weapon_instance = weapon_resource.model.instantiate()
-		add_child(current_weapon_instance)
-	elif weapon_resource:
-		current_weapon_instance = weapon_resource.instantiate()
 		add_child(current_weapon_instance)

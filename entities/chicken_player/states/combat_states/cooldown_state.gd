@@ -1,19 +1,37 @@
-## CooldownState: Handles the cooldown phase of the weapon state machine.
-class_name CooldownState extends BaseState
+## CooldownState: The weapon is cooling down after an attack.
+class_name CooldownState
+extends BaseState
 
-## Public Variables
-var weapon_state_machine: Node3D
-var cooldown_timer: float = 0.0
+# Constants
+const STATE_TYPE = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
 
+# Variables
+var weapon: Node3D  # The weapon that is cooling down
+var cooldown_timer: Timer  # Timer to track cooldown duration-
 
-func enter() -> void:
-	print("Entering Cooldown State")
-	cooldown_timer = weapon_state_machine.current_weapon.cooldown_time
+# Sets up the weapon reference
+func setup(weapon_node: Node3D) -> void:
+	weapon = weapon_node
 
-func process(delta: float) -> void:
-	# Reduce the cooldown duration by the time passed since the last frame.
-	cooldown_timer -= delta
-	
-	# If cooldown timer reaches 0, switch to the idle state.
-	if cooldown_timer <= 0:
-		weapon_state_machine.transition_to(WeaponEnums.WeaponState.IDLE)
+# When entering this state, start the cooldown timer
+func enter(previous_state, information: Dictionary = {}) -> void:
+	print("Entering COOLDOWN state")
+
+	# Create a timer that lasts as long as the weapon's cooldown time
+	cooldown_timer = Timer.new()
+	cooldown_timer.wait_time = weapon.current_weapon.cooldown_time
+	cooldown_timer.one_shot = true
+	cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
+	add_child(cooldown_timer)
+
+	cooldown_timer.start()
+
+# When exiting this state, stop and remove the cooldown timer
+func exit() -> void:
+	if cooldown_timer:
+		cooldown_timer.stop()
+		cooldown_timer.queue_free()
+
+# When the cooldown timer runs out, switch back to the IDLE state
+func _on_cooldown_timer_timeout() -> void:
+	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.IDLE)

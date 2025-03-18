@@ -11,14 +11,14 @@
 [ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/sprint_state.gd" id="9_yqrof"]
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/fall_state.gd" id="11_jgbvq"]
-[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapons/melee_weapon.tscn" id="12_k8bkn"]
+[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
 height = 3.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8bkn"]
-size = Vector3(0.9, 2.8, 1.6)
+size = Vector3(0.9, 2.05107, 1.6)
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 script = ExtResource("1_abrql")
@@ -78,10 +78,10 @@ wait_time = 0.3
 one_shot = true
 
 [node name="HitArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0058, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00355, 0, -1.93037)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01575, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01575, 0.374463, 0)
 shape = SubResource("BoxShape3D_k8bkn")
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]

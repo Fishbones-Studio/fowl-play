@@ -1,19 +1,37 @@
-## WindupState: Prepares the weapon before attacking.
-class_name WindupState extends BaseState
+## WindupState: The weapon is preparing to attack.
+class_name WindupState
+extends BaseState
 
-## Public Variables
-var weapon_state_machine: Node3D
-var windup_timer: float = 0.0
+# Constants
+const STATE_TYPE = WeaponEnums.MeleeState.WINDUP  
 
+# Variables
+var weapon: Node3D  
+var windup_timer: Timer  
 
-func enter() -> void:
-	print("Entering Windup State")
-	windup_timer = weapon_state_machine.current_weapon.windup_time
+# Sets up the weapon reference
+func setup(weapon_node: Node3D) -> void:
+	weapon = weapon_node
 
-func process(delta: float) -> void:
-	# Reduce the windup duration by the time passed since the last frame.
-	windup_timer -= delta
-	
-	# If the windup timer reaches 0, switch to the attacking state.
-	if windup_timer <= 0:
-		weapon_state_machine.transition_to(WeaponEnums.WeaponState.ATTACKING)
+# When entering this state, start the windup timer
+func enter(previous_state, information: Dictionary = {}) -> void:
+	print("Entering WINDUP state")
+
+	# Create a timer that lasts as long as the weapon's windup time
+	windup_timer = Timer.new()
+	windup_timer.wait_time = weapon.current_weapon.windup_time
+	windup_timer.one_shot = true
+	windup_timer.timeout.connect(_on_windup_timer_timeout)
+	add_child(windup_timer)
+
+	windup_timer.start()
+
+# When exiting this state, stop and remove the windup timer
+func exit() -> void:
+	if windup_timer:
+		windup_timer.stop()
+		windup_timer.queue_free()
+
+# When the windup timer runs out, switch to the ATTACKING state
+func _on_windup_timer_timeout() -> void:
+	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.ATTACKING)
