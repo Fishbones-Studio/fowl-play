@@ -9,4 +9,4 @@ func _ready():
 func _input_event(camera, event, postion, normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked on", name)
-		get_tree().change_scene_to_file("uid://c4pohtsnom3x7")
+		SignalManager.switch_ui_scene.emit("uid://c4pohtsnom3x7")
