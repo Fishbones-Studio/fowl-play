@@ -15,7 +15,7 @@ func setup(weapon_node: Node3D) -> void:
 	weapon = weapon_node
 
 # When entering this state
-func enter(previous_state, information: Dictionary = {}) -> void:
+func enter(previous_state, information: Dictionary[String, float] = {}) -> void:
 	print("Entering IDLE state")
 
 # Checks for player input (attack button press)

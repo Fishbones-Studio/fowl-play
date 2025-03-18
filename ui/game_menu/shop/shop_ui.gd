@@ -1,8 +1,10 @@
 extends Control
 @onready var shop_slots: HBoxContainer = $shop_slots
+
 func _ready():
 	randomize()
 	refresh_shop()
+
 
 #Function to refresh the shop
 func refresh_shop():
@@ -18,3 +20,4 @@ func refresh_shop():
 			slot.set_item(random_item)
 
 			
+

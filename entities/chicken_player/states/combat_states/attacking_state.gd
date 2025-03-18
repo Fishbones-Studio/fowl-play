@@ -24,7 +24,7 @@ func setup(weapon_node: Node3D) -> void:
 	print("Weapon set successfully:", weapon.current_weapon.name)  
 
 # When entering this state, start the attack timer and attack
-func enter(previous_state, information: Dictionary = {}) -> void:
+func enter(previous_state, information: Dictionary[String, float] = {}) -> void:
 	print("Entering ATTACKING state")
 
 	# Create a new timer that lasts as long as the weapon's attack duration

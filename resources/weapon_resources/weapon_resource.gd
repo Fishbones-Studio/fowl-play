@@ -1,16 +1,17 @@
-## WeaponResource: Defines weapon properties that can be used across different weapons.
-extends Resource
+# WeaponResource: Defines weapon properties that can be used across different weapons.
 class_name WeaponResource
+extends BaseResource
 
-## Weapon Attributes
-@export var name: String 
+# Weapon Attributes
 @export var damage: int
 
-## Timing Variables
+# Timing Variables
 @export var windup_time: float 
 @export var attack_duration: float 
 @export var cooldown_time: float 
 
-## Visual & UI Elements
+# Visual & UI Elements
 @export var model: PackedScene
-@export var icon: Texture  # The icon for the shop/inventory
+
+func _init() -> void:
+	type = ItemEnums.ItemTypes.WEAPON

@@ -2,6 +2,7 @@
 extends Node3D
 
 ## Exported Variables
+@export_group("weapon")
 @export var current_weapon: WeaponResource
 
 ## Public Variables

@@ -11,12 +11,15 @@
 
 [sub_resource type="Resource" id="Resource_7770a"]
 script = ExtResource("3_32jyy")
-name = "stick"
 damage = 0
 windup_time = 0.0
 attack_duration = 0.0
 cooldown_time = 0.0
 model = ExtResource("2_jk4mf")
+name = "stick"
+drop_chance = 0
+cost = 0
+description = ""
 metadata/_custom_type_script = "uid://bwivmv3wqxk4o"
 
 [node name="MeleeWeapon" type="Node3D"]
