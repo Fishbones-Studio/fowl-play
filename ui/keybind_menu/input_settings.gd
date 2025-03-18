@@ -216,9 +216,9 @@ func _set_label_text(row: Node, container_name: String, event: InputEvent, actio
 	var panel: RemapPanel = row.find_child(container_name)
 	if event:
 		panel.label_path.text = _trim_mapping_suffix(event.as_text())
-		panel.action_to_remap = action_to_remap
 	else:
 		panel.label_path.text = "Unassigned"
+	panel.action_to_remap = action_to_remap
 
 
 func _create_header_label(text: String, alignment: HorizontalAlignment) -> Label:
