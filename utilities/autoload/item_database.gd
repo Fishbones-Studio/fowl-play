@@ -1,6 +1,6 @@
 extends Node
 #Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
-const ItemEnums = preload("res://utilities/enums/item_enums.gd")
+
 var items = [
 	#Ranged_Weapons
 	load("res://resources/ranged_weapon_resources/crossbow.tres"),
@@ -24,6 +24,7 @@ var items = [
 	load("res://resources/weapon_resources/stick.tres"),
 	load("res://resources/weapon_resources/sword.tres"),	
 ]
+const ItemEnums = preload("res://utilities/enums/item_enums.gd")
 
 func _ready() -> void:
 	for item in items:
