@@ -1,6 +1,5 @@
 [gd_scene load_steps=17 format=3 uid="uid://21r458rvciqo"]
 
-[ext_resource type="Script" uid="uid://b4p5qknvtsxmn" path="res://ui/game_menu/player/chicken.gd" id="1_isj0k"]
 [ext_resource type="Script" uid="uid://dduulsvf3cbei" path="res://ui/game_menu/flyers/flyer_area_3d.gd" id="2_at3e2"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
 [ext_resource type="Script" uid="uid://cf7w0qpoidrnw" path="res://ui/game_menu/shop/shop_area_3d.gd" id="5_hvp38"]
@@ -22,6 +21,21 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvpcr"]
 albedo_color = Color(0.25498, 0.16922, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_5qgdc"]
+script/source = "extends Area3D
+
+
+@export var scene_to_load: PackedScene
+
+func _ready():
+	set_process_input(true)
+	
+func _input_event(camera, event, postion, normal, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		print(\"Clicked on\", name)
+		SignalManager.switch_ui_scene.emit(\"uid://dvkxcgdk0goul\")
+"
 
 [sub_resource type="BoxMesh" id="BoxMesh_efok4"]
 
@@ -57,7 +71,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Chicken" type="Area3D" parent="."]
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
-script = ExtResource("1_isj0k")
+script = SubResource("GDScript_5qgdc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
 mesh = SubResource("BoxMesh_efok4")
