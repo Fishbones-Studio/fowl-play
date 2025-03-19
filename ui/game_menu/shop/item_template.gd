@@ -29,7 +29,7 @@ func _on_buy_item_pressed() -> void:
 		}
 		
 		var existing_item = Inventory.get_item_by_type(new_item.type)
-		
+		#Tranfer the existing item into an array (so that all functions handle an array since I need an array for the abilities)
 		if existing_item != null and existing_item is Dictionary:
 			existing_item = [existing_item]
 		
@@ -46,7 +46,7 @@ func _on_buy_item_pressed() -> void:
 				existing_item = []
 			elif existing_item is Dictionary:
 				existing_item = [existing_item]
-				
+				#Non-Ability cases
 			if existing_item.size() < 2:
 				Inventory.add_item(new_item)
 				GameManager.update_prosperity_eggs(-int(item_cost.text))	
@@ -87,6 +87,7 @@ func _on_buy_item_pressed() -> void:
 		print(GameManager.prosperity_eggs)
 	
 func _on_confirmation_accepted(old_item, new_item):
+	#Cast single item back into an Dictionairy for remove item function.
 	if old_item is Array:
 		old_item = old_item[0]
 	Inventory.remove_item(old_item)
@@ -105,7 +106,7 @@ func _on_confirmation_canceled():
 	purchase_in_progress = false
 	
 	_disconnect_confirmation_signals()
-	
+	#Function to handle disconnething the signal
 func _disconnect_confirmation_signals():
 	if ConfirmationPopup.confirmed.is_connected(_on_confirmation_accepted):
 		ConfirmationPopup.confirmed.disconnect(_on_confirmation_accepted)
