@@ -28,9 +28,6 @@ func get_item_by_type(item_type):
 	if item_type == "Ability"  and matching_items.size() == 2:
 		return matching_items
 	return matching_items if matching_items.size() > 0 else []
-	
-func remove_item_by_type(item_type):
-	items_in_inventory = items_in_inventory.filter(func(i): return i.type != item_type)
 
 func remove_item(item):
 	items_in_inventory = items_in_inventory.filter(func(i): return i != item)
