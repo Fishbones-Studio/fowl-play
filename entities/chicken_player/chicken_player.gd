@@ -4,7 +4,7 @@ class_name ChickenPlayer
 # Player Stats export variables
 @export_category("Stamina")
 @export_range(10, 200) var max_stamina: float = 100
-@export var stamina_regen: float = 3.0
+@export var stamina_regen: float = 8.5
 
 @export_group("Health")
 @export_range(10, 200) var max_health: int = 100
@@ -13,7 +13,7 @@ class_name ChickenPlayer
 var stamina: float = max_stamina:
 	set(value): stamina = clamp(value, 0, max_stamina)
 
-var health: int = max_health
+var health: int    = max_health
 
 
 func _ready():

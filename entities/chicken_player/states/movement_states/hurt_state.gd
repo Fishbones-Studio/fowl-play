@@ -1,6 +1,6 @@
 ## **NOTE** this file is work in progress and not all sections are complete
 
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var knockback_strength: float = 5.0
 @export var vertical_knockback: float = 8.0
