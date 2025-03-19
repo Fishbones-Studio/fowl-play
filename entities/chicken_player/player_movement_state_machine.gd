@@ -4,12 +4,12 @@
 
 extends Node
 
-@export var starting_state: BasePlayerState
+@export var starting_state: BasePlayerMovementState
 @export var player: ChickenPlayer
 
-var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerState] = {}
+var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerMovementState] = {}
 
-@onready var current_state: BasePlayerState = _get_initial_state()
+@onready var current_state: BasePlayerMovementState = _get_initial_state()
 
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func _ready() -> void:
 	await owner.ready
 
 	# Get all states in the scene tree
-	for state_node: BasePlayerState in get_children():
+	for state_node: BasePlayerMovementState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		state_node.setup(player)
 
@@ -72,5 +72,5 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, informati
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 
-func _get_initial_state() -> BasePlayerState:
+func _get_initial_state() -> BasePlayerMovementState:
 	return starting_state if starting_state != null else get_child(0)
