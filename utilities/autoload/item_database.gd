@@ -1,5 +1,6 @@
 extends Node
 #Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
+
 const ItemEnums = preload("res://utilities/enums/item_enums.gd")
 var items = [
 	#Ranged_Weapons
@@ -39,6 +40,7 @@ func get_random_item():
 	
 	print("ROLL: ", roll)
 	print("Total drop chance: ", total_drop_chance)	
+
 	#Get a random rarity accordingly to the chances
 	for item in items:
 		cumulative += item.drop_chance
@@ -46,6 +48,7 @@ func get_random_item():
 		if roll < cumulative:
 			return item
 			
+
 # Helper function to convert the enum to a readable string
 func item_type_to_string(item_type: int) -> String:
 	match item_type:
@@ -57,7 +60,4 @@ func item_type_to_string(item_type: int) -> String:
 			return "Passive"
 		ItemEnums.ItemTypes.ABILITY:
 			return "Ability"
-	return "Unknown"  # Fallback if the type is not recognized
-
-		
-			
+	return "Unknown"  # Fallback if the type is not recognized	

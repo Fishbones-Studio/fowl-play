@@ -9,8 +9,11 @@ windup_time = 2.0
 attack_duration = 0.5
 cooldown_time = 1.0
 magazine_size = 1
+
 name = "slingshot"
 drop_chance = 60
 cost = 100
 description = "slingshot placeholder"
+
 type = 1
+
