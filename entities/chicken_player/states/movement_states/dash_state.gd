@@ -1,12 +1,11 @@
 ## State handling player dash movement
 ## 
 ## Applies instant burst movement in facing direction with stamina cost
-extends BasePlayerMovementState
+extends BasePlayerState
 
 @export_range(10, 100) var stamina_cost: int = 30
 
-@export_range(1.0, 30.0) var dash_distance: float = 50.0
-@export var dash_movement_speed: float = 0
+@export_range(1.0, 20.0) var dash_distance: float = 30.0
 
 var _dash_available: bool = true
 var _dash_direction: Vector3
@@ -22,17 +21,17 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
 		return
 
+	super.enter(_previous_state)
+
 	if not _dash_available or player.stamina < stamina_cost:
 		print("dash not available")
 		if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
 		else:
 			# adding dashed true to the information dictionary
+			information.set("dashed", true)
 			SignalManager.player_transition_state.emit(previous_state, information)
 		return
-
-	movement_speed = dash_movement_speed
-	super.enter(_previous_state)
 
 	# Consume stamina
 	player.stamina -= stamina_cost
@@ -56,12 +55,14 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 	dash_duration_timer.start()
 
 
-func physics_process(delta: float) -> void:
-	player.velocity = _dash_direction * dash_distance * delta * DELTA_MODIFIER # We multiply by delta here, so that the dash stays the same speed if the physics tick is not met/changed
+func physics_process(_delta: float) -> void:
+	player.velocity = _dash_direction * dash_distance
 
 
 func exit() -> void:
+	_dash_available = false
 	dash_duration_timer.stop()
+	dash_cooldown_timer.start()
 
 
 func _on_dash_timer_timeout():
@@ -71,8 +72,6 @@ func _on_dash_timer_timeout():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
 	else:
 		SignalManager.player_transition_state.emit(previous_state, information)
-	_dash_available = false
-	dash_cooldown_timer.start()
 
 
 func _on_dash_cooldown_timer_timeout():
