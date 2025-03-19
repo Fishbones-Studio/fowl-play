@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccns8he8y64n3"]
+
+[ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h40bv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
+size = Vector3(1.58911, 2.98218, 0.90918)
+
+[node name="TempEnemy" type="CharacterBody3D"]
+script = ExtResource("1_c1mms")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.49301, 0, 0, 0, 1.64627, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_h40bv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0753174, 0.22522, 0.0454102)
+shape = SubResource("BoxShape3D_c1mms")
