@@ -3,10 +3,8 @@ extends Node
 var items_in_inventory: Array = []
 
 func add_item(item):
-	if typeof(item) == TYPE_DICTIONARY:
-		items_in_inventory.append(item)
-	else:
-		print("Invalid item format")
+	items_in_inventory.append(item)
+
 	
 func get_items():
 	return items_in_inventory

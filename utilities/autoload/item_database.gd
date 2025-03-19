@@ -37,9 +37,6 @@ func get_random_item():
 		
 	var roll = randi() % total_drop_chance
 	var cumulative = 0
-	
-	print("ROLL: ", roll)
-	print("Total drop chance: ", total_drop_chance)	
 	#Get a random rarity accordingly to the chances
 	for item in items:
 		cumulative += item.drop_chance
