@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=2 format=3 uid="uid://d2e14a4lokgl4"]
+
+[ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://resources/ranged_weapon_resources/ranged_weapon_resource.gd" id="1_rrk3o"]
+
+[resource]
+script = ExtResource("1_rrk3o")
+damage = 250
+windup_time = 0.5
+attack_duration = 0.5
+cooldown_time = 15.0
+magazine_size = 1
+name = "musket"
+drop_chance = 30
+cost = 250
+description = "musket placeholder"
+type = 1

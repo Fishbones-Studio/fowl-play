@@ -1,63 +1,63 @@
 extends Node
-
-enum Rarity {COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
-
+#Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
+const ItemEnums = preload("res://utilities/enums/item_enums.gd")
 var items = [
-	{"name": "Stick", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Lake", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Bone", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Hammer", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Knife", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Frying Pan", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Sword", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Axe", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Lightsaber", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Slingshot", "rarity": Rarity.COMMON, "type": "Ranged", "cost": 100},
-	{"name": "Crossbow", "rarity": Rarity.COMMON, "type": "Ranged", "cost": 100},
-	{"name": "Revolver", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Pistol", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Musket", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Minigun", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Sniper", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Lazet eyes", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Flamethrower", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Cap", "rarity": Rarity.COMMON, "type": "Helemt", "cost": 100},
-	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Boots", "cost": 100},
-	{"name": "Bubblewrap Helmet", "rarity": Rarity.COMMON, "type": "Helemt", "cost": 100},
-	{"name": "Bubblewrap Boots", "rarity": Rarity.UNCOMMON, "type": "Boots", "cost": 200},
-	{"name": "Rollerblades", "rarity": Rarity.RARE, "type": "Boots", "cost": 500},
-	{"name": "Jordans", "rarity": Rarity.RARE, "type": "Boots", "cost": 1000},
-	{"name": "Helmet", "rarity": Rarity.RARE, "type": "Helmet", "cost": 1000},
-	{"name": "Mohawk", "rarity": Rarity.RARE, "type": "Helmet", "cost": 1000},
-	{"name": "Helicoter blades", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Mechenical butt", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Chamovlage Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Necromancer Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	{"name": "Blink Mutation", "rarity": Rarity.RARE, "type": "Ability", "cost": 1000},
-	
+	#Ranged_Weapons
+	load("res://resources/ranged_weapon_resources/crossbow.tres"),
+	load("res://resources/ranged_weapon_resources/flamethrower.tres"),
+	load("res://resources/ranged_weapon_resources/lazer_eyes.tres"),
+	load("res://resources/ranged_weapon_resources/minigun.tres"),
+	load("res://resources/ranged_weapon_resources/musket.tres"),
+	load("res://resources/ranged_weapon_resources/pistol.tres"),
+	load("res://resources/ranged_weapon_resources/revolver.tres"),
+	load("res://resources/ranged_weapon_resources/slingshot.tres"),
+	load("res://resources/ranged_weapon_resources/sniper.tres"),
+	#Melee_Weapons
+	load("res://resources/weapon_resources/axe.tres"),
+	load("res://resources/weapon_resources/bone.tres"),
+	load("res://resources/weapon_resources/flipflops.tres"),
+	load("res://resources/weapon_resources/frying_pan.tres"),
+	load("res://resources/weapon_resources/hammer.tres"),
+	load("res://resources/weapon_resources/knife.tres"),
+	load("res://resources/weapon_resources/leek.tres"),
+	load("res://resources/weapon_resources/phasesaber.tres"),
+	load("res://resources/weapon_resources/stick.tres"),
+	load("res://resources/weapon_resources/sword.tres"),	
 ]
+
+func _ready() -> void:
+	for item in items:
+		print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
 #Function to get a random item from the list above
 func get_random_item():
-	var rarity_chances = { Rarity.COMMON: 60, Rarity.UNCOMMON: 30, Rarity.RARE: 10}
-	var roll = randi() % 100
-	var selected_rarity = Rarity.COMMON
+	var total_drop_chance = 0
+	for item in items:
+		total_drop_chance += item.drop_chance
+		
+	var roll = randi() % total_drop_chance
 	var cumulative = 0
+	
+	print("ROLL: ", roll)
+	print("Total drop chance: ", total_drop_chance)	
 	#Get a random rarity accordingly to the chances
-	for rarity in rarity_chances.keys():
-		cumulative += rarity_chances[rarity]
+	for item in items:
+		cumulative += item.drop_chance
+	
 		if roll < cumulative:
-			selected_rarity = rarity
-			break
+			return item
 			
-	print("Selected rarity:", selected_rarity)
-	#List of items that match the rarity
-	var filtered_items = items.filter(func(item): return item.rarity == selected_rarity)
-			
-	#Select item
-	if filtered_items.size() > 0:
-		var selected_item = filtered_items[randi() % filtered_items.size()]
-		print("Selected item:", selected_item["name"])
-		return selected_item
+# Helper function to convert the enum to a readable string
+func item_type_to_string(item_type: int) -> String:
+	match item_type:
+		ItemEnums.ItemTypes.WEAPON:
+			return "Weapon"
+		ItemEnums.ItemTypes.RANGED_WEAPON:
+			return "Ranged Weapon"
+		ItemEnums.ItemTypes.PASSIVE:
+			return "Passive"
+		ItemEnums.ItemTypes.ABILITY:
+			return "Ability"
+	return "Unknown"  # Fallback if the type is not recognized
+
 		
 			

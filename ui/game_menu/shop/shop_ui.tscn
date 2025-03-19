@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4pohtsnom3x7"]
+[gd_scene load_steps=4 format=3 uid="uid://c4pohtsnom3x7"]
 
 [ext_resource type="Script" uid="uid://blkyks16ibjax" path="res://ui/game_menu/shop/shop_ui.gd" id="1_bftum"]
-[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="2_gly3t"]
 [ext_resource type="PackedScene" uid="uid://cc5vmtbby4xy0" path="res://ui/game_menu/shop/item_template.tscn" id="3_jh6x4"]
 [ext_resource type="PackedScene" uid="uid://da6m7g6ijjyop" path="res://ui/game_menu/shop/confirmation_popup.tscn" id="4_gly3t"]
 
@@ -25,34 +24,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.0
-offset_top = 33.0
-offset_right = 34.0
-offset_bottom = 72.0
-grow_horizontal = 2
+layout_mode = 0
+offset_left = 545.0
+offset_top = 18.0
+offset_right = 613.0
+offset_bottom = 57.0
 theme_override_font_sizes/font_size = 28
 text = "Shop"
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -26.5
-offset_top = -57.0
-offset_right = 26.5
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 0
+offset_left = 545.0
+offset_top = 587.0
+offset_right = 598.0
+offset_bottom = 630.0
 theme_override_font_sizes/font_size = 25
 text = "Exit"
-script = ExtResource("2_gly3t")
 
 [node name="shop_slots" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -84,8 +71,6 @@ layout_mode = 2
 [node name="Item5" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-
 [node name="ConfirmationPopup" parent="." instance=ExtResource("4_gly3t")]
 visible = false
 custom_minimum_size = Vector2(400, 300)
@@ -100,4 +85,4 @@ offset_top = -158.0
 offset_right = 221.0
 offset_bottom = 142.0
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
