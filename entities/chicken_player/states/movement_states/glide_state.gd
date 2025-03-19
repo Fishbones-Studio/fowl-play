@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export_range(0, 1, 0.01) var glide_gravity: float = 0.4
 @export var glide_fall_speed: float = 1.5

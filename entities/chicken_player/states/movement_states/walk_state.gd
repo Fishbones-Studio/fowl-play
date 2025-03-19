@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var walk_speed: float = 20.0
 

@@ -1,7 +1,7 @@
 ## State handling player dash movement
 ## 
 ## Applies instant burst movement in facing direction with stamina cost
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export_range(10, 100) var stamina_cost: int = 30
 

@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var movement_deadzone: float = 0.1 ## The minimum input value to consider switching over to movement. Gets added on top of deadzone from the input map.
 

@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var sprint_speed: float = 60.0
 @export var sprint_stamina_cost: int = 30

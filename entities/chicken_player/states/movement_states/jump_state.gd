@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var air_movement_speed: float = 20.0
 @export var jump_velocity: float = 10.0

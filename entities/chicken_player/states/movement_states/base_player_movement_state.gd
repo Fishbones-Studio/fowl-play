@@ -1,4 +1,4 @@
-class_name BasePlayerState
+class_name BasePlayerMovementState
 extends BaseState
 
 @export var STATE_TYPE: PlayerEnums.PlayerStates
@@ -30,7 +30,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 # Providing default player movement
 func physics_process(delta: float) -> void:
 	if movement_speed == 0.0:
-		push_error("BasePlayerState: movement_speed is null. Please set it in the child class before calling super.")
+		push_error("BasePlayerMovementState: movement_speed is null. Please set it in the child class before calling super.")
 
 	var direction: Vector3 = get_player_direction( get_player_input_dir())
 
