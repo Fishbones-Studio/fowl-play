@@ -3,7 +3,7 @@ class_name WindupState
 extends BaseCombatState
 
 # Constants
-const STATE_TYPE = WeaponEnums.MeleeState.WINDUP
+const STATE_TYPE: int = WeaponEnums.MeleeState.WINDUP
 # Variables
 var weapon: Node3D
 var windup_timer: Timer

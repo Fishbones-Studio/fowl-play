@@ -4,7 +4,7 @@ extends BaseCombatState
 
 # Constants
 # Defines this state as IDLE
-const STATE_TYPE = WeaponEnums.MeleeState.IDLE
+const STATE_TYPE: int = WeaponEnums.MeleeState.IDLE
 # Variables
 # Handy to have for idle animation
 var weapon: Node3D

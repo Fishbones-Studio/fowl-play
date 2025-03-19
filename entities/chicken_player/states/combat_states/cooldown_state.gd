@@ -3,7 +3,7 @@ class_name CooldownState
 extends BaseCombatState
 
 # Constants
-const STATE_TYPE = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
+const STATE_TYPE: int = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
 # Variables
 var weapon: Node3D  # The weapon that is cooling down
 var cooldown_timer: Timer  # Timer to track cooldown duration-
