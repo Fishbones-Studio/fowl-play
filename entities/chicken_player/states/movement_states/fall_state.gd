@@ -1,4 +1,4 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
 @export var glide_hold_threshold: float = 0.25  # Seconds to hold for glide
 @export var fall_movement_speed: float = 35

@@ -1,7 +1,7 @@
-extends BasePlayerState
+extends BasePlayerMovementState
 
-@export var air_movement_speed: float = 2.0
-@export var jump_velocity: float = 15.0
+@export var air_movement_speed: float = 20.0
+@export var jump_velocity: float = 10.0
 @export var air_jumps: int = 2
 
 var _air_jumps_used: int = 0
@@ -17,7 +17,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 	super.enter(_previous_state)
 
 	movement_speed = air_movement_speed
-	player.velocity.y = jump_velocity
+	player.velocity.y = jump_velocity # Initial jump velocity
 
 
 func process(delta: float) -> void:

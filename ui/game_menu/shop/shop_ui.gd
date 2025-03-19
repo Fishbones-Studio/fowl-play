@@ -19,5 +19,5 @@ func refresh_shop():
 			var random_item = ItemDatabase.get_random_item()
 			slot.set_item(random_item)
 
-			
-
+func _on_button_pressed():
+	queue_free()
