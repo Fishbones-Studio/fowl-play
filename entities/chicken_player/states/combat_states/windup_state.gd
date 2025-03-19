@@ -1,22 +1,22 @@
 ## WindupState: The weapon is preparing to attack.
 class_name WindupState
-extends BaseState
+extends BaseCombatState
 
 # Constants
-const STATE_TYPE = WeaponEnums.MeleeState.WINDUP  
-
+const STATE_TYPE = WeaponEnums.MeleeState.WINDUP
 # Variables
-var weapon: Node3D  
-var windup_timer: Timer  
+var weapon: Node3D
+var windup_timer: Timer
+
 
 # Sets up the weapon reference
 func setup(weapon_node: Node3D) -> void:
 	weapon = weapon_node
 
+
 # When entering this state, start the windup timer
 func enter(previous_state, information: Dictionary[String, float] = {}) -> void:
 	print("Entering WINDUP state")
-	
 	if weapon.current_weapon.windup_time <= 0:
 		SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.ATTACKING)
 		return
@@ -30,11 +30,15 @@ func enter(previous_state, information: Dictionary[String, float] = {}) -> void:
 
 		windup_timer.start()
 
+
+
+
 # When exiting this state, stop and remove the windup timer
 func exit() -> void:
 	if windup_timer:
 		windup_timer.stop()
 		windup_timer.queue_free()
+
 
 # When the windup timer runs out, switch to the ATTACKING state
 func _on_windup_timer_timeout() -> void:
