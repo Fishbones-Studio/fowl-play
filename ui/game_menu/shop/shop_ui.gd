@@ -1,15 +1,15 @@
 extends Control
-
-@onready var shop_slots: HBoxContainer = $ShopSlots
-
+@onready var shop_slots: HBoxContainer = $shop_slots
 
 func _ready():
 	randomize()
 	refresh_shop()
 
 
+#Function to refresh the shop
 func refresh_shop():
-	#Loop over the shop_slots to get all the Item_Templates and fill them with a item
+	#loop over the shop_slots to get all the Item_Templates and fill them with a item
+	
 	for slot in shop_slots.get_children():
 		if slot == null:
 			print("Error: Found a Nil slot!")
@@ -19,6 +19,5 @@ func refresh_shop():
 			var random_item = ItemDatabase.get_random_item()
 			slot.set_item(random_item)
 
+			
 
-func _on_exit_button_pressed() -> void:
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")

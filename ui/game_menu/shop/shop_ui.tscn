@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0ijhggyoq6r"]
+[gd_scene load_steps=5 format=3 uid="uid://c4pohtsnom3x7"]
 
 [ext_resource type="Script" uid="uid://blkyks16ibjax" path="res://ui/game_menu/shop/shop_ui.gd" id="1_bftum"]
+[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="2_gly3t"]
 [ext_resource type="PackedScene" uid="uid://cc5vmtbby4xy0" path="res://ui/game_menu/shop/item_template.tscn" id="3_jh6x4"]
 [ext_resource type="PackedScene" uid="uid://da6m7g6ijjyop" path="res://ui/game_menu/shop/confirmation_popup.tscn" id="4_gly3t"]
 
-[node name="ShopUI" type="Control"]
+[node name="Shop_UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel"]
+
 layout_mode = 0
 offset_left = 545.0
 offset_top = 18.0
@@ -32,7 +34,19 @@ offset_bottom = 57.0
 theme_override_font_sizes/font_size = 28
 text = "Shop"
 
-[node name="ShopSlots" type="HBoxContainer" parent="."]
+[node name="Button" type="Button" parent="."]
+
+layout_mode = 0
+offset_left = 545.0
+offset_top = 587.0
+offset_right = 598.0
+offset_bottom = 630.0
+
+theme_override_font_sizes/font_size = 25
+text = "Exit"
+script = ExtResource("2_gly3t")
+
+[node name="shop_slots" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -45,31 +59,27 @@ offset_bottom = 141.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 46
+
+=======
 alignment = 1
 
-[node name="Item1" parent="ShopSlots" instance=ExtResource("3_jh6x4")]
+
+[node name="Item1" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="Item2" parent="ShopSlots" instance=ExtResource("3_jh6x4")]
+[node name="Item2" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="Item3" parent="ShopSlots" instance=ExtResource("3_jh6x4")]
+[node name="Item3" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="Item4" parent="ShopSlots" instance=ExtResource("3_jh6x4")]
+[node name="Item4" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="Item5" parent="ShopSlots" instance=ExtResource("3_jh6x4")]
+[node name="Item5" parent="shop_slots" instance=ExtResource("3_jh6x4")]
 layout_mode = 2
 
-[node name="ExitButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 545.0
-offset_top = 587.0
-offset_right = 598.0
-offset_bottom = 630.0
-theme_override_font_sizes/font_size = 25
-text = "Exit"
+
 
 [node name="ConfirmationPopup" parent="." instance=ExtResource("4_gly3t")]
 visible = false
@@ -85,4 +95,4 @@ offset_top = -158.0
 offset_right = 221.0
 offset_bottom = 142.0
 
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

@@ -1,39 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=3 format=3 uid="uid://dvkxcgdk0goul"]
 
-[sub_resource type="GDScript" id="GDScript_ocrg6"]
-script/source = "extends Control
+[ext_resource type="Script" uid="uid://b8gx1gvv4eua" path="res://ui/game_menu/exit_button.gd" id="1_4dq8u"]
+[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/chicken_inventory/chicken_inventory.gd" id="1_j5p5e"]
 
-@onready var grid_container: GridContainer = $GridContainer
-
-
-func _ready():
-	update_inventory()
-
-
-func update_inventory():
-	for child in grid_container.get_children():
-		child.queue_free()
-		
-	var inventory_items = Inventory.get_items()
-	
-	for item in inventory_items:
-		var label = Label.new()
-		label.text = item.name + \" (\" + item.type + \") - Cost: \" + str(item.cost)
-		grid_container.add_child(label)
-
-
-func _on_exit_button_pressed() -> void:
-	SignalManager.switch_game_scene.emit(\"uid://21r458rvciqo\")
-"
-
-[node name="ChickenInventory" type="Control"]
+[node name="Chicken_Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_ocrg6")
+script = ExtResource("1_j5p5e")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -93,7 +70,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(380, 325)
 layout_mode = 2
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -108,5 +85,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "Exit"
+script = ExtResource("1_4dq8u")
 
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
