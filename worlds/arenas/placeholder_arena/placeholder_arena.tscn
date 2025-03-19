@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsx7lytfj8571"]
 
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="1_mlvld"]
-[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/folow_camera.tscn" id="3_hc6wf"]
+[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_hc6wf"]
 [ext_resource type="PackedScene" uid="uid://ccns8he8y64n3" path="res://entities/temp_enemy/temp_enemy.tscn" id="3_pnu6u"]
 
 [node name="PlaceholderArena" type="Node3D"]
