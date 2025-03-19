@@ -66,7 +66,7 @@ func show_confirmation(existing_item, new_item : Dictionary):
 	
 
 
-func _on_replace_pressed(old_item , new_item) -> void:
+func _on_replace_pressed(old_item : Dictionary , new_item: Dictionary) -> void:
 	emit_signal("confirmed", old_item, new_item)
 	visible = false
 
