@@ -9,8 +9,11 @@ windup_time = 0.0
 attack_duration = 0.5
 cooldown_time = 10.0
 magazine_size = 1
-type = "ranged weapon"
+
 name = "crossbow"
 drop_chance = 60
 cost = 100
 description = "crossbow placehodler"
+
+type = 1
+
