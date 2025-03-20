@@ -1,6 +1,8 @@
 extends Control
 
-@onready var shop_items: HBoxContainer = %ShopItemsContainer
+var shop_items: Array[ShopItem]
+
+@onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 
 
 func _ready() -> void:
@@ -23,8 +25,11 @@ func refresh_shop() -> void:
 		
 		if random_item in Inventory.items_in_inventory:
 			continue
+		if random_item in shop_items:
+			continue
 		
-		shop_items.add_child(shop_item)
+		shop_items.append(shop_item)
+		shop_items_container.add_child(shop_item)
 		shop_item.set_item(random_item)
 		
 		items_in_shop += 1
