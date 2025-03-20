@@ -1,19 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=7 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1mms"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_h40bv"]
+material = SubResource("StandardMaterial3D_c1mms")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h40bv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(1.58911, 2.98218, 0.90918)
 
-[node name="TempEnemy" type="CharacterBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_h40bv"]
+
+[node name="TempEnemy" type="CharacterBody3D" node_paths=PackedStringArray("hit_area")]
 script = ExtResource("1_c1mms")
+hit_area = NodePath("Area3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 0.3, 0, 0, 0, 2, -0.04, -1.5, 2.124)
+mesh = SubResource("TorusMesh_h40bv")
+skeleton = NodePath("../Area3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.49301, 0, 0, 0, 1.64627, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1.49301, 0, 0, 0, 1.64627, 0, 0, 0, 1.30914, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_h40bv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0753174, 0.22522, 0.0454102)
+transform = Transform3D(1.19601, 0, 0, 0, 1.04496, 0, 0, 0, 1.40402, -0.0753174, 0.22522, -0.0254253)
 shape = SubResource("BoxShape3D_c1mms")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.14252)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.003, 0.011, 0)
+shape = SubResource("BoxShape3D_h40bv")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07183, 0)
+modulate = Color(1, 0, 0, 1)
+text = "Touch the circle if you dare"
+font_size = 61
+outline_size = 21
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
