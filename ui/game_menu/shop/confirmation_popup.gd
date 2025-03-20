@@ -15,7 +15,7 @@ signal canceled
 @onready var existing_item_buff2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_buff
 @onready var existing_item_type2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_type
 @onready var existing_item_cost2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_cost
-@onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item2
+@onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item
 @onready var cancel2: Button = $HBoxContainer/VBoxContainerExisting2/cancel
 
 @onready var new_item_name: Label = $HBoxContainer/VBoxContainerNew/new_item_name
