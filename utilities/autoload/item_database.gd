@@ -37,13 +37,8 @@ func get_random_item():
 		
 	var roll = randi() % total_drop_chance
 	var cumulative = 0
-	#Get a random rarity accordingly to the chances
-	for item in items:
-		cumulative += item.drop_chance
-	
-		if roll < cumulative:
-			return item
 			
+
 # Helper function to convert the enum to a readable string
 func item_type_to_string(item_type: int) -> String:
 	match item_type:
@@ -55,7 +50,4 @@ func item_type_to_string(item_type: int) -> String:
 			return "Passive"
 		ITEM_ENUMS.ItemTypes.ABILITY:
 			return "Ability"
-	return "Unknown"  # Fallback if the type is not recognized
-
-		
-			
+	return "Unknown"  # Fallback if the type is not recognized	

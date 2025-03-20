@@ -8,8 +8,11 @@ damage = 125
 windup_time = 1.0
 attack_duration = 1.0
 cooldown_time = 1.0
+
 name = "axe"
 drop_chance = 10
 cost = 500
 description = "axe placeholder"
+
 type = 0
+

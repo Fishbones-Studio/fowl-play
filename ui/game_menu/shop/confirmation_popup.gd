@@ -25,6 +25,7 @@ signal canceled
 
 var pending_item = null #Variable to store the item in waiting for conformation
 
+
 func show_confirmation(existing_item, new_item : Dictionary):
 	pending_item = new_item
 	if existing_item is Array and existing_item.size() == 2:
@@ -47,9 +48,11 @@ func show_confirmation(existing_item, new_item : Dictionary):
 		replace_item_1.pressed.connect(func(): _on_replace_pressed(existing_item[0], new_item))
 		replace_item_2.pressed.connect(func(): _on_replace_pressed(existing_item[1], new_item))
 	else:
+
 		existing_item_name.text = existing_item[0].name
 		existing_item_type.text = existing_item[0].type
 		existing_item_cost.text = str(existing_item[0].cost)
+
 		
 		new_item_name.text = new_item.name
 		new_item_type.text = new_item.type
@@ -67,7 +70,9 @@ func show_confirmation(existing_item, new_item : Dictionary):
 
 
 func _on_replace_pressed(old_item: Array , new_item: Dictionary) -> void:
+
 	emit_signal("confirmed", old_item, new_item)
+
 	visible = false
 
 
