@@ -38,10 +38,17 @@ func _load_items() -> void:
 		
 		if item != new_item:
 			# Add the replace- and cancel buttons to the item
+			var h_separator = HSeparator.new()
+			
 			var replace_button = Button.new()
 			replace_button.text = "Replace"
 			replace_button.button_up.connect(_replace_item.bind(item, new_item))
+			
+			shop_item_vbox.add_child(h_separator)
 			shop_item_vbox.add_child(replace_button)
+			
+			replace_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			replace_button.size_flags_vertical = Control.SIZE_SHRINK_END
 			
 			owned_items_container.add_child(current_item)
 		else:
@@ -52,6 +59,7 @@ func _load_items() -> void:
 		current_item.type_label.text = ItemDatabase.item_type_to_string(item.type)
 		current_item.description_label.text = item.description
 		current_item.cost_label.text = str(item.cost)
+		current_item.make_unclickable()
 
 
 func _replace_item(old_item: Resource , new_item: Resource) -> void:

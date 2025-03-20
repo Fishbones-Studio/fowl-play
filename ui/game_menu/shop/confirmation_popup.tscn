@@ -38,7 +38,11 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"HeaderMedium"
 text = "Swap Items?"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,6 +57,7 @@ theme_override_constants/separation = 15
 [node name="OwnedItemsLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"HeaderSmall"
 text = "Owned items"
 
 [node name="OwnedItemsContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
@@ -67,11 +72,16 @@ theme_override_constants/separation = 15
 [node name="NewItemLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NewItemContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"HeaderSmall"
 text = "New Item"
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 text = "Cancel"
 
 [connection signal="button_up" from="PanelContainer/MarginContainer/VBoxContainer/CancelButton" to="." method="_on_cancel_button_button_up"]

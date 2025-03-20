@@ -11,6 +11,14 @@ script = ExtResource("1_k8gfq")
 [node name="ShopItemContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="NameLabel" type="Label" parent="ShopItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemTitle"
+text = "FLAMETHROWER"
+
 [node name="ItemIcon" type="TextureRect" parent="ShopItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -18,25 +26,32 @@ texture = ExtResource("2_k3g6w")
 expand_mode = 5
 stretch_mode = 6
 
-[node name="NameLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"ShopItemLabel"
-text = "FLAMETHROWER"
-
 [node name="TypeLabel" type="Label" parent="ShopItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemType"
 text = "TYPE"
 
 [node name="DescriptionLabel" type="Label" parent="ShopItemContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
-text = "TYPE"
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemDescription"
+text = "DESCRIPTION"
+autowrap_mode = 3
 
 [node name="CostLabel" type="Label" parent="ShopItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"ItemCost"
 text = "PRICE"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
