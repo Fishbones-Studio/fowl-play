@@ -9,11 +9,8 @@ windup_time = 0.5
 attack_duration = 0.5
 cooldown_time = 10.0
 magazine_size = 4
-
-name = "sniper"
+name = "Sniper"
 drop_chance = 10
 cost = 500
 description = "sniper placeholder"
-
 type = 1
-

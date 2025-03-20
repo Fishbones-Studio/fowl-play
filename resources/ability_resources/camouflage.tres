@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://bl7cshiwg4hux"]
+
+[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://resources/ability_resources/ability_resource.gd" id="1_un1ew"]
+
+[resource]
+script = ExtResource("1_un1ew")
+name = "Camouflage"
+drop_chance = 10
+cost = 1000
+description = ""
+type = 2

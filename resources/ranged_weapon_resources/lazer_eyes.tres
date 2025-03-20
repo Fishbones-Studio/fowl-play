@@ -9,11 +9,8 @@ windup_time = 0.1
 attack_duration = 0.5
 cooldown_time = 5.0
 magazine_size = 1
-
-name = "lazer eyes"
+name = "Lazer Eyes"
 drop_chance = 10
 cost = 500
 description = "lazer eyes placeholder"
-
 type = 1
-

@@ -9,11 +9,8 @@ windup_time = 0.0
 attack_duration = 0.2
 cooldown_time = 0.1
 magazine_size = 50
-
-name = "flamethrower"
+name = "Flamethrower"
 drop_chance = 10
 cost = 500
 description = "flamethrower placeholder"
-
 type = 1
-

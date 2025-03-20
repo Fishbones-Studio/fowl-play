@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://bc7tsqs8wtclj"]
+
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_baki8"]
+
+[resource]
+script = ExtResource("1_baki8")
+hp_shift = 0
+defense_shift = 10
+weight_shift = 0
+speed_shift = 40
+name = "Rolleblades"
+drop_chance = 25
+cost = 250
+description = ""
+type = 4

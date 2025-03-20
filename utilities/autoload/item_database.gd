@@ -20,9 +20,19 @@ var items = [
 	load("res://resources/weapon_resources/hammer.tres"),
 	load("res://resources/weapon_resources/knife.tres"),
 	load("res://resources/weapon_resources/leek.tres"),
-	load("res://resources/weapon_resources/phasesaber.tres"),
+	load("res://resources/weapon_resources/lightsaber.tres"),
 	load("res://resources/weapon_resources/stick.tres"),
 	load("res://resources/weapon_resources/sword.tres"),	
+	#Passives
+	load("res://resources/passive_resources/bubblewrap_boots.tres"),
+	load("res://resources/passive_resources/bubblewrap_helmet.tres"),
+	load("res://resources/passive_resources/iron_helmet.tres"),
+	load("res://resources/passive_resources/jordans.tres"),
+	load("res://resources/passive_resources/mohawk.tres"),
+	load("res://resources/passive_resources/rollerblades.tres"),
+	#Abilities
+	load("res://resources/ability_resources/camouflage.tres"),
+	load("res://resources/ability_resources/necromancer.tres"),
 ]
 const ITEM_ENUMS = preload("res://utilities/enums/item_enums.gd")
 
@@ -53,8 +63,10 @@ func item_type_to_string(item_type: int) -> String:
 			return "Weapon"
 		ITEM_ENUMS.ItemTypes.RANGED_WEAPON:
 			return "Ranged Weapon"
-		ITEM_ENUMS.ItemTypes.PASSIVE:
-			return "Passive"
+		ITEM_ENUMS.ItemTypes.BOOTS:
+			return "Boots"
+		ITEM_ENUMS.ItemTypes.HELMET:
+			return "Helmet"
 		ITEM_ENUMS.ItemTypes.ABILITY:
 			return "Ability"
 	return "Unknown"  # Fallback if the type is not recognized	
