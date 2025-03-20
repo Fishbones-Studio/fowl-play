@@ -9,8 +9,10 @@ windup_time = 1.0
 attack_duration = 10.0
 cooldown_time = 4.0
 magazine_size = 100
-type = "ranged weapon"
+
 name = "minigun"
 drop_chance = 10
 cost = 500
 description = "minigun placeholder"
+
+type = 1

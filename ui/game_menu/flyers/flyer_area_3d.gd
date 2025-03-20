@@ -1,7 +1,7 @@
 extends Area3D
 
-func _ready():
-	set_process_input(true)
+
+@export var scene_to_load: PackedScene
 
 
 func _input_event(camera, event, postion, normal, shape_idx):

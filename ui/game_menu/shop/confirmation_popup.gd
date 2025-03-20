@@ -15,9 +15,8 @@ signal canceled
 @onready var existing_item_buff2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_buff
 @onready var existing_item_type2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_type
 @onready var existing_item_cost2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_cost
-@onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item2
+@onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item
 @onready var cancel2: Button = $HBoxContainer/VBoxContainerExisting2/cancel
-
 
 @onready var new_item_name: Label = $HBoxContainer/VBoxContainerNew/new_item_name
 @onready var new_item_buff: Label = $HBoxContainer/VBoxContainerNew/new_item_buff
@@ -49,9 +48,11 @@ func show_confirmation(existing_item, new_item : Dictionary):
 		replace_item_1.pressed.connect(func(): _on_replace_pressed(existing_item[0], new_item))
 		replace_item_2.pressed.connect(func(): _on_replace_pressed(existing_item[1], new_item))
 	else:
-		existing_item_name.text = existing_item.name
-		existing_item_type.text = existing_item.type
-		existing_item_cost.text = str(existing_item.cost)
+
+		existing_item_name.text = existing_item[0].name
+		existing_item_type.text = existing_item[0].type
+		existing_item_cost.text = str(existing_item[0].cost)
+
 		
 		new_item_name.text = new_item.name
 		new_item_type.text = new_item.type
@@ -68,8 +69,8 @@ func show_confirmation(existing_item, new_item : Dictionary):
 	
 
 
+func _on_replace_pressed(old_item: Array , new_item: Dictionary) -> void:
 
-func _on_replace_pressed(old_item : Dictionary, new_item: Dictionary) -> void:
 	emit_signal("confirmed", old_item, new_item)
 
 	visible = false
