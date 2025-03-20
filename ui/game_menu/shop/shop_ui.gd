@@ -28,6 +28,7 @@ func refresh_shop() -> void:
 		if random_item in shop_items:
 			continue
 		
+		# TODO: need to fix this
 		shop_items.append(shop_item)
 		shop_items_container.add_child(shop_item)
 		shop_item.set_item(random_item)
