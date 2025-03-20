@@ -24,7 +24,7 @@ var items = [
 	load("res://resources/weapon_resources/stick.tres"),
 	load("res://resources/weapon_resources/sword.tres"),	
 ]
-const ItemEnums = preload("res://utilities/enums/item_enums.gd")
+const ITEM_ENUMS = preload("res://utilities/enums/item_enums.gd")
 
 func _ready() -> void:
 	for item in items:
@@ -47,13 +47,13 @@ func get_random_item():
 # Helper function to convert the enum to a readable string
 func item_type_to_string(item_type: int) -> String:
 	match item_type:
-		ItemEnums.ItemTypes.WEAPON:
+		ITEM_ENUMS.ItemTypes.WEAPON:
 			return "Weapon"
-		ItemEnums.ItemTypes.RANGED_WEAPON:
+		ITEM_ENUMS.ItemTypes.RANGED_WEAPON:
 			return "Ranged Weapon"
-		ItemEnums.ItemTypes.PASSIVE:
+		ITEM_ENUMS.ItemTypes.PASSIVE:
 			return "Passive"
-		ItemEnums.ItemTypes.ABILITY:
+		ITEM_ENUMS.ItemTypes.ABILITY:
 			return "Ability"
 	return "Unknown"  # Fallback if the type is not recognized
 
