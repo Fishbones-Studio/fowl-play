@@ -12,11 +12,10 @@ var purchase_in_progress = false
 func set_item(item):
 
 	item_name.text = item.name
-	item_type.text = item.type
+	item_type.text =  ItemDatabase.item_type_to_string(item.type)
 	item_cost.text = str(item.cost)
 
 func _on_buy_item_pressed() -> void:
-
 	
 	if purchase_in_progress:
 		return
@@ -25,7 +24,8 @@ func _on_buy_item_pressed() -> void:
 	purchase_in_progress = true
 	
 
-	if Gamemanager.prosperity_eggs >= int(item_cost.text):
+	if GameManager.prosperity_eggs >= int(item_cost.text):
+
 		var new_item = {
 			"name": item_name.text,
 			"type": item_type.text,
@@ -35,6 +35,9 @@ func _on_buy_item_pressed() -> void:
 		var existing_item = Inventory.get_item_by_type(new_item.type)
 		
 
+		if existing_item != null and existing_item is Dictionary:
+			existing_item = [existing_item]
+		
 		#Special case for ability type
 		if new_item.type == "Ability":
 			#check if ability already exists in inventory
@@ -48,10 +51,12 @@ func _on_buy_item_pressed() -> void:
 				existing_item = []
 			elif existing_item is Dictionary:
 				existing_item = [existing_item]
-				
+				#Non-Ability cases
 			if existing_item.size() < 2:
 				Inventory.add_item(new_item)
-				Gamemanager.update_prosperity_eggs(-int(item_cost.text))	
+
+				GameManager.update_prosperity_eggs(-int(item_cost.text))	
+
 				print("item bought")
 				purchase_in_progress = false
 				return
@@ -79,18 +84,25 @@ func _on_buy_item_pressed() -> void:
 		
 		else:
 			Inventory.add_item(new_item)
-			Gamemanager.update_prosperity_eggs(-int(item_cost.text))
+			GameManager.update_prosperity_eggs(-int(item_cost.text))
 			print("Item Bought!")
 			purchase_in_progress = false
 		
 	else:
 		print("Not enhough proseperity eggs.")
 		purchase_in_progress = false
+
+		print(GameManager.prosperity_eggs)
 	
 func _on_confirmation_accepted(old_item, new_item):
+	#Cast single item back into an Dictionairy for remove item function.
+	if old_item is Array:
+		old_item = old_item[0]
 	Inventory.remove_item(old_item)
 	Inventory.add_item(new_item)
-	Gamemanager.update_prosperity_eggs(-new_item.cost)
+	GameManager.update_prosperity_eggs(-new_item.cost)
+	
+
 	print("Replaced ", old_item.name, " with ", new_item.name)
 	
 	purchase_in_progress = false
@@ -103,10 +115,9 @@ func _on_confirmation_canceled():
 	purchase_in_progress = false
 	
 	_disconnect_confirmation_signals()
-	
+	#Function to handle disconnething the signal
 func _disconnect_confirmation_signals():
 	if ConfirmationPopup.confirmed.is_connected(_on_confirmation_accepted):
 		ConfirmationPopup.confirmed.disconnect(_on_confirmation_accepted)
 	if ConfirmationPopup.canceled.is_connected(_on_confirmation_canceled):
 		ConfirmationPopup.canceled.disconnect(_on_confirmation_canceled)
-
