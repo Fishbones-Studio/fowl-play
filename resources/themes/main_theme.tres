@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://besvom3pq3s63"]
+
+[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/Joyous.png" id="1_x2ak3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4ejt"]
+texture = ExtResource("1_x2ak3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nads"]
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_i4ejt")
+ShopItemLabel/base_type = &"Label"
+ShopItemLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+ShopItemLabel/constants/outline_size = 0
+ShopItemLabel/font_sizes/font_size = 16
+ShopItemLabel/styles/normal = SubResource("StyleBoxFlat_4nads")

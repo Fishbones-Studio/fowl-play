@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://d037dy0qefcgm"]
+
+[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_8h7wf"]
+
+[resource]
+script = ExtResource("1_8h7wf")
+damage = 25
+windup_time = 0.5
+attack_duration = 1.0
+cooldown_time = 1.0
+type = null
+name = "wing"
+drop_chance = null
+cost = null
+description = "Basic attack used to harass other chickens."

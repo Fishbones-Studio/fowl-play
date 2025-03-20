@@ -1,81 +1,67 @@
+class_name ShopItemConfirmation
 extends Control
 
-signal confirmed(new_item)
-signal canceled
+var existing_items: Array[Resource]
+var new_item: Resource
 
-@onready var existing_item_name: Label = $HBoxContainer/VBoxContainerExisting1/existing_item_name
-@onready var existing_item_buff: Label = $HBoxContainer/VBoxContainerExisting1/existing_item_buff
-@onready var existing_item_type: Label = $HBoxContainer/VBoxContainerExisting1/existing_item_type
-@onready var existing_item_cost: Label = $HBoxContainer/VBoxContainerExisting1/existing_item_cost
-@onready var replace_item_1: Button = $HBoxContainer/VBoxContainerExisting1/replace_item1
-@onready var cancel1: Button = $HBoxContainer/VBoxContainerExisting1/cancel
-
-@onready var existing_item2_label: Label = $HBoxContainer/VBoxContainerExisting2/Label
-@onready var existing_item_name2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_name
-@onready var existing_item_buff2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_buff
-@onready var existing_item_type2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_type
-@onready var existing_item_cost2: Label = $HBoxContainer/VBoxContainerExisting2/existing_item_cost
-@onready var replace_item_2: Button = $HBoxContainer/VBoxContainerExisting2/replace_item
-@onready var cancel2: Button = $HBoxContainer/VBoxContainerExisting2/cancel
-
-@onready var new_item_name: Label = $HBoxContainer/VBoxContainerNew/new_item_name
-@onready var new_item_buff: Label = $HBoxContainer/VBoxContainerNew/new_item_buff
-@onready var new_item_type: Label = $HBoxContainer/VBoxContainerNew/new_item_type
-@onready var new_item_cost: Label = $HBoxContainer/VBoxContainerNew/new_item_cost
-
-var pending_item = null #Variable to store the item in waiting for conformation
+@onready var owned_items_container: HBoxContainer = %OwnedItemsContainer
+@onready var new_item_container: VBoxContainer = %NewItemContainer
 
 
-func show_confirmation(existing_item, new_item : Dictionary):
-	pending_item = new_item
-	if existing_item is Array and existing_item.size() == 2:
-		existing_item_name.text = existing_item[0].name
-		existing_item_type.text = existing_item[0].type
-		existing_item_cost.text = str(existing_item[0].cost)
-		
-		existing_item_name2.text = existing_item[1].name
-		existing_item_type2.text = existing_item[1].type
-		existing_item_cost2.text = str(existing_item[1].cost)
-		replace_item_1.visible = true
-		replace_item_2.visible = true
-		
-		new_item_name.text = new_item.name
-		new_item_type.text = new_item.type
-		new_item_cost.text = str(new_item.cost)
-		
-		cancel1.pressed.connect(func(): _on_cancel_pressed())
-		cancel2.pressed.connect(func(): _on_cancel_pressed())
-		replace_item_1.pressed.connect(func(): _on_replace_pressed(existing_item[0], new_item))
-		replace_item_2.pressed.connect(func(): _on_replace_pressed(existing_item[1], new_item))
-	else:
+func _ready() -> void:
+	_load_items()
 
-		existing_item_name.text = existing_item[0].name
-		existing_item_type.text = existing_item[0].type
-		existing_item_cost.text = str(existing_item[0].cost)
 
-		
-		new_item_name.text = new_item.name
-		new_item_type.text = new_item.type
-		new_item_cost.text = str(new_item.cost)
-		
-		replace_item_1.visible = true
-		replace_item_2.visible = false
-		existing_item2_label.visible = false
-		cancel2.visible = false
-		replace_item_1.pressed.connect(func(): _on_replace_pressed(existing_item, new_item))
-		cancel1.pressed.connect(func(): _on_cancel_pressed())
+func setup(params: Dictionary) -> void:
+	if "existing_items" in params:
+		existing_items = params["existing_items"]
+	if "new_item" in params:
+		new_item = params["new_item"]
+
+
+func _load_items() -> void:
+	existing_items.append(new_item)
 	
-	visible = true
-	
+	for item in existing_items:
+		var title: String = "Owned Item No. " + str(existing_items.find(item, 0)) # Get the array index
+		var current_item: ShopItem = load("uid://cc5vmtbby4xy0").instantiate()
+		
+		# Check if current_item is valid
+		if not current_item:
+			print("Failed to instantiate ShopItem.")
+			continue
+		
+		# Change title if the item is the new_item
+		if item == new_item: title = "New item"
+		
+		var shop_item_vbox = current_item.get_child(-1)
+		
+		if item != new_item:
+			# Add the replace- and cancel buttons to the item
+			var replace_button = Button.new()
+			replace_button.text = "Replace"
+			replace_button.button_up.connect(_replace_item.bind(item, new_item))
+			shop_item_vbox.add_child(replace_button)
+			
+			owned_items_container.add_child(current_item)
+		else:
+			new_item_container.add_child(current_item)
+		
+		# Set item properties
+		current_item.name_label.text = item.name
+		current_item.type_label.text = ItemDatabase.item_type_to_string(item.type)
+		current_item.description_label.text = item.description
+		current_item.cost_label.text = str(item.cost)
 
 
-func _on_replace_pressed(old_item: Array , new_item: Dictionary) -> void:
+func _replace_item(old_item: Resource , new_item: Resource) -> void:
+	Inventory.remove_item(old_item)
+	Inventory.add_item(new_item)
+	GameManager.update_prosperity_eggs(-new_item.cost)
 
-	emit_signal("confirmed", old_item, new_item)
+	print("Item ", old_item, " replaced with ", new_item)
+	queue_free()
 
-	visible = false
 
-
-func _on_cancel_pressed() -> void:
-	emit_signal("canceled")
-	visible = false
+func _on_cancel_button_button_up() -> void:
+	queue_free()
