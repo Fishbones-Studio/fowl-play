@@ -48,7 +48,7 @@ func _load_items() -> void:
 			shop_item_vbox.add_child(replace_button)
 			
 			replace_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-			replace_button.size_flags_vertical = Control.SIZE_SHRINK_END
+			replace_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 			
 			owned_items_container.add_child(current_item)
 		else:
