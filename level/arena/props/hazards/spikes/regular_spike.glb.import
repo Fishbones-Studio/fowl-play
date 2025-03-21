@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d3n5atdpaga74"
-path="res://.godot/imported/wall.glb-938722acffc7e214acc356e30c3ff01d.scn"
+uid="uid://cyb0lkd6tiahb"
+path="res://.godot/imported/regular_spike.glb-aff446e7597cc91fda1f7c419940ae07.scn"
 
 [deps]
 
-source_file="res://level/parts/wall.glb"
-dest_files=["res://.godot/imported/wall.glb-938722acffc7e214acc356e30c3ff01d.scn"]
+source_file="res://level/arena/props/hazards/spikes/regular_spike.glb"
+dest_files=["res://.godot/imported/regular_spike.glb-aff446e7597cc91fda1f7c419940ae07.scn"]
 
 [params]
 

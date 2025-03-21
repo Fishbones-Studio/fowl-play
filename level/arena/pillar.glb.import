@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dm3t5pdwxroa7"
-path="res://.godot/imported/floor.glb-e07a8990ea74407f46d2d8d141a8398a.scn"
+uid="uid://bvjwwhblk8d0x"
+path="res://.godot/imported/pillar.glb-6d7daa2a2262053d0cbd06ca504f82b1.scn"
 
 [deps]
 
-source_file="res://level/parts/floor.glb"
-dest_files=["res://.godot/imported/floor.glb-e07a8990ea74407f46d2d8d141a8398a.scn"]
+source_file="res://level/arena/pillar.glb"
+dest_files=["res://.godot/imported/pillar.glb-6d7daa2a2262053d0cbd06ca504f82b1.scn"]
 
 [params]
 

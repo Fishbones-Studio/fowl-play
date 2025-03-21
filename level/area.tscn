@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://dn4y6rw2w6ydt"]
+[gd_scene load_steps=22 format=3 uid="uid://dn4y6rw2w6ydt"]
 
-[ext_resource type="PackedScene" uid="uid://dm3t5pdwxroa7" path="res://level/parts/floor.glb" id="1_gpm27"]
-[ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/parts/wall.glb" id="2_ao8rp"]
-[ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/parts/pillar.glb" id="2_qw8k7"]
+[ext_resource type="PackedScene" uid="uid://dm3t5pdwxroa7" path="res://level/arena/floor.glb" id="1_gpm27"]
+[ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/arena/wall.glb" id="2_ao8rp"]
+[ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/pillar.glb" id="2_qw8k7"]
+[ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="4_ao8rp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qw8k7"]
 size = Vector3(2, 7.5, 2)
@@ -214,6 +215,14 @@ shape = SubResource("CylinderShape3D_ao8rp")
 
 [node name="floor" parent="Floor" instance=ExtResource("1_gpm27")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Hazards" type="Node3D" parent="."]
+
+[node name="RegularSpike" parent="Hazards" instance=ExtResource("4_ao8rp")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.6, 15.2765)
+
+[node name="RegularSpike2" parent="Hazards" instance=ExtResource("4_ao8rp")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 10.0541, 0.6, 9.06059)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 40, 0)

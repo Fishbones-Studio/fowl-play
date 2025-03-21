@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cbdc813dsla4c"]
 
-[ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://worlds/props/hazards/base_hazard.tscn" id="1_mootq"]
-[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://worlds/props/hazards/temp_sting_hazard/temp_sting_hazard.gd" id="2_v5ja6"]
+[ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_mootq"]
+[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/temp_sting_hazard/temp_sting_hazard.gd" id="2_v5ja6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_souhp"]
 size = Vector3(1.1, 0.5, 1.1)
