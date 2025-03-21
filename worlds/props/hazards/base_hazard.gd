@@ -1,3 +1,8 @@
+## BazeHazard serves as a base class for all hazards in the game.
+##
+## It handles the basic functionality of detecting when a body enters the hazard area
+## and applying damage to the player or enemy. Child classes can extend this functionality
+
 class_name BaseHazard
 extends Node
 
@@ -14,6 +19,7 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 		body.take_damage(damage)
 
 
+## Overwrite in child class
 func _on_hazard_area_body_exited(_body: Node3D) -> void:
-	# Overwrite in child class
+
 	pass
