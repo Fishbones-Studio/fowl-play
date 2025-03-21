@@ -4,7 +4,7 @@ extends BaseState
 @export var STATE_TYPE: EnemyEnums.EnemyStates
 var previous_state: EnemyEnums.EnemyStates
 @export var DELTA_MODIFIER: float = 100
-var player := ChickenPlayer
+var player: ChickenPlayer
 @export var enemy: Enemy
 
 func setup(_enemy: Enemy) -> void:
