@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsx7lytfj8571"]
+[gd_scene load_steps=6 format=3 uid="uid://bsx7lytfj8571"]
 
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="1_mlvld"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_hc6wf"]
 [ext_resource type="PackedScene" uid="uid://ccns8he8y64n3" path="res://entities/temp_enemy/temp_enemy.tscn" id="3_pnu6u"]
 [ext_resource type="PackedScene" uid="uid://cbdc813dsla4c" path="res://worlds/props/hazards/temp_sting_hazard/temp_sting_hazard.tscn" id="4_pnu6u"]
+[ext_resource type="PackedScene" uid="uid://bjs44eecc5tnp" path="res://worlds/props/hazards/temp_hold_hazard/temp_hold_hazard.tscn" id="5_gx6q5"]
 
 [node name="PlaceholderArena" type="Node3D"]
 
@@ -32,5 +33,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9246, 0.515418, -21.1347)
 
 [node name="TempHazard" parent="." instance=ExtResource("4_pnu6u")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 10)
-damage_interval = 1.0
 damage_duration = 5.0
+
+[node name="TempHoldHazard" parent="." instance=ExtResource("5_gx6q5")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 0)
+damage_interval = 2.0

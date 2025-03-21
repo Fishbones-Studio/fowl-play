@@ -1,7 +1,6 @@
 extends BaseHazard
 
-@export var damage_interval: float = 1.0  ## Time between damage ticks
-@export var damage_duration: float = 5.0  ## Total duration of damage
+@export var damage_interval: float = 2.0  ## Time between damage ticks
 
 
 func _process(_delta: float) -> void:
@@ -14,6 +13,9 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 		active_bodies[body as PhysicsBody3D] = Time.get_ticks_msec()
 
 
+func _on_hazard_area_body_exited(_body: Node3D) -> void:
+	active_bodies.erase(_body)
+	
 func _apply_continuous_damage() -> void:
 	var current_time: int = Time.get_ticks_msec()
 
@@ -23,9 +25,6 @@ func _apply_continuous_damage() -> void:
 			continue
 
 		var elapsed: float = (current_time - active_bodies[body]) / 1000.0
-		if elapsed >= damage_duration:
-			active_bodies.erase(body)
-		elif fmod(elapsed, damage_interval) < 0.01: # Small threshold for float comparison
-			print("Sting hazard hurt entity")
+		if fmod(elapsed, damage_interval) < 0.01: # Small threshold for float comparison
+			print("Temp hold hazard hurt entity")
 			super._on_hazard_area_body_entered(body)
-	
