@@ -44,8 +44,10 @@ func _buy_item() -> void:
 			purchase_in_progress = false
 			return
 	
-	# Max items of same type is 2
-	if existing_items.size() < 2:
+	# Max items of same type is 1
+	# Special case for ability, since you can have 2 of them
+	if existing_items.size() < 1 || (shop_item.type == 2 && existing_items.size() < 2):
+		print(shop_item.type)
 		Inventory.add_item(shop_item)
 		GameManager.update_prosperity_eggs(-int(cost_label.text))
 		
@@ -59,7 +61,7 @@ func _buy_item() -> void:
 		if item.type == shop_item.type:
 			matching_items += 1
 
-	if matching_items >= 2:
+	if matching_items >= 1:
 		SignalManager.add_ui_scene.emit("uid://da6m7g6ijjyop", {
 			"existing_items": existing_items,
 			"new_item": shop_item,
