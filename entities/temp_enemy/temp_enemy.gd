@@ -30,6 +30,7 @@ func attack_player():
 	for body in bodies:
 		if body is ChickenPlayer:
 			SignalManager.hurt_player.emit(damage_to_player)
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
