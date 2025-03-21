@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=13 format=3 uid="uid://besvom3pq3s63"]
 
-[ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
-[ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
-[ext_resource type="StyleBox" uid="uid://bhmsxt42xcgkj" path="res://resources/themes/styleboxes/button_pressed.tres" id="3_dagba"]
-[ext_resource type="StyleBox" uid="uid://c80bewaohqml0" path="res://resources/themes/styleboxes/panel_container_hover.tres" id="4_dagba"]
-[ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/styleboxes/panel_container_normal.tres" id="5_xtbu8"]
+[ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/hover_button.tres" id="1_yjg5f"]
+[ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/normal_button.tres" id="2_0wthw"]
+[ext_resource type="StyleBox" uid="uid://bhmsxt42xcgkj" path="res://resources/themes/pressed_button.tres" id="3_dagba"]
+[ext_resource type="StyleBox" uid="uid://c80bewaohqml0" path="res://resources/themes/hover_panel_container.tres" id="4_dagba"]
+[ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/normal_panel_container_bg.tres" id="5_xtbu8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtbu8"]
 

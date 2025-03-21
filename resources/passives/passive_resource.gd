@@ -6,3 +6,6 @@ extends BaseResource
 @export var defense_shift: int
 @export var weight_shift: int
 @export var speed_shift: int
+
+func _init() -> void:
+	type = ItemEnums.ItemTypes.PASSIVE

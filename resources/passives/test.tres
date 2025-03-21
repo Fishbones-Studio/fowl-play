@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://bc7tsqs8wtclj"]
 
-[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_004so"]
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passives/passive_resource.gd" id="1_004so"]
 
 [resource]
 script = ExtResource("1_004so")

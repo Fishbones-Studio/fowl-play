@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://d0ae4aavq1w0x"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://d0ae4aavq1w0x"]
 
 [ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_65usx"]
-[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="1_crrke"]
+
 
 [resource]
 script = ExtResource("1_65usx")
@@ -9,9 +9,7 @@ damage = 50
 windup_time = 0.5
 attack_duration = 1.0
 cooldown_time = 1.0
-model = ExtResource("1_crrke")
 name = "leek"
 drop_chance = 60
 cost = 100
 description = "Basic vegetable, more effective than hiting with a soft wing."
-type = 0
