@@ -23,16 +23,12 @@ func _load_items() -> void:
 	existing_items.append(new_item)
 	
 	for item in existing_items:
-		var title: String = "Owned Item No. " + str(existing_items.find(item, 0)) # Get the array index
 		var current_item: ShopItem = load("uid://cc5vmtbby4xy0").instantiate()
 		
 		# Check if current_item is valid
 		if not current_item:
 			print("Failed to instantiate ShopItem.")
 			continue
-		
-		# Change title if the item is the new_item
-		if item == new_item: title = "New item"
 		
 		var shop_item_vbox = current_item.get_child(-1)
 		
