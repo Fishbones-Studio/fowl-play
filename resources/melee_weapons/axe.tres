@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cjgeshdiymo8q"]
+
+[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_g5bl8"]
+
+[resource]
+script = ExtResource("1_g5bl8")
+damage = 125
+windup_time = 1.0
+attack_duration = 1.0
+cooldown_time = 1.0
+<<<<<<< HEAD:resources/weapon_resources/axe.tres
+name = "Axe"
+drop_chance = 10
+cost = 500
+description = "axe placeholder"
+type = 0
+=======
+
+name = "axe"
+drop_chance = 10
+cost = 500
+description = "axe placeholder"
+
+type = 0
+
+>>>>>>> origin/dev:resources/melee_weapons/axe.tres

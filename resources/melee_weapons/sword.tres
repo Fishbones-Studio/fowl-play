@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://vkav63ryp6mw"]
+
+<<<<<<< HEAD:resources/weapon_resources/sword.tres
+[ext_resource type="Script" uid="uid://u2yw34jmrc7i" path="res://resources/weapon_resources/weapon_resource.gd" id="1_xjgoh"]
+=======
+[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_xjgoh"]
+
+>>>>>>> origin/dev:resources/melee_weapons/sword.tres
+
+[resource]
+script = ExtResource("1_xjgoh")
+damage = 275
+windup_time = 0.6
+attack_duration = 1.0
+cooldown_time = 0.5
+name = "Sword"
+drop_chance = 10
+cost = 500
+description = "sword placeholder"
+<<<<<<< HEAD:resources/weapon_resources/sword.tres
+type = 0
+=======
+
+type = 0
+
+>>>>>>> origin/dev:resources/melee_weapons/sword.tres

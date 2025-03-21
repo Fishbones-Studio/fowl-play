@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://duhhcwgua2a"]
+
+[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_yxsrx"]
+
+[resource]
+script = ExtResource("1_yxsrx")
+damage = 10
+windup_time = 0.2
+attack_duration = 0.2
+cooldown_time = 0.2
+name = "Flipflops"
+drop_chance = 60
+cost = 100
+description = "flipflops placeholder"
+type = null
