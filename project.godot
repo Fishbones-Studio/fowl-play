@@ -29,6 +29,7 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 Panku="*res://addons/panku_console/console.tscn"
 UIManager="*res://utilities/autoload/ui_manager/ui_manager.tscn"
 SaveManager="*res://utilities/autoload/save_manager.gd"
+Gamemanager="*res://utilities/autoload/game_manager.gd"
 
 [editor]
 
