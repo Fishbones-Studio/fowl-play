@@ -1,3 +1,5 @@
+## This serves as a temporary hazard that applies damage at tick based intervals
+## The damage applies after the entity touches the hazard area, and then damages the player for a set duration
 extends BaseHazard
 
 @export var damage_interval: float = 1.0  ## Time between damage ticks

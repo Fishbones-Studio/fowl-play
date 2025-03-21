@@ -1,3 +1,6 @@
+## This serves as a temporary hazard that applies damage at tick based intervals
+## The damage applies while the entity is in the hazard area, and immediately stops on exit
+
 extends BaseHazard
 
 @export var damage_interval: float = 2.0  ## Time between damage ticks
@@ -15,7 +18,8 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 func _on_hazard_area_body_exited(_body: Node3D) -> void:
 	active_bodies.erase(_body)
-	
+
+
 func _apply_continuous_damage() -> void:
 	var current_time: int = Time.get_ticks_msec()
 
