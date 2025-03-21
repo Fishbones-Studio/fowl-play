@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdiosrwi6l87h"]
+
+[ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_odgku"]
+[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/temp_sting_hazard/temp_sting_hazard.gd" id="2_fdjq5"]
+[ext_resource type="PackedScene" uid="uid://dehxv1j0emd5r" path="res://level/arena/props/hazards/saws/ground_saw.glb" id="2_pvlaj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
+size = Vector3(0.5, 2.5, 2.5)
+
+[node name="GroundSaw" instance=ExtResource("1_odgku")]
+script = ExtResource("2_fdjq5")
+damage_interval = 1.0
+damage_duration = 5.0
+
+[node name="CollisionShape3D" parent="HazardArea" index="0"]
+shape = SubResource("BoxShape3D_fdjq5")
+
+[node name="ground_saw" parent="." index="1" instance=ExtResource("2_pvlaj")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
