@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=6 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
+[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
+[ext_resource type="Script" uid="uid://ja4658qiwf5y" path="res://entities/temp_enemy/enemy_states/base_enemy_state.gd" id="3_3byh2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h40bv"]
 
@@ -17,3 +19,20 @@ mesh = SubResource("CapsuleMesh_h40bv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0753174, 0.22522, 0.0454102)
 shape = SubResource("BoxShape3D_c1mms")
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
+script = ExtResource("2_h40bv")
+starting_state = NodePath("idle_state")
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://btddu8dhoifau"
+
+[node name="idle_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_3byh2")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_3byh2")
+STATE_TYPE = 1
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
