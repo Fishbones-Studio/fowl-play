@@ -9,17 +9,10 @@ windup_time = 1.0
 attack_duration = 10.0
 cooldown_time = 4.0
 magazine_size = 100
-<<<<<<< HEAD:resources/ranged_weapon_resources/minigun.tres
-name = "Minigun"
-drop_chance = 10
-cost = 500
-description = "minigun placeholder"
-=======
 
 name = "minigun"
 drop_chance = 10
 cost = 500
 description = "minigun placeholder"
 
->>>>>>> origin/dev:resources/ranged_weapons/minigun.tres
 type = 1

@@ -9,13 +9,6 @@ windup_time = 0.5
 attack_duration = 0.5
 cooldown_time = 2.5
 magazine_size = 6
-<<<<<<< HEAD:resources/ranged_weapon_resources/pistol.tres
-name = "Pistol"
-drop_chance = 30
-cost = 250
-description = "pistol placeholder"
-type = 1
-=======
 
 name = "pistol"
 drop_chance = 30
@@ -23,5 +16,3 @@ cost = 250
 description = "pistol placeholder"
 
 type = 1
-
->>>>>>> origin/dev:resources/ranged_weapons/pistol.tres

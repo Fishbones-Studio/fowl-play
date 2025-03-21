@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cgpyao4xtqnte"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cy5wf0nyk8md5"]
 
 <<<<<<<< HEAD:resources/melee_weapons/lightsaber.tres
 [ext_resource type="Script" uid="uid://u2yw34jmrc7i" path="res://resources/weapon_resources/weapon_resource.gd" id="1_2c4ew"]

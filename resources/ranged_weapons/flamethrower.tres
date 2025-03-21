@@ -9,15 +9,8 @@ windup_time = 0.0
 attack_duration = 0.2
 cooldown_time = 0.1
 magazine_size = 50
-<<<<<<< HEAD:resources/ranged_weapon_resources/flamethrower.tres
-name = "Flamethrower"
-drop_chance = 10
-cost = 500
-description = "flamethrower placeholder"
-=======
 name = "flamethrower"
 drop_chance = 10
 cost = 500
 description = ""
->>>>>>> origin/dev:resources/ranged_weapons/flamethrower.tres
 type = 1

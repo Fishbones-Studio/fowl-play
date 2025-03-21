@@ -10,6 +10,8 @@ var items: Array[Resource] = []
 func _ready() -> void:
 	_load_items("res://resources/melee_weapons/")
 	_load_items("res://resources/ranged_weapons/")
+	_load_items("res://resources/passives/")
+	_load_items("res://resources/abilities/")
 	
 	for item in items:
 		print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
@@ -42,8 +44,10 @@ func item_type_to_string(item_type: int) -> String:
 			return "Weapon"
 		ITEM_ENUMS.ItemTypes.RANGED_WEAPON:
 			return "Ranged Weapon"
-		ITEM_ENUMS.ItemTypes.PASSIVE:
-			return "Passive"
+		ITEM_ENUMS.ItemTypes.BOOTS:
+			return "Boots"
+		ITEM_ENUMS.ItemTypes.HELMET:
+			return "Helmet"
 		ITEM_ENUMS.ItemTypes.ABILITY:
 			return "Ability"
 	return "Unknown"  # Fallback if the type is not recognized	

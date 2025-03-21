@@ -9,13 +9,6 @@ windup_time = 0.5
 attack_duration = 0.5
 cooldown_time = 15.0
 magazine_size = 1
-<<<<<<< HEAD:resources/ranged_weapon_resources/musket.tres
-name = "Musket"
-drop_chance = 30
-cost = 250
-description = "musket placeholder"
-type = 1
-=======
 
 name = "musket"
 drop_chance = 30
@@ -23,5 +16,3 @@ cost = 250
 description = "musket placeholder"
 
 type = 1
-
->>>>>>> origin/dev:resources/ranged_weapons/musket.tres

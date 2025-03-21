@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://bc7tsqs8wtclj"]
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://1owvav5kiktl"]
 
 [ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_baki8"]
 
