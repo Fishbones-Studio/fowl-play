@@ -1,18 +1,29 @@
 extends BaseEnemyState
-@export var speed = 30
-var player_position
+@export var speed = 10
 var target_position
+var rng = RandomNumberGenerator.new()
+var my_random_number
+
+func _ready():
+	my_random_number = rng.randf_range(-10.0, 10.0)
+
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	print ("enemy entered chase state")
 
 
-func process(delta: float) -> void:
-	var player = GameManager.chicken_player
-
-	player_position = player.position
-	target_position = (player_position - enemy.position).normalized()
+func physics_process(delta: float) -> void: 
+	target_position = (player.position - enemy.position).normalized()
 	
-	if enemy.position.distance_to(player_position) > 5:
-		enemy.move_and_slide()
-		enemy.look_at(player_position)
+	if enemy.position.distance_to(player.position) > attack_range && enemy.position.distance_to(player.position) < 3*chase_distance:
+		enemy.look_at(player.position)
+		enemy.velocity.x = target_position.x * speed
+		enemy.velocity.z = target_position.z * speed
+	elif enemy.position.distance_to(player.position) < attack_range:
+		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.ATTACK_STATE, {})
+	elif enemy.position.distance_to(player.position) > 3*chase_distance:
+		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE, {})
+	enemy.move_and_slide()
+	
+
+	

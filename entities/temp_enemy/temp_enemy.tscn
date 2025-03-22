@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=8 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
+[ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_h40bv"]
 
@@ -35,6 +36,11 @@ metadata/_custom_type_script = "uid://ja4658qiwf5y"
 script = ExtResource("4_07niy")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_07niy")
+enemy = NodePath("../..")
+STATE_TYPE = 2
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-0.99981, 0, -0.0194766, 0, 1, 0, 0.0194766, 0, -0.99981, 0, 2.37627, 0)

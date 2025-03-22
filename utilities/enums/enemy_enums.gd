@@ -3,5 +3,6 @@ extends Node
 
 enum EnemyStates {
 	IDLE_STATE,
-	CHASE_STATE
+	CHASE_STATE,
+	ATTACK_STATE
 }
