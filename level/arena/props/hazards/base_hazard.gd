@@ -21,5 +21,4 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 ## Overwrite in child class
 func _on_hazard_area_body_exited(_body: Node3D) -> void:
-
 	pass

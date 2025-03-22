@@ -1,7 +1,8 @@
-## This serves as a temporary hazard that applies damage at tick based intervals
+## This hazard applies damage at tick based intervals
 ## The damage applies while the entity is in the hazard area, and immediately stops on exit
 
-extends BaseHazard
+class_name HoldHazard
+extends  BaseHazard
 
 @export var damage_interval: float = 2.0  ## Time between damage ticks
 
