@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc5vmtbby4xy0"]
+[gd_scene load_steps=2 format=3 uid="uid://d20kwc73v3d8g"]
 
-[ext_resource type="Script" uid="uid://74xofhorearv" path="res://ui/game_menu/shop/shop_item.gd" id="1_k8gfq"]
 [ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/Joyous.png" id="2_k3g6w"]
 
 [node name="ShopItem" type="PanelContainer"]
 offset_right = 47.0
 offset_bottom = 143.0
-script = ExtResource("1_k8gfq")
 
 [node name="ShopItemContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

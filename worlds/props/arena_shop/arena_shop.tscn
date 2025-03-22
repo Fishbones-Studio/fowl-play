@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://ry4wdixyo7pm"]
+
+[ext_resource type="Script" uid="uid://cldavcl0ahxx7" path="res://worlds/props/arena_shop/arena_shop.gd" id="1_6ydkh"]
+[ext_resource type="FontFile" uid="uid://b1nic8hb7y5lm" path="res://resources/fonts/Frost Scream.otf" id="1_ggq23"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ydkh"]
+albedo_color = Color(0.164706, 0.529412, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lcfeo"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ggq23"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggq23"]
+
+[node name="ArenaShop" type="StaticBody3D"]
+script = ExtResource("1_6ydkh")
+
+[node name="ShopBox" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6ydkh")
+mesh = SubResource("BoxMesh_lcfeo")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.91113, 0.412119, 0, -0.412119, 0.91113, 0, 1.59172, 0)
+modulate = Color(0.431034, 0.746089, 3.85046e-07, 1)
+text = "Buy Upgrades"
+font = ExtResource("1_ggq23")
+font_size = 86
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_ggq23")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("BoxShape3D_ggq23")
+
+[node name="OpenShopLabel" type="Label3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.712712, 0.701457, 0, -0.701457, 0.712712, 0, 1.12641, 3.18026)
+text = "Press E to open shop"
+font_size = 50
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_player_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_player_body_exited"]
