@@ -1,8 +1,8 @@
 [gd_scene load_steps=23 format=3 uid="uid://dn4y6rw2w6ydt"]
 
-[ext_resource type="PackedScene" uid="uid://dm3t5pdwxroa7" path="res://level/arena/floor.glb" id="1_gpm27"]
-[ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/arena/wall.glb" id="2_ao8rp"]
-[ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/pillar.glb" id="2_qw8k7"]
+[ext_resource type="PackedScene" uid="uid://dm3t5pdwxroa7" path="res://level/arena/props/arena_parts/floor.glb" id="1_gpm27"]
+[ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/arena/props/arena_parts/wall.glb" id="2_ao8rp"]
+[ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/props/arena_parts/pillar.glb" id="2_qw8k7"]
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="4_ao8rp"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="5_ksnm3"]
 
