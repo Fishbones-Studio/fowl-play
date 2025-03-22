@@ -1,6 +1,6 @@
 extends Control
 
-var shop_items: Array[ShopItem]
+var shop_items: Array[Resource]
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 
@@ -21,15 +21,14 @@ func refresh_shop() -> void:
 			push_error("Shop item path is not correctly assigned")
 			return
 		
-		var random_item: Resource  = ItemDatabase.get_random_item()
+		var random_item: Resource = ItemDatabase.get_random_item()
 		
-		if random_item in Inventory.items_in_inventory:
+		if random_item in Inventory.items_in_inventory: # Prevent population with owned items
 			continue
-		if random_item in shop_items:
+		if random_item in shop_items: # Prevent duplicate shop items
 			continue
 		
-		# TODO: need to fix this
-		shop_items.append(shop_item)
+		shop_items.append(random_item)
 		shop_items_container.add_child(shop_item)
 		shop_item.set_item(random_item)
 		

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=15 format=3 uid="uid://21r458rvciqo"]
 
-[ext_resource type="Script" uid="uid://dduulsvf3cbei" path="res://ui/game_menu/flyers/flyer_area_3d.gd" id="2_at3e2"]
+[ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
-[ext_resource type="Script" uid="uid://cf7w0qpoidrnw" path="res://ui/game_menu/shop/shop_area_3d.gd" id="5_hvp38"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y7cqx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,21 +21,6 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvpcr"]
 albedo_color = Color(0.25498, 0.16922, 0, 1)
 
-[sub_resource type="GDScript" id="GDScript_5qgdc"]
-script/source = "extends Area3D
-
-
-@export var scene_to_load: PackedScene
-
-func _ready():
-	set_process_input(true)
-	
-func _input_event(camera, event, postion, normal, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		print(\"Clicked on\", name)
-		SignalManager.switch_ui_scene.emit(\"uid://dvkxcgdk0goul\")
-"
-
 [sub_resource type="BoxMesh" id="BoxMesh_efok4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_efok4"]
@@ -52,7 +36,8 @@ albedo_texture = ExtResource("3_l20ko")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yeww"]
 
-[node name="UI_Menu" type="Node3D"]
+[node name="GameMenu" type="Node3D"]
+script = ExtResource("1_5qgdc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -71,7 +56,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Chicken" type="Area3D" parent="."]
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
-script = SubResource("GDScript_5qgdc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
 mesh = SubResource("BoxMesh_efok4")
@@ -79,26 +63,28 @@ mesh = SubResource("BoxMesh_efok4")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
 shape = SubResource("BoxShape3D_efok4")
 
-[node name="Flyer_Area3D" type="Area3D" parent="."]
+[node name="Flyer" type="Area3D" parent="."]
 transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
-script = ExtResource("2_at3e2")
 
-[node name="Flyers" type="MeshInstance3D" parent="Flyer_Area3D"]
+[node name="Flyers" type="MeshInstance3D" parent="Flyer"]
 transform = Transform3D(1, 0, 1.49012e-07, 0, 1.01061, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_48rgb")
 mesh = SubResource("BoxMesh_rkxcn")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer_Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer"]
 shape = SubResource("BoxShape3D_t1gii")
 
-[node name="Shop_Area3D" type="Area3D" parent="."]
+[node name="Shop" type="Area3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
-script = ExtResource("5_hvp38")
 
-[node name="Shop" type="MeshInstance3D" parent="Shop_Area3D"]
+[node name="Shop" type="MeshInstance3D" parent="Shop"]
 mesh = SubResource("CapsuleMesh_q8q2c")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop_Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop"]
 shape = SubResource("CapsuleShape3D_6yeww")
+
+[connection signal="input_event" from="Chicken" to="." method="_on_chicken_input_event"]
+[connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
+[connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]

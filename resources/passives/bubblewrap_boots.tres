@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://dyk6aboos8lw4"]
+
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_hrp7u"]
+
+[resource]
+script = ExtResource("1_hrp7u")
+hp_shift = 0
+defense_shift = 10
+weight_shift = 0
+speed_shift = 0
+name = "Bubblewrap Boots"
+drop_chance = 60
+cost = 100
+description = ""
+type = 4
