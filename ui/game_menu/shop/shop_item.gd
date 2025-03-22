@@ -1,8 +1,8 @@
 class_name ShopItem
 extends PanelContainer
 
-var purchase_in_progress : bool = false
-var shop_item : Resource
+var purchase_in_progress: bool = false
+var shop_item: Resource
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
@@ -44,7 +44,7 @@ func _buy_item() -> void:
 			purchase_in_progress = false
 			return
 	
-	# If item is an ability and there are player owns less than two abilities
+	# If item is an ability and player owns less than two abilities
 	var ability_condition = shop_item.type == ItemEnums.ItemTypes.ABILITY and existing_items.size() < 2
 	
 	# Max items of same type is 1, unless item is ability
