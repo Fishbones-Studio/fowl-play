@@ -44,14 +44,15 @@ func _buy_item() -> void:
 			purchase_in_progress = false
 			return
 	
-	# Max items of same type is 1
-	# Special case for ability, since you can have 2 of them
-	if existing_items.size() < 1 || (shop_item.type == 2 && existing_items.size() < 2):
-		print(shop_item.type)
+	# If item is an ability and there are player owns less than two abilities
+	var ability_condition = shop_item.type == ItemEnums.ItemTypes.ABILITY and existing_items.size() < 2
+	
+	# Max items of same type is 1, unless item is ability
+	if existing_items.is_empty() or ability_condition :
 		Inventory.add_item(shop_item)
 		GameManager.update_prosperity_eggs(-int(cost_label.text))
 		
-		print("Item bought: ", shop_item)
+		print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
 		purchase_in_progress = false
 		return
 		
