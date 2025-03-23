@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://dn4y6rw2w6ydt"]
+[gd_scene load_steps=25 format=3 uid="uid://dn4y6rw2w6ydt"]
 
 [ext_resource type="PackedScene" uid="uid://dm3t5pdwxroa7" path="res://level/arena/props/arena_parts/floor.glb" id="1_gpm27"]
 [ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/arena/props/arena_parts/wall.glb" id="2_ao8rp"]
 [ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/props/arena_parts/pillar.glb" id="2_qw8k7"]
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="4_ao8rp"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="5_ksnm3"]
+[ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="5_uk3uf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qw8k7"]
 size = Vector3(2, 7.5, 2)
@@ -238,17 +239,15 @@ curve = SubResource("Curve3D_bdt0p")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Hazards/GroundSaw1Path"]
 transform = Transform3D(0.999697, 0, 0.0244023, 0, 1, 0, -0.0244023, 0, 0.999697, 0, 0, 0)
-
-[node name="GroundSaw1" parent="Hazards/GroundSaw1Path/PathFollow3D" node_paths=PackedStringArray("path_follow") instance=ExtResource("5_ksnm3")]
-transform = Transform3D(0.999708, 0, -0.0244025, 0, 1, 0, 0.0244025, 0, 0.999708, 0, 0, 0)
-movement_speed = 6.0
+script = ExtResource("5_uk3uf")
+movement_speed = 2.0
 movement_mode = 2
-path_follow = NodePath("..")
+
+[node name="GroundSaw1" parent="Hazards/GroundSaw1Path/PathFollow3D" instance=ExtResource("5_ksnm3")]
+transform = Transform3D(0.999708, 0, -0.0244025, 0, 1, 0, 0.0244025, 0, 0.999708, 0, 0, 0)
 
 [node name="GroundSaw2" parent="Hazards" instance=ExtResource("5_ksnm3")]
 transform = Transform3D(0.669131, 0, 0.743145, 0, 1, 0, -0.743145, 0, 0.669131, 12.9386, 0.876658, -21.643)
-movement_speed = 6.0
-movement_mode = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 40, 0)

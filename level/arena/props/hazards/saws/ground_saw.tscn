@@ -1,11 +1,26 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdiosrwi6l87h"]
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_odgku"]
-[ext_resource type="Script" uid="uid://b4c6drxdfgpdo" path="res://level/arena/props/hazards/saws/ground_saw.gd" id="2_fdjq5"]
+[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/bleed_hazard.gd" id="2_fdjq5"]
 [ext_resource type="PackedScene" uid="uid://dehxv1j0emd5r" path="res://level/arena/props/hazards/saws/ground_saw.glb" id="2_pvlaj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
 size = Vector3(0.5, 2.5, 2.5)
+
+[sub_resource type="Animation" id="Animation_w4h7w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ground_saw:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_fdjq5"]
 resource_name = "rotation"
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_w4h7w"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ground_saw:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qeog0"]
 _data = {
 &"RESET": SubResource("Animation_w4h7w"),
@@ -46,8 +46,6 @@ _data = {
 
 [node name="GroundSaw" instance=ExtResource("1_odgku")]
 script = ExtResource("2_fdjq5")
-movement_speed = 2.0
-loop_movement = true
 damage_interval = 1.0
 damage_duration = 5.0
 
