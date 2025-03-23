@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdiosrwi6l87h"]
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_odgku"]
-[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/bleed_hazard.gd" id="2_fdjq5"]
+[ext_resource type="Script" uid="uid://b4c6drxdfgpdo" path="res://level/arena/props/hazards/saws/ground_saw.gd" id="2_fdjq5"]
 [ext_resource type="PackedScene" uid="uid://dehxv1j0emd5r" path="res://level/arena/props/hazards/saws/ground_saw.glb" id="2_pvlaj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
@@ -46,9 +46,10 @@ _data = {
 
 [node name="GroundSaw" instance=ExtResource("1_odgku")]
 script = ExtResource("2_fdjq5")
+movement_speed = 2.0
+loop_movement = true
 damage_interval = 1.0
-damage_duration = 3.0
-damage = 3
+damage_duration = 5.0
 
 [node name="CollisionShape3D" parent="HazardArea" index="0"]
 shape = SubResource("BoxShape3D_fdjq5")
