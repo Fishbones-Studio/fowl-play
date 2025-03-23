@@ -5,7 +5,7 @@ enum MovementMode { ONCE, LOOP, PING_PONG }
 
 @export var movement_speed: float = 6.0
 @export var movement_mode: MovementMode = MovementMode.LOOP
-@export var path_follow: PathFollow3D  ## Assign manually or leave null to use parent
+@export var path_follow: PathFollow3D  ## PathFollow3D node to follow, leave empty to disable path following
 
 var _current_direction: float = 1.0
 
