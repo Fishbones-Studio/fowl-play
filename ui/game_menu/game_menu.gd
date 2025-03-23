@@ -22,7 +22,7 @@ func _on_flyer_input_event(camera: Node, event: InputEvent, event_position: Vect
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked on ", name)
 		SignalManager.switch_ui_scene.emit("uid://xhakfqnxgnrr")
-		SignalManager.switch_game_scene.emit("uid://bsx7lytfj8571")
+		SignalManager.switch_game_scene.emit("uid://bhnqi4fnso1hh")
 
 
 func _on_shop_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
