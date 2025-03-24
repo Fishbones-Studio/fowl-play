@@ -22,7 +22,4 @@ camera_reference = NodePath("../PlayerCamera")
 entity_to_follow = NodePath("../Player")
 
 [node name="TempEnemy" parent="." instance=ExtResource("4_m55rb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.936, 0, 0)
-
-[node name="TempEnemy2" parent="." instance=ExtResource("4_m55rb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.1227, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04619, 0.942033, -25.4663)
