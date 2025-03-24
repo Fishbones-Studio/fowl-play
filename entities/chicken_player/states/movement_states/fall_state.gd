@@ -39,7 +39,6 @@ func process(delta: float) -> void:
 				SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
 				_is_jump_held = false
 		elif _jump_available:
-			print("Air jump")
 			# Button released before threshold
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 			_is_jump_held = false

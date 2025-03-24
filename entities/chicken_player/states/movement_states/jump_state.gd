@@ -12,7 +12,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 
 	# checking if jump is available, otherwise go to falling state
 	if !information.get("jump_available", true):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {"jump_available": _air_jumps_used < air_jumps})
 		return
 
 	super.enter(_previous_state)
@@ -26,7 +26,7 @@ func process(delta: float) -> void:
 
 	# Handle dash transition
 	if Input.is_action_just_pressed("dash"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {"jump_available": _air_jumps_used < air_jumps})
 
 
 func physics_process(delta: float) -> void:
