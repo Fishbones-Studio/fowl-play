@@ -20,9 +20,10 @@ func _on_chicken_input_event(camera: Node, event: InputEvent, event_position: Ve
 func _on_flyer_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	# TODO: first switch to the flyers ui
 	if event is InputEventMouseButton and event.pressed:
-		print("Clicked on ", name)
-		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
-		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			print("Clicked on ", name)
+			SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
+			SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 
 
 func _on_shop_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
