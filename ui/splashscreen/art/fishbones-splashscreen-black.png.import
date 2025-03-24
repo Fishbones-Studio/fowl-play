@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caypnb5v7do1g"
-path="res://.godot/imported/fishbones-splashscreen-transparent.png-5f309c1c42a1f58fd401123fc29b1ba5.ctex"
+uid="uid://bqofqcpvkqoah"
+path="res://.godot/imported/fishbones-splashscreen-black.png-33181023b1f4d82e9ca7131bb4470314.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/splashscreen/art/fishbones-splashscreen-transparent.png"
-dest_files=["res://.godot/imported/fishbones-splashscreen-transparent.png-5f309c1c42a1f58fd401123fc29b1ba5.ctex"]
+source_file="res://ui/splashscreen/art/fishbones-splashscreen-black.png"
+dest_files=["res://.godot/imported/fishbones-splashscreen-black.png-33181023b1f4d82e9ca7131bb4470314.ctex"]
 
 [params]
 
