@@ -5,5 +5,6 @@ enum ItemTypes{
 	WEAPON,
 	RANGED_WEAPON,
 	ABILITY,
-	PASSIVE
+	HELMET,
+	BOOTS
 }

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://bkqw5ido2dfs8"]
+
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_84if2"]
+
+[resource]
+script = ExtResource("1_84if2")
+hp_shift = 0
+defense_shift = 20
+weight_shift = 5
+speed_shift = 0
+name = "Bubblewrap Helmet"
+drop_chance = 60
+cost = 100
+description = ""
+type = 3

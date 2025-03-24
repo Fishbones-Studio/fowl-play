@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://chu44sxlsk0hd"]
+
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_6gdpc"]
+
+[resource]
+script = ExtResource("1_6gdpc")
+hp_shift = 0
+defense_shift = 60
+weight_shift = 0
+speed_shift = 20
+name = "Mohawk"
+drop_chance = 10
+cost = 500
+description = ""
+type = 3
