@@ -13,7 +13,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 func input(event: InputEvent) -> void:
 	# Check for jump input
 	if event.is_action_pressed("jump") and player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"coyote_time": true})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"from_ground": true})
 
 
 func process(delta: float) -> void:
@@ -26,7 +26,7 @@ func process(delta: float) -> void:
 func physics_process(_delta: float) -> void:
 	# Check for state transitions
 	if not player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {"coyote_time": true})
 		return
 
 	var input_dir := get_player_input_dir()

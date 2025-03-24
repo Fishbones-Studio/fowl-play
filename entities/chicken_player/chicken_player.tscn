@@ -50,7 +50,8 @@ one_shot = true
 
 [node name="Glide" type="Node" parent="MovementStateMachine"]
 script = ExtResource("5_a1qjk")
-glide_movement_speed = 7.5
+glide_gravity = 0.0
+glide_movement_speed = 5.0
 STATE_TYPE = 4
 
 [node name="Hurt" type="Node" parent="MovementStateMachine"]
@@ -62,8 +63,7 @@ script = ExtResource("7_afbqv")
 
 [node name="Jump" type="Node" parent="MovementStateMachine"]
 script = ExtResource("8_gx6sm")
-air_movement_speed = 10.0
-jump_velocity = 6.5
+air_movement_speed = 6.0
 STATE_TYPE = 3
 
 [node name="Sprint" type="Node" parent="MovementStateMachine"]

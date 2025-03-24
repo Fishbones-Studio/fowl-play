@@ -22,10 +22,8 @@ signal item_selected
 signal item_bought
 signal item_bought_confirmed
 signal item_bought_cancelled
-var _cooldowns: Dictionary[StringName, int] = {}
-
-
 ## Dictionary to store cooldowns for signals
+var _cooldowns: Dictionary[StringName, int] = {}
 
 
 ## Throthle function for signals, to prevent spamming
