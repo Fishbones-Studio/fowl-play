@@ -34,7 +34,7 @@ func enter(_previous_state, _information: Dictionary[String, float] = {}) -> voi
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	add_child(attack_timer)
 	attack_timer.start()
-	attack()
+	_attack()
 
 
 
@@ -55,7 +55,7 @@ func _on_attack_timer_timeout() -> void:
 	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.COOLDOWN)
 
 
-func attack() -> void:
+func _attack() -> void:
 	if not hit_area:
 		print("HitArea not found!")
 		return
