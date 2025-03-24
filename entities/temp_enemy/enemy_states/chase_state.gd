@@ -23,4 +23,5 @@ func physics_process(delta: float) -> void:
 	enemy.move_and_slide()
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
-	in_attack_area = true
+	if body == player:
+		in_attack_area = true

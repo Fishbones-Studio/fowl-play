@@ -20,8 +20,10 @@ func attack_player():
 
 #Check if player is in the attack area of the enemy
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	attack_player()
+	if body == player:
+		attack_player()
 
 #Reset enemy after the player leaves the attack area of the enemy
 func _on_attack_area_body_exited(body: Node3D) -> void:
-	SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE)
+	if body == player:
+		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE)
