@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cgpyao4xtqnte"]
 
-[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_yffq1"]
+[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="1_g81tl"]
 
 [resource]
-script = ExtResource("1_yffq1")
+script = ExtResource("1_g81tl")
 damage = 250
 windup_time = 0.25
 attack_duration = 0.25
 cooldown_time = 0.25
-type = null
-name = "phasesaber"
+name = "Lightsaber"
 drop_chance = 10
 cost = 500
-description = "phasesaber placeholder"
+description = "Lightsaber placeholder"
+type = null
