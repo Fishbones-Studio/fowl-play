@@ -53,16 +53,6 @@ func _load_items(path: String) -> void:
 	for file in files:
 		if file.ends_with(".tres"):
 			items.append(load(path + file))
-			
-	#var files: PackedStringArray = DirAccess.get_files_at(path)
-#
-	#if not files:
-		#print("An error occurred when trying to access path: ", path)
-		#return
-#
-	#for file in files:
-		#if file.ends_with(".tres"):
-			#items.append(load(path + file))
 
 
 ## Find an item in the database based on item name
