@@ -1,9 +1,10 @@
-extends Node
 class_name ItemEnums
+extends Node
 
 enum ItemTypes{
 	WEAPON,
 	RANGED_WEAPON,
 	ABILITY,
-	PASSIVE
+	HELMET,
+	BOOTS
 }

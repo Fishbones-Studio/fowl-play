@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PassiveResource" load_steps=2 format=3 uid="uid://dsrg3x0fcklgr"]
+
+[ext_resource type="Script" uid="uid://ck8pwegi8mtc" path="res://resources/passive_resources/passive_resource.gd" id="1_3cxce"]
+
+[resource]
+script = ExtResource("1_3cxce")
+hp_shift = 0
+defense_shift = 40
+weight_shift = 0
+speed_shift = 80
+name = "Jordans"
+drop_chance = 5
+cost = 1500
+description = ""
+type = 4

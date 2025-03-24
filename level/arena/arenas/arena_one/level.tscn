@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhnqi4fnso1hh"]
+
+[ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arenas/arena_one/area.tscn" id="1_qohg2"]
+[ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="3_ktfr2"]
+[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="4_44x8d"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Area" parent="." instance=ExtResource("1_qohg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00213242, 0.0203018, 0.00496864)
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.995509, -0.00619845, 0.0944599, 0.00475659, 0.999869, 0.0154817, -0.0945434, -0.0149629, 0.995408, 0, 3.84457, 8.32513)
+
+[node name="Player" parent="." instance=ExtResource("3_ktfr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50721, 0)
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("4_44x8d")]
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 7.08687, 3.80724, 4.36455)
+camera_reference = NodePath("../PlayerCamera")
+entity_to_follow = NodePath("../Player")
