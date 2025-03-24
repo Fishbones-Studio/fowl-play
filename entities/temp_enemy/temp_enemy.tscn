@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=9 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
@@ -10,6 +10,8 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(1.81518, 2.98218, 1.77759)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_07niy"]
 
 [node name="TempEnemy" type="CharacterBody3D"]
 script = ExtResource("1_c1mms")
@@ -32,13 +34,16 @@ metadata/_custom_type_script = "uid://btddu8dhoifau"
 script = ExtResource("3_wrgcg")
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="chase_state" type="Node" parent="EnemyStateMachine"]
+[node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_07niy")
+enemy = NodePath("../..")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_area", "enemy")]
 script = ExtResource("5_07niy")
+attack_area = NodePath("../../attack_area")
+damage = 10
 enemy = NodePath("../..")
 STATE_TYPE = 2
 
@@ -47,3 +52,13 @@ transform = Transform3D(-0.99981, 0, -0.0194766, 0, 1, 0, 0.0194766, 0, -0.99981
 modulate = Color(0.627451, 0, 0, 1)
 text = "OOOOO Scaryy Chickennnnn"
 font_size = 85
+
+[node name="attack_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attack_area"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -2)
+shape = SubResource("BoxShape3D_07niy")
+
+[connection signal="body_entered" from="attack_area" to="EnemyStateMachine/chase_state" method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="attack_area" to="EnemyStateMachine/attack_state" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="attack_area" to="EnemyStateMachine/attack_state" method="_on_attack_area_body_exited"]
