@@ -3,6 +3,7 @@ extends BasePlayerMovementState
 @export var air_movement_speed: float = 20.0
 @export var jump_velocity: float = 10.0
 @export var air_jumps: int = 2
+@export var air_movement_damping: float = 0.96
 
 var _air_jumps_used: int = 0
 
@@ -29,7 +30,16 @@ func process(delta: float) -> void:
 
 
 func physics_process(delta: float) -> void:
-	super(delta)
+
+	# Applying air movement
+	var input_dir: Vector2 = get_player_input_dir()
+
+	# applying air movement even after not pressing buttons anymore, but slowing down
+	if input_dir == Vector2.ZERO && previous_state != PlayerEnums.PlayerStates.IDLE_STATE:
+		player.velocity.x *= air_movement_damping
+		player.velocity.z *= air_movement_damping
+	else:
+		super(delta)
 
 	# Apply gravity first
 	player.velocity.y += player.get_gravity().y * delta
