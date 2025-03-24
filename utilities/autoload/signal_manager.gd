@@ -17,6 +17,8 @@ signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is
 signal add_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to add an (additional) UI scene
 signal switch_game_scene(scenscene_pathe: String) ## This signal is used to switch the game scene, replacing all current
 signal add_game_scene(scene_path: String) ## This signal is used to add an (additional) game scene
+# Enemy signals
+signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 # Shop signals
 signal item_selected
 signal item_bought

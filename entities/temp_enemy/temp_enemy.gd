@@ -1,5 +1,6 @@
 ## Enemy: A basic enemy that can take damage and die.
-class_name Enemy extends CharacterBody3D
+class_name Enemy 
+extends CharacterBody3D
 
 ## Exported Variables
 @export var health: int = 100
