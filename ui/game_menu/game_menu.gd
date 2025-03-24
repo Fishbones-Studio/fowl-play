@@ -13,8 +13,9 @@ func _process(delta: float) -> void:
 
 func _on_chicken_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		print("Clicked on ", name)
-		SignalManager.switch_ui_scene.emit("uid://dvkxcgdk0goul")
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			print("Clicked on ", name)
+			SignalManager.switch_ui_scene.emit("uid://dvkxcgdk0goul")
 
 
 func _on_flyer_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
