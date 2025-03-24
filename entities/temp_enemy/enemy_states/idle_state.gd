@@ -1,6 +1,6 @@
 extends BaseEnemyState
 
-var target_position
+var target_position : Vector3
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	print("enemy entered idle state")

@@ -1,13 +1,7 @@
 extends BaseEnemyState
-@export var speed = 10
-var target_position
-var rng = RandomNumberGenerator.new()
-var my_random_number
-var in_attack_area = false
-
-func _ready():
-	my_random_number = rng.randf_range(-10.0, 10.0)
-
+@export var speed : int = 10
+var target_position: Vector3
+var in_attack_area : bool = false
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	print ("enemy entered chase state")
