@@ -3,9 +3,9 @@ extends BasePlayerMovementState
 @export var glide_hold_threshold: float = 0.25  # Seconds to hold for glide
 @export var fall_movement_speed: float = 35
 
-var _jump_available: bool = false
-var _dashed: bool = false
-var _is_jump_held: bool = false
+var _jump_available: bool   = false
+var _dashed: bool           = false
+var _is_jump_held: bool     = false
 var _jump_press_time: float = 0.0
 
 @onready var coyote_timer: Timer = $CoyoteTimer ## Timer to manage jump availability after leaving the ground, so the player can jump when just barely off the platform
@@ -39,6 +39,7 @@ func process(delta: float) -> void:
 				SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
 				_is_jump_held = false
 		elif _jump_available:
+			print("Air jump")
 			# Button released before threshold
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 			_is_jump_held = false

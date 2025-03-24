@@ -5,7 +5,7 @@ extends BasePlayerMovementState
 
 @export_range(10, 100) var stamina_cost: int = 30
 
-@export_range(1.0, 20.0) var dash_distance: float = 50.0
+@export_range(1.0, 30.0) var dash_distance: float = 50.0
 @export var dash_movement_speed: float = 0
 
 var _dash_available: bool = true

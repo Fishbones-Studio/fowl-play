@@ -22,10 +22,6 @@ func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = 
 
 func process(delta: float) -> void:
 	player.regen_stamina(delta)
-	# Handle air jump input
-	if Input.is_action_just_pressed("jump") and _air_jumps_used < air_jumps:
-		_air_jumps_used += 1
-		player.velocity.y = jump_velocity
 
 	# Handle dash transition
 	if Input.is_action_just_pressed("dash"):
