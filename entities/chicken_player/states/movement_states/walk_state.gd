@@ -10,7 +10,7 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 func input(event: InputEvent) -> void:
 	# Check for jump input
 	if event.is_action_pressed("jump") and player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"from_ground": true})
 
 	elif Input.is_action_pressed("sprint") and player.stamina > 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})

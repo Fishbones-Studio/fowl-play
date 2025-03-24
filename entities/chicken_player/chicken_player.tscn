@@ -37,9 +37,11 @@ player = NodePath("..")
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
+dash_distance = 20.0
 STATE_TYPE = 5
 
 [node name="DashDurationTimer" type="Timer" parent="MovementStateMachine/Dash"]
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="MovementStateMachine/Dash"]
@@ -48,6 +50,8 @@ one_shot = true
 
 [node name="Glide" type="Node" parent="MovementStateMachine"]
 script = ExtResource("5_a1qjk")
+glide_gravity = 0.0
+glide_movement_speed = 5.0
 STATE_TYPE = 4
 
 [node name="Hurt" type="Node" parent="MovementStateMachine"]
@@ -59,14 +63,17 @@ script = ExtResource("7_afbqv")
 
 [node name="Jump" type="Node" parent="MovementStateMachine"]
 script = ExtResource("8_gx6sm")
+air_movement_speed = 6.0
 STATE_TYPE = 3
 
 [node name="Sprint" type="Node" parent="MovementStateMachine"]
 script = ExtResource("9_yqrof")
+sprint_speed = 10.0
 STATE_TYPE = 2
 
 [node name="Walk" type="Node" parent="MovementStateMachine"]
 script = ExtResource("10_3wlsy")
+walk_speed = 6.0
 STATE_TYPE = 1
 
 [node name="Fall" type="Node" parent="MovementStateMachine"]

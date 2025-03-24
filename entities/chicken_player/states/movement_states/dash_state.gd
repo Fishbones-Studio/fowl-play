@@ -5,7 +5,7 @@ extends BasePlayerMovementState
 
 @export_range(10, 100) var stamina_cost: int = 30
 
-@export_range(1.0, 20.0) var dash_distance: float = 50.0
+@export_range(1.0, 30.0) var dash_distance: float = 50.0
 @export var dash_movement_speed: float = 0
 
 var _dash_available: bool = true
@@ -64,7 +64,6 @@ func physics_process(delta: float) -> void:
 func exit() -> void:
 	_dash_available = false
 	dash_duration_timer.stop()
-	dash_cooldown_timer.start()
 
 
 func _on_dash_timer_timeout():
@@ -74,6 +73,7 @@ func _on_dash_timer_timeout():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
 	else:
 		SignalManager.player_transition_state.emit(previous_state, information)
+	dash_cooldown_timer.start()
 
 
 func _on_dash_cooldown_timer_timeout():
