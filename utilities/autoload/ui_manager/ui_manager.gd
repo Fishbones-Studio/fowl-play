@@ -13,16 +13,16 @@ func _ready():
 		add_child(initial_ui_scene.instantiate())
 
 
-func _on_switch_ui(new_ui_scene_path: String) -> void:
+func _on_switch_ui(new_ui_scene_path: String, params: Dictionary = {}) -> void:
 	# Remove the current children
 	for child in get_children():
 		child.queue_free()
 
 	# Load the new UI scene from the path
-	_on_add_ui_scene(new_ui_scene_path)
+	_on_add_ui_scene(new_ui_scene_path, params)
 
 
-func _on_add_ui_scene(new_ui_scene_path: String) -> void:
+func _on_add_ui_scene(new_ui_scene_path: String, params: Dictionary = {}) -> void:
 	# Load the UI scene from the path
 	var new_ui_scene_resource: Resource = ResourceLoader.load(new_ui_scene_path)
 
@@ -34,7 +34,11 @@ func _on_add_ui_scene(new_ui_scene_path: String) -> void:
 	if new_ui_scene_resource is PackedScene:
 		# Instance the new UI scene
 		var new_ui_node: Node = new_ui_scene_resource.instantiate()
-
+		
+		# If the UI has a setup or initialize method, call it with parameters
+		if new_ui_node.has_method("setup"):
+			new_ui_node.setup(params)
+		
 		# Add it as a child of the UI manager
 		add_child(new_ui_node)
 	else:

@@ -1,68 +1,75 @@
+## Autoload script to manage all items in the game. Will excist of a dict of all
+## items and a function to get a random item.
 extends Node
-#Autoload s	cript to manage all items in the game. Will excist of a dict of all items and a function to get a random item.
-enum Rarity {COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 
-var items: Array[Variant] = [
-	{"name": "Stick", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Lake", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Bone", "rarity": Rarity.COMMON, "type": "Melee", "cost": 100},
-	{"name": "Hammer", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Knife", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Frying Pan", "rarity": Rarity.UNCOMMON, "type": "Melee", "cost": 200},
-	{"name": "Sword", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Axe", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Lightsaber", "rarity": Rarity.RARE, "type": "Melee", "cost": 1000},
-	{"name": "Slingshot", "rarity": Rarity.COMMON, "type": "Ranged", "cost": 100},
-	{"name": "Crossbow", "rarity": Rarity.COMMON, "type": "Ranged", "cost": 100},
-	{"name": "Revolver", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Pistol", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Musket", "rarity": Rarity.UNCOMMON, "type": "Ranged", "cost": 200},
-	{"name": "Minigun", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Sniper", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Lazet eyes", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Flamethrower", "rarity": Rarity.RARE, "type": "Ranged", "cost": 1000},
-	{"name": "Cap", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
-	{"name": "Flipflops", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
-	{"name": "Bubblewrap Helmet", "rarity": Rarity.COMMON, "type": "Passive", "cost": 100},
-	{"name": "Bubblewrap Boots", "rarity": Rarity.UNCOMMON, "type": "Passive", "cost": 200},
-	{"name": "Rollerblades", "rarity": Rarity.RARE, "type": "Passive", "cost": 500},
-	{"name": "Jordans", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
-	{"name": "Helmet", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
-	{"name": "Mohawk", "rarity": Rarity.RARE, "type": "Passive", "cost": 1000},
-	{"name": "Helicoter blades", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
-	{"name": "Mechenical butt", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
-	{"name": "Chamovlage Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
-	{"name": "Necromancer Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
-	{"name": "Blink Mutation", "rarity": Rarity.COMMON, "type": "Ability", "cost": 1000},
-]
+const ITEM_ENUMS           = preload("uid://3mucjbtp3r4g")
+var items: Array[Resource] = []
 
-# TODO: replace variant with correct resource type
 
-#Function to get a random item from the list above
-func get_random_item() -> Variant:
-	var rarity_chances: Dictionary = { Rarity.COMMON: 60, Rarity.UNCOMMON: 30, Rarity.RARE: 10}
-	var roll: int            = randi() % 100
-	var selected_rarity: int = Rarity.COMMON
-	var cumulative: int      = 0
-	#Get a random rarity accordingly to the chances
-	for rarity in rarity_chances.keys():
-		cumulative += rarity_chances[rarity]
+func _ready() -> void:
+	_load_items("res://resources/melee_weapons/")
+	_load_items("res://resources/ranged_weapons/")
+	_load_items("res://resources/passives/")
+	_load_items("res://resources/abilities/")
+
+	for item in items:
+		print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
+
+
+## Get a random item based on the item´s drop chance
+func get_random_item() -> Resource:
+	# Calculate total drop chance
+	var total_drop_chance: int = 0
+	for item in items:
+		total_drop_chance += item.drop_chance
+
+	# Roll a random number between 0 and the total drop chance
+	var roll: int       = randi() % total_drop_chance
+	var cumulative: int = 0
+
+	# Find the item corresponding to the roll
+	for item in items:
+		cumulative += item.drop_chance
 		if roll < cumulative:
-			selected_rarity = rarity
-			break
-			
-	print("Selected rarity:", selected_rarity)
-	#List of items that match the rarity
-	var filtered_items: Array = items.filter(func(item): return item.rarity == selected_rarity)
-			
-	#Select item
-	if filtered_items.size() > 0:
-		var selected_item = filtered_items[randi() % filtered_items.size()]
-		print("Selected item:", selected_item["name"]) 
-		return selected_item
-	else:
-		print("No items found for rarity:", selected_rarity)
-		return null
-		
-			
+			return item
+
+	return null
+
+
+## Helper function to convert the enum to a readable string
+func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
+	var item_string: String = ItemEnums.ItemTypes.keys()[item_type]
+	# Turn item_string from UPPER_CASE to Title Case
+	return item_string.capitalize()
+
+
+func _load_items(path: String) -> void:
+	var files: PackedStringArray = DirAccess.get_files_at(path)
+
+	if not files:
+		print("An error occurred when trying to access path: ", path)
+		return
+
+	for file in files:
+		if file.ends_with(".tres"):
+			items.append(load(path + file))
+
+
+## Find an item in the database based on item name
+func get_item_by_name(item_name: String) -> Resource:
+	for item in items:
+		if item.name == item_name:
+			return item
+	print("Item with name '", item_name, "' not found in the database")
+
+	return null
+
+
+## Find an item in the database based on it's resource
+func get_item(item_res: Resource) -> Resource:
+	for item in items:
+		if item == item_res:
+			return item
+	print("Item '", item_res, "' not found in the database")
+
+	return null
