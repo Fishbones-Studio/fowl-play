@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwox3q508ewxc"]
+
+[ext_resource type="Script" uid="uid://bpe7vq7qvhenv" path="res://ui/keybind_menu/input_settings.gd" id="1_v41sd"]
+
+[node name="InputSettings" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_v41sd")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionList" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="BottomButtons" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="BackButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/BottomButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Go Back"
+
+[node name="ErrorText" type="Label" parent="Panel/MarginContainer/VBoxContainer/BottomButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResetButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/BottomButtons"]
+layout_mode = 2
+text = "Reset to default"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BottomButtons/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BottomButtons/ResetButton" to="." method="_on_reset_button_pressed"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccns8he8y64n3"]
+
+[ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
+[ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/temp_enemy/Model/Chicken improved hennifer varient.glb" id="2_5gl3h"]
+[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
+[ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
+[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
+[ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
+size = Vector3(1.81518, 2.98218, 1.77759)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_07niy"]
+
+[node name="TempEnemy" type="CharacterBody3D"]
+script = ExtResource("1_c1mms")
+
+[node name="Chicken improved hennifer varient" parent="." instance=ExtResource("2_5gl3h")]
+transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0, 0.816296, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.03772, 0.22522, 0.0404053)
+shape = SubResource("BoxShape3D_c1mms")
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
+script = ExtResource("2_h40bv")
+starting_state = NodePath("idle_state")
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://btddu8dhoifau"
+
+[node name="idle_state" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("3_wrgcg")
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_07niy")
+speed = 4
+enemy = NodePath("../..")
+STATE_TYPE = 1
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_area", "enemy")]
+script = ExtResource("5_07niy")
+attack_area = NodePath("../../attack_area")
+damage = 2
+enemy = NodePath("../..")
+STATE_TYPE = 2
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.99981, 0, -0.0194766, 0, 1, 0, 0.0194766, 0, -0.99981, 0, 2.37627, 0)
+modulate = Color(0.627451, 0, 0, 1)
+text = "OOOOO Scaryy Chickennnnn"
+font_size = 85
+
+[node name="attack_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="attack_area"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -2)
+shape = SubResource("BoxShape3D_07niy")
+
+[connection signal="body_entered" from="attack_area" to="EnemyStateMachine/chase_state" method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="attack_area" to="EnemyStateMachine/attack_state" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="attack_area" to="EnemyStateMachine/attack_state" method="_on_attack_area_body_exited"]

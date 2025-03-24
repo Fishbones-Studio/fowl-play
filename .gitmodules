@@ -1,0 +1,4 @@
+[submodule "addons/panku_console"]
+	path = addons/panku_console
+	url = https://github.com/Ark2000/panku_console
+	ignore = all

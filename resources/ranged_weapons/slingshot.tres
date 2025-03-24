@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=2 format=3 uid="uid://bm5jvkn271601"]
+
+[ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://resources/ranged_weapons/ranged_weapon_resource.gd" id="1_wstxe"]
+
+[resource]
+script = ExtResource("1_wstxe")
+damage = 25
+windup_time = 2.0
+attack_duration = 0.5
+cooldown_time = 1.0
+magazine_size = 1
+
+name = "slingshot"
+drop_chance = 60
+cost = 100
+description = "slingshot placeholder"
+
+type = 1
