@@ -14,8 +14,8 @@ config/name="Fowl Play"
 config/version="0.0.1"
 run/main_scene="uid://bu4jhshnfcfa8"
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/image="uid://caypnb5v7do1g"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://bqofqcpvkqoah"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2500
 
