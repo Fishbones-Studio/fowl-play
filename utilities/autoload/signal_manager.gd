@@ -22,3 +22,19 @@ signal item_selected
 signal item_bought
 signal item_bought_confirmed
 signal item_bought_cancelled
+var _cooldowns: Dictionary[StringName, int] = {}
+
+
+## Dictionary to store cooldowns for signals
+
+
+## Throthle function for signals, to prevent spamming
+## This function ignores the signal if it is called before the cooldown time has passed
+func emit_throttled(signal_name: StringName, args: Array = [], cooldown: float = 0.5) -> void:
+	var now: int = Time.get_ticks_msec()
+	if now < _cooldowns.get(signal_name, 0):
+		return
+
+	_cooldowns[signal_name] = now + int(cooldown * 1000)
+	# callv destructures the array and passes it as arguments
+	callv("emit_signal", [signal_name] + args)
