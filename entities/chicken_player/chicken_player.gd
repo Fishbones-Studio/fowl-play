@@ -4,6 +4,8 @@ class_name ChickenPlayer
 # Player Stats export variables
 @export_category("Stamina")
 @export_range(10, 200) var max_stamina: float = 100
+
+
 @export var stamina_regen: float = 8.5
 
 @export_group("Health")
