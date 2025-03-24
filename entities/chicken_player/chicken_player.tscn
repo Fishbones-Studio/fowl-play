@@ -37,7 +37,7 @@ player = NodePath("..")
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
-dash_distance = 25.0
+dash_distance = 20.0
 STATE_TYPE = 5
 
 [node name="DashDurationTimer" type="Timer" parent="MovementStateMachine/Dash"]
