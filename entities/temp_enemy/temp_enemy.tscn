@@ -36,6 +36,7 @@ metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
 [node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_07niy")
+speed = 3
 enemy = NodePath("../..")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
@@ -43,7 +44,7 @@ metadata/_custom_type_script = "uid://ja4658qiwf5y"
 [node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_area", "enemy")]
 script = ExtResource("5_07niy")
 attack_area = NodePath("../../attack_area")
-damage = 10
+damage = 2
 enemy = NodePath("../..")
 STATE_TYPE = 2
 

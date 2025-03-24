@@ -1,6 +1,7 @@
 class_name BaseEnemyState
 extends BaseState
 
+#Instantiate globally used variables around the enemy states
 @export var DELTA_MODIFIER : float = 100
 @export var chase_distance : float = 100
 #@export var attack_range : float = 10 <- to be implemented later with connection to specific weapon

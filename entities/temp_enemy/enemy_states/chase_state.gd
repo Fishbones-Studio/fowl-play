@@ -13,7 +13,8 @@ func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {
 	print ("enemy entered chase state")
 	in_attack_area = false
 
-
+#Check what conditions are fulfilled to shift the enemy in state to certain behaviour patterns.
+#This would be the place to change behaviour, for example a ranged attack.
 func physics_process(delta: float) -> void: 
 	target_position = (player.position - enemy.position).normalized()
 	
