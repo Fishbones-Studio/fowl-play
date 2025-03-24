@@ -129,3 +129,7 @@ attack={
 
 3d/run_on_separate_thread=true
 3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
