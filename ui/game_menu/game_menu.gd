@@ -1,5 +1,6 @@
 extends Node3D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,8 +22,8 @@ func _on_flyer_input_event(camera: Node, event: InputEvent, event_position: Vect
 	# TODO: first switch to the flyers ui
 	if event is InputEventMouseButton and event.pressed:
 		print("Clicked on ", name)
-		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
-		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
+		SignalManager.switch_ui_scene.emit("uid://xhakfqnxgnrr")
+		SignalManager.switch_game_scene.emit("uid://bhnqi4fnso1hh")
 
 
 func _on_shop_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
