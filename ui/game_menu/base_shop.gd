@@ -1,6 +1,6 @@
 ## manages the basic functions for adding and displaying items in the shop, to be used by different types of shops.
-extends Control
 class_name BaseShop
+extends Control
 
 @export var max_items: int = 5
 var shop_items: Array[Resource]
@@ -17,10 +17,14 @@ func _ready() -> void:
 	randomize()
 	refresh_shop()
 
+
+
 func refresh_shop() -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
+
+
 
 	var items_in_shop = 0
 	while items_in_shop < max_items:

@@ -1,4 +1,4 @@
-class_name InAranaShopItem
+class_name InArenaShopItem
 extends PanelContainer
 
 var purchase_in_progress: bool = false
@@ -15,6 +15,8 @@ var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
 func disable_item() -> void:
 	self.visible = false
+	
+
 
 func set_item(item: InRunUpgradeResource) -> void: 
 	name_label.text = item.name
@@ -23,14 +25,18 @@ func set_item(item: InRunUpgradeResource) -> void:
 	description_label.text = item.description
 	
 	upgrade_item = item
+	
+
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			_buy_upgrade()	
-
+			
+			
 func make_unclickable() -> void:
 	disconnect("gui_input", _on_gui_input)
+
 
 
 func _on_mouse_entered() -> void:
@@ -43,6 +49,7 @@ func _on_mouse_exited() -> void:
 	if not theme:
 		theme = Theme.new()  # Create a new Theme if it doesn't exist
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+
 
 func _buy_upgrade() -> void:
 	if purchase_in_progress:
@@ -69,3 +76,4 @@ func _buy_upgrade() -> void:
 	disable_item()
 	
 	purchase_in_progress = false
+	

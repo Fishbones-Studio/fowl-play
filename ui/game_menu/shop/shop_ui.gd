@@ -1,6 +1,5 @@
-extends BaseShop
 class_name GameItemShop
-
+extends BaseShop
 
 func _ready() -> void:
 	item_database = ItemDatabase
@@ -13,3 +12,5 @@ func _ready() -> void:
 
 func _on_exit_button_button_button_up() -> void:
 	queue_free()
+	
+	
