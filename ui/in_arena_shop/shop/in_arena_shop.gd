@@ -21,8 +21,7 @@ func refresh_shop() -> void:
 
 		var random_item: Resource = UpgradeDatabase.get_random_item()
 		
-
-				
+	
 		upgrade_items.append(random_item)
 		upgrade_items_container.add_child(upgrade_item)
 		upgrade_item.set_item(random_item)
