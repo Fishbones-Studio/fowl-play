@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://3j6kdlfgl71i"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://resources/in_run_upgrades/in_run_upgrade_resource.gd" id="1_xlov0"]
+
+[resource]
+script = ExtResource("1_xlov0")
+health_bonus = 0
+speed_bonus = 0.0
+damage_bonus = 0.0
+stamina_bonus = 15.0
+name = "CluckEndure"
+drop_chance = 30
+cost = 1250
+description = "Boosts stamina for endless energy and speed!"
+type = 0
+metadata/_custom_type_script = "uid://dr34raogtpfqd"
