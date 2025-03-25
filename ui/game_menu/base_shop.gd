@@ -1,3 +1,4 @@
+## manages the basic functions for adding and displaying items in the shop, to be used by different types of shops.
 extends Control
 class_name BaseShop
 

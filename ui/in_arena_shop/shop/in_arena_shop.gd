@@ -9,8 +9,8 @@ func _ready() -> void:
 	shop_items_container = %ShopItemsContainer
 	check_inventory = false  
 	prevent_duplicates = false  
-	# calls ready of BaseShop
-	super._ready()
+	# calls baseshop
+	super()
 
 
 func close_ui() -> void:
