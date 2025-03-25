@@ -44,12 +44,12 @@ func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
 
 
 func _load_items(path: String) -> void:
-	var files: PackedStringArray = DirAccess.get_files_at(path)
-
+	var files: PackedStringArray = ResourceLoader.list_directory(path)
+	
 	if not files:
 		print("An error occurred when trying to access path: ", path)
 		return
-
+	
 	for file in files:
 		if file.ends_with(".tres"):
 			items.append(load(path + file))

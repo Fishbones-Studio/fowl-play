@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5sfxc6bnsh2n"
 path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cube Base Color.png-4633fce505ec60fd0c990c4a1eb8a4cd.s3tc.ctex"
+path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cube Base Color.png-4633fce505ec60fd0c990c4a1eb8a4cd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://entities/temp_enemy/Model/Chicken improved hennifer varient_Cube Base Color.png"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cube Base Color.png-4633fce505ec60fd0c990c4a1eb8a4cd.s3tc.ctex"]
+dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cube Base Color.png-4633fce505ec60fd0c990c4a1eb8a4cd.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cube Base Color.png-4633fce505ec60fd0c990c4a1eb8a4cd.etc2.ctex"]
 
 [params]
 
