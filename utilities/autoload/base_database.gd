@@ -1,17 +1,21 @@
 ## Base class for all shop databases in the game
-class_name BaseDatabase extends Node
+class_name BaseDatabase
+extends Node
 
 const ITEM_ENUMS = preload("uid://3mucjbtp3r4g")
 var items: Array[Resource] = []
+
 
 # child classes should override this to load their specific resources
 func _load_resources() -> void:
 	pass
 
+
 func _ready() -> void:
 	_load_resources()
 	for item in items:
 		print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
+
 
 ## Get a random item based on the item´s drop chance
 func get_random_item() -> Resource:

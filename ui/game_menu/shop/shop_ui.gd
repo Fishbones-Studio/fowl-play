@@ -1,6 +1,7 @@
 class_name GameItemShop
 extends BaseShop
 
+
 func _ready() -> void:
 	item_database = ItemDatabase
 	item_scene = load("uid://cc5vmtbby4xy0")
@@ -10,7 +11,6 @@ func _ready() -> void:
 	# calls baseshop
 	super()
 
+
 func _on_exit_button_button_button_up() -> void:
 	queue_free()
-	
-	

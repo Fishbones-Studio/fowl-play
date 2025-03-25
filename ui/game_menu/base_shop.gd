@@ -2,6 +2,7 @@
 class_name BaseShop
 extends Control
 
+
 @export var max_items: int = 5
 var shop_items: Array[Resource]
 
@@ -23,7 +24,6 @@ func refresh_shop() -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
-
 
 
 	var items_in_shop = 0

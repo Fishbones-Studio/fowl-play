@@ -2,7 +2,6 @@ class_name InRunUpgradeResource
 extends BaseResource
 
 
-
 @export var health_bonus: int = 0  
 @export var speed_bonus: float = 0.0  
 @export var damage_bonus: float = 0.0  
@@ -11,6 +10,7 @@ extends BaseResource
 
 func _init() -> void:
 	type = ItemEnums.ItemTypes.UPGRADE
+
 
 func get_bonus_string() -> String:
 	var bonuses_text = ""
