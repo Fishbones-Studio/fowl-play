@@ -6,6 +6,7 @@ var upgrade_items: Array[Resource]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.prosperity_eggs = 9000
 	refresh_shop()
 
 
@@ -39,3 +40,4 @@ func close_ui() -> void:
 
 func _on_exit_button_button_pressed() -> void:
 	close_ui()
+	print(GameManager.chicken_player.health)

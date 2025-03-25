@@ -59,3 +59,11 @@ func get_item_by_name(item_name: String) -> Resource:
 	print("Item with name '", item_name, "' not found in the database")
 
 	return null
+	
+func get_item(item_res: Resource) -> Resource:
+	for item in items:
+		if item == item_res:
+			return item
+	print("Item '", item_res, "' not found in the database")
+
+	return null
