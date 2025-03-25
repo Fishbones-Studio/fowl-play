@@ -3,14 +3,15 @@
 [ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="1_xkk47"]
 
 [node name="InArenaShop" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 109.0
-offset_top = 54.0
-offset_right = -138.0
-offset_bottom = -73.0
+offset_left = 71.0
+offset_top = 46.0
+offset_right = -88.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xkk47")
@@ -21,10 +22,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 5.0
-offset_right = -3.0
-offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,7 +45,6 @@ text = "Upgrade"
 layout_mode = 2
 
 [node name="ExitButtonButton" type="Button" parent="Panel/MarginContainer/MarginContainer"]
-process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

@@ -30,5 +30,5 @@ func open_shop():
 	get_tree().paused = true
 
 func _input(event):
-	if event.is_action_pressed("open_run_shop") and player_in_area:
+	if event.is_action_pressed("interact") and player_in_area:
 		open_shop()
