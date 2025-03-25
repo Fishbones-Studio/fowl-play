@@ -2,6 +2,7 @@
 class_name BaseResource
 extends Resource
 
+
 # Basic attributes for all resources
 @export var name: String 
 
