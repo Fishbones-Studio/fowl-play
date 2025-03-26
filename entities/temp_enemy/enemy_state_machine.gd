@@ -2,10 +2,12 @@ extends Node
 
 @export var starting_state: BaseEnemyState
 @export var enemy: Enemy
+@export var attack_range: Area3D
 
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,10 +23,10 @@ func _ready() -> void:
 	# Get all states in the scene tree
 	for state_node: BaseEnemyState in get_children():
 		states[state_node.STATE_TYPE] = state_node
-		state_node.setup(enemy)
+		state_node.setup(enemy, attack_range)
 
 	print(states)
-	
+
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
 
@@ -35,7 +37,8 @@ func _process(delta: float) -> void:
 		push_error(owner.name + ": No state set.")
 		return
 	current_state.process(delta)
-	
+
+
 func _physics_process(delta: float) -> void:
 	if current_state == null:
 		push_error(owner.name + ": No state set.")

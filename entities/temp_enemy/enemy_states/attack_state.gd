@@ -15,7 +15,7 @@ func attack_player():
 	for body in bodies:
 		if body is ChickenPlayer:
 			SignalManager.hurt_player.emit(damage)
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE)
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {})
 		
 
 #Check if player is in the attack area of the enemy
