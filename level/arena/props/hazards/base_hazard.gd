@@ -9,7 +9,12 @@ extends Node
 @export var damage: int = 10
 
 ## Dictionary to track active bodies and their entry time
-var active_bodies: Dictionary[PhysicsBody3D, int] = {}
+var active_bodies: Dictionary[int, int] = {}
+var bodies_to_remove: Array[int] = []
+
+
+func _process(_delta: float) -> void:
+	erase_invalid_bodies()
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
@@ -22,3 +27,10 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 ## Overwrite in child class
 func _on_hazard_area_body_exited(_body: Node3D) -> void:
 	pass
+
+
+func erase_invalid_bodies() -> void:
+	# Erase invalid entries after iteration
+	for id in bodies_to_remove:
+		active_bodies.erase(id)
+	bodies_to_remove.clear()
