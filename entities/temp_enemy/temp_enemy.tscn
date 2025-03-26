@@ -22,10 +22,11 @@ transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.9998
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.03772, 0.22522, 0.0404053)
 shape = SubResource("BoxShape3D_c1mms")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "attack_range")]
 script = ExtResource("2_h40bv")
 starting_state = NodePath("idle_state")
 enemy = NodePath("..")
+attack_range = NodePath("../attack_area")
 metadata/_custom_type_script = "uid://btddu8dhoifau"
 
 [node name="idle_state" type="Node" parent="EnemyStateMachine"]
