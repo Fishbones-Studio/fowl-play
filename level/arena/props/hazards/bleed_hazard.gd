@@ -24,7 +24,7 @@ func _apply_continuous_damage() -> void:
 	var current_time: int = Time.get_ticks_msec()
 
 	for id in active_bodies:
-		var body: Node = instance_from_id(id)
+		var body: PhysicsBody3D = instance_from_id(id)
 
 		if not is_instance_valid(body):
 			bodies_to_remove.append(id)
