@@ -1,6 +1,8 @@
-## State handling player dash movement
+################################################################################
+## State handling player dash movement.
 ## 
-## Applies instant burst movement in facing direction with stamina cost
+## Applies instant burst movement in facing direction with stamina cost.
+################################################################################
 extends BasePlayerMovementState
 
 var _stamina_cost: int
@@ -47,19 +49,22 @@ func physics_process(delta: float) -> void:
 	if get_jump_velocity() > 0 and movement_component.jump_available:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 	
-	if player.is_on_floor():
-		var direction = get_player_direction()
-		
-		if direction == Vector3.ZERO:
-			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
-			return
-		
-		if Input.is_action_pressed("sprint") and player.stats.current_stamina > 0:
-			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
-			return
-		
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+	if not player.is_on_floor():
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
+
+	var direction = get_player_direction()
+	
+	if direction == Vector3.ZERO:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		return
+	
+	if Input.is_action_pressed("sprint") and player.stats.current_stamina > 0:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		return
+	
+	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+	return
 	
 	player.move_and_slide()
 

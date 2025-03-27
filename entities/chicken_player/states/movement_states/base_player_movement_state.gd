@@ -17,7 +17,7 @@ func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 
 
 ################################################################################
-# The following are non spefic FSM-methods, i.e. utility methods 
+# The following are non spefic FSM-methods, i.e. utility methods
 # that may be used by multiple states.
 ################################################################################
 

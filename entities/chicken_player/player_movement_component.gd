@@ -4,7 +4,7 @@ extends BaseMovementComponent
 @export_category("Speed Factors")
 @export var walk_speed_factor: float = 1.0
 @export var sprint_speed_factor: float = 1.5
-@export var dash_speed_factor: float = 5.0
+@export var dash_speed_factor: float = 10.0
 @export_range(0, 1, 0.01) var glide_speed_factor: float = 0.4
 @export_category("Stamina Cost")
 @export var sprint_stamina_cost: int = 20
