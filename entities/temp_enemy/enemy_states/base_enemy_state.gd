@@ -4,23 +4,26 @@ extends BaseState
 #Instantiate globally used variables around the enemy states
 @export var DELTA_MODIFIER: float = 100
 @export var chase_distance: float = 100
-#@export var attack_range : float = 10 <- to be implemented later with connection to specific weapon
 @export var enemy: Enemy
 @export var STATE_TYPE: EnemyEnums.EnemyStates
+@export var ANIMATION_NAME: String
 
+var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
-var attack_range: Area3D
-
-@onready var player = GameManager.chicken_player
+var weapon: Weapon 
 
 
-func setup(_enemy: Enemy, _attack_range: Area3D) -> void:
+
+func setup(_enemy: Enemy, _weapon : Weapon, _player : ChickenPlayer) -> void:
 	if _enemy == null:
 		push_error(owner.name + ": No enemy reference set" + str(STATE_TYPE))
 	enemy = _enemy
-	if _attack_range == null:
-		push_error(owner.name + ": No attack range reference set" + str(STATE_TYPE))
-	attack_range = _attack_range
+	if _weapon == null:
+		push_error(owner.name + ": No weapon reference set" + str(STATE_TYPE))
+	weapon = _weapon
+	if _player == null:
+		push_error(owner.name + ": No player reference set" + str(STATE_TYPE))
+	player = _player
 
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:

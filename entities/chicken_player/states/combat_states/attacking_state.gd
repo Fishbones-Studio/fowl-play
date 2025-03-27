@@ -50,7 +50,6 @@ func _attack() -> void:
 
 	# Get all enemies inside the hit area
 	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
-	print(enemies)
 	for enemy in enemies:
 		if enemy is Enemy:
 			enemy.take_damage(weapon.current_weapon.damage)
