@@ -16,11 +16,14 @@ func setup(weapon_node: Node3D) -> void:
 	cooldown_timer.wait_time = weapon.current_weapon.attack_duration
 
 
+
 # When entering this state, start the cooldown timer
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
-	print("Entering COOLDOWN state")
 	# Create a timer that lasts as long as the weapon's cooldown time
 	cooldown_timer.start()
+
+
+
 
 
 # When exiting this state, stop and remove the cooldown timer

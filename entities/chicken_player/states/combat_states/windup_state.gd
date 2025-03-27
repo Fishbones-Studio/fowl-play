@@ -17,8 +17,7 @@ func setup(weapon_node: Node3D) -> void:
 
 
 # When entering this state, start the windup timer
-func enter(previous_state, information: Dictionary[String, float] = {}) -> void:
-	print("Entering WINDUP state")
+func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
 	if weapon.current_weapon.windup_time <= 0:
 		SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.ATTACKING)
 		return

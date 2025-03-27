@@ -4,6 +4,7 @@ extends BaseCombatState
 
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
+
 # Variables
 var weapon: Node3D
 var chicken_player: Node3D
@@ -14,6 +15,7 @@ var hit_area: Area3D
 
 # Set up the weapon and cache important nodes
 func setup(weapon_node: Node3D) -> void:
+	super(weapon_node)
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
@@ -49,7 +51,7 @@ func _attack() -> void:
 		return
 
 	# Get all enemies inside the hit area
-	var enemies = hit_area.get_overlapping_bodies()
+	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for enemy in enemies:
 		if enemy is Enemy:
 			enemy.take_damage(weapon.current_weapon.damage)

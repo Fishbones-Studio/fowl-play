@@ -131,6 +131,10 @@ interact={
 ]
 }
 
+[panku]
+
+disable_on_release=true
+
 [physics]
 
 3d/run_on_separate_thread=true
