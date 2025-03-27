@@ -12,4 +12,5 @@ speed = 15.0
 weight = 3
 health_regen = 9
 stamina_regen = 9
+weight_factor = 0.07
 metadata/_custom_type_script = "uid://u7jvfphumqak"
