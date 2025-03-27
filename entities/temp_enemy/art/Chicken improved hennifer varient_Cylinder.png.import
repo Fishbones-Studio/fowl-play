@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7hpdqcgtx7g2"
-path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-e4bb9569a0519da8a8460678ff813542.s3tc.ctex"
-path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-e4bb9569a0519da8a8460678ff813542.etc2.ctex"
+path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-6b12f6fc29f915c920529fa56f2edebd.s3tc.ctex"
+path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-6b12f6fc29f915c920529fa56f2edebd.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/temp_enemy/Model/Chicken improved hennifer varient_Cylinder.png"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-e4bb9569a0519da8a8460678ff813542.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-e4bb9569a0519da8a8460678ff813542.etc2.ctex"]
+source_file="res://entities/temp_enemy/art/Chicken improved hennifer varient_Cylinder.png"
+dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-6b12f6fc29f915c920529fa56f2edebd.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cylinder.png-6b12f6fc29f915c920529fa56f2edebd.etc2.ctex"]
 
 [params]
 

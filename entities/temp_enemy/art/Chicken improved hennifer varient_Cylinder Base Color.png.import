@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bms3jwilv8kl2"
-path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-5fbc857d5a76e23a08322a9a77e22238.s3tc.ctex"
-path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-5fbc857d5a76e23a08322a9a77e22238.etc2.ctex"
+path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-77306b56c216f7986837bcb7d6004c95.s3tc.ctex"
+path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-77306b56c216f7986837bcb7d6004c95.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/temp_enemy/Model/Chicken improved hennifer varient_Cylinder Base Color.png"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-5fbc857d5a76e23a08322a9a77e22238.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-5fbc857d5a76e23a08322a9a77e22238.etc2.ctex"]
+source_file="res://entities/temp_enemy/art/Chicken improved hennifer varient_Cylinder Base Color.png"
+dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-77306b56c216f7986837bcb7d6004c95.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cylinder Base Color.png-77306b56c216f7986837bcb7d6004c95.etc2.ctex"]
 
 [params]
 
