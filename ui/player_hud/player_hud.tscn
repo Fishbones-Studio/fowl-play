@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=5 format=3 uid="uid://xhakfqnxgnrr"]
 
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
@@ -26,6 +27,11 @@ theme_override_constants/margin_bottom = 15
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="PlayerPortrait" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_4cl3s")
+stretch_mode = 2
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
