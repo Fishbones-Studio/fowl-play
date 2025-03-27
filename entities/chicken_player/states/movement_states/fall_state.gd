@@ -12,8 +12,8 @@ var _has_coyote: bool = false
 @onready var coyote_timer: Timer = $CoyoteTimer
 
 
-func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	var active_coyote_time = information.get("coyote_time", false)
 	

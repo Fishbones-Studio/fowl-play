@@ -3,8 +3,8 @@ extends BasePlayerMovementState
 var _stamina_cost: int
 
 
-func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	_stamina_cost = movement_component.glide_stamina_cost
 	

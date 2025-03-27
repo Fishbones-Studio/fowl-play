@@ -5,8 +5,8 @@ extends BasePlayerMovementState
 var _air_jumps_used: int = 0
 
 
-func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	if information.get("from_ground", false):
 		_air_jumps_used = 0 # Reset air jumps if coming from the ground
@@ -18,7 +18,7 @@ func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}
 	player.velocity.y = get_jump_velocity()
 
 
-func input(event: InputEvent) -> void:
+func input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return

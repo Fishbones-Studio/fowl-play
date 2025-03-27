@@ -15,8 +15,8 @@ var _dash_direction: Vector3
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
 
-func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	_stamina_cost = movement_component.dash_stamina_cost
 	
@@ -67,7 +67,6 @@ func physics_process(delta: float) -> void:
 		return
 	
 	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
-	return
 	
 	player.move_and_slide()
 

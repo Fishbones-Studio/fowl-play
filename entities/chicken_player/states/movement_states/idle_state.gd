@@ -1,14 +1,14 @@
 extends BasePlayerMovementState
 
 
-func enter(previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	player.velocity.x = 0
 	player.velocity.z = 0
 
 
-func input(event: InputEvent) -> void:
+func input(_event: InputEvent) -> void:
 	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})

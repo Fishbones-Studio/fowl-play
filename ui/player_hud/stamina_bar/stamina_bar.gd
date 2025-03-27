@@ -5,8 +5,8 @@ var stamina: float:
 	set = set_stamina
 
 
-func init(max_stamina: float, stamina: float) -> void:
-	value = stamina
+func init(max_stamina: float, current_stamina: float) -> void:
+	value = current_stamina
 	max_value = max_stamina
 
 

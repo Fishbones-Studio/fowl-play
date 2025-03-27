@@ -3,13 +3,13 @@ extends BasePlayerMovementState
 var _stamina_cost: int
 
 
-func enter(previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	super(prev_state)
 	
 	_stamina_cost = movement_component.sprint_stamina_cost
 
 
-func input(event: InputEvent) -> void:
+func input(_event: InputEvent) -> void:
 	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
