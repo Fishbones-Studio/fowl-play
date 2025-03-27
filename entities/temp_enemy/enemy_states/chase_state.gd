@@ -15,11 +15,11 @@ func exit() -> void:
 #This would be the place to change behaviour, for example a ranged attack.
 func physics_process(_delta: float) -> void:
 	target_position = (player.position - enemy.position).normalized()
-	if enemy.position.distance_to(player.position) < 3 * chase_distance:
+	if enemy.position.distance_to(player.position) < 2 * chase_distance:
 		enemy.look_at(player.position)
 		enemy.velocity.x = target_position.x * speed
 		enemy.velocity.z = target_position.z * speed
-	elif enemy.position.distance_to(player.position) > 2*chase_distance:
+	else:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE, {})
 	enemy.move_and_slide()
 
