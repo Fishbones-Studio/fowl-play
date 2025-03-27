@@ -77,7 +77,7 @@ func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	if(current_state.ANIMATION_NAME != null && weapon):
+	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
 	
