@@ -11,5 +11,5 @@ cooldown_time = 0.25
 name = "Stick"
 drop_chance = 60
 cost = 100
-description = "Leek"
+description = "Stick"
 type = null
