@@ -24,5 +24,6 @@ func physics_process(_delta: float) -> void:
 	enemy.move_and_slide()
 
 func _on_attack_area_body_entered(body: PhysicsBody3D) -> void:
-	if body == ChickenPlayer:
+	# TODO this only triggers once, if you stay in the body, the enemy will stop atacking after 1 time
+	if body == player:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.ATTACK_STATE, {})
