@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://21r458rvciqo"]
 
-[ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
+[ext_resource type="Script" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y7cqx"]
