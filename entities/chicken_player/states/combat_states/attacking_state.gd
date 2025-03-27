@@ -5,11 +5,6 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
 
-# Variables
-var weapon: Node3D
-var chicken_player: Node3D
-var hit_area: Area3D
-
 @onready var attack_timer: Timer = $AttackTimer
 
 

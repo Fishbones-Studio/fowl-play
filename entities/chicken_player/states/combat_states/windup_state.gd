@@ -5,8 +5,6 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.WINDUP
 # Variables
-var weapon: Node3D
-
 @onready var windup_timer: Timer = $WindupTimer
 
 

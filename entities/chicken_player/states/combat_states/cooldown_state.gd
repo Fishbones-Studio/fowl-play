@@ -5,8 +5,6 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
 # Variables
-var weapon: Weapon  # The weapon that is cooling down
-
 @onready var cooldown_timer: Timer = $CooldownTimer
 
 
