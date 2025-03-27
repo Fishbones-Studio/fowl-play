@@ -9,9 +9,9 @@ extends Node
 @export var entity: Node3D
 
 @export_category("Jump")
-@export var jump_height: float = 2.0
-@export var time_to_peak: float = 0.5
-@export var time_to_ground: float = 0.3
+@export var jump_height: float = 5.0
+@export var time_to_peak: float = 0.6
+@export var time_to_ground: float = 0.5
 
 var jump_velocity: float
 var jump_gravity: float
