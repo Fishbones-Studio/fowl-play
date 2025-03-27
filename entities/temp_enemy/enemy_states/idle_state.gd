@@ -15,11 +15,13 @@ func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {
 	_choose_new_wander_target()
 
 
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
 	if enemy.position.distance_to(player.position) < chase_distance:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.CHASE_STATE, {})
 		return
 
+
+func physics_process(delta: float) -> void:
 	wander_timer -= delta
 	if wander_timer <= 0:
 		_choose_new_wander_target()
@@ -31,7 +33,6 @@ func process(delta: float) -> void:
 
 	enemy.velocity.x = direction.x * wander_speed
 	enemy.velocity.z = direction.z * wander_speed
-	enemy.move_and_slide()
 
 
 func _choose_new_wander_target() -> void:
