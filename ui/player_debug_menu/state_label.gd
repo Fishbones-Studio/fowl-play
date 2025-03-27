@@ -1,8 +1,8 @@
 extends Label
 
 func _ready():
-	SignalManager.player_transition_state.connect(_on_player_state_transition)
-
+	SignalManager.player_state_transitioned.connect(_on_player_state_transition)
+	pass
 
 func _on_player_state_transition(next_state: PlayerEnums.PlayerStates, information: Dictionary):
 	# TODO: when spamming buttons, this ui stays stuck displaying the previous state

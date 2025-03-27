@@ -1,37 +1,29 @@
-extends CharacterBody3D
 class_name ChickenPlayer
+extends CharacterBody3D
 
-# Player Stats export variables
-@export_category("Stamina")
-@export_range(10, 200) var max_stamina: float = 100
+@export var stats: EntityStats
 
-
-@export var stamina_regen: float = 8.5
-
-@export_group("Health")
-@export_range(10, 200) var max_health: int = 100
-
-# Player stats
-var stamina: float = max_stamina:
-	set(value): stamina = clamp(value, 0, max_stamina)
-
-var health: int    = max_health
+@onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 
 
 func _ready():
+	stats.init()
 	GameManager.chicken_player = self
+	SignalManager.init_health.emit(stats.health, stats.current_health)
+	SignalManager.init_stamina.emit(stats.stamina, stats.current_stamina)
 
-	SignalManager.init_health.emit(max_health, health)
-	SignalManager.init_stamina.emit(max_stamina, stamina)
+
+func _input(event: InputEvent) -> void:
+	movement_state_machine.input(event)
 
 
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
+func _process(delta: float) -> void:
+	movement_state_machine.process(delta)
+
+
+func _physics_process(delta: float) -> void:
+	movement_state_machine.physics_process(delta)
 
 
 func _exit_tree() -> void:
 	GameManager.chicken_player = null
-
-
-func regen_stamina(delta: float) -> void:
-	stamina += stamina_regen * delta
