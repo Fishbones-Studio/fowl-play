@@ -10,8 +10,7 @@ extends BaseResource
 @export var attack_duration: float 
 @export var cooldown_time: float 
 
-# Visual & UI Elements
-@export var model: PackedScene
+
 
 func _init() -> void:
 	type = ItemEnums.ItemTypes.WEAPON

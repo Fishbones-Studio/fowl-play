@@ -5,13 +5,7 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
 # Variables
-var weapon: Node3D  # The weapon that is cooling down
 var cooldown_timer: Timer  # Timer to track cooldown duration-
-
-
-# Sets up the weapon reference
-func setup(weapon_node: Node3D) -> void:
-	weapon = weapon_node
 
 
 # When entering this state, start the cooldown timer
@@ -26,6 +20,9 @@ func enter(_previous_state, _information: Dictionary[String, float] = {}) -> voi
 	add_child(cooldown_timer)
 	
 	cooldown_timer.start()
+
+
+
 
 
 # When exiting this state, stop and remove the cooldown timer
