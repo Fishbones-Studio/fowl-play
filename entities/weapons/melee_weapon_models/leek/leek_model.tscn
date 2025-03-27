@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://8bqvublk1ovr"]
+[gd_scene load_steps=8 format=3 uid="uid://bymaeu4dtl7ex"]
 
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_spb7y"]
 [ext_resource type="Resource" uid="uid://d0ae4aavq1w0x" path="res://resources/melee_weapons/leek.tres" id="2_c1sn0"]
-[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="2_sj0ep"]
-[ext_resource type="Script" uid="uid://cffmofhbye1xy" path="res://entities/weapons/melee_weapon_models/leek/leek_model.gd" id="3_sj0ep"]
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="3_sj0ep"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sj0ep"]
+size = Vector3(5, 5, 4)
 
 [sub_resource type="Animation" id="Animation_em7sn"]
 resource_name = "ATTACK"
@@ -14,7 +17,7 @@ tracks/0/path = NodePath("leek:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.0666667, 0.3, 0.55, 0.8),
+"times": PackedFloat32Array(0, 0.3, 0.533333, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0), Vector3(-1.5708, 0, 0.610865), Vector3(0, 0, 0)]
@@ -41,25 +44,18 @@ _data = {
 &"RESET": SubResource("Animation_rovfi")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_sj0ep"]
-size = Vector3(5, 5, 4)
-
-[node name="LeekModel" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "hit_area")]
-script = ExtResource("3_sj0ep")
+[node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_spb7y")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_c1sn0")
-hit_area = NodePath("HitArea")
 
-[node name="leek" parent="." instance=ExtResource("2_sj0ep")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79052, 0)
+[node name="leek" parent="." index="0" instance=ExtResource("3_sj0ep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.25)
+shape = SubResource("BoxShape3D_sj0ep")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 &"": SubResource("AnimationLibrary_axwbb")
 }
-
-[node name="HitArea" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.25)
-shape = SubResource("BoxShape3D_sj0ep")
