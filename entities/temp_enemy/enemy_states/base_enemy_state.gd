@@ -3,8 +3,8 @@ extends BaseState
 
 #Instantiate globally used variables around the enemy states
 @export var DELTA_MODIFIER: float = 100
-@export var chase_distance: float = 100
 @export var enemy: Enemy
+@export var chase_distance: float = 25
 @export var STATE_TYPE: EnemyEnums.EnemyStates
 @export var ANIMATION_NAME: String
 

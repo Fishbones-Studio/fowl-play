@@ -34,6 +34,10 @@ metadata/_custom_type_script = "uid://btddu8dhoifau"
 
 [node name="idle_state" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_wrgcg")
+DELTA_MODIFIER = null
+chase_distance = null
+STATE_TYPE = null
+ANIMATION_NAME = null
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
 [node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
