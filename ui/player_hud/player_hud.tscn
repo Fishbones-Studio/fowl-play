@@ -28,10 +28,18 @@ theme_override_constants/margin_bottom = 15
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="PlayerPortrait" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="PlayerPortrainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/HBoxContainer/PlayerPortrainContainer"]
+layout_mode = 2
+
+[node name="PlayerPortrait" type="TextureRect" parent="MarginContainer/HBoxContainer/PlayerPortrainContainer/BoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
 texture = ExtResource("1_4cl3s")
-stretch_mode = 2
+expand_mode = 1
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
