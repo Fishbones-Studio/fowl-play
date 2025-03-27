@@ -41,7 +41,7 @@ func physics_process(delta: float) -> void:
 	
 	if _is_dashing:
 		player.velocity = _dash_direction * player.stats.calculate_speed(movement_component.dash_speed_factor)
-		player.move_and_collide(player.velocity)
+		player.move_and_slide()
 		return
 	
 	if get_jump_velocity() > 0 and movement_component.jump_available:
