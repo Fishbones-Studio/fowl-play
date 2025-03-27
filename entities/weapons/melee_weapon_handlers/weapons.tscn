@@ -10,14 +10,14 @@
 
 [node name="MeleeWeapon" type="Node3D"]
 
-[node name="CurrentWeapon" type="Node3D" parent="."]
+[node name="CurrentMeleeWeapon" type="Node3D" parent="."]
 script = ExtResource("1_ugll4")
 current_weapon = ExtResource("2_p0bdf")
 
 [node name="MeleeStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "weapon")]
 script = ExtResource("2_ycty3")
 starting_state = NodePath("Idle")
-weapon = NodePath("../CurrentWeapon")
+weapon = NodePath("../CurrentMeleeWeapon")
 
 [node name="Idle" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("5_l7vwy")
@@ -25,8 +25,19 @@ script = ExtResource("5_l7vwy")
 [node name="Attacking" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("6_hs04l")
 
+[node name="AttackTimer" type="Timer" parent="MeleeStateMachine/Attacking"]
+one_shot = true
+
 [node name="Cooldown" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("7_mq8tj")
 
+[node name="CooldownTimer" type="Timer" parent="MeleeStateMachine/Cooldown"]
+
 [node name="Windup" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("8_6pe85")
+
+[node name="WindupTimer" type="Timer" parent="MeleeStateMachine/Windup"]
+
+[connection signal="timeout" from="MeleeStateMachine/Attacking/AttackTimer" to="MeleeStateMachine/Attacking" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="MeleeStateMachine/Cooldown/CooldownTimer" to="MeleeStateMachine/Cooldown" method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="MeleeStateMachine/Windup/WindupTimer" to="MeleeStateMachine/Windup" method="_on_windup_timer_timeout"]

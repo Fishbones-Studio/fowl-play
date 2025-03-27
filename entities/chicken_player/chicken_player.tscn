@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/movement_states/sprint_state.gd" id="9_yqrof"]
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
-[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
+[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/weapons.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
@@ -91,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00355, 0, -1.93037)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01575, 0.374463, 0)
 shape = SubResource("BoxShape3D_k8bkn")
 
-[node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
+[node name="Weapons" parent="." instance=ExtResource("12_k8bkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 0.0779402, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
