@@ -12,6 +12,7 @@ signal combat_transition_state(target_state: WeaponEnums.MeleeState, information
 signal init_health(max_health: int, health: int)
 signal hurt_player(damage: int)
 signal init_stamina(max_stamina: float, stamina: float)
+signal stamina_changed(value: float)
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
 signal add_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to add an (additional) UI scene
@@ -24,6 +25,9 @@ signal item_selected
 signal item_bought
 signal item_bought_confirmed
 signal item_bought_cancelled
+# Weapon signals
+signal weapon_hit_area_body_entered(body: PhysicsBody3D)
+signal weapon_hit_area_body_exited(body: PhysicsBody3D)
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}
 

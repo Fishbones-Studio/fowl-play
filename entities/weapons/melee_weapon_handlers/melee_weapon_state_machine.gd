@@ -4,12 +4,13 @@
 extends Node
 
 @export var starting_state: BaseCombatState
-@export var weapon: Node3D
+
 
 var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
+@onready var weapon: Weapon = $"../CurrentWeapon".current_weapon
 
 
 func _ready() -> void:
@@ -61,23 +62,30 @@ func _input(event: InputEvent) -> void:
 
 # Handles transitioning from one state to another
 func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information: Dictionary[String, float] = {}) -> void:
-	# Prevent transitioning to the same state
+# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
 		target_state = WeaponEnums.MeleeState.IDLE
-
+	
 	# Exit the current state before switching
 	var previous_state := current_state
 	previous_state.exit()
-
+	
 	# Switch to the new state
 	current_state = states.get(target_state)
 	if current_state == null:
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
+	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
+		# Play the animation for the new state
+		weapon.animation_player.play(current_state.ANIMATION_NAME)
+	
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.STATE_TYPE, information)
+
+
+
 
 
 # Gets the initial state when the game starts
