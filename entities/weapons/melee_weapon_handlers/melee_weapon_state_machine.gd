@@ -5,12 +5,11 @@ extends Node
 
 @export var starting_state: BaseCombatState
 @export var weapon: Node3D
-
 var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
-
+@onready var parent_character = owner.parent_character
 
 func _ready() -> void:
 	if weapon == null:
@@ -56,7 +55,8 @@ func _input(event: InputEvent) -> void:
 		push_error(owner.name + ": No state set.")
 		return
 	# Pass input events to the current state
-	current_state.input(event)
+	if (parent_character == GameManager.chicken_player):
+		current_state.input(event)
 
 
 # Handles transitioning from one state to another

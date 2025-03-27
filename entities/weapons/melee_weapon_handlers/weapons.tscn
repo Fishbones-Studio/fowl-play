@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfbarshp3p5gi"]
+[gd_scene load_steps=9 format=3 uid="uid://bfbarshp3p5gi"]
 
+[ext_resource type="Script" uid="uid://c6lkoyb3dmrwf" path="res://entities/weapons/melee_weapon_handlers/weapons.gd" id="1_nnc3r"]
 [ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/weapons/melee_weapon_handlers/current_weapon.gd" id="1_ugll4"]
 [ext_resource type="Resource" uid="uid://d0ae4aavq1w0x" path="res://resources/melee_weapons/leek.tres" id="2_p0bdf"]
 [ext_resource type="Script" uid="uid://kk30wx1g1hsr" path="res://entities/weapons/melee_weapon_handlers/melee_weapon_state_machine.gd" id="2_ycty3"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cck8pm0t4q5sw" path="res://entities/chicken_player/states/combat_states/windup_state.gd" id="8_6pe85"]
 
 [node name="MeleeWeapon" type="Node3D"]
+script = ExtResource("1_nnc3r")
 
 [node name="CurrentMeleeWeapon" type="Node3D" parent="."]
 script = ExtResource("1_ugll4")
