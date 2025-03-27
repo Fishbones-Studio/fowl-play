@@ -13,7 +13,7 @@ func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -
 	# Handle state transitions
 	if player.stats.current_stamina < _stamina_cost:
 		print("Not enough stamina to glide")
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 
 
@@ -27,11 +27,11 @@ func process(delta: float) -> void:
 	# Handle state transitions
 	if player.stats.current_stamina <= _stamina_cost * delta:
 		print("Not enough stamina to glide")
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 	
 	if Input.is_action_just_released("jump"):
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 
 
 func physics_process(delta: float) -> void:
@@ -50,4 +50,4 @@ func physics_process(delta: float) -> void:
 	
 	# Handle state transitions
 	if player.is_on_floor():
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
