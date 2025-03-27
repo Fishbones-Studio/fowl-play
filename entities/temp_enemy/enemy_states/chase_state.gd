@@ -1,15 +1,18 @@
 extends BaseEnemyState
-@export var speed : int = 10
+@export var speed: int = 10
+
 var target_position: Vector3
-	
+
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	# Connect body entered signal
 	SignalManager.weapon_hit_area_body_entered.connect(_on_attack_area_body_entered)
-	
+
+
 func exit() -> void:
 	# Disconnect body entered signal
 	SignalManager.weapon_hit_area_body_entered.disconnect(_on_attack_area_body_entered)
+
 
 #Check what conditions are fulfilled to shift the enemy in state to certain behaviour patterns.
 #This would be the place to change behaviour, for example a ranged attack.
@@ -21,7 +24,7 @@ func physics_process(_delta: float) -> void:
 		enemy.velocity.z = target_position.z * speed
 	else:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE, {})
-	enemy.move_and_slide()
+
 
 func _on_attack_area_body_entered(body: PhysicsBody3D) -> void:
 	# TODO this only triggers once, if you stay in the body, the enemy will stop atacking after 1 time
