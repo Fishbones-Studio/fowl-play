@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=14 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
@@ -16,9 +16,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
 height = 3.5
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k8bkn"]
-size = Vector3(0.9, 2.05107, 1.6)
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 script = ExtResource("1_abrql")
@@ -84,15 +81,8 @@ STATE_TYPE = 7
 wait_time = 0.3
 one_shot = true
 
-[node name="HitArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00355, 0, -1.93037)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01575, 0.374463, 0)
-shape = SubResource("BoxShape3D_k8bkn")
-
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 0.0779402, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 1.05442, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
