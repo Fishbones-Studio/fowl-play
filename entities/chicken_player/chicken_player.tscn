@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/movement_states/sprint_state.gd" id="9_yqrof"]
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
-[ext_resource type="Script" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
+[ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
@@ -39,6 +39,18 @@ movement_component = NodePath("../MoveComponent")
 [node name="Idle" type="Node" parent="MovementStateMachine"]
 script = ExtResource("7_afbqv")
 
+[node name="Walk" type="Node" parent="MovementStateMachine"]
+script = ExtResource("10_3wlsy")
+state_type = 1
+
+[node name="Sprint" type="Node" parent="MovementStateMachine"]
+script = ExtResource("9_yqrof")
+state_type = 2
+
+[node name="Jump" type="Node" parent="MovementStateMachine"]
+script = ExtResource("8_gx6sm")
+state_type = 3
+
 [node name="Glide" type="Node" parent="MovementStateMachine"]
 script = ExtResource("5_a1qjk")
 state_type = 4
@@ -46,18 +58,6 @@ state_type = 4
 [node name="Hurt" type="Node" parent="MovementStateMachine"]
 script = ExtResource("6_j3ovn")
 state_type = 6
-
-[node name="Jump" type="Node" parent="MovementStateMachine"]
-script = ExtResource("8_gx6sm")
-state_type = 3
-
-[node name="Sprint" type="Node" parent="MovementStateMachine"]
-script = ExtResource("9_yqrof")
-state_type = 2
-
-[node name="Walk" type="Node" parent="MovementStateMachine"]
-script = ExtResource("10_3wlsy")
-state_type = 1
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
@@ -81,6 +81,7 @@ one_shot = true
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
+glide_stamina_cost = 1
 entity = NodePath("..")
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
