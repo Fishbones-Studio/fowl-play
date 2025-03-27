@@ -1,80 +1,80 @@
-## State handling player dash movement
+################################################################################
+## State handling player dash movement.
 ## 
-## Applies instant burst movement in facing direction with stamina cost
+## Applies instant burst movement in facing direction with stamina cost.
+################################################################################
 extends BasePlayerMovementState
 
-@export_range(10, 100) var stamina_cost: int = 30
-
-@export_range(1.0, 30.0) var dash_distance: float = 50.0
-@export var dash_movement_speed: float = 0
+var _stamina_cost: int
 
 var _dash_available: bool = true
+var _is_dashing: bool = false
 var _dash_direction: Vector3
 
 @onready var dash_duration_timer: Timer = $DashDurationTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
 
-func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
-	# check if already dashed
-	if information.get("dashed", false):
-		print("already dashed")
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
+func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
+	super(prev_state)
+	
+	_stamina_cost = movement_component.dash_stamina_cost
+	
+	# Handle state transitions
+	if not _dash_available or player.stats.current_stamina < _stamina_cost:
+		print("Dash available: ", _dash_available)
+		SignalManager.player_state_transitioned.emit(previous_state.state_type, information)
 		return
-
-	if not _dash_available or player.stamina < stamina_cost:
-		print("dash not available")
-		if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
-		else:
-			# adding dashed true to the information dictionary
-			SignalManager.player_transition_state.emit(previous_state, information)
-		return
-
-	movement_speed = dash_movement_speed
-	super.enter(_previous_state)
-
-	# Consume stamina
-	player.stamina -= stamina_cost
-
-	# Get dash direction (player-relative input or player forward)
-	var input_dir: Vector2 = get_player_input_dir()
-
-	if input_dir != Vector2.ZERO:
-		# Use movement direction from input (matches player-relative movement)
-		_dash_direction = get_player_direction(input_dir)
-	else:
-		# Fallback to player's forward direction
-		_dash_direction = -player.global_basis.z.normalized()
-
-	# Ensure vertical component is flat
-	_dash_direction.y = 0
-
-	# Initial velocity burst
-	player.velocity = _dash_direction * dash_distance
-
-	dash_duration_timer.start()
-
-
-func physics_process(delta: float) -> void:
-	player.velocity = _dash_direction * dash_distance * delta * DELTA_MODIFIER # We multiply by delta here, so that the dash stays the same speed if the physics tick is not met/changed
-
-
-func exit() -> void:
-	dash_duration_timer.stop()
-
-
-func _on_dash_timer_timeout():
-	# Transition back to the previous state
-	var information: Dictionary = {"dashed": true}
-	if previous_state == PlayerEnums.PlayerStates.JUMP_STATE:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, information)
-	else:
-		SignalManager.player_transition_state.emit(previous_state, information)
+	
+	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost))
+	
 	_dash_available = false
+	_is_dashing = true
+	
+	_dash_direction = get_player_direction()
+	
+	if _dash_direction == Vector3.ZERO:
+		_dash_direction = -player.global_basis.z # Default forward direction
+	
+	dash_duration_timer.start()
 	dash_cooldown_timer.start()
 
 
+func physics_process(delta: float) -> void:
+	apply_gravity(delta)
+	
+	if _is_dashing:
+		player.velocity = _dash_direction * player.stats.calculate_speed(movement_component.dash_speed_factor)
+		player.move_and_slide()
+		return
+	
+	# Handle state transitions
+	if get_jump_velocity() > 0 and movement_component.jump_available:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
+	
+	if not player.is_on_floor():
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		return
+	
+	var direction = get_player_direction()
+	
+	if direction == Vector3.ZERO:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		return
+	
+	if is_sprinting() and player.stats.current_stamina > 0:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		return
+	
+	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+	
+	player.move_and_slide()
+
+
+func _on_dash_duration_timer_timeout():
+	_is_dashing = false
+
+
 func _on_dash_cooldown_timer_timeout():
-	print("dash available again")
+	print("Dash available: ", _dash_available)
 	_dash_available = true

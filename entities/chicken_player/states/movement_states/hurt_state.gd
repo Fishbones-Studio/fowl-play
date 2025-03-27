@@ -8,14 +8,14 @@ extends BasePlayerMovementState
 var _knockback_force: Vector3
 
 
-func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
+func enter(_previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	# Calculate knockback direction 
-	var knockback_direction: Vector3 = -player.transform.basis.z
+	var knockback_direction: Vector3 = player.transform.basis.z
 
 	_knockback_force = Vector3(
-		knockback_direction.x * knockback_strength,
+		knockback_direction.x + knockback_strength,
 		vertical_knockback,
-		knockback_direction.z * knockback_strength
+		knockback_direction.z + knockback_strength
 	)
 
 	# Apply initial knockback force
@@ -23,9 +23,17 @@ func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary =
 
 
 func physics_process(delta: float) -> void:
-	# Apply gravity
-	player.velocity.y += player.get_gravity().y * delta
-
-	# Check for landing
-	if player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+	apply_gravity(delta)
+	
+	if not player.is_on_floor():
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		return
+	
+	if get_player_direction() == Vector3.ZERO:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		return
+	if is_sprinting():
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		return
+	
+	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
