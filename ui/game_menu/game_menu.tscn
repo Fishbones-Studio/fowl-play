@@ -56,14 +56,18 @@ transform = Transform3D(4.30347, 0, 0, 0, 2.5026, 0, 0, 0, 2.62598, 0, 1.1667, 0
 mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
-[node name="Chicken" type="Area3D" parent="."]
+[node name="Inventory" type="Area3D" parent="."]
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Inventory"]
 mesh = SubResource("BoxMesh_efok4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 shape = SubResource("BoxShape3D_efok4")
+
+[node name="Inventory Label" type="Label3D" parent="Inventory"]
+transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
+text = "Inventory"
 
 [node name="Flyer" type="Area3D" parent="."]
 transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
@@ -77,6 +81,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer"]
 shape = SubResource("BoxShape3D_t1gii")
 
+[node name="Arenas Label" type="Label3D" parent="Flyer"]
+transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, 0.048014, 1.64521, 0.179505)
+text = "Arena's
+"
+
 [node name="Shop" type="Area3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
 
@@ -86,6 +95,12 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shop"]
 shape = SubResource("CapsuleShape3D_6yeww")
+
+[node name="Shop Label" type="Label3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 0, 2.24983, 0.797185)
+text = "Shop
+"
+font_size = 67
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_og4p7")
@@ -110,6 +125,6 @@ shadow_enabled = true
 spot_range = 9.0
 spot_angle = 68.9063
 
-[connection signal="input_event" from="Chicken" to="." method="_on_chicken_input_event"]
+[connection signal="input_event" from="Inventory" to="." method="_on_chicken_input_event"]
 [connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
 [connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]
