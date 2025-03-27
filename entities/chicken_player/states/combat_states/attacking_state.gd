@@ -4,12 +4,11 @@ extends BaseCombatState
 
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
-
-@export var hit_area: Area3D
-
 # Variables
-var attack_timer: Timer
 
+var attack_timer: Timer
+var chicken_player: Node3D
+var hit_area: Area3D
 
 
 # Set up the weapon and cache important nodes
@@ -18,6 +17,9 @@ func setup(weapon_node: Weapon) -> void:
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
+
+	chicken_player = weapon.get_parent().get_parent()
+	hit_area = chicken_player.get_node("HitArea")
 
 
 # When entering this state, start the attack timer and attack
