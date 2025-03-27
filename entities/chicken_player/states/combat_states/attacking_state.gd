@@ -5,28 +5,25 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
 # Variables
-var weapon: Node3D
+
 var attack_timer: Timer
 var chicken_player: Node3D
 var hit_area: Area3D
 
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: Node3D) -> void:
+func setup(weapon_node: Weapon) -> void:
+	super(weapon_node)
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
 
-	weapon = weapon_node
 	chicken_player = weapon.get_parent().get_parent()
 	hit_area = chicken_player.get_node("HitArea")
-
-	print("Weapon set successfully:", weapon.current_weapon.name)
 
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
-	print("Entering ATTACKING state")
 	# Create a new timer that lasts as long as the weapon's attack duration
 	attack_timer = Timer.new()
 	attack_timer.wait_time = weapon.current_weapon.attack_duration
@@ -35,12 +32,6 @@ func enter(_previous_state, _information: Dictionary[String, float] = {}) -> voi
 	add_child(attack_timer)
 	attack_timer.start()
 	_attack()
-
-
-
-
-
-
 
 
 # When exiting this state, stop and remove the attack timer
@@ -61,7 +52,7 @@ func _attack() -> void:
 		return
 
 	# Get all enemies inside the hit area
-	var enemies = hit_area.get_overlapping_bodies()
+	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for enemy in enemies:
 		if enemy is Enemy:
 			enemy.take_damage(weapon.current_weapon.damage)

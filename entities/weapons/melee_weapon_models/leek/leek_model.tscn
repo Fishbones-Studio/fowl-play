@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://8bqvublk1ovr"]
+
+[ext_resource type="Resource" uid="uid://d0ae4aavq1w0x" path="res://resources/melee_weapons/leek.tres" id="2_c1sn0"]
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="2_sj0ep"]
+[ext_resource type="Script" uid="uid://cffmofhbye1xy" path="res://entities/weapons/melee_weapon_models/leek/leek_model.gd" id="3_sj0ep"]
+
+[sub_resource type="Animation" id="Animation_em7sn"]
+resource_name = "ATTACK"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leek:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0666667, 0.3, 0.55, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0), Vector3(-1.5708, 0, -0.610865), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rovfi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leek:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axwbb"]
+_data = {
+&"ATTACK": SubResource("Animation_em7sn"),
+&"RESET": SubResource("Animation_rovfi")
+}
+
+[node name="LeekModel" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("3_sj0ep")
+animation_player = NodePath("AnimationPlayer")
+current_weapon = ExtResource("2_c1sn0")
+
+[node name="leek" parent="." instance=ExtResource("2_sj0ep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79052, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_axwbb")
+}
