@@ -12,6 +12,7 @@ var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(current_state)
 	if enemy == null:
 		push_error(owner.name + ": No enemy reference set")
 		
@@ -67,7 +68,7 @@ func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information
 	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
-
+		
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 
