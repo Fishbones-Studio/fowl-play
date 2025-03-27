@@ -3,7 +3,8 @@ extends Node3D
 
 @export var animation_player: AnimationPlayer
 @export var current_weapon: WeaponResource
-@export var hit_area : Area3D
+
+@onready var hit_area : Area3D = $HitArea
 
 func _ready() -> void:
 	# connect a signal to body entering the hit_area
