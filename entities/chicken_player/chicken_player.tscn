@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/movement_states/sprint_state.gd" id="9_yqrof"]
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
-[ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
+[ext_resource type="Script" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
