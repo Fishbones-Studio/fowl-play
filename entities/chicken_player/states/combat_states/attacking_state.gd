@@ -20,9 +20,6 @@ func setup(weapon_node: Node3D) -> void:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
 
-	weapon = weapon_node
-	chicken_player = weapon.get_parent().get_parent()
-	hit_area = chicken_player.get_node("HitArea")
 	attack_timer.wait_time = weapon.current_weapon.attack_duration
 
 	print("Weapon set successfully:", weapon.current_weapon.name)
