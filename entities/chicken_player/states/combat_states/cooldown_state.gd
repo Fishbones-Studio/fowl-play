@@ -10,7 +10,6 @@ var cooldown_timer: Timer  # Timer to track cooldown duration-
 
 # When entering this state, start the cooldown timer
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
-	print("Entering COOLDOWN state")
 	# Create a timer that lasts as long as the weapon's cooldown time
 	cooldown_timer = Timer.new()
 	cooldown_timer = Timer.new()
