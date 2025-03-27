@@ -1,22 +1,22 @@
 extends BasePlayerMovementState
 
-var stamina_cost: int
+var _stamina_cost: int
 
 func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(previous_state)
 	
-	stamina_cost = movement_component.glide_stamina_cost
+	_stamina_cost = movement_component.glide_stamina_cost
 	
-	if player.stats.current_stamina < stamina_cost:
+	if player.stats.current_stamina < _stamina_cost:
 		print("Not enough stamina to glide")
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 
 
 func process(delta: float) -> void:
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(stamina_cost * delta))
+	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
 	
-	if player.stats.current_stamina <= (stamina_cost * delta):
+	if player.stats.current_stamina <= _stamina_cost * delta:
 		print("Not enough stamina to glide")
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return

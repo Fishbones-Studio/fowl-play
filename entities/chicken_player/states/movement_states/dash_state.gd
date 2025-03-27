@@ -3,7 +3,7 @@
 ## Applies instant burst movement in facing direction with stamina cost
 extends BasePlayerMovementState
 
-var stamina_cost: int
+var _stamina_cost: int
 
 var _dash_available: bool = true
 var _is_dashing: bool = false
@@ -16,14 +16,14 @@ var _dash_direction: Vector3
 func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(previous_state)
 	
-	stamina_cost = movement_component.dash_stamina_cost
+	_stamina_cost = movement_component.dash_stamina_cost
 	
-	if not _dash_available or player.stats.current_stamina < stamina_cost:
+	if not _dash_available or player.stats.current_stamina < _stamina_cost:
 		print("dash not available")
 		SignalManager.player_state_transitioned.emit(previous_state.state_type, information)
 		return
 	
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(stamina_cost))
+	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost))
 	
 	_dash_available = false
 	_is_dashing = true
@@ -41,7 +41,7 @@ func physics_process(delta: float) -> void:
 	
 	if _is_dashing:
 		player.velocity = _dash_direction * player.stats.calculate_speed(movement_component.dash_speed_factor)
-		player.move_and_slide()
+		player.move_and_collide(player.velocity)
 		return
 	
 	if get_jump_velocity() > 0 and movement_component.jump_available:

@@ -1,12 +1,12 @@
 extends BasePlayerMovementState
 
-var stamina_cost: int
+var _stamina_cost: int
 
 
 func enter(previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(previous_state)
 	
-	stamina_cost = movement_component.sprint_stamina_cost
+	_stamina_cost = movement_component.sprint_stamina_cost
 
 
 func input(event: InputEvent) -> void:
@@ -22,7 +22,7 @@ func input(event: InputEvent) -> void:
 
 
 func process(delta: float) -> void:
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(stamina_cost * delta))
+	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
 	
 	if not Input.is_action_pressed("sprint") or player.stats.current_stamina <= 0:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
