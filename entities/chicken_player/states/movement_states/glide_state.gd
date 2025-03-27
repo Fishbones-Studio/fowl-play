@@ -6,6 +6,8 @@ var _stamina_cost: int
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 	
+	player.velocity.y = 0
+	
 	_stamina_cost = movement_component.glide_stamina_cost
 	
 	# Handle state transitions
@@ -17,6 +19,9 @@ func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -
 
 func process(delta: float) -> void:
 	# Drain stamina and updates the stamina bar in the HUD
+	if is_sprinting():
+			player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
+	
 	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
 	
 	# Handle state transitions
@@ -35,9 +40,9 @@ func physics_process(delta: float) -> void:
 	var speed_factor: float
 	
 	if is_sprinting():
-		speed_factor = movement_component.sprint_speed_factor * movement_component.glide_speed_factor
+		speed_factor = movement_component.sprint_speed_factor - movement_component.glide_speed_factor
 	else:
-		speed_factor = movement_component.walk_speed_factor * movement_component.glide_speed_factor
+		speed_factor = movement_component.walk_speed_factor - movement_component.glide_speed_factor
 	
 	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
 	
