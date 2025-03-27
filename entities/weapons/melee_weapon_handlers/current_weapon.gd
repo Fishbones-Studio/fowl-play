@@ -1,31 +1,30 @@
 ## Weapon State Machine: Manages weapon state transitions and behavior.
-extends Node3D
+@tool
+class_name CurrentWeapon extends Node3D
 
 ## Exported Variables
 @export_group("weapon")
-@export var current_weapon: WeaponResource
+@export var weapon_scene: PackedScene:
+	set(value):
+		# Custom setter to validate the scene type
+		if value and value.can_instantiate() and value.instantiate() is Weapon:
+			weapon_scene = value
+		else:
+			push_error("Assigned scene is not a valid Weapon type")
+			weapon_scene = null
 
-## Public Variables
-var current_weapon_instance: Node3D
-
-## Onready Variables
-@export var hitbox: Area3D
+var current_weapon: Weapon
 
 
-func _ready():
-	if not current_weapon:
-		push_error("No weapon assigned!")
+func _ready() -> void:
+	if not weapon_scene:
+		push_error("No valid weapon scene assigned!")
 		return
-
-	equip_weapon(current_weapon)
-
-
-func equip_weapon(weapon_resource: WeaponResource):
-	if current_weapon_instance:
-		current_weapon_instance.queue_free()
-
-	current_weapon = weapon_resource
-
-	if weapon_resource.model:
-		current_weapon_instance = weapon_resource.model.instantiate()
-		add_child(current_weapon_instance)
+	
+	current_weapon = weapon_scene.instantiate() as Weapon
+	print("set weapon")
+	if not current_weapon:
+		push_error("Failed to instantiate weapon!")
+		return
+	
+	add_child(current_weapon)
