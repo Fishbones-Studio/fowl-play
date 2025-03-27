@@ -10,10 +10,6 @@ func _ready() -> void:
 	# Initializing the health and stamina bars
 	SignalManager.hurt_player.connect(func (damage): health_bar.health -= damage)
 	SignalManager.init_health.connect(health_bar.init_health)
-
-	SignalManager.init_stamina.connect(stamina_bar.init_stamina)
-
-
-func _process(_delta: float) -> void:
-	if(GameManager.chicken_player):
-		stamina_bar.stamina = GameManager.chicken_player.stamina
+	
+	SignalManager.init_stamina.connect(stamina_bar.init)
+	SignalManager.stamina_changed.connect(stamina_bar.set_stamina)
