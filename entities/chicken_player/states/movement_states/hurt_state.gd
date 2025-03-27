@@ -13,9 +13,9 @@ func enter(_previous_state: BasePlayerMovementState, _information: Dictionary = 
 	var knockback_direction: Vector3 = player.transform.basis.z
 
 	_knockback_force = Vector3(
-		knockback_direction.x * knockback_strength,
+		knockback_direction.x + knockback_strength,
 		vertical_knockback,
-		knockback_direction.z * knockback_strength
+		knockback_direction.z + knockback_strength
 	)
 
 	# Apply initial knockback force
@@ -32,7 +32,7 @@ func physics_process(delta: float) -> void:
 	if get_player_direction() == Vector3.ZERO:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting():
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 	

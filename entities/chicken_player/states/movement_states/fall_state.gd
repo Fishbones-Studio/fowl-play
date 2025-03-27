@@ -5,7 +5,7 @@ extends BasePlayerMovementState
 
 var _jump_press_time: float = 0.0
 var _is_jump_held: bool = false
-var _has_coyote_jump: bool = false
+var _has_coyote: bool = false
 
 # Timer to manage jump availability after leaving the ground, so the 
 # player can jump when just barely off the platform.
@@ -18,18 +18,21 @@ func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}
 	var active_coyote_time = information.get("coyote_time", false)
 	
 	if active_coyote_time:
-		_has_coyote_jump = true
+		_has_coyote = true
 		coyote_timer.start(active_coyote_time)
 
 
 func process(delta: float) -> void:
+	# Drain stamina if player is sprinting, else regenerate stamina
 	if is_sprinting():
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
 	else:
 		player.stats.regen_stamina(delta)
 	
+	# Update the stamina bar
 	SignalManager.stamina_changed.emit(player.stats.current_stamina)
 	
+	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
@@ -57,23 +60,23 @@ func physics_process(delta: float) -> void:
 	
 	var speed_factor: float
 	
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting():
 		speed_factor = movement_component.sprint_speed_factor
 	else:
 		speed_factor = movement_component.walk_speed_factor
 	
 	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
 	
-	player.velocity.x = velocity.x
-	player.velocity.z = velocity.z
-	player.move_and_slide()
+	apply_movement(velocity)
 	
+	# Handle state transitions
 	if not player.is_on_floor():
 		return
 	
 	if velocity == Vector3.ZERO:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
+	
 	if Input.is_action_pressed("sprint"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
@@ -83,4 +86,4 @@ func physics_process(delta: float) -> void:
 
 func _on_coyote_timer_timeout():
 	print("coyote timer expired")
-	_has_coyote_jump = false
+	_has_coyote = false

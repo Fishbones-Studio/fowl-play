@@ -1,3 +1,8 @@
+################################################################################
+## Base movement component that handles core physics calculations for 
+## entity movement.
+## It servers as a blase class for move specialized movement components.
+################################################################################
 class_name BaseMovementComponent
 extends Node
 
@@ -17,8 +22,8 @@ var fall_gravity: float
 func update_physics_by_weight(weight: int):
 	# Calculate weight multiplier using logarithmic scaling,
 	# we use 3 (kg) as standard weight. So 3 (kg) would give a multiplier of 1.0
-	# TODO: tweek/experiment with weight factor.
-	var weight_multiplier: float = 1.0 + (log(weight / 3) / log(3))
+	# NOTE: tweek/experiment with formula and weight factor.
+	var weight_multiplier: float = 1.0 + (log(weight / 3.0) / log(3.0))
 	
 	# Adjust physics parameters based on weight
 	jump_height = jump_height / weight_multiplier
@@ -35,5 +40,6 @@ func get_jump_velocity() -> float:
 	return jump_velocity
 
 
+## Return custom calculated gravity
 func get_gravity(velocity: Vector3) -> float:
 	return jump_gravity if velocity.y > 0 else fall_gravity

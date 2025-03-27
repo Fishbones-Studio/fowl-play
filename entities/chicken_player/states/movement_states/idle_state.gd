@@ -9,6 +9,7 @@ func enter(previous_state: BasePlayerMovementState, _information: Dictionary = {
 
 
 func input(event: InputEvent) -> void:
+	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
@@ -23,7 +24,7 @@ func input(event: InputEvent) -> void:
 	if get_player_direction() == Vector3.ZERO:
 		return
 		
-	if Input.is_action_just_pressed("sprint"):
+	if is_sprinting():
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 	
@@ -31,12 +32,14 @@ func input(event: InputEvent) -> void:
 
 
 func process(delta: float) -> void:
+	# Regenerates stamina and updates the stamina bar in the HUD
 	SignalManager.stamina_changed.emit(player.stats.regen_stamina(delta))
 
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
+	# Handle state transitions
 	if not player.is_on_floor():
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {"coyote_time": true})
 		return

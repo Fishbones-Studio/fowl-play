@@ -10,6 +10,7 @@ func enter(previous_state: BasePlayerMovementState, _information: Dictionary = {
 
 
 func input(event: InputEvent) -> void:
+	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 	
@@ -22,25 +23,26 @@ func input(event: InputEvent) -> void:
 
 
 func process(delta: float) -> void:
+	# Drain stamina and updates the stamina bar in the HUD
 	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
 	
-	if not Input.is_action_pressed("sprint") or player.stats.current_stamina <= 0:
+	# Handle state transitions
+	if not is_sprinting() or player.stats.current_stamina <= 0:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
+	var velocity = get_player_direction() * player.stats.calculate_speed(movement_component.sprint_speed_factor)
+	
+	# Handle state transitions
 	if not player.is_on_floor():
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {"coyote_time": true})
 		return
-	
-	var velocity = get_player_direction() * player.stats.calculate_speed(movement_component.sprint_speed_factor)
-	
+		
 	if velocity == Vector3.ZERO:
 		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
 	
-	player.velocity.x = velocity.x
-	player.velocity.z = velocity.z
-	player.move_and_slide()
+	apply_movement(velocity)

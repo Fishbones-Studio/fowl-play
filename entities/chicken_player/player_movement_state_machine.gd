@@ -34,8 +34,6 @@ func _ready() -> void:
 		states[state_node.state_type] = state_node
 		state_node.player = player
 		state_node.movement_component = movement_component
-		
-		print(name, ": ", state_node.name)
 	
 	current_state = _get_initial_state()
 	current_state.enter(current_state)
@@ -68,7 +66,7 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dic
 	
 	current_state = states.get(target_state)
 	
-	if current_state == null:
+	if not current_state:
 		push_error(name + ": Trying to transition to state " + PlayerEnums.PlayerStates.find_key(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 	
@@ -77,5 +75,6 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dic
 	print("current state: ", current_state.name)
 
 
+## Return the starting state if set, else return the first child of this object
 func _get_initial_state() -> BasePlayerMovementState:
-	return starting_state if starting_state != null else get_child(0)
+	return starting_state if starting_state else get_child(0)

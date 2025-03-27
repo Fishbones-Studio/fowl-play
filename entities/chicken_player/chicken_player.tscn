@@ -80,6 +80,7 @@ state_type = 4
 
 [node name="Hurt" type="Node" parent="MovementStateMachine"]
 script = ExtResource("6_j3ovn")
+knockback_strength = 15.0
 state_type = 6
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]

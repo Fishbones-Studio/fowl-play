@@ -8,9 +8,10 @@ extends Resource
 @export var defense: int
 @export var speed: float
 @export var weight: int
-@export_category("Regeneration Factors")
+@export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int
+@export var weight_factor: float = 0.07 # Controls slowdown strength
 
 var current_health: float:
 	set(value): 
@@ -20,7 +21,6 @@ var current_stamina: float:
 	set(value): 
 		current_stamina = clamp(value, 0, stamina)
 
-var weight_factor: float = 0.07 # Controls slowdown strength
 
 
 func init() -> void:
@@ -53,13 +53,13 @@ func drain_stamina(amount: float) -> float:
 	return current_stamina
 
 
-## Regenerate health over time
+## Regenerate health over delta time
 func regen_health(delta: float) -> float:
 	current_health += health_regen * delta
 	return current_health
 
 
-## Regenerate stamina over time
+## Regenerate stamina over delta time
 func regen_stamina(delta: float) -> float:
 	current_stamina += stamina_regen * delta
 	return current_stamina

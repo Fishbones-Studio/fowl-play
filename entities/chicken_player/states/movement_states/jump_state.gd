@@ -45,7 +45,7 @@ func physics_process(delta: float) -> void:
 	
 	var speed_factor: float
 	
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting():
 		speed_factor = movement_component.sprint_speed_factor
 	else:
 		speed_factor = movement_component.walk_speed_factor

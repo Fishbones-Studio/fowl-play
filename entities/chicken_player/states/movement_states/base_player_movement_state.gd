@@ -8,7 +8,7 @@ var previous_state: BasePlayerMovementState
 var movement_component: PlayerMovementComponent
 
 
-## Called once when entering the state
+## Called once when entering the state.
 ##
 ## Parameters:
 ## prev_state: The state that was active before this one.
@@ -22,8 +22,15 @@ func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 ################################################################################
 
 
+## Applies jump or fall gravity based on player velocity
 func apply_gravity(delta: float) -> void: 
 	player.velocity.y += get_gravity(player.velocity) * delta
+
+
+func apply_movement(velocity: Vector3) -> void:
+	player.velocity.x = velocity.x
+	player.velocity.z = velocity.z
+	player.move_and_slide()
 
 
 func is_sprinting() -> bool:
