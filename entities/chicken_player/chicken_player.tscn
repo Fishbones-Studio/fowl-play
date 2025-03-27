@@ -81,7 +81,6 @@ one_shot = true
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
-glide_stamina_cost = 1
 entity = NodePath("..")
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
