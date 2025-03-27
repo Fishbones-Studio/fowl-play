@@ -1,63 +1,86 @@
 extends BasePlayerMovementState
 
-@export var glide_hold_threshold: float = 0.25  # Seconds to hold for glide
-@export var fall_movement_speed: float = 35
+# Time for to hold for glide (in seconds)
+@export var glide_hold_threshold: float = 0.25
 
-var _jump_available: bool   = false
-var _dashed: bool           = false
-var _is_jump_held: bool     = false
 var _jump_press_time: float = 0.0
+var _is_jump_held: bool = false
+var _has_coyote_jump: bool = false
 
-@onready var coyote_timer: Timer = $CoyoteTimer ## Timer to manage jump availability after leaving the ground, so the player can jump when just barely off the platform
+# Timer to manage jump availability after leaving the ground, so the 
+# player can jump when just barely off the platform.
+@onready var coyote_timer: Timer = $CoyoteTimer
 
 
-func enter(_previous_state: PlayerEnums.PlayerStates, information: Dictionary = {}) -> void:
-	movement_speed = fall_movement_speed
-	super.enter(_previous_state)
-
-	# check for jump availability and dash in information
-	_jump_available = information.get("jump_available", false)
-	_dashed = information.get("dashed", false)
+func enter(previous_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
+	super(previous_state)
+	
 	var active_coyote_time = information.get("coyote_time", false)
+	
 	if active_coyote_time:
+		_has_coyote_jump = true
 		coyote_timer.start(active_coyote_time)
-		_jump_available = true
 
 
 func process(delta: float) -> void:
-	# apply movement
-	player.regen_stamina(delta)
-	# state transitions
+	if is_sprinting():
+		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
+	else:
+		player.stats.regen_stamina(delta)
+	
+	SignalManager.stamina_changed.emit(player.stats.current_stamina)
+	
+	if Input.is_action_just_pressed("dash"):
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
+		return
+	
 	if  Input.is_action_pressed("jump") and not _is_jump_held:
 		_jump_press_time = Time.get_ticks_msec()
 		_is_jump_held = true
-
-	if _is_jump_held:
-		if Input.is_action_pressed("jump"):
-			# Check if held longer than threshold
-			if Time.get_ticks_msec() - _jump_press_time > glide_hold_threshold * 1000:
-				SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
-				_is_jump_held = false
-		elif _jump_available:
-			# Button released before threshold
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
+	
+	if Input.is_action_pressed("jump") and _is_jump_held:
+		var current_time = Time.get_ticks_msec()
+		var hold_duration = current_time - _jump_press_time
+		
+		if hold_duration > glide_hold_threshold * 1000:
+			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
 			_is_jump_held = false
-
-	# check for landing
-	if player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+			return
+		
+		if movement_component.jump_available:
+			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
+			_is_jump_held = false
 
 
 func physics_process(delta: float) -> void:
-	# apply gravity
-	player.velocity.y += player.get_gravity().y * delta
-
-
-func exit() -> void:
-	coyote_timer.stop()
-	_jump_available = false
+	apply_gravity(delta)
+	
+	var speed_factor: float
+	
+	if Input.is_action_pressed("sprint"):
+		speed_factor = movement_component.sprint_speed_factor
+	else:
+		speed_factor = movement_component.walk_speed_factor
+	
+	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
+	
+	player.velocity.x = velocity.x
+	player.velocity.z = velocity.z
+	player.move_and_slide()
+	
+	if not player.is_on_floor():
+		return
+	
+	if velocity == Vector3.ZERO:
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		return
+	if Input.is_action_pressed("sprint"):
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		return
+	
+	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 
 
 func _on_coyote_timer_timeout():
 	print("coyote timer expired")
-	_jump_available = false
+	_has_coyote_jump = false
