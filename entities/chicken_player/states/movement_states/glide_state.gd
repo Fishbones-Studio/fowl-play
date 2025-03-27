@@ -1,51 +1,53 @@
 extends BasePlayerMovementState
 
-@export_range(0, 1, 0.01) var glide_gravity: float = 0.4
-@export var glide_movement_speed: float = 25
-@export var glide_stamina_cost: int = 35
+var _stamina_cost: int
 
 
-func enter(_previous_state: PlayerEnums.PlayerStates, _information: Dictionary = {}) -> void:
-	# set the y velocity to 0
-	#player.velocity.y = 0
-
-	# check for stamina
-	if player.stamina < glide_stamina_cost:
+func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	super(prev_state)
+	
+	player.velocity.y = 0
+	
+	_stamina_cost = movement_component.glide_stamina_cost
+	
+	# Handle state transitions
+	if player.stats.current_stamina < _stamina_cost:
 		print("Not enough stamina to glide")
-		SignalManager.player_transition_state.emit(_previous_state, _information)
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 
-	movement_speed = glide_movement_speed
-	super.enter(_previous_state)
 
-
-func process(_delta: float) -> void:
-	# subtract stamina
-	player.stamina -= glide_stamina_cost * _delta
-
-	# if stamina is less than 0, go to fall state
-	if player.stamina <= (glide_stamina_cost *_delta):
+func process(delta: float) -> void:
+	# Drain stamina and updates the stamina bar in the HUD
+	if is_sprinting():
+			player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
+	
+	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
+	
+	# Handle state transitions
+	if player.stats.current_stamina <= _stamina_cost * delta:
 		print("Not enough stamina to glide")
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
-
-	# check if the player is holding the jump button
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		return
+	
 	if Input.is_action_just_released("jump"):
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 
 
 func physics_process(delta: float) -> void:
-	# Applying default player movement
-	super(delta)
-
-	# Apply modified gravity
-	var gravity: float = player.get_gravity().y * glide_gravity
-	player.velocity.y += gravity * delta
-
-	# Check for state transitions
+	player.velocity.y += get_gravity(player.velocity) * delta * movement_component.glide_speed_factor
+	
+	var speed_factor: float
+	
+	if is_sprinting():
+		speed_factor = movement_component.sprint_speed_factor - movement_component.glide_speed_factor
+	else:
+		speed_factor = movement_component.walk_speed_factor - movement_component.glide_speed_factor
+	
+	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
+	
+	apply_movement(velocity)
+	
+	# Handle state transitions
 	if player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
-
-
-func exit() -> void:
-	# reset the gravity scale
-	pass
+		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
