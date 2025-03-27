@@ -26,14 +26,14 @@ func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
 	if not player.is_on_floor():
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 	
 	if get_player_direction() == Vector3.ZERO:
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
 	if is_sprinting():
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 	
-	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
