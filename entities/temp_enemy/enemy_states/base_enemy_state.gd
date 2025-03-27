@@ -4,17 +4,16 @@ extends BaseState
 #Instantiate globally used variables around the enemy states
 @export var DELTA_MODIFIER: float = 100
 @export var enemy: Enemy
-@export var chase_distance: float = 25
+@export var chase_distance: float = 20
 @export var STATE_TYPE: EnemyEnums.EnemyStates
 @export var ANIMATION_NAME: String
 
 var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
-var weapon: Weapon 
+var weapon: Weapon
 
 
-
-func setup(_enemy: Enemy, _weapon : Weapon, _player : ChickenPlayer) -> void:
+func setup(_enemy: Enemy, _weapon: Weapon, _player: ChickenPlayer) -> void:
 	if _enemy == null:
 		push_error(owner.name + ": No enemy reference set" + str(STATE_TYPE))
 	enemy = _enemy
