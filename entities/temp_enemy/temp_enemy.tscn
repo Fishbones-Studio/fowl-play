@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
-size = Vector3(1.81518, 2.98218, 1.77759)
+size = Vector3(4, 4, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_07niy"]
 
@@ -19,7 +19,7 @@ script = ExtResource("1_c1mms")
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0, 0.816296, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.03772, 0.22522, 0.0404053)
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.129918, 0.732965, -0.0705451)
 shape = SubResource("BoxShape3D_c1mms")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "attack_range")]

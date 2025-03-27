@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://8bqvublk1ovr"]
+[gd_scene load_steps=8 format=3 uid="uid://8bqvublk1ovr"]
 
 [ext_resource type="Resource" uid="uid://d0ae4aavq1w0x" path="res://resources/melee_weapons/leek.tres" id="2_c1sn0"]
 [ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="2_sj0ep"]
@@ -41,10 +41,14 @@ _data = {
 &"RESET": SubResource("Animation_rovfi")
 }
 
-[node name="LeekModel" type="StaticBody3D" node_paths=PackedStringArray("animation_player")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_sj0ep"]
+size = Vector3(5, 5, 4)
+
+[node name="LeekModel" type="StaticBody3D" node_paths=PackedStringArray("animation_player", "hit_area")]
 script = ExtResource("3_sj0ep")
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_c1sn0")
+hit_area = NodePath("HitArea")
 
 [node name="leek" parent="." instance=ExtResource("2_sj0ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79052, 0)
@@ -53,3 +57,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79052, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_axwbb")
 }
+
+[node name="HitArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.25)
+shape = SubResource("BoxShape3D_sj0ep")

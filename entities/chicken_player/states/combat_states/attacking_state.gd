@@ -5,10 +5,9 @@ extends BaseCombatState
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
 
-@export var hit_area: Area3D
-
 # Variables
 var attack_timer: Timer
+var hit_area: Area3D 
 
 
 
@@ -18,7 +17,7 @@ func setup(weapon_node: Weapon) -> void:
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
-
+	hit_area = weapon.hit_area
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
@@ -51,6 +50,7 @@ func _attack() -> void:
 
 	# Get all enemies inside the hit area
 	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
+	print(enemies)
 	for enemy in enemies:
 		if enemy is Enemy:
 			enemy.take_damage(weapon.current_weapon.damage)
