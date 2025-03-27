@@ -1,5 +1,5 @@
-extends ProgressBar
 class_name HealthBar
+extends ProgressBar
 
 @onready var timer := $Timer
 @onready var damage_bar := $DamageBar
@@ -12,7 +12,7 @@ func set_health(_health: int):
 	var prev_health: int = health
 	health = min(max_value, _health)
 	value = health
-
+	
 	if health <= prev_health:
 		timer.start()
 	else:
