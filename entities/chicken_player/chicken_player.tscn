@@ -82,7 +82,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 1.05442, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 1.45135, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]

@@ -9,7 +9,6 @@ const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
 
 # Variables
 var attack_timer: Timer
-var chicken_player: Node3D
 
 
 
@@ -19,9 +18,6 @@ func setup(weapon_node: Weapon) -> void:
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
-
-	chicken_player = weapon.get_parent().get_parent()
-	hit_area = chicken_player.get_node("HitArea")
 
 
 # When entering this state, start the attack timer and attack
