@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bymaeu4dtl7ex"]
 
-[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_spb7y"]
-[ext_resource type="Script" path="res://resources/melee_weapons/weapon_resource.gd" id="2_sj0ep"]
-[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapon_models/leek/leek.glb" id="3_sj0ep"]
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_spb7y"]
+[ext_resource type="Script" path="res://entities/weapons/melee_weapons/weapon_resource.gd" id="2_sj0ep"]
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.glb" id="3_sj0ep"]
 
 [sub_resource type="Resource" id="Resource_c1sn0"]
 script = ExtResource("2_sj0ep")

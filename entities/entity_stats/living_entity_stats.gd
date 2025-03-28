@@ -1,4 +1,4 @@
-class_name EntityStats
+class_name LivingEntityStats
 extends Resource
 
 @export_category("Base Stats")

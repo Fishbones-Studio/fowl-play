@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bylp16bp7kd5n"
-path.s3tc="res://.godot/imported/leek_Cylinder Base Color.png-d85c977939c6b74b80fe332edf0adc03.s3tc.ctex"
-path.etc2="res://.godot/imported/leek_Cylinder Base Color.png-d85c977939c6b74b80fe332edf0adc03.etc2.ctex"
+path.s3tc="res://.godot/imported/leek_Cylinder Base Color.png-afbcaa2dd1b55c893a5c69f81bfb23a4.s3tc.ctex"
+path.etc2="res://.godot/imported/leek_Cylinder Base Color.png-afbcaa2dd1b55c893a5c69f81bfb23a4.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/weapons/melee_weapon_models/leek/leek_Cylinder Base Color.png"
-dest_files=["res://.godot/imported/leek_Cylinder Base Color.png-d85c977939c6b74b80fe332edf0adc03.s3tc.ctex", "res://.godot/imported/leek_Cylinder Base Color.png-d85c977939c6b74b80fe332edf0adc03.etc2.ctex"]
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek_Cylinder Base Color.png"
+dest_files=["res://.godot/imported/leek_Cylinder Base Color.png-afbcaa2dd1b55c893a5c69f81bfb23a4.s3tc.ctex", "res://.godot/imported/leek_Cylinder Base Color.png-afbcaa2dd1b55c893a5c69f81bfb23a4.etc2.ctex"]
 
 [params]
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LivingEntityStats" load_steps=2 format=3 uid="uid://bwhuhbesdlyu5"]
+
+[ext_resource type="Script" uid="uid://up7hh823h5kw" path="res://entities/entity_stats/living_entity_stats.gd" id="1_x5m08"]
+
+[resource]
+script = ExtResource("1_x5m08")
+max_health = 100.0
+max_stamina = 100.0
+attack = 10
+defense = 10
+speed = 15.0
+weight = 3
+health_regen = 9
+stamina_regen = 9
+weight_factor = 0.07
+metadata/_custom_type_script = "uid://u7jvfphumqak"

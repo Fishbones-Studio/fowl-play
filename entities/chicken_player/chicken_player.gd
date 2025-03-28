@@ -1,7 +1,7 @@
 class_name ChickenPlayer
 extends CharacterBody3D
 
-@export var stats: EntityStats
+@export var stats: LivingEntityStats
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://dtqxejhenf4x7"]
 
-[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://resources/in_run_upgrades/in_run_upgrade_resource.gd" id="1_ykvnc"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/in_arena_shop/resources/in_run_upgrade_resource.gd" id="1_ykvnc"]
 
 [resource]
 script = ExtResource("1_ykvnc")
