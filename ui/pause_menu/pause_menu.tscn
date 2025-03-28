@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnq3em8w064n4"]
+[gd_scene load_steps=8 format=3 uid="uid://dnq3em8w064n4"]
 
+[ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/pause_menu_bg_blur.gdshader" id="1_mnjdh"]
 [ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/themes/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/clodsire-Joyous.png" id="3_b4b0p"]
@@ -11,6 +12,25 @@ shader_parameter/blur_amount = 1.0
 shader_parameter/mix_amount = 0.2
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
+[sub_resource type="GDScript" id="GDScript_c3jo5"]
+script/source = "extends Control
+
+
+func _ready():
+	connect(\"mouse_entered\", Callable(self, \"_on_mouse_entered\"))
+	connect(\"mouse_exited\", Callable(self, \"_on_mouse_exited\"))
+
+
+func _on_mouse_entered():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+func _on_mouse_exited():
+	var tween = create_tween()
+	tween.tween_property(self, \"scale\", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+"
+
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -18,6 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_c3jo5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_jbgdu")
@@ -28,14 +49,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="GameLogoContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 0
 offset_right = 298.884
 offset_bottom = 256.0
 theme_type_variation = &"PauseMenuLogoContainer"
+script = SubResource("GDScript_c3jo5")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
 layout_mode = 2
 texture = ExtResource("2_jbgdu")
 expand_mode = 3
@@ -61,27 +83,30 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="PauseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
 text = "Resume"
 alignment = 0
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
-text = "Resume"
+text = "Settings"
 alignment = 0
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
-text = "Resume"
+text = "Forfeit"
 alignment = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
@@ -89,37 +114,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer2"]
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(1, 1, 1, 0)
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer2"]
+[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(1, 1, 1, 0)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Footer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -20.0
+offset_top = -56.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"PauseMenuFooter"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer"]
+[node name="FooterButtonContainer" type="HBoxContainer" parent="Footer"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="Footer/FooterButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
 
-[node name="Button" type="Button" parent="PanelContainer/HBoxContainer2"]
+[node name="PlaceholderButton1" type="Button" parent="Footer/FooterButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -128,7 +153,8 @@ theme_override_icons/icon = ExtResource("3_b4b0p")
 text = "placeholder"
 alignment = 0
 
-[node name="Button2" type="Button" parent="PanelContainer/HBoxContainer2"]
+[node name="PlaceholderButton2" type="Button" parent="Footer/FooterButtonContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
@@ -137,7 +163,7 @@ theme_override_icons/icon = ExtResource("4_c3jo5")
 text = "placeholder"
 alignment = 0
 
-[node name="HSeparator2" type="HSeparator" parent="PanelContainer/HBoxContainer2"]
+[node name="HSeparator2" type="HSeparator" parent="Footer/FooterButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
