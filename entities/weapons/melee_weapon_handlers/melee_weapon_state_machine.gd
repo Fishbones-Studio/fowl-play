@@ -10,7 +10,6 @@ var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
-@onready var parent_character = owner.parent_character
 @onready var weapon: Weapon = $"../CurrentWeapon".current_weapon
 
 
@@ -58,8 +57,7 @@ func _input(event: InputEvent) -> void:
 		push_error(owner.name + ": No state set.")
 		return
 	# Pass input events to the current state
-	if (parent_character == GameManager.chicken_player):
-		current_state.input(event)
+	current_state.input(event)
 
 
 # Handles transitioning from one state to another
@@ -85,9 +83,6 @@ func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information
 	
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.STATE_TYPE, information)
-
-
-
 
 
 # Gets the initial state when the game starts

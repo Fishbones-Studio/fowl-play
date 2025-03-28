@@ -5,10 +5,6 @@ extends BaseCombatState
 # Constants
 # Defines this state as IDLE
 const STATE_TYPE: int = WeaponEnums.MeleeState.IDLE
-# Variables
-# Handy to have for idle animation
-var weapon: Node3D
-
 
 func setup(weapon_node: Node3D) -> void:
 	weapon = weapon_node
@@ -17,6 +13,5 @@ func setup(weapon_node: Node3D) -> void:
 # Checks for player input (attack button press)
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
-		print("attack called")
 		# Switch to the WINDUP state when attacking
 		SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.WINDUP)
