@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=16 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://resources/entity_stats/player_stats.tres" id="2_4hg1i"]

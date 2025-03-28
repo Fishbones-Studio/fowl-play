@@ -1,10 +1,14 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
 [ext_resource type="StyleBox" uid="uid://bhmsxt42xcgkj" path="res://resources/themes/styleboxes/button_pressed.tres" id="3_dagba"]
 [ext_resource type="StyleBox" uid="uid://c80bewaohqml0" path="res://resources/themes/styleboxes/panel_container_hover.tres" id="4_dagba"]
 [ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/styleboxes/panel_container_normal.tres" id="5_xtbu8"]
+[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/themes/clodsire-no-bg.png" id="6_7adcq"]
+[ext_resource type="StyleBox" uid="uid://c6x8bod707wjc" path="res://resources/themes/pause_menu_themes/pause_menu_button_normal.tres" id="7_7adcq"]
+[ext_resource type="StyleBox" uid="uid://do8svyygf5k1e" path="res://resources/themes/pause_menu_themes/pause_menu_button_hover.tres" id="8_6bdnh"]
+[ext_resource type="StyleBox" uid="uid://bs2x4gjk4xumb" path="res://resources/themes/pause_menu_themes/pause_menu_button_pressed.tres" id="9_7adcq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtbu8"]
 
@@ -54,6 +58,14 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 shadow_size = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7adcq"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 5
+border_color = Color(0.905882, 0.843137, 0.678431, 1)
+shadow_color = Color(0, 0, 0, 0.294118)
+shadow_size = 1
+shadow_offset = Vector2(0, -1)
+
 [resource]
 Button/colors/font_color = Color(0.529412, 0.501961, 0.345098, 1)
 Button/constants/outline_size = 5
@@ -95,4 +107,25 @@ MarginContainer/constants/margin_right = 50
 MarginContainer/constants/margin_top = 50
 Panel/styles/panel = SubResource("StyleBoxFlat_hf3i3")
 PanelContainer/styles/panel = ExtResource("5_xtbu8")
+PauseMenuButton/base_type = &"Button"
+PauseMenuButton/colors/font_color = Color(1, 1, 1, 1)
+PauseMenuButton/colors/font_hover_color = Color(0.14902, 0.145098, 0.12549, 1)
+PauseMenuButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+PauseMenuButton/colors/icon_focus_color = Color(0, 0, 0, 0)
+PauseMenuButton/colors/icon_normal_color = Color(0, 0, 0, 0)
+PauseMenuButton/constants/h_separation = 45
+PauseMenuButton/constants/icon_max_width = 33
+PauseMenuButton/constants/outline_size = 0
+PauseMenuButton/font_sizes/font_size = 36
+PauseMenuButton/icons/icon = ExtResource("6_7adcq")
+PauseMenuButton/styles/hover = ExtResource("8_6bdnh")
+PauseMenuButton/styles/normal = ExtResource("7_7adcq")
+PauseMenuButton/styles/pressed = ExtResource("9_7adcq")
+PauseMenuFooter/base_type = &"PanelContainer"
+PauseMenuFooter/styles/panel = SubResource("StyleBoxFlat_7adcq")
+PauseMenuLogoContainer/base_type = &"MarginContainer"
+PauseMenuLogoContainer/constants/margin_bottom = 50
+PauseMenuLogoContainer/constants/margin_left = 50
+PauseMenuLogoContainer/constants/margin_right = 50
+PauseMenuLogoContainer/constants/margin_top = 50
 VBoxContainer/constants/separation = 10

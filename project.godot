@@ -32,6 +32,11 @@ Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 UpgradeDatabase="*res://utilities/autoload/upgrade_database.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

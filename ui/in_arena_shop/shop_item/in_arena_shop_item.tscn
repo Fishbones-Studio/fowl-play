@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1xvduw1f032y"]
 
 [ext_resource type="Script" uid="uid://bnxftib2aj2df" path="res://ui/in_arena_shop/shop_item/in_arena_shop_item.gd" id="1_p4fgh"]
-[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/Joyous.png" id="2_adwmk"]
+[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/clodsire-Joyous.png" id="2_adwmk"]
 
 [node name="InArenaShopItem" type="PanelContainer"]
 process_mode = 3

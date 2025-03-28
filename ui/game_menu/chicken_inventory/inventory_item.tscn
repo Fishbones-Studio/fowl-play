@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvrmks8outcaw"]
 
-[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/Joyous.png" id="1_1htsk"]
+[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/clodsire-Joyous.png" id="1_1htsk"]
 [ext_resource type="Script" uid="uid://6pkaym4aalcg" path="res://ui/game_menu/chicken_inventory/inventory_item.gd" id="1_ufued"]
 
 [node name="InventoryItem" type="PanelContainer"]
