@@ -25,6 +25,8 @@ var current_stamina: float:
 
 
 func init() -> void:
+	if max_health <=0 : push_error("Forgot to set max_health")
+	if max_stamina <=0 : push_error("Forgot to set max_stamina")
 	current_health = max_health
 	current_stamina = max_stamina
 
