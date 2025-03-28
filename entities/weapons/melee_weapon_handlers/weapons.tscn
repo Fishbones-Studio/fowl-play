@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfbarshp3p5gi"]
 
 [ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_weapon.tscn" id="1_gk67c"]
-[ext_resource type="PackedScene" uid="uid://8bqvublk1ovr" path="res://entities/weapons/melee_weapon_models/leek/leek_model.tscn" id="2_p0bdf"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapon_models/leek/leek_model.tscn" id="2_p0bdf"]
 [ext_resource type="Script" uid="uid://kk30wx1g1hsr" path="res://entities/weapons/melee_weapon_handlers/melee_weapon_state_machine.gd" id="2_ycty3"]
 [ext_resource type="Script" uid="uid://dlgfsk2b6j0us" path="res://entities/chicken_player/states/combat_states/idle_state.gd" id="5_l7vwy"]
 [ext_resource type="Script" uid="uid://ccb1xp7bs0efp" path="res://entities/chicken_player/states/combat_states/attacking_state.gd" id="6_hs04l"]
