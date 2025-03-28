@@ -49,19 +49,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameLogoContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 0
-offset_right = 298.884
-offset_bottom = 256.0
-theme_type_variation = &"PauseMenuLogoContainer"
-script = SubResource("GDScript_c3jo5")
-
-[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
-layout_mode = 2
-texture = ExtResource("2_jbgdu")
-expand_mode = 3
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -167,3 +154,17 @@ alignment = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+
+[node name="GameLogoContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+offset_right = 298.884
+offset_bottom = 256.0
+theme_type_variation = &"PauseMenuLogoContainer"
+script = SubResource("GDScript_c3jo5")
+
+[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
+layout_mode = 2
+texture = ExtResource("2_jbgdu")
+expand_mode = 3

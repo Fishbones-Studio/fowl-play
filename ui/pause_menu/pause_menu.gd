@@ -1,12 +1,13 @@
 extends Control
 
 var footer: PanelContainer
+var game_logo_container: MarginContainer
 
 
 func setup(params: Dictionary = {}) -> void:
 	init()
 	load_footer()
-	setup_button_transitions()
+	setup_entered_and_exit_transitions()
 
 
 # TODO: Make this modular
@@ -26,7 +27,7 @@ func scale(node: Control, scale_xy: Vector2, duration: float = 0.2,
 	tween.tween_property(node, "scale", scale_xy, duration).set_trans(transition).set_ease(ease)
 
 
-func setup_button_transitions():
+func setup_entered_and_exit_transitions():
 	var buttons = find_children("", "Button", true)  # Find all Button nodes
 	
 	for button in buttons:
@@ -35,7 +36,11 @@ func setup_button_transitions():
 	for button in buttons:
 		button.mouse_entered.connect(func(): scale(button, Vector2(1.1, 1.1)))
 		button.mouse_exited.connect(func(): scale(button, Vector2(1.0, 1.0)))
+	
+	game_logo_container.mouse_entered.connect(func(): scale(game_logo_container, Vector2(1.1, 1.1)))
+	game_logo_container.mouse_exited.connect(func(): scale(game_logo_container, Vector2(1.1, 1.1)))
 
 
 func init() -> void:
 	footer = %Footer
+	game_logo_container = %GameLogoContainer
