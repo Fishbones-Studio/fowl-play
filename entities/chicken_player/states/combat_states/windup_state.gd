@@ -9,8 +9,7 @@ const STATE_TYPE: int = WeaponEnums.MeleeState.WINDUP
 
 
 # Sets up the weapon reference
-func setup(weapon_node: Node3D) -> void:
-	weapon = weapon_node
+func _ready() -> void:
 	windup_timer.wait_time = weapon.current_weapon.windup_time
 
 
