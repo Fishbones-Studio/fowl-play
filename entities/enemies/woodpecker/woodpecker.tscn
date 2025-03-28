@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0o65o2xsk53s"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_k6lf6"]
-[ext_resource type="PackedScene" uid="uid://dkodmddskbaa2" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
+[ext_resource type="PackedScene" uid="uid://dwfyr15hnplou" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1t2bg"]
 radius = 1.095
@@ -12,7 +12,6 @@ script = ExtResource("1_k6lf6")
 metadata/_custom_type_script = "uid://bln2tqwj0gh1w"
 
 [node name="woodpecker" parent="." instance=ExtResource("2_crgub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008111, 0, -0.00550079)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225414, 2.83076, 0)
