@@ -59,11 +59,11 @@ func _buy_upgrade() -> void:
 	# when buying a upgrade and the bonus property is above 0 we set the new values to that property
 	if upgrade_item.health_bonus > 0:
 		GameManager.chicken_player.stats.max_health += upgrade_item.health_bonus
-		GameManager.chicken_player.stats.health += upgrade_item.health_bonus  
+		GameManager.chicken_player.stats.current_health += upgrade_item.health_bonus  
 
 	if upgrade_item.stamina_bonus > 0:
 		GameManager.chicken_player.stats.max_stamina += upgrade_item.stamina_bonus
-		GameManager.chicken_player.stats.stamina += upgrade_item.stamina_bonus 
+		GameManager.chicken_player.stats.current_stamina += upgrade_item.stamina_bonus 
 	
 	# i am gonna add the other buffs later, for now i can only access these properties
 	
