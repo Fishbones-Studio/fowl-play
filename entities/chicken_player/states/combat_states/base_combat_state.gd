@@ -3,10 +3,10 @@ extends BaseState
 
 @export var ANIMATION_NAME: String
 
-var weapon: Weapon
+var weapon: MeleeWeapon
 
 
-func setup(_weapon_node: Weapon) -> void:
+func setup(_weapon_node: MeleeWeapon) -> void:
 	weapon = _weapon_node
 
 

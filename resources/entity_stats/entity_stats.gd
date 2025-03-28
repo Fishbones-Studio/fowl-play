@@ -2,12 +2,13 @@ class_name EntityStats
 extends Resource
 
 @export_category("Base Stats")
-@export var health: float
-@export var stamina: float
+@export var max_health: float
+@export var max_stamina: float
 @export var attack: int
 @export var defense: int
 @export var speed: float
 @export var weight: int
+
 @export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int
@@ -15,17 +16,17 @@ extends Resource
 
 var current_health: float:
 	set(value): 
-		current_health = clamp(value, 0, health)
+		current_health = clamp(value, 0, max_health)
 
 var current_stamina: float:
 	set(value): 
-		current_stamina = clamp(value, 0, stamina)
+		current_stamina = clamp(value, 0, max_stamina)
 
 
 
 func init() -> void:
-	current_health = health
-	current_stamina = stamina
+	current_health = max_health
+	current_stamina = max_stamina
 
 
 ## Calculate the speed based on weight and speed factor

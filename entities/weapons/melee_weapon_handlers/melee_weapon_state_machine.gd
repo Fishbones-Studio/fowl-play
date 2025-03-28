@@ -5,12 +5,11 @@ extends Node
 
 @export var starting_state: BaseCombatState
 
-
 var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
-@onready var weapon: Weapon = $"../CurrentWeapon".current_weapon
+@onready var weapon: MeleeWeapon = $"../CurrentWeapon".current_weapon
 
 
 func _ready() -> void:

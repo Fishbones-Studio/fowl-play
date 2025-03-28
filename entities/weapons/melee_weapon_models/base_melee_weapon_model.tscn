@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bopxj7p74h8p1"]
 
-[ext_resource type="Script" uid="uid://cjpn7eesmtfhr" path="res://entities/weapons/weapon.gd" id="1_br2vt"]
+[ext_resource type="Script" uid="uid://c5x4a7dffdnes" path="res://entities/weapons/melee_weapon.gd" id="1_br2vt"]
 
 [node name="BaseMeleeWeaponModel" type="Node3D"]
 script = ExtResource("1_br2vt")
