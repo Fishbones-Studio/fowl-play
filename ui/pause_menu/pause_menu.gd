@@ -38,7 +38,7 @@ func setup_entered_and_exit_transitions():
 		button.mouse_exited.connect(func(): scale(button, Vector2(1.0, 1.0)))
 	
 	game_logo_container.mouse_entered.connect(func(): scale(game_logo_container, Vector2(1.1, 1.1)))
-	game_logo_container.mouse_exited.connect(func(): scale(game_logo_container, Vector2(1.1, 1.1)))
+	game_logo_container.mouse_exited.connect(func(): scale(game_logo_container, Vector2(1.0, 1.0)))
 
 
 func init() -> void:

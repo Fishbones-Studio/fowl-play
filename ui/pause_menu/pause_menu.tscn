@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/pause_menu_bg_blur.gdshader" id="1_mnjdh"]
 [ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/themes/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/clodsire-Joyous.png" id="3_b4b0p"]
+[ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
 [ext_resource type="Texture2D" uid="uid://cg3lbnbmyac73" path="res://resources/themes/clodsire-normal.png" id="4_c3jo5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbgdu"]
@@ -11,25 +12,6 @@ shader = ExtResource("1_mnjdh")
 shader_parameter/blur_amount = 1.0
 shader_parameter/mix_amount = 0.2
 shader_parameter/color_over = Color(0, 0, 0, 1)
-
-[sub_resource type="GDScript" id="GDScript_c3jo5"]
-script/source = "extends Control
-
-
-func _ready():
-	connect(\"mouse_entered\", Callable(self, \"_on_mouse_entered\"))
-	connect(\"mouse_exited\", Callable(self, \"_on_mouse_exited\"))
-
-
-func _on_mouse_entered():
-	var tween = create_tween()
-	tween.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-
-
-func _on_mouse_exited():
-	var tween = create_tween()
-	tween.tween_property(self, \"scale\", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-"
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -48,6 +30,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer2/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(574, 648)
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer2/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0509858, 501.772, 4.70896)
+projection = 1
+size = 3.968
+
+[node name="chicken_default" parent="HBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource("3_uraes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -109,6 +121,19 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="GameLogoContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+offset_right = 298.884
+offset_bottom = 256.0
+theme_type_variation = &"PauseMenuLogoContainer"
+
+[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
+layout_mode = 2
+texture = ExtResource("2_jbgdu")
+expand_mode = 3
+
 [node name="Footer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
@@ -154,17 +179,3 @@ alignment = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
-
-[node name="GameLogoContainer" type="MarginContainer" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 1
-offset_right = 298.884
-offset_bottom = 256.0
-theme_type_variation = &"PauseMenuLogoContainer"
-script = SubResource("GDScript_c3jo5")
-
-[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
-layout_mode = 2
-texture = ExtResource("2_jbgdu")
-expand_mode = 3
