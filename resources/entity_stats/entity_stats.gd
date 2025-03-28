@@ -35,32 +35,32 @@ func calculate_speed(speed_factor: float) -> float:
 
 
 func restore_health(amount: float) -> float:
-	current_health += amount
+	current_health = clamp(current_health + amount, 0 , max_health)
 	return current_health
 
 
 func restore_stamina(amount: float) -> float:
-	current_stamina += amount
+	current_stamina = clamp(current_stamina + amount, 0, max_stamina)
 	return current_stamina
 
 
 func drain_health(amount: float) -> float:
-	current_health -= amount
+	current_health = clamp(current_health - amount, 0 , max_health)
 	return current_health
 
 
 func drain_stamina(amount: float) -> float:
-	current_stamina -= amount
+	current_stamina = clamp(current_stamina - amount, 0, max_stamina)
 	return current_stamina
 
 
 ## Regenerate health over delta time
 func regen_health(delta: float) -> float:
-	current_health += health_regen * delta
+	current_health = clamp(current_health + (current_health * delta), 0, max_health)
 	return current_health
 
 
 ## Regenerate stamina over delta time
 func regen_stamina(delta: float) -> float:
-	current_stamina += stamina_regen * delta
+	current_stamina = clamp(current_stamina + (stamina_regen * delta), 0, max_stamina)
 	return current_stamina
