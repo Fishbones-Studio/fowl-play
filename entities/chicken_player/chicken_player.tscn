@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
-[ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://resources/entity_stats/player_stats.tres" id="2_4hg1i"]
+[ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
+[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9

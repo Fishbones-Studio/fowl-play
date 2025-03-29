@@ -10,7 +10,7 @@ const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
 var hit_area: Area3D
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: Weapon) -> void:
+func setup(weapon_node: MeleeWeapon) -> void:
 	super(weapon_node)
 	if not weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
