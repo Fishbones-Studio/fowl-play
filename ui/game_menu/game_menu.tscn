@@ -1,20 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=17 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y7cqx"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_u6mtr"]
-sky_material = SubResource("ProceduralSkyMaterial_y7cqx")
-
-[sub_resource type="Environment" id="Environment_82jt7"]
-background_mode = 2
-sky = SubResource("Sky_u6mtr")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_sulwi"]
 
@@ -36,32 +23,51 @@ albedo_texture = ExtResource("3_l20ko")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yeww"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1gii"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_og4p7"]
+material = SubResource("StandardMaterial3D_t1gii")
+size = Vector2(20, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6dc34"]
+size = Vector3(20, 25, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley17"]
+albedo_color = Color(0.511632, 0.318083, 0, 1)
+
+[sub_resource type="Environment" id="Environment_ley17"]
+background_mode = 1
+background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
+ambient_light_energy = 0.01
+
 [node name="GameMenu" type="Node3D"]
 script = ExtResource("1_5qgdc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_82jt7")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.17144)
+transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.46062)
 
 [node name="Table" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.30347, 0, 0, 0, 2.5026, 0, 0, 0, 2.62598, 0, 1.1667, 0)
 mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
-[node name="Chicken" type="Area3D" parent="."]
+[node name="Inventory" type="Area3D" parent="."]
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Chicken"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Inventory"]
 mesh = SubResource("BoxMesh_efok4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chicken"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 shape = SubResource("BoxShape3D_efok4")
+
+[node name="Inventory Label" type="Label3D" parent="Inventory"]
+transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
+text = "Inventory"
 
 [node name="Flyer" type="Area3D" parent="."]
 transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
@@ -75,6 +81,11 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Flyer"]
 shape = SubResource("BoxShape3D_t1gii")
 
+[node name="Arenas Label" type="Label3D" parent="Flyer"]
+transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, 0.048014, 1.64521, 0.179505)
+text = "Arena's
+"
+
 [node name="Shop" type="Area3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
 
@@ -85,6 +96,35 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shop"]
 shape = SubResource("CapsuleShape3D_6yeww")
 
-[connection signal="input_event" from="Chicken" to="." method="_on_chicken_input_event"]
+[node name="Shop Label" type="Label3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 0, 2.24983, 0.797185)
+text = "Shop
+"
+font_size = 67
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_og4p7")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.64108)
+mesh = SubResource("BoxMesh_6dc34")
+surface_material_override/0 = SubResource("StandardMaterial3D_ley17")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.7486, 0)
+mesh = SubResource("PlaneMesh_og4p7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ley17")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.076632, 0.997059, 0, -0.997059, -0.076632, 0.00419521, 6.11901, -0.0586296)
+light_color = Color(1, 1, 0.745098, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 9.0
+spot_angle = 68.9063
+
+[connection signal="input_event" from="Inventory" to="." method="_on_chicken_input_event"]
 [connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
 [connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]

@@ -65,7 +65,7 @@ func physics_process(delta: float) -> void:
 	else:
 		speed_factor = movement_component.walk_speed_factor
 	
-	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
+	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(speed_factor)
 	
 	apply_movement(velocity)
 	

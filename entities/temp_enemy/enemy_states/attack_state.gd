@@ -3,7 +3,6 @@ extends BaseEnemyState
 @export var damage : int
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	print("Attack state entered")
 	attack_player()
 	# Connect body exited signal
 	SignalManager.weapon_hit_area_body_exited.connect(_on_attack_area_body_exited)
