@@ -4,6 +4,7 @@ extends Node
 @export var enemy: Enemy
 @export var player: ChickenPlayer
 
+
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
