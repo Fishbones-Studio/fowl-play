@@ -7,6 +7,7 @@ var weapon: MeleeWeapon
 
 
 func setup(_weapon_node: MeleeWeapon) -> void:
+	print(_weapon_node)
 	weapon = _weapon_node
 
 

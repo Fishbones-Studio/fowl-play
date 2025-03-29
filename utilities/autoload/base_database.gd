@@ -26,8 +26,8 @@ func get_random_item() -> Resource:
 	for item in items:
 		total_drop_chance += item.drop_chance
 	
-	# Roll a random number between 0 and the total drop chance
-	var roll: int       = randi() % total_drop_chance
+	# Roll a random number between 1 and the total drop chance. You can not modulo by 0
+	var roll = randi() % max(1, total_drop_chance)
 	var cumulative: int = 0
 	
 	# Find the item corresponding to the roll
