@@ -10,10 +10,10 @@ extends BaseState
 
 var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
-var weapon: Weapon
+var weapon: MeleeWeapon
 
 
-func setup(_enemy: Enemy, _weapon: Weapon, _player: ChickenPlayer) -> void:
+func setup(_enemy: Enemy, _weapon: MeleeWeapon, _player: ChickenPlayer) -> void:
 	if _enemy == null:
 		push_error(owner.name + ": No enemy reference set" + str(STATE_TYPE))
 	enemy = _enemy

@@ -18,7 +18,7 @@ func input(_event: InputEvent) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"from_ground": true})
 		return
 	
-	if Input.is_action_pressed("sprint") and player.stats.stamina > 0:
+	if Input.is_action_pressed("sprint") and player.stats.current_stamina > 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 
 
@@ -29,7 +29,7 @@ func process(delta: float) -> void:
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
-	var velocity = get_player_direction() * player.stats.calculate_speed(movement_component.walk_speed_factor)
+	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(movement_component.walk_speed_factor)
 	
 	# Handle state transitions
 	if not player.is_on_floor():

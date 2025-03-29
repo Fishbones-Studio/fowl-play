@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfbarshp3p5gi"]
+
+[ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_weapon.tscn" id="1_gk67c"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek_model.tscn" id="2_p0bdf"]
+[ext_resource type="Script" uid="uid://kk30wx1g1hsr" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon_state_machine.gd" id="2_ycty3"]
+[ext_resource type="Script" uid="uid://dlgfsk2b6j0us" path="res://entities/chicken_player/states/combat_states/idle_state.gd" id="5_l7vwy"]
+[ext_resource type="Script" uid="uid://ccb1xp7bs0efp" path="res://entities/chicken_player/states/combat_states/attacking_state.gd" id="6_hs04l"]
+[ext_resource type="Script" uid="uid://dv8nlk4ss2qnp" path="res://entities/chicken_player/states/combat_states/cooldown_state.gd" id="7_mq8tj"]
+[ext_resource type="Script" uid="uid://cck8pm0t4q5sw" path="res://entities/chicken_player/states/combat_states/windup_state.gd" id="8_6pe85"]
+
+[node name="MeleeWeapon" type="Node3D"]
+
+[node name="CurrentWeapon" parent="." instance=ExtResource("1_gk67c")]
+weapon_scene = ExtResource("2_p0bdf")
+
+[node name="MeleeStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_ycty3")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("5_l7vwy")
+
+[node name="Attacking" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("6_hs04l")
+ANIMATION_NAME = "ATTACK"
+
+[node name="Cooldown" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("7_mq8tj")
+
+[node name="Windup" type="Node" parent="MeleeStateMachine"]
+script = ExtResource("8_6pe85")
