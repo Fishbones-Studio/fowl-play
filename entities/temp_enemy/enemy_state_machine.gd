@@ -4,10 +4,11 @@ extends Node
 @export var enemy: Enemy
 @export var player: ChickenPlayer
 
+
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
-@onready var weapon: Weapon = $"../CurrentWeapon".current_weapon
+@onready var weapon: MeleeWeapon = $"../CurrentWeapon".current_weapon
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +16,7 @@ func _ready() -> void:
 	print(current_state)
 	if enemy == null:
 		push_error(owner.name + ": No enemy reference set")
-		
+
 	if player == null:
 		player = GameManager.chicken_player
 
@@ -68,7 +69,7 @@ func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information
 	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
-		
+
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 

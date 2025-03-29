@@ -71,8 +71,6 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dic
 		current_state = previous_state
 	
 	current_state.enter(previous_state, info)
-	
-	print("current state: ", current_state.name)
 
 
 ## Return the starting state if set, else return the first child of this object
