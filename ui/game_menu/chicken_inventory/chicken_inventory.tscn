@@ -43,6 +43,13 @@ size_flags_vertical = 0
 theme_type_variation = &"HeaderLarge"
 text = "Inventory"
 
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = " Save
+"
+
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -59,4 +66,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Exit"
 
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/ExitButton" to="." method="_on_button_pressed"]
