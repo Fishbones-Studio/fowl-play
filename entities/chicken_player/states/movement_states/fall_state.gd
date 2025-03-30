@@ -34,7 +34,7 @@ func process(delta: float) -> void:
 	
 	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
 	
 	if  Input.is_action_pressed("jump") and not _is_jump_held:
@@ -46,12 +46,12 @@ func process(delta: float) -> void:
 		var hold_duration = current_time - _jump_press_time
 		
 		if hold_duration > glide_hold_threshold * 1000:
-			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
 			_is_jump_held = false
 			return
 		
 		if movement_component.jump_available:
-			SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 			_is_jump_held = false
 
 
@@ -65,7 +65,7 @@ func physics_process(delta: float) -> void:
 	else:
 		speed_factor = movement_component.walk_speed_factor
 	
-	var velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
+	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(speed_factor)
 	
 	apply_movement(velocity)
 	
@@ -74,14 +74,14 @@ func physics_process(delta: float) -> void:
 		return
 	
 	if velocity == Vector3.ZERO:
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
 	
 	if Input.is_action_pressed("sprint"):
-		SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 	
-	SignalManager.player_state_transitioned.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 
 
 func _on_coyote_timer_timeout():

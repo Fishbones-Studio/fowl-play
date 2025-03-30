@@ -1,19 +1,19 @@
 [gd_scene load_steps=16 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
-[ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://resources/entity_stats/player_stats.tres" id="2_4hg1i"]
+[ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
+[ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/movement_states/glide_state.gd" id="5_a1qjk"]
 [ext_resource type="Script" uid="uid://dvihu8iywlyx1" path="res://entities/chicken_player/states/movement_states/hurt_state.gd" id="6_j3ovn"]
 [ext_resource type="Script" uid="uid://bjte651aelkuy" path="res://entities/chicken_player/states/movement_states/idle_state.gd" id="7_afbqv"]
 [ext_resource type="Script" uid="uid://dio0ctxnagxrr" path="res://entities/chicken_player/states/movement_states/jump_state.gd" id="8_gx6sm"]
 [ext_resource type="Script" uid="uid://d3yvdvg47g35i" path="res://entities/chicken_player/states/movement_states/sprint_state.gd" id="9_yqrof"]
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
-[ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/movement_states/glide_state.gd" id="11_4hg1i"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="PackedScene" uid="uid://bfbarshp3p5gi" path="res://entities/weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
@@ -23,7 +23,7 @@ height = 3.5
 script = ExtResource("1_abrql")
 stats = ExtResource("2_4hg1i")
 
-[node name="Chicken" parent="." instance=ExtResource("2_jgbvq")]
+[node name="chicken_default" parent="." instance=ExtResource("2_jgbvq")]
 transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 0, 0.345436, 0)
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
@@ -34,7 +34,7 @@ shape = SubResource("CapsuleShape3D_abrql")
 script = ExtResource("3_wvtmh")
 starting_state = NodePath("Idle")
 player = NodePath("..")
-movement_component = NodePath("../MovementComponent")
+movement_component = NodePath("../MoveComponent")
 
 [node name="Idle" type="Node" parent="MovementStateMachine"]
 script = ExtResource("7_afbqv")
@@ -51,12 +51,20 @@ state_type = 2
 script = ExtResource("8_gx6sm")
 state_type = 3
 
+[node name="Glide" type="Node" parent="MovementStateMachine"]
+script = ExtResource("5_a1qjk")
+state_type = 4
+
+[node name="Hurt" type="Node" parent="MovementStateMachine"]
+script = ExtResource("6_j3ovn")
+state_type = 6
+
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
 state_type = 5
 
 [node name="DashDurationTimer" type="Timer" parent="MovementStateMachine/Dash"]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="MovementStateMachine/Dash"]
@@ -71,21 +79,9 @@ state_type = 7
 wait_time = 0.3
 one_shot = true
 
-[node name="Glide" type="Node" parent="MovementStateMachine"]
-script = ExtResource("11_4hg1i")
-state_type = 4
-
-[node name="Hurt" type="Node" parent="MovementStateMachine"]
-script = ExtResource("6_j3ovn")
-knockback_strength = 15.0
-state_type = 6
-
-[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
-jump_height = 5.0
-time_to_peak = 0.6
-time_to_ground = 0.5
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27513, 1.45135, 0)

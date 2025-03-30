@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://1if7ntr2ebdw"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/in_arena_shop/resources/in_run_upgrade_resource.gd" id="1_h2m3w"]
+
+[resource]
+script = ExtResource("1_h2m3w")
+health_bonus = 0
+speed_bonus = 2.0
+damage_bonus = 0.0
+stamina_bonus = 0.0
+name = "SwiftFeather"
+drop_chance = 30
+cost = 750
+description = "Zoom past the competition with lightning-fast speed!"
+type = 0
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

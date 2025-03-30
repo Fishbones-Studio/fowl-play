@@ -24,7 +24,7 @@ func _ready() -> void:
 	if movement_component == null:
 		push_error(name + ": No movement component reference set")
 	
-	SignalManager.player_state_transitioned.connect(_transition_to_next_state)
+	SignalManager.player_transition_state.connect(_transition_to_next_state)
 	
 	# Ensure owner is ready before accessing data and nodes.
 	await owner.ready
@@ -71,8 +71,6 @@ func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dic
 		current_state = previous_state
 	
 	current_state.enter(previous_state, info)
-	
-	print("current state: ", current_state.name)
 
 
 ## Return the starting state if set, else return the first child of this object
