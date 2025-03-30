@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnq3em8w064n4"]
+[gd_scene load_steps=12 format=3 uid="uid://dnq3em8w064n4"]
 
 [ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/pause_menu_bg_blur.gdshader" id="1_mnjdh"]
@@ -13,7 +13,23 @@ shader_parameter/blur_amount = 1.0
 shader_parameter/mix_amount = 0.2
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="PauseMenu" type="Control"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uraes"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_ihaig"]
+sky_material = SubResource("ProceduralSkyMaterial_uraes")
+
+[sub_resource type="Environment" id="Environment_ihaig"]
+background_mode = 2
+sky = SubResource("Sky_ihaig")
+sky_rotation = Vector3(1.00356, 0, 0)
+
+[sub_resource type="World3D" id="World3D_3qrb2"]
+environment = SubResource("Environment_ihaig")
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "footer", "game_logo_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +37,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c3jo5")
+chicken = NodePath("HBoxContainer2/SubViewportContainer/SubViewport/chicken_default")
+camera = NodePath("HBoxContainer2/SubViewportContainer/SubViewport/Camera3D")
+footer = NodePath("Footer")
+game_logo_container = NodePath("GameLogoContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_jbgdu")
@@ -49,17 +69,19 @@ size_flags_horizontal = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer2/SubViewportContainer"]
+world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(574, 648)
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="HBoxContainer2/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0509858, 501.772, 4.70896)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 1.5, 1.8)
 projection = 1
-size = 3.968
+size = 4.0
 
 [node name="chicken_default" parent="HBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource("3_uraes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+unique_name_in_owner = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -142,7 +164,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -56.0
+offset_top = -45.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"PauseMenuFooter"
