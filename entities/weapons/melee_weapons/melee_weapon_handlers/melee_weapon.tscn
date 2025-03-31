@@ -32,12 +32,14 @@ script = ExtResource("7_mq8tj")
 
 [node name="CooldownTimer" type="Timer" parent="MeleeStateMachine/Cooldown"]
 unique_name_in_owner = true
+wait_time = 0.499
 
 [node name="Windup" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("8_6pe85")
 
 [node name="WindupTimer" type="Timer" parent="MeleeStateMachine/Windup"]
 unique_name_in_owner = true
+wait_time = 0.1
 
 [connection signal="timeout" from="MeleeStateMachine/Attacking/AttackTimer" to="MeleeStateMachine/Attacking" method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="MeleeStateMachine/Cooldown/CooldownTimer" to="MeleeStateMachine/Cooldown" method="_on_cooldown_timer_timeout"]

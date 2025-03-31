@@ -17,15 +17,16 @@ extends Node3D
 @export_range(0, 90) var max_degrees: float = 45.0
 @export_group("Entity")
 @export var entity_to_follow: CharacterBody3D
-@export var entity_follow_horizontal_offset: float = 3.0
+@export var entity_follow_horizontal_offset: float = 2
 @export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
-
+@export var crosshair = preload("res://crosshair.tscn").instantiate()
 @onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
 
 
 func _ready():
+	add_child(crosshair)
 	if (!camera_reference):
 		push_error("No Camera3D set")
 
