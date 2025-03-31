@@ -10,24 +10,24 @@ extends Node3D
 @export var camera_spring_length: float = 4.8
 @export var camera_margin: float = 0.5
 @export var camera_smoothness: float = 6.0
+
 @export_category("Sensitity")
 @export_range(0.1, 2.0) var horizontal_sensitivity: float = 0.5
 @export_range(0.1, 2.0) var vertical_sensitivity: float = 0.5
 @export_range(-90, 0 ) var min_degrees: float = -90.0
 @export_range(0, 90) var max_degrees: float = 45.0
+
 @export_group("Entity")
 @export var entity_to_follow: CharacterBody3D
 @export var entity_follow_horizontal_offset: float = 2
 @export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
-@export var crosshair = preload("res://crosshair.tscn").instantiate()
 @onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
 
 
-func _ready():
-	add_child(crosshair)
-	if (!camera_reference):
+func _ready() -> void:
+	if !camera_reference:
 		push_error("No Camera3D set")
 
 	spring_arm_3d.spring_length = camera_spring_length
@@ -41,7 +41,7 @@ func _ready():
 	position = Vector3(entity_follow_horizontal_offset, entity_follow_height, entity_follow_distance)
 
 
-func _input(event):
+func _input(event) -> void:
 	if event is InputEventMouseMotion:
 		# Mouse sensitivity control
 		entity_to_follow.rotate_y(deg_to_rad(-event.relative.x) * horizontal_sensitivity)
@@ -49,7 +49,7 @@ func _input(event):
 		_apply_camera_clamp()
 
 
-func _process(delta):
+func _process(delta) -> void:
 	# Calculate controller input
 	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
 	var y_axis: float = Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down")
@@ -61,7 +61,7 @@ func _process(delta):
 	_apply_camera_clamp()
 
 
-func _apply_camera_clamp():
+func _apply_camera_clamp() -> void:
 	# Clamp the rotation to prevent flipping
 	rotation.z = 0
 	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))
