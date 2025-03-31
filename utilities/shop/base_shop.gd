@@ -7,6 +7,7 @@ extends Control
 @export var item_scene_packed: PackedScene
 
 var shop_items: Array[BaseResource]
+var available_items: Array[BaseResource] = []
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 var check_inventory: bool = true
@@ -21,22 +22,41 @@ func refresh_shop() -> void:
 		push_error("Shop container is not assigned!")
 		return
 
-	for x in range(shop_items.size(), max_items):
-		var shop_item: BaseShopItem = _create_shop_item()
+	# Clear previous items
+	shop_items.clear()
+	for child in shop_items_container.get_children():
+		child.queue_free()
+
+	# Get all possible items that can be shown
+	available_items = _get_available_items()
+
+	# Determine how many items we can actually show
+	var items_to_show = min(available_items.size(), max_items)
+
+	# Shuffle the available items to randomize selection
+	available_items.shuffle()
+
+	# Add items up to our limit
+	for i in range(items_to_show):
+		var shop_item = _create_shop_item()
 		if not shop_item:
-			continue  # Skip if item creation failed
-
-		var random_item: BaseResource = item_database.get_random_item()
-
-		if _should_skip_item(random_item):
-			print("Skipping item: ", random_item.name)
-			shop_item.queue_free()
 			continue
 
-		print("Adding item: ", random_item.name)
-		shop_items.append(random_item)
+		var selected_item = available_items[i]
+		shop_items.append(selected_item)
 		shop_items_container.add_child(shop_item)
-		shop_item.set_item_data(random_item)
+		shop_item.set_item_data(selected_item)
+		print("Added item: ", selected_item.name)
+
+func _get_available_items() -> Array[BaseResource]:
+	var valid_items: Array[BaseResource] = []
+
+	for item in item_database.items:
+		if _should_skip_item(item):
+			continue
+		valid_items.append(item)
+
+	return valid_items
 		
 		
 func close_ui() -> void:
