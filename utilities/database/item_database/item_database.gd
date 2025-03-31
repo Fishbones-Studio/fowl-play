@@ -3,8 +3,9 @@ extends BaseDatabase
 func _load_resources() -> void:
 	load_scene_resources("res://entities/weapons/melee_weapons/melee_weapon_models", "current_weapon")
 
+
 func load_scene_resources(path: String, resource_property: String) -> void:
-	var dir = DirAccess.open(path)
+	var dir := DirAccess.open(path)
 	if !dir:
 		push_error("Can't open directory: ", path)
 		return
@@ -13,12 +14,12 @@ func load_scene_resources(path: String, resource_property: String) -> void:
 		var subdir_path := path.path_join(subdir)
 		var sub_dir := DirAccess.open(subdir_path)
 		var resource_loaded := false
-		var tscn_file : String
+		var tscn_file: String
 
 		# First try to load .tres file
 		for file in sub_dir.get_files():
 			if file.ends_with(".tres"):
-				var resource : BaseResource = load(subdir_path.path_join(file)) as BaseResource
+				var resource: BaseResource = load(subdir_path.path_join(file)) as BaseResource
 				if resource:
 					items.append(resource)
 					resource_loaded = true
@@ -26,13 +27,12 @@ func load_scene_resources(path: String, resource_property: String) -> void:
 			if file.ends_with(".tscn"):
 				tscn_file = subdir_path.path_join(file)
 				break  # Save the .tscn file for later use
-				
 
 		# Fall back to scene loading if no .tres found
 		if !resource_loaded:
 			print("No .tres file found in ", subdir_path, ", loading scene instead")
 			var scene := load(tscn_file) as PackedScene
-			var instance = scene.instantiate()
+			var instance: Node = scene.instantiate()
 
 			if instance.has_method("get") && instance.get(resource_property) is BaseResource:
 				items.append(instance.get(resource_property))

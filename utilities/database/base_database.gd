@@ -12,7 +12,7 @@ func _load_resources() -> void:
 
 func _ready() -> void:
 	_load_resources()
-	
+
 	if items.is_empty():
 		push_warning("Warning: No items loaded in the database")
 	else:
@@ -26,20 +26,20 @@ func get_random_item() -> BaseResource:
 	var total_drop_chance: int = 0
 	for item in items:
 		total_drop_chance += item.drop_chance
-	
+
 	# Roll a random number between 1 and the total drop chance. You can not modulo by 0
-	var roll : float = randi() % max(1, total_drop_chance)
+	var roll: float = randi() % max(1, total_drop_chance)
 	var cumulative: float = 0
-	
+
 	# Find the item corresponding to the roll
 	for item in items:
-		var item_drop_chance : float = item.drop_chance
+		var item_drop_chance: float = item.drop_chance
 		if item_drop_chance == 0:
 			continue
 		cumulative += item_drop_chance
 		if roll < cumulative:
 			return item
-	
+
 	return null
 
 
@@ -49,18 +49,19 @@ func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
 	# Turn item_string from UPPER_CASE to Title Case
 	return item_string.capitalize()
 
+
 func get_files_from_path(path: String) -> PackedStringArray:
 	var files: PackedStringArray = ResourceLoader.list_directory(path)
 
 	if not files:
 		push_error("An error occurred when trying to access path: ", path)
-		
+
 	return files
 
 
 func load_items(path: String) -> void:
 	var files: PackedStringArray = get_files_from_path(path)
-	
+
 	for file in files:
 		if file.ends_with(".tres"):
 			var file_path = path.path_join(file)
@@ -76,7 +77,7 @@ func get_item_by_name(item_name: String) -> Resource:
 	for item in items:
 		if item.name == item_name:
 			return item
-	
+
 	print("Item with name '", item_name, "' not found in the database")
 	return null
 
@@ -86,6 +87,6 @@ func get_item(item_res: Resource) -> BaseResource:
 	for item in items:
 		if item == item_res:
 			return item
-	
+
 	print("Item '", item_res, "' not found in the database")
 	return null

@@ -5,6 +5,7 @@ var upgrade_item: InRunUpgradeResource
 
 @onready var bonus_label: Label = %BonusLabel
 
+
 func _ready() -> void:
 	# setting up the labels
 	name_label = %NameLabel
@@ -12,16 +13,18 @@ func _ready() -> void:
 	description_label = %DescriptionLabel
 	cost_label = %CostLabel
 
+
 func set_item_data(item: Resource) -> void:
 	if !item is InRunUpgradeResource:
 		push_error("Item is not of type InRunUpgradeResource")
 		return
-	
+
 	name_label.text = item.name
 	bonus_label.text = item.get_bonus_string()
 	cost_label.text = str(item.cost)
 	description_label.text = item.description
 	upgrade_item = item
+
 
 func attempt_purchase() -> void:
 	if purchase_in_progress or not can_afford():

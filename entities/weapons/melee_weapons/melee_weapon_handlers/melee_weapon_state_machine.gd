@@ -84,6 +84,9 @@ func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 
+
+
+
 # Gets the initial state when the game starts
 func _get_initial_state() -> BaseCombatState:
 	return starting_state if starting_state != null else get_child(0)
