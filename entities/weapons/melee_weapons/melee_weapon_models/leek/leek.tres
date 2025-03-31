@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_nt88w")
-damage = 5
-windup_time = 0.3
-attack_duration = 1.0
+damage = 10
+windup_time = 0.4
+attack_duration = 0.6
 cooldown_time = 0.02
 name = "Leek"
 drop_chance = 1

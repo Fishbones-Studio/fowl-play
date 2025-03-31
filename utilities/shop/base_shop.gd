@@ -10,14 +10,17 @@ var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
+
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
 
+
 func _ready() -> void:
 	GameManager.prosperity_eggs = 9000
-	refresh_shop()
+	_refresh_shop()
 
-func refresh_shop() -> void:
+
+func _refresh_shop() -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
@@ -38,15 +41,16 @@ func refresh_shop() -> void:
 
 	# Add items up to our limit
 	for i in range(items_to_show):
-		var shop_item = _create_shop_item()
+		var shop_item: BaseShopItem = _create_shop_item()
 		if not shop_item:
 			continue
 
-		var selected_item = available_items[i]
+		var selected_item: BaseResource = available_items[i]
 		shop_items.append(selected_item)
 		shop_items_container.add_child(shop_item)
 		shop_item.set_item_data(selected_item)
 		print("Added item: ", selected_item.name)
+
 
 func _get_available_items() -> Array[BaseResource]:
 	var valid_items: Array[BaseResource] = []
@@ -57,17 +61,14 @@ func _get_available_items() -> Array[BaseResource]:
 		valid_items.append(item)
 
 	return valid_items
-		
-		
-func close_ui() -> void:
-	queue_free()
+
 
 func _create_shop_item() -> BaseShopItem:
 	if not item_scene_packed:
 		push_error("No item scene packed assigned!")
 		return null
 
-	var shop_item = item_scene_packed.instantiate()
+	var shop_item: Node = item_scene_packed.instantiate()
 	if not shop_item is BaseShopItem:
 		push_error("Packed scene is not a BaseShopItem: ", item_scene_packed.resource_path)
 		shop_item.queue_free()
@@ -75,9 +76,14 @@ func _create_shop_item() -> BaseShopItem:
 
 	return shop_item
 
+
 func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.items_in_inventory) or (prevent_duplicates and item in shop_items)
 
 
 func _on_exit_button_button_pressed() -> void:
 	close_ui()
+
+
+func close_ui() -> void:
+	queue_free()

@@ -1,4 +1,3 @@
-class_name ShopItemConfirmation
 extends Control
 
 var existing_items: Array[Resource]
@@ -21,35 +20,35 @@ func setup(params: Dictionary) -> void:
 
 func _load_items() -> void:
 	existing_items.append(new_item)
-	
+
 	for item in existing_items:
 		var current_item: ShopItem = load("uid://cc5vmtbby4xy0").instantiate()
-		
+
 		# Check if current_item is valid
 		if not current_item:
 			print("Failed to instantiate ShopItem.")
 			continue
-		
-		var shop_item_vbox = current_item.get_child(-1)
-		
+
+		var shop_item_vbox: Node = current_item.get_child(-1)
+
 		if item != new_item:
 			# Add the replace- and cancel buttons to the item
 			var h_separator = HSeparator.new()
-			
+
 			var replace_button = Button.new()
 			replace_button.text = "Replace"
 			replace_button.button_up.connect(_replace_item.bind(item, new_item))
-			
+
 			shop_item_vbox.add_child(h_separator)
 			shop_item_vbox.add_child(replace_button)
-			
+
 			replace_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 			replace_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-			
+
 			owned_items_container.add_child(current_item)
 		else:
 			new_item_container.add_child(current_item)
-		
+
 		# Set item properties
 		current_item.name_label.text = item.name
 		current_item.type_label.text = str(item.type).capitalize()
@@ -58,12 +57,12 @@ func _load_items() -> void:
 		current_item.make_unclickable()
 
 
-func _replace_item(old_item: Resource , new_item: Resource) -> void:
+func _replace_item(old_item: Resource, _new_item: Resource) -> void:
 	Inventory.remove_item(old_item)
-	Inventory.add_item(new_item)
-	GameManager.update_prosperity_eggs(-new_item.cost)
+	Inventory.add_item(_new_item)
+	GameManager.update_prosperity_eggs(-_new_item.cost)
 
-	print("Item ", old_item, " replaced with ", new_item)
+	print("Item ", old_item, " replaced with ", _new_item)
 	queue_free()
 
 
