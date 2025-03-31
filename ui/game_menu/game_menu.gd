@@ -4,7 +4,8 @@ extends Node3D
 
 @export var items: Array[Area3D]
 @export var flicker_light: SpotLight3D 
-@export var flicker_timer: Timer      
+@export var flicker_timer: Timer
+@export var audio_player: AudioStreamPlayer      
 
 var highlight_scale_factor: float = 1.1 
 var highlight_color: Color = Color.YELLOW
@@ -18,6 +19,8 @@ var original_label_colors: Dictionary = {}
 ## Tracks which item the mouse is hovering over.
 var mouse_hover_index: int = -1 
 var is_flickering: bool = false
+var original_energy: float
+
 
 
 
@@ -33,9 +36,14 @@ func _ready() -> void:
 		if label:
 			original_label_colors[item] = label.modulate
 	
+	original_energy = flicker_light.light_energy
+	
+	
 	flicker_timer.timeout.connect(_on_flicker_timer_timeout)
 	flicker_timer.wait_time = 2
 	flicker_timer.start()
+	
+	_play_flicker_sound()
 	
 	reset_highlights()
 
@@ -49,19 +57,34 @@ func _on_flicker_timer_timeout():
 
 
 func start_flicker_effect():
+	if is_flickering: return
 	is_flickering = true
-	var original_energy = flicker_light.light_energy
 	
-	# Create flicker pattern
-	var tween = create_tween().set_parallel(false)
+	var tween = create_tween()
+	var flicker_count = randi_range(3, 5)
+
+
+	for i in flicker_count:
+		var flicker_duration = randf_range(0.05, 0.2)
+		
+		# Light OFF with sound
+		tween.tween_property(flicker_light, "light_energy", 0.0, flicker_duration/2)
+		tween.tween_callback(_play_flicker_sound)
+		
+		# Light ON
+		tween.tween_property(flicker_light, "light_energy", original_energy, flicker_duration/2)
+		tween.tween_interval(randf_range(0.05, 0.15))
 	
-	# Random flicker sequence
-	tween.tween_property(flicker_light, "light_energy", randf_range(0.1, original_energy*0.3), 0.05)
-	tween.tween_property(flicker_light, "light_energy", randf_range(original_energy*0.8, original_energy*1.2), 0.1)
-	tween.tween_property(flicker_light, "light_energy", randf_range(0.2, original_energy*0.5), 0.07)
-	tween.tween_property(flicker_light, "light_energy", original_energy, 0.3)
-	
-	tween.tween_callback(func(): is_flickering = false)
+	# Finalize
+	tween.tween_callback(func(): 
+		flicker_light.light_energy = original_energy
+		is_flickering = false
+		flicker_timer.start(randf_range(18, 22))  # Reset timer
+	)
+
+func _play_flicker_sound():
+	audio_player.pitch_scale = randf_range(0.9, 1.1)  # Slight pitch variation
+	audio_player.play()
 
 
 func find_label_in_item(item: Node) -> Label3D:
