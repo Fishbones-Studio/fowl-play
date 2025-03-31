@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhqylbt87pmer"
-path="res://.godot/imported/clodsire-Joyous.png-d58876edf2729d422eaf1f46866ac6d5.ctex"
+path="res://.godot/imported/clodsire-Joyous.png-9da2064b5da1f6ed42179f5ad2ee743c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/themes/clodsire-Joyous.png"
-dest_files=["res://.godot/imported/clodsire-Joyous.png-d58876edf2729d422eaf1f46866ac6d5.ctex"]
+source_file="res://resources/icons/clodsire-Joyous.png"
+dest_files=["res://.godot/imported/clodsire-Joyous.png-9da2064b5da1f6ed42179f5ad2ee743c.ctex"]
 
 [params]
 

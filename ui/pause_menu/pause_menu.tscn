@@ -1,16 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnq3em8w064n4"]
+[gd_scene load_steps=10 format=3 uid="uid://dnq3em8w064n4"]
 
 [ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
-[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/pause_menu_bg_blur.gdshader" id="1_mnjdh"]
-[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/themes/clodsire-no-bg.png" id="2_jbgdu"]
-[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/themes/clodsire-Joyous.png" id="3_b4b0p"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
+[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
-[ext_resource type="Texture2D" uid="uid://cg3lbnbmyac73" path="res://resources/themes/clodsire-normal.png" id="4_c3jo5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbgdu"]
 shader = ExtResource("1_mnjdh")
 shader_parameter/blur_amount = 3.0
-shader_parameter/mix_amount = 0.2
+shader_parameter/mix_amount = 0.7
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uraes"]
@@ -113,6 +111,7 @@ theme_override_constants/separation = 0
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
 text = "Resume"
 alignment = 0
 
@@ -120,6 +119,7 @@ alignment = 0
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
 text = "Settings"
 alignment = 0
 
@@ -127,6 +127,7 @@ alignment = 0
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
 text = "Forfeit"
 alignment = 0
 
@@ -177,26 +178,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
 
-[node name="TooltipLabel" type="Button" parent="Footer/FooterButtonContainer"]
+[node name="TooltipLabel" type="Label" parent="Footer/FooterButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/h_separation = 25
-theme_override_icons/icon = ExtResource("3_b4b0p")
-text = "L - Select
-"
-alignment = 0
+theme_override_colors/font_color = Color(0.14902, 0.145098, 0.12549, 1)
+theme_override_constants/outline_size = 0
+text = "L -Select"
 
-[node name="TooltipLabel2" type="Button" parent="Footer/FooterButtonContainer"]
+[node name="TooltipLabel2" type="Label" parent="Footer/FooterButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-theme_override_constants/h_separation = 25
-theme_override_icons/icon = ExtResource("4_c3jo5")
+theme_override_colors/font_color = Color(0.14902, 0.145098, 0.12549, 1)
+theme_override_constants/outline_size = 0
 text = "X - Confirm"
-alignment = 0
 
 [node name="HSeparator2" type="HSeparator" parent="Footer/FooterButtonContainer"]
 layout_mode = 2

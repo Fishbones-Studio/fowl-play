@@ -1,7 +1,29 @@
-[gd_scene format=3 uid="uid://81fy3yb0j33w"]
+[gd_scene load_steps=7 format=3 uid="uid://81fy3yb0j33w"]
+
+[ext_resource type="Script" uid="uid://5gymr6e3q66h" path="res://ui/settings_menu/settings_menu.gd" id="1_cobfr"]
+[ext_resource type="PackedScene" uid="uid://b732163n2f47p" path="res://ui/settings_menu/sidebar_item.tscn" id="2_424ss"]
+[ext_resource type="PackedScene" uid="uid://bpba8wvtfww4x" path="res://ui/settings_menu/content_item_drop_down.tscn" id="2_kvsec"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="2_p8urx"]
+[ext_resource type="PackedScene" uid="uid://6air6r3l5p61" path="res://ui/settings_menu/content_item_slider.tscn" id="3_2adas"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjkyi"]
+shader = ExtResource("2_p8urx")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.7
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cobfr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gjkyi")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,39 +38,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 85)
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 0
+theme_type_variation = &"SettingsHeaderContainer"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+[node name="HeaderContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 1152.0
+offset_bottom = 71.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Panel/HeaderContainer"]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 
-[node name="SettingsLabel" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer2"]
+[node name="SettingsLabel" type="Label" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 56)
 layout_mode = 2
+theme_type_variation = &"HeaderMedium"
 text = "Settings / Controls"
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer2/HBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/MarginContainer2/HBoxContainer2"]
+[node name="CloseButton" type="Button" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"SettingsExitButton"
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 75
+theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 25
+theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
@@ -60,8 +97,54 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="SidebarItem" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+layout_mode = 2
+
+[node name="SidebarItem2" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+layout_mode = 2
+
+[node name="SidebarItem3" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+layout_mode = 2
+
+[node name="SidebarItem4" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 4.5
+
+[node name="ContentItemSlider" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_2adas")]
+layout_mode = 2
+
+[node name="ContentItemDropdown" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_kvsec")]
+layout_mode = 2
+
+[node name="ContentItemSlider2" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_2adas")]
+layout_mode = 2
+
+[node name="ContentItemDropdown2" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_kvsec")]
+layout_mode = 2
+
+[node name="ContentItemSlider3" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_2adas")]
+layout_mode = 2
+
+[node name="ContentItemDropdown3" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_kvsec")]
+layout_mode = 2
+
+[node name="ContentItemSlider4" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_2adas")]
+layout_mode = 2
+
+[node name="ContentItemDropdown4" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_kvsec")]
+layout_mode = 2
