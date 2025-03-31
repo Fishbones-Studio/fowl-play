@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=4 format=3 uid="uid://cuqpcy333m8d5"]
 
 [ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="1_xkk47"]
+[ext_resource type="PackedScene" uid="uid://b1xvduw1f032y" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.tscn" id="2_4rb57"]
 [ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="2_am5cq"]
 
 [node name="InArenaShop" type="Control" node_paths=PackedStringArray("item_database")]
@@ -17,6 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xkk47")
 item_database = NodePath("UpgradeDatabase")
+item_scene_packed = ExtResource("2_4rb57")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(800, 400)

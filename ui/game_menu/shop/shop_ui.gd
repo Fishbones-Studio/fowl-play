@@ -2,7 +2,6 @@ extends BaseShop
 
 
 func _ready() -> void:
-	item_scene = preload("uid://cc5vmtbby4xy0")
 	shop_items_container = %ShopItemsContainer  
 	check_inventory = true  
 	prevent_duplicates = true 
