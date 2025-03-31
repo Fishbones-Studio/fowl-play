@@ -41,12 +41,14 @@ background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
 ambient_light_energy = 0.01
 
-[node name="GameMenu" type="Node3D"]
+[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("items")]
 script = ExtResource("1_5qgdc")
+items = [NodePath("Inventory"), NodePath("Shop"), NodePath("Flyer")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
 shadow_enabled = true
+sky_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.46062)
@@ -117,14 +119,20 @@ mesh = SubResource("PlaneMesh_og4p7")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ley17")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="Lamp" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
 transform = Transform3D(1, 0, 0, 0, -0.076632, 0.997059, 0, -0.997059, -0.076632, 0.00419521, 6.11901, -0.0586296)
 light_color = Color(1, 1, 0.745098, 1)
 light_energy = 16.0
 shadow_enabled = true
 spot_range = 9.0
+spot_attenuation = 1.18
 spot_angle = 68.9063
 
-[connection signal="input_event" from="Inventory" to="." method="_on_chicken_input_event"]
+[connection signal="input_event" from="Inventory" to="." method="_on_inventory_input_event"]
+[connection signal="mouse_entered" from="Inventory" to="." method="_on_inventory_mouse_entered"]
 [connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
+[connection signal="mouse_entered" from="Flyer" to="." method="_on_flyer_mouse_entered"]
 [connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]
+[connection signal="mouse_entered" from="Shop" to="." method="_on_shop_mouse_entered"]
