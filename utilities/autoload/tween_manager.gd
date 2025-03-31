@@ -5,16 +5,6 @@ const DEFAULT_TRANSITION: Tween.TransitionType = Tween.TRANS_CUBIC
 const DEFAULT_EASE: Tween.EaseType = Tween.EASE_OUT
 
 
-func chain(tweens: Array[Tween]) -> void:
-	assert(tweens.size() > 1, "At least two tweens must be provided")
-	
-	for i in range(tweens.size() - 1):
-		tweens[i].finished.connect(func(): tweens[i+1].play)
-	
-	if tweens.size() > 0:
-		tweens[0].play()
-
-
 func parallel(tweens: Array[Tween]) -> void:
 	assert(tweens.size() > 1, "At least two tweens must be provided")
 	
@@ -51,8 +41,7 @@ func create_move_tween(
 	ease: Tween.EaseType = DEFAULT_EASE
 ) -> Tween:
 	assert(node != null, "Target node cannot be null")
-	assert(axis.to_lower() in ["x", "y", "z"], 
-		   "Axis must be 'x', 'y', or 'z'")
+	assert(axis.to_lower() in ["x", "y", "z"], "Axis must be 'x', 'y', or 'z'")
 	
 	var property := "position:%s" % axis.to_lower()
 	

@@ -9,7 +9,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbgdu"]
 shader = ExtResource("1_mnjdh")
-shader_parameter/blur_amount = 1.0
+shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.2
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
@@ -42,7 +42,7 @@ camera = NodePath("HBoxContainer2/SubViewportContainer/SubViewport/Camera3D")
 footer = NodePath("Footer")
 game_logo_container = NodePath("GameLogoContainer")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BlurRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_jbgdu")
 layout_mode = 1
 anchors_preset = 15
