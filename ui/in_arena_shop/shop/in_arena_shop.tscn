@@ -1,70 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=5 format=3 uid="uid://dwo2wursssv8f"]
 
-[ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="1_xkk47"]
+[ext_resource type="PackedScene" uid="uid://cuqpcy333m8d5" path="res://utilities/shop/base_shop.tscn" id="1_xkk47"]
 [ext_resource type="PackedScene" uid="uid://b1xvduw1f032y" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.tscn" id="2_4rb57"]
-[ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="2_am5cq"]
+[ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="2_am5cq"]
+[ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="3_4rb57"]
 
-[node name="InArenaShop" type="Control" node_paths=PackedStringArray("item_database")]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 71.0
-offset_top = 46.0
-offset_right = -88.0
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_xkk47")
+[node name="InArenaShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_xkk47")]
+script = ExtResource("2_am5cq")
 item_database = NodePath("UpgradeDatabase")
 item_scene_packed = ExtResource("2_4rb57")
 
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(800, 400)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_top = 50
-
-[node name="Label" type="Label" parent="Panel/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_type_variation = &"HeaderLarge"
-text = "Upgrade"
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="ExitButtonButton" type="Button" parent="Panel/MarginContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Exit"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="ShopItemsContainer" type="HBoxContainer" parent="Panel/MarginContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="UpgradeDatabase" parent="." instance=ExtResource("2_am5cq")]
-
-[connection signal="pressed" from="Panel/MarginContainer/MarginContainer/ExitButtonButton" to="." method="_on_exit_button_button_pressed"]
+[node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_4rb57")]

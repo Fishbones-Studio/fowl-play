@@ -8,7 +8,7 @@ extends Control
 
 var shop_items: Array[BaseResource]
 
-var shop_items_container: HBoxContainer
+@onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
 
@@ -36,6 +36,9 @@ func refresh_shop() -> void:
 		shop_items.append(random_item)
 		shop_items_container.add_child(shop_item)
 		shop_item.set_item_data(random_item)
+		
+func close_ui() -> void:
+	queue_free()
 
 func _create_shop_item() -> BaseShopItem:
 	if not item_scene_packed:
@@ -52,3 +55,7 @@ func _create_shop_item() -> BaseShopItem:
 
 func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.items_in_inventory) or (prevent_duplicates and item in shop_items)
+
+
+func _on_exit_button_button_pressed() -> void:
+	close_ui()

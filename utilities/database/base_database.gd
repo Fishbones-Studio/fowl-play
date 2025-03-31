@@ -64,7 +64,7 @@ func load_items(path: String) -> void:
 	
 	for file in files:
 		if file.ends_with(".tres"):
-			var file_path = path + "/"+ file
+			var file_path = path.path_join(file)
 			var res: Resource = load(file_path)
 			if res is BaseResource:
 				items.append(res)

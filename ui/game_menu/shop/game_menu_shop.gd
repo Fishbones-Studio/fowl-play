@@ -1,4 +1,4 @@
-extends BaseShop
+class_name GameMenuShop extends BaseShop
 
 
 func _ready() -> void:
@@ -6,8 +6,4 @@ func _ready() -> void:
 	check_inventory = true  
 	prevent_duplicates = true 
 	# calls baseshop
-	super()
-
-
-func _on_exit_button_button_button_up() -> void:
-	queue_free()
+	#super()
