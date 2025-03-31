@@ -52,7 +52,7 @@ func _load_items() -> void:
 		
 		# Set item properties
 		current_item.name_label.text = item.name
-		current_item.type_label.text = ItemDatabase.item_type_to_string(item.type)
+		current_item.type_label.text = str(item.type).capitalize()
 		current_item.description_label.text = item.description
 		current_item.cost_label.text = str(item.cost)
 		current_item.make_unclickable()

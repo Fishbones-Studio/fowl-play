@@ -18,7 +18,7 @@ func load_scene_resources(path: String, resource_property: String) -> void:
 		# First try to load .tres file
 		for file in sub_dir.get_files():
 			if file.ends_with(".tres"):
-				var resource := load(subdir_path.path_join(file)) as BaseResource
+				var resource : BaseResource = load(subdir_path.path_join(file)) as BaseResource
 				if resource:
 					items.append(resource)
 					resource_loaded = true
