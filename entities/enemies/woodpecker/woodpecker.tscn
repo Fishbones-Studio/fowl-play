@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0o65o2xsk53s"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_k6lf6"]
-[ext_resource type="PackedScene" uid="uid://cnkpsfyjlxmq1" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
+[ext_resource type="PackedScene" uid="uid://d4cy221n2xsvf" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1t2bg"]
 radius = 1.095
