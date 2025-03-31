@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -14,6 +14,13 @@
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_yjg5f"]
 color = Color(0.529412, 0.501961, 0.345098, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvx0j"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtbu8"]
 content_margin_left = 2.0
@@ -66,6 +73,16 @@ shadow_color = Color(0, 0, 0, 0.0588235)
 shadow_size = 1
 shadow_offset = Vector2(0, -1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bdnh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoenm"]
+bg_color = Color(0.938624, 0.925614, 0.933812, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [resource]
 Button/colors/font_color = Color(0.529412, 0.501961, 0.345098, 1)
 Button/constants/outline_size = 5
@@ -78,6 +95,7 @@ ConfirmationContainer/base_type = &"PanelContainer"
 ConfirmationContainer/styles/panel = ExtResource("4_dagba")
 HSeparator/constants/separation = 25
 HSeparator/styles/separator = SubResource("StyleBoxLine_yjg5f")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_tvx0j")
 HeaderLarge/font_sizes/font_size = 75
 HeaderMedium/font_sizes/font_size = 50
 HeaderSmall/font_sizes/font_size = 30
@@ -109,15 +127,16 @@ Panel/styles/panel = SubResource("StyleBoxFlat_hf3i3")
 PanelContainer/styles/panel = ExtResource("5_xtbu8")
 PauseMenuButton/base_type = &"Button"
 PauseMenuButton/colors/font_color = Color(1, 1, 1, 1)
+PauseMenuButton/colors/font_focus_color = Color(0.14902, 0.145098, 0.12549, 1)
 PauseMenuButton/colors/font_hover_color = Color(0.14902, 0.145098, 0.12549, 1)
 PauseMenuButton/colors/font_pressed_color = Color(1, 1, 1, 1)
-PauseMenuButton/colors/icon_focus_color = Color(0, 0, 0, 0)
 PauseMenuButton/colors/icon_normal_color = Color(0, 0, 0, 0)
 PauseMenuButton/constants/h_separation = 45
 PauseMenuButton/constants/icon_max_width = 33
 PauseMenuButton/constants/outline_size = 0
 PauseMenuButton/font_sizes/font_size = 36
 PauseMenuButton/icons/icon = ExtResource("6_7adcq")
+PauseMenuButton/styles/focus = ExtResource("8_6bdnh")
 PauseMenuButton/styles/hover = ExtResource("8_6bdnh")
 PauseMenuButton/styles/normal = ExtResource("7_7adcq")
 PauseMenuButton/styles/pressed = ExtResource("9_7adcq")
@@ -128,4 +147,11 @@ PauseMenuLogoContainer/constants/margin_bottom = 50
 PauseMenuLogoContainer/constants/margin_left = 50
 PauseMenuLogoContainer/constants/margin_right = 50
 PauseMenuLogoContainer/constants/margin_top = 50
+SettingsContentLabel/base_type = &"Label"
+SettingsContentLabel/colors/font_color = Color(0.145098, 0.14902, 0.12549, 1)
+SettingsContentLabel/constants/outline_size = 0
+SettingsContentLabel/font_sizes/font_size = 36
+SettingsContentLabel/styles/normal = SubResource("StyleBoxFlat_6bdnh")
+SettingsContentPanel/base_type = &"Panel"
+SettingsContentPanel/styles/panel = SubResource("StyleBoxFlat_yoenm")
 VBoxContainer/constants/separation = 10

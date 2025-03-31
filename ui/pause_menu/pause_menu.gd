@@ -31,13 +31,25 @@ func _init_chicken():
 
 
 func _setup_enter_and_exit_transitions():
-	var buttons = find_children("", "Button", true)
+	var buttons: Array[Node] = find_children("", "Button", true)
 	
-	for button in buttons:
-		button.mouse_entered.connect(func(): 
+	for button: Button in buttons:
+		var hover_sylebox: StyleBox = preload("uid://do8svyygf5k1e")
+		
+		button.focus_entered.connect(func():
+			TweenManager.create_scale_tween(null, button, Vector2(1.1, 1.1)))
+		button.focus_exited.connect(func():
+			TweenManager.create_scale_tween(null, button, Vector2(1.0, 1.0)))
+		
+		button.mouse_entered.connect(func():
 			TweenManager.create_scale_tween(null, button, Vector2(1.1, 1.1)))
 		button.mouse_exited.connect(func():
 			TweenManager.create_scale_tween(null, button, Vector2(1.0, 1.0)))
+		
+		button.button_down.connect(func():
+			button.add_theme_stylebox_override('focus', StyleBoxEmpty.new()))
+		button.button_up.connect(func():
+			button.add_theme_stylebox_override('focus', hover_sylebox))
 	
 	game_logo_container.mouse_entered.connect(func():
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.1, 1.1)))

@@ -10,8 +10,8 @@ var shop_items: Array[Resource]
 var shop_items_container: HBoxContainer
 var item_database: Node
 var item_scene: PackedScene
-var check_inventory: bool = true  
-var prevent_duplicates: bool = true  
+var check_inventory: bool = true
+var prevent_duplicates: bool = true
 
 func _ready() -> void:
 	GameManager.prosperity_eggs = 9000

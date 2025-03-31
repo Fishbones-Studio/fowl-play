@@ -177,24 +177,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 8.0
 
-[node name="PlaceholderButton1" type="Button" parent="Footer/FooterButtonContainer"]
+[node name="TooltipLabel" type="Button" parent="Footer/FooterButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_override_constants/h_separation = 25
 theme_override_icons/icon = ExtResource("3_b4b0p")
-text = "placeholder"
+text = "L - Select
+"
 alignment = 0
 
-[node name="PlaceholderButton2" type="Button" parent="Footer/FooterButtonContainer"]
+[node name="TooltipLabel2" type="Button" parent="Footer/FooterButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 theme_override_constants/h_separation = 25
 theme_override_icons/icon = ExtResource("4_c3jo5")
-text = "placeholder"
+text = "X - Confirm"
 alignment = 0
 
 [node name="HSeparator2" type="HSeparator" parent="Footer/FooterButtonContainer"]

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b732163n2f47p"]
+
+[node name="SidebarItem" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(256, 56)
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 14.0
+theme_type_variation = &"PauseMenuButton"
+text = "Button"
