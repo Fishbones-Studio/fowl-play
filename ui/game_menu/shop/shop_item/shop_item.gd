@@ -14,15 +14,20 @@ func _ready() -> void:
 
 func set_item_data(item: Resource) -> void:
 	if not (item is BaseResource or item is InRunUpgradeResource):
+		if item == null:
+			push_error("Item is null")
 		push_error("Item is not of appropriate type (BaseResource/InRunUpgradeResource), but instead: ", item.get_class())
 		return
+	print("deaww")
 	name_label.text = item.name
 	type_label.text = str(item.type).capitalize()
 	cost_label.text = str(item.cost)
 	description_label.text = item.description
 	shop_item = item
+	print(shop_item)
 
 func attempt_purchase() -> void:
+	print("attempting purchase")
 	if purchase_in_progress or not can_afford():
 		return
 

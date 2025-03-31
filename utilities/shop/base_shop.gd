@@ -14,7 +14,6 @@ var prevent_duplicates: bool = true
 
 func _ready() -> void:
 	GameManager.prosperity_eggs = 9000
-	randomize()
 	refresh_shop()
 
 func refresh_shop() -> void:
@@ -22,7 +21,7 @@ func refresh_shop() -> void:
 		push_error("Shop container is not assigned!")
 		return
 
-	while shop_items.size() < max_items:
+	for x in range(shop_items.size(), max_items):
 		var shop_item: BaseShopItem = _create_shop_item()
 		if not shop_item:
 			continue  # Skip if item creation failed
@@ -30,12 +29,15 @@ func refresh_shop() -> void:
 		var random_item: BaseResource = item_database.get_random_item()
 
 		if _should_skip_item(random_item):
+			print("Skipping item: ", random_item.name)
 			shop_item.queue_free()
 			continue
 
+		print("Adding item: ", random_item.name)
 		shop_items.append(random_item)
 		shop_items_container.add_child(shop_item)
 		shop_item.set_item_data(random_item)
+		
 		
 func close_ui() -> void:
 	queue_free()

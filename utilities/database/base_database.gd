@@ -16,7 +16,6 @@ func _ready() -> void:
 	if items.is_empty():
 		push_warning("Warning: No items loaded in the database")
 	else:
-		print(items)
 		for item in items:
 			print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
 
