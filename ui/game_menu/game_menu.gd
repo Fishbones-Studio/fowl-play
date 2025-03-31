@@ -7,8 +7,11 @@ extends Node3D
 @export var flicker_timer: Timer
 @export var audio_player: AudioStreamPlayer      
 
+## Highlight variables
 var highlight_scale_factor: float = 1.1 
 var highlight_color: Color = Color.YELLOW
+
+## index variables
 ## Keeps track of the currently selected item.
 var current_index: int = 0 
 var is_keyboard_navigation_active: bool = false 
@@ -18,10 +21,10 @@ var original_scales: Dictionary = {}
 var original_label_colors: Dictionary = {}
 ## Tracks which item the mouse is hovering over.
 var mouse_hover_index: int = -1 
+
+## flickering variables
 var is_flickering: bool = false
 var original_energy: float
-
-
 
 
 ## Called when the node is added to the scene.
@@ -97,10 +100,18 @@ func find_label_in_item(item: Node) -> Label3D:
 			return found
 	return null
 
+
 ## Handles user input events.
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		is_keyboard_navigation_active = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# Check if mouse moved away from all items
+		if mouse_hover_index == -1:
+			reset_highlights()
+			
+	if is_keyboard_navigation_active == true:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	if event.is_action_pressed("move_left") or event.is_action_pressed("joypad_button_left"):
 		activate_keyboard_navigation()
@@ -175,22 +186,35 @@ func select_current_item() -> void:
 
 ## Handles mouse hover highlighting.
 func _mouse_hover_highlight(item: Area3D) -> void:
+	var found_index = -1
 	for i in items.size():
 		if items[i] == item:
-			mouse_hover_index = i
-			if not is_keyboard_navigation_active:
-				current_index = i
-				highlight_current_item()
+			found_index = i
 			break
+	
+	if found_index != -1:
+		mouse_hover_index = found_index
+		if not is_keyboard_navigation_active:
+			current_index = found_index
+			highlight_current_item()
+	else:
+		# Mouse exited all items
+		mouse_hover_index = -1
+		if not is_keyboard_navigation_active:
+			reset_highlights()
+
 
 func _on_inventory_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	_handle_item_click(items[0], event)
 
+
 func _on_shop_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	_handle_item_click(items[1], event)
 
+
 func _on_flyer_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	_handle_item_click(items[2], event)
+
 
 func _handle_item_click(item: Area3D, event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -198,12 +222,32 @@ func _handle_item_click(item: Area3D, event: InputEvent) -> void:
 		current_index = items.find(item)
 		select_current_item()
 
+
 ## Mouse hover events for specific items.
 func _on_inventory_mouse_entered() -> void:
 	_mouse_hover_highlight(items[0]) 
 
+
 func _on_shop_mouse_entered() -> void:
 	_mouse_hover_highlight(items[1])  
 
+
 func _on_flyer_mouse_entered() -> void:
 	_mouse_hover_highlight(items[2])
+
+
+func _on_inventory_mouse_exited() -> void:
+	_check_mouse_exit(items[0])
+
+func _on_shop_mouse_exited() -> void:
+	_check_mouse_exit(items[1])
+
+func _on_flyer_mouse_exited() -> void:
+	_check_mouse_exit(items[2])
+
+func _check_mouse_exit(item: Area3D) -> void:
+	# Only reset if the exited item was the one we were hovering over
+	if mouse_hover_index != -1 and items[mouse_hover_index] == item:
+		mouse_hover_index = -1
+		if not is_keyboard_navigation_active:
+			reset_highlights()
