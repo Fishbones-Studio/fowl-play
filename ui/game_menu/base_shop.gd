@@ -4,11 +4,12 @@ extends Control
 
 
 @export var max_items: int = 5
-var shop_items: Array[Resource]
+@export var item_database: BaseDatabase
+var shop_items: Array[BaseResource]
 
 # These must be set in child classes in ready function
 var shop_items_container: HBoxContainer
-var item_database: Node
+
 var item_scene: PackedScene
 var check_inventory: bool = true  
 var prevent_duplicates: bool = true  
@@ -19,14 +20,13 @@ func _ready() -> void:
 	refresh_shop()
 
 
-
 func refresh_shop() -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
 
 
-	var items_in_shop = 0
+	var items_in_shop: int = 0
 	while items_in_shop < max_items:
 		var shop_item = item_scene.instantiate()
 		

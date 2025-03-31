@@ -1,5 +1,7 @@
 extends Control
 
+var item_database : BaseDatabase = load("uid://cq2fdalpfdd26").new()
+
 @onready var grid_container: GridContainer = %GridContainer
 
 
@@ -22,7 +24,7 @@ func _update_inventory() -> void:
 		
 		# Set item properties
 		inventory_item.name_label.text = item.name
-		inventory_item.type_label.text = ItemDatabase.item_type_to_string(item.type)
+		inventory_item.type_label.text = item_database.item_type_to_string(item.type)
 		inventory_item.description_label.text = item.description
 
 

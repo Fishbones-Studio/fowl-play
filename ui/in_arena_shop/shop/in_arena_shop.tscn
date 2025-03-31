@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=3 format=3 uid="uid://cuqpcy333m8d5"]
 
 [ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="1_xkk47"]
+[ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="2_am5cq"]
 
-[node name="InArenaShop" type="Control"]
+[node name="InArenaShop" type="Control" node_paths=PackedStringArray("item_database")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -15,6 +16,7 @@ offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xkk47")
+item_database = NodePath("UpgradeDatabase")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(800, 400)
@@ -60,5 +62,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="UpgradeDatabase" parent="." instance=ExtResource("2_am5cq")]
 
 [connection signal="pressed" from="Panel/MarginContainer/MarginContainer/ExitButtonButton" to="." method="_on_exit_button_button_pressed"]

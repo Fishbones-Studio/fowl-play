@@ -3,6 +3,7 @@ extends PanelContainer
 
 var purchase_in_progress: bool = false
 var shop_item: Resource
+var item_database : BaseDatabase
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
@@ -12,10 +13,13 @@ var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 @onready var cost_label: Label = %CostLabel
 @onready var description_label: Label = %DescriptionLabel
 
+func _ready() -> void:
+	item_database = load("uid://cq2fdalpfdd26").new()
+
 
 func set_item(item: Resource) -> void:
 	name_label.text = item.name
-	type_label.text =  ItemDatabase.item_type_to_string(item.type)
+	type_label.text =  item_database.item_type_to_string(item.type)
 	cost_label.text = str(item.cost)
 	description_label.text = item.description
 	
@@ -34,7 +38,7 @@ func _buy_item() -> void:
 		purchase_in_progress = false
 		return
 	
-	ItemDatabase.get_item(shop_item)
+	item_database.get_item(shop_item)
 	
 	var existing_items: Array[Resource] = Inventory.get_item_by_type(shop_item.type)
 	

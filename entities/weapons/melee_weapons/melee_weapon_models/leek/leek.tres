@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cb3vabpn2qg5e"]
+
+[ext_resource type="Script" path="res://entities/weapons/melee_weapons/weapon_resource.gd" id="1_nt88w"]
+
+[resource]
+script = ExtResource("1_nt88w")
+damage = 5
+windup_time = 0.3
+attack_duration = 1.0
+cooldown_time = 0.02
+name = "Leek"
+drop_chance = 0
+cost = 0
+description = "PlaceHolder"
+type = 0
+model_uid = "uid://bymaeu4dtl7ex"

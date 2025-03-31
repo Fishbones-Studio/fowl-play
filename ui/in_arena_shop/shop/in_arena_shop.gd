@@ -4,7 +4,6 @@ extends BaseShop
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	item_database = UpgradeDatabase
 	item_scene = load("uid://b1xvduw1f032y")
 	shop_items_container = %ShopItemsContainer
 	check_inventory = false  

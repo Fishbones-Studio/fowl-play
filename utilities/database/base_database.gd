@@ -2,9 +2,7 @@
 class_name BaseDatabase
 extends Node
 
-const ITEM_ENUMS = preload("uid://3mucjbtp3r4g")
-
-var items: Array[Resource] = []
+var items: Array[BaseResource] = []
 
 
 # Child classes should override this to load their specific resources
@@ -45,13 +43,17 @@ func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
 	# Turn item_string from UPPER_CASE to Title Case
 	return item_string.capitalize()
 
-
-func _load_items(path: String) -> void:
+func get_files_from_path(path: String) -> PackedStringArray:
 	var files: PackedStringArray = ResourceLoader.list_directory(path)
-	
+
 	if not files:
-		print("An error occurred when trying to access path: ", path)
-		return
+		push_error("An error occurred when trying to access path: ", path)
+		
+	return files
+
+
+func load_items(path: String) -> void:
+	var files: PackedStringArray = get_files_from_path(path)
 	
 	for file in files:
 		if file.ends_with(".tres"):

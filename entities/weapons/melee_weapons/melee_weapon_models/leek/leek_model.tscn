@@ -1,21 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bymaeu4dtl7ex"]
+[gd_scene load_steps=8 format=3 uid="uid://bymaeu4dtl7ex"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_spb7y"]
-[ext_resource type="Script" path="res://entities/weapons/melee_weapons/weapon_resource.gd" id="2_sj0ep"]
+[ext_resource type="Resource" uid="uid://cb3vabpn2qg5e" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_fdxpv"]
 [ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.glb" id="3_sj0ep"]
-
-[sub_resource type="Resource" id="Resource_c1sn0"]
-script = ExtResource("2_sj0ep")
-damage = 5
-windup_time = 0.3
-attack_duration = 1.0
-cooldown_time = 0.02
-name = "Leek"
-drop_chance = 0
-cost = 0
-description = "PlaceHolder"
-type = 0
-model_uid = "uid://bymaeu4dtl7ex"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sj0ep"]
 size = Vector3(5, 5, 4)
@@ -59,7 +46,7 @@ _data = {
 
 [node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_spb7y")]
 animation_player = NodePath("AnimationPlayer")
-current_weapon = SubResource("Resource_c1sn0")
+current_weapon = ExtResource("2_fdxpv")
 
 [node name="leek" parent="." index="0" instance=ExtResource("3_sj0ep")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
