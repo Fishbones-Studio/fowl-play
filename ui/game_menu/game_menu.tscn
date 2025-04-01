@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=20 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
 [ext_resource type="AudioStream" uid="uid://bpkov0e1nvibh" path="res://sound_effects/328013__pfranzen__irritating-flourescent-light-hum.ogg" id="3_5qgdc"]
+[ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/game_menu/game_menu_handlers/lamp_controller.gd" id="3_efok4"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
+[ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/game_menu/game_menu_handlers/input_handler.gd" id="5_t1gii"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sulwi"]
 
@@ -42,12 +44,11 @@ background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
 ambient_light_energy = 0.01
 
-[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("items", "flicker_light", "flicker_timer", "audio_player")]
+[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("items", "input_handler", "light_handler")]
 script = ExtResource("1_5qgdc")
 items = [NodePath("Inventory"), NodePath("Shop"), NodePath("Flyer")]
-flicker_light = NodePath("Lamp/SpotLight3D")
-flicker_timer = NodePath("Lamp/FlickerTimer")
-audio_player = NodePath("AudioStreamPlayer")
+input_handler = NodePath("InputHandler")
+light_handler = NodePath("Lamp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
@@ -119,7 +120,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ley17")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ley17")
 
-[node name="Lamp" type="Node3D" parent="."]
+[node name="Lamp" type="Node3D" parent="." node_paths=PackedStringArray("flicker_light", "flicker_timer", "audio_player")]
+script = ExtResource("3_efok4")
+flicker_light = NodePath("SpotLight3D")
+flicker_timer = NodePath("FlickerTimer")
+audio_player = NodePath("../AudioStreamPlayer")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
 transform = Transform3D(1, 0, 0, 0, -0.076632, 0.997059, 0, -0.997059, -0.076632, 0.00419521, 6.11901, -0.0586296)
@@ -136,12 +141,5 @@ spot_angle = 68.9063
 stream = ExtResource("3_5qgdc")
 volume_db = -5.824
 
-[connection signal="input_event" from="Inventory" to="." method="_on_inventory_input_event"]
-[connection signal="mouse_entered" from="Inventory" to="." method="_on_inventory_mouse_entered"]
-[connection signal="mouse_exited" from="Inventory" to="." method="_on_inventory_mouse_exited"]
-[connection signal="input_event" from="Flyer" to="." method="_on_flyer_input_event"]
-[connection signal="mouse_entered" from="Flyer" to="." method="_on_flyer_mouse_entered"]
-[connection signal="mouse_exited" from="Flyer" to="." method="_on_flyer_mouse_exited"]
-[connection signal="input_event" from="Shop" to="." method="_on_shop_input_event"]
-[connection signal="mouse_entered" from="Shop" to="." method="_on_shop_mouse_entered"]
-[connection signal="mouse_exited" from="Shop" to="." method="_on_shop_mouse_exited"]
+[node name="InputHandler" type="Node3D" parent="."]
+script = ExtResource("5_t1gii")
