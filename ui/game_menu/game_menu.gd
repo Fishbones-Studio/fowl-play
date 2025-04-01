@@ -1,5 +1,6 @@
 extends Node3D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -30,4 +31,4 @@ func _on_shop_input_event(_camera: Node, event: InputEvent, _event_position: Vec
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked on ", name)
-			SignalManager.switch_ui_scene.emit("uid://c4pohtsnom3x7")
+			SignalManager.switch_ui_scene.emit("uid://bir1j5qouane0")

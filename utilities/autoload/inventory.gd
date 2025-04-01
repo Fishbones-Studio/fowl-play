@@ -1,16 +1,13 @@
 extends Node
 ## Autoload script to manage the inventory
-const SAVE_FILE_PATH = "user://inventory_save.json"
+const SAVE_FILE_PATH : String = "user://inventory_save.json"
 var items_in_inventory: Array[Resource] = []
 
-func _ready():
-	add_to_group("base_database")
-	
+
 ## Add an item to the player's inventory
 func add_item(item: Resource) -> void:
-	if item.name not in items_in_inventory.map(func(i): return i.name):
-		items_in_inventory.append(item)
-	save_inventory()
+	items_in_inventory.append(item)
+	save_intentory()
 
 
 ## Get all items from the player's inventory
@@ -20,9 +17,7 @@ func get_items() -> Array[Resource]:
 
 ## Get an item based on the name, else return null
 func get_item_by_name(item_name: String) -> Resource:
-	print("Searching for item:", item_name)
 	for item in items_in_inventory:
-		print("Checking:", item_name)
 		if item.name == item_name:
 			print("item found: ", item)
 			return item
