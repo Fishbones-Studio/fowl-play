@@ -7,7 +7,7 @@ extends BasePlayerMovementState
 
 var _stamina_cost: int
 
-var _dash_available: bool = true
+
 var _is_dashing: bool = false
 var _dash_direction: Vector3
 
@@ -21,14 +21,14 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	_stamina_cost = movement_component.dash_stamina_cost
 	
 	# Handle state transitions
-	if not _dash_available or player.stats.current_stamina < _stamina_cost:
-		print("Dash available: ", _dash_available)
+	if not movement_component.dash_available or player.stats.current_stamina < _stamina_cost:
+		print("Dash available: ", movement_component.dash_available)
 		SignalManager.player_transition_state.emit(previous_state.state_type, information)
 		return
 	
 	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost))
 	
-	_dash_available = false
+	movement_component.dash_available = false
 	_is_dashing = true
 	
 	_dash_direction = get_player_direction()
@@ -76,5 +76,5 @@ func _on_dash_duration_timer_timeout():
 
 
 func _on_dash_cooldown_timer_timeout():
-	print("Dash available: ", _dash_available)
-	_dash_available = true
+	print("Dash available: ", movement_component.dash_available)
+	movement_component.dash_available = true
