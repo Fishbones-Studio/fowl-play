@@ -21,15 +21,14 @@ func _on_area_3d_body_entered(_body: ChickenPlayer) -> void:
 
 
 func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
-		label.visible = false
-		player_in_area = false
+	label.visible = false
+	player_in_area = false
 
 
 func open_shop():
-	SignalManager.add_ui_scene.emit("uid://cuqpcy333m8d5")
+	SignalManager.add_ui_scene.emit("uid://dwo2wursssv8f")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
-
 
 
 func _input(event):
