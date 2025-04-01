@@ -3,11 +3,16 @@ extends Node
 const SAVE_FILE_PATH : String = "user://inventory_save.json"
 var items_in_inventory: Array[Resource] = []
 
+func _ready() -> void:
+	# Loading the inventory when the game starts
+	load_inventory()
+	pass
+
 
 ## Add an item to the player's inventory
 func add_item(item: Resource) -> void:
 	items_in_inventory.append(item)
-	save_intentory()
+	save_inventory()
 
 
 ## Get all items from the player's inventory
@@ -51,7 +56,7 @@ func save_inventory() -> void:
 		else:
 			print("WARNING: Item has no resource path!", item)
 	#Write save_data to a file
-	var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
+	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data))
 	file.close()
 	print("Inventory Saved! ", save_data)
@@ -62,8 +67,8 @@ func load_inventory() -> void:
 		print("No save file found. ")
 		return
 	#Store all items into save_data
-	var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
-	var save_data = JSON.parse_string(file.get_as_text())
+	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
+	var save_data        = JSON.parse_string(file.get_as_text())
 	file.close()
 	
 	if not save_data or not "items" in save_data:
@@ -74,7 +79,7 @@ func load_inventory() -> void:
 	#Loop save_data for all items and add them to the inventory
 	for item_path in save_data["items"]:
 		if ResourceLoader.exists(item_path):
-			var item = load(item_path) as Resource
+			var item: Resource = load(item_path) as Resource
 			items_in_inventory.append(item)
 		else:
 			print("WARNING: Item resource not found:", item_path)

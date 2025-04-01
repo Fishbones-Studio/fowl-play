@@ -1,13 +1,9 @@
 extends Control
 
-var item_database: BaseDatabase = load("uid://cq2fdalpfdd26").new()
-
 @onready var grid_container: GridContainer = %GridContainer
-const SAVE_FILE_PATH = "user://inventory_save.json"
 
 func _ready() -> void:
 	await get_tree().process_frame
-	Inventory.load_inventory()
 	_update_inventory()
 
 
@@ -32,6 +28,3 @@ func _update_inventory() -> void:
 
 func _on_button_pressed() -> void:
 	queue_free()
-	
-func _on_save_button_pressed() -> void:
-	Inventory.save_inventory()
