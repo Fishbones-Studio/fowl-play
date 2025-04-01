@@ -8,6 +8,7 @@ func _ready() -> void:
 
 
 func _update_inventory() -> void:
+	print("Updating chickeninventory")
 	# Empty the UI of the inventory
 	for child in grid_container.get_children():
 		child.queue_free()
