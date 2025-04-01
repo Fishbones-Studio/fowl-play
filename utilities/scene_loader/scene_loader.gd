@@ -3,6 +3,7 @@
 ## This allows for a single point of entry for all scenes, seperate from UI elements
 extends Node
 
+
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
 

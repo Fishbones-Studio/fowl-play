@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://cn06ry3jiuqki"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/in_arena_shop/resources/in_run_upgrade_resource.gd" id="1_a4p5s"]
+
+[resource]
+script = ExtResource("1_a4p5s")
+health_bonus = 0
+speed_bonus = 0.0
+damage_bonus = 25.0
+stamina_bonus = 0.0
+name = "TalonFury"
+drop_chance = 30
+cost = 1500
+description = "Unleash the power of  the fowl beast"
+type = 0
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

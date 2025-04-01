@@ -111,7 +111,7 @@ func _on_select_current_item():
 			SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
 			SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 		"Shop":
-			SignalManager.switch_ui_scene.emit("uid://c4pohtsnom3x7")
+			SignalManager.switch_ui_scene.emit("uid://bir1j5qouane0")
 		"Inventory":
 			SignalManager.switch_ui_scene.emit("uid://dvkxcgdk0goul")
 

@@ -4,6 +4,7 @@
 class_name BaseState
 extends Node
 
+
 ## Handles input events for state-specific behavior.
 ##
 ## **Must be overridden** in child classes that need input handling.

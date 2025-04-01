@@ -44,7 +44,7 @@ background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
 ambient_light_energy = 0.01
 
-[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("items", "input_handler", "light_handler")]
+[node name="GameMenu" type="Node3D"]
 script = ExtResource("1_5qgdc")
 items = [NodePath("Inventory"), NodePath("Shop"), NodePath("Flyer")]
 input_handler = NodePath("InputHandler")
@@ -55,10 +55,12 @@ script = ExtResource("5_t1gii")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
 shadow_enabled = true
 sky_mode = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.46062)
 transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.46062)
 
 [node name="Table" type="MeshInstance3D" parent="."]
@@ -67,13 +69,20 @@ mesh = SubResource("BoxMesh_sulwi")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Inventory" type="Area3D" parent="."]
+[node name="Inventory" type="Area3D" parent="."]
 transform = Transform3D(0.12886, -0.00380412, 0.214198, -0.00290748, 0.249907, 0.00618742, -0.214212, -0.00568034, 0.128767, -1.49409, 3.21736, -0.0533764)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Inventory"]
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Inventory"]
 mesh = SubResource("BoxMesh_efok4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inventory"]
 shape = SubResource("BoxShape3D_efok4")
+
+[node name="Inventory Label" type="Label3D" parent="Inventory"]
+transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
+text = "Inventory"
 
 [node name="Inventory Label" type="Label3D" parent="Inventory"]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)

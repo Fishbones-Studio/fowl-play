@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuqpcy333m8d5"]
+
+[ext_resource type="Script" uid="uid://ddkveip8o00su" path="res://utilities/shop/base_shop.gd" id="1_jjkbf"]
+[ext_resource type="PackedScene" uid="uid://rlw81wk5qpko" path="res://ui/popup_panel/popup_panel.tscn" id="2_jh0jc"]
+
+[node name="BaseShop" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jjkbf")
+
+[node name="PopupPanel" parent="." instance=ExtResource("2_jh0jc")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="TitleLabel" type="Label" parent="PopupPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLarge"
+text = "Upgrade"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopItemsContainer" type="HBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Spacer" type="Control" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ExitButtonButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Exit"
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/VBoxContainer/ExitButtonButton" to="." method="_on_exit_button_button_pressed"]
