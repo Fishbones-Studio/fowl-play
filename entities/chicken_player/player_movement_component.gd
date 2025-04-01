@@ -11,6 +11,7 @@ extends BaseMovementComponent
 @export var dash_stamina_cost: int = 30
 @export var glide_stamina_cost: int = 20
 
+var dash_available: bool = true
 var jump_available: bool = true
 
 
