@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://bir1j5qouane0"]
+
+[ext_resource type="PackedScene" uid="uid://cuqpcy333m8d5" path="res://utilities/shop/base_shop.tscn" id="1_8of6b"]
+[ext_resource type="Script" uid="uid://blkyks16ibjax" path="res://ui/game_menu/shop/game_menu_shop.gd" id="2_l1wyw"]
+[ext_resource type="PackedScene" uid="uid://cpkyls5oiljn8" path="res://utilities/database/item_database/item_database.tscn" id="2_lxfyn"]
+[ext_resource type="PackedScene" uid="uid://cc5vmtbby4xy0" path="res://ui/game_menu/shop/shop_item/shop_item.tscn" id="3_l1wyw"]
+
+[node name="GameMenuShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_8of6b")]
+script = ExtResource("2_l1wyw")
+item_database = NodePath("ItemDatabase")
+item_scene_packed = ExtResource("3_l1wyw")
+
+[node name="ItemDatabase" parent="." index="1" instance=ExtResource("2_lxfyn")]
