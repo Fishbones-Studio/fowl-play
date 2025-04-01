@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://db68ojqri7xqs"]
+
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_rk4tr"]
+[ext_resource type="PackedScene" uid="uid://cwgmtrf1rjw48" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb" id="2_aea71"]
+[ext_resource type="Resource" uid="uid://daurair44d7r4" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tres" id="2_vmu4i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmu4i"]
+
+[sub_resource type="Animation" id="Animation_bax8f"]
+resource_name = "ATTACK"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("butter_knife")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.05, 1, 0, 0, 1, 0.2, 1, 0, 0, -2, 0.3, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_wtiuw"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("butter_knife")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpbh2"]
+_data = {
+&"ATTACK": SubResource("Animation_bax8f"),
+&"RESET": SubResource("Animation_wtiuw")
+}
+
+[node name="ButterKnife" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_rk4tr")]
+animation_player = NodePath("AnimationPlayer")
+current_weapon = ExtResource("2_vmu4i")
+
+[node name="butter_knife" parent="." index="0" instance=ExtResource("2_aea71")]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, 1.5, 0, -1.5, -6.55671e-08, 0, 0, -0.825175)
+shape = SubResource("CapsuleShape3D_vmu4i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_bpbh2")
+}

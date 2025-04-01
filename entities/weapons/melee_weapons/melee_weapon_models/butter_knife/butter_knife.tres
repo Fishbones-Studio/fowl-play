@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://daurair44d7r4"]
+
+[ext_resource type="Script" path="res://entities/weapons/melee_weapons/weapon_resource.gd" id="1_ry0ng"]
+
+[resource]
+script = ExtResource("1_ry0ng")
+damage = 5
+windup_time = 0.0
+attack_duration = 0.1
+cooldown_time = 0.0
+name = "Butter Knife"
+drop_chance = 0
+cost = 0
+description = "Stabby knife"
+type = 0
+model_uid = "uid://db68ojqri7xqs"
