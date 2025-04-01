@@ -1,5 +1,6 @@
-extends Node
 ## Autoload script to manage the inventory
+extends Node
+## Saving the inventory to a resource file on the user's system
 const SAVE_FILE_PATH : String = "user://inventory_save.tres"
 var items_in_inventory: Array[BaseResource] = []
 
@@ -37,8 +38,8 @@ func remove_item(item: BaseResource) -> void:
 
 
 func save_inventory() -> void:
-	var inventory_data = InventoryData.new()
-	inventory_data.items = items_in_inventory.duplicate(true)
+	var inventory_data = InventoryData.new() # creating a new instance of InventoryData resource
+	inventory_data.items = items_in_inventory.duplicate(true) # Deep copy, aka clone. duplicate(false) would be a shallow copy, aka reference copy
 
 	var error: int = ResourceSaver.save(inventory_data, SAVE_FILE_PATH)
 	if error != OK:
@@ -48,7 +49,7 @@ func save_inventory() -> void:
 func load_inventory() -> void:
 	if ResourceLoader.exists(SAVE_FILE_PATH):
 		var inventory_data: InventoryData = ResourceLoader.load(SAVE_FILE_PATH)
-		items_in_inventory = inventory_data.items.duplicate(true)
+		items_in_inventory = inventory_data.items.duplicate(true) # Deep copy, aka clone. duplicate(false) would be a shallow copy, aka reference copy
 		print("Inventory loaded successfully, with: " + str(items_in_inventory.size()) + " items")
 	else:
 		print("No inventory save file found, starting fresh")
