@@ -26,7 +26,25 @@ albedo_texture = ExtResource("3_l20ko")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yeww"]
 
-[node name="GameMenu" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1gii"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_og4p7"]
+material = SubResource("StandardMaterial3D_t1gii")
+size = Vector2(20, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6dc34"]
+size = Vector3(20, 25, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley17"]
+albedo_color = Color(0.511632, 0.318083, 0, 1)
+
+[sub_resource type="Environment" id="Environment_ley17"]
+background_mode = 1
+background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
+ambient_light_energy = 0.01
+
+[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("items", "input_handler", "light_handler")]
 script = ExtResource("1_5qgdc")
 items = [NodePath("Inventory"), NodePath("Shop"), NodePath("Flyer")]
 input_handler = NodePath("InputHandler")
@@ -113,12 +131,6 @@ audio_player = NodePath("AudioStreamPlayer")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
 transform = Transform3D(1, 0, 0, 0, -0.076632, 0.997059, 0, -0.997059, -0.076632, 0.00419521, 6.11901, -0.0586296)
-light_color = Color(1, 1, 0.745098, 1)
-light_energy = 16.0
-shadow_enabled = true
-spot_range = 9.0
-spot_attenuation = 1.18
-spot_angle = 68.9063
 
 [node name="FlickerTimer" type="Timer" parent="Lamp"]
 
