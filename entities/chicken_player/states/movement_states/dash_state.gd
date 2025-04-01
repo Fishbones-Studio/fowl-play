@@ -6,8 +6,6 @@
 extends BasePlayerMovementState
 
 var _stamina_cost: int
-
-
 var _is_dashing: bool = false
 var _dash_direction: Vector3
 
@@ -51,23 +49,23 @@ func physics_process(delta: float) -> void:
 	# Handle state transitions
 	if get_jump_velocity() > 0 and movement_component.jump_available:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
-	
+
 	if not player.is_on_floor():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
-	
-	var direction = get_player_direction()
-	
+
+	var direction: Vector3 = get_player_direction()
+
 	if direction == Vector3.ZERO:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
-	
+
 	if is_sprinting() and player.stats.current_stamina > 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
-	
+
 	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
-	
+
 	player.move_and_slide()
 
 

@@ -4,12 +4,10 @@ extends BaseResource
 
 # Weapon Attributes
 @export var damage: int
-
 # Timing Variables
-@export var windup_time: float 
-@export var attack_duration: float 
-@export var cooldown_time: float 
-
+@export var windup_time: float
+@export var attack_duration: float
+@export var cooldown_time: float
 
 
 func _init() -> void:

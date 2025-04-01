@@ -4,10 +4,10 @@ extends BaseCombatState
 
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
-
 @onready var attack_timer: Timer = %AttackTimer
 
 var hit_area: Area3D
+
 
 # Set up the weapon and cache important nodes
 func setup(weapon_node: MeleeWeapon) -> void:
@@ -18,6 +18,7 @@ func setup(weapon_node: MeleeWeapon) -> void:
 	hit_area = weapon.hit_area
 
 	print("Weapon set successfully:", weapon.current_weapon.name)
+
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:

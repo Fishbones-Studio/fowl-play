@@ -6,6 +6,7 @@ extends BaseCombatState
 # Defines this state as IDLE
 const STATE_TYPE: int = WeaponEnums.MeleeState.IDLE
 
+
 # Checks for player input (attack button press)
 func input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
