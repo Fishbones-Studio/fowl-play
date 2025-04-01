@@ -1,5 +1,6 @@
 extends Node3D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -23,6 +24,7 @@ func _on_flyer_input_event(_camera: Node, event: InputEvent, _event_position: Ve
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked on ", name)
 			SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
+			SignalManager.emit_throttled("add_ui_scene", ["uid://dnq3em8w064n4"])
 			SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 
 

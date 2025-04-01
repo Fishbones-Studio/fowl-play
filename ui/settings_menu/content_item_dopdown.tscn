@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bpba8wvtfww4x"]
+[gd_scene format=3 uid="uid://dt0fhn02p7ukk"]
 
 [node name="ContentItemDropdown" type="Control"]
 custom_minimum_size = Vector2(0, 35)

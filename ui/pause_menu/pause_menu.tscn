@@ -28,6 +28,8 @@ sky_rotation = Vector3(1.00356, 0, 0)
 environment = SubResource("Environment_ihaig")
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "footer", "game_logo_container")]
+process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,8 +37,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c3jo5")
-chicken = NodePath("HBoxContainer2/SubViewportContainer/SubViewport/chicken_default")
-camera = NodePath("HBoxContainer2/SubViewportContainer/SubViewport/Camera3D")
+chicken = NodePath("ChickenContainer/SubViewportContainer/SubViewport/chicken_default")
+camera = NodePath("ChickenContainer/SubViewportContainer/SubViewport/Camera3D")
 footer = NodePath("Footer")
 game_logo_container = NodePath("GameLogoContainer")
 
@@ -49,7 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="ChickenContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,28 +59,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="HBoxContainer2"]
+[node name="Control" type="Control" parent="ChickenContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer2"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ChickenContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer2/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="ChickenContainer/SubViewportContainer"]
 world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(574, 648)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="HBoxContainer2/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 1.5, 1.8)
 projection = 1
 size = 4.0
 
-[node name="chicken_default" parent="HBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource("3_uraes")]
+[node name="chicken_default" parent="ChickenContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_uraes")]
 unique_name_in_owner = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -123,12 +125,12 @@ keep_pressed_outside = true
 text = "Settings"
 alignment = 0
 
-[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
 keep_pressed_outside = true
-text = "Forfeit"
+text = "Quit"
 alignment = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
@@ -200,3 +202,7 @@ text = "X - Confirm"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]

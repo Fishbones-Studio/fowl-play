@@ -23,7 +23,6 @@ var current_stamina: float:
 		current_stamina = clamp(value, 0, max_stamina)
 
 
-
 func init() -> void:
 	if max_health <=0 : push_error("Forgot to set max_health")
 	if max_stamina <=0 : push_error("Forgot to set max_stamina")

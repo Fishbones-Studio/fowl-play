@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bpba8wvtfww4x"]
+
+[node name="ContentItemKeybind" type="Control"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SettingsContentPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"SettingsContentLabel"
+text = "label"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PrimaryPanel" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+theme_type_variation = &"SettingsContentPanelRight"
+
+[node name="PrimaryButton" type="Button" parent="MarginContainer/HBoxContainer/PrimaryPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"SettingsKeybindButton"
+text = "Unasigned"
+
+[node name="SecondaryPanel" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+theme_type_variation = &"SettingsContentPanelRight"
+
+[node name="SecondaryButton" type="Button" parent="MarginContainer/HBoxContainer/SecondaryPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"SettingsKeybindButton"
+text = "Unasigned"
+
+[node name="Controller" type="Panel" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+theme_type_variation = &"SettingsContentPanelRight"
+
+[node name="ControllerButton" type="Button" parent="MarginContainer/HBoxContainer/Controller"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"SettingsKeybindButton"
+text = "Unasigned"
