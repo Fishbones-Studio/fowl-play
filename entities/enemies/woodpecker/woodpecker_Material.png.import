@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1tfgkgkqxwpj"
+uid="uid://b4ywin1yih0oc"
 path.s3tc="res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.s3tc.ctex"
 path.etc2="res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1df6fa8cac4df6de9027286868932f8c"
+"md5": "332c2613ce0221984d536b3d14b119f4"
 }
 
 [deps]
