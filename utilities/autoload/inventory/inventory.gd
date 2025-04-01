@@ -1,8 +1,11 @@
 ## Autoload script to manage the inventory
 extends Node
+
 ## Saving the inventory to a resource file on the user's system
 const SAVE_FILE_PATH : String = "user://inventory_save.tres"
+
 var items_in_inventory: Array[BaseResource] = []
+
 
 func _ready() -> void:
 	# Loading the inventory when the game starts
@@ -53,5 +56,3 @@ func load_inventory() -> void:
 		print("Inventory loaded successfully, with: " + str(items_in_inventory.size()) + " items")
 	else:
 		print("No inventory save file found, starting fresh")
-			
-				

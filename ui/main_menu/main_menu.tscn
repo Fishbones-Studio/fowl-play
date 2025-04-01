@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dab0i61vj1n23"]
 
-[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
+[ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
 [ext_resource type="AudioStream" uid="uid://wnqtkl4c2rw4" path="res://ui/main_menu/art/song_1.wav" id="2_mu8pm"]
 
 [node name="MainMenu" type="Control"]
@@ -62,6 +62,7 @@ text = "Quit
 stream = ExtResource("2_mu8pm")
 volume_db = -5.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
