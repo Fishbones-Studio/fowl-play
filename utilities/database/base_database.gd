@@ -17,7 +17,7 @@ func _ready() -> void:
 		push_warning("Warning: No items loaded in the database")
 	else:
 		for item in items:
-			print("Loaded item: ", item.name, " with type: ", item_type_to_string(item.type))
+			print("Loaded item: ", item.name, " with type: ", ItemEnums.item_type_to_string(item.type))
 
 
 ## Get a random item based on the item´s drop chance
@@ -41,13 +41,6 @@ func get_random_item() -> BaseResource:
 			return item
 
 	return null
-
-
-## Helper function to convert the enum to a readable string
-func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
-	var item_string: String = ItemEnums.ItemTypes.keys()[item_type]
-	# Turn item_string from UPPER_CASE to Title Case
-	return item_string.capitalize()
 
 
 func get_files_from_path(path: String) -> PackedStringArray:

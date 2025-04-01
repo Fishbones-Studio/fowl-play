@@ -22,7 +22,7 @@ func set_item_data(item: Resource) -> void:
 		return
 
 	name_label.text = item.name
-	type_label.text = str(item.type).capitalize()
+	type_label.text = ItemEnums.item_type_to_string(item.type)
 	cost_label.text = str(item.cost)
 	description_label.text = item.description
 	shop_item = item
