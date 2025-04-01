@@ -19,7 +19,7 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 
 func input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && movement_component.dash_available:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
 
