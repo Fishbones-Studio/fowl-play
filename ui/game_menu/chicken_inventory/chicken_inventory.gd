@@ -5,6 +5,7 @@ extends Control
 
 func _ready() -> void:
 	_update_inventory()
+	InputBlocker.block()
 
 
 func _update_inventory() -> void:
@@ -27,4 +28,6 @@ func _update_inventory() -> void:
 
 
 func _on_button_pressed() -> void:
+	InputBlocker.unblock()
 	queue_free()
+	

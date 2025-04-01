@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
-[ext_resource type="AudioStream" uid="uid://bpkov0e1nvibh" path="res://sound_effects/328013__pfranzen__irritating-flourescent-light-hum.ogg" id="3_5qgdc"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/game_menu/game_menu_handlers/lamp_controller.gd" id="3_efok4"]
 [ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
+[ext_resource type="AudioStream" uid="uid://b8q5sgur0ci0o" path="res://sound_effects/temp_poultry_man_song.mp3" id="5_og4p7"]
 [ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/game_menu/game_menu_handlers/input_handler.gd" id="5_t1gii"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sulwi"]
@@ -49,6 +49,9 @@ script = ExtResource("1_5qgdc")
 items = [NodePath("Inventory"), NodePath("Shop"), NodePath("Flyer")]
 input_handler = NodePath("InputHandler")
 light_handler = NodePath("Lamp")
+
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("5_t1gii")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
@@ -124,7 +127,7 @@ environment = SubResource("Environment_ley17")
 script = ExtResource("3_efok4")
 flicker_light = NodePath("SpotLight3D")
 flicker_timer = NodePath("FlickerTimer")
-audio_player = NodePath("../AudioStreamPlayer")
+audio_player = NodePath("AudioStreamPlayer")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lamp"]
 transform = Transform3D(1, 0, 0, 0, -0.076632, 0.997059, 0, -0.997059, -0.076632, 0.00419521, 6.11901, -0.0586296)
@@ -137,9 +140,8 @@ spot_angle = 68.9063
 
 [node name="FlickerTimer" type="Timer" parent="Lamp"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_5qgdc")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Lamp"]
+stream = ExtResource("5_og4p7")
 volume_db = -5.824
-
-[node name="InputHandler" type="Node3D" parent="."]
-script = ExtResource("5_t1gii")
+autoplay = true
+parameters/looping = false

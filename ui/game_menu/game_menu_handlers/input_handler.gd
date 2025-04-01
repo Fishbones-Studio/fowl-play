@@ -1,4 +1,6 @@
+# Handles UI input (mouse, keyboard, controller) and emits navigation signals.
 extends Node
+
 
 signal move_selection(direction: int)
 signal select_current_item()
@@ -6,11 +8,13 @@ signal keyboard_navigation_activated()
 signal keyboard_navigation_deactivated()
 signal item_clicked(item_index: int)
 
+
 var is_controller_connected: bool = false
 var can_move_with_stick: bool = true
 var stick_cooldown: float = 0.3
 var stick_cooldown_timer: Timer
 var controller_was_used: bool = false
+
 
 func _ready():
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
@@ -21,23 +25,29 @@ func _ready():
 	stick_cooldown_timer.one_shot = true
 	stick_cooldown_timer.timeout.connect(_on_stick_cooldown_timeout)
 
+
 func _on_joy_connection_changed(_device: int, _connected: bool):
 	_check_for_controller()
+
 
 func _check_for_controller():
 	is_controller_connected = Input.get_connected_joypads().size() > 0
 
+
 func _on_stick_cooldown_timeout():
 	can_move_with_stick = true
 
-func _input(event: InputEvent):
-	# Mouse movement deactivates keyboard/controller navigation
+
+func _input(event: InputEvent):	
+	if InputBlocker.blocked:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		return
+	
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		keyboard_navigation_deactivated.emit()
 		controller_was_used = false
 	
-	# Controller analog stick handling
 	if is_controller_connected and event is InputEventJoypadMotion:
 		var axis_value = event.axis_value
 		var axis = event.axis
@@ -52,7 +62,6 @@ func _input(event: InputEvent):
 				controller_was_used = true
 				keyboard_navigation_activated.emit()
 	
-	# Keyboard/controller button handling
 	elif event.is_action_pressed("move_left"):
 		handle_directional_input(-1)
 	elif event.is_action_pressed("move_right"):
@@ -65,11 +74,13 @@ func _input(event: InputEvent):
 		controller_was_used = true
 		select_current_item.emit()
 
+
 func handle_directional_input(direction: int):
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	controller_was_used = true
 	keyboard_navigation_activated.emit()
 	move_selection.emit(direction)
+
 
 func handle_item_click(item: Area3D, event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
