@@ -20,21 +20,21 @@ var previous_state: BasePlayerMovementState
 func _ready() -> void:
 	if player == null:
 		push_error(name + ": No player reference set")
-	
+
 	if movement_component == null:
 		push_error(name + ": No movement component reference set")
-	
+
 	SignalManager.player_transition_state.connect(_transition_to_next_state)
-	
+
 	# Ensure owner is ready before accessing data and nodes.
 	await owner.ready
-	
+
 	# Retrieve and initialize all state nodes in the scene tree
 	for state_node: BasePlayerMovementState in get_children():
 		states[state_node.state_type] = state_node
 		state_node.player = player
 		state_node.movement_component = movement_component
-	
+
 	current_state = _get_initial_state()
 	current_state.enter(current_state)
 
@@ -63,16 +63,14 @@ func physics_process(delta: float) -> void:
 func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dictionary = {} ) -> void:
 	previous_state = current_state
 	previous_state.exit()
-	
+
 	current_state = states.get(target_state)
-	
+
 	if not current_state:
 		push_error(name + ": Trying to transition to state " + PlayerEnums.PlayerStates.find_key(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
-	
+
 	current_state.enter(previous_state, info)
-	
-	print("current state: ", current_state.name)
 
 
 ## Return the starting state if set, else return the first child of this object

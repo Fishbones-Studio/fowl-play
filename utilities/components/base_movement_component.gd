@@ -7,7 +7,6 @@ class_name BaseMovementComponent
 extends Node
 
 @export var entity: Node3D
-
 @export_category("Jump")
 @export var jump_height: float = 5.0
 @export var time_to_peak: float = 0.6
@@ -24,12 +23,12 @@ func update_physics_by_weight(weight: int):
 	# we use 3 (kg) as standard weight. So 3 (kg) would give a multiplier of 1.0
 	# NOTE: tweek/experiment with formula and weight factor.
 	var weight_multiplier: float = 1.0 + (log(weight / 3.0) / log(3.0))
-	
+
 	# Adjust physics parameters based on weight
 	jump_height = jump_height / weight_multiplier
 	time_to_peak = time_to_peak / weight_multiplier
 	time_to_ground = time_to_ground / weight_multiplier
-	
+
 	# Recalculate velocity and gravity
 	jump_velocity = (2.0 * jump_height) / time_to_peak
 	jump_gravity = (-2.0 * jump_height) / (time_to_peak * time_to_peak)

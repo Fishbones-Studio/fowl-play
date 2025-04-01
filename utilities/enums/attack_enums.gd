@@ -3,7 +3,7 @@ extends Node
 
 enum MeleeState {
 	IDLE,
-	WINDUP,      
-	ATTACKING, 
-	COOLDOWN   
+	WINDUP,
+	ATTACKING,
+	COOLDOWN
 }
