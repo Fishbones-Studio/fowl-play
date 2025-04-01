@@ -1,11 +1,9 @@
 extends Control
 
-var item_database: BaseDatabase = load("uid://cq2fdalpfdd26").new()
-
 @onready var grid_container: GridContainer = %GridContainer
 
-
 func _ready() -> void:
+	await get_tree().process_frame
 	_update_inventory()
 
 
