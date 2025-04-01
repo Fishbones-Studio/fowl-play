@@ -10,6 +10,7 @@ var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
+@onready var title_label = %TitleLabel
 
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
