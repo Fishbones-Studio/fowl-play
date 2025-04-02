@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=2 format=3 uid="uid://blv5macbefk8v"]
+
+[ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_43o3y"]
+
+[resource]
+script = ExtResource("1_43o3y")
+damage = 20
+windup_time = 1.0
+attack_duration = 1.5
+cooldown_time = 1.0
+name = "Dagger"
+drop_chance = 0
+cost = 0
+description = "Slower, more damage"
+type = 0
+model_uid = ""
+metadata/_custom_type_script = "uid://bflt4m3fx7gmv"
