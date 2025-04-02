@@ -15,6 +15,7 @@ var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 func _ready() -> void:
 	if weapon == null:
 		push_error(owner.name + ": No weapon reference set")
+	print("Set melee weapon:" + weapon.name)
 
 	# Listen for state transition signals
 	SignalManager.combat_transition_state.connect(_transition_to_next_state)
