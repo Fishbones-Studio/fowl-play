@@ -12,6 +12,7 @@ var paused: bool:
 		visible = value
 		get_tree().paused = value
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else prev_mouse_mode
+		if value: get_parent().move_child(self, get_parent().get_child_count() - 1) # TODO: Whack
 
 @onready var resume_button: Button = %ResumeButton
 @onready var quit_button: Button = %QuitButton
