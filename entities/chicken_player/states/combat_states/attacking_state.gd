@@ -11,9 +11,6 @@ var hit_area: Area3D
 
 # Set up the weapon and cache important nodes
 func setup(weapon_node: MeleeWeapon) -> void:
-	if not weapon_node:
-		print("Weapon does not exist! Please provide a valid weapon node.")
-		return
 	super(weapon_node)
 	hit_area = weapon_node.hit_area
 
