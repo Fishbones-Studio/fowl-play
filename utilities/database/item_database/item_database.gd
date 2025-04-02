@@ -2,7 +2,7 @@ extends BaseDatabase
 
 
 func _load_resources() -> void:
-	load_scene_resources("res://entities/weapons/melee_weapons/melee_weapon_models/", "current_weapon")
+	load_scene_resources("res://entities/weapons/melee_weapons/melee_weapon_models", "current_weapon")
 
 
 func load_scene_resources(path: String, resource_property: String) -> void:

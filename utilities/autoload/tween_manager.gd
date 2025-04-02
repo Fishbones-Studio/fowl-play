@@ -1,8 +1,7 @@
 ################################################################################
-## Autoload to manage tween creationa and lifetime
-## 
+## Autoload to manage tween creation and lifetime.
+##
 ################################################################################
-
 extends Node
 
 const DEFAULT_DURATION: float = 0.2
