@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @export var stats: LivingEntityStats
 
+#
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 
 
