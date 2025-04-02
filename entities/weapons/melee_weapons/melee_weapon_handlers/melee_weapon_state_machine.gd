@@ -5,7 +5,7 @@ extends Node
 
 @export var starting_state: BaseCombatState
 
-var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
+var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
@@ -65,7 +65,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
-		target_state = WeaponEnums.MeleeState.IDLE
+		target_state = WeaponEnums.WeaponState.IDLE
 
 	# Exit the current state before switching
 	var previous_state := current_state

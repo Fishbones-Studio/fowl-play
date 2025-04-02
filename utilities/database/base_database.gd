@@ -2,19 +2,18 @@
 class_name BaseDatabase
 extends Node
 
-var items: Array[BaseResource] = []
-
+static var items: Array[BaseResource] = []
+	
 
 # Child classes should override this to load their specific resources
-func _load_resources() -> void:
-	pass
+static func _load_resources() -> Array[BaseResource]:
+	return []
 
 
 func _ready() -> void:
-	_load_resources()
-
 	if items.is_empty():
-		push_warning("Warning: No items loaded in the database")
+		push_warning("Warning: No items loaded in the database. Loading now")
+		items = _load_resources()
 	else:
 		for item in items:
 			print("Loaded item: ", item.name, " with type: ", ItemEnums.item_type_to_string(item.type))
@@ -43,7 +42,7 @@ func get_random_item() -> BaseResource:
 	return null
 
 
-func get_files_from_path(path: String) -> PackedStringArray:
+static func get_files_from_path(path: String) -> PackedStringArray:
 	var files: PackedStringArray = ResourceLoader.list_directory(path)
 
 	if not files:
@@ -52,17 +51,19 @@ func get_files_from_path(path: String) -> PackedStringArray:
 	return files
 
 
-func load_items(path: String) -> void:
+static func load_items(path: String) -> Array[BaseResource]:
 	var files: PackedStringArray = get_files_from_path(path)
+	var temp_items: Array[BaseResource] = []
 
 	for file in files:
 		if file.ends_with(".tres"):
-			var file_path = path.path_join(file)
+			var file_path: String = path.path_join(file)
 			var res: Resource = load(file_path)
 			if res is BaseResource:
-				items.append(res)
+				temp_items.append(res)
 			else:
 				push_warning("File '", file, "' is not a BaseResource")
+	return temp_items
 
 
 ## Find an item in the database based on item name
