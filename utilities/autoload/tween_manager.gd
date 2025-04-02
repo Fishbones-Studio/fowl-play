@@ -10,13 +10,6 @@ const DEFAULT_TRANSITION: Tween.TransitionType = Tween.TRANS_CUBIC
 const DEFAULT_EASE: Tween.EaseType = Tween.EASE_OUT
 
 
-func parallel(tweens: Array[Tween]) -> void:
-	assert(tweens.size() > 1, "At least two tweens must be provided")
-	
-	for t in tweens:
-		t.play()
-
-
 func create_scale_tween(
 	tween: Tween,
 	node: Node,
