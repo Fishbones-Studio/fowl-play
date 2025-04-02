@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_uwjcx"]
 [ext_resource type="Script" uid="uid://cu0k474owfja5" path="res://level/arena/props/hazards/hold_hazard.gd" id="2_mkuk0"]
-[ext_resource type="PackedScene" uid="uid://cyb0lkd6tiahb" path="res://level/arena/props/hazards/spikes/regular_spike.glb" id="2_vbrfj"]
+[ext_resource type="PackedScene" uid="uid://barbd3injxojh" path="res://level/arena/props/hazards/spikes/regular_spike.glb" id="2_vbrfj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mkuk0"]
 
