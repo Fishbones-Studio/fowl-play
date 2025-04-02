@@ -147,6 +147,7 @@ pause={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="Projectile"
 3d_physics/layer_5="Hazard"
+3d_physics/layer_6="Interactables"
 
 [panku]
 
