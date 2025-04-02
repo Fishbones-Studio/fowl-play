@@ -17,6 +17,10 @@ var paused: bool:
 @onready var quit_button: Button = %QuitButton
 
 
+func _ready() -> void:
+	SignalManager.settings_menu_toggled.connect(_toggle_settings_menu)
+
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if not paused: 
@@ -86,8 +90,37 @@ func _on_resume_button_button_up() -> void:
 
 
 func _on_settings_button_button_up() -> void:
-	pass # Replace with function body.
+	SignalManager.add_ui_scene.emit("uid://81fy3yb0j33w")
 
 
 func _on_quit_button_button_up() -> void:
-	pass # Replace with function body.
+	paused = false
+
+	var scene_loader: Node = get_tree().root.get_node("SceneLoader")
+	var children: Array = scene_loader.get_children()\
+		.map(func(child): return child.name)
+
+	#TODO: Whack
+	if "GameMenu" in children:
+		_return_to_main_menu()
+	if "Level" in children:
+		_return_to_game_menu()
+
+
+func _return_to_game_menu() -> void:
+	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+	SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
+
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _return_to_main_menu() -> void:
+	SignalManager.switch_game_scene.emit("uid://dab0i61vj1n233")
+	SignalManager.switch_ui_scene.emit("uid://dab0i61vj1n23")
+
+
+func _toggle_settings_menu(value: bool) -> void:
+	if value:
+		set_process_input(false)
+	else:
+		set_process_input(true)

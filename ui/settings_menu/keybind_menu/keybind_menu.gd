@@ -95,7 +95,6 @@ func _create_action_list():
 
 	# Add action rows
 	for action in InputMap.get_actions():
-		print("Hello world")
 		if action.begins_with("ui_"):
 			continue # Skip built-in UI actions
 

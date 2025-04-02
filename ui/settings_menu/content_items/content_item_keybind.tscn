@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpba8wvtfww4x"]
 
-[ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybind_menu/remap_panel.gd" id="1_0jaxl"]
+[ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybind_menu/remap_panel.gd" id="1_q71b7"]
 
 [node name="ContentItemKeybind" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -56,7 +56,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 theme_type_variation = &"SettingsContentPanelRight"
-script = ExtResource("1_0jaxl")
+script = ExtResource("1_q71b7")
 button = NodePath("PrimaryButton")
 
 [node name="PrimaryButton" type="Button" parent="MarginContainer/HBoxContainer/PrimaryPanel"]
@@ -78,7 +78,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 theme_type_variation = &"SettingsContentPanelRight"
-script = ExtResource("1_0jaxl")
+script = ExtResource("1_q71b7")
 button = NodePath("SecondaryButton")
 input_type = 1
 
@@ -101,7 +101,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 6.0
 theme_type_variation = &"SettingsContentPanelRight"
-script = ExtResource("1_0jaxl")
+script = ExtResource("1_q71b7")
 button = NodePath("ControllerButton")
 input_type = 2
 

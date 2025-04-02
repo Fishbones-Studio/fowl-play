@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://6air6r3l5p61"]
 
-[ext_resource type="Script" uid="uid://dlb8sdrpn1jtm" path="res://ui/settings_menu/content_item_slider.gd" id="1_vfvd7"]
+[ext_resource type="Script" uid="uid://dlb8sdrpn1jtm" path="res://ui/settings_menu/content_items/content_item_slider.gd" id="1_vfvd7"]
 
 [node name="ContentItemSlider" type="Control"]
 custom_minimum_size = Vector2(0, 35)
