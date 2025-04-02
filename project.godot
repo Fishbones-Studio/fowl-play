@@ -140,6 +140,14 @@ pause={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemy"
+3d_physics/layer_4="Projectile"
+3d_physics/layer_5="Hazard"
+
 [panku]
 
 disable_on_release=true
