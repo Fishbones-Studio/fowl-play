@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=2 format=3 uid="uid://csmfpbrekf78u"]
+
+[ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://entities/weapons/ranged_weapons/ranged_weapon_resource.gd" id="1_dlpss"]
+
+[resource]
+script = ExtResource("1_dlpss")
+damage = 3
+windup_time = 2.0
+attack_duration = 5.0
+cooldown_time = 3.0
+allow_continuous_fire = true
+allow_early_release = true
+name = "Minigun"
+drop_chance = 10
+cost = 0
+description = "MiniGun"
+model_uid = "uid://8owdwg4pu4ht"
+metadata/_custom_type_script = "uid://dm0sr7j8y5j30"

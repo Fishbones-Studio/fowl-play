@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnadoylbmugpd"]
+[gd_scene load_steps=4 format=3 uid="uid://bnadoylbmugpd"]
 
 [ext_resource type="Script" uid="uid://c2vgsram4a8rn" path="res://entities/weapons/ranged_weapons/ranged_weapon.gd" id="1_ymw4u"]
 [ext_resource type="Script" uid="uid://binuh0bjcc3uy" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/ranged_weapon_state_machine.gd" id="1_yncyi"]
+[ext_resource type="Script" uid="uid://b46r4taxgy3dm" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/ranged_weapon_handler.gd" id="3_llx1a"]
 
 [node name="BaseRangedWeaponModel" type="Node3D"]
 script = ExtResource("1_ymw4u")
 
 [node name="RangedWeaponStateMachine" type="Node" parent="."]
 script = ExtResource("1_yncyi")
+
+[node name="RangedWeaponHandler" type="Node" parent="." node_paths=PackedStringArray("state_machine")]
+script = ExtResource("3_llx1a")
+state_machine = NodePath("../RangedWeaponStateMachine")
+
+[node name="AttackOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93543, 0)
