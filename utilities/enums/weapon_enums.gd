@@ -1,7 +1,7 @@
 class_name WeaponEnums
 extends Node
 
-enum MeleeState {
+enum WeaponState {
 	IDLE,
 	WINDUP,
 	ATTACKING,

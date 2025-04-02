@@ -3,7 +3,7 @@ class_name WindupState
 extends BaseCombatState
 
 # Constants
-const STATE_TYPE: int = WeaponEnums.MeleeState.WINDUP
+const STATE_TYPE: int = WeaponEnums.WeaponState.WINDUP
 # Variables
 @onready var windup_timer: Timer = %WindupTimer
 
@@ -26,4 +26,4 @@ func exit() -> void:
 
 # When the windup timer runs out, switch to the ATTACKING state
 func _on_windup_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.ATTACKING)
+	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.ATTACKING)
