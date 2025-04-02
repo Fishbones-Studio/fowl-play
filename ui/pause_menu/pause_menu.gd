@@ -117,7 +117,7 @@ func _return_to_game_menu() -> void:
 
 
 func _return_to_main_menu() -> void:
-	SignalManager.switch_game_scene.emit("uid://dab0i61vj1n233")
+	SignalManager.switch_game_scene.emit("uid://dab0i61vj1n23")
 	SignalManager.switch_ui_scene.emit("uid://dab0i61vj1n23")
 
 
