@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bwayhjdb5vvd5"
-path="res://.godot/imported/woodpecker.glb-2df22ad5710ce2df58f8a4dd160869a6.scn"
+uid="uid://cwgmtrf1rjw48"
+path="res://.godot/imported/butter_knife.glb-3309e8c6c950a2d1de0985d57e7c9bed.scn"
 
 [deps]
 
-source_file="res://entities/enemies/woodpecker/woodpecker.glb"
-dest_files=["res://.godot/imported/woodpecker.glb-2df22ad5710ce2df58f8a4dd160869a6.scn"]
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb"
+dest_files=["res://.godot/imported/butter_knife.glb-3309e8c6c950a2d1de0985d57e7c9bed.scn"]
 
 [params]
 
