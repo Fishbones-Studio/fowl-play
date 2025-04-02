@@ -40,6 +40,8 @@ func _on_stick_cooldown_timeout():
 
 func _input(event: InputEvent):	
 	if InputBlocker.blocked:
+		# TODO: when using controller mouse becomes invisible and going to the inventory or shop scene still dont have controller nav or keyboard nav so you cant do anything anymore
+		# so for now just make the mouse visible when the input is blocked
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		return
 	
