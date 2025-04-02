@@ -36,7 +36,7 @@ func attempt_purchase() -> void:
 
 	purchase_in_progress = true
 
-	var existing_items: Array[Resource] = Inventory.get_item_by_type(shop_item.type)
+	var existing_items: Array[BaseResource] = Inventory.get_item_by_type(shop_item.type)
 
 	for item in existing_items:
 		if item == shop_item:
