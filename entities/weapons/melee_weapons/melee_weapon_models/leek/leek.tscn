@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bymaeu4dtl7ex"]
 
-[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_spb7y"]
-[ext_resource type="Resource" uid="uid://cb3vabpn2qg5e" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_fdxpv"]
-[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.glb" id="3_sj0ep"]
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_e1ngp"]
+[ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_e1ngp"]
+[ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="3_k4qq2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sj0ep"]
 size = Vector3(5, 5, 4)
@@ -44,11 +44,11 @@ _data = {
 &"RESET": SubResource("Animation_rovfi")
 }
 
-[node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_spb7y")]
+[node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
 animation_player = NodePath("AnimationPlayer")
-current_weapon = ExtResource("2_fdxpv")
+current_weapon = ExtResource("2_e1ngp")
 
-[node name="leek" parent="." index="0" instance=ExtResource("3_sj0ep")]
+[node name="leek" parent="." index="0" instance=ExtResource("3_k4qq2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]

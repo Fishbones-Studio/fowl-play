@@ -1,5 +1,5 @@
 # WeaponResource: Defines weapon properties that can be used across different weapons.
-class_name WeaponResource
+class_name MeleeWeaponResource
 extends BaseResource
 
 # Weapon Attributes
@@ -11,4 +11,4 @@ extends BaseResource
 
 
 func _init() -> void:
-	type = ItemEnums.ItemTypes.WEAPON
+	type = ItemEnums.ItemTypes.MELEE_WEAPON
