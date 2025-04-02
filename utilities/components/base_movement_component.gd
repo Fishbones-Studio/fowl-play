@@ -6,15 +6,42 @@
 class_name BaseMovementComponent
 extends Node
 
+# Ratio defaults (adjust these to tweak feel)
+const DEFAULT_PEAK_RATIO: float = 0.12  # seconds per meter of jump height
+const DEFAULT_FALL_RATIO: float = 0.10   # seconds per meter of jump height
+
 @export var entity: Node3D
+
 @export_category("Jump")
-@export var jump_height: float = 5.0
-@export var time_to_peak: float = 0.6
-@export var time_to_ground: float = 0.5
+@export var jump_height: float = 5.0:
+	set(value):
+		jump_height = value
+		_recalculate_jump_params()
+
+# Default time values (will be auto-calculated if not set)
+var time_to_peak: float = 0.0  # 0 means auto-calculate
+var time_to_ground: float = 0.0 # 0 means auto-calculate
 
 var jump_velocity: float
 var jump_gravity: float
 var fall_gravity: float
+
+
+func _ready():
+	_recalculate_jump_params()
+
+
+func _recalculate_jump_params():
+	# Calculate times if not manually specified
+	if time_to_peak <= 0:
+		time_to_peak = jump_height * DEFAULT_PEAK_RATIO
+	if time_to_ground <= 0:
+		time_to_ground = jump_height * DEFAULT_FALL_RATIO
+
+	# Calculate physics values
+	jump_velocity = (2.0 * jump_height) / time_to_peak
+	jump_gravity = (-2.0 * jump_height) / (time_to_peak * time_to_peak)
+	fall_gravity = (-2.0 * jump_height) / (time_to_ground * time_to_ground)
 
 
 ## Update the vertical motion physics based on weight
@@ -26,13 +53,6 @@ func update_physics_by_weight(weight: int):
 
 	# Adjust physics parameters based on weight
 	jump_height = jump_height / weight_multiplier
-	time_to_peak = time_to_peak / weight_multiplier
-	time_to_ground = time_to_ground / weight_multiplier
-
-	# Recalculate velocity and gravity
-	jump_velocity = (2.0 * jump_height) / time_to_peak
-	jump_gravity = (-2.0 * jump_height) / (time_to_peak * time_to_peak)
-	fall_gravity = (-2.0 * jump_height) / (time_to_ground * time_to_ground)
 
 
 func get_jump_velocity() -> float:
