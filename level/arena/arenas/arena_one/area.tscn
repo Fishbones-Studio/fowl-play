@@ -229,10 +229,10 @@ transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 [node name="Hazards" type="Node3D" parent="."]
 
 [node name="RegularSpike" parent="Hazards" instance=ExtResource("4_ao8rp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.6, 15.2765)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.896961, 23.8652)
 
 [node name="RegularSpike2" parent="Hazards" instance=ExtResource("4_ao8rp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 10.0541, 0.6, 9.06059)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 10.0541, 0.83769, 9.06059)
 
 [node name="GroundSaw1Path" type="Path3D" parent="Hazards"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.876658, -12.4011)
