@@ -12,11 +12,13 @@ var paused: bool:
 		visible = value
 		get_tree().paused = value
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else prev_mouse_mode
-		if value: get_parent().move_child(
-			self, get_parent().get_child_count() - 1) # TODO: Whack
+		if value: # TODO: Whack
+			get_parent().move_child(self, get_parent().get_child_count() - 1) 
+			_set_button_visibility()
 
 @onready var resume_button: Button = %ResumeButton
 @onready var quit_button: Button = %QuitButton
+@onready var forfeit_button: Button = %ForfeitButton
 
 
 func _ready() -> void:
@@ -97,16 +99,27 @@ func _on_settings_button_button_up() -> void:
 
 func _on_quit_button_button_up() -> void:
 	paused = false
+	_return_to_main_menu()
 
+
+func _on_forfeit_button_button_up() -> void:
+	paused = false
+	_return_to_game_menu()
+
+
+func _set_button_visibility() -> void: 
+	var children: Array = _get_scene_loader_children()
+
+	quit_button.visible = "GameMenu" in children
+	forfeit_button.visible = "Level" in children
+
+
+func _get_scene_loader_children() -> Array:
 	var scene_loader: Node = get_tree().root.get_node("SceneLoader")
 	var children: Array = scene_loader.get_children()\
 		.map(func(child): return child.name)
 
-	#TODO: Whack
-	if "GameMenu" in children:
-		_return_to_main_menu()
-	if "Level" in children:
-		_return_to_game_menu()
+	return children
 
 
 func _return_to_game_menu() -> void:
