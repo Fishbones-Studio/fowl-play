@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=36 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=37 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -137,6 +137,9 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddjlj"]
 bg_color = Color(0, 0, 0, 0.12549)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20od3"]
+bg_color = Color(0.772549, 0.737255, 0.670588, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kiug"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
 border_width_left = 2
@@ -257,6 +260,7 @@ SettingsHeaderContainer/styles/panel = SubResource("StyleBoxFlat_ddjlj")
 SettingsKeybindButton/base_type = &"Button"
 SettingsKeybindButton/colors/font_color = Color(0.164706, 0.164706, 0.164706, 1)
 SettingsKeybindButton/constants/outline_size = 0
+SettingsKeybindButton/styles/focus = SubResource("StyleBoxFlat_20od3")
 SettingsKeybindButton/styles/normal = ExtResource("10_6bdnh")
 SettingsSliderLabel/base_type = &"Label"
 SettingsSliderLabel/colors/font_color = Color(0.282353, 0.321569, 0.4, 1)
