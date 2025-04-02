@@ -26,7 +26,7 @@ func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
 
 
 func open_shop():
-	SignalManager.add_ui_scene.emit("uid://cuqpcy333m8d5")
+	SignalManager.add_ui_scene.emit("uid://bbbvd0g05hgn3")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 
