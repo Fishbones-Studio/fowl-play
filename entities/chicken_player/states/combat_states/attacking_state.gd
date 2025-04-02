@@ -4,9 +4,10 @@ extends BaseCombatState
 
 # Constants
 const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
-@onready var attack_timer: Timer = %AttackTimer
 
 var hit_area: Area3D
+
+@onready var attack_timer: Timer = %AttackTimer
 
 
 # Set up the weapon and cache important nodes
