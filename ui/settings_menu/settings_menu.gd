@@ -42,7 +42,6 @@ func _on_sidebar_pressed(item: Button) -> void:
 func _on_sidebar_focus_entered(item: Button) -> void:
 	item.button_pressed = true
 	current_item = item
-	print(current_item)
 
 	_update_content(item)
 
