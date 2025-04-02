@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ne7iiotato7p"
-path="res://.godot/imported/leek.glb-01a888efa5982359a793a055660ea2b6.scn"
+uid="uid://ov5d0pnsy350"
+path="res://.godot/imported/dagger.glb-c5d7d25de0cdbf996fa9e6e0ac329bbe.scn"
 
 [deps]
 
-source_file="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.glb"
-dest_files=["res://.godot/imported/leek.glb-01a888efa5982359a793a055660ea2b6.scn"]
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.glb"
+dest_files=["res://.godot/imported/dagger.glb-c5d7d25de0cdbf996fa9e6e0ac329bbe.scn"]
 
 [params]
 

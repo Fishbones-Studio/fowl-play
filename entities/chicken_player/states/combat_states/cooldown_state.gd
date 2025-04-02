@@ -10,7 +10,7 @@ const STATE_TYPE: int = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as
 
 # When entering this state, start the cooldown timer
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
-# Create a timer that lasts as long as the weapon's cooldown time
+	# Create a timer that lasts as long as the weapon's cooldown time
 	cooldown_timer.wait_time = weapon.current_weapon.attack_duration
 	cooldown_timer.start()
 

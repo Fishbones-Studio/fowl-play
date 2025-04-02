@@ -2,7 +2,7 @@ class_name ItemEnums
 extends Node
 
 enum ItemTypes{
-	WEAPON,
+	MELEE_WEAPON,
 	RANGED_WEAPON,
 	ABILITY,
 	HELMET,

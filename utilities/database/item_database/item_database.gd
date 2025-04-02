@@ -6,16 +6,17 @@ func _load_resources() -> void:
 
 
 func load_scene_resources(path: String, resource_property: String) -> void:
-	var dir := DirAccess.open(path)
+	var dir := ResourceLoader.load(path)
 	if !dir:
 		push_error("Can't open directory: ", path)
 		return
 
 	for subdir in dir.get_directories():
 		var subdir_path := path.path_join(subdir)
-		var sub_dir := DirAccess.open(subdir_path)
+		var sub_dir := ResourceLoader.load(subdir_path)
 		var resource_loaded := false
 		var tscn_file: String
+		print("Looking in dir: " + subdir_path)
 
 		# First try to load .tres file
 		for file in sub_dir.get_files():
@@ -30,7 +31,7 @@ func load_scene_resources(path: String, resource_property: String) -> void:
 				break  # Save the .tscn file for later use
 
 		# Fall back to scene loading if no .tres found
-		if !resource_loaded:
+		if !resource_loaded && tscn_file:
 			print("No .tres file found in ", subdir_path, ", loading scene instead")
 			var scene := load(tscn_file) as PackedScene
 			var instance: Node = scene.instantiate()
