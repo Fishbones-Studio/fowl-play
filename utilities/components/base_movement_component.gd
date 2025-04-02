@@ -1,7 +1,7 @@
 ################################################################################
 ## Base movement component that handles core physics calculations for 
 ## entity movement.
-## It servers as a blase class for move specialized movement components.
+## It servers as a blase class for specialized movement components.
 ################################################################################
 class_name BaseMovementComponent
 extends Node
