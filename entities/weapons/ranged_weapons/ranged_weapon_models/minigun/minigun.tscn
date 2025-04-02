@@ -8,5 +8,10 @@
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
+[node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("weapon")]
+weapon = NodePath("..")
+
 [node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("3_uw0c0")
+
+[node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="1"]
