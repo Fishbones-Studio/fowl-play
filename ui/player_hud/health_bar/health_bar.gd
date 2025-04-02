@@ -12,7 +12,7 @@ func set_health(_health: int):
 	var prev_health: int = health
 	health = min(max_value, _health)
 	value = health
-	
+
 	if health <= prev_health:
 		timer.start()
 	else:

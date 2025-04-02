@@ -8,24 +8,23 @@ extends Resource
 @export var defense: int
 @export var speed: float
 @export var weight: int
-
 @export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int
 @export var weight_factor: float = 0.07 # Controls slowdown strength
 
 var current_health: float:
-	set(value): 
+	set(value):
 		current_health = clamp(value, 0, max_health)
 
 var current_stamina: float:
-	set(value): 
+	set(value):
 		current_stamina = clamp(value, 0, max_stamina)
 
 
 func init() -> void:
-	if max_health <=0 : push_error("Forgot to set max_health")
-	if max_stamina <=0 : push_error("Forgot to set max_stamina")
+	if max_health <=0: push_error("Forgot to set max_health")
+	if max_stamina <=0: push_error("Forgot to set max_stamina")
 	current_health = max_health
 	current_stamina = max_stamina
 
@@ -36,7 +35,7 @@ func calculate_speed(speed_factor: float) -> float:
 
 
 func restore_health(amount: float) -> float:
-	current_health = clamp(current_health + amount, 0 , max_health)
+	current_health = clamp(current_health + amount, 0, max_health)
 	return current_health
 
 
@@ -46,7 +45,7 @@ func restore_stamina(amount: float) -> float:
 
 
 func drain_health(amount: float) -> float:
-	current_health = clamp(current_health - amount, 0 , max_health)
+	current_health = clamp(current_health - amount, 0, max_health)
 	return current_health
 
 

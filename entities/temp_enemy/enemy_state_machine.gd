@@ -4,7 +4,6 @@ extends Node
 @export var enemy: Enemy
 @export var player: ChickenPlayer
 
-
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
@@ -65,8 +64,7 @@ func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	# TODO: start animation of the state
-	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
+	if (current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon && weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
 

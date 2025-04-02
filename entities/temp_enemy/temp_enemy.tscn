@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=9 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_weapon.tscn" id="3_8k1p6"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek_model.tscn" id="4_hrlsl"]
 [ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
@@ -24,7 +23,6 @@ shape = SubResource("BoxShape3D_c1mms")
 
 [node name="CurrentWeapon" parent="." instance=ExtResource("3_8k1p6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28045, 1.54188, 0)
-weapon_scene = ExtResource("4_hrlsl")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
 script = ExtResource("2_h40bv")

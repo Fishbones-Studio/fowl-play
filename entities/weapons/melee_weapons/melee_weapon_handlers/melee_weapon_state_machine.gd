@@ -15,6 +15,7 @@ var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 func _ready() -> void:
 	if weapon == null:
 		push_error(owner.name + ": No weapon reference set")
+	print("Set melee weapon:" + weapon.name)
 
 	# Listen for state transition signals
 	SignalManager.combat_transition_state.connect(_transition_to_next_state)
@@ -61,25 +62,25 @@ func _input(event: InputEvent) -> void:
 
 # Handles transitioning from one state to another
 func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information: Dictionary[String, float] = {}) -> void:
-# Prevent transitioning to the same state
+	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
 		target_state = WeaponEnums.MeleeState.IDLE
-	
+
 	# Exit the current state before switching
 	var previous_state := current_state
 	previous_state.exit()
-	
+
 	# Switch to the new state
 	current_state = states.get(target_state)
 	if current_state == null:
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	if(current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon):
+	if (current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon && weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
-	
+
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.STATE_TYPE, information)
 
