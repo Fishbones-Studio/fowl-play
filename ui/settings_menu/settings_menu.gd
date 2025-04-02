@@ -18,7 +18,8 @@ var current_item: Button
 func _ready() -> void:
 	for item: Button in sidebar_items:
 		item.toggled.connect(_on_sidebar_toggled.bind(item))
-		item.focus_entered.connect(_on_focus_entered.bind(item))
+		item.focus_entered.connect(_on_sidebar_focus_entered.bind(item))
+		item.pressed.connect(_on_sidebar_pressed.bind(item))
 
 	controls.grab_focus()
 
@@ -30,12 +31,19 @@ func _input(event: InputEvent) -> void:
 		_close_window()
 
 
-func _on_focus_entered(item: Button) -> void:
-	if current_item == item:
+func _on_sidebar_pressed(item: Button) -> void:
+	if current_item != item:
 		return
-		
+
 	item.button_pressed = true
 	current_item = item
+
+
+func _on_sidebar_focus_entered(item: Button) -> void:
+	item.button_pressed = true
+	current_item = item
+	print(current_item)
+
 	_update_content(item)
 
 
@@ -59,13 +67,10 @@ func _update_content(item: Button) -> void:
 func _on_sidebar_toggled(toggled: bool, item: Button) -> void:
 	for sidebar_item in sidebar_items:
 		if sidebar_item == item:
+			TweenManager.create_scale_tween(null, sidebar_item, Vector2(1.2, 1.2))
 			continue
 		sidebar_item.button_pressed = false
-
-	if toggled:
-		TweenManager.create_scale_tween(null, item, Vector2(1.2, 1.2))
-	else:
-		TweenManager.create_scale_tween(null, item, Vector2(1.0, 1.0))
+		TweenManager.create_scale_tween(null, sidebar_item, Vector2(1.0, 1.0))
 
 
 func _on_close_button_button_up() -> void:
