@@ -15,7 +15,7 @@ func _on_chicken_input_event(_camera: Node, event: InputEvent, _event_position: 
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked on ", name)
-			SignalManager.switch_ui_scene.emit("uid://dvkxcgdk0goul")
+			SignalManager.add_ui_scene.emit("uid://dvkxcgdk0goul")
 
 
 func _on_flyer_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
@@ -32,4 +32,4 @@ func _on_shop_input_event(_camera: Node, event: InputEvent, _event_position: Vec
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			print("Clicked on ", name)
-			SignalManager.switch_ui_scene.emit("uid://bir1j5qouane0")
+			SignalManager.add_ui_scene.emit("uid://bir1j5qouane0")
