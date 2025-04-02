@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bpba8wvtfww4x"]
+[gd_scene load_steps=2 format=3 uid="uid://bpba8wvtfww4x"]
+
+[ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybind_menu/remap_panel.gd" id="1_0jaxl"]
 
 [node name="ContentItemKeybind" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -41,24 +43,24 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(256, 35)
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.0
 theme_type_variation = &"SettingsContentLabel"
 text = "label"
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer"]
+[node name="PrimaryPanel" type="Panel" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(156, 35)
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="PrimaryPanel" type="Panel" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(256, 35)
-layout_mode = 2
+size_flags_stretch_ratio = 3.0
 theme_type_variation = &"SettingsContentPanelRight"
+script = ExtResource("1_0jaxl")
+button = NodePath("PrimaryButton")
 
 [node name="PrimaryButton" type="Button" parent="MarginContainer/HBoxContainer/PrimaryPanel"]
+custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,12 +72,18 @@ grow_vertical = 2
 theme_type_variation = &"SettingsKeybindButton"
 text = "Unasigned"
 
-[node name="SecondaryPanel" type="Panel" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(256, 35)
+[node name="SecondaryPanel" type="Panel" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(156, 35)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
 theme_type_variation = &"SettingsContentPanelRight"
+script = ExtResource("1_0jaxl")
+button = NodePath("SecondaryButton")
+input_type = 1
 
 [node name="SecondaryButton" type="Button" parent="MarginContainer/HBoxContainer/SecondaryPanel"]
+custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,12 +95,18 @@ grow_vertical = 2
 theme_type_variation = &"SettingsKeybindButton"
 text = "Unasigned"
 
-[node name="Controller" type="Panel" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(256, 35)
+[node name="ControllerPanel" type="Panel" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("button")]
+custom_minimum_size = Vector2(156, 35)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
 theme_type_variation = &"SettingsContentPanelRight"
+script = ExtResource("1_0jaxl")
+button = NodePath("ControllerButton")
+input_type = 2
 
-[node name="ControllerButton" type="Button" parent="MarginContainer/HBoxContainer/Controller"]
+[node name="ControllerButton" type="Button" parent="MarginContainer/HBoxContainer/ControllerPanel"]
+custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

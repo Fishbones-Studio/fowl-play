@@ -13,4 +13,3 @@ func _on_play_button_pressed():
 func _on_settings_button_pressed() -> void:
 	#SignalManager.add_ui_scene.emit("uid://bwox3q508ewxc")
 	SignalManager.add_ui_scene.emit("uid://81fy3yb0j33w")
-	

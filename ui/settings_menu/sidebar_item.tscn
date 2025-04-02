@@ -2,25 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dtrgvy5t2vm3j" path="res://ui/settings_menu/sidebar_item.gd" id="1_1t6i4"]
 
-[node name="SidebarItem" type="Control"]
+[node name="SidebarItem" type="Button"]
 custom_minimum_size = Vector2(156, 48)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 156.0
-offset_bottom = 36.0
+offset_bottom = 48.0
+theme_type_variation = &"SidebarButton"
+text = "Key bindings"
+alignment = 0
 script = ExtResource("1_1t6i4")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"SidebarButton"
-text = "Key Bindings"
-
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
-[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered"]
-[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

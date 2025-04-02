@@ -1,14 +1,18 @@
-[gd_resource type="Theme" load_steps=31 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=36 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
 [ext_resource type="StyleBox" uid="uid://bhmsxt42xcgkj" path="res://resources/themes/styleboxes/button_pressed.tres" id="3_dagba"]
 [ext_resource type="StyleBox" uid="uid://c80bewaohqml0" path="res://resources/themes/styleboxes/panel_container_hover.tres" id="4_dagba"]
+[ext_resource type="StyleBox" uid="uid://dwicgkvjluob0" path="res://resources/themes/styleboxes/keybinds_res_def_button_hover.tres" id="5_03ohx"]
 [ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/styleboxes/panel_container_normal.tres" id="5_xtbu8"]
 [ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="6_7adcq"]
+[ext_resource type="StyleBox" uid="uid://2bi33x6p08ih" path="res://resources/themes/styleboxes/keybinds_res_def_button_normal.tres" id="6_7ucis"]
 [ext_resource type="StyleBox" uid="uid://do8svyygf5k1e" path="res://resources/themes/styleboxes/pause_menu_button_hover.tres" id="7_6bdnh"]
+[ext_resource type="StyleBox" uid="uid://ih2cst4gsqnr" path="res://resources/themes/styleboxes/keybinds_res_def_button_pressed.tres" id="7_27a07"]
 [ext_resource type="StyleBox" uid="uid://c6x8bod707wjc" path="res://resources/themes/styleboxes/pause_menu_button_normal.tres" id="8_yoenm"]
 [ext_resource type="StyleBox" uid="uid://bs2x4gjk4xumb" path="res://resources/themes/styleboxes/pause_menu_button_pressed.tres" id="9_tvx0j"]
+[ext_resource type="StyleBox" uid="uid://d3oipv5i4i1q3" path="res://resources/themes/styleboxes/keybind_button_normal.tres" id="10_6bdnh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtbu8"]
 
@@ -101,37 +105,50 @@ image = SubResource("Image_6bdnh")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27a07"]
 bg_color = Color(0.376471, 0.411765, 0.478431, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ucis"]
 bg_color = Color(0.282353, 0.32549, 0.396078, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bdnh"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoenm"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03ohx"]
 bg_color = Color(0.772549, 0.737255, 0.670588, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddjlj"]
 bg_color = Color(0, 0, 0, 0.12549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kiug"]
+bg_color = Color(0.8, 0.796078, 0.780392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.101961)
+shadow_size = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7adcq"]
 
@@ -168,6 +185,14 @@ ItemTitle/styles/normal = SubResource("StyleBoxFlat_0wthw")
 ItemType/base_type = &"Label"
 ItemType/colors/font_color = Color(0.60933, 0.60933, 0.60933, 1)
 ItemType/styles/normal = SubResource("StyleBoxFlat_dagba")
+KeybindResDefButton/base_type = &"Button"
+KeybindResDefButton/colors/font_color = Color(0.164706, 0.164706, 0.164706, 1)
+KeybindResDefButton/constants/outline_size = 0
+KeybindResDefButton/font_sizes/font_size = 20
+KeybindResDefButton/styles/focus = ExtResource("5_03ohx")
+KeybindResDefButton/styles/hover = ExtResource("5_03ohx")
+KeybindResDefButton/styles/normal = ExtResource("6_7ucis")
+KeybindResDefButton/styles/pressed = ExtResource("7_27a07")
 Label/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 Label/constants/outline_size = 3
 Label/font_sizes/font_size = 20
@@ -213,7 +238,7 @@ PopupMenu/icons/radio_unchecked = SubResource("ViewportTexture_03ohx")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_27a07")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_7ucis")
 SettingsContentLabel/base_type = &"Label"
-SettingsContentLabel/colors/font_color = Color(0.529412, 0.501961, 0.521569, 1)
+SettingsContentLabel/colors/font_color = Color(0.282353, 0.321569, 0.4, 1)
 SettingsContentLabel/constants/outline_size = 0
 SettingsContentLabel/font_sizes/font_size = 20
 SettingsContentLabel/styles/normal = SubResource("StyleBoxFlat_6bdnh")
@@ -229,6 +254,15 @@ SettingsExitButton/constants/outline_size = 0
 SettingsExitButton/font_sizes/font_size = 32
 SettingsHeaderContainer/base_type = &"Panel"
 SettingsHeaderContainer/styles/panel = SubResource("StyleBoxFlat_ddjlj")
+SettingsKeybindButton/base_type = &"Button"
+SettingsKeybindButton/colors/font_color = Color(0.164706, 0.164706, 0.164706, 1)
+SettingsKeybindButton/constants/outline_size = 0
+SettingsKeybindButton/styles/normal = ExtResource("10_6bdnh")
+SettingsSliderLabel/base_type = &"Label"
+SettingsSliderLabel/colors/font_color = Color(0.282353, 0.321569, 0.4, 1)
+SettingsSliderLabel/constants/outline_size = 0
+SettingsSliderLabel/font_sizes/font_size = 20
+SettingsSliderLabel/styles/normal = SubResource("StyleBoxFlat_5kiug")
 SidebarButton/base_type = &"Button"
 SidebarButton/colors/font_color = Color(0.745098, 0.737255, 0.745098, 1)
 SidebarButton/colors/font_focus_color = Color(0.917647, 0.905882, 0.862745, 1)
