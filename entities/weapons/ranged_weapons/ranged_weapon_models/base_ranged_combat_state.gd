@@ -26,12 +26,17 @@ func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
 	
-func process_hit(result: Dictionary) -> void:
-	var target = result.collider
-	print("Colliding with:" + result.collider)
-	if target is PhysicsBody3D:
-		if target == origin_entity:
-			print("Hit self")
-			return
-		print("Hit physicsbody")
-		SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)
+func process_hit(raycast: RayCast3D) -> void:
+	if raycast.is_colliding():
+		var collider: Object = raycast.get_collider()
+		
+		if collider is PhysicsBody3D:
+			DebugDrawer.draw_debug_impact(collider.position, weapon)
+			if collider == origin_entity:
+				print("Hit self")
+				return
+			print("Hit physicsbody")
+			print("Colliding with:" + collider.name)
+			SignalManager.weapon_hit_target.emit(collider, weapon.current_weapon.damage)
+	# Clean up raycast
+	raycast.queue_free()

@@ -34,25 +34,32 @@ func _fire_bullet() -> void:
 	var fire_direction: Vector3 = _calculate_spiral_direction()
 
 	# Get world space positions
-	var origin: Vector3 = attack_origin.position
+	var origin: Vector3 = attack_origin.global_transform.origin
 	var end: Vector3 = origin + fire_direction * max_range
 
 	# Debug draw (lasts 3 frames)
 	DebugDrawer.draw_debug_trajectory(origin, end, weapon)
 
-	var params: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, end)
-	params.collide_with_areas = true
-	params.collide_with_bodies = true
+	# Create and configure raycast
+	var raycast := RayCast3D.new()
+	raycast.enabled = true
+	raycast.target_position = fire_direction * max_range
+#	raycast.collision_mask = weapon.damageable_layers
+	raycast.hit_from_inside = true
 
-	var result: Dictionary = weapon.get_world_3d().direct_space_state.intersect_ray(params)
-	if result:
-		process_hit(result)
-		DebugDrawer.draw_debug_impact(result.position, weapon)
-
+	# Add to scene temporarily
+	attack_origin.add_child(raycast)
+	raycast.global_transform.origin = origin
+	raycast.force_raycast_update()  # Ensure immediate collision check
+	
+	# TODO: hit animation
+	process_hit(raycast)
+	
 	# Update spiral pattern with angle clamping
 	_current_angle += spiral_spread * _angle_direction
 	_current_angle = wrapf(_current_angle, -max_spread_angle, max_spread_angle)
 	_angle_direction *= -1
+
 
 func _calculate_spiral_direction() -> Vector3:
 	var base_forward: Vector3 = attack_origin.basis.z

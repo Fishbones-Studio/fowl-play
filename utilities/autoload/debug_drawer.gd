@@ -29,8 +29,8 @@ func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
 		# Create impact marker
 		var impact_marker = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
-		sphere.radius = 0.1
-		sphere.height = 0.2
+		sphere.radius = 1.0
+		sphere.height = 1.0
 
 		var material = StandardMaterial3D.new()
 		material.albedo_color = Color.RED
