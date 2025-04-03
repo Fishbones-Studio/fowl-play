@@ -11,6 +11,7 @@ func _ready():
 	GameManager.chicken_player = self
 	SignalManager.init_health.emit(stats.max_health, stats.current_health)
 	SignalManager.init_stamina.emit(stats.max_stamina, stats.current_stamina)
+	SignalManager.weapon_hit_target.connect(_on_weapon_hit_target)
 
 
 func _input(event: InputEvent) -> void:
@@ -19,10 +20,17 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	movement_state_machine.process(delta)
+	SignalManager.player_stats_changed.emit(stats)
 
 
 func _physics_process(delta: float) -> void:
 	movement_state_machine.physics_process(delta)
+
+func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:
+	if target == self:
+		print("target")
+		# take away health
+		stats.drain_health(damage)
 
 
 func _exit_tree() -> void:

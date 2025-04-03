@@ -22,8 +22,6 @@ func process(delta: float) -> void:
 	if is_sprinting():
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
 
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
-
 	# Handle state transitions
 	if player.stats.current_stamina <= _stamina_cost * delta:
 		print("Not enough stamina to glide")

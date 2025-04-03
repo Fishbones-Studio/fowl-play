@@ -43,4 +43,4 @@ func _attack() -> void:
 	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for enemy in enemies:
 		if enemy is Enemy:
-			enemy.take_damage(weapon.current_weapon.damage)
+			SignalManager.weapon_hit_target.emit(enemy, weapon.current_weapon.damage)

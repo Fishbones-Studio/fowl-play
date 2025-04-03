@@ -14,7 +14,8 @@ current_weapon = ExtResource("2_h8kbp")
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
-[node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("weapon")]
+[node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
+starting_state = NodePath("IdleState")
 weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]

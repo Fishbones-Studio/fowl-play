@@ -6,6 +6,7 @@ extends BaseState
 
 var weapon: RangedWeapon
 var transition_signal : Signal
+var origin_entity : PhysicsBody3D ## The entity that is using the weapon
 
 
 func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
@@ -16,6 +17,7 @@ func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 	if not _transition_signal:
 		print("Transition signal does not exist! Please provide a valid signal.")
 		return
+		
 	
 	weapon = _weapon_node
 	transition_signal = _transition_signal
@@ -23,10 +25,9 @@ func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 
 func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
-
-	# TODO fix
+	
 func process_hit(result: Dictionary) -> void:
 	var target = result.collider
-	print(target)
 	if target is PhysicsBody3D:
-		SignalManager.weapon_hit_area_body_entered.emit(target)
+		print("Hit physicsbody")
+		SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)

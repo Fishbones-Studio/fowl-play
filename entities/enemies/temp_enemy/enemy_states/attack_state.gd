@@ -16,9 +16,7 @@ func exit() -> void:
 
 #Deal damage to the player when they enter the attack_area of the enemy
 func attack_player():
-	SignalManager.hurt_player.emit(damage)
-	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {})
-
+	SignalManager.weapon_hit_target.emit(player, damage)
 
 #Reset enemy after the player leaves the attack area of the enemy
 func _on_attack_area_body_exited(body: PhysicsBody3D) -> void:

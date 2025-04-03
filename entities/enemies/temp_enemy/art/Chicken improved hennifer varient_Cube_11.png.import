@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2linqp2b8ggw"
-path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-b6dd5b8acce7630729eb13d7db952692.s3tc.ctex"
-path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-b6dd5b8acce7630729eb13d7db952692.etc2.ctex"
+path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-a10972291330a85ae38d34d6a9c297b0.s3tc.ctex"
+path.etc2="res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-a10972291330a85ae38d34d6a9c297b0.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/temp_enemy/art/Chicken improved hennifer varient_Cube_11.png"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-b6dd5b8acce7630729eb13d7db952692.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-b6dd5b8acce7630729eb13d7db952692.etc2.ctex"]
+source_file="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient_Cube_11.png"
+dest_files=["res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-a10972291330a85ae38d34d6a9c297b0.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Cube_11.png-a10972291330a85ae38d34d6a9c297b0.etc2.ctex"]
 
 [params]
 

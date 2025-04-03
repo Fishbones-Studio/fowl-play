@@ -6,7 +6,6 @@ class_name RangedWeaponHandler extends Node
 ## Called when attack action is initiated (button pressed)
 func start_use() -> void:
 	print("Starting weapon")
-	print(state_machine.current_state)
 	match state_machine.current_state.state_type:
 		WeaponEnums.WeaponState.COOLDOWN:
 			print("Attack not allowed during cooldown")
@@ -20,7 +19,8 @@ func start_use() -> void:
 				pass
 			else: 
 				print("Cannot attack again during attack")
-
+		_:
+			pass
 ## Called when attack action is released (button released)
 func end_use() -> void:
 	print("Stopping weapon")
