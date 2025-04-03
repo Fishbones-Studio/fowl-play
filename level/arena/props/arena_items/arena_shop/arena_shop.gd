@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-var player_in_area = false
+var player_in_area := false
 
 @onready var label = $Area3D/OpenShopLabel
 
@@ -26,7 +26,7 @@ func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
 
 
 func open_shop():
-	SignalManager.add_ui_scene.emit("uid://bbbvd0g05hgn3")
+	SignalManager.add_ui_scene.emit("res://ui/in_arena_shop/shop/in_arena_shop.tscn") # UID fails here for some reason, so switching back to res path
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 

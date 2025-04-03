@@ -35,7 +35,6 @@ func process_hit(raycast: RayCast3D) -> void:
 			if collider == origin_entity:
 				print("Hit self")
 				return
-			print("Hit physicsbody")
 			print("Colliding with:" + collider.name)
 			SignalManager.weapon_hit_target.emit(collider, weapon.current_weapon.damage)
 	# Clean up raycast

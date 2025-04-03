@@ -36,17 +36,18 @@ func _fire_bullet() -> void:
 	# Get world space positions
 	var origin: Vector3 = attack_origin.global_position
 	var end: Vector3 = origin + fire_direction * max_range
-	print("Origin: %v End: %v" % [origin, end])
 
 	# Create and configure raycast
 	var raycast := RayCast3D.new()
 	raycast.enabled = true
 	raycast.target_position = fire_direction * max_range  # Local space
 	raycast.exclude_parent = true
+	raycast.collision_mask = 0b0110 # Binary for collision layers 2 and 3
 
 	# Add to scene temporarily
 	attack_origin.add_child(raycast)
 	raycast.global_transform.origin = origin
+	raycast.target_position = end
 	raycast.force_raycast_update()
 
 	# Create trajectory visualization
@@ -63,14 +64,13 @@ func _fire_bullet() -> void:
 	trajectory_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	# Set color (red with some transparency)
-	var trail_color := Color(0.3, 0.3, 0.3, 0.5)
+	var trail_color := Color(0.3, 0.3, 0.3, 0.1)
 	trajectory_mesh.surface_set_color(trail_color)
 
 	# Cylinder parameters
 	var radius := 0.1  # Adjust for thickness
 	var segments := 8   # More segments = smoother cylinder
 	var start_pos := Vector3.ZERO
-	var end_pos := fire_direction * max_range
 
 	# Create a circle of vertices around the start and end points
 	var start_verts: Array[Vector3] = []
@@ -89,7 +89,7 @@ func _fire_bullet() -> void:
 		var circle_vec := ortho.rotated(fire_direction, angle) * radius
 
 		start_verts.append(start_pos + circle_vec)
-		end_verts.append(end_pos + circle_vec)
+		end_verts.append(end + circle_vec)
 
 	# Create triangles connecting the circles
 	for i in range(segments):
@@ -111,7 +111,7 @@ func _fire_bullet() -> void:
 		trajectory_mesh.surface_add_vertex(start_pos)
 
 		trajectory_mesh.surface_add_vertex(end_verts[i])
-		trajectory_mesh.surface_add_vertex(end_pos)
+		trajectory_mesh.surface_add_vertex(end)
 		trajectory_mesh.surface_add_vertex(end_verts[next_i])
 
 	# Finish drawing
