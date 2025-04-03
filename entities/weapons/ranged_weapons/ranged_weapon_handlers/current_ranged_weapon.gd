@@ -23,7 +23,6 @@ func _ready() -> void:
 		return
 
 	current_weapon = weapon_scene.instantiate() as RangedWeapon
-	print("set weapon")
 	if not current_weapon:
 		push_error("Failed to instantiate weapon!")
 		return

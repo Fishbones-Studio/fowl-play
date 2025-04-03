@@ -12,7 +12,6 @@ var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(current_state)
 	if enemy == null:
 		push_error(owner.name + ": No enemy reference set")
 
@@ -29,9 +28,7 @@ func _ready() -> void:
 	for state_node: BaseEnemyState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		state_node.setup(enemy, weapon, player)
-
-	print(states)
-
+		
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
 

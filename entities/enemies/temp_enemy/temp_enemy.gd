@@ -17,7 +17,6 @@ func _physics_process(_delta: float) -> void:
 
 ## Public Methods
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
-	print(target)
 	if target == self:
 		print("Enemy hit!")
 		health -= damage

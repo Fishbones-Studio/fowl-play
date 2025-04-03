@@ -28,7 +28,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
-		print("target")
 		# take away health
 		stats.drain_health(damage)
 

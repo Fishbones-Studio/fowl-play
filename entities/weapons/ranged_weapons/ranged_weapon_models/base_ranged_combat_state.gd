@@ -28,6 +28,10 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 	
 func process_hit(result: Dictionary) -> void:
 	var target = result.collider
+	print("Colliding with:" + result.collider)
 	if target is PhysicsBody3D:
+		if target == origin_entity:
+			print("Hit self")
+			return
 		print("Hit physicsbody")
 		SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)

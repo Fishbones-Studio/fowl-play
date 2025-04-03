@@ -11,7 +11,6 @@ var _current_angle: float = 0.0
 var _angle_direction: int = 1
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
-	print("entering attack")
 	_fire_timer = 0.0
 	_fire_duration = 0.0
 	_current_angle = 0.0
@@ -32,7 +31,6 @@ func physics_process(delta: float) -> void:
 		transition_signal.emit(WeaponEnums.WeaponState.COOLDOWN, {})
 
 func _fire_bullet() -> void:
-	print("firing a bullet")
 	var fire_direction: Vector3 = _calculate_spiral_direction()
 
 	# Get world space positions
