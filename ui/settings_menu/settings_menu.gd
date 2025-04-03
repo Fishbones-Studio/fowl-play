@@ -27,7 +27,7 @@ func _ready() -> void:
 	SignalManager.settings_menu_toggled.emit(true)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		_close_window()
 
@@ -64,7 +64,7 @@ func _update_content(item: Button) -> void:
 	settings_label.text = "Settings / " + _format_text(item.name)
 
 
-func _on_sidebar_toggled(toggled: bool, item: Button) -> void:
+func _on_sidebar_toggled(_toggled: bool, item: Button) -> void:
 	for sidebar_item in sidebar_items:
 		if sidebar_item == item:
 			TweenManager.create_scale_tween(null, sidebar_item, Vector2(1.2, 1.2))
@@ -91,11 +91,11 @@ func _format_text(text: String) -> String:
 	var result: String = ""
 
 	for i in range(text.length()):
-		var char = text[i]
+		var character = text[i]
 
-		if char == char.to_upper() and i > 0 and text[i-1] != " ":
+		if character == character.to_upper() and i > 0 and text[i-1] != " ":
 			result += " "
 
-		result += char
+		result += character
 
 	return result

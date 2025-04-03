@@ -25,7 +25,7 @@ func _ready() -> void:
 func _load_audio_settings() -> void:
 	var config = ConfigFile.new()
 
-	if config.load(config_path) == OK:
+	if config.load(config_path) == OK and config.has_section(config_name):
 		# Replace audio setttings with user's saved preferences
 		for audio_bus_name in config.get_section_keys(config_name):
 			var saved_volume = config.get_value(config_name, audio_bus_name)
@@ -44,7 +44,7 @@ func _load_audio_busses() -> void:
 
 		instance.set_text(audio_bus)
 		instance.set_value(audio_busses[audio_bus])
-		instance.slider.value_changed.connect(_volume_changed.bind(audio_bus, instance))
+		instance.slider.value_changed.connect(_volume_changed.bind(audio_bus))
 
 
 func _save_audio_settings() -> void:
@@ -56,7 +56,7 @@ func _save_audio_settings() -> void:
 	config.save(config_path)
 
 
-func _volume_changed(value: float, bus_name: String, slider: SettingsSliderItem) -> void:
+func _volume_changed(value: float, bus_name: String) -> void:
 	_set_volume(bus_name, value)
 	_save_audio_settings()
 
