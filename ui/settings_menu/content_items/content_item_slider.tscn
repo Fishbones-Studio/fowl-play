@@ -77,4 +77,7 @@ custom_minimum_size = Vector2(256, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
+step = 0.1
 value = 50.0
+
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
