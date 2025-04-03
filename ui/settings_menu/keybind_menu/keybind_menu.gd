@@ -1,12 +1,12 @@
 ################################################################################
-## Script to display and manage input settings in a UI
+## Script to display and manage input settings in a UI.
 ##
 ## This script handles the input settings UI, allowing users to remap keys and 
-## save their preferences
+## save their preferences.
 ################################################################################
 extends Control
 
-var config_path: String = "user://keybinds.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
+var config_path: String = "user://settings.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
 @onready var stylebox_focus: StyleBoxFlat = load("uid://dwicgkvjluob0")
