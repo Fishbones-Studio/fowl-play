@@ -31,7 +31,7 @@ func process_hit(raycast: RayCast3D) -> void:
 		var collider: Object = raycast.get_collider()
 		
 		if collider is PhysicsBody3D:
-			DebugDrawer.draw_debug_impact(collider.position, weapon)
+			DebugDrawer.draw_debug_impact(collider.global_position, collider)
 			if collider == origin_entity:
 				print("Hit self")
 				return

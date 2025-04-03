@@ -34,7 +34,7 @@ func _fire_bullet() -> void:
 	var fire_direction: Vector3 = _calculate_spiral_direction()
 
 	# Get world space positions
-	var origin: Vector3 = attack_origin.global_transform.origin
+	var origin: Vector3 = attack_origin.global_position
 	var end: Vector3 = origin + fire_direction * max_range
 
 	# Debug draw (lasts 3 frames)
@@ -43,9 +43,11 @@ func _fire_bullet() -> void:
 	# Create and configure raycast
 	var raycast := RayCast3D.new()
 	raycast.enabled = true
-	raycast.target_position = fire_direction * max_range
-#	raycast.collision_mask = weapon.damageable_layers
-	raycast.hit_from_inside = true
+	raycast.target_position = end
+	# TODO: collision layer, figure out how to show the raycast in debug
+	raycast.exclude_parent = true
+	raycast.debug_shape_custom_color = Color(0.5, 0.8, 1.0, 1.0)
+	raycast.debug_shape_thickness = 5
 
 	# Add to scene temporarily
 	attack_origin.add_child(raycast)

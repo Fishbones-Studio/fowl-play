@@ -1,7 +1,7 @@
 extends Node
 
 func draw_debug_trajectory(start: Vector3, end: Vector3, parent : Node3D) -> void:
-	if  OS.has_feature("debug"):
+	if  !OS.has_feature("debug"): # TODO switch back
 		# Create temporary debug line
 		var debug_line = ImmediateMesh.new()
 		var mesh_instance = MeshInstance3D.new()
@@ -17,11 +17,9 @@ func draw_debug_trajectory(start: Vector3, end: Vector3, parent : Node3D) -> voi
 
 		mesh_instance.mesh = debug_line
 		parent.add_child(mesh_instance)
-
-		# Auto-remove after short delay
-		await get_tree().process_frame
-		await get_tree().process_frame
-		await get_tree().process_frame
+		
+		#TODO this pauses entire code execution, do timer n the mesh instance node		
+		await get_tree().create_timer(0.2).timeout
 		mesh_instance.queue_free()
 
 func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
@@ -29,8 +27,8 @@ func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
 		# Create impact marker
 		var impact_marker = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
-		sphere.radius = 1.0
-		sphere.height = 1.0
+		sphere.radius = 0.4
+		sphere.height = 0.2
 
 		var material = StandardMaterial3D.new()
 		material.albedo_color = Color.RED
