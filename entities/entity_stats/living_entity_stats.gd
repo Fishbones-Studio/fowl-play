@@ -7,7 +7,7 @@ extends Resource
 @export var attack: int
 @export var defense: int
 @export var speed: float
-@export var weight: int
+@export var weight: float
 @export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int

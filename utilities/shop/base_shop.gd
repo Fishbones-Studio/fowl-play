@@ -84,6 +84,7 @@ func _should_skip_item(item: BaseResource) -> bool:
 
 
 func _on_exit_button_button_pressed() -> void:
+	InputBlocker.blocked = false
 	close_ui()
 
 
