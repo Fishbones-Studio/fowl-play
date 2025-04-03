@@ -46,13 +46,14 @@ func _on_flicker_timer_timeout() -> void:
 
 
 func _start_flicker_effect() -> void:
-	if _is_flickering: return
+	if _is_flickering: 
+		return
 	
 	_is_flickering = true
 	flicker_started.emit()
 	
-	# Create and bind the tween to this node for proper cleanup
-	var tween = create_tween().bind_node(self)
+	# Explicit self.create_tween() is clearer
+	var tween = self.create_tween()  # Now using self.create_tween() explicitly
 	var flicker_count = randi_range(3, max_flicker_count)
 
 	for i in flicker_count:
@@ -72,10 +73,3 @@ func _start_flicker_effect() -> void:
 		flicker_ended.emit()
 		flicker_timer.start(randf_range(long_flicker_pause - 2, long_flicker_pause + 2))
 	)
-
-
-func _exit_tree() -> void:
-	if has_meta("_tween"):
-		var tween = get_meta("_tween")
-		if tween is Tween:
-			tween.kill()

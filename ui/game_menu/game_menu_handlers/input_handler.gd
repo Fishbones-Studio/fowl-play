@@ -2,11 +2,11 @@
 extends Node
 
 
-signal move_selection(direction: int)
-signal select_current_item()
-signal keyboard_navigation_activated()
-signal keyboard_navigation_deactivated()
-signal item_clicked(item_index: int)
+signal selection_moved(direction: int) 
+signal current_item_selected()          
+signal keyboard_navigation_activated()  
+signal keyboard_navigation_deactivated() 
+signal item_clicked(item_index: int)   
 
 
 var is_controller_connected: bool = false
@@ -55,7 +55,7 @@ func _input(event: InputEvent):
 			if can_move_with_stick:
 				Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 				var direction = sign(axis_value)
-				move_selection.emit(direction)
+				selection_moved.emit(direction)  
 				can_move_with_stick = false
 				stick_cooldown_timer.start(stick_cooldown)
 				controller_was_used = true
@@ -71,14 +71,14 @@ func _input(event: InputEvent):
 		handle_directional_input(1)
 	elif event.is_action_pressed("accept"):
 		controller_was_used = true
-		select_current_item.emit()
+		current_item_selected.emit() 
 
 
 func handle_directional_input(direction: int):
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	controller_was_used = true
 	keyboard_navigation_activated.emit()
-	move_selection.emit(direction)
+	selection_moved.emit(direction)  
 
 
 func handle_item_click(item: Area3D, event: InputEvent) -> void:
