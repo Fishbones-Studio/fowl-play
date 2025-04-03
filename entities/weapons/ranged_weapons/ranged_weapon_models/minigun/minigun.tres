@@ -4,13 +4,14 @@
 
 [resource]
 script = ExtResource("1_dlpss")
-damage = 3
-windup_time = 1.5
-attack_duration = 5.0
+damage = 5
+windup_time = 1.0
+attack_duration = 2.8
 cooldown_time = 2.6
 allow_continuous_fire = true
 allow_early_release = true
-fire_rate_per_second = 0.3
+fire_rate_per_second = 0.2
+max_range = 150.0
 name = "Minigun"
 drop_chance = 10
 cost = 0

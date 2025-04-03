@@ -1,7 +1,7 @@
 extends Node
 
-func draw_debug_trajectory(start: Vector3, end: Vector3, parent : Node3D) -> void:
-	if  !OS.has_feature("debug"): # TODO switch back
+func draw_debug_trajectory(start: Vector3, end: Vector3) -> void:
+	if OS.has_feature("debug"):
 		# Create temporary debug line
 		var debug_line = ImmediateMesh.new()
 		var mesh_instance = MeshInstance3D.new()
@@ -16,11 +16,17 @@ func draw_debug_trajectory(start: Vector3, end: Vector3, parent : Node3D) -> voi
 		debug_line.surface_end()
 
 		mesh_instance.mesh = debug_line
-		parent.add_child(mesh_instance)
-		
-		#TODO this pauses entire code execution, do timer n the mesh instance node		
-		await get_tree().create_timer(0.2).timeout
-		mesh_instance.queue_free()
+		add_child(mesh_instance)
+
+		# Create and start timer
+		var timer : Timer = Timer.new()
+		timer.timeout.connect(func():
+			mesh_instance.queue_free()
+		)
+		timer.one_shot = true
+		mesh_instance.add_child(timer)
+		timer.start(0.2)
+
 
 func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
 	if  OS.has_feature("debug"):
