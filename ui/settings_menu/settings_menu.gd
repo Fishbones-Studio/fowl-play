@@ -11,6 +11,7 @@ var current_item: Button
 @onready var audio: Button = %Audio
 
 @onready var keybinds_menu: PackedScene = load("uid://bkbsjmbi2yaoh")
+@onready var audio_menu: PackedScene = load("uid://6xd2kic6u58a")
 
 @onready var sidebar_items: Array[Node] = _get_sidebar_items()
 
@@ -58,7 +59,7 @@ func _update_content(item: Button) -> void:
 		graphics:
 			pass
 		audio:
-			pass
+			content.add_child(audio_menu.instantiate())
 	
 	settings_label.text = "Settings / " + _format_text(item.name)
 
