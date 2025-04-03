@@ -22,7 +22,7 @@ func _ready() -> void:
 	_load_audio_settings()
 
 
-func _load_audio_settings():
+func _load_audio_settings() -> void:
 	var config = ConfigFile.new()
 
 	if config.load(config_path) == OK:
