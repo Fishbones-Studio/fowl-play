@@ -1,0 +1,187 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnq3em8w064n4"]
+
+[ext_resource type="Script" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
+[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="2_jbgdu"]
+[ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbgdu"]
+shader = ExtResource("1_mnjdh")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.7
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uraes"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_ihaig"]
+sky_material = SubResource("ProceduralSkyMaterial_uraes")
+
+[sub_resource type="Environment" id="Environment_ihaig"]
+background_mode = 2
+sky = SubResource("Sky_ihaig")
+sky_rotation = Vector3(1.00356, 0, 0)
+
+[sub_resource type="World3D" id="World3D_3qrb2"]
+environment = SubResource("Environment_ihaig")
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "footer", "game_logo_container")]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c3jo5")
+chicken = NodePath("ChickenContainer/SubViewportContainer/SubViewport/chicken_default")
+camera = NodePath("ChickenContainer/SubViewportContainer/SubViewport/Camera3D")
+footer = NodePath("Footer")
+game_logo_container = NodePath("GameLogoContainer")
+
+[node name="BlurRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jbgdu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChickenContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="ChickenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ChickenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ChickenContainer/SubViewportContainer"]
+world_3d = SubResource("World3D_3qrb2")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 1.5, 1.8)
+projection = 1
+size = 4.0
+
+[node name="chicken_default" parent="ChickenContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_uraes")]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0785398
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="PauseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="ResumeButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Resume"
+alignment = 0
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Settings"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Quit"
+alignment = 0
+
+[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Forfeit"
+alignment = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GameLogoContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+offset_right = 298.884
+offset_bottom = 256.0
+theme_type_variation = &"PauseMenuLogoContainer"
+
+[node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
+layout_mode = 2
+texture = ExtResource("2_jbgdu")
+expand_mode = 3
+
+[node name="Footer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"PauseMenuFooter"
+
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_button_up"]

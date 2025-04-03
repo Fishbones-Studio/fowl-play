@@ -1,6 +1,6 @@
 extends Control
 
-var existing_items: Array[Resource]
+var existing_items: Array[BaseResource]
 var new_item: Resource
 
 @onready var owned_items_container: HBoxContainer = %OwnedItemsContainer
