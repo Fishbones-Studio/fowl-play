@@ -24,6 +24,8 @@ func _on_switch_ui(new_ui_scene_path: String, params: Dictionary = {}) -> void:
 
 func _on_add_ui_scene(new_ui_scene_path: String, params: Dictionary = {}) -> void:
 	# Load the UI scene from the path
+	assert(ResourceLoader.exists(new_ui_scene_path), "path doesn't exist")
+	
 	var new_ui_scene_resource: Resource = ResourceLoader.load(new_ui_scene_path)
 
 	if new_ui_scene_resource == null:
