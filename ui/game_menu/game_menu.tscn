@@ -46,6 +46,7 @@ ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
 ambient_light_energy = 0.01
 
 [node name="GameMenu" type="Node3D" node_paths=PackedStringArray("input_handler", "light_handler")]
+process_mode = 1
 script = ExtResource("1_5qgdc")
 input_handler = NodePath("InputHandler")
 light_handler = NodePath("Lamp")

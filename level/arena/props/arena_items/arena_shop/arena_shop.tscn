@@ -14,6 +14,8 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_brd77"]
 
 [node name="ArenaShop" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 63
 script = ExtResource("1_5pok6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -31,6 +33,8 @@ text = "Upgrade Shop"
 font_size = 63
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 63
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)

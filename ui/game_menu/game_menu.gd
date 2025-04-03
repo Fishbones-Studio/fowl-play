@@ -90,6 +90,7 @@ func _on_select_current_item() -> void:
 	var selected_item = focusable_items[current_index]
 	if selected_item == flyer_item:
 		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
+		SignalManager.emit_throttled("add_ui_scene", ["uid://dnq3em8w064n4"])
 		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 	elif selected_item == shop_item:
 		SignalManager.switch_ui_scene.emit("uid://bir1j5qouane0")
