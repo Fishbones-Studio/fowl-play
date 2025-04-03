@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dnq3em8w064n4"]
 
-[ext_resource type="Script" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
+[ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
 [ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
@@ -72,7 +72,7 @@ stretch = true
 world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(574, 648)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
