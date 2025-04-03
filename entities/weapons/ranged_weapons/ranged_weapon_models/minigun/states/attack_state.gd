@@ -58,16 +58,61 @@ func _fire_bullet() -> void:
 	# Add to scene
 	attack_origin.add_child(trajectory_mesh_instance)
 
-	# Begin drawing the trajectory line
+	# Begin drawing the trajectory cylinder
 	trajectory_mesh.clear_surfaces()
-	trajectory_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	trajectory_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	# Set line color (red with some transparency)
-	trajectory_mesh.surface_set_color(Color(0.3, 0.3, 0.3, 0.5))
+	# Set color (red with some transparency)
+	var trail_color := Color(0.3, 0.3, 0.3, 0.5)
+	trajectory_mesh.surface_set_color(trail_color)
 
-	# Draw line from origin to end point
-	trajectory_mesh.surface_add_vertex(origin - attack_origin.global_transform.origin)  # Local space
-	trajectory_mesh.surface_add_vertex(fire_direction * max_range)  # Local space
+	# Cylinder parameters
+	var radius := 0.1  # Adjust for thickness
+	var segments := 8   # More segments = smoother cylinder
+	var start_pos := Vector3.ZERO
+	var end_pos := fire_direction * max_range
+
+	# Create a circle of vertices around the start and end points
+	var start_verts: Array[Vector3] = []
+	var end_verts: Array[Vector3] = []
+
+	# Find an orthogonal vector to the direction for our circle
+	var ortho: Vector3
+	if abs(fire_direction.dot(Vector3.UP)) < 0.9:
+		ortho = fire_direction.cross(Vector3.UP).normalized()
+	else:
+		ortho = fire_direction.cross(Vector3.RIGHT).normalized()
+
+	# Generate vertices in a circle around the line
+	for i in range(segments):
+		var angle := float(i) / segments * TAU
+		var circle_vec := ortho.rotated(fire_direction, angle) * radius
+
+		start_verts.append(start_pos + circle_vec)
+		end_verts.append(end_pos + circle_vec)
+
+	# Create triangles connecting the circles
+	for i in range(segments):
+		var next_i := (i + 1) % segments
+
+		# Triangle 1
+		trajectory_mesh.surface_add_vertex(start_verts[i])
+		trajectory_mesh.surface_add_vertex(end_verts[i])
+		trajectory_mesh.surface_add_vertex(start_verts[next_i])
+
+		# Triangle 2
+		trajectory_mesh.surface_add_vertex(start_verts[next_i])
+		trajectory_mesh.surface_add_vertex(end_verts[i])
+		trajectory_mesh.surface_add_vertex(end_verts[next_i])
+
+		# Add caps
+		trajectory_mesh.surface_add_vertex(start_verts[i])
+		trajectory_mesh.surface_add_vertex(start_verts[next_i])
+		trajectory_mesh.surface_add_vertex(start_pos)
+
+		trajectory_mesh.surface_add_vertex(end_verts[i])
+		trajectory_mesh.surface_add_vertex(end_pos)
+		trajectory_mesh.surface_add_vertex(end_verts[next_i])
 
 	# Finish drawing
 	trajectory_mesh.surface_end()
@@ -82,7 +127,7 @@ func _fire_bullet() -> void:
 		timer.queue_free()
 	)
 	timer.start()
-	
+
 	# Process hit
 	process_hit(raycast)
 	
@@ -90,7 +135,6 @@ func _fire_bullet() -> void:
 	_current_angle += spiral_spread * _angle_direction
 	_current_angle = wrapf(_current_angle, -max_spread_angle, max_spread_angle)
 	_angle_direction *= -1
-
 
 
 func _calculate_spiral_direction() -> Vector3:
