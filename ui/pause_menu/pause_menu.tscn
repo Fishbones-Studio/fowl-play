@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dnq3em8w064n4"]
 
-[ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
+[ext_resource type="Script" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
 [ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
@@ -72,7 +72,7 @@ stretch = true
 world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
@@ -169,6 +169,7 @@ expand_mode = 3
 
 [node name="Footer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 1
 anchors_preset = 12
@@ -179,37 +180,6 @@ offset_top = -45.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"PauseMenuFooter"
-
-[node name="FooterButtonContainer" type="HBoxContainer" parent="Footer"]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="Footer/FooterButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-
-[node name="TooltipLabel" type="Label" parent="Footer/FooterButtonContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme_override_colors/font_color = Color(0.14902, 0.145098, 0.12549, 1)
-theme_override_constants/outline_size = 0
-text = "L -Select"
-
-[node name="TooltipLabel2" type="Label" parent="Footer/FooterButtonContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme_override_colors/font_color = Color(0.14902, 0.145098, 0.12549, 1)
-theme_override_constants/outline_size = 0
-text = "X - Confirm"
-
-[node name="HSeparator2" type="HSeparator" parent="Footer/FooterButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
 
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
