@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://6air6r3l5p61"]
+
+[ext_resource type="Script" uid="uid://dlb8sdrpn1jtm" path="res://ui/settings_menu/content_items/content_item_slider.gd" id="1_vfvd7"]
+
+[node name="ContentItemSlider" type="Control"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_vfvd7")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SettingsContentPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_type_variation = &"SettingsContentLabel"
+text = "label"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="SliderLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 25)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"SettingsSliderLabel"
+text = "61"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 50.0

@@ -20,6 +20,8 @@ radius = 0.9
 height = 3.5
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 61
 script = ExtResource("1_abrql")
 stats = ExtResource("2_4hg1i")
 
