@@ -83,7 +83,7 @@ func _load_input_settings():
 	InputMap.load_from_project_settings()
 	var config = ConfigFile.new()
 
-	if config.load(config_path) == OK:
+	if config.load(config_path) == OK and config.has_section(config_name):
 		# Replace default bindings with user's saved preferences
 		for action in config.get_section_keys(config_name):
 			InputMap.action_erase_events(action)
