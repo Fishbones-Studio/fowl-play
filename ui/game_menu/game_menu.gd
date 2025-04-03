@@ -18,6 +18,10 @@ func _ready() -> void:
 	# Get all focusable items 
 	focusable_items = _get_focusable_items()
 	
+	if focusable_items.is_empty():
+		print("No focusable items found. Disabling navigation.")
+		return
+	
 	# Connect signals for each item
 	for i in focusable_items.size():
 		var item = focusable_items[i]
@@ -73,9 +77,6 @@ func _on_item_pressed(index: int) -> void:
 	_on_select_current_item()
 
 func _on_move_selection(direction: int) -> void:
-	if focusable_items.is_empty():
-		return
-	
 	# Clear mouse hover state and activate keyboard navigation
 	is_mouse_hovering = false
 	is_keyboard_navigation_active = true
@@ -84,9 +85,6 @@ func _on_move_selection(direction: int) -> void:
 	highlight_current_item()
 
 func _on_select_current_item() -> void:
-	if focusable_items.is_empty():
-		return
-	
 	var selected_item = focusable_items[current_index]
 	if selected_item == flyer_item:
 		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
