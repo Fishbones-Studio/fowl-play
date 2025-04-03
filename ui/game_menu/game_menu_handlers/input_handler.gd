@@ -1,14 +1,14 @@
 # Handles UI input (mouse, keyboard, controller) and emits navigation signals.
 extends Node
 
-
+# signals
 signal selection_moved(direction: int) 
 signal current_item_selected()          
 signal keyboard_navigation_activated()  
 signal keyboard_navigation_deactivated() 
 signal item_clicked(item_index: int)   
 
-
+# controller checks, timers
 var is_controller_connected: bool = false
 var can_move_with_stick: bool = true
 var stick_cooldown: float = 0.3
@@ -16,7 +16,7 @@ var stick_cooldown_timer: Timer
 var controller_was_used: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_check_for_controller()
 	
@@ -26,19 +26,7 @@ func _ready():
 	stick_cooldown_timer.timeout.connect(_on_stick_cooldown_timeout)
 
 
-func _on_joy_connection_changed(_device: int, _connected: bool):
-	_check_for_controller()
-
-
-func _check_for_controller():
-	is_controller_connected = Input.get_connected_joypads().size() > 0
-
-
-func _on_stick_cooldown_timeout():
-	can_move_with_stick = true
-
-
-func _input(event: InputEvent):	
+func _input(event: InputEvent) -> void:	
 	if InputBlocker.blocked:
 		return
 	
@@ -74,7 +62,11 @@ func _input(event: InputEvent):
 		current_item_selected.emit() 
 
 
-func handle_directional_input(direction: int):
+func _on_stick_cooldown_timeout() -> void:
+	can_move_with_stick = true
+
+
+func handle_directional_input(direction: int) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	controller_was_used = true
 	keyboard_navigation_activated.emit()
@@ -87,3 +79,11 @@ func handle_item_click(item: Area3D, event: InputEvent) -> void:
 		if menu and menu.has_method("get_item_index"):
 			var index = menu.get_item_index(item)
 			item_clicked.emit(index)
+
+
+func _on_joy_connection_changed(_device: int, _connected: bool) -> void:
+	_check_for_controller()
+
+
+func _check_for_controller() -> void:
+	is_controller_connected = Input.get_connected_joypads().size() > 0
