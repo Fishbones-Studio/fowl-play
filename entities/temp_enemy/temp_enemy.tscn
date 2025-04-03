@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
-[ext_resource type="Script" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
+[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
 [ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_weapon.tscn" id="3_8k1p6"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
@@ -51,10 +51,10 @@ STATE_TYPE = 2
 ANIMATION_NAME = "ATTACK"
 
 [node name="Name" type="Label3D" parent="."]
-transform = Transform3D(-0.99981, 0, -0.0194766, 0, 1, 0, 0.0194766, 0, -0.99981, 0, 2.37627, 0)
+transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, 0, 3, 0)
 modulate = Color(0.627451, 0, 0, 1)
 text = "OOOOO Scaryy Chickennnnn"
 font_size = 85
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, -1.5958, 3.54465, -1.12409)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)

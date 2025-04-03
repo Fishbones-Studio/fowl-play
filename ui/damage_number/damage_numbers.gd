@@ -1,11 +1,24 @@
 extends Node3D
+
+@export_group("Popup settings")
+@export var horizontal_spread = 2.2
+@export var vertical_variance = 1.4
+@export var depth_offset = 0.7
+
+@export_group("Text settings")
+@export var base_size: int = 100
+@export var size_variation: float = 0.2
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var label_3d: Label3D = $Anchor/Label3D
+@onready var damage_value_label: Label3D = $Anchor/Label3D
 
-func set_and_play(value):
-	label_3d.text = str(value)
-	
-	animation_player.play("red_rise_and_fade")
 
-func remove():
+func display_damage(value: int) -> void:
+	damage_value_label.text = str(value)
+	damage_value_label.font_size = base_size * randf_range(1.0 - size_variation, 1.0 + size_variation)
+
+	animation_player.play("popup")
+
+
+func remove() -> void:
 	queue_free()

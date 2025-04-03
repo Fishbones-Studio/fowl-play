@@ -8,7 +8,7 @@
 
 [node name="RegularSpike" instance=ExtResource("1_uwjcx")]
 script = ExtResource("2_mkuk0")
-damage_interval = 1.5
+damage_interval = 0.2
 damage = 5
 
 [node name="CollisionShape3D" parent="HazardArea" index="0"]
