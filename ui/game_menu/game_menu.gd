@@ -110,14 +110,15 @@ func reset_highlights() -> void:
 	if is_mouse_hovering or is_keyboard_navigation_active:
 		return
 	
-	for item in focusable_items:
-		item.unfocus()
+	_unfocus_all_items()
 
 func highlight_current_item() -> void:
-	# First reset all highlights
-	for item in focusable_items:
-		item.unfocus()
+	_unfocus_all_items()
 	
 	# Then apply highlight to current item if keyboard navigation is active
 	if is_keyboard_navigation_active and not focusable_items.is_empty():
 		focusable_items[current_index].focus()
+
+func _unfocus_all_items() -> void:
+	for item in focusable_items:
+		item.unfocus()
