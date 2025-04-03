@@ -16,7 +16,7 @@ var audio_busses: Dictionary[String, float]
 
 func _ready() -> void:
 	for index in range(AudioServer.get_bus_count()):
-		var bus_volume = AudioServer.get_bus_volume_db(index)
+		var bus_volume = AudioServer.get_bus_volume_linear(index) * 100
 		audio_busses[AudioServer.get_bus_name(index)] = bus_volume
 
 	_load_audio_settings()
@@ -40,14 +40,11 @@ func _load_audio_busses() -> void:
 
 	for audio_bus in audio_busses:
 		var instance: SettingsSliderItem = audio_slider.instantiate()
-		print(instance)
-		print(audio_bus)
-		add_child(instance)
+		content_container.add_child(instance)
 
 		instance.set_text(audio_bus)
 		instance.set_value(audio_busses[audio_bus])
 		instance.slider.value_changed.connect(_volume_changed.bind(audio_bus))
-	print(content_container.get_children())
 
 
 func _save_audio_settings() -> void:
@@ -72,6 +69,5 @@ func _set_volume(bus_name: String, volume_percent: float) -> void:
 	# Convert from percentage to dB
 	# Note: 0.0 percent = -80 dB (silent), 1.0 percent = 0 dB (max)
 	var volume_db = linear_to_db(clamp(volume_percent, 0, 100)/100)
-
 	audio_busses[bus_name] = volume_db
 	AudioServer.set_bus_volume_db(bus_idx, volume_db)
