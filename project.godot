@@ -30,6 +30,7 @@ SaveManager="*res://utilities/autoload/save_manager.gd"
 Gamemanager="*res://utilities/autoload/game_manager.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+InputBlocker="*res://utilities/autoload/signal_blocker.gd"
 
 [display]
 
