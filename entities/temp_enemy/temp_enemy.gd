@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 const DAMAGE_NUMBERS: PackedScene = preload("uid://b6cnb1t5cixqj")
 
-@export var health: int = 1000
+@export var health: int = 100
 
 @onready var damage_label: Marker3D = $Marker3D
 
