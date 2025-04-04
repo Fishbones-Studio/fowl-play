@@ -1,3 +1,4 @@
+## Plays a random song from a specified folder at random intervals.
 extends AudioStreamPlayer
 
 @export var music_folder: String = "res://ui/game_menu/art/random_music/"

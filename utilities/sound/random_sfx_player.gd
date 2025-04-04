@@ -1,3 +1,4 @@
+## Plays a random sound effect from a specified folder at random intervals.
 extends AudioStreamPlayer3D
 
 @export var sounds_folder: String = "res://ui/game_menu/art/random_sounds/"
