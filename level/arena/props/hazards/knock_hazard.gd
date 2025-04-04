@@ -1,8 +1,9 @@
 class_name KnockHazard
 extends BaseHazard
 
-@export var knockback_strength: float = 100.0
+@export var knockback_strength: float = 125.0
 @export var vertical_knockback: float = 25.0
+@export var max_knockback: float = 75.0
 
 @onready var hazard_area: Area3D = $HazardArea
 
@@ -14,12 +15,14 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 										   ).normalized()
 
 		var _knockback_force := Vector3(
-			knockback_direction.x + knockback_strength,
+			clamp(knockback_direction.x * knockback_strength, -max_knockback, max_knockback),
 			vertical_knockback,
-			knockback_direction.z + knockback_strength
+			clamp(knockback_direction.z * knockback_strength, -max_knockback, max_knockback)
 		)
+		
+		print("Knockback force: ", _knockback_force)
 
-		# Adding to the existing velocity
+		# Override velocity
 		body.velocity += _knockback_force
 
 		# Apply damage

@@ -84,8 +84,9 @@ _data = {
 
 [node name="SpikeBall" instance=ExtResource("1_34esa")]
 script = ExtResource("2_p5xf8")
-knockback_strength = 100.0
-vertical_knockback = 20.0
+knockback_strength = 125.0
+vertical_knockback = 25.0
+max_knockback = 55.0
 
 [node name="HazardArea" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 8, 0)
