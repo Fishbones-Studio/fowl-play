@@ -6,7 +6,7 @@ extends CharacterBody3D
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 
 
-func _ready():
+func _ready() -> void:
 	stats.init()
 	GameManager.chicken_player = self
 	SignalManager.init_health.emit(stats.max_health, stats.current_health)
@@ -26,11 +26,12 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	movement_state_machine.physics_process(delta)
 
+
+func _exit_tree() -> void:
+	GameManager.chicken_player = null
+
+
 func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		# take away health
 		stats.drain_health(damage)
-
-
-func _exit_tree() -> void:
-	GameManager.chicken_player = null
