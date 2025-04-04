@@ -46,6 +46,8 @@ func exit() -> void:
 	# Reset the angle to the initial position
 	_current_angle = 0.0
 	_angle_direction = 1
+	
+	attack_duration_timer.stop()
 
 	# Clear ray cast queue, allows existing raycasts to still be processed
 	_ray_queue.clear()
