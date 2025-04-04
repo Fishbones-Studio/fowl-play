@@ -1,7 +1,8 @@
 ## Handles input transitions for ranged weapon state machine
 class_name RangedWeaponHandler extends Node
 
-@export var state_machine : RangedWeaponStateMachine
+@export var state_machine: RangedWeaponStateMachine
+
 
 ## Called when attack action is initiated (button pressed)
 func start_use() -> void:
@@ -20,6 +21,8 @@ func start_use() -> void:
 				print("Cannot attack again during attack")
 		_:
 			pass
+
+
 ## Called when attack action is released (button released)
 func end_use() -> void:
 	print("Stopping weapon")
@@ -34,9 +37,11 @@ func end_use() -> void:
 		_:
 			pass
 
+
 ## Helper to check weapon's hold capability
 func weapon_supports_hold_fire() -> bool:
 	return state_machine.weapon.current_weapon.allow_continuous_fire
+
 
 ## Helper to check if weapon allows early release
 func weapon_supports_early_release() -> bool:

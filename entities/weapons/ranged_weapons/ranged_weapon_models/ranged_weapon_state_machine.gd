@@ -1,7 +1,8 @@
 ## State machine for the player melee system.
 ##
 ## This script manages the different states of the combat melee system, for the current melee weapon.
-class_name RangedWeaponStateMachine extends Node
+class_name RangedWeaponStateMachine 
+extends Node
 
 signal combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
 
@@ -66,23 +67,23 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 	if target_state == current_state.state_type:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
 		target_state = WeaponEnums.WeaponState.IDLE
-	
+
 	# Exit the current state before switching
 	var previous_state := current_state
 	previous_state.exit()
-	
+
 	# Switch to the new state
 	current_state = states.get(target_state)
 	if current_state == null:
 			push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 			current_state = previous_state
-	
+
 	if (current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon && weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
-		
+
 	print("Transitioning secondary weapon to state: " + WeaponEnums.weapon_state_to_string(current_state.state_type))
-	
+
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.state_type, information)
 
