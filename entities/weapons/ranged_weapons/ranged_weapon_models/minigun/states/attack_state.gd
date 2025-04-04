@@ -6,39 +6,35 @@ extends BaseRangedCombatState
 @export var max_spread_angle: float = 45.0  # Max spray angle
 
 var _fire_timer: float = 0.0
-var _attack_duration_timer: float = 0.0
 var _current_angle: float = 0.0
 var _angle_direction: int = 1
+var _ray_queue: Array[RayRequest] = []
 
-var _ray_queue: Array = []
+@onready var attack_duration_timer : Timer = $AttackDurationTimer
 
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	_fire_timer = 0.0
-	_attack_duration_timer = 0.0
 	_current_angle = 0.0
 	_angle_direction = 1
+	attack_duration_timer.start(weapon.current_weapon.attack_duration)
 
 
 func process(delta: float) -> void:
 	_fire_timer += delta
-	_attack_duration_timer += delta
 
 	var fire_interval: float = weapon.current_weapon.fire_rate_per_second
 
 	while _fire_timer >= fire_interval:
 		_fire_timer -= fire_interval
 		_fire_bullet()
-
-	if _attack_duration_timer >= weapon.current_weapon.attack_duration:
-		transition_signal.emit(WeaponEnums.WeaponState.COOLDOWN, {})
-		
+				
 func physics_process(_delta: float) -> void:
 	# loop through raycast queue, create raycasts and check for collisions
 	for ray_param in _ray_queue:
-		var origin: Vector3 = ray_param["origin"]
-		var direction: Vector3 = ray_param["direction"]
-		var max_range: float = ray_param["max_range"]
+		var origin: Vector3 = ray_param.origin
+		var direction: Vector3 = ray_param.direction
+		var max_range: float = ray_param.max_range
 
 		var raycast: RayCast3D = _create_raycast(origin, direction, max_range)
 		raycast.force_raycast_update()
@@ -54,7 +50,7 @@ func exit() -> void:
 	# Clear ray cast queue, allows existing raycasts to still be processed
 	_ray_queue.clear()
 
-
+# The visualization should start immediatly for game feel, but Raycasts need to be processed in physics_process to work
 func _fire_bullet() -> void:
 	# Calculate spawn position with rotating offset
 	var angle_rad : float = deg_to_rad(_current_angle)
@@ -69,11 +65,7 @@ func _fire_bullet() -> void:
 	var origin: Vector3 = attack_origin.global_position + attack_origin.global_transform.basis * offset
 
 	# Store raycast parameters for physics processing
-	_ray_queue.append({
-		"origin": origin,
-		"direction": fire_direction,
-		"max_range": max_range
-	})
+	_ray_queue.append(RayRequest.new(origin, fire_direction, max_range))
 
 	# Visualize the trajectory
 	_create_trajectory_visualization(origin, fire_direction, max_range)
@@ -176,3 +168,7 @@ func _update_spiral_angle() -> void:
 	_current_angle += spiral_spread * _angle_direction
 	_current_angle = clamp(_current_angle, -max_spread_angle, max_spread_angle)
 	_angle_direction *= -1 if abs(_current_angle) >= max_spread_angle else 1
+
+
+func _on_attack_duration_timer_timeout() -> void:
+	transition_signal.emit(WeaponEnums.WeaponState.COOLDOWN, {})

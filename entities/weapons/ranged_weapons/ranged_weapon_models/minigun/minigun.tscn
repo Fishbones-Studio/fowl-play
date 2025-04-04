@@ -33,6 +33,9 @@ attack_origin = NodePath("../../AttackOrigin")
 ANIMATION_NAME = "ATTACK"
 state_type = 2
 
+[node name="AttackDurationTimer" type="Timer" parent="RangedWeaponStateMachine/AttackState" index="0"]
+one_shot = true
+
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3"]
 script = ExtResource("6_04ypb")
 ANIMATION_NAME = "COOLDOWN"
@@ -42,3 +45,5 @@ state_type = 3
 
 [node name="AttackOrigin" parent="." index="4"]
 transform = Transform3D(-0.992793, -0.119842, 0, 0.119842, -0.992793, 0, 0, 0, 1, 0, 0, 2.72573)
+
+[connection signal="timeout" from="RangedWeaponStateMachine/AttackState/AttackDurationTimer" to="RangedWeaponStateMachine/AttackState" method="_on_attack_duration_timer_timeout"]
