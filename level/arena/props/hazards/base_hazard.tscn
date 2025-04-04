@@ -7,7 +7,7 @@ script = ExtResource("1_lcs4t")
 
 [node name="HazardArea" type="Area3D" parent="."]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HazardArea"]
 
