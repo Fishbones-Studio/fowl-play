@@ -2,7 +2,7 @@ extends BaseRangedCombatState
 
 @export var attack_origin: Node3D
 @export var spiral_spread: float = 5.0
-@export var max_spread_angle: float = 15.0  # Maximum bullet spread from center
+@export var max_spread_angle: float = 35.0  # Maximum bullet spread from center
 
 var _fire_timer: float = 0.0
 var _fire_duration: float = 0.0
@@ -34,13 +34,13 @@ func _fire_bullet() -> void:
 	var max_range: float = weapon.current_weapon.max_range
 
 	# Get world space positions
-	var origin: Vector3 = attack_origin.global_position
-	var end: Vector3 = origin + fire_direction * max_range
+	var origin: Vector3 = attack_origin.global_position + fire_direction
+	var end: Vector3 = origin * max_range
 
 	# Create and configure raycast
 	var raycast := RayCast3D.new()
 	raycast.enabled = true
-	raycast.target_position = fire_direction * max_range  # Local space
+	raycast.target_position = end # Local space
 	raycast.exclude_parent = true
 	raycast.collision_mask = 0b0110 # Binary for collision layers 2 and 3
 
