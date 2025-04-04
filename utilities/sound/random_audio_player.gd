@@ -3,7 +3,7 @@ class_name RandomAudioPlayer
 extends Node
 
 ## signal to notify the player to start playing the audio
-signal play_audio(ound: AudioStream, sound_name: String)
+signal play_audio(sound: AudioStream, sound_name: String)
 
 var audio_folder: String
 var file_extensions: Array[String]
