@@ -1,27 +1,26 @@
 class_name KnockHazard
 extends BaseHazard
 
-@export var knockback_strength: float = 220.0
-@export var vertical_knockback: float = 20.0
-@export var hazard_object: Node3D
+@export var knockback_strength: float = 100.0
+@export var vertical_knockback: float = 25.0
 
-var _knockback_force: Vector3
-
-
-func _process(_delta: float) -> void:
-	super(_delta)
-
+@onready var hazard_area: Area3D = $HazardArea
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
-		var knockback_direction: Vector3 = hazard_object.global_position.direction_to(body.global_position)
+		# Calculate knockback direction
+		var knockback_direction: Vector3 = (
+										   body.global_position - hazard_area.global_position
+										   ).normalized()
 
-		_knockback_force = Vector3(
+		var _knockback_force := Vector3(
 			knockback_direction.x + knockback_strength,
 			vertical_knockback,
 			knockback_direction.z + knockback_strength
 		)
-		
-		body.velocity = _knockback_force
-		body.move_and_slide()
-		super._on_hazard_area_body_entered(body)
+
+		# Adding to the existing velocity
+		body.velocity += _knockback_force
+
+		# Apply damage
+		super(body)

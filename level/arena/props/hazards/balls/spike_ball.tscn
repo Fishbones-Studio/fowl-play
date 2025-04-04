@@ -82,11 +82,10 @@ _data = {
 &"spin": SubResource("Animation_87nxk")
 }
 
-[node name="SpikeBall" node_paths=PackedStringArray("hazard_object") instance=ExtResource("1_34esa")]
+[node name="SpikeBall" instance=ExtResource("1_34esa")]
 script = ExtResource("2_p5xf8")
-knockback_strength = 220.0
+knockback_strength = 100.0
 vertical_knockback = 20.0
-hazard_object = NodePath("spike_ball")
 
 [node name="HazardArea" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 8, 0)
