@@ -10,8 +10,8 @@ func init(max_stamina: float, current_stamina: float) -> void:
 	max_value = max_stamina
 
 
-func set_stamina(sta: float) -> void:
-	if sta == stamina:
+func set_stamina(_stamina: float) -> void:
+	if _stamina == stamina:
 		return
-	stamina = min(max_value, sta)
+	stamina = min(max_value, _stamina)
 	value = stamina 

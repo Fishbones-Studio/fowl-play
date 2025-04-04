@@ -28,7 +28,8 @@ func process(delta: float) -> void:
 	while _fire_timer >= fire_interval:
 		_fire_timer -= fire_interval
 		_fire_bullet()
-				
+
+
 func physics_process(_delta: float) -> void:
 	# loop through raycast queue, create raycasts and check for collisions
 	for ray_param in _ray_queue:
@@ -41,7 +42,7 @@ func physics_process(_delta: float) -> void:
 		process_hit(raycast)
 	_ray_queue.clear()
 
-		
+
 func exit() -> void:
 	# Reset the angle to the initial position
 	_current_angle = 0.0
@@ -51,6 +52,7 @@ func exit() -> void:
 
 	# Clear ray cast queue, allows existing raycasts to still be processed
 	_ray_queue.clear()
+
 
 # The visualization should start immediatly for game feel, but Raycasts need to be processed in physics_process to work
 func _fire_bullet() -> void:
@@ -96,7 +98,6 @@ func _create_raycast(origin: Vector3, direction: Vector3, max_range: float) -> R
 	timer.start()
 
 	return raycast
-
 
 
 func _create_trajectory_visualization(origin: Vector3, direction: Vector3, max_range: float) -> void:

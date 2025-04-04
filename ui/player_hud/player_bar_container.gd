@@ -12,11 +12,12 @@ func _ready() -> void:
 	SignalManager.init_stamina.connect(stamina_bar.init)
 
 	SignalManager.player_stats_changed.connect(_on_stats_changed)
-	
-func _on_stats_changed(stats: LivingEntityStats):
+
+
+func _on_stats_changed(stats: LivingEntityStats) -> void:
 	# updating the max values
 	health_bar.max_value = stats.max_health
 	stamina_bar.max_value = stats.max_stamina
-	
+
 	health_bar.health = stats.current_health
 	stamina_bar.stamina = stats.current_stamina
