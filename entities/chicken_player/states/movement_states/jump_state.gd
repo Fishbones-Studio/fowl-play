@@ -7,9 +7,6 @@ var _air_jumps_used: int = 0
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
-	
-	animation_tree.set("parameters/Jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
 
 	if information.get("from_ground", false):
 		_air_jumps_used = 0 # Reset air jumps if coming from the ground
@@ -17,6 +14,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		_air_jumps_used += 1 # Else increment air jumps used
 
 	movement_component.jump_available = air_jumps > _air_jumps_used
+
+	animation_tree.set("parameters/Jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	player.velocity.y = get_jump_velocity()
 

@@ -6,8 +6,6 @@ var _stamina_cost: int
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
-	animation_tree.set("parameters/Movement/transition_request", "Glide")
-
 	player.velocity.y = 0
 
 	_stamina_cost = movement_component.glide_stamina_cost
@@ -17,6 +15,8 @@ func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -
 		print("Not enough stamina to glide")
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
+
+	animation_tree.set("parameters/Movement/transition_request", "Glide")
 
 
 func process(delta: float) -> void:
