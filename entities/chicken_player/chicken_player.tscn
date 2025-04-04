@@ -2,11 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
-[ext_resource type="Texture2D" uid="uid://d2fwwv75an27p" path="res://entities/enemies/woodpecker/woodpecker_Material.png" id="3_pq2r3"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
-[ext_resource type="Texture2D" uid="uid://b0buwth1ydius" path="res://entities/enemies/woodpecker/woodpecker_body Base Color.png" id="4_8i8jv"]
-[ext_resource type="Texture2D" uid="uid://mqhv3g2qlkap" path="res://entities/enemies/woodpecker/woodpecker_Material_2.png" id="5_6mkbl"]
 [ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/movement_states/glide_state.gd" id="5_a1qjk"]
 [ext_resource type="Script" uid="uid://dvihu8iywlyx1" path="res://entities/chicken_player/states/movement_states/hurt_state.gd" id="6_j3ovn"]
 [ext_resource type="Script" uid="uid://bjte651aelkuy" path="res://entities/chicken_player/states/movement_states/idle_state.gd" id="7_afbqv"]
@@ -17,25 +14,34 @@
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5aj8x"]
+load_path = "res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5dyt"]
 resource_name = "eyes material"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_pq2r3")
+albedo_texture = SubResource("CompressedTexture2D_5aj8x")
 roughness = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4hg1i"]
+load_path = "res://.godot/imported/woodpecker_body Base Color.png-b00f5fa912e307cabed4196ecec2266d.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxgwv"]
 resource_name = "body material"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("4_8i8jv")
+albedo_texture = SubResource("CompressedTexture2D_4hg1i")
 roughness = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n43gi"]
+load_path = "res://.godot/imported/woodpecker_Material_2.png-856eae1a0cd0fc8dc5910439bcf4a351.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51ocb"]
 resource_name = "wings material"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("5_6mkbl")
+albedo_texture = SubResource("CompressedTexture2D_n43gi")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5yd21"]
@@ -142,7 +148,6 @@ bind/15/pose = Transform3D(-0.599208, -1.03976, -1.00697, 1.35731, -0.78221, -1.
 
 [sub_resource type="Animation" id="Animation_6x6j6"]
 resource_name = "Attack"
-loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -359,7 +364,7 @@ tracks/14/keys = PackedFloat32Array(0, 1, -0.109821, -0.435989, -0.870267, 0.201
 
 [sub_resource type="Animation" id="Animation_lgaxv"]
 resource_name = "Fall"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -468,7 +473,7 @@ tracks/14/keys = PackedFloat32Array(0, 1, 0.193296, -0.542814, -0.718361, 0.3898
 
 [sub_resource type="Animation" id="Animation_balb7"]
 resource_name = "Glide"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -577,7 +582,7 @@ tracks/14/keys = PackedFloat32Array(0, 1, 0.156078, -0.580376, -0.707775, 0.3712
 
 [sub_resource type="Animation" id="Animation_b5aqr"]
 resource_name = "Idle"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -794,7 +799,7 @@ tracks/14/keys = PackedFloat32Array(0, 1, 0.556543, -8.98659e-08, -0.663262, 0.5
 
 [sub_resource type="Animation" id="Animation_2p6jf"]
 resource_name = "Sprint"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -903,7 +908,7 @@ tracks/14/keys = PackedFloat32Array(0, 1, 0.117871, -0.441061, -0.707727, 0.5391
 
 [sub_resource type="Animation" id="Animation_s8wbd"]
 resource_name = "Walk"
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -1075,7 +1080,7 @@ animation = &"Sprint"
 animation = &"Walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vsiul"]
-graph_offset = Vector2(-356.34, 30.0779)
+graph_offset = Vector2(-362.045, -116.517)
 nodes/Dash/node = SubResource("AnimationNodeOneShot_pq2r3")
 nodes/Dash/position = Vector2(600, 60)
 nodes/Jump/node = SubResource("AnimationNodeOneShot_qjuvu")
@@ -1085,17 +1090,17 @@ nodes/Movement/position = Vector2(150, 70)
 nodes/anim_dash/node = SubResource("AnimationNodeAnimation_pq2r3")
 nodes/anim_dash/position = Vector2(420, 420)
 nodes/anim_fall/node = SubResource("AnimationNodeAnimation_rq0op")
-nodes/anim_fall/position = Vector2(-140, 380)
+nodes/anim_fall/position = Vector2(-80, 230)
 nodes/anim_glide/node = SubResource("AnimationNodeAnimation_cx2nh")
-nodes/anim_glide/position = Vector2(-140, 570)
+nodes/anim_glide/position = Vector2(-100, 420)
 nodes/anim_idle/node = SubResource("AnimationNodeAnimation_8i8jv")
-nodes/anim_idle/position = Vector2(-170, -140)
+nodes/anim_idle/position = Vector2(130, -150)
 nodes/anim_jump/node = SubResource("AnimationNodeAnimation_6mkbl")
 nodes/anim_jump/position = Vector2(230, 430)
 nodes/anim_sprint/node = SubResource("AnimationNodeAnimation_vsiul")
-nodes/anim_sprint/position = Vector2(-160, 220)
+nodes/anim_sprint/position = Vector2(-260, 120)
 nodes/anim_walk/node = SubResource("AnimationNodeAnimation_1ij6v")
-nodes/anim_walk/position = Vector2(-160, 50)
+nodes/anim_walk/position = Vector2(-100, -20)
 nodes/output/position = Vector2(790, 80)
 node_connections = [&"Dash", 0, &"Jump", &"Dash", 1, &"anim_dash", &"Jump", 0, &"Movement", &"Jump", 1, &"anim_jump", &"Movement", 0, &"anim_idle", &"Movement", 1, &"anim_walk", &"Movement", 2, &"anim_sprint", &"Movement", 3, &"anim_fall", &"Movement", 4, &"anim_glide", &"output", 0, &"Dash"]
 
@@ -1127,8 +1132,8 @@ bones/1/name = "Hip.Right"
 bones/1/parent = 0
 bones/1/rest = Transform3D(-0.659302, 0.00893234, 0.751824, 0.205687, -0.959643, 0.191775, 0.723197, 0.281079, 0.630856, -0.534314, -0.211753, 0.385049)
 bones/1/enabled = true
-bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
-bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
+bones/1/position = Vector3(-0.534314, -0.211753, 0.385049)
+bones/1/rotation = Quaternion(0.40911, 0.13115, 0.90136, 0.0545716)
 bones/1/scale = Vector3(1, 1, 0.999998)
 bones/2/name = "Knee.Right"
 bones/2/parent = 1
@@ -1149,57 +1154,57 @@ bones/4/parent = 0
 bones/4/rest = Transform3D(0.584657, -0.732608, -0.348515, 0.732608, 0.292219, 0.61473, -0.348514, -0.614731, 0.707562, -5.75799e-08, 1.02655, -3.01205e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(-5.75799e-08, 1.02655, -3.01205e-08)
-bones/4/rotation = Quaternion(-0.382386, -3.80033e-07, 0.45571, 0.803809)
+bones/4/rotation = Quaternion(-0.382386, -9.26909e-08, 0.45571, 0.803809)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "Lower.Tail"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.948103, 0.314968, -0.0435462, -0.314968, 0.911563, -0.264289, -0.0435474, 0.264289, 0.96346, -1.9744e-07, 0.836176, -7.82311e-08)
 bones/5/enabled = true
 bones/5/position = Vector3(-1.9744e-07, 0.836176, -7.82311e-08)
-bones/5/rotation = Quaternion(0.135167, 3.06744e-07, -0.161086, 0.977641)
+bones/5/rotation = Quaternion(0.135167, 2.62924e-07, -0.161086, 0.977641)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Upper.Tail"
 bones/6/parent = 5
 bones/6/rest = Transform3D(0.975867, 0.217426, -0.0202503, -0.217426, 0.958875, -0.182442, -0.0202503, 0.182442, 0.983008, 4.65661e-08, 0.724064, -9.68575e-08)
 bones/6/enabled = true
 bones/6/position = Vector3(4.65661e-08, 0.724064, -9.68575e-08)
-bones/6/rotation = Quaternion(0.176391, -0.0946727, -0.0565098, 0.978126)
+bones/6/rotation = Quaternion(0.0921738, -2.63978e-08, -0.109848, 0.989665)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "Core.Front"
 bones/7/parent = 0
 bones/7/rest = Transform3D(0.60646, 0.723299, -0.330219, -0.723299, 0.329372, -0.606921, -0.33022, 0.60692, 0.722912, -5.75799e-08, 1.02655, -3.01205e-08)
 bones/7/enabled = true
 bones/7/position = Vector3(-5.75799e-08, 1.02655, -3.01205e-08)
-bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
+bones/7/rotation = Quaternion(0.372215, 1.98294e-07, -0.443588, 0.815283)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "Lower.Neck"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.815766, -0.55734, -0.154591, 0.55734, 0.686048, 0.467664, -0.154591, -0.467664, 0.870283, -1.04308e-07, 1.01162, -3.46452e-07)
 bones/8/enabled = true
 bones/8/position = Vector3(-1.04308e-07, 1.01162, -3.46452e-07)
-bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
+bones/8/rotation = Quaternion(-0.254674, -6.35144e-08, 0.303508, 0.918164)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "Neck"
 bones/9/parent = 8
 bones/9/rest = Transform3D(0.975464, -0.219194, -0.0205882, 0.219194, 0.958188, 0.183926, -0.0205881, -0.183926, 0.982724, 1.75089e-07, 1.03411, 6.33299e-08)
 bones/9/enabled = true
 bones/9/position = Vector3(1.75089e-07, 1.03411, 6.33299e-08)
-bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
+bones/9/rotation = Quaternion(-0.0929396, -1.60436e-08, 0.110761, 0.989492)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/name = "Head"
 bones/10/parent = 9
 bones/10/rest = Transform3D(0.999628, -0.0272812, -0.000312295, 0.0272812, 0.999366, 0.0228916, -0.000312411, -0.0228916, 0.999738, 9.68575e-08, 1.17598, 6.33299e-08)
 bones/10/enabled = true
 bones/10/position = Vector3(9.68575e-08, 1.17598, 6.33299e-08)
-bones/10/rotation = Quaternion(-0.0592884, -0.014061, -0.0832213, 0.994667)
+bones/10/rotation = Quaternion(-0.0114476, 2.60082e-08, 0.0136427, 0.999841)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "Hip.Left"
 bones/11/parent = 0
 bones/11/rest = Transform3D(-0.579113, 0.319765, 0.749919, -0.265338, -0.943711, 0.197495, 0.770859, -0.0846097, 0.631361, 0.309155, -0.211753, -0.620158)
 bones/11/enabled = true
 bones/11/position = Vector3(0.309155, -0.211753, -0.620158)
-bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
-bones/11/scale = Vector3(0.999999, 1, 1)
+bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888002, -0.164725)
+bones/11/scale = Vector3(1, 0.999999, 1)
 bones/12/name = "Knee.Left"
 bones/12/parent = 11
 bones/12/rest = Transform3D(0.993611, 0.101391, 0.049564, -0.108816, 0.977168, 0.182487, -0.0299299, -0.186714, 0.981958, -2.14204e-08, 0.890298, 2.24682e-08)
@@ -1212,21 +1217,21 @@ bones/13/parent = 12
 bones/13/rest = Transform3D(0.985054, -0.0423343, -0.166965, -0.165683, 0.0321903, -0.985653, 0.0471016, 0.998585, 0.0246951, 7.39819e-08, 1.18244, 1.94999e-07)
 bones/13/enabled = true
 bones/13/position = Vector3(7.39819e-08, 1.18244, 1.94999e-07)
-bones/13/rotation = Quaternion(0.694292, -0.0749028, -0.0431603, 0.714482)
-bones/13/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0.694292, -0.0749026, -0.0431602, 0.714482)
+bones/13/scale = Vector3(1, 1, 0.999999)
 bones/14/name = "Wing.Left"
 bones/14/parent = 0
 bones/14/rest = Transform3D(0.120167, 0.663717, -0.738268, -0.663717, -0.499314, -0.556925, -0.738268, 0.556925, 0.380519, 0.0982325, 2.09585, -1.47197)
 bones/14/enabled = true
-bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)
-bones/14/rotation = Quaternion(0.556543, -6.54378e-08, -0.663262, 0.500343)
+bones/14/position = Vector3(-0.00794601, 2.09585, -1.34543)
+bones/14/rotation = Quaternion(0.737778, 0.442693, -0.252071, 0.442907)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/name = "Wing.Right"
 bones/15/parent = 0
 bones/15/rest = Transform3D(0.120167, 0.663717, -0.738268, -0.663717, -0.499314, -0.556925, -0.738268, 0.556925, 0.380519, -1.34829, 2.09585, 0.251933)
 bones/15/enabled = true
-bones/15/position = Vector3(-1.26466, 2.09585, 0.152267)
-bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
+bones/15/position = Vector3(-1.28211, 2.09585, 0.173064)
+bones/15/rotation = Quaternion(0.117871, -0.441061, -0.707727, 0.539161)
 bones/15/scale = Vector3(1, 1, 1)
 
 [node name="Object" type="MeshInstance3D" parent="woodpecker/Armature/Skeleton3D"]
@@ -1247,9 +1252,9 @@ parameters/Dash/request = 0
 parameters/Jump/active = false
 parameters/Jump/internal_active = false
 parameters/Jump/request = 0
-parameters/Movement/current_state = "Idle"
+parameters/Movement/current_state = "Walk"
 parameters/Movement/transition_request = ""
-parameters/Movement/current_index = 0
+parameters/Movement/current_index = 1
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
