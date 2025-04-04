@@ -28,7 +28,7 @@ func draw_debug_trajectory(start: Vector3, end: Vector3) -> void:
 		timer.start(0.2)
 
 
-func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
+func draw_debug_impact(position: Vector3, parent : Node3D, color: Color = Color.RED) -> void:
 	if  OS.has_feature("debug"):
 		# Create impact marker
 		var impact_marker = MeshInstance3D.new()
@@ -37,7 +37,7 @@ func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
 		sphere.height = 0.2
 
 		var material = StandardMaterial3D.new()
-		material.albedo_color = Color.RED
+		material.albedo_color = color
 		sphere.material = material
 
 		impact_marker.mesh = sphere
@@ -46,7 +46,11 @@ func draw_debug_impact(position: Vector3, parent : Node3D) -> void:
 		parent.add_child(impact_marker)
 		impact_marker.global_position = position
 
-		# Auto-remove after 1 second
-		await get_tree().create_timer(1.0).timeout
-		if is_instance_valid(impact_marker):
+		# Create and start timer
+		var timer : Timer = Timer.new()
+		timer.timeout.connect(func():
 			impact_marker.queue_free()
+		)
+		timer.one_shot = true
+		impact_marker.add_child(timer)
+		timer.start(0.2)

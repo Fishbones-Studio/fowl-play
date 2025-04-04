@@ -27,15 +27,18 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
 	
 func process_hit(raycast: RayCast3D) -> void:
+	# make the raycast immediately check for collisions
+	raycast.force_raycast_update()
+	
 	if raycast.is_colliding():
 		var collider: Object = raycast.get_collider()
+		print("Raycast hit: " + collider.name)
 		
 		if collider is PhysicsBody3D:
-			DebugDrawer.draw_debug_impact(collider.global_position, collider)
+			DebugDrawer.draw_debug_impact(raycast.get_collision_point(), collider)
 			if collider == origin_entity:
 				print("Hit self")
 				return
 			print("Colliding with:" + collider.name)
+			# TODO: hit marker
 			SignalManager.weapon_hit_target.emit(collider, weapon.current_weapon.damage)
-	# Clean up raycast
-	raycast.queue_free()
