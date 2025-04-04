@@ -15,6 +15,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 	movement_component.jump_available = air_jumps > _air_jumps_used
 
+	animation_tree.set("parameters/Jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
 	player.velocity.y = get_jump_velocity()
 
 

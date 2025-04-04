@@ -3,6 +3,8 @@ extends BasePlayerMovementState
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.set("parameters/Movement/transition_request", "Idle")
+
 	player.velocity.x = 0
 	player.velocity.z = 0
 
