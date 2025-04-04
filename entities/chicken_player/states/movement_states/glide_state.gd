@@ -6,6 +6,8 @@ var _stamina_cost: int
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.set("parameters/Movement/transition_request", "Glide")
+
 	player.velocity.y = 0
 
 	_stamina_cost = movement_component.glide_stamina_cost

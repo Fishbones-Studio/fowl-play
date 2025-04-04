@@ -3,6 +3,8 @@ extends BasePlayerMovementState
 func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.set("parameters/Movement/transition_request", "Walk")
+
 
 func input(_event: InputEvent) -> void:
 	# Handle state transitions

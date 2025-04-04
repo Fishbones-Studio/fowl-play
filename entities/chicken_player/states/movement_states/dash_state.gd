@@ -15,7 +15,9 @@ var _dash_direction: Vector3
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
-	
+
+	animation_tree.set("parameters/Dash/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
 	_stamina_cost = movement_component.dash_stamina_cost
 	
 	# Handle state transitions

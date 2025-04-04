@@ -15,6 +15,8 @@ var _has_coyote: bool = false
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.set("parameters/Movement/transition_request", "Fall")
+
 	var active_coyote_time = information.get("coyote_time", false)
 
 	if active_coyote_time:
