@@ -10,7 +10,7 @@ var file_extensions: Array[String]
 var min_interval: float
 var max_interval: float
 var avoid_repeats: bool
-var start_playing : bool
+var start_playing: bool
 
 var available_audio: Array[AudioStream] = []
 var current_index: int = -1
