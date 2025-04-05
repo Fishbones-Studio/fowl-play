@@ -31,9 +31,6 @@ func process(delta: float) -> void:
 	else:
 		player.stats.regen_stamina(delta)
 
-	# Update the stamina bar
-	SignalManager.stamina_changed.emit(player.stats.current_stamina)
-
 	# Handle state transitions
 	if Input.is_action_just_pressed("dash"):
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})

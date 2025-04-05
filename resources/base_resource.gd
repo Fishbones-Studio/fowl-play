@@ -8,7 +8,9 @@ extends Resource
 @export var drop_chance: int
 @export var cost: int
 @export var description: String = "PlaceHolder" # Flavour text
-@export var type: ItemEnums.ItemTypes # Defines what item slot it uses, extends to other resources
+
 # Visual & UI Elements
 @export var icon: Texture  # The icon for the shop/inventory
 @export var model_uid: String # The uid of the model, for saving and loading purpouses
+
+var type: ItemEnums.ItemTypes # Defines what item slot it uses, extends to other resources. Set in the child class
