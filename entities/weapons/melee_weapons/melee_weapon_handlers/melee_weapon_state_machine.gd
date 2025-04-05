@@ -5,7 +5,7 @@ extends Node
 
 @export var starting_state: BaseCombatState
 
-var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
+var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
@@ -15,7 +15,6 @@ var states: Dictionary[WeaponEnums.MeleeState, BaseCombatState] = {}
 func _ready() -> void:
 	if weapon == null:
 		push_error(owner.name + ": No weapon reference set")
-	print("Set melee weapon:" + weapon.name)
 
 	# Listen for state transition signals
 	SignalManager.combat_transition_state.connect(_transition_to_next_state)
@@ -28,9 +27,7 @@ func _ready() -> void:
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
 		state_node.setup(weapon)
-
-	print(states)
-
+		
 	# Start in the initial state if it exists
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
@@ -61,11 +58,11 @@ func _input(event: InputEvent) -> void:
 
 
 # Handles transitioning from one state to another
-func _transition_to_next_state(target_state: WeaponEnums.MeleeState, information: Dictionary[String, float] = {}) -> void:
+func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary[String, float] = {}) -> void:
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
-		target_state = WeaponEnums.MeleeState.IDLE
+		target_state = WeaponEnums.WeaponState.IDLE
 
 	# Exit the current state before switching
 	var previous_state := current_state

@@ -12,6 +12,5 @@ name = "Leek"
 drop_chance = 50
 cost = 0
 description = "Basic Weapon"
-type = 0
 model_uid = "uid://bymaeu4dtl7ex"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

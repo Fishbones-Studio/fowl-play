@@ -3,7 +3,7 @@ class_name AttackingState
 extends BaseCombatState
 
 # Constants
-const STATE_TYPE: int = WeaponEnums.MeleeState.ATTACKING
+const STATE_TYPE: int = WeaponEnums.WeaponState.ATTACKING
 
 var hit_area: Area3D
 
@@ -31,7 +31,7 @@ func exit() -> void:
 
 # When the attack timer runs out, switch to the cooldown state
 func _on_attack_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.COOLDOWN)
+	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.COOLDOWN)
 
 
 func _attack() -> void:
@@ -43,4 +43,4 @@ func _attack() -> void:
 	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for enemy in enemies:
 		if enemy is Enemy:
-			enemy.take_damage(weapon.current_weapon.damage)
+			SignalManager.weapon_hit_target.emit(enemy, weapon.current_weapon.damage)

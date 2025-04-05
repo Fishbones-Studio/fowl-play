@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://8owdwg4pu4ht"]
+
+[ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
+[ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
+[ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
+[ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
+[ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/idle_state.gd" id="3_vnsd5"]
+[ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/windup_state.gd" id="4_w5bhe"]
+[ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/cooldown_state.gd" id="6_04ypb"]
+
+[node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
+animation_player = NodePath("AnimationPlayer")
+current_weapon = ExtResource("2_h8kbp")
+
+[node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
+
+[node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
+starting_state = NodePath("IdleState")
+weapon = NodePath("..")
+
+[node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
+script = ExtResource("3_vnsd5")
+ANIMATION_NAME = "IDLE"
+
+[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
+script = ExtResource("4_w5bhe")
+ANIMATION_NAME = "WINDUP"
+state_type = 1
+
+[node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin")]
+script = ExtResource("3_uw0c0")
+attack_origin = NodePath("../../AttackOrigin")
+ANIMATION_NAME = "ATTACK"
+state_type = 2
+
+[node name="AttackDurationTimer" type="Timer" parent="RangedWeaponStateMachine/AttackState" index="0"]
+one_shot = true
+
+[node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3"]
+script = ExtResource("6_04ypb")
+ANIMATION_NAME = "COOLDOWN"
+state_type = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+
+[node name="AttackOrigin" parent="." index="4"]
+transform = Transform3D(-0.992793, -0.119842, 0, 0.119842, -0.992793, 0, 0, 0, 1, 0, 0, 2.72573)
+
+[connection signal="timeout" from="RangedWeaponStateMachine/AttackState/AttackDurationTimer" to="RangedWeaponStateMachine/AttackState" method="_on_attack_duration_timer_timeout"]
