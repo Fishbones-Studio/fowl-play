@@ -18,10 +18,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
-	if body is ChickenPlayer:
-		SignalManager.hurt_player.emit(damage)
-	elif body is Enemy:
-		body.take_damage(damage)
+	if body is PhysicsBody3D:
+		SignalManager.weapon_hit_target.emit(body, damage)
 
 
 ## Overwrite in child class

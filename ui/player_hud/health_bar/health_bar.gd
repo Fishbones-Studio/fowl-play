@@ -4,13 +4,17 @@ extends ProgressBar
 @onready var timer := $Timer
 @onready var damage_bar := $DamageBar
 
-var health: int:
+var health: float:
 	set = set_health
 
 
-func set_health(_health: int):
-	var prev_health: int = health
+func set_health(_health: float) -> void:
+	if _health == health:
+		return
+	
+	var prev_health: float = health
 	health = min(max_value, _health)
+	
 	value = health
 
 	if health <= prev_health:

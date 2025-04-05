@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjmtiw26u67me"]
+
+[ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="1_squlr"]
+[ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="2_6l0ns"]
+[ext_resource type="Script" uid="uid://tp14smymrpnn" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/ranged_weapon_player_controller.gd" id="3_rqk1k"]
+
+[node name="RangedWeapon" type="Node3D"]
+
+[node name="CurrentRangedWeapon" type="Node3D" parent="."]
+script = ExtResource("1_squlr")
+weapon_scene = ExtResource("2_6l0ns")
+
+[node name="RangedPlayerWeaponController" type="Node" parent="."]
+script = ExtResource("3_rqk1k")

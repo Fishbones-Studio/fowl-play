@@ -19,10 +19,7 @@ func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -
 
 func process(delta: float) -> void:
 	# Drain stamina and updates the stamina bar in the HUD
-	if is_sprinting():
-		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
-
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
+	player.stats.drain_stamina(_stamina_cost * delta)
 
 	# Handle state transitions
 	if player.stats.current_stamina <= _stamina_cost * delta:

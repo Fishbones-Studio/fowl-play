@@ -6,3 +6,5 @@
 script = ExtResource("1_br2vt")
 
 [node name="HitArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 6
