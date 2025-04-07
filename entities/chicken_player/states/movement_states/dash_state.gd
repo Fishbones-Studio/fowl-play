@@ -34,7 +34,7 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	if _dash_direction == Vector3.ZERO:
 		_dash_direction = -player.global_basis.z # Default forward direction
 
-	animation_tree.set("parameters/Dash/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	dash_duration_timer.start()
 	dash_cooldown_timer.start()

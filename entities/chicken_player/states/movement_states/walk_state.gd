@@ -3,7 +3,7 @@ extends BasePlayerMovementState
 func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 	super(prev_state)
 
-	animation_tree.set("parameters/Movement/transition_request", "Walk")
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 
 
 func input(_event: InputEvent) -> void:
