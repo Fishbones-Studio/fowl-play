@@ -5,6 +5,7 @@ extends ProgressBar
 @onready var damage_bar := $DamageBar
 @onready var health_bar := self 
 
+
 var health: float:
 	set = set_health
 

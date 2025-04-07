@@ -13,15 +13,18 @@ const CORNER_RADIUS = 6
 @export var red_color = Color.RED
 @export var max_health: int = 100
 
+
 func _ready() -> void:
 	health = max_health
 	_setup_health_bar()
 	_update_health_bar_appearance() 
 	SignalManager.weapon_hit_target.connect(_take_damage)
 
+
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	pass
+
 
 ## Private Methods
 func _setup_health_bar() -> void:
@@ -30,10 +33,12 @@ func _setup_health_bar() -> void:
 	else:
 		printerr("Error: HealthBar node not found within the SubViewport.")
 
+
 func _update_health_bar() -> void:
 	if is_instance_valid(health_bar_node):
 		health_bar_node.health = health 
 		_update_health_bar_appearance() 
+
 
 func _update_health_bar_appearance() -> void:
 	if is_instance_valid(health_bar_node):
@@ -48,6 +53,7 @@ func _update_health_bar_appearance() -> void:
 			current_color = red_color
 
 		health_bar_node.change_healthbar_appearance(current_color, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS)
+
 
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
@@ -72,6 +78,7 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 
 		if health <= 0:
 			die()
+
 
 func die() -> void:
 	print("Enemy died!")
