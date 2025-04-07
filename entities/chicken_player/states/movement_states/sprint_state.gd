@@ -26,7 +26,7 @@ func input(_event: InputEvent) -> void:
 
 func process(delta: float) -> void:
 	# Drain stamina and updates the stamina bar in the HUD
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost * delta))
+	player.stats.drain_stamina(_stamina_cost * delta)
 
 	# Handle state transitions
 	if not is_sprinting() or player.stats.current_stamina <= 0:

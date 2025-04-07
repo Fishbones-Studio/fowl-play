@@ -35,8 +35,6 @@ func process(delta: float) -> void:
 	else:
 		player.stats.regen_stamina(delta)
 
-	SignalManager.stamina_changed.emit(player.stats.current_stamina)
-
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)

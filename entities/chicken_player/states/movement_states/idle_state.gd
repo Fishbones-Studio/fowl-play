@@ -34,7 +34,7 @@ func input(_event: InputEvent) -> void:
 
 func process(delta: float) -> void:
 	# Regenerates stamina and updates the stamina bar in the HUD
-	SignalManager.stamina_changed.emit(player.stats.regen_stamina(delta))
+	player.stats.regen_stamina(delta)
 
 
 func physics_process(delta: float) -> void:

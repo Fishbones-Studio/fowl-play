@@ -23,9 +23,9 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		print("Dash available: ", movement_component.dash_available)
 		SignalManager.player_transition_state.emit(previous_state.state_type, information)
 		return
-
-	SignalManager.stamina_changed.emit(player.stats.drain_stamina(_stamina_cost))
-
+		
+	player.stats.drain_stamina(_stamina_cost)
+	
 	movement_component.dash_available = false
 	_is_dashing = true
 

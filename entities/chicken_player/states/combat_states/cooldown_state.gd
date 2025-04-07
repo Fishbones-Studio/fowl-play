@@ -3,7 +3,7 @@ class_name CooldownState
 extends BaseCombatState
 
 # Constants
-const STATE_TYPE: int = WeaponEnums.MeleeState.COOLDOWN  # Defines this state as COOLDOWN
+const STATE_TYPE: int = WeaponEnums.WeaponState.COOLDOWN  # Defines this state as COOLDOWN
 # Variables
 @onready var cooldown_timer: Timer = %CooldownTimer
 
@@ -23,4 +23,4 @@ func exit() -> void:
 
 # When the cooldown timer runs out, switch back to the IDLE state
 func _on_cooldown_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.MeleeState.IDLE)
+	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.IDLE)
