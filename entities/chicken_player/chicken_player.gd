@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var stats: LivingEntityStats
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
+@onready var death_screen: CanvasLayer = $DeathScreen
 
 
 func _ready() -> void:
@@ -35,3 +36,6 @@ func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		# take away health
 		stats.drain_health(damage)
+		if stats.current_health == 0.0:
+			death_screen.transition()
+			

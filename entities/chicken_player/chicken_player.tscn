@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 [ext_resource type="PackedScene" uid="uid://cjmtiw26u67me" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/ranged_weapon.tscn" id="15_n43gi"]
+[ext_resource type="PackedScene" uid="uid://ba8j8ajmddtai" path="res://ui/game_over/game_over.tscn" id="16_qjuvu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
@@ -91,6 +92,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
 
 [node name="RangedWeapon" parent="." instance=ExtResource("15_n43gi")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0.5, 0)
+
+[node name="DeathScreen" parent="." instance=ExtResource("16_qjuvu")]
+visible = false
 
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]

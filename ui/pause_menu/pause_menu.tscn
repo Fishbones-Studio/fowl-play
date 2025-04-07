@@ -11,21 +11,21 @@ shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.7
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uraes"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b4b0p"]
 sky_top_color = Color(1, 1, 1, 1)
 sky_horizon_color = Color(1, 1, 1, 1)
 energy_multiplier = 1.5
 
 [sub_resource type="Sky" id="Sky_ihaig"]
-sky_material = SubResource("ProceduralSkyMaterial_uraes")
+sky_material = SubResource("ProceduralSkyMaterial_b4b0p")
 
-[sub_resource type="Environment" id="Environment_ihaig"]
+[sub_resource type="Environment" id="Environment_c3jo5"]
 background_mode = 2
 sky = SubResource("Sky_ihaig")
 sky_rotation = Vector3(1.00356, 0, 0)
 
 [sub_resource type="World3D" id="World3D_3qrb2"]
-environment = SubResource("Environment_ihaig")
+environment = SubResource("Environment_c3jo5")
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "footer", "game_logo_container")]
 process_mode = 3
@@ -72,7 +72,7 @@ stretch = true
 world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
