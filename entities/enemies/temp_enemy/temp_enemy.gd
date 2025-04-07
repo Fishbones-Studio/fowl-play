@@ -2,16 +2,18 @@
 class_name Enemy
 extends CharacterBody3D
 
-@onready var damage_label: Marker3D = $Marker3D
-@onready var health_bar_node: HealthBar = $SubViewport/HealthBar
-
-var health: int
-const CORNER_RADIUS = 6
 
 @export var green_color = Color.GREEN
 @export var orange_color = Color.YELLOW
 @export var red_color = Color.RED
 @export var max_health: int = 100
+
+const CORNER_RADIUS = 6
+
+var health: int
+
+@onready var damage_label: Marker3D = $Marker3D
+@onready var health_bar_node: HealthBar = $SubViewport/HealthBar
 
 
 func _ready() -> void:
