@@ -13,11 +13,13 @@ func _ready() -> void:
 	pass 
 
 
-func change_healthbar_appearance(color: Color, top_left_radius: int = 0, bottom_left_radius: int = 0) -> void:
+func change_healthbar_appearance(color: Color, top_right_radius: int, bottom_right_radius: int, top_left_radius: int = 0, bottom_left_radius: int = 0) -> void:
 	var style_box := StyleBoxFlat.new()
 	style_box.bg_color = color
 	style_box.corner_radius_top_left = top_left_radius
+	style_box.corner_radius_top_right = top_left_radius
 	style_box.corner_radius_bottom_left = bottom_left_radius
+	style_box.corner_radius_bottom_right = bottom_right_radius
 	health_bar.add_theme_stylebox_override("fill", style_box)
 
 

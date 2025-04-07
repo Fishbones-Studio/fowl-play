@@ -16,7 +16,7 @@ const CORNER_RADIUS = 6
 func _ready() -> void:
 	health = max_health
 	_setup_health_bar()
-	_update_health_bar_appearance() # Set initial appearance
+	_update_health_bar_appearance() 
 	SignalManager.weapon_hit_target.connect(_take_damage)
 
 func _physics_process(_delta: float) -> void:
@@ -32,8 +32,8 @@ func _setup_health_bar() -> void:
 
 func _update_health_bar() -> void:
 	if is_instance_valid(health_bar_node):
-		health_bar_node.health = health # The setter in HealthBar will handle the visual update
-		_update_health_bar_appearance() # Update appearance whenever health changes
+		health_bar_node.health = health 
+		_update_health_bar_appearance() 
 
 func _update_health_bar_appearance() -> void:
 	if is_instance_valid(health_bar_node):
@@ -47,7 +47,7 @@ func _update_health_bar_appearance() -> void:
 		else:
 			current_color = red_color
 
-		health_bar_node.change_healthbar_appearance(current_color, CORNER_RADIUS, CORNER_RADIUS)
+		health_bar_node.change_healthbar_appearance(current_color, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS)
 
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
