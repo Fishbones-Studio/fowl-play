@@ -2,21 +2,36 @@
 
 [ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="1_oc75s"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lsalo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f00t2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re7yl"]
+content_margin_bottom = 3.0
 bg_color = Color(0.99683, 0, 0.26861, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_color = Color(0.605513, 0.000835225, 0.000457916, 0.6)
+shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umwhf"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qx3t"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
 
 [node name="HealthBar" type="ProgressBar"]
 offset_right = 360.0
 offset_bottom = 16.0
-theme_override_styles/background = SubResource("StyleBoxEmpty_lsalo")
+theme_override_styles/background = SubResource("StyleBoxFlat_f00t2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_re7yl")
 value = 50.0
 show_percentage = false
