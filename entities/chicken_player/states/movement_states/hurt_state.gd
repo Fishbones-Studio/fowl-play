@@ -5,7 +5,6 @@ extends BasePlayerMovementState
 @export var vertical_knockback: float = 8.0
 
 var _knockback: Vector3
-var _knockback_resistance: float
 var _is_immobile: bool
 
 @onready var hurt_timer: Timer = $HurtTimer
