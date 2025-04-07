@@ -2,45 +2,64 @@
 class_name Enemy
 extends CharacterBody3D
 
-@export var max_health: int = 100
-var health: int
-
 @onready var damage_label: Marker3D = $Marker3D
-@onready var health_bar_sprite: Sprite3D = $Sprite3D
-@onready var health_bar_viewport: SubViewport = $SubViewport
-@onready var health_bar_progress: ProgressBar = $SubViewport/ProgressBar
+@onready var health_bar_node: HealthBar = $SubViewport/HealthBar
 
+var health: int
+const CORNER_RADIUS = 6
+
+@export var green_color = Color.GREEN
+@export var orange_color = Color.YELLOW
+@export var red_color = Color.RED
+@export var max_health: int = 100
 
 func _ready() -> void:
 	health = max_health
-	if health_bar_progress == null:
-		printerr("Error: health_bar_progress is null! Check your node paths.")
-	else:
-		_update_health_bar()
+	_setup_health_bar()
+	_update_health_bar_appearance() # Set initial appearance
 	SignalManager.weapon_hit_target.connect(_take_damage)
-
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
-
+	pass
 
 ## Private Methods
-func _update_health_bar() -> void:
-	if is_instance_valid(health_bar_progress):
-		health_bar_progress.max_value = max_health
-		health_bar_progress.value = health
+func _setup_health_bar() -> void:
+	if is_instance_valid(health_bar_node):
+		health_bar_node.init_health(max_health, health)
 	else:
-		print("Error: health_bar_progress is not valid!")
+		printerr("Error: HealthBar node not found within the SubViewport.")
 
+func _update_health_bar() -> void:
+	if is_instance_valid(health_bar_node):
+		health_bar_node.health = health # The setter in HealthBar will handle the visual update
+		_update_health_bar_appearance() # Update appearance whenever health changes
 
-## Public Methods
+func _update_health_bar_appearance() -> void:
+	if is_instance_valid(health_bar_node):
+		var health_percentage: float = float(health) / max_health
+		var current_color: Color
+
+		if health_percentage > 0.66:
+			current_color = green_color
+		elif health_percentage > 0.33:
+			current_color = orange_color
+		else:
+			current_color = red_color
+
+		health_bar_node.change_healthbar_appearance(current_color, CORNER_RADIUS, CORNER_RADIUS)
+
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		health -= damage
 		_update_health_bar()
 
 		var damage_popup: Node3D = preload("uid://b6cnb1t5cixqj").instantiate()
-		get_parent().add_child(damage_popup)
+		var root = get_tree().get_root().get_child(0)
+		if is_instance_valid(root):
+			root.add_child(damage_popup)
+		else:
+			printerr("Error: Could not find the root node to add damage popup.")
 
 		var spawn_position: Vector3 = damage_label.global_position + Vector3(
 			randf_range(-damage_popup.horizontal_spread, damage_popup.horizontal_spread),
@@ -51,9 +70,8 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 		damage_popup.global_position = spawn_position
 		damage_popup.display_damage(damage)
 
-	if health <= 0:
-		die()
-
+		if health <= 0:
+			die()
 
 func die() -> void:
 	print("Enemy died!")

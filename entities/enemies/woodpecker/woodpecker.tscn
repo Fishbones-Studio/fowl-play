@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0o65o2xsk53s"]
+[gd_scene load_steps=6 format=3 uid="uid://d0o65o2xsk53s"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_k6lf6"]
 [ext_resource type="PackedScene" uid="uid://bwayhjdb5vvd5" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="3_crgub"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1t2bg"]
 radius = 1.095
 height = 5.7
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1t2bg"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Woodpecker" type="CharacterBody3D"]
 collision_layer = 4
@@ -23,4 +27,13 @@ shape = SubResource("CapsuleShape3D_1t2bg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.83149, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.91022, 0)
+transform = Transform3D(0.0137702, 0, 0.999905, 0, 1, 0, -0.999905, 0, 0.0137702, 0, 3.59369, -0.486352)
+billboard = 1
+texture = SubResource("ViewportTexture_1t2bg")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("3_crgub")]

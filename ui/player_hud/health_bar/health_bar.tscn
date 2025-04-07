@@ -9,17 +9,20 @@ corner_radius_bottom_right = 6
 expand_margin_bottom = 3.0
 shadow_size = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re7yl"]
-content_margin_bottom = 3.0
-bg_color = Color(0.99683, 0, 0.26861, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71knl"]
+bg_color = Color(0.884307, 6.26662e-05, 3.39803e-05, 1)
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 expand_margin_bottom = 3.0
-shadow_color = Color(0.605513, 0.000835225, 0.000457916, 0.6)
+shadow_color = Color(0.847059, 0, 0, 0.6)
 shadow_size = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umwhf"]
 bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qx3t"]
 bg_color = Color(1, 1, 1, 1)
@@ -32,7 +35,7 @@ shadow_size = 2
 offset_right = 360.0
 offset_bottom = 16.0
 theme_override_styles/background = SubResource("StyleBoxFlat_f00t2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_re7yl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_71knl")
 value = 50.0
 show_percentage = false
 script = ExtResource("1_oc75s")
