@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_34esa"]
 [ext_resource type="PackedScene" uid="uid://b7w0gamflf5pk" path="res://level/arena/props/hazards/balls/spike_ball.glb" id="2_kxu0f"]
-[ext_resource type="Script" path="res://level/arena/props/hazards/knock_hazard.gd" id="2_p5xf8"]
+[ext_resource type="Script" uid="uid://bmqo6sk52fa4n" path="res://level/arena/props/hazards/knock_hazard.gd" id="2_p5xf8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kxu0f"]
 radius = 1.6
@@ -72,9 +72,8 @@ _data = {
 
 [node name="SpikeBall" instance=ExtResource("1_34esa")]
 script = ExtResource("2_p5xf8")
-knockback_strength = 125.0
-vertical_knockback = 25.0
-max_knockback = 55.0
+knockback_force = 5.0
+vertical_knockback = 5.0
 
 [node name="HazardArea" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7, 9, 0)
@@ -83,7 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7, 9, 0)
 shape = SubResource("SphereShape3D_kxu0f")
 
 [node name="spike_ball" parent="." index="1" instance=ExtResource("2_kxu0f")]
-transform = Transform3D(5.60101e-08, -1.03523, 0, 1.28136, 4.52514e-08, 0, 0, 0, -1, 0, 9, 0)
+transform = Transform3D(4.63851e-06, -1.03523, 0, 1.28136, 3.74752e-06, 0, 0, 0, -1, 0, 9, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {

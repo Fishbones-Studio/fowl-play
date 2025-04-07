@@ -2,7 +2,7 @@
 class_name Enemy
 extends CharacterBody3D
 
-# TODO: enemy should also use livingentity stat
+# TODO: enemy should also use living entity stat
 
 ## Exported Variables
 @export var health: int = 100

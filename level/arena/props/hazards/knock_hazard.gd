@@ -1,29 +1,29 @@
 class_name KnockHazard
 extends BaseHazard
 
-@export var knockback_strength: float = 125.0
-@export var vertical_knockback: float = 25.0
-@export var max_knockback: float = 75.0
+@export var knockback_force: float = 5.0
+@export var vertical_knockback: float = 5.0
 
 @onready var hazard_area: Area3D = $HazardArea
+
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		# Calculate knockback direction
-		var knockback_direction: Vector3 = (
-										   body.global_position - hazard_area.global_position
-										   ).normalized()
+		var knockback_direction: Vector3 = self.global_position.direction_to(body.global_position)
 
-		var _knockback_force := Vector3(
-			clamp(knockback_direction.x * knockback_strength, -max_knockback, max_knockback),
-			vertical_knockback,
-			clamp(knockback_direction.z * knockback_strength, -max_knockback, max_knockback)
+		var knockback: Vector3 = Vector3(
+			knockback_direction.x * knockback_force,
+			abs(knockback_direction.y) + vertical_knockback,
+			knockback_direction.z * knockback_force,
 		)
-		
-		print("Knockback force: ", _knockback_force)
 
-		# Override velocity
-		body.velocity += _knockback_force
+		if body.collision_layer == 2:
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {
+				"knockback": knockback,
+				})
+		else:
+			body.velocity += knockback
 
 		# Apply damage
 		super(body)
