@@ -1,8 +1,7 @@
 ## **NOTE** this file is work in progress and not all sections are complete
 extends BasePlayerMovementState
 
-@export var knockback_strength: float = 5.0
-@export var vertical_knockback: float = 8.0
+@export var knockback_decay: int = 20 # Rate at which the knockback decays per second
 
 var _knockback: Vector3
 var _is_immobile: bool
@@ -28,7 +27,7 @@ func physics_process(delta: float) -> void:
 
 	if _is_immobile:
 		player.velocity += _knockback
-		_knockback = _knockback.lerp(Vector3.ZERO, 0.1)
+		_knockback = _knockback.move_toward(Vector3.ZERO, knockback_decay * delta)
 
 	if not _is_immobile:
 		if not player.is_on_floor():
