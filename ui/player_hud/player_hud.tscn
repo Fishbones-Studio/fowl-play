@@ -9,6 +9,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgno4"]
 shader = ExtResource("3_kpoie")
+shader_parameter/hurt_color = Vector3(1, 0, 0)
+shader_parameter/overlay_alpha = 0.5
+shader_parameter/aberration_strength = 0.05
+shader_parameter/displacement_strength = 0.01
+shader_parameter/time = 0.0
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -58,7 +63,7 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
 [node name="HurtDuration" type="Timer" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
-wait_time = 0.2
+wait_time = 0.15
 one_shot = true
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
