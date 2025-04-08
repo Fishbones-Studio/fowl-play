@@ -1,35 +1,40 @@
 class_name KnockHazard
 extends BaseHazard
 
-
 @export var knockback_force: float = 5.0
-@export var minimum_horizontal_knockback: float = 3.0
+@export var minimum_horizontal_knockback: float = 1.1
 @export var minimum_vertical_knockback: float = 5.0
+@export var maximum_horizontal_knockback: float = 3.0
+@export var maximum_vertical_knockback: float = 10.0
 
 @onready var hazard_area: Area3D = $HazardArea
 
-
 func _on_hazard_area_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
-		# Calculate knockback direction
-		var knockback_direction: Vector3 = self.global_position.direction_to(body.global_position)
+	if not body is CharacterBody3D:
+		return
 
-		var knockback_x: float = knockback_direction.x * knockback_force
-		var knockback_y: float = abs(knockback_direction.y) * knockback_force
-		var knockback_z: float = knockback_direction.z * knockback_force
+	# Calculate knockback direction
+	var knockback_direction : Vector3 = self.global_position.direction_to(body.global_position)
+	var knockback : Vector3 = calculate_knockback(knockback_direction)
 
-		var knockback: Vector3 = Vector3(
-			knockback_x if abs(knockback_x) > minimum_horizontal_knockback else minimum_horizontal_knockback * sign(knockback_direction.x),
-			knockback_y if knockback_y > minimum_vertical_knockback else minimum_vertical_knockback,
-			knockback_z if abs(knockback_z) > minimum_horizontal_knockback else minimum_horizontal_knockback * sign(knockback_direction.z),
+	if body.collision_layer == 2:  # Player 
+		SignalManager.player_transition_state.emit(
+			PlayerEnums.PlayerStates.HURT_STATE,
+				{"knockback": knockback}
 		)
+	else:  # TODO: for other entities
+		body.velocity += knockback
 
-		if body.collision_layer == 2: # Player
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {
-				"knockback": knockback,
-				})
-		else: # TODO: for other entities
-			body.velocity += knockback
+	super(body)
 
-		# Apply damage
-		super(body)
+func calculate_knockback(direction: Vector3) -> Vector3:
+	var horizontal_component := func(axis: float) -> float:
+		var magnitude = abs(axis) * knockback_force
+		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
+		return magnitude * sign(axis)
+
+	return Vector3(
+		horizontal_component.call(direction.x),
+		clamp(max(abs(direction.y) * knockback_force, minimum_vertical_knockback), minimum_vertical_knockback, maximum_vertical_knockback),
+		horizontal_component.call(direction.z)
+	)
