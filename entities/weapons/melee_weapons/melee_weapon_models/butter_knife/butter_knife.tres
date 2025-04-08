@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=2 format=3 uid="uid://b8aw1r4xls2u4"]
+[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=3 format=3 uid="uid://b8aw1r4xls2u4"]
 
-[ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_ry0ng"]
+[ext_resource type="Texture2D" uid="uid://cjh4s3ohpa3fu" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.png" id="1_m3duu"]
+[ext_resource type="Script" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_ry0ng"]
 
 [resource]
 script = ExtResource("1_ry0ng")
@@ -12,6 +13,5 @@ name = "Butter Knife"
 drop_chance = 10
 cost = 0
 description = "Stab"
-type = 0
+icon = ExtResource("1_m3duu")
 model_uid = ""
-metadata/_custom_type_script = "uid://bflt4m3fx7gmv"
