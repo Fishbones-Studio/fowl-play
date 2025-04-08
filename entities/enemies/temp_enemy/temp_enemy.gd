@@ -8,6 +8,7 @@ extends CharacterBody3D
 @export var low_health_color: Color = Color.RED
 @export var stats: LivingEntityStats
 
+
 const CORNER_RADIUS = 6
 
 @onready var damage_label: Marker3D = $Marker3D

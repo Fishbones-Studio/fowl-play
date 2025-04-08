@@ -62,6 +62,10 @@ state_type = 4
 script = ExtResource("6_j3ovn")
 state_type = 6
 
+[node name="ImmobileTimer" type="Timer" parent="MovementStateMachine/Hurt"]
+wait_time = 0.05
+one_shot = true
+
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
 state_type = 5
@@ -92,6 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
 [node name="RangedWeapon" parent="." instance=ExtResource("15_n43gi")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0.5, 0)
 
+[connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Fall/CoyoteTimer" to="MovementStateMachine/Fall" method="_on_coyote_timer_timeout"]
