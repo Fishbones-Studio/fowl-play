@@ -10,6 +10,7 @@ script = ExtResource("1_ufued")
 
 [node name="InventoryItemContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="NameLabel" type="Label" parent="InventoryItemContainer"]
 unique_name_in_owner = true

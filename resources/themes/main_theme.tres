@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://2bi33x6p08ih" path="res://resources/themes/styleboxes/keybinds_res_def_button_normal.tres" id="6_7ucis"]
 [ext_resource type="StyleBox" uid="uid://do8svyygf5k1e" path="res://resources/themes/styleboxes/pause_menu_button_hover.tres" id="7_6bdnh"]
 [ext_resource type="StyleBox" uid="uid://ih2cst4gsqnr" path="res://resources/themes/styleboxes/keybinds_res_def_button_pressed.tres" id="7_27a07"]
+[ext_resource type="StyleBox" uid="uid://dh8tswh46s27n" path="res://resources/themes/styleboxes/panel_container_normal_v2.tres" id="8_7ucis"]
 [ext_resource type="StyleBox" uid="uid://c6x8bod707wjc" path="res://resources/themes/styleboxes/pause_menu_button_normal.tres" id="8_yoenm"]
 [ext_resource type="StyleBox" uid="uid://bs2x4gjk4xumb" path="res://resources/themes/styleboxes/pause_menu_button_pressed.tres" id="9_tvx0j"]
 [ext_resource type="StyleBox" uid="uid://d3oipv5i4i1q3" path="res://resources/themes/styleboxes/keybind_button_normal.tres" id="10_6bdnh"]
@@ -54,20 +55,6 @@ content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf3i3"]
-bg_color = Color(0.0823529, 0.0666667, 0.0509804, 1)
-border_width_left = 35
-border_width_top = 150
-border_width_right = 35
-border_width_bottom = 25
-border_color = Color(0.0313726, 0.027451, 0.0196078, 1)
-border_blend = true
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
-shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7adcq"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
@@ -199,16 +186,16 @@ KeybindResDefButton/styles/pressed = ExtResource("7_27a07")
 Label/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 Label/constants/outline_size = 3
 Label/font_sizes/font_size = 20
-MarginContainer/constants/margin_bottom = 50
-MarginContainer/constants/margin_left = 50
-MarginContainer/constants/margin_right = 50
-MarginContainer/constants/margin_top = 50
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
 OptionButton/colors/font_color = Color(0.368627, 0.396078, 0.392157, 1)
 OptionButton/constants/arrow_margin = 15
 OptionButton/constants/modulate_arrow = 1
 OptionButton/constants/outline_size = 0
 OptionButton/font_sizes/font_size = 18
-Panel/styles/panel = SubResource("StyleBoxFlat_hf3i3")
+Panel/styles/panel = ExtResource("8_7ucis")
 PanelContainer/styles/panel = ExtResource("5_xtbu8")
 PauseMenuButton/base_type = &"Button"
 PauseMenuButton/colors/font_color = Color(0.745098, 0.737255, 0.745098, 1)
