@@ -23,4 +23,4 @@ func exit() -> void:
 
 # When the cooldown timer runs out, switch back to the IDLE state
 func _on_cooldown_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.IDLE)
+	SignalManager.combat_transition_state.emit(root_actor, WeaponEnums.WeaponState.IDLE)

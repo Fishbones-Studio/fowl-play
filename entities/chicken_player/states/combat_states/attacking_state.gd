@@ -9,7 +9,6 @@ var hit_area: Area3D
 
 @onready var attack_timer: Timer = %AttackTimer
 
-
 # Set up the weapon and cache important nodes
 func setup(weapon_node: MeleeWeapon) -> void:
 	super(weapon_node)
@@ -31,7 +30,7 @@ func exit() -> void:
 
 # When the attack timer runs out, switch to the cooldown state
 func _on_attack_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.COOLDOWN)
+	SignalManager.combat_transition_state.emit(root_actor, WeaponEnums.WeaponState.COOLDOWN)
 
 
 func _attack() -> void:
@@ -39,8 +38,15 @@ func _attack() -> void:
 		print("HitArea not found!")
 		return
 
-	# Get all enemies inside the hit area
-	var enemies: Array[Node3D] = hit_area.get_overlapping_bodies()
-	for enemy in enemies:
-		if enemy is Enemy:
-			SignalManager.weapon_hit_target.emit(enemy, weapon.current_weapon.damage)
+	# Get targets for the given area in the attack area. Check which actor is making the attack
+	# and corresponding to what actor makes the attack deal damage to certain types of targets
+	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
+	if(root_actor == GameManager.chicken_player):
+		for target in targets:
+			if target is Enemy:
+				SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)
+	else:
+		for target in targets:
+			if target == GameManager.chicken_player:
+				SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)
+	

@@ -3,8 +3,12 @@ extends BaseState
 
 @export var ANIMATION_NAME: String
 
+var root_actor: CharacterBody3D
 var weapon: MeleeWeapon
 
+func _ready() -> void:
+	await owner.ready
+	root_actor = get_parent().root_actor
 
 func setup(_weapon_node: MeleeWeapon) -> void:
 	if not _weapon_node:

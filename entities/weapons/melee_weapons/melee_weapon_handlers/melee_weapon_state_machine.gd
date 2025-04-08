@@ -10,6 +10,8 @@ var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
 @onready var weapon: MeleeWeapon = $"../CurrentWeapon".current_weapon
+# Get the reference from the root node from this scene to the node owning it in enemy/player scene.
+@onready var root_actor: CharacterBody3D = get_parent().actor
 
 
 func _ready() -> void:
@@ -19,8 +21,9 @@ func _ready() -> void:
 	# Listen for state transition signals
 	SignalManager.combat_transition_state.connect(_transition_to_next_state)
 
-	# Wait for the owner to be ready before setting up states
-	await owner.ready
+	# Wait for root actor to be ready, ran into some issues with later calls if this wait wasn't changed
+	# Somehow the GameManager.chicken_player wasn't being updated quickly enough and this change fixed that.
+	await root_actor.ready
 
 	# Get all states in the scene and store them in the dictionary
 	for state_node: BaseCombatState in get_children():
@@ -33,12 +36,14 @@ func _ready() -> void:
 		current_state.enter(current_state.STATE_TYPE)
 
 
+# Check if the root actor is an enemy if so, use process behaviour
 func _process(delta: float) -> void:
 	if current_state == null:
 		push_error(owner.name + ": No state set.")
 		return
 	# Run the active state's process function
-	current_state.process(delta)
+	if(root_actor != GameManager.chicken_player):
+		current_state.process(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -49,16 +54,21 @@ func _physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 
+# Check if root actor is player if so, use user input
 func _input(event: InputEvent) -> void:
 	if current_state == null:
 		push_error(owner.name + ": No state set.")
 		return
 	# Pass input events to the current state
-	current_state.input(event)
+	if(root_actor == GameManager.chicken_player):
+		current_state.input(event)
 
 
-# Handles transitioning from one state to another
-func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary[String, float] = {}) -> void:
+# Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
+func _transition_to_next_state(actor:  CharacterBody3D, target_state: WeaponEnums.WeaponState, information: Dictionary[String, float] = {}) -> void:
+	if actor != root_actor:
+		return
+
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")

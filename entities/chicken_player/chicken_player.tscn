@@ -86,8 +86,9 @@ one_shot = true
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 
-[node name="MeleeWeapon" parent="." instance=ExtResource("12_k8bkn")]
+[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("12_k8bkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+actor = NodePath("..")
 
 [node name="RangedWeapon" parent="." instance=ExtResource("15_n43gi")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0.5, 0)
