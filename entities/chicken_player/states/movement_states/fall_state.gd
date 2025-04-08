@@ -7,6 +7,8 @@ var _jump_press_time: float = 0.0
 var _is_jump_held: bool = false
 var _has_coyote: bool = false
 
+var _has_initial_velocity: bool
+
 # Timer to manage jump availability after leaving the ground, so the 
 # player can jump when just barely off the platform.
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -18,6 +20,14 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 
 	var active_coyote_time = information.get("coyote_time", false)
+
+	_has_initial_velocity = false
+
+# So the player keeps the X/Z velocity. If not, the player abruptly stops midair.
+# Then falls down. Which IS what we want after dashing, but not with other movement.
+	if "initial_velocity" in information:
+		player.velocity = information["initial_velocity"]
+		_has_initial_velocity = true
 
 	if active_coyote_time:
 		_has_coyote = true
@@ -64,7 +74,12 @@ func physics_process(delta: float) -> void:
 	else:
 		speed_factor = movement_component.walk_speed_factor
 
-	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(speed_factor)
+	var velocity: Vector3
+
+	if _has_initial_velocity:
+		velocity = player.velocity
+	else:
+		velocity = get_player_direction() * player.stats.calculate_speed(speed_factor)
 
 	apply_movement(velocity)
 
