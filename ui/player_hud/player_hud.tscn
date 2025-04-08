@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://xhakfqnxgnrr"]
 
-[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_4cl3s"]
+[ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
@@ -28,18 +28,17 @@ theme_override_constants/margin_bottom = 15
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="PlayerPortrainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="PlayerPortraitContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/HBoxContainer/PlayerPortrainContainer"]
-layout_mode = 2
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+script = ExtResource("1_4cl3s")
 
-[node name="PlayerPortrait" type="TextureRect" parent="MarginContainer/HBoxContainer/PlayerPortrainContainer/BoxContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("1_4cl3s")
-expand_mode = 1
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer/SubViewport"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
