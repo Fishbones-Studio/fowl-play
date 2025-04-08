@@ -1,40 +1,54 @@
 ## **NOTE** this file is work in progress and not all sections are complete
-
 extends BasePlayerMovementState
 
-@export var knockback_strength: float = 5.0
-@export var vertical_knockback: float = 8.0
+@export var knockback_decay: int = 50 # Rate at which the knockback decays per second
 
-var _knockback_force: Vector3
+var _knockback: Vector3
+var _is_immobile: bool
+
+@onready var immobile_timer: Timer = $ImmobileTimer
 
 
-func enter(_previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
+	super(prev_state)
 
-	# Calculate knockback direction 
-	var knockback_direction: Vector3 = player.transform.basis.z
+	player.velocity.x = 0
+	player.velocity.z = 0
 
-	_knockback_force = Vector3(
-		knockback_direction.x + knockback_strength,
-		vertical_knockback,
-		knockback_direction.z + knockback_strength
-	)
-
-	# Apply initial knockback force
-	player.velocity = _knockback_force
+	if "knockback" in info:
+		_knockback = info["knockback"]
+	if "immobile_time" in info:
+		immobile_timer.wait_time = info["immobile_time"]
+		immobile_timer.start()
+		_is_immobile = true
 
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 
-	if not player.is_on_floor():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
-		return
+	if _is_immobile:
+		player.velocity += _knockback
+		_knockback = _knockback.move_toward(Vector3.ZERO, knockback_decay * delta)
 
-	if get_player_direction() == Vector3.ZERO:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
-		return
-	if is_sprinting():
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
-		return
+	if not _is_immobile:
+		if not player.is_on_floor():
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {
+				"initial_velocity": player.velocity,
+			})
+			return
 
-	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+		if get_player_direction() == Vector3.ZERO:
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
+			return
+
+		if is_sprinting():
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
+			return
+
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+
+	player.move_and_slide()
+
+
+func _on_immobile_timer_timeout() -> void:
+	_is_immobile = false
