@@ -28,7 +28,7 @@ script = ExtResource("1_abrql")
 stats = ExtResource("2_4hg1i")
 
 [node name="chicken_default" parent="." instance=ExtResource("2_jgbvq")]
-transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 0, 0.345436, 0)
+transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0.345436, 0)
 script = ExtResource("4_qjuvu")
 layer_to_add = 2
 
