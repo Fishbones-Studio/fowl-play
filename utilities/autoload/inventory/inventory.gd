@@ -19,6 +19,7 @@ func add_item(item: BaseResource) -> void:
 	items_in_inventory.append(item)
 	save_inventory()
 
+
 ## Get all items from the player's inventory
 func get_items() -> Array[BaseResource]:
 	return items_in_inventory
