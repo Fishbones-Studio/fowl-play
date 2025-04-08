@@ -6,7 +6,7 @@ extends BasePlayerMovementState
 var _knockback: Vector3
 var _is_immobile: bool
 
-@onready var hurt_timer: Timer = $HurtTimer
+@onready var immobile_timer: Timer = $ImmobileTimer
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
@@ -15,11 +15,12 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	player.velocity.x = 0
 	player.velocity.z = 0
 
-	hurt_timer.start()
-	_is_immobile = true
-
 	if "knockback" in info:
 		_knockback = info["knockback"]
+	if "immobile_time" in info:
+		immobile_timer.wait_time = info["immobile_time"]
+		immobile_timer.start()
+		_is_immobile = true
 
 
 func physics_process(delta: float) -> void:
@@ -31,7 +32,9 @@ func physics_process(delta: float) -> void:
 
 	if not _is_immobile:
 		if not player.is_on_floor():
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {
+				"initial_velocity": player.velocity,
+			})
 			return
 
 		if get_player_direction() == Vector3.ZERO:
@@ -47,5 +50,5 @@ func physics_process(delta: float) -> void:
 	player.move_and_slide()
 
 
-func _on_hurt_timer_timeout() -> void:
+func _on_immobile_timer_timeout() -> void:
 	_is_immobile = false

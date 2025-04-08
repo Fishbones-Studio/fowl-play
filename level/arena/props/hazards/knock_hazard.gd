@@ -3,11 +3,16 @@ extends BaseHazard
 
 @export var knockback_force: float = 5.0
 @export var minimum_horizontal_knockback: float = 1.1
-@export var minimum_vertical_knockback: float = 5.0
+@export var minimum_vertical_knockback: float = 7.0
 @export var maximum_horizontal_knockback: float = 3.0
 @export var maximum_vertical_knockback: float = 10.0
 
 @onready var hazard_area: Area3D = $HazardArea
+
+
+func _ready() -> void:
+	print("min knockback: ", minimum_vertical_knockback)
+
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if not body is CharacterBody3D:
@@ -19,13 +24,16 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 	if body.collision_layer == 2:  # Player 
 		SignalManager.player_transition_state.emit(
-			PlayerEnums.PlayerStates.HURT_STATE,
-				{"knockback": knockback}
+			PlayerEnums.PlayerStates.HURT_STATE, {
+				"knockback": knockback,
+				"immobile_time": 0.5,
+				}
 		)
 	else:  # TODO: for other entities
 		body.velocity += knockback
 
 	super(body)
+
 
 func calculate_knockback(direction: Vector3) -> Vector3:
 	var horizontal_component := func(axis: float) -> float:
@@ -33,8 +41,9 @@ func calculate_knockback(direction: Vector3) -> Vector3:
 		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
 		return magnitude * sign(axis)
 
-	return Vector3(
+	var knockback =  Vector3(
 		horizontal_component.call(direction.x),
 		clamp(max(abs(direction.y) * knockback_force, minimum_vertical_knockback), minimum_vertical_knockback, maximum_vertical_knockback),
 		horizontal_component.call(direction.z)
 	)
+	return knockback
