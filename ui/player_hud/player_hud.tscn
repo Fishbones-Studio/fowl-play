@@ -105,12 +105,12 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/PlayerBarContainer"]
+[node name="Spacer" type="VSeparator" parent="MarginContainer/HBoxContainer/PlayerBarContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 35.0
 
-[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Spacer" type="HSeparator" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
