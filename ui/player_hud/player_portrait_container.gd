@@ -8,10 +8,11 @@ extends CenterContainer
 @onready var duration_timer : Timer = $DurationTimer
 @onready var color_rect : ColorRect = $ColorRect
 
+
 func _ready() -> void:
 	# Set initial state
 	color_rect.hide()
-	
+
 	# Connect signals
 	SignalManager.player_hurt.connect(
 		func() : 
@@ -24,6 +25,7 @@ func _ready() -> void:
 			_on_player_health(heal_time, heal_shader)
 	)
 
+
 func _on_player_health(time : float, shader_material : ShaderMaterial) -> void:
 	# Apply the appropriate shader
 	color_rect.material = shader_material
@@ -34,6 +36,7 @@ func _on_player_health(time : float, shader_material : ShaderMaterial) -> void:
 	
 	color_rect.show()
 	duration_timer.start(time)
+
 
 func _on_duration_timer_timeout():
 	color_rect.hide()
