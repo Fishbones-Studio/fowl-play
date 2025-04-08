@@ -14,20 +14,14 @@ func _ready() -> void:
 	pass 
 
 
-func change_healthbar_appearance(color: Color, top_right_radius: int, bottom_right_radius: int, top_left_radius: int = 0, bottom_left_radius: int = 0) -> void:
+func change_healthbar_appearance(color: Color, corner_radius: Vector4) -> void:
 	var style_box := StyleBoxFlat.new()
 	style_box.bg_color = color
-	style_box.corner_radius_top_left = top_left_radius
-	style_box.corner_radius_top_right = top_left_radius
-	style_box.corner_radius_bottom_left = bottom_left_radius
-	style_box.corner_radius_bottom_right = bottom_right_radius
+	style_box.corner_radius_top_left = corner_radius.x
+	style_box.corner_radius_top_right = corner_radius.y
+	style_box.corner_radius_bottom_right = corner_radius.z
+	style_box.corner_radius_bottom_left = corner_radius.w
 	health_bar.add_theme_stylebox_override("fill", style_box)
-
-
-func set_damage_bar_color(color: Color) -> void:
-	var style_box := StyleBoxFlat.new()
-	style_box.bg_color = color
-	damage_bar.add_theme_stylebox_override("fill", style_box)
 
 
 func set_health(_health: float) -> void:

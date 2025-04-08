@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=16 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
+[ext_resource type="Resource" uid="uid://6q28kdrnq2vu" path="res://entities/enemies/temp_enemy/common_enemy_stats.tres" id="2_2bxow"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
 [ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_melee_weapon.tscn" id="3_8k1p6"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
 [ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/enemies/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
-[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="8_thcnk"]
+[ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="8_thcnk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(2.63416, 4, 3.24414)
@@ -15,10 +16,40 @@ size = Vector3(2.63416, 4, 3.24414)
 [sub_resource type="ViewportTexture" id="ViewportTexture_2bxow"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f00t2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71knl"]
+bg_color = Color(0.884307, 6.26662e-05, 3.39803e-05, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_color = Color(0.847059, 0, 0, 0.6)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umwhf"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qx3t"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
 [node name="TempEnemy" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_c1mms")
+stats = ExtResource("2_2bxow")
 
 [node name="Chicken improved hennifer varient" parent="." instance=ExtResource("2_5gl3h")]
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0, 0.816296, 0)
@@ -66,4 +97,30 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="HealthBar" parent="SubViewport" instance=ExtResource("8_thcnk")]
+[node name="HealthBar" type="ProgressBar" parent="SubViewport"]
+offset_right = 360.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_f00t2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_71knl")
+value = 50.0
+show_percentage = false
+script = ExtResource("8_thcnk")
+
+[node name="DamageBar" type="ProgressBar" parent="SubViewport/HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_umwhf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4qx3t")
+value = 65.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="SubViewport/HealthBar"]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="SubViewport/HealthBar/Timer" to="SubViewport/HealthBar" method="_on_timer_timeout"]
