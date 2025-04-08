@@ -11,8 +11,9 @@
 shader = ExtResource("3_kpoie")
 shader_parameter/hurt_color = Vector3(1, 0, 0)
 shader_parameter/overlay_alpha = 0.5
-shader_parameter/aberration_strength = 0.05
+shader_parameter/aberration_strength = 0.015
 shader_parameter/displacement_strength = 0.01
+shader_parameter/abberation_offset = Vector2(0.5, 0.5)
 shader_parameter/time = 0.0
 
 [node name="PlayerHud" type="Control"]

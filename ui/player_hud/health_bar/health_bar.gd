@@ -19,7 +19,9 @@ func set_health(_health: float) -> void:
 
 	if health <= prev_health:
 		timer.start()
+		SignalManager.player_hurt.emit()
 	else:
+		SignalManager.player_heal.emit()
 		_on_timer_timeout()
 
 

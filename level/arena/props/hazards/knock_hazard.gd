@@ -11,22 +11,19 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		# Calculate knockback direction
 		var knockback_direction: Vector3 = (
-										   body.global_position - hazard_area.global_position
-										   ).normalized()
+		body.global_position - hazard_area.global_position
+		).normalized()
 
 		var _knockback_force := Vector3(
 			clamp(knockback_direction.x * knockback_strength, -max_knockback, max_knockback),
 			vertical_knockback,
 			clamp(knockback_direction.z * knockback_strength, -max_knockback, max_knockback)
 		)
-		
+
 		print("Knockback force: ", _knockback_force)
 
 		# Override velocity
 		body.velocity += _knockback_force
-		
-		if body.collision_layer == 2:
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {})
 
-		# Apply damagelayer
+		# Apply damage
 		super(body)
