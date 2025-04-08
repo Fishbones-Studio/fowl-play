@@ -3,7 +3,6 @@
 ## This script is used to manage signals in the game that are needed in multiple scenes.
 ## It is an autoload script, meaning it is loaded automatically when the game starts and is accessible from anywhere.
 ##
-
 extends Node
 
 # Player signals
@@ -12,6 +11,7 @@ signal combat_transition_state(actor: CharacterBody3D, target_state: WeaponEnums
 signal init_health(max_health: int, health: int)
 signal init_stamina(max_stamina: float, stamina: float)
 signal player_stats_changed(stats: LivingEntityStats)
+
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
 signal add_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to add an (additional) UI scene
@@ -32,6 +32,7 @@ signal item_bought_cancelled
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
 signal weapon_hit_area_body_exited(body: PhysicsBody3D)
 signal weapon_hit_target(target: PhysicsBody3D, damage: int)
+
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}
 
