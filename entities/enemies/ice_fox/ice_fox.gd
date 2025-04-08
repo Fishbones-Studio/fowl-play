@@ -1,4 +1,4 @@
-class_name IceWolf
+class_name IceFox
 extends CharacterBody3D
 
 @export var stats: LivingEntityStats

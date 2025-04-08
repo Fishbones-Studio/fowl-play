@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://5dsmkedrprey"]
-
-[ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_wolf/ice_wolf.gd" id="1_qpvxk"]
-[ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_wolf/ice_wolf_stats.tres" id="2_dpd7y"]
-
-[node name="IceWolf" type="Node3D"]
-script = ExtResource("1_qpvxk")
-stats = ExtResource("2_dpd7y")
