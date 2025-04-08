@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=8 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
+[ext_resource type="Script" uid="uid://ceil8iql2shtl" path="res://ui/player_hud/player_portrait_container.gd" id="1_l7ggc"]
 [ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
+[ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgno4"]
+shader = ExtResource("3_kpoie")
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -28,17 +33,33 @@ theme_override_constants/margin_bottom = 15
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="PlayerPortraitContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer"]
+[node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("1_l7ggc")
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+[node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer"]
 handle_input_locally = false
 size = Vector2i(128, 128)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
 
-[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+visible = false
+material = SubResource("ShaderMaterial_kgno4")
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="HurtDuration" type="Timer" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+wait_time = 0.2
+one_shot = true
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -66,3 +87,5 @@ size_flags_stretch_ratio = 35.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+
+[connection signal="timeout" from="MarginContainer/HBoxContainer/PlayerPortraitContainer/HurtDuration" to="MarginContainer/HBoxContainer/PlayerPortraitContainer" method="_on_hurt_duration_timeout"]

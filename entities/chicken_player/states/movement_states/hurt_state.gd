@@ -9,6 +9,8 @@ var _knockback_force: Vector3
 
 
 func enter(_previous_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	SignalManager.player_hurt.emit()
+	
 	# Calculate knockback direction 
 	var knockback_direction: Vector3 = player.transform.basis.z
 

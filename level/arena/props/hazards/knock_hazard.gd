@@ -24,6 +24,9 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 		# Override velocity
 		body.velocity += _knockback_force
+		
+		if body.collision_layer == 2:
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {})
 
-		# Apply damage
+		# Apply damagelayer
 		super(body)

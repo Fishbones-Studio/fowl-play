@@ -3,6 +3,8 @@ extends SubViewport
 @export var offset : Vector3 = Vector3(0.0, 1.5, -1.8)
 @onready var camera : Camera3D = $Camera3D
 
+
+
 func _process(delta: float) -> void:
 	if GameManager.chicken_player:
 		var player = GameManager.chicken_player
