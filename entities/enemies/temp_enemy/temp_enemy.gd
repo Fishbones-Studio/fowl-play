@@ -2,7 +2,7 @@
 class_name Enemy
 extends CharacterBody3D
 
-
+# TODO: enemy should also use living entity stat
 @export var green_color = Color.GREEN
 @export var orange_color = Color.YELLOW
 @export var red_color = Color.RED

@@ -23,6 +23,7 @@ func _update_inventory() -> void:
 
 		# Set item properties
 		inventory_item.name_label.text = item.name
+		if item.icon: inventory_item.item_icon.texture = item.icon
 		inventory_item.type_label.text = ItemEnums.item_type_to_string(item.type)
 		inventory_item.description_label.text = item.description
 
