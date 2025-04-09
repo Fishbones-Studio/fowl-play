@@ -45,7 +45,7 @@ func restore_stamina(amount: float) -> float:
 
 
 func drain_health(amount: float) -> float:
-	current_health = clamp(current_health - amount, 0, max_health)	
+	current_health = clamp(current_health - amount, 0, max_health)
 	return current_health
 
 
