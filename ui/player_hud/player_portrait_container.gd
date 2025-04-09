@@ -11,8 +11,15 @@ extends CenterContainer
 @export var effect_fov : float = 75.0
 @export var fov_tween_duration : float = 0.1 ## How fast the FOV changes
 
+@export_group("Border")
+@export var border_starting_colour : Color
+@export var border_heal_colour : Color
+@export var border_hurt_colour : Color
+
+
 @onready var duration_timer : Timer = $DurationTimer
-@onready var color_rect : ColorRect = $ColorRect
+@onready var overlay_shader : ColorRect = $OverlayShader
+@onready var border : ColorRect = $Border
 @onready var camera : Camera3D = %ViewportCamera
 
 var fov_tween : Tween ## Keeping track of the FOV tween
@@ -20,7 +27,10 @@ var fov_tween : Tween ## Keeping track of the FOV tween
 
 func _ready() -> void:
 	# Hide by default
-	color_rect.hide()
+	overlay_shader.hide()
+	
+	# set border colour
+	border.color = border_starting_colour
 	
 	if camera:
 		camera.fov = normal_fov
@@ -31,19 +41,22 @@ func _ready() -> void:
 	SignalManager.player_hurt.connect(
 		func():
 			print("hurt shader")
-			_on_player_health(hurt_time, hurt_shader)
+			_on_player_health(hurt_time, hurt_shader, border_hurt_colour)
 	)
 	SignalManager.player_heal.connect(
 		func():
 			print("heal shader")
-			_on_player_health(heal_time, heal_shader)
+			_on_player_health(heal_time, heal_shader, border_heal_colour)
 	)
 
 
-func _on_player_health(time : float, shader_material : ShaderMaterial) -> void:
+func _on_player_health(time : float, shader_material : ShaderMaterial, colour: Color) -> void:
 	if not camera:
 		printerr("Cannot apply effect: ViewportCamera not found!")
 		return
+		
+	# Setting the border colour
+	border.color = colour
 
 	# Kill previous FOV tween if it's still running
 	if fov_tween and fov_tween.is_valid():
@@ -57,19 +70,22 @@ func _on_player_health(time : float, shader_material : ShaderMaterial) -> void:
 		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	# Apply the appropriate shader
-	color_rect.material = shader_material
+	overlay_shader.material = shader_material
 
 	# Reset shader visibility timer if already playing
-	if color_rect.visible:
+	if overlay_shader.visible:
 		duration_timer.stop()
 
-	color_rect.show()
+	overlay_shader.show()
 	duration_timer.start(time) # Start timer for shader visibility
 
 
 func _on_duration_timer_timeout():
 	if not camera:
 		return
+		
+	# resetting border colour
+	border.color = border_starting_colour
 
 	# Kill previous FOV tween if it's still running (unlikely here, but safe)
 	if fov_tween and fov_tween.is_valid():
@@ -83,4 +99,4 @@ func _on_duration_timer_timeout():
 		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN) 
 
 	# Hide the shader effect
-	color_rect.hide()
+	overlay_shader.hide()

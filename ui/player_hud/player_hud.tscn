@@ -60,6 +60,13 @@ size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
 hurt_shader = SubResource("ShaderMaterial_w7jxt")
 heal_shader = SubResource("ShaderMaterial_8qpry")
+border_starting_colour = Color(0.517184, 0.517185, 0.517184, 0.490196)
+border_heal_colour = Color(0, 1, 0.4, 1)
+border_hurt_colour = Color(0.8, 0, 0, 1)
+
+[node name="Border" type="ColorRect" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 2
 
 [node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
 layout_mode = 2
@@ -69,7 +76,7 @@ size_flags_vertical = 0
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
-size = Vector2i(128, 128)
+size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
 
@@ -79,10 +86,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 cull_mask = 1047554
 fov = 65.0
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
+[node name="OverlayShader" type="ColorRect" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
 visible = false
 material = SubResource("ShaderMaterial_kgno4")
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="DurationTimer" type="Timer" parent="MarginContainer/HBoxContainer/PlayerPortraitContainer"]
