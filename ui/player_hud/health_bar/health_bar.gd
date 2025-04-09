@@ -33,9 +33,14 @@ func set_health(_health: float) -> void:
 
 	value = health
 
+
 	if health <= prev_health:
 		timer.start()
+		SignalManager.player_hurt.emit()
 	else:
+		if health > prev_health:
+			timer.stop()
+			SignalManager.player_heal.emit()
 		_on_timer_timeout()
 
 
@@ -44,9 +49,10 @@ func init_health(_max_health: int, _health: int) -> void:
 	health = _health
 	max_value = _max_health
 	value = health
-	damage_bar.max_value = _max_health
-	damage_bar.value = health
+	damage_bar.max_value = max_value
+	damage_bar.value = value
 
 
 func _on_timer_timeout() -> void:
+	damage_bar.max_value = max_value
 	damage_bar.value = health
