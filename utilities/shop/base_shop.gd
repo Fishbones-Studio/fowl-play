@@ -83,7 +83,7 @@ func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.items_in_inventory) or (prevent_duplicates and item in shop_items)
 
 
-func _on_exit_button_button_pressed() -> void:
+func _on_exit_button_pressed() -> void:
 	InputBlocker.blocked = false
 	close_ui()
 
