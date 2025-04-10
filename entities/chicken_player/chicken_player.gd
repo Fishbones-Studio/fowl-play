@@ -33,5 +33,4 @@ func _exit_tree() -> void:
 
 func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
-		# take away health
 		stats.drain_health(damage)

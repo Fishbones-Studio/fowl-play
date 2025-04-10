@@ -29,6 +29,11 @@ func process(delta: float) -> void:
 	# Handle state transitions
 	if not is_sprinting() or player.stats.current_stamina <= 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
+		return
+
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
 
 
 func physics_process(delta: float) -> void:

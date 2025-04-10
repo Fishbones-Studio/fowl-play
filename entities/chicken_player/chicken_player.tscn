@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=19 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
+[ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death.gd" id="14_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://cjmtiw26u67me" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/ranged_weapon.tscn" id="15_n43gi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
@@ -88,6 +89,10 @@ state_type = 7
 [node name="CoyoteTimer" type="Timer" parent="MovementStateMachine/Fall"]
 wait_time = 0.3
 one_shot = true
+
+[node name="Death" type="Node" parent="MovementStateMachine"]
+script = ExtResource("14_pq2r3")
+state_type = 8
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
