@@ -35,7 +35,6 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-InputBlocker="*res://utilities/autoload/signal_blocker.gd"
 
 [editor]
 
