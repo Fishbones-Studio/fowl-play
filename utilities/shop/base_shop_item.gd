@@ -2,7 +2,7 @@ class_name BaseShopItem
 extends PanelContainer
 
 # Common properties
-var purchase_in_progress: bool = false
+static var purchase_in_progress: bool = false
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
