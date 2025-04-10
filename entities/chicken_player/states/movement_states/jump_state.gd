@@ -35,6 +35,10 @@ func process(delta: float) -> void:
 	else:
 		player.stats.regen_stamina(delta)
 
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
+
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)

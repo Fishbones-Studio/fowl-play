@@ -1,5 +1,6 @@
 extends BasePlayerMovementState
 
+
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
@@ -35,6 +36,10 @@ func input(_event: InputEvent) -> void:
 func process(delta: float) -> void:
 	# Regenerates stamina and updates the stamina bar in the HUD
 	player.stats.regen_stamina(delta)
+
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
 
 
 func physics_process(delta: float) -> void:

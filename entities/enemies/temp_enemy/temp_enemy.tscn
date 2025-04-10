@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=8 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
-[ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_melee_weapon.tscn" id="3_8k1p6"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
-[ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/enemies/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(2.63416, 4, 3.24414)
@@ -22,9 +21,6 @@ transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.9998
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.112076, 0.732965, -0.232283)
 shape = SubResource("BoxShape3D_c1mms")
-
-[node name="CurrentWeapon" parent="." instance=ExtResource("3_8k1p6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28045, 1.54188, 0)
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
 script = ExtResource("2_h40bv")
@@ -43,18 +39,9 @@ enemy = NodePath("../..")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_07niy")
-damage = 2
-enemy = NodePath("../..")
-STATE_TYPE = 2
-ANIMATION_NAME = "ATTACK"
-
-[node name="Name" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, 0, 3, 0)
-modulate = Color(0.627451, 0, 0, 1)
-text = "OOOOO Scaryy Chickennnnn"
-font_size = 85
-
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("7_thcnk")]
+transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
+actor = NodePath("..")

@@ -32,6 +32,10 @@ func process(delta: float) -> void:
 	if Input.is_action_just_released("jump"):
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
+
 
 func physics_process(delta: float) -> void:
 	player.velocity.y += get_gravity(player.velocity) * delta * movement_component.glide_speed_factor

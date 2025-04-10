@@ -7,7 +7,6 @@ extends Node
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
-@onready var weapon: MeleeWeapon = $"../CurrentWeapon".current_weapon
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +26,7 @@ func _ready() -> void:
 	# Get all states in the scene tree
 	for state_node: BaseEnemyState in get_children():
 		states[state_node.STATE_TYPE] = state_node
-		state_node.setup(enemy, weapon, player)
+		state_node.setup(enemy, player)
 		
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
@@ -60,11 +59,6 @@ func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information
 	if current_state == null:
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
-
-	if (current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon && weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
-		# Play the animation for the new state
-		weapon.animation_player.play(current_state.ANIMATION_NAME)
-
 	current_state.enter(previous_state.STATE_TYPE, information)
 
 
