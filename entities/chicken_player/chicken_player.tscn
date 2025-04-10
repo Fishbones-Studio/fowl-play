@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
+[ext_resource type="Script" uid="uid://nxjekf2tieqd" path="res://utilities/camera/culling_script.gd" id="4_qjuvu"]
 [ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/movement_states/glide_state.gd" id="5_a1qjk"]
 [ext_resource type="Script" uid="uid://dvihu8iywlyx1" path="res://entities/chicken_player/states/movement_states/hurt_state.gd" id="6_j3ovn"]
 [ext_resource type="Script" uid="uid://bjte651aelkuy" path="res://entities/chicken_player/states/movement_states/idle_state.gd" id="7_afbqv"]
@@ -27,7 +28,9 @@ script = ExtResource("1_abrql")
 stats = ExtResource("2_4hg1i")
 
 [node name="chicken_default" parent="." instance=ExtResource("2_jgbvq")]
-transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 0, 0.345436, 0)
+transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0.345436, 0)
+script = ExtResource("4_qjuvu")
+layer_to_add = 2
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350985, 0)
