@@ -56,5 +56,5 @@ func _rotate_toward_direction(direction: Vector3, delta: float) -> void:
 	var current_angle: float = enemy.rotation.y # Get the current angle of the enemy
 
 	# Lerp the angle to smoothly rotate towards the target direction
-	var new_angle := lerp_angle(current_angle, target_angle, rotation_speed * delta)
+	var new_angle : float = lerp_angle(current_angle, target_angle, rotation_speed * delta)
 	enemy.rotation.y = new_angle
