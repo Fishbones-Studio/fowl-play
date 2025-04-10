@@ -29,7 +29,7 @@ func _ready() -> void:
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon)
+		state_node.setup(weapon, root_actor)
 		
 	# Start in the initial state if it exists
 	if current_state:

@@ -10,8 +10,8 @@ var hit_area: Area3D
 @onready var attack_timer: Timer = %AttackTimer
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: MeleeWeapon) -> void:
-	super(weapon_node)
+func setup(weapon_node: MeleeWeapon, root_actor: CharacterBody3D) -> void:
+	super(weapon_node, root_actor)
 	hit_area = weapon_node.hit_area
 
 

@@ -6,16 +6,12 @@ extends BaseState
 var root_actor: CharacterBody3D
 var weapon: MeleeWeapon
 
-func _ready() -> void:
-	await owner.ready
-	root_actor = get_parent().root_actor
-
-func setup(_weapon_node: MeleeWeapon) -> void:
+func setup(_weapon_node: MeleeWeapon, weapon_root_actor: CharacterBody3D) -> void:
 	if not _weapon_node:
 		print("Weapon does not exist! Please provide a valid weapon node.")
 		return
 	weapon = _weapon_node
-
+	root_actor = weapon_root_actor
 
 func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
 	pass
