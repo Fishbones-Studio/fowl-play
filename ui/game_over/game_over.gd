@@ -12,19 +12,22 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if (event is InputEventMouseButton
-			and event.button_index == MOUSE_BUTTON_LEFT
-			and not animation_player.is_playing()
-			and not is_transitioning):
+	if (
+		event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and not animation_player.is_playing()
+		and not is_transitioning
+	):
+
 			_return_to_game_menu()
 
 
 func _return_to_game_menu() -> void:
 	is_transitioning = true
 	animation_player.play("fade_to_white")
-	
-	Gamemanager.reset_game()
-	
+
+	GameManager.reset_game()
+
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
 	await animation_player.animation_finished
