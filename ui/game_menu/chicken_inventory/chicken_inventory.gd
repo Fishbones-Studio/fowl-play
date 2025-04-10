@@ -5,7 +5,6 @@ extends Control
 func _ready() -> void:
 	await get_tree().process_frame
 	_update_inventory()
-	InputBlocker.blocked = true
 
 
 func _update_inventory() -> void:
@@ -29,6 +28,5 @@ func _update_inventory() -> void:
 
 
 func _on_button_pressed() -> void:
-	InputBlocker.blocked = false
 	queue_free()
 	

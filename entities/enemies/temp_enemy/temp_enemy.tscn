@@ -39,12 +39,6 @@ enemy = NodePath("../..")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="Name" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, 0, 3, 0)
-modulate = Color(0.627451, 0, 0, 1)
-text = "OOOOO Scaryy Chickennnnn"
-font_size = 85
-
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
