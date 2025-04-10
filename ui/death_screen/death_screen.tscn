@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://ba8j8ajmddtai"]
 
-[ext_resource type="Script" uid="uid://t51xudcjie2v" path="res://ui/game_over/game_over.gd" id="1_ns3eh"]
-[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="2_4cp6t"]
+[ext_resource type="Script" uid="uid://t51xudcjie2v" path="res://ui/death_screen/death_screen.gd" id="1_t6qdb"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="2_4iqn7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ns3eh"]
-shader = ExtResource("2_4cp6t")
+shader = ExtResource("2_4iqn7")
 shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 1.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
@@ -142,7 +142,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ns3eh")
+script = ExtResource("1_t6qdb")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ns3eh")

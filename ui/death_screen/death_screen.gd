@@ -28,6 +28,8 @@ func _return_to_game_menu() -> void:
 
 	GameManager.reset_game()
 
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
 	await animation_player.animation_finished

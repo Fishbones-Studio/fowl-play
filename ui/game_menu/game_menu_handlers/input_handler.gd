@@ -27,9 +27,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:	
-	if InputBlocker.blocked:
-		return
-	
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		keyboard_navigation_deactivated.emit()
