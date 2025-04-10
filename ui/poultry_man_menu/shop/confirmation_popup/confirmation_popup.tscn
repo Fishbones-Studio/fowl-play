@@ -80,10 +80,23 @@ layout_mode = 2
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ReplaceButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Replace"
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Cancel"
 
-[connection signal="button_up" from="PanelContainer/MarginContainer/VBoxContainer/CancelButton" to="." method="_on_cancel_button_button_up"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ReplaceButton" to="." method="_on_replace_button_pressed"]
+[connection signal="button_up" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/CancelButton" to="." method="_on_cancel_button_button_up"]

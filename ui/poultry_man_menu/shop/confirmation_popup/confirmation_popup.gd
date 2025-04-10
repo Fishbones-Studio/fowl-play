@@ -25,8 +25,8 @@ func _load_items() -> void:
 		return 
 
 	# Safely instantiate and setup items
-	var current_item: ConfirmationItem = _create_confirmation_item(existing_item_resource, false)
-	var new_item: ConfirmationItem = _create_confirmation_item(new_item_resource, true)
+	var current_item: ConfirmationItem = _create_confirmation_item(existing_item_resource)
+	var new_item: ConfirmationItem = _create_confirmation_item(new_item_resource)
 
 	# Verify successful creation
 	if not current_item or not new_item:
@@ -44,7 +44,7 @@ func _load_items() -> void:
 
 
 # Helper function for safe instantiation
-func _create_confirmation_item(resource: Resource, is_new: bool) -> ConfirmationItem:
+func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
 	if not resource:
 		printerr("Attempted to create item with null resource")
 		return null
@@ -54,10 +54,20 @@ func _create_confirmation_item(resource: Resource, is_new: bool) -> Confirmation
 		printerr("Failed to instantiate ConfirmationItem scene")
 		return null
 		
-	item.setup(resource, is_new)
+	item.set_item_data(resource)
 	return item
 
+func _replace_item(old_item: Resource, _new_item: Resource) -> void:
+	Inventory.remove_item(old_item)
+	Inventory.add_item(_new_item)
+	GameManager.update_prosperity_eggs(-_new_item.cost)
 
+	print("Item ", old_item, " replaced with ", _new_item)
+	queue_free()
 
 func _on_cancel_button_button_up() -> void:
 	queue_free()
+
+
+func _on_replace_button_pressed() -> void:
+	_replace_item(existing_item_resource, new_item_resource)

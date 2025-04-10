@@ -51,11 +51,3 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_type_variation = &"ItemCost"
 text = "PRICE"
-
-[node name="ReplaceButton" type="Button" parent="ConfirmationItemContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "Replace"
-
-[connection signal="button_up" from="ConfirmationItemContainer/ReplaceButton" to="." method="_on_replace_button_button_up"]
