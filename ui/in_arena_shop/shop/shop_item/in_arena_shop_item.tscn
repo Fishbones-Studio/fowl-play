@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1xvduw1f032y"]
 
 [ext_resource type="Script" uid="uid://bnxftib2aj2df" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.gd" id="1_p4fgh"]
-[ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/icons/clodsire-Joyous.png" id="2_adwmk"]
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="2_q4qen"]
 
 [node name="InArenaShopItem" type="PanelContainer"]
 process_mode = 3
@@ -28,7 +28,7 @@ text = "Health"
 [node name="ItemIcon" type="TextureRect" parent="ShopItemContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_adwmk")
+texture = ExtResource("2_q4qen")
 expand_mode = 5
 stretch_mode = 6
 
