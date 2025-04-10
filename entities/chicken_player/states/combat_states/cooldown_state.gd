@@ -9,7 +9,7 @@ const STATE_TYPE: int = WeaponEnums.WeaponState.COOLDOWN  # Defines this state a
 
 
 # When entering this state, start the cooldown timer
-func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
+func enter(_previous_state, _information: Dictionary = {}) -> void:
 	# Create a timer that lasts as long as the weapon's cooldown time
 	cooldown_timer.wait_time = weapon.current_weapon.attack_duration
 	cooldown_timer.start()
@@ -23,4 +23,4 @@ func exit() -> void:
 
 # When the cooldown timer runs out, switch back to the IDLE state
 func _on_cooldown_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(WeaponEnums.WeaponState.IDLE)
+	melee_combat_transition_state.emit(WeaponEnums.WeaponState.IDLE, {})
