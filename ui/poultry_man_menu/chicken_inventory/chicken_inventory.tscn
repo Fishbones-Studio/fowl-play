@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvkxcgdk0goul"]
 
-[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/game_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
+[ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
 
 [node name="ChickenInventory" type="Control"]
 layout_mode = 3

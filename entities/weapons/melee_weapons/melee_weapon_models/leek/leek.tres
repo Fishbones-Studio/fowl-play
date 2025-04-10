@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=3 format=3 uid="uid://cybaeim8kc5kk"]
 
 [ext_resource type="Texture2D" uid="uid://bd34yxn8bkg8r" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.png" id="1_16jp6"]
-[ext_resource type="Script" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_nt88w"]
+[ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_nt88w"]
 
 [resource]
 script = ExtResource("1_nt88w")

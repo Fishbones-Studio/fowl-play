@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://da6m7g6ijjyop"]
 
-[ext_resource type="Script" uid="uid://dghqqfddvq86h" path="res://ui/game_menu/shop/confirmation_popup.gd" id="1_wha5l"]
+[ext_resource type="Script" uid="uid://dghqqfddvq86h" path="res://ui/poultry_man_menu/shop/confirmation_popup.gd" id="1_wha5l"]
 
 [node name="ConformationPopup" type="Control"]
 layout_mode = 3

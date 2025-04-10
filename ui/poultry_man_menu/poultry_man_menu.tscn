@@ -1,14 +1,14 @@
 [gd_scene load_steps=24 format=3 uid="uid://21r458rvciqo"]
 
-[ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/game_menu/game_menu.gd" id="1_5qgdc"]
-[ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/game_menu/art/wind_main.mp3" id="2_og4p7"]
-[ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/game_menu/game_menu_handlers/lamp_controller.gd" id="3_efok4"]
-[ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/game_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="3_l20ko"]
-[ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/game_menu/game_menu_handlers/focusable_3d.gd" id="3_og4p7"]
-[ext_resource type="PackedScene" uid="uid://dfvuupl5t1kb0" path="res://utilities/sound/random_music_player.tscn" id="3_w84py"]
-[ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/random_sfx_player.tscn" id="4_jp2vv"]
-[ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/game_menu/game_menu_handlers/input_handler.gd" id="5_t1gii"]
-[ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/game_menu/art/light_switch.ogg" id="7_6dc34"]
+[ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
+[ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
+[ext_resource type="PackedScene" uid="uid://dfvuupl5t1kb0" path="res://utilities/sound/random_music_player.tscn" id="3_n15us"]
+[ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/random_sfx_player.tscn" id="4_iajuv"]
+[ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/poultry_man_menu/game_menu_handlers/input_handler.gd" id="5_x5v8y"]
+[ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
+[ext_resource type="Texture2D" uid="uid://0h773o8276fx" path="res://ui/poultry_man_menu/flyers/445432740_788436026810250_284174567203887156_n-662x1024.jpg" id="7_qvty8"]
+[ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]
+[ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/poultry_man_menu/art/light_switch.ogg" id="9_78wky"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sulwi"]
 
@@ -24,7 +24,7 @@ albedo_color = Color(0.25498, 0.16922, 0, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yeww"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48rgb"]
-albedo_texture = ExtResource("3_l20ko")
+albedo_texture = ExtResource("7_qvty8")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkxcn"]
 
@@ -48,25 +48,25 @@ background_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
 ambient_light_color = Color(0.389098, 0.435257, 0.504486, 1)
 ambient_light_energy = 0.01
 
-[node name="GameMenu" type="Node3D" node_paths=PackedStringArray("input_handler", "light_handler")]
+[node name="PoultryManMenu" type="Node3D" node_paths=PackedStringArray("input_handler", "light_handler")]
 process_mode = 1
-script = ExtResource("1_5qgdc")
+script = ExtResource("1_jhi5u")
 input_handler = NodePath("InputHandler")
 light_handler = NodePath("Lamp")
 
 [node name="WindMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_og4p7")
+stream = ExtResource("2_bfy7c")
 autoplay = true
 bus = &"Music"
 
-[node name="RandomMusicPlayer" parent="." instance=ExtResource("3_w84py")]
+[node name="RandomMusicPlayer" parent="." instance=ExtResource("3_n15us")]
 stream = null
 volume_db = -10.0
 
-[node name="RandomSFXPlayer" parent="." instance=ExtResource("4_jp2vv")]
+[node name="RandomSFXPlayer" parent="." instance=ExtResource("4_iajuv")]
 
 [node name="InputHandler" type="Node" parent="."]
-script = ExtResource("5_t1gii")
+script = ExtResource("5_x5v8y")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, -0.381381, 0.511378, -0.410521)
@@ -87,7 +87,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 
 [node name="Inventory" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, -1.39421, 2.73958, 0)
-script = ExtResource("3_og4p7")
+script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MenuItems/Inventory"]
@@ -102,7 +102,7 @@ text = "Inventory"
 
 [node name="Shop" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
-script = ExtResource("3_og4p7")
+script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
 [node name="Shop" type="MeshInstance3D" parent="MenuItems/Shop"]
@@ -120,7 +120,7 @@ font_size = 67
 
 [node name="Flyer" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
-script = ExtResource("3_og4p7")
+script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
 [node name="Flyers" type="MeshInstance3D" parent="MenuItems/Flyer"]
@@ -149,7 +149,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ley17")
 environment = SubResource("Environment_ley17")
 
 [node name="Lamp" type="Node3D" parent="." node_paths=PackedStringArray("flicker_light", "flicker_timer", "audio_player")]
-script = ExtResource("3_efok4")
+script = ExtResource("8_c6cgu")
 flicker_light = NodePath("SpotLight3D")
 flicker_timer = NodePath("FlickerTimer")
 audio_player = NodePath("../WindMusicPlayer")
@@ -166,5 +166,5 @@ spot_angle = 68.9063
 [node name="FlickerTimer" type="Timer" parent="Lamp"]
 
 [node name="FlickerPlayer" type="AudioStreamPlayer" parent="Lamp"]
-stream = ExtResource("7_6dc34")
+stream = ExtResource("9_78wky")
 bus = &"SFX"

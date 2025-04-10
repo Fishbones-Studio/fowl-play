@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc5vmtbby4xy0"]
 
-[ext_resource type="Script" uid="uid://74xofhorearv" path="res://ui/game_menu/shop/shop_item/shop_item.gd" id="1_k8gfq"]
+[ext_resource type="Script" uid="uid://74xofhorearv" path="res://ui/poultry_man_menu/shop/shop_item/shop_item.gd" id="1_k8gfq"]
 [ext_resource type="Texture2D" uid="uid://bhqylbt87pmer" path="res://resources/icons/clodsire-Joyous.png" id="2_k3g6w"]
 
 [node name="ShopItem" type="PanelContainer"]
