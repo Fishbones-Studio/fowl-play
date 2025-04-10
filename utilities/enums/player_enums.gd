@@ -1,7 +1,7 @@
 class_name PlayerEnums
 extends Node
 
-enum PlayerStates{
+enum PlayerStates {
 	IDLE_STATE,
 	WALK_STATE,
 	SPRINT_STATE,
@@ -9,5 +9,6 @@ enum PlayerStates{
 	GLIDE_STATE,
 	DASH_STATE,
 	HURT_STATE,
-	FALL_STATE
+	FALL_STATE,
+	DEATH_STATE,
 }
