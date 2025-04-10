@@ -4,6 +4,8 @@ const CONFIRMATION_ITEM_SCENE = preload("uid://bsstdeorrjt66")
 
 var existing_item_resource: BaseResource
 var new_item_resource: BaseResource
+var purchased_signal : Signal
+var purchase_cancelled_signal : Signal
 
 @onready var owned_items_container: CenterContainer = %OwnedItemsContainer
 @onready var new_item_container: CenterContainer = %NewItemContainer
@@ -14,6 +16,10 @@ func setup(params: Dictionary) -> void:
 		existing_item_resource = params["existing_item"]
 	if "new_item" in params:
 		new_item_resource = params["new_item"]
+	if "purchased_signal" in params:
+		purchased_signal = params["purchased_signal"]
+	if "purchase_cancelled" in params:
+		purchase_cancelled_signal = params["purchase_cancelled"]
 		
 
 func _ready() -> void:
@@ -35,8 +41,7 @@ func _load_items() -> void:
 		if current_item: current_item.queue_free()
 		if new_item: new_item.queue_free()
 		return
-		
-	current_item.make_unclickable()
+	
 
 	# Add to containers
 	owned_items_container.add_child(current_item)
@@ -55,17 +60,17 @@ func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
 		return null
 		
 	item.set_item_data(resource)
+	
 	return item
 
 func _replace_item(old_item: Resource, _new_item: Resource) -> void:
 	Inventory.remove_item(old_item)
-	Inventory.add_item(_new_item)
-	GameManager.update_prosperity_eggs(-_new_item.cost)
-
 	print("Item ", old_item, " replaced with ", _new_item)
+	purchased_signal.emit()
 	queue_free()
 
 func _on_cancel_button_button_up() -> void:
+	purchase_cancelled_signal.emit()
 	queue_free()
 
 
