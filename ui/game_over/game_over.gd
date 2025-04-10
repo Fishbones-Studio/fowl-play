@@ -22,7 +22,9 @@ func _input(event: InputEvent) -> void:
 func _return_to_game_menu() -> void:
 	is_transitioning = true
 	animation_player.play("fade_to_white")
-
+	
+	Gamemanager.reset_game()
+	
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
 	await animation_player.animation_finished
