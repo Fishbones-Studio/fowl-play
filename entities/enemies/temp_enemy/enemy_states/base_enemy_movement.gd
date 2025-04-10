@@ -9,7 +9,7 @@ var movement_component : EnemyMovementComponent
 ################################################################################
 
 
-## Applies jump or fall gravity based on player velocity
+## Applies jump or fall gravity based on velocity
 func apply_gravity(delta: float) -> void:
 	enemy.velocity.y += movement_component.get_gravity(enemy.velocity) * delta
 
