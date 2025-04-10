@@ -37,9 +37,15 @@ func _attack() -> void:
 	if not hit_area:
 		print("HitArea not found!")
 		return
-
+	var dash_attack_roll : int
+		#Condition for checking if the attacking entity is a Enemy that can perform a certain attack.
+	if(root_actor == Enemy):
+		dash_attack_roll = randi_range(0,3)
+		
 	# Get targets for the given area in the attack area. Check which actor is making the attack
 	# and corresponding to what actor makes the attack deal damage to certain types of targets
+	if (dash_attack_roll == 3):
+		pass
 	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
 	if(root_actor == GameManager.chicken_player):
 		for target in targets:

@@ -6,7 +6,7 @@ extends CharacterBody3D
 
 ## Exported Variables
 @export var health: int = 100
-
+@export var stats: LivingEntityStats
 @onready var damage_label: Marker3D = $Marker3D
 
 
