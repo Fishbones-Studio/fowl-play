@@ -5,6 +5,8 @@ extends Node
 
 @export var starting_state: BaseCombatState
 
+signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
+
 var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
 
 # The current active state (set when the scene loads)
@@ -19,7 +21,7 @@ func _ready() -> void:
 		push_error(owner.name + ": No weapon reference set")
 
 	# Listen for state transition signals
-	SignalManager.combat_transition_state.connect(_transition_to_next_state)
+	melee_combat_transition_state.connect(_transition_to_next_state)
 
 	# Wait for root actor to be ready, ran into some issues with later calls if this wait wasn't changed
 	# Somehow the GameManager.chicken_player wasn't being updated quickly enough and this change fixed that.
@@ -29,7 +31,7 @@ func _ready() -> void:
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon, root_actor)
+		state_node.setup(weapon, melee_combat_transition_state, root_actor)
 		
 	# Start in the initial state if it exists
 	if current_state:
@@ -65,10 +67,7 @@ func _input(event: InputEvent) -> void:
 
 
 # Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
-func _transition_to_next_state(actor:  CharacterBody3D, target_state: WeaponEnums.WeaponState, information: Dictionary[String, float] = {}) -> void:
-	if actor != root_actor:
-		return
-
+func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")

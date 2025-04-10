@@ -49,5 +49,5 @@ font_size = 85
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("7_thcnk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33101, 0.773663, -0.180517)
+transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
 actor = NodePath("..")

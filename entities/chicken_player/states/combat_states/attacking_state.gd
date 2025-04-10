@@ -10,13 +10,13 @@ var hit_area: Area3D
 @onready var attack_timer: Timer = %AttackTimer
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: MeleeWeapon, root_actor: CharacterBody3D) -> void:
-	super(weapon_node, root_actor)
+func setup(weapon_node: MeleeWeapon, melee_combat_transition_state: Signal, root_actor: CharacterBody3D) -> void:
+	super(weapon_node, melee_combat_transition_state, root_actor)
 	hit_area = weapon_node.hit_area
 
 
 # When entering this state, start the attack timer and attack
-func enter(_previous_state, _information: Dictionary[String, float] = {}) -> void:
+func enter(_previous_state, _information: Dictionary = {}) -> void:
 	attack_timer.wait_time = weapon.current_weapon.attack_duration
 	attack_timer.start()
 	_attack()
@@ -30,7 +30,7 @@ func exit() -> void:
 
 # When the attack timer runs out, switch to the cooldown state
 func _on_attack_timer_timeout() -> void:
-	SignalManager.combat_transition_state.emit(root_actor, WeaponEnums.WeaponState.COOLDOWN)
+	melee_combat_transition_state.emit(WeaponEnums.WeaponState.COOLDOWN)
 
 
 func _attack() -> void:

@@ -11,8 +11,8 @@ var valid_attack : bool = false
 
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: MeleeWeapon, root_actor: CharacterBody3D) -> void:
-	super(weapon_node, root_actor)
+func setup(weapon_node: MeleeWeapon, melee_combat_transition_state: Signal, root_actor: CharacterBody3D) -> void:
+	super(weapon_node, melee_combat_transition_state, root_actor)
 	hit_area = weapon_node.hit_area
 
 
@@ -26,12 +26,11 @@ func process(delta: float) -> void:
 		else:
 			valid_attack = false
 	if(valid_attack):
-		SignalManager.combat_transition_state.emit(root_actor, WeaponEnums.WeaponState.WINDUP)
+		melee_combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
 
 
 # Checks for player input (attack button press)
 func input(event: InputEvent) -> void:
-	
 	if event.is_action_pressed("attack"):
 		# Switch to the WINDUP state when attacking
-		SignalManager.combat_transition_state.emit(root_actor, WeaponEnums.WeaponState.WINDUP)
+		melee_combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
