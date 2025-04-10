@@ -62,8 +62,10 @@ bus = &"Music"
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("3_n15us")]
 stream = null
 volume_db = -10.0
+music_folder = "res://ui/poultry_man_menu/art/random_music/"
 
 [node name="RandomSFXPlayer" parent="." instance=ExtResource("4_iajuv")]
+sounds_folder = "res://ui/poultry_man_menu/art/random_sounds/"
 
 [node name="InputHandler" type="Node" parent="."]
 script = ExtResource("5_x5v8y")
