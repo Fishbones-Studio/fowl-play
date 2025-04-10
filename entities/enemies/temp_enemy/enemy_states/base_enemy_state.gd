@@ -13,13 +13,10 @@ var previous_state: EnemyEnums.EnemyStates
 var weapon: MeleeWeapon
 
 
-func setup(_enemy: Enemy, _weapon: MeleeWeapon, _player: ChickenPlayer) -> void:
+func setup(_enemy: Enemy, _player: ChickenPlayer) -> void:
 	if _enemy == null:
 		push_error(owner.name + ": No enemy reference set" + str(STATE_TYPE))
 	enemy = _enemy
-	if _weapon == null:
-		push_error(owner.name + ": No weapon reference set" + str(STATE_TYPE))
-	weapon = _weapon
 	if _player == null:
 		push_error(owner.name + ": No player reference set" + str(STATE_TYPE))
 	player = _player
