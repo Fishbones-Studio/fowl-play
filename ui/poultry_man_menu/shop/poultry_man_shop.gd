@@ -8,6 +8,7 @@ func _ready() -> void:
 	title_label.text = "Shop"
 	super()
 
+	
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	var shop_item_instance = SHOP_ITEM_SCENE.instantiate()
 	
