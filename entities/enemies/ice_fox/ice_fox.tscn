@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://5dsmkedrprey"]
+
+[ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
+[ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="2_qhcpj"]
+[ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="3_qhcpj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhcpj"]
+
+[node name="IceFox" type="CharacterBody3D"]
+script = ExtResource("1_cemmm")
+stats = ExtResource("2_qhcpj")
+
+[node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qhcpj")
