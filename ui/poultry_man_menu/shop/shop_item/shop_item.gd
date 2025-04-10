@@ -4,31 +4,30 @@ extends BaseShopItem
 var shop_item: BaseResource
 
 @onready var type_label: Label = %TypeLabel
-
-
-func _ready() -> void:
-	# setting up the labels
-	name_label = %NameLabel
-	item_icon = %ItemIcon
-	description_label = %DescriptionLabel
-	cost_label = %CostLabel
+@onready var name_label : Label = %NameLabel
+@onready var item_icon: TextureRect = %ItemIcon
+@onready var description_label: Label = %DescriptionLabel
+@onready var cost_label: Label = %CostLabel
 
 
 func set_item_data(item: Resource) -> void:
-	if not (item is BaseResource or item is InRunUpgradeResource):
+	if not item is BaseResource or item is InRunUpgradeResource:
 		if item == null:
 			push_error("Item is null")
+			return
 		push_error("Item is not of appropriate type (BaseResource/InRunUpgradeResource), but instead: ", item.get_class())
 		return
+		
+	shop_item = item as BaseResource
 
-	name_label.text = item.name
-	if item.icon: item_icon.texture = item.icon
-	type_label.text = ItemEnums.item_type_to_string(item.type)
-	cost_label.text = str(item.cost)
-	description_label.text = item.description
-	shop_item = item
+	
+func populate_visual_fields() -> void:
+	name_label.text = shop_item.name
+	if shop_item.icon: item_icon.texture = shop_item.icon
+	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
+	cost_label.text = str(shop_item.cost)
+	description_label.text = shop_item.description
 	print(shop_item)
-
 
 func attempt_purchase() -> void:
 	# Prevent purchase if one is already in progress or player can't afford it
@@ -61,16 +60,22 @@ func attempt_purchase() -> void:
 
 	# Count items of matching type
 	var matching_items: int = 0
+	var matching_item: BaseResource = null
 	for item in existing_items:
 		if item.type == shop_item.type:
 			matching_items += 1
+			matching_item = item
 
 	# If player already has items of this type, show selection UI to replace
 	#NOTE: Currently never triggers, as no different types exist yet
 	if matching_items >= 1:
 		SignalManager.add_ui_scene.emit("uid://da6m7g6ijjyop", {
-			"existing_items": existing_items,
+			"existing_item": matching_item,
 			"new_item": shop_item,
 		})
 
 	purchase_in_progress = false
+
+	
+func can_afford() -> bool:
+	return GameManager.prosperity_eggs >= shop_item.cost

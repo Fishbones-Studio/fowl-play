@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsstdeorrjt66"]
+
+[ext_resource type="Script" uid="uid://co5jxy4kqnvlb" path="res://ui/poultry_man_menu/shop/confirmation_popup/confirmation_item/confirmation_item.gd" id="1_5obmk"]
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_awb1i"]
+
+[node name="ConfirmationItem" type="PanelContainer"]
+offset_right = 47.0
+offset_bottom = 143.0
+script = ExtResource("1_5obmk")
+
+[node name="ConfirmationItemContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemTitle"
+text = "FLAMETHROWER"
+
+[node name="ItemIcon" type="TextureRect" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_awb1i")
+expand_mode = 5
+stretch_mode = 6
+
+[node name="TypeLabel" type="Label" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemType"
+text = "TYPE"
+
+[node name="DescriptionLabel" type="Label" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemDescription"
+text = "DESCRIPTION"
+autowrap_mode = 3
+
+[node name="CostLabel" type="Label" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"ItemCost"
+text = "PRICE"
+
+[node name="ReplaceButton" type="Button" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Replace"
+
+[connection signal="button_up" from="ConfirmationItemContainer/ReplaceButton" to="." method="_on_replace_button_button_up"]
