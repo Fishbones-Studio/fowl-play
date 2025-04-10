@@ -33,6 +33,12 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 
 func process(delta: float) -> void:
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {
+			"initial_velocity": player.velocity,
+		})
+		return
+	
 	# Drain stamina if player is sprinting, else regenerate stamina
 	if is_sprinting():
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
