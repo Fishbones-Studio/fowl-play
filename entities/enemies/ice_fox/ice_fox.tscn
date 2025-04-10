@@ -1,16 +1,91 @@
-[gd_scene load_steps=5 format=3 uid="uid://5dsmkedrprey"]
+[gd_scene load_steps=11 format=3 uid="uid://5dsmkedrprey"]
 
 [ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="2_qhcpj"]
+[ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="3_0uh03"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="3_qhcpj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qhcpj"]
+size = Vector3(1, 2.74377, 4.11517)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elgf2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72x12"]
+bg_color = Color(0.884307, 6.26662e-05, 3.39803e-05, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_color = Color(0.847059, 0, 0, 0.6)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psoce"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ghaq"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wbtjo"]
+viewport_path = NodePath("SubViewport")
 
 [node name="IceFox" type="CharacterBody3D"]
 script = ExtResource("1_cemmm")
-stats = ExtResource("2_qhcpj")
+ice_fox_stats = ExtResource("2_qhcpj")
 
 [node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00022, -0.0567322)
 shape = SubResource("BoxShape3D_qhcpj")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91448, 0)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="HealthBar" type="ProgressBar" parent="SubViewport"]
+offset_right = 360.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_elgf2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_72x12")
+value = 50.0
+show_percentage = false
+script = ExtResource("3_0uh03")
+
+[node name="DamageBar" type="ProgressBar" parent="SubViewport/HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_psoce")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ghaq")
+value = 65.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="SubViewport/HealthBar"]
+wait_time = 0.4
+one_shot = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.998487, 0, -0.054985, 0, 1.60517, 0, 0.054985, 0, 0.998487, 0.91032, -1.17744, 1.62822)
+texture = SubResource("ViewportTexture_wbtjo")
+
+[connection signal="timeout" from="SubViewport/HealthBar/Timer" to="SubViewport/HealthBar" method="_on_timer_timeout"]

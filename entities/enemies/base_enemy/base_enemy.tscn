@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://d76iv74yuaid"]
+
+[ext_resource type="Script" uid="uid://cd8a2u1b8h7rk" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_aiyc5"]
+[ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="1_e7hss"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aiyc5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk2kt"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gtyw"]
+bg_color = Color(0.884307, 6.26662e-05, 3.39803e-05, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_color = Color(0.847059, 0, 0, 0.6)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu5dw"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4q74"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_bottom = 3.0
+shadow_size = 2
+
+[node name="BaseEnemy" type="CharacterBody3D"]
+script = ExtResource("1_aiyc5")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_aiyc5")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="HealthBar" type="ProgressBar" parent="SubViewport"]
+offset_right = 360.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yk2kt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6gtyw")
+value = 50.0
+show_percentage = false
+script = ExtResource("1_e7hss")
+
+[node name="DamageBar" type="ProgressBar" parent="SubViewport/HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_uu5dw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o4q74")
+value = 65.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="SubViewport/HealthBar"]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="SubViewport/HealthBar/Timer" to="SubViewport/HealthBar" method="_on_timer_timeout"]
