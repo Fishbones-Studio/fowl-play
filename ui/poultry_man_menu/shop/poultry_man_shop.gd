@@ -3,12 +3,12 @@ extends BaseShop
 const SHOP_ITEM_SCENE = preload("uid://cc5vmtbby4xy0")
 
 func _ready() -> void:
-	InputBlocker.blocked = true
 	check_inventory = true
 	prevent_duplicates = true
 	title_label.text = "Shop"
 	super()
 
+	
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	var shop_item_instance = SHOP_ITEM_SCENE.instantiate()
 	

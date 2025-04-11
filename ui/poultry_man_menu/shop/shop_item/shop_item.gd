@@ -26,7 +26,6 @@ func _on_purchase_complete() -> void:
 	queue_free()
 	
 
-
 func set_item_data(item: Resource) -> void:
 	if not item is BaseResource or item is InRunUpgradeResource:
 		if item == null:
@@ -75,7 +74,6 @@ func attempt_purchase() -> void:
 			"purchase_cancelled": purchase_cancelled
 		})
 	
-
 	
 func can_afford() -> bool:
 	return GameManager.prosperity_eggs >= shop_item.cost

@@ -47,3 +47,7 @@ func attempt_purchase() -> void:
 	GameManager.prosperity_eggs -= int(cost_label.text)
 	self.visible = false
 	purchase_in_progress = false
+
+	
+func can_afford() -> bool:
+	return GameManager.prosperity_eggs >= upgrade_item.cost
