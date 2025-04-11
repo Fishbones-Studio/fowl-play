@@ -19,7 +19,7 @@ func setup(_enemy: Enemy, _player: ChickenPlayer, _movement_component: EnemyMove
 	if _player == null:
 		push_error(owner.name + ": No player reference set" + str(STATE_TYPE))
 	player = _player
-	if movement_component == null:
+	if _movement_component == null:
 		push_error(owner.name + ": No movement component reference set" + str(STATE_TYPE))
 	movement_component = _movement_component
 

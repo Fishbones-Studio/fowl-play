@@ -23,7 +23,7 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 		_is_immobile = true
 
 
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
 	if player.stats.current_health <= 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
 		return

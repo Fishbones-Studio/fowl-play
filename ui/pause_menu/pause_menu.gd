@@ -25,7 +25,7 @@ func _ready() -> void:
 	SignalManager.settings_menu_toggled.connect(_toggle_settings_menu)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if not paused: 
 			prev_mouse_mode = Input.mouse_mode

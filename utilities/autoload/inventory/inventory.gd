@@ -11,7 +11,7 @@ ItemEnums.ItemTypes.ABILITY: 2
 }
 
 ## State
-var _inventory_data: InventoryData
+var inventory_data: InventoryData
 
 
 func _ready() -> void:
@@ -37,14 +37,14 @@ func _equip_item_in_slot(item: BaseResource, slot_index: int) -> bool:
 
 	match slot_type:
 		ItemEnums.ItemTypes.MELEE_WEAPON:
-			_inventory_data.melee_weapon_slot = item
+			inventory_data.melee_weapon_slot = item
 		ItemEnums.ItemTypes.RANGED_WEAPON:
-			_inventory_data.ranged_weapon_slot = item
+			inventory_data.ranged_weapon_slot = item
 		ItemEnums.ItemTypes.ABILITY:
 			if slot_index == 0:
-				_inventory_data.ability_slot_one = item
+				inventory_data.ability_slot_one = item
 			elif slot_index == 1:
-				_inventory_data.ability_slot_two = item
+				inventory_data.ability_slot_two = item
 			else:
 				push_error("Invalid ability slot index ", slot_index)
 				return false
@@ -62,14 +62,14 @@ func _unequip_item_from_slot(item: BaseResource, slot_index: int) -> bool:
 
 	match slot_type:
 		ItemEnums.ItemTypes.MELEE_WEAPON:
-			_inventory_data.melee_weapon_slot = null
+			inventory_data.melee_weapon_slot = null
 		ItemEnums.ItemTypes.RANGED_WEAPON:
-			_inventory_data.ranged_weapon_slot = null
+			inventory_data.ranged_weapon_slot = null
 		ItemEnums.ItemTypes.ABILITY:
 			if slot_index == 0:
-				_inventory_data.ability_slot_one = null
+				inventory_data.ability_slot_one = null
 			elif slot_index == 1:
-				_inventory_data.ability_slot_two = null
+				inventory_data.ability_slot_two = null
 			else:
 				push_error("Invalid ability slot index ", slot_index)
 				return false
@@ -82,7 +82,7 @@ func _unequip_item_from_slot(item: BaseResource, slot_index: int) -> bool:
 
 ## Equipment Management
 func equip_item(item: BaseResource, slot_index: int = -1) -> bool:
-	if not _inventory_data.items.has(item):
+	if not inventory_data.items.has(item):
 		push_error("Cannot equip item not in inventory: ", item.name)
 		return false
 
@@ -129,14 +129,14 @@ func get_equipped_item(
 ) -> BaseResource:
 	match item_type:
 		ItemEnums.ItemTypes.MELEE_WEAPON:
-			return _inventory_data.melee_weapon_slot
+			return inventory_data.melee_weapon_slot
 		ItemEnums.ItemTypes.RANGED_WEAPON:
-			return _inventory_data.ranged_weapon_slot
+			return inventory_data.ranged_weapon_slot
 		ItemEnums.ItemTypes.ABILITY:
 			if slot_index == 0:
-				return _inventory_data.ability_slot_one
+				return inventory_data.ability_slot_one
 			elif slot_index == 1:
-				return _inventory_data.ability_slot_two
+				return inventory_data.ability_slot_two
 			else:
 				push_error("Invalid ability slot index ", slot_index)
 				return null
@@ -151,11 +151,11 @@ func add_item(
 	slot_index: int = -1,
 	auto_equip: bool = true
 ) -> void:
-	if _inventory_data.items.has(item):
+	if inventory_data.items.has(item):
 		push_warning("Item already in inventory: ", item.name)
 		return
 
-	_inventory_data.items.append(item)
+	inventory_data.items.append(item)
 
 	if auto_equip:
 		print("Auto-equipping item: ", item.name)
@@ -165,24 +165,24 @@ func add_item(
 
 
 func remove_item(item: BaseResource) -> void:
-	_inventory_data.items.erase(item)
+	inventory_data.items.erase(item)
 	unequip_item(item)
 	save_inventory()
 
 
 func get_all_items() -> Array[BaseResource]:
-	return _inventory_data.items.duplicate(true)
+	return inventory_data.items.duplicate(true)
 
 
 func get_items_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
-	return _inventory_data.items.filter(
+	return inventory_data.items.filter(
 		func(item): return item.type == item_type
 	)
 
 
 ## Inventory Management
 func save_inventory() -> void:
-	var error: int = ResourceSaver.save(_inventory_data, SAVE_FILE_PATH)
+	var error: int = ResourceSaver.save(inventory_data, SAVE_FILE_PATH)
 	if error != OK:
 		push_error("Inventory save failed with error code: ", error)
 
@@ -191,14 +191,14 @@ func load_inventory() -> void:
 	if ResourceLoader.exists(SAVE_FILE_PATH):
 		var loaded: Resource = ResourceLoader.load(SAVE_FILE_PATH)
 		if loaded is InventoryData:
-			_inventory_data = loaded
-			print("Loaded inventory with %d items" % _inventory_data.items.size())
+			inventory_data = loaded
+			print("Loaded inventory with %d items" % inventory_data.items.size())
 			return
 	else:
 		push_warning("No inventory save file found, creating a new one")
-		_inventory_data = InventoryData.new()
+		inventory_data = InventoryData.new()
 
 
 func reset_inventory() -> void:
-	_inventory_data = InventoryData.new()
+	inventory_data = InventoryData.new()
 	save_inventory()

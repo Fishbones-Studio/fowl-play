@@ -10,14 +10,14 @@ var hit_area: Area3D
 @onready var attack_timer: Timer = %AttackTimer
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: MeleeWeapon, melee_combat_transition_state: Signal, root_actor: CharacterBody3D) -> void:
-	super(weapon_node, melee_combat_transition_state, root_actor)
+func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _root_actor: CharacterBody3D) -> void:
+	super(_weapon_node, _melee_combat_transition_state, _root_actor)
 	hit_area = weapon_node.hit_area
 
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary = {}) -> void:
-	attack_timer.wait_time = weapon.current_weapon.attack_duration
+	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
 	attack_timer.start()
 	_attack()
 
@@ -50,9 +50,9 @@ func _attack() -> void:
 	if(root_actor == GameManager.chicken_player):
 		for target in targets:
 			if target is Enemy:
-				SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)
+				SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage)
 	else:
 		for target in targets:
 			if target == GameManager.chicken_player:
-				SignalManager.weapon_hit_target.emit(target, weapon.current_weapon.damage)
+				SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage)
 	

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=3 format=3 uid="uid://blv5macbefk8v"]
 
 [ext_resource type="Texture2D" uid="uid://4if2m81qjh0x" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.png" id="1_8lwf8"]
-[ext_resource type="Script" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_43o3y"]
+[ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_43o3y"]
 
 [resource]
 script = ExtResource("1_43o3y")
@@ -14,4 +14,4 @@ drop_chance = 0
 cost = 0
 description = "Slower, more damage"
 icon = ExtResource("1_8lwf8")
-model_uid = ""
+model_uid = "uid://dldj0suybdnhl"

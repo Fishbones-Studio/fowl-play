@@ -18,7 +18,7 @@ func setup(weapon_node: MeleeWeapon, melee_combat_transition_state: Signal, root
 
 # This is only excecuted if the root actor is an enemy.
 # This looks for the player within the weapon's attack area and then transitions to windup like player.
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
 	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for target in targets:
 		if(target == GameManager.chicken_player):
