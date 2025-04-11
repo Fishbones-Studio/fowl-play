@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 			resume_button.grab_focus()
 
 
-func setup(params: Dictionary = {}) -> void:
+func setup(_params: Dictionary = {}) -> void:
 	_init_footer()
 	_squish_chicken()
 	_setup_enter_and_exit_transitions()

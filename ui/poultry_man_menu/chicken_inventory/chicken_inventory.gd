@@ -13,7 +13,7 @@ func _update_inventory() -> void:
 		child.queue_free()
 
 	# Return all items in the inventory
-	var inventory_items = Inventory.get_items()
+	var inventory_items = Inventory.get_all_items()
 
 	# Print all items in inventory
 	for item in inventory_items:

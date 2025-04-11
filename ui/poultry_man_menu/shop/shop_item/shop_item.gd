@@ -52,9 +52,9 @@ func attempt_purchase() -> void:
 
 	purchase_in_progress = true
 
-	var existing_items: Array[BaseResource] = Inventory.get_item_by_type(shop_item.type)
+	var existing_items: Array[BaseResource] = Inventory.get_items_by_type(shop_item.type)
 	
-	if existing_items.count(shop_item) >= 1:
+	if existing_items.has(shop_item):
 		print("Item already owned")
 		purchase_in_progress = false
 		return
