@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpu52aksjkec7"]
+
+[ext_resource type="Script" uid="uid://dnts5lxivcp65" path="res://entities/chicken_player/weapons/slots/melee_weapon_player_slot.gd" id="1_svlr0"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="2_xswfd"]
+
+[node name="MeleeWeaponPlayerSlot" type="Node3D"]
+script = ExtResource("1_svlr0")
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("2_xswfd")]

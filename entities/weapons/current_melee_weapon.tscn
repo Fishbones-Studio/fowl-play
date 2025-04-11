@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxsfgou65yp8w"]
-
-[ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/weapons/current_melee_weapon.gd" id="1_reqhr"]
-
-[node name="CurrentWeapon" type="Node3D"]
-script = ExtResource("1_reqhr")

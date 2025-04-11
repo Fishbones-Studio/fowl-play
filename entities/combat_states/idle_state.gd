@@ -11,9 +11,9 @@ var valid_attack : bool = false
 
 
 # Set up the weapon and cache important nodes
-func setup(weapon_node: MeleeWeapon, melee_combat_transition_state: Signal, root_actor: CharacterBody3D) -> void:
-	super(weapon_node, melee_combat_transition_state, root_actor)
-	hit_area = weapon_node.hit_area
+func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _root_actor: CharacterBody3D) -> void:
+	super(_weapon_node, _melee_combat_transition_state, _root_actor)
+	hit_area = _weapon_node.hit_area
 
 
 # This is only excecuted if the root actor is an enemy.

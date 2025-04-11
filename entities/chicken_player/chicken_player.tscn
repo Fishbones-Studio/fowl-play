@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
@@ -14,9 +14,8 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="12_k8bkn"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death.gd" id="14_pq2r3"]
-[ext_resource type="PackedScene" uid="uid://cjmtiw26u67me" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/ranged_weapon.tscn" id="15_n43gi"]
+[ext_resource type="PackedScene" uid="uid://cpu52aksjkec7" path="res://entities/chicken_player/weapons/slots/melee_weapon_player_slot.tscn" id="16_pq2r3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
@@ -98,12 +97,9 @@ state_type = 8
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 
-[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("12_k8bkn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+[node name="MeleeWeaponSlot" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("16_pq2r3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14933, 0.410203, 0)
 actor = NodePath("..")
-
-[node name="RangedWeapon" parent="." instance=ExtResource("15_n43gi")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0.5, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
