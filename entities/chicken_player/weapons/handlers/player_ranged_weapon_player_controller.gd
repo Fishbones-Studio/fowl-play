@@ -2,7 +2,10 @@ extends Node
 
 # TODO: setup method. current_weapon will be null
 
-@onready var current_weapon : RangedWeapon = $"../CurrentRangedWeapon".current_weapon
+@export var current_weapon : RangedWeapon
+
+func setup(_weapon : RangedWeapon) -> void:
+	current_weapon = _weapon
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack_secondary"):

@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=19 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="2_jgbvq"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
-[ext_resource type="Script" uid="uid://nxjekf2tieqd" path="res://utilities/camera/culling_script.gd" id="4_qjuvu"]
+[ext_resource type="Script" path="res://utilities/camera/culling_script.gd" id="4_qjuvu"]
 [ext_resource type="Script" uid="uid://q0xe52m76goy" path="res://entities/chicken_player/states/movement_states/glide_state.gd" id="5_a1qjk"]
 [ext_resource type="Script" uid="uid://dvihu8iywlyx1" path="res://entities/chicken_player/states/movement_states/hurt_state.gd" id="6_j3ovn"]
 [ext_resource type="Script" uid="uid://bjte651aelkuy" path="res://entities/chicken_player/states/movement_states/idle_state.gd" id="7_afbqv"]
@@ -14,8 +14,9 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death.gd" id="14_pq2r3"]
+[ext_resource type="Script" path="res://entities/chicken_player/states/movement_states/death.gd" id="14_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://cpu52aksjkec7" path="res://entities/chicken_player/weapons/slots/melee_weapon_player_slot.tscn" id="16_pq2r3"]
+[ext_resource type="PackedScene" uid="uid://cjmtiw26u67me" path="res://entities/chicken_player/weapons/slots/player_ranged_weapon_slot.tscn" id="17_pq2r3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
@@ -100,6 +101,9 @@ entity = NodePath("..")
 [node name="MeleeWeaponSlot" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("16_pq2r3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14933, 0.410203, 0)
 actor = NodePath("..")
+
+[node name="PlayerRangedWeaponSlot" parent="." instance=ExtResource("17_pq2r3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.46061, 0.696951, 0)
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]

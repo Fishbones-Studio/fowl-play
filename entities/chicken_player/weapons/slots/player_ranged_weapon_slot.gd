@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var ranged_weapon_node : RangedWeaponNode = $CurrentRangedWeapon
+@onready var ranged_weapon_player_controller : Node = $RangedPlayerWeaponController
 
 
 func _ready() -> void:
@@ -14,3 +15,4 @@ func _ready() -> void:
 	ranged_weapon_node.ranged_weapon_scene = load(ranged_weapon.model_uid)
 	
 	ranged_weapon_node.setup()
+	ranged_weapon_player_controller.setup(ranged_weapon_node.current_weapon)

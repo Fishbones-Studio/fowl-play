@@ -8,7 +8,9 @@ extends Node3D
 @export var ranged_weapon_scene: PackedScene:
 	set(value):
 		# Custom setter to validate the scene type
-		if value and value.can_instantiate() and value.instantiate() is RangedWeapon:
+		var temp_weapon_instance = value.instantiate()
+		if value and value.can_instantiate() and temp_weapon_instance is RangedWeapon:
+			current_weapon = temp_weapon_instance
 			ranged_weapon_scene = value
 		else:
 			push_error("Assigned scene is not a valid Weapon type")
@@ -25,7 +27,9 @@ func setup() -> void:
 		push_error("No valid weapon scene assigned!")
 		return
 
-	current_weapon = ranged_weapon_scene.instantiate() as RangedWeapon
+	if not current_weapon:
+		current_weapon = ranged_weapon_scene.instantiate() as RangedWeapon
+		print("Instantiated ranged weapon: " + current_weapon.name)
 	if not current_weapon:
 		push_error("Failed to instantiate weapon!")
 		return
