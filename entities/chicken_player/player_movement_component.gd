@@ -17,7 +17,7 @@ var jump_available: bool = true
 
 
 func _ready() -> void:
-	update_physics_by_weight(entity.stats.weight)
+	_update_physics_based_on_weight(entity.stats.weight)
 
 
 func get_jump_velocity() -> float:
