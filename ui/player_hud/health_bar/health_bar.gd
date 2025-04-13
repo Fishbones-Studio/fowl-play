@@ -5,8 +5,11 @@ extends ProgressBar
 @onready var damage_bar := $DamageBar
 @onready var health_bar := self 
 
+var is_enemy: bool = false
+
 var health: float:
 	set = set_health
+
 
 
 func change_healthbar_appearance(color: Color) -> void:
@@ -29,12 +32,19 @@ func set_health(_health: float) -> void:
 
 	if health <= prev_health:
 		timer.start()
-		SignalManager.player_hurt.emit()
+		if is_enemy:
+			SignalManager.enemy_hurt.emit()
+		else:
+			SignalManager.player_hurt.emit()
 	else:
 		if health > prev_health:
 			timer.stop()
-			SignalManager.player_heal.emit()
+			if is_enemy:
+				SignalManager.enemy_heal.emit()
+			else:
+				SignalManager.player_heal.emit()
 		_on_timer_timeout()
+
 
 
 func init_health(_max_health: int, _health: int) -> void:

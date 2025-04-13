@@ -13,6 +13,9 @@ extends CharacterBody3D
 @onready var health_bar_node: HealthBar = $SubViewport/HealthBar
 
 func _ready() -> void:
+	if is_instance_valid(health_bar_node):
+		health_bar_node.is_enemy = true
+
 	print("BaseEnemy _ready() called. Stats resource: ", stats)
 	if stats == null:
 		printerr("ERROR: Stats resource is NULL!")
@@ -21,6 +24,7 @@ func _ready() -> void:
 		_setup_health_bar()
 		_update_health_bar_appearance()
 		SignalManager.weapon_hit_target.connect(_take_damage)
+
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
