@@ -3,10 +3,17 @@ extends ProgressBar
 
 @onready var timer := $Timer
 @onready var damage_bar := $DamageBar
+@onready var health_bar := self 
 
 var health: float:
 	set = set_health
 
+
+func change_healthbar_appearance(color: Color) -> void:
+	var style_box := StyleBoxFlat.new()
+	style_box.bg_color = color
+	
+	health_bar.add_theme_stylebox_override("fill", style_box)
 
 func set_health(_health: float) -> void:
 	if _health == health:

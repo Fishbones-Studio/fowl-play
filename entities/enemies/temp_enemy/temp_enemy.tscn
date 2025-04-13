@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=12 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
@@ -6,11 +6,15 @@
 [ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/temp_enemy/enemy_stats.tres" id="2_thcnk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
-[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="6_vwxab"]
+[ext_resource type="Script" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="6_vwxab"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="9_2bxow"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(2.63416, 4, 3.24414)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vj4mj"]
+viewport_path = NodePath("SubViewport")
 
 [node name="TempEnemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -53,3 +57,12 @@ actor = NodePath("..")
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_vwxab")
 entity = NodePath("..")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.28121, 0.829008, -1.50837)
+texture = SubResource("ViewportTexture_vj4mj")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("9_2bxow")]
