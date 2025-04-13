@@ -1,20 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0o65o2xsk53s"]
+[gd_scene load_steps=10 format=3 uid="uid://d0o65o2xsk53s"]
 
-[ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_k6lf6"]
-[ext_resource type="PackedScene" uid="uid://bwayhjdb5vvd5" path="res://entities/enemies/woodpecker/woodpecker.glb" id="2_crgub"]
+[ext_resource type="Script" uid="uid://btgmyrnqlqcms" path="res://entities/enemies/woodpecker/woodpecker.gd" id="1_x6gfb"]
+[ext_resource type="PackedScene" uid="uid://bwayhjdb5vvd5" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="2_crgub"]
+[ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="2_p6jwh"]
+[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="3_x6gfb"]
+[ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="5_p6jwh"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_ioi28"]
+[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="6_vfx5i"]
+[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="8_ioi28"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1t2bg"]
-radius = 1.095
-height = 5.7
+[sub_resource type="BoxShape3D" id="BoxShape3D_p6jwh"]
+size = Vector3(2.5, 5.5, 4.15)
 
 [node name="Woodpecker" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 27
-script = ExtResource("1_k6lf6")
+script = ExtResource("1_x6gfb")
+stats = ExtResource("2_p6jwh")
 metadata/_custom_type_script = "uid://bln2tqwj0gh1w"
 
 [node name="woodpecker" parent="." instance=ExtResource("2_crgub")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225414, 2.83076, 0)
-shape = SubResource("CapsuleShape3D_1t2bg")
+shape = SubResource("BoxShape3D_p6jwh")
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
+script = ExtResource("3_x6gfb")
+starting_state = NodePath("idle_state")
+enemy = NodePath("..")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://btddu8dhoifau"
+
+[node name="idle_state" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("5_p6jwh")
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="chase_state" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("6_vfx5i")
+STATE_TYPE = 1
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("6_ioi28")]
+transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
+actor = NodePath("..")
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("8_ioi28")
+entity = NodePath("..")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)

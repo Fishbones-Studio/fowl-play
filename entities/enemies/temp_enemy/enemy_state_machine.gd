@@ -2,10 +2,10 @@ extends Node
 
 @export var starting_state: BaseEnemyState
 @export var enemy: Enemy
-@export var player: ChickenPlayer
 @export var movement_component: EnemyMovementComponent
 
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
+var player: ChickenPlayer
 
 @onready var current_state: BaseEnemyState = _get_initial_state()
 

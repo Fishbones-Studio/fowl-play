@@ -12,6 +12,7 @@ signal init_stamina(max_stamina: float, stamina: float)
 signal player_stats_changed(stats: LivingEntityStats)
 signal player_hurt()
 signal player_heal()
+
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
 signal add_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to add an (additional) UI scene
@@ -21,6 +22,7 @@ signal settings_menu_toggled(value: bool)
 
 # Enemy signals
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
+signal enemy_died()
 
 # Shop signals
 signal item_selected

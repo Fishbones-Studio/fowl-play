@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckr61ohunhkre"]
+
+[ext_resource type="Script" uid="uid://d4biwqekg0iid" path="res://entities/enemies/base_enemy.gd" id="1_mlwkv"]
+
+[node name="BaseEnemy" type="CharacterBody3D"]
+script = ExtResource("1_mlwkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

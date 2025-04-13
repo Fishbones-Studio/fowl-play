@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bwayhjdb5vvd5"
-path="res://.godot/imported/woodpecker.glb-2df22ad5710ce2df58f8a4dd160869a6.scn"
+path="res://.godot/imported/woodpecker.glb-bf3fd7e2295a76960d73480e1de8ddab.scn"
 
 [deps]
 
-source_file="res://entities/enemies/woodpecker/woodpecker.glb"
-dest_files=["res://.godot/imported/woodpecker.glb-2df22ad5710ce2df58f8a4dd160869a6.scn"]
+source_file="res://entities/enemies/woodpecker/art/woodpecker.glb"
+dest_files=["res://.godot/imported/woodpecker.glb-bf3fd7e2295a76960d73480e1de8ddab.scn"]
 
 [params]
 

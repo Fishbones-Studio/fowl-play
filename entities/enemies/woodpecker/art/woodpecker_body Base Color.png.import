@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4ywin1yih0oc"
-path.s3tc="res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.s3tc.ctex"
-path.etc2="res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.etc2.ctex"
+uid="uid://gjt126rvegss"
+path.s3tc="res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.s3tc.ctex"
+path.etc2="res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "47b1f7ff3140463a315dc47f556401dd"
+"md5": "9ae1cb6d440e54a212744489a9fb1c4f"
 }
 
 [deps]
 
-source_file="res://entities/enemies/woodpecker/woodpecker_Material.png"
-dest_files=["res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.s3tc.ctex", "res://.godot/imported/woodpecker_Material.png-de87bb1f9ae994c7d1261d0cb3bbb09d.etc2.ctex"]
+source_file="res://entities/enemies/woodpecker/art/woodpecker_body Base Color.png"
+dest_files=["res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.s3tc.ctex", "res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.etc2.ctex"]
 
 [params]
 

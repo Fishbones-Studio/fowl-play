@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhnqi4fnso1hh"]
+
+[ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
+[ext_resource type="Script" uid="uid://dysimibhncv05" path="res://level/level.gd" id="1_ivpvi"]
+[ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_ivpvi"]
+[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
+[ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
+[ext_resource type="PackedScene" uid="uid://ccns8he8y64n3" path="res://entities/enemies/temp_enemy/temp_enemy.tscn" id="4_6gtgk"]
+[ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_cw150"]
+[ext_resource type="AudioStream" uid="uid://b8q5sgur0ci0o" path="res://level/arena/music/temp_arena_song.mp3" id="6_xii2b"]
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_ivpvi")
+enemies = Array[PackedScene]([ExtResource("5_cw150"), ExtResource("4_6gtgk"), ExtResource("4_0v1st")])
+
+[node name="Arena" parent="." instance=ExtResource("1_44x8d")]
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.995509, -0.00619845, 0.0944599, 0.00475659, 0.999869, 0.0154817, -0.0945434, -0.0149629, 0.995408, 0, 3.84457, 8.32513)
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_0v1st")]
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 7.08687, 3.80724, 4.36455)
+camera_reference = NodePath("../PlayerCamera")
+entity_to_follow = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_ivpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="EnemyPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xii2b")
+autoplay = true
+bus = &"Music"

@@ -4,6 +4,7 @@ var chicken_player: ChickenPlayer = null
 var prosperity_eggs: int
 var feathers_of_rebirth: int
 
+var current_round: int
 
 func reset_game() -> void:
 	prosperity_eggs = 0
