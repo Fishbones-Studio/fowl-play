@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://djg6luy3rxi23"]
+[gd_scene load_steps=5 format=3 uid="uid://djg6luy3rxi23"]
 
 [ext_resource type="PackedScene" uid="uid://cuqpcy333m8d5" path="res://utilities/shop/base_shop.tscn" id="1_xkk47"]
+[ext_resource type="PackedScene" uid="uid://b1xvduw1f032y" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.tscn" id="2_4rb57"]
 [ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/in_arena_shop/shop/in_arena_shop.gd" id="2_am5cq"]
 [ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="3_4rb57"]
 
 [node name="InArenaShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_xkk47")]
 script = ExtResource("2_am5cq")
 item_database = NodePath("UpgradeDatabase")
+item_scene_packed = ExtResource("2_4rb57")
 
 [node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_4rb57")]

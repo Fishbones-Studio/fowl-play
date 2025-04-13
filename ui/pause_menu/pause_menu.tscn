@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
+[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="2_jbgdu"]
 [ext_resource type="PackedScene" uid="uid://cosl5b7xy6ps1" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
-[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="4_b4b0p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbgdu"]
 shader = ExtResource("1_mnjdh")
@@ -158,14 +158,13 @@ size_flags_vertical = 3
 [node name="GameLogoContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
-layout_mode = 0
 offset_right = 298.884
 offset_bottom = 256.0
 theme_type_variation = &"PauseMenuLogoContainer"
 
 [node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
 layout_mode = 2
-texture = ExtResource("4_b4b0p")
+texture = ExtResource("2_jbgdu")
 expand_mode = 3
 
 [node name="Footer" type="PanelContainer" parent="."]

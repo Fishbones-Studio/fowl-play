@@ -3,7 +3,6 @@ extends Node
 @export var starting_state: BaseEnemyState
 @export var enemy: Enemy
 @export var player: ChickenPlayer
-@export var movement_component: EnemyMovementComponent
 
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 
@@ -27,7 +26,7 @@ func _ready() -> void:
 	# Get all states in the scene tree
 	for state_node: BaseEnemyState in get_children():
 		states[state_node.STATE_TYPE] = state_node
-		state_node.setup(enemy, player, movement_component)
+		state_node.setup(enemy, player)
 		
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)

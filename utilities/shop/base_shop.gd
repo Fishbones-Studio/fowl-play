@@ -4,14 +4,17 @@ extends Control
 
 @export var max_items: int = 5
 @export var item_database: BaseDatabase
+@export var item_scene_packed: PackedScene
 
 var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
-var check_inventory: bool = true
-var prevent_duplicates: bool = true
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 @onready var title_label = %TitleLabel
+
+var check_inventory: bool = true
+var prevent_duplicates: bool = true
+
 
 func _ready() -> void:
 	print(item_database.items)
@@ -40,14 +43,14 @@ func _refresh_shop() -> void:
 
 	# Add items up to our limit
 	for i in range(items_to_show):
+		var shop_item: BaseShopItem = _create_shop_item()
+		if not shop_item:
+			continue
+
 		var selected_item: BaseResource = available_items[i]
 		shop_items.append(selected_item)
-		var shop_item: BaseShopItem = create_shop_item(selected_item)
-		if not shop_item:
-			push_error("Failed to create shop item for: ", selected_item.name)
-			continue
-		
 		shop_items_container.add_child(shop_item)
+		shop_item.set_item_data(selected_item)
 		print("Added item: ", selected_item.name)
 
 
@@ -62,9 +65,18 @@ func _get_available_items() -> Array[BaseResource]:
 	return valid_items
 
 
-func create_shop_item(_selected_item: BaseResource) -> BaseShopItem:
-	printerr("Create_shop_item should be overwritten in child class")
-	return
+func _create_shop_item() -> BaseShopItem:
+	if not item_scene_packed:
+		push_error("No item scene packed assigned!")
+		return null
+
+	var shop_item: Node = item_scene_packed.instantiate()
+	if not shop_item is BaseShopItem:
+		push_error("Packed scene is not a BaseShopItem: ", item_scene_packed.resource_path)
+		shop_item.queue_free()
+		return null
+
+	return shop_item
 
 
 func _should_skip_item(item: BaseResource) -> bool:
@@ -72,6 +84,7 @@ func _should_skip_item(item: BaseResource) -> bool:
 
 
 func _on_exit_button_pressed() -> void:
+	InputBlocker.blocked = false
 	close_ui()
 
 

@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://c80bewaohqml0" path="res://resources/themes/styleboxes/panel_container_hover.tres" id="4_dagba"]
 [ext_resource type="StyleBox" uid="uid://dwicgkvjluob0" path="res://resources/themes/styleboxes/keybinds_res_def_button_hover.tres" id="5_03ohx"]
 [ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/styleboxes/panel_container_normal.tres" id="5_xtbu8"]
-[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="6_7adcq"]
+[ext_resource type="Texture2D" uid="uid://l3u21i0umnhe" path="res://resources/icons/clodsire-no-bg.png" id="6_7adcq"]
 [ext_resource type="StyleBox" uid="uid://2bi33x6p08ih" path="res://resources/themes/styleboxes/keybinds_res_def_button_normal.tres" id="6_7ucis"]
 [ext_resource type="StyleBox" uid="uid://do8svyygf5k1e" path="res://resources/themes/styleboxes/pause_menu_button_hover.tres" id="7_6bdnh"]
 [ext_resource type="StyleBox" uid="uid://ih2cst4gsqnr" path="res://resources/themes/styleboxes/keybinds_res_def_button_pressed.tres" id="7_27a07"]

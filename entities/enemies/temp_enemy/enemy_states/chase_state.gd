@@ -1,4 +1,5 @@
 extends BaseEnemyState
+@export var speed: int = 10
 @export var rotation_speed: float = 5.0   ## How quickly enemy turns toward target
 var target_position: Vector3
 
@@ -10,8 +11,8 @@ func physics_process(delta: float) -> void:
 	if enemy.position.distance_to(player.position) < chase_distance:
 		if target_position.length() > 0:
 			_rotate_toward_direction(target_position, delta)
-		apply_movement(target_position * enemy.stats.calculate_speed(movement_component.walk_speed_factor))
-		apply_gravity(delta)
+		enemy.velocity.x = target_position.x * speed
+		enemy.velocity.z = target_position.z * speed
 	else:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.IDLE_STATE, {})
 

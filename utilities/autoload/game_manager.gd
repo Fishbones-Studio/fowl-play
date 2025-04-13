@@ -7,7 +7,7 @@ var feathers_of_rebirth: int
 
 func reset_game() -> void:
 	prosperity_eggs = 0
-	feathers_of_rebirth = 0
+	#feathers_of_rebirth = 0
 	Inventory.reset_inventory()
 
 

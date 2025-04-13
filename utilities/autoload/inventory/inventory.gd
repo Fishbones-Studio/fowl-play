@@ -23,7 +23,7 @@ func add_item(item: BaseResource) -> void:
 ## Get all items from the player's inventory
 func get_items() -> Array[BaseResource]:
 	return items_in_inventory
-
+	
 
 ## Get all items with the same type
 func get_item_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
@@ -57,8 +57,7 @@ func load_inventory() -> void:
 		print("Inventory loaded successfully, with: " + str(items_in_inventory.size()) + " items")
 	else:
 		print("No inventory save file found, starting fresh")
-
-
-func reset_inventory() -> void:
+		
+func reset_inventory():
 	items_in_inventory.clear()
 	save_inventory()

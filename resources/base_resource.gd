@@ -13,5 +13,4 @@ extends Resource
 @export var icon: Texture  # The icon for the shop/inventory
 @export var model_uid: String # The uid of the model, for saving and loading purpouses
 
-var type: ItemEnums.ItemTypes ## Defines what item slot it uses, extends to other resources. Set in the child class
-var type_max_owned_amount : int = 1 ## How many of this item type the player is allowed to have. NOTE: Only overwrite in _init. in resources directly extending BaseResource
+var type: ItemEnums.ItemTypes # Defines what item slot it uses, extends to other resources. Set in the child class

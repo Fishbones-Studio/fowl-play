@@ -2,12 +2,16 @@ class_name BaseShopItem
 extends PanelContainer
 
 # Common properties
-static var purchase_in_progress: bool = false
+var purchase_in_progress: bool = false
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
-func _ready() -> void:
-	populate_visual_fields()
+# Common UI elements (should be overridden by child classes)
+@onready var name_label: Label
+@onready var cost_label: Label
+@onready var description_label: Label
+@onready var item_icon: TextureRect
+
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -31,16 +35,7 @@ func set_item_data(_item: Resource) -> void:
 func attempt_purchase() -> void:
 	push_error("attempt_purchase() must be implemented by child class")
 	return
-	
-## abstract method, overwrite in child class
-func populate_visual_fields() -> void:
-	push_error("populate_visual_fields() must be implemented by child class")
-	return
 
-## abstract method, overwrite in child class
-func can_afford() -> bool:
-	push_error("can_afford() must be implemented by child class")
-	return false
 
 func _on_mouse_exited() -> void:
 	if not theme:
@@ -50,3 +45,7 @@ func _on_mouse_exited() -> void:
 
 func make_unclickable() -> void:
 	disconnect("gui_input", _on_gui_input)
+
+
+func can_afford() -> bool:
+	return GameManager.prosperity_eggs >= int(cost_label.text)
