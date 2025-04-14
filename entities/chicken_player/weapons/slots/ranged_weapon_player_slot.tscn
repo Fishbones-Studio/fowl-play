@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjmtiw26u67me"]
+
+[ext_resource type="Script" uid="uid://dtf7cau81m765" path="res://entities/chicken_player/weapons/slots/ranged_weapon_player_slot.gd" id="1_8grrb"]
+[ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="2_tb5ma"]
+[ext_resource type="Script" uid="uid://tp14smymrpnn" path="res://entities/chicken_player/weapons/handlers/player_ranged_weapon_player_controller.gd" id="3_x8iqg"]
+
+[node name="RangedWeaponPlayerSlot" type="Node3D"]
+script = ExtResource("1_8grrb")
+
+[node name="CurrentRangedWeapon" type="Node3D" parent="."]
+script = ExtResource("2_tb5ma")
+
+[node name="RangedWeaponPlayerController" type="Node" parent="."]
+script = ExtResource("3_x8iqg")

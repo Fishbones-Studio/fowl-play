@@ -24,12 +24,6 @@ signal settings_menu_toggled(value: bool)
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 signal enemy_died()
 
-# Shop signals
-signal item_selected
-signal item_bought
-signal item_bought_confirmed
-signal item_bought_cancelled
-
 # Weapon signals
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
 signal weapon_hit_area_body_exited(body: PhysicsBody3D)

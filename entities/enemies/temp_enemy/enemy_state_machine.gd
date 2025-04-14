@@ -17,6 +17,9 @@ func _ready() -> void:
 
 	if player == null:
 		player = GameManager.chicken_player
+		
+	if movement_component == null:
+		push_error(owner.name + "No enemy movement component set")
 
 	# Connect the signal to the transition function
 	SignalManager.enemy_transition_state.connect(_transition_to_next_state)

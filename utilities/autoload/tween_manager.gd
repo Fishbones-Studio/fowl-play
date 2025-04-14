@@ -15,7 +15,7 @@ func create_scale_tween(
 	scale: Variant,
 	duration: float = DEFAULT_DURATION,
 	transition: Tween.TransitionType = DEFAULT_TRANSITION,
-	ease: Tween.EaseType = DEFAULT_EASE
+	tween_ease: Tween.EaseType = DEFAULT_EASE
 ) -> Tween:
 	assert(scale is Vector2 or scale is Vector3,
 			"Scale must be a Vector2 or Vector3")
@@ -23,7 +23,7 @@ func create_scale_tween(
 	if not tween: tween = node.create_tween()
 	tween.tween_property(node, "scale", scale, duration)\
 			.set_trans(transition)\
-			.set_ease(ease)
+			.set_ease(tween_ease)
 	
 	return tween
 
@@ -35,7 +35,7 @@ func create_move_tween(
 	distance: float,
 	duration: float = DEFAULT_DURATION,
 	transition: Tween.TransitionType = DEFAULT_TRANSITION,
-	ease: Tween.EaseType = DEFAULT_EASE
+	tween_ease: Tween.EaseType = DEFAULT_EASE
 ) -> Tween:
 	assert(node != null, "Target node cannot be null")
 	assert(axis.to_lower() in ["x", "y", "z"], "Axis must be 'x', 'y', or 'z'")
@@ -45,6 +45,6 @@ func create_move_tween(
 	if not tween: tween = node.create_tween()
 	tween.tween_property(node, property, distance, duration)\
 		.set_trans(transition)\
-		.set_ease(ease)
+		.set_ease(tween_ease)
 	
 	return tween

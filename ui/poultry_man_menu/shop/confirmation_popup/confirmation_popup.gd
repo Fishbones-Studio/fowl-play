@@ -11,7 +11,6 @@ var purchase_cancelled_signal : Signal
 @onready var new_item_container: CenterContainer = %NewItemContainer
 
 func setup(params: Dictionary) -> void:
-	print("Confirmation popup setup with params: ", params)
 	if "existing_item" in params:
 		existing_item_resource = params["existing_item"]
 	if "new_item" in params:

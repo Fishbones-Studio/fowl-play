@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/cooldown_state.gd" id="6_04ypb"]
 
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_h8kbp")
 

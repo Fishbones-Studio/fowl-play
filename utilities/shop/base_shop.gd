@@ -48,7 +48,6 @@ func _refresh_shop() -> void:
 			continue
 		
 		shop_items_container.add_child(shop_item)
-		print("Added item: ", selected_item.name)
 
 
 func _get_available_items() -> Array[BaseResource]:
@@ -68,7 +67,7 @@ func create_shop_item(_selected_item: BaseResource) -> BaseShopItem:
 
 
 func _should_skip_item(item: BaseResource) -> bool:
-	return (check_inventory and item in Inventory.items_in_inventory) or (prevent_duplicates and item in shop_items)
+	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
 
 
 func _on_exit_button_pressed() -> void:
