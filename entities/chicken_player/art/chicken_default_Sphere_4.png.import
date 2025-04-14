@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwrx6b3f1c7wi"
+uid="uid://pacubgyjbgr6"
 path.s3tc="res://.godot/imported/chicken_default_Sphere_4.png-62aadf525fef83731eb091b18e7385bf.s3tc.ctex"
 path.etc2="res://.godot/imported/chicken_default_Sphere_4.png-62aadf525fef83731eb091b18e7385bf.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b7356d546ddc879ec49342d0e1df3427"
+"md5": "2054de6845ac82a1f42d2943c06955a0"
 }
 
 [deps]

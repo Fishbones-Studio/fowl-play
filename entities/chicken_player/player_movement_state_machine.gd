@@ -10,6 +10,7 @@ extends Node
 @export var starting_state: BasePlayerMovementState
 @export var player: ChickenPlayer
 @export var movement_component: PlayerMovementComponent
+@export var animation_tree: AnimationTree
 
 var states: Dictionary[PlayerEnums.PlayerStates, BasePlayerMovementState] = {}
 
@@ -24,6 +25,9 @@ func _ready() -> void:
 	if movement_component == null:
 		push_error(name + ": No movement component reference set")
 
+	if animation_tree == null:
+		push_error(name + ": No animation tree reference set")
+
 	SignalManager.player_transition_state.connect(_transition_to_next_state)
 
 	# Ensure owner is ready before accessing data and nodes.
@@ -34,6 +38,7 @@ func _ready() -> void:
 		states[state_node.state_type] = state_node
 		state_node.player = player
 		state_node.movement_component = movement_component
+		state_node.animation_tree = animation_tree
 
 	current_state = _get_initial_state()
 	current_state.enter(current_state)

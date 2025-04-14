@@ -17,6 +17,8 @@ var _has_initial_velocity: bool
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	var active_coyote_time = information.get("coyote_time", false)
 
 	_has_initial_velocity = false

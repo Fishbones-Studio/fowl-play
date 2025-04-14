@@ -4,6 +4,8 @@ extends BasePlayerMovementState
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	player.velocity.x = 0
 	player.velocity.z = 0
 

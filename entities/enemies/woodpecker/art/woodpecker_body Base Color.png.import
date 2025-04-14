@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://gjt126rvegss"
+=======
+uid="uid://cbcw2kefx787m"
+>>>>>>> origin/dev
 path.s3tc="res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.s3tc.ctex"
 path.etc2="res://.godot/imported/woodpecker_body Base Color.png-2a948f29a5cc73cdeeca7c2cab69a9a1.etc2.ctex"
 metadata={

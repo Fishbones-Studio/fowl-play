@@ -3,7 +3,11 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
+<<<<<<< HEAD
 uid="uid://bwayhjdb5vvd5"
+=======
+uid="uid://dfcg3q1hpmmgk"
+>>>>>>> origin/dev
 path="res://.godot/imported/woodpecker.glb-bf3fd7e2295a76960d73480e1de8ddab.scn"
 
 [deps]

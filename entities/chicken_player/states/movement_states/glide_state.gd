@@ -16,6 +16,8 @@ func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
 		return
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 
 func process(delta: float) -> void:
 	# Drain stamina and updates the stamina bar in the HUD
