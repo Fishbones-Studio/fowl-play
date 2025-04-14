@@ -3,12 +3,13 @@ extends Node
 
 ## Constants
 const SAVE_FILE_PATH := "user://inventory_save.tres"
+
 ## Configuration
 var default_slot_config: Dictionary[ItemEnums.ItemTypes, int] = {
-ItemEnums.ItemTypes.MELEE_WEAPON: 1,
-ItemEnums.ItemTypes.RANGED_WEAPON: 1,
-ItemEnums.ItemTypes.ABILITY: 2
-}
+		ItemEnums.ItemTypes.MELEE_WEAPON: 1,
+		ItemEnums.ItemTypes.RANGED_WEAPON: 1,
+		ItemEnums.ItemTypes.ABILITY: 2
+	}
 
 ## State
 var inventory_data: InventoryData
@@ -16,6 +17,7 @@ var inventory_data: InventoryData
 
 func _ready() -> void:
 	load_inventory()
+
 
 ## Function to validate if an item can be equipped
 func _validate_equipment_operation(item: BaseResource, slot_index: int) -> bool:

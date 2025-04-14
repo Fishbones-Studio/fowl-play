@@ -147,17 +147,6 @@ node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Das
 radius = 0.9
 height = 3.5
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_qjuvu"]
-height = 0.663086
-radius = 11.7358
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjuvu"]
-albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qjuvu"]
-material = SubResource("StandardMaterial3D_qjuvu")
-size = Vector2(1, 1)
-
 [node name="ChickenPlayer" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 13
@@ -173,17 +162,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
-bones/3/rotation = Quaternion(-0.527367, -0.0203354, -0.0180753, 0.849202)
-bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
-bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
-bones/6/rotation = Quaternion(-0.268938, 0.0361644, 0.74135, 0.613812)
+bones/2/rotation = Quaternion(-0.397329, 0.00336502, -0.0111635, 0.917602)
+bones/3/rotation = Quaternion(-0.53017, -0.00737618, -0.00988243, 0.847802)
+bones/4/rotation = Quaternion(-0.172838, -0.0775749, -0.112431, 0.975432)
+bones/5/rotation = Quaternion(-0.185508, -0.110974, -0.706191, 0.674215)
+bones/6/rotation = Quaternion(-0.199829, 0.125159, 0.688696, 0.68564)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
-bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
+bones/8/rotation = Quaternion(0.312578, -0.0219195, -0.059972, 0.947743)
+bones/9/rotation = Quaternion(0.180981, 0.0156079, -0.130211, 0.974704)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.176772, -0.00614296, 0.0234678, 0.983953)
+bones/11/rotation = Quaternion(-0.176672, -0.00492061, 0.0252872, 0.983933)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
@@ -258,52 +247,15 @@ state_type = 8
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 
+[node name="PlayerAbilityController" type="Node" parent="."]
+
 [node name="PlayerWeaponController" parent="." instance=ExtResource("26_vclph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
 weapon_collision_mask = 4
-
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.229004, 0)
-shape = SubResource("CylinderShape3D_qjuvu")
-
-[node name="Ground_Pound_Particles" type="CPUParticles3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0420914, -1.41608, 0.0010854)
-emitting = false
-amount = 2000
-lifetime = 2.0
-one_shot = true
-preprocess = 1.25
-explosiveness = 1.0
-randomness = 1.0
-lifetime_randomness = 1.0
-local_coords = true
-mesh = SubResource("PlaneMesh_qjuvu")
-emission_shape = 6
-emission_ring_axis = Vector3(0, 33.115, 1)
-emission_ring_height = 1.25
-emission_ring_radius = 11.1
-emission_ring_inner_radius = 1.0
-emission_ring_cone_angle = 90.0
-gravity = Vector3(0, 0.5, 0)
-color = Color(0.366595, 0.366595, 0.366595, 1)
-
-[node name="Ground_Pound_Timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="Ability1_Cooldown" type="Timer" parent="."]
-wait_time = 30.0
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Fall/CoyoteTimer" to="MovementStateMachine/Fall" method="_on_coyote_timer_timeout"]
-[connection signal="body_entered" from="Area3D" to="MovementStateMachine/Jump" method="_on_area_3d_body_entered"]
-[connection signal="timeout" from="Ground_Pound_Timer" to="MovementStateMachine/Jump" method="_on_ground_pound_timer_timeout"]
-[connection signal="timeout" from="Ability1_Cooldown" to="MovementStateMachine/Jump" method="_on_ability_1_cooldown_timeout"]
 
 [editable path="chicken_default"]

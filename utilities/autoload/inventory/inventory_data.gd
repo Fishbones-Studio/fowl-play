@@ -19,6 +19,7 @@ extends Resource
 	set(value):
 		ability_slot_two = _validate_slot(value, "Ability Two")
 
+
 func _init(
 	_items: Array[BaseResource] = [],
 	_melee_weapon_slot: MeleeWeaponResource = null,
@@ -31,6 +32,7 @@ func _init(
 	ranged_weapon_slot = _ranged_weapon_slot
 	ability_slot_one = _ability_slot_one
 	ability_slot_two = _ability_slot_two
+
 
 ## Validates if an item can be equipped (must be in inventory or null)
 func _validate_slot(item: BaseResource, slot_name: String) -> BaseResource:
