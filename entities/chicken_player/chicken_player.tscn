@@ -248,7 +248,7 @@ script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 
 [node name="PlayerWeaponController" parent="." instance=ExtResource("26_vclph")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
 weapon_collision_mask = 4
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
