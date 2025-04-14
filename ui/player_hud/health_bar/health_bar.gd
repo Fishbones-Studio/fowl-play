@@ -1,14 +1,13 @@
 class_name HealthBar
 extends ProgressBar
 
-@onready var timer := $Timer
-@onready var damage_bar := $DamageBar
-
 @export var tracked_entity: Node = null
 @export var high_health_color: Color = Color.GREEN
 @export var medium_health_color: Color = Color.ORANGE
 @export var critical_health_color: Color = Color.RED
 
+@onready var timer := $Timer
+@onready var damage_bar := $DamageBar
 
 var health: float:
 	set = set_health
@@ -23,12 +22,11 @@ func _ready() -> void:
 
 
 func bind_signals() -> void:
-	if tracked_entity:
-		SignalManager.enemy_stats_changed.connect(_on_enemy_stats_changed)
+	SignalManager.enemy_stats_changed.connect(_on_enemy_stats_changed)
 
 
 func _update_health_color() -> void:
-	var health_percent := health / max_value if max_value > 0 else 1.0
+	var health_percent : float = health / max_value if max_value > 0 else 1.0
 	
 	var current_color: Color
 	if health_percent > 0.55:
@@ -38,7 +36,7 @@ func _update_health_color() -> void:
 	else:
 		current_color = critical_health_color
 	
-	var style_box := StyleBoxFlat.new()
+	var style_box : StyleBoxFlat = StyleBoxFlat.new()
 	style_box.bg_color = current_color
 	add_theme_stylebox_override("fill", style_box)
 
@@ -48,7 +46,7 @@ func set_health(_health: float) -> void:
 	if _health == health:
 		return
 	
-	var prev_health := health
+	var prev_health: float = health
 	health = _health
 	value = _health
 	
@@ -56,11 +54,13 @@ func set_health(_health: float) -> void:
 
 	if health <= prev_health:
 		timer.start()
-		SignalManager.player_hurt.emit()
+		if not tracked_entity:
+			SignalManager.player_hurt.emit()
 	else:
 		if health > prev_health:
 			timer.stop()
-			SignalManager.player_heal.emit()
+			if not tracked_entity:
+				SignalManager.player_heal.emit()
 		_on_timer_timeout()
 
 
@@ -78,7 +78,7 @@ func _on_timer_timeout() -> void:
 	damage_bar.value = health
 
 
-func _on_enemy_stats_changed(entity: Node, stats: LivingEntityStats) -> void:
+func _on_enemy_stats_changed(entity: CharacterBody3D, stats: LivingEntityStats) -> void:
 	if entity == tracked_entity:
 		max_value = stats.max_health
 		health = stats.current_health

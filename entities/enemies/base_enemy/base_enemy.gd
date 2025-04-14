@@ -7,9 +7,14 @@ extends CharacterBody3D
 @onready var damage_label: Marker3D = $Marker3D
 
 func _ready() -> void:
-	initialize_health_bar()
 	initialize_stats()
+	initialize_health_bar()
 	SignalManager.weapon_hit_target.connect(_take_damage)
+
+
+func _physics_process(_delta: float) -> void:
+	move_and_slide()
+
 
 func initialize_health_bar() -> void:
 	if health_bar:
@@ -17,15 +22,13 @@ func initialize_health_bar() -> void:
 		health_bar.bind_signals()
 		health_bar.init_health(stats.max_health, stats.current_health)
 
+
 func initialize_stats() -> void:
 	if stats:
 		stats.init()
-		SignalManager.enemy_stats_changed.emit(self, stats)
 	else:
 		printerr("ERROR: Stats resource is NULL!")
 
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
 
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
@@ -35,13 +38,10 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 		if stats.current_health <= 0:
 			die()
 
+
 func spawn_damage_popup(damage: int) -> void:
 	var damage_popup = preload("uid://b6cnb1t5cixqj").instantiate()
-	var root = get_tree().get_root().get_child(0)
-	if is_instance_valid(root):
-		root.add_child(damage_popup)
-	else:
-		printerr("Error: Could not find the root node to add damage popup.")
+	get_parent().add_child(damage_popup)
 
 	var spawn_position = damage_label.global_position + Vector3(
 		randf_range(-damage_popup.horizontal_spread, damage_popup.horizontal_spread),
@@ -51,6 +51,7 @@ func spawn_damage_popup(damage: int) -> void:
 
 	damage_popup.global_position = spawn_position
 	damage_popup.display_damage(damage)
+
 
 func die() -> void:
 	print("BaseEnemy died!")
