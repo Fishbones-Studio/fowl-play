@@ -15,9 +15,9 @@ var _dash_direction: Vector3
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
-	
+
 	_stamina_cost = movement_component.dash_stamina_cost
-	
+
 	# Handle state transitions
 	if not movement_component.dash_available or player.stats.current_stamina < _stamina_cost:
 		print("Dash available: ", movement_component.dash_available)
@@ -28,12 +28,14 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	
 	movement_component.dash_available = false
 	_is_dashing = true
-	
+
 	_dash_direction = get_player_direction()
-	
+
 	if _dash_direction == Vector3.ZERO:
 		_dash_direction = -player.global_basis.z # Default forward direction
-	
+
+	animation_tree.set("parameters/OneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
 	dash_duration_timer.start()
 	dash_cooldown_timer.start()
 
