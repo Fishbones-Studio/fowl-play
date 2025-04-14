@@ -15,17 +15,12 @@ size = Vector3(2.5, 5.5, 4.15)
 [node name="Woodpecker" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 27
-<<<<<<< HEAD
 script = ExtResource("1_x6gfb")
 stats = ExtResource("2_p6jwh")
 metadata/_custom_type_script = "uid://bln2tqwj0gh1w"
 
 [node name="woodpecker" parent="." instance=ExtResource("2_crgub")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-=======
-
-[node name="woodpecker" type="Node3D" parent="."]
->>>>>>> origin/dev
 
 [node name="Armature" type="Node3D" parent="woodpecker"]
 transform = Transform3D(0.488995, 0.410316, 0, -0.410316, 0.488995, 0, 0, 0, 0.638338, -0.0371947, 2.44817, 0.00152457)
