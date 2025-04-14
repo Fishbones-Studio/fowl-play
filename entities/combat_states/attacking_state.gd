@@ -41,5 +41,7 @@ func _attack() -> void:
 	# Get targets for the given area in the attack area. 
 	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for target in targets:
-		if target == CharacterBody3D:
+		print("Melee weapon target:" + target.name)
+		if target is ChickenPlayer or target is Enemy:
+			print("physicsbody")
 			SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage)
