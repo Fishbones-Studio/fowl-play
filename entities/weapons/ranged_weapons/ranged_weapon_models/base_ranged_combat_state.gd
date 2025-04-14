@@ -11,11 +11,11 @@ var origin_entity : PhysicsBody3D ## The entity that is using the weapon
 
 func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 	if not _weapon_node:
-		print("Weapon does not exist! Please provide a valid weapon node.")
+		push_error("Weapon does not exist! Please provide a valid weapon node.")
 		return
 	
 	if not _transition_signal:
-		print("Transition signal does not exist! Please provide a valid signal.")
+		push_error("Transition signal does not exist! Please provide a valid signal.")
 		return
 		
 	

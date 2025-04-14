@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://7fek21ei1eri"]
+
+[ext_resource type="Script" uid="uid://nokps8t6hp3i" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.gd" id="1_dxmja"]
+[ext_resource type="PackedScene" uid="uid://cpu52aksjkec7" path="res://entities/chicken_player/weapons/slots/melee_weapon_player_slot.tscn" id="1_ojf1h"]
+[ext_resource type="PackedScene" uid="uid://cjmtiw26u67me" path="res://entities/chicken_player/weapons/slots/ranged_weapon_player_slot.tscn" id="2_dxmja"]
+
+[node name="PlayerWeaponController" type="Node3D"]
+script = ExtResource("1_dxmja")
+
+[node name="MeleeWeaponPlayerSlot" parent="." instance=ExtResource("1_ojf1h")]
+visible = false
+
+[node name="RangedWeaponPlayerSlot" parent="." instance=ExtResource("2_dxmja")]
+visible = false

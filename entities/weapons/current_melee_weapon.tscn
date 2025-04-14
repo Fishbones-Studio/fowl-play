@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxsfgou65yp8w"]
-
-[ext_resource type="Script" uid="uid://dgaohu7ppbgoq" path="res://entities/weapons/current_melee_weapon.gd" id="1_reqhr"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="2_25o57"]
-
-[node name="CurrentWeapon" type="Node3D"]
-script = ExtResource("1_reqhr")
-weapon_scene = ExtResource("2_25o57")
