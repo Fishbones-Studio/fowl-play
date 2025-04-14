@@ -1,8 +1,5 @@
 class_name IceFox
-extends CharacterBody3D
-
-@export var stats: LivingEntityStats
-
+extends Enemy
 
 func _ready() -> void:
-	stats.init()
+	super()
