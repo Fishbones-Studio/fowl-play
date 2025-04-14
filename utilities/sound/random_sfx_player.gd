@@ -15,7 +15,6 @@ func _ready() -> void:
 
 
 func _on_play_sound(sound: AudioStream, sound_name: String) -> void:
-	print("Playing sound: ", sound_name)
 	stream = sound
 	# Set random position in 3D space
 	var random_angle := randf_range(0, 2 * PI)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=13 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
@@ -8,9 +8,14 @@
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="6_vwxab"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="8_2bxow"]
+[ext_resource type="PackedScene" uid="uid://crf4ow8864siv" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.tscn" id="8_vj4mj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(2.63416, 4, 3.24414)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vj4mj"]
+size = Vector3(4, 4, 2)
 
 [node name="TempEnemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -46,10 +51,22 @@ metadata/_custom_type_script = "uid://ja4658qiwf5y"
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
-[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("7_thcnk")]
-transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
-actor = NodePath("..")
-
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_vwxab")
 entity = NodePath("..")
+
+[node name="EnemyMeleeHandler" parent="." node_paths=PackedStringArray("attacking_area", "melee_weapon") instance=ExtResource("8_vj4mj")]
+attacking_area = NodePath("../AttackingArea")
+melee_weapon = NodePath("../MeleeWeapon")
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("7_thcnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03808, 1.34805, 0)
+melee_weapon_scene = ExtResource("8_2bxow")
+
+[node name="AttackingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981667, -3.53733)
+shape = SubResource("BoxShape3D_vj4mj")
