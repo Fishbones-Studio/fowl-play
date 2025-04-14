@@ -12,7 +12,7 @@ var _is_immobile: bool
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	super(prev_state)
 
-	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+	#animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 
 	player.velocity.x = 0
 	player.velocity.z = 0
