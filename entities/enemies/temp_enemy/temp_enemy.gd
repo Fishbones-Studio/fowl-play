@@ -5,12 +5,12 @@ extends CharacterBody3D
 # TODO: enemy should also use living entity stat
 
 ## Exported Variables
-@export var health: int = 100
 @export var stats: LivingEntityStats
 @onready var damage_label: Marker3D = $Marker3D
 
 
 func _ready() -> void:
+	stats.init()
 	SignalManager.weapon_hit_target.connect(_take_damage)
 
 
@@ -22,8 +22,8 @@ func _physics_process(_delta: float) -> void:
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		print("Enemy hit!")
-		health -= damage
-		print("Enemy took %d damage! Remaining health: %d" % [damage, health])
+		stats.current_health -= damage
+		print("Enemy took %d damage! Remaining health: %d" % [damage, stats.current_health])
 		
 		var damage_popup: Node3D = preload("uid://b6cnb1t5cixqj").instantiate()
 		get_parent().add_child(damage_popup)
@@ -38,7 +38,7 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 		damage_popup.global_position = spawn_position
 		damage_popup.display_damage(damage)
 		
-	if health <= 0:
+	if stats.current_health <= 0:
 		die()
 
 
