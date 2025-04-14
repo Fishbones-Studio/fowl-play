@@ -1,16 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://5dsmkedrprey"]
+[gd_scene load_steps=7 format=3 uid="uid://5dsmkedrprey"]
 
 [ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="2_qhcpj"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="3_qhcpj"]
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="4_0uh03"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qhcpj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_elgf2"]
+viewport_path = NodePath("SubViewport")
 
 [node name="IceFox" type="CharacterBody3D"]
 script = ExtResource("1_cemmm")
 stats = ExtResource("2_qhcpj")
+high_health_color = Color(9.62615e-06, 0.957093, 0.839865, 1)
+medium_health_color = Color(0.312914, 0.580456, 0.883592, 1)
+critical_health_color = Color(0.244722, 2.59906e-05, 0.946402, 1)
 
 [node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qhcpj")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11897, 0, 0.709816)
+texture = SubResource("ViewportTexture_elgf2")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("4_0uh03")]
