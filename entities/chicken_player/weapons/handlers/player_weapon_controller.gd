@@ -1,3 +1,4 @@
+## Handles input for the player weapons
 extends Node3D
 
 var current_weapon_index := 0
