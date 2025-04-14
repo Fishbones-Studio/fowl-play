@@ -4,7 +4,7 @@ extends SubViewport
 @onready var camera : Camera3D = %ViewportCamera
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if GameManager.chicken_player:
 		var player = GameManager.chicken_player
 
