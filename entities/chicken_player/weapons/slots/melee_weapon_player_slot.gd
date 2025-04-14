@@ -12,5 +12,6 @@ func _ready() -> void:
 		return
 	
 	melee_weapon_node.melee_weapon_scene = load(melee_weapon.model_uid)
+	melee_weapon_node.weapon_collision_mask = get_parent().weapon_collision_mask
 	
 	melee_weapon_node.setup()

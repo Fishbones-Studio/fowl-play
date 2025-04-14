@@ -1,6 +1,10 @@
 ## Handles input for the player weapons
 extends Node3D
 
+# Using flags for user-friendly layer selection in the editor
+# NOTE: currently only used for melee weapon, might also be used for ranged weapon at later date
+@export_flags_3d_physics var weapon_collision_mask: int
+
 var current_weapon_index: int = 0
 var active_weapon: Node3D = null
 
