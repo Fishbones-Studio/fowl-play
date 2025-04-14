@@ -59,10 +59,9 @@ entity = NodePath("..")
 attacking_area = NodePath("../AttackingArea")
 melee_weapon = NodePath("../MeleeWeapon")
 
-[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("7_thcnk")]
+[node name="MeleeWeapon" parent="." instance=ExtResource("7_thcnk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03808, 1.34805, 0)
 melee_weapon_scene = ExtResource("8_2bxow")
-actor = NodePath("..")
 
 [node name="AttackingArea" type="Area3D" parent="."]
 collision_layer = 0
