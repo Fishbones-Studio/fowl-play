@@ -253,11 +253,9 @@ transform = Transform3D(0.669131, 0, 0.743145, 0, 1, 0, -0.743145, 0, 0.669131, 
 
 [node name="SpikeBall" parent="Hazards" instance=ExtResource("7_syv12")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6153, 3.54027, 14.4364)
-minimum_vertical_knockback = 5.0
 
 [node name="SpikeBall2" parent="Hazards" instance=ExtResource("7_syv12")]
 transform = Transform3D(0.111469, 0, -0.993768, 0, 1, 0, 0.993768, 0, 0.111469, -29.0257, 3.54027, -12.915)
-minimum_vertical_knockback = 5.0
 
 [node name="Store" type="Node3D" parent="."]
 
@@ -266,4 +264,5 @@ transform = Transform3D(0.393605, 0, -0.91928, 0, 1, 0, 0.91928, 0, 0.393605, 39
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22.457, 0)
+layers = 3
 light_energy = 2.0

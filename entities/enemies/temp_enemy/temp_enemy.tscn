@@ -1,20 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=13 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
-[ext_resource type="PackedScene" uid="uid://cxsfgou65yp8w" path="res://entities/weapons/current_melee_weapon.tscn" id="3_8k1p6"]
+[ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/temp_enemy/enemy_stats.tres" id="2_thcnk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
-[ext_resource type="Script" uid="uid://gn0lsc05d43v" path="res://entities/enemies/temp_enemy/enemy_states/attack_state.gd" id="5_07niy"]
+[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="6_vwxab"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="8_2bxow"]
+[ext_resource type="PackedScene" uid="uid://crf4ow8864siv" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.tscn" id="8_vj4mj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c1mms"]
 size = Vector3(2.63416, 4, 3.24414)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vj4mj"]
+size = Vector3(4, 4, 2)
 
 [node name="TempEnemy" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_c1mms")
+stats = ExtResource("2_thcnk")
 
 [node name="Chicken improved hennifer varient" parent="." instance=ExtResource("2_5gl3h")]
 transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.999808, 0, 0.816296, 0)
@@ -23,38 +30,44 @@ transform = Transform3D(-0.999808, 0, 0.0195988, 0, 1, 0, -0.0195988, 0, -0.9998
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0.112076, 0.732965, -0.232283)
 shape = SubResource("BoxShape3D_c1mms")
 
-[node name="CurrentWeapon" parent="." instance=ExtResource("3_8k1p6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28045, 1.54188, 0)
-
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy")]
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
 script = ExtResource("2_h40bv")
 starting_state = NodePath("idle_state")
 enemy = NodePath("..")
+movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://btddu8dhoifau"
 
-[node name="idle_state" type="Node" parent="EnemyStateMachine"]
+[node name="idle_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("3_wrgcg")
+enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
 [node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_07niy")
-speed = 4
-enemy = NodePath("../..")
 STATE_TYPE = 1
-metadata/_custom_type_script = "uid://ja4658qiwf5y"
-
-[node name="attack_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_07niy")
-damage = 2
 enemy = NodePath("../..")
-STATE_TYPE = 2
-ANIMATION_NAME = "ATTACK"
-
-[node name="Name" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, 0, 3, 0)
-modulate = Color(0.627451, 0, 0, 1)
-text = "OOOOO Scaryy Chickennnnn"
-font_size = 85
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("6_vwxab")
+entity = NodePath("..")
+
+[node name="EnemyMeleeHandler" parent="." node_paths=PackedStringArray("attacking_area", "melee_weapon") instance=ExtResource("8_vj4mj")]
+attacking_area = NodePath("../AttackingArea")
+melee_weapon = NodePath("../MeleeWeapon")
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("7_thcnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03808, 1.34805, 0)
+melee_weapon_scene = ExtResource("8_2bxow")
+weapon_collision_mask = 2
+
+[node name="AttackingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981667, -3.53733)
+shape = SubResource("BoxShape3D_vj4mj")

@@ -12,6 +12,8 @@ var _is_immobile: bool
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	super(prev_state)
 
+	#animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	player.velocity.x = 0
 	player.velocity.z = 0
 
@@ -21,6 +23,12 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 		immobile_timer.wait_time = info["immobile_time"]
 		immobile_timer.start()
 		_is_immobile = true
+
+
+func process(_delta: float) -> void:
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
 
 
 func physics_process(delta: float) -> void:

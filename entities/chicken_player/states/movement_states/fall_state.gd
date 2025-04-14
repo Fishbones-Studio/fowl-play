@@ -17,6 +17,8 @@ var _has_initial_velocity: bool
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	var active_coyote_time = information.get("coyote_time", false)
 
 	_has_initial_velocity = false
@@ -33,6 +35,12 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 
 func process(delta: float) -> void:
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {
+			"initial_velocity": player.velocity,
+		})
+		return
+	
 	# Drain stamina if player is sprinting, else regenerate stamina
 	if is_sprinting():
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
@@ -97,5 +105,4 @@ func physics_process(delta: float) -> void:
 
 
 func _on_coyote_timer_timeout():
-	print("coyote timer expired")
 	_has_coyote = false

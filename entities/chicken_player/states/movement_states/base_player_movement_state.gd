@@ -6,6 +6,7 @@ extends BaseState
 var player: ChickenPlayer
 var previous_state: BasePlayerMovementState
 var movement_component: PlayerMovementComponent
+var animation_tree: AnimationTree
 
 
 ## Called once when entering the state.
@@ -24,7 +25,7 @@ func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 
 ## Applies jump or fall gravity based on player velocity
 func apply_gravity(delta: float) -> void:
-	player.velocity.y += get_gravity(player.velocity) * delta
+	player.velocity.y += movement_component.get_gravity(player.velocity) * delta
 
 
 func apply_movement(velocity: Vector3) -> void:

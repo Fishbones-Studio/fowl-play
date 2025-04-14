@@ -60,7 +60,6 @@ text = "Quit
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mu8pm")
-volume_db = -5.0
 autoplay = true
 bus = &"Music"
 

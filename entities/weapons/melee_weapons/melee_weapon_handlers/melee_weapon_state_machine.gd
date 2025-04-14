@@ -1,64 +1,65 @@
 ## State machine for the player melee system.
 ##
 ## This script manages the different states of the combat melee system, for the current melee weapon.
-extends Node
+class_name MeleeStateMachine extends Node
+
+signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
 
 @export var starting_state: BaseCombatState
 
 var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
+var weapon : MeleeWeapon
+## Variable to track if setup has run yet
+var initialized : bool = false
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
-@onready var weapon: MeleeWeapon = $"../CurrentWeapon".current_weapon
 
 
-func _ready() -> void:
+func setup(_weapon : MeleeWeapon) -> void:
+	weapon = _weapon
+	
 	if weapon == null:
-		push_error(owner.name + ": No weapon reference set")
+		push_error(owner.name + ": No weapon reference set. " + owner.name )
 
 	# Listen for state transition signals
-	SignalManager.combat_transition_state.connect(_transition_to_next_state)
+	melee_combat_transition_state.connect(_transition_to_next_state)
 
-	# Wait for the owner to be ready before setting up states
-	await owner.ready
 
 	# Get all states in the scene and store them in the dictionary
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon)
+		state_node.setup(weapon, melee_combat_transition_state)
 		
 	# Start in the initial state if it exists
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
 
+	initialized = true
 
+
+# Check if the root actor is an enemy if so, use process behaviour
 func _process(delta: float) -> void:
-	if current_state == null:
-		push_error(owner.name + ": No state set.")
-		return
-	# Run the active state's process function
-	current_state.process(delta)
+	if initialized:
+		if current_state == null:
+			push_error(owner.name + ": No state set.")
+			return
+
+		current_state.process(delta)
 
 
 func _physics_process(delta: float) -> void:
-	if current_state == null:
-		push_error(owner.name + ": No state set.")
-		return
-	# Run the active state's physics process
-	current_state.physics_process(delta)
+	if initialized: 
+		if current_state == null:
+			push_error(owner.name + ": No state set.")
+			return
+		# Run the active state's physics process
+		current_state.physics_process(delta)
 
 
-func _input(event: InputEvent) -> void:
-	if current_state == null:
-		push_error(owner.name + ": No state set.")
-		return
-	# Pass input events to the current state
-	current_state.input(event)
-
-
-# Handles transitioning from one state to another
-func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary[String, float] = {}) -> void:
+# Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
+func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")

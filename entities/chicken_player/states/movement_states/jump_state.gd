@@ -21,6 +21,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 	movement_component.jump_available = air_jumps > _air_jumps_used
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	player.velocity.y = get_jump_velocity()
 
 
@@ -45,6 +47,10 @@ func process(delta: float) -> void:
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
 	else:
 		player.stats.regen_stamina(delta)
+
+	if player.stats.current_health <= 0:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
+		return
 
 
 func physics_process(delta: float) -> void:
