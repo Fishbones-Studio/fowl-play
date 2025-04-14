@@ -10,14 +10,33 @@
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="7_cx7ru"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_egqbq"]
-size = Vector3(2.5, 5, 3)
+size = Vector3(1.5, 5, 1.25)
 
 [node name="Woodpecker" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 27
 script = ExtResource("1_t0esn")
 stats = ExtResource("2_p6jwh")
 
 [node name="woodpecker" parent="." instance=ExtResource("2_crgub")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="woodpecker/Armature" index="0"]
+bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
+bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
+bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
+bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
+bones/6/rotation = Quaternion(0.0516779, 0.0332721, -0.0737218, 0.995383)
+bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
+bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
+bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
+bones/10/rotation = Quaternion(0.00153176, -0.0159936, -0.0338803, 0.999297)
+bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
+bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
+bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)
+bones/14/rotation = Quaternion(0.556543, -6.54378e-08, -0.663262, 0.500343)
+bones/15/position = Vector3(-1.26466, 2.09585, 0.152267)
+bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.66, 0)
@@ -39,9 +58,8 @@ script = ExtResource("5_vfx5i")
 STATE_TYPE = 1
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="MeleeWeapon" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("6_ioi28")]
+[node name="MeleeWeapon" parent="." instance=ExtResource("6_ioi28")]
 transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
-actor = NodePath("..")
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("7_cx7ru")
@@ -49,3 +67,5 @@ entity = NodePath("..")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[editable path="woodpecker"]

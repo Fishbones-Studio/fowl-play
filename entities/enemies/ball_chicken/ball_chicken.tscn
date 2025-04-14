@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqnetav07a5i1"]
+
+[ext_resource type="Script" uid="uid://bhdek7fgsl7pu" path="res://entities/enemies/ball_chicken/ball_chicken.gd" id="1_3n7t4"]
+[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_nnmdb"]
+[ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
+[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="4_hsirj"]
+[ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
+[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_o5lth"]
+[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="8_om003"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i8sye"]
+radius = 2.5
+
+[node name="BallChicken" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 27
+script = ExtResource("1_3n7t4")
+stats = ExtResource("2_nnmdb")
+
+[node name="ball_chicken" parent="." instance=ExtResource("3_2hblk")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i8sye")
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
+script = ExtResource("4_hsirj")
+starting_state = NodePath("idle_state")
+enemy = NodePath("..")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://btddu8dhoifau"
+
+[node name="idle_state" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("5_8q87k")
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="chase_state" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("6_lvw3e")
+STATE_TYPE = 1
+metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("7_o5lth")]
+transform = Transform3D(0.931043, 0, 0.364909, 0, 1, 0, -0.364909, 0, 0.931043, 1.06114, 0.849884, -0.923179)
+
+[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("8_om003")
+entity = NodePath("..")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[editable path="ball_chicken"]
