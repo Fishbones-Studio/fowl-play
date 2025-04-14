@@ -58,11 +58,6 @@ func _physics_process(delta: float) -> void:
 		current_state.physics_process(delta)
 
 
-# Should not be checking input here
-func _input(event: InputEvent) -> void:
-	pass
-
-
 # Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
 func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
 	# Prevent transitioning to the same state
