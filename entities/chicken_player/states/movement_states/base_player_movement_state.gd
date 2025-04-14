@@ -6,6 +6,7 @@ extends BaseState
 var player: ChickenPlayer
 var previous_state: BasePlayerMovementState
 var movement_component: PlayerMovementComponent
+var animation_tree: AnimationTree
 
 
 ## Called once when entering the state.
