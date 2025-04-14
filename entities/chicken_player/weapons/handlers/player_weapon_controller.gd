@@ -35,12 +35,12 @@ func _activate_weapon(index: int) -> void:
 	print("Switched to weapon: ", active_weapon.name)
 
 func _start_attack() -> void:
-	if active_weapon is RangedWeaponPlayerSlot:
+	if active_weapon && active_weapon is RangedWeaponPlayerSlot:
 		active_weapon.ranged_weapon_player_controller.start_firing()
 	elif active_weapon is MeleeWeaponPlayerSlot:
 		active_weapon.melee_weapon_node.melee_state_machine\
 			.melee_combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
 
 func _stop_attack() -> void:
-	if active_weapon is RangedWeaponPlayerSlot:
+	if active_weapon && active_weapon is RangedWeaponPlayerSlot:
 		active_weapon.ranged_weapon_player_controller.stop_firing()
