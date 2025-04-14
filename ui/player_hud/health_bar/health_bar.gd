@@ -52,7 +52,9 @@ func set_health(_health: float) -> void:
 	health = _health
 	
 	value = _health
-
+	
+	_update_health_color()
+	
 	if health <= prev_health:
 		timer.start()
 		SignalManager.player_hurt.emit()
