@@ -13,6 +13,9 @@ class_name MeleeWeaponNode extends Node3D
 		else:
 			push_error("Assigned scene is not a valid Weapon type")
 			melee_weapon_scene = null
+			
+# Using flags for user-friendly layer selection in the editor
+@export_flags_3d_physics var weapon_collision_mask: int
 
 var current_weapon: MeleeWeapon
 
@@ -29,6 +32,11 @@ func setup():
 		return
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
+		
 	
 	add_child(current_weapon)
+	
+	# set the defined collison mask
+	current_weapon.hit_area.collision_mask = weapon_collision_mask
+	
 	melee_state_machine.setup(current_weapon)
