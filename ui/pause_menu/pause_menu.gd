@@ -13,7 +13,7 @@ var paused: bool:
 		get_tree().paused = value
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else prev_mouse_mode
 		if value: # TODO: Whack
-			get_parent().move_child(self, get_parent().get_child_count() - 1) 
+			get_parent().move_child(self, get_parent().get_child_count() - 1)
 			_set_button_visibility()
 
 @onready var resume_button: Button = %ResumeButton
@@ -25,7 +25,7 @@ func _ready() -> void:
 	SignalManager.settings_menu_toggled.connect(_toggle_settings_menu)
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if not paused: 
 			prev_mouse_mode = Input.mouse_mode
@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 			resume_button.grab_focus()
 
 
-func setup(params: Dictionary = {}) -> void:
+func setup(_params: Dictionary = {}) -> void:
 	_init_footer()
 	_squish_chicken()
 	_setup_enter_and_exit_transitions()
@@ -110,8 +110,8 @@ func _on_forfeit_button_button_up() -> void:
 func _set_button_visibility() -> void: 
 	var children: Array = _get_scene_loader_children()
 
-	quit_button.visible = "GameMenu" in children
-	forfeit_button.visible = "Level" in children
+	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
+	forfeit_button.visible = "Level" in children # TODO: Whack
 
 
 func _get_scene_loader_children() -> Array:
