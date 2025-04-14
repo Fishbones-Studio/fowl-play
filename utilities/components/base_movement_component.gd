@@ -1,65 +1,62 @@
 ################################################################################
-## Base movement component that handles core physics calculations for 
-## entity movement.
-## It servers as a blase class for specialized movement components.
+## Base movement component that handles core physics calculations for entity movement.
+## Serves as a base class for specialized movement components.
 ################################################################################
 class_name BaseMovementComponent
 extends Node
 
-# Ratio defaults (adjust these to tweak feel)
-const DEFAULT_PEAK_RATIO: float = 30 # seconds per meter of jump height
-const DEFAULT_FALL_RATIO: float = 36 # seconds per meter of jump height
+# Physics constants
+const DEFAULT_JUMP_HEIGHT: float = 5.0  # meters
+const DEFAULT_TIME_TO_PEAK: float = 0.4  # seconds for default height
+const DEFAULT_TIME_TO_DESCENT: float = 0.3  # seconds for default height
 
 @export var entity: Node3D
 
-@export_category("Jump")
-@export var jump_height: float = 5.0:
+@export_category("Jump Settings")
+@export var jump_height: float = DEFAULT_JUMP_HEIGHT:
 	set(value):
-		jump_height = value
+		jump_height = max(value, 0.1)
 		_recalculate_jump_params()
 
-# Default time values (will be auto-calculated if not set)
-var time_to_peak: float = 0.0  # 0 means auto-calculate
-var time_to_ground: float = 0.0 # 0 means auto-calculate
+# Physics state
+var jump_velocity: float = 0.0
+var jump_gravity: float = 0.0
+var fall_gravity: float = 0.0
 
-var jump_velocity: float
-var jump_gravity: float
-var fall_gravity: float
+var time_to_peak: float = 0.0
+var time_to_descent: float = 0.0
 
 
 func _ready():
 	_recalculate_jump_params()
 
 
+## Solves for initial velocity and gravity to achieve specified jump arc
+## Uses kinematic equations derived from real physics principles:
+## - Displacement = initial_velocity * time + 0.5 * acceleration * time²
+## - Rearrange to solve for velocity = 2 * displacement / time
+## - Rearrange to solve for accelleration = 2 * displacement / time²
 func _recalculate_jump_params():
-	# Calculate times if not manually specified
-	if time_to_peak <= 0:
-		time_to_peak = jump_height / DEFAULT_PEAK_RATIO
-	if time_to_ground <= 0:
-		time_to_ground = jump_height / DEFAULT_FALL_RATIO
-
+	time_to_peak = DEFAULT_TIME_TO_PEAK * sqrt(jump_height / DEFAULT_JUMP_HEIGHT)
+	time_to_descent = DEFAULT_TIME_TO_DESCENT * sqrt(jump_height / DEFAULT_JUMP_HEIGHT)
+	
 	# Calculate physics values
-	jump_velocity = (1.5 * jump_height) / time_to_peak
-	jump_gravity = (-jump_height) / (time_to_peak * time_to_peak)
-	fall_gravity = (-jump_height) / (time_to_ground * time_to_ground)
+	jump_velocity = (2.0 * jump_height) / time_to_peak
+	jump_gravity = (-2.0 * jump_height) / (time_to_peak * time_to_peak)
+	fall_gravity = (-2.0 * jump_height) / (time_to_descent * time_to_descent)
 
 
-## Update the vertical motion physics based on weight
-func update_physics_by_weight(weight: int):
-	# Calculate weight multiplier using logarithmic scaling,
-	# we use 3 (kg) as standard weight. So 3 (kg) would give a multiplier of 1.0
-	# NOTE: tweek/experiment with formula and weight factor.\
-	# NOTE: Do not set weight to 1 or below
-	var weight_multiplier: float = 1.0 + (log(weight / 3.0) / log(3.0))
-
-	# Adjust physics parameters based on weight
-	jump_height = jump_height / weight_multiplier
+## Uses square root scaling for realistic weight distribution
+## Uses 3.0 (kg) as standard weight. Average chicken weighs roughly 2.5-4~ kg.
+func _update_physics_based_on_weight(weight: float) -> void:
+	jump_height /= sqrt(weight / 3.0)
+	_recalculate_jump_params()
 
 
 func get_jump_velocity() -> float:
 	return jump_velocity
 
 
-## Return custom calculated gravity
+## Returns the appropriate gravity value based on movement state
 func get_gravity(velocity: Vector3) -> float:
 	return jump_gravity if velocity.y > 0 else fall_gravity
