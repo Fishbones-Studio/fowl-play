@@ -2,7 +2,6 @@
 class_name MeleeWeaponNode extends Node3D
 
 # Used to get reference to player/enemy in their respective scenes.
-@export var actor : CharacterBody3D
 @export_group("weapon")
 @export var melee_weapon_scene: PackedScene:
 	set(value):
@@ -21,7 +20,7 @@ var current_weapon: MeleeWeapon
 
 func _ready():
 	# In enemy, the export vars are set, so we can immediatly run the setup
-	if actor && melee_weapon_scene:
+	if melee_weapon_scene:
 		setup()
 
 func setup():
@@ -33,4 +32,4 @@ func setup():
 		print("Instantiated melee weapon: " + current_weapon.name)
 	
 	add_child(current_weapon)
-	melee_state_machine.setup(actor, current_weapon)
+	melee_state_machine.setup(current_weapon)

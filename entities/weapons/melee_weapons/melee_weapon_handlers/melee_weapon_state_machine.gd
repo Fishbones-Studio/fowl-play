@@ -15,12 +15,8 @@ var initialized : bool = false
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
 
-# Get the reference from the root node from this scene to the node owning it in enemy/player scene.
-var root_actor: CharacterBody3D
 
-
-func setup(_actor : CharacterBody3D, _weapon : MeleeWeapon) -> void:
-	root_actor = _actor
+func setup(_weapon : MeleeWeapon) -> void:
 	weapon = _weapon
 	
 	if weapon == null:
@@ -34,7 +30,7 @@ func setup(_actor : CharacterBody3D, _weapon : MeleeWeapon) -> void:
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon, melee_combat_transition_state, root_actor)
+		state_node.setup(weapon, melee_combat_transition_state)
 		
 	# Start in the initial state if it exists
 	if current_state:
@@ -50,9 +46,8 @@ func _process(delta: float) -> void:
 		if current_state == null:
 			push_error(owner.name + ": No state set.")
 			return
-		# Run the active state's process function
-		if(root_actor != GameManager.chicken_player):
-			current_state.process(delta)
+
+		current_state.process(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -64,15 +59,9 @@ func _physics_process(delta: float) -> void:
 		current_state.physics_process(delta)
 
 
-# Check if root actor is player if so, use user input
+# Should not be checking input here
 func _input(event: InputEvent) -> void:
-	if initialized:
-		if current_state == null:
-			push_error(owner.name + ": No state set.")
-			return
-		# Pass input events to the current state
-		if(root_actor == GameManager.chicken_player):
-			current_state.input(event)
+	pass
 
 
 # Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.

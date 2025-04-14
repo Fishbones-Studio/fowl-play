@@ -1,19 +1,11 @@
-extends Node
-
-# TODO: setup method. current_weapon will be null
+class_name RangedWeaponPlayerController extends Node
 
 @export var current_weapon : RangedWeapon
 
 func setup(_weapon : RangedWeapon) -> void:
 	current_weapon = _weapon
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack_secondary"):
-		_start_firing()
-	elif event.is_action_released("attack_secondary"):
-		_stop_firing()
-
-func _start_firing() -> void:
+func start_firing() -> void:
 	if not is_instance_valid(current_weapon):
 		push_warning("No valid ranged weapon equipped")
 		return
@@ -21,7 +13,7 @@ func _start_firing() -> void:
 	if current_weapon.handler:
 		current_weapon.handler.start_use()
 
-func _stop_firing() -> void:
+func stop_firing() -> void:
 	if not is_instance_valid(current_weapon):
 		return
 
