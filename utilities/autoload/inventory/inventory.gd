@@ -89,7 +89,6 @@ func equip_item(item: BaseResource, slot_index: int = -1) -> bool:
 	# Auto-find first available slot if none specified
 	if slot_index == -1:
 		for i in default_slot_config.get(item.type, 0):
-			print("aa")
 			if get_equipped_item(item.type, i) == null:
 				slot_index = i
 				break
@@ -108,7 +107,6 @@ func equip_item(item: BaseResource, slot_index: int = -1) -> bool:
 func unequip_item(item: BaseResource, slot_index: int = -1) -> bool:
 	if slot_index == -1:
 		for i in default_slot_config.get(item.type, 0):
-			print("bb")
 			if get_equipped_item(item.type, i) != null:
 				slot_index = i
 				break

@@ -35,8 +35,7 @@ func setup(_weapon : MeleeWeapon) -> void:
 	# Start in the initial state if it exists
 	if current_state:
 		current_state.enter(current_state.STATE_TYPE)
-		
-	print("MeleeStateMachine ran setup")
+
 	initialized = true
 
 

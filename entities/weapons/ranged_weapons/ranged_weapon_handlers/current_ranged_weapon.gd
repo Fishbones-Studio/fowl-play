@@ -29,9 +29,8 @@ func setup() -> void:
 
 	if not current_weapon:
 		current_weapon = ranged_weapon_scene.instantiate() as RangedWeapon
-		print("Instantiated ranged weapon: " + current_weapon.name)
 	if not current_weapon:
-		push_error("Failed to instantiate weapon!")
+		push_error("Failed to instantiate ranged weapon!")
 		return
 
 	add_child(current_weapon)

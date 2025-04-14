@@ -29,7 +29,6 @@ func setup():
 		return
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
-		print("Instantiated melee weapon: " + current_weapon.name)
 	
 	add_child(current_weapon)
 	melee_state_machine.setup(current_weapon)

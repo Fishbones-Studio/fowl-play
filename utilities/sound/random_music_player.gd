@@ -15,6 +15,5 @@ func _ready() -> void:
 
 
 func _on_play_sound(sound: AudioStream, sound_name: String) -> void:
-	print("Playing musin: ", sound_name)
 	stream = sound
 	play()
