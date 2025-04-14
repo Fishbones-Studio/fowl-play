@@ -11,7 +11,6 @@ func start_use() -> void:
 			print("Attack not allowed during cooldown")
 			return
 		WeaponEnums.WeaponState.IDLE:
-			print("going to windup")
 			state_machine.combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
 		WeaponEnums.WeaponState.ATTACKING:
 			# Allow continuous fire if weapon supports it

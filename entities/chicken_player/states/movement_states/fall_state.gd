@@ -105,5 +105,4 @@ func physics_process(delta: float) -> void:
 
 
 func _on_coyote_timer_timeout():
-	print("coyote timer expired")
 	_has_coyote = false
