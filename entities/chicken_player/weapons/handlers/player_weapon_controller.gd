@@ -5,6 +5,11 @@ var current_weapon_index := 0
 var active_weapon: Node3D
 
 func _ready() -> void:
+	if get_children().size() == 0:
+		# TODO: some default weapon
+		push_error("No weapons")
+		queue_free()
+		return
 	_activate_weapon(current_weapon_index)
 
 func _input(event: InputEvent) -> void:
