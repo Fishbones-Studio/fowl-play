@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpoybimnqob11"]
-
-[ext_resource type="Texture2D" path="res://ui/crosshair.svg" id="1_rtxwy"]
+[gd_scene format=3 uid="uid://cpoybimnqob11"]
 
 [node name="Crosshair" type="Node3D"]
 
@@ -20,4 +18,3 @@ grow_vertical = 2
 scale = Vector2(0.232367, 0.165641)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_rtxwy")
