@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		print("Enemy hit!")
-		stats.current_health -= damage
+		stats.drain_health(damage)
 		print("Enemy took %d damage! Remaining health: %d" % [damage, stats.current_health])
 		
 		var damage_popup: Node3D = preload("uid://b6cnb1t5cixqj").instantiate()
