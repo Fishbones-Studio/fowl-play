@@ -262,9 +262,6 @@ entity = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
 weapon_collision_mask = 4
 
-[node name="DeathScreen" parent="." instance=ExtResource("16_qjuvu")]
-visible = false
-
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 0
