@@ -6,7 +6,7 @@ extends CanvasLayer
 @export var initial_ui_scene: PackedScene
 
 
-func _ready():
+func _ready() -> void:
 	SignalManager.switch_ui_scene.connect(_on_switch_ui)
 	SignalManager.add_ui_scene.connect(_on_add_ui_scene)
 	if initial_ui_scene:
