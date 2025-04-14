@@ -117,7 +117,7 @@ states/Fall/position = Vector2(848, 395)
 states/Glide/node = SubResource("AnimationNodeAnimation_n43gi")
 states/Glide/position = Vector2(460, 509)
 states/Idle/node = SubResource("AnimationNodeAnimation_qjuvu")
-states/Idle/position = Vector2(356, 53)
+states/Idle/position = Vector2(355.5, 50.25)
 states/Jump/node = SubResource("AnimationNodeAnimation_hmi2t")
 states/Jump/position = Vector2(662.5, 129.5)
 states/Sprint/node = SubResource("AnimationNodeAnimation_yiywh")
@@ -126,14 +126,14 @@ states/Start/position = Vector2(217, 48)
 states/Walk/node = SubResource("AnimationNodeAnimation_vclph")
 states/Walk/position = Vector2(518, 367)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqatk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_yoq0e"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_s5wfe"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_iclyv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_gijp2"), "Walk", "Sprint", SubResource("AnimationNodeStateMachineTransition_7naj4"), "Sprint", "Walk", SubResource("AnimationNodeStateMachineTransition_cuo5c"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_u8bit"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_2wh4f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_7ahvc"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ee1u"), "Jump", "Sprint", SubResource("AnimationNodeStateMachineTransition_5h8xb"), "Sprint", "Jump", SubResource("AnimationNodeStateMachineTransition_vjble"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_udner"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_xo15m"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_oql7h"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_rucgp"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_2cs3l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n5g0g"), "Sprint", "Fall", SubResource("AnimationNodeStateMachineTransition_dhwnh"), "Fall", "Sprint", SubResource("AnimationNodeStateMachineTransition_tmwol"), "Fall", "Glide", SubResource("AnimationNodeStateMachineTransition_4atkk"), "Glide", "Fall", SubResource("AnimationNodeStateMachineTransition_8qh5d"), "Idle", "Glide", SubResource("AnimationNodeStateMachineTransition_xum6i")]
-graph_offset = Vector2(114.195, -56.6405)
+graph_offset = Vector2(-57.8928, -118.44)
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vwm1c"]
 fadein_time = 0.1
 fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yiywh"]
-graph_offset = Vector2(-311.227, -79.4455)
+graph_offset = Vector2(-429.12, -80.64)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_5aj8x")
 nodes/Dash/position = Vector2(-248, 132)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_y8j8d")
@@ -160,19 +160,19 @@ layer_to_add = 2
 recursive = true
 
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
-bones/0/rotation = Quaternion(0.964567, -0.00799557, 0.0126355, 0.263414)
-bones/1/rotation = Quaternion(-0.108072, 2.62974e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.573543, -0.00122003, 0.000553545, 0.819175)
-bones/3/rotation = Quaternion(-0.470948, 0.00277013, -0.0145424, 0.882037)
-bones/4/rotation = Quaternion(-0.260399, -0.00113742, -0.00920271, 0.965457)
+bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
+bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.434138, -0.00257234, 0.0106214, 0.90078)
+bones/3/rotation = Quaternion(-0.685707, -0.0919002, 0.00572195, 0.72203)
+bones/4/rotation = Quaternion(-0.109824, 0.0204284, 0.0224777, 0.993487)
 bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
 bones/6/rotation = Quaternion(-0.268938, 0.0361644, 0.74135, 0.613812)
-bones/7/rotation = Quaternion(0.608742, -0.0585387, 0.132636, 0.780009)
-bones/8/rotation = Quaternion(0.341031, -0.0259117, -0.100761, 0.934277)
-bones/9/rotation = Quaternion(0.644958, 0.0969203, -0.140953, 0.744827)
-bones/10/rotation = Quaternion(0.116295, 0.0242887, 0.164114, 0.979261)
+bones/7/rotation = Quaternion(0.150566, 0.0307317, 0.238495, 0.958909)
+bones/8/rotation = Quaternion(0.588505, -0.129407, -0.14376, 0.785015)
+bones/9/rotation = Quaternion(0.0662418, 0.151163, -0.146547, 0.975339)
+bones/10/rotation = Quaternion(0.308751, 0.0791932, 0.198243, 0.926877)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(0.0244612, -4.72212e-17, -1.55171e-16, 0.999701)
+bones/11/rotation = Quaternion(-0.23933, 0.0450574, 0.053253, 0.968429)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
