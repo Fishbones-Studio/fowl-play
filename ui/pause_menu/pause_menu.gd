@@ -13,7 +13,7 @@ var paused: bool:
 		get_tree().paused = value
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else prev_mouse_mode
 		if value: # TODO: Whack
-			get_parent().move_child(self, get_parent().get_child_count() - 1) 
+			get_parent().move_child(self, get_parent().get_child_count() - 1)
 			_set_button_visibility()
 
 @onready var resume_button: Button = %ResumeButton
@@ -110,8 +110,8 @@ func _on_forfeit_button_button_up() -> void:
 func _set_button_visibility() -> void: 
 	var children: Array = _get_scene_loader_children()
 
-	quit_button.visible = "GameMenu" in children
-	forfeit_button.visible = "Level" in children
+	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
+	forfeit_button.visible = "Level" in children # TODO: Whack
 
 
 func _get_scene_loader_children() -> Array:

@@ -1,7 +1,7 @@
 class_name BaseEnemyState
 extends BaseEnemyMovementState
 
-#Instantiate globally used variables around the enemy states
+# Instantiate globally used variables around the enemy states
 @export var DELTA_MODIFIER: float = 100
 
 @export var chase_distance: float = 20
