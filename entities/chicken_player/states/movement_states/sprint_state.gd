@@ -6,6 +6,8 @@ var _stamina_cost: int
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
 	super(prev_state)
 
+	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+
 	_stamina_cost = movement_component.sprint_stamina_cost
 
 
