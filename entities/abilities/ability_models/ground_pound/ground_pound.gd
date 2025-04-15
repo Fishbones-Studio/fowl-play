@@ -52,6 +52,7 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	# Handles edge case where character lands without hitting an enemy
 	if ability_holder.velocity.y <= 0.0 and not _particles_emitted and on_cooldown:
 
 		await get_tree().create_timer(0.2).timeout
@@ -77,6 +78,9 @@ func _apply_knockback(body: Node3D) -> void:
 
 
 func _toggle_collision_masks(toggle: bool) -> void:
+	# Manages collision detection layers:
+	# - Enables/disables detection based on owner type
+
 	if ability_holder.collision_layer == 2: # Player
 		hit_area.set_collision_mask_value(3, toggle)
 	if ability_holder.collision_layer == 4: # Enemy

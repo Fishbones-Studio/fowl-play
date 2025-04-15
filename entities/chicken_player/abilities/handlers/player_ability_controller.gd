@@ -1,3 +1,10 @@
+################################################################################
+## Manages the player's abilities, handling activation, cooldowns, and input.
+##
+## This controller links AbilitySlot nodes to the player character and processes 
+## input to trigger abilities when conditions are met (cooldowns, resources, etc.).
+## Add AbilitySlot children to this node to register them with the controller.
+################################################################################
 class_name PlayerAbilityController
 extends Node3D
 
@@ -9,6 +16,7 @@ var abilities: Dictionary[AbilitySlot, Ability]
 func _ready() -> void:
 	assert(player, "No player reference set for: %s" % name) # For debugging
 	
+	# Initialize all child AbilitySlots
 	for child: AbilitySlot in get_children():
 		child.setup(player)
 		
