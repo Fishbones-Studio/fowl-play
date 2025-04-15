@@ -37,10 +37,9 @@ func _ready() -> void:
 				# Added closing parenthesis for push_warning
 				push_warning("No item slot found at index: ", index)
 	)
-	
-	_init_item_slots(Inventory.inventory_data.items)
+	_init_item_slots(Inventory.inventory_data.get_items_sorted_flattened())
 
-func _init_item_slots(items: Array) -> void: # Use Array or Array[BaseResource]
+func _init_item_slots(items: Array) -> void:
 	print("Initializing item slots with items: ", items)
 	# Clear the container
 	for child in get_children():
