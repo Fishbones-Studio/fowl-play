@@ -163,17 +163,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.506291, -0.00255163, 0.00823781, 0.86232)
-bones/3/rotation = Quaternion(-0.530035, -0.00274389, -0.0069451, 0.847943)
-bones/4/rotation = Quaternion(-0.107425, 0.167349, -0.0473542, 0.978883)
-bones/5/rotation = Quaternion(-0.240781, -0.0575091, -0.743278, 0.621495)
-bones/6/rotation = Quaternion(-0.203744, 0.120323, 0.691967, 0.68205)
+bones/2/rotation = Quaternion(-0.441868, 0.000992651, -0.00338448, 0.897073)
+bones/3/rotation = Quaternion(-0.520631, 0.072732, 0.0437667, 0.849551)
+bones/4/rotation = Quaternion(-0.108034, -0.303735, 0.0741523, 0.943703)
+bones/5/rotation = Quaternion(-0.268438, -0.0231794, -0.762635, 0.588041)
+bones/6/rotation = Quaternion(-0.177774, 0.151977, 0.669674, 0.704866)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.273089, -0.0150722, -0.10612, 0.955999)
-bones/9/rotation = Quaternion(0.207708, 0.0285349, -0.151262, 0.966004)
+bones/8/rotation = Quaternion(0.231894, -0.007263, -0.0562009, 0.971089)
+bones/9/rotation = Quaternion(0.170872, 0.0258522, -0.14978, 0.973499)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.178733, -0.0537823, -0.0467255, 0.981315)
+bones/11/rotation = Quaternion(-0.173993, -0.0294551, -0.0137377, 0.98421)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
@@ -250,7 +250,6 @@ entity = NodePath("..")
 
 [node name="PlayerWeaponController" parent="." instance=ExtResource("26_vclph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
-visible = true
 weapon_collision_mask = 4
 
 [node name="PlayerAbilityController" parent="." node_paths=PackedStringArray("player") instance=ExtResource("17_pq2r3")]

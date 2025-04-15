@@ -16,7 +16,7 @@ func _ready() -> void:
 		abilities[child] = child.ability
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 		if abilities.size() > 0 and Input.is_action_just_pressed("ability_one"):
 			_try_activate_ability(abilities.keys()[0])
 		if abilities.size() > 1 and Input.is_action_just_pressed("ability_two"):

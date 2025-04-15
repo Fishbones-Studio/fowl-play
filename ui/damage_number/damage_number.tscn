@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhlso5fbo76px"]
+
+[ext_resource type="Script" uid="uid://bcyqallhhjd7l" path="res://ui/damage_number/damage_number.gd" id="1_i4q1m"]
+
+[node name="DamageNumber" type="Node3D"]
+script = ExtResource("1_i4q1m")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+text = "123"
+outline_size = 20

@@ -50,7 +50,7 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	_toggle_collision_masks(false)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ability_holder.velocity.y <= 0.0 and not _particles_emitted and on_cooldown:
 
 		await get_tree().create_timer(0.2).timeout

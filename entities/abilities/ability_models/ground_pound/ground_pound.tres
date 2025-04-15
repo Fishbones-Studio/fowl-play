@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://dx4h8wfqycags"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://dx4h8wfqycags"]
 
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_7nl1e"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_ve8n7"]
 
 [resource]
@@ -10,5 +11,6 @@ name = "Ground Pound"
 drop_chance = 50
 cost = 0
 description = "While in the air,"
+icon = ExtResource("1_7nl1e")
 model_uid = "uid://b7t7b5rawdkte"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
