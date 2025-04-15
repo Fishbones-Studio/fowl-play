@@ -6,7 +6,7 @@ extends Ability
 
 var damage : float:
 	get:
-		return current_ability.damage * max(ability_holder.stats.weight, 0.1)
+		return current_ability.damage * ability_holder.stats.weight
 
 var _particles_emitted: bool = false
 
