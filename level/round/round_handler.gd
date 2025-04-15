@@ -82,9 +82,8 @@ func _enter_in_progress() -> void:
 	if round_timer:
 		_activate_round_countdown("Current round ends in", battle_timer)
 
-	print("hi")
 	await SignalManager.enemy_died
-	print("bye")
+	
 	_start_round()
 
 
