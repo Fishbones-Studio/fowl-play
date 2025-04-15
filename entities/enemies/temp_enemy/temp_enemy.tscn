@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=15 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="2_h40bv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="8_2bxow"]
 [ext_resource type="PackedScene" uid="uid://crf4ow8864siv" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.tscn" id="8_vj4mj"]
+[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="11_0gkpg"]
 
 [sub_resource type="GDScript" id="GDScript_nt0ce"]
 script/source = "## Enemy: A basic enemy that can take damage and die.
@@ -25,6 +26,9 @@ size = Vector3(2.63416, 4, 3.24414)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vj4mj"]
 size = Vector3(4, 4, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jqyht"]
+viewport_path = NodePath("SubViewport")
 
 [node name="TempEnemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -78,3 +82,12 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackingArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981667, -3.53733)
 shape = SubResource("BoxShape3D_vj4mj")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.15451, 0.637661, -1.52368)
+texture = SubResource("ViewportTexture_jqyht")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("11_0gkpg")]
