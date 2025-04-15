@@ -6,16 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="4_0uh03"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qhcpj"]
+size = Vector3(3, 4, 3)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_elgf2"]
 viewport_path = NodePath("SubViewport")
 
 [node name="IceFox" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_cemmm")
 stats = ExtResource("2_qhcpj")
-high_health_color = Color(9.62615e-06, 0.957093, 0.839865, 1)
-medium_health_color = Color(0.312914, 0.580456, 0.883592, 1)
-critical_health_color = Color(0.244722, 2.59906e-05, 0.946402, 1)
 
 [node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
 

@@ -5,6 +5,12 @@ extends Node
 
 var cooldown : float = 0.0
 
+
+func _ready() -> void:
+	if not melee_weapon:
+		queue_free()
+
+
 func _physics_process(_delta: float) -> void:
 	if cooldown > 0.0:
 		cooldown -= _delta
