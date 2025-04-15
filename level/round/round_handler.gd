@@ -79,6 +79,9 @@ func _enter_in_progress() -> void:
 
 	_spawn_enemy_in_level()
 
+	#if round_timer:
+		
+
 	await SignalManager.enemy_died
 
 	_start_round()
@@ -111,7 +114,10 @@ func _enter_intermission() -> void:
 	print("imagine you are now in a different part of arena with a shop")
 
 	while intermission_timer.time_left > 0:
-		countdown_instance.update_countdown(ceil(intermission_timer.time_left))
+		var remaining_seconds: float = ceil(intermission_timer.time_left)
+		countdown_instance.update_countdown(
+			"Next round in %d second%s" % [remaining_seconds, "" if remaining_seconds == 1 else "s"]
+		)
 		await get_tree().create_timer(1.0).timeout
 
 	countdown_instance.queue_free()
