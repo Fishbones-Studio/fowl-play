@@ -1,7 +1,6 @@
 class_name AbilityResource
 extends BaseResource
 
-@export var damage: int
 @export var cooldown: float
 
 

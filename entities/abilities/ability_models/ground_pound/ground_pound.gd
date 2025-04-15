@@ -1,12 +1,12 @@
 extends Ability
 
 @export var descent_velocity: float = -50.0
-@export var knockback_force: float = 750
+@export var knockback_force: float = 200
 @export var knockback_force_upwards: float = 10
 
 var damage : float:
 	get:
-		return current_ability.damage * ability_holder.stats.weight
+		return max(ability_holder.stats.attack, 0.1) * ability_holder.stats.weight * 2
 
 var _particles_emitted: bool = false
 
@@ -72,7 +72,7 @@ func _apply_knockback(body: Node3D) -> void:
 			dir.z * knockback_force
 		)
 		# Knockback is a bit scuffed due to enemy not having a hurt state implemented.
-		body.velocity = knockback
+		body.velocity = knockback * ability_holder.stats.weight
 
 
 func _toggle_collision_masks(toggle: bool) -> void:
