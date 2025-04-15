@@ -33,15 +33,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
 enemy_scenes = Array[PackedScene]([ExtResource("4_6gtgk"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
+round_timer = true
 waiting_time = 5.0
-
-[node name="RoundBattleTimer" type="Timer" parent="RoundHandler"]
-wait_time = 120.0
-one_shot = true
 
 [node name="RoundIntermissionTimer" type="Timer" parent="RoundHandler"]
 wait_time = 30.0
 one_shot = true
 
-[connection signal="timeout" from="RoundHandler/RoundBattleTimer" to="RoundHandler" method="_on_round_battle_timer_timeout"]
+[node name="RoundBattleTimer" type="Timer" parent="RoundHandler"]
+wait_time = 120.0
+one_shot = true
+
 [connection signal="timeout" from="RoundHandler/RoundIntermissionTimer" to="RoundHandler" method="_on_round_intermission_timer_timeout"]
+[connection signal="timeout" from="RoundHandler/RoundBattleTimer" to="RoundHandler" method="_on_round_battle_timer_timeout"]

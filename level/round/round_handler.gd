@@ -79,8 +79,8 @@ func _enter_in_progress() -> void:
 
 	_spawn_enemy_in_level()
 
-	#if round_timer:
-		
+	if round_timer:
+		_activate_round_countdown("Current round ends in", battle_timer)
 
 	await SignalManager.enemy_died
 
@@ -103,24 +103,9 @@ func _enter_concluding() -> void:
 
 
 func _enter_intermission() -> void:
-	assert(ROUND_COUNTDOWN_SCENE is PackedScene, "ROUND_COUNTDOWN_SCENE is not a valid PackedScene")
-
-	var countdown_instance: Control = ROUND_COUNTDOWN_SCENE.instantiate()
-	add_child(countdown_instance)
-
-	intermission_timer.start()
-
 	# TODO, shop somewhere to interact
 	print("imagine you are now in a different part of arena with a shop")
-
-	while intermission_timer.time_left > 0:
-		var remaining_seconds: float = ceil(intermission_timer.time_left)
-		countdown_instance.update_countdown(
-			"Next round in %d second%s" % [remaining_seconds, "" if remaining_seconds == 1 else "s"]
-		)
-		await get_tree().create_timer(1.0).timeout
-
-	countdown_instance.queue_free()
+	_activate_round_countdown("Intermission ends in", intermission_timer)
 
 
 # Selects a random enemy from the pool, then remove it from the spawn pool to prevent fighting the same enemy and finally return the enemy instance
@@ -137,16 +122,29 @@ func _spawn_enemy_in_level() -> void:
 	SignalManager.enemy_died.connect(func(): _current_enemy = null, CONNECT_ONE_SHOT)
 
 
-# This function probably won't be used, but who knows, maybe for tie breakers
-# Compares both the ChickenPlayer and Enemy health and whoever has the lowest remaining health loses
-func _on_round_battle_timer_timeout() -> void:
-	if GameManager.chicken_player.stats.current_health > _current_enemy.stats.current_health:
-		print("you have more hp and procceed to next round")
-		# go to next round
-	else:
-		print("enemy has more hp and you lose, game over noob")
-		# show game over screen
+func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
+	assert(ROUND_COUNTDOWN_SCENE is PackedScene, "ROUND_COUNTDOWN_SCENE is not a valid PackedScene")
+
+	var countdown_instance: Control = ROUND_COUNTDOWN_SCENE.instantiate()
+	add_child(countdown_instance)
+
+	countdown_timer.start()
+
+	while countdown_timer.time_left > 0:
+		var remaining_seconds: float = ceil(countdown_timer.time_left)
+		countdown_instance.update_countdown(
+			"%s %d second%s" % [text, remaining_seconds, "" if remaining_seconds == 1 else "s"]
+		)
+		await get_tree().create_timer(1.0).timeout
+
+	countdown_instance.queue_free()
 
 
 func _on_round_intermission_timer_timeout() -> void:
+	_start_round()
+
+
+func _on_round_battle_timer_timeout() -> void:
+	# TODO, something when it draws? less rewards or none? right now just some ui
+	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Draw!"})
 	_start_round()
