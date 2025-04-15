@@ -140,11 +140,11 @@ func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
 	countdown_instance.queue_free()
 
 
-func _on_round_intermission_timer_timeout() -> void:
+# TODO, something when it draws? less rewards or none? right now just some ui
+func _on_round_battle_timer_timeout() -> void:
+	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Draw!"})
 	_start_round()
 
 
-func _on_round_battle_timer_timeout() -> void:
-	# TODO, something when it draws? less rewards or none? right now just some ui
-	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Draw!"})
+func _on_round_intermission_timer_timeout() -> void:
 	_start_round()
