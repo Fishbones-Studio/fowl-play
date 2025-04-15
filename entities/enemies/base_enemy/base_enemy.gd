@@ -31,7 +31,6 @@ func initialize_stats() -> void:
 
 
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
-	print("The target: " + target.name)
 	if target == self:
 		stats.drain_health(damage)
 		spawn_damage_popup(damage)

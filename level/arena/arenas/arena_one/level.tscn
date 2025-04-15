@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhnqi4fnso1hh"]
+[gd_scene load_steps=6 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arenas/arena_one/area.tscn" id="1_1ainy"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_n6hdu"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_km5ld"]
 [ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_2xhu8"]
-[ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="6_2ctv6"]
 [ext_resource type="AudioStream" uid="uid://b8q5sgur0ci0o" path="res://level/arena/arenas/arena_one/art/temp_arena_song.mp3" id="6_2orkt"]
 
 [node name="Level" type="Node3D"]
@@ -32,6 +31,3 @@ bus = &"Music"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5682, -28.3459)
 collision_layer = 1
 collision_mask = 1
-
-[node name="IceFox" parent="." instance=ExtResource("6_2ctv6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45942, -6.75908)

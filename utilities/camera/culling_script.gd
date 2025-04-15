@@ -7,7 +7,7 @@ extends Node3D
 # If true, applies the layer to all descendants. If false, only direct children.
 @export var recursive := false
 
-func _ready():
+func _ready() -> void:
 	# Validate the input layer number just in case
 	if layer_to_add < 1 or layer_to_add > 20:
 		printerr(
@@ -18,7 +18,7 @@ func _ready():
 		return
 
 	# Calculate the bitmask value for the specified layer number.
-	var layer_bitmask = 1 << (layer_to_add - 1)
+	var layer_bitmask: int = 1 << (layer_to_add - 1)
 
 	if recursive:
 		# Start the recursive process from this node's children
@@ -34,16 +34,9 @@ func _ready():
 func _apply_layer_to_node(node: Node, layer_bitmask: int) -> void:
 	# Check if the node inherits from VisualInstance3D
 	if node is VisualInstance3D:
-		var visual_instance = node as VisualInstance3D
+		var visual_instance: VisualInstance3D = node as VisualInstance3D
 		# Use the bitwise OR operator (|) to add the new layer's bit
 		visual_instance.layers = visual_instance.layers | layer_bitmask
-		# Print the result for debugging
-		print(
-			"Node '",
-			visual_instance.name,
-			"' layers set to: ",
-			visual_instance.layers
-		)
 
 
 # Recursive function to apply the layer to a node and all its descendants
