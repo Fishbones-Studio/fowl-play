@@ -21,10 +21,8 @@ type = 1
 metadata/_custom_type_script = "uid://d4biwqekg0iid"
 
 [node name="ball_chicken" parent="." instance=ExtResource("3_2hblk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("SphereShape3D_i8sye")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
