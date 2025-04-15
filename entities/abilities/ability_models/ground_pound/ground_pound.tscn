@@ -1,35 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://cryel2pstdou1"]
+[gd_scene load_steps=7 format=3 uid="uid://b7t7b5rawdkte"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_84y3s"]
+[ext_resource type="Script" uid="uid://ddf0inyihgiuq" path="res://entities/abilities/ability_models/ground_pound/ground_pound.gd" id="1_pv44g"]
+[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_qn7uh"]
+[ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="2_qn7uh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cv686"]
 height = 0.5
 radius = 11.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjuvu"]
 albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_l863u"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_55xeu"]
 material = SubResource("StandardMaterial3D_qjuvu")
 size = Vector2(1, 1)
 
-[node name="GroundPound" type="Node3D"]
+[node name="GroundPound" instance=ExtResource("1_qn7uh")]
+script = ExtResource("1_pv44g")
+descent_velocity = -50.0
+knockback_force = 750.0
+knockback_force_upwards = 10.0
+current_ability = ExtResource("2_qn7uh")
 
-[node name="HitArea" type="Area3D" parent="."]
+[node name="HitArea" type="Area3D" parent="." index="1"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 0
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("CylinderShape3D_84y3s")
+shape = SubResource("CylinderShape3D_cv686")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea"]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+unique_name_in_owner = true
 emitting = false
 amount = 250
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 lifetime_randomness = 1.0
-mesh = SubResource("PlaneMesh_l863u")
+mesh = SubResource("PlaneMesh_55xeu")
 emission_shape = 6
 emission_ring_axis = Vector3(0, 33, 1)
 emission_ring_height = 0.0
@@ -37,3 +47,5 @@ emission_ring_radius = 11.0
 emission_ring_inner_radius = 1.0
 emission_ring_cone_angle = 90.0
 gravity = Vector3(0, 0.5, 0)
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

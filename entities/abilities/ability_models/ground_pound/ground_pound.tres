@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://dx4h8wfqycags"]
 
-[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_b3yni"]
+[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_ve8n7"]
 
 [resource]
-script = ExtResource("1_b3yni")
-damage = 10
+script = ExtResource("1_ve8n7")
+damage = 15
 cooldown = 5.0
 name = "Ground Pound"
 drop_chance = 50
 cost = 0
-description = "Slam down with devastating force, crushing enemies beneath you and sending shockwaves through the battlefield."
-model_uid = ""
+description = "While in the air,"
+model_uid = "uid://b7t7b5rawdkte"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

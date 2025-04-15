@@ -55,6 +55,7 @@ func _equip_item_in_slot(item: BaseResource, slot_index: int) -> bool:
 			return false
 	return true
 
+
 ## Function to unequip an item from a slot
 func _unequip_item_from_slot(item: BaseResource, slot_index: int) -> bool:
 	var slot_type: ItemEnums.ItemTypes = item.type

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ewtev0tsouye"]
+
+[ext_resource type="Script" uid="uid://brddre840c61" path="res://entities/abilities/ability.gd" id="1_tf6v8"]
+
+[node name="Ability" type="Node3D"]
+script = ExtResource("1_tf6v8")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
