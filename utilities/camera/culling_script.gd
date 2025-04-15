@@ -5,7 +5,7 @@ extends Node3D
 # Export the layer *number* (1 to 20) you want to ADD to the children.
 @export_range(1, 20) var layer_to_add : int = 1
 # If true, applies the layer to all descendants. If false, only direct children.
-@export var recursive := false
+@export var recursive : bool = false
 
 func _ready() -> void:
 	# Validate the input layer number just in case

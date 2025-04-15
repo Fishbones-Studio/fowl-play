@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 @onready var damage_label: Marker3D = $Marker3D
 
+
 func _ready() -> void:
 	initialize_stats()
 	initialize_health_bar()
@@ -40,7 +41,7 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 
 
 func spawn_damage_popup(damage: int) -> void:
-	var damage_popup = preload("uid://b6cnb1t5cixqj").instantiate()
+	var damage_popup: Node3D = preload("uid://b6cnb1t5cixqj").instantiate()
 	get_parent().add_child(damage_popup)
 
 	var spawn_position: Vector3 = damage_label.global_position + Vector3(

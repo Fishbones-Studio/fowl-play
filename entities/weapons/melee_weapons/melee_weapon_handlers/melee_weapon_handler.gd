@@ -1,5 +1,6 @@
 @tool
-class_name MeleeWeaponNode extends Node3D
+class_name MeleeWeaponNode 
+extends Node3D
 
 # Used to get reference to player/enemy in their respective scenes.
 @export_group("weapon")
@@ -21,23 +22,26 @@ var current_weapon: MeleeWeapon
 
 @onready var melee_state_machine : MeleeStateMachine = $MeleeStateMachine
 
-func _ready():
+
+func _ready() -> void:
 	# In enemy, the export vars are set, so we can immediatly run the setup
 	if melee_weapon_scene:
 		setup()
 
-func setup():
+
+func setup() -> void:
 	if not melee_weapon_scene:
 		push_error("No valid weapon scene assigned!")
 		queue_free()
 		return
+
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
-		
-	
+
+
 	add_child(current_weapon)
-	
+
 	# set the defined collison mask
 	current_weapon.hit_area.collision_mask = weapon_collision_mask
-	
+
 	melee_state_machine.setup(current_weapon)

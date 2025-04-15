@@ -39,6 +39,7 @@ func _ready() -> void:
 	)
 	_init_item_slots(Inventory.inventory_data.get_items_sorted_flattened())
 
+
 func _init_item_slots(items: Array) -> void:
 	print("Initializing item slots with items: ", items)
 	# Clear the container

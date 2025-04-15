@@ -5,16 +5,17 @@ extends ProgressBar
 @export var medium_health_color: Color = Color.ORANGE
 @export var critical_health_color: Color = Color.RED
 
-@onready var timer := $Timer
-@onready var damage_bar := $DamageBar
-
 var health: float:
 	set = set_health
+
+@onready var timer: Timer= $Timer
+@onready var damage_bar: ProgressBar = $DamageBar
 
 
 func _ready() -> void:
 	# Set initial color
 	_update_health_color()
+
 
 func _update_health_color() -> void:
 	var health_percent : float = health / max_value if max_value > 0 else 1.0
@@ -52,7 +53,6 @@ func set_health(_health: float) -> void:
 		if health > prev_health:
 			timer.stop()
 		_on_timer_timeout()
-
 
 
 func init_health(_max_health: float, _health: float) -> void:

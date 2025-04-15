@@ -1,11 +1,12 @@
 extends BaseEnemyState
 
 var target_position: Vector3
-
 var calculated_speed: float
 
-func _init():
+
+func _init() -> void:
 	STATE_TYPE = EnemyEnums.EnemyStates.CHASE_STATE
+
 
 #Check what conditions are fulfilled to shift the enemy in state to certain behaviour patterns.
 #This would be the place to change behaviour, for example a ranged attack.
