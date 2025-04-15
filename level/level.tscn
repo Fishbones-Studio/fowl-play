@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
-[ext_resource type="Script" path="res://level/level.gd" id="1_ivpvi"]
+[ext_resource type="Script" uid="uid://dysimibhncv05" path="res://level/level.gd" id="1_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
@@ -16,6 +16,7 @@ total_rounds = 4
 enemies = Array[PackedScene]([ExtResource("4_6gtgk"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
 
 [node name="Arena" parent="." instance=ExtResource("1_44x8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -72.1674, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.995509, -0.00619845, 0.0944599, 0.00475659, 0.999869, 0.0154817, -0.0945434, -0.0149629, 0.995408, 0, 3.84457, 8.32513)
