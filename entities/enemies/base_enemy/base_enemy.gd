@@ -59,6 +59,7 @@ func spawn_damage_popup(damage: int) -> void:
 
 func die() -> void:
 	print("BaseEnemy died!")
+	SignalManager.enemy_died.emit()
 	queue_free()
 
 

@@ -32,7 +32,7 @@ func _init_enemies() -> void:
 	available_enemies.clear()
 
 	for enemy in enemy_scenes:
-		var enemy_instance: = enemy.instantiate()
+		var enemy_instance: Enemy = enemy.instantiate()
 		assert(enemy_instance != null, "Failed to instantiate enemy scene")
 
 		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.get_enemy_type()
@@ -82,8 +82,9 @@ func _enter_in_progress() -> void:
 	if round_timer:
 		_activate_round_countdown("Current round ends in", battle_timer)
 
+	print("hi")
 	await SignalManager.enemy_died
-
+	print("bye")
 	_start_round()
 
 
