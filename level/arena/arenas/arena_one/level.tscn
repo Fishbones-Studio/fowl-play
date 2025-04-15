@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arenas/arena_one/area.tscn" id="1_1ainy"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_n6hdu"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_km5ld"]
-[ext_resource type="PackedScene" uid="uid://ccns8he8y64n3" path="res://entities/enemies/temp_enemy/temp_enemy.tscn" id="4_i2t4f"]
+[ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_2xhu8"]
 [ext_resource type="AudioStream" uid="uid://b8q5sgur0ci0o" path="res://level/arena/arenas/arena_one/art/temp_arena_song.mp3" id="6_2orkt"]
 
 [node name="Level" type="Node3D"]
@@ -22,10 +22,12 @@ transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861
 camera_reference = NodePath("../PlayerCamera")
 entity_to_follow = NodePath("../Player")
 
-[node name="TempEnemy" parent="." instance=ExtResource("4_i2t4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04619, 0.942033, -25.4663)
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_2orkt")
 autoplay = true
 bus = &"Music"
+
+[node name="HenifferEnemy" parent="." instance=ExtResource("5_2xhu8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5682, -28.3459)
+collision_layer = 1
+collision_mask = 1

@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkmdrs8gij6w5"
-path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-68ea8da12c44de1fb7cce3520e869521.s3tc.ctex"
-path.etc2="res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-68ea8da12c44de1fb7cce3520e869521.etc2.ctex"
+path.s3tc="res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-5f880073297c2d41a792d562c6d22629.s3tc.ctex"
+path.etc2="res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-5f880073297c2d41a792d562c6d22629.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient_Sphere_3.png"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-68ea8da12c44de1fb7cce3520e869521.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-68ea8da12c44de1fb7cce3520e869521.etc2.ctex"]
+source_file="res://entities/enemies/hennifer_enemy/art/Chicken improved hennifer varient_Sphere_3.png"
+dest_files=["res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-5f880073297c2d41a792d562c6d22629.s3tc.ctex", "res://.godot/imported/Chicken improved hennifer varient_Sphere_3.png-5f880073297c2d41a792d562c6d22629.etc2.ctex"]
 
 [params]
 

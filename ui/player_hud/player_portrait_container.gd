@@ -16,13 +16,12 @@ extends CenterContainer
 @export var border_heal_colour : Color
 @export var border_hurt_colour : Color
 
+var fov_tween : Tween ## Keeping track of the FOV tween
 
 @onready var duration_timer : Timer = $DurationTimer
 @onready var overlay_shader : ColorRect = $OverlayShader
 @onready var border : ColorRect = $Border
 @onready var camera : Camera3D = %ViewportCamera
-
-var fov_tween : Tween ## Keeping track of the FOV tween
 
 
 func _ready() -> void:
@@ -40,12 +39,10 @@ func _ready() -> void:
 	# Connect signals
 	SignalManager.player_hurt.connect(
 		func():
-			print("hurt shader")
 			_on_player_health(hurt_time, hurt_shader, border_hurt_colour)
 	)
 	SignalManager.player_heal.connect(
 		func():
-			print("heal shader")
 			_on_player_health(heal_time, heal_shader, border_heal_colour)
 	)
 
@@ -54,7 +51,7 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 	if not camera:
 		printerr("Cannot apply effect: ViewportCamera not found!")
 		return
-		
+
 	# Setting the border colour
 	border.color = colour
 
@@ -66,8 +63,8 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 	fov_tween = create_tween()
 	# Animate the camera's fov property to the effect_fov
 	fov_tween.tween_property(
-			camera, "fov", effect_fov, fov_tween_duration
-		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		camera, "fov", effect_fov, fov_tween_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	# Apply the appropriate shader
 	overlay_shader.material = shader_material
@@ -80,10 +77,10 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 	duration_timer.start(time) # Start timer for shader visibility
 
 
-func _on_duration_timer_timeout():
+func _on_duration_timer_timeout() -> void:
 	if not camera:
 		return
-		
+
 	# resetting border colour
 	border.color = border_starting_colour
 
@@ -95,8 +92,8 @@ func _on_duration_timer_timeout():
 	fov_tween = create_tween()
 	# Animate the camera's fov property back to the normal_fov
 	fov_tween.tween_property(
-			camera, "fov", normal_fov, fov_tween_duration
-		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN) 
+		camera, "fov", normal_fov, fov_tween_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN) 
 
 	# Hide the shader effect
 	overlay_shader.hide()

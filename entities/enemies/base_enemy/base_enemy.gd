@@ -6,9 +6,12 @@ extends CharacterBody3D
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 @onready var damage_label: Marker3D = $Marker3D
 
+
 func _ready() -> void:
 	initialize_stats()
 	initialize_health_bar()
+	collision_layer = 4
+	collision_mask = 27
 	SignalManager.weapon_hit_target.connect(_take_damage)
 
 
@@ -18,8 +21,6 @@ func _physics_process(_delta: float) -> void:
 
 func initialize_health_bar() -> void:
 	if health_bar:
-		health_bar.tracked_entity = self
-		health_bar.bind_signals()
 		health_bar.init_health(stats.max_health, stats.current_health)
 
 
@@ -33,17 +34,17 @@ func initialize_stats() -> void:
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		stats.drain_health(damage)
-		SignalManager.enemy_stats_changed.emit(self, stats)
 		spawn_damage_popup(damage)
+		health_bar.set_health(stats.current_health)
 		if stats.current_health <= 0:
 			die()
 
 
 func spawn_damage_popup(damage: int) -> void:
-	var damage_popup = preload("uid://b6cnb1t5cixqj").instantiate()
+	var damage_popup: Node3D = preload("uid://b6cnb1t5cixqj").instantiate()
 	get_parent().add_child(damage_popup)
 
-	var spawn_position = damage_label.global_position + Vector3(
+	var spawn_position: Vector3 = damage_label.global_position + Vector3(
 		randf_range(-damage_popup.horizontal_spread, damage_popup.horizontal_spread),
 		randf_range(0, damage_popup.vertical_variance),
 		randf_range(-damage_popup.depth_offset, damage_popup.depth_offset)

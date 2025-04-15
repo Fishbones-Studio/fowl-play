@@ -1,28 +1,20 @@
 class_name HealthBar
 extends ProgressBar
 
-@export var tracked_entity: Node = null
 @export var high_health_color: Color = Color.GREEN
 @export var medium_health_color: Color = Color.ORANGE
 @export var critical_health_color: Color = Color.RED
 
-@onready var timer := $Timer
-@onready var damage_bar := $DamageBar
-
 var health: float:
 	set = set_health
+
+@onready var timer: Timer= $Timer
+@onready var damage_bar: ProgressBar = $DamageBar
 
 
 func _ready() -> void:
 	# Set initial color
 	_update_health_color()
-	
-	if tracked_entity:
-		bind_signals()
-
-
-func bind_signals() -> void:
-	SignalManager.enemy_stats_changed.connect(_on_enemy_stats_changed)
 
 
 func _update_health_color() -> void:
@@ -57,16 +49,13 @@ func set_health(_health: float) -> void:
 	
 	if health <= prev_health:
 		timer.start()
-		SignalManager.player_hurt.emit()
 	else:
 		if health > prev_health:
 			timer.stop()
-			SignalManager.player_heal.emit()
 		_on_timer_timeout()
 
 
-
-func init_health(_max_health: int, _health: int) -> void:
+func init_health(_max_health: float, _health: float) -> void:
 	print("init_health")
 	health = _health
 	max_value = _max_health
@@ -79,10 +68,3 @@ func init_health(_max_health: int, _health: int) -> void:
 func _on_timer_timeout() -> void:
 	damage_bar.max_value = max_value
 	damage_bar.value = health
-
-
-func _on_enemy_stats_changed(entity: CharacterBody3D, stats: LivingEntityStats) -> void:
-	if entity == tracked_entity:
-		max_value = stats.max_health
-		health = stats.current_health
-		_update_health_color()
