@@ -10,7 +10,7 @@ const DEFAULT_JUMP_HEIGHT: float = 5.0  # meters
 const DEFAULT_TIME_TO_PEAK: float = 0.4  # seconds for default height
 const DEFAULT_TIME_TO_DESCENT: float = 0.3  # seconds for default height
 
-@export var entity: Node3D
+@export var entity: PhysicsBody3D
 
 @export_category("Jump Settings")
 @export var jump_height: float = DEFAULT_JUMP_HEIGHT:
