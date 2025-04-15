@@ -41,5 +41,5 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 
 
 func die() -> void:
-	print(name, " has died died!")
+	print(name, " has died!")
 	queue_free()
