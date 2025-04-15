@@ -40,12 +40,10 @@ func _ready() -> void:
 	# Connect signals
 	SignalManager.player_hurt.connect(
 		func():
-			print("hurt shader")
 			_on_player_health(hurt_time, hurt_shader, border_hurt_colour)
 	)
 	SignalManager.player_heal.connect(
 		func():
-			print("heal shader")
 			_on_player_health(heal_time, heal_shader, border_heal_colour)
 	)
 

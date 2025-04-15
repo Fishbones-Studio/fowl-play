@@ -29,12 +29,14 @@ func _init_weapon(weapon_count : int) -> void:
 
 	# Deactivate all weapons
 	for i in weapon_count:
+		SignalManager.deactivate_item_slot.emit(i)
 		var weapon: Node = get_child(i)
 		weapon.visible = false
 		if weapon is RangedWeaponPlayerSlot:
 			weapon.ranged_weapon_player_controller.stop_firing()
 
 	# Activate the current weapon
+	SignalManager.activate_item_slot.emit(current_weapon_index)
 	active_weapon = get_child(current_weapon_index)
 	active_weapon.visible = true
 	print("Switched to weapon: %s" % active_weapon.name)
