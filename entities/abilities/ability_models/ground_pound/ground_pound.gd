@@ -10,7 +10,6 @@ var damage : float:
 
 var _particles_emitted: bool = false
 
-
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 
@@ -34,9 +33,9 @@ func _on_cooldown_timer_timeout() -> void:
 
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
-	if body.collision_layer == 2: # Player
+	if body.collision_layer == 2: # if target body is player
 		ability_holder._on_weapon_hit_target(ability_holder)
-	if body.collision_layer == 4:
+	if body.collision_layer == 4: # if target body is enemy
 		SignalManager.weapon_hit_target.emit(body, damage)
 	
 	_apply_knockback(body)
