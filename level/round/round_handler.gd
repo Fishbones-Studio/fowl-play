@@ -31,8 +31,8 @@ func _ready() -> void:
 func _init_enemies() -> void:
 	available_enemies.clear()
 
-	for child in enemy_scenes:
-		var enemy_instance: Enemy = child.instantiate()
+	for enemy in enemy_scenes:
+		var enemy_instance: = enemy.instantiate()
 		assert(enemy_instance != null, "Failed to instantiate enemy scene")
 
 		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.get_enemy_type()
@@ -123,8 +123,6 @@ func _spawn_enemy_in_level() -> void:
 
 
 func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
-	assert(ROUND_COUNTDOWN_SCENE is PackedScene, "ROUND_COUNTDOWN_SCENE is not a valid PackedScene")
-
 	var countdown_instance: Control = ROUND_COUNTDOWN_SCENE.instantiate()
 	add_child(countdown_instance)
 

@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody3D
 
 @export var stats: LivingEntityStats
+@export var type: EnemyEnums.EnemyTypes
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 @onready var damage_label: Marker3D = $Marker3D
@@ -35,7 +36,9 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
 		stats.drain_health(damage)
 		spawn_damage_popup(damage)
-		health_bar.set_health(stats.current_health)
+		if health_bar:
+			health_bar.set_health(stats.current_health)
+
 		if stats.current_health <= 0:
 			die()
 
@@ -57,3 +60,7 @@ func spawn_damage_popup(damage: int) -> void:
 func die() -> void:
 	print("BaseEnemy died!")
 	queue_free()
+
+
+func get_enemy_type() -> EnemyEnums.EnemyTypes:
+	return type

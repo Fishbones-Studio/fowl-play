@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
-[ext_resource type="PackedScene" uid="uid://ccns8he8y64n3" path="res://entities/enemies/temp_enemy/temp_enemy.tscn" id="4_6gtgk"]
+[ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_0v1st"]
 [ext_resource type="PackedScene" uid="uid://dqnetav07a5i1" path="res://entities/enemies/ball_chicken/ball_chicken.tscn" id="5_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_cw150"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
@@ -32,8 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
-enemy_scenes = Array[PackedScene]([ExtResource("4_6gtgk"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
-round_timer = true
+enemy_scenes = Array[PackedScene]([ExtResource("5_0v1st"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
 waiting_time = 2.5
 
 [node name="RoundBattleTimer" type="Timer" parent="RoundHandler"]
