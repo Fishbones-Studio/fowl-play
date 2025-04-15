@@ -1,5 +1,7 @@
 extends Node
 
+const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
+
 @export_category("Enemies")
 @export var enemy_scenes: Array[PackedScene]
 
@@ -7,6 +9,7 @@ extends Node
 @export var max_rounds: int = 3
 @export var round_intermission: bool = true
 @export var round_timer: bool = false # If enabled, match lasts 120 seconds
+@export var waiting_time: float
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 var available_enemies: Dictionary = {}
@@ -20,6 +23,7 @@ var _current_enemy: Enemy # The one currently in the arena fighting
 
 
 func _ready() -> void:
+	GameManager.current_round = 1
 	_init_enemies()
 	_start_round()
 
@@ -42,32 +46,33 @@ func _start_round() -> void:
 	match round_state:
 		RoundEnums.RoundTypes.WAITING:
 			_enter_waiting()
+			round_state = RoundEnums.RoundTypes.IN_PROGRESS
 		RoundEnums.RoundTypes.IN_PROGRESS:
 			_enter_in_progress()
+			round_state = RoundEnums.RoundTypes.CONCLUDING
 		RoundEnums.RoundTypes.CONCLUDING:
 			_enter_concluding()
+			round_state = RoundEnums.RoundTypes.INTERMISSION if round_intermission else RoundEnums.RoundTypes.WAITING
 		RoundEnums.RoundTypes.INTERMISSION:
 			_enter_intermission()
+			round_state = RoundEnums.RoundTypes.WAITING
 		_:
 			assert(false, "Invalid RoundState: %s" % str(round_state))
 
 
 func _enter_waiting() -> void:
-	print("in waiting")
+	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Round %d" % GameManager.current_round})
 	GameManager.chicken_player.global_position = player_position.global_position
 
-	round_state = RoundEnums.RoundTypes.IN_PROGRESS
-
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(waiting_time).timeout
 
 	_start_round()
 
 
 func _enter_in_progress() -> void:
-	print("in progress")
 	if _current_enemy == null:
 		_current_enemy = _pick_random_enemy(
-			EnemyEnums.EnemyTypes.BOSS
+			EnemyEnums.EnemyTypes.BOSS 
 				if GameManager.current_round == max_rounds 
 				else EnemyEnums.EnemyTypes.REGULAR
 		)
@@ -75,29 +80,45 @@ func _enter_in_progress() -> void:
 	_spawn_enemy_in_level()
 
 	await SignalManager.enemy_died
-	round_state = RoundEnums.RoundTypes.CONCLUDING
+
 	_start_round()
 
 
 func _enter_concluding() -> void:
-	print("in concluding")
-	round_state = RoundEnums.RoundTypes.INTERMISSION
-	
-	await get_tree().create_timer(5.0).timeout
+	if GameManager.current_round == max_rounds: # crack way to check if boss dead
+		print("boss is dead, wooahaha!!!")
+		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+		return
+
+	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Enemy defeated!"})
+
+	await get_tree().create_timer(waiting_time).timeout
+
+	GameManager.current_round += 1
 
 	_start_round()
-	
+
 
 func _enter_intermission() -> void:
-	print("in intermission")
+	assert(ROUND_COUNTDOWN_SCENE is PackedScene, "ROUND_COUNTDOWN_SCENE is not a valid PackedScene")
+
+	var countdown_instance: Control = ROUND_COUNTDOWN_SCENE.instantiate()
+	add_child(countdown_instance)
+
 	intermission_timer.start()
 
-	# Player should teleport to some area where they can interact with shop and heal
-	print("imagine you are now in a different part of arena")
+	# TODO, shop somewhere to interact
+	print("imagine you are now in a different part of arena with a shop")
+
+	while intermission_timer.time_left > 0:
+		countdown_instance.update_countdown(ceil(intermission_timer.time_left))
+		await get_tree().create_timer(1.0).timeout
+
+	countdown_instance.queue_free()
 
 
+# Selects a random enemy from the pool, then remove it from the spawn pool to prevent fighting the same enemy and finally return the enemy instance
 func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
-	# Selects a random enemy from the pool, then remove it from the spawn pool to prevent fighting the same enemy and finally return the enemy instance
 	return available_enemies[enemy_type].pop_at(randi_range(0, available_enemies[enemy_type].size() - 1))
 
 
@@ -107,10 +128,7 @@ func _spawn_enemy_in_level() -> void:
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_position.global_position
 
-	SignalManager.enemy_died.connect(func():
-		_current_enemy = null
-		, CONNECT_ONE_SHOT
-	)
+	SignalManager.enemy_died.connect(func(): _current_enemy = null, CONNECT_ONE_SHOT)
 
 
 # This function probably won't be used, but who knows, maybe for tie breakers
@@ -125,6 +143,4 @@ func _on_round_battle_timer_timeout() -> void:
 
 
 func _on_round_intermission_timer_timeout() -> void:
-	round_state = RoundEnums.RoundTypes.WAITING # Reset back to waiting
-
 	_start_round()
