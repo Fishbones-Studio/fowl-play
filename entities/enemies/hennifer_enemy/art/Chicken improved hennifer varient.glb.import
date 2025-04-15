@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d2ew1seudodji"
-path="res://.godot/imported/Chicken improved hennifer varient.glb-f54a4c76cdc9c19b1aed6e500c2db939.scn"
+path="res://.godot/imported/Chicken improved hennifer varient.glb-ff0ddc937394efa6b6a0f3aa9683d588.scn"
 
 [deps]
 
-source_file="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb"
-dest_files=["res://.godot/imported/Chicken improved hennifer varient.glb-f54a4c76cdc9c19b1aed6e500c2db939.scn"]
+source_file="res://entities/enemies/hennifer_enemy/art/Chicken improved hennifer varient.glb"
+dest_files=["res://.godot/imported/Chicken improved hennifer varient.glb-ff0ddc937394efa6b6a0f3aa9683d588.scn"]
 
 [params]
 

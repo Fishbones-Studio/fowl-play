@@ -29,6 +29,7 @@ func _ready():
 func setup():
 	if not melee_weapon_scene:
 		push_error("No valid weapon scene assigned!")
+		queue_free()
 		return
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon

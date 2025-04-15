@@ -11,6 +11,7 @@ var active_weapon: Node3D = null
 func _ready() -> void:
 	var child_count: int = get_child_count()
 	print("Amount of weapons: %d" % child_count)
+	await owner.ready
 	_init_weapon(child_count)
 
 func _input(event: InputEvent) -> void:
@@ -38,6 +39,8 @@ func _init_weapon(weapon_count : int) -> void:
 	# Activate the current weapon
 	SignalManager.activate_item_slot.emit(current_weapon_index)
 	active_weapon = get_child(current_weapon_index)
+	print(active_weapon)
+	print("Current weapon index: %d" % current_weapon_index )
 	active_weapon.visible = true
 	print("Switched to weapon: %s" % active_weapon.name)
 

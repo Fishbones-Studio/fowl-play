@@ -9,6 +9,9 @@ var target_position: Vector3 ## Target position for wandering
 var wander_timer: float = wander_interval ## Timer for choosing new target
 var origin_position: Vector3 ## Starting position of the enemy
 
+func _init():
+	STATE_TYPE = EnemyEnums.EnemyStates.IDLE_STATE
+
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	origin_position = enemy.position
