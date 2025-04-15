@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dqnetav07a5i1"]
 
-[ext_resource type="Script" uid="uid://bhdek7fgsl7pu" path="res://entities/enemies/ball_chicken/ball_chicken.gd" id="1_3n7t4"]
+[ext_resource type="Script" uid="uid://bkbsre7rmmf5b" path="res://entities/enemies/ball_chicken/ball_chicken.gd" id="1_3n7t4"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_nnmdb"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="4_hsirj"]
@@ -17,10 +17,14 @@ collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_3n7t4")
 stats = ExtResource("2_nnmdb")
+type = 1
+metadata/_custom_type_script = "uid://d4biwqekg0iid"
 
 [node name="ball_chicken" parent="." instance=ExtResource("3_2hblk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("SphereShape3D_i8sye")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]

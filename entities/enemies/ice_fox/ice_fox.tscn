@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://5dsmkedrprey"]
 
-[ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
+[ext_resource type="Script" uid="uid://dxxu6tfphed3m" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="2_7ghaq"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="3_psoce"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="3_qhcpj"]
@@ -17,6 +17,7 @@ collision_layer = 4
 collision_mask = 27
 script = ExtResource("1_cemmm")
 stats = ExtResource("2_7ghaq")
+metadata/_custom_type_script = "uid://d4biwqekg0iid"
 
 [node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)

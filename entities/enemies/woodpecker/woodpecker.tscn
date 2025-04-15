@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c031d6x5cq0gv"]
 
-[ext_resource type="Script" path="res://entities/enemies/base_enemy.gd" id="1_t0esn"]
+[ext_resource type="Script" uid="uid://d4biwqekg0iid" path="res://entities/enemies/base_enemy.gd" id="1_t0esn"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="2_crgub"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="2_p6jwh"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/temp_enemy/enemy_state_machine.gd" id="3_x6gfb"]
