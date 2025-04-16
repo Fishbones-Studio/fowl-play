@@ -5,7 +5,6 @@
 
 [resource]
 script = ExtResource("1_ve8n7")
-damage = 15
 cooldown = 5.0
 name = "Ground Pound"
 drop_chance = 50

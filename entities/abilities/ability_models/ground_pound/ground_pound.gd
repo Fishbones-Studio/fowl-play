@@ -16,11 +16,12 @@ var _particles_emitted: bool = false
 
 
 func activate() -> void:
-	if ability_holder.velocity.y <= 0:
+	if ability_holder.is_on_floor():
 		print("Cannot perform %s while on the ground." % name)
 		return
 
 	_toggle_collision_masks(true)
+	SignalManager.activate_item_slot.emit(current_ability)
 
 	ability_holder.velocity.x = 0
 	ability_holder.velocity.z = 0
@@ -49,16 +50,16 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	ability_holder.velocity.y = 0
 	
 	_toggle_collision_masks(false)
+	SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _physics_process(_delta: float) -> void:
 	# Handles edge case where character lands without hitting an enemy
-	if ability_holder.velocity.y <= 0.0 and not _particles_emitted and on_cooldown:
-
+	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
 		await get_tree().create_timer(0.2).timeout
-
 		cpu_particles.emitting = true
 		_particles_emitted = true
+		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _apply_knockback(body: Node3D) -> void:

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
 [ext_resource type="Shader" uid="uid://dscuhfc7v6toy" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
 [ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
-[ext_resource type="Script" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
+[ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]
 shader = ExtResource("3_kpoie")
