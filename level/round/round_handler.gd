@@ -35,7 +35,7 @@ func _init_enemies() -> void:
 		var enemy_instance: Enemy = enemy.instantiate()
 		assert(enemy_instance != null, "Failed to instantiate enemy scene")
 
-		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.get_enemy_type()
+		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.type
 
 		if not available_enemies.has(enemy_type):
 			available_enemies[enemy_type] = []
@@ -91,6 +91,7 @@ func _enter_concluding() -> void:
 	if GameManager.current_round == max_rounds: # crack way to check if boss dead
 		print("boss is dead, wooahaha!!!")
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+		SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
 		return
 
 	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Enemy defeated!"})

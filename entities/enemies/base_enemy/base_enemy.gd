@@ -61,7 +61,3 @@ func die() -> void:
 	print("BaseEnemy died!")
 	SignalManager.enemy_died.emit()
 	queue_free()
-
-
-func get_enemy_type() -> EnemyEnums.EnemyTypes:
-	return type
