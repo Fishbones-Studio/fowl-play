@@ -45,8 +45,7 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	cpu_particles.emitting = true
 	_particles_emitted = true
 	
-	ability_holder.velocity.x = 0
-	ability_holder.velocity.z = 0
+	# resetting vertical velocity
 	ability_holder.velocity.y = 0
 	
 	_toggle_collision_masks(false)
