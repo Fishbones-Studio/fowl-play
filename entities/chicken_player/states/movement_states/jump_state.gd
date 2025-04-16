@@ -24,7 +24,7 @@ func input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dash") && movement_component.dash_available:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
-
+	
 	if get_jump_velocity() > 0 and _air_jumps_used < air_jumps:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 
@@ -56,9 +56,7 @@ func physics_process(delta: float) -> void:
 
 	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(speed_factor)
 
-	player.velocity.x = velocity.x
-	player.velocity.z = velocity.z
-	player.move_and_slide()
+	apply_movement(velocity)
 
 	if not player.is_on_floor():
 		return

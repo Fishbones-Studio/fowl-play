@@ -15,8 +15,8 @@ signal player_stats_changed(stats: LivingEntityStats)
 # UI signals
 signal player_hurt()
 signal player_heal()
-signal deactivate_item_slot(slot_index: int)
-signal activate_item_slot(slot_index: int)
+signal deactivate_item_slot(item : BaseResource)
+signal activate_item_slot(item : BaseResource)
 
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current

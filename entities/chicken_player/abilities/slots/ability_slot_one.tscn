@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcq62l5mhdyyv"]
+
+[ext_resource type="Script" uid="uid://orcep7na6fug" path="res://entities/chicken_player/abilities/slots/ability_slot_one.gd" id="1_3kp5d"]
+
+[node name="AbilitySlotOne" type="Node3D"]
+script = ExtResource("1_3kp5d")

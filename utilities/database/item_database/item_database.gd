@@ -5,11 +5,15 @@ static func _load_resources() -> Array[BaseResource]:
 	var temp_items: Array[BaseResource] = []
 	load_scene_resources("res://entities/weapons/melee_weapons/melee_weapon_models", "current_weapon", temp_items)
 	load_scene_resources("res://entities/weapons/ranged_weapons/ranged_weapon_models", "current_weapon", temp_items)
+	load_scene_resources("res://entities/abilities/ability_models/", "", temp_items)
 	return temp_items
 
 
-static func load_scene_resources(path: String, resource_property: String, temp_items : Array[BaseResource]) -> void:
-
+static func load_scene_resources(
+	path: String,
+	resource_property: String, 
+	temp_items : Array[BaseResource]
+	) -> void:
 	var dir := DirAccess.open(path)
 	if !dir:
 		push_error("Can't open directory: ", path)
@@ -27,7 +31,7 @@ static func load_scene_resources(path: String, resource_property: String, temp_i
 			if file.ends_with(".remap"):
 				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.ends_with(".tres"):
-				var resource: BaseResource = ResourceLoader.load(subdir_path.path_join(file)) as BaseResource
+				var resource: BaseResource = load(subdir_path.path_join(file)) as BaseResource
 				if resource:
 					temp_items.append(resource)
 					resource_loaded = true
