@@ -7,6 +7,10 @@ extends Node3D
 @export_group("weapon")
 @export var ranged_weapon_scene: PackedScene:
 	set(value):
+		if value == null: 
+			ranged_weapon_scene = null
+			current_weapon = null
+			return
 		# Custom setter to validate the scene type
 		var temp_weapon_instance = value.instantiate()
 		if value and value.can_instantiate() and temp_weapon_instance is RangedWeapon:
@@ -19,7 +23,7 @@ extends Node3D
 var current_weapon: RangedWeapon
 
 func _ready() -> void:
-	if ranged_weapon_scene:
+	if ranged_weapon_scene || get_parent() is Enemy:
 		setup()
 
 func setup() -> void:

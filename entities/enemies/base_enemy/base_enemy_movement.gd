@@ -2,6 +2,7 @@ class_name BaseEnemyMovementState
 extends BaseState
 
 @export var enemy: Enemy
+
 var movement_component : EnemyMovementComponent
 var steering_force : Vector3
 
