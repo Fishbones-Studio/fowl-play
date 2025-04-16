@@ -4,14 +4,18 @@ extends Node
 @export var melee_weapon : MeleeWeaponNode
 
 var cooldown : float = 0.0
+var to_be_deleted : bool = false
 
 
 func _ready() -> void:
-	if not melee_weapon:
+	if not melee_weapon or not is_instance_valid(melee_weapon):
+		to_be_deleted = true
 		queue_free()
 
 
 func _physics_process(_delta: float) -> void:
+	if to_be_deleted: return
+	
 	if cooldown > 0.0:
 		cooldown -= _delta
 	else:

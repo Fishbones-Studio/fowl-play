@@ -6,3 +6,10 @@ enum EnemyStates {
 	CHASE_STATE,
 	ATTACK_STATE
 }
+
+
+enum EnemyTypes {
+	REGULAR,
+	#ELITE,
+	BOSS,
+}
