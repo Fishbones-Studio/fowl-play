@@ -20,6 +20,7 @@ stats = ExtResource("2_v8d7w")
 transform = Transform3D(-0.9, 0, -1.35896e-07, 0, 0.9, 0, 1.35896e-07, 0, -0.9, 0, 0.8, 0)
 
 [node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 1, 0)
 shape = SubResource("BoxShape3D_v8d7w")
 
 [node name="HealthbarSprite" parent="." index="2"]
@@ -29,6 +30,7 @@ texture = SubResource("ViewportTexture_fgbet")
 visible = false
 
 [node name="MeleeWeapon" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09222, 0.615398, -0.320664)
 melee_weapon_scene = ExtResource("4_dmp11")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
