@@ -4,9 +4,9 @@ extends CharacterBody3D
 signal damage_taken
 
 @export var stats: LivingEntityStats
+@export var type: EnemyEnums.EnemyTypes
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
-
 
 func _ready() -> void:
 	initialize_stats()
@@ -41,5 +41,6 @@ func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 
 
 func die() -> void:
+	SignalManager.enemy_died.emit()
 	print(name, " has died!")
 	queue_free()

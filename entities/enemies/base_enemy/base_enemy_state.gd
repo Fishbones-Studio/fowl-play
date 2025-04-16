@@ -12,6 +12,7 @@ var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
 var weapon: MeleeWeapon
 
+
 func setup(_enemy: Enemy, _player: ChickenPlayer, _movement_component: EnemyMovementComponent) -> void:
 	if _enemy == null:
 		push_error(owner.name + ": No enemy reference set" + str(STATE_TYPE))

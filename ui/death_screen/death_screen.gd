@@ -34,5 +34,5 @@ func _return_to_game_menu() -> void:
 	await animation_player.animation_finished
 
 	SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
-	
+
 	get_tree().paused = false
