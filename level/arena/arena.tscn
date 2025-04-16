@@ -4,6 +4,31 @@
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="5_byl6v"]
 [ext_resource type="AudioStream" uid="uid://b8q5sgur0ci0o" path="res://level/arena/music/temp_arena_song.mp3" id="8_co35n"]
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b4aaq"]
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byl6v"]
+shader = ExtResource("5_byl6v")
+shader_parameter/sky_color_a = Color(0.01, 0.01, 0.05, 1)
+shader_parameter/sky_color_b = Color(0.05, 0.05, 0.15, 1)
+shader_parameter/cloud_color = Color(0.1, 0.1, 0.15, 1)
+shader_parameter/cloud_min = 0.3
+shader_parameter/cloud_max = 0.8
+shader_parameter/cloud_speed = 0.01
+shader_parameter/cloud_noise = SubResource("NoiseTexture2D_b4aaq")
+shader_parameter/star_density = 0.98
+shader_parameter/star_brightness = 1.0
+shader_parameter/twinkle_speed = 2.0
+shader_parameter/star_scale = 80.0
+
+[sub_resource type="Sky" id="Sky_wdiye"]
+sky_material = SubResource("ShaderMaterial_byl6v")
+
+[sub_resource type="Environment" id="Environment_co35n"]
+background_mode = 2
+sky = SubResource("Sky_wdiye")
+volumetric_fog_density = 0.005
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_b4aaq"]
 size = Vector3(0.03, 2.5, 0.2)
 
@@ -72,32 +97,20 @@ size = Vector3(30, 50, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wdiye"]
 size = Vector3(30, 50, 0.5)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_byl6v"]
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_byl6v"]
-shader = ExtResource("5_byl6v")
-shader_parameter/sky_color_a = Color(0.01, 0.01, 0.05, 1)
-shader_parameter/sky_color_b = Color(0.05, 0.05, 0.15, 1)
-shader_parameter/cloud_color = Color(0.1, 0.1, 0.15, 1)
-shader_parameter/cloud_min = 0.3
-shader_parameter/cloud_max = 0.8
-shader_parameter/cloud_speed = 0.01
-shader_parameter/cloud_noise = SubResource("NoiseTexture2D_byl6v")
-shader_parameter/star_density = 0.98
-shader_parameter/star_brightness = 1.0
-shader_parameter/twinkle_speed = 2.0
-shader_parameter/star_scale = 80.0
-
-[sub_resource type="Sky" id="Sky_embqv"]
-sky_material = SubResource("ShaderMaterial_byl6v")
-
-[sub_resource type="Environment" id="Environment_co35n"]
-background_mode = 2
-sky = SubResource("Sky_embqv")
-volumetric_fog_density = 0.005
-
 [node name="Arena" type="StaticBody3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_co35n")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -25, 45, 0)
+layers = 3
+light_energy = 50.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+spot_range = 60.0
+spot_angle = 60.0
 
 [node name="sewer_arena" parent="." instance=ExtResource("1_b4aaq")]
 
@@ -235,18 +248,5 @@ shape = SubResource("BoxShape3D_wdiye")
 stream = ExtResource("8_co35n")
 autoplay = true
 bus = &"Music"
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_co35n")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -25, 45, 0)
-layers = 3
-light_energy = 50.0
-light_indirect_energy = 2.0
-light_volumetric_fog_energy = 5.0
-shadow_enabled = true
-spot_range = 60.0
-spot_angle = 60.0
 
 [editable path="sewer_arena"]
