@@ -1,3 +1,12 @@
+################################################################################
+## Handles the round system, including timing, transitions, and enemy management.
+## 
+## Manages the round-based flow of the game, including tracking the current and 
+## maximum rounds, triggering intermissions when necessary, and controlling the 
+## battle timer. It also handles transitions and delays between phases to ensure 
+## smooth progression between rounds.
+###################################################################
+class_name RoundHandler
 extends Node
 
 const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
@@ -15,6 +24,7 @@ var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 var available_enemies: Dictionary = {}
 
 var _current_enemy: Enemy # The one currently in the arena fighting
+var _round_countdown: Control = null
 
 @onready var enemy_position: Marker3D = $"../EnemyPosition" # Position where to spawn the enemy at
 @onready var player_position: Marker3D = $"../PlayerPosition"
@@ -83,18 +93,22 @@ func _enter_in_progress() -> void:
 		_activate_round_countdown("Current round ends in", battle_timer)
 
 	await SignalManager.enemy_died
-	
+
+	if round_timer:
+		battle_timer.stop()
+
 	_start_round()
 
 
 func _enter_concluding() -> void:
 	if GameManager.current_round == max_rounds: # crack way to check if boss dead
-		print("boss is dead, wooahaha!!!")
+		print("all rounds completed, back to poultry man menu")
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 		SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
 		return
 
-	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Enemy defeated!"})
+	if _current_enemy == null:
+		SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Enemy defeated!"})
 
 	await get_tree().create_timer(waiting_time).timeout
 
@@ -106,6 +120,7 @@ func _enter_concluding() -> void:
 func _enter_intermission() -> void:
 	# TODO, shop somewhere to interact
 	print("imagine you are now in a different part of arena with a shop")
+
 	_activate_round_countdown("Intermission ends in", intermission_timer)
 
 
@@ -124,24 +139,31 @@ func _spawn_enemy_in_level() -> void:
 
 
 func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
-	var countdown_instance: Control = ROUND_COUNTDOWN_SCENE.instantiate()
-	add_child(countdown_instance)
+	if _round_countdown == null:
+		_round_countdown = ROUND_COUNTDOWN_SCENE.instantiate()
+		add_child(_round_countdown)
+
+	_round_countdown.show()
 
 	countdown_timer.start()
 
 	while countdown_timer.time_left > 0:
 		var remaining_seconds: float = ceil(countdown_timer.time_left)
-		countdown_instance.update_countdown(
+		_round_countdown.update_countdown(
 			"%s %d second%s" % [text, remaining_seconds, "" if remaining_seconds == 1 else "s"]
 		)
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(1.0).timeout # we only want to see the time remaining update every second
 
-	countdown_instance.queue_free()
+	_round_countdown.hide()
 
 
 # TODO, something when it draws? less rewards or none? right now just some ui
 func _on_round_battle_timer_timeout() -> void:
-	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Draw!"})
+	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Time up!"})
+
+	_current_enemy.queue_free() # just kill enemy
+
+	_round_countdown.hide()
 	_start_round()
 
 
