@@ -17,7 +17,7 @@ var initialized : bool = false
 @onready var current_state: BaseCombatState = _get_initial_state()
 
 
-func setup(_weapon : MeleeWeapon) -> void:
+func setup(_weapon : MeleeWeapon, _entity_stats : LivingEntityStats) -> void:
 	weapon = _weapon
 	
 	if weapon == null:
@@ -30,7 +30,7 @@ func setup(_weapon : MeleeWeapon) -> void:
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon, melee_combat_transition_state)
+		state_node.setup(weapon, melee_combat_transition_state, _entity_stats)
 		
 	# Start in the initial state if it exists
 	if current_state:

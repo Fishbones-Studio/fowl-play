@@ -11,3 +11,4 @@ script = ExtResource("1_dxmja")
 visible = false
 
 [node name="RangedWeaponPlayerSlot" parent="." instance=ExtResource("2_dxmja")]
+visible = false

@@ -55,7 +55,7 @@ func drain_health(amount: float) -> float:
 	var actual_damage: float = amount * damage_multiplier
 
 	current_health = clamp(current_health - actual_damage, 0, max_health)
-	return current_health
+	return actual_damage
 
 
 func drain_stamina(amount: float) -> float:

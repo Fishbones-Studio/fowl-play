@@ -18,6 +18,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
+func get_stats_resource() -> LivingEntityStats:
+	if stats == null:
+		push_warning("Attempted to get stats resource before it was assigned!")
+	return stats
 
 func initialize_health_bar() -> void:
 	if health_bar:
@@ -33,8 +37,7 @@ func initialize_stats() -> void:
 
 func _take_damage(target: PhysicsBody3D, damage: int) -> void:
 	if target == self:
-		stats.drain_health(damage)
-		damage_taken.emit(damage)
+		damage_taken.emit(stats.drain_health(damage))
 		health_bar.set_health(stats.current_health)
 		if stats.current_health <= 0:
 			die()

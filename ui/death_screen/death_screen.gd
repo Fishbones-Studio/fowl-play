@@ -8,6 +8,7 @@ var is_transitioning: bool = false
 
 func _ready() -> void:
 	get_tree().paused = true
+	GameManager.reset_game()
 	animation_player.play("fade_to_black")
 
 
@@ -24,9 +25,7 @@ func _input(event: InputEvent) -> void:
 func _return_to_game_menu() -> void:
 	is_transitioning = true
 	animation_player.play("fade_to_white")
-
-	GameManager.reset_game()
-
+	
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
