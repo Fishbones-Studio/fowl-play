@@ -27,9 +27,6 @@ func _ready() -> void:
 	# In enemy, the export vars are set, so we can immediatly run the setup
 	if melee_weapon_scene:
 		setup()
-	else:
-		push_warning("No valid weapon scene assigned!")
-		queue_free()
 
 
 func setup() -> void:

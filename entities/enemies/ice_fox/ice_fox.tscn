@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5dsmkedrprey"]
+[gd_scene load_steps=10 format=3 uid="uid://5dsmkedrprey"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Script" uid="uid://dxxu6tfphed3m" path="res://entities/enemies/ice_fox/ice_fox.gd" id="2_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="4_qhcpj"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_knbep"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="5_psoce"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_75fyq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8d7w"]
@@ -17,14 +18,20 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("2_cemmm")
 stats = ExtResource("3_7ghaq")
 
-[node name="CollisionShape3D" parent="." index="0"]
+[node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1"]
 shape = SubResource("BoxShape3D_v8d7w")
 
-[node name="HealthbarSprite" parent="." index="1"]
+[node name="HealthbarSprite" parent="." index="2"]
 texture = SubResource("ViewportTexture_fgbet")
 
-[node name="AttackingArea" parent="." index="3"]
+[node name="AttackingArea" parent="." index="4"]
 visible = false
+
+[node name="MeleeWeapon" parent="." index="6"]
+melee_weapon_scene = ExtResource("5_psoce")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
@@ -37,8 +44,5 @@ enemy = NodePath("../..")
 script = ExtResource("6_75fyq")
 STATE_TYPE = 1
 enemy = NodePath("../..")
-
-[node name="ice_fox" parent="." index="9" instance=ExtResource("4_qhcpj")]
-transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
 
 [editable path="ice_fox"]

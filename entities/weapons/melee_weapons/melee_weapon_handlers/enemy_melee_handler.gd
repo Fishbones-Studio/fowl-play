@@ -4,7 +4,7 @@ extends Node
 @export var melee_weapon : MeleeWeaponNode
 
 var cooldown : float = 0.0
-var to_be_deleted := false
+var to_be_deleted : bool = false
 
 
 func _ready() -> void:

@@ -28,6 +28,9 @@ texture = SubResource("ViewportTexture_fgbet")
 [node name="AttackingArea" parent="." index="4"]
 visible = false
 
+[node name="MeleeWeapon" parent="." index="6"]
+melee_weapon_scene = ExtResource("4_dmp11")
+
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
 
