@@ -5,7 +5,9 @@ const ITEM_SLOT: PackedScene = preload("uid://ckypq3131wkcv")
 
 func _ready() -> void:
 	SignalManager.activate_item_slot.connect(
-		func(index: int ):
+		func(item: BaseResource ):
+			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
+			
 			print("Activating item slot at index: ", index)
 			# Check if the item slot is valid
 			if index < 0 or index >= get_child_count():
@@ -22,7 +24,8 @@ func _ready() -> void:
 	)
 
 	SignalManager.deactivate_item_slot.connect(
-		func(index: int):
+		func(item: BaseResource ):
+			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
 			print("Deactivating item slot at index: ", index)
 			# Check if the item slot is valid
 			if index < 0 or index >= get_child_count():
@@ -37,7 +40,7 @@ func _ready() -> void:
 				# Added closing parenthesis for push_warning
 				push_warning("No item slot found at index: ", index)
 	)
-	_init_item_slots(Inventory.inventory_data.get_items_sorted_flattened())
+	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
 
 func _init_item_slots(items: Array) -> void:

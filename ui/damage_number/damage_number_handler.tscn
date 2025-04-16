@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6cnb1t5cixqj"]
+
+[ext_resource type="Script" uid="uid://cjkali5oc1koo" path="res://ui/damage_number/damage_number_handler.gd" id="1_lpb0a"]
+
+[node name="DamageNumberHandler" type="Marker3D"]
+script = ExtResource("1_lpb0a")

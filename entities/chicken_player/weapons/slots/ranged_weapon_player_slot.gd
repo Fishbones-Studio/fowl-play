@@ -1,4 +1,5 @@
-class_name RangedWeaponPlayerSlot extends Node3D
+class_name RangedWeaponPlayerSlot 
+extends Node3D
 
 @onready var ranged_weapon_node : RangedWeaponNode = $CurrentRangedWeapon
 @onready var ranged_weapon_player_controller : RangedWeaponPlayerController = $RangedWeaponPlayerController

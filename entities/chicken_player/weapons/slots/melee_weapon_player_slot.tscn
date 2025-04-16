@@ -7,4 +7,3 @@
 script = ExtResource("1_svlr0")
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("2_xswfd")]
-weapon_collision_mask = null

@@ -1,4 +1,5 @@
-class_name MeleeWeaponPlayerSlot extends Node3D
+class_name MeleeWeaponPlayerSlot 
+extends Node3D
 
 @onready var melee_weapon_node : MeleeWeaponNode = $MeleeWeapon
 
