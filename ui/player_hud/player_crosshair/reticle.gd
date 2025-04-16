@@ -7,6 +7,6 @@ extends CenterContainer
 func _ready() -> void:
 	queue_redraw()
 
-
+# function to draw dot
 func _draw() -> void:
 	draw_circle(Vector2(0,0), DOT_RADIUS, DOT_COLOR)
