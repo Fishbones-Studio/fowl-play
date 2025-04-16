@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.495675, -0.00195786, 0.00629067, 0.868483)
-bones/3/rotation = Quaternion(-0.526668, -0.0150995, -0.0145935, 0.849811)
-bones/4/rotation = Quaternion(-0.178238, -0.324321, -0.0844737, 0.925155)
-bones/5/rotation = Quaternion(-0.17208, -0.119376, -0.698575, 0.684201)
-bones/6/rotation = Quaternion(-0.231025, 0.0859631, 0.713835, 0.655498)
+bones/2/rotation = Quaternion(-0.502102, -0.00231688, 0.007468, 0.864773)
+bones/3/rotation = Quaternion(-0.530562, 0.000923903, -0.00462419, 0.847633)
+bones/4/rotation = Quaternion(-0.108428, 0.201883, -0.0570273, 0.971717)
+bones/5/rotation = Quaternion(-0.24007, -0.0594509, -0.742215, 0.622855)
+bones/6/rotation = Quaternion(-0.189595, 0.137693, 0.679993, 0.694769)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.29337, -0.0152681, -0.0504682, 0.954544)
-bones/9/rotation = Quaternion(0.180854, 0.00847276, -0.114945, 0.976733)
+bones/8/rotation = Quaternion(0.283732, -0.0172681, -0.103429, 0.953153)
+bones/9/rotation = Quaternion(0.200927, 0.0295565, -0.152123, 0.967271)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.172659, 0.0497406, 0.105334, 0.978069)
+bones/11/rotation = Quaternion(-0.178979, -0.063683, -0.0613431, 0.979871)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
@@ -251,7 +251,7 @@ entity = NodePath("..")
 jump_height = 25.0
 
 [node name="PlayerWeaponPivot" type="Node3D" parent="."]
-transform = Transform3D(0.821816, 0.398451, 0.407254, 1.06156e-08, 0.71479, -0.699339, -0.569753, 0.574728, 0.587426, 1.26707, 0.685471, 0)
+transform = Transform3D(0.988659, -0.0821671, -0.125703, 0.0151733, 0.88741, -0.46073, 0.149407, 0.453598, 0.878594, 1.26707, 0.685471, 0)
 script = ExtResource("16_8i8jv")
 
 [node name="PlayerWeaponController" parent="PlayerWeaponPivot" instance=ExtResource("26_vclph")]

@@ -13,6 +13,6 @@ func _process(delta):
 		look_at(target_position)
 
 		# Get the current vertical angle relative to the world up vector
-		var current_vertical_angle = camera.global_transform.basis.get_euler().x
+		var current_vertical_angle = camera.global_basis.get_euler().x
 	else:
 		printerr("Error: No 3D camera found in the viewport!")
