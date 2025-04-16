@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_ulswk")
-max_health = 225.0
+max_health = 200.0
 max_stamina = 100.0
-attack = 0
-defense = 5
+attack_multiplier = 1.0
+defense = 25
 speed = 8.0
 weight = 1.5
 health_regen = 0

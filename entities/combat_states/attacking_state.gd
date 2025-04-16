@@ -10,8 +10,8 @@ var hit_area: Area3D
 @onready var attack_timer: Timer = %AttackTimer
 
 # Set up the weapon and cache important nodes
-func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal) -> void:
-	super(_weapon_node, _melee_combat_transition_state)
+func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _entity_stats : LivingEntityStats) -> void:
+	super(_weapon_node, _melee_combat_transition_state, _entity_stats)
 	hit_area = weapon_node.hit_area
 
 
@@ -42,4 +42,4 @@ func _attack() -> void:
 	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for target in targets:
 		if target is ChickenPlayer or target is Enemy:
-			SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage)
+			SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage * entity_stats.attack_multiplier)

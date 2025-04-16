@@ -1,3 +1,4 @@
+## Required to be child of PlayerWeaponController
 class_name MeleeWeaponPlayerSlot 
 extends Node3D
 

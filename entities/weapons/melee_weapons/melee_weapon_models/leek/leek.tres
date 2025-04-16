@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_nt88w")
-damage = 10
+damage = 20
 windup_time = 0.4
 attack_duration = 1.0
 cooldown_time = 0.8
