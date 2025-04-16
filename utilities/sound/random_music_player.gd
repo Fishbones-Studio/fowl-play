@@ -14,6 +14,6 @@ func _ready() -> void:
 	add_child(_random_player)
 
 
-func _on_play_sound(sound: AudioStream, sound_name: String) -> void:
+func _on_play_sound(sound: AudioStream, _sound_name: String) -> void:
 	stream = sound
 	play()

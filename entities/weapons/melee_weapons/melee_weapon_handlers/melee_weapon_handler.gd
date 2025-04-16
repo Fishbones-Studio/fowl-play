@@ -38,7 +38,6 @@ func setup() -> void:
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
 
-
 	add_child(current_weapon)
 
 	# set the defined collison mask

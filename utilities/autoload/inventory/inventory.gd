@@ -3,12 +3,13 @@ extends Node
 
 ## Constants
 const SAVE_FILE_PATH := "user://inventory_save.tres"
+
 ## Configuration
 var default_slot_config: Dictionary[ItemEnums.ItemTypes, int] = {
-ItemEnums.ItemTypes.MELEE_WEAPON: 1,
-ItemEnums.ItemTypes.RANGED_WEAPON: 1,
-ItemEnums.ItemTypes.ABILITY: 2
-}
+		ItemEnums.ItemTypes.MELEE_WEAPON: 1,
+		ItemEnums.ItemTypes.RANGED_WEAPON: 1,
+		ItemEnums.ItemTypes.ABILITY: 2
+	}
 
 ## State
 var inventory_data: InventoryData
@@ -16,6 +17,7 @@ var inventory_data: InventoryData
 
 func _ready() -> void:
 	load_inventory()
+
 
 ## Function to validate if an item can be equipped
 func _validate_equipment_operation(item: BaseResource, slot_index: int) -> bool:
@@ -52,6 +54,7 @@ func _equip_item_in_slot(item: BaseResource, slot_index: int) -> bool:
 			push_error("Unknown item type: ", item.type)
 			return false
 	return true
+
 
 ## Function to unequip an item from a slot
 func _unequip_item_from_slot(item: BaseResource, slot_index: int) -> bool:
@@ -180,6 +183,7 @@ func get_items_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
 
 ## Inventory Management
 func save_inventory() -> void:
+	inventory_data.recalc_items_sorted = true # Force recalculation of sorted items on next get
 	var error: int = ResourceSaver.save(inventory_data, SAVE_FILE_PATH)
 	if error != OK:
 		push_error("Inventory save failed with error code: ", error)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://rvl463trs4qd"]
+
+[ext_resource type="Script" uid="uid://d2yof1q4530nu" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.gd" id="1_2ikkx"]
+[ext_resource type="PackedScene" uid="uid://dcq62l5mhdyyv" path="res://entities/chicken_player/abilities/slots/ability_slot_one.tscn" id="2_0sykn"]
+
+[node name="PlayerAbilityController" type="Node3D"]
+script = ExtResource("1_2ikkx")
+
+[node name="AbilitySlotOne" parent="." instance=ExtResource("2_0sykn")]
