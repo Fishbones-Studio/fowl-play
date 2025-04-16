@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ca8ot8h50lgrg"]
+[gd_scene load_steps=9 format=3 uid="uid://ca8ot8h50lgrg"]
 
 [ext_resource type="Script" uid="uid://xg3hp4sm0655" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_e7hss"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_aiyc5"]
 [ext_resource type="PackedScene" uid="uid://crf4ow8864siv" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.tscn" id="3_uu5dw"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="4_o4q74"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="5_pkybk"]
 [ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/base_enemy/enemy_state_machine.gd" id="6_pkybk"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/base_enemy/movement_component.gd" id="7_c8gv6"]
 
@@ -44,8 +43,6 @@ attacking_area = NodePath("../AttackingArea")
 melee_weapon = NodePath("../MeleeWeapon")
 
 [node name="MeleeWeapon" parent="." instance=ExtResource("4_o4q74")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03808, 1.34805, 0)
-melee_weapon_scene = ExtResource("5_pkybk")
 weapon_collision_mask = 2
 
 [node name="Marker3D" type="Marker3D" parent="."]
