@@ -1,49 +1,46 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqnetav07a5i1"]
+[gd_scene load_steps=9 format=3 uid="uid://bw4u5qtf6bv0m"]
 
-[ext_resource type="Script" uid="uid://bkbsre7rmmf5b" path="res://entities/enemies/ball_chicken/ball_chicken.gd" id="1_3n7t4"]
+[ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
+[ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="2_8f7sg"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_nnmdb"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
-[ext_resource type="Script" uid="uid://b0cks7mas8v7j" path="res://entities/enemies/base_enemy/enemy_state_machine.gd" id="4_hsirj"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
-[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/base_enemy/movement_component.gd" id="8_om003"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_i8sye"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
 radius = 2.5
 
-[node name="BallChicken" type="CharacterBody3D"]
-collision_layer = 4
-collision_mask = 27
-script = ExtResource("1_3n7t4")
+[sub_resource type="ViewportTexture" id="ViewportTexture_8f7sg"]
+viewport_path = NodePath("SubViewport")
+
+[node name="BallChicken" instance=ExtResource("1_oapbr")]
 stats = ExtResource("2_nnmdb")
 type = 1
 
-[node name="ball_chicken" parent="." instance=ExtResource("3_2hblk")]
+[node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_i8sye")
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_gbobm")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
-script = ExtResource("4_hsirj")
-starting_state = NodePath("idle_state")
-enemy = NodePath("..")
-movement_component = NodePath("../MovementComponent")
-metadata/_custom_type_script = "uid://btddu8dhoifau"
+[node name="HealthbarSprite" parent="." index="2"]
+texture = SubResource("ViewportTexture_8f7sg")
 
-[node name="idle_state" type="Node" parent="EnemyStateMachine"]
+[node name="MeleeWeapon" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32256, 0.507973, -1.69485)
+melee_weapon_scene = ExtResource("2_8f7sg")
+
+[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
+starting_state = NodePath("Idle State")
+
+[node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_8q87k")
-metadata/_custom_type_script = "uid://ja4658qiwf5y"
+enemy = NodePath("../..")
 
-[node name="chase_state" type="Node" parent="EnemyStateMachine"]
+[node name="Chase State" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_lvw3e")
 STATE_TYPE = 1
-metadata/_custom_type_script = "uid://ja4658qiwf5y"
-
-[node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
-script = ExtResource("8_om003")
-entity = NodePath("..")
-
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+enemy = NodePath("../..")
 
 [editable path="ball_chicken"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
 [ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_0v1st"]
-[ext_resource type="PackedScene" uid="uid://dqnetav07a5i1" path="res://entities/enemies/ball_chicken/ball_chicken.tscn" id="5_6gtgk"]
+[ext_resource type="PackedScene" uid="uid://bw4u5qtf6bv0m" path="res://entities/enemies/ball_chicken/ball_chicken.tscn" id="5_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_cw150"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
 
