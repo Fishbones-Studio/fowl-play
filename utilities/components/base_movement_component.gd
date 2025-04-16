@@ -47,9 +47,8 @@ func _recalculate_jump_params():
 
 
 ## Uses square root scaling for realistic weight distribution
-## Uses 3.0 (kg) as standard weight. Average chicken weighs roughly 2.5-4~ kg.
 func _update_physics_based_on_weight(weight: float) -> void:
-	jump_height /= sqrt(weight / 3.0)
+	jump_height /= sqrt(weight)
 	_recalculate_jump_params()
 
 

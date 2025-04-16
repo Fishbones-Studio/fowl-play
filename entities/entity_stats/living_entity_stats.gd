@@ -4,12 +4,10 @@ extends Resource
 @export_category("Base Stats")
 @export var max_health: float
 @export var max_stamina: float
-@export var attack: int
-@export var defense: int
+@export_range(0.0, 2.0, 0.1) var attack_multiplier: float = 1.0
+@export_range(0, 1000) var defense: int = 0
 @export var speed: float
-@export var weight: float:
-	set(value):
-		weight = max(value, 0.1)
+@export var weight: float
 @export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int
@@ -46,8 +44,17 @@ func restore_stamina(amount: float) -> float:
 	return current_stamina
 
 
+## Reduces health by the given amount, taking defense into account.
 func drain_health(amount: float) -> float:
-	current_health = clamp(current_health - amount, 0, max_health)
+	if amount <= 0: # Don't process non-positive damage amounts
+		return current_health
+
+	# Calculate damage multiplier based on defense
+	# defense = 50  -> multiplier = 0.66 (66% damage)
+	var damage_multiplier: float = 100.0 / (100.0 + float(defense))
+	var actual_damage: float = amount * damage_multiplier
+
+	current_health = clamp(current_health - actual_damage, 0, max_health)
 	return current_health
 
 
