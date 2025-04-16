@@ -3,7 +3,7 @@ extends Node3D
 func _process(delta):
 	var viewport = get_viewport()
 	var viewport_size = viewport.get_visible_rect().size
-	var screen_center = viewport_size / 2.0
+	var screen_center = viewport_size / 2.1
 	var camera = viewport.get_camera_3d()
 
 	if camera:
