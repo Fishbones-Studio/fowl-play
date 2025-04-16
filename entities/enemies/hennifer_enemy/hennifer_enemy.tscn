@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/hennifer_enemy/art/Chicken improved hennifer varient.glb" id="2_fgbet"]
-[ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/hennifer_enemy_stats.tres" id="2_v8d7w"]
+[ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/enemy_stats.tres" id="2_v8d7w"]
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="4_dmp11"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]

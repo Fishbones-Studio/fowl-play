@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_chase_state"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_egqbq"]
-size = Vector3(1.5, 5, 1.25)
+size = Vector3(1.5, 5, 2)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_woodpecker"]
 viewport_path = NodePath("SubViewport")
