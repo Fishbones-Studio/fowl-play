@@ -1,3 +1,12 @@
+################################################################################
+## Handles the round system, including timing, transitions, and enemy management.
+## 
+## Manages the round-based flow of the game, including tracking the current and 
+## maximum rounds, triggering intermissions when necessary, and controlling the 
+## battle timer. It also handles transitions and delays between phases to ensure 
+## smooth progression between rounds.
+###################################################################
+class_name RoundHandler
 extends Node
 
 const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
