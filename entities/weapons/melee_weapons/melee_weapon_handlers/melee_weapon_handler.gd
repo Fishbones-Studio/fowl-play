@@ -1,8 +1,6 @@
-@tool
 class_name MeleeWeaponNode 
 extends Node3D
 
-# Used to get reference to player/enemy in their respective scenes.
 @export_group("weapon")
 @export var melee_weapon_scene: PackedScene:
 	set(value):
@@ -23,11 +21,34 @@ extends Node3D
 @export_flags_3d_physics var weapon_collision_mask: int
 
 var current_weapon: MeleeWeapon
+var owner_stats : LivingEntityStats
 
 @onready var melee_state_machine : MeleeStateMachine = $MeleeStateMachine
 
 
 func _ready() -> void:
+	var current_node: Node = get_parent()
+	while current_node != null:
+		# Check if the node has the getter function
+		if current_node.has_method("get_stats_resource"):
+			var potential_stats = current_node.get_stats_resource()
+			if potential_stats is LivingEntityStats:
+				owner_stats = potential_stats
+				print(
+					"MeleeWeaponNode found stats on: ",
+					current_node.name
+				)
+				break # Stop searching once found
+
+		# Move up to the next parent
+		current_node = current_node.get_parent()
+
+	if owner_stats == null:
+		push_error(
+			"MeleeWeaponNode could not find a parent with get_stats_resource() "
+			+ "returning LivingEntityStats! Weapon might not function correctly."
+		)
+		
 	# In enemy, the export vars are set, so we can immediatly run the setup
 	if melee_weapon_scene || get_parent() is Enemy:
 		setup()
@@ -47,4 +68,4 @@ func setup() -> void:
 	# set the defined collison mask
 	current_weapon.hit_area.collision_mask = weapon_collision_mask
 
-	melee_state_machine.setup(current_weapon)
+	melee_state_machine.setup(current_weapon, owner_stats)
