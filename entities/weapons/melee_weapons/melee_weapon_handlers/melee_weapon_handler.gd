@@ -6,6 +6,10 @@ extends Node3D
 @export_group("weapon")
 @export var melee_weapon_scene: PackedScene:
 	set(value):
+		if value == null:
+			melee_weapon_scene = null
+			current_weapon = null
+			return
 		# Custom setter to validate the scene type
 		var temp_weapon_instance = value.instantiate()
 		if value and value.can_instantiate() and temp_weapon_instance is MeleeWeapon:
@@ -25,7 +29,7 @@ var current_weapon: MeleeWeapon
 
 func _ready() -> void:
 	# In enemy, the export vars are set, so we can immediatly run the setup
-	if melee_weapon_scene:
+	if melee_weapon_scene || get_parent() is Enemy:
 		setup()
 
 

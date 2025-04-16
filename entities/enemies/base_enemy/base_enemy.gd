@@ -8,7 +8,6 @@ signal damage_taken
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 
-
 func _ready() -> void:
 	initialize_stats()
 	initialize_health_bar()
