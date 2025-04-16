@@ -60,7 +60,6 @@ func _update_weapon_state() -> void:
 	if is_instance_valid(active_weapon_slot):
 		active_weapon_resource = _get_weapon_resource(active_weapon_slot)
 		_activate_weapon(active_weapon_slot)
-		print("adwdwdawfeefeeeaseaf")
 		if active_weapon_resource:
 			print("activating weapon slot: ", active_weapon_resource.name)
 			SignalManager.activate_item_slot.emit(active_weapon_resource)

@@ -29,6 +29,12 @@ func _physics_process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	GameManager.chicken_player = null
+	
+
+func get_stats_resource() -> LivingEntityStats:
+	if stats == null:
+		push_warning("Attempted to get stats resource before it was assigned!")
+	return stats
 
 
 func _on_weapon_hit_target(target: PhysicsBody3D, damage: int) -> void:

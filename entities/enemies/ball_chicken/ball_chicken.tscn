@@ -13,7 +13,6 @@ radius = 2.5
 viewport_path = NodePath("SubViewport")
 
 [node name="BallChicken" instance=ExtResource("1_oapbr")]
-stats = ExtResource("2_nnmdb")
 type = 1
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
@@ -28,6 +27,7 @@ texture = SubResource("ViewportTexture_8f7sg")
 
 [node name="MeleeWeapon" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32256, 0.507973, -1.69485)
+entity_stats = ExtResource("2_nnmdb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
