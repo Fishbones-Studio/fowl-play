@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://xhakfqnxgnrr"]
 
-[ext_resource type="Script" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
+[ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://ceil8iql2shtl" path="res://ui/player_hud/player_portrait_container.gd" id="1_l7ggc"]
 [ext_resource type="Script" uid="uid://c7mjsdvhp8em5" path="res://ui/player_hud/player_bar_container.gd" id="1_sqrx6"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="1_vyppb"]
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
-[ext_resource type="Shader" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
-[ext_resource type="Shader" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
-[ext_resource type="Script" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
+[ext_resource type="Shader" uid="uid://dscuhfc7v6toy" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
+[ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
+[ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
 [ext_resource type="PackedScene" uid="uid://77dxickbfdy8" path="res://ui/player_hud/player_crosshair/crosshair_container.tscn" id="9_8qpry"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]

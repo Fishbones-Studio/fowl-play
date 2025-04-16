@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=54 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
+[ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
@@ -163,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.49663, -0.00201111, 0.00646529, 0.867936)
-bones/3/rotation = Quaternion(-0.52841, -0.0136442, -0.013842, 0.848767)
-bones/4/rotation = Quaternion(-0.105391, 0.0633284, -0.020921, 0.992192)
-bones/5/rotation = Quaternion(-0.241113, -0.053622, -0.745283, 0.619308)
-bones/6/rotation = Quaternion(-0.244783, 0.0681797, 0.724222, 0.641042)
+bones/2/rotation = Quaternion(-0.457216, 0.000160765, -0.000656659, 0.889355)
+bones/3/rotation = Quaternion(-0.525841, 0.000321032, -0.00434935, 0.850572)
+bones/4/rotation = Quaternion(-0.166322, -0.322314, -0.0567812, 0.930176)
+bones/5/rotation = Quaternion(-0.189392, -0.102766, -0.711435, 0.668903)
+bones/6/rotation = Quaternion(-0.221861, 0.0976369, 0.706673, 0.664724)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.241436, -0.00880131, -0.112998, 0.963775)
-bones/9/rotation = Quaternion(0.227646, 0.025278, -0.148731, 0.961986)
+bones/8/rotation = Quaternion(0.280262, -0.0136475, -0.0508579, 0.958478)
+bones/9/rotation = Quaternion(0.179093, 0.0113514, -0.121125, 0.976282)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.177667, -0.024253, -0.00318853, 0.983787)
+bones/11/rotation = Quaternion(-0.173163, 0.0358897, 0.0845465, 0.980601)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
@@ -248,7 +249,10 @@ state_type = 8
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 
-[node name="PlayerWeaponController" parent="." instance=ExtResource("26_vclph")]
+[node name="PlayerWeaponPivot" type="Node3D" parent="."]
+script = ExtResource("16_8i8jv")
+
+[node name="PlayerWeaponController" parent="PlayerWeaponPivot" instance=ExtResource("26_vclph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
 weapon_collision_mask = 4
 
