@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccns8he8y64n3"]
+[gd_scene load_steps=16 format=3 uid="uid://ccns8he8y64n3"]
 
 [ext_resource type="Script" uid="uid://bln2tqwj0gh1w" path="res://entities/enemies/temp_enemy/temp_enemy.gd" id="1_c1mms"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/temp_enemy/art/Chicken improved hennifer varient.glb" id="2_5gl3h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/temp_enemy/enemy_states/idle_state.gd" id="3_wrgcg"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/temp_enemy/enemy_states/chase_state.gd" id="4_07niy"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/temp_enemy/enemy_states/movement_component.gd" id="6_vwxab"]
+[ext_resource type="Script" uid="uid://2htosw08ep1s" path="res://entities/enemies/temp_enemy/enemy_states/dash_state.gd" id="7_jqyht"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="7_thcnk"]
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="8_2bxow"]
 [ext_resource type="PackedScene" uid="uid://crf4ow8864siv" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.tscn" id="8_vj4mj"]
@@ -36,21 +37,28 @@ shape = SubResource("BoxShape3D_c1mms")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state", "enemy", "movement_component")]
 script = ExtResource("2_h40bv")
-starting_state = NodePath("idle_state")
+starting_state = NodePath("IdleState")
 enemy = NodePath("..")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://btddu8dhoifau"
 
-[node name="idle_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+[node name="IdleState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("3_wrgcg")
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
 
-[node name="chase_state" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
+[node name="ChaseState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_07niy")
 STATE_TYPE = 1
 enemy = NodePath("../..")
 metadata/_custom_type_script = "uid://ja4658qiwf5y"
+
+[node name="DashState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("7_jqyht")
+
+[node name="DashDurationTimer" type="Timer" parent="EnemyStateMachine/DashState"]
+
+[node name="DashCooldownTimer" type="Timer" parent="EnemyStateMachine/DashState"]
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
@@ -84,3 +92,6 @@ texture = SubResource("ViewportTexture_jqyht")
 transparent_bg = true
 
 [node name="HealthBar" parent="SubViewport" instance=ExtResource("11_0gkpg")]
+
+[connection signal="timeout" from="EnemyStateMachine/DashState/DashDurationTimer" to="EnemyStateMachine/DashState" method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="EnemyStateMachine/DashState/DashCooldownTimer" to="EnemyStateMachine/DashState" method="_on_dash_cooldown_timer_timeout"]
