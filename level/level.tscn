@@ -12,6 +12,7 @@
 [node name="Level" type="Node3D"]
 
 [node name="Arena" parent="." instance=ExtResource("1_44x8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.403, -1, 0.798173)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 28)
@@ -25,7 +26,7 @@ entity_to_follow = NodePath("../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 20)
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
