@@ -2,7 +2,5 @@
 
 [ext_resource type="Script" uid="uid://d3n3sw3irj4gt" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/enemy_melee_handler.gd" id="1_3v7d7"]
 
-[node name="EnemyMeleeHandler" type="Node" node_paths=PackedStringArray("attacking_area", "melee_weapon")]
+[node name="EnemyMeleeHandler" type="Node"]
 script = ExtResource("1_3v7d7")
-attacking_area = NodePath("")
-melee_weapon = NodePath("")

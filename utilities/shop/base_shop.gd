@@ -1,4 +1,5 @@
-## manages the basic functions for adding and displaying items in the shop, to be used by different types of shops.
+## Manages the basic functions for adding and displaying items in the shop, 
+## to be used by different types of shops.
 class_name BaseShop
 extends Control
 
@@ -12,6 +13,7 @@ var prevent_duplicates: bool = true
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 @onready var title_label = %TitleLabel
+
 
 func _ready() -> void:
 	print(item_database.items)

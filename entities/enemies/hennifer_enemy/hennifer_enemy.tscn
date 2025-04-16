@@ -27,7 +27,7 @@ texture = SubResource("ViewportTexture_fgbet")
 [node name="AttackingArea" parent="." index="4"]
 visible = false
 
-[node name="EnemyStateMachine" parent="." index="8" node_paths=PackedStringArray("starting_state")]
+[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
 
 [node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
