@@ -39,7 +39,7 @@ bones/15/position = Vector3(-1.34829, 2.09585, 0.251932)
 bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.66, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_egqbq")
 
 [node name="HealthbarSprite" parent="." index="2"]
@@ -50,6 +50,7 @@ texture = SubResource("ViewportTexture_woodpecker")
 visible = false
 
 [node name="MeleeWeapon" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10738, 2.35215, 0)
 melee_weapon_scene = ExtResource("5_x6gfb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
