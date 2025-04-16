@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dn4y6rw2w6ydt"]
+[gd_scene load_steps=28 format=3 uid="uid://dn4y6rw2w6ydt"]
 
 [ext_resource type="PackedScene" uid="uid://bwi0t0rjkr75f" path="res://level/arena/art/sewer_arena.glb" id="1_b4aaq"]
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="5_byl6v"]
@@ -66,6 +66,12 @@ radius = 60.0
 height = 1.0
 radius = 47.326
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_frwhh"]
+size = Vector3(30, 50, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wdiye"]
+size = Vector3(30, 50, 0.5)
+
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_byl6v"]
 seamless = true
 
@@ -90,8 +96,6 @@ sky_material = SubResource("ShaderMaterial_byl6v")
 background_mode = 2
 sky = SubResource("Sky_embqv")
 volumetric_fog_density = 0.005
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_frwhh"]
 
 [node name="Arena" type="StaticBody3D"]
 
@@ -180,12 +184,52 @@ shape = SubResource("ConvexPolygonShape3D_15ch7")
 shape = SubResource("ConvexPolygonShape3D_embqv")
 
 [node name="FloorCollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.709, 1.25, -1.16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.709, 1.2, -1.16)
 shape = SubResource("CylinderShape3D_b4aaq")
 
 [node name="CeilingCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2205, 40.6871, 0)
 shape = SubResource("CylinderShape3D_co35n")
+
+[node name="WallCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.854468, 0, 0.519504, 0, 1, 0, -0.519504, 0, 0.854468, -45.3202, 17.6405, -38.1309)
+shape = SubResource("BoxShape3D_frwhh")
+
+[node name="WallCollisionShape2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.994489, 0, -0.104841, 0, 1, 0, 0.104841, 0, 0.994489, -18.962, 17.6405, -44.1734)
+shape = SubResource("BoxShape3D_frwhh")
+
+[node name="WallCollisionShape3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.742806, 0, -0.669507, 0, 1, 0, 0.669507, 0, 0.742806, 6.01217, 17.6405, -33.0088)
+shape = SubResource("BoxShape3D_frwhh")
+
+[node name="WallCollisionShape4" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.163378, 0, -0.986564, 0, 1, 0, 0.986564, 0, 0.163378, 19.9235, 17.6405, -8.62)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.379924, 0, -0.925018, 0, 1, 0, 0.925018, 0, -0.379924, 16.2599, 17.6405, 19.075)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape6" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.863413, 0, -0.504497, 0, 1, 0, 0.504497, 0, -0.863413, -0.246902, 17.6405, 38.6246)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape7" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.993707, 0, 0.112007, 0, 1, 0, -0.112007, 0, -0.993707, -25.6005, 17.6405, 44.0051)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape8" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.748146, 0, 0.663535, 0, 1, 0, -0.663535, 0, -0.748146, -50.3489, 17.6405, 33.7314)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape9" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.265034, 0, 0.964239, 0, 1, 0, -0.964239, 0, -0.265034, -64.8084, 17.6405, 9.86402)
+shape = SubResource("BoxShape3D_wdiye")
+
+[node name="WallCollisionShape10" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.388706, 0, 0.921362, 0, 1, 0, -0.921362, 0, 0.388706, -62.8099, 17.6405, -17.309)
+shape = SubResource("BoxShape3D_wdiye")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_co35n")
@@ -204,9 +248,5 @@ light_volumetric_fog_energy = 5.0
 shadow_enabled = true
 spot_range = 60.0
 spot_angle = 60.0
-
-[node name="WallCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.8235, 0)
-shape = SubResource("BoxShape3D_frwhh")
 
 [editable path="sewer_arena"]
