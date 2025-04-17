@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw4u5qtf6bv0m"]
+[gd_scene load_steps=8 format=3 uid="uid://bw4u5qtf6bv0m"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
+[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
@@ -12,6 +13,7 @@ radius = 2.5
 viewport_path = NodePath("SubViewport")
 
 [node name="BallChicken" instance=ExtResource("1_oapbr")]
+stats = ExtResource("2_v7541")
 type = 1
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
