@@ -2,6 +2,11 @@ extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
 
+# Check for cancel button input
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_button_pressed()
+
 func _ready() -> void:
 	await get_tree().process_frame
 	_update_inventory()

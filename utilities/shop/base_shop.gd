@@ -1,5 +1,3 @@
-## Manages the basic functions for adding and displaying items in the shop, 
-## to be used by different types of shops.
 class_name BaseShop
 extends Control
 
@@ -13,13 +11,18 @@ var prevent_duplicates: bool = true
 
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 @onready var title_label = %TitleLabel
-
+@onready var exit_button: Button = %ExitButton
 
 func _ready() -> void:
 	await get_tree().process_frame
 
 	_refresh_shop()
-
+	_setup_controller_navigation()
+	
+# Check for cancel button input
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_exit_button_pressed()
 
 func _refresh_shop() -> void:
 	if not shop_items_container:
@@ -78,3 +81,22 @@ func close_ui() -> void:
 
 func _on_exit_button_pressed() -> void:
 	close_ui()
+
+func _setup_controller_navigation() -> void:
+	# Make all shop items are focusable
+	for child in shop_items_container.get_children():
+		if child is Control:
+			child.focus_mode = Control.FOCUS_ALL
+
+	# Make exit button is focusable
+	if exit_button:
+		exit_button.focus_mode = Control.FOCUS_ALL
+
+	# Set initial focus to the first shop item, or exit button if no items
+	await get_tree().process_frame
+	var first_item: Node = shop_items_container.get_child(0)
+	if first_item and first_item is Control:
+		first_item.grab_focus()
+	elif exit_button:
+		exit_button.grab_focus()
+		
