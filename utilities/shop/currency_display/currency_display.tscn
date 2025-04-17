@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2jrp810g6g7e"]
+
+[ext_resource type="Script" uid="uid://dtl7bjx4pgltt" path="res://utilities/shop/currency_display/currency_display.gd" id="1_0wptd"]
+
+[node name="GridContainer" type="GridContainer"]
+offset_right = 167.0
+offset_bottom = 38.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+script = ExtResource("1_0wptd")
+
+[node name="PEText" type="Label" parent="."]
+layout_mode = 2
+text = "Prosperity Eggs"
+
+[node name="PEAmount" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="FoRText" type="Label" parent="."]
+layout_mode = 2
+text = "Feathers of Rebirth"
+
+[node name="FoRAmount" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
