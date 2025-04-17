@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource("1_a4p5s")
-health_bonus = 0
+health_bonus = 0.0
 speed_bonus = 0.0
 damage_bonus = 25.0
 stamina_bonus = 0.0
 name = "TalonFury"
 drop_chance = 30
-cost = 1500
+cost = 45
 description = "Unleash the power of  the fowl beast"
-type = 0
+model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
