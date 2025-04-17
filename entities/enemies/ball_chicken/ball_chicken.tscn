@@ -17,7 +17,7 @@ stats = ExtResource("2_v7541")
 type = 1
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
-transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 1, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
 transform = Transform3D(0.309239, 0.15102, -0.121204, -0.150488, 0.331147, 0.0286531, 0.121863, 0.0257057, 0.34295, 0.186526, 0.724427, 0.0605452)
@@ -33,6 +33,7 @@ transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 0, 0)
 shape = SubResource("SphereShape3D_gbobm")
 
 [node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.15451, 3.61011, -1.52368)
 texture = SubResource("ViewportTexture_8f7sg")
 
 [node name="MeleeWeapon" parent="." index="6"]
