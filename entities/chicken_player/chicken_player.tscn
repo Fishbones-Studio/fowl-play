@@ -151,7 +151,7 @@ height = 3.5
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 45
 script = ExtResource("1_abrql")
 stats = ExtResource("2_4hg1i")
 
@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.454408, 0.000313544, -0.00115765, 0.890793)
-bones/3/rotation = Quaternion(-0.531927, 0.0107562, 0.00159798, 0.84672)
-bones/4/rotation = Quaternion(-0.117894, 0.295722, -0.0946687, 0.943233)
-bones/5/rotation = Quaternion(-0.231661, -0.0715474, -0.735053, 0.633176)
-bones/6/rotation = Quaternion(-0.14944, 0.185413, 0.643807, 0.727188)
+bones/2/rotation = Quaternion(-0.40993, 0.00269994, -0.00898271, 0.912069)
+bones/3/rotation = Quaternion(-0.5156, 0.0654122, 0.034803, 0.85362)
+bones/4/rotation = Quaternion(-0.0957371, -0.188318, 0.074281, 0.974604)
+bones/5/rotation = Quaternion(-0.275415, -0.0158338, -0.766512, 0.579962)
+bones/6/rotation = Quaternion(-0.198825, 0.126395, 0.687852, 0.686551)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.31309, -0.0247273, -0.0899133, 0.945134)
-bones/9/rotation = Quaternion(0.181804, 0.0309972, -0.154826, 0.970575)
+bones/8/rotation = Quaternion(0.219384, -0.00416623, -0.0877054, 0.97168)
+bones/9/rotation = Quaternion(0.192017, 0.0309882, -0.154321, 0.968687)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.179371, -0.0912302, -0.102069, 0.97421)
+bones/11/rotation = Quaternion(-0.174005, -0.0177893, 0.00385064, 0.984577)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")

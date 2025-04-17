@@ -1,13 +1,15 @@
-class_name ConfirmationItem extends BaseShopItem
+class_name ConfirmationItem 
+extends BaseShopItem
 
 var shop_item: BaseResource
-var show_replace : bool
+var show_replace: bool
 
 @onready var type_label: Label = %TypeLabel
 @onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var description_label: Label = %DescriptionLabel
 @onready var cost_label: Label = %CostLabel
+
 
 func set_item_data(item: Resource) -> void:
 	if not (item is BaseResource or item is InRunUpgradeResource):
@@ -18,7 +20,8 @@ func set_item_data(item: Resource) -> void:
 		
 	shop_item = item
 	print(shop_item)
-	
+
+
 func populate_visual_fields() -> void:
 	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon

@@ -1,6 +1,7 @@
 extends BaseShop
 
-const SHOP_ITEM_SCENE = preload("uid://cc5vmtbby4xy0")
+const SHOP_ITEM_SCENE: PackedScene = preload("uid://cc5vmtbby4xy0")
+
 
 func _ready() -> void:
 	check_inventory = true

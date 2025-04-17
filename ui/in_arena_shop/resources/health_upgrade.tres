@@ -4,12 +4,13 @@
 
 [resource]
 script = ExtResource("1_ykvnc")
-health_bonus = 50
+health_bonus = 50.0
 speed_bonus = 0.0
 damage_bonus = 0.0
-name = "FeatherFort+"
+stamina_bonus = 0.0
+name = "FeatherFort"
 drop_chance = 30
 cost = 1000
 description = "FeatherFort+ – Stronger, healthier, happier chickens!"
-type = 2
+model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

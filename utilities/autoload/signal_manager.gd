@@ -32,7 +32,7 @@ signal enemy_died()
 # Weapon signals
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
 signal weapon_hit_area_body_exited(body: PhysicsBody3D)
-signal weapon_hit_target(target: PhysicsBody3D, damage: int)
+signal weapon_hit_target(target: PhysicsBody3D, damage: float)
 
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}

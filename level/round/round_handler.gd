@@ -22,8 +22,8 @@ var available_enemies: Dictionary = {}
 var _current_enemy: Enemy # The one currently in the arena fighting
 var _round_countdown: Control = null
 
-@onready var enemy_position: Marker3D = $"../EnemyPosition" # Position where to spawn the enemy at
-@onready var player_position: Marker3D = $"../PlayerPosition"
+@onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
+@onready var player_default_position: Marker3D = %PlayerPosition
 @onready var battle_timer: Timer = $RoundBattleTimer
 @onready var intermission_timer: Timer = $RoundIntermissionTimer
 
@@ -68,7 +68,7 @@ func _start_round() -> void:
 
 func _enter_waiting() -> void:
 	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Round %d" % GameManager.current_round})
-	GameManager.chicken_player.global_position = player_position.global_position
+	GameManager.chicken_player.global_position = player_default_position.global_position
 
 	await get_tree().create_timer(waiting_time).timeout
 
@@ -116,6 +116,7 @@ func _enter_concluding() -> void:
 func _enter_intermission() -> void:
 	# TODO, shop somewhere to interact
 	print("imagine you are now in a different part of arena with a shop")
+	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0) # teleport player to the intermission area
 
 	_activate_round_countdown("Intermission ends in", intermission_timer)
 
@@ -129,7 +130,7 @@ func _spawn_enemy_in_level() -> void:
 	assert(_current_enemy, "Missing current enemy")
 
 	add_child(_current_enemy)
-	_current_enemy.global_position = enemy_position.global_position
+	_current_enemy.global_position = enemy_default_position.global_position
 
 	SignalManager.enemy_died.connect(func(): _current_enemy = null, CONNECT_ONE_SHOT)
 

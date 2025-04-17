@@ -10,24 +10,28 @@ var upgrade_item: InRunUpgradeResource
 @onready var cost_label: Label = %CostLabel
 
 
+func _ready() -> void:
+	super()
+
+
 func set_item_data(item: Resource) -> void:
-	if !item is InRunUpgradeResource:
+	if not item is InRunUpgradeResource:
 		if item == null:
 			push_error("Item is null")
 			return
 		push_error("Item is not of type InRunUpgradeResource")
 		return
-		
-	upgrade_item = item as InRunUpgradeResource
 
-	
+	upgrade_item = item as InRunUpgradeResource
+	print(upgrade_item)
+
+
 func populate_visual_fields() -> void:
 	name_label.text = upgrade_item.name
 	if upgrade_item.icon: item_icon.texture = upgrade_item.icon
 	bonus_label.text = upgrade_item.get_bonus_string()
 	cost_label.text = str(upgrade_item.cost)
 	description_label.text = upgrade_item.description
-
 
 
 func attempt_purchase() -> void:
@@ -48,6 +52,6 @@ func attempt_purchase() -> void:
 	self.visible = false
 	purchase_in_progress = false
 
-	
+
 func can_afford() -> bool:
 	return GameManager.prosperity_eggs >= upgrade_item.cost
