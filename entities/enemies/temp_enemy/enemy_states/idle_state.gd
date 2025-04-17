@@ -8,15 +8,20 @@ extends BaseEnemyState
 var target_position: Vector3 ## Target position for wandering
 var wander_timer: float = wander_interval ## Timer for choosing new target
 var origin_position: Vector3 ## Starting position of the enemy
+var dash_threshold: int
 
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
 	origin_position = enemy.position
 	_choose_new_wander_target()
+	dash_threshold = randi_range(0,3)
 
 
 func process(_delta: float) -> void:
-	if enemy.position.distance_to(player.position) < chase_distance:
+	if enemy.position.distance_to(player.position) < chase_distance && dash_threshold == 0:
+		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.DASH_STATE, {})
+		return
+	if enemy.position.distance_to(player.position) < chase_distance && dash_threshold > 0:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.CHASE_STATE, {})
 		return
 
