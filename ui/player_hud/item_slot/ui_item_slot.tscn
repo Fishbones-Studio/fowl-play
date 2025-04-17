@@ -7,6 +7,7 @@ custom_minimum_size = Vector2(96, 96)
 script = ExtResource("1_438fu")
 active_indicator_colour = Color(0.760784, 0.517647, 0.517647, 0.490196)
 item_background_colour = Color(0.517647, 0.517647, 0.517647, 0.490196)
+cooldown_colour = Color(0.294118, 0.184314, 0.239216, 0.666667)
 
 [node name="ActiveIndicator" type="ColorRect" parent="."]
 visible = false
@@ -23,3 +24,9 @@ color = Color(0.517647, 0.517647, 0.517647, 0.490196)
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 1
+
+[node name="Cooldown" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+fill_mode = 3
+show_percentage = false
