@@ -10,8 +10,7 @@ var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
 func _ready() -> void:
 	await get_tree().process_frame
-	
-	
+
 	populate_visual_fields()
 
 

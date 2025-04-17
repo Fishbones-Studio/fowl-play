@@ -193,7 +193,7 @@ func get_items_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
 
 
 ## Inventory Management
-func save_inventory() -> void:	
+func save_inventory() -> void:
 	inventory_data.recalc_items_sorted = true # Force recalculation of sorted items on next get
 	var error: int = ResourceSaver.save(inventory_data, SAVE_FILE_PATH)
 	if error != OK:
