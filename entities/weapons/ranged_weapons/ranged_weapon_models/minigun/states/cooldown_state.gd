@@ -3,7 +3,7 @@ extends BaseRangedCombatState
 var _cooldown_timer: float = 0.0
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
-	SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration)
+	SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration, true)
 	_cooldown_timer = 0.0
 
 func physics_process(delta: float) -> void:

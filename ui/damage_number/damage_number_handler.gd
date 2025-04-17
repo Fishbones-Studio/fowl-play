@@ -2,9 +2,9 @@ class_name DamageNumberHandler
 extends Marker3D
 
 @export_group("Popup settings")
-@export var horizontal_spread = 2.2
-@export var vertical_variance = 1.4
-@export var depth_offset = 0.7
+@export var horizontal_spread: float = 2.2
+@export var vertical_variance: float = 1.4
+@export var depth_offset: float = 0.7
 
 @export_group("Text settings")
 @export var base_size: int = 140

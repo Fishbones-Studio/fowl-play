@@ -27,7 +27,7 @@ func activate() -> void:
 	ability_holder.velocity.z = 0
 	ability_holder.velocity.y = descent_velocity
 	
-	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time)
+	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 	cooldown_timer.start()
 
 

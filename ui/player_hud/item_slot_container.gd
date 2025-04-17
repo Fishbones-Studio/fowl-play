@@ -42,14 +42,14 @@ func _ready() -> void:
 	)
 	
 	SignalManager.cooldown_item_slot.connect(
-		func(item: BaseResource, cd: float):
+		func(item: BaseResource, cd: float, create_tween : bool):
 			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
 			if index < 0 or index >= get_child_count():
 				push_warning("Invalid item slot index: ", index)
 				return
 			var item_slot: UiItemSlot = get_child(index) as UiItemSlot
 			if item_slot:
-				item_slot.start_cooldown(cd)
+				item_slot.start_cooldown(cd, create_tween)
 	)
 	
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)

@@ -49,31 +49,32 @@ func _update_item_visuals() -> void:
 		item_image.texture = item.icon
 
 
-func start_cooldown(duration: float) -> void:
-	# Stop and discard any existing tween
-	if cooldown_tween and cooldown_tween.is_valid():
-		cooldown_tween.kill()
-	cooldown_tween = null
-
+func start_cooldown(duration: float, create_tween := true) -> void:
 	cooldown.visible = true
 
 	# Set max_value to the cooldown duration
 	cooldown.max_value = duration
 	cooldown.value = duration
 
-	# Animate value from duration to 0
-	cooldown_tween = create_tween()
-	cooldown_tween.tween_property(
-		cooldown, "value", 0.0, duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-
-	# Connect the finished signal if the tween was created successfully
-	if cooldown_tween:
-		if not cooldown_tween.finished.is_connected(_on_cooldown_finished):
-			cooldown_tween.finished.connect(_on_cooldown_finished)
-	else:
-		push_error("Failed to create cooldown tween.")
-		_on_cooldown_finished()
+	if create_tween:
+		# Stop and discard any existing tween
+		if cooldown_tween and cooldown_tween.is_valid():
+			cooldown_tween.kill()
+		cooldown_tween = null
+	
+		# Animate value from duration to 0
+		cooldown_tween = create_tween()
+		cooldown_tween.tween_property(
+			cooldown, "value", 0.0, duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+		# Connect the finished signal if the tween was created successfully
+		if cooldown_tween:
+			if not cooldown_tween.finished.is_connected(_on_cooldown_finished):
+				cooldown_tween.finished.connect(_on_cooldown_finished)
+		else:
+			push_error("Failed to create cooldown tween.")
+			_on_cooldown_finished()
 
 
 
