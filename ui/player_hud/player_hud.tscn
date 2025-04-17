@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=13 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://ceil8iql2shtl" path="res://ui/player_hud/player_portrait_container.gd" id="1_l7ggc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dscuhfc7v6toy" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
 [ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
 [ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
+[ext_resource type="PackedScene" uid="uid://77dxickbfdy8" path="res://ui/player_hud/player_crosshair/crosshair_container.tscn" id="9_8qpry"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]
 shader = ExtResource("3_kpoie")
@@ -140,5 +141,8 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 script = ExtResource("8_w7jxt")
+
+[node name="CrosshairContainer" parent="." instance=ExtResource("9_8qpry")]
+layout_mode = 1
 
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
