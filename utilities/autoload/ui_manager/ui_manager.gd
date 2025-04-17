@@ -40,6 +40,9 @@ func _on_add_ui_scene(new_ui_scene_path: String, params: Dictionary = {}) -> voi
 		# If the UI has a setup or initialize method, call it with parameters
 		if new_ui_node.has_method("setup") and params:
 			new_ui_node.setup(params)
+			
+		# When the node leaves the tree, emit the left tree signal
+		new_ui_node.tree_exited.connect(func(): SignalManager.left_tree.emit())
 
 		# Add it as a child of the UI manager
 		add_child(new_ui_node)
