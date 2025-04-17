@@ -100,6 +100,7 @@ func _enter_concluding() -> void:
 	if GameManager.current_round == max_rounds: # crack way to check if boss dead
 		print("all rounds completed, back to poultry man menu")
 		GameManager.prosperity_eggs += GameManager.arena_completion_reward
+		GameManager.feathers_of_rebirth += 5 # TODO: improve later
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 		SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
 		return
