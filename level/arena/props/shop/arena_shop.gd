@@ -6,7 +6,7 @@ var player_in_area: bool = false
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("interact") and player_in_area:
+	if Input.is_action_just_pressed("interact") and player_in_area:
 		open_shop()
 
 

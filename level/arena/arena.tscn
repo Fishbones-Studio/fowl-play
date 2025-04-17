@@ -196,6 +196,12 @@ shape = SubResource("ConvexPolygonShape3D_15ch7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sewer_arena/Cylinder_059/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_embqv")
 
+[node name="Cylinder_061" parent="sewer_arena" index="33"]
+transform = Transform3D(5.61588, 0, 0, 0, -1.44984, 2.18691e-06, 0, -5.6459e-07, -5.61588, -22.176, 119.844, -0.700502)
+
+[node name="AnimationPlayer" parent="sewer_arena" index="45"]
+autoplay = "Cylinder_061Action"
+
 [node name="FloorCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.709, 1.2, -1.16)
 shape = SubResource("CylinderShape3D_b4aaq")

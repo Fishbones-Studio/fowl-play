@@ -1,25 +1,26 @@
 [gd_scene load_steps=8 format=3 uid="uid://bw4u5qtf6bv0m"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
-[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_nnmdb"]
+[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
-radius = 2.5
+radius = 4.75
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8f7sg"]
 viewport_path = NodePath("SubViewport")
 
 [node name="BallChicken" instance=ExtResource("1_oapbr")]
+stats = ExtResource("2_v7541")
 type = 1
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 0, 0)
 shape = SubResource("SphereShape3D_gbobm")
 
 [node name="HealthbarSprite" parent="." index="2"]
@@ -27,7 +28,6 @@ texture = SubResource("ViewportTexture_8f7sg")
 
 [node name="MeleeWeapon" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32256, 0.507973, -1.69485)
-entity_stats = ExtResource("2_nnmdb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
