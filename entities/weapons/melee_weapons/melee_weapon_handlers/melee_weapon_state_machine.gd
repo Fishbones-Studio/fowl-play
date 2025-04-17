@@ -60,7 +60,6 @@ func _physics_process(delta: float) -> void:
 
 # Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
 func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
-	print("Target state: " +  WeaponEnums.weapon_state_to_string(target_state) + " Current state: " + WeaponEnums.weapon_state_to_string(current_state.STATE_TYPE))
 	# Prevent transitioning to the same state
 	if target_state == current_state.STATE_TYPE:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
