@@ -40,6 +40,18 @@ func _ready() -> void:
 				# Added closing parenthesis for push_warning
 				push_warning("No item slot found at index: ", index)
 	)
+	
+	SignalManager.cooldown_item_slot.connect(
+		func(item: BaseResource, cd: float):
+			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
+			if index < 0 or index >= get_child_count():
+				push_warning("Invalid item slot index: ", index)
+				return
+			var item_slot: UiItemSlot = get_child(index) as UiItemSlot
+			if item_slot:
+				item_slot.start_cooldown(cd)
+	)
+	
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
 

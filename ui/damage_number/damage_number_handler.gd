@@ -31,7 +31,7 @@ func display_damage(value: int) -> void:
 	damage_number.label.font_size = base_size * randi_range(1, size_variation)
 	damage_number.label.modulate = damage_color if value >= 0 else heal_color
 
-	var tween = damage_number.create_tween()
+	var tween: Tween = damage_number.create_tween()
 	TweenManager.create_move_tween(tween, damage_number, "y", damage_number.position.y + 1, 0.25, Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	TweenManager.create_move_tween(tween, damage_number, "y", damage_number.position.y, 0.5, Tween.TRANS_CUBIC,Tween.EASE_IN)
 	tween.finished.connect(func(): damage_number.queue_free())
