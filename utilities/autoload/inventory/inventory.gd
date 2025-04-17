@@ -17,6 +17,8 @@ var inventory_data: InventoryData
 
 func _ready() -> void:
 	load_inventory()
+	GameManager.prosperity_eggs_changed.connect(func(value): inventory_data.prosperity_eggs = value)
+	GameManager.feathers_of_rebirth_changed.connect(func(value): inventory_data.feathers_of_rebirth = value)
 
 
 ## Function to validate if an item can be equipped
@@ -182,7 +184,7 @@ func get_items_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
 
 
 ## Inventory Management
-func save_inventory() -> void:
+func save_inventory() -> void:	
 	inventory_data.recalc_items_sorted = true # Force recalculation of sorted items on next get
 	var error: int = ResourceSaver.save(inventory_data, SAVE_FILE_PATH)
 	if error != OK:

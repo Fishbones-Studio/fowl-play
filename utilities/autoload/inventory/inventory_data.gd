@@ -31,7 +31,7 @@ var items_sorted_flattened : Array :
 		ability_slot_two = _validate_slot(value, "Ability Two")
 
 @export_group("currency")
-@export var prosperity_eggs: int = 200
+@export var prosperity_eggs: int = 200 # starting money
 @export var feathers_of_rebirth: int = 0
 
 
