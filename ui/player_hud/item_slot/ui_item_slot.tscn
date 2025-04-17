@@ -25,8 +25,8 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 expand_mode = 1
 
-[node name="Cooldown" type="ColorRect" parent="."]
-visible = false
+[node name="Cooldown" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
-color = Color(0.294118, 0.184314, 0.239216, 0.666667)
+fill_mode = 3
+show_percentage = false

@@ -47,28 +47,3 @@ func create_move_tween(
 	.set_trans(transition)\
 	.set_ease(tween_ease)
 	return tween
-
-
-func create_size_tween(
-	tween: Tween,
-	node: Node,
-	axis: String,
-	target_size: float,
-	duration: float = DEFAULT_DURATION,
-	transition: Tween.TransitionType = DEFAULT_TRANSITION,
-	ease_type: Tween.EaseType = DEFAULT_EASE
-) -> Tween:
-	assert(axis.to_lower() in ["x", "y"], "Axis must be 'x' or 'y'")
-	if not node or not node.is_inside_tree():
-		push_error("Cannot create size tween: Node is null or not in tree.")
-		return null
-
-	var property := "size:%s" % axis.to_lower()
-	if not tween:
-		push_error("Failed to create size tween instance.")
-		return null
-
-	tween.tween_property(node, property, target_size, duration)\
-	.set_trans(transition)\
-	.set_ease(ease_type)
-	return tween

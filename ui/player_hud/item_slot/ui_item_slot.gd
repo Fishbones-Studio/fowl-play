@@ -16,17 +16,26 @@ var active: bool = false:
 		active = value
 		active_indicator.visible = value
 
+var cooldown_tween: Tween
+var cooldown_original_size: Vector2
+
 @onready var active_indicator: ColorRect = $ActiveIndicator
 @onready var item_image: TextureRect = $ItemImage
 @onready var item_background: ColorRect = $ItemBackground
-@onready var cooldown: ColorRect = $Cooldown
-var cooldown_tween: Tween # Removed @onready, initialize as needed
+@onready var cooldown: ProgressBar = $Cooldown
+
 
 func _ready() -> void:
 	# Apply colors
 	active_indicator.color = active_indicator_colour if active_indicator_colour else active_indicator.color
 	item_background.color = item_background_colour if item_background_colour else item_background.color
-	cooldown.color = cooldown_colour if cooldown_colour else cooldown.color
+
+	# Create a new StyleBoxFlat for the fill
+	var fill_stylebox := StyleBoxFlat.new()
+	fill_stylebox.bg_color = cooldown_colour if cooldown_colour else Color(1, 1, 1) # fallback colour
+	
+	# Apply the stylebox override to the ProgressBar's fill
+	cooldown.add_theme_stylebox_override("fill", fill_stylebox)
 
 	# Start hidden
 	cooldown.visible = false
@@ -34,45 +43,39 @@ func _ready() -> void:
 
 	_update_item_visuals()
 
+
 func _update_item_visuals() -> void:
 	if item_image and item:
 		item_image.texture = item.icon
 
+
 func start_cooldown(duration: float) -> void:
-	# Stop and discard any existing tween safely
+	# Stop and discard any existing tween
 	if cooldown_tween and cooldown_tween.is_valid():
 		cooldown_tween.kill()
-	# cooldown_tween reference will be overwritten below
+	cooldown_tween = null
 
-	# Ensure the node is ready for tweening
-	if not cooldown or not cooldown.is_inside_tree():
-		push_warning("Cooldown node is not ready for tweening.")
-		return
-
-	# Reset cooldown bar to full size
-	cooldown.size = item_background.size
 	cooldown.visible = true
 
-	# Create a new tween
-	cooldown_tween = self.create_tween()
-	TweenManager.create_size_tween(
-		cooldown_tween, 
-		cooldown, 
-		"y",      
-		0.0,      
-		duration,
-		Tween.TRANS_SINE,
-		Tween.EASE_OUT
-	)
+	# Set max_value to the cooldown duration
+	cooldown.max_value = duration
+	cooldown.value = duration
 
-	# Connect the finished signal *only if* the tween was created successfully
+	# Animate value from duration to 0
+	cooldown_tween = create_tween()
+	cooldown_tween.tween_property(
+		cooldown, "value", 0.0, duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	# Connect the finished signal if the tween was created successfully
 	if cooldown_tween:
-		cooldown_tween.finished.connect(_on_cooldown_finished)
+		if not cooldown_tween.finished.is_connected(_on_cooldown_finished):
+			cooldown_tween.finished.connect(_on_cooldown_finished)
 	else:
-		# Handle the case where tween creation failed in the manager
-		push_error("Failed to create cooldown tween via TweenManager.")
-		_on_cooldown_finished() # Fallback: hide bar immediately
+		push_error("Failed to create cooldown tween.")
+		_on_cooldown_finished()
+
+
 
 func _on_cooldown_finished() -> void:
 	cooldown.visible = false
-	cooldown_tween = null
