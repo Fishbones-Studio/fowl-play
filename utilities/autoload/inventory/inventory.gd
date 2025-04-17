@@ -19,7 +19,7 @@ func _ready() -> void:
 	load_inventory()
 	GameManager.prosperity_eggs_changed.connect(
 		func(value): 
-			print("Setting prosperity eggs  in save system to: ", value)
+			print("Setting prosperity eggs in save system to: ", value)
 			inventory_data.prosperity_eggs = value
 			save_inventory()
 	)

@@ -52,9 +52,8 @@ func _refresh_shop() -> void:
 		shop_items_container.add_child(shop_item)
 
 
-func _get_available_items(filter: Dictionary = {}) -> Array[BaseResource]:
+func _get_available_items() -> Array[BaseResource]:
 	var valid_items: Array[BaseResource] = []
-	var filter_types: Array = []
 
 	for item in item_database.items:
 		if _should_skip_item(item):
