@@ -10,6 +10,10 @@ var upgrade_item: InRunUpgradeResource
 @onready var cost_label: Label = %CostLabel
 
 
+func _ready() -> void:
+	super()
+
+
 func set_item_data(item: Resource) -> void:
 	if not item is InRunUpgradeResource:
 		if item == null:
@@ -19,6 +23,7 @@ func set_item_data(item: Resource) -> void:
 		return
 
 	upgrade_item = item as InRunUpgradeResource
+	print(upgrade_item)
 
 
 func populate_visual_fields() -> void:

@@ -4,10 +4,10 @@ extends Ability
 @export var knockback_force: float = 200
 @export var knockback_force_upwards: float = 10
 
-var damage : float:
+var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack_multiplier * stats.weight
+		return stats.attack_multiplier * stats.weight * stats.defense
 
 var _particles_emitted: bool = false
 
