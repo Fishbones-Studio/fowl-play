@@ -55,15 +55,12 @@ func _physics_process(delta: float) -> void:
 func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information: Dictionary = {}) -> void:
 	previous_state = current_state
 	previous_state.exit()
-	
-	print(target_state)
 
 	current_state = states.get(target_state)
 
 	if not current_state:
 		push_error(owner.name + ": Trying to transition to state " + EnemyEnums.EnemyStates.find_key(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
-
 
 	current_state.enter(previous_state.state_type, information)
 

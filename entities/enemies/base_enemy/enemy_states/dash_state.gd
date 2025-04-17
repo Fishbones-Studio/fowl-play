@@ -13,9 +13,9 @@ var _direction_difference: float
 
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	print ("entered dash state")
 	_stamina_cost = movement_component.dash_stamina_cost
 	target_position = (player.position - enemy.position).normalized()
+
 	enemy.stats.drain_stamina(_stamina_cost)
 
 
