@@ -2,9 +2,9 @@ class_name DamageNumberHandler
 extends Marker3D
 
 @export_group("Popup settings")
-@export var horizontal_spread = 2.2
-@export var vertical_variance = 1.4
-@export var depth_offset = 0.7
+@export var horizontal_spread: float = 2.2
+@export var vertical_variance: float = 1.4
+@export var depth_offset: float = 0.7
 
 @export_group("Text settings")
 @export var base_size: int = 140
@@ -31,7 +31,7 @@ func display_damage(value: int) -> void:
 	damage_number.label.font_size = base_size * randi_range(1, size_variation)
 	damage_number.label.modulate = damage_color if value >= 0 else heal_color
 
-	var tween = damage_number.create_tween()
+	var tween: Tween = damage_number.create_tween()
 	TweenManager.create_move_tween(tween, damage_number, "y", damage_number.position.y + 1, 0.25, Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	TweenManager.create_move_tween(tween, damage_number, "y", damage_number.position.y, 0.5, Tween.TRANS_CUBIC,Tween.EASE_IN)
 	tween.finished.connect(func(): damage_number.queue_free())

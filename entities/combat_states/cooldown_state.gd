@@ -10,6 +10,7 @@ const STATE_TYPE: int = WeaponEnums.WeaponState.COOLDOWN  # Defines this state a
 
 # When entering this state, start the cooldown timer
 func enter(_previous_state, _information: Dictionary = {}) -> void:
+	SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, true)
 	# Create a timer that lasts as long as the weapon's cooldown time
 	cooldown_timer.wait_time = weapon_node.current_weapon.attack_duration
 	cooldown_timer.start()

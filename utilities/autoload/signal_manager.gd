@@ -18,6 +18,7 @@ signal player_heal()
 signal deactivate_item_slot(item : BaseResource)
 signal activate_item_slot(item : BaseResource)
 signal left_tree()
+signal cooldown_item_slot(item : BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
