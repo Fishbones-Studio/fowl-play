@@ -17,7 +17,7 @@ var prevent_duplicates: bool = true
 
 func _ready() -> void:
 	await get_tree().process_frame
-	
+
 	_refresh_shop()
 
 
