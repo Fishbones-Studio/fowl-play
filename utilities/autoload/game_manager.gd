@@ -31,5 +31,5 @@ var current_round: int = 1:
 
 
 func reset_game() -> void:
-	prosperity_eggs += current_round * int(arena_round_reward / 2.0)
+	prosperity_eggs = clamp((100 + current_round * int(arena_round_reward / 2.0)), 125, 200)
 	Inventory.reset_inventory()
