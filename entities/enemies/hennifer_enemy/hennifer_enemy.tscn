@@ -24,6 +24,7 @@ transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 1, 0)
 shape = SubResource("BoxShape3D_v8d7w")
 
 [node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -0.725)
 texture = SubResource("ViewportTexture_fgbet")
 
 [node name="AttackingArea" parent="." index="4"]
@@ -44,3 +45,6 @@ enemy = NodePath("../..")
 script = ExtResource("5_75fyq")
 STATE_TYPE = 1
 enemy = NodePath("../..")
+
+[node name="DamageNumberHandler" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

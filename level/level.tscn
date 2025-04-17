@@ -13,35 +13,37 @@
 [node name="Level" type="Node3D"]
 
 [node name="Arena" parent="." instance=ExtResource("1_44x8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.403, -1, 0.798173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, -1, 0.9)
 
 [node name="IntermissionArea" parent="." instance=ExtResource("2_6gtgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 28)
+transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 4)
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_0v1st")]
-transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 7, 4, 24.5)
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
 camera_reference = NodePath("../PlayerCamera")
 entity_to_follow = NodePath("../Player")
+entity_follow_height = 1.8
+entity_follow_distance = 20.0
 
 [node name="Player" parent="." instance=ExtResource("2_ivpvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
 enemy_scenes = Array[PackedScene]([ExtResource("5_0v1st"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
 round_timer = true
-waiting_time = 2.5
+waiting_time = 1.5
 
 [node name="RoundBattleTimer" type="Timer" parent="RoundHandler"]
 wait_time = 120.0
