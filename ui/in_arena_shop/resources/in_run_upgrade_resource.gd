@@ -1,7 +1,7 @@
 class_name InRunUpgradeResource
 extends BaseResource
 
-@export var health_bonus: int = 0
+@export var health_bonus: float = 0.0
 @export var speed_bonus: float = 0.0
 @export var damage_bonus: float = 0.0
 @export var stamina_bonus: float = 0.0

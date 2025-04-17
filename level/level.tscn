@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhnqi4fnso1hh"]
+[gd_scene load_steps=10 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
+[ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area.tscn" id="2_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_ivpvi"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
@@ -12,6 +13,10 @@
 [node name="Level" type="Node3D"]
 
 [node name="Arena" parent="." instance=ExtResource("1_44x8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.403, -1, 0.798173)
+
+[node name="IntermissionArea" parent="." instance=ExtResource("2_6gtgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="."]
 transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 28)
@@ -25,9 +30,11 @@ entity_to_follow = NodePath("../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 20)
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -35)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="RoundHandler" type="Node" parent="."]

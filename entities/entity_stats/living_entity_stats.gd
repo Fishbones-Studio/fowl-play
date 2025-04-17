@@ -8,6 +8,7 @@ extends Resource
 @export_range(0, 1000) var defense: int = 0
 @export var speed: float
 @export var weight: float
+
 @export_category("Factors")
 @export var health_regen: int
 @export var stamina_regen: int
@@ -23,8 +24,8 @@ var current_stamina: float:
 
 
 func init() -> void:
-	if max_health <=0: push_error("Forgot to set max_health")
-	if max_stamina <=0: push_error("Forgot to set max_stamina")
+	if max_health <= 0: push_error("Forgot to set max_health")
+	if max_stamina <= 0: push_error("Forgot to set max_stamina")
 	current_health = max_health
 	current_stamina = max_stamina
 
