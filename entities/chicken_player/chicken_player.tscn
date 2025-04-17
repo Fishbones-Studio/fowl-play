@@ -147,7 +147,7 @@ node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Das
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 0.9
-height = 3.5
+height = 3.3
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
 collision_layer = 2
@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.510913, -0.00281138, 0.0090896, 0.85958)
-bones/3/rotation = Quaternion(-0.52743, -0.0194734, -0.0175152, 0.849195)
-bones/4/rotation = Quaternion(-0.182234, -0.324254, -0.0939095, 0.923488)
-bones/5/rotation = Quaternion(-0.166254, -0.124924, -0.694112, 0.689175)
-bones/6/rotation = Quaternion(-0.234033, 0.0821024, 0.716143, 0.6524)
+bones/2/rotation = Quaternion(-0.402765, 0.00307868, -0.0102246, 0.915241)
+bones/3/rotation = Quaternion(-0.531567, 0.00576347, -0.00156415, 0.846995)
+bones/4/rotation = Quaternion(-0.146369, 0.188756, -0.11731, 0.963943)
+bones/5/rotation = Quaternion(-0.20892, -0.0926528, -0.720605, 0.654596)
+bones/6/rotation = Quaternion(-0.163845, 0.168555, 0.657153, 0.716166)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.30158, -0.0162839, -0.0503717, 0.95197)
-bones/9/rotation = Quaternion(0.181453, 0.00754266, -0.112917, 0.976866)
+bones/8/rotation = Quaternion(0.31429, -0.0253021, -0.0731545, 0.946166)
+bones/9/rotation = Quaternion(0.180556, 0.0246284, -0.147654, 0.972107)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.172454, 0.054304, 0.112196, 0.977099)
+bones/11/rotation = Quaternion(-0.179008, -0.0656057, -0.0641744, 0.979558)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
