@@ -5,7 +5,7 @@ signal feathers_of_rebirth_changed(new_value : int)
 
 
 var chicken_player: ChickenPlayer = null
-var prosperity_eggs: int :
+var prosperity_eggs: int:
 	set(value):
 		print("Setting prosperity eggs to: ", value)
 		prosperity_eggs = value

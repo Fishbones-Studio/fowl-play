@@ -14,6 +14,7 @@ var focusable_items: Array[Focusable3D] = []
 @onready var shop_item: Focusable3D = $MenuItems/Shop
 @onready var inventory_item: Focusable3D = $MenuItems/Inventory
 
+
 func _ready() -> void:
 	# Get all focusable items 
 	focusable_items = _get_focusable_items()

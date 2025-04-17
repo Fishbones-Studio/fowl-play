@@ -16,10 +16,12 @@ var prevent_duplicates: bool = true
 
 
 func _ready() -> void:
+	await get_tree().process_frame
+	
 	_refresh_shop()
 
 
-func _refresh_shop() -> void:
+func _refresh_shop(filter: Dictionary = {}) -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
@@ -30,7 +32,7 @@ func _refresh_shop() -> void:
 		child.queue_free()
 
 	# Get all possible items that can be shown
-	available_items = _get_available_items()
+	available_items = _get_available_items(filter)
 
 	# Determine how many items we can actually show
 	var items_to_show = min(available_items.size(), max_items)
@@ -50,10 +52,16 @@ func _refresh_shop() -> void:
 		shop_items_container.add_child(shop_item)
 
 
-func _get_available_items() -> Array[BaseResource]:
+func _get_available_items(filter: Dictionary = {}) -> Array[BaseResource]:
 	var valid_items: Array[BaseResource] = []
+	var filter_types: Array = []
+
+	if "types" in filter:
+		filter_types = filter["types"]
 
 	for item in item_database.items:
+		if not filter_types.is_empty() and not item.type in filter_types:
+			continue
 		if _should_skip_item(item):
 			continue
 		valid_items.append(item)

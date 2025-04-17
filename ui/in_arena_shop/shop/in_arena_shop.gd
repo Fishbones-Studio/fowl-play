@@ -11,8 +11,10 @@ func _ready() -> void:
 	check_inventory = false
 	prevent_duplicates = false
 	title_label.text = "Upgrades"
-	# calls baseshop
-	super()
+
+	_refresh_shop({
+		"types": [ItemEnums.ItemTypes.UPGRADE],
+	})
 
 
 func close_ui() -> void:
