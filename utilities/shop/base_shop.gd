@@ -21,7 +21,7 @@ func _ready() -> void:
 	_refresh_shop()
 
 
-func _refresh_shop(filter: Dictionary = {}) -> void:
+func _refresh_shop() -> void:
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
@@ -32,7 +32,7 @@ func _refresh_shop(filter: Dictionary = {}) -> void:
 		child.queue_free()
 
 	# Get all possible items that can be shown
-	available_items = _get_available_items(filter)
+	available_items = _get_available_items()
 
 	# Determine how many items we can actually show
 	var items_to_show = min(available_items.size(), max_items)
@@ -56,12 +56,7 @@ func _get_available_items(filter: Dictionary = {}) -> Array[BaseResource]:
 	var valid_items: Array[BaseResource] = []
 	var filter_types: Array = []
 
-	if "types" in filter:
-		filter_types = filter["types"]
-
 	for item in item_database.items:
-		if not filter_types.is_empty() and not item.type in filter_types:
-			continue
 		if _should_skip_item(item):
 			continue
 		valid_items.append(item)

@@ -12,9 +12,7 @@ func _ready() -> void:
 	prevent_duplicates = false
 	title_label.text = "Upgrades"
 
-	_refresh_shop({
-		"types": [ItemEnums.ItemTypes.UPGRADE],
-	})
+	super()
 
 
 func close_ui() -> void:

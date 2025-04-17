@@ -8,15 +8,7 @@ func _ready() -> void:
 	prevent_duplicates = true
 	title_label.text = "Shop"
 
-	_refresh_shop({
-		"types": [
-			ItemEnums.ItemTypes.MELEE_WEAPON,
-			ItemEnums.ItemTypes.RANGED_WEAPON,
-			ItemEnums.ItemTypes.ABILITY,
-			ItemEnums.ItemTypes.HELMET,
-			ItemEnums.ItemTypes.BOOTS,
-			],
-	})
+	super()
 
 	
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
