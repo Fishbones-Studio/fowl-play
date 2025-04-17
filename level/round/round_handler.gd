@@ -17,7 +17,7 @@ const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
 @export var waiting_time: float
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
-var available_enemies: Dictionary = {}
+var available_enemies: Dictionary[EnemyEnums.EnemyTypes, Array] = {}
 
 var _current_enemy: Enemy # The one currently in the arena fighting
 var _round_countdown: Control = null

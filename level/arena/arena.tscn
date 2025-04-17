@@ -203,7 +203,7 @@ transform = Transform3D(5.61588, 0, 0, 0, -1.44984, 2.18691e-06, 0, -5.6459e-07,
 autoplay = "Cylinder_061Action"
 
 [node name="FloorCollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.709, 1.2, -1.16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.709, 1.1, -1.16)
 shape = SubResource("CylinderShape3D_b4aaq")
 
 [node name="CeilingCollisionShape" type="CollisionShape3D" parent="."]
