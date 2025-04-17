@@ -14,6 +14,7 @@ var focusable_items: Array[Focusable3D] = []
 @onready var shop_item: Focusable3D = $MenuItems/Shop
 @onready var inventory_item: Focusable3D = $MenuItems/Inventory
 
+
 func _ready() -> void:
 	# Get all focusable items 
 	focusable_items = _get_focusable_items()
@@ -24,7 +25,7 @@ func _ready() -> void:
 	
 	# Connect signals for each item
 	for i in focusable_items.size():
-		var item = focusable_items[i]
+		var item: Focusable3D = focusable_items[i]
 		item.focused.connect(_on_item_focused.bind(i))
 		item.unfocused.connect(_on_item_unfocused.bind(i))
 		item.pressed.connect(_on_item_pressed.bind(i))
@@ -85,7 +86,7 @@ func _on_move_selection(direction: int) -> void:
 	highlight_current_item()
 
 func _on_select_current_item() -> void:
-	var selected_item = focusable_items[current_index]
+	var selected_item: Focusable3D = focusable_items[current_index]
 	if selected_item == flyer_item:
 		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
 		SignalManager.emit_throttled("add_ui_scene", ["uid://dnq3em8w064n4"])

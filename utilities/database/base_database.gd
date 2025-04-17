@@ -11,12 +11,9 @@ static func _load_resources() -> Array[BaseResource]:
 
 
 func _ready() -> void:
-	if items.is_empty():
-		push_warning("Warning: No items loaded in the database. Loading now")
-		items = _load_resources()
-	else:
-		for item in items:
-			print("Loaded item: ", item.name, " with type: ", ItemEnums.item_type_to_string(item.type))
+	items = _load_resources()
+	for item in items:
+		print("Loaded item: ", item.name, " with type: ", ItemEnums.item_type_to_string(item.type))
 
 
 ## Get a random item based on the item´s drop chance
@@ -63,6 +60,7 @@ static func load_items(path: String) -> Array[BaseResource]:
 				temp_items.append(res)
 			else:
 				push_warning("File '", file, "' is not a BaseResource")
+
 	return temp_items
 
 

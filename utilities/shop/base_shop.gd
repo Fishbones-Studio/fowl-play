@@ -16,8 +16,8 @@ var prevent_duplicates: bool = true
 
 
 func _ready() -> void:
-	print(item_database.items)
-	GameManager.prosperity_eggs = 9000
+	await get_tree().process_frame
+
 	_refresh_shop()
 
 
@@ -72,9 +72,9 @@ func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
 
 
-func _on_exit_button_pressed() -> void:
-	close_ui()
-
-
 func close_ui() -> void:
 	queue_free()
+
+
+func _on_exit_button_pressed() -> void:
+	close_ui()

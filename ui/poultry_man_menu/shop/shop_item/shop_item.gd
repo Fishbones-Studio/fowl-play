@@ -21,8 +21,8 @@ func _ready() -> void:
 
 func _on_purchase_complete() -> void:
 	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
+	GameManager.prosperity_eggs -= shop_item.cost
 	Inventory.add_item(shop_item)
-	GameManager.update_prosperity_eggs(-shop_item.cost)
 	purchase_in_progress = false
 	queue_free()
 
