@@ -7,7 +7,8 @@ extends Node
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 var player: ChickenPlayer
 
-@onready var current_state: BaseEnemyState = _get_initial_state()
+var current_state: BaseEnemyState
+var previous_state: BaseEnemyState
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +18,7 @@ func _ready() -> void:
 
 	if player == null:
 		player = GameManager.chicken_player
-		
+
 	if movement_component == null:
 		push_error(owner.name + "No enemy movement component set")
 
@@ -29,11 +30,11 @@ func _ready() -> void:
 
 	# Get all states in the scene tree
 	for state_node: BaseEnemyState in get_children():
-		states[state_node.STATE_TYPE] = state_node
+		states[state_node.state_type] = state_node
 		state_node.setup(enemy, player, movement_component)
-		
-	if current_state:
-		current_state.enter(current_state.STATE_TYPE)
+
+	current_state = _get_initial_state()
+	current_state.enter(current_state.state_type)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,18 +53,19 @@ func _physics_process(delta: float) -> void:
 
 
 func _transition_to_next_state(target_state: EnemyEnums.EnemyStates, information: Dictionary = {}) -> void:
-	if target_state == current_state.STATE_TYPE:
-		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
-		target_state = EnemyEnums.EnemyStates.IDLE_STATE
-
-	var previous_state := current_state
+	previous_state = current_state
 	previous_state.exit()
+	
+	print(target_state)
 
 	current_state = states.get(target_state)
-	if current_state == null:
-		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
+
+	if not current_state:
+		push_error(owner.name + ": Trying to transition to state " + EnemyEnums.EnemyStates.find_key(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
-	current_state.enter(previous_state.STATE_TYPE, information)
+
+
+	current_state.enter(previous_state.state_type, information)
 
 
 func _get_initial_state() -> BaseEnemyState:

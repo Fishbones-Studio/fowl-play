@@ -41,11 +41,13 @@ enemy = NodePath("../..")
 
 [node name="ChaseState" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_75fyq")
-STATE_TYPE = 1
+state_type = 1
 enemy = NodePath("../..")
 
-[node name="DashState" type="Node" parent="EnemyStateMachine" index="2"]
+[node name="DashState" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_rbpgh")
+state_type = 2
+enemy = NodePath("../..")
 
 [node name="DashDurationTimer" type="Timer" parent="EnemyStateMachine/DashState" index="0"]
 wait_time = 0.2

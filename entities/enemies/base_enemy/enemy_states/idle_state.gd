@@ -11,19 +11,16 @@ var origin_position: Vector3 ## Starting position of the enemy
 var dash_threshold: int
 
 
-func _init() -> void:
-	STATE_TYPE = EnemyEnums.EnemyStates.IDLE_STATE
-
-
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	print("entered")
+	print("idle")
 	origin_position = enemy.position
 	_choose_new_wander_target()
 
 
 func process(_delta: float) -> void:
-	dash_threshold = randi_range(1,100)
-	if enemy.position.distance_to(player.position) < chase_distance && dash_threshold <= 25 && movement_component.dash_available:
+	dash_threshold = randi_range(1, 100)
+
+	if enemy.position.distance_to(player.position) < chase_distance and dash_threshold <= 25 and movement_component.dash_available:
 		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.DASH_STATE, {})
 		return
 	elif enemy.position.distance_to(player.position) < chase_distance:
