@@ -35,7 +35,7 @@ func initialize_stats() -> void:
 		printerr("ERROR: Stats resource is NULL!")
 
 
-func _take_damage(target: PhysicsBody3D, damage: int) -> void:
+func _take_damage(target: PhysicsBody3D, damage: float) -> void:
 	if target == self:
 		damage_taken.emit(stats.drain_health(damage))
 		health_bar.set_health(stats.current_health)

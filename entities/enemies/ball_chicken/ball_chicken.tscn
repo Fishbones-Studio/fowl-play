@@ -1,33 +1,43 @@
 [gd_scene load_steps=8 format=3 uid="uid://bw4u5qtf6bv0m"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
-[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_nnmdb"]
+[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
-radius = 2.5
+radius = 4.75
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8f7sg"]
 viewport_path = NodePath("SubViewport")
 
 [node name="BallChicken" instance=ExtResource("1_oapbr")]
+stats = ExtResource("2_v7541")
 type = 1
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 1, 0)
+
+[node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
+transform = Transform3D(0.309239, 0.15102, -0.121204, -0.150488, 0.331147, 0.0286531, 0.121863, 0.0257057, 0.34295, 0.186526, 0.724427, 0.0605452)
+
+[node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
+transform = Transform3D(0.202847, -0.0250982, -0.112382, 0.0358473, 0.230096, 0.0133162, 0.109429, -0.0288518, 0.20396, -0.219024, -0.459037, 0.689051)
+
+[node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
+transform = Transform3D(0.0254117, 0.0801845, -0.0627835, 0.0105762, 0.0622807, 0.0838232, 0.101289, -0.02662, 0.00699884, -0.737007, 0.707179, 0.157209)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 0, 0)
 shape = SubResource("SphereShape3D_gbobm")
 
 [node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.15451, 3.61011, -1.52368)
 texture = SubResource("ViewportTexture_8f7sg")
 
 [node name="MeleeWeapon" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32256, 0.507973, -1.69485)
-entity_stats = ExtResource("2_nnmdb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("Idle State")
