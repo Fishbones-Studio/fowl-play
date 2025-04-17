@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://rou530ix2je3"]
+
+[ext_resource type="Script" uid="uid://bbthkpmh03j4g" path="res://level/arena/props/shop/arena_shop.gd" id="1_5pok6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brd77"]
+albedo_color = Color(0.0489061, 0.0997902, 0.10584, 0.952941)
+
+[sub_resource type="BoxMesh" id="BoxMesh_brd77"]
+material = SubResource("StandardMaterial3D_brd77")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xq2d5"]
+size = Vector3(4, 2, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brd77"]
+size = Vector3(6, 4, 4)
+
+[node name="ArenaShop" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 31
+script = ExtResource("1_5pok6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_brd77")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xq2d5")
+
+[node name="NameLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 1.65892, 0)
+modulate = Color(0, 1, 0.188235, 1)
+text = "Upgrade Shop"
+font_size = 63
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 63
+
+[node name="DetectionArea" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_brd77")
+
+[node name="OpenShopLabel" type="Label3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 0.610077, 2.81642)
+visible = false
+modulate = Color(1, 1, 0.854902, 1)
+text = "Press E to open shop"
+font_size = 51
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
