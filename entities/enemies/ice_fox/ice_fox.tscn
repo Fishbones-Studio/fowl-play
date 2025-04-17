@@ -1,34 +1,50 @@
-[gd_scene load_steps=7 format=3 uid="uid://5dsmkedrprey"]
+[gd_scene load_steps=10 format=3 uid="uid://5dsmkedrprey"]
 
-[ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="1_cemmm"]
-[ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="2_qhcpj"]
-[ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="3_qhcpj"]
-[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="4_0uh03"]
+[ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
+[ext_resource type="Script" uid="uid://dxxu6tfphed3m" path="res://entities/enemies/ice_fox/ice_fox.gd" id="2_cemmm"]
+[ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
+[ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="4_qhcpj"]
+[ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_knbep"]
+[ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_psoce"]
+[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_75fyq"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qhcpj"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8d7w"]
+size = Vector3(3.5, 4, 4)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_elgf2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fgbet"]
 viewport_path = NodePath("SubViewport")
 
-[node name="IceFox" type="CharacterBody3D"]
-script = ExtResource("1_cemmm")
-stats = ExtResource("2_qhcpj")
-high_health_color = Color(9.62615e-06, 0.957093, 0.839865, 1)
-medium_health_color = Color(0.312914, 0.580456, 0.883592, 1)
-critical_health_color = Color(0.244722, 2.59906e-05, 0.946402, 1)
+[node name="IceFox" instance=ExtResource("1_5tp27")]
+script = ExtResource("2_cemmm")
+stats = ExtResource("3_7ghaq")
 
-[node name="ice_fox" parent="." instance=ExtResource("3_qhcpj")]
+[node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_qhcpj")
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_v8d7w")
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="HealthbarSprite" parent="." index="2"]
+texture = SubResource("ViewportTexture_fgbet")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11897, 0, 0.709816)
-texture = SubResource("ViewportTexture_elgf2")
+[node name="AttackingArea" parent="." index="4"]
+visible = false
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
+[node name="MeleeWeapon" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795686, 1.48774, -1.33457)
+melee_weapon_scene = ExtResource("5_psoce")
 
-[node name="HealthBar" parent="SubViewport" instance=ExtResource("4_0uh03")]
+[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
+starting_state = NodePath("Idle State")
+
+[node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_knbep")
+enemy = NodePath("../..")
+
+[node name="Chase State" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_75fyq")
+STATE_TYPE = 1
+enemy = NodePath("../..")
+
+[editable path="ice_fox"]

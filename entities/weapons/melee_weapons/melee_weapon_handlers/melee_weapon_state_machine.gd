@@ -1,7 +1,8 @@
 ## State machine for the player melee system.
 ##
 ## This script manages the different states of the combat melee system, for the current melee weapon.
-class_name MeleeStateMachine extends Node
+class_name MeleeStateMachine
+extends Node
 
 signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
 
@@ -16,7 +17,7 @@ var initialized : bool = false
 @onready var current_state: BaseCombatState = _get_initial_state()
 
 
-func setup(_weapon : MeleeWeapon) -> void:
+func setup(_weapon : MeleeWeapon, _entity_stats : LivingEntityStats) -> void:
 	weapon = _weapon
 	
 	if weapon == null:
@@ -25,12 +26,11 @@ func setup(_weapon : MeleeWeapon) -> void:
 	# Listen for state transition signals
 	melee_combat_transition_state.connect(_transition_to_next_state)
 
-
 	# Get all states in the scene and store them in the dictionary
 	for state_node: BaseCombatState in get_children():
 		states[state_node.STATE_TYPE] = state_node
 		# Pass the weapon to each state
-		state_node.setup(weapon, melee_combat_transition_state)
+		state_node.setup(weapon, melee_combat_transition_state, _entity_stats)
 		
 	# Start in the initial state if it exists
 	if current_state:

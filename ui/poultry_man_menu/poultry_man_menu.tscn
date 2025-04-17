@@ -55,6 +55,7 @@ light_handler = NodePath("Lamp")
 
 [node name="WindMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_bfy7c")
+volume_db = -15.0
 autoplay = true
 bus = &"Music"
 
@@ -64,7 +65,9 @@ volume_db = -10.0
 music_folder = "res://ui/poultry_man_menu/art/random_music/"
 
 [node name="RandomSFXPlayer" parent="." instance=ExtResource("4_iajuv")]
+volume_db = 2.0
 sounds_folder = "res://ui/poultry_man_menu/art/random_sounds/"
+max_random_distance = 20.0
 
 [node name="InputHandler" type="Node" parent="."]
 script = ExtResource("5_x5v8y")

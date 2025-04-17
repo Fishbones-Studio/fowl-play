@@ -10,9 +10,13 @@ signal player_transition_state(target_state: PlayerEnums.PlayerStates, informati
 signal init_health(max_health: int, health: int)
 signal init_stamina(max_stamina: float, stamina: float)
 signal player_stats_changed(stats: LivingEntityStats)
+
+
+# UI signals
 signal player_hurt()
 signal player_heal()
-
+signal deactivate_item_slot(item : BaseResource)
+signal activate_item_slot(item : BaseResource)
 
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
@@ -23,7 +27,7 @@ signal settings_menu_toggled(value: bool)
 
 # Enemy signals
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
-signal enemy_stats_changed(entity: Node, stats: LivingEntityStats)
+signal enemy_died()
 
 # Weapon signals
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)

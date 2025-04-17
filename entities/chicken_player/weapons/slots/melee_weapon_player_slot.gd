@@ -1,4 +1,6 @@
-class_name MeleeWeaponPlayerSlot extends Node3D
+## Required to be child of PlayerWeaponController
+class_name MeleeWeaponPlayerSlot 
+extends Node3D
 
 @onready var melee_weapon_node : MeleeWeaponNode = $MeleeWeapon
 

@@ -10,7 +10,7 @@ const DEFAULT_JUMP_HEIGHT: float = 5.0  # meters
 const DEFAULT_TIME_TO_PEAK: float = 0.4  # seconds for default height
 const DEFAULT_TIME_TO_DESCENT: float = 0.3  # seconds for default height
 
-@export var entity: Node3D
+@export var entity: PhysicsBody3D
 
 @export_category("Jump Settings")
 @export var jump_height: float = DEFAULT_JUMP_HEIGHT:
@@ -47,9 +47,8 @@ func _recalculate_jump_params():
 
 
 ## Uses square root scaling for realistic weight distribution
-## Uses 3.0 (kg) as standard weight. Average chicken weighs roughly 2.5-4~ kg.
 func _update_physics_based_on_weight(weight: float) -> void:
-	jump_height /= sqrt(weight / 3.0)
+	jump_height /= sqrt(weight)
 	_recalculate_jump_params()
 
 
