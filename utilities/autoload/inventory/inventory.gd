@@ -194,6 +194,8 @@ func load_inventory() -> void:
 		var loaded: Resource = ResourceLoader.load(SAVE_FILE_PATH)
 		if loaded is InventoryData:
 			inventory_data = loaded
+			GameManager.prosperity_eggs = inventory_data.prosperity_eggs
+			GameManager.feathers_of_rebirth = inventory_data.feathers_of_rebirth
 			print("Loaded inventory with %d items" % inventory_data.items.size())
 			return
 	else:

@@ -16,8 +16,6 @@ var prevent_duplicates: bool = true
 
 
 func _ready() -> void:
-	print(item_database.items)
-	GameManager.prosperity_eggs = 9000
 	_refresh_shop()
 
 

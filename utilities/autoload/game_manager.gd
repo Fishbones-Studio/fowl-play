@@ -1,14 +1,24 @@
 extends Node
 
+signal prosperity_eggs_changed(new_value : int)
+signal feathers_of_rebirth_changed(new_value : int)
+
+
 var chicken_player: ChickenPlayer = null
-var prosperity_eggs: int
-var feathers_of_rebirth: int
+var prosperity_eggs: int :
+	set(value):
+		prosperity_eggs = value
+		Inventory.inventory_data.prosperity_eggs = value
+		prosperity_eggs_changed.emit(value)
+var feathers_of_rebirth: int:
+	set(value):
+		feathers_of_rebirth = value
+		Inventory.inventory_data.prosperity_eggs = value
+		feathers_of_rebirth_changed.emit(value)
 
 var current_round: int
 
 func reset_game() -> void:
-	prosperity_eggs = 0
-	feathers_of_rebirth = 0
 	Inventory.reset_inventory()
 
 
