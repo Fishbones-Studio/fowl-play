@@ -11,7 +11,7 @@ func _ready() -> void:
 	check_inventory = false
 	prevent_duplicates = false
 	title_label.text = "Upgrades"
-	# calls baseshop
+
 	super()
 
 

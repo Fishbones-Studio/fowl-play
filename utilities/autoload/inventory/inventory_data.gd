@@ -3,6 +3,7 @@ class_name InventoryData
 extends Resource
 
 ## All inventory items
+@export_group("items")
 @export var items: Array[BaseResource] = []
 
 ## Bool to trigger recalculation of items_sorted
@@ -28,6 +29,10 @@ var items_sorted_flattened : Array :
 @export var ability_slot_two: AbilityResource:
 	set(value):
 		ability_slot_two = _validate_slot(value, "Ability Two")
+
+@export_group("currency")
+@export var prosperity_eggs: int = 200 # starting money
+@export var feathers_of_rebirth: int = 0
 
 
 func _init(

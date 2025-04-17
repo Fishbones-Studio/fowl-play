@@ -48,7 +48,7 @@ func attempt_purchase() -> void:
 		GameManager.chicken_player.stats.max_stamina += upgrade_item.stamina_bonus
 		GameManager.chicken_player.stats.current_stamina += upgrade_item.stamina_bonus
 
-	GameManager.prosperity_eggs -= int(cost_label.text)
+	GameManager.prosperity_eggs -= int(upgrade_item.cost)
 	self.visible = false
 	purchase_in_progress = false
 
