@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=54 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
+[ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
@@ -249,8 +250,12 @@ script = ExtResource("12_5aj8x")
 entity = NodePath("..")
 jump_height = 25.0
 
-[node name="PlayerWeaponController" parent="." instance=ExtResource("26_vclph")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0.8, 0)
+[node name="PlayerWeaponPivot" type="Node3D" parent="."]
+transform = Transform3D(0.988659, -0.0821671, -0.125703, 0.0151733, 0.88741, -0.46073, 0.149407, 0.453598, 0.878594, 1.26707, 0.685471, 0)
+script = ExtResource("16_8i8jv")
+
+[node name="PlayerWeaponController" parent="PlayerWeaponPivot" instance=ExtResource("26_vclph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0272464, -0.0780606, 0.136689)
 weapon_collision_mask = 4
 
 [node name="PlayerAbilityController" parent="." node_paths=PackedStringArray("player") instance=ExtResource("17_pq2r3")]
