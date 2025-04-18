@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdwr1kdxdlvqi"]
+[gd_scene load_steps=10 format=3 uid="uid://bdwr1kdxdlvqi"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/hennifer_enemy/art/Chicken improved hennifer varient.glb" id="2_fgbet"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="4_dmp11"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]
+[ext_resource type="Script" uid="uid://2htosw08ep1s" path="res://entities/enemies/base_enemy/enemy_states/dash_state.gd" id="7_rbpgh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8d7w"]
 size = Vector3(3.5, 4, 4)
@@ -34,17 +35,30 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09222, 0.615398, -0.320664)
 melee_weapon_scene = ExtResource("4_dmp11")
 
-[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
-starting_state = NodePath("Idle State")
-
-[node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
+[node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_knbep")
 enemy = NodePath("../..")
 
-[node name="Chase State" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
+[node name="Chase" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_75fyq")
-STATE_TYPE = 1
+state_type = 1
 enemy = NodePath("../..")
+
+[node name="Dash" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_rbpgh")
+state_type = 2
+enemy = NodePath("../..")
+
+[node name="DashDurationTimer" type="Timer" parent="EnemyStateMachine/Dash" index="0"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="EnemyStateMachine/Dash" index="1"]
+wait_time = 2.0
+one_shot = true
 
 [node name="DamageNumberHandler" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[connection signal="timeout" from="EnemyStateMachine/Dash/DashDurationTimer" to="EnemyStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="EnemyStateMachine/Dash/DashCooldownTimer" to="EnemyStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]

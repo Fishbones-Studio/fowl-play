@@ -23,9 +23,9 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		print("Dash available: ", movement_component.dash_available)
 		SignalManager.player_transition_state.emit(previous_state.state_type, information)
 		return
-		
+
 	player.stats.drain_stamina(_stamina_cost)
-	
+
 	movement_component.dash_available = false
 	_is_dashing = true
 
@@ -42,12 +42,12 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
-	
+
 	if _is_dashing:
 		player.velocity = _dash_direction * player.stats.calculate_speed(movement_component.dash_speed_factor)
 		player.move_and_slide()
 		return
-	
+
 	# Handle state transitions
 	if get_jump_velocity() > 0 and movement_component.jump_available:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})

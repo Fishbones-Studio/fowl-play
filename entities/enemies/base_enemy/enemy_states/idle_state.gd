@@ -1,17 +1,18 @@
 extends BaseEnemyState
 
+@export_category("Enemy Movement")
 @export var wander_interval: float = 3.0  ## Time between choosing new wander directions
 @export var wander_speed: float = 3.0
 @export var wander_radius: float = 8.0   ## Max distance from starting point
 @export var rotation_speed: float = 5.0   ## How quickly enemy turns toward target
 
+@export_category("Enemy Dash")
+@export_range(1, 100) var dash_treshold: int = 100
+@export_range(1, 100) var dash_chance: int = 25
+
 var target_position: Vector3 ## Target position for wandering
 var wander_timer: float = wander_interval ## Timer for choosing new target
 var origin_position: Vector3 ## Starting position of the enemy
-
-
-func _init() -> void:
-	STATE_TYPE = EnemyEnums.EnemyStates.IDLE_STATE
 
 
 func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
@@ -21,8 +22,12 @@ func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {
 
 func process(_delta: float) -> void:
 	if enemy.position.distance_to(player.position) < chase_distance:
-		SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.CHASE_STATE, {})
-		return
+		if randi_range(1, dash_treshold) <= dash_chance and movement_component.dash_available:
+			SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.DASH_STATE, {})
+			return
+		else:
+			SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.CHASE_STATE, {})
+			return
 
 
 func physics_process(delta: float) -> void:
