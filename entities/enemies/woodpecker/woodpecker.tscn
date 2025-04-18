@@ -54,15 +54,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10738, 2.35215, 0)
 melee_weapon_scene = ExtResource("5_x6gfb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
-starting_state = NodePath("Idle State")
+starting_state = NodePath("Idle")
 
-[node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
+[node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_idle_state")
 enemy = NodePath("../..")
 
-[node name="Chase State" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
+[node name="Chase" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_chase_state")
-STATE_TYPE = 1
+state_type = 1
 enemy = NodePath("../..")
 
 [node name="DamageNumberHandler" parent="." index="9"]
