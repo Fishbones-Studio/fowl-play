@@ -104,13 +104,13 @@ func _on_select_current_item() -> void:
 	elif selected_item == shop_item:
 		if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
 			UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
-			return
-		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP) 
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP) 
 	elif selected_item == inventory_item:
 		if UIEnums.UI.CHICKEN_INVENTORY in UIManager.ui_list:
 			UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
-			return
-		SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY) 
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY) 
 
 
 func _on_keyboard_navigation_activated() -> void:

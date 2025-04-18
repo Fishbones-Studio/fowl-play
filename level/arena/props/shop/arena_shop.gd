@@ -11,7 +11,11 @@ func _input(_event: InputEvent) -> void:
 
 
 func open_shop() -> void:
-	SignalManager.add_ui_scene.emit(UIEnums.UI.IN_ARENA_SHOP)
+	if UIEnums.UI.IN_ARENA_SHOP in UIManager.ui_list:
+		UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)
+	else:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.IN_ARENA_SHOP)
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

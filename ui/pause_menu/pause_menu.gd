@@ -24,7 +24,7 @@ func _init_footer() -> void:
 func _squish_chicken() -> void:
 	var chicken_tween: Tween = chicken.create_tween()
 
-	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.7, 1.5, 0.7), 0.3)
+	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.7, 1.5, 0.7), 0.2)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(1.1, 1.1, 1.1), 0.1)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.9, 0.9, 0.9), 0.1)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(1.0, 1.0, 1.0), 0.1)
@@ -63,14 +63,14 @@ func _setup_enter_and_exit_transitions() -> void:
 
 
 func _on_resume_button_button_up() -> void:
-	UIManager.toggle_ui(UIEnums.UI.PAUSE_MENU)
+	UIManager.handle_pause()
 
 
 func _on_settings_button_button_up() -> void:
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
-			return
-	SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
+		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
+	else:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
 
 
 func _on_quit_button_button_up() -> void:
@@ -85,7 +85,7 @@ func _set_button_visibility() -> void:
 	var children: Array = _get_scene_loader_children()
 
 	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
-	forfeit_button.visible = "Arena" in children # TODO: Whack
+	forfeit_button.visible = "Level" in children # TODO: Whack
 
 
 func _get_scene_loader_children() -> Array:

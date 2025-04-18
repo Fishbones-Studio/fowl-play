@@ -50,6 +50,7 @@ func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
 
 	if curr_ui:
 		curr_ui.set_process_input(true)
+		curr_ui.grab_focus()
 
 	previous_ui = prev_ui if is_instance_valid(prev_ui) else null
 	current_ui = curr_ui if is_instance_valid(curr_ui) else null
@@ -59,13 +60,13 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 	if ui not in ui_list:
 		push_error("'", UIEnums.ui_to_string(ui), "'", " does not exist in the list.")
 		return
-	
+
 	var ui_to_show: Control = ui_list[ui]
-	
+
 	if current_ui != ui_to_show:
 		swap_ui(current_ui, ui_to_show)
 
-	ui_to_show.visible = true
+	ui_to_show.visible = not ui_to_show.visible
 	move_child(ui_to_show, get_child_count() - 1)
 
 

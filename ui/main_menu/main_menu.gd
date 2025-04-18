@@ -12,6 +12,6 @@ func _on_play_button_pressed():
 
 func _on_settings_button_pressed() -> void:
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
-			return
-	SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
+		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
+	else:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
