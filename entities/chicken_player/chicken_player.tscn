@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.490836, -0.00168853, 0.00540749, 0.871234)
-bones/3/rotation = Quaternion(-0.531161, 0.00518103, -0.00193024, 0.847253)
-bones/4/rotation = Quaternion(-0.110371, 0.241403, -0.0695635, 0.961615)
-bones/5/rotation = Quaternion(-0.238466, -0.0625166, -0.74048, 0.625232)
-bones/6/rotation = Quaternion(-0.173014, 0.157673, 0.665438, 0.7088)
+bones/2/rotation = Quaternion(-0.41967, 0.00218261, -0.0072864, 0.907645)
+bones/3/rotation = Quaternion(-0.522442, 0.0540251, 0.0313322, 0.850384)
+bones/4/rotation = Quaternion(-0.123373, -0.310443, 0.0404236, 0.941685)
+bones/5/rotation = Quaternion(-0.24848, -0.0438876, -0.75094, 0.610263)
+bones/6/rotation = Quaternion(-0.189332, 0.138012, 0.679767, 0.694999)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.295971, -0.0199933, -0.0994662, 0.949794)
-bones/9/rotation = Quaternion(0.193049, 0.0305397, -0.153158, 0.968681)
+bones/8/rotation = Quaternion(0.243682, -0.00892587, -0.0538965, 0.968315)
+bones/9/rotation = Quaternion(0.172979, 0.0218462, -0.14244, 0.974326)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.179195, -0.0751455, -0.0782793, 0.977811)
+bones/11/rotation = Quaternion(-0.174016, -0.0125465, 0.0117328, 0.984593)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
@@ -248,7 +248,7 @@ state_type = 8
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
-jump_height = 25.0
+jump_height = 8.0
 
 [node name="PlayerWeaponPivot" type="Node3D" parent="."]
 transform = Transform3D(0.988659, -0.0821671, -0.125703, 0.0151733, 0.88741, -0.46073, 0.149407, 0.453598, 0.878594, 1.26707, 0.685471, 0)
