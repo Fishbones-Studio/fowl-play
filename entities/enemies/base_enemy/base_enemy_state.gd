@@ -3,7 +3,7 @@ extends BaseEnemyMovementState
 
 # Instantiate globally used variables around the enemy states
 @export var delta_modifier: float = 100
-@export var chase_distance: float = 20
+@export var chase_distance: float = 60
 @export var state_type: EnemyEnums.EnemyStates
 @export var animation_name: String
 

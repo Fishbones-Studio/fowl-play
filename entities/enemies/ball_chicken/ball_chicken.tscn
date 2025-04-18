@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
 [ext_resource type="PackedScene" uid="uid://uqsprukqlhul" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
-[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
+[ext_resource type="Script" uid="uid://ciwd27kcmtmfk" path="res://entities/enemies/base_enemy/enemy_states/boss_chase.gd" id="5_v7541"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
 radius = 4.25
@@ -49,13 +49,18 @@ starting_state = NodePath("Idle")
 script = ExtResource("5_8q87k")
 enemy = NodePath("../..")
 
-[node name="Chase" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
-script = ExtResource("6_lvw3e")
+[node name="BossChase" type="Node" parent="EnemyStateMachine" index="1"]
+script = ExtResource("5_v7541")
 state_type = 1
-enemy = NodePath("../..")
+
+[node name="ChaseDuration" type="Timer" parent="EnemyStateMachine/BossChase" index="0"]
+wait_time = 3.0
+one_shot = true
 
 [node name="DamageNumberHandler" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -4.5)
 base_size = 200
+
+[connection signal="timeout" from="EnemyStateMachine/BossChase/ChaseDuration" to="EnemyStateMachine/BossChase" method="_on_chase_duration_timeout"]
 
 [editable path="ball_chicken"]
