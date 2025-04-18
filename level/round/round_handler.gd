@@ -67,7 +67,7 @@ func _start_round() -> void:
 
 
 func _enter_waiting() -> void:
-	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Round %d" % GameManager.current_round})
+	SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Round %d" % GameManager.current_round})
 	GameManager.chicken_player.global_position = player_default_position.global_position
 
 	await get_tree().create_timer(waiting_time).timeout
@@ -102,11 +102,11 @@ func _enter_concluding() -> void:
 		GameManager.prosperity_eggs += GameManager.arena_completion_reward
 		GameManager.feathers_of_rebirth += 5 # TODO: improve later
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-		SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
+		SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
 		return
 
 	if _current_enemy == null:
-		SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Enemy defeated!"})
+		SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!"})
 
 	await get_tree().create_timer(waiting_time).timeout
 
@@ -158,7 +158,7 @@ func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
 
 # TODO, something when it draws? less rewards or none? right now just some ui
 func _on_round_battle_timer_timeout() -> void:
-	SignalManager.add_ui_scene.emit("uid://61l26wjx0fux", {"display_text": "Time up!"})
+	SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Time up!"})
 
 	_current_enemy.queue_free() # just kill enemy
 

@@ -24,13 +24,6 @@ func _ready() -> void:
 
 	controls.grab_focus()
 
-	SignalManager.settings_menu_toggled.emit(true)
-
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		_close_window()
-
 
 func _on_sidebar_pressed(item: Button) -> void:
 	if current_item != item:
@@ -74,19 +67,14 @@ func _on_sidebar_toggled(_toggled: bool, item: Button) -> void:
 
 
 func _on_close_button_button_up() -> void:
-	_close_window()
-
-
-func _close_window() -> void:
-	SignalManager.settings_menu_toggled.emit(false)
-	queue_free()
+	UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 
 
 func _get_sidebar_items() -> Array[Node]:
 	return get_tree().get_nodes_in_group("SettingsMenuSidebarItem")
 
 
-## Add space before capital letters that aren't at start or after existing space
+# Add space before capital letters that aren't at start or after existing space
 func _format_text(text: String) -> String:
 	var result: String = ""
 

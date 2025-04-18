@@ -15,11 +15,6 @@ func _ready() -> void:
 	super()
 
 
-func close_ui() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	queue_free() 
-
-
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	var shop_item_instance: Control = IN_ARENA_SHOP_ITEM_SCENE.instantiate()
 
@@ -36,3 +31,7 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	shop_item_script_node.set_item_data(selected_item)
 
 	return shop_item_script_node
+
+
+func close_ui() -> void:
+	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)

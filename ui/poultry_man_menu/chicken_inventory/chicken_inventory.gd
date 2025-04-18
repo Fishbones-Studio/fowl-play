@@ -2,8 +2,10 @@ extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
 
+
 func _ready() -> void:
 	await get_tree().process_frame
+
 	_update_inventory()
 
 
@@ -28,5 +30,4 @@ func _update_inventory() -> void:
 
 
 func _on_button_pressed() -> void:
-	queue_free()
-	
+	UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
