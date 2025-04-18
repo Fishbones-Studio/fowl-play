@@ -49,11 +49,12 @@ starting_state = NodePath("Idle")
 script = ExtResource("5_8q87k")
 enemy = NodePath("../..")
 
-[node name="BossChase" type="Node" parent="EnemyStateMachine" index="1"]
+[node name="Chase" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_v7541")
 state_type = 1
+enemy = NodePath("../..")
 
-[node name="ChaseDuration" type="Timer" parent="EnemyStateMachine/BossChase" index="0"]
+[node name="ChaseDuration" type="Timer" parent="EnemyStateMachine/Chase" index="0"]
 wait_time = 3.0
 one_shot = true
 
@@ -61,6 +62,6 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -4.5)
 base_size = 200
 
-[connection signal="timeout" from="EnemyStateMachine/BossChase/ChaseDuration" to="EnemyStateMachine/BossChase" method="_on_chase_duration_timeout"]
+[connection signal="timeout" from="EnemyStateMachine/Chase/ChaseDuration" to="EnemyStateMachine/Chase" method="_on_chase_duration_timeout"]
 
 [editable path="ball_chicken"]

@@ -22,7 +22,7 @@ func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {
 
 func process(_delta: float) -> void:
 	if enemy.position.distance_to(player.position) < chase_distance:
-		if randi_range(1, dash_treshold) <= dash_chance and movement_component.dash_available:
+		if randi_range(1, dash_treshold) <= dash_chance and movement_component.dash_available and enemy_has_dash:
 			SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.DASH_STATE, {})
 			return
 		else:

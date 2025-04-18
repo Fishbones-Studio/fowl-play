@@ -6,6 +6,7 @@ extends BaseEnemyMovementState
 @export var chase_distance: float = 60
 @export var state_type: EnemyEnums.EnemyStates
 @export var animation_name: String
+@export var enemy_has_dash: bool
 
 var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
