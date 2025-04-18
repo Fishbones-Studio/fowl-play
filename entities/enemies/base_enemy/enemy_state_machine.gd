@@ -3,6 +3,7 @@ extends Node
 @export var starting_state: BaseEnemyState
 @export var enemy: Enemy
 @export var movement_component: EnemyMovementComponent
+@export var animation_tree: AnimationTree
 
 var states: Dictionary[EnemyEnums.EnemyStates, BaseEnemyState] = {}
 var player: ChickenPlayer
@@ -20,7 +21,10 @@ func _ready() -> void:
 		player = GameManager.chicken_player
 
 	if movement_component == null:
-		push_error(owner.name + "No enemy movement component set")
+		push_error(owner.name + ": No enemy movement component set")
+
+	if animation_tree == null:
+		push_error(owner.name + ": No enemy animation tree reference set")
 
 	# Connect the signal to the transition function
 	SignalManager.enemy_transition_state.connect(_transition_to_next_state)
@@ -31,7 +35,7 @@ func _ready() -> void:
 	# Get all states in the scene tree
 	for state_node: BaseEnemyState in get_children():
 		states[state_node.state_type] = state_node
-		state_node.setup(enemy, player, movement_component)
+		state_node.setup(enemy, player, movement_component, animation_tree)
 
 	current_state = _get_initial_state()
 	current_state.enter(current_state.state_type)
