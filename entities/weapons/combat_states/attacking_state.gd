@@ -17,6 +17,7 @@ func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _e
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary = {}) -> void:
+	SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, false)
 	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
 	attack_timer.start()
 	_attack()
