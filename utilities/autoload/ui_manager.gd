@@ -181,7 +181,7 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	var new_ui_node: Control = new_ui_resource.instantiate()
 
 	# If the UI has a setup or initialize method, call it with parameters
-	if new_ui_node.has_method("setup") and params:
+	if new_ui_node.has_method("setup"):
 		new_ui_node.setup(params)
 
 	# Add it as a child of the UI manager
