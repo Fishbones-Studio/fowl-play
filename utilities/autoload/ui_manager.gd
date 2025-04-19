@@ -45,13 +45,6 @@ func clear_ui() -> void:
 
 
 func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
-	for ui: Control in ui_list.values():
-		ui.set_process_input(false)
-
-	if curr_ui:
-		curr_ui.set_process_input(true)
-		curr_ui.grab_focus()
-
 	previous_ui = prev_ui if is_instance_valid(prev_ui) else null
 	current_ui = curr_ui if is_instance_valid(curr_ui) else null
 
@@ -67,6 +60,7 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 		swap_ui(current_ui, ui_to_show)
 
 	ui_to_show.visible = not ui_to_show.visible
+
 	move_child(ui_to_show, get_child_count() - 1)
 
 
@@ -75,14 +69,14 @@ func handle_pause() -> void:
 	var main_menu: Control = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if  main_menu and current_ui == main_menu:
 		return
-	
+
 	if not paused:
 		previous_mouse_mode = Input.mouse_mode
-	
+
 	var pause_menu: Control = ui_list.get(UIEnums.UI.PAUSE_MENU)
 	var pause_menu_visible: bool = pause_menu and pause_menu.visible
 	var is_current_pause_menu: bool = current_ui == pause_menu
-	
+
 	if is_current_pause_menu:
 		current_ui.visible = not current_ui.visible
 		paused = current_ui.visible
@@ -126,8 +120,3 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	swap_ui(current_ui, new_ui_node)
 
 	ui_list[new_ui] = new_ui_node
-	
-	for item in ui_list:
-		print(item, ": ", ui_list[item])
-
-	print("Current UI", ": ", current_ui.name)

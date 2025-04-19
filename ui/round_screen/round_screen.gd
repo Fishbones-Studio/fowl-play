@@ -13,6 +13,10 @@ func _ready() -> void:
 	animation_timer.start()
 
 
+func _input(event: InputEvent) -> void:
+	if visible: get_viewport().set_input_as_handled()
+
+
 func setup(params: Dictionary) -> void:
 	display_text = params.get("display_text")
 
