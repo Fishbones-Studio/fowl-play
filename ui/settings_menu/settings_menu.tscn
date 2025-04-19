@@ -98,24 +98,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 text = "Controls"
 
-[node name="KeyBindings" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="KeyBindings" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 
-[node name="Graphics" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Graphics" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 text = "Graphics"
 
-[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true

@@ -117,8 +117,6 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 ##
 ## @note: Manages the complex interplay between pause menu and other UIs
 func handle_pause() -> void:
-	# TODO: Test settings
-
 	# Special case: Never pause from main menu
 	var main_menu: Control = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if  main_menu and current_ui == main_menu:
