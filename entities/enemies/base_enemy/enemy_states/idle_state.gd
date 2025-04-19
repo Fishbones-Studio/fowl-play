@@ -8,7 +8,7 @@ extends BaseEnemyState
 
 @export_category("Enemy Dash")
 @export_range(1, 100) var dash_treshold: int = 100
-@export_range(1, 100) var dash_chance: int = 25
+@export_range(0, 100) var dash_chance: int = 25
 
 var target_position: Vector3 ## Target position for wandering
 var wander_timer: float = wander_interval ## Timer for choosing new target
@@ -22,7 +22,7 @@ func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {
 
 func process(_delta: float) -> void:
 	if enemy.position.distance_to(player.position) < chase_distance:
-		if randi_range(1, dash_treshold) <= dash_chance and movement_component.dash_available and enemy_has_dash:
+		if randi_range(1, dash_treshold) <= dash_chance and movement_component.dash_available:
 			SignalManager.enemy_transition_state.emit(EnemyEnums.EnemyStates.DASH_STATE, {})
 			return
 		else:
@@ -38,7 +38,7 @@ func physics_process(delta: float) -> void:
 
 	var direction: Vector3 = (target_position - enemy.position).normalized()
 	if direction.length() > 0:
-		_rotate_toward_direction(direction, delta)
+		_rotate_toward_direction(direction, delta, wander_speed)
 
 	apply_movement(Vector3(direction.x * wander_speed, 0, direction.z * wander_speed))
 	apply_gravity(delta)
@@ -58,12 +58,3 @@ func _choose_new_wander_target() -> void:
 	# Ensure the target position is within the wander radius, if not, adjust it
 	if origin_position.distance_to(target_position) > wander_radius:
 		target_position = origin_position + (target_position - origin_position).normalized() * wander_radius
-
-
-func _rotate_toward_direction(direction: Vector3, delta: float) -> void:
-	var target_angle: float = atan2(-direction.x, -direction.z) # Calculate the angle to the target direction
-	var current_angle: float = enemy.rotation.y # Get the current angle of the enemy
-
-	# Lerp the angle to smoothly rotate towards the target direction
-	var new_angle : float = lerp_angle(current_angle, target_angle, rotation_speed * delta)
-	enemy.rotation.y = new_angle

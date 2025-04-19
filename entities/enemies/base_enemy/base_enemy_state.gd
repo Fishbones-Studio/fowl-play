@@ -6,11 +6,11 @@ extends BaseEnemyMovementState
 @export var chase_distance: float = 60
 @export var state_type: EnemyEnums.EnemyStates
 @export var animation_name: String
-@export var enemy_has_dash: bool
 
 var player: ChickenPlayer
 var previous_state: EnemyEnums.EnemyStates
 var weapon: MeleeWeapon
+var calculated_speed: float
 
 
 func setup(_enemy: Enemy, _player: ChickenPlayer, _movement_component: EnemyMovementComponent) -> void:

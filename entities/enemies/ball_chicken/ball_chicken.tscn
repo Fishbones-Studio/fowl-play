@@ -47,6 +47,7 @@ starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_8q87k")
+dash_chance = 0
 enemy = NodePath("../..")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
