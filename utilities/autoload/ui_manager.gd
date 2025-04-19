@@ -83,7 +83,8 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 	if current_ui != ui_to_show:
 		swap_ui(current_ui, ui_to_show)
 
-	ui_to_show.visible = not ui_to_show.visible
+
+	current_ui.visible = not current_ui.visible
 
 	move_child(ui_to_show, get_child_count() - 1)
 
@@ -108,8 +109,9 @@ func handle_pause() -> void:
 		current_ui.visible = false
 		paused = pause_menu_visible
 		swap_ui(current_ui, previous_ui)
-	else:
-		paused = false
+	elif previous_ui:
+		swap_ui(ui_list[UIEnums.UI.PAUSE_MENU], previous_ui)
+		paused = current_ui.visible
 
 
 func _on_switch_ui(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:

@@ -74,7 +74,3 @@ func _should_skip_item(item: BaseResource) -> bool:
 
 func close_ui() -> void:
 	queue_free()
-
-
-func _on_exit_button_pressed() -> void:
-	close_ui()

@@ -26,6 +26,12 @@ func _ready() -> void:
 	_load_items()
 
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		_on_cancel_button_button_up()
+		UIManager.get_viewport().set_input_as_handled()
+
+
 func _load_items() -> void:
 	if new_item_resource == null:
 		printerr("Item is null")
