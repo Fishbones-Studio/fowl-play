@@ -108,7 +108,6 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 	if current_ui != ui_to_show:
 		swap_ui(current_ui, ui_to_show)
 
-
 	current_ui.visible = not current_ui.visible
 
 	move_child(ui_to_show, get_child_count() - 1)
