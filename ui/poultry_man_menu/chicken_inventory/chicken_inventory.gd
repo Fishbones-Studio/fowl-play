@@ -4,14 +4,15 @@ extends Control
 
 
 func _ready() -> void:
-	await get_tree().process_frame
-
 	_update_inventory()
 
 
 func _update_inventory() -> void:
+	await get_tree().process_frame
+	
 	# Empty the UI of the inventory
 	for child in grid_container.get_children():
+		remove_child(child)
 		child.queue_free()
 
 	# Return all items in the inventory
@@ -31,3 +32,7 @@ func _update_inventory() -> void:
 
 func _on_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
+
+
+func _on_visibility_changed() -> void:
+	if visible: _update_inventory()

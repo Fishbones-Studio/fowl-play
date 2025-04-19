@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if UIManager.current_ui.visible: # TODO: whack
+	if UIManager.current_ui and UIManager.current_ui.visible: # TODO: whack
 		return
 
 	if event is InputEventMouseMotion:

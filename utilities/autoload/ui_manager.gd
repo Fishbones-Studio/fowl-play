@@ -30,10 +30,34 @@ func _input(_event: InputEvent) -> void:
 		handle_pause()
 
 
+func remove_ui(ui: Control) -> void:
+	# Check if UI exists in our list
+	if ui not in ui_list.values():
+		push_error("UI ", ui.name, " not found in ui_list")
+		return
+
+	var ui_enum: UIEnums.UI = ui_list.find_key(ui)
+
+	# Handle references
+	if current_ui == ui:
+		current_ui = null
+	if previous_ui == ui:
+		previous_ui = null
+
+	# Remove from scene tree
+	remove_child(ui)
+	ui.queue_free()
+	ui_list.erase(ui_enum)
+
+	handle_pause()
+
+
 func clear_ui() -> void:
+	# Hide all ui nodes
 	for ui in ui_list:
 		ui_list[ui].visible = false
 
+	# Remove every child from scene tree
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -84,6 +108,8 @@ func handle_pause() -> void:
 		current_ui.visible = false
 		paused = pause_menu_visible
 		swap_ui(current_ui, previous_ui)
+	else:
+		paused = false
 
 
 func _on_switch_ui(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:

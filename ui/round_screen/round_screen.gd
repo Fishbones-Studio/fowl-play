@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if visible: get_viewport().set_input_as_handled()
+	if visible: get_viewport().set_input_as_handled() # Block all input
 
 
 func setup(params: Dictionary) -> void:
