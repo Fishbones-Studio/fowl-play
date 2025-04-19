@@ -12,7 +12,7 @@ func _update_inventory() -> void:
 	
 	# Empty the UI of the inventory
 	for child in grid_container.get_children():
-		remove_child(child)
+		grid_container.remove_child(child)
 		child.queue_free()
 
 	# Return all items in the inventory
