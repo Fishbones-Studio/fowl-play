@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dnq3em8w064n4"]
 
 [ext_resource type="Script" uid="uid://cmu00fbo5i5bn" path="res://ui/pause_menu/pause_menu.gd" id="1_c3jo5"]
-[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_mnjdh"]
 [ext_resource type="PackedScene" uid="uid://c0w6d53ulyk6x" path="res://entities/chicken_player/art/chicken_default.glb" id="3_uraes"]
 [ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="4_b4b0p"]
 [ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="4_c3jo5"]
