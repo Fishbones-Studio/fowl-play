@@ -14,6 +14,7 @@ var _ray_queue: Array[RayRequest] = []
 
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
+	SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration, false)
 	_fire_timer = 0.0
 	_current_angle = 0.0
 	_angle_direction = 1
