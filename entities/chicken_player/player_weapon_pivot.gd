@@ -1,6 +1,8 @@
 extends Node3D
 
 @export var camera: Camera3D = null
+@export_range(-90, 0 ) var max_down_angle: float = -45.0
+@export_range(0, 90) var max_up_angle: float = 45.0 
 
 var screen_center: Vector2 = Vector2.ZERO
 var last_viewport_size: Vector2 = Vector2.ZERO
@@ -19,14 +21,17 @@ func _ready():
 
 
 func _process(_delta) -> void:
-
 	if not camera:
 		return
 
 	# Figure out where the center of the screen is pointing
 	var target_position: Vector3 = camera.global_position + camera.project_ray_normal(screen_center) * 30.0
+
 	# Rotate this node to look at that point
 	look_at(target_position)
+
+	rotation.x = clamp(rotation.x, deg_to_rad(max_down_angle), deg_to_rad(max_up_angle))
+	rotation.y = 0
 
 
 func _update_screen_center():

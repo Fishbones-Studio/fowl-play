@@ -19,6 +19,7 @@ var jump_available: bool = true
 func _ready() -> void:
 	_update_physics_based_on_weight(entity.stats.weight)
 
+
 #TODO implement enemy jump
 #func get_jump_velocity() -> float:
 #	return jump_velocity if Input.is_action_just_pressed("jump") else 0.0
