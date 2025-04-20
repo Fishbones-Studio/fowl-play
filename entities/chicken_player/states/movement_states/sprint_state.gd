@@ -29,7 +29,7 @@ func process(delta: float) -> void:
 	player.stats.drain_stamina(_stamina_cost * delta)
 
 	# Handle state transitions
-	if not is_sprinting() or player.stats.current_stamina <= 0:
+	if not Input.is_action_pressed("sprint") or player.stats.current_stamina <= 0:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 		return
 
