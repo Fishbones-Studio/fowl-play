@@ -10,6 +10,7 @@ var purchase_cancelled_signal : Signal
 @onready var owned_items_container: CenterContainer = %OwnedItemsContainer
 @onready var new_item_container: CenterContainer = %NewItemContainer
 
+
 func setup(params: Dictionary) -> void:
 	if "existing_item" in params:
 		existing_item_resource = params["existing_item"]
@@ -19,10 +20,17 @@ func setup(params: Dictionary) -> void:
 		purchased_signal = params["purchased_signal"]
 	if "purchase_cancelled" in params:
 		purchase_cancelled_signal = params["purchase_cancelled"]
-		
+
 
 func _ready() -> void:
 	_load_items()
+
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		_on_cancel_button_button_up()
+		UIManager.get_viewport().set_input_as_handled()
+
 
 func _load_items() -> void:
 	if new_item_resource == null:
@@ -40,7 +48,6 @@ func _load_items() -> void:
 		if current_item: current_item.queue_free()
 		if new_item: new_item.queue_free()
 		return
-	
 
 	# Add to containers
 	owned_items_container.add_child(current_item)
@@ -57,20 +64,22 @@ func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
 	if not item or not item is ConfirmationItem:
 		printerr("Failed to instantiate ConfirmationItem scene")
 		return null
-		
+
 	item.set_item_data(resource)
-	
+
 	return item
+
 
 func _replace_item(old_item: Resource, _new_item: Resource) -> void:
 	Inventory.remove_item(old_item)
 	print("Item ", old_item, " replaced with ", _new_item)
 	purchased_signal.emit()
-	queue_free()
+	UIManager.remove_ui(self)
+
 
 func _on_cancel_button_button_up() -> void:
 	purchase_cancelled_signal.emit()
-	queue_free()
+	UIManager.remove_ui(self)
 
 
 func _on_replace_button_pressed() -> void:
