@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://df1clah7xvv32"]
+
+[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
+[ext_resource type="Script" uid="uid://c1esqie0rd4t3" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.gd" id="2_7fey8"]
+[ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="3_nqrm3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gdliy"]
+height = 3.0
+radius = 25.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lj7w"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.230603, 0.156685, 0.0584118, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_rjsn0"]
+material = SubResource("StandardMaterial3D_3lj7w")
+size = Vector2(6, 6)
+
+[sub_resource type="Curve" id="Curve_gdliy"]
+_data = [Vector2(0, 0.00203478), 0.0, 0.0, 0, 0, Vector2(0.495633, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.401221), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_gdliy"]
+offsets = PackedFloat32Array(0.170792, 0.529703, 0.943069)
+colors = PackedColorArray(0.447771, 0.19073, 0.221989, 1, 0.649454, 0.194277, 0.285676, 1, 0.701369, 0.336546, 0.2301, 1)
+
+[node name="SeaOfFlame" instance=ExtResource("1_vfv0y")]
+script = ExtResource("2_7fey8")
+health_consumption = 25.0
+damage_duration = 2.0
+damage_interval = 0.2
+current_ability = ExtResource("3_nqrm3")
+
+[node name="HitArea" type="Area3D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_gdliy")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+unique_name_in_owner = true
+emitting = false
+amount = 1500
+one_shot = true
+randomness = 1.0
+local_coords = true
+draw_order = 2
+mesh = SubResource("QuadMesh_rjsn0")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 3.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 25.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+angular_velocity_max = 25.0
+linear_accel_min = 1.0
+linear_accel_max = 5.0
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_gdliy")
+color_initial_ramp = SubResource("Gradient_gdliy")
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
