@@ -119,6 +119,7 @@ func _enter_intermission() -> void:
 	# TODO, shop somewhere to interact
 	print("imagine you are now in a different part of arena with a shop")
 	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0) # teleport player to the intermission area
+	SignalManager.upgrades_shop_refreshed.emit()
 
 	_activate_round_countdown("Intermission ends in", intermission_timer)
 

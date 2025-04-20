@@ -11,6 +11,8 @@ func _ready() -> void:
 	prevent_duplicates = false
 	title_label.text = "Upgrades"
 
+	SignalManager.upgrades_shop_refreshed.connect(_refresh_shop)
+
 	super()
 
 
