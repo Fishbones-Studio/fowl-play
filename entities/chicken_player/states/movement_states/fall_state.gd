@@ -60,7 +60,10 @@ func process(delta: float) -> void:
 		var current_time: int = Time.get_ticks_msec()
 		var hold_duration: float = current_time - _jump_press_time
 
-		if hold_duration > glide_hold_threshold * 1000:
+		var has_enough_stamina: bool = player.stats.current_stamina >= movement_component.glide_stamina_threshold
+		var held_long_enough: bool = hold_duration > glide_hold_threshold * 1000
+
+		if held_long_enough and has_enough_stamina:
 			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.GLIDE_STATE, {})
 			_is_jump_held = false
 			return
@@ -97,7 +100,7 @@ func physics_process(delta: float) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
 
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 
