@@ -32,7 +32,7 @@ func init() -> void:
 
 ## Calculate the speed based on weight and speed factor
 func calculate_speed(speed_factor: float) -> float:
-	return speed * exp(-(weight) * weight_factor) * speed_factor
+	return max(speed * exp(-(weight) * weight_factor) * speed_factor, 0.1)
 
 
 func restore_health(amount: float) -> float:
