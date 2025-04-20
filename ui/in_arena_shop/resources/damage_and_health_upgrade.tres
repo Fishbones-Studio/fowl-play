@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://cts6te4vffs7f"]
+[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://cnuwlwyjrpiac"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/in_arena_shop/resources/in_run_upgrade_resource.gd" id="1_14e0q"]
 
 [resource]
 script = ExtResource("1_14e0q")
-health_bonus = 10
-speed_bonus = 0.0
-damage_bonus = 10.0
+health_bonus = 25.0
 stamina_bonus = 0.0
+attack_multiplier_bonus = 0.2
+defense_bonus = 0.0
+speed_bonus = 0.0
+weight_bonus = 0.0
 name = "Cluck of Power"
 drop_chance = 50
 cost = 65
