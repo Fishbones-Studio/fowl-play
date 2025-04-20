@@ -7,17 +7,13 @@ const IN_ARENA_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("item shop opened")
-	Input.MOUSE_MODE_VISIBLE
 	check_inventory = false
 	prevent_duplicates = false
 	title_label.text = "Upgrades"
 
+	SignalManager.upgrades_shop_refreshed.connect(_refresh_shop)
+
 	super()
-
-
-func close_ui() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	queue_free() 
 
 
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
@@ -36,3 +32,11 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	shop_item_script_node.set_item_data(selected_item)
 
 	return shop_item_script_node
+
+
+func close_ui() -> void:
+	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)
+
+
+func _on_visibility_changed() -> void:
+	if visible: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
