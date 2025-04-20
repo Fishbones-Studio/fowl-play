@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://blc88hxvg3otq"]
+
+[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="1_ihale"]
+[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="2_opwiw"]
+
+[resource]
+script = ExtResource("2_opwiw")
+cooldown = 20.0
+name = "Seas of Flame"
+drop_chance = 5
+cost = 1
+description = "Set the seas ablaze!"
+icon = ExtResource("1_ihale")
+model_uid = "uid://df1clah7xvv32"
+metadata/_custom_type_script = "uid://cqht6vad2p0dc"
