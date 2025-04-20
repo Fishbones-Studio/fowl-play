@@ -8,6 +8,7 @@ signal damage_taken
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 
+
 func _ready() -> void:
 	initialize_stats()
 	initialize_health_bar()
@@ -18,10 +19,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
+
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:
 		push_warning("Attempted to get stats resource before it was assigned!")
 	return stats
+
 
 func initialize_health_bar() -> void:
 	if health_bar:
@@ -35,15 +38,15 @@ func initialize_stats() -> void:
 		printerr("ERROR: Stats resource is NULL!")
 
 
+func die() -> void:
+	SignalManager.enemy_died.emit()
+	print(name, " has died!")
+	queue_free()
+
+
 func _take_damage(target: PhysicsBody3D, damage: float) -> void:
 	if target == self:
 		damage_taken.emit(stats.drain_health(damage))
 		health_bar.set_health(stats.current_health)
 		if stats.current_health <= 0:
 			die()
-
-
-func die() -> void:
-	SignalManager.enemy_died.emit()
-	print(name, " has died!")
-	queue_free()
