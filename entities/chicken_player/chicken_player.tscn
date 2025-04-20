@@ -251,7 +251,7 @@ entity = NodePath("..")
 jump_height = 8.0
 
 [node name="PlayerWeaponPivot" type="Node3D" parent="."]
-transform = Transform3D(0.988659, -0.0821671, -0.125703, 0.0151733, 0.88741, -0.46073, 0.149407, 0.453598, 0.878594, 1.26707, 0.685471, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.265, 0.685, 0)
 script = ExtResource("16_8i8jv")
 
 [node name="PlayerWeaponController" parent="PlayerWeaponPivot" instance=ExtResource("26_vclph")]
