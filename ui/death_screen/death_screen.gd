@@ -20,18 +20,19 @@ func _input(event: InputEvent) -> void:
 		and not is_transitioning
 	):
 		_return_to_game_menu()
+		return
+
+	get_viewport().set_input_as_handled()
 
 
 func _return_to_game_menu() -> void:
 	is_transitioning = true
 	animation_player.play("fade_to_white")
-	
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+	get_tree().paused = false
 
 	await animation_player.animation_finished
 
-	SignalManager.switch_ui_scene.emit(UIEnums.PATHS[UIEnums.UI.PAUSE_MENU])
-
-	get_tree().paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)

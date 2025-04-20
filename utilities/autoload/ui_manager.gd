@@ -147,7 +147,7 @@ func handle_pause() -> void:
 		swap_ui(ui_list[UIEnums.UI.PAUSE_MENU], previous_ui)
 		paused = current_ui.visible
 
-	_handle_mouse_mode(current_ui.visible)
+	if current_ui: _handle_mouse_mode(current_ui.visible)
 
 
 func _handle_mouse_mode(value: bool) -> void:
