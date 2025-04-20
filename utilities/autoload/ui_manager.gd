@@ -193,7 +193,7 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	var new_ui_node: Control = new_ui_resource.instantiate()
 
 	# Stores the mouse mode if UI scene will be visible
-	if new_ui_node.visible:
+	if new_ui_node.visible and not _is_any_visible():
 		previous_mouse_mode = Input.mouse_mode
 
 	# If the UI has a setup or initialize method, call it with parameters
