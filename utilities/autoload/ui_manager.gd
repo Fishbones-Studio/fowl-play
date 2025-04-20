@@ -102,13 +102,15 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 		push_error("'", UIEnums.ui_to_string(ui), "'", " does not exist in the list.")
 		return
 
-	var ui_to_show: Control = ui_list[ui]
+	if not _is_any_visible():
+		previous_mouse_mode = Input.mouse_mode
 
+	var ui_to_show: Control = ui_list[ui]
 	if current_ui != ui_to_show:
 		swap_ui(current_ui, ui_to_show)
 
 	current_ui.visible = not current_ui.visible
-
+	_handle_mouse_mode(current_ui.visible)
 	move_child(ui_to_show, get_child_count() - 1)
 
 
@@ -146,6 +148,7 @@ func handle_pause() -> void:
 		paused = current_ui.visible
 
 	_handle_mouse_mode(current_ui.visible)
+
 
 func _handle_mouse_mode(value: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else previous_mouse_mode
