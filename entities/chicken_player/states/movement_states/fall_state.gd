@@ -104,5 +104,5 @@ func physics_process(delta: float) -> void:
 	SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 
 
-func _on_coyote_timer_timeout():
+func _on_coyote_timer_timeout() -> void:
 	_has_coyote = false
