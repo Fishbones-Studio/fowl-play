@@ -74,3 +74,19 @@ func regen_health(delta: float) -> float:
 func regen_stamina(delta: float) -> float:
 	current_stamina = clamp(current_stamina + (stamina_regen * delta), 0, max_stamina)
 	return current_stamina
+
+
+func apply_upgrade(upgrade: InRunUpgradeResource) -> void:
+	max_health += upgrade.health_bonus
+	current_health += upgrade.health_bonus
+
+	max_stamina += upgrade.stamina_bonus
+	current_stamina += upgrade.stamina_bonus
+
+	attack_multiplier += upgrade.attack_multiplier_bonus
+
+	defense += upgrade.defense_bonus
+
+	speed += upgrade.speed_bonus
+
+	weight += upgrade.weight_bonus

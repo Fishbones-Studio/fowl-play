@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="InRunUpgradeResource" load_steps=2 format=3 uid="uid://vgg1gereecb6"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/in_arena_shop/resources/in_run_upgrade_resource.gd" id="1_juq0d"]
+
+[resource]
+script = ExtResource("1_juq0d")
+health_bonus = 0.0
+stamina_bonus = 0.0
+attack_multiplier_bonus = 0.0
+defense_bonus = 0.0
+speed_bonus = 0.0
+weight_bonus = 5.0
+name = "Make ******* Fit Again"
+drop_chance = 20
+cost = 10
+description = "You keep eating hamburgers and gained a lot of weight."
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"
