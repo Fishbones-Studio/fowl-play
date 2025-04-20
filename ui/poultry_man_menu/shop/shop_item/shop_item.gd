@@ -68,7 +68,7 @@ func attempt_purchase() -> void:
 	else:
 		# TODO: add the just replaced item back to the shop?
 		# TODO: for abilities, somehow show both possible abilites to replace
-		SignalManager.add_ui_scene.emit("uid://da6m7g6ijjyop", {
+		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP_CONFIRMATION, {
 			"existing_item": existing_items[0],
 			"new_item": shop_item,
 			"purchased_signal": purchased,
