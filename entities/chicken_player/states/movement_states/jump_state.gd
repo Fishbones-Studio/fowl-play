@@ -64,7 +64,7 @@ func physics_process(delta: float) -> void:
 	if velocity == Vector3.ZERO:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, {})
 		return
-	if Input.is_action_pressed("sprint"):
+	if is_sprinting():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 		return
 
