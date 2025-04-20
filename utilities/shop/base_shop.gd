@@ -16,12 +16,12 @@ var prevent_duplicates: bool = true
 
 
 func _ready() -> void:
-	await get_tree().process_frame
-
 	_refresh_shop()
 
 
 func _refresh_shop() -> void:
+	await get_tree().process_frame
+
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
@@ -74,7 +74,3 @@ func _should_skip_item(item: BaseResource) -> bool:
 
 func close_ui() -> void:
 	queue_free()
-
-
-func _on_exit_button_pressed() -> void:
-	close_ui()

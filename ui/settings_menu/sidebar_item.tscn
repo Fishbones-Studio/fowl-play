@@ -1,9 +1,13 @@
-[gd_scene format=3 uid="uid://b732163n2f47p"]
+[gd_scene load_steps=2 format=3 uid="uid://b732163n2f47p"]
+
+[ext_resource type="Script" uid="uid://mi2p26liplwd" path="res://ui/settings_menu/sidebar_item.gd" id="1_1t6i4"]
 
 [node name="SidebarItem" type="Button"]
 custom_minimum_size = Vector2(156, 48)
 offset_right = 156.0
 offset_bottom = 48.0
 theme_type_variation = &"SidebarButton"
+disabled = true
 text = "Key bindings"
 alignment = 0
+script = ExtResource("1_1t6i4")
