@@ -9,3 +9,5 @@ script = ExtResource("2_am5cq")
 item_database = NodePath("UpgradeDatabase")
 
 [node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_4rb57")]
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

@@ -30,12 +30,25 @@ func _load_audio_settings() -> void:
 		for audio_bus_name in config.get_section_keys(config_name):
 			var saved_volume = config.get_value(config_name, audio_bus_name)
 			audio_busses[audio_bus_name] = saved_volume
+			
+			_set_volume(audio_bus_name, saved_volume)
 
 	_load_audio_busses()
 
 
+func _save_audio_settings() -> void:
+	var config = ConfigFile.new()
+	config.load(config_path) # Load existing settings
+
+	for audio_bus_name: String in audio_busses:
+		config.set_value(config_name, audio_bus_name, audio_busses[audio_bus_name])
+
+	config.save(config_path)
+
+
 func _load_audio_busses() -> void:
 	for child in content_container.get_children():
+		content_container.remove_child(child)
 		child.queue_free()
 
 	for audio_bus in audio_busses:
@@ -45,15 +58,6 @@ func _load_audio_busses() -> void:
 		instance.set_text(audio_bus)
 		instance.set_value(audio_busses[audio_bus])
 		instance.slider.value_changed.connect(_volume_changed.bind(audio_bus))
-
-
-func _save_audio_settings() -> void:
-	var config = ConfigFile.new()
-
-	for audio_bus_name: String in audio_busses:
-		config.set_value(config_name, audio_bus_name, audio_busses[audio_bus_name])
-
-	config.save(config_path)
 
 
 func _volume_changed(value: float, bus_name: String) -> void:

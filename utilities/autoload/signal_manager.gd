@@ -2,7 +2,6 @@
 ##
 ## This script is used to manage signals in the game that are needed in multiple scenes.
 ## It is an autoload script, meaning it is loaded automatically when the game starts and is accessible from anywhere.
-##
 extends Node
 
 # Player signals
@@ -11,20 +10,18 @@ signal init_health(max_health: int, health: int)
 signal init_stamina(max_stamina: float, stamina: float)
 signal player_stats_changed(stats: LivingEntityStats)
 
-
 # UI signals
-signal player_hurt()
-signal player_heal()
+signal player_hurt
+signal player_heal
 signal deactivate_item_slot(item : BaseResource)
 signal activate_item_slot(item : BaseResource)
 signal cooldown_item_slot(item : BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals
 signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
-signal add_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to add an (additional) UI scene
+signal add_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to add an (additional) UI scene
 signal switch_game_scene(scene_path: String) ## This signal is used to switch the game scene, replacing all current
 signal add_game_scene(scene_path: String) ## This signal is used to add an (additional) game scene
-signal settings_menu_toggled(value: bool)
 
 # Enemy signals
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
@@ -34,6 +31,10 @@ signal enemy_died()
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
 signal weapon_hit_area_body_exited(body: PhysicsBody3D)
 signal weapon_hit_target(target: PhysicsBody3D, damage: float)
+
+# Shop signals
+signal upgrades_shop_refreshed
+
 
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}

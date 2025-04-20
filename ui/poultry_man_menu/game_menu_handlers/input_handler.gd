@@ -26,7 +26,10 @@ func _ready() -> void:
 	stick_cooldown_timer.timeout.connect(_on_stick_cooldown_timeout)
 
 
-func _input(event: InputEvent) -> void:	
+func _input(event: InputEvent) -> void:
+	if UIManager.current_ui and UIManager.current_ui.visible: # TODO: whack
+		return
+
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		keyboard_navigation_deactivated.emit()

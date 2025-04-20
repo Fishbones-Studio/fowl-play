@@ -1,7 +1,5 @@
 extends Control
 
-var current_item: Button
-
 @onready var settings_label: Label = %SettingsLabel
 @onready var content: Control = %Content
 
@@ -13,45 +11,32 @@ var current_item: Button
 @onready var keybinds_menu: PackedScene = load("uid://bkbsjmbi2yaoh")
 @onready var audio_menu: PackedScene = load("uid://6xd2kic6u58a")
 
-@onready var sidebar_items: Array[Node] = _get_sidebar_items()
+@onready var sidebar_container: VBoxContainer = %SidebarContainer
 
 
 func _ready() -> void:
-	for item: Button in sidebar_items:
-		item.toggled.connect(_on_sidebar_toggled.bind(item))
+	for item: SiderBarItem in sidebar_container.get_children():
 		item.focus_entered.connect(_on_sidebar_focus_entered.bind(item))
-		item.pressed.connect(_on_sidebar_pressed.bind(item))
 
 	controls.grab_focus()
 
-	SignalManager.settings_menu_toggled.emit(true)
+
+func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
+	for item: SiderBarItem in sidebar_container.get_children():
+		item.active = item == sidebar_item
+
+	_update_content(sidebar_item)
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		_close_window()
+func _on_close_button_button_up() -> void:
+	UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 
 
-func _on_sidebar_pressed(item: Button) -> void:
-	if current_item != item:
-		return
-
-	item.button_pressed = true
-	current_item = item
-
-
-func _on_sidebar_focus_entered(item: Button) -> void:
-	item.button_pressed = true
-	current_item = item
-
-	_update_content(item)
-
-
-func _update_content(item: Button) -> void:
+func _update_content(sidebar_item: SiderBarItem) -> void:
 	for child in content.get_children():
 		content.remove_child(child)
 	
-	match item:
+	match sidebar_item:
 		controls:
 			pass
 		key_bindings:
@@ -61,32 +46,10 @@ func _update_content(item: Button) -> void:
 		audio:
 			content.add_child(audio_menu.instantiate())
 	
-	settings_label.text = "Settings / " + _format_text(item.name)
+	settings_label.text = "Settings / " + _format_text(sidebar_item.name)
 
 
-func _on_sidebar_toggled(_toggled: bool, item: Button) -> void:
-	for sidebar_item in sidebar_items:
-		if sidebar_item == item:
-			TweenManager.create_scale_tween(null, sidebar_item, Vector2(1.2, 1.2))
-			continue
-		sidebar_item.button_pressed = false
-		TweenManager.create_scale_tween(null, sidebar_item, Vector2(1.0, 1.0))
-
-
-func _on_close_button_button_up() -> void:
-	_close_window()
-
-
-func _close_window() -> void:
-	SignalManager.settings_menu_toggled.emit(false)
-	queue_free()
-
-
-func _get_sidebar_items() -> Array[Node]:
-	return get_tree().get_nodes_in_group("SettingsMenuSidebarItem")
-
-
-## Add space before capital letters that aren't at start or after existing space
+# Add space before capital letters that aren't at start or after existing space
 func _format_text(text: String) -> String:
 	var result: String = ""
 

@@ -5,36 +5,9 @@ extends Control
 @export var footer: PanelContainer
 @export var game_logo_container: MarginContainer
 
-var prev_mouse_mode: Input.MouseMode
-var paused: bool:
-	set(value):
-		paused = value
-		visible = value
-		get_tree().paused = value
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else prev_mouse_mode
-		if value: # TODO: Whack
-			get_parent().move_child(self, get_parent().get_child_count() - 1)
-			_set_button_visibility()
-
 @onready var resume_button: Button = %ResumeButton
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
-
-
-func _ready() -> void:
-	SignalManager.settings_menu_toggled.connect(_toggle_settings_menu)
-
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		if not paused: 
-			prev_mouse_mode = Input.mouse_mode
-
-		paused = not paused
-
-		if paused: 
-			_squish_chicken()
-			resume_button.grab_focus()
 
 
 func setup(_params: Dictionary = {}) -> void:
@@ -51,7 +24,7 @@ func _init_footer() -> void:
 func _squish_chicken() -> void:
 	var chicken_tween: Tween = chicken.create_tween()
 
-	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.7, 1.5, 0.7), 0.3)
+	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.7, 1.5, 0.7), 0.2)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(1.1, 1.1, 1.1), 0.1)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(0.9, 0.9, 0.9), 0.1)
 	TweenManager.create_scale_tween(chicken_tween, chicken, Vector3(1.0, 1.0, 1.0), 0.1)
@@ -64,7 +37,7 @@ func _setup_enter_and_exit_transitions() -> void:
 	var buttons: Array[Node] = find_children("", "Button", true)
 
 	for button: Button in buttons:
-		var hover_sylebox: StyleBox = preload("uid://do8svyygf5k1e")
+		var hover_stylebox: StyleBox = preload("uid://do8svyygf5k1e")
 
 		button.focus_entered.connect(func():
 			TweenManager.create_scale_tween(null, button, Vector2(1.1, 1.1)))
@@ -81,7 +54,7 @@ func _setup_enter_and_exit_transitions() -> void:
 		button.button_down.connect(func():
 			button.add_theme_stylebox_override('focus', StyleBoxEmpty.new()))
 		button.button_up.connect(func():
-			button.add_theme_stylebox_override('focus', hover_sylebox))
+			button.add_theme_stylebox_override('focus', hover_stylebox))
 
 	game_logo_container.mouse_entered.connect(func():
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.1, 1.1)))
@@ -90,20 +63,21 @@ func _setup_enter_and_exit_transitions() -> void:
 
 
 func _on_resume_button_button_up() -> void:
-	paused = false
+	UIManager.handle_pause()
 
 
 func _on_settings_button_button_up() -> void:
-	SignalManager.add_ui_scene.emit("uid://81fy3yb0j33w")
+	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
+		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
+	else:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
 
 
 func _on_quit_button_button_up() -> void:
-	paused = false
 	_return_to_main_menu()
 
 
 func _on_forfeit_button_button_up() -> void:
-	paused = false
 	_return_to_game_menu()
 
 
@@ -124,18 +98,17 @@ func _get_scene_loader_children() -> Array:
 
 func _return_to_game_menu() -> void:
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	SignalManager.switch_ui_scene.emit("uid://dnq3em8w064n4")
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
+	UIManager.paused = false
 
 
 func _return_to_main_menu() -> void:
-	SignalManager.switch_game_scene.emit("uid://dab0i61vj1n23")
-	SignalManager.switch_ui_scene.emit("uid://dab0i61vj1n23")
+	SignalManager.switch_game_scene.emit(UIEnums.PATHS[UIEnums.UI.MAIN_MENU])
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU)
+	UIManager.paused = false
 
 
-func _toggle_settings_menu(value: bool) -> void:
-	if value:
-		set_process_input(false)
-	else:
-		set_process_input(true)
+func _on_visibility_changed() -> void:
+	_squish_chicken()
+	resume_button.grab_focus()
+	_set_button_visibility()
