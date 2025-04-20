@@ -15,9 +15,13 @@ extends BaseMovementComponent
 var dash_available: bool = true
 var jump_available: bool = true
 
+var _current_weight: float
 
 func _ready() -> void:
+	_current_weight = entity.stats.weight
 	_update_physics_based_on_weight(entity.stats.weight)
+
+	SignalManager.player_stats_changed.connect(_on_weight_changed)
 
 
 func get_jump_velocity() -> float:
@@ -33,3 +37,9 @@ func get_player_input_dir() -> Vector2:
 func get_player_direction() -> Vector3:
 	var input_dir: Vector2 = get_player_input_dir()
 	return entity.transform.basis * (Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+
+func _on_weight_changed(stats: LivingEntityStats) -> void:
+	if _current_weight != stats.weight:
+		_current_weight = stats.weight
+		_update_physics_based_on_weight(stats.weight)

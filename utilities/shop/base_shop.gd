@@ -1,3 +1,5 @@
+## Manages the basic functions for adding and displaying items in the shop, 
+## to be used by different types of shops.
 class_name BaseShop
 extends Control
 
@@ -14,8 +16,6 @@ var prevent_duplicates: bool = true
 @onready var exit_button: Button = %ExitButton
 
 func _ready() -> void:
-	await get_tree().process_frame
-
 	_refresh_shop()
 	_setup_controller_navigation()
 	
@@ -25,6 +25,8 @@ func _input(event: InputEvent) -> void:
 		_on_exit_button_pressed()
 
 func _refresh_shop() -> void:
+	await get_tree().process_frame
+
 	if not shop_items_container:
 		push_error("Shop container is not assigned!")
 		return
@@ -75,12 +77,8 @@ func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
 
 
-func close_ui() -> void:
-	queue_free()
-
-
 func _on_exit_button_pressed() -> void:
-	close_ui()
+	queue_free()
 
 func _setup_controller_navigation() -> void:
 	# Make all shop items are focusable

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=37 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=38 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -140,6 +140,8 @@ corner_radius_bottom_left = 2
 shadow_color = Color(0, 0, 0, 0.101961)
 shadow_size = 1
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ucis"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7adcq"]
 
 [resource]
@@ -255,11 +257,10 @@ SettingsSliderLabel/constants/outline_size = 0
 SettingsSliderLabel/font_sizes/font_size = 20
 SettingsSliderLabel/styles/normal = SubResource("StyleBoxFlat_5kiug")
 SidebarButton/base_type = &"Button"
-SidebarButton/colors/font_color = Color(0.745098, 0.737255, 0.745098, 1)
+SidebarButton/colors/font_disabled_color = Color(0.745098, 0.737255, 0.745098, 1)
 SidebarButton/colors/font_focus_color = Color(0.938624, 0.925614, 0.933812, 1)
-SidebarButton/colors/font_hover_color = Color(0.917647, 0.905882, 0.862745, 1)
-SidebarButton/colors/font_pressed_color = Color(0.917647, 0.905882, 0.862745, 1)
 SidebarButton/constants/outline_size = 1
 SidebarButton/font_sizes/font_size = 22
+SidebarButton/styles/disabled = SubResource("StyleBoxEmpty_7ucis")
 VBoxContainer/constants/separation = 10
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_7adcq")

@@ -13,9 +13,13 @@ func _ready() -> void:
 	animation_timer.start()
 
 
+func _input(event: InputEvent) -> void:
+	if visible: get_viewport().set_input_as_handled() # Block all input
+
+
 func setup(params: Dictionary) -> void:
 	display_text = params.get("display_text")
 
 
 func _on_animation_timer_timeout() -> void:
-	queue_free()
+	UIManager.remove_ui(self)

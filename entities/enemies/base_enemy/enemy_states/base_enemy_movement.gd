@@ -3,8 +3,8 @@ extends BaseState
 
 @export var enemy: Enemy
 
-var movement_component : EnemyMovementComponent
-var steering_force : Vector3
+var movement_component: EnemyMovementComponent
+var steering_force: Vector3
 
 ################################################################################
 # The following are non spefic FSM-methods, i.e. utility methods

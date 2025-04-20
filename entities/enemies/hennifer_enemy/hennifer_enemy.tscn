@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdwr1kdxdlvqi"]
+[gd_scene load_steps=27 format=3 uid="uid://bdwr1kdxdlvqi"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="PackedScene" uid="uid://d2ew1seudodji" path="res://entities/enemies/hennifer_enemy/art/Chicken improved hennifer varient.glb" id="2_fgbet"]
@@ -6,6 +6,65 @@
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="4_dmp11"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]
+[ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/base_enemy/enemy_states/wander_state.gd" id="6_surp0"]
+[ext_resource type="Script" uid="uid://2htosw08ep1s" path="res://entities/enemies/base_enemy/enemy_states/dash_state.gd" id="7_rbpgh"]
+
+[sub_resource type="Animation" id="Animation_surp0"]
+resource_name = "temp"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wabf"]
+_data = {
+&"temp": SubResource("Animation_surp0")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_surp0"]
+animation = &"temp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3wabf"]
+animation = &"temp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xwdhe"]
+animation = &"temp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q5l3a"]
+animation = &"temp"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw78k"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwi72"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ganh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3t21"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ema6o"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ectbi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e4ve4"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vbjj3"]
+states/Chase/node = SubResource("AnimationNodeAnimation_3wabf")
+states/Chase/position = Vector2(594, 82.5)
+states/Idle/node = SubResource("AnimationNodeAnimation_xwdhe")
+states/Idle/position = Vector2(393.5, 89)
+states/Wander/node = SubResource("AnimationNodeAnimation_q5l3a")
+states/Wander/position = Vector2(490, 175)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kw78k"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_mwi72"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_5ganh"), "Idle", "Wander", SubResource("AnimationNodeStateMachineTransition_q3t21"), "Wander", "Idle", SubResource("AnimationNodeStateMachineTransition_ema6o"), "Wander", "Chase", SubResource("AnimationNodeStateMachineTransition_ectbi"), "Chase", "Wander", SubResource("AnimationNodeStateMachineTransition_e4ve4")]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_nhmno"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xwdhe"]
+graph_offset = Vector2(-268.492, 3.222)
+nodes/Dash/node = SubResource("AnimationNodeAnimation_surp0")
+nodes/Dash/position = Vector2(-50, 300)
+nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_vbjj3")
+nodes/MovementStateMachine/position = Vector2(-110, 40)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_nhmno")
+nodes/OneShot/position = Vector2(210, 100)
+nodes/output/position = Vector2(380, 160)
+node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Dash", &"output", 0, &"OneShot"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8d7w"]
 size = Vector3(3.5, 4, 4)
@@ -18,6 +77,18 @@ stats = ExtResource("2_v8d7w")
 
 [node name="Chicken improved hennifer varient" parent="." index="0" instance=ExtResource("2_fgbet")]
 transform = Transform3D(-0.9, 0, -1.35896e-07, 0, 0.9, 0, 1.35896e-07, 0, -0.9, 0, 0.8, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Chicken improved hennifer varient" index="16"]
+libraries = {
+&"": SubResource("AnimationLibrary_3wabf")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Chicken improved hennifer varient" index="17"]
+tree_root = SubResource("AnimationNodeBlendTree_xwdhe")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 1, 0)
@@ -34,17 +105,42 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09222, 0.615398, -0.320664)
 melee_weapon_scene = ExtResource("4_dmp11")
 
-[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state")]
-starting_state = NodePath("Idle State")
+[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state", "animation_tree")]
+starting_state = NodePath("Idle")
+animation_tree = NodePath("../Chicken improved hennifer varient/AnimationTree")
 
-[node name="Idle State" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
+[node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_knbep")
+dash_chance = 25
 enemy = NodePath("../..")
 
-[node name="Chase State" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_75fyq")
-STATE_TYPE = 1
+[node name="Wander" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_surp0")
+state_type = 1
 enemy = NodePath("../..")
+
+[node name="Chase" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_75fyq")
+state_type = 2
+enemy = NodePath("../..")
+
+[node name="Dash" type="Node" parent="EnemyStateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_rbpgh")
+state_type = 3
+enemy = NodePath("../..")
+
+[node name="DashDurationTimer" type="Timer" parent="EnemyStateMachine/Dash" index="0"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="EnemyStateMachine/Dash" index="1"]
+wait_time = 2.0
+one_shot = true
 
 [node name="DamageNumberHandler" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[connection signal="timeout" from="EnemyStateMachine/Dash/DashDurationTimer" to="EnemyStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="EnemyStateMachine/Dash/DashCooldownTimer" to="EnemyStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
+
+[editable path="Chicken improved hennifer varient"]

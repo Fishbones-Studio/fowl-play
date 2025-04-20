@@ -17,6 +17,6 @@ func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
 	if player.is_on_floor():
-		SignalManager.switch_ui_scene.emit("uid://ba8j8ajmddtai")
+		SignalManager.switch_ui_scene.emit(UIEnums.UI.DEATH_SCREEN)
 	
 	apply_movement(player.velocity)
