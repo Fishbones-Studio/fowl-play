@@ -23,9 +23,9 @@ func display_damage(value: int) -> void:
 		randf_range(0, vertical_variance),
 		randf_range(-depth_offset, depth_offset)
 	)
-	
+
 	add_child(damage_number)
-	
+
 	damage_number.global_position = spawn_position
 	damage_number.label.text = str(value)
 	damage_number.label.font_size = base_size * randi_range(1, size_variation)

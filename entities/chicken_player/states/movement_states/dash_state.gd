@@ -71,10 +71,10 @@ func physics_process(delta: float) -> void:
 	player.move_and_slide()
 
 
-func _on_dash_duration_timer_timeout():
+func _on_dash_duration_timer_timeout() -> void:
 	_is_dashing = false
 
 
-func _on_dash_cooldown_timer_timeout():
+func _on_dash_cooldown_timer_timeout() -> void:
 	print("Dash available: ", movement_component.dash_available)
 	movement_component.dash_available = true
