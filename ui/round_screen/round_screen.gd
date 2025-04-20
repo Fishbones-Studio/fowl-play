@@ -22,4 +22,4 @@ func setup(params: Dictionary) -> void:
 
 
 func _on_animation_timer_timeout() -> void:
-	UIManager.toggle_ui(UIEnums.UI.ROUND_SCREEN)
+	UIManager.remove_ui(self)

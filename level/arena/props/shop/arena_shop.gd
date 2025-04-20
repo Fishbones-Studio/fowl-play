@@ -16,8 +16,6 @@ func open_shop() -> void:
 	else:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.IN_ARENA_SHOP)
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
 
 func _on_area_3d_body_entered(_body: ChickenPlayer) -> void:
 	player_in_area = true

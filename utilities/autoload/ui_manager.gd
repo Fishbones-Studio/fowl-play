@@ -12,12 +12,11 @@ var previous_mouse_mode: Input.MouseMode
 # Dictionary mapping UI enums to their instantiated Control nodes
 var ui_list: Dictionary[UIEnums.UI, Control]
 
-# Pause state with setter that manages game pause and mouse visibility
+# Pause state with setter that manages game pause
 var paused:
 	set(value):
 		paused = value
 		get_tree().paused = value
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else previous_mouse_mode
 
 
 func _ready() -> void:
@@ -122,8 +121,8 @@ func handle_pause() -> void:
 	if  main_menu and current_ui == main_menu:
 		return
 
-	# Store current mouse mode when first pausing
-	if not paused:
+	# Store mouse mode if a UI is not visible
+	if not _is_any_visible():
 		previous_mouse_mode = Input.mouse_mode
 
 	var pause_menu: Control = ui_list.get(UIEnums.UI.PAUSE_MENU)
@@ -145,6 +144,20 @@ func handle_pause() -> void:
 	elif previous_ui: 
 		swap_ui(ui_list[UIEnums.UI.PAUSE_MENU], previous_ui)
 		paused = current_ui.visible
+
+	_handle_mouse_mode(current_ui.visible)
+
+
+func _handle_mouse_mode(value: bool) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else previous_mouse_mode
+
+
+func _is_any_visible() -> bool:
+	for ui in ui_list:
+		if ui == UIEnums.UI.PLAYER_HUD: continue # Exception for player hud
+		if ui_list[ui].visible:
+			return true
+	return false
 
 
 ## Completely switches to a new UI scene
@@ -179,6 +192,10 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 
 	# Instantiate the new UI scene
 	var new_ui_node: Control = new_ui_resource.instantiate()
+
+	# Stores the mouse mode is UI scene will be visible
+	if new_ui_node.visible:
+		previous_mouse_mode = Input.mouse_mode
 
 	# If the UI has a setup or initialize method, call it with parameters
 	if new_ui_node.has_method("setup"):
