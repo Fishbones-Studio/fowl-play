@@ -167,7 +167,7 @@ func _split_events_by_type(events: Array[InputEvent]) -> Dictionary:
 func _is_event_already_assigned(event: InputEvent, current_action: String) -> bool:
 	# Check all actions except current one for duplicate bindings. Also ignore built-in UI actions
 	for action in InputMap.get_actions():
-		if action == current_action || action.begins_with("ui_"):
+		if action == current_action || action.begins_with("ui_") || action == "cycle_debug_menu" || action == "toggle_console":
 			continue
 
 		for existing_event in InputMap.action_get_events(action):
