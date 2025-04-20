@@ -12,10 +12,16 @@ extends BaseMovementComponent
 @export var dash_stamina_cost: int = 30
 @export var glide_stamina_cost: int = 20
 
+@export_category("Stamina Threshold")
+@export var sprint_stamina_threshold: int = 10
+@export var glide_stamina_threshold: int = 10
+
+
 var dash_available: bool = true
 var jump_available: bool = true
 
 var _current_weight: float
+
 
 func _ready() -> void:
 	_current_weight = entity.stats.weight

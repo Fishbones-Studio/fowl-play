@@ -35,7 +35,7 @@ func apply_movement(velocity: Vector3) -> void:
 
 
 func is_sprinting() -> bool:
-	return Input.is_action_pressed("sprint")
+	return Input.is_action_pressed("sprint") and player.stats.current_stamina >= movement_component.sprint_stamina_threshold
 
 
 func get_gravity(velocity: Vector3) -> float:

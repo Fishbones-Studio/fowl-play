@@ -19,7 +19,7 @@ func input(_event: InputEvent) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {"from_ground": true})
 		return
 
-	if Input.is_action_pressed("sprint") and player.stats.current_stamina > 0:
+	if is_sprinting():
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.SPRINT_STATE, {})
 
 
