@@ -29,8 +29,9 @@ func _return_to_game_menu() -> void:
 	is_transitioning = true
 	animation_player.play("fade_to_white")
 
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 	get_tree().paused = false
+	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+
 
 	await animation_player.animation_finished
 
