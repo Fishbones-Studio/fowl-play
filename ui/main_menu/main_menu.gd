@@ -1,6 +1,10 @@
 extends Control
 
 
+func _ready() -> void:
+	SaveManager.load_settings()
+
+
 func _on_quit_button_pressed():
 	get_tree().quit()
 
