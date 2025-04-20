@@ -36,8 +36,11 @@ func _ready() -> void:
 		input_handler.current_item_selected.connect(_on_select_current_item)  
 		input_handler.keyboard_navigation_activated.connect(_on_keyboard_navigation_activated)
 		input_handler.keyboard_navigation_deactivated.connect(_on_keyboard_navigation_deactivated)
-	
+
 	reset_highlights()
+
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
+
 
 func _get_focusable_items() -> Array[Focusable3D]:
 	var items: Array[Focusable3D] = []
@@ -52,6 +55,7 @@ func _get_focusable_items() -> Array[Focusable3D]:
 	
 	return items
 
+
 func _find_focusable_children(node: Node) -> Array[Focusable3D]:
 	var result: Array[Focusable3D] = []
 	for child in node.get_children():
@@ -60,9 +64,11 @@ func _find_focusable_children(node: Node) -> Array[Focusable3D]:
 		result.append_array(_find_focusable_children(child))
 	return result
 
+
 func _on_item_focused(index: int) -> void:
 	is_mouse_hovering = true
 	current_index = index
+
 
 func _on_item_unfocused(_index: int) -> void:
 	is_mouse_hovering = false
@@ -71,11 +77,13 @@ func _on_item_unfocused(_index: int) -> void:
 	else:
 		highlight_current_item()
 
+
 func _on_item_pressed(index: int) -> void:
 	current_index = index
 	is_keyboard_navigation_active = false
 	highlight_current_item()
 	_on_select_current_item()
+
 
 func _on_move_selection(direction: int) -> void:
 	# Clear mouse hover state and activate keyboard navigation
@@ -85,39 +93,52 @@ func _on_move_selection(direction: int) -> void:
 	current_index = wrapi(current_index + direction, 0, focusable_items.size())
 	highlight_current_item()
 
+
 func _on_select_current_item() -> void:
 	var selected_item: Focusable3D = focusable_items[current_index]
+
 	if selected_item == flyer_item:
-		SignalManager.emit_throttled("switch_ui_scene", ["uid://xhakfqnxgnrr"])
-		SignalManager.emit_throttled("add_ui_scene", ["uid://dnq3em8w064n4"])
+		SignalManager.emit_throttled("switch_ui_scene", [UIEnums.UI.PLAYER_HUD])
+		SignalManager.emit_throttled("add_ui_scene", [UIEnums.UI.PAUSE_MENU])
 		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 	elif selected_item == shop_item:
-		SignalManager.switch_ui_scene.emit("uid://bir1j5qouane0")
+		if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
+			UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP) 
 	elif selected_item == inventory_item:
-		SignalManager.switch_ui_scene.emit("uid://dvkxcgdk0goul")
+		if UIEnums.UI.CHICKEN_INVENTORY in UIManager.ui_list:
+			UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY) 
+
 
 func _on_keyboard_navigation_activated() -> void:
 	is_keyboard_navigation_active = true
 	is_mouse_hovering = false
 	highlight_current_item()
 
+
 func _on_keyboard_navigation_deactivated() -> void:
 	is_keyboard_navigation_active = false
 	reset_highlights()
+
 
 func reset_highlights() -> void:
 	# Only reset if not hovering and not in keyboard navigation
 	if is_mouse_hovering or is_keyboard_navigation_active:
 		return
-	
+
 	_unfocus_all_items()
+
 
 func highlight_current_item() -> void:
 	_unfocus_all_items()
-	
+
 	# Then apply highlight to current item if keyboard navigation is active
 	if is_keyboard_navigation_active and not focusable_items.is_empty():
 		focusable_items[current_index].focus()
+
 
 func _unfocus_all_items() -> void:
 	for item in focusable_items:

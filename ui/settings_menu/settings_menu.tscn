@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5gymr6e3q66h" path="res://ui/settings_menu/settings_menu.gd" id="1_cobfr"]
 [ext_resource type="PackedScene" uid="uid://b732163n2f47p" path="res://ui/settings_menu/sidebar_item.tscn" id="2_424ss"]
-[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://resources/shaders/color_rect_bg_blur.gdshader" id="2_p8urx"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_p8urx"]
 [ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="3_424ss"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gjkyi"]
@@ -98,24 +98,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Controls" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 text = "Controls"
 
-[node name="KeyBindings" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="KeyBindings" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 
-[node name="Graphics" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Graphics" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 text = "Graphics"
 
-[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" groups=["SettingsMenuSidebarItem"] instance=ExtResource("2_424ss")]
+[node name="Audio" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
