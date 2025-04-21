@@ -63,19 +63,19 @@ type = 1
 transform = Transform3D(-7.64949e-08, -1.5299e-07, -1.75, 0, -1.75, 1.5299e-07, -1.75, 6.6874e-15, 7.64949e-08, 0, 2.5, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-1.51735, -0.149152, -1.68063, 1.47395, -1.21719, -1.22273, -0.821124, -1.90928, 0.910792, 0, 0, 0)
+transform = Transform3D(-1.67408, 1.17, 0.988785, -1.33486, -0.395638, -1.79186, -0.751494, -1.90361, 0.980143, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583026, 0.359968, 0.0122451, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.346685, -0.0158203, 0.11263, -0.0200861, 0.347122, 0.110584, -0.111948, -0.111275, 0.328956, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854376, -0.0245268, -0.0878413, 0.214687, -0.0244904, 0.0136041, 0.0318789, 0.230663, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.214001, 0.0839094, 0.0396118, -0.0868049, 0.216221, 0.0109393, -0.0327843, -0.024778, 0.229604, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
-transform = Transform3D(0.0413089, 0.0520153, -0.0812715, 0.022335, 0.0808504, 0.0630985, 0.0938711, -0.0421268, 0.0207511, -0.737007, 0.707179, 0.157209)
+transform = Transform3D(0.0484762, 0.0756767, -0.0542232, -0.0190953, 0.0679162, 0.0777163, 0.091118, -0.0260282, 0.0451343, -0.702794, 0.656331, 0.182295)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
-transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+transform = Transform3D(0.0662967, -0.160068, -0.153403, -0.10811, 0.116449, -0.168231, 0.193563, 0.119864, -0.0414193, -0.107392, 0.155255, 1.03631)
 
 [node name="AnimationTree" type="AnimationTree" parent="ball_chicken" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_hsirj")
@@ -101,15 +101,18 @@ animation_tree = NodePath("../ball_chicken/AnimationTree")
 
 [node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_8q87k")
+chase_distance = 100.0
 enemy = NodePath("../..")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_2ly6u")
+chase_distance = 100.0
 state_type = 1
 enemy = NodePath("../..")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_lvw3e")
+chase_distance = 100.0
 state_type = 2
 enemy = NodePath("../..")
 
