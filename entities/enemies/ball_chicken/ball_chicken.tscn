@@ -26,27 +26,32 @@ xfade_time = 0.3
 xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hblk"]
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hsirj"]
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8q87k"]
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvw3e"]
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2hblk"]
 states/Chase/node = SubResource("AnimationNodeAnimation_v7541")
 states/Chase/position = Vector2(445, 222)
 states/Idle/node = SubResource("AnimationNodeAnimation_2ly6u")
 states/Idle/position = Vector2(386, 70.5)
-"states/Wander /node" = SubResource("AnimationNodeAnimation_55l3j")
-"states/Wander /position" = Vector2(571, 81.5)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_55l3j"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_3n7t4"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_nnmdb"), "Idle", "Wander ", SubResource("AnimationNodeStateMachineTransition_2hblk"), "Wander ", "Idle", SubResource("AnimationNodeStateMachineTransition_hsirj"), "Chase", "Wander ", SubResource("AnimationNodeStateMachineTransition_8q87k"), "Wander ", "Chase", SubResource("AnimationNodeStateMachineTransition_lvw3e")]
+states/Wander/node = SubResource("AnimationNodeAnimation_55l3j")
+states/Wander/position = Vector2(585, 74.975)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_55l3j"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_3n7t4"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_nnmdb"), "Idle", "Wander", SubResource("AnimationNodeStateMachineTransition_2hblk"), "Wander", "Idle", SubResource("AnimationNodeStateMachineTransition_hsirj"), "Wander", "Chase", SubResource("AnimationNodeStateMachineTransition_8q87k"), "Chase", "Wander", SubResource("AnimationNodeStateMachineTransition_lvw3e")]
+graph_offset = Vector2(169.65, 27.0375)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hsirj"]
-graph_offset = Vector2(-30.1909, 12.8273)
+graph_offset = Vector2(-87.7063, 17.5557)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_2hblk")
 nodes/MovementStateMachine/position = Vector2(170, 80)
-nodes/output/position = Vector2(520, 130)
+nodes/output/position = Vector2(560, 100)
 node_connections = [&"output", 0, &"MovementStateMachine"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
@@ -63,19 +68,19 @@ type = 1
 transform = Transform3D(-7.64949e-08, -1.5299e-07, -1.75, 0, -1.75, 1.5299e-07, -1.75, 6.6874e-15, 7.64949e-08, 0, 2.5, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-1.51735, -0.149152, -1.68063, 1.47395, -1.21719, -1.22273, -0.821124, -1.90928, 0.910792, 0, 0, 0)
+transform = Transform3D(-0.245241, -0.965689, -2.03873, 2.12928, -0.776421, 0.111634, -0.745081, -1.90099, 0.990067, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583026, 0.359968, 0.0122451, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854376, -0.0245268, -0.0878413, 0.214687, -0.0244904, 0.0136041, 0.0318789, 0.230663, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.215651, 0.0854375, -0.0245268, -0.0878412, 0.214687, -0.0244904, 0.0136041, 0.0318789, 0.230663, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
 transform = Transform3D(0.0413089, 0.0520153, -0.0812715, 0.022335, 0.0808504, 0.0630985, 0.0938711, -0.0421268, 0.0207511, -0.737007, 0.707179, 0.157209)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
-transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
 
 [node name="AnimationTree" type="AnimationTree" parent="ball_chicken" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_hsirj")

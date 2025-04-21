@@ -18,7 +18,7 @@ signal activate_item_slot(item : BaseResource)
 signal cooldown_item_slot(item : BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals
-signal switch_ui_scene(scene_path: String, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
+signal switch_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
 signal add_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to add an (additional) UI scene
 signal switch_game_scene(scene_path: String) ## This signal is used to switch the game scene, replacing all current
 signal add_game_scene(scene_path: String) ## This signal is used to add an (additional) game scene
