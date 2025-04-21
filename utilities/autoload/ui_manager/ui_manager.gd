@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	# Handle pause input globally
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
 		handle_pause()
 
 

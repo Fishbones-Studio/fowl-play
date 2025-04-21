@@ -5,7 +5,7 @@ extends Control
 # Check for cancel button input
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
+		UIManager.handle_pause()
 
 func _ready() -> void:
 	_update_inventory()

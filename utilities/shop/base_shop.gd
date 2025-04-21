@@ -18,10 +18,12 @@ func _ready() -> void:
 	_refresh_shop()
 	_setup_controller_navigation()
 	
-# Check for cancel button input
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		queue_free()
+	# setting up controller navigation to trigger on visibility
+	visibility_changed.connect(
+		func():
+			if visible:
+				_setup_controller_navigation()
+	)
 
 func _refresh_shop() -> void:
 	await get_tree().process_frame

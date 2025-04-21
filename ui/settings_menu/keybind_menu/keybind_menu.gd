@@ -61,18 +61,9 @@ func _input(event: InputEvent) -> void:
 
 		InputMap.action_add_event(SaveManager.action_to_remap, event)
 		_finalize_remapping()
-		
 	else:
-		# Handle focus changes with ui_* actions
-		if Input.is_action_just_pressed("ui_up"):
-			_move_focus(-1, 0)
-		elif Input.is_action_just_pressed("ui_down"):
-			_move_focus(1, 0)
-		elif Input.is_action_just_pressed("ui_left"):
-			_move_focus(0, -1)
-		elif Input.is_action_just_pressed("ui_right"):
-			_move_focus(0, 1)
-		elif Input.is_action_just_pressed("ui_accept"):
+
+		if Input.is_action_just_pressed("ui_accept"):
 			_activate_focused_button()
 
 
@@ -112,8 +103,8 @@ func _create_action_list():
 
 	# Add action rows
 	for action in InputMap.get_actions():
-		if action.begins_with("ui_") || action == "cycle_debug_menu" || action == "toggle_console":
-			continue # Skip built-in UI actions
+		if action.begins_with("ui_") or action in ["cycle_debug_menu", "toggle_console"]:
+			continue
 
 		var action_row: Node = input_button_scene.instantiate()
 		var split_events: Dictionary = _split_events_by_type(InputMap.action_get_events(action))
@@ -131,65 +122,43 @@ func _create_action_list():
 
 func _setup_navigation():
 	_focusable_buttons.clear()
+	var grid: Array = _get_button_grid()
 
-	# Add all remap buttons
-	for row in content_container.get_children():
-		for panel_name in ["PrimaryPanel", "SecondaryPanel", "ControllerPanel"]:
-			var panel: Node = row.find_child(panel_name)
-			var btn: Button = panel.button
-			btn.focus_mode = Control.FOCUS_ALL
-			_focusable_buttons.append(btn)
-
-	# Add restore defaults button
-	restore_defaults_button.focus_mode = Control.FOCUS_ALL
-	_focusable_buttons.append(restore_defaults_button)
+	# Flatten grid into focusable buttons array (row-major order)
+	for row in grid:
+		_focusable_buttons.append_array(row)
 
 	# Set initial focus
 	if _focusable_buttons.size() > 0:
 		_current_focus_index = 0
 		_focusable_buttons[_current_focus_index].grab_focus()
-	
 
 
-func _move_focus(row_change: int, col_change: int) -> void:
-	if _focusable_buttons.is_empty():
-		return
-		
-	var current_focus: Control = get_viewport().gui_get_focus_owner()
-	if not current_focus or current_focus not in _focusable_buttons:
-		_focusable_buttons[0].grab_focus()
-		return
-		
-	var current_index: int = _focusable_buttons.find(current_focus)
-	if current_index == -1:
-		return
-		
-	var new_index: int = current_index
-	
-	# Calculate new index based on navigation
-	if row_change != 0:
-		# Vertical navigation (rows)
-		new_index = current_index + (row_change * 3)  # 3 columns per row
-		new_index = clamp(new_index, 0, _focusable_buttons.size() - 1)
-	elif col_change != 0:
-		# Horizontal navigation (columns)
-		new_index = current_index + col_change
-		# Wrap around at row boundaries
-		if col_change > 0 and current_index % 3 == 2:  # Last column
-			new_index = min(current_index + 1, _focusable_buttons.size() - 1)
-		elif col_change < 0 and current_index % 3 == 0:  # First column
-			new_index = max(current_index - 1, 0)
-		else:
-			new_index = clamp(new_index, 0, _focusable_buttons.size() - 1)
-	
-	if new_index != current_index and new_index < _focusable_buttons.size():
-		_focusable_buttons[new_index].grab_focus()
+func _get_button_grid() -> Array:
+	var grid: Array = []
 
+	# Build grid of remap buttons per row
+	for row in content_container.get_children():
+		var row_buttons: Array[Button] = []
+		for panel_name in ["PrimaryPanel", "SecondaryPanel", "ControllerPanel"]:
+			var panel := row.find_child(panel_name) as RemapPanel
+			if panel and panel.button is Button:
+				panel.button.focus_mode = Control.FOCUS_ALL
+				row_buttons.append(panel.button)
+		if row_buttons.size() > 0:
+			grid.append(row_buttons)
+
+	# Add restore defaults button as its own row
+	if restore_defaults_button is Button:
+		restore_defaults_button.focus_mode = Control.FOCUS_ALL
+		grid.append([restore_defaults_button])
+
+	return grid
 
 
 func _activate_focused_button():
-	var focused: Control = get_viewport().gui_get_focus_owner()
-	if focused is Button:
+	var focused := get_viewport().gui_get_focus_owner() as Button
+	if focused:
 		focused.emit_signal("pressed")
 
 
@@ -245,7 +214,7 @@ func _split_events_by_type(events: Array[InputEvent]) -> Dictionary:
 func _is_event_already_assigned(event: InputEvent, current_action: String) -> bool:
 	# Check all actions except current one for duplicate bindings. Also ignore built-in UI actions
 	for action in InputMap.get_actions():
-		if action == current_action || action.begins_with("ui_") || action == "cycle_debug_menu" || action == "toggle_console":
+		if action == current_action or action.begins_with("ui_") or action in ["cycle_debug_menu", "toggle_console"]:
 			continue
 
 		for existing_event in InputMap.action_get_events(action):
