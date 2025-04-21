@@ -7,9 +7,11 @@ extends Control
 @onready var key_bindings: Button = %KeyBindings
 @onready var graphics: Button = %Graphics
 @onready var audio: Button = %Audio
+@onready var cheat: Button = %Cheat
 
-@onready var keybinds_menu: PackedScene = load("uid://bkbsjmbi2yaoh")
-@onready var audio_menu: PackedScene = load("uid://6xd2kic6u58a")
+@onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
+@onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
+@onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 
 @onready var sidebar_container: VBoxContainer = %SidebarContainer
 
@@ -17,6 +19,10 @@ extends Control
 func _ready() -> void:
 	for item: SiderBarItem in sidebar_container.get_children():
 		item.focus_entered.connect(_on_sidebar_focus_entered.bind(item))
+
+	# Remove cheat menu if not in debug
+	if not OS.has_feature("debug"):
+		cheat.queue_free()
 
 	controls.grab_focus()
 
@@ -35,7 +41,7 @@ func _on_close_button_button_up() -> void:
 func _update_content(sidebar_item: SiderBarItem) -> void:
 	for child in content.get_children():
 		content.remove_child(child)
-	
+
 	match sidebar_item:
 		controls:
 			pass
@@ -45,7 +51,9 @@ func _update_content(sidebar_item: SiderBarItem) -> void:
 			pass
 		audio:
 			content.add_child(audio_menu.instantiate())
-	
+		cheat:
+			content.add_child(cheat_menu.instantiate())
+
 	settings_label.text = "Settings / " + _format_text(sidebar_item.name)
 
 
