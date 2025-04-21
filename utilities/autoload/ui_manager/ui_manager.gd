@@ -206,12 +206,8 @@ func _handle_pause_action() -> void:
 		var current_ui_enum: Variant = ui_list.find_key(current_ui)
 		# Allow pausing if the current UI is the Player HUD
 		if current_ui_enum != null and current_ui_enum != UIEnums.UI.PLAYER_HUD and current_ui_enum != UIEnums.UI.PAUSE_MENU:
-			# If a UI other than the HUD is active, don't allow pausing
-			print(
-				"Cannot pause: Another UI is active (",
-				UIEnums.ui_to_string(current_ui_enum),
-				")"
-			)
+			# If a UI other than the HUD is active, don't allow pausing and instead cancel
+			_handle_ui_cancel_action()
 			return
 
 	var pause_menu_enum: UIEnums.UI = UIEnums.UI.PAUSE_MENU
