@@ -105,7 +105,7 @@ func clear_ui() -> void:
 	previous_ui = null
 	current_ui = null
 	paused = false # Ensure game is unpaused
-	#_handle_mouse_mode(false) # Restore original mouse mode
+	_handle_mouse_mode(false) # Restore original mouse mode
 
 
 ## Swaps the current and previous UI references
@@ -257,7 +257,6 @@ func _handle_pause_action() -> void:
 		# This should only hide the Player HUD based on the check at the start
 		if is_instance_valid(current_ui) and current_ui.visible:
 			current_ui.visible = false
-		# Don't swap yet, wait until pause menu is made current
 
 		# Show the pause menu
 		pause_menu.visible = true
