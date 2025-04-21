@@ -2,7 +2,7 @@
 ## Script to display and manage input settings in a UI.
 ##
 ## This script handles the input settings UI, allowing users to remap keys and 
-## save their preferences.
+## save their preferences. Includes full controller support using ui_* actions.
 ################################################################################
 extends Control
 
@@ -10,10 +10,14 @@ var config_path: String = "user://settings.cfg" ## path to the config file, on w
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
 @onready var stylebox_focus: StyleBoxFlat = load("uid://dwicgkvjluob0")
-@onready var input_button_scene: PackedScene = preload("uid://bpba8wvtfww4x") ## scene for the clickable button row
+@onready var input_button_scene: PackedScene = preload("uid://bpba8wvtfww4x")
 @onready var error_text_label: Label = %ErrorTextLabel
 @onready var restore_defaults_button: Button = %RestoreDefaultsButton
 @onready var content_container: VBoxContainer = %ContentContainer
+
+# Navigation focus tracking
+var _current_focus_index: int = 0
+var _focusable_buttons: Array[Button] = []
 
 
 func _ready():
@@ -26,39 +30,50 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-	if not SaveManager.is_remapping || event is InputEventMouseMotion:
-		return
+	if SaveManager.is_remapping:
+		if event is InputEventMouseMotion:
+			return
 
-	get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
-	var input_type = SaveManager.input_type
-	var action_to_remap = SaveManager.action_to_remap
+		# Validate event type matches input mode
+		if not _is_valid_event_for_input_type(event, SaveManager.input_type):
+			error_text_label.text = "Invalid input event for this action"
+			return
 
-	# Validate event type matches input mode (keyboard/mouse vs controller)
-	if not _is_valid_event_for_input_type(event, input_type):
-		error_text_label.text = "Invalid input event for this action"
-		return
+		# Prevent double-click from being registered
+		if event is InputEventMouseButton and event.double_click:
+			event = event.duplicate()
+			event.double_click = false
 
-	# Prevent double-click from being registered as valid input
-	if event is InputEventMouseButton and event.double_click:
-		event = event.duplicate()
-		event.double_click = false
+		# Check for existing assignments
+		if _is_event_already_assigned(event, SaveManager.action_to_remap):
+			error_text_label.text = "Input event already assigned to another action"
+			return
 
-	# Check for existing assignments to prevent key conflict
-	if _is_event_already_assigned(event, action_to_remap):
-		error_text_label.text = "Input event already assigned to another action"
-		return
+		var current_events: Array[InputEvent] = InputMap.action_get_events(SaveManager.action_to_remap)
+		var split_events: Dictionary = _split_events_by_type(current_events)
 
-	var current_events: Array[InputEvent] = InputMap.action_get_events(action_to_remap)
-	var split_events: Dictionary = _split_events_by_type(current_events)
+		# Replace existing binding of same type
+		var old_event: InputEvent = _get_event_to_replace(split_events, SaveManager.input_type)
+		if old_event:
+			InputMap.action_erase_event(SaveManager.action_to_remap, old_event)
 
-	# Replace existing binding of same type (primary/secondary/controller)
-	var old_event: InputEvent = _get_event_to_replace(split_events, input_type)
-	if old_event:
-		InputMap.action_erase_event(action_to_remap, old_event)
-
-	InputMap.action_add_event(action_to_remap, event)
-	_finalize_remapping()
+		InputMap.action_add_event(SaveManager.action_to_remap, event)
+		_finalize_remapping()
+		
+	else:
+		# Handle focus changes with ui_* actions
+		if Input.is_action_just_pressed("ui_up"):
+			_move_focus(-1, 0)
+		elif Input.is_action_just_pressed("ui_down"):
+			_move_focus(1, 0)
+		elif Input.is_action_just_pressed("ui_left"):
+			_move_focus(0, -1)
+		elif Input.is_action_just_pressed("ui_right"):
+			_move_focus(0, 1)
+		elif Input.is_action_just_pressed("ui_accept"):
+			_activate_focused_button()
 
 
 func _save_input_settings():
@@ -80,7 +95,6 @@ func _load_input_settings():
 	var config = ConfigFile.new()
 
 	if config.load(config_path) == OK and config.has_section(config_name):
-		# Replace default bindings with user's saved preferences
 		for action in config.get_section_keys(config_name):
 			InputMap.action_erase_events(action)
 			for event in config.get_value(config_name, action):
@@ -91,13 +105,14 @@ func _load_input_settings():
 
 func _create_action_list():
 	error_text_label.text = ""
+
 	# Clear existing children
 	for child in content_container.get_children():
 		child.queue_free()
 
 	# Add action rows
 	for action in InputMap.get_actions():
-		if action.begins_with("ui_"):
+		if action.begins_with("ui_") || action == "cycle_debug_menu" || action == "toggle_console":
 			continue # Skip built-in UI actions
 
 		var action_row: Node = input_button_scene.instantiate()
@@ -109,6 +124,73 @@ func _create_action_list():
 		_set_label_text(action_row, "ControllerPanel", split_events.controller, action)
 
 		content_container.add_child(action_row)
+
+	# Setup navigation after creating UI
+	_setup_navigation()
+
+
+func _setup_navigation():
+	_focusable_buttons.clear()
+
+	# Add all remap buttons
+	for row in content_container.get_children():
+		for panel_name in ["PrimaryPanel", "SecondaryPanel", "ControllerPanel"]:
+			var panel: Node = row.find_child(panel_name)
+			var btn: Button = panel.button
+			btn.focus_mode = Control.FOCUS_ALL
+			_focusable_buttons.append(btn)
+
+	# Add restore defaults button
+	restore_defaults_button.focus_mode = Control.FOCUS_ALL
+	_focusable_buttons.append(restore_defaults_button)
+
+	# Set initial focus
+	if _focusable_buttons.size() > 0:
+		_current_focus_index = 0
+		_focusable_buttons[_current_focus_index].grab_focus()
+	
+
+
+func _move_focus(row_change: int, col_change: int) -> void:
+	if _focusable_buttons.is_empty():
+		return
+		
+	var current_focus: Control = get_viewport().gui_get_focus_owner()
+	if not current_focus or current_focus not in _focusable_buttons:
+		_focusable_buttons[0].grab_focus()
+		return
+		
+	var current_index: int = _focusable_buttons.find(current_focus)
+	if current_index == -1:
+		return
+		
+	var new_index: int = current_index
+	
+	# Calculate new index based on navigation
+	if row_change != 0:
+		# Vertical navigation (rows)
+		new_index = current_index + (row_change * 3)  # 3 columns per row
+		new_index = clamp(new_index, 0, _focusable_buttons.size() - 1)
+	elif col_change != 0:
+		# Horizontal navigation (columns)
+		new_index = current_index + col_change
+		# Wrap around at row boundaries
+		if col_change > 0 and current_index % 3 == 2:  # Last column
+			new_index = min(current_index + 1, _focusable_buttons.size() - 1)
+		elif col_change < 0 and current_index % 3 == 0:  # First column
+			new_index = max(current_index - 1, 0)
+		else:
+			new_index = clamp(new_index, 0, _focusable_buttons.size() - 1)
+	
+	if new_index != current_index and new_index < _focusable_buttons.size():
+		_focusable_buttons[new_index].grab_focus()
+
+
+
+func _activate_focused_button():
+	var focused: Control = get_viewport().gui_get_focus_owner()
+	if focused is Button:
+		focused.emit_signal("pressed")
 
 
 func _trim_mapping_suffix(mapping: String) -> String:
@@ -141,10 +223,10 @@ func _is_valid_event_for_input_type(event: InputEvent, input_type: int) -> bool:
 func _split_events_by_type(events: Array[InputEvent]) -> Dictionary:
 	# Categorize inputs by type with priority: primary > secondary > controller
 	var result: Dictionary = {
-		primary = null,
-		secondary = null,
-		controller = null
-	}
+								 primary = null,
+								 secondary = null,
+								 controller = null
+							 }
 
 	for event in events:
 		if event is InputEventJoypadButton or event is InputEventJoypadMotion:
