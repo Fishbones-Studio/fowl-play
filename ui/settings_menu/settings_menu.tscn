@@ -121,6 +121,12 @@ layout_mode = 2
 toggle_mode = true
 text = "Audio"
 
+[node name="Cheat" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Cheat"
+
 [node name="Content" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
