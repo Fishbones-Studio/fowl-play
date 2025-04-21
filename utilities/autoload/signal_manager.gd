@@ -15,9 +15,7 @@ signal player_hurt
 signal player_heal
 signal deactivate_item_slot(item : BaseResource)
 signal activate_item_slot(item : BaseResource)
-signal left_tree()
-# TODO
-# new_ui_node.tree_exited.connect(func(): SignalManager.left_tree.emit())
+signal ui_disabled()
 signal cooldown_item_slot(item : BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals

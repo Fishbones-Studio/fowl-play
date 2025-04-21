@@ -98,21 +98,25 @@ func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
 ## @param: ui - The UI enum to toggle
 ## @note: Brings UI to front when showing, manages focus automatically
 func toggle_ui(ui: UIEnums.UI) -> void:
-	if ui not in ui_list:
-		push_error("'", UIEnums.ui_to_string(ui), "'", " does not exist in the list.")
+	# If it isn't in our ui_list any more, re‑instance it
+	if not ui_list.has(ui):
+		_on_add_ui_scene(ui)
 		return
-
+		
+	var ui_to_show: Control = ui_list[ui]
+	if not is_instance_valid(ui_to_show):
+		ui_list.erase(ui)
+		_on_add_ui_scene(ui)
+		return
 	if not _is_any_visible():
 		previous_mouse_mode = Input.mouse_mode
 
-	var ui_to_show: Control = ui_list[ui]
 	if current_ui != ui_to_show:
 		swap_ui(current_ui, ui_to_show)
 
 	current_ui.visible = not current_ui.visible
 	_handle_mouse_mode(current_ui.visible)
 	move_child(ui_to_show, get_child_count() - 1)
-
 
 ## Handles pause state and UI visibility changes
 ##
@@ -155,11 +159,39 @@ func _handle_mouse_mode(value: bool) -> void:
 
 
 func _is_any_visible() -> bool:
-	for ui in ui_list:
-		if ui == UIEnums.UI.PLAYER_HUD: continue # Exception for player hud
-		if ui_list[ui].visible:
+	# Create a copy of the keys to iterate over. This allows safely removing items from the original dictionary.
+	var keys_to_check: Array = ui_list.keys()
+	for ui_enum in keys_to_check:
+		# Check if the key still exists in the dictionary (it might have been removed).
+		if not ui_list.has(ui_enum):
+			continue
+
+		# Exception for player hud
+		if ui_enum == UIEnums.UI.PLAYER_HUD:
+			continue
+
+		var node: Control = ui_list[ui_enum]
+
+		# Check if the node instance is valid before accessing it
+		if not is_instance_valid(node):
+			# This state indicates a potential bug elsewhere: a UI node was freed
+			push_warning(
+				"Found freed instance in ui_list for key: ",
+				UIEnums.ui_to_string(ui_enum),
+				". This might indicate the UI was freed externally or remove_ui failed. Removing stale entry."
+			)
+			# Clean up the stale entry to prevent future errors
+			ui_list.erase(ui_enum)
+			# Skip to the next key
+			continue
+
+		# If the node is valid and visible, return true
+		if node.visible:
 			return true
+
+	# If the loop finishes without finding any other visible UI
 	return false
+
 
 
 ## Completely switches to a new UI scene
@@ -202,6 +234,14 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	# If the UI has a setup or initialize method, call it with parameters
 	if new_ui_node.has_method("setup"):
 		new_ui_node.setup(params)
+		
+	# hook up the exit tree and visibility
+	new_ui_node.tree_exited.connect(func(): SignalManager.ui_disabled.emit())
+	new_ui_node.visibility_changed.connect(
+		func ():
+			if not new_ui_node.visible:
+				SignalManager.ui_disabled.emit()
+	)
 
 	# Add it as a child of the UI manager
 	add_child(new_ui_node)
