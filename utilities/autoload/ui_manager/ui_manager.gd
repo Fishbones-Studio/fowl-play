@@ -463,12 +463,12 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 
 	# hook up the exit tree and visibility
 	new_ui_node.tree_exited.connect(
-		func(): SignalManager.ui_disabled.emit() # Consider passing which UI exited
+		func(): SignalManager.ui_disabled.emit()
 	)
 	new_ui_node.visibility_changed.connect(
 		func():
 			if not new_ui_node.visible:
-				SignalManager.ui_disabled.emit() # Consider passing which UI was hidden
+				SignalManager.ui_disabled.emit()
 	)
 
 	# Add it as a child of the UI manager
