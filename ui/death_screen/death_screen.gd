@@ -14,8 +14,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if (
-		event is InputEventMouseButton
-		and event.button_index == MOUSE_BUTTON_LEFT
+		((event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT) or  event.is_action_pressed("ui_accept"))
 		and not animation_player.is_playing()
 		and not is_transitioning
 	):

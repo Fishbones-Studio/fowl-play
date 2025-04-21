@@ -8,7 +8,7 @@ extends CanvasLayer
 var current_ui: Control # Currently active UI control
 var previous_ui: Control # Previously active UI control (for navigation history)
 # Stores the mouse mode before UI changes (for proper restoration)
-var previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
+var previous_mouse_mode: Input.MouseMode
 # Dictionary mapping UI enums to their instantiated Control nodes
 var ui_list: Dictionary[UIEnums.UI, Control] = {}
 
@@ -105,7 +105,7 @@ func clear_ui() -> void:
 	previous_ui = null
 	current_ui = null
 	paused = false # Ensure game is unpaused
-	_handle_mouse_mode(false) # Restore original mouse mode
+	#_handle_mouse_mode(false) # Restore original mouse mode
 
 
 ## Swaps the current and previous UI references
@@ -138,7 +138,11 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 
 	var ui_to_toggle: Control = ui_list[ui]
 	if not is_instance_valid(ui_to_toggle):
-		push_warning("Instance for UI ", UIEnums.ui_to_string(ui), " invalid in toggle_ui. Re-adding.")
+		push_warning(
+			"Instance for UI ",
+			UIEnums.ui_to_string(ui),
+			" invalid in toggle_ui. Re-adding."
+		)
 		ui_list.erase(ui)
 		_on_add_ui_scene(ui)
 		# Same logic as above if it was the pause menu
@@ -190,11 +194,25 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 ## Handles the "pause" action, typically opening/closing the pause menu.
 ##
 ## @note: Manages pause state, UI visibility, and mouse mode.
+##        Only allows pausing if no UI or only the Player HUD is active.
 func _handle_pause_action() -> void:
 	# Special case: Never pause from main menu
 	var main_menu: Control = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu and main_menu.visible:
 		return
+		
+	# Check if another UI (other than HUD) is currently active and visible
+	if is_instance_valid(current_ui) and current_ui.visible:
+		var current_ui_enum: Variant = ui_list.find_key(current_ui)
+		# Allow pausing if the current UI is the Player HUD
+		if current_ui_enum != null and current_ui_enum != UIEnums.UI.PLAYER_HUD and current_ui_enum != UIEnums.UI.PAUSE_MENU:
+			# If a UI other than the HUD is active, don't allow pausing
+			print(
+				"Cannot pause: Another UI is active (",
+				UIEnums.ui_to_string(current_ui_enum),
+				")"
+			)
+			return
 
 	var pause_menu_enum: UIEnums.UI = UIEnums.UI.PAUSE_MENU
 	var pause_menu: Control = ui_list.get(pause_menu_enum) # Try to get existing
@@ -219,9 +237,8 @@ func _handle_pause_action() -> void:
 		swap_ui(current_ui, pause_menu)
 		_handle_mouse_mode(true) # Mouse should be visible
 		return
-
-	# --- Pause menu exists, handle toggling ---
-	var needs_mouse_mode_store = not _is_any_visible() and not pause_menu.visible
+		
+	var needs_mouse_mode_store: bool = not _is_any_visible() and not pause_menu.visible
 
 	if pause_menu.visible: # Pause menu is currently visible -> Hide it
 		pause_menu.visible = false
@@ -241,6 +258,7 @@ func _handle_pause_action() -> void:
 			previous_mouse_mode = Input.mouse_mode
 
 		# Hide the currently visible UI (if any) before showing pause menu
+		# This should only hide the Player HUD based on the check at the start
 		if is_instance_valid(current_ui) and current_ui.visible:
 			current_ui.visible = false
 		# Don't swap yet, wait until pause menu is made current
@@ -355,7 +373,6 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 		# If it exists but isn't current, make it current (unless it's pause menu)
 		var existing_node: Control = ui_list[new_ui]
 		if current_ui != existing_node:
-			# --- Start Modification ---
 			# Only make visible and current if it's NOT the pause menu
 			if new_ui != UIEnums.UI.PAUSE_MENU:
 				if not existing_node.visible and not _is_any_visible():
@@ -366,7 +383,6 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 				current_ui.visible = true
 				move_child(current_ui, get_child_count() - 1)
 				_handle_mouse_mode(true)
-		# --- End Modification ---
 		return # Don't re-add
 
 	# Load the UI scene from the path
@@ -417,7 +433,6 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	# Add it as a child of the UI manager
 	add_child(new_ui_node)
 
-	# --- Start Modification ---
 	# Decide if this new UI should become the current one immediately
 	if should_be_visible_initially:
 		# Hide the previously current UI if one exists and is valid
