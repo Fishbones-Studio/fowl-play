@@ -2,11 +2,6 @@ extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
 
-# Check for cancel button input
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		UIManager.handle_pause()
-
 func _ready() -> void:
 	_update_inventory()
 

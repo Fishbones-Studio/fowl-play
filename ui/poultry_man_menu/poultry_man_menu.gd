@@ -39,8 +39,6 @@ func _ready() -> void:
 
 	reset_highlights()
 
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
-
 
 func _get_focusable_items() -> Array[Focusable3D]:
 	var items: Array[Focusable3D] = []
@@ -99,7 +97,6 @@ func _on_select_current_item() -> void:
 
 	if selected_item == flyer_item:
 		SignalManager.emit_throttled("switch_ui_scene", [UIEnums.UI.PLAYER_HUD])
-		SignalManager.emit_throttled("add_ui_scene", [UIEnums.UI.PAUSE_MENU])
 		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
 	elif selected_item == shop_item:
 		if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
