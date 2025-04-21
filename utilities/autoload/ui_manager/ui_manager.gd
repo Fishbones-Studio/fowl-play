@@ -39,6 +39,52 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("ui_cancel"):
 		_handle_ui_cancel_action()
 
+	
+## Removes a specific UI control from the manager using its enum identifier.
+##
+## @param: ui_enum - The UIEnums.UI value of the UI to remove.
+## @note: Handles lookup, node validity checks, and calls the main remove_ui function.
+func remove_ui_by_enum(ui_enum: UIEnums.UI) -> void:
+	# Check if the UI enum exists in our list
+	if not ui_list.has(ui_enum):
+		push_warning(
+			"Attempted to remove UI by enum, but ",
+			UIEnums.ui_to_string(ui_enum),
+			" was not found in ui_list."
+		)
+		return
+
+	var ui_node: Control = ui_list[ui_enum]
+
+	# Check if the node instance associated with the enum is still valid
+	if not is_instance_valid(ui_node):
+		push_warning(
+			"Attempted to remove UI by enum (",
+			UIEnums.ui_to_string(ui_enum),
+			"), but its node instance was invalid. Removing stale entry from list."
+		)
+		# Clean up the stale entry even if the node is gone
+		ui_list.erase(ui_enum)
+		# Also check references just in case they somehow point to the invalid node ID
+		if current_ui == ui_node:
+			current_ui = null
+		if previous_ui == ui_node:
+			previous_ui = null
+		# Attempt to restore previous if current became null due to invalid node removal
+		if current_ui == null and is_instance_valid(previous_ui):
+			current_ui = previous_ui
+			previous_ui = null
+			if is_instance_valid(current_ui):
+				current_ui.visible = true
+				move_child(current_ui, get_child_count() - 1)
+				_handle_mouse_mode(true) # Update mouse if a UI became visible
+			elif not _is_any_visible(): # If no UI became visible
+				_handle_mouse_mode(false) # Update mouse based on lack of UI
+
+		return
+
+	# If the node is valid, call the existing remove_ui function
+	remove_ui(ui_node)
 
 ## Removes a specific UI control from the manager
 ##

@@ -63,10 +63,13 @@ func _setup_enter_and_exit_transitions() -> void:
 
 
 func _on_resume_button_button_up() -> void:
+	# hard hide the settings menu
+	UIManager.remove_ui_by_enum(UIEnums.UI.SETTINGS_MENU)
 	UIManager._handle_pause_action()
 
 
 func _on_settings_button_button_up() -> void:
+	print("Settings button pressed")
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
 		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 	else:
