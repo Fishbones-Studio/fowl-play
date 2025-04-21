@@ -1,4 +1,8 @@
-# Cheat Menu Script
+################################################################################
+## Script to manage changing various game variables.
+##
+## This script handles the cheat settings UI, allowing users to change important game values, mainly for testing purpouses.
+################################################################################
 extends Control
 
 @onready var input_field_scene: PackedScene = preload("uid://cbaagbd3itbmp")

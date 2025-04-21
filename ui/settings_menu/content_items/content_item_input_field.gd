@@ -11,11 +11,11 @@ enum InputType { INTEGER, TEXT, FLOAT }
 
 @export var default_value: String = ""
 
-@onready var input_field: TextEdit = %InputField
-
 var last_valid_text: String = default_value
 var is_validating: bool = false
 var last_caret_column: int = 0
+
+@onready var input_field: TextEdit = %InputField
 
 func _ready() -> void:
 	input_field.text_changed.connect(_on_text_changed)
