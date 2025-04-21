@@ -51,7 +51,7 @@ func set_item_data(_item: Resource) -> void:
 
 ## Abstract method, overwrite in child class
 func attempt_purchase() -> void:
-	push_error("attempt_purchase() must be implemented by child class")
+	purchase_in_progress = false
 	return
 
 ## Abstract method, overwrite in child class
