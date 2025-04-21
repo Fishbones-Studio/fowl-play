@@ -1,5 +1,7 @@
 extends BasePlayerMovementState
 
+var shown: bool = false
+
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
@@ -16,7 +18,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
-	if player.is_on_floor():
+	if player.is_on_floor() && not shown:
+		shown = true
 		SignalManager.switch_ui_scene.emit(UIEnums.UI.DEATH_SCREEN)
 	
 	apply_movement(player.velocity)
