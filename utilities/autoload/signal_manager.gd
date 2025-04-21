@@ -15,7 +15,7 @@ signal player_hurt
 signal player_heal
 signal deactivate_item_slot(item : BaseResource)
 signal activate_item_slot(item : BaseResource)
-signal ui_disabled()
+signal ui_disabled(previous_ui : Control)
 signal cooldown_item_slot(item : BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals

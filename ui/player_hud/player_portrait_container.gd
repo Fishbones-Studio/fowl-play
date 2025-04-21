@@ -74,6 +74,10 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 		duration_timer.stop()
 
 	overlay_shader.show()
+	
+	if ! duration_timer.is_inside_tree():
+		add_child(duration_timer)
+	
 	duration_timer.start(time) # Start timer for shader visibility
 
 

@@ -1,4 +1,4 @@
-extends Control
+class_name PauseScreen extends Control
 
 @export var chicken: Node3D
 @export var camera: Camera3D
@@ -85,6 +85,8 @@ func _on_forfeit_button_button_up() -> void:
 
 
 func _set_button_visibility() -> void: 
+	if not ready:
+		await ready
 	var children: Array = _get_scene_loader_children()
 
 	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
@@ -92,11 +94,16 @@ func _set_button_visibility() -> void:
 
 
 func _get_scene_loader_children() -> Array:
-	var scene_loader: Node = get_tree().root.get_node("SceneLoader")
+	var tree := get_tree()
+	if tree == null or tree.root == null:
+		return []
+	if not tree.root.has_node("SceneLoader"):
+		return []
+	var scene_loader: Node = tree.root.get_node("SceneLoader")
 	var children: Array = scene_loader.get_children()\
-		.map(func(child): return child.name)
-
+	.map(func(child): return child.name)
 	return children
+
 
 
 func _return_to_game_menu() -> void:
@@ -113,5 +120,6 @@ func _return_to_main_menu() -> void:
 
 func _on_visibility_changed() -> void:
 	_squish_chicken()
-	resume_button.grab_focus()
-	_set_button_visibility()
+	if is_inside_tree():
+		resume_button.grab_focus()
+		_set_button_visibility()
