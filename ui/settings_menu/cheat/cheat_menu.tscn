@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://6xd2kic6u58a"]
+[gd_scene load_steps=2 format=3 uid="uid://b8gcj7dpmbadg"]
 
-[ext_resource type="Script" uid="uid://bauwbqmskptjp" path="res://ui/settings_menu/audio_menu/audio_menu.gd" id="1_ooq2j"]
+[ext_resource type="Script" uid="uid://mh727xj7w1kh" path="res://ui/settings_menu/cheat/cheat_menu.gd" id="1_321pd"]
 
-[node name="AudioMenu" type="Control"]
+[node name="CheatMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ooq2j")
+script = ExtResource("1_321pd")
 
 [node name="VBoxContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -25,9 +25,6 @@ theme_override_constants/margin_bottom = 15
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-follow_focus = true
 
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
