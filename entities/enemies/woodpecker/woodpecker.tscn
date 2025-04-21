@@ -151,11 +151,11 @@ bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
 bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
 bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
 bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
-bones/6/rotation = Quaternion(0.0440731, 0.0452615, -0.145216, 0.987381)
+bones/6/rotation = Quaternion(0.234395, -0.153256, -0.0775171, 0.95685)
 bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
 bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
 bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
-bones/10/rotation = Quaternion(0.105658, -0.015709, 0.0392231, 0.993504)
+bones/10/rotation = Quaternion(-0.0456593, -0.0130862, -0.0771808, 0.995885)
 bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
 bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
 bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)
@@ -191,15 +191,18 @@ animation_tree = NodePath("../woodpecker/AnimationTree")
 
 [node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_idle_state")
+chase_distance = 100.0
 enemy = NodePath("../..")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_p6jwh")
+chase_distance = 100.0
 state_type = 1
 enemy = NodePath("../..")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_chase_state")
+chase_distance = 100.0
 state_type = 2
 enemy = NodePath("../..")
 

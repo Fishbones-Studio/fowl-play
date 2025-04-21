@@ -121,20 +121,24 @@ animation_tree = NodePath("../chicken_hennifer/AnimationTree")
 [node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
 script = ExtResource("4_knbep")
 dash_chance = 25
+chase_distance = 100.0
 enemy = NodePath("../..")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_surp0")
+chase_distance = 100.0
 state_type = 1
 enemy = NodePath("../..")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_75fyq")
+chase_distance = 100.0
 state_type = 2
 enemy = NodePath("../..")
 
 [node name="Dash" type="Node" parent="EnemyStateMachine" index="3" node_paths=PackedStringArray("enemy")]
 script = ExtResource("7_rbpgh")
+chase_distance = 100.0
 state_type = 3
 enemy = NodePath("../..")
 
