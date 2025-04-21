@@ -15,7 +15,7 @@ extends Node3D
 @export_category("Sensitity")
 @export_range(0.1, 2.0) var horizontal_sensitivity: float = 0.5
 @export_range(0.1, 2.0) var vertical_sensitivity: float = 0.5
-@export_range(0.1, 8.0) var controller_sensitivity: float = 4.0
+@export_range(0.1, 8.0) var controller_sensitivity: float = 8.0
 @export_range(-90, 0 ) var min_degrees: float = -90.0
 @export_range(0, 90) var max_degrees: float = 45.0
 
