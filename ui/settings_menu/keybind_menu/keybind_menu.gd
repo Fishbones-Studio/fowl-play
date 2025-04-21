@@ -16,10 +16,6 @@ var config_name: String = "keybinds" ## name of the config section, mostly usefu
 @onready var content_container: VBoxContainer = %ContentContainer
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-	get_viewport().set_input_as_handled()
-
-
 func _ready():
 	# Make this block input to lower layers
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
