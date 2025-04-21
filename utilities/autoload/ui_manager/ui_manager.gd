@@ -92,9 +92,12 @@ func clear_ui() -> void:
 			ui_list[ui_key].visible = false
 
 	# Remove and free all child nodes managed by this layer
-	for child in get_children():
-		remove_child(child)
-		child.queue_free()
+	for child in get_children().duplicate():
+		if child is Control: # Ensure it's a control node
+			var ui_enum = ui_list.find_key(child)
+			if ui_enum != null: # Check if it's a managed UI
+				remove_child(child)
+				child.queue_free()
 
 	ui_list.clear()
 
@@ -123,7 +126,14 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 	# If it isn't in our ui_list any more, re‑instance it
 	if not ui_list.has(ui):
 		_on_add_ui_scene(ui)
-		# _on_add_ui_scene handles visibility and making it current
+		# If it's the pause menu, _on_add_ui_scene adds it hidden.
+		if ui == UIEnums.UI.PAUSE_MENU:
+			var added_pause_menu = ui_list.get(ui)
+			if is_instance_valid(added_pause_menu):
+				added_pause_menu.visible = true
+				move_child(added_pause_menu, get_child_count() - 1)
+				paused = true # Pause when toggling pause menu on
+				_handle_mouse_mode(true)
 		return
 
 	var ui_to_toggle: Control = ui_list[ui]
@@ -131,11 +141,20 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 		push_warning("Instance for UI ", UIEnums.ui_to_string(ui), " invalid in toggle_ui. Re-adding.")
 		ui_list.erase(ui)
 		_on_add_ui_scene(ui)
+		# Same logic as above if it was the pause menu
+		if ui == UIEnums.UI.PAUSE_MENU:
+			var added_pause_menu = ui_list.get(ui)
+			if is_instance_valid(added_pause_menu):
+				added_pause_menu.visible = true
+				move_child(added_pause_menu, get_child_count() - 1)
+				paused = true
+				_handle_mouse_mode(true)
 		return
 
 	var becoming_visible: bool = not ui_to_toggle.visible
 
 	# Store mouse mode only if this action will make the *first* UI visible
+	# (excluding HUD and hidden pause menu)
 	if becoming_visible and not _is_any_visible():
 		previous_mouse_mode = Input.mouse_mode
 
@@ -174,62 +193,65 @@ func toggle_ui(ui: UIEnums.UI) -> void:
 func _handle_pause_action() -> void:
 	# Special case: Never pause from main menu
 	var main_menu: Control = ui_list.get(UIEnums.UI.MAIN_MENU)
-	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu:
+	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu and main_menu.visible:
 		return
 
 	var pause_menu_enum: UIEnums.UI = UIEnums.UI.PAUSE_MENU
+	var pause_menu: Control = ui_list.get(pause_menu_enum) # Try to get existing
 
-	# Ensure pause menu is loaded if not present
-	if not ui_list.has(pause_menu_enum):
-		# Store mouse mode before potentially showing the first UI
-		if not _is_any_visible():
-			previous_mouse_mode = Input.mouse_mode
-		_on_add_ui_scene(pause_menu_enum)
-		# _on_add_ui_scene should make it visible and current
-		paused = true # Ensure game is paused
-		# Mouse mode handled by _on_add_ui_scene's visibility change logic
-		return
-
-	var pause_menu: Control = ui_list.get(pause_menu_enum)
+	# Ensure pause menu is loaded if not present or invalid
 	if not is_instance_valid(pause_menu):
-		push_error("Pause menu instance is invalid even after check/add.")
+		if not _is_any_visible(): # Store mouse mode if nothing else is visible
+			previous_mouse_mode = Input.mouse_mode
+		# Add the scene, it will start hidden due to changes in _on_add_ui_scene
+		_on_add_ui_scene(pause_menu_enum)
+		pause_menu = ui_list.get(pause_menu_enum) # Get the newly added instance
+		if not is_instance_valid(pause_menu):
+			push_error("Failed to add or find pause menu instance.")
+			return
+		# Since it was just added hidden, the action now is to show it
+		pause_menu.visible = true
+		move_child(pause_menu, get_child_count() - 1) # Bring to front
+		paused = true
+		# Make it current, hiding whatever was current before (if anything)
+		if is_instance_valid(current_ui):
+			current_ui.visible = false
+		swap_ui(current_ui, pause_menu)
+		_handle_mouse_mode(true) # Mouse should be visible
 		return
 
-	# Store mouse mode if no UI is currently visible before we show one
-	if not pause_menu.visible and not _is_any_visible():
-		previous_mouse_mode = Input.mouse_mode
+	# --- Pause menu exists, handle toggling ---
+	var needs_mouse_mode_store = not _is_any_visible() and not pause_menu.visible
 
-	if current_ui == pause_menu: # Pause menu is currently active
-		# Toggle pause menu visibility
-		pause_menu.visible = not pause_menu.visible
-		paused = pause_menu.visible # Update game pause state
+	if pause_menu.visible: # Pause menu is currently visible -> Hide it
+		pause_menu.visible = false
+		paused = false # Unpause
 
-		if not pause_menu.visible: # If pause menu was just hidden
-			var next_ui: Control = null
-			if is_instance_valid(previous_ui):
-				# Restore the previous UI if it exists
-				next_ui = previous_ui
-				next_ui.visible = true
-				move_child(next_ui, get_child_count() - 1)
-			swap_ui(pause_menu, next_ui) # Previous (or null) becomes current
-		# If pause menu was just shown, swap_ui isn't needed (it's already current)
+		# Restore previous UI if available and if it wasn't the pause menu itself
+		var next_ui: Control = null
+		if is_instance_valid(previous_ui) and previous_ui != pause_menu:
+			next_ui = previous_ui
+			next_ui.visible = true
+			move_child(next_ui, get_child_count() - 1)
+		# Update current UI reference. If next_ui is null, current becomes null.
+		swap_ui(pause_menu, next_ui)
 
-	elif is_instance_valid(current_ui) and current_ui.visible: # Another UI is active
-		# Hide the current UI
-		current_ui.visible = false
+	else: # Pause menu exists but is hidden -> Show it
+		if needs_mouse_mode_store: # Store mouse mode if needed
+			previous_mouse_mode = Input.mouse_mode
+
+		# Hide the currently visible UI (if any) before showing pause menu
+		if is_instance_valid(current_ui) and current_ui.visible:
+			current_ui.visible = false
+		# Don't swap yet, wait until pause menu is made current
+
 		# Show the pause menu
 		pause_menu.visible = true
 		move_child(pause_menu, get_child_count() - 1) # Bring pause menu to front
 		paused = true # Pause the game
-		swap_ui(current_ui, pause_menu) # Pause menu becomes current
 
-	else: # No UI is currently active/visible
-		# Show the pause menu
-		pause_menu.visible = true
-		move_child(pause_menu, get_child_count() - 1) # Bring pause menu to front
-		paused = true # Pause the game
-		# No need to swap if current_ui was null, just set it
-		swap_ui(current_ui, pause_menu) # Handles setting current_ui, previous becomes old current (null)
+		# Make pause menu current, storing the previously visible UI (if any) as previous
+		swap_ui(current_ui if current_ui != pause_menu else previous_ui, pause_menu)
 
 	# Update mouse mode based on whether any UI is now visible
 	_handle_mouse_mode(_is_any_visible())
@@ -252,13 +274,16 @@ func _handle_ui_cancel_action() -> void:
 		ui_to_hide.visible = false # Hide the current UI
 
 		var next_ui: Control = null
-		if is_instance_valid(previous_ui):
+		# Restore previous UI only if it's valid and *not* the one we just hid
+		if is_instance_valid(previous_ui) and previous_ui != ui_to_hide:
 			next_ui = previous_ui
 			next_ui.visible = true # Show the previous UI
 			move_child(next_ui, get_child_count() - 1) # Bring it to front
 
 		# Update current/previous references
-		swap_ui(ui_to_hide, next_ui) # next_ui (or null) becomes current
+		# The UI we hid becomes the new previous_ui (or null if invalid)
+		# The next_ui (restored previous or null) becomes the new current_ui
+		swap_ui(ui_to_hide, next_ui)
 
 		# Update pause state ONLY if the UI being hidden was the pause menu
 		if was_pause_menu:
@@ -266,8 +291,6 @@ func _handle_ui_cancel_action() -> void:
 
 		# Update mouse mode based on whether any UI is now visible
 		_handle_mouse_mode(_is_any_visible())
-
-	# If no UI is currently visible, ui_cancel does nothing.
 
 
 func _handle_mouse_mode(value: bool) -> void:
@@ -297,7 +320,7 @@ func _is_any_visible() -> bool:
 				". This might indicate the UI was freed externally or remove_ui failed. Removing stale entry."
 			)
 			# Clean up the stale entry to prevent future errors
-			ui_list.erase(ui_enum)
+			if ui_list.has(ui_enum): ui_list.erase(ui_enum)
 			# Skip to the next key
 			continue
 
@@ -309,35 +332,41 @@ func _is_any_visible() -> bool:
 	return false
 
 
-## Completely switches to a new UI scene
+## Completely switches to a new UI scene using clear_ui first.
+## Use this for major state changes (e.g., Menu -> Game).
 ##
 ## @param: new_ui - The UI enum to switch to
 ## @param: params - Optional parameters to pass to the new UI
 func _on_switch_ui(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	clear_ui() # Clears everything including pause state and mouse mode
 
-	# Load the new UI scene from the path
+	# Load the new UI scene from the path. It will be added hidden if it's the pause menu.
 	_on_add_ui_scene(new_ui, params)
 
 
-## Adds and initializes a new UI scene
+## Adds and initializes a new UI scene.
+## Pause Menu starts hidden by default.
 ##
 ## @param: new_ui - The UI enum to add
 ## @param: params - Dictionary of initialization parameters
 func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	# Avoid adding if it already exists and is valid
 	if ui_list.has(new_ui) and is_instance_valid(ui_list[new_ui]):
-		# If it exists but isn't current, make it current
+		# If it exists but isn't current, make it current (unless it's pause menu)
 		var existing_node: Control = ui_list[new_ui]
 		if current_ui != existing_node:
-			if not existing_node.visible and not _is_any_visible():
-				previous_mouse_mode = Input.mouse_mode # Store if first visible
-			if is_instance_valid(current_ui):
-				current_ui.visible = false
-			swap_ui(current_ui, existing_node)
-			current_ui.visible = true
-			move_child(current_ui, get_child_count() - 1)
-			_handle_mouse_mode(true)
+			# --- Start Modification ---
+			# Only make visible and current if it's NOT the pause menu
+			if new_ui != UIEnums.UI.PAUSE_MENU:
+				if not existing_node.visible and not _is_any_visible():
+					previous_mouse_mode = Input.mouse_mode # Store if first visible
+				if is_instance_valid(current_ui):
+					current_ui.visible = false
+				swap_ui(current_ui, existing_node)
+				current_ui.visible = true
+				move_child(current_ui, get_child_count() - 1)
+				_handle_mouse_mode(true)
+		# --- End Modification ---
 		return # Don't re-add
 
 	# Load the UI scene from the path
@@ -366,7 +395,9 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 		return
 
 	# Stores the mouse mode if UI scene will be visible and no others are
-	if new_ui_node.visible and not _is_any_visible():
+	# Check visibility *before* potentially hiding the pause menu
+	var should_be_visible_initially = new_ui != UIEnums.UI.PAUSE_MENU
+	if should_be_visible_initially and not _is_any_visible():
 		previous_mouse_mode = Input.mouse_mode
 
 	# If the UI has a setup or initialize method, call it with parameters
@@ -374,7 +405,6 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 		new_ui_node.setup(params)
 
 	# hook up the exit tree and visibility
-	# Use Callable.bind() to pass the node itself to the signal handler if needed
 	new_ui_node.tree_exited.connect(
 		func(): SignalManager.ui_disabled.emit() # Consider passing which UI exited
 	)
@@ -387,21 +417,22 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	# Add it as a child of the UI manager
 	add_child(new_ui_node)
 
-	# Hide the previously current UI if one exists and is valid
-	if is_instance_valid(current_ui):
-		current_ui.visible = false
+	# --- Start Modification ---
+	# Decide if this new UI should become the current one immediately
+	if should_be_visible_initially:
+		# Hide the previously current UI if one exists and is valid
+		if is_instance_valid(current_ui):
+			current_ui.visible = false
+		# Make the new UI current
+		swap_ui(current_ui, new_ui_node)
+		ui_list[new_ui] = new_ui_node # Add to list
+		# Ensure the new UI is visible and on top
+		current_ui.visible = true
+		move_child(current_ui, get_child_count() - 1)
+	else:
+		# If it's the pause menu (or other initially hidden UI), just add to list
+		ui_list[new_ui] = new_ui_node
+		new_ui_node.visible = false # Ensure it starts hidden
 
-	# Make the new UI current
-	swap_ui(current_ui, new_ui_node)
-	ui_list[new_ui] = new_ui_node
-
-	# Ensure the new UI is visible and on top
-	current_ui.visible = true
-	move_child(current_ui, get_child_count() - 1)
-
-	# Update mouse mode based on the new UI's visibility
-	_handle_mouse_mode(current_ui.visible)
-
-	# Special handling if adding the pause menu - ensure game pause state matches
-	if new_ui == UIEnums.UI.PAUSE_MENU:
-		paused = current_ui.visible
+	# Update mouse mode based on whether *any* UI is actually visible now
+	_handle_mouse_mode(_is_any_visible())
