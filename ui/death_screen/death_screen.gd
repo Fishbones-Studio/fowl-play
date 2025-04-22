@@ -1,9 +1,9 @@
 extends Control
 
+var is_transitioning: bool = false
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var title: Label = $TitleLabel
-
-var is_transitioning: bool = false
 
 
 func _ready() -> void:
