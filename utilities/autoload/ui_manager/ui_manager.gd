@@ -182,8 +182,9 @@ func toggle_ui(ui_enum: UIEnums.UI) -> void:
 ##
 ## @note: Manages the complex interplay between pause menu and other UIs
 func handle_pause() -> void:
-	var main_menu: Control = ui_list.get(UIEnums.UI.MAIN_MENU)
-	if is_instance_valid(main_menu) and current_ui == main_menu and main_menu.visible:
+	# check if any ui, besides HUD and/or pause menu, is visible
+	if _is_any_visible_besides_list([UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]):
+		push_warning("Attempted to pause while other UI is visible. Ignoring.")
 		return
 
 	var pause_menu: Control = ui_list.get(UIEnums.UI.PAUSE_MENU)
@@ -265,6 +266,18 @@ func _handle_ui_cancel_action() -> void:
 func _handle_mouse_mode(ui_visible: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if ui_visible else previous_mouse_mode
 
+	
+## checks if any UI, besides the passed in list of enums, is currently visible
+func _is_any_visible_besides_list(ui_exceptions: Array[UIEnums.UI]) -> bool:
+	for ui_enum in ui_list:
+		if ui_enum in ui_exceptions:
+			continue
+
+		var node = ui_list[ui_enum]
+		if is_instance_valid(node) and node.visible:
+			return true
+
+	return false
 
 ## Checks if any UI (excluding Player HUD) is currently visible
 func _is_any_visible() -> bool:
