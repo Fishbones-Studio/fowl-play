@@ -85,6 +85,7 @@ func clear_ui() -> void:
 
 	for child in get_children().duplicate():
 		if is_instance_valid(child) and child is Control and child.get_parent() == self:
+			print("Removing child: " + child.name)
 			remove_child(child)
 			child.queue_free()
 
@@ -143,14 +144,27 @@ func _handle_pause_action() -> void:
 	var main_menu = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu:
 		return
+		
+	
 
 	# Get or create pause menu
 	var pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
 	if not is_instance_valid(pause_menu):
+		print(ui_list)
 		_on_add_ui_scene(UIEnums.UI.PAUSE_MENU)
 		pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
 		if not is_instance_valid(pause_menu):
+			push_error("cannot instantiate pause menu")
 			return
+			
+	var is_any_other_ui_visible : bool = _is_any_visible()
+	var pause_menu_is_currently_visible = pause_menu.visible # Check if pause menu is already shown
+
+	# If trying to show the pause menu (pause_menu.visible is false) AND
+	# another UI (besides HUD) is visible, then do nothing.
+	if not pause_menu_is_currently_visible and is_any_other_ui_visible:
+		# TODO, vibrate the controller or play a sound to indicate inability to pause
+		return # Abort pausing action
 
 	# Toggle pause menu visibility
 	if pause_menu.visible:
@@ -263,6 +277,7 @@ func _on_switch_ui(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	# If an instance already exists, reuse it (do not create a new one)
 	if ui_list.has(new_ui) and is_instance_valid(ui_list[new_ui]):
+		print("reusing")
 		var existing_node = ui_list[new_ui]
 		if current_ui != existing_node and new_ui != UIEnums.UI.PAUSE_MENU:
 			if not existing_node.visible and not _is_any_visible():
@@ -338,8 +353,6 @@ func _on_add_ui_scene(new_ui: UIEnums.UI, params: Dictionary = {}) -> void:
 	ui_list[new_ui] = new_ui_node
 
 	if should_be_visible:
-		if is_instance_valid(current_ui):
-			current_ui.visible = false
 		swap_ui(current_ui, new_ui_node)
 		current_ui.visible = true
 		if current_ui.get_parent() == self:

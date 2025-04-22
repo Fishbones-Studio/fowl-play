@@ -1,15 +1,15 @@
-extends Control
+class_name PlayerHud extends Control
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	# TODO fix this, triggers way too often and it doesnt work
-	
 	SignalManager.ui_disabled.connect(
 		func(previous_controll : Control):
-			if previous_controll is PauseScreen:
-				print("Adwwwafw")
+			if previous_controll is PauseScreen or previous_controll is PauseScreen:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 				if !visible:
-					SignalManager.switch_ui_scene.emit(UIEnums.UI.PLAYER_HUD)
+					print("turning player hud visible")
+					visible = true
+			else:
+				print("Previous controll: " + str(previous_controll))
 	)

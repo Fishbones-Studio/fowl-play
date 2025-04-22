@@ -33,6 +33,6 @@ func _return_to_game_menu() -> void:
 
 
 	await animation_player.animation_finished
-
+	
+	UIManager.remove_ui(self)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)

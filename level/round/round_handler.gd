@@ -102,7 +102,6 @@ func _enter_concluding() -> void:
 		GameManager.prosperity_eggs += GameManager.arena_completion_reward
 		GameManager.feathers_of_rebirth += 5 # TODO: improve later
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-		SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
 		return
 
 	if _current_enemy == null:
