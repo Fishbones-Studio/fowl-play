@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://df0wct2jxwjf1"]
+
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_qnvlc"]
+[ext_resource type="Script" uid="uid://csbg75enrn5wy" path="res://level/arena/props/interactable/next_enemy/next_enemy.gd" id="2_nb684"]
+
+[node name="NextEnemy" instance=ExtResource("1_qnvlc")]
+script = ExtResource("2_nb684")
+
+[node name="NameLabel" parent="." index="1"]
+text = "Enter Fight"

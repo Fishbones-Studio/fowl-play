@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://fcnahlq4lql5"]
+
+[ext_resource type="Script" uid="uid://bbthkpmh03j4g" path="res://level/arena/props/interactable/shop/arena_shop.gd" id="1_5pok6"]
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_xq2d5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brd77"]
+albedo_color = Color(0.0489061, 0.0997902, 0.10584, 0.952941)
+
+[sub_resource type="BoxMesh" id="BoxMesh_brd77"]
+material = SubResource("StandardMaterial3D_brd77")
+
+[node name="ArenaShop" instance=ExtResource("1_xq2d5")]
+script = ExtResource("1_5pok6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_brd77")
+
+[node name="NameLabel" parent="." index="2"]
+text = "Open Shop"

@@ -72,14 +72,3 @@ script = ExtResource("9_cw150")
 enemy_scenes = Array[PackedScene]([ExtResource("5_0v1st"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
 round_timer = true
 waiting_time = 1.5
-
-[node name="RoundBattleTimer" type="Timer" parent="RoundHandler"]
-wait_time = 120.0
-one_shot = true
-
-[node name="RoundIntermissionTimer" type="Timer" parent="RoundHandler"]
-wait_time = 30.0
-one_shot = true
-
-[connection signal="timeout" from="RoundHandler/RoundBattleTimer" to="RoundHandler" method="_on_round_battle_timer_timeout"]
-[connection signal="timeout" from="RoundHandler/RoundIntermissionTimer" to="RoundHandler" method="_on_round_intermission_timer_timeout"]

@@ -2,7 +2,12 @@ extends StaticBody3D
 
 var player_in_area: bool = false
 
-@onready var label = $Area3D/OpenShopLabel
+@onready var interact_label = $Area3D/InteractLabel
+@onready var name_label = $NameLabel
+
+
+func _ready() -> void:
+	name_label.text = "Upgrade Shop"
 
 
 func _input(_event: InputEvent) -> void:
@@ -19,9 +24,9 @@ func open_shop() -> void:
 
 func _on_area_3d_body_entered(_body: ChickenPlayer) -> void:
 	player_in_area = true
-	label.visible = true
+	interact_label.visible = true
 
 
 func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
-	label.visible = false
+	interact_label.visible = false
 	player_in_area = false

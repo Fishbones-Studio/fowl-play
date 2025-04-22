@@ -1,11 +1,11 @@
 ################################################################################
-## Manages round transitions, including enemy spawning, max rounds, and intermissions. 
-## Controls the battle timer and intermission duration, ensuring smooth round flow. 
+## Manages round transitions, including enemy spawning, max rounds, and intermissions.
+## Controls the battle timer and intermission duration, ensuring smooth round flow.
 ## Handles the random selection of enemies based on the current round.
 ###################################################################
 extends Node
 
-const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
+signal next_enemy_selected(enemy: Enemy)
 
 @export_category("Enemies")
 @export var enemy_scenes: Array[PackedScene]
@@ -18,14 +18,13 @@ const ROUND_COUNTDOWN_SCENE: PackedScene = preload("uid://cobwc3aaxw4i8")
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 var available_enemies: Dictionary[EnemyEnums.EnemyTypes, Array] = {}
+var next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 
-var _current_enemy: Enemy # The one currently in the arena fighting
+var _current_enemy: Enemy = null # The one currently in the arena fighting
 var _round_countdown: Control = null
 
 @onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
 @onready var player_default_position: Marker3D = %PlayerPosition
-@onready var battle_timer: Timer = $RoundBattleTimer
-@onready var intermission_timer: Timer = $RoundIntermissionTimer
 
 
 func _ready() -> void:
@@ -37,8 +36,8 @@ func _ready() -> void:
 func _init_enemies() -> void:
 	available_enemies.clear()
 
-	for enemy in enemy_scenes:
-		var enemy_instance: Enemy = enemy.instantiate()
+	for scene in enemy_scenes:
+		var enemy_instance: Enemy = scene.instantiate()
 		assert(enemy_instance != null, "Failed to instantiate enemy scene")
 
 		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.type
@@ -58,7 +57,6 @@ func _start_round() -> void:
 			round_state = RoundEnums.RoundTypes.CONCLUDING
 		RoundEnums.RoundTypes.CONCLUDING:
 			_enter_concluding()
-			round_state = RoundEnums.RoundTypes.INTERMISSION if round_intermission else RoundEnums.RoundTypes.WAITING
 		RoundEnums.RoundTypes.INTERMISSION:
 			_enter_intermission()
 			round_state = RoundEnums.RoundTypes.WAITING
@@ -67,8 +65,13 @@ func _start_round() -> void:
 
 
 func _enter_waiting() -> void:
-	SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Round %d" % GameManager.current_round})
-	GameManager.chicken_player.global_position = player_default_position.global_position
+	SignalManager.add_ui_scene.emit(
+		UIEnums.UI.ROUND_SCREEN,
+		{"display_text": "Round %d" % GameManager.current_round}
+	)
+	GameManager.chicken_player.global_position = (
+		player_default_position.global_position
+	)
 
 	await get_tree().create_timer(waiting_time).timeout
 
@@ -76,95 +79,120 @@ func _enter_waiting() -> void:
 
 
 func _enter_in_progress() -> void:
+	# Use the pre-selected next_enemy if available, otherwise pick one (for the first round)
 	if _current_enemy == null:
-		_current_enemy = _pick_random_enemy(
-			EnemyEnums.EnemyTypes.BOSS 
-				if GameManager.current_round == max_rounds 
+		if next_enemy != null:
+			_current_enemy = next_enemy
+			next_enemy = null # Clear the stored next enemy
+		else:
+			# This case should only happen for the very first round
+			var first_enemy_type: EnemyEnums.EnemyTypes = (
+				EnemyEnums.EnemyTypes.BOSS
+				if GameManager.current_round == max_rounds
 				else EnemyEnums.EnemyTypes.REGULAR
-		)
+			)
+			_current_enemy = _pick_random_enemy(first_enemy_type)
 
 	_spawn_enemy_in_level()
 
-	if round_timer:
-		_activate_round_countdown("Current round ends in", battle_timer)
-
 	await SignalManager.enemy_died
-
-	if round_timer:
-		battle_timer.stop()
-
 	_start_round()
 
 
 func _enter_concluding() -> void:
-	if GameManager.current_round == max_rounds: # crack way to check if boss dead
+	# Check if all rounds are completed (boss defeated)
+	if (
+		GameManager.current_round == max_rounds
+		and _current_enemy == null # Ensure the enemy is actually defeated
+	):
 		print("all rounds completed, back to poultry man menu")
 		GameManager.prosperity_eggs += GameManager.arena_completion_reward
 		GameManager.feathers_of_rebirth += 5 # TODO: improve later
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+		# Don't proceed further in this function if game is ending
 		return
 
+	# Display enemy defeated message
 	if _current_enemy == null:
-		SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!"})
+		SignalManager.add_ui_scene.emit(
+			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!"}
+		)
 
+	# Decide and store the next enemy *before* the wait time
+	# Ensure we don't try to pick an enemy after the last round
+	if GameManager.current_round < max_rounds:
+		var next_round_number: int = GameManager.current_round + 1
+		var next_enemy_type: EnemyEnums.EnemyTypes = (
+			EnemyEnums.EnemyTypes.BOSS
+			if next_round_number == max_rounds
+			else EnemyEnums.EnemyTypes.REGULAR
+		)
+		# Check if there are available enemies of the required type
+		if (
+			available_enemies.has(next_enemy_type)
+			and not available_enemies[next_enemy_type].is_empty()
+		):
+			next_enemy = _pick_random_enemy(next_enemy_type)
+			next_enemy_selected.emit(next_enemy) # Emit signal for UI/intermission
+		else:
+			printerr(
+				"No available enemies of type %s for round %d!"
+				% [EnemyEnums.EnemyTypes.keys()[next_enemy_type], next_round_number]
+			)
+			# TODO: maybe end game or spawn a default?
+
+	# Wait before proceeding
 	await get_tree().create_timer(waiting_time).timeout
 
+	# Increment round *after* picking the next enemy and waiting
 	GameManager.current_round += 1
 
+	# Set next state and start it
+	round_state = (
+		RoundEnums.RoundTypes.INTERMISSION
+		if round_intermission
+		else RoundEnums.RoundTypes.WAITING
+	)
 	_start_round()
 
 
 func _enter_intermission() -> void:
-	# TODO, shop somewhere to interact
 	print("imagine you are now in a different part of arena with a shop")
-	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0) # teleport player to the intermission area
+	GameManager.chicken_player.global_position = Vector3(
+		-400, 2.5, 0
+	) # teleport player to the intermission area
 	SignalManager.upgrades_shop_refreshed.emit()
+	# TODO: spawn next enemy in the intermission area
 
-	_activate_round_countdown("Intermission ends in", intermission_timer)
 
-
-# Selects a random enemy from the pool, then remove it from the spawn pool to prevent fighting the same enemy and finally return the enemy instance
+# Selects a random enemy instance from the pool, removes it, and returns it
 func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
-	return available_enemies[enemy_type].pop_at(randi_range(0, available_enemies[enemy_type].size() - 1))
+	if (
+		not available_enemies.has(enemy_type)
+		or available_enemies[enemy_type].is_empty()
+	):
+		printerr(
+			"Attempted to pick an enemy of type %s, but none are available!"
+			% EnemyEnums.EnemyTypes.keys()[enemy_type]
+		)
+		return null # Or handle error appropriately
+
+	var index: int = randi_range(0, available_enemies[enemy_type].size() - 1)
+	var picked_enemy: Enemy = available_enemies[enemy_type].pop_at(index)
+	return picked_enemy
 
 
 func _spawn_enemy_in_level() -> void:
-	assert(_current_enemy, "Missing current enemy")
+	assert(_current_enemy != null, "Missing current enemy for spawning")
+
+	# Ensure the enemy node is not already in the tree if reusing instances
+	if _current_enemy.get_parent() != null:
+		_current_enemy.get_parent().remove_child(_current_enemy)
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_default_position.global_position
 
-	SignalManager.enemy_died.connect(func(): _current_enemy = null, CONNECT_ONE_SHOT)
-
-
-func _activate_round_countdown(text: String, countdown_timer: Timer) -> void:
-	if _round_countdown == null:
-		_round_countdown = ROUND_COUNTDOWN_SCENE.instantiate()
-		add_child(_round_countdown)
-
-	_round_countdown.show()
-
-	countdown_timer.start()
-
-	while countdown_timer.time_left > 0:
-		var remaining_seconds: float = ceil(countdown_timer.time_left)
-		_round_countdown.update_countdown(
-			"%s %d second%s" % [text, remaining_seconds, "" if remaining_seconds == 1 else "s"]
-		)
-		await get_tree().create_timer(1.0).timeout # we only want to see the time remaining update every second
-
-	_round_countdown.hide()
-
-
-# TODO, something when it draws? less rewards or none? right now just some ui
-func _on_round_battle_timer_timeout() -> void:
-	SignalManager.add_ui_scene.emit(UIEnums.UI.ROUND_SCREEN, {"display_text": "Time up!"})
-
-	_current_enemy.queue_free() # just kill enemy
-
-	_round_countdown.hide()
-	_start_round()
-
-
-func _on_round_intermission_timer_timeout() -> void:
-	_start_round()
+	# Connect death signal (one-shot ensures it disconnects after firing)
+	SignalManager.enemy_died.connect(
+		func(): _current_enemy = null, CONNECT_ONE_SHOT
+	)
