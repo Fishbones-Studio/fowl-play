@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bw4u5qtf6bv0m"]
+[gd_scene load_steps=25 format=3 uid="uid://bw4u5qtf6bv0m"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/base_enemy/enemy_states/wander_state.gd" id="5_2ly6u"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/ball_chicken/enemy_ability_controller.gd" id="7_3n7t4"]
+[ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/ball_chicken/enemy_ability_slot.gd" id="8_nnmdb"]
+[ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="10_2hblk"]
+[ext_resource type="Resource" uid="uid://dsjg1jdshy7mx" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_blaze.tres" id="10_hsirj"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7541"]
 animation = &"rolling "
@@ -68,20 +72,19 @@ type = 1
 transform = Transform3D(-7.64949e-08, -1.5299e-07, -1.75, 0, -1.75, 1.5299e-07, -1.75, 6.6874e-15, 7.64949e-08, 0, 2.5, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-0.245241, -0.965689, -2.03873, 2.12928, -0.776421, 0.111634, -0.745081, -1.90099, 0.990067, 0, 0, 0)
+transform = Transform3D(-1.67408, 1.17, 0.988784, -1.33486, -0.395638, -1.79185, -0.751494, -1.90361, 0.980141, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.345111, 0.0473222, 0.108561, -0.0518961, 0.361075, 0.00758082, -0.10645, -0.0226113, 0.348258, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854375, -0.0245268, -0.0878412, 0.214687, -0.0244904, 0.0136041, 0.0318789, 0.230663, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.217882, 0.0782389, -0.0285034, -0.0813902, 0.216966, -0.0266006, 0.0175907, 0.0347936, 0.229971, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
-transform = Transform3D(0.0484762, 0.0756767, -0.0542232, -0.0190953, 0.0679162, 0.0777163, 0.091118, -0.0260282, 0.0451343, -0.702794, 0.656331, 0.182295)
+transform = Transform3D(0.0418941, 0.0521745, -0.0808689, 0.0226207, 0.0803893, 0.063584, 0.0935428, -0.0428068, 0.020842, -0.737007, 0.707179, 0.157209)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
-transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
-
+transform = Transform3D(0.199424, -0.0223273, -0.115244, 0.0213058, 0.230295, -0.00774851, 0.115437, -0.00393302, 0.20052, -0.107777, 0.155827, 1.03602)
 
 [node name="AnimationTree" type="AnimationTree" parent="ball_chicken" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_hsirj")
@@ -125,5 +128,20 @@ enemy = NodePath("../..")
 [node name="DamageNumberHandler" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -4.5)
 base_size = 200
+
+[node name="EnemyAbilityController" type="Node3D" parent="." index="10" node_paths=PackedStringArray("enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+script = ExtResource("7_3n7t4")
+enemy = NodePath("..")
+
+[node name="EnemyAbilitySlot" type="Node3D" parent="EnemyAbilityController" index="0"]
+script = ExtResource("8_nnmdb")
+ability_resource = ExtResource("10_2hblk")
+
+[node name="EnemyAbilitySlot2" type="Node3D" parent="EnemyAbilityController" index="1"]
+script = ExtResource("8_nnmdb")
+ability_resource = ExtResource("10_hsirj")
+
+[connection signal="body_entered" from="AttackingArea" to="EnemyAbilityController" method="_on_attacking_area_body_entered"]
 
 [editable path="ball_chicken"]

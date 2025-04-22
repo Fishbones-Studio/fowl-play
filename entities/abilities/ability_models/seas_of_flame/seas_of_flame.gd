@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack_multiplier * (stats.max_health / stats.current_health * stats.defense) + stats.max_health
+		return stats.attack_multiplier * (stats.max_health / stats.current_health) + stats.max_health
 
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
@@ -44,7 +44,7 @@ func _apply_burn(body: Node3D) -> void:
 				break
 
 			if body.collision_layer == 2: # Player
-				ability_holder._on_weapon_hit_target(ability_holder)
+				SignalManager.weapon_hit_target.emit(body, burn_damage)
 			if body.collision_layer == 4: # Enemy
 				SignalManager.weapon_hit_target.emit(body, burn_damage)
 
@@ -53,7 +53,6 @@ func _toggle_collision_masks(toggle: bool) -> void:
 	if ability_holder.collision_layer == 2: # Player
 		hit_area.set_collision_mask_value(3, toggle)
 	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_layer_value(2, toggle)
 
 	hit_area.set_collision_mask_value(1, toggle) # World
 

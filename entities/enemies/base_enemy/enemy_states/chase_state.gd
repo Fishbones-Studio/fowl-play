@@ -18,7 +18,7 @@ func physics_process(delta: float) -> void:
 	target_position = (player.position - enemy.position).normalized()
 
 	if enemy.position.distance_to(player.position) < chase_distance:
-		calculated_speed = enemy.stats.calculate_speed(movement_component.walk_speed_factor)
+		calculated_speed = enemy.stats.calculate_speed(movement_component.sprint_speed_factor)
 		_rotate_toward_direction(target_position, delta)
 		apply_movement(target_position * calculated_speed)
 	else:
