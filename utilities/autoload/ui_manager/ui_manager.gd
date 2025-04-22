@@ -217,6 +217,10 @@ func handle_pause() -> void:
 		paused = false
 
 		var ui_to_restore = previous_ui if is_instance_valid(previous_ui) else null
+		# if null and player hud is not visible, set to player hud
+		if ui_to_restore == null and not _is_any_visible():
+			ui_to_restore = ui_list.get(UIEnums.UI.PLAYER_HUD) if ui_list.has(UIEnums.UI.PLAYER_HUD) else null
+		
 		swap_ui(pause_menu, ui_to_restore)
 
 		if is_instance_valid(current_ui):
