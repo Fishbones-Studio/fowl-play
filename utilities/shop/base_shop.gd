@@ -14,16 +14,18 @@ var prevent_duplicates: bool = true
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 @onready var title_label = %TitleLabel
 
+
 func _ready() -> void:
 	_refresh_shop()
 	_setup_controller_navigation()
-	
+
 	# setting up controller navigation to trigger on visibility
 	visibility_changed.connect(
 		func():
 			if visible:
 				_setup_controller_navigation()
 	)
+
 
 func _refresh_shop() -> void:
 	await get_tree().process_frame
@@ -54,7 +56,7 @@ func _refresh_shop() -> void:
 		if not shop_item:
 			push_error("Failed to create shop item for: ", selected_item.name)
 			continue
-		
+
 		shop_items_container.add_child(shop_item)
 
 
@@ -76,6 +78,7 @@ func create_shop_item(_selected_item: BaseResource) -> BaseShopItem:
 
 func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
+
 
 func _setup_controller_navigation() -> void:
 	# Make all shop items are focusable
