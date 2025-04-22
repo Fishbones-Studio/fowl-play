@@ -37,18 +37,18 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
 	if body.collision_layer == 2: # if target body is player
-		ability_holder._on_weapon_hit_target(ability_holder)
+		SignalManager.weapon_hit_target.emit(body, damage)
 	if body.collision_layer == 4: # if target body is enemy
 		SignalManager.weapon_hit_target.emit(body, damage)
-	
+
 	_apply_knockback(body)
-	
+
 	cpu_particles.emitting = true
 	_particles_emitted = true
-	
+
 	# resetting vertical velocity
 	ability_holder.velocity.y = 0
-	
+
 	_toggle_collision_masks(false)
 	SignalManager.deactivate_item_slot.emit(current_ability)
 
@@ -86,6 +86,6 @@ func _toggle_collision_masks(toggle: bool) -> void:
 	if ability_holder.collision_layer == 2: # Player
 		hit_area.set_collision_mask_value(3, toggle)
 	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_layer_value(2, toggle)
+		hit_area.set_collision_mask_value(2, toggle)
 
 	hit_area.set_collision_mask_value(1, toggle) # World

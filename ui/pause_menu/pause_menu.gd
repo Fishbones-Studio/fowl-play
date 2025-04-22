@@ -87,6 +87,7 @@ func _on_quit_button_button_up() -> void:
 
 
 func _on_forfeit_button_button_up() -> void:
+	GameManager.reset_game()
 	_return_to_game_menu()
 
 
