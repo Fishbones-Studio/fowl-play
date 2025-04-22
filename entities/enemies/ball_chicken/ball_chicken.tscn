@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/ball_chicken/enemy_ability_controller.gd" id="7_3n7t4"]
 [ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/ball_chicken/enemy_ability_slot.gd" id="8_nnmdb"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="10_2hblk"]
-[ext_resource type="Resource" uid="uid://dsjg1jdshy7mx" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_blaze.tres" id="10_hsirj"]
+[ext_resource type="Resource" uid="uid://dsjg1jdshy7mx" path="res://entities/enemies/ball_chicken/seas_of_blaze.tres" id="10_hsirj"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7541"]
 animation = &"rolling "
