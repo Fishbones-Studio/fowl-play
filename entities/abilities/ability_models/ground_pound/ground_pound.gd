@@ -59,6 +59,7 @@ func _physics_process(_delta: float) -> void:
 		await get_tree().create_timer(0.2).timeout
 		cpu_particles.emitting = true
 		_particles_emitted = true
+		_toggle_collision_masks(false)
 		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
