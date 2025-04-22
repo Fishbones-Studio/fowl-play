@@ -114,12 +114,15 @@ func _get_scene_loader_children() -> Array:
 
 func _return_to_game_menu() -> void:
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
+	UIManager.remove_ui(self)
 	UIManager.paused = false
 
 
 func _return_to_main_menu() -> void:
 	SignalManager.switch_game_scene.emit(UIEnums.PATHS[UIEnums.UI.MAIN_MENU])
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU)
+	UIManager.remove_ui(self)
 	UIManager.paused = false
 
 
