@@ -1,9 +1,9 @@
 extends Control
 
+var is_transitioning: bool = false
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var title: Label = $TitleLabel
-
-var is_transitioning: bool = false
 
 
 func _ready() -> void:
@@ -31,9 +31,3 @@ func _return_to_game_menu() -> void:
 
 	get_tree().paused = false
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-
-
-	await animation_player.animation_finished
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
