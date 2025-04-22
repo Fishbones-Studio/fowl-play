@@ -130,6 +130,8 @@ func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
 	previous_ui = prev_ui if is_instance_valid(prev_ui) else null
 	current_ui = curr_ui if is_instance_valid(curr_ui) else null
 
+	print("Current UI: ", current_ui, " | Prev UI: ", previous_ui)
+
 
 ## Toggles visibility of a specific UI
 ## Use this for overlays like Inventory, Map, etc., not for Pause or main switching.

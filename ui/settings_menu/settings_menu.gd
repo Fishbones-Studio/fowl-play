@@ -27,6 +27,16 @@ func _ready() -> void:
 	controls.grab_focus()
 
 
+func _input(event: InputEvent) -> void:
+	# Remove settings menu, and make pause focusable again, if conditions are true
+	if (Input.is_action_just_pressed("pause") \
+	or Input.is_action_just_pressed("ui_cancel") ) \
+	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.PAUSE_MENU):
+		UIManager.remove_ui(self)
+		UIManager.handle_pause()
+		UIManager.get_viewport().set_input_as_handled()
+
+
 func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
 	for item: SiderBarItem in sidebar_container.get_children():
 		item.active = item == sidebar_item

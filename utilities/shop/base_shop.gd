@@ -88,6 +88,11 @@ func _setup_controller_navigation() -> void:
 
 	# Set initial focus to the first shop item, or exit button if no items
 	await get_tree().process_frame
-	var first_item: Node = shop_items_container.get_child(0)
+	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else null
 	if first_item and first_item is Control:
 		first_item.grab_focus()
+
+
+## Abstract method
+func _on_exit_button_up() -> void:
+	pass
