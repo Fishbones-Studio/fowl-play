@@ -18,18 +18,18 @@ var focusable_items: Array[Focusable3D] = []
 func _ready() -> void:
 	# Get all focusable items 
 	focusable_items = _get_focusable_items()
-	
+
 	if focusable_items.is_empty():
 		print("No focusable items found. Disabling navigation.")
 		return
-	
+
 	# Connect signals for each item
 	for i in focusable_items.size():
 		var item: Focusable3D = focusable_items[i]
 		item.focused.connect(_on_item_focused.bind(i))
 		item.unfocused.connect(_on_item_unfocused.bind(i))
 		item.pressed.connect(_on_item_pressed.bind(i))
-	
+
 	# Connect input handler signals
 	if input_handler:
 		input_handler.selection_moved.connect(_on_move_selection) 
@@ -40,6 +40,7 @@ func _ready() -> void:
 	reset_highlights()
 
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _get_focusable_items() -> Array[Focusable3D]:
@@ -48,7 +49,7 @@ func _get_focusable_items() -> Array[Focusable3D]:
 	for node in all_nodes:
 		if node is Focusable3D:
 			items.append(node)
-	
+
 	# Fallback if no groups are used
 	if items.is_empty():
 		items = _find_focusable_children(self)
@@ -89,7 +90,7 @@ func _on_move_selection(direction: int) -> void:
 	# Clear mouse hover state and activate keyboard navigation
 	is_mouse_hovering = false
 	is_keyboard_navigation_active = true
-	
+
 	current_index = wrapi(current_index + direction, 0, focusable_items.size())
 	highlight_current_item()
 

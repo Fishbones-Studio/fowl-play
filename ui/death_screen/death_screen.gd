@@ -32,8 +32,4 @@ func _return_to_game_menu() -> void:
 	get_tree().paused = false
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 
-
 	await animation_player.animation_finished
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
