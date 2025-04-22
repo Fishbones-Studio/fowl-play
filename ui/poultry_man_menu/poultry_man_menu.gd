@@ -16,6 +16,8 @@ var focusable_items: Array[Focusable3D] = []
 
 
 func _ready() -> void:
+	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
+	
 	# Get all focusable items
 	focusable_items = _get_focusable_items()
 
