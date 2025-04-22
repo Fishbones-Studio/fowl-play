@@ -53,6 +53,7 @@ func _toggle_collision_masks(toggle: bool) -> void:
 	if ability_holder.collision_layer == 2: # Player
 		hit_area.set_collision_mask_value(3, toggle)
 	if ability_holder.collision_layer == 4: # Enemy
+		hit_area.set_collision_mask_value(2, toggle)
 
 	hit_area.set_collision_mask_value(1, toggle) # World
 
