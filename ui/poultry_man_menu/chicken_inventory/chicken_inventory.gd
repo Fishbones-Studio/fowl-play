@@ -2,6 +2,7 @@ extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
 
+
 func _ready() -> void:
 	_update_inventory()
 

@@ -30,5 +30,5 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	return shop_item_script_node
 
 
-func close_ui() -> void:
+func _on_exit_button_up() -> void:
 	UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)

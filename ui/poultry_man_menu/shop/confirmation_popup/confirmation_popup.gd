@@ -27,8 +27,14 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		_on_cancel_button_button_up()
+	if (Input.is_action_just_pressed("pause") \
+	or Input.is_action_just_pressed("ui_cancel") ) \
+	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.POULTRYMAN_SHOP):
+		_cancel_purchase()
+		# To gain focus again, toggling twice is a bit stupid though, maybe a bool
+		# parameter would work better
+		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP) 
+		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
 		UIManager.get_viewport().set_input_as_handled()
 
 
@@ -53,6 +59,8 @@ func _load_items() -> void:
 	owned_items_container.add_child(current_item)
 	new_item_container.add_child(new_item)
 
+	current_item.grab_focus()
+
 
 # Helper function for safe instantiation
 func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
@@ -60,27 +68,35 @@ func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
 		printerr("Attempted to create item with null resource")
 		return null
 
-	var item : ConfirmationItem = CONFIRMATION_ITEM_SCENE.instantiate()
+	var item: ConfirmationItem = CONFIRMATION_ITEM_SCENE.instantiate()
+
 	if not item or not item is ConfirmationItem:
 		printerr("Failed to instantiate ConfirmationItem scene")
 		return null
 
 	item.set_item_data(resource)
+	item.gui_input.connect(_on_item_selected.bind(item, resource))
 
 	return item
 
 
-func _replace_item(old_item: Resource, _new_item: Resource) -> void:
-	Inventory.remove_item(old_item)
-	print("Item ", old_item, " replaced with ", _new_item)
+func _on_item_selected(event: InputEvent, item: ConfirmationItem, resource: BaseResource) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_cancel_purchase() if resource == existing_item_resource else _proceed_with_purchase()
+			UIManager.get_viewport().set_input_as_handled()
+
+	if event.is_action_pressed("ui_accept") and item.has_focus():
+		_cancel_purchase() if resource == existing_item_resource else _proceed_with_purchase()
+
+
+func _proceed_with_purchase() -> void:
+	Inventory.remove_item(existing_item_resource)
+	print("Item ", existing_item_resource, " replaced with ", new_item_resource)
 	purchased_signal.emit()
 	UIManager.remove_ui(self)
 
 
-func _on_cancel_button_button_up() -> void:
+func _cancel_purchase() -> void:
 	purchase_cancelled_signal.emit()
 	UIManager.remove_ui(self)
-
-
-func _on_replace_button_pressed() -> void:
-	_replace_item(existing_item_resource, new_item_resource)
