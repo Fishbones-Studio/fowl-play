@@ -210,9 +210,8 @@ func handle_pause() -> void:
 		if not _is_any_visible():
 			previous_mouse_mode = Input.mouse_mode
 
-		var filtered_values: Array = ui_exceptions.map(func(key): return ui_list.get(key))
-		if is_instance_valid(current_ui) and current_ui not in filtered_values:
-			current_ui.visible = false
+		if is_instance_valid(current_ui) and current_ui:
+			current_ui.visible = ui_list.find_key(current_ui) == UIEnums.UI.PLAYER_HUD
 			swap_ui(current_ui, pause_menu)
 		elif not is_instance_valid(current_ui):
 			swap_ui(null, pause_menu)
