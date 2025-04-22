@@ -48,6 +48,10 @@ func _ready() -> void:
 
 
 func _on_player_health(time : float, shader_material : ShaderMaterial, colour: Color) -> void:
+	# check if queue_free has been called
+	if is_queued_for_deletion():
+		return
+	
 	if not camera:
 		printerr("Cannot apply effect: ViewportCamera not found!")
 		return
@@ -74,10 +78,15 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 		duration_timer.stop()
 
 	overlay_shader.show()
+	
 	duration_timer.start(time) # Start timer for shader visibility
 
 
 func _on_duration_timer_timeout() -> void:
+	# check if queue_free has been called
+	if is_queued_for_deletion():
+		return
+
 	if not camera:
 		return
 

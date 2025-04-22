@@ -14,10 +14,16 @@ var prevent_duplicates: bool = true
 @onready var shop_items_container: HBoxContainer = %ShopItemsContainer
 @onready var title_label = %TitleLabel
 
-
 func _ready() -> void:
 	_refresh_shop()
-
+	_setup_controller_navigation()
+	
+	# setting up controller navigation to trigger on visibility
+	visibility_changed.connect(
+		func():
+			if visible:
+				_setup_controller_navigation()
+	)
 
 func _refresh_shop() -> void:
 	await get_tree().process_frame
@@ -71,6 +77,14 @@ func create_shop_item(_selected_item: BaseResource) -> BaseShopItem:
 func _should_skip_item(item: BaseResource) -> bool:
 	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
 
+func _setup_controller_navigation() -> void:
+	# Make all shop items are focusable
+	for child in shop_items_container.get_children():
+		if child is Control:
+			child.focus_mode = Control.FOCUS_ALL
 
-func close_ui() -> void:
-	queue_free()
+	# Set initial focus to the first shop item, or exit button if no items
+	await get_tree().process_frame
+	var first_item: Node = shop_items_container.get_child(0)
+	if first_item and first_item is Control:
+		first_item.grab_focus()

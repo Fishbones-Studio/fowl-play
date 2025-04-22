@@ -1,4 +1,4 @@
-extends Control
+class_name PauseScreen extends Control
 
 @export var chicken: Node3D
 @export var camera: Camera3D
@@ -8,6 +8,12 @@ extends Control
 @onready var resume_button: Button = %ResumeButton
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
+
+func _ready():
+	visibility_changed.connect(
+		func():
+			if visible: UIManager.paused = true
+	)
 
 
 func setup(_params: Dictionary = {}) -> void:
@@ -63,10 +69,13 @@ func _setup_enter_and_exit_transitions() -> void:
 
 
 func _on_resume_button_button_up() -> void:
+	# hard hide the settings menu
+	UIManager.remove_ui_by_enum(UIEnums.UI.SETTINGS_MENU)
 	UIManager.handle_pause()
 
 
 func _on_settings_button_button_up() -> void:
+	print("Settings button pressed")
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
 		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 	else:
@@ -82,6 +91,8 @@ func _on_forfeit_button_button_up() -> void:
 
 
 func _set_button_visibility() -> void: 
+	if not ready:
+		await ready
 	var children: Array = _get_scene_loader_children()
 
 	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
@@ -89,26 +100,34 @@ func _set_button_visibility() -> void:
 
 
 func _get_scene_loader_children() -> Array:
-	var scene_loader: Node = get_tree().root.get_node("SceneLoader")
+	var tree := get_tree()
+	if tree == null or tree.root == null:
+		return []
+	if not tree.root.has_node("SceneLoader"):
+		return []
+	var scene_loader: Node = tree.root.get_node("SceneLoader")
 	var children: Array = scene_loader.get_children()\
-		.map(func(child): return child.name)
-
+	.map(func(child): return child.name)
 	return children
+
 
 
 func _return_to_game_menu() -> void:
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
+	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
+	UIManager.remove_ui(self)
 	UIManager.paused = false
 
 
 func _return_to_main_menu() -> void:
 	SignalManager.switch_game_scene.emit(UIEnums.PATHS[UIEnums.UI.MAIN_MENU])
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU)
+	UIManager.remove_ui(self)
 	UIManager.paused = false
 
 
 func _on_visibility_changed() -> void:
 	_squish_chicken()
-	resume_button.grab_focus()
-	_set_button_visibility()
+	if is_inside_tree():
+		resume_button.grab_focus()
+		_set_button_visibility()

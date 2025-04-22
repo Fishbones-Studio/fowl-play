@@ -44,7 +44,7 @@ func attempt_purchase() -> void:
 
 	GameManager.prosperity_eggs -= int(upgrade_item.cost)
 	self.visible = false
-	purchase_in_progress = false
+	super()
 
 
 func can_afford() -> bool:

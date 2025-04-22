@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ry0ng")
-damage = 10
+damage = 8
 windup_time = 0.0
 attack_duration = 0.3
 cooldown_time = 0.35

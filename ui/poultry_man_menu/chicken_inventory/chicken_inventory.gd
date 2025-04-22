@@ -2,7 +2,6 @@ extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
 
-
 func _ready() -> void:
 	_update_inventory()
 
@@ -28,10 +27,6 @@ func _update_inventory() -> void:
 		if item.icon: inventory_item.item_icon.texture = item.icon
 		inventory_item.type_label.text = ItemEnums.item_type_to_string(item.type)
 		inventory_item.description_label.text = item.description
-
-
-func _on_button_pressed() -> void:
-	UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
 
 
 func _on_visibility_changed() -> void:
