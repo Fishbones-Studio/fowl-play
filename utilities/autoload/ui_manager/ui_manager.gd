@@ -211,9 +211,14 @@ func _handle_ui_cancel_action() -> void:
 	var main_menu = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu:
 		return
+		
+	var pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
+	if pause_menu and is_instance_valid(pause_menu) and current_ui == pause_menu:
+		_handle_pause_action()
+		return
+	
 
 	if is_instance_valid(current_ui) and current_ui.visible:
-		var was_pause_menu = (ui_list.find_key(current_ui) == UIEnums.UI.PAUSE_MENU)
 		current_ui.visible = false
 		
 		var next_ui = previous_ui if is_instance_valid(previous_ui) else null
@@ -222,9 +227,6 @@ func _handle_ui_cancel_action() -> void:
 			move_child(next_ui, get_child_count() - 1)
 			
 		swap_ui(current_ui, next_ui)
-		
-		if was_pause_menu:
-			paused = false
 			
 		_handle_mouse_mode(_is_any_visible())
 
