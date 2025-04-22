@@ -144,8 +144,6 @@ func _handle_pause_action() -> void:
 	var main_menu = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu:
 		return
-		
-	
 
 	# Get or create pause menu
 	var pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
@@ -173,11 +171,20 @@ func _handle_pause_action() -> void:
 		paused = false
 		
 		# Restore previous UI
-		var next_ui = previous_ui if is_instance_valid(previous_ui) else null
+		var next_ui = previous_ui if (is_instance_valid(previous_ui) && previous_ui != pause_menu) else null
+		# if next ui is null, set next ui to player hud, if it exists
+		if next_ui == null:
+			if ui_list.has(UIEnums.UI.PLAYER_HUD):
+				print("next ui is null, setting to player hud")
+				next_ui = ui_list.get(UIEnums.UI.PLAYER_HUD)
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		if next_ui:
 			next_ui.visible = true
+			if next_ui == ui_list.get(UIEnums.UI.PLAYER_HUD):
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			move_child(next_ui, get_child_count() - 1)
 		swap_ui(pause_menu, next_ui)
+		return
 	else:
 		# Show pause menu
 		if not _is_any_visible():
@@ -226,6 +233,7 @@ func _cleanup_references(ui_node: Control) -> void:
 	if current_ui == ui_node:
 		current_ui = null
 	if previous_ui == ui_node:
+		print("previous_ui is null")
 		previous_ui = null
 		
 	if current_ui == null and is_instance_valid(previous_ui):
