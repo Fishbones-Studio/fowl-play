@@ -32,9 +32,9 @@ func _input(event: InputEvent) -> void:
 	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.POULTRYMAN_SHOP):
 		_cancel_purchase()
 		# To gain focus again, toggling twice is a bit stupid though, maybe a bool
-		# parameter would work better
-		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP) 
-		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
+		# parameter would be more intuitive
+		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP) # Close UI
+		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP) # Open UI
 		UIManager.get_viewport().set_input_as_handled()
 
 
