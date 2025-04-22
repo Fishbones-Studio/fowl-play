@@ -131,6 +131,8 @@ func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
 	current_ui = curr_ui if is_instance_valid(curr_ui) else null
 
 	print("Current UI: ", current_ui, " | Prev UI: ", previous_ui)
+	if current_ui and previous_ui:
+		print("Current UI visible: ", current_ui.visible, " | Prev UI visibile: ", previous_ui.visible)
 
 
 ## Toggles visibility of a specific UI
@@ -187,7 +189,8 @@ func toggle_ui(ui_enum: UIEnums.UI) -> void:
 ## @note: Manages the complex interplay between pause menu and other UIs
 func handle_pause() -> void:
 	# check if any ui, besides HUD and/or pause menu, is visible
-	if _is_any_visible_besides_list([UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]):
+	var ui_exceptions: Array[UIEnums.UI] = [UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]
+	if _is_any_visible_besides_list(ui_exceptions):
 		push_warning("Attempted to pause while other UI is visible. Ignoring.")
 		_handle_ui_cancel_action()
 		return
@@ -207,7 +210,8 @@ func handle_pause() -> void:
 		if not _is_any_visible():
 			previous_mouse_mode = Input.mouse_mode
 
-		if is_instance_valid(current_ui) and current_ui != pause_menu:
+		var filtered_values: Array = ui_exceptions.map(func(key): return ui_list.get(key))
+		if is_instance_valid(current_ui) and current_ui not in filtered_values:
 			current_ui.visible = false
 			swap_ui(current_ui, pause_menu)
 		elif not is_instance_valid(current_ui):
