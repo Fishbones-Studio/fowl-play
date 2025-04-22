@@ -208,10 +208,15 @@ func _handle_pause_action() -> void:
 
 
 func _handle_ui_cancel_action() -> void:
+	# if only the player hud is active, do nothing
+	if ui_list.has(UIEnums.UI.PLAYER_HUD) and ui_list[UIEnums.UI.PLAYER_HUD].visible && !_is_any_visible():
+		return
+	
 	var main_menu = ui_list.get(UIEnums.UI.MAIN_MENU)
 	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu:
 		return
 		
+	# If the pause menu is active, handle its cancel action
 	var pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
 	if pause_menu and is_instance_valid(pause_menu) and current_ui == pause_menu:
 		_handle_pause_action()
