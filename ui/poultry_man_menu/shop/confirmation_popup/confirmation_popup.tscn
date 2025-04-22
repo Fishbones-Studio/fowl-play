@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://da6m7g6ijjyop"]
+[gd_scene load_steps=3 format=3 uid="uid://da6m7g6ijjyop"]
 
 [ext_resource type="Script" uid="uid://dghqqfddvq86h" path="res://ui/poultry_man_menu/shop/confirmation_popup/confirmation_popup.gd" id="1_wha5l"]
+[ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="2_ndt5t"]
 
 [node name="ConfirmationPopup" type="Control"]
 layout_mode = 3
@@ -89,6 +90,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Cancel"
+script = ExtResource("2_ndt5t")
 
 [node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

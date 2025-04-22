@@ -23,7 +23,7 @@ func _on_purchase_complete() -> void:
 	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
 	GameManager.prosperity_eggs -= shop_item.cost
 	Inventory.add_item(shop_item)
-	purchase_in_progress = false
+	super.attempt_purchase()
 	queue_free()
 
 
@@ -59,6 +59,7 @@ func attempt_purchase() -> void:
 	if existing_items.has(shop_item):
 		print("Item already owned")
 		purchase_in_progress = false
+		super()
 		return
 
 	# If player already has items of this type, show selection UI to replace

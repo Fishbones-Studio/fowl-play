@@ -11,7 +11,8 @@ func _on_quit_button_pressed():
 
 func _on_play_button_pressed():
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.PAUSE_MENU)
+	UIManager.remove_ui_by_enum(UIEnums.UI.SETTINGS_MENU)
+	UIManager.remove_ui(self)
 
 
 func _on_settings_button_pressed() -> void:

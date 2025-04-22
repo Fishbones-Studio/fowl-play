@@ -13,9 +13,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if (
-		event is InputEventMouseButton
-		and event.button_index == MOUSE_BUTTON_LEFT
+	if (((event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT) or event.is_action_pressed("ui_accept"))
 		and not animation_player.is_playing()
 		and not is_transitioning
 	):
@@ -31,3 +30,5 @@ func _return_to_game_menu() -> void:
 
 	get_tree().paused = false
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+	
+	UIManager.remove_ui(self)
