@@ -26,7 +26,7 @@ signal add_game_scene(scene_path: String) ## This signal is used to add an (addi
 
 # Enemy signals
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
-signal enemy_died()
+signal enemy_died
 
 # Weapon signals
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
@@ -37,6 +37,8 @@ signal weapon_hit_target(target: PhysicsBody3D, damage: float)
 signal preview_shop_item(item: BaseResource)
 signal upgrades_shop_refreshed
 
+# Round signals
+signal start_next_round # to trigger the next round
 
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}

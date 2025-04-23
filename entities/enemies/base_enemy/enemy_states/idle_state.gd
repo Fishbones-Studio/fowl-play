@@ -4,8 +4,8 @@ extends BaseEnemyState
 @export_range(0, 100, 1) var dash_chance: int
 
 
-func enter(previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
+	super(_previous_state)
 
 	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 

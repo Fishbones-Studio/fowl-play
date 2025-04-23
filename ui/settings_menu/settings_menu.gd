@@ -27,7 +27,7 @@ func _ready() -> void:
 	controls.grab_focus()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ) \

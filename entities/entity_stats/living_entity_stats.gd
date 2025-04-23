@@ -85,6 +85,7 @@ func apply_upgrade(upgrade: InRunUpgradeResource) -> void:
 
 	attack_multiplier += upgrade.attack_multiplier_bonus
 
+	# TODO: float converion here
 	defense += upgrade.defense_bonus
 
 	speed += upgrade.speed_bonus

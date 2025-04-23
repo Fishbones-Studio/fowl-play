@@ -11,7 +11,7 @@ enum ItemTypes {
 }
 
 ## Helper function to convert the enum to a readable string
-static func item_type_to_string(item_type: ItemEnums.ItemTypes) -> String:
-	var item_string: String = ItemEnums.ItemTypes.keys()[item_type]
+static func item_type_to_string(item_type: ItemTypes) -> String:
+	var item_string: String = ItemTypes.keys()[item_type]
 	# Turn item_string from UPPER_CASE to Title Case
 	return item_string.capitalize()
