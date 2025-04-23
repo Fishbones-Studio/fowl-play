@@ -38,6 +38,6 @@ func _try_activate_ability(ability_slot: EnemyAbilitySlot) -> void:
 	ability.activate()
 
 
-func _on_attacking_area_body_entered(body: Node3D) -> void:
+func _on_attacking_area_body_entered(_body: Node3D) -> void:
 	_try_activate_ability(abilities.keys()[0])
 	_try_activate_ability(abilities.keys()[1])

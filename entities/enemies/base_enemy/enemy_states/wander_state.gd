@@ -10,8 +10,8 @@ var origin_position: Vector3
 var calculated_speed: float
 
 
-func enter(previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
+	super(_previous_state)
 
 	origin_position = enemy.position
 	wander_timer = wander_interval

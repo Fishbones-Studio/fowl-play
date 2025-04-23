@@ -139,9 +139,10 @@ size = Vector3(1.5, 5, 2)
 [sub_resource type="ViewportTexture" id="ViewportTexture_woodpecker"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Woodpecker" instance=ExtResource("1_base_enemy")]
+[node name="Woodpecker" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_base_enemy")]
 script = ExtResource("2_woodpecker_script")
 stats = ExtResource("3_woodpecker_stats")
+enemy_model = NodePath("woodpecker")
 
 [node name="woodpecker" parent="." index="0" instance=ExtResource("4_woodpecker_model")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -151,11 +152,11 @@ bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
 bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
 bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
 bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
-bones/6/rotation = Quaternion(0.234395, -0.153256, -0.0775171, 0.95685)
+bones/6/rotation = Quaternion(0.045246, 0.0434719, -0.134657, 0.988904)
 bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
 bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
 bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
-bones/10/rotation = Quaternion(-0.0456593, -0.0130862, -0.0771808, 0.995885)
+bones/10/rotation = Quaternion(0.0903819, -0.0157663, 0.0284654, 0.995375)
 bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
 bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
 bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)

@@ -4,8 +4,8 @@ var target_position: Vector3
 var calculated_speed: float
 
 
-func enter(previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(_previous_state: EnemyEnums.EnemyStates, _information: Dictionary = {}) -> void:
+	super(_previous_state)
 
 	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 
