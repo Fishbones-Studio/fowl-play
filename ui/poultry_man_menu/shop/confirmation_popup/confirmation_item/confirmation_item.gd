@@ -1,8 +1,6 @@
 class_name ConfirmationItem 
 extends BaseShopItem
 
-var shop_item: BaseResource
-
 @onready var type_label: Label = %TypeLabel
 @onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon

@@ -13,6 +13,7 @@ weight_bonus = 0.0
 name = "Cluck of Power"
 drop_chance = 50
 cost = 65
+currency_type = 0
 description = "\"With enhanced vitality and devastating strikes, this chicken becomes a true force of nature in battle."
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
