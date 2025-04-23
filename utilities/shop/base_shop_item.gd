@@ -35,6 +35,8 @@ func _on_focus_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	
+	SignalManager.preview_shop_item.emit(null)
 
 
 func _on_mouse_entered() -> void:
@@ -50,6 +52,8 @@ func _on_mouse_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	
+	SignalManager.preview_shop_item.emit(null)
 
 
 ## Abstract method, overwrite in child class

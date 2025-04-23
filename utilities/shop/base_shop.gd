@@ -14,6 +14,7 @@ var prevent_duplicates: bool = true
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
 
+@onready var shop_preview_container: VBoxContainer = %ItemPreviewContainer
 @onready var shop_preview_label: Label = %ItemPreviewLabel
 @onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
 @onready var shop_preview_type: Label = %ItemPreviewType
@@ -30,7 +31,7 @@ func _ready() -> void:
 			if visible:
 				_setup_controller_navigation()
 	)
-	
+
 	SignalManager.preview_shop_item.connect(_on_populate_visual_fields)
 
 
@@ -102,6 +103,10 @@ func _setup_controller_navigation() -> void:
 
 
 func _on_populate_visual_fields(item: BaseResource) -> void:
+	shop_preview_container.visible = item != null
+	if item == null:
+		return
+
 	shop_preview_label.text = item.name
 	if item.icon: shop_preview_icon.texture = item.icon
 	shop_preview_type.text = ItemEnums.item_type_to_string(item.type)

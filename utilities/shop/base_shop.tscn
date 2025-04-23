@@ -59,7 +59,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
-text = "Poultry Man Shop"
+text = "Shop"
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Panel/MarginContainer/HBoxContainer"]
@@ -102,29 +102,31 @@ columns = 4
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="ItemPreviewContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="ItemPreviewLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemPreviewLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Label"
 
-[node name="ItemPreviewIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemPreviewIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_5kcef")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="ItemPreviewType" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemPreviewType" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "TYpe"
 
-[node name="ItemPreviewDescription" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ItemPreviewDescription" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
