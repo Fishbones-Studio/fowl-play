@@ -14,11 +14,7 @@ var prevent_duplicates: bool = true
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
 
-@onready var shop_preview_container: VBoxContainer = %ItemPreviewContainer
-@onready var shop_preview_label: Label = %ItemPreviewLabel
-@onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
-@onready var shop_preview_type: Label = %ItemPreviewType
-@onready var shop_preview_description: RichTextLabel = %ItemPreviewDescription
+@onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
 
 
 func _ready() -> void:
@@ -107,10 +103,7 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 	if item == null:
 		return
 
-	shop_preview_label.text = item.name
-	if item.icon: shop_preview_icon.texture = item.icon
-	shop_preview_type.text = ItemEnums.item_type_to_string(item.type)
-	shop_preview_description.text = item.description
+	shop_preview_container.setup(item)
 
 
 ## Abstract method
