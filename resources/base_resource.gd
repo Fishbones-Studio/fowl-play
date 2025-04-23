@@ -7,7 +7,8 @@ extends Resource
 # Shop Variable
 @export var drop_chance: int
 @export var cost: int
-@export var description: String = "PlaceHolder" # Flavour text
+@export var currency_type: CurrencyEnums.CurrencyTypes
+@export_multiline var description: String = "PlaceHolder" # Flavour text
 
 # Visual & UI Elements
 @export var icon: Texture  # The icon for the shop/inventory

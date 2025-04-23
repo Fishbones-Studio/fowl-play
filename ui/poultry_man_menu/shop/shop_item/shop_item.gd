@@ -4,13 +4,10 @@ extends BaseShopItem
 signal purchased
 signal purchase_cancelled
 
-var shop_item: BaseResource
-
-@onready var type_label: Label = %TypeLabel
-@onready var name_label : Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var description_label: Label = %DescriptionLabel
-@onready var cost_label: Label = %CostLabel
+@onready var item_label: Label = %ItemLabel
+@onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
+@onready var item_cost_label: Label = %ItemCostLabel
 
 
 func _ready() -> void:
@@ -31,12 +28,10 @@ func set_item_data(item: Resource) -> void:
 
 
 func populate_visual_fields() -> void:
-	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
-	cost_label.text = str(shop_item.cost)
-	description_label.text = shop_item.description
-	print(shop_item)
+	item_label.text = shop_item.name
+	item_currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
+	item_cost_label.text = str(shop_item.cost)
 
 
 func attempt_purchase() -> void:
@@ -69,13 +64,12 @@ func attempt_purchase() -> void:
 		})
 
 
-func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= shop_item.cost
-
-
 func _on_purchase_complete() -> void:
-	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
-	GameManager.prosperity_eggs -= shop_item.cost
+	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+		GameManager.prosperity_eggs -= shop_item.cost
+	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+		GameManager.feathers_of_rebirth -= shop_item.cost
+
 	Inventory.add_item(shop_item)
 	super.attempt_purchase()
 	queue_free()
