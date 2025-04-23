@@ -47,21 +47,18 @@ func _create_cheat_field(
 		return
 	
 	var validator: InputValidator = input_field_scene.instantiate()
-	var label: Label = validator.get_node("%Label")
 
-	if not validator or not label:
+	if not validator:
 		push_error("Could not instantiate or find nodes in input_field_scene.")
-		if validator:
-			validator.queue_free()
 		return
 
 	validator.validation_type = validation_type
-	label.text = label_text
-
-	validator.set_value(GameManager.get(variable_name))
-	
+		
 
 	content_container.add_child(validator)
+	validator.set_value(GameManager.get(variable_name))
+
+	validator.set_label_text(label_text)
 	# Connect signal after adding to scene tree
 	validator.value_committed.connect(
 		_on_value_committed.bind(variable_name, validation_type)

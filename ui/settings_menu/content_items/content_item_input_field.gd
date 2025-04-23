@@ -17,6 +17,7 @@ var is_validating: bool = false
 var last_caret_column: int = 0
 
 @onready var input_field: TextEdit = %InputField
+@onready var label : Label = %Label
 
 
 func _ready() -> void:
@@ -24,7 +25,13 @@ func _ready() -> void:
 	input_field.focus_exited.connect(_on_focus_exited)
 	last_valid_text = default_value if _is_valid(default_value) else _fallback_value()
 	input_field.text = last_valid_text
+	
 
+func set_label_text(text: String) -> void:
+	if label:
+		label.text = text
+	else:
+		push_error("Label node not found. Ensure the scene structure is correct.")
 
 func _fallback_value() -> String:
 	match validation_type:
@@ -47,7 +54,7 @@ func _validate_text(text: String) -> void:
 	is_validating = true
 
 	# Store current cursor position before any changes
-	var current_caret_column = input_field.get_caret_column()
+	var current_caret_column: int = input_field.get_caret_column()
 
 	if not _is_valid(text):
 		# Restore last valid text but keep cursor near where user was typing

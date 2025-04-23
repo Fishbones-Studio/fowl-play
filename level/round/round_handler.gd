@@ -73,7 +73,6 @@ func _start_round() -> void:
 			_enter_concluding()
 		RoundEnums.RoundTypes.INTERMISSION:
 			_enter_intermission()
-			round_state = RoundEnums.RoundTypes.WAITING
 		_:
 			assert(false, "Invalid RoundState: %s" % str(round_state))
 

@@ -100,23 +100,25 @@ func _apply_cheat_settings() -> void:
 		)
 		return
 
-	# --- Health Cheats ---
+	# Health Cheat
 	if infinite_health:
 		chicken_player.stats.max_health = INF
 		chicken_player.stats.current_health = INF
 		# Using a very large number for regen instead of INF, since INF is a float
 		chicken_player.stats.health_regen = 9223372036854775807 # Max int
 	else:
+		print("Restoring health stats from default resource for health")
 		# Restore health stats from the loaded default resource
 		chicken_player.stats.max_health = _default_player_stats.max_health
 		# Restore health smoothly, clamping to the new max
 		chicken_player.stats.restore_health(0)
 		chicken_player.stats.health_regen = _default_player_stats.health_regen
 
-	# --- Damage Cheats ---
+	# Damage Cheats
 	if infinite_damage:
 		chicken_player.stats.attack_multiplier = INF
 	else:
+		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
 		chicken_player.stats.attack_multiplier = (
 		_default_player_stats.attack_multiplier
