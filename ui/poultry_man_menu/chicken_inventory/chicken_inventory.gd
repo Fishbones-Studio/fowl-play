@@ -32,3 +32,7 @@ func _update_inventory() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible: _update_inventory()
+
+
+func _on_exit_button_pressed():
+	UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)

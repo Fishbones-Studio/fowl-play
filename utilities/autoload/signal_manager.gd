@@ -35,6 +35,7 @@ signal weapon_hit_target(target: PhysicsBody3D, damage: float)
 
 # Shop signals
 signal upgrades_shop_refreshed
+signal purchase_completed
 
 # Round signals
 signal start_next_round # to trigger the next round

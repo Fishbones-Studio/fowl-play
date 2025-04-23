@@ -49,21 +49,20 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 2
-
-[node name="ShopItemsContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ShopItemsContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ExitButton" type="Button" parent="Panel/MarginContainer"]
+[node name="ExitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Exit"
 
-[connection signal="button_up" from="Panel/MarginContainer/ExitButton" to="." method="_on_exit_button_up"]
+[connection signal="button_up" from="Panel/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_up"]

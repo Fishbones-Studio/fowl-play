@@ -26,6 +26,8 @@ func _ready() -> void:
 				_setup_controller_navigation()
 	)
 
+	SignalManager.purchase_completed.connect(_setup_controller_navigation)
+
 
 func _refresh_shop() -> void:
 	await get_tree().process_frame
