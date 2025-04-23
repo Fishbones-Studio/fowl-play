@@ -9,6 +9,7 @@ class_name PauseScreen extends Control
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
 
+
 func _ready():
 	visibility_changed.connect(
 		func():

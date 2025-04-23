@@ -1,0 +1,156 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2vh7na31m8hi"]
+
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_rolus"]
+[ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="2_7na05"]
+[ext_resource type="PackedScene" uid="uid://c0w6d53ulyk6x" path="res://entities/chicken_player/art/chicken_default.glb" id="3_yykr0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jocee"]
+shader = ExtResource("1_rolus")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.7
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b4b0p"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_eprvc"]
+sky_material = SubResource("ProceduralSkyMaterial_b4b0p")
+
+[sub_resource type="Environment" id="Environment_c3jo5"]
+background_mode = 2
+sky = SubResource("Sky_eprvc")
+sky_rotation = Vector3(1.00356, 0, 0)
+
+[sub_resource type="World3D" id="World3D_t2nsf"]
+environment = SubResource("Environment_c3jo5")
+
+[node name="ChickenStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlurRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jocee")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChickenDetailsContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChickenStatsContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 4.0
+theme_override_constants/separation = 2
+
+[node name="MaxHealthStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+corner_radius = Vector4i(2, 2, 0, 0)
+
+[node name="MaxStaminaStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 1
+
+[node name="AttackStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 2
+
+[node name="DefenseStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 3
+
+[node name="SpeedStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 4
+
+[node name="WeightStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 5
+
+[node name="HealthRegenStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 6
+
+[node name="StaminaRegenStatContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 7
+corner_radius = Vector4i(0, 0, 2, 2)
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChickenWeaponsContainer" type="TabContainer" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"ChickenWeaponsContainer"
+tab_alignment = 1
+current_tab = 0
+
+[node name="TabBar" type="TabBar" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenWeaponsContainer"]
+layout_mode = 2
+tab_alignment = 1
+metadata/_tab_index = 0
+
+[node name="TabBar2" type="TabBar" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenWeaponsContainer"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"ChickenWeaponsTabBar"
+tab_alignment = 1
+metadata/_tab_index = 1
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChickenContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/ChickenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ChickenContainer/SubViewportContainer"]
+world_3d = SubResource("World3D_t2nsf")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/ChickenContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 1.5, 1.8)
+projection = 1
+current = true
+size = 4.0
+
+[node name="chicken_default" parent="HBoxContainer/ChickenContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_yykr0")]
+unique_name_in_owner = true
