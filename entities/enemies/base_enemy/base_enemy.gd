@@ -5,7 +5,7 @@ signal damage_taken
 
 @export var stats: LivingEntityStats
 @export var type: EnemyEnums.EnemyTypes
-@export var enemy_model : Node3D
+@export var enemy_model: Node3D
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 

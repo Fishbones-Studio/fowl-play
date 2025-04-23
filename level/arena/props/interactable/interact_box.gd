@@ -1,15 +1,17 @@
-class_name InteractableBox extends StaticBody3D
+class_name InteractableBox 
+extends StaticBody3D
 
 var player_in_area: bool = false
 
-@onready var interact_label = $Area3D/InteractLabel
-@onready var name_label = $NameLabel
+@onready var interact_label: Label3D = $Area3D/InteractLabel
+@onready var name_label: Label3D = $NameLabel
 
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact") and player_in_area:
 		interact()
-		
+
+
 func interact() -> void:
 	push_error("Overwrite in child class")
 

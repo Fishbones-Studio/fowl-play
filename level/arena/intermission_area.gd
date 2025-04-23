@@ -1,4 +1,5 @@
-class_name IntermissionArea extends Node3D
+class_name IntermissionArea 
+extends Node3D
 
 @export var round_handler: RoundHandler
 
@@ -9,16 +10,19 @@ var initial_enemy_rotation: Basis
 @onready var next_enemy_box: InteractableBox = $NextEnemy
 @onready var player_detector: Area3D = $PlayerDetector
 
-func _ready():
+
+func _ready() -> void:
 	if round_handler and next_enemy_box:
 		round_handler.next_enemy_selected.connect(_on_next_enemy_selected)
 	player_detector.body_entered.connect(_on_body_entered)
 	player_detector.body_exited.connect(_on_body_exited)
 
+
 func _physics_process(_delta: float) -> void:
 	if player_in_area and enemy_model and GameManager.chicken_player:
 		enemy_model.look_at(GameManager.chicken_player.global_position)
 		enemy_model.basis = enemy_model.basis * initial_enemy_rotation
+
 
 func _on_next_enemy_selected(next_enemy: Enemy) -> void:
 	if next_enemy.enemy_model:
@@ -36,10 +40,12 @@ func _on_next_enemy_selected(next_enemy: Enemy) -> void:
 	else:
 		push_warning("next_enemy has no enemy model set")
 
+
 func _on_body_entered(body: Node) -> void:
 	if body == GameManager.chicken_player:
 		enemy_model.visible = true
 		player_in_area = true
+
 
 func _on_body_exited(body: Node) -> void:
 	if body == GameManager.chicken_player:

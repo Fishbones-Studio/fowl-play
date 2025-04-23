@@ -3,7 +3,8 @@
 ## Controls the battle timer and intermission duration, ensuring smooth round flow.
 ## Handles the random selection of enemies based on the current round.
 ###################################################################
-class_name RoundHandler extends Node
+class_name RoundHandler 
+extends Node
 
 signal next_enemy_selected(enemy: Enemy)
 
@@ -13,7 +14,6 @@ signal next_enemy_selected(enemy: Enemy)
 @export_category("Round Settings")
 @export var max_rounds: int = 3
 @export var round_intermission: bool = true
-@export var round_timer: bool = false # If enabled, match lasts 120 seconds
 @export var waiting_time: float
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
@@ -43,7 +43,6 @@ func _proceed_to_next_round() -> void:
 	round_state = RoundEnums.RoundTypes.WAITING
 	# Trigger the state machine to enter the WAITING state (_enter_waiting)
 	_start_round()
-
 
 
 func _init_enemies() -> void:
@@ -108,6 +107,7 @@ func _enter_in_progress() -> void:
 	_spawn_enemy_in_level()
 
 	await SignalManager.enemy_died
+
 	_start_round()
 
 
