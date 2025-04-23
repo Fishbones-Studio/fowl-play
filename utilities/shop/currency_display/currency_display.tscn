@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2jrp810g6g7e"]
+[gd_scene load_steps=6 format=3 uid="uid://b2jrp810g6g7e"]
 
 [ext_resource type="Script" uid="uid://dtl7bjx4pgltt" path="res://utilities/shop/currency_display/currency_display.gd" id="1_0wptd"]
 [ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="2_rilcm"]
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="3_85tee"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rilcm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -82,7 +83,7 @@ grow_vertical = 2
 
 [node name="FeathersOfRebirthIcon" type="TextureRect" parent="FeathersOfRebirthContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_rilcm")
+texture = ExtResource("3_85tee")
 expand_mode = 2
 stretch_mode = 6
 

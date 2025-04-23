@@ -1,10 +1,9 @@
 class_name InArenaShopItem
 extends BaseShopItem
 
-@onready var bonus_label: Label = %BonusLabel
-@onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var description_label: Label = %DescriptionLabel
+@onready var name_label: Label = %NameLabel
+@onready var currency_icon: TextureRect = %CurrencyIcon
 @onready var cost_label: Label = %CostLabel
 
 
@@ -24,11 +23,10 @@ func set_item_data(item: Resource) -> void:
 
 
 func populate_visual_fields() -> void:
-	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	bonus_label.text = shop_item.get_bonus_string()
+	name_label.text = shop_item.name
+	currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	cost_label.text = str(shop_item.cost)
-	description_label.text = shop_item.description
 
 
 func attempt_purchase() -> void:
@@ -39,10 +37,10 @@ func attempt_purchase() -> void:
 
 	GameManager.chicken_player.stats.apply_upgrade(shop_item)
 
-	GameManager.prosperity_eggs -= int(shop_item.cost)
+	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+		GameManager.prosperity_eggs -= shop_item.cost
+	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+		GameManager.feathers_of_rebirth -= shop_item.cost
+
 	self.visible = false
 	super()
-
-
-func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= shop_item.cost

@@ -34,26 +34,6 @@ horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="BonusLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_type_variation = &"ItemType"
-text = "Bonus"
-
-[node name="DescriptionLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(164, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_type_variation = &"ItemDescription"
-text = "DESCRIPTION"
-autowrap_mode = 3
-
 [node name="HBoxContainer" type="HBoxContainer" parent="ShopItemContainer"]
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 2

@@ -4,9 +4,6 @@ extends BaseShopItem
 signal purchased
 signal purchase_cancelled
 
-const PROSPERITY_EGGS_ICON = preload("uid://be0yl1q0uryjp")
-const FEATHERS_OF_REBIRTH_ICON = preload("uid://dbrl2j52kvydc") #TODO, temp
-
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_label: Label = %ItemLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
@@ -33,7 +30,7 @@ func set_item_data(item: Resource) -> void:
 func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
 	item_label.text = shop_item.name
-	item_currency_icon.texture = PROSPERITY_EGGS_ICON if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else FEATHERS_OF_REBIRTH_ICON
+	item_currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	item_cost_label.text = str(shop_item.cost)
 
 
@@ -67,12 +64,12 @@ func attempt_purchase() -> void:
 		})
 
 
-func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= shop_item.cost
-
-
 func _on_purchase_complete() -> void:
-	GameManager.prosperity_eggs -= shop_item.cost
+	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+		GameManager.prosperity_eggs -= shop_item.cost
+	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+		GameManager.feathers_of_rebirth -= shop_item.cost
+
 	Inventory.add_item(shop_item)
 	super.attempt_purchase()
 	queue_free()
