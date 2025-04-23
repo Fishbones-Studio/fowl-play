@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=5 format=3 uid="uid://cuqpcy333m8d5"]
 
 [ext_resource type="Script" uid="uid://ddkveip8o00su" path="res://utilities/shop/base_shop.gd" id="1_jjkbf"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_jh0jc"]
@@ -6,13 +6,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jh0jc"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqmvr"]
-bg_color = Color(0.819608, 0.72549, 0.568627, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
 
 [node name="BaseShop" type="Control"]
 process_mode = 3
@@ -109,41 +102,33 @@ columns = 4
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
-[node name="ItemPreviewContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="ItemPreviewLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
+[node name="ItemPreviewLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Ground Pound"
+text = "Label"
 
-[node name="ItemPreviewIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
+[node name="ItemPreviewIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_5kcef")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="ItemPreviewDescription" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
+[node name="ItemPreviewType" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TYpe"
+
+[node name="ItemPreviewDescription" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Consectetur adipiscing elit quisque faucibus ex sapien vitae. Ex sapien vitae pellentesque sem placerat in id. Placerat in id cursus mi pretium tellus duis. Pretium tellus duis convallis tempus leo eu aenean."
+text = "Description"
 fit_content = true
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/margin_bottom = 30
-
-[node name="PurchaseButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/ItemPreviewContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_nqmvr")
-text = "Purchase"
-expand_icon = true
 
 [connection signal="button_up" from="VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_button_up"]

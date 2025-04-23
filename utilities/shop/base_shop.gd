@@ -11,13 +11,12 @@ var available_items: Array[BaseResource] = []
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
 
-#var selected_item: 
-
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
 
 @onready var shop_preview_label: Label = %ItemPreviewLabel
 @onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
+@onready var shop_preview_type: Label = %ItemPreviewType
 @onready var shop_preview_description: RichTextLabel = %ItemPreviewDescription
 
 
@@ -31,6 +30,8 @@ func _ready() -> void:
 			if visible:
 				_setup_controller_navigation()
 	)
+	
+	SignalManager.preview_shop_item.connect(_on_populate_visual_fields)
 
 
 func _refresh_shop() -> void:
@@ -98,6 +99,13 @@ func _setup_controller_navigation() -> void:
 	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else null
 	if first_item and first_item is Control:
 		first_item.grab_focus()
+
+
+func _on_populate_visual_fields(item: BaseResource) -> void:
+	shop_preview_label.text = item.name
+	if item.icon: shop_preview_icon.texture = item.icon
+	shop_preview_type.text = ItemEnums.item_type_to_string(item.type)
+	shop_preview_description.text = item.description
 
 
 ## Abstract method

@@ -4,6 +4,8 @@ extends PanelContainer
 # Common properties
 static var purchase_in_progress: bool = false
 
+var shop_item: BaseResource
+
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
@@ -11,14 +13,22 @@ var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	populate_visual_fields()
-	focus_entered.connect(_on_focus_entered)
-	focus_exited.connect(_on_focus_exited)
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			attempt_purchase()
+	elif event.is_action_pressed("ui_accept") and has_focus():
+		attempt_purchase()
 
 
 func _on_focus_entered() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
+
+	SignalManager.preview_shop_item.emit(shop_item)
 
 
 func _on_focus_exited() -> void:
@@ -32,6 +42,8 @@ func _on_mouse_entered() -> void:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
 	grab_focus()
+
+	SignalManager.preview_shop_item.emit(shop_item)
 
 
 func _on_mouse_exited() -> void:

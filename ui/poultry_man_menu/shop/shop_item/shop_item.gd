@@ -7,8 +7,6 @@ signal purchase_cancelled
 const PROSPERITY_EGGS_ICON = preload("uid://be0yl1q0uryjp")
 const FEATHERS_OF_REBIRTH_ICON = preload("uid://dbrl2j52kvydc") #TODO, temp
 
-var shop_item: BaseResource
-
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_label: Label = %ItemLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
@@ -40,7 +38,6 @@ func populate_visual_fields() -> void:
 
 
 func attempt_purchase() -> void:
-	print("hello")
 	# Prevent purchase if one is already in progress or player can't afford it
 	if purchase_in_progress or not can_afford():
 		return
