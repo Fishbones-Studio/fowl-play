@@ -9,7 +9,7 @@ func _ready() -> void:
 	print("item shop opened")
 	check_inventory = false
 	prevent_duplicates = false
-	title_label.text = "Upgrades"
+	shop_title_label.text = "Upgrades Shop"
 
 	SignalManager.upgrades_shop_refreshed.connect(_refresh_shop)
 
@@ -38,6 +38,5 @@ func _on_visibility_changed() -> void:
 	if visible: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-
-func _on_exit_button_up() -> void:
+func _on_close_button_button_up() -> void:
 	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)

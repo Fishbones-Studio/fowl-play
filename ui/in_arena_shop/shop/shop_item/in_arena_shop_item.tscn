@@ -1,29 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1xvduw1f032y"]
+[gd_scene load_steps=4 format=3 uid="uid://b1xvduw1f032y"]
 
 [ext_resource type="Script" uid="uid://bnxftib2aj2df" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.gd" id="1_p4fgh"]
 [ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="2_q4qen"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q4qen"]
+load_path = "res://.godot/imported/prosperity_egg_icon.png-364a70c39e0b598fd490a1a5f7f25042.ctex"
+
 [node name="InArenaShopItem" type="PanelContainer"]
 process_mode = 3
-anchors_preset = -1
-anchor_right = 0.174
-anchor_bottom = 0.594
-offset_right = 0.551987
-offset_bottom = 0.0879822
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 185.0
+offset_bottom = 250.0
 script = ExtResource("1_p4fgh")
 
 [node name="ShopItemContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_type_variation = &"ItemTitle"
-text = "Health"
 
 [node name="ItemIcon" type="TextureRect" parent="ShopItemContainer"]
 unique_name_in_owner = true
@@ -32,8 +22,19 @@ texture = ExtResource("2_q4qen")
 expand_mode = 5
 stretch_mode = 6
 
+[node name="NameLabel" type="Label" parent="ShopItemContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemTitle"
+text = "Health"
+horizontal_alignment = 1
+
 [node name="BonusLabel" type="Label" parent="ShopItemContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -42,6 +43,7 @@ text = "Bonus"
 
 [node name="DescriptionLabel" type="Label" parent="ShopItemContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -50,7 +52,19 @@ theme_type_variation = &"ItemDescription"
 text = "DESCRIPTION"
 autowrap_mode = 3
 
-[node name="CostLabel" type="Label" parent="ShopItemContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ShopItemContainer"]
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyIcon" type="TextureRect" parent="ShopItemContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_q4qen")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="ShopItemContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
