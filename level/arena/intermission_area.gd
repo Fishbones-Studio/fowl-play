@@ -1,31 +1,32 @@
 class_name IntermissionArea extends Node3D
 
-@export var round_handler : RoundHandler
+@export var round_handler: RoundHandler
 
-var enemy_model : Node3D
+var enemy_model: Node3D
+var player_in_area: bool = false
+var initial_enemy_rotation: Basis
 
-@onready var next_enemy_box : InteractableBox = $NextEnemy
+@onready var next_enemy_box: InteractableBox = $NextEnemy
+@onready var player_detector: Area3D = $PlayerDetector
 
 func _ready():
-	if round_handler && next_enemy_box:
+	if round_handler and next_enemy_box:
 		round_handler.next_enemy_selected.connect(_on_next_enemy_selected)
-		
+	player_detector.body_entered.connect(_on_body_entered)
+	player_detector.body_exited.connect(_on_body_exited)
+
 func _physics_process(_delta: float) -> void:
-	if enemy_model && GameManager.chicken_player:
+	if player_in_area and enemy_model and GameManager.chicken_player:
 		enemy_model.look_at(GameManager.chicken_player.global_position)
-		# rotate the enemy model 180 degrees, currently looks at the player with the backside
-		enemy_model.rotate_y(deg_to_rad(90))
-		
-		
-		
-func _on_next_enemy_selected(next_enemy : Enemy) -> void:
-	if(next_enemy.enemy_model):
+		enemy_model.basis = enemy_model.basis * initial_enemy_rotation
+
+func _on_next_enemy_selected(next_enemy: Enemy) -> void:
+	if next_enemy.enemy_model:
 		enemy_model = next_enemy.enemy_model.duplicate()
 		next_enemy_box.add_child(enemy_model)
-		# check if the enemy model has an animation player, and if so play Idle
-		var animation_player : AnimationPlayer = enemy_model.get_node("AnimationPlayer")
+		initial_enemy_rotation = enemy_model.basis.orthonormalized()
+		var animation_player: AnimationPlayer = enemy_model.get_node_or_null("AnimationPlayer")
 		if animation_player:
-			# TODO: animation naming should really be the same for each enemy
 			if animation_player.has_animation("Idle"):
 				animation_player.play("Idle")
 			elif animation_player.has_animation("idle"):
@@ -34,3 +35,13 @@ func _on_next_enemy_selected(next_enemy : Enemy) -> void:
 			push_warning("No animationplayer found")
 	else:
 		push_warning("next_enemy has no enemy model set")
+
+func _on_body_entered(body: Node) -> void:
+	if body == GameManager.chicken_player:
+		enemy_model.visible = true
+		player_in_area = true
+
+func _on_body_exited(body: Node) -> void:
+	if body == GameManager.chicken_player:
+		player_in_area = false
+		enemy_model.visible = false
