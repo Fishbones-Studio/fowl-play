@@ -17,7 +17,7 @@ func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	populate_visual_fields()
 
-st
+
 func can_afford() -> bool:
 	match shop_item.currency_type:
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
