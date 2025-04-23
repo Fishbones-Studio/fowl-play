@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/ball_chicken/enemy_ability_controller.gd" id="7_3n7t4"]
 [ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/ball_chicken/enemy_ability_slot.gd" id="8_nnmdb"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="10_2hblk"]
-[ext_resource type="Resource" uid="uid://dsjg1jdshy7mx" path="res://entities/enemies/ball_chicken/seas_of_blaze.tres" id="10_hsirj"]
+[ext_resource type="Resource" uid="uid://dsjg1jdshy7mx" path="res://entities/abilities/ability_models/flare_propulsion/flare_propulsion.tres" id="10_hsirj"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7541"]
 animation = &"rolling "
@@ -64,27 +64,28 @@ radius = 4.25
 [sub_resource type="ViewportTexture" id="ViewportTexture_8f7sg"]
 viewport_path = NodePath("SubViewport")
 
-[node name="BallChicken" instance=ExtResource("1_oapbr")]
+[node name="BallChicken" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_oapbr")]
 stats = ExtResource("2_v7541")
 type = 1
+enemy_model = NodePath("ball_chicken")
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_2hblk")]
 transform = Transform3D(-7.64949e-08, -1.5299e-07, -1.75, 0, -1.75, 1.5299e-07, -1.75, 6.6874e-15, 7.64949e-08, 0, 2.5, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-1.67408, 1.17, 0.988784, -1.33486, -0.395638, -1.79185, -0.751494, -1.90361, 0.980141, 0, 0, 0)
+transform = Transform3D(-1.67408, 1.17, 0.988782, -1.33486, -0.395639, -1.79185, -0.751495, -1.90361, 0.98014, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.345111, 0.0473222, 0.108561, -0.0518961, 0.361075, 0.00758082, -0.10645, -0.0226113, 0.348258, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.354562, 0.0536865, -0.0673033, -0.0674469, 0.350485, -0.0757427, 0.0535061, 0.0860451, 0.350514, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.217882, 0.0782389, -0.0285034, -0.0813902, 0.216966, -0.0266006, 0.0175907, 0.0347936, 0.229971, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.219619, -0.0724162, -0.0304918, 0.0642089, 0.217575, -0.0542623, 0.045289, 0.042697, 0.224794, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
-transform = Transform3D(0.0418941, 0.0521745, -0.0808689, 0.0226207, 0.0803893, 0.063584, 0.0935428, -0.0428068, 0.020842, -0.737007, 0.707179, 0.157209)
+transform = Transform3D(0.0504122, -0.0428536, -0.0814817, 0.0904547, 0.00576511, 0.0529318, -0.0171354, -0.0956419, 0.0396996, -0.704343, 0.658633, 0.181159)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
-transform = Transform3D(0.199424, -0.0223273, -0.115244, 0.0213058, 0.230295, -0.00774851, 0.115437, -0.00393302, 0.20052, -0.107777, 0.155827, 1.03602)
+transform = Transform3D(0.0931324, -0.0733918, -0.19872, -0.131577, 0.150086, -0.117095, 0.166023, 0.160117, 0.0186737, -0.107395, 0.15526, 1.0363)
 
 [node name="AnimationTree" type="AnimationTree" parent="ball_chicken" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_hsirj")

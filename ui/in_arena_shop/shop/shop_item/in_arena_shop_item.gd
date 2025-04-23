@@ -1,12 +1,9 @@
 class_name InArenaShopItem
 extends BaseShopItem
 
-var upgrade_item: InRunUpgradeResource
-
-@onready var bonus_label: Label = %BonusLabel
-@onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var description_label: Label = %DescriptionLabel
+@onready var name_label: Label = %NameLabel
+@onready var currency_icon: TextureRect = %CurrencyIcon
 @onready var cost_label: Label = %CostLabel
 
 
@@ -22,16 +19,14 @@ func set_item_data(item: Resource) -> void:
 		push_error("Item is not of type InRunUpgradeResource")
 		return
 
-	upgrade_item = item as InRunUpgradeResource
-	print(upgrade_item)
+	shop_item = item as InRunUpgradeResource
 
 
 func populate_visual_fields() -> void:
-	name_label.text = upgrade_item.name
-	if upgrade_item.icon: item_icon.texture = upgrade_item.icon
-	bonus_label.text = upgrade_item.get_bonus_string()
-	cost_label.text = str(upgrade_item.cost)
-	description_label.text = upgrade_item.description
+	if shop_item.icon: item_icon.texture = shop_item.icon
+	name_label.text = shop_item.name
+	currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
+	cost_label.text = str(shop_item.cost)
 
 
 func attempt_purchase() -> void:
@@ -40,12 +35,12 @@ func attempt_purchase() -> void:
 
 	purchase_in_progress = true
 
-	GameManager.chicken_player.stats.apply_upgrade(upgrade_item)
+	GameManager.chicken_player.stats.apply_upgrade(shop_item)
 
-	GameManager.prosperity_eggs -= int(upgrade_item.cost)
+	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+		GameManager.prosperity_eggs -= shop_item.cost
+	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+		GameManager.feathers_of_rebirth -= shop_item.cost
+
 	self.visible = false
 	super()
-
-
-func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= upgrade_item.cost

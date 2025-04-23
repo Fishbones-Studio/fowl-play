@@ -12,8 +12,8 @@ var _direction_difference: float
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
 
-func enter(previous_state: EnemyEnums.EnemyStates, information: Dictionary = {}) -> void:
-	super(previous_state)
+func enter(_previous_state: EnemyEnums.EnemyStates, information: Dictionary = {}) -> void:
+	super(_previous_state)
 
 	_stamina_cost = movement_component.dash_stamina_cost
 	target_position = (player.position - enemy.position).normalized()

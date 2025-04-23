@@ -6,8 +6,7 @@ const SHOP_ITEM_SCENE: PackedScene = preload("uid://cc5vmtbby4xy0")
 func _ready() -> void:
 	check_inventory = true
 	prevent_duplicates = true
-	title_label.text = "Shop"
-
+	shop_title_label.text = "Poultry Man Shop"
 	super()
 
 
@@ -30,5 +29,5 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	return shop_item_script_node
 
 
-func _on_exit_button_up() -> void:
+func _on_close_button_button_up() -> void:
 	UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)

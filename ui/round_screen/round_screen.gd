@@ -13,7 +13,7 @@ func _ready() -> void:
 	animation_timer.start()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if visible: get_viewport().set_input_as_handled() # Block all input
 
 
