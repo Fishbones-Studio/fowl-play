@@ -3,7 +3,7 @@
 ## Controls the battle timer and intermission duration, ensuring smooth round flow.
 ## Handles the random selection of enemies based on the current round.
 ###################################################################
-extends Node
+class_name RoundHandler extends Node
 
 signal next_enemy_selected(enemy: Enemy)
 
@@ -18,8 +18,8 @@ signal next_enemy_selected(enemy: Enemy)
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 var available_enemies: Dictionary[EnemyEnums.EnemyTypes, Array] = {}
-var next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 
+var _next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 var _current_enemy: Enemy = null # The one currently in the arena fighting
 
 @onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
@@ -93,9 +93,9 @@ func _enter_waiting() -> void:
 func _enter_in_progress() -> void:
 	# Use the pre-selected next_enemy if available, otherwise pick one (for the first round)
 	if _current_enemy == null:
-		if next_enemy != null:
-			_current_enemy = next_enemy
-			next_enemy = null # Clear the stored next enemy
+		if _next_enemy != null:
+			_current_enemy = _next_enemy
+			_next_enemy = null # Clear the stored next enemy
 		else:
 			# This case should only happen for the very first round
 			var first_enemy_type: EnemyEnums.EnemyTypes = (
@@ -144,8 +144,8 @@ func _enter_concluding() -> void:
 			available_enemies.has(next_enemy_type)
 			and not available_enemies[next_enemy_type].is_empty()
 		):
-			next_enemy = _pick_random_enemy(next_enemy_type)
-			next_enemy_selected.emit(next_enemy) # Emit signal for UI/intermission
+			_next_enemy = _pick_random_enemy(next_enemy_type)
+			next_enemy_selected.emit(_next_enemy) # Emit signal for UI/intermission
 		else:
 			printerr(
 				"No available enemies of type %s for round %d!"
