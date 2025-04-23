@@ -7,7 +7,7 @@ static var purchase_in_progress: bool = false
 var shop_item: BaseResource
 
 var prosperity_egg_icon = preload("uid://be0yl1q0uryjp")
-var feathers_of_rebirth_icon = preload("uid://dbrl2j52kvydc") #TODO, temp
+var feathers_of_rebirth_icon = preload("uid://brgdaqksfgmqu")
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
@@ -17,7 +17,7 @@ func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	populate_visual_fields()
 
-
+st
 func can_afford() -> bool:
 	match shop_item.currency_type:
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
