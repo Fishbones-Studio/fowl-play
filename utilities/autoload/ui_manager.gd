@@ -37,7 +37,8 @@ func _input(_event: InputEvent) -> void:
 	# Handle pause input globally
 	if Input.is_action_just_pressed("pause"):
 		handle_pause()
-		
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
 		_handle_ui_cancel_action()
@@ -60,6 +61,7 @@ func remove_ui_by_enum(ui_enum: UIEnums.UI) -> void:
 		return
 
 	remove_ui(ui_node)
+
 
 ## Removes a specific UI control from the manager
 ##
@@ -128,6 +130,10 @@ func swap_ui(prev_ui: Control, curr_ui: Control) -> void:
 	previous_ui = prev_ui if is_instance_valid(prev_ui) else null
 	current_ui = curr_ui if is_instance_valid(curr_ui) else null
 
+	print("Current UI: ", current_ui, " | Prev UI: ", previous_ui)
+	if current_ui and previous_ui:
+		print("Current UI visible: ", current_ui.visible, " | Prev UI visibile: ", previous_ui.visible)
+
 
 ## Toggles visibility of a specific UI
 ## Use this for overlays like Inventory, Map, etc., not for Pause or main switching.
@@ -183,11 +189,14 @@ func toggle_ui(ui_enum: UIEnums.UI) -> void:
 ## @note: Manages the complex interplay between pause menu and other UIs
 func handle_pause() -> void:
 	# check if any ui, besides HUD and/or pause menu, is visible
-	if _is_any_visible_besides_list([UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]):
+	var ui_exceptions: Array[UIEnums.UI] = [UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]
+	if _is_any_visible_besides_list(ui_exceptions):
 		push_warning("Attempted to pause while other UI is visible. Ignoring.")
+		_handle_ui_cancel_action()
 		return
 
 	var pause_menu: Control = ui_list.get(UIEnums.UI.PAUSE_MENU)
+
 	if not is_instance_valid(pause_menu):
 		_on_add_ui_scene(UIEnums.UI.PAUSE_MENU, {}, false)
 		pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
@@ -201,8 +210,8 @@ func handle_pause() -> void:
 		if not _is_any_visible():
 			previous_mouse_mode = Input.mouse_mode
 
-		if is_instance_valid(current_ui) and current_ui != pause_menu:
-			current_ui.visible = false
+		if is_instance_valid(current_ui) and current_ui:
+			current_ui.visible = ui_list.find_key(current_ui) == UIEnums.UI.PLAYER_HUD
 			swap_ui(current_ui, pause_menu)
 		elif not is_instance_valid(current_ui):
 			swap_ui(null, pause_menu)
@@ -220,12 +229,12 @@ func handle_pause() -> void:
 		# if null and player hud is not visible, set to player hud
 		if ui_to_restore == null and not _is_any_visible():
 			ui_to_restore = ui_list.get(UIEnums.UI.PLAYER_HUD) if ui_list.has(UIEnums.UI.PLAYER_HUD) else null
-		
-		swap_ui(pause_menu, ui_to_restore)
 
-		if is_instance_valid(current_ui):
-			current_ui.visible = true
-			move_child(current_ui, get_child_count() - 1)
+		swap_ui(pause_menu, ui_to_restore)
+#
+		#if is_instance_valid(current_ui):
+			#current_ui.visible = true
+			#move_child(current_ui, get_child_count() - 1)
 
 		_handle_mouse_mode(_is_any_visible())
 
@@ -270,7 +279,7 @@ func _handle_ui_cancel_action() -> void:
 func _handle_mouse_mode(ui_visible: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if ui_visible else previous_mouse_mode
 
-	
+
 ## checks if any UI, besides the passed in list of enums, is currently visible
 func _is_any_visible_besides_list(ui_exceptions: Array[UIEnums.UI]) -> bool:
 	for ui_enum in ui_list:
@@ -282,6 +291,7 @@ func _is_any_visible_besides_list(ui_exceptions: Array[UIEnums.UI]) -> bool:
 			return true
 
 	return false
+
 
 ## Checks if any UI (excluding Player HUD) is currently visible
 func _is_any_visible() -> bool:
@@ -353,8 +363,9 @@ func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_vis
 		if not _is_any_visible():
 			previous_mouse_mode = Input.mouse_mode
 
-		if is_instance_valid(current_ui):
-			current_ui.visible = false
+		#if is_instance_valid(current_ui):
+			#current_ui.visible = false
+
 		swap_ui(current_ui, new_ui_node)
 
 		new_ui_node.visible = true

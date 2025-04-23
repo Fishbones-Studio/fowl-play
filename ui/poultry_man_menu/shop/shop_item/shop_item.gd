@@ -19,14 +19,6 @@ func _ready() -> void:
 	super()
 
 
-func _on_purchase_complete() -> void:
-	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
-	GameManager.prosperity_eggs -= shop_item.cost
-	Inventory.add_item(shop_item)
-	super.attempt_purchase()
-	queue_free()
-
-
 func set_item_data(item: Resource) -> void:
 	if not item is BaseResource or item is InRunUpgradeResource:
 		if item == null:
@@ -64,7 +56,7 @@ func attempt_purchase() -> void:
 
 	# If player already has items of this type, show selection UI to replace
 	if existing_items.is_empty() or existing_items.size() < shop_item.type_max_owned_amount:
-		#TODO: add a confirmaiton popup
+		#TODO: add a confirmation popup
 		_on_purchase_complete()
 	else:
 		# TODO: add the just replaced item back to the shop?
@@ -79,3 +71,11 @@ func attempt_purchase() -> void:
 
 func can_afford() -> bool:
 	return GameManager.prosperity_eggs >= shop_item.cost
+
+
+func _on_purchase_complete() -> void:
+	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
+	GameManager.prosperity_eggs -= shop_item.cost
+	Inventory.add_item(shop_item)
+	super.attempt_purchase()
+	queue_free()
