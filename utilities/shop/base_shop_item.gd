@@ -6,8 +6,8 @@ static var purchase_in_progress: bool = false
 
 var shop_item: BaseResource
 
-var prosperity_egg_icon = preload("uid://be0yl1q0uryjp")
-var feathers_of_rebirth_icon = preload("uid://brgdaqksfgmqu")
+var prosperity_egg_icon: CompressedTexture2D = preload("uid://be0yl1q0uryjp")
+var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu")
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")

@@ -1,10 +1,12 @@
-class_name ItemPreviewContainer extends VBoxContainer
+class_name ItemPreviewContainer 
+extends MarginContainer
 
 @onready var shop_preview_label: Label = %ItemPreviewLabel
 @onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
 @onready var shop_preview_type: Label = %ItemPreviewType
 @onready var shop_preview_description: RichTextLabel = %ItemPreviewDescription
 @onready var shop_preview_stats: RichTextLabel = %ItemPreviewStats
+
 
 func setup(item: BaseResource) -> void:
 	shop_preview_label.text = item.name
@@ -45,6 +47,7 @@ func setup(item: BaseResource) -> void:
 		stats_text = item.get_bonus_string(true) # Pass true to use BBCode
 
 	stats_text = "\n" + stats_text.strip_edges()
+
 	if not stats_text.is_empty():
 		shop_preview_stats.text = stats_text
 		shop_preview_stats.visible = true

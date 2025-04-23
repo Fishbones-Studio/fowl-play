@@ -3,38 +3,55 @@
 [ext_resource type="Script" uid="uid://gdc2rjsxta66" path="res://ui/item_preview_container/item_preview_container.gd" id="1_inxb6"]
 [ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_pi0rk"]
 
-[node name="ItemPreviewContainer" type="VBoxContainer"]
+[node name="ItemPreviewContainer" type="MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
+offset_right = 250.0
+offset_bottom = 331.0
 size_flags_horizontal = 10
+theme_override_constants/margin_bottom = 30
 script = ExtResource("1_inxb6")
 
-[node name="ItemPreviewLabel" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ItemPreviewLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Label"
 
-[node name="ItemPreviewIcon" type="TextureRect" parent="."]
+[node name="ItemPreviewIcon" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_pi0rk")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="ItemPreviewType" type="Label" parent="."]
+[node name="ItemPreviewType" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "TYpe"
 
-[node name="ItemPreviewDescription" type="RichTextLabel" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemPreviewDescription" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "Description"
 fit_content = true
 
-[node name="ItemPreviewStats" type="RichTextLabel" parent="."]
+[node name="ItemPreviewStats" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/line_separation = 8
 bbcode_enabled = true
+text = "Stats"
 fit_content = true
