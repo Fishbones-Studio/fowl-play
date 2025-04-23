@@ -1,5 +1,5 @@
 class_name ItemPreviewContainer 
-extends MarginContainer
+extends VBoxContainer
 
 @onready var shop_preview_label: Label = %ItemPreviewLabel
 @onready var shop_preview_icon: TextureRect = %ItemPreviewIcon

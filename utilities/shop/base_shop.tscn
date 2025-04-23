@@ -87,6 +87,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
