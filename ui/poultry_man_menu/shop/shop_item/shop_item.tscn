@@ -1,56 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc5vmtbby4xy0"]
+[gd_scene load_steps=4 format=3 uid="uid://cc5vmtbby4xy0"]
 
 [ext_resource type="Script" uid="uid://74xofhorearv" path="res://ui/poultry_man_menu/shop/shop_item/shop_item.gd" id="1_k8gfq"]
-[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="2_8e35v"]
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="2_8e35v"]
+[ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="3_4umf5"]
 
 [node name="ShopItem" type="PanelContainer"]
-offset_right = 47.0
-offset_bottom = 143.0
+offset_right = 185.0
+offset_bottom = 250.0
 script = ExtResource("1_k8gfq")
+metadata/_edit_use_anchors_ = true
 
-[node name="ShopItemContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="ShopItemContainer"]
+[node name="ItemIcon" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_8e35v")
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = &"ItemTitle"
-text = "FLAMETHROWER"
+text = "Ground Pound"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
 
-[node name="ItemIcon" type="TextureRect" parent="ShopItemContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="CurrencyIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_8e35v")
-expand_mode = 5
-stretch_mode = 6
+texture = ExtResource("3_4umf5")
+expand_mode = 3
 
-[node name="TypeLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_type_variation = &"ItemType"
-text = "TYPE"
-
-[node name="DescriptionLabel" type="Label" parent="ShopItemContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(164, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_type_variation = &"ItemDescription"
-text = "DESCRIPTION"
-autowrap_mode = 3
-
-[node name="CostLabel" type="Label" parent="ShopItemContainer"]
+[node name="PriceLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_type_variation = &"ItemCost"
-text = "PRICE"
+text = "200"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

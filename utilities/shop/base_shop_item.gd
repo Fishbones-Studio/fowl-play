@@ -15,15 +15,6 @@ func _ready() -> void:
 	focus_exited.connect(_on_focus_exited)
 
 
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			attempt_purchase()
-	elif event.is_action_pressed("ui_accept") and has_focus():
-		print(has_focus())
-		attempt_purchase()
-
-
 func _on_focus_entered() -> void:
 	if not theme:
 		theme = Theme.new()

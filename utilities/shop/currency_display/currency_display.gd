@@ -1,7 +1,7 @@
 extends GridContainer
 
-@onready var prosperity_label : Label = %PEAmount
-@onready var feathers_of_rebirth : Label = %FoRAmount
+@onready var prosperity_label: Label = %ProsperityEggsAmount
+@onready var feathers_of_rebirth: Label = %FeathersOfRebirthAmount
 
 
 func _ready() -> void:
