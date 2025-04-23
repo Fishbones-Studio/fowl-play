@@ -170,7 +170,6 @@ func _enter_concluding() -> void:
 
 
 func _enter_intermission() -> void:
-	print("imagine you are now in a different part of arena with a shop")
 	GameManager.chicken_player.global_position = Vector3(
 		-400, 2.5, 0
 	) # teleport player to the intermission area

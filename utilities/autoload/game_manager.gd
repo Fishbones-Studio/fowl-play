@@ -79,7 +79,7 @@ var infinite_damage: bool = false:
 func _ready() -> void:
 	# Load default stats during initialization
 	# TODO: once permanemt upgrades have been implemented, rewrite this
-	_default_player_stats = ResourceLoader.load(DEFAULT_PLAYER_STATS_PATH)
+	_default_player_stats = ResourceLoader.load(DEFAULT_PLAYER_STATS_PATH).duplicate()
 	if not _default_player_stats:
 		push_error(
 			"Failed to load default player stats from %s"
@@ -102,6 +102,7 @@ func _apply_cheat_settings() -> void:
 
 	# Health Cheat
 	if infinite_health:
+		print("Setting infinite health")
 		chicken_player.stats.max_health = INF
 		chicken_player.stats.current_health = INF
 		# Using a very large number for regen instead of INF, since INF is a float
@@ -110,19 +111,19 @@ func _apply_cheat_settings() -> void:
 		print("Restoring health stats from default resource for health")
 		# Restore health stats from the loaded default resource
 		chicken_player.stats.max_health = _default_player_stats.max_health
-		# Restore health smoothly, clamping to the new max
-		chicken_player.stats.restore_health(0)
+		# Restore health, the current_health has a clamp in setter
+		chicken_player.stats.current_health = chicken_player.stats.current_health
 		chicken_player.stats.health_regen = _default_player_stats.health_regen
 
 	# Damage Cheats
 	if infinite_damage:
+		print("Setting infinite damage")
 		chicken_player.stats.attack_multiplier = INF
 	else:
 		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
-		chicken_player.stats.attack_multiplier = (
-		_default_player_stats.attack_multiplier
-		)
+		chicken_player.stats.attack_multiplier = _default_player_stats.attack_multiplier
+		
 
 	
 func reset_game() -> void:
