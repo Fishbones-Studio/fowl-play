@@ -9,6 +9,7 @@ cooldown = 5.0
 name = "Ground Pound"
 drop_chance = 50
 cost = 125
+currency_type = 0
 description = "While in the air,"
 icon = ExtResource("1_7nl1e")
 model_uid = "uid://b7t7b5rawdkte"

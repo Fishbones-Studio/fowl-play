@@ -6,7 +6,6 @@ const IN_ARENA_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("item shop opened")
 	check_inventory = false
 	prevent_duplicates = false
 	shop_title_label.text = "Upgrades Shop"
