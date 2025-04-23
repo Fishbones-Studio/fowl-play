@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=4 format=3 uid="uid://dvkxcgdk0goul"]
 
 [ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
-[ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="2_5f1dx"]
+[ext_resource type="PackedScene" uid="uid://cc55r8e7gadvt" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.tscn" id="2_abcde"]
+[ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="3_5f1dx"]
 
 [node name="ChickenInventory" type="Control"]
 layout_mode = 3
@@ -41,49 +42,73 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_type_variation = &"HeaderLarge"
-text = "Inventory"
+text = "Equipment"
 
 [node name="SubtitleLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 bbcode_enabled = true
-text = "[center][font_size=25][color=gray][i]Items are automatically equiped[/i][/color][/font_size][/center]
+text = "[center][font_size=25][color=gray][i]Items are automatically equipped[/i][/color][/font_size][/center]
 "
 fit_content = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="EquipmentGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 15
+columns = 2
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MeleeLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Melee Weapon:"
+vertical_alignment = 1
+
+[node name="MeleeSlot" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 5
-columns = 4
 
-[node name="MeleeWeapon" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="RangedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid"]
 layout_mode = 2
-text = "Melee Weapon"
+size_flags_vertical = 1
+text = "Ranged Weapon:"
+vertical_alignment = 1
 
-[node name="RangedWeapon" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="RangedSlot" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Ranged Weapon"
+size_flags_horizontal = 3
 
-[node name="AbilitySlotOne" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="Ability1Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid"]
 layout_mode = 2
-text = "Ability Slot One"
+size_flags_vertical = 1
+text = "Ability Slot 1:"
+vertical_alignment = 1
 
-[node name="AbilitySlotTwo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="AbilitySlot1" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Ability Slot Two"
+size_flags_horizontal = 3
+
+[node name="Ability2Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Ability Slot 2:"
+vertical_alignment = 1
+
+[node name="AbilitySlot2" parent="Panel/MarginContainer/VBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ExitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Exit"
-script = ExtResource("2_5f1dx")
+script = ExtResource("3_5f1dx")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

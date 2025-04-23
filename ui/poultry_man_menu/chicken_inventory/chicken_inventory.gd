@@ -1,37 +1,50 @@
 extends Control
 
-@onready var grid_container: GridContainer = %GridContainer
 
+@onready var melee_slot: EquipedItemSlot = %MeleeSlot
+@onready var ranged_slot: EquipedItemSlot = %RangedSlot
+@onready var ability_slot_1: EquipedItemSlot = %AbilitySlot1
+@onready var ability_slot_2: EquipedItemSlot = %AbilitySlot2
 
 func _ready() -> void:
-	_update_inventory()
+	_update_equipped_slots()
 
+func _update_equipped_slots() -> void:
+	# Get equipped items from the Inventory autoload
+	var melee_weapon: BaseResource = Inventory.get_equipped_item(
+		ItemEnums.ItemTypes.MELEE_WEAPON, 0
+	)
+	var ranged_weapon: BaseResource = Inventory.get_equipped_item(
+		ItemEnums.ItemTypes.RANGED_WEAPON, 0
+	)
+	var ability_1: BaseResource = Inventory.get_equipped_item(
+		ItemEnums.ItemTypes.ABILITY, 0
+	)
+	var ability_2: BaseResource = Inventory.get_equipped_item(
+		ItemEnums.ItemTypes.ABILITY, 1
+	)
 
-func _update_inventory() -> void:
-	await get_tree().process_frame
-	
-	# Empty the UI of the inventory
-	for child in grid_container.get_children():
-		grid_container.remove_child(child)
-		child.queue_free()
+	# Update the UI slots
+	if melee_slot:
+		melee_slot.display_item(melee_weapon)
+	else: push_warning("MeleeSlot node method not found.")
 
-	# Return all items in the inventory
-	var inventory_items = Inventory.get_all_items()
+	if ranged_slot:
+		ranged_slot.display_item(ranged_weapon)
+	else: push_warning("RangedSlot node method not found.")
 
-	# Print all items in inventory
-	for item in inventory_items:
-		var inventory_item = load("uid://bvrmks8outcaw").instantiate()
-		grid_container.add_child(inventory_item)
+	if ability_slot_1:
+		ability_slot_1.display_item(ability_1)
+	else: push_warning("AbilitySlot1 node method not found.")
 
-		# Set item properties
-		inventory_item.name_label.text = item.name
-		if item.icon: inventory_item.item_icon.texture = item.icon
-		inventory_item.type_label.text = ItemEnums.item_type_to_string(item.type)
-		inventory_item.description_label.text = item.description
+	if ability_slot_2:
+		ability_slot_2.display_item(ability_2)
+	else: push_warning("AbilitySlot2 node method not found.")
 
 
 func _on_visibility_changed() -> void:
-	if visible: _update_inventory()
+	if visible:
+		_update_equipped_slots()
 
 
 func _on_exit_button_pressed():
