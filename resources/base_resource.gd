@@ -6,7 +6,8 @@ extends Resource
 @export var name: String
 # Shop Variable
 @export var drop_chance: int
-@export var cost: int
+## The cost of the item in prosperity eggs
+@export var pe_cost: int
 @export var description: String = "PlaceHolder" # Flavour text
 
 # Visual & UI Elements

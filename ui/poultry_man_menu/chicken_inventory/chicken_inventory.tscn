@@ -43,27 +43,42 @@ size_flags_vertical = 0
 theme_type_variation = &"HeaderLarge"
 text = "Inventory"
 
+[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[center][font_size=25][color=gray][i]Items are automatically equiped[/i][/color][/font_size][/center]
+"
+fit_content = true
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 5
-columns = 5
+columns = 4
+
+[node name="MeleeWeapon" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Melee Weapon"
+
+[node name="RangedWeapon" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Ranged Weapon"
+
+[node name="AbilitySlotOne" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Ability Slot One"
+
+[node name="AbilitySlotTwo" type="Label" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Ability Slot Two"
 
 [node name="ExitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

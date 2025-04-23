@@ -30,7 +30,7 @@ func populate_visual_fields() -> void:
 	name_label.text = upgrade_item.name
 	if upgrade_item.icon: item_icon.texture = upgrade_item.icon
 	bonus_label.text = upgrade_item.get_bonus_string()
-	cost_label.text = str(upgrade_item.cost)
+	cost_label.text = "PE: %d" % upgrade_item.pe_cost
 	description_label.text = upgrade_item.description
 
 
@@ -42,10 +42,10 @@ func attempt_purchase() -> void:
 
 	GameManager.chicken_player.stats.apply_upgrade(upgrade_item)
 
-	GameManager.prosperity_eggs -= int(upgrade_item.cost)
+	GameManager.prosperity_eggs -= int(upgrade_item.pe_cost)
 	self.visible = false
 	super()
 
 
 func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= upgrade_item.cost
+	return GameManager.prosperity_eggs >= upgrade_item.pe_cost

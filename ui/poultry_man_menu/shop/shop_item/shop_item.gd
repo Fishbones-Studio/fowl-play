@@ -34,7 +34,7 @@ func populate_visual_fields() -> void:
 	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon
 	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
-	cost_label.text = str(shop_item.cost)
+	cost_label.text = "PE: %d" % shop_item.pe_cost
 	description_label.text = shop_item.description
 	print(shop_item)
 
@@ -70,12 +70,12 @@ func attempt_purchase() -> void:
 
 
 func can_afford() -> bool:
-	return GameManager.prosperity_eggs >= shop_item.cost
+	return GameManager.prosperity_eggs >= shop_item.pe_cost
 
 
 func _on_purchase_complete() -> void:
 	print("Item bought: ", name_label.text, " │ Type: ", type_label.text)
-	GameManager.prosperity_eggs -= shop_item.cost
+	GameManager.prosperity_eggs -= shop_item.pe_cost
 	Inventory.add_item(shop_item)
 	super.attempt_purchase()
 	queue_free()

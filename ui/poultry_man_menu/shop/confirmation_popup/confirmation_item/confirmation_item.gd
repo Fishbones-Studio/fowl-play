@@ -25,5 +25,5 @@ func populate_visual_fields() -> void:
 	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon
 	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
-	cost_label.text = str(shop_item.cost)
+	cost_label.text = "PE: %d" % shop_item.pe_cost
 	description_label.text = shop_item.description
