@@ -8,4 +8,4 @@
 script = ExtResource("2_2mh6r")
 item_database = NodePath("ItemDatabase")
 
-[node name="ItemDatabase" parent="." index="1" instance=ExtResource("4_syjhg")]
+[node name="ItemDatabase" parent="." index="2" instance=ExtResource("4_syjhg")]

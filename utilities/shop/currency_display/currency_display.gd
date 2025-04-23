@@ -1,4 +1,4 @@
-extends GridContainer
+extends HBoxContainer
 
 @onready var prosperity_label: Label = %ProsperityEggsAmount
 @onready var feathers_of_rebirth: Label = %FeathersOfRebirthAmount

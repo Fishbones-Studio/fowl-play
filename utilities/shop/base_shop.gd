@@ -3,7 +3,7 @@
 class_name BaseShop
 extends Control
 
-@export var max_items: int = 5
+@export var max_items: int = 8
 @export var item_database: BaseDatabase
 
 var shop_items: Array[BaseResource]
@@ -11,8 +11,14 @@ var available_items: Array[BaseResource] = []
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
 
-@onready var shop_items_container: HBoxContainer = %ShopItemsContainer
-@onready var title_label = %TitleLabel
+#var selected_item: 
+
+@onready var shop_title_label: Label = %ShopLabel
+@onready var shop_items_container: GridContainer = %ShopItemsContainer
+
+@onready var shop_preview_label: Label = %ItemPreviewLabel
+@onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
+@onready var shop_preview_description: RichTextLabel = %ItemPreviewDescription
 
 
 func _ready() -> void:
@@ -88,11 +94,12 @@ func _setup_controller_navigation() -> void:
 
 	# Set initial focus to the first shop item, or exit button if no items
 	await get_tree().process_frame
+
 	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else null
 	if first_item and first_item is Control:
 		first_item.grab_focus()
 
 
 ## Abstract method
-func _on_exit_button_up() -> void:
+func _on_close_button_button_up() -> void:
 	pass
