@@ -21,7 +21,6 @@ var available_enemies: Dictionary[EnemyEnums.EnemyTypes, Array] = {}
 var next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 
 var _current_enemy: Enemy = null # The one currently in the arena fighting
-var _round_countdown: Control = null
 
 @onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
 @onready var player_default_position: Marker3D = %PlayerPosition

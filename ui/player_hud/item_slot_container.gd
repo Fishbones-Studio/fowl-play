@@ -29,7 +29,6 @@ func _ready() -> void:
 			print("Deactivating item slot at index: ", index)
 			# Check if the item slot is valid
 			if index < 0 or index >= get_child_count():
-				push_warning("Invalid item slot index: ", index)
 				return
 			# Deactivate the item slot
 			var item_slot: UiItemSlot = get_child(index) as UiItemSlot
@@ -45,7 +44,6 @@ func _ready() -> void:
 		func(item: BaseResource, cd: float, create_tween : bool):
 			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
 			if index < 0 or index >= get_child_count():
-				push_warning("Invalid item slot index: ", index)
 				return
 			var item_slot: UiItemSlot = get_child(index) as UiItemSlot
 			if item_slot:
