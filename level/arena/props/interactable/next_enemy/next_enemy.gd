@@ -1,18 +1,10 @@
-extends StaticBody3D
-
-var player_in_area: bool = false
-
-@onready var interact_label = $Area3D/InteractLabel
-@onready var name_label = $NameLabel
-
-
-func _ready() -> void:
-	name_label.text = "Start Fight"
-
+# NextEnemy box, fo starting the next round
+extends InteractableBox
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact") and player_in_area:
-		pass
+		print("starting next round")
+		SignalManager.start_next_round.emit()
 
 
 func _on_area_3d_body_entered(_body: ChickenPlayer) -> void:

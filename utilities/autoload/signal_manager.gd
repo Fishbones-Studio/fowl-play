@@ -36,6 +36,9 @@ signal weapon_hit_target(target: PhysicsBody3D, damage: float)
 # Shop signals
 signal upgrades_shop_refreshed
 
+# round signals
+signal start_next_round() # to trigger the next round
+
 
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}

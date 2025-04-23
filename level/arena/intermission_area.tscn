@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://b37klg6och4oh"]
+[gd_scene load_steps=29 format=3 uid="uid://b37klg6och4oh"]
 
+[ext_resource type="Script" uid="uid://bbhxd7v2h2bfi" path="res://level/arena/intermission_area.gd" id="1_4kspm"]
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="1_8q74n"]
-[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_m3dq1"]
 [ext_resource type="PackedScene" uid="uid://d3n5atdpaga74" path="res://level/arena/props/arena_parts/wall/wall.glb" id="1_qp4i4"]
 [ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/props/arena_parts/pillar/pillar.glb" id="2_m3dq1"]
 [ext_resource type="PackedScene" uid="uid://c3kbplfgptn7a" path="res://level/arena/props/arena_parts/floor/floor.glb" id="3_8q74n"]
+[ext_resource type="PackedScene" uid="uid://fcnahlq4lql5" path="res://level/arena/props/interactable/shop/arena_shop.tscn" id="6_4kspm"]
 [ext_resource type="PackedScene" uid="uid://df0wct2jxwjf1" path="res://level/arena/props/interactable/next_enemy/next_enemy.tscn" id="6_ydxl2"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_byl6v"]
@@ -85,6 +86,7 @@ height = 0.3
 radius = 15.0
 
 [node name="IntermissionArea" type="Node3D"]
+script = ExtResource("1_4kspm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4kspm")
@@ -98,9 +100,6 @@ light_volumetric_fog_energy = 5.0
 shadow_enabled = true
 spot_range = 40.0
 spot_angle = 60.0
-
-[node name="ArenaShop" parent="." instance=ExtResource("1_m3dq1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -15)
 
 [node name="WallOne" type="StaticBody3D" parent="."]
 
@@ -256,4 +255,7 @@ shape = SubResource("CylinderShape3D_qo3bk")
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 1, 1, -1)
 
 [node name="NextEnemy" parent="." instance=ExtResource("6_ydxl2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.3497, 0, 0)
+transform = Transform3D(-0.0585398, 0, -0.998285, 0, 1, 0, 0.998285, 0, -0.0585398, 30, 2.5, 0)
+
+[node name="ArenaShop" parent="." instance=ExtResource("6_4kspm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -7.107)

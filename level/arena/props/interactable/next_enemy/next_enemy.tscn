@@ -7,4 +7,6 @@
 script = ExtResource("2_nb684")
 
 [node name="NameLabel" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 5, 0)
 text = "Enter Fight"
+font_size = 200

@@ -31,6 +31,20 @@ func _ready() -> void:
 	GameManager.current_round = 1
 	_init_enemies()
 	_start_round()
+	SignalManager.start_next_round.connect(_proceed_to_next_round)
+	
+
+func _proceed_to_next_round() -> void:
+	# Ensure we are actually in the intermission state before proceeding
+	if round_state != RoundEnums.RoundTypes.INTERMISSION:
+		printerr("Tried to proceed from intermission, but not in intermission state!")
+		return
+
+	# Set the state to WAITING for the next round
+	round_state = RoundEnums.RoundTypes.WAITING
+	# Trigger the state machine to enter the WAITING state (_enter_waiting)
+	_start_round()
+
 
 
 func _init_enemies() -> void:
