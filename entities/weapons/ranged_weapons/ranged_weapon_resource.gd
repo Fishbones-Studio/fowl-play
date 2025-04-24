@@ -20,17 +20,18 @@ func _init() -> void:
 func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 	var modifiers: Array[String] = []
 
-	modifiers.append("[color=%s]%d[/color]" % [hex_code, damage])
-
-	modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, fire_rate_per_second])
-
-	modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, windup_time])
-
-	modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, attack_duration])
-
-	modifiers.append("[color=%s]%.2fm[/color]" % [hex_code, max_range])
-
-	modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown_time])
+	if damage:
+		modifiers.append("[color=%s]%d[/color]" % [hex_code, damage])
+	if fire_rate_per_second:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, fire_rate_per_second])
+	if windup_time:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, windup_time])
+	if attack_duration:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, attack_duration])
+	if max_range:
+		modifiers.append("[color=%s]%.2fm[/color]" % [hex_code, max_range])
+	if cooldown_time:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown_time])
 
 	modifiers.append("[color=%s]%s[/color]" % [hex_code, "can fire continuously" if allow_continuous_fire else "fires one bullet at a time"])
 	modifiers.append("[color=%s]%s[/color]" % [hex_code, "can be released mid-fire" if allow_early_release else "cannot be released mid-fire"])
@@ -41,16 +42,34 @@ func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 func get_modifier() -> Array[float]:
 	var modifiers: Array[float] = []
 
-	modifiers.append(damage)
+	if damage:
+		modifiers.append(damage)
+	else:
+		modifiers.append(0.0)
 
-	modifiers.append(fire_rate_per_second)
-
-	modifiers.append(windup_time)
-
-	modifiers.append(attack_duration)
-
-	modifiers.append(max_range)
-
-	modifiers.append(cooldown_time)
+	if fire_rate_per_second:
+		modifiers.append(fire_rate_per_second)
+	else:
+		modifiers.append(0.0)
+	
+	if windup_time:
+		modifiers.append(windup_time)
+	else:
+		modifiers.append(0.0)
+	
+	if attack_duration:
+		modifiers.append(attack_duration)
+	else:
+		modifiers.append(0.0)
+	
+	if max_range:
+		modifiers.append(max_range)
+	else:
+		modifiers.append(0.0)
+	
+	if cooldown_time:
+		modifiers.append(cooldown_time)
+	else:
+		modifiers.append(0.0)
 
 	return modifiers

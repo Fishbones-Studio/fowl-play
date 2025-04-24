@@ -11,8 +11,9 @@ func _init() -> void:
 
 func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 	var modifiers: Array[String] = []
-
-	modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown])
+	
+	if cooldown:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown])
 
 	return modifiers
 
@@ -20,6 +21,9 @@ func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 func get_modifier() -> Array[float]:
 	var modifiers: Array[float] = []
 
-	modifiers.append(cooldown)
+	if cooldown:
+		modifiers.append(cooldown)
+	else:
+		modifiers.append(0.0)
 
 	return modifiers
