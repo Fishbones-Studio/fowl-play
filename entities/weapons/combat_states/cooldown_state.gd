@@ -30,5 +30,4 @@ func exit() -> void:
 
 # When the cooldown timer runs out, switch back to the IDLE state
 func _on_cooldown_timer_timeout() -> void:
-	print("entred cooldown ttttt")
 	melee_combat_transition_state.emit(WeaponEnums.WeaponState.IDLE, {})
