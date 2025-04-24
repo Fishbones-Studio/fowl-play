@@ -1,4 +1,4 @@
-extends Button
+class_name FocusButton extends Button
 
 
 func _ready():

@@ -184,6 +184,9 @@ func remove_item(item: BaseResource) -> void:
 
 func get_all_items() -> Array[BaseResource]:
 	return inventory_data.items.duplicate(true)
+	
+func get_all_items_sorted() -> Dictionary[ItemEnums.ItemTypes, Array]:
+	return inventory_data.get_items_sorted().duplicate(true)
 
 
 func get_items_by_type(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:

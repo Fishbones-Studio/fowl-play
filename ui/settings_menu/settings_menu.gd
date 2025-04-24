@@ -46,7 +46,7 @@ func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
 	_update_content(sidebar_item)
 
 
-func _on_close_button_button_up() -> void:
+func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 
 

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=5 format=3 uid="uid://dvkxcgdk0goul"]
 
 [ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
+[ext_resource type="PackedScene" uid="uid://cc55r8e7gadvt" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.tscn" id="2_abcde"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_x0uxr"]
+[ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_x0uxr"]
 
 [node name="ChickenInventory" type="Control"]
 layout_mode = 3
@@ -19,49 +22,147 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"SettingsHeaderContainer"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 10
 
-[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_type_variation = &"HeaderLarge"
-text = "Inventory"
+theme_type_variation = &"HeaderMedium"
+text = "Equipment"
+vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_x0uxr")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="EquipmentGrid" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 5
-columns = 5
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="MeleeLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Melee Weapon:"
+vertical_alignment = 1
+
+[node name="MeleeSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RangedLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Ranged Weapon:"
+vertical_alignment = 1
+
+[node name="RangedSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Ability1Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Ability Slot 1:"
+vertical_alignment = 1
+
+[node name="AbilitySlot1" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Ability2Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Ability Slot 2:"
+vertical_alignment = 1
+
+[node name="AbilitySlot2" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InvisibleArea" type="Control" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_x0uxr")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Swap Abilities"
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][font_size=25][color=gray][i]Items are automatically equipped[/i][/color][/font_size][/center]
+"
+fit_content = true
+scroll_active = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/HBoxContainer2/SwapAbilitiesButton" to="." method="_on_swap_abilities_button_pressed"]

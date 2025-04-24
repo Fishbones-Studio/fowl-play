@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5gymr6e3q66h" path="res://ui/settings_menu/settings_menu.gd" id="1_cobfr"]
 [ext_resource type="PackedScene" uid="uid://b732163n2f47p" path="res://ui/settings_menu/sidebar_item.tscn" id="2_424ss"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_p8urx"]
-[ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="3_424ss"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="3_424ss"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gjkyi"]
 shader = ExtResource("2_p8urx")
@@ -69,13 +69,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(56, 56)
+[node name="CloseButton" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2" instance=ExtResource("3_424ss")]
 layout_mode = 2
-theme_type_variation = &"SettingsExitButton"
-text = "X"
-script = ExtResource("3_424ss")
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
@@ -128,6 +123,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 
-[connection signal="button_up" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_button_up"]
-[connection signal="focus_entered" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" method="_on_focus_entered"]
-[connection signal="focus_exited" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" method="_on_focus_exited"]
+[connection signal="pressed" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]
