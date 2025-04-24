@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=5 format=3 uid="uid://cuqpcy333m8d5"]
 
 [ext_resource type="Script" uid="uid://ddkveip8o00su" path="res://utilities/shop/base_shop.gd" id="1_jjkbf"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_jh0jc"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_1w0y0"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="3_5kcef"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jh0jc"]
-bg_color = Color(0, 0, 0, 1)
 
 [node name="BaseShop" type="Control"]
 process_mode = 3
@@ -37,7 +34,7 @@ grow_vertical = 2
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 85)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jh0jc")
+theme_type_variation = &"SettingsHeaderContainer"
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel"]
 layout_mode = 1

@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvkxcgdk0goul"]
+[gd_scene load_steps=5 format=3 uid="uid://dvkxcgdk0goul"]
 
 [ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
 [ext_resource type="PackedScene" uid="uid://cc55r8e7gadvt" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.tscn" id="2_abcde"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_x0uxr"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_x0uxr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0uxr"]
-bg_color = Color(0.0575914, 0.0590637, 0.0561323, 1)
 
 [node name="ChickenInventory" type="Control"]
 layout_mode = 3
@@ -37,7 +34,7 @@ theme_override_constants/separation = 25
 custom_minimum_size = Vector2(0, 85)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_x0uxr")
+theme_type_variation = &"SettingsHeaderContainer"
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel"]
 layout_mode = 1
