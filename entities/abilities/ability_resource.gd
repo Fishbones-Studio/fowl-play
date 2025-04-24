@@ -13,6 +13,6 @@ func get_modifier_string() -> Array[String]:
 	var modifiers: Array[String] = []
 
 	if cooldown:
-		modifiers.append("%.2f" % cooldown)
+		modifiers.append("%.2fs" % cooldown)
 
 	return modifiers

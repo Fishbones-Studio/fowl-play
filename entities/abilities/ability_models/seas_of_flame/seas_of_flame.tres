@@ -12,7 +12,7 @@ cost = 200
 currency_type = 0
 description = "The user sets the seas a blaze, sacrificing 25%% of the user's Max Health to unleash an AoA attack and targets caught in the flames have burn applied.
 Burn targets take damage over time.
-This ability can only be used while on the ground and has a cooldown of %ss."
+This ability can only be used while on the ground and has a cooldown of %s."
 icon = ExtResource("1_ihale")
 model_uid = "uid://df1clah7xvv32"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
