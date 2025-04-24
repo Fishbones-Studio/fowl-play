@@ -37,5 +37,5 @@ func _on_visibility_changed() -> void:
 	if visible: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func _on_close_button_button_up() -> void:
+func _on_close_button_pressed()-> void:
 	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)
