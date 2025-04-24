@@ -34,15 +34,16 @@ size_flags_vertical = 0
 theme_type_variation = &"ItemType"
 text = "TYPE"
 
-[node name="DescriptionLabel" type="Label" parent="ConfirmationItemContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="ConfirmationItemContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = &"ItemDescription"
+bbcode_enabled = true
 text = "DESCRIPTION"
-autowrap_mode = 3
+fit_content = true
 
 [node name="CostLabel" type="Label" parent="ConfirmationItemContainer"]
 unique_name_in_owner = true

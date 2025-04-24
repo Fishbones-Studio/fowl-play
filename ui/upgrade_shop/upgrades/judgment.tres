@@ -14,6 +14,6 @@ name = "Judgment"
 drop_chance = 1
 cost = 1000
 currency_type = 0
-description = "The user is gazed by the creator of the world. Increases the user's Health by %, Stamina by %s, Attack by %s, and Defense by %s. Additionally, the user grows longer legs and increases Speed by %s."
+description = "The user is gazed by the creator of the world. Increases the user's Health by %s, Stamina by %s, Attack by %s, and Defense by %s. Additionally, the user grows longer legs and increases Speed by %s."
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

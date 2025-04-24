@@ -4,7 +4,7 @@ extends BaseShopItem
 @onready var type_label: Label = %TypeLabel
 @onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var description_label: Label = %DescriptionLabel
+@onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var cost_label: Label = %CostLabel
 
 
@@ -24,4 +24,4 @@ func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
 	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
 	cost_label.text = str(shop_item.cost)
-	description_label.text = shop_item.description
+	description_label.text = shop_item.description % shop_item.get_modifier_string()
