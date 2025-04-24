@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsstdeorrjt66"]
+[gd_scene load_steps=4 format=3 uid="uid://bsstdeorrjt66"]
 
 [ext_resource type="Script" uid="uid://co5jxy4kqnvlb" path="res://ui/poultry_man_menu/shop/confirmation_popup/confirmation_item/confirmation_item.gd" id="1_5obmk"]
 [ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_awb1i"]
+[ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="3_xhs0u"]
 
 [node name="ConfirmationItem" type="PanelContainer"]
 offset_right = 47.0
@@ -34,23 +35,37 @@ size_flags_vertical = 0
 theme_type_variation = &"ItemType"
 text = "TYPE"
 
-[node name="DescriptionLabel" type="Label" parent="ConfirmationItemContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="ConfirmationItemContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(164, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = &"ItemDescription"
+theme_override_constants/line_separation = 6
+bbcode_enabled = true
 text = "DESCRIPTION"
-autowrap_mode = 3
+fit_content = true
 
-[node name="CostLabel" type="Label" parent="ConfirmationItemContainer"]
+[node name="CurrencyHboxContainer" type="HBoxContainer" parent="ConfirmationItemContainer"]
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="ItemCurrencyIcon" type="TextureRect" parent="ConfirmationItemContainer/CurrencyHboxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_xhs0u")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ItemCostLabel" type="Label" parent="ConfirmationItemContainer/CurrencyHboxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_type_variation = &"ItemCost"
-text = "PRICE"
+text = "200"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

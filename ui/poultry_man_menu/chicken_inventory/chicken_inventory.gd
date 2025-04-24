@@ -1,17 +1,17 @@
 extends Control
 
-var ability_1 : AbilityResource = null
-var ability_2 : AbilityResource = null
+var ability_1: AbilityResource = null
+var ability_2: AbilityResource = null
 
-@onready var equipment_grid : GridContainer = %EquipmentGrid
+@onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var melee_slot: EquipedItemSlot = %MeleeSlot
 @onready var ranged_slot: EquipedItemSlot = %RangedSlot
 @onready var ability_slot_1: EquipedItemSlot = %AbilitySlot1
 @onready var ability_slot_2: EquipedItemSlot = %AbilitySlot2
 @onready var close_button: Button = %CloseButton
-@onready var item_preview_container : ItemPreviewContainer = %ItemPreviewContainer
-@onready var swap_abilities_button : Button = %SwapAbilitiesButton
-@onready var invisible_area : Control = %InvisibleArea
+@onready var item_preview_container: ItemPreviewContainer = %ItemPreviewContainer
+@onready var swap_abilities_button: Button = %SwapAbilitiesButton
+@onready var invisible_area: Control = %InvisibleArea
 
 
 func _ready() -> void:
@@ -36,13 +36,13 @@ func _setup_controller_navigation() -> void:
 		swap_abilities_button.focus_mode = Control.FOCUS_ALL
 
 	if melee_slot and ranged_slot and ability_slot_1 and ability_slot_2	and close_button and swap_abilities_button:
-		melee_slot.focus_neighbor_right  = ranged_slot.get_path()
-		melee_slot.focus_neighbor_bottom = ability_slot_1.get_path()
+		melee_slot.focus_neighbor_right  = close_button.get_path()
+		melee_slot.focus_neighbor_bottom = ranged_slot.get_path()
 
-		ranged_slot.focus_neighbor_left   = melee_slot.get_path()
-		ranged_slot.focus_neighbor_bottom = ability_slot_2.get_path()
+		ranged_slot.focus_neighbor_top   = melee_slot.get_path()
+		ranged_slot.focus_neighbor_bottom = ability_slot_1.get_path()
 
-		ability_slot_1.focus_neighbor_top    = melee_slot.get_path()
+		ability_slot_1.focus_neighbor_top    = ranged_slot.get_path()
 		ability_slot_1.focus_neighbor_bottom = ability_slot_2.get_path()
 
 		ability_slot_2.focus_neighbor_top    = ability_slot_1.get_path()
@@ -52,7 +52,6 @@ func _setup_controller_navigation() -> void:
 		swap_abilities_button.focus_neighbor_right = close_button.get_path()
 
 		close_button.focus_neighbor_left = swap_abilities_button.get_path()
-
 
 
 func _update_equipped_slots() -> void:

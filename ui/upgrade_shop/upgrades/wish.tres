@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bx2sc7ritx4xy"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_olgpb"]
+
+[resource]
+script = ExtResource("1_olgpb")
+health_bonus = 40.0
+stamina_bonus = 0.0
+attack_multiplier_bonus = 0.0
+defense_bonus = 0
+speed_bonus = 0.0
+weight_bonus = 0.0
+name = "Wish"
+drop_chance = 0
+cost = 20
+currency_type = 0
+description = "Increases the user's Health by %s."
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

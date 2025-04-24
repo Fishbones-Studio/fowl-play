@@ -32,6 +32,7 @@ func _try_activate_ability(ability_slot: EnemyAbilitySlot) -> void:
 		push_error("Ability missing 'activate' method: ", ability.name)
 		return
 
+	# TODO, whack and needs to be fixed later
 	if ability.current_ability.name == "Ground Pound":
 		enemy.velocity.y += 50
 

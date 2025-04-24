@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://da6m7g6ijjyop"]
+[gd_scene load_steps=3 format=3 uid="uid://da6m7g6ijjyop"]
 
 [ext_resource type="Script" uid="uid://dghqqfddvq86h" path="res://ui/poultry_man_menu/shop/confirmation_popup/confirmation_popup.gd" id="1_wha5l"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_ndt5t"]
 
 [node name="ConfirmationPopup" type="Control"]
 layout_mode = 3
@@ -35,11 +36,21 @@ theme_override_constants/margin_bottom = 25
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
 theme_type_variation = &"HeaderMedium"
 text = "Swap Items?"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("2_ndt5t")]
+layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -58,7 +69,7 @@ theme_override_constants/separation = 15
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"HeaderSmall"
-text = "Owned items"
+text = "Owned Item"
 
 [node name="OwnedItemsContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
@@ -76,3 +87,5 @@ text = "New Item"
 [node name="NewItemContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]

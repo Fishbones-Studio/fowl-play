@@ -28,7 +28,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.PLAYER_DEBUG_MENU: "uid://bjr4b02aehry4",
 	UI.ROUND_SCREEN: "uid://61l26wjx0fux",
 	UI.CHICKEN_STATS: "uid://c2vh7na31m8hi",
-	}
+}
 
 
 static func ui_to_string(ui: UI) -> String:

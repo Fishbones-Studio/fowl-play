@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://db5utqrg8gaeo"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_8k8x3"]
+
+[resource]
+script = ExtResource("1_8k8x3")
+health_bonus = 0.0
+stamina_bonus = 40.0
+attack_multiplier_bonus = 30.0
+defense_bonus = 0
+speed_bonus = 0.0
+weight_bonus = 0.0
+name = "Calm Mind"
+drop_chance = 0
+cost = 120
+currency_type = 0
+description = "The user quietly focuses its mind and calms its spirit, increasing the user's Stamina by %s and Attack by %s."
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

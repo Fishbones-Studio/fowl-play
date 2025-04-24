@@ -2,7 +2,7 @@
 extends Node
 
 ## Constants
-const SAVE_FILE_PATH := "user://inventory_save.tres"
+const SAVE_FILE_PATH: String = "user://inventory_save.tres"
 
 ## Configuration
 var default_slot_config: Dictionary[ItemEnums.ItemTypes, int] = {
@@ -184,7 +184,8 @@ func remove_item(item: BaseResource) -> void:
 
 func get_all_items() -> Array[BaseResource]:
 	return inventory_data.items.duplicate(true)
-	
+
+
 func get_all_items_sorted() -> Dictionary[ItemEnums.ItemTypes, Array]:
 	return inventory_data.get_items_sorted().duplicate(true)
 
