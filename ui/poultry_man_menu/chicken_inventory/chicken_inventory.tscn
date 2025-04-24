@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
 [ext_resource type="PackedScene" uid="uid://cc55r8e7gadvt" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.tscn" id="2_abcde"]
-[ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="3_5f1dx"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_x0uxr"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_x0uxr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0uxr"]
@@ -78,11 +78,8 @@ scroll_active = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="ExitButton" type="Button" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+[node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_x0uxr")]
 layout_mode = 2
-theme_type_variation = &"SettingsExitButton"
-text = "X"
-script = ExtResource("3_5f1dx")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -151,8 +148,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_x0uxr")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

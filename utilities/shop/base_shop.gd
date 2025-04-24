@@ -108,5 +108,5 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 
 
 ## Abstract method
-func _on_close_button_button_up() -> void:
+func _on_close_button_pressed() -> void:
 	pass

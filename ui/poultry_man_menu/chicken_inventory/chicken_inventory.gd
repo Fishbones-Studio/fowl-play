@@ -1,10 +1,11 @@
 extends Control
 
-
+@onready var equipment_grid : GridContainer = %EquipmentGrid
 @onready var melee_slot: EquipedItemSlot = %MeleeSlot
 @onready var ranged_slot: EquipedItemSlot = %RangedSlot
 @onready var ability_slot_1: EquipedItemSlot = %AbilitySlot1
 @onready var ability_slot_2: EquipedItemSlot = %AbilitySlot2
+
 
 func _ready() -> void:
 	_update_equipped_slots()
@@ -47,5 +48,5 @@ func _on_visibility_changed() -> void:
 		_update_equipped_slots()
 
 
-func _on_exit_button_pressed():
+func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
