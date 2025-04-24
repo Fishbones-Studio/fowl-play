@@ -15,3 +15,19 @@ extends BaseResource
 
 func _init() -> void:
 	type = ItemEnums.ItemTypes.RANGED_WEAPON
+
+
+# todo, display others
+func get_modifier_string() -> Array[String]:
+	var modifiers: Array[String] = []
+
+	if damage:
+		modifiers.append("%d" % damage)
+	if windup_time:
+		modifiers.append("%.2f" % windup_time)
+	if attack_duration:
+		modifiers.append("%.2f" % attack_duration)
+	if cooldown_time:
+		modifiers.append("%.2f" % cooldown_time)
+
+	return modifiers

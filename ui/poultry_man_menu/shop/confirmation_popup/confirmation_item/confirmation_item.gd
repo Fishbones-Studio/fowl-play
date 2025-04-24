@@ -9,10 +9,10 @@ extends BaseShopItem
 
 
 func set_item_data(item: Resource) -> void:
-	if not (item is BaseResource or item is InRunUpgradeResource):
+	if not (item is BaseResource or item is UpgradeResource):
 		if item == null:
 			push_error("Item is null")
-		push_error("Item is not of appropriate type (BaseResource/InRunUpgradeResource), but instead: ", item.get_class())
+		push_error("Item is not of appropriate type (BaseResource/UpgradeResource), but instead: ", item.get_class())
 		return
 
 	shop_item = item

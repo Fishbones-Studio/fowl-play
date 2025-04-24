@@ -1,7 +1,7 @@
-class_name InArenaShop
+class_name UpgradeShop
 extends BaseShop
 
-const IN_ARENA_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
+const UPGRADE_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,13 +16,13 @@ func _ready() -> void:
 
 
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
-	var shop_item_instance: Control = IN_ARENA_SHOP_ITEM_SCENE.instantiate()
+	var shop_item_instance: Control = UPGRADE_SHOP_ITEM_SCENE.instantiate()
 
 	if not shop_item_instance:
 		push_error("Failed to instantiate Shop Item scene!")
 		return null
 
-	var shop_item_script_node: InArenaShopItem = shop_item_instance as InArenaShopItem
+	var shop_item_script_node: UpgradeShopItem = shop_item_instance as UpgradeShopItem
 	if not shop_item_script_node:
 		push_error("Instantiated shop item node does not have the expected script type.")
 		shop_item_instance.queue_free()

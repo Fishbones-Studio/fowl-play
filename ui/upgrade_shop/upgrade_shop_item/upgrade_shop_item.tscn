@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1xvduw1f032y"]
 
-[ext_resource type="Script" uid="uid://bnxftib2aj2df" path="res://ui/in_arena_shop/shop/shop_item/in_arena_shop_item.gd" id="1_p4fgh"]
+[ext_resource type="Script" uid="uid://bnxftib2aj2df" path="res://ui/upgrade_shop/upgrade_shop_item/upgrade_shop_item.gd" id="1_p4fgh"]
 [ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="2_q4qen"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q4qen"]
