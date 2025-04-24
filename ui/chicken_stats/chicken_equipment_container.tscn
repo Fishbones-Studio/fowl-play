@@ -8,7 +8,7 @@ size_flags_stretch_ratio = 4.0
 theme_override_constants/separation = 0
 script = ExtResource("1_ip2io")
 
-[node name="ChickenEquipmentButtonsContainer" type="HBoxContainer" parent="."]
+[node name="ChickenEquipmentPanelContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0

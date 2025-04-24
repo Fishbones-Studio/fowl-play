@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bw8m5ywf3dq02"]
 
-[ext_resource type="PackedScene" uid="uid://cuvibbm5bfoje" path="res://ui/chicken_stats/chicken_equipment_button.tscn" id="2_g5yc7"]
+[ext_resource type="PackedScene" uid="uid://cuvibbm5bfoje" path="res://ui/chicken_stats/chicken_equipment_panel.tscn" id="2_g5yc7"]
 
 [sub_resource type="GDScript" id="GDScript_p8d7r"]
 script/source = "extends HBoxContainer
@@ -43,10 +43,5 @@ func _on_weapon_button_focus_entered(weapon: ChickenEquipmentButton) -> void:
 theme_override_constants/separation = 0
 script = SubResource("GDScript_p8d7r")
 
-[node name="ChickenWeaponButton" parent="." instance=ExtResource("2_g5yc7")]
+[node name="ChickenEquipmentPanel" parent="." instance=ExtResource("2_g5yc7")]
 layout_mode = 2
-text = "Slot 1 - "
-
-[node name="ChickenWeaponButton2" parent="." instance=ExtResource("2_g5yc7")]
-layout_mode = 2
-text = "Slot 2 - "
