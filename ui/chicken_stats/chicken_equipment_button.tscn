@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://cuvibbm5bfoje"]
 
-[ext_resource type="Script" uid="uid://cth6aobfpaw7o" path="res://ui/chicken_stats/chicken_weapon_button.gd" id="1_rj473"]
+[ext_resource type="Script" uid="uid://cth6aobfpaw7o" path="res://ui/chicken_stats/chicken_equipment_button.gd" id="1_rj473"]
 
-[node name="ChickenWeaponButton" type="Button"]
+[node name="ChickenEquipmentButton" type="Button"]
 custom_minimum_size = Vector2(256, 36)
 size_flags_horizontal = 3
 theme_type_variation = &"ChickenWeaponButton"

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnj4tl7mxfwi6"]
+
+[ext_resource type="Script" uid="uid://dp02hm14w2ymu" path="res://ui/chicken_stats/chicken_equipment_container.gd" id="1_ip2io"]
+
+[node name="ChickenEquipmentContainer" type="VBoxContainer"]
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/separation = 0
+script = ExtResource("1_ip2io")
+
+[node name="ChickenEquipmentButtonsContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ChickenWeaponDescLabel"
+text = "Lorem Ipsum"

@@ -1,6 +1,6 @@
 class_name StatsEnums
 
-enum Stat {
+enum Stats {
 	MAX_HEALTH,
 	MAX_STAMINA,
 	ATTACK_MULTIPLIER,
@@ -8,8 +8,8 @@ enum Stat {
 	SPEED,
 	WEIGHT,
 	HEALTH_REGEN,
-	STAMINA_REGEN,
+	STAMINA_REGEN
 }
 
-static func stat_to_string(stat: Stat) -> String:
-	return Stat.keys()[stat].to_lower()
+static func stat_to_string(stat: Stats) -> String:
+	return Stats.keys()[stat].to_lower()

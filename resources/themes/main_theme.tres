@@ -34,7 +34,7 @@ border_color = Color(0.8, 0.796078, 0.780392, 1)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt88i"]
-bg_color = Color(0.8, 0.796078, 0.780392, 1)
+bg_color = Color(0.938624, 0.925614, 0.933812, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07ai7"]
 content_margin_left = 25.0

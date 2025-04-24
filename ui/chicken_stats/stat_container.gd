@@ -1,14 +1,14 @@
 class_name StatContainer
 extends HBoxContainer
 
-@export var stat: StatsEnums.Stat
+@export var stat: StatsEnums.Stats
 
 @onready var stat_label: Label = $StatLabel
 @onready var stat_value_label: Label = $StatValueLabel
 
 
 func _ready() -> void:
-	if not stat:
+	if stat == null:
 		push_error("No stat set for stat container: ", self.name)
 		return
 
