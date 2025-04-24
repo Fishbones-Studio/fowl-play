@@ -1,15 +1,12 @@
 class_name BaseShopItem
 extends PanelContainer
 
-
-
 # Common properties
 static var purchase_in_progress: bool = false :
 	set(value):
 		purchase_in_progress = value
 		if !value:
 			SignalManager.purchase_completed.emit()
-
 
 var shop_item: BaseResource
 

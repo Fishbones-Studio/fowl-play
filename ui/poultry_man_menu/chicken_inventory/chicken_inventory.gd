@@ -1,17 +1,17 @@
 extends Control
 
-var ability_1 : AbilityResource = null
-var ability_2 : AbilityResource = null
+var ability_1: AbilityResource = null
+var ability_2: AbilityResource = null
 
-@onready var equipment_grid : GridContainer = %EquipmentGrid
+@onready var equipment_grid: GridContainer = %EquipmentGrid
 @onready var melee_slot: EquipedItemSlot = %MeleeSlot
 @onready var ranged_slot: EquipedItemSlot = %RangedSlot
 @onready var ability_slot_1: EquipedItemSlot = %AbilitySlot1
 @onready var ability_slot_2: EquipedItemSlot = %AbilitySlot2
 @onready var close_button: Button = %CloseButton
-@onready var item_preview_container : ItemPreviewContainer = %ItemPreviewContainer
-@onready var swap_abilities_button : Button = %SwapAbilitiesButton
-@onready var invisible_area : Control = %InvisibleArea
+@onready var item_preview_container: ItemPreviewContainer = %ItemPreviewContainer
+@onready var swap_abilities_button: Button = %SwapAbilitiesButton
+@onready var invisible_area: Control = %InvisibleArea
 
 
 func _ready() -> void:
@@ -54,7 +54,6 @@ func _setup_controller_navigation() -> void:
 		close_button.focus_neighbor_left = swap_abilities_button.get_path()
 
 
-
 func _update_equipped_slots() -> void:
 	# Get equipped items from the Inventory autoload
 	var melee_weapon: BaseResource = Inventory.get_equipped_item(
@@ -86,7 +85,8 @@ func _update_equipped_slots() -> void:
 	if ability_slot_2:
 		ability_slot_2.display_item(ability_2)
 	else: push_warning("AbilitySlot2 node method not found.")
-	
+
+
 func _on_populate_visual_fields(item: BaseResource) -> void:
 	item_preview_container.visible = item != null
 	invisible_area.visible = !item_preview_container.visible 
@@ -94,6 +94,7 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 		return
 
 	item_preview_container.setup(item)
+
 
 func _on_visibility_changed() -> void:
 	if visible:
