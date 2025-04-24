@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5asg38flourg"]
+
+[ext_resource type="Script" uid="uid://coqib8kyhvh5b" path="res://ui/chicken_stats/stat_container.gd" id="1_u5tuf"]
+
+[node name="StatContainer" type="HBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+script = ExtResource("1_u5tuf")
+
+[node name="StatLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_type_variation = &"ChickenStatLabel"
+text = "Stat Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatValueLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_type_variation = &"ChickenStatValueLabel"
+text = "Stat Value"
+vertical_alignment = 1

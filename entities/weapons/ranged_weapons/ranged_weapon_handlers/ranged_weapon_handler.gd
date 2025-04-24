@@ -1,5 +1,6 @@
 ## Handles input transitions for ranged weapon state machine
-class_name RangedWeaponHandler extends Node
+class_name RangedWeaponHandler 
+extends Node
 
 @export var state_machine: RangedWeaponStateMachine
 

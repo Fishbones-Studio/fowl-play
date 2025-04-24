@@ -1,0 +1,159 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2vh7na31m8hi"]
+
+[ext_resource type="Script" uid="uid://c1b516aq1e48v" path="res://ui/chicken_stats/chicken_stats.gd" id="1_5okfq"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_rolus"]
+[ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="2_7na05"]
+[ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="2_yykr0"]
+[ext_resource type="PackedScene" uid="uid://cnj4tl7mxfwi6" path="res://ui/chicken_stats/chicken_equipment_container.tscn" id="5_l08ed"]
+[ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="6_l08ed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l08ed"]
+shader = ExtResource("1_rolus")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.6
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l08ed"]
+
+[node name="ChickenStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5okfq")
+metadata/_edit_vertical_guides_ = [-239.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_l08ed")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+theme_type_variation = &"SettingsHeaderContainer"
+
+[node name="HeaderContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 1152.0
+offset_bottom = 71.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/HeaderContainer"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 56)
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Chicken Overview"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"SettingsExitButton"
+text = "X"
+script = ExtResource("2_yykr0")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ChickenDetailsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ChickenStatsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="MaxHealthStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+
+[node name="MaxStaminaStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 1
+
+[node name="AttackStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 2
+
+[node name="DefenseStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 3
+
+[node name="SpeedStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 4
+
+[node name="WeightStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 5
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealthRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 6
+
+[node name="StaminaRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+layout_mode = 2
+stat = 7
+
+[node name="ChickenEquipmentContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" node_paths=PackedStringArray("item_preview") instance=ExtResource("5_l08ed")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+equipments = Array[int]([0, 1, 2, 2])
+item_preview = NodePath("../Control/ItemPreviewContainer")
+
+[node name="Control" type="PanelContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l08ed")
+
+[node name="ItemPreviewContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/Control" instance=ExtResource("6_l08ed")]
+layout_mode = 2
+
+[connection signal="button_up" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_button_up"]
+[connection signal="focus_entered" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_exited"]
