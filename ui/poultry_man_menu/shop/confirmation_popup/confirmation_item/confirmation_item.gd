@@ -7,11 +7,14 @@ var compare_item: BaseResource = null
 @onready var name_label: Label = %NameLabel
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var description_label: RichTextLabel = %DescriptionLabel
-@onready var cost_label: Label = %CostLabel
+
+@onready var item_cost_label: Label = %ItemCostLabel
+@onready var item_currency_icon : TextureRect = %ItemCurrencyIcon
+@onready var currency_container : HBoxContainer = $ConfirmationItemContainer/CurrencyHboxContainer
 
 
 func _ready() -> void:
-	cost_label.visible = false
+	currency_container.visible = false
 	super()
 
 
@@ -51,9 +54,10 @@ func populate_visual_fields() -> void:
 	name_label.text = shop_item.name
 	if shop_item.icon: item_icon.texture = shop_item.icon
 	type_label.text = ItemEnums.item_type_to_string(shop_item.type)
-	cost_label.text = str(shop_item.cost)
+	item_currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
+	item_cost_label.text = str(shop_item.cost)
 	if compare_item:
-		cost_label.visible = true
+		currency_container.visible = true
 		description_label.text = _create_compare_item_description()
 	else:
 		description_label.text = "\n".join(shop_item.get_modifier_string())
