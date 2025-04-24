@@ -43,7 +43,43 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
 		_handle_ui_cancel_action()
 
-	
+## Loads a game scene with a loading screen, then switches to HUD and target game scene
+##
+## @param: game_scene_path - The resource path or UID to the game scene
+## @param: hud_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
+func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
+	# 1. Show loading screen
+	SignalManager.emit_signal("switch_ui_scene", UIEnums.UI.LOADING_SCREEN)
+	SignalManager.emit_signal("loading_screen_started")
+	await get_tree().process_frame
+
+
+	# 2. Load in background
+	ResourceLoader.load_threaded_request(game_scene_path)
+	var progress = []
+
+	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		SignalManager.emit_signal("loading_progress_updated", progress[0] if progress.size() > 0 else 0.0)
+		await get_tree().process_frame
+
+
+	# 3. Verify load
+	if ResourceLoader.load_threaded_get_status(game_scene_path) != ResourceLoader.THREAD_LOAD_LOADED:
+		push_error("Failed to load scene: ", game_scene_path)
+		SignalManager.emit_signal("switch_ui_scene", UIEnums.UI.MAIN_MENU)
+		return
+
+	# ✅ Notify loading is finished BEFORE switching
+	SignalManager.emit_signal("loading_screen_finished")
+
+	# 4. Switch scenes
+	SignalManager.emit_signal("switch_game_scene", game_scene_path)
+
+	# 5. Show HUD
+	SignalManager.emit_signal("switch_ui_scene", hud_ui)
+
+
+
 ## Removes a specific UI control from the manager using its enum identifier.
 ##
 ## @param: ui_enum - The UIEnums.UI value of the UI to remove.

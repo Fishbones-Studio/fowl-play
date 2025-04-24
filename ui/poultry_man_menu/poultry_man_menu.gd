@@ -133,8 +133,7 @@ func _on_select_current_item() -> void:
 	var selected_item: Focusable3D = focusable_items[current_index]
 
 	if selected_item == flyer_item:
-		SignalManager.emit_throttled("switch_ui_scene", [UIEnums.UI.PLAYER_HUD])
-		SignalManager.emit_throttled("switch_game_scene", ["uid://bhnqi4fnso1hh"])
+		UIManager.load_game_with_loading_screen("uid://bhnqi4fnso1hh")
 	elif selected_item == shop_item:
 		if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
 			UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
