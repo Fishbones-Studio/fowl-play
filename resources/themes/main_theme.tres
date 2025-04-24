@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=49 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=42 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -34,26 +34,14 @@ border_color = Color(0.8, 0.796078, 0.780392, 1)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt88i"]
-bg_color = Color(0.938624, 0.925614, 0.933812, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20od3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g1eo5"]
+bg_color = Color(0.8, 0.796078, 0.780392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07ai7"]
+content_margin_left = 25.0
+content_margin_top = 15.0
+content_margin_right = 25.0
+content_margin_bottom = 15.0
 bg_color = Color(0.938624, 0.925614, 0.933812, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27a07"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ddjlj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5kiug"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_px7dm"]
-bg_color = Color(0.938624, 0.925614, 0.933812, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8xsr"]
-bg_color = Color(0.8, 0.796078, 0.780392, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_yjg5f"]
 color = Color(0.529412, 0.501961, 0.345098, 0)
@@ -200,24 +188,15 @@ ChickenStatValueLabel/colors/font_color = Color(0.1562, 0.166833, 0.22, 1)
 ChickenStatValueLabel/constants/outline_size = 0
 ChickenStatValueLabel/font_sizes/font_size = 18
 ChickenStatValueLabel/styles/normal = SubResource("StyleBoxFlat_yig1m")
-ChickenWeaponsContainer/base_type = &"TabContainer"
-ChickenWeaponsContainer/colors/font_selected_color = Color(0.1562, 0.166833, 0.22, 1)
-ChickenWeaponsContainer/colors/font_unselected_color = Color(0.1562, 0.166833, 0.22, 1)
-ChickenWeaponsContainer/constants/outline_size = 0
-ChickenWeaponsContainer/font_sizes/font_size = 18
-ChickenWeaponsContainer/styles/panel = SubResource("StyleBoxFlat_lt88i")
-ChickenWeaponsContainer/styles/tab_selected = SubResource("StyleBoxEmpty_20od3")
-ChickenWeaponsContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_g1eo5")
-ChickenWeaponsContainer/styles/tabbar_background = SubResource("StyleBoxFlat_07ai7")
-ChickenWeaponsTabBar/base_type = &"TabBar"
-ChickenWeaponsTabBar/colors/font_selected_color = Color(0, 0, 0, 1)
-ChickenWeaponsTabBar/colors/font_unselected_color = Color(0, 0, 0, 1)
-ChickenWeaponsTabBar/font_sizes/font_size = 20
-ChickenWeaponsTabBar/styles/button_pressed = SubResource("StyleBoxEmpty_27a07")
-ChickenWeaponsTabBar/styles/tab_disabled = SubResource("StyleBoxEmpty_ddjlj")
-ChickenWeaponsTabBar/styles/tab_focus = SubResource("StyleBoxEmpty_5kiug")
-ChickenWeaponsTabBar/styles/tab_selected = SubResource("StyleBoxFlat_px7dm")
-ChickenWeaponsTabBar/styles/tab_unselected = SubResource("StyleBoxFlat_o8xsr")
+ChickenWeaponButton/base_type = &"Button"
+ChickenWeaponButton/colors/font_disabled_color = Color(0.1562, 0.166833, 0.22, 1)
+ChickenWeaponButton/constants/outline_size = 0
+ChickenWeaponButton/styles/disabled = SubResource("StyleBoxFlat_lt88i")
+ChickenWeaponDescLabel/base_type = &"RichTextLabel"
+ChickenWeaponDescLabel/colors/default_color = Color(0.1562, 0.166833, 0.22, 1)
+ChickenWeaponDescLabel/constants/outline_size = 0
+ChickenWeaponDescLabel/font_sizes/normal_font_size = 16
+ChickenWeaponDescLabel/styles/normal = SubResource("StyleBoxFlat_07ai7")
 ConfirmationContainer/base_type = &"PanelContainer"
 ConfirmationContainer/styles/panel = ExtResource("4_dagba")
 HSeparator/styles/separator = SubResource("StyleBoxLine_yjg5f")

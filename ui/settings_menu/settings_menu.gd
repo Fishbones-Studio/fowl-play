@@ -1,4 +1,5 @@
-class_name SettingsMenu extends Control
+class_name SettingsMenu 
+extends Control
 
 @onready var settings_label: Label = %SettingsLabel
 @onready var content: Control = %Content
