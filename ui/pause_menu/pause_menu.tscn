@@ -12,23 +12,23 @@ shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.7
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b4b0p"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c3jo5"]
 sky_top_color = Color(1, 1, 1, 1)
 sky_horizon_color = Color(1, 1, 1, 1)
 energy_multiplier = 1.5
 
 [sub_resource type="Sky" id="Sky_ihaig"]
-sky_material = SubResource("ProceduralSkyMaterial_b4b0p")
+sky_material = SubResource("ProceduralSkyMaterial_c3jo5")
 
-[sub_resource type="Environment" id="Environment_c3jo5"]
+[sub_resource type="Environment" id="Environment_uraes"]
 background_mode = 2
 sky = SubResource("Sky_ihaig")
 sky_rotation = Vector3(1.00356, 0, 0)
 
 [sub_resource type="World3D" id="World3D_3qrb2"]
-environment = SubResource("Environment_c3jo5")
+environment = SubResource("Environment_uraes")
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "footer", "game_logo_container")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "game_logo_container")]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -40,7 +40,6 @@ grow_vertical = 2
 script = ExtResource("1_c3jo5")
 chicken = NodePath("ChickenContainer/SubViewportContainer/SubViewport/chicken_default")
 camera = NodePath("ChickenContainer/SubViewportContainer/SubViewport/Camera3D")
-footer = NodePath("Footer")
 game_logo_container = NodePath("GameLogoContainer")
 
 [node name="BlurRect" type="ColorRect" parent="."]
@@ -120,6 +119,14 @@ text = "Resume"
 alignment = 0
 script = ExtResource("4_c3jo5")
 
+[node name="OverviewButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Overview"
+alignment = 0
+
 [node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -170,22 +177,9 @@ layout_mode = 2
 texture = ExtResource("4_b4b0p")
 expand_mode = 3
 
-[node name="Footer" type="PanelContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(0, 56)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -45.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_type_variation = &"PauseMenuFooter"
-
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_stats_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_button_up"]

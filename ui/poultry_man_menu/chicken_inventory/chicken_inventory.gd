@@ -86,7 +86,8 @@ func _update_equipped_slots() -> void:
 	if ability_slot_2:
 		ability_slot_2.display_item(ability_2)
 	else: push_warning("AbilitySlot2 node method not found.")
-	
+
+
 func _on_populate_visual_fields(item: BaseResource) -> void:
 	item_preview_container.visible = item != null
 	invisible_area.visible = !item_preview_container.visible 
@@ -94,6 +95,7 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 		return
 
 	item_preview_container.setup(item)
+
 
 func _on_visibility_changed() -> void:
 	if visible:

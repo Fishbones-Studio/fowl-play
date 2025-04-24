@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuqpcy333m8d5"]
+[gd_scene load_steps=4 format=3 uid="uid://cuqpcy333m8d5"]
 
 [ext_resource type="Script" uid="uid://ddkveip8o00su" path="res://utilities/shop/base_shop.gd" id="1_jjkbf"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_jh0jc"]
