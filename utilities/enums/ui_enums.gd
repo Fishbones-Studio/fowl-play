@@ -12,7 +12,7 @@ enum UI {
 	IN_ARENA_SHOP,
 	PLAYER_DEBUG_MENU,
 	ROUND_SCREEN,
-	LOADING_SCREEN
+	LOADING_SCREEN,
 	CHICKEN_STATS,
 }
 
@@ -28,7 +28,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.IN_ARENA_SHOP: "uid://djg6luy3rxi23",
 	UI.PLAYER_DEBUG_MENU: "uid://bjr4b02aehry4",
 	UI.ROUND_SCREEN: "uid://61l26wjx0fux",
-	UI.LOADING_SCREEN: "uid://cu2ima27whcct"
+	UI.LOADING_SCREEN: "uid://cu2ima27whcct",
 	UI.CHICKEN_STATS: "uid://c2vh7na31m8hi",
 	}
 
