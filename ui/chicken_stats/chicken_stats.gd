@@ -1,11 +1,5 @@
 extends Control
 
-@onready var close_button: Button = %CloseButton
-
-
-func _ready() -> void:
-	close_button.grab_focus()
-
 
 func _input(_event: InputEvent) -> void:
 	# Remove stats menu, and make pause focusable again, if conditions are true

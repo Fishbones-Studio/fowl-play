@@ -72,7 +72,7 @@ func _set_equipment_panels(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPan
 			pass
 
 	if panel and panel.equipped_item:
-		panel.label.text += " - " + panel.equipped_item.name
+		panel.label.text = panel.equipped_item.name
 		panel.img.texture = panel.equipped_item.icon
 	else:
 		panel.label.text += "- Empty"

@@ -149,7 +149,6 @@ item_preview = NodePath("../Control/ItemPreviewContainer")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_l08ed")
 
 [node name="ItemPreviewContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/Control" instance=ExtResource("6_l08ed")]
