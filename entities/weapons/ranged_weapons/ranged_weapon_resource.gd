@@ -37,3 +37,39 @@ func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 	modifiers.append("[color=%s]%s[/color]" % [hex_code, "can be released mid-fire" if allow_early_release else "cannot be released mid-fire"])
 
 	return modifiers
+
+
+func get_modifier() -> Array[float]:
+	var modifiers: Array[float] = []
+
+	if damage:
+		modifiers.append(damage)
+	else:
+		modifiers.append(0.0)
+
+	if fire_rate_per_second:
+		modifiers.append(fire_rate_per_second)
+	else:
+		modifiers.append(0.0)
+	
+	if windup_time:
+		modifiers.append(windup_time)
+	else:
+		modifiers.append(0.0)
+	
+	if attack_duration:
+		modifiers.append(attack_duration)
+	else:
+		modifiers.append(0.0)
+	
+	if max_range:
+		modifiers.append(max_range)
+	else:
+		modifiers.append(0.0)
+	
+	if cooldown_time:
+		modifiers.append(cooldown_time)
+	else:
+		modifiers.append(0.0)
+
+	return modifiers

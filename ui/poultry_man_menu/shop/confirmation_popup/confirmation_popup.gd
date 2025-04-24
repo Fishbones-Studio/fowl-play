@@ -1,11 +1,10 @@
 extends Control
 
 const CONFIRMATION_ITEM_SCENE = preload("uid://bsstdeorrjt66")
-
 var existing_item_resource: BaseResource
 var new_item_resource: BaseResource
-var purchased_signal : Signal
-var purchase_cancelled_signal : Signal
+var purchased_signal: Signal
+var purchase_cancelled_signal: Signal
 
 @onready var owned_items_container: CenterContainer = %OwnedItemsContainer
 @onready var new_item_container: CenterContainer = %NewItemContainer
@@ -26,7 +25,7 @@ func _ready() -> void:
 	_load_items()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ) \
 	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.POULTRYMAN_SHOP):
@@ -41,11 +40,11 @@ func _input(event: InputEvent) -> void:
 func _load_items() -> void:
 	if new_item_resource == null:
 		printerr("Item is null")
-		return 
+		return
 
 	# Safely instantiate and setup items
 	var current_item: ConfirmationItem = _create_confirmation_item(existing_item_resource)
-	var new_item: ConfirmationItem = _create_confirmation_item(new_item_resource)
+	var new_item: ConfirmationItem = _create_confirmation_item(new_item_resource, existing_item_resource)
 
 	# Verify successful creation
 	if not current_item or not new_item:
@@ -63,8 +62,8 @@ func _load_items() -> void:
 
 
 # Helper function for safe instantiation
-func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
-	if not resource:
+func _create_confirmation_item(display_resource: Resource, compare_resource: BaseResource = null) -> ConfirmationItem:
+	if not display_resource:
 		printerr("Attempted to create item with null resource")
 		return null
 
@@ -74,8 +73,8 @@ func _create_confirmation_item(resource: Resource) -> ConfirmationItem:
 		printerr("Failed to instantiate ConfirmationItem scene")
 		return null
 
-	item.set_item_data(resource)
-	item.gui_input.connect(_on_item_selected.bind(item, resource))
+	item.set_item_data(display_resource, compare_resource)
+	item.gui_input.connect(_on_item_selected.bind(item, display_resource))
 
 	return item
 
@@ -100,3 +99,7 @@ func _proceed_with_purchase() -> void:
 func _cancel_purchase() -> void:
 	purchase_cancelled_signal.emit()
 	UIManager.remove_ui(self)
+
+
+func _on_close_button_pressed():
+	UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP_CONFIRMATION)
