@@ -1,4 +1,4 @@
-extends Button
+class_name FocusButton extends Button
 
 func _ready():
 	SignalManager.ui_disabled.connect(_try_grab_focus)

@@ -16,6 +16,7 @@ max_range = 25.0
 name = "Minigun"
 drop_chance = 10
 cost = 200
+currency_type = 0
 description = "MiniGun"
 icon = ExtResource("1_f0db6")
 model_uid = "uid://8owdwg4pu4ht"

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdm28vmjyejeo"]
+
+[ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="1_0lv8c"]
+
+[node name="CloseButton" type="Button"]
+custom_minimum_size = Vector2(56, 56)
+theme_type_variation = &"SettingsExitButton"
+text = "X"
+script = ExtResource("1_0lv8c")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

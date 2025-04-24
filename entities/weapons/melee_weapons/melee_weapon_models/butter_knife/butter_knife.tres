@@ -12,6 +12,7 @@ cooldown_time = 0.35
 name = "Butter Knife"
 drop_chance = 8
 cost = 110
+currency_type = 0
 description = "Stab"
 icon = ExtResource("1_m3duu")
 model_uid = "uid://db68ojqri7xqs"

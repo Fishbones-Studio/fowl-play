@@ -102,7 +102,7 @@ shape = SubResource("BoxShape3D_og4p7")
 
 [node name="Inventory Label" type="Label3D" parent="MenuItems/Inventory"]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
-text = "Inventory"
+text = "Equipment"
 
 [node name="Shop" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
