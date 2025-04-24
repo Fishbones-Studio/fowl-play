@@ -13,21 +13,20 @@ func _init() -> void:
 	type = ItemEnums.ItemTypes.UPGRADE
 
 
-# TODO, add back the bbcCode
-func get_modifier_string() -> Array[String]:
+func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 	var modifiers: Array[String] = []
 
 	if health_bonus != 0.0:
-		modifiers.append("%+.2f" % health_bonus)
+		modifiers.append("[color=%s]%+.2f[/color]" % [hex_code, health_bonus])
 	if stamina_bonus != 0.0:
-		modifiers.append("%+.2f" % stamina_bonus)
+		modifiers.append("[color=%s]%+.2f[/color]" % [hex_code, stamina_bonus])
 	if attack_multiplier_bonus != 0.0:
-		modifiers.append("%+.2f" % attack_multiplier_bonus)
+		modifiers.append("[color=%s]%+.2f[/color]" % [hex_code, attack_multiplier_bonus])
 	if defense_bonus != 0:
-		modifiers.append("%+d" % defense_bonus)
+		modifiers.append("[color=%s]%+d[/color]" % [hex_code, defense_bonus])
 	if speed_bonus != 0.0:
-		modifiers.append("%+.2f" % speed_bonus)
+		modifiers.append("[color=%s]%+.2f[/color]" % [hex_code, speed_bonus])
 	if weight_bonus != 0.0:
-		modifiers.append("%+.2f" % weight_bonus)
+		modifiers.append("[color=%s]%+.2f[/color]" % [hex_code, weight_bonus])
 
 	return modifiers

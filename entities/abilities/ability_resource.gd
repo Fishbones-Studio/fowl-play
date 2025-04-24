@@ -9,10 +9,10 @@ func _init() -> void:
 	type_max_owned_amount = 2
 
 
-func get_modifier_string() -> Array[String]:
+func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 	var modifiers: Array[String] = []
 
 	if cooldown:
-		modifiers.append("%.2fs" % cooldown)
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown])
 
 	return modifiers
