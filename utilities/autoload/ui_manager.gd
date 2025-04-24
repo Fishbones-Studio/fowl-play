@@ -73,10 +73,10 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 	loaded_resource = null  
 
 	# Switch to the loaded game scene
-	SignalManager.switch_game_scene.emit([game_scene_path])
+	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
 
 	# Switch to the specified HUD UI
-	SignalManager.switch_ui_scene.emit([hud_ui])
+	SignalManager.emit_throttled("switch_ui_scene", [hud_ui])
 
 
 ## Removes a specific UI control from the manager using its enum identifier.
