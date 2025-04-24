@@ -48,36 +48,35 @@ func _unhandled_input(event: InputEvent) -> void:
 ## @param: game_scene_path - The resource path or UID to the game scene
 ## @param: hud_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
 func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
-	# 1. Show loading screen
-	SignalManager.emit_signal("switch_ui_scene", UIEnums.UI.LOADING_SCREEN)
+	# Show the loading screen UI
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
+	# Notify that the loading screen has started
 	SignalManager.emit_signal("loading_screen_started")
 	await get_tree().process_frame
 
-
-	# 2. Load in background
+	# Begin loading the game scene in a separate thread
 	ResourceLoader.load_threaded_request(game_scene_path)
 	var progress = []
 
+	# Continuously update progress until loading is complete
 	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		# Emit current loading progress (fallback to 0.0 if not available)
 		SignalManager.emit_signal("loading_progress_updated", progress[0] if progress.size() > 0 else 0.0)
 		await get_tree().process_frame
 
-
-	# 3. Verify load
-	if ResourceLoader.load_threaded_get_status(game_scene_path) != ResourceLoader.THREAD_LOAD_LOADED:
-		push_error("Failed to load scene: ", game_scene_path)
-		SignalManager.emit_signal("switch_ui_scene", UIEnums.UI.MAIN_MENU)
-		return
-
-	# ✅ Notify loading is finished BEFORE switching
+	# Notify that loading is complete
 	SignalManager.emit_signal("loading_screen_finished")
+	
+	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
+	var loaded_resource = ResourceLoader.load_threaded_get(game_scene_path)
+	# Explicitly discard the resource if not needed
+	loaded_resource = null  
 
-	# 4. Switch scenes
-	SignalManager.emit_signal("switch_game_scene", game_scene_path)
+	# Switch to the loaded game scene
+	SignalManager.switch_game_scene.emit([game_scene_path])
 
-	# 5. Show HUD
-	SignalManager.emit_signal("switch_ui_scene", hud_ui)
-
+	# Switch to the specified HUD UI
+	SignalManager.switch_ui_scene.emit([hud_ui])
 
 
 ## Removes a specific UI control from the manager using its enum identifier.
