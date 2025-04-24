@@ -35,6 +35,8 @@ func _on_attack_timer_timeout() -> void:
 
 
 func _attack() -> void:
+	print(weapon_node.current_weapon.attack_duration)
+	#print(attack_timer.wait_time)
 	if not hit_area:
 		print("HitArea not found!")
 		return
