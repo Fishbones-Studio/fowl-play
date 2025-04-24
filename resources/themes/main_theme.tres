@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=41 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=42 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://dwicgkvjluob0" path="res://resources/themes/styleboxes/keybinds_res_def_button_hover.tres" id="5_03ohx"]
 [ext_resource type="StyleBox" uid="uid://bpysgk20uefcg" path="res://resources/themes/styleboxes/chicken_weapon_desc_label_dark.tres" id="5_5kiug"]
 [ext_resource type="StyleBox" uid="uid://b3g0yn6513eyy" path="res://resources/themes/styleboxes/chicken_stat_label_dark.tres" id="5_20od3"]
+[ext_resource type="StyleBox" uid="uid://ceyysiao8q2tl" path="res://resources/themes/styleboxes/panel_container_normal.tres" id="5_xtbu8"]
 [ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="6_7adcq"]
 [ext_resource type="StyleBox" uid="uid://2bi33x6p08ih" path="res://resources/themes/styleboxes/keybinds_res_def_button_normal.tres" id="6_7ucis"]
 [ext_resource type="StyleBox" uid="uid://xd230hdal3tb" path="res://resources/themes/styleboxes/chicken_stat_value_label_dark.tres" id="6_g1eo5"]
@@ -221,7 +222,7 @@ OptionButton/constants/modulate_arrow = 1
 OptionButton/constants/outline_size = 0
 OptionButton/font_sizes/font_size = 18
 Panel/styles/panel = ExtResource("8_7ucis")
-PanelContainer/styles/panel = ExtResource("4_7ucis")
+PanelContainer/styles/panel = ExtResource("5_xtbu8")
 PauseMenuButton/base_type = &"Button"
 PauseMenuButton/colors/font_color = Color(0.745098, 0.737255, 0.745098, 1)
 PauseMenuButton/colors/font_focus_color = Color(0.529412, 0.501961, 0.521569, 1)
