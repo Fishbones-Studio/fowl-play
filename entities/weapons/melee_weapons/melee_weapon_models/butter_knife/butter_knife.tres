@@ -13,6 +13,6 @@ name = "Butter Knife"
 drop_chance = 8
 cost = 110
 currency_type = 0
-description = "Deals %s Base Damage with a quick stab. The attack lasts %s, then enters a cooldown state for %s."
+description = "Deals %s Base Damage with a quick stab. Feel the speed, with a windup of %s. The attack lasts %s, then enters a cooldown state for %s."
 icon = ExtResource("1_m3duu")
 model_uid = "uid://db68ojqri7xqs"

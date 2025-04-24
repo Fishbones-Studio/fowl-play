@@ -8,8 +8,8 @@ extends Resource
 @export var drop_chance: int
 @export var cost: int
 @export var currency_type: CurrencyEnums.CurrencyTypes
-@export_multiline var description: String = "PlaceHolder" # Flavour text
 
+@export_multiline var description: String = "PlaceHolder" # Flavour text. Should always be displayed in a RichTextLabel with BBCode support
 # Visual & UI Elements
 @export var icon: Texture  # The icon for the shop/inventory
 @export var model_uid: String # The uid of the model, for saving and loading purpouses
@@ -21,4 +21,9 @@ var type_max_owned_amount: int = 1 ## How many of this item type the player is a
 # Abstract method
 func get_modifier_string() -> Array[String]:
 	printerr("get_modifier_string() should be overwritten in child class")
+	return []
+
+
+func get_modifier() -> Array[float]:
+	printerr("get_modifier() should be overwritten in child class")
 	return []
