@@ -4,11 +4,13 @@ class_name EquipedItemSlot extends PanelContainer
 
 var item : BaseResource
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_name: Label = %ItemName
 
-
+func _ready() -> void:
+	focus_mode = Control.FOCUS_ALL
 
 func display_item(_item: BaseResource) -> void:
 	if _item:
@@ -29,8 +31,17 @@ func display_item(_item: BaseResource) -> void:
 		if empty_slot_texture == null: item_icon.hide()
 
 func _on_focus_entered() -> void:
+	print("focus entered")
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
 
 	SignalManager.preview_shop_item.emit(item)
+
+
+func _on_focus_exited() -> void:
+	if not theme:
+		theme = Theme.new()
+	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	
+	SignalManager.preview_shop_item.emit(null)

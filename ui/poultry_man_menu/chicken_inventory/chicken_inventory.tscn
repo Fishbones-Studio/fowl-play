@@ -93,7 +93,7 @@ theme_override_constants/margin_bottom = 30
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 50
 
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -160,6 +160,11 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="InvisibleArea" type="Control" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
 
 [node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_x0uxr")]
 unique_name_in_owner = true
