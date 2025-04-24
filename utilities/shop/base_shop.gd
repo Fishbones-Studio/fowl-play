@@ -13,7 +13,6 @@ var prevent_duplicates: bool = true
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
-
 @onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
 
 

@@ -1,4 +1,4 @@
-class_name InArenaShopItem
+class_name UpgradeShopItem
 extends BaseShopItem
 
 @onready var item_icon: TextureRect = %ItemIcon
@@ -12,14 +12,14 @@ func _ready() -> void:
 
 
 func set_item_data(item: Resource) -> void:
-	if not item is InRunUpgradeResource:
+	if not item is UpgradeResource:
 		if item == null:
 			push_error("Item is null")
 			return
-		push_error("Item is not of type InRunUpgradeResource")
+		push_error("Item is not of type UpgradeResource")
 		return
 
-	shop_item = item as InRunUpgradeResource
+	shop_item = item as UpgradeResource
 
 
 func populate_visual_fields() -> void:

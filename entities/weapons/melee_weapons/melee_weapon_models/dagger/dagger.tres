@@ -13,6 +13,6 @@ name = "Dagger"
 drop_chance = 20
 cost = 80
 currency_type = 0
-description = "Slower, more damage"
+description = "Deals %s Base Damage with a powerful swing after a windup of %s. The attack lasts %s, then enters a cooldown state for %s."
 icon = ExtResource("1_8lwf8")
 model_uid = "uid://dldj0suybdnhl"

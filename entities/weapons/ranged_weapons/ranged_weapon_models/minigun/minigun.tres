@@ -17,7 +17,9 @@ name = "Minigun"
 drop_chance = 10
 cost = 200
 currency_type = 0
-description = "MiniGun"
+description = "Deals %s Base Damage per bullet, with a fire rate of %s after a windup of %s. The attack lasts %s, with a max range of %s, then enters a cooldown state for %s.
+
+This weapon %s and %s."
 icon = ExtResource("1_f0db6")
 model_uid = "uid://8owdwg4pu4ht"
 metadata/_custom_type_script = "uid://dm0sr7j8y5j30"

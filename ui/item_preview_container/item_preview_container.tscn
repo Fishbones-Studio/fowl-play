@@ -40,14 +40,7 @@ size_flags_vertical = 3
 [node name="ItemPreviewDescription" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/line_separation = 6
 bbcode_enabled = true
 text = "Description"
-fit_content = true
-
-[node name="ItemPreviewStats" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/line_separation = 8
-bbcode_enabled = true
-text = "Stats"
 fit_content = true

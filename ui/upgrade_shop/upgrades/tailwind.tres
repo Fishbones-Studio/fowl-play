@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://dorvad0onug1x"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_67ylu"]
+
+[resource]
+script = ExtResource("1_67ylu")
+health_bonus = 0.0
+stamina_bonus = 0.0
+attack_multiplier_bonus = 0.0
+defense_bonus = 0
+speed_bonus = 15.0
+weight_bonus = 0.0
+name = "Tailwind"
+drop_chance = 0
+cost = 500
+currency_type = 0
+description = "The wind blows behind the user's back and increases Speed by %s."
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

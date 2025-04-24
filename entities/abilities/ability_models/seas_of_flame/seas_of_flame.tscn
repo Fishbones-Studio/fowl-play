@@ -50,8 +50,9 @@ shape = SubResource("CylinderShape3D_gdliy")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 emitting = false
-amount = 1500
+amount = 2000
 one_shot = true
 randomness = 1.0
 local_coords = true
