@@ -7,6 +7,7 @@
 extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"
+const SETTINGS_CFG_NAME_KEYBINDS: String = "keybinds"
 const SETTINGS_CFG_NAME_AUDIO: String = "audio"
 
 # Input remapping 
@@ -24,6 +25,13 @@ func load_settings() -> void:
 	# Attempt to load config file - return if failed
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
 		return
+
+	# Load keybind settings
+	if config.has_section(SETTINGS_CFG_NAME_KEYBINDS):
+		for action in config.get_section_keys(SETTINGS_CFG_NAME_KEYBINDS):
+			InputMap.action_erase_events(action)
+			for event in config.get_value(SETTINGS_CFG_NAME_KEYBINDS, action):
+				InputMap.action_add_event(action, event)
 
 	# Load audio settings
 	if config.has_section(SETTINGS_CFG_NAME_AUDIO):
