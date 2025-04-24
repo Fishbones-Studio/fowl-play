@@ -152,7 +152,9 @@ layout_mode = 2
 stat = 5
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HealthRegenStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
@@ -162,7 +164,7 @@ stat = 6
 layout_mode = 2
 stat = 7
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 3
@@ -171,7 +173,7 @@ size_flags_vertical = 3
 layout_mode = 2
 equipments = Array[int]([0, 1])
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 3
