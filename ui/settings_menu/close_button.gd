@@ -1,4 +1,4 @@
-extends FocusButton
+extends Button
 
 
 func _on_focus_entered() -> void:

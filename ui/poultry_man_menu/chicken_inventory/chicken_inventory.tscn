@@ -79,6 +79,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_x0uxr")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
@@ -94,7 +95,20 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="EquipmentGrid" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Swap"
+
+[node name="EquipmentGrid" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,46 +117,46 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 15
 columns = 2
 
-[node name="MeleeLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+[node name="MeleeLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Melee Weapon:"
 vertical_alignment = 1
 
-[node name="MeleeSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+[node name="MeleeSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RangedLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+[node name="RangedLabel" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Ranged Weapon:"
 vertical_alignment = 1
 
-[node name="RangedSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+[node name="RangedSlot" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Ability1Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+[node name="Ability1Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Ability Slot 1:"
 vertical_alignment = 1
 
-[node name="AbilitySlot1" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+[node name="AbilitySlot1" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Ability2Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid"]
+[node name="Ability2Label" type="Label" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Ability Slot 2:"
 vertical_alignment = 1
 
-[node name="AbilitySlot2" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
+[node name="AbilitySlot2" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/EquipmentGrid" instance=ExtResource("2_abcde")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -154,3 +168,4 @@ size_flags_horizontal = 8
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/HBoxContainer/GridContainer/SwapAbilitiesButton" to="." method="_on_swap_abilities_button_pressed"]

@@ -1,13 +1,18 @@
 class_name EquipedItemSlot extends PanelContainer
 
+@export var empty_slot_texture: Texture2D
+
+var item : BaseResource
+var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+
 @onready var item_icon: TextureRect = %ItemIcon
 @onready var item_name: Label = %ItemName
 
-# Optional: Add a default empty texture
-@export var empty_slot_texture: Texture2D
 
-func display_item(item: BaseResource) -> void:
-	if item:
+
+func display_item(_item: BaseResource) -> void:
+	if _item:
+		item = _item
 		item_name.text = item.name
 		if item.icon:
 			item_icon.texture = item.icon
@@ -18,6 +23,14 @@ func display_item(item: BaseResource) -> void:
 			if empty_slot_texture == null: item_icon.hide()
 
 	else:
+		item == null
 		item_name.text = "Empty"
 		item_icon.texture = empty_slot_texture # Show empty slot texture
 		if empty_slot_texture == null: item_icon.hide()
+
+func _on_focus_entered() -> void:
+	if not theme:
+		theme = Theme.new()
+	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
+
+	SignalManager.preview_shop_item.emit(item)
