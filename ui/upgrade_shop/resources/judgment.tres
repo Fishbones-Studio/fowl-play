@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://cbvvcch30whey"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_n28g3"]
+
+[resource]
+script = ExtResource("1_n28g3")
+health_bonus = 100.0
+stamina_bonus = 100.0
+attack_multiplier_bonus = 50.0
+defense_bonus = 120
+speed_bonus = 6.0
+weight_bonus = 0.0
+name = "Judgment"
+drop_chance = 1
+cost = 1000
+currency_type = 0
+description = "The user is gazed by the creator of the world. Increases the user's Health by %, Stamina by %s, Attack by %s, and Defense by %s. Additionally, the user grows longer legs and increases Speed by %s."
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

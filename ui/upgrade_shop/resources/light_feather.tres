@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bemb84fkpw1pp"]
 
-[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/resources/upgrade_resource.gd" id="1_5kktv"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_5kktv"]
 
 [resource]
 script = ExtResource("1_5kktv")
@@ -12,8 +12,8 @@ speed_bonus = 0.0
 weight_bonus = -2.0
 name = "Light Feather"
 drop_chance = 0
-cost = 10
+cost = 40
 currency_type = 0
-description = "Decreases the user's weight by %s."
+description = "Decreases the user's Weight by %s."
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://3hev0w12a2b2"]
 
-[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/resources/upgrade_resource.gd" id="1_5tno4"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_5tno4"]
 
 [resource]
 script = ExtResource("1_5tno4")
@@ -14,6 +14,6 @@ name = "Heavy Feather"
 drop_chance = 0
 cost = 10
 currency_type = 0
-description = "Increases the user's weight by %s."
+description = "Increases the user's Weight by %s."
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
