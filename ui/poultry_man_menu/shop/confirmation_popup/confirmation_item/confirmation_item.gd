@@ -23,6 +23,7 @@ func _create_compare_item_description() -> String:
 	var compare_item_modifier: Array[float] = compare_item.get_modifier()
 	var base_item_modifier: Array[float] = shop_item.get_modifier()
 	var base_modifier_labels: Array[String] = shop_item.get_modifier_string()
+	var compare_modifier_labels: Array[String] = compare_item.get_modifier_string()
 
 	if compare_item_modifier.size() != base_item_modifier.size():
 		push_error("Compare item and base item modifiers are not the same size: ", compare_item_modifier, " vs ", base_item_modifier)
@@ -38,6 +39,7 @@ func _create_compare_item_description() -> String:
 		var current_label_text: String
 		var suffix: String = ""
 
+		# Try to get suffix from base modifier label
 		if not is_zero_approx(base_val):
 			if base_label_idx < base_modifier_labels.size():
 				current_label_text = base_modifier_labels[base_label_idx]
@@ -54,14 +56,30 @@ func _create_compare_item_description() -> String:
 
 				if check_pos != -1:
 					var potential_suffix: String = clean_label[check_pos]
-					print("Potential Suffix: ", potential_suffix)
 					if !(potential_suffix.is_valid_int() || potential_suffix.is_valid_float()):
 						suffix = potential_suffix
 
 				base_label_idx += 1
 			else:
 				push_warning("Mismatch: Ran out of base modifier labels for non-zero base values at index %d." % i)
-			
+
+		# Fallback: Try to get suffix from compare modifier label if not found
+		if suffix == "" and i < compare_modifier_labels.size():
+			var compare_label: String = compare_modifier_labels[i].strip_edges()
+			var tag_end_pos: int = compare_label.rfind("[/color]")
+			var check_pos: int = -1
+
+			if tag_end_pos != -1:
+				if tag_end_pos > 0:
+					check_pos = tag_end_pos - 1
+			elif not compare_label.is_empty():
+				check_pos = compare_label.length() - 1
+
+			if check_pos != -1:
+				var potential_suffix: String = compare_label[check_pos]
+				if !(potential_suffix.is_valid_int() || potential_suffix.is_valid_float()):
+					suffix = potential_suffix
+
 		# Setting a fallback label
 		if current_label_text.is_empty():
 			current_label_text = "[color=yellow]0.0%s[/color]" % suffix
