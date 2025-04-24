@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2vh7na31m8hi"]
+[gd_scene load_steps=9 format=3 uid="uid://c2vh7na31m8hi"]
 
 [ext_resource type="Script" uid="uid://c1b516aq1e48v" path="res://ui/chicken_stats/chicken_stats.gd" id="1_5okfq"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_rolus"]
 [ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="2_7na05"]
 [ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="2_yykr0"]
-[ext_resource type="PackedScene" uid="uid://c0w6d53ulyk6x" path="res://entities/chicken_player/art/chicken_default.glb" id="3_yykr0"]
 [ext_resource type="PackedScene" uid="uid://cnj4tl7mxfwi6" path="res://ui/chicken_stats/chicken_equipment_container.tscn" id="5_l08ed"]
+[ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="6_l08ed"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l08ed"]
 shader = ExtResource("1_rolus")
@@ -13,21 +13,7 @@ shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.6
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b4b0p"]
-sky_top_color = Color(1, 1, 1, 1)
-sky_horizon_color = Color(1, 1, 1, 1)
-energy_multiplier = 1.5
-
-[sub_resource type="Sky" id="Sky_eprvc"]
-sky_material = SubResource("ProceduralSkyMaterial_b4b0p")
-
-[sub_resource type="Environment" id="Environment_c3jo5"]
-background_mode = 2
-sky = SubResource("Sky_eprvc")
-sky_rotation = Vector3(1.00356, 0, 0)
-
-[sub_resource type="World3D" id="World3D_t2nsf"]
-environment = SubResource("Environment_c3jo5")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l08ed"]
 
 [node name="ChickenStats" type="Control"]
 layout_mode = 3
@@ -80,7 +66,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 56)
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
-text = "Chicken Stats"
+text = "Chicken Overview"
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer"]
@@ -96,116 +82,78 @@ text = "X"
 script = ExtResource("2_yykr0")
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+[node name="ChickenDetailsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="ChickenStatsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_bottom = 25
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
-
-[node name="ChickenDetailsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="ChickenStatsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
-layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 2
-size_flags_stretch_ratio = 4.0
 theme_override_constants/separation = 2
 
-[node name="MaxHealthStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="MaxHealthStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 
-[node name="MaxStaminaStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="MaxStaminaStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 1
 
-[node name="AttackStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="AttackStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 2
 
-[node name="DefenseStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="DefenseStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 3
 
-[node name="SpeedStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="SpeedStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 4
 
-[node name="WeightStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="WeightStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 5
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HealthRegenStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="HealthRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 6
 
-[node name="StaminaRegenStatContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
+[node name="StaminaRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
 layout_mode = 2
 stat = 7
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ChickenWeaponsContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer" instance=ExtResource("5_l08ed")]
-layout_mode = 2
-equipments = Array[int]([0, 1])
-
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ChickenAbiltiesContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ScrollContainer/ChickenDetailsContainer" instance=ExtResource("5_l08ed")]
-layout_mode = 2
-equipments = Array[int]([2, 2])
-
-[node name="ChickenContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="ChickenEquipmentContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" node_paths=PackedStringArray("item_preview") instance=ExtResource("5_l08ed")]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+equipments = Array[int]([0, 1, 2, 2])
+item_preview = NodePath("../Control/ItemPreviewContainer")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ChickenContainer"]
+[node name="Control" type="PanelContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer"]
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-stretch = true
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l08ed")
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/MarginContainer/HBoxContainer/ChickenContainer/SubViewportContainer"]
-world_3d = SubResource("World3D_t2nsf")
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(574, 528)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="VBoxContainer/MarginContainer/HBoxContainer/ChickenContainer/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 1.5, 1.8)
-projection = 1
-current = true
-size = 4.0
-
-[node name="chicken_default" parent="VBoxContainer/MarginContainer/HBoxContainer/ChickenContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_yykr0")]
-unique_name_in_owner = true
+[node name="ItemPreviewContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/Control" instance=ExtResource("6_l08ed")]
+layout_mode = 2
 
 [connection signal="focus_entered" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_exited"]

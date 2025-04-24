@@ -2,41 +2,52 @@ class_name ChickenEquipmentContainer
 extends VBoxContainer
 
 @export var equipments: Array[ItemEnums.ItemTypes] = []
+@export var item_preview: ItemPreviewContainer
 
-var _equipment_panel: Array[ChickenEquipmentPanel]
+var _equipment_panels: Array[ChickenEquipmentPanel]
 var _ability_slot: int = 0
+var _item_focused: bool = false
 
 @onready var equipment_panel_resource: Resource = preload("uid://cuvibbm5bfoje")
-@onready var chicken_equipment_panel_container: HBoxContainer = %ChickenEquipmentPanelContainer
-@onready var equipment_description: RichTextLabel = %RichTextLabel
 
 
 func _ready() -> void:
+	assert(item_preview, "Item preview not set for: " + self.name)
+
 	for equipment_type: ItemEnums.ItemTypes in equipments:
-		var equipment_button: ChickenEquipmentPanel = equipment_panel_resource.instantiate()
+		var equipment_panel: ChickenEquipmentPanel = equipment_panel_resource.instantiate()
 
-		_equipment_panel.append(equipment_button)
-		chicken_equipment_panel_container.add_child(equipment_button)
-		equipment_button.focus_entered.connect(_on_equipment_button_focus_entered.bind(equipment_button))
+		add_child(equipment_panel)
+		_equipment_panels.append(equipment_panel)
+		equipment_panel.focus_entered.connect(_on_equipment_panels_focus_entered.bind(equipment_panel))
 
-		_set_equipment_button(equipment_type, equipment_button)
+		_set_equipment_panels(equipment_type, equipment_panel)
 
-	_on_equipment_button_focus_entered(_equipment_panel[0])
+	for item: ChickenEquipmentPanel in _equipment_panels:
+		if item.equipped_item:
+			item.grab_focus()
+			_item_focused = true
+			break
+
+	if not _item_focused:
+		_equipment_panels[0].grab_focus()
 
 
-func _on_equipment_button_focus_entered(equipment_button: ChickenEquipmentPanel) -> void:
-	# Toggle buttons
-	for button: ChickenEquipmentPanel in _equipment_panel:
-		button.active = button == equipment_button
+func _on_equipment_panels_focus_entered(equipment_panel: ChickenEquipmentPanel) -> void:
+	for panel: ChickenEquipmentPanel in _equipment_panels: # Toggle panels
+		panel.active = panel == equipment_panel
 
-	if equipment_button.equipped_item:
-		equipment_description.text = equipment_button.equipped_item.description
+	if equipment_panel.equipped_item: # Set the preview item
+		await get_tree().process_frame
+
+		item_preview.setup(equipment_panel.equipped_item)
+		item_preview.visible = true
 	else:
-		equipment_description.text = "Not equipped."
+		item_preview.visible = false
 
 
-func _set_equipment_button(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPanel) -> void:
-	panel.label.text = "Slot " + str(equipments.find(item) + 1) + " - "
+func _set_equipment_panels(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPanel) -> void:
+	panel.label.text = ItemEnums.item_type_to_string(item) + " "
 
 	match item:
 		ItemEnums.ItemTypes.MELEE_WEAPON:
@@ -51,8 +62,8 @@ func _set_equipment_button(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPan
 			panel.equipped_item = Inventory.get_equipped_item(
 				ItemEnums.ItemTypes.ABILITY, _ability_slot
 			)
+			panel.label.text += str(_ability_slot + 1) + " "
 			_ability_slot += 1
-			panel.label.text = "Slot " + str(_ability_slot) + " - "
 		ItemEnums.ItemTypes.HELMET:
 			pass
 		ItemEnums.ItemTypes.BOOTS:
@@ -61,7 +72,7 @@ func _set_equipment_button(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPan
 			pass
 
 	if panel and panel.equipped_item:
-		panel.label.text = panel.equipped_item.name
+		panel.label.text += " - " + panel.equipped_item.name
 		panel.img.texture = panel.equipped_item.icon
 	else:
-		panel.label.text += ItemEnums.item_type_to_string(item)
+		panel.label.text += "- Empty"

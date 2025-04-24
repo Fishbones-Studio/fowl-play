@@ -9,6 +9,8 @@ extends VBoxContainer
 
 
 func setup(item: BaseResource) -> void:
+	await get_tree().process_frame
+
 	shop_preview_label.text = item.name
 	if item.icon:
 		shop_preview_icon.texture = item.icon

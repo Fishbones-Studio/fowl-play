@@ -1,6 +1,8 @@
 class_name ChickenEquipmentPanel
 extends Panel
 
+var equipped_item: BaseResource
+
 var active: bool = false:
 	set(value):
 		active = value
@@ -9,13 +11,8 @@ var active: bool = false:
 		else:
 			add_theme_stylebox_override("panel", inactive_stylebox_dark)
 
-var equipped_item: BaseResource
+@onready var img: TextureRect = $%TextureRect
+@onready var label: Label = %Label
 
-
-@onready var img: TextureRect = $VBoxContainer/TextureRect
-@onready var label: Label = $VBoxContainer/Label
-
-#@onready var active_stylebox: StyleBoxFlat = preload("uid://bko4hnwdd8w0f")
-#@onready var inactive_stylebox: StyleBoxFlat = preload("uid://b1c8gk4cr5oa7")
 @onready var active_stylebox_dark: StyleBoxFlat = preload("uid://cetchnns5h8tx")
 @onready var inactive_stylebox_dark: StyleBoxFlat = preload("uid://cng68uuqfw6hb")
