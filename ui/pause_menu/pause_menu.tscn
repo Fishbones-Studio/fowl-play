@@ -119,12 +119,12 @@ text = "Resume"
 alignment = 0
 script = ExtResource("4_c3jo5")
 
-[node name="StatsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="OverviewButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
 keep_pressed_outside = true
-text = "Stats"
+text = "Overview"
 alignment = 0
 
 [node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
@@ -179,7 +179,7 @@ expand_mode = 3
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/StatsButton" to="." method="_on_stats_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_stats_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_button_up"]

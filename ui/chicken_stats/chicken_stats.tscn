@@ -154,5 +154,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_l08ed")
 [node name="ItemPreviewContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/Control" instance=ExtResource("6_l08ed")]
 layout_mode = 2
 
+[connection signal="button_up" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_button_up"]
 [connection signal="focus_entered" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" to="VBoxContainer/Panel/HeaderContainer/HBoxContainer/CloseButton" method="_on_focus_exited"]

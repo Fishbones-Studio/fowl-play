@@ -5,7 +5,7 @@ class_name PauseScreen extends Control
 @export var game_logo_container: MarginContainer
 
 @onready var resume_button: Button = %ResumeButton
-@onready var stats_button: Button = %StatsButton
+@onready var overview_button: Button = %OverviewButton
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
 
@@ -56,7 +56,7 @@ func _set_button_visibility() -> void:
 
 	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
 	forfeit_button.visible = "Level" in children # TODO: Whack
-	stats_button.visible = "Level" in children # TODO: Whack
+	overview_button.visible = "Level" in children # TODO: Whack
 
 
 func _get_scene_loader_children() -> Array:
