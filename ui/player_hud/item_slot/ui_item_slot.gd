@@ -48,6 +48,7 @@ func _update_item_visuals() -> void:
 	if item_image and item:
 		item_image.texture = item.icon
 
+
 ## Starting the visualization of the slot cooldown state
 func start_cooldown(duration: float, create_tween := true) -> void:
 	cooldown.visible = true
