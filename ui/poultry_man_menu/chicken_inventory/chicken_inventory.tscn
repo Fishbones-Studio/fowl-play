@@ -63,20 +63,7 @@ vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
-
-[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[center][font_size=25][color=gray][i]Items are automatically equipped[/i][/color][/font_size][/center]
-"
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_x0uxr")]
 unique_name_in_owner = true
@@ -158,13 +145,27 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Swap Abilities"
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][font_size=25][color=gray][i]Items are automatically equipped[/i][/color][/font_size][/center]
+"
+fit_content = true
+scroll_active = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/SwapAbilitiesButton" to="." method="_on_swap_abilities_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/HBoxContainer2/SwapAbilitiesButton" to="." method="_on_swap_abilities_button_pressed"]
