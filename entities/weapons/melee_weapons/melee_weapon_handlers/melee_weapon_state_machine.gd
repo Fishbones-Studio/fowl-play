@@ -9,7 +9,7 @@ signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, info
 @export var starting_state: BaseCombatState
 
 var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
-var weapon : MeleeWeapon
+var weapon: MeleeWeapon
 ## Variable to track if setup has run yet
 var initialized : bool = false
 
@@ -66,7 +66,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		target_state = WeaponEnums.WeaponState.IDLE
 
 	# Exit the current state before switching
-	var previous_state := current_state
+	var previous_state: BaseCombatState = current_state
 	previous_state.exit()
 
 	# Switch to the new state
@@ -75,7 +75,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	if (current_state.ANIMATION_NAME != null && !current_state.ANIMATION_NAME.is_empty() && weapon && weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
+	if (current_state.ANIMATION_NAME != null and not current_state.ANIMATION_NAME.is_empty() and weapon and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
 		# Play the animation for the new state
 		weapon.animation_player.play(current_state.ANIMATION_NAME)
 

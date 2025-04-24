@@ -25,7 +25,8 @@ func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 
 func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
-	
+
+
 func process_hit(raycast: RayCast3D) -> void:
 	# make the raycast immediately check for collisions
 	raycast.force_raycast_update()
