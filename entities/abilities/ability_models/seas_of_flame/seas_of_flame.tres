@@ -10,7 +10,7 @@ name = "Seas of Flame"
 drop_chance = 5
 cost = 200
 currency_type = 0
-description = "The user sets the seas a blaze, sacrificing 25% of the user's Max Health to unleash an AoA attack and targets caught in the flames have burn applied.
+description = "The user sets the seas a blaze, sacrificing 25%% of the user's Max Health to unleash an AoA attack and targets caught in the flames have burn applied.
 Burn targets take damage over time.
 This ability can only be used while on the ground and has a cooldown of %ss."
 icon = ExtResource("1_ihale")

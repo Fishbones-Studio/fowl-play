@@ -10,9 +10,7 @@ name = "Flare Propulsion"
 drop_chance = 0
 cost = 10000
 currency_type = 0
-description = "Deals a lot of fire DMG.
-
-Cooldown: %ss."
+description = "Deals a lot of fire DMG and has a cooldown of %ss."
 icon = ExtResource("1_af586")
 model_uid = "uid://df1clah7xvv32"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
