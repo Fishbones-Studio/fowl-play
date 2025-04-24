@@ -1,7 +1,7 @@
 class_name MeleeWeaponNode 
 extends Node3D
 
-@export_group("weapon")
+@export_group("Weapon")
 @export var melee_weapon_scene: PackedScene:
 	set(value):
 		if value == null:
@@ -9,21 +9,21 @@ extends Node3D
 			current_weapon = null
 			return
 		# Custom setter to validate the scene type
-		var temp_weapon_instance = value.instantiate()
+		var temp_weapon_instance := value.instantiate()
 		if value and value.can_instantiate() and temp_weapon_instance is MeleeWeapon:
 			melee_weapon_scene = value
 			current_weapon = temp_weapon_instance
 		else:
 			push_error("Assigned scene is not a valid Weapon type")
 			melee_weapon_scene = null
-			
+
 # Using flags for user-friendly layer selection in the editor
 @export_flags_3d_physics var weapon_collision_mask: int
 
 var current_weapon: MeleeWeapon
-var owner_stats : LivingEntityStats
+var owner_stats: LivingEntityStats
 
-@onready var melee_state_machine : MeleeStateMachine = $MeleeStateMachine
+@onready var melee_state_machine: MeleeStateMachine = $MeleeStateMachine
 
 
 func _ready() -> void:
@@ -31,7 +31,7 @@ func _ready() -> void:
 	while current_node != null:
 		# Check if the node has the getter function
 		if current_node.has_method("get_stats_resource"):
-			var potential_stats = current_node.get_stats_resource()
+			var potential_stats: LivingEntityStats = current_node.get_stats_resource()
 			if potential_stats is LivingEntityStats:
 				owner_stats = potential_stats
 				print(
@@ -50,7 +50,7 @@ func _ready() -> void:
 		)
 		
 	# In enemy, the export vars are set, so we can immediatly run the setup
-	if melee_weapon_scene || get_parent() is Enemy:
+	if melee_weapon_scene or get_parent() is Enemy:
 		setup()
 
 

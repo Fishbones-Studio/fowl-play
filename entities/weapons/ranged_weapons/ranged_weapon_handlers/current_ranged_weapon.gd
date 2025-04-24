@@ -3,7 +3,7 @@ class_name RangedWeaponNode
 extends Node3D
 
 ## Exported Variables
-@export_group("weapon")
+@export_group("Weapon")
 @export var ranged_weapon_scene: PackedScene:
 	set(value):
 		if value == null:
@@ -20,7 +20,7 @@ extends Node3D
 			ranged_weapon_scene = null
 
 var current_weapon: RangedWeapon
-var owner_stats : LivingEntityStats
+var owner_stats: LivingEntityStats
 
 
 func _ready() -> void:
