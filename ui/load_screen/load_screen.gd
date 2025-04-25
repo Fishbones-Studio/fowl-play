@@ -70,12 +70,16 @@ func _update_loading_text():
 	if not visible: return
 	
 	dot_count = (dot_count + 1) % 4
-	loading_text.text = "Loading" + ".".repeat(dot_count)
-	get_tree().create_timer(0.3).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
+	loading_text.text = "Loading" + " .".repeat(dot_count)
+	# Safely create a timer
+	if is_instance_valid(get_tree()):
+		get_tree().create_timer(0.3).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
 
 func _on_loading_finished():
 	progress_bar.value = 100
 	loading_text.text = "Loading..."
 	
-	await get_tree().create_timer(0.15).timeout
+	# Safely create a timer for delayed actions
+	if is_instance_valid(get_tree()):
+		await get_tree().create_timer(0.15).timeout
 	visible = false

@@ -29,7 +29,7 @@ texture = SubResource("CompressedTexture2D_s8ngp")
 layout_mode = 1
 offset_right = 97.0
 offset_bottom = 40.0
-theme_override_constants/separation = 29
+theme_override_constants/separation = 30
 
 [node name="Control" type="Control" parent="HBoxContainer2"]
 layout_mode = 2
@@ -57,7 +57,7 @@ anchor_bottom = 1.0
 offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 39
+theme_override_constants/separation = 30
 
 [node name="Control3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
