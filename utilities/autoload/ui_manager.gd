@@ -34,7 +34,6 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	# Handle pause input globally
 	if Input.is_action_just_pressed("pause"):
 		handle_pause()
 
@@ -43,7 +42,45 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
 		_handle_ui_cancel_action()
 
-	
+
+## Loads a game scene with a loading screen, then switches to HUD and target game scene
+##
+## @param: game_scene_path - The resource path or UID to the game scene
+## @param: hud_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
+func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
+	# Show the loading screen UI
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
+
+	# Notify that the loading screen has started
+	SignalManager.loading_screen_started.emit()
+	await get_tree().process_frame
+
+	# Begin loading the game scene in a separate thread
+	ResourceLoader.load_threaded_request(game_scene_path)
+	var progress: Array = []
+
+	# Continuously update progress until loading is complete
+	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		# Emit current loading progress (fallback to 0.0 if not available)
+		SignalManager.loading_progress_updated.emit(progress[0] if progress.size() > 0 else 0.0)
+		await get_tree().process_frame
+
+	# Notify that loading is complete
+	SignalManager.loading_screen_finished.emit()
+
+	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
+	var loaded_resource: Resource = ResourceLoader.load_threaded_get(game_scene_path)
+
+	# Explicitly discard the resource if not needed
+	loaded_resource = null  
+
+	# Switch to the loaded game scene
+	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
+
+	# Switch to the specified HUD UI
+	SignalManager.emit_throttled("switch_ui_scene", [hud_ui])
+
+
 ## Removes a specific UI control from the manager using its enum identifier.
 ##
 ## @param: ui_enum - The UIEnums.UI value of the UI to remove.
@@ -242,10 +279,11 @@ func handle_pause() -> void:
 ## Handles the "ui_cancel" input action (e.g., Escape key)
 ## Used to back out of UI screens like inventory, map, or pause menu.
 func _handle_ui_cancel_action() -> void:
-	# Do nothing if main menu is active
-	var main_menu = ui_list.get(UIEnums.UI.MAIN_MENU)
-	if main_menu and is_instance_valid(main_menu) and current_ui == main_menu and main_menu.visible:
-		return
+	# Do nothing if main menu or loading screen is active
+	for ui_enum: UIEnums.UI in [UIEnums.UI.MAIN_MENU, UIEnums.UI.LOADING_SCREEN]:
+		var ui: Control = ui_list.get(ui_enum)
+		if ui and is_instance_valid(ui) and current_ui == ui and ui.visible:
+			return
 
 	# If pause menu is active, treat cancel as unpause
 	var pause_menu = ui_list.get(UIEnums.UI.PAUSE_MENU)
