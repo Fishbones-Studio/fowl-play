@@ -1,6 +1,7 @@
 extends Control
 
-const CHICKEN_FACTS = [
+# Array of random facts about chickens
+const CHICKEN_FACTS: Array = [
 	"Chickens can recognize over 100 different faces, including humans!",
 	"A chicken's heart beats about 300 times per minute.",
 	"Chickens have better color vision than humans.",
@@ -14,6 +15,12 @@ const CHICKEN_FACTS = [
 	"What came first, the chicken or the egg?"
 ]
 
+# Array of textures for backgrounds
+const BACKGROUND_TEXTURES: Array = [
+	preload("uid://c8654s5idl77v"),
+	preload("uid://drdswpp3ufmjq"),
+]
+
 var target_progress: float = 0.0
 var current_progress: float = 0.0
 var dot_count: int = 0
@@ -21,6 +28,7 @@ var dot_count: int = 0
 @onready var progress_bar: ProgressBar = $HBoxContainer/VBoxContainer/ProgressBar
 @onready var loading_text: Label = $HBoxContainer/VBoxContainer/Label
 @onready var random_text: Label = $HBoxContainer2/VBoxContainer/Label
+@onready var background: TextureRect = $TextureRect
 
 
 func _ready():
@@ -36,6 +44,7 @@ func _on_loading_started():
 	progress_bar.value = 0
 	visible = true
 	random_text.text = _get_random_chicken_fact()
+	background.texture = _get_random_background()
 	_update_loading_text()  
 	set_process(true) 
 
@@ -43,20 +52,19 @@ func _on_loading_started():
 func _get_random_chicken_fact() -> String:
 	return CHICKEN_FACTS.pick_random()
 
+func _get_random_background():
+	return BACKGROUND_TEXTURES.pick_random()
 
 func _on_progress_updated(progress: float):
 	target_progress = progress  
-
 
 func _process(delta):
 	current_progress = move_toward(current_progress, target_progress, delta * 2.0)
 	progress_bar.value = current_progress * 200.0
 	
-	
 	if current_progress >= 1.0:
 		set_process(false)
 		_on_loading_finished()
-
 
 func _update_loading_text():
 	if not visible: return
@@ -65,11 +73,9 @@ func _update_loading_text():
 	loading_text.text = "Loading" + ".".repeat(dot_count)
 	get_tree().create_timer(0.3).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
 
-
 func _on_loading_finished():
 	progress_bar.value = 100
 	loading_text.text = "Loading..."
-	
 	
 	await get_tree().create_timer(0.15).timeout
 	visible = false
