@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cagx53mfo6ifq"
-path="res://.godot/imported/cluck_norris.png-c206978e63186920e65720eac5557741.ctex"
+uid="uid://cqo1onb8cigi2"
+path="res://.godot/imported/pen_art.png-af294c8f3615d8a1d6d6b00ff97d0249.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/load_screen/art/cluck_norris.png"
-dest_files=["res://.godot/imported/cluck_norris.png-c206978e63186920e65720eac5557741.ctex"]
+source_file="res://ui/loading_screen/art/pen_art.png"
+dest_files=["res://.godot/imported/pen_art.png-af294c8f3615d8a1d6d6b00ff97d0249.ctex"]
 
 [params]
 

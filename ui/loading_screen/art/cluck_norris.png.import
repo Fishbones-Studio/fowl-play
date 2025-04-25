@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8654s5idl77v"
-path="res://.godot/imported/chicken_headshot_half.png-f909efb935dc0e044a7d635c8f920c4b.ctex"
+uid="uid://cagx53mfo6ifq"
+path="res://.godot/imported/cluck_norris.png-2e479c45ea03cc30eddbce69dc63aee4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/load_screen/art/chicken_headshot_half.png"
-dest_files=["res://.godot/imported/chicken_headshot_half.png-f909efb935dc0e044a7d635c8f920c4b.ctex"]
+source_file="res://ui/loading_screen/art/cluck_norris.png"
+dest_files=["res://.godot/imported/cluck_norris.png-2e479c45ea03cc30eddbce69dc63aee4.ctex"]
 
 [params]
 

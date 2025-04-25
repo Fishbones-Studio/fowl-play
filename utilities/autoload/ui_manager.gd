@@ -38,7 +38,6 @@ func _input(_event: InputEvent) -> void:
 		handle_pause()
 
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
 		_handle_ui_cancel_action()
@@ -51,27 +50,27 @@ func _unhandled_input(event: InputEvent) -> void:
 func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
 	# Show the loading screen UI
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
-	
+
 	# Notify that the loading screen has started
-	SignalManager.emit_signal("loading_screen_started")
+	SignalManager.loading_screen_started.emit()
 	await get_tree().process_frame
 
 	# Begin loading the game scene in a separate thread
 	ResourceLoader.load_threaded_request(game_scene_path)
-	var progress = []
+	var progress: Array = []
 
 	# Continuously update progress until loading is complete
 	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 		# Emit current loading progress (fallback to 0.0 if not available)
-		SignalManager.emit_signal("loading_progress_updated", progress[0] if progress.size() > 0 else 0.0)
+		SignalManager.loading_progress_updated.emit(progress[0] if progress.size() > 0 else 0.0)
 		await get_tree().process_frame
 
 	# Notify that loading is complete
-	SignalManager.emit_signal("loading_screen_finished")
+	SignalManager.loading_screen_finished.emit()
 
 	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
-	var loaded_resource = ResourceLoader.load_threaded_get(game_scene_path)
-	
+	var loaded_resource: Resource = ResourceLoader.load_threaded_get(game_scene_path)
+
 	# Explicitly discard the resource if not needed
 	loaded_resource = null  
 

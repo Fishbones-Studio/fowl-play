@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu2ima27whcct"]
+
+[ext_resource type="Script" uid="uid://vcte0cqqen55" path="res://ui/loading_screen/loading_screen.gd" id="1_sw7at"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_dyir8"]
+[ext_resource type="StyleBox" uid="uid://ctrq6smv82lw6" path="res://resources/themes/styleboxes/loading_screen_progress_bar.tres" id="3_7w6sp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s8ngp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rfcy"]
+shader = ExtResource("2_dyir8")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.6
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sw7at")
+
+[node name="BackgroundArt" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_s8ngp")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0rfcy")
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -106.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 16
+
+[node name="LoadingProgressBar" type="ProgressBar" parent="MarginContainer/ContentContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/fill = ExtResource("3_7w6sp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="FactLabel" type="Label" parent="MarginContainer/ContentContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Fact Text"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/ContentContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LoadingLabel" type="Label" parent="MarginContainer/ContentContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Now Loading...."
+horizontal_alignment = 1

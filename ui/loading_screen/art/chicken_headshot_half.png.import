@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh50psf8qk8wl"
-path="res://.godot/imported/kids_art.png-3d66c631dce9a2069af27455445efd12.ctex"
+uid="uid://c8654s5idl77v"
+path="res://.godot/imported/chicken_headshot_half.png-e112096eddbf3e88ab05c350a7113f73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/load_screen/art/kids_art.png"
-dest_files=["res://.godot/imported/kids_art.png-3d66c631dce9a2069af27455445efd12.ctex"]
+source_file="res://ui/loading_screen/art/chicken_headshot_half.png"
+dest_files=["res://.godot/imported/chicken_headshot_half.png-e112096eddbf3e88ab05c350a7113f73.ctex"]
 
 [params]
 

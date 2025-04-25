@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqo1onb8cigi2"
-path="res://.godot/imported/pen_art.png-2f3116dad342a14393c35dc294adcc6c.ctex"
+uid="uid://bh50psf8qk8wl"
+path="res://.godot/imported/kids_art.png-f26e58dbd55d1ac6d386ad19215cecaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/load_screen/art/pen_art.png"
-dest_files=["res://.godot/imported/pen_art.png-2f3116dad342a14393c35dc294adcc6c.ctex"]
+source_file="res://ui/loading_screen/art/kids_art.png"
+dest_files=["res://.godot/imported/kids_art.png-f26e58dbd55d1ac6d386ad19215cecaf.ctex"]
 
 [params]
 
