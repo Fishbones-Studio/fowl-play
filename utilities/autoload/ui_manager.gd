@@ -11,6 +11,7 @@ var previous_ui: Control # Previously active UI control (for navigation history)
 var previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_CAPTURED # Default to captured
 # Dictionary mapping UI enums to their instantiated Control nodes
 var ui_list: Dictionary[UIEnums.UI, Control] = {}
+var is_loading: bool = false
 
 # Pause state with setter that manages game pause
 var paused := false:
@@ -34,9 +35,13 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	# Handle pause input globally
+	# Handle pause input globally, but block it while loading
+	if is_loading:
+		return
+	
 	if Input.is_action_just_pressed("pause"):
 		handle_pause()
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,8 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 ## @param: game_scene_path - The resource path or UID to the game scene
 ## @param: hud_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
 func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
+	# Set loading flag to disable input like pause
+	is_loading = true
+	
 	# Show the loading screen UI
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
+	
 	# Notify that the loading screen has started
 	SignalManager.emit_signal("loading_screen_started")
 	await get_tree().process_frame
@@ -66,9 +75,10 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 
 	# Notify that loading is complete
 	SignalManager.emit_signal("loading_screen_finished")
-	
+
 	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
 	var loaded_resource = ResourceLoader.load_threaded_get(game_scene_path)
+	
 	# Explicitly discard the resource if not needed
 	loaded_resource = null  
 
@@ -77,6 +87,9 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 
 	# Switch to the specified HUD UI
 	SignalManager.emit_throttled("switch_ui_scene", [hud_ui])
+	
+	# Re-enable input like pause
+	is_loading = false
 
 
 ## Removes a specific UI control from the manager using its enum identifier.

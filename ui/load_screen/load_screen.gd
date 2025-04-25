@@ -41,7 +41,7 @@ func _on_loading_started():
 
 
 func _get_random_chicken_fact() -> String:
-	return CHICKEN_FACTS[randi() % CHICKEN_FACTS.size()]
+	return CHICKEN_FACTS.pick_random()
 
 
 func _on_progress_updated(progress: float):
