@@ -10,7 +10,8 @@ const CHICKEN_FACTS = [
 	"A chicken can run at 9 miles per hour when it wants to.",
 	"Chickens have a special gland that helps them make vitamin D from sunlight.",
 	"There are more chickens on Earth than any other bird species.",
-	"Chickens dream when they sleep, just like humans do."
+	"Chickens dream when they sleep, just like humans do.",
+	"What came first, the chicken or the egg?"
 ]
 
 var target_progress: float = 0.0
@@ -19,7 +20,7 @@ var dot_count: int = 0
 
 @onready var progress_bar: ProgressBar = $HBoxContainer/VBoxContainer/ProgressBar
 @onready var loading_text: Label = $HBoxContainer/VBoxContainer/Label
-@onready var random_text: Label = $TextureRect/HBoxContainer/VBoxContainer/Label
+@onready var random_text: Label = $HBoxContainer2/VBoxContainer/Label
 
 
 func _ready():

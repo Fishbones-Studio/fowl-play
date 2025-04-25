@@ -1,16 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu2ima27whcct"]
+[gd_scene load_steps=4 format=3 uid="uid://cu2ima27whcct"]
 
 [ext_resource type="Script" uid="uid://vcte0cqqen55" path="res://ui/load_screen/load_screen.gd" id="1_s8ngp"]
-
-[sub_resource type="Gradient" id="Gradient_k7gf0"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_s8ngp"]
-gradient = SubResource("Gradient_k7gf0")
+[ext_resource type="Texture2D" uid="uid://c8654s5idl77v" path="res://ui/load_screen/art/chicken_headshot_half.png" id="2_p0hg8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0hg8"]
-bg_color = Color(0.818945, 1.54018e-06, 0.488277, 1)
+bg_color = Color(0.819608, 0.72549, 0.568627, 1)
 
 [node name="LoadScreen" type="Control"]
 layout_mode = 3
@@ -28,35 +22,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_s8ngp")
+texture = ExtResource("2_p0hg8")
 
-[node name="Label" type="Label" parent="TextureRect"]
-layout_mode = 2
-offset_left = 433.0
-offset_top = 294.0
-offset_right = 719.0
-offset_bottom = 344.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 72
-text = "Fowl Play"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
+offset_right = 97.0
+offset_bottom = 40.0
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer"]
+[node name="Control" type="Control" parent="HBoxContainer2"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Control" type="Control" parent="HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -64,15 +47,19 @@ text = "random text"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -344.0
 offset_top = -50.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Control3" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
