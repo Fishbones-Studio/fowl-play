@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drdswpp3ufmjq"
-path="res://.godot/imported/ArenaArt.png-b71522085a26b147c1839874a672a692.ctex"
+uid="uid://bh50psf8qk8wl"
+path="res://.godot/imported/kids_art.png-3d66c631dce9a2069af27455445efd12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/load_screen/art/ArenaArt.png"
-dest_files=["res://.godot/imported/ArenaArt.png-b71522085a26b147c1839874a672a692.ctex"]
+source_file="res://ui/load_screen/art/kids_art.png"
+dest_files=["res://.godot/imported/kids_art.png-3d66c631dce9a2069af27455445efd12.ctex"]
 
 [params]
 

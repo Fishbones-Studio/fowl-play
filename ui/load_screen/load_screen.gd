@@ -19,6 +19,9 @@ const CHICKEN_FACTS: Array = [
 const BACKGROUND_TEXTURES: Array = [
 	preload("uid://c8654s5idl77v"),
 	preload("uid://drdswpp3ufmjq"),
+	preload("uid://cagx53mfo6ifq"),
+	preload("uid://bh50psf8qk8wl"),
+	preload("uid://cqo1onb8cigi2"),
 ]
 
 var target_progress: float = 0.0
