@@ -20,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sw7at")
+path_to_background_art = "res://ui/loading_screen/art/"
 
 [node name="BackgroundArt" type="TextureRect" parent="."]
 unique_name_in_owner = true
