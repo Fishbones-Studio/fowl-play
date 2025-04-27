@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_greek")
-health_bonus = 0.0
-stamina_bonus = 0.0
-attack_multiplier_bonus = 50.0
+health_bonus = 0
+stamina_bonus = 0
+attack_bonus = 50
 defense_bonus = 0
-speed_bonus = 3.0
-weight_bonus = -1.0
+speed_bonus = 3
+weight_bonus = -1
 name = "Anger Shell"
 drop_chance = 0
 cost = 100

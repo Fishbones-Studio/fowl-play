@@ -4,7 +4,7 @@ extends Resource
 @export_category("Base Stats")
 @export var max_health: float
 @export var max_stamina: float
-@export_range(0.0, 2.0, 0.1) var attack_multiplier: float = 1.0
+@export var attack: float
 @export_range(0, 1000) var defense: int = 0
 @export var speed: float
 @export var weight: float
@@ -46,14 +46,16 @@ func restore_stamina(amount: float) -> float:
 
 
 ## Reduces health by the given amount, taking defense into account.
-func drain_health(amount: float) -> float:
+func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEnums.DamageTypes.NORMAL) -> float:
 	if amount <= 0: # Don't process non-positive damage amounts
 		return current_health
 
-	# Calculate damage multiplier based on defense
-	# defense = 50  -> multiplier = 0.66 (66% damage)
-	var damage_multiplier: float = 100.0 / (100.0 + float(defense))
-	var actual_damage: float = amount * damage_multiplier
+	var actual_damage: float = 0.0
+
+	if damage_type == DamageEnums.DamageTypes.NORMAL:
+		actual_damage += max(amount / defense, 1.0)
+	elif damage_type == DamageEnums.DamageTypes.TRUE:
+		actual_damage += amount
 
 	current_health = clamp(current_health - actual_damage, 0, max_health)
 	return actual_damage
@@ -83,7 +85,7 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	max_stamina += upgrade.stamina_bonus
 	current_stamina += upgrade.stamina_bonus
 
-	attack_multiplier += upgrade.attack_multiplier_bonus
+	attack += upgrade.attack_bonus
 
 	defense += upgrade.defense_bonus
 

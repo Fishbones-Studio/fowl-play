@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack_multiplier * stats.weight * stats.defense
+		return stats.attack * stats.weight * stats.defense
 
 var _particles_emitted: bool = false
 
@@ -36,10 +36,12 @@ func _on_cooldown_timer_timeout() -> void:
 
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
+	var damage_dict: Dictionary[float, DamageEnums.DamageTypes] = { damage: DamageEnums.DamageTypes.NORMAL }
+
 	if body.collision_layer == 2: # if target body is player
-		SignalManager.weapon_hit_target.emit(body, damage)
+		SignalManager.weapon_hit_target.emit(body, damage_dict)
 	if body.collision_layer == 4: # if target body is enemy
-		SignalManager.weapon_hit_target.emit(body, damage)
+		SignalManager.weapon_hit_target.emit(body, damage_dict)
 
 	_apply_knockback(body)
 
