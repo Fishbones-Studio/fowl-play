@@ -31,6 +31,10 @@ signal loading_screen_finished
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 signal enemy_died
 
+# Boss signals
+signal boss_appeared(visible: bool)
+signal boss_stats_changed(stats: LivingEntityStats)
+
 # Weapon signals
 signal weapon_hit_area_body_entered(body: PhysicsBody3D)
 signal weapon_hit_area_body_exited(body: PhysicsBody3D)
