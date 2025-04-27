@@ -107,9 +107,9 @@ func _enter_in_progress() -> void:
 	_spawn_enemy_in_level()
 
 	if _current_enemy.type == EnemyEnums.EnemyTypes.BOSS:
-		SignalManager.emit_signal("boss_appeared", true)  
+		SignalManager.boss_appeared.emit(true)  
 	else:
-		SignalManager.emit_signal("boss_appeared", false) 
+		SignalManager.boss_appeared.emit(false) 
 
 	await SignalManager.enemy_died
 
