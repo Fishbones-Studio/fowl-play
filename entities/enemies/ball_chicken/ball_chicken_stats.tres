@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_w03qf")
+name = "Chicken Ball"
 max_health = 300.0
 max_stamina = 2.0
 attack = 20.0
@@ -14,4 +15,5 @@ health_regen = 2
 stamina_regen = 0
 weight_factor = 0.07
 k_scaler = 100.0
+is_player = false
 metadata/_custom_type_script = "uid://up7hh823h5kw"

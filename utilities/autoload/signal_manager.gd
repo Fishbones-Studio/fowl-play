@@ -34,7 +34,6 @@ signal enemy_died
 # Boss signals
 signal boss_appeared(visible: bool)
 signal boss_stats_changed(stats: LivingEntityStats)
-signal boss_name_changed(name: String)
 
 # Weapon signals
 signal weapon_hit_target(target: PhysicsBody3D, damage: float, type: DamageEnums.DamageTypes)

@@ -2,6 +2,7 @@ class_name LivingEntityStats
 extends Resource
 
 @export_category("Base Stats")
+@export var name: String
 @export var max_health: float
 @export var max_stamina: float
 @export var attack: float
@@ -31,6 +32,7 @@ func init() -> void:
 	if max_stamina <= 0: push_error("Forgot to set max_stamina")
 	current_health = max_health
 	current_stamina = max_stamina
+
 
 
 ## Calculate the speed based on weight and speed factor
