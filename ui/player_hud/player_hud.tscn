@@ -142,6 +142,7 @@ script = ExtResource("9_hbnkv")
 
 [node name="BossHealthBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer" instance=ExtResource("1_vyppb")]
 unique_name_in_owner = true
+layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
 
