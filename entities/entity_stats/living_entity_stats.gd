@@ -2,7 +2,6 @@ class_name LivingEntityStats
 extends Resource
 
 @export_category("Base Stats")
-@export var name: String
 @export var max_health: float
 @export var max_stamina: float
 @export var attack: float
@@ -18,6 +17,7 @@ extends Resource
 
 @export_group("Holder")
 @export var is_player : bool = false
+@export var name: String
 
 var current_health: float:
 	set(value):
