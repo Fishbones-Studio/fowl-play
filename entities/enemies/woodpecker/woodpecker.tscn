@@ -152,11 +152,11 @@ bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
 bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
 bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
 bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
-bones/6/rotation = Quaternion(0.307543, -0.23249, -0.0353478, 0.922018)
+bones/6/rotation = Quaternion(0.0685178, 0.0161591, -0.0715507, 0.99495)
 bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
 bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
 bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
-bones/10/rotation = Quaternion(-0.125742, -0.0118361, -0.136883, 0.982503)
+bones/10/rotation = Quaternion(-0.00673589, -0.0157366, -0.0406003, 0.999029)
 bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
 bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
 bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)
@@ -183,7 +183,7 @@ texture = SubResource("ViewportTexture_woodpecker")
 visible = false
 
 [node name="MeleeWeapon" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10738, 2.35215, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900274, 2.35215, 0)
 melee_weapon_scene = ExtResource("5_x6gfb")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state", "animation_tree")]

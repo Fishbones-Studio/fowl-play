@@ -146,7 +146,7 @@ nodes/output/position = Vector2(264, -14)
 node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Dash", &"output", 0, &"OneShot"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
-radius = 0.9
+radius = 1.1
 height = 3.3
 
 [node name="ChickenPlayer" type="CharacterBody3D"]
@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.505129, -0.00248645, 0.00802406, 0.863003)
-bones/3/rotation = Quaternion(-0.53026, -0.00118646, -0.0059596, 0.847813)
-bones/4/rotation = Quaternion(-0.107769, 0.182171, -0.05135, 0.975993)
-bones/5/rotation = Quaternion(-0.240534, -0.0582797, -0.74286, 0.622018)
-bones/6/rotation = Quaternion(-0.19771, 0.127767, 0.686912, 0.68756)
+bones/2/rotation = Quaternion(-0.474022, -0.000758922, 0.00235914, 0.880509)
+bones/3/rotation = Quaternion(-0.514154, 0.00454045, -0.0140238, 0.857571)
+bones/4/rotation = Quaternion(-0.104487, -0.00487274, -0.00442037, 0.994505)
+bones/5/rotation = Quaternion(-0.241278, -0.0512542, -0.746507, 0.617969)
+bones/6/rotation = Quaternion(-0.267323, 0.0383381, 0.740251, 0.615709)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.277616, -0.0159992, -0.105006, 0.954802)
-bones/9/rotation = Quaternion(0.204829, 0.0289756, -0.151627, 0.966548)
+bones/8/rotation = Quaternion(0.221767, -0.00509999, -0.115362, 0.968238)
+bones/9/rotation = Quaternion(0.238683, 0.023275, -0.147366, 0.959569)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.178845, -0.0580194, -0.05298, 0.980735)
+bones/11/rotation = Quaternion(-0.175613, 0.0387454, 0.087354, 0.97981)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
