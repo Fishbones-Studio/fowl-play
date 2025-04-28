@@ -6,7 +6,6 @@ extends BaseState
 
 var weapon: RangedWeapon
 var transition_signal : Signal
-var origin_entity : PhysicsBody3D ## The entity that is using the weapon
 
 
 func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
@@ -27,7 +26,7 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
 
 
-func process_hit(raycast: RayCast3D) -> void:
+func process_raycast_hit(raycast: RayCast3D) -> void:
 	# make the raycast immediately check for collisions
 	raycast.force_raycast_update()
 	
@@ -37,9 +36,6 @@ func process_hit(raycast: RayCast3D) -> void:
 		
 		if collider is PhysicsBody3D:
 			DebugDrawer.draw_debug_impact(raycast.get_collision_point(), collider)
-			if collider == origin_entity:
-				print("Hit self")
-				return
 			print("Colliding with:" + collider.name)
 			# TODO: hit marker
 			SignalManager.weapon_hit_target.emit(collider, weapon.entity_stats.calc_scaled_damage(weapon.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)

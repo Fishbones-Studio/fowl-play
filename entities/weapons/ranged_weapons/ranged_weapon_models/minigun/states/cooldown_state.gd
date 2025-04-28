@@ -4,7 +4,8 @@ var _cooldown_timer: float = 0.0
 
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
-	SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.cooldown_time, true)
+	if weapon.entity_stats.is_player:
+		SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.cooldown_time, true)
 	_cooldown_timer = 0.0
 
 

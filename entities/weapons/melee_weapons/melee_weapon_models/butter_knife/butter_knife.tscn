@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cwgmtrf1rjw48" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb" id="2_aea71"]
 [ext_resource type="Resource" uid="uid://b8aw1r4xls2u4" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tres" id="2_vmu4i"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmu4i"]
-
 [sub_resource type="Animation" id="Animation_bax8f"]
 resource_name = "ATTACK"
 length = 0.3
@@ -19,14 +17,14 @@ tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.05, 1, 0, 0, 1, 0.2, 1, 0, 0
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("butter_knife:rotation")
+tracks/1/path = NodePath("WeaponHitBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-3.59989e-21, 1.5708, -1.5708)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -2), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vmu4i"]
@@ -80,6 +78,10 @@ _data = {
 &"RESET": SubResource("Animation_wtiuw")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmu4i"]
+radius = 0.8
+height = 2.4
+
 [node name="ButterKnife" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_rk4tr")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_vmu4i")
@@ -87,11 +89,14 @@ current_weapon = ExtResource("2_vmu4i")
 [node name="butter_knife" parent="." index="0" instance=ExtResource("2_aea71")]
 transform = Transform3D(1.31043e-11, -3.61999e-06, 1, -1, -3.61999e-06, 3.59989e-21, 3.61999e-06, -1, -3.61999e-06, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
-transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, 1.5, 0, -1.5, -6.55671e-08, 0, 0, -0.825175)
-shape = SubResource("CapsuleShape3D_vmu4i")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_bpbh2")
 }
+
+[node name="HitCheckPoint" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.458175)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.6)
+shape = SubResource("CapsuleShape3D_vmu4i")

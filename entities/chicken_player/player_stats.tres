@@ -14,3 +14,4 @@ health_regen = 9
 stamina_regen = 9
 weight_factor = 0.07
 k_scaler = 100.0
+is_player = true

@@ -69,6 +69,8 @@ size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
 hurt_shader = SubResource("ShaderMaterial_w7jxt")
 heal_shader = SubResource("ShaderMaterial_8qpry")
+normal_fov = 50.0
+effect_fov = 72.0
 border_starting_colour = Color(0.517184, 0.517185, 0.517184, 0.490196)
 border_heal_colour = Color(0, 1, 0.4, 1)
 border_hurt_colour = Color(0.8, 0, 0, 1)
@@ -88,6 +90,7 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
+offset = Vector3(0, 1, -1.8)
 
 [node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewport"]
 unique_name_in_owner = true
