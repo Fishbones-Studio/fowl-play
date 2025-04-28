@@ -59,7 +59,7 @@ var current_round: int = 1:
 		current_round = value
 
 
-# --- Cheat Variables ---
+# Cheat variables
 var infinite_health: bool = false:
 	set(value):
 		if infinite_health == value:

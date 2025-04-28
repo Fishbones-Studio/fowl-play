@@ -43,4 +43,4 @@ func _attack() -> void:
 	var targets: Array[Node3D] = hit_area.get_overlapping_bodies()
 	for target in targets:
 		if target is ChickenPlayer or target is Enemy:
-			SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage * entity_stats.attack, DamageEnums.DamageTypes.NORMAL)
+			SignalManager.weapon_hit_target.emit(target, weapon_node.current_weapon.damage + entity_stats.attack, DamageEnums.DamageTypes.NORMAL)
