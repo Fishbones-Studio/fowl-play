@@ -53,8 +53,11 @@ func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEn
 	var actual_damage: float = 0.0
 
 	if damage_type == DamageEnums.DamageTypes.NORMAL:
-		actual_damage += max(amount / defense, 1.0)
+		# Basic damage formula to calculate damage taken
+		# Damage = ([Power×Attack÷Defense] + 1)
+		actual_damage += floor(amount / defense) + 1
 	elif damage_type == DamageEnums.DamageTypes.TRUE:
+		# Ignores defense and apply the damage directly
 		actual_damage += amount
 
 	current_health = clamp(current_health - actual_damage, 0, max_health)

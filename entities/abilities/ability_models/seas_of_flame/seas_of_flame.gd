@@ -35,7 +35,6 @@ func _apply_burn(body: Node3D) -> void:
 		# Get the amount of ticks the burn applies, rounded down
 		var burn_tick_count: int = floor(damage_duration / damage_interval)
 		var burn_damage: float = damage / burn_tick_count
-		var damage_dict: Dictionary[float, DamageEnums.DamageTypes] = { burn_damage: DamageEnums.DamageTypes.NORMAL }
 
 		for i in range(burn_tick_count):
 			await get_tree().create_timer(damage_interval).timeout
@@ -45,9 +44,9 @@ func _apply_burn(body: Node3D) -> void:
 				break
 
 			if body.collision_layer == 2: # Player
-				SignalManager.weapon_hit_target.emit(body, damage_dict)
+				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
 			if body.collision_layer == 4: # Enemy
-				SignalManager.weapon_hit_target.emit(body, damage_dict)
+				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
 
 
 func _toggle_collision_masks(toggle: bool) -> void:
