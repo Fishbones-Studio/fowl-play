@@ -66,6 +66,6 @@ func setup() -> void:
 	add_child(current_weapon)
 
 	# set the defined collison mask
-	current_weapon.hit_area.collision_mask = weapon_collision_mask
+	current_weapon.hit_mask = weapon_collision_mask
 
 	melee_state_machine.setup(current_weapon, owner_stats)

@@ -20,13 +20,15 @@ func activate() -> void:
 	cpu_particles.emitting = true
 
 	_toggle_collision_masks(true)
-	SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.activate_item_slot.emit(current_ability)
 
 	# Consumes a percentage of the holder's max health when activating the ability
 	# If the current HP is not sufficient, reduces HP to 1 (can't drop to 0 or below)
 	ability_holder.stats.current_health -= min(ability_holder.stats.max_health * (health_consumption / 100.0), ability_holder.stats.current_health - 1.0)
 
-	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+	if ability_holder == ChickenPlayer:
+		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 	cooldown_timer.start()
 
 
@@ -62,4 +64,5 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	_apply_burn(body)
 
 	_toggle_collision_masks(false)
-	SignalManager.deactivate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.deactivate_item_slot.emit(current_ability)

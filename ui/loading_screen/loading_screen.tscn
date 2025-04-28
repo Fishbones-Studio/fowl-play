@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_dyir8"]
 [ext_resource type="StyleBox" uid="uid://ctrq6smv82lw6" path="res://resources/themes/styleboxes/loading_screen_progress_bar.tres" id="3_7w6sp"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s8ngp"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sw7at"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0rfcy"]
 shader = ExtResource("2_dyir8")
@@ -30,7 +30,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CompressedTexture2D_s8ngp")
+texture = SubResource("CompressedTexture2D_sw7at")
+expand_mode = 3
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0rfcy")

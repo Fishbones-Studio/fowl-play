@@ -37,8 +37,6 @@ signal boss_stats_changed(stats: LivingEntityStats)
 signal boss_name_changed(name: String)
 
 # Weapon signals
-signal weapon_hit_area_body_entered(body: PhysicsBody3D)
-signal weapon_hit_area_body_exited(body: PhysicsBody3D)
 signal weapon_hit_target(target: PhysicsBody3D, damage: float, type: DamageEnums.DamageTypes)
 
 # Shop signals

@@ -27,7 +27,8 @@ func activate() -> void:
 	ability_holder.velocity.z = 0
 	ability_holder.velocity.y = descent_velocity
 	
-	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+	if ability_holder == ChickenPlayer:
+		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 	cooldown_timer.start()
 
 
@@ -50,7 +51,8 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	ability_holder.velocity.y = 0
 
 	_toggle_collision_masks(false)
-	SignalManager.deactivate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _physics_process(_delta: float) -> void:
@@ -60,7 +62,8 @@ func _physics_process(_delta: float) -> void:
 		cpu_particles.emitting = true
 		_particles_emitted = true
 		_toggle_collision_masks(false)
-		SignalManager.deactivate_item_slot.emit(current_ability)
+		if ability_holder == ChickenPlayer:
+			SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _apply_knockback(body: Node3D) -> void:
