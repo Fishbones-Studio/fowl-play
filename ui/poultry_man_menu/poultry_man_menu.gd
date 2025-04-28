@@ -13,6 +13,8 @@ var focusable_items: Array[Focusable3D] = []
 @onready var flyer_item: Focusable3D = $MenuItems/Flyer  
 @onready var shop_item: Focusable3D = $MenuItems/Shop
 @onready var inventory_item: Focusable3D = $MenuItems/Inventory
+@onready var rebirth_shop_item: Focusable3D = $MenuItems/Rebirth_Shop
+@onready var forfeit_item: Focusable3D = $MenuItems/Forfeit
 
 
 func _ready() -> void:
@@ -144,6 +146,11 @@ func _on_select_current_item() -> void:
 			UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
 		else:
 			SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY)
+	elif selected_item == forfeit_item:
+		if UIEnums.UI.FORFEIT_POPUP in UIManager.ui_list:
+			UIManager.toggle_ui(UIEnums.UI.FORFEIT_POPUP)
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
 
 
 func _on_keyboard_navigation_activated() -> void:

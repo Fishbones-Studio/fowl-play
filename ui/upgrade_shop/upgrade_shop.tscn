@@ -9,6 +9,6 @@ script = ExtResource("2_qprek")
 max_items = null
 item_database = NodePath("UpgradeDatabase")
 
-[node name="UpgradeDatabase" parent="." index="2" instance=ExtResource("3_i2pg2")]
+[node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_i2pg2")]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

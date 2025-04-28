@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=27 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -28,6 +28,14 @@ albedo_color = Color(0.25498, 0.16922, 0, 1)
 size = Vector3(1, 0.1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t1gii"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_k5ek6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jhi5u"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_k5ek6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bfy7c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1gii"]
 
@@ -90,7 +98,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tvpcr")
 [node name="MenuItems" type="Node3D" parent="."]
 
 [node name="Inventory" type="Area3D" parent="MenuItems"]
-transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, -1.39421, 2.73958, 0)
+transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, 0.0894314, 2.73958, -0.632341)
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
@@ -105,7 +113,7 @@ transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.637
 text = "Equipment"
 
 [node name="Shop" type="Area3D" parent="MenuItems"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0738483, 2.54873, -0.784794)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.23576, 2.54873, -0.784794)
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
@@ -117,13 +125,13 @@ skeleton = NodePath("../../..")
 shape = SubResource("CapsuleShape3D_6yeww")
 
 [node name="Shop Label" type="Label3D" parent="MenuItems/Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 0, 2.24983, 0.797185)
+transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, -0.494917, 2.24983, 0.797185)
 text = "Shop
 "
 font_size = 67
 
 [node name="Flyer" type="Area3D" parent="MenuItems"]
-transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.31423, 1.95472, -0.471436)
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.60808, 1.95472, 0.381649)
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
@@ -140,6 +148,39 @@ shape = SubResource("BoxShape3D_t1gii")
 transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, 0.048014, 1.64521, 0.179505)
 text = "Arena's
 "
+
+[node name="Rebirth_Shop" type="Area3D" parent="MenuItems"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.6, -0.6)
+script = ExtResource("6_dqtu2")
+metadata/_custom_type_script = "uid://c4docd5kunare"
+
+[node name="Rebirth_Shop" type="MeshInstance3D" parent="MenuItems/Rebirth_Shop"]
+transform = Transform3D(0.56, 0, 0, 0, 0.1, 0, 0, 0, 0.6, -1, 2, 0)
+mesh = SubResource("TubeTrailMesh_k5ek6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Rebirth_Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1, 2, 0)
+shape = SubResource("CylinderShape3D_jhi5u")
+
+[node name="Rebirth_Shop Label" type="Label3D" parent="MenuItems/Rebirth_Shop"]
+transform = Transform3D(0.958884, 0, 0.283798, 0, 1, 0, -0.283798, 0, 0.958884, -1.05282, 2.66212, -0.00119543)
+text = "Rebirth Shop"
+
+[node name="Forfeit" type="Area3D" parent="MenuItems"]
+script = ExtResource("6_dqtu2")
+metadata/_custom_type_script = "uid://c4docd5kunare"
+
+[node name="Forfeit" type="MeshInstance3D" parent="MenuItems/Forfeit"]
+transform = Transform3D(0.337386, 0, 0, 0, 0.337386, 0, 0, 0, 0.337386, -1.5344, 2.55179, 0.468091)
+mesh = SubResource("TorusMesh_k5ek6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Forfeit"]
+transform = Transform3D(0.862454, 0, 0, 0, 0.862454, 0, 0, 0, 0.862454, -1.53732, 1.86659, 0.461297)
+shape = SubResource("CylinderShape3D_bfy7c")
+
+[node name="Label3D" type="Label3D" parent="MenuItems/Forfeit"]
+transform = Transform3D(0.941512, 0, 0.33698, 0, 1, 0, -0.33698, 0, 0.941512, -1.73851, 2.77418, -0.0855815)
+text = "Forfeit"
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_og4p7")
