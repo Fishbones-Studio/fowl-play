@@ -85,7 +85,8 @@ func regen_health(delta: float) -> float:
 func regen_stamina(delta: float) -> float:
 	current_stamina = clamp(current_stamina + (stamina_regen * delta), 0, max_stamina)
 	return current_stamina
-
+	
+## Calculate the damage based on the attack and the k_scaler
 func calc_scaled_damage(damage: float) -> float:
 	var scale: float = 1.0 + (attack / (k_scaler + attack))
 	var actual_damage: float = floor(damage * scale)
@@ -93,6 +94,7 @@ func calc_scaled_damage(damage: float) -> float:
 	return actual_damage
 
 
+## Calculate the defense based on the defense and the k_scaler
 func apply_upgrade(upgrade: UpgradeResource) -> void:
 	max_health += upgrade.health_bonus
 	current_health += upgrade.health_bonus
