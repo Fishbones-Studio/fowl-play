@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_n28g3")
-health_bonus = 100.0
-stamina_bonus = 100.0
-attack_multiplier_bonus = 50.0
+health_bonus = 100
+stamina_bonus = 100
+attack_bonus = 20
 defense_bonus = 120
-speed_bonus = 6.0
-weight_bonus = 0.0
+speed_bonus = 6
+weight_bonus = 0
 name = "Judgment"
 drop_chance = 1
 cost = 1000

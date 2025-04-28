@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_0uv6g")
-health_bonus = 0.0
-stamina_bonus = 0.0
-attack_multiplier_bonus = 20.0
+health_bonus = 0
+stamina_bonus = 0
+attack_bonus = 20
 defense_bonus = 40
-speed_bonus = 0.0
-weight_bonus = 0.0
+speed_bonus = 0
+weight_bonus = 0
 name = "Coaching"
 drop_chance = 0
 cost = 60

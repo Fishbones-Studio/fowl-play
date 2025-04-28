@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body is PhysicsBody3D:
-		SignalManager.weapon_hit_target.emit(body, damage)
+		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.TRUE)
 
 
 ## Overwrite in child class

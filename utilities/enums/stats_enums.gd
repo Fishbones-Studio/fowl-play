@@ -3,7 +3,7 @@ class_name StatsEnums
 enum Stats {
 	MAX_HEALTH,
 	MAX_STAMINA,
-	ATTACK_MULTIPLIER,
+	ATTACK,
 	DEFENSE,
 	SPEED,
 	WEIGHT,

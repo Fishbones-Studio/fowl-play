@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_olgpb")
-health_bonus = 40.0
-stamina_bonus = 0.0
-attack_multiplier_bonus = 0.0
+health_bonus = 40
+stamina_bonus = 0
+attack_bonus = 0
 defense_bonus = 0
-speed_bonus = 0.0
-weight_bonus = 0.0
+speed_bonus = 0
+weight_bonus = 0
 name = "Wish"
 drop_chance = 0
 cost = 20

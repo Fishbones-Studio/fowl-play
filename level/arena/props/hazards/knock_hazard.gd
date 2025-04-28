@@ -36,7 +36,7 @@ func calculate_knockback(direction: Vector3) -> Vector3:
 		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
 		return magnitude * sign(axis)
 
-	var knockback: Vector3 =  Vector3(
+	var knockback: Vector3 = Vector3(
 		horizontal_component.call(direction.x),
 		clamp(max(abs(direction.y) * knockback_force, minimum_vertical_knockback), minimum_vertical_knockback, maximum_vertical_knockback),
 		horizontal_component.call(direction.z)
