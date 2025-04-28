@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmgeue4l6fj4f"]
+
+[ext_resource type="Script" uid="uid://c1y2iw2q8ee8l" path="res://ui/poultry_man_menu/rebirth_shop/rebirth_shop.gd" id="1_7r0g5"]
+[ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="1_wnuwk"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_7r0g5"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7r0g5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+theme_type_variation = &"SettingsHeaderContainer"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -27.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="UpgradeLabel" type="Label" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Upgrades"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CurrencyDisplay" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("1_wnuwk")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_7r0g5")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ShopItemsContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

@@ -151,6 +151,11 @@ func _on_select_current_item() -> void:
 			UIManager.toggle_ui(UIEnums.UI.FORFEIT_POPUP)
 		else:
 			SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
+	elif selected_item == rebirth_shop_item:
+		if UIEnums.UI.REBIRTH_SHOP in UIManager.ui_list:
+			UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+		else:
+			SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP)
 
 
 func _on_keyboard_navigation_activated() -> void:

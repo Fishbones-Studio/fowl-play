@@ -14,7 +14,8 @@ enum UI {
 	ROUND_SCREEN,
 	LOADING_SCREEN,
 	CHICKEN_STATS,
-	FORFEIT_POPUP
+	FORFEIT_POPUP,
+	REBIRTH_SHOP,
 }
 
 const PATHS: Dictionary[UI, String] = {
@@ -32,6 +33,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.LOADING_SCREEN: "uid://cu2ima27whcct",
 	UI.CHICKEN_STATS: "uid://c2vh7na31m8hi",
 	UI.FORFEIT_POPUP: "uid://bqt3s2usixpf3",
+	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 }
 
 

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_8hi1c")
-health_bonus = 0.0
-stamina_bonus = 0.0
+health_bonus = 0
+stamina_bonus = 0
 attack_multiplier_bonus = 0.0
 defense_bonus = 500
-speed_bonus = 0.0
-weight_bonus = 0.0
+speed_bonus = 0
+weight_bonus = 0
 name = "Prism Armor"
 drop_chance = 0
 cost = 230
