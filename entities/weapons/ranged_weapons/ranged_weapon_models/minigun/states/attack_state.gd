@@ -14,7 +14,8 @@ var _ray_queue: Array[RayRequest] = []
 
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
-	SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration, false)
+	if weapon.entity_stats.is_player:
+		SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration, false)
 	_fire_timer = 0.0
 	_current_angle = 0.0
 	_angle_direction = 1
@@ -40,7 +41,7 @@ func physics_process(_delta: float) -> void:
 
 		var raycast: RayCast3D = _create_raycast(origin, direction, max_range)
 		raycast.force_raycast_update()
-		process_hit(raycast)
+		process_raycast_hit(raycast)
 	_ray_queue.clear()
 
 

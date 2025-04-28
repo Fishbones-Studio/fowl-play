@@ -15,6 +15,9 @@ extends Resource
 @export var weight_factor: float = 0.07 # Controls slowdown strength
 @export var k_scaler : float = 100.0 # Controlls scaling for damage and defense
 
+@export_group("Holder")
+@export var is_player : bool = false
+
 var current_health: float:
 	set(value):
 		current_health = clamp(value, 0, max_health)
@@ -61,8 +64,6 @@ func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEn
 		elif damage_type == DamageEnums.DamageTypes.TRUE:
 			actual_damage = amount
 
-		print("Scaled Defense: Damage: %s, Type: %s, Actual Damage: %s, Defense: %s" % [amount, damage_type, actual_damage, defense])
-
 	current_health = clamp(current_health - actual_damage, 0, max_health)
 	return actual_damage
 
@@ -92,7 +93,6 @@ func calc_scaled_damage(damage: float) -> float:
 		var scale: float = 1.0 + (attack / (k_scaler + attack))
 		actual_damage = floor(damage * scale)
 	
-	print("Scaled Damage: Damage: %s, Actual Damage: %s, Attack: %s" % [damage, actual_damage, attack])
 	return actual_damage
 
 
