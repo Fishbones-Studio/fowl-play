@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=3 uid="uid://5dsmkedrprey"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
-[ext_resource type="Script" uid="uid://dxxu6tfphed3m" path="res://entities/enemies/ice_fox/ice_fox.gd" id="2_cemmm"]
+[ext_resource type="Script" uid="uid://dm5aqojr8vi2c" path="res://entities/enemies/ice_fox/ice_fox.gd" id="2_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="4_qhcpj"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_knbep"]

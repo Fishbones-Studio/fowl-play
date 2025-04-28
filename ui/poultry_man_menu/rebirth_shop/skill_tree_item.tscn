@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://cdudy6ia0qr8w"]
+[gd_scene load_steps=2 format=3 uid="uid://cdudy6ia0qr8w"]
 
-[node name="VBoxContainer" type="VBoxContainer"]
+[ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.gd" id="1_7dkd8"]
+
+[node name="Skill_tree_item" type="VBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_7dkd8")
 
-[node name="Kind_Indicator" type="Label" parent="."]
+[node name="Kind_Indicator_Label" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Label"
@@ -45,32 +48,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="Level6" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Level7" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Level8" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Level9" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Level10" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "MAX"
+
+[connection signal="pressed" from="HBoxContainer/Buy_Button" to="." method="_on_buy_button_pressed"]

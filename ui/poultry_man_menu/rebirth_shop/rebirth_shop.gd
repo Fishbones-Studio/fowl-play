@@ -1,5 +1,7 @@
 extends Control
 
+const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
+
 func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ) \

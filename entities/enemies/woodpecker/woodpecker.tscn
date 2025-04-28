@@ -1,7 +1,7 @@
 [gd_scene load_steps=45 format=3 uid="uid://d0o65o2xsk53s"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_base_enemy"]
-[ext_resource type="Script" uid="uid://btgmyrnqlqcms" path="res://entities/enemies/woodpecker/woodpecker.gd" id="2_woodpecker_script"]
+[ext_resource type="Script" path="res://entities/enemies/woodpecker/woodpecker.gd" id="2_woodpecker_script"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_idle_state"]
