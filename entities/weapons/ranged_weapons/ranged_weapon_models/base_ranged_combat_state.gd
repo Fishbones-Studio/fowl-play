@@ -42,4 +42,4 @@ func process_hit(raycast: RayCast3D) -> void:
 				return
 			print("Colliding with:" + collider.name)
 			# TODO: hit marker
-			SignalManager.weapon_hit_target.emit(collider, weapon.current_weapon.damage * weapon.entity_stats.attack_multiplier)
+			SignalManager.weapon_hit_target.emit(collider, weapon.entity_stats.calc_scaled_damage(weapon.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)

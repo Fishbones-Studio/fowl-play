@@ -59,7 +59,7 @@ var current_round: int = 1:
 		current_round = value
 
 
-# --- Cheat Variables ---
+# Cheat variables
 var infinite_health: bool = false:
 	set(value):
 		if infinite_health == value:
@@ -118,14 +118,13 @@ func _apply_cheat_settings() -> void:
 	# Damage Cheats
 	if infinite_damage:
 		print("Setting infinite damage")
-		chicken_player.stats.attack_multiplier = INF
+		chicken_player.stats.attack = INF
 	else:
 		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
-		chicken_player.stats.attack_multiplier = _default_player_stats.attack_multiplier
-		
+		chicken_player.stats.attack = _default_player_stats.attack
 
-	
+
 func reset_game() -> void:
 	# Use the setter for prosperity_eggs to ensure signals/updates happen
 	prosperity_eggs = clamp(
