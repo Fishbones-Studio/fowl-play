@@ -39,7 +39,6 @@ func _attack() -> void:
 	# Get targets for the given area in the attack area. 
 	var targets : Array[Node] = weapon_node.hit_targets_this_swing
 	for target in targets:
-		print("Hit target: " + str(target))
 		if target is ChickenPlayer or target is Enemy:
 			SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
 			weapon_node.attacking = false
