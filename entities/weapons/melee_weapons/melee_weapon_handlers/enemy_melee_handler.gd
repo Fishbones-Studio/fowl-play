@@ -21,6 +21,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		var targets: Array[Node3D] = attacking_area.get_overlapping_bodies()
 		for target in targets:
-			if target == GameManager.chicken_player and melee_weapon and melee_weapon.melee_state_machine:
+			if target == GameManager.chicken_player and melee_weapon and melee_weapon.melee_state_machine and melee_weapon.melee_state_machine.current_state.state_type == WeaponEnums.WeaponState.IDLE:
 				melee_weapon.melee_state_machine.melee_combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
 				cooldown = melee_weapon.current_weapon.current_weapon.cooldown_time
