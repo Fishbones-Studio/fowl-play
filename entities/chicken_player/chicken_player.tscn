@@ -135,6 +135,7 @@ fadein_time = 0.1
 fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yiywh"]
+graph_offset = Vector2(-875.85, -43.657)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_5aj8x")
 nodes/Dash/position = Vector2(-248, 132)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_y8j8d")
@@ -163,19 +164,21 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.478977, -0.00103188, 0.0032542, 0.877821)
-bones/3/rotation = Quaternion(-0.516451, 0.0936182, 0.0574512, 0.849243)
-bones/4/rotation = Quaternion(-0.0901298, -0.279038, 0.110904, 0.949587)
-bones/5/rotation = Quaternion(-0.290926, 0.000699975, -0.77472, 0.5614)
-bones/6/rotation = Quaternion(-0.165588, 0.166496, 0.65874, 0.714788)
+bones/2/rotation = Quaternion(-0.504704, -0.00246261, 0.00794589, 0.863252)
+bones/3/rotation = Quaternion(-0.526933, -0.0181883, -0.0166463, 0.849549)
+bones/4/rotation = Quaternion(-0.1806, -0.324651, -0.0900018, 0.924059)
+bones/5/rotation = Quaternion(-0.168598, -0.122684, -0.695922, 0.68718)
+bones/6/rotation = Quaternion(-0.232853, 0.0836191, 0.71524, 0.65362)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.21817, -0.00437408, -0.0684419, 0.973498)
-bones/9/rotation = Quaternion(0.169889, 0.0328563, -0.157855, 0.972183)
+bones/8/rotation = Quaternion(0.296919, -0.0157028, -0.0504059, 0.953442)
+bones/9/rotation = Quaternion(0.181204, 0.00790844, -0.113717, 0.976817)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.173777, -0.0480543, -0.0417859, 0.982724)
+bones/11/rotation = Quaternion(-0.172539, 0.0525169, 0.109501, 0.977488)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/OneShot/active = false

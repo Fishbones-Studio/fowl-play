@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_mvqda")
-damage = 10
-windup_time = 0.0
-attack_duration = 0.0
-cooldown_time = 0.0
+damage = 8
+windup_time = 0.4
+attack_duration = 0.4
+cooldown_time = 1.0
 name = "Peck"
 purchasable = false
 drop_chance = 0
 cost = 0
 currency_type = 0
-description = "PlaceHolder"
+description = "[color=orange]Default weapon:[/color] The fearsome PECK! Your trusty beak unleashes %s Base Damage after a %s windup. The pecking lasts %s, after which your beak needs a breather for %s. Wouldn't want to break it, right?"
 model_uid = "uid://cyabnta5e4ldb"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"
