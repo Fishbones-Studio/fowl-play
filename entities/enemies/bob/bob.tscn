@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://0vmeubjcsxig"]
+[gd_scene load_steps=52 format=3 uid="uid://0vmeubjcsxig"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/legacy/ball_chicken/ball_chicken_stats.tres" id="2_fjbia"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="4_8cml0"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="6_e381t"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="7_0xmxa"]
+[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="10_jowcg"]
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="10_yvhtp"]
+[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="11_jowcg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 2.825
@@ -78,16 +80,17 @@ blend = 0.2
 [sub_resource type="BTAction" id="BTAction_yvhtp"]
 script = ExtResource("6_e381t")
 target_var = &"target"
-rotation_speed = 6.0
-angle_threshold = 26.0
-duration = 0.0
+rotation_speed = 10.0
+angle_threshold = 1.0
+duration = 5.0
 
 [sub_resource type="BTAction" id="BTAction_0xmxa"]
 script = ExtResource("3_fjbia")
 target_var = &"target"
 tolerance = 5.0
 aggro_distance = 50.0
-duration = 10.0
+duration = 5.0
+ignore_y = null
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
@@ -142,7 +145,7 @@ speed_factor = 5.0
 duration = 5.0
 bounce = true
 bounce_angle_variation = 45.0
-camera_shake = 5.0
+camera_shake = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_b8d52"]
 custom_name = "Charge!"
@@ -153,11 +156,38 @@ custom_name = "Charge attack"
 children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
+custom_name = "Cooldown charge attack"
 children = [SubResource("BTSequence_yvhtp")]
 metadata/_weight_ = 1.0
 
+[sub_resource type="BTAction" id="BTAction_kbctg"]
+script = ExtResource("10_jowcg")
+jump_height = 100.0
+
+[sub_resource type="BTSequence" id="BTSequence_kbctg"]
+children = [SubResource("BTAction_kbctg")]
+
+[sub_resource type="BTAction" id="BTAction_5cuga"]
+script = ExtResource("11_jowcg")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_5cuga"]
+children = [SubResource("BTAction_5cuga")]
+
+[sub_resource type="BTWait" id="BTWait_jowcg"]
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_sv4kc"]
+custom_name = "Earthquake"
+children = [SubResource("BTSequence_kbctg"), SubResource("BTSequence_5cuga"), SubResource("BTWait_jowcg")]
+metadata/_weight_ = 0.985075
+
+[sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
+custom_name = "Cooldown earthquake 10s"
+children = [SubResource("BTSequence_sv4kc")]
+
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_yvhtp"]
-children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp")]
+children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp"), SubResource("BTCooldown_kbctg")]
 
 [sub_resource type="BTSequence" id="BTSequence_36efm"]
 children = [SubResource("BTAction_sexgk"), SubResource("BTSetVar_0xmxa"), SubResource("BTSequence_0xmxa"), SubResource("BTProbabilitySelector_yvhtp")]
@@ -194,7 +224,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.7
 texture = SubResource("ViewportTexture_m0aa4")
 
 [node name="MovementComponent" parent="." index="4"]
-sprint_speed_factor = 2.5
+sprint_speed_factor = 10.0
+jump_height = 100.0
 
 [node name="DamageNumberHandler" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83981, 0)

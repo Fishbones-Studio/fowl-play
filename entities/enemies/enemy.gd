@@ -11,6 +11,7 @@ signal damage_taken
 @onready var bt_player: BTPlayer = $BTPlayer
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
+@onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
 
 
 func _ready() -> void:

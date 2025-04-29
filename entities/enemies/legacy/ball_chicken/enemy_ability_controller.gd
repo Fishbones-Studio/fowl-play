@@ -3,21 +3,21 @@ extends Node3D
 
 @export var enemy: Enemy
 
-var abilities: Dictionary[EnemyAbilitySlot, Ability]
+var abilities: Dictionary[AbilitySlot, Ability]
 
 
 func _ready() -> void:
 	assert(enemy, "No enmey reference set for: %s" % name) # For debugging
 
 	# Initialize all child AbilitySlots
-	for child: EnemyAbilitySlot in get_children():
+	for child: AbilitySlot in get_children():
 		child.setup(enemy)
 
 		if not is_instance_valid(child.ability): continue
 		abilities[child] = child.ability
 
 
-func _try_activate_ability(ability_slot: EnemyAbilitySlot) -> void:
+func try_activate_ability(ability_slot: AbilitySlot = abilities.keys()[0]) -> void:
 	var ability = abilities[ability_slot]
 
 	if not ability:
@@ -32,13 +32,4 @@ func _try_activate_ability(ability_slot: EnemyAbilitySlot) -> void:
 		push_error("Ability missing 'activate' method: ", ability.name)
 		return
 
-	# TODO, whack and needs to be fixed later
-	if ability.current_ability.name == "Ground Pound":
-		enemy.velocity.y += 50
-
 	ability.activate()
-
-
-func _on_attacking_area_body_entered(_body: Node3D) -> void:
-	_try_activate_ability(abilities.keys()[0])
-	_try_activate_ability(abilities.keys()[1])

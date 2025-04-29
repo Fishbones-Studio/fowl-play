@@ -1,7 +1,7 @@
 class_name EnemyAbilitySlot
 extends Node3D
 
-@export var ability_resource: AbilityResource # Can be set for default player ability
+@export var ability_resource: AbilityResource
 
 var ability: Ability
 

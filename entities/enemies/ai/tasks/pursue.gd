@@ -9,12 +9,15 @@ extends BTAction
 @export var aggro_distance: float = 20.0
 ## Duration the enemy will pursue the target.
 @export var duration: float
+## Set y-axis to 0
+@export var ignore_y: bool = true
 
 
 func _generate_name() -> String:
 	return "Pursue ➜ %s" % [LimboUtility.decorate_var(target_var)]
 
 
+# TODO: Implement if stuck
 func _tick(delta: float) -> Status:
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
@@ -39,5 +42,5 @@ func _is_at_position(position: Vector3) -> bool:
 func _move_towards_position(position: Vector3, delta: float) -> void:
 	var speed: float = agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 	var desired_velocity: Vector3 = agent.global_position.direction_to(position) * speed
-	desired_velocity.y = 0
+	if ignore_y: desired_velocity.y = 0
 	agent.velocity = desired_velocity

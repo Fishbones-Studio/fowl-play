@@ -55,7 +55,11 @@ func _refresh_shop() -> void:
 	# Add items up to our limit
 	for i in range(items_to_show):
 		var selected_item: BaseResource = available_items[i]
+		if selected_item.drop_chance <= 0.0:
+			continue
+
 		shop_items.append(selected_item)
+
 		var shop_item: BaseShopItem = create_shop_item(selected_item)
 		if not shop_item:
 			push_error("Failed to create shop item for: ", selected_item.name)

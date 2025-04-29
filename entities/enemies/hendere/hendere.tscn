@@ -83,6 +83,7 @@ target_var = &"target"
 tolerance = 5.0
 aggro_distance = 50.0
 duration = 10.0
+ignore_y = null
 
 [sub_resource type="BTCondition" id="BTCondition_n7fk8"]
 script = ExtResource("6_y6e3h")
@@ -238,5 +239,8 @@ transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
 melee_weapon_scene = ExtResource("10_f4t48")
 weapon_collision_mask = 2
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0"]
+ability_resource = null
 
 [editable path="chicken_hennifer"]

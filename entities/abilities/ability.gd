@@ -14,7 +14,7 @@ var on_cooldown: bool:
 
 func _ready() -> void:
 	if not current_ability:
-		push_error("Ability resource not set: ", current_ability)
+		push_warning("Ability resource not set: ", current_ability)
 		return
 
 	cooldown_timer.wait_time = current_ability.cooldown

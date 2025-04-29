@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxc3j6moweqeh"]
+
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
+[ext_resource type="Script" uid="uid://cbbjybahmxy5y" path="res://entities/abilities/ability_models/earthquake/earthquake.gd" id="2_1j166"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1j166"]
+radius = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjuvu"]
+albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_57nyx"]
+material = SubResource("StandardMaterial3D_qjuvu")
+size = Vector2(1, 1)
+
+[node name="Earthquake" instance=ExtResource("1_57nyx")]
+script = ExtResource("2_1j166")
+descent_velocity = -50.0
+initial_knockback_force = 200.0
+knockback_force_upwards = 10.0
+quake_interval = 0.5
+quake_damage_increase = 0.2
+quake_radius_increase = 0.3
+max_quakes = 3
+
+[node name="QuakeTimer" type="Timer" parent="." index="1"]
+wait_time = 0.001
+one_shot = true
+
+[node name="HitArea" type="Area3D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("CylinderShape3D_1j166")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 250
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+lifetime_randomness = 1.0
+mesh = SubResource("PlaneMesh_57nyx")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 33, 1)
+emission_ring_height = 2.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0.5, 0)
+
+[connection signal="timeout" from="QuakeTimer" to="." method="_pulse_quake"]
