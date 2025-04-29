@@ -80,8 +80,9 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 			# Play the animation for the new state
 			weapon.animation_player.play(current_state.ANIMATION_NAME)
 		if target_state == WeaponEnums.WeaponState.IDLE:
-			# resetting the property tracks
-			weapon.animation_player.queue("RESET")
+			if weapon.animation_player.has_animation("RESET"):
+				# resetting the property tracks
+				weapon.animation_player.queue("RESET")
 
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.STATE_TYPE, information)
