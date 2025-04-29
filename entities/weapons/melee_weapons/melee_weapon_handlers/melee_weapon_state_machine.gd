@@ -75,9 +75,13 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	if (current_state.ANIMATION_NAME != null and not current_state.ANIMATION_NAME.is_empty() and weapon and weapon.animation_player and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
-		# Play the animation for the new state
-		weapon.animation_player.play(current_state.ANIMATION_NAME)
+	if (weapon.animation_player and weapon):
+		if (current_state.ANIMATION_NAME != null and not current_state.ANIMATION_NAME.is_empty()  and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
+			# Play the animation for the new state
+			weapon.animation_player.play(current_state.ANIMATION_NAME)
+		if target_state == WeaponEnums.WeaponState.IDLE:
+			# resetting the property tracks
+			weapon.animation_player.queue("RESET")
 
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.STATE_TYPE, information)

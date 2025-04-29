@@ -32,12 +32,13 @@ func _on_attack_timer_timeout() -> void:
 
 
 func _attack() -> void:
-	# Get targets for the given area in the attack area. 
-	var targets : Array[Node] = weapon_node.hit_targets_this_swing
-	for target in targets:
-		if target is ChickenPlayer or target is Enemy:
-			SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
-			weapon_node.attacking = false
-		elif target != null:
-			print("Hit target is not a valid target!" + target.name)
-			return
+	if weapon_node.attacking:
+		# Get targets for the given area in the attack area. 
+		var targets : Array[Node] = weapon_node.hit_targets_this_swing
+		for target in targets:
+			if target is ChickenPlayer or target is Enemy:
+				SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
+				weapon_node.attacking = false
+			elif target != null:
+				print("Hit target is not a valid target!" + target.name)
+				return

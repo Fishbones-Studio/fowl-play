@@ -5,14 +5,16 @@
 
 [resource]
 script = ExtResource("1_43o3y")
-damage = 35
-windup_time = 1.0
-attack_duration = 1.5
+damage = 30
+windup_time = 0.5
+attack_duration = 1.4
 cooldown_time = 1.0
 name = "Dagger"
+purchasable = true
 drop_chance = 20
 cost = 80
 currency_type = 0
-description = "Deals %s Base Damage with a powerful swing after a windup of %s. The attack lasts %s, then enters a cooldown state for %s."
+description = "Deals %s Base Damage with a powerful swing after a windup of %s. The attack lasts %s, then enters a cooldown state for %s.
+Allows for [color=orange]2 hits per attack[/color]"
 icon = ExtResource("1_8lwf8")
 model_uid = "uid://dldj0suybdnhl"

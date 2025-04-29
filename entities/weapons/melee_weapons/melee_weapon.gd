@@ -64,4 +64,7 @@ func _check_for_hit() -> void:
 			hit_targets_this_swing.append(collider)
 			print("Melee hit (ray): ", collider.name)
 
+## Funtion to call from animation tracks
+func set_attacking(attacking_value : bool) -> void:
+	attacking = attacking_value
 	
