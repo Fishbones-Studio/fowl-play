@@ -1,11 +1,11 @@
 extends Ability
 
-@export var descent_velocity: float = -50.0
-@export var initial_knockback_force: float = 20
-@export var knockback_force_upwards: float = 5
+@export var descent_velocity: float = -25.0
+@export var initial_knockback_force: float = 5.0
+@export var knockback_force_upwards: float = 3.0
 @export var quake_interval: float = 0.5  # Time between quake pulses
 @export var quake_damage_increase: float = 0.2  # Damage multiplier per quake
-@export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
+@export var quake_radius_increase: float = 2.0  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
 
 var damage: float:
@@ -69,13 +69,14 @@ func _pulse_quake() -> void:
 			_apply_knockback(body)
 			_hit_bodies.append(body)
 
+	cpu_particles.emitting = true
+
 	print("EARTHQUAKE")
 	if camera:
 		camera.apply_shake(1.0)
 
 	collision_shape.scale = Vector3.ONE * (1.0 + (_current_quake_count * quake_radius_increase))
 	cpu_particles.scale = collision_shape.scale
-	cpu_particles.emitting = true
 
 	# Damage calculation
 	_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
