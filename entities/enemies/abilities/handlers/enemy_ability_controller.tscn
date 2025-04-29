@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkllq0utfdh6m"]
+
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/abilities/handlers/enemy_ability_controller.gd" id="1_t5wqw"]
+
+[node name="EnemyAbilityController" type="Node3D"]
+script = ExtResource("1_t5wqw")

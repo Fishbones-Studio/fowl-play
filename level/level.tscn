@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhnqi4fnso1hh"]
+[gd_scene load_steps=13 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
 [ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area.tscn" id="2_6gtgk"]
@@ -7,20 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="3_rhqlf"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
-[ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_0v1st"]
 [ext_resource type="PackedScene" uid="uid://bw4u5qtf6bv0m" path="res://entities/enemies/ball_chicken/ball_chicken.tscn" id="5_6gtgk"]
-[ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_cw150"]
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="5_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="5_m3nah"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
 
 [sub_resource type="Curve3D" id="Curve3D_l5lfc"]
-closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.797, 0, -2.758, 0, 0, 0, 0, 0, 0, 20.692, 0, -16.1, 0, 0, 0, 0, 0, 0, 17.622, 0, -33.116, 0, 0, 0, 0, 0, 0, -1.47, 0, -41.92, 0, 0, 0, 0, 0, 0, -13.982, 0, -34.752, 0, 0, 0, 0, 0, 0, -21.4088, -7.09679, -28.9869, 0, 0, 0, 0, 0, 0, -20.141, -10.5106, -16.9777, 0, 0, 0, 0, 0, 0, -9.09975, -9.82256, -4.35105),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, -0.4443, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.87716, -0.18117, -7.90227, 0, 0, 0, 0, 0, 0, 8.32189, -0.147777, -7.39713),
+"tilts": PackedFloat32Array(0, 0)
 }
-point_count = 8
+point_count = 2
 
 [node name="Level" type="Node3D"]
 
@@ -32,8 +29,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 2,
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Arena/Path3D"]
-transform = Transform3D(0.832036, 0, -0.554713, 0, 0.999998, 0, 0.554711, 0, 0.832038, 11.797, 0, -2.758)
+transform = Transform3D(-0.0494668, -0.0032661, -0.998766, 0, 0.99999, -0.00327011, 0.998769, -0.000161763, -0.0494667, -1.87716, -0.18117, -7.90227)
 script = ExtResource("2_xii2b")
+movement_mode = 2
 
 [node name="GroundSaw" parent="Arena/Path3D/PathFollow3D" instance=ExtResource("3_rhqlf")]
 
@@ -71,5 +69,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
-enemy_scenes = Array[PackedScene]([ExtResource("5_0v1st"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
+enemy_scenes = Array[PackedScene]([ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
 waiting_time = 1.5

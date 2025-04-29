@@ -1,0 +1,171 @@
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://bc7ucld3pg5s8"]
+
+[ext_resource type="Script" uid="uid://bsjn8t8w5nfwk" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
+[ext_resource type="Script" uid="uid://bw10c0fo6vv38" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_wrjj1"]
+[ext_resource type="Script" uid="uid://43q4y05m4ggu" path="res://entities/enemies/ai/tasks/stop.gd" id="2_yhbkp"]
+[ext_resource type="Script" uid="uid://s4bbvc8i00hy" path="res://entities/enemies/ai/tasks/face_target.gd" id="3_ml4vu"]
+[ext_resource type="Script" uid="uid://cuaisi7jhl4b0" path="res://entities/enemies/ai/tasks/chase_target.gd" id="4_3c427"]
+[ext_resource type="Script" uid="uid://chd1rql0tbgaj" path="res://entities/enemies/ai/tasks/perform_pounce.gd" id="4_yhbkp"]
+[ext_resource type="Script" uid="uid://dysn6i203vasf" path="res://entities/enemies/ai/tasks/perform_dash.gd" id="5_yhbkp"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_sfte8"]
+
+[sub_resource type="BTAction" id="BTAction_ulmcl"]
+script = ExtResource("1_yhbkp")
+output_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_yhbkp"]
+custom_name = "Initialize target"
+children = [SubResource("BTAction_ulmcl")]
+
+[sub_resource type="BBNode" id="BBNode_sq422"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qmoh7"]
+animation_player = SubResource("BBNode_sq422")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_k708t"]
+script = ExtResource("2_yhbkp")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_sq422"]
+min_duration = 0.2
+max_duration = 1.4
+
+[sub_resource type="BTSequence" id="BTSequence_qmoh7"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_qmoh7"), SubResource("BTAction_k708t"), SubResource("BTRandomWait_sq422")]
+
+[sub_resource type="BBNode" id="BBNode_b2ogj"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_yhbkp"]
+animation_player = SubResource("BBNode_b2ogj")
+animation_name = &"Jump"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_yhbkp"]
+script = ExtResource("3_ml4vu")
+target_var = &"target"
+rotation_speed = 5.0
+min_angle = 0.5
+
+[sub_resource type="BBNode" id="BBNode_k708t"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_u4hmx"]
+animation_player = SubResource("BBNode_k708t")
+animation_name = &"Fall"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_t3gyd"]
+script = ExtResource("4_yhbkp")
+target_var = &"target"
+jump_velocity_factor = 1.8
+horizontal_speed = 40.0
+min_distance = 2.0
+
+[sub_resource type="BBNode" id="BBNode_u4hmx"]
+saved_value = NodePath("EnemyAbilityController")
+resource_name = "EnemyAbilityController"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_t3gyd"]
+node = SubResource("BBNode_u4hmx")
+method = &"_activate_first_ability"
+
+[sub_resource type="BTSequence" id="BTSequence_ulmcl"]
+custom_name = "Pounce sequence"
+children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAction_yhbkp"), SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd"), SubResource("BTCallMethod_t3gyd")]
+metadata/_weight_ = 1.85714
+
+[sub_resource type="BTCooldown" id="BTCooldown_yhbkp"]
+duration = 5.0
+children = [SubResource("BTSequence_ulmcl")]
+metadata/_weight_ = 1.5
+
+[sub_resource type="BBNode" id="BBNode_t3gyd"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ulmcl"]
+animation_player = SubResource("BBNode_t3gyd")
+animation_name = &"Dash"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_u4hmx"]
+script = ExtResource("3_ml4vu")
+target_var = &"target"
+rotation_speed = 5.0
+min_angle = 0.5
+
+[sub_resource type="BTAction" id="BTAction_40a5u"]
+script = ExtResource("5_yhbkp")
+target_var = &"target"
+dash_duration = 0.2
+min_distance = null
+
+[sub_resource type="BBNode" id="BBNode_yhbkp"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_k708t"]
+animation_player = SubResource("BBNode_yhbkp")
+animation_name = &"Dash"
+max_time = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_40a5u"]
+custom_name = "Dash sequence"
+children = [SubResource("BTPlayAnimation_ulmcl"), SubResource("BTAction_u4hmx"), SubResource("BTAction_40a5u"), SubResource("BTAwaitAnimation_k708t")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_b2ogj"]
+children = [SubResource("BTCooldown_yhbkp"), SubResource("BTSequence_40a5u")]
+
+[sub_resource type="BTCondition" id="BTCondition_3c427"]
+script = ExtResource("2_wrjj1")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 25.0
+
+[sub_resource type="BTComment" id="BTComment_yhbkp"]
+custom_name = "TODO, add another check, if im very close, perform some kind of slash attack"
+
+[sub_resource type="BBNode" id="BBNode_qmoh7"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wrjj1"]
+animation_player = SubResource("BBNode_qmoh7")
+animation_name = &"Sprint"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_ml4vu"]
+script = ExtResource("3_ml4vu")
+target_var = &"target"
+rotation_speed = 5.0
+min_angle = null
+
+[sub_resource type="BTAction" id="BTAction_6nkjl"]
+script = ExtResource("4_3c427")
+target_var = &"target"
+
+[sub_resource type="BTParallel" id="BTParallel_yhbkp"]
+children = [SubResource("BTAction_ml4vu"), SubResource("BTAction_6nkjl")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_b2ogj"]
+time_limit = 10.0
+children = [SubResource("BTParallel_yhbkp")]
+
+[sub_resource type="BTSequence" id="BTSequence_wrjj1"]
+custom_name = "Chase after player"
+children = [SubResource("BTCondition_3c427"), SubResource("BTComment_yhbkp"), SubResource("BTPlayAnimation_wrjj1"), SubResource("BTTimeLimit_b2ogj")]
+
+[sub_resource type="BTSequence" id="BTSequence_sq422"]
+children = [SubResource("BTSequence_yhbkp"), SubResource("BTSequence_qmoh7"), SubResource("BTProbabilitySelector_b2ogj"), SubResource("BTSequence_wrjj1")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_sfte8")
+root_task = SubResource("BTSequence_sq422")

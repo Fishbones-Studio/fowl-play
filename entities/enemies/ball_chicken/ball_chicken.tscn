@@ -1,62 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://bw4u5qtf6bv0m"]
+[gd_scene load_steps=10 format=3 uid="uid://bw4u5qtf6bv0m"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_oapbr"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/ball_chicken/ball_chicken_stats.tres" id="2_v7541"]
 [ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/ball_chicken/art/ball_chicken.glb" id="3_2hblk"]
-[ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/base_enemy/enemy_states/wander_state.gd" id="5_2ly6u"]
-[ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
-[ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
-[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/ball_chicken/enemy_ability_controller.gd" id="7_3n7t4"]
-[ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/ball_chicken/enemy_ability_slot.gd" id="8_nnmdb"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/abilities/handlers/enemy_ability_controller.gd" id="7_3n7t4"]
+[ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/abilities/slots/enemy_ability_slot.gd" id="8_nnmdb"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="10_2hblk"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="10_hsirj"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7541"]
-animation = &"rolling "
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ly6u"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_55l3j"]
-animation = &"rolling "
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55l3j"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3n7t4"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nnmdb"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hblk"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hsirj"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8q87k"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvw3e"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2hblk"]
-states/Chase/node = SubResource("AnimationNodeAnimation_v7541")
-states/Chase/position = Vector2(445, 222)
-states/Idle/node = SubResource("AnimationNodeAnimation_2ly6u")
-states/Idle/position = Vector2(386, 70.5)
-states/Wander/node = SubResource("AnimationNodeAnimation_55l3j")
-states/Wander/position = Vector2(585, 74.975)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_55l3j"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_3n7t4"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_nnmdb"), "Idle", "Wander", SubResource("AnimationNodeStateMachineTransition_2hblk"), "Wander", "Idle", SubResource("AnimationNodeStateMachineTransition_hsirj"), "Wander", "Chase", SubResource("AnimationNodeStateMachineTransition_8q87k"), "Chase", "Wander", SubResource("AnimationNodeStateMachineTransition_lvw3e")]
-graph_offset = Vector2(169.65, 27.0375)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hsirj"]
-graph_offset = Vector2(-87.7063, 17.5557)
-nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_2hblk")
-nodes/MovementStateMachine/position = Vector2(170, 80)
-nodes/output/position = Vector2(560, 100)
-node_connections = [&"output", 0, &"MovementStateMachine"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gbobm"]
 radius = 4.25
@@ -76,20 +26,16 @@ transform = Transform3D(-7.64949e-08, -1.5299e-07, -1.75, 0, -1.75, 1.5299e-07, 
 transform = Transform3D(-1.67408, 1.17, 0.988782, -1.33486, -0.395639, -1.79185, -0.751495, -1.90361, 0.980139, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.354476, 0.0545392, -0.0670703, -0.0681657, 0.350442, -0.0752978, 0.0531636, 0.085684, 0.350654, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.341492, 0.0513027, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.21972, -0.0723058, -0.0300219, 0.0642577, 0.217647, -0.0539132, 0.0447262, 0.0425147, 0.224941, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.215651, 0.0854371, -0.0245267, -0.0878411, 0.214686, -0.0244903, 0.0136041, 0.0318787, 0.230662, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
-transform = Transform3D(0.0501074, -0.0431476, -0.0815145, 0.0905501, 0.00539153, 0.052808, -0.017521, -0.0955315, 0.0397971, -0.704136, 0.658326, 0.181311)
+transform = Transform3D(0.0413089, 0.0520153, -0.0812716, 0.022335, 0.0808504, 0.0630986, 0.0938711, -0.0421268, 0.0207511, -0.737007, 0.707179, 0.157209)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
-transform = Transform3D(0.0929651, -0.0739878, -0.198577, -0.131642, 0.149767, -0.11743, 0.166065, 0.160142, 0.0180768, -0.107394, 0.155258, 1.0363)
-
-[node name="AnimationTree" type="AnimationTree" parent="ball_chicken" index="2"]
-tree_root = SubResource("AnimationNodeBlendTree_hsirj")
-anim_player = NodePath("../AnimationPlayer")
+transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229762, -0.00652853, 0.112928, -0.00742395, 0.201845, -0.107802, 0.155865, 1.03601)
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 2.5, 0)
@@ -105,32 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 [node name="MeleeWeapon" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32256, 0.507973, -1.69485)
 
-[node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state", "animation_tree")]
-starting_state = NodePath("Idle")
-animation_tree = NodePath("../ball_chicken/AnimationTree")
-
-[node name="Idle" type="Node" parent="EnemyStateMachine" index="0" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_8q87k")
-chase_distance = 100.0
-enemy = NodePath("../..")
-
-[node name="Wander" type="Node" parent="EnemyStateMachine" index="1" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_2ly6u")
-chase_distance = 100.0
-state_type = 1
-enemy = NodePath("../..")
-
-[node name="Chase" type="Node" parent="EnemyStateMachine" index="2" node_paths=PackedStringArray("enemy")]
-script = ExtResource("6_lvw3e")
-chase_distance = 100.0
-state_type = 2
-enemy = NodePath("../..")
-
-[node name="DamageNumberHandler" parent="." index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -4.5)
-base_size = 200
-
-[node name="EnemyAbilityController" type="Node3D" parent="." index="10" node_paths=PackedStringArray("enemy")]
+[node name="EnemyAbilityController" type="Node3D" parent="." index="7" node_paths=PackedStringArray("enemy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 script = ExtResource("7_3n7t4")
 enemy = NodePath("..")
@@ -142,6 +63,10 @@ ability_resource = ExtResource("10_2hblk")
 [node name="EnemyAbilitySlot2" type="Node3D" parent="EnemyAbilityController" index="1"]
 script = ExtResource("8_nnmdb")
 ability_resource = ExtResource("10_hsirj")
+
+[node name="DamageNumberHandler" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -4.5)
+base_size = 200
 
 [connection signal="body_entered" from="AttackingArea" to="EnemyAbilityController" method="_on_attacking_area_body_entered"]
 

@@ -8,6 +8,7 @@ signal damage_taken
 @export var enemy_model: Node3D
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
+@onready var movement_component: EnemyMovementComponent = $MovementComponent
 
 
 func _ready() -> void:
@@ -17,7 +18,8 @@ func _ready() -> void:
 	SignalManager.weapon_hit_target.connect(_take_damage)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	apply_gravity(delta)
 	move_and_slide()
 
 
@@ -51,3 +53,14 @@ func _take_damage(target: PhysicsBody3D, damage: int, type: DamageEnums.DamageTy
 		health_bar.set_health(stats.current_health)
 		if stats.current_health <= 0:
 			die()
+
+
+func apply_gravity(delta: float) -> void:
+	velocity.y += movement_component.get_gravity(velocity) * delta
+
+
+func apply_movement(target_position: Vector3) -> void:
+	var steering_force: Vector3 = (target_position - velocity)
+	velocity.x += steering_force.x
+	velocity.z += steering_force.z
+	move_and_slide()

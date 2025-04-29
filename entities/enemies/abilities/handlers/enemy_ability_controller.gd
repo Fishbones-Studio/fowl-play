@@ -7,7 +7,7 @@ var abilities: Dictionary[EnemyAbilitySlot, Ability]
 
 
 func _ready() -> void:
-	assert(enemy, "No enmey reference set for: %s" % name) # For debugging
+	assert(enemy, "No enemy reference set for: %s" % name) # For debugging
 
 	# Initialize all child AbilitySlots
 	for child: EnemyAbilitySlot in get_children():
@@ -32,13 +32,12 @@ func _try_activate_ability(ability_slot: EnemyAbilitySlot) -> void:
 		push_error("Ability missing 'activate' method: ", ability.name)
 		return
 
-	# TODO, whack and needs to be fixed later
-	if ability.current_ability.name == "Ground Pound":
-		enemy.velocity.y += 50
-
 	ability.activate()
 
 
-func _on_attacking_area_body_entered(_body: Node3D) -> void:
+func _activate_first_ability() -> void:
 	_try_activate_ability(abilities.keys()[0])
+
+
+func _activate_second_ability() -> void:
 	_try_activate_ability(abilities.keys()[1])
