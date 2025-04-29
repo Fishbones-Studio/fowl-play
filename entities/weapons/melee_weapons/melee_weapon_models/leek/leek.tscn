@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bymaeu4dtl7ex"]
+[gd_scene load_steps=7 format=3 uid="uid://bymaeu4dtl7ex"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_e1ngp"]
-[ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_e1ngp"]
 [ext_resource type="PackedScene" uid="uid://ne7iiotato7p" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="3_k4qq2"]
 
 [sub_resource type="Animation" id="Animation_em7sn"]
@@ -56,9 +55,7 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
 size = Vector3(1.8, 4.2, 2)
 
-[node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
-animation_player = NodePath("AnimationPlayer")
-current_weapon = ExtResource("2_e1ngp")
+[node name="LeekModel" instance=ExtResource("1_e1ngp")]
 
 [node name="leek" parent="." index="0" instance=ExtResource("3_k4qq2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=2 format=3 uid="uid://c6srj1sb1gdhm"]
+[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=3 format=3 uid="uid://c6srj1sb1gdhm"]
 
+[ext_resource type="Texture2D" uid="uid://cwtfhx12oyuy7" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/art/peck.png" id="1_gp07i"]
 [ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_mvqda"]
 
 [resource]
 script = ExtResource("1_mvqda")
-damage = 8
-windup_time = 0.4
+damage = 10
+windup_time = 0.2
 attack_duration = 0.4
-cooldown_time = 1.0
+cooldown_time = 0.3
 name = "Peck"
 purchasable = false
 drop_chance = 0
 cost = 0
 currency_type = 0
 description = "[color=orange]Default weapon:[/color] The fearsome PECK! Your trusty beak unleashes %s Base Damage after a %s windup. The pecking lasts %s, after which your beak needs a breather for %s. Wouldn't want to break it, right?"
+icon = ExtResource("1_gp07i")
 model_uid = "uid://cyabnta5e4ldb"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

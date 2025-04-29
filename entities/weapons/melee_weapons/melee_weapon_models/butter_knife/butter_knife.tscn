@@ -4,28 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cwgmtrf1rjw48" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb" id="2_aea71"]
 [ext_resource type="Resource" uid="uid://b8aw1r4xls2u4" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tres" id="2_vmu4i"]
 
-[sub_resource type="Animation" id="Animation_wtiuw"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("butter_knife")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("butter_knife:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-3.59989e-21, 1.5708, -1.5708)]
-}
-
 [sub_resource type="Animation" id="Animation_bax8f"]
 resource_name = "Attack"
 length = 0.3
@@ -69,6 +47,28 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, -2, 1),
 "update": 0,
 "values": [Vector3(-3.59989e-21, 1.5708, -1.5708), Vector3(0, 1.5708, 4.88692), Vector3(0, 1.5708, 4.88692)]
+}
+
+[sub_resource type="Animation" id="Animation_wtiuw"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("butter_knife")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("butter_knife:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.59989e-21, 1.5708, -1.5708)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bpbh2"]

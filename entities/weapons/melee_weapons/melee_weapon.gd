@@ -31,6 +31,7 @@ func _check_for_hit() -> void:
 
 	# Collision shape check 
 	var overlapping_bodies := weapon_hit_box.get_overlapping_bodies()
+	print(overlapping_bodies)
 	for body in overlapping_bodies:
 		if body is Node3D and not hit_targets_this_swing.has(body):
 			hit_targets_this_swing.append(body)
