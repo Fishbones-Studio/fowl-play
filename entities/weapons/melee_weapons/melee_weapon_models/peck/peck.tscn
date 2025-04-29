@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyabnta5e4ldb"]
+
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_mc8bi"]
+[ext_resource type="Script" uid="uid://diutjtbki3ste" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.gd" id="2_1cyw5"]
+[ext_resource type="Resource" uid="uid://c6srj1sb1gdhm" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tres" id="3_fn1cq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fn1cq"]
+
+[node name="Peck" instance=ExtResource("1_mc8bi")]
+script = ExtResource("2_1cyw5")
+current_weapon = ExtResource("3_fn1cq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
+shape = SubResource("BoxShape3D_fn1cq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="2"]

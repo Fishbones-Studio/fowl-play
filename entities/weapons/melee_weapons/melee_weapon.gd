@@ -1,7 +1,7 @@
 class_name MeleeWeapon
 extends Node3D
 
-@export var animation_player: AnimationPlayer
+@export var animation_player: AnimationPlayer # Used in the state machine
 @export var current_weapon: MeleeWeaponResource
 @export var hit_mask: int = 2
 @export var ray_length: float = 10 # Length of the raycast check

@@ -17,6 +17,7 @@ var items_sorted_flattened : Array :
 		return items_sorted_flattened
 
 ## Inventory slots (can be null/empty)
+# TODO: this causes melee weapon not to be in inventory
 @export var melee_weapon_slot: MeleeWeaponResource:
 	set(value):
 		melee_weapon_slot = _validate_slot(value, "Melee Weapon")
@@ -33,20 +34,6 @@ var items_sorted_flattened : Array :
 @export_group("currency")
 @export var prosperity_eggs: int = 200 # starting money
 @export var feathers_of_rebirth: int = 0
-
-
-func _init(
-	_items: Array[BaseResource] = [],
-	_melee_weapon_slot: MeleeWeaponResource = null,
-	_ranged_weapon_slot: RangedWeaponResource = null,
-	_ability_slot_one: AbilityResource = null,
-	_ability_slot_two: AbilityResource = null
-) -> void:
-	items = _items
-	melee_weapon_slot = _melee_weapon_slot
-	ranged_weapon_slot = _ranged_weapon_slot
-	ability_slot_one = _ability_slot_one
-	ability_slot_two = _ability_slot_two
 
 
 ## Validates if an item can be equipped (must be in inventory or null)

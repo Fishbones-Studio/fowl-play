@@ -56,7 +56,7 @@ static func load_items(path: String) -> Array[BaseResource]:
 		if file.ends_with(".tres"):
 			var file_path: String = path.path_join(file)
 			var res: Resource = load(file_path)
-			if res is BaseResource:
+			if res is BaseResource && res.purchasable:
 				temp_items.append(res)
 			else:
 				push_warning("File '", file, "' is not a BaseResource")
