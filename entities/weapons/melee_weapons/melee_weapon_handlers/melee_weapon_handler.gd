@@ -21,7 +21,6 @@ extends Node3D
 @export_flags_3d_physics var weapon_collision_mask: int:
 	set(value):
 		weapon_collision_mask = value
-		print("Setting weapon mask to: %d" % value)
 		if current_weapon:
 			current_weapon.hit_mask = weapon_collision_mask
 		
