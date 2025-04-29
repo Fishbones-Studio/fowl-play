@@ -17,7 +17,6 @@ var items_sorted_flattened : Array :
 		return items_sorted_flattened
 
 ## Inventory slots (can be null/empty)
-# TODO: this causes melee weapon not to be in inventory
 @export var melee_weapon_slot: MeleeWeaponResource:
 	set(value):
 		melee_weapon_slot = _validate_slot(value, "Melee Weapon")

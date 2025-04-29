@@ -45,7 +45,6 @@ func _validate_equipment_operation(item: BaseResource, slot_index: int) -> bool:
 	
 func _set_default_items(loaded : InventoryData) -> void:
 	if loaded.melee_weapon_slot == null:
-		 # TODO fix
 		var default_melee_weapon : BaseResource = ResourceLoader.load("uid://c6srj1sb1gdhm")
 		loaded.items.append(default_melee_weapon)
 		loaded.melee_weapon_slot = default_melee_weapon
