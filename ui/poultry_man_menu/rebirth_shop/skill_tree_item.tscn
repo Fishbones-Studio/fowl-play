@@ -6,6 +6,7 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_7dkd8")
+upgrade_type = "Attack_Multiplier"
 
 [node name="Kind_Indicator_Label" type="Label" parent="."]
 layout_mode = 2

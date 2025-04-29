@@ -6,7 +6,6 @@
 
 [node name="UpgradeShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_37cfq")]
 script = ExtResource("2_qprek")
-max_items = null
 item_database = NodePath("UpgradeDatabase")
 
 [node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_i2pg2")]

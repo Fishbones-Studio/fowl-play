@@ -3,9 +3,7 @@ extends VBoxContainer
 @export var upgrade_type: String = "Damage"
 @export var max_level: int = 5
 @export var cost_per_level: int = 100
-
-var current_level: int = 0
-
+@onready var kind_indicator_label: Label = $Kind_Indicator_Label
 @onready var buy_button: Button = $HBoxContainer/Buy_Button
 @onready var level_panels: Array = [
 	$HBoxContainer/Level1,
@@ -23,9 +21,17 @@ var current_level: int = 0
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level5.tres")
 ]
 
+var original_stats = ResourceLoader.load("res://entities/chicken_player/player_stats.tres")
+var current_level: int = 0
+var copied_stats = original_stats.duplicate()
+
 func _ready() -> void:
+	print("copied_stats properties:", copied_stats)
+	print("upgraded_stats properties:", upgrade_resources)
+		
+	kind_indicator_label.text = upgrade_type
 	#Load current level from saved data
-	current_level = SaveManager.load_upgrade(upgrade_type)
+	current_level = SaveManager.load_game(copied_stats).get(upgrade_type, 0)
 	#Initialize the panels to the right level
 	update_panels()
 	
@@ -47,26 +53,37 @@ func purchase_upgrade() -> void:
 
 func apply_upgrade() -> void:
 	if current_level <= upgrade_resources.size():
+		print("Current level:", current_level)
+		var upgrade_resource = upgrade_resources[current_level -1]
+		if upgrade_resource == null:
+			push_error("Upgrade resource is null!")
+			return
+		if not upgrade_resource is PermUpgradeResource:
+			push_error("Upgrade resource is not a PermUpgradeResource!")
+			return
 		match upgrade_type:
 			"Health":
-				GameManager.chicken_player.stats.max_health += upgrade_resources[current_level -1].value
-				GameManager.chicken_player.stats.current_health += upgrade_resources[current_level -1].value
+				copied_stats.max_health += upgrade_resources[current_level -1].value
 			"Stamina":
-				GameManager.chicken_player.stats.max_stamina += upgrade_resources[current_level -1].value
-				GameManager.chicken_player.stats.current_stamina += upgrade_resources[current_level -1].value
+				copied_stats.max_stamina += upgrade_resources[current_level -1].value
 			"Attack_Multiplier":
-				GameManager.chicken_player.stats.attack_multiplier += upgrade_resources[current_level-1].value
+				copied_stats.attack_multiplier += upgrade_resources[current_level-1].value
+				print("After upgrade - copied_stats.attack_multiplier:", copied_stats.attack_multiplier)
 			"Defence":
-				GameManager.chicken_player.stats.defense += upgrade_resources[current_level-1].value
+				copied_stats.stats.defense += upgrade_resources[current_level-1].value
 			"Speed":
-				GameManager.chicken_player.stats.speed += upgrade_resources[current_level - 1].value
+				copied_stats.stats.speed += upgrade_resources[current_level - 1].value
 			"Weight":
-				GameManager.chicken_player.stats.weight += upgrade_resources[current_level -1].value
-				
+				copied_stats.stats.weight += upgrade_resources[current_level -1].value
+	print("Original stats attack_multiplier:", original_stats.attack_multiplier)
+	print("Copied stats attack_multiplier:", copied_stats.attack_multiplier)
 func update_panels() -> void:
 	for i in range(level_panels.size()):
 		level_panels[i].visible = i < current_level
 		
 func save_upgrades() -> void:
-	SaveManager.save_upgrade(upgrade_type, current_level)
+	
+	var upgrades = SaveManager.load_game(copied_stats)
+	upgrades[upgrade_type] = current_level
+	SaveManager.save_game(copied_stats, upgrades)
 			

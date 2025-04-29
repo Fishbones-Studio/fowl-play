@@ -2,6 +2,7 @@ extends Node
 
 signal prosperity_eggs_changed(new_value: int)
 signal feathers_of_rebirth_changed(new_value: int)
+signal chicken_player_initialized
 
 # Preload default stats once to avoid repeated loading
 const DEFAULT_PLAYER_STATS_PATH: String = "uid://bwhuhbesdlyu5"
@@ -13,8 +14,10 @@ var chicken_player: ChickenPlayer = null:
 		if chicken_player == value:
 			return # No change
 		chicken_player = value
+		print("GameManager.chicken_player set to:", value)
 		# Apply cheats immediately if a player is assigned
 		_apply_cheat_settings()
+		emit_signal("chicken_player_initialized")
 
 
 var prosperity_eggs: int:

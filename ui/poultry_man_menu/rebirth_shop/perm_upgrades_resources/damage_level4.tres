@@ -13,6 +13,6 @@ weight_bonus = 0
 name = ""
 drop_chance = 0
 cost = 0
-currency_type = 0
+currency_type = 1
 description = "PlaceHolder"
 model_uid = ""

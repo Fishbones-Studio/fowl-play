@@ -90,3 +90,4 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	speed += upgrade.speed_bonus
 
 	weight += upgrade.weight_bonus
+	

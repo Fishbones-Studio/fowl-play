@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
-[ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
+[ext_resource type="Script" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
@@ -164,17 +164,17 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.505129, -0.00248645, 0.00802406, 0.863003)
-bones/3/rotation = Quaternion(-0.53026, -0.00118646, -0.0059596, 0.847813)
-bones/4/rotation = Quaternion(-0.107769, 0.182171, -0.05135, 0.975993)
-bones/5/rotation = Quaternion(-0.240534, -0.0582797, -0.74286, 0.622018)
-bones/6/rotation = Quaternion(-0.19771, 0.127767, 0.686912, 0.68756)
+bones/2/rotation = Quaternion(-0.49118, -0.00170765, 0.00547021, 0.871039)
+bones/3/rotation = Quaternion(-0.528033, -0.0160876, -0.0153879, 0.848932)
+bones/4/rotation = Quaternion(-0.105081, 0.0399708, -0.0154487, 0.99354)
+bones/5/rotation = Quaternion(-0.240935, -0.0530102, -0.745575, 0.619078)
+bones/6/rotation = Quaternion(-0.253709, 0.0564702, 0.73072, 0.631262)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.277616, -0.0159992, -0.105006, 0.954802)
-bones/9/rotation = Quaternion(0.204829, 0.0289756, -0.151627, 0.966548)
+bones/8/rotation = Quaternion(0.234295, -0.00745116, -0.114268, 0.965398)
+bones/9/rotation = Quaternion(0.2321, 0.0244858, -0.148169, 0.961029)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.178845, -0.0580194, -0.05298, 0.980735)
+bones/11/rotation = Quaternion(-0.177362, -0.0176347, 0.006557, 0.983966)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
