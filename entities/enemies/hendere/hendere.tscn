@@ -1,0 +1,242 @@
+[gd_scene load_steps=54 format=3 uid="uid://cm3hcx1pvcnnd"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_legca"]
+[ext_resource type="Resource" uid="uid://bd2xkljpgossi" path="res://entities/enemies/hendere/hendere_stats.tres" id="2_n7fk8"]
+[ext_resource type="PackedScene" uid="uid://duqairtxdtmx4" path="res://entities/enemies/legacy/hennifer_enemy/art/chicken_hennifer.glb" id="3_i6i68"]
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="4_qjixf"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_hcbj7"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="6_y6e3h"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face_target.gd" id="7_vidql"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue_target.gd" id="8_xofvk"]
+[ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="9_legca"]
+[ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="10_f4t48"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="10_n7fk8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pg7ui"]
+radius = 1.0
+height = 2.4
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tskui"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_8swpl"]
+
+[sub_resource type="BTAction" id="BTAction_lg466"]
+script = ExtResource("4_qjixf")
+output_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_ghfjr"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_igs77"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_ghfjr")
+
+[sub_resource type="BBNode" id="BBNode_nrghm"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ynbrp"]
+animation_player = SubResource("BBNode_nrghm")
+animation_name = &"idle"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_8py2e"]
+script = ExtResource("5_hcbj7")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_n8emp"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_iavk7"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_ynbrp"), SubResource("BTAction_8py2e"), SubResource("BTRandomWait_n8emp")]
+
+[sub_resource type="BTCondition" id="BTCondition_ddbif"]
+script = ExtResource("6_y6e3h")
+distance_min = 5.0
+distance_max = 100.0
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_k65bw"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_eatwp"]
+animation_player = SubResource("BBNode_k65bw")
+animation_name = &"walking"
+blend = 0.2
+speed = 2.0
+
+[sub_resource type="BTAction" id="BTAction_rbvfn"]
+script = ExtResource("7_vidql")
+target_var = &"target"
+rotation_speed = 10.0
+angle_threshold = 2.0
+duration = 0.0
+
+[sub_resource type="BTAction" id="BTAction_qrmyx"]
+script = ExtResource("8_xofvk")
+target_var = &"target"
+tolerance = 5.0
+aggro_distance = 50.0
+duration = 10.0
+
+[sub_resource type="BTCondition" id="BTCondition_n7fk8"]
+script = ExtResource("6_y6e3h")
+distance_min = 0.0
+distance_max = 5.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_i6i68"]
+script = ExtResource("10_n7fk8")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_hcbj7"]
+children = [SubResource("BTCondition_n7fk8"), SubResource("BTAction_i6i68")]
+
+[sub_resource type="BTParallel" id="BTParallel_fjrrt"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_rbvfn"), SubResource("BTAction_qrmyx"), SubResource("BTSequence_hcbj7")]
+
+[sub_resource type="BTSequence" id="BTSequence_a1uay"]
+custom_name = "Pursue target"
+children = [SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
+
+[sub_resource type="BBNode" id="BBNode_nthwi"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_tibng"]
+animation_player = SubResource("BBNode_nthwi")
+animation_name = &"idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_cbrdp"]
+script = ExtResource("7_vidql")
+target_var = &"target"
+rotation_speed = 25.0
+angle_threshold = 1.0
+duration = 2.0
+
+[sub_resource type="BTWait" id="BTWait_rxeep"]
+duration = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_jwc6c"]
+num_successes_required = 2
+children = [SubResource("BTAction_cbrdp"), SubResource("BTWait_rxeep")]
+
+[sub_resource type="BTSequence" id="BTSequence_5l4v5"]
+custom_name = "Anticipation"
+children = [SubResource("BTPlayAnimation_tibng"), SubResource("BTParallel_jwc6c")]
+
+[sub_resource type="BBNode" id="BBNode_d0mtc"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_l0rnk"]
+animation_player = SubResource("BBNode_d0mtc")
+animation_name = &"dash"
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_n7fk8"]
+script = ExtResource("9_legca")
+targe_var = &"target"
+flank_distance = -2.0
+
+[sub_resource type="BTSequence" id="BTSequence_6e6ua"]
+custom_name = "Flank"
+children = [SubResource("BTPlayAnimation_l0rnk"), SubResource("BTAction_n7fk8")]
+
+[sub_resource type="BTWait" id="BTWait_i6i68"]
+duration = 0.2
+
+[sub_resource type="BTAction" id="BTAction_hcbj7"]
+script = ExtResource("10_n7fk8")
+target_var = &"target"
+
+[sub_resource type="BTDelay" id="BTDelay_n7fk8"]
+seconds = 0.1
+children = [SubResource("BTAction_hcbj7")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_vidql"]
+times = 10
+children = [SubResource("BTDelay_n7fk8")]
+
+[sub_resource type="BTAction" id="BTAction_qjixf"]
+script = ExtResource("7_vidql")
+target_var = &"target"
+rotation_speed = 2.0
+angle_threshold = 2.0
+duration = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_hcbj7"]
+children = [SubResource("BTRepeat_vidql"), SubResource("BTAction_qjixf")]
+
+[sub_resource type="BTSequence" id="BTSequence_qjixf"]
+children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
+
+[sub_resource type="BTSequence" id="BTSequence_kwr7b"]
+custom_name = "Flank and shank"
+children = [SubResource("BTSequence_5l4v5"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+metadata/_weight_ = 0.010101
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]
+children = [SubResource("BTSequence_a1uay"), SubResource("BTSequence_kwr7b")]
+
+[sub_resource type="BTSequence" id="BTSequence_t2uqu"]
+children = [SubResource("BTAction_lg466"), SubResource("BTSetVar_igs77"), SubResource("BTSequence_iavk7"), SubResource("BTProbabilitySelector_ptrup")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_cy5wr"]
+blackboard_plan = SubResource("BlackboardPlan_8swpl")
+root_task = SubResource("BTSequence_t2uqu")
+
+[node name="Hendere" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_legca")]
+stats = ExtResource("2_n7fk8")
+enemy_model = NodePath("chicken_hennifer")
+
+[node name="chicken_hennifer" parent="." index="0" instance=ExtResource("3_i6i68")]
+transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 0, 1.13557, 0)
+
+[node name="Skeleton3D" parent="chicken_hennifer/Armature_001" index="1"]
+bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
+bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.434138, -0.00257234, 0.0106214, 0.90078)
+bones/3/rotation = Quaternion(-0.685707, -0.0919002, 0.00572195, 0.72203)
+bones/4/rotation = Quaternion(-0.109824, 0.0204284, 0.0224777, 0.993487)
+bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
+bones/6/rotation = Quaternion(-0.268938, 0.0361644, 0.74135, 0.613812)
+bones/7/rotation = Quaternion(0.150566, 0.0307317, 0.238495, 0.958909)
+bones/8/rotation = Quaternion(0.588505, -0.129407, -0.14376, 0.785015)
+bones/9/rotation = Quaternion(0.0662418, 0.151163, -0.146547, 0.975339)
+bones/10/rotation = Quaternion(0.308751, 0.0791932, 0.198243, 0.926877)
+bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
+bones/11/rotation = Quaternion(-0.23933, 0.0450574, 0.053253, 0.968429)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17727, -0.0127716)
+shape = SubResource("CapsuleShape3D_pg7ui")
+
+[node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.116262, 0)
+texture = SubResource("ViewportTexture_tskui")
+
+[node name="DamageNumberHandler" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33002, 0)
+
+[node name="BTPlayer" parent="." index="6"]
+behavior_tree = SubResource("BehaviorTree_cy5wr")
+
+[node name="EnemyWeaponController" parent="." index="7"]
+transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 1.01467, 1.12672, -0.399625)
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+melee_weapon_scene = ExtResource("10_f4t48")
+weapon_collision_mask = 2
+
+[editable path="chicken_hennifer"]

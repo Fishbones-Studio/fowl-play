@@ -7,6 +7,7 @@ const STATE_TYPE: int = WeaponEnums.WeaponState.ATTACKING
 
 @onready var attack_timer: Timer = %AttackTimer
 
+
 # Set up the weapon and cache important nodes
 func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _entity_stats : LivingEntityStats) -> void:
 	super(_weapon_node, _melee_combat_transition_state, _entity_stats)
@@ -19,7 +20,8 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 		SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, false)
 	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
 	attack_timer.start()
-	
+
+
 func physics_process(_delta: float) -> void:
 	_attack()
 
@@ -39,6 +41,7 @@ func _on_attack_timer_timeout() -> void:
 func _attack() -> void:
 	# Get targets for the given area in the attack area. 
 	var targets : Array[Node] = weapon_node.hit_targets_this_swing
+
 	for target in targets:
 		if target is ChickenPlayer or target is Enemy:
 			SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)

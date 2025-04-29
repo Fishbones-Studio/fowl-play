@@ -16,6 +16,7 @@ var hit_targets_this_swing: Array[Node] = []
 @onready var hit_check_point: Marker3D = $HitCheckPoint
 @onready var weapon_hit_box : Area3D = $WeaponHitBox
 
+
 func _physics_process(_delta: float) -> void:
 	if attacking:
 		_check_for_hit()

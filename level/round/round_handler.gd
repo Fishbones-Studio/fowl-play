@@ -202,6 +202,7 @@ func _spawn_enemy_in_level() -> void:
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_default_position.global_position
+	_current_enemy.global_position.y += 1.0
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	SignalManager.enemy_died.connect(

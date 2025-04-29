@@ -1,0 +1,204 @@
+[gd_scene load_steps=43 format=3 uid="uid://0vmeubjcsxig"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
+[ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/legacy/ball_chicken/ball_chicken_stats.tres" id="2_fjbia"]
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="2_m0aa4"]
+[ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="3_0xmxa"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue_target.gd" id="3_fjbia"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="4_8cml0"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face_target.gd" id="6_e381t"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="7_0xmxa"]
+[ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/move_forward.gd" id="10_yvhtp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
+radius = 2.825
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m0aa4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_i06h6"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = "The chicken player."
+var/aggro_distance/name = &"aggro_distance"
+var/aggro_distance/type = 3
+var/aggro_distance/value = 20.0
+var/aggro_distance/hint = 0
+var/aggro_distance/hint_string = "The distance for enemy to become aggressive."
+
+[sub_resource type="BTAction" id="BTAction_sexgk"]
+script = ExtResource("2_m0aa4")
+output_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_sexgk"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_0xmxa"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_sexgk")
+
+[sub_resource type="BBNode" id="BBNode_8cml0"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_sexgk"]
+animation_player = SubResource("BBNode_8cml0")
+animation_name = &"idle"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_e381t"]
+script = ExtResource("4_8cml0")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_e381t"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_0xmxa"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_e381t"), SubResource("BTRandomWait_e381t")]
+
+[sub_resource type="BTCondition" id="BTCondition_yvhtp"]
+script = ExtResource("7_0xmxa")
+distance_min = 5.0
+distance_max = 100.0
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_e381t"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0xmxa"]
+animation_player = SubResource("BBNode_e381t")
+animation_name = &"rolling "
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_yvhtp"]
+script = ExtResource("6_e381t")
+target_var = &"target"
+rotation_speed = 6.0
+angle_threshold = 26.0
+duration = 0.0
+
+[sub_resource type="BTAction" id="BTAction_0xmxa"]
+script = ExtResource("3_fjbia")
+target_var = &"target"
+tolerance = 5.0
+aggro_distance = 50.0
+duration = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_e381t"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTAction_yvhtp"), SubResource("BTAction_0xmxa")]
+
+[sub_resource type="BTSequence" id="BTSequence_jowcg"]
+custom_name = "Pursue target"
+children = [SubResource("BTCondition_yvhtp"), SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
+
+[sub_resource type="BBNode" id="BBNode_jowcg"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kbctg"]
+animation_player = SubResource("BBNode_jowcg")
+animation_name = &"rolling "
+blend = 0.2
+speed = 3.0
+
+[sub_resource type="BTAction" id="BTAction_sv4kc"]
+script = ExtResource("6_e381t")
+target_var = &"target"
+rotation_speed = 25.0
+angle_threshold = 1.0
+duration = 2.0
+
+[sub_resource type="BTWait" id="BTWait_5cuga"]
+duration = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_cjgjq"]
+num_successes_required = 2
+children = [SubResource("BTAction_sv4kc"), SubResource("BTWait_5cuga")]
+
+[sub_resource type="BTSequence" id="BTSequence_g0ry3"]
+custom_name = "Anticipation"
+children = [SubResource("BTPlayAnimation_kbctg"), SubResource("BTParallel_cjgjq")]
+
+[sub_resource type="BBNode" id="BBNode_akjhg"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_2bbcu"]
+animation_player = SubResource("BBNode_akjhg")
+animation_name = &"rolling "
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_j7hde"]
+script = ExtResource("10_yvhtp")
+speed_factor = 5.0
+duration = 5.0
+bounce = true
+bounce_angle_variation = 45.0
+
+[sub_resource type="BTSequence" id="BTSequence_b8d52"]
+custom_name = "Charge!"
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTAction_j7hde")]
+
+[sub_resource type="BTSequence" id="BTSequence_yvhtp"]
+custom_name = "Charge attack"
+children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
+children = [SubResource("BTSequence_yvhtp")]
+metadata/_weight_ = 0.111111
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_yvhtp"]
+children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp")]
+
+[sub_resource type="BTSequence" id="BTSequence_36efm"]
+children = [SubResource("BTAction_sexgk"), SubResource("BTSetVar_0xmxa"), SubResource("BTSequence_0xmxa"), SubResource("BTProbabilitySelector_yvhtp")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_m0aa4"]
+blackboard_plan = SubResource("BlackboardPlan_i06h6")
+root_task = SubResource("BTSequence_36efm")
+
+[node name="Bob" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_i06h6")]
+stats = ExtResource("2_fjbia")
+enemy_model = NodePath("ball_chicken")
+
+[node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.87023, 0)
+
+[node name="Sphere" parent="ball_chicken" index="0"]
+transform = Transform3D(-2.003, -1.06636, 0, 1.06636, -2.003, 0, 0, 0, 2.26917, 0, 0, 0)
+
+[node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
+transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583026, 0.359968, 0.0122451, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+
+[node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
+transform = Transform3D(0.215651, 0.0854377, -0.0245267, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.0318789, 0.230663, -0.219024, -0.459037, 0.689051)
+
+[node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
+transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81166, 0)
+shape = SubResource("SphereShape3D_fjbia")
+
+[node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.75983, 0)
+texture = SubResource("ViewportTexture_m0aa4")
+
+[node name="MovementComponent" parent="." index="4"]
+sprint_speed_factor = 2.5
+
+[node name="DamageNumberHandler" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83981, 0)
+
+[node name="BTPlayer" parent="." index="6"]
+behavior_tree = SubResource("BehaviorTree_m0aa4")
+
+[editable path="ball_chicken"]
