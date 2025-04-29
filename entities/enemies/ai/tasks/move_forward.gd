@@ -35,8 +35,12 @@ func _tick(_delta: float) -> Status:
 	if elapsed_time > duration:
 		_timed_out = true
 
-	if bounce and agent.is_on_wall():
-		_bounce()
+	if agent.is_on_wall():
+		if bounce:
+			_bounce()
+			return RUNNING
+		else:
+			return SUCCESS
 
 	if not _timed_out:
 		agent.velocity = _current_direction * _get_current_speed()

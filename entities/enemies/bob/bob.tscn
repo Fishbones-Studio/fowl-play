@@ -87,7 +87,7 @@ script = ExtResource("3_fjbia")
 target_var = &"target"
 tolerance = 5.0
 aggro_distance = 50.0
-duration = 2.0
+duration = 10.0
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
@@ -153,7 +153,7 @@ children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
 children = [SubResource("BTSequence_yvhtp")]
-metadata/_weight_ = 0.111111
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_yvhtp"]
 children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp")]
