@@ -16,11 +16,11 @@ size = Vector2(1, 1)
 [node name="Earthquake" instance=ExtResource("1_57nyx")]
 script = ExtResource("2_1j166")
 descent_velocity = -50.0
-initial_knockback_force = 200.0
-knockback_force_upwards = 10.0
+initial_knockback_force = 20.0
+knockback_force_upwards = 5.0
 quake_interval = 0.5
 quake_damage_increase = 0.2
-quake_radius_increase = 0.3
+quake_radius_increase = 0.5
 max_quakes = 3
 
 [node name="QuakeTimer" type="Timer" parent="." index="1"]

@@ -1,11 +1,11 @@
 extends Ability
 
 @export var descent_velocity: float = -50.0
-@export var initial_knockback_force: float = 200
-@export var knockback_force_upwards: float = 10
+@export var initial_knockback_force: float = 20
+@export var knockback_force_upwards: float = 5
 @export var quake_interval: float = 0.5  # Time between quake pulses
-@export var quake_damage_increase: float = .2  # Damage multiplier per quake
-@export var quake_radius_increase: float = .5  # Radius multiplier per quake
+@export var quake_damage_increase: float = 0.2  # Damage multiplier per quake
+@export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
 
 var damage: float:
@@ -59,10 +59,6 @@ func _start_quake_sequence() -> void:
 
 
 func _pulse_quake() -> void:
-	print("EARTHQUAKE")
-	if camera:
-		camera.apply_shake(1.0)
-
 	# Damage and knockback all bodies in area
 	for body in hit_area.get_overlapping_bodies():
 		if body in _hit_bodies:
@@ -72,6 +68,10 @@ func _pulse_quake() -> void:
 			SignalManager.weapon_hit_target.emit(body, _current_damage, DamageEnums.DamageTypes.NORMAL)
 			_apply_knockback(body)
 			_hit_bodies.append(body)
+
+	print("EARTHQUAKE")
+	if camera:
+		camera.apply_shake(1.0)
 
 	collision_shape.scale = Vector3.ONE * (1.0 + (_current_quake_count * quake_radius_increase))
 	cpu_particles.scale = collision_shape.scale
