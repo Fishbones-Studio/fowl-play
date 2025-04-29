@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dldj0suybdnhl"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_8ap45"]
-[ext_resource type="Script" uid="uid://dy6wo0w7iov0r" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.gd" id="2_6a4qq"]
+[ext_resource type="Resource" uid="uid://blv5macbefk8v" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tres" id="2_6a4qq"]
 [ext_resource type="PackedScene" uid="uid://ov5d0pnsy350" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.glb" id="2_8qojw"]
 
 [sub_resource type="Animation" id="Animation_6a4qq"]
@@ -82,8 +82,9 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_6a4qq"]
 size = Vector3(0.8, 2.2, 0.8)
 
-[node name="Dagger" instance=ExtResource("1_8ap45")]
-script = ExtResource("2_6a4qq")
+[node name="Dagger" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_8ap45")]
+animation_player = NodePath("AnimationPlayer")
+current_weapon = ExtResource("2_6a4qq")
 
 [node name="dagger" parent="." index="0" instance=ExtResource("2_8qojw")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)

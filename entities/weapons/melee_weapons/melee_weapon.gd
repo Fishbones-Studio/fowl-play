@@ -28,6 +28,8 @@ func _check_for_hit() -> void:
 		
 	weapon_hit_box.collision_layer = 0
 	weapon_hit_box.collision_mask = hit_mask
+	
+	print(weapon_hit_box.collision_layer)
 
 	# Collision shape check 
 	var overlapping_bodies := weapon_hit_box.get_overlapping_bodies()

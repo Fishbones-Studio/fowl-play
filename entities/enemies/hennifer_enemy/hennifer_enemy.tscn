@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/hennifer_enemy_stats.tres" id="2_v8d7w"]
 [ext_resource type="PackedScene" uid="uid://duqairtxdtmx4" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="4_dmp11"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
+[ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="4_surp0"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]
 [ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/base_enemy/enemy_states/wander_state.gd" id="6_surp0"]
 [ext_resource type="Script" uid="uid://2htosw08ep1s" path="res://entities/enemies/base_enemy/enemy_states/dash_state.gd" id="7_rbpgh"]
@@ -81,17 +81,17 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 
 [node name="Skeleton3D" parent="chicken_hennifer/Armature_001" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.492638, -0.00178873, 0.00573606, 0.870214)
-bones/3/rotation = Quaternion(-0.528126, -0.0154849, -0.0150066, 0.848892)
-bones/4/rotation = Quaternion(-0.105153, 0.045726, -0.016782, 0.993262)
-bones/5/rotation = Quaternion(-0.240982, -0.0531723, -0.745498, 0.619139)
-bones/6/rotation = Quaternion(-0.251518, 0.0593566, 0.729144, 0.633692)
+bones/2/rotation = Quaternion(-0.508725, -0.00268836, 0.00868617, 0.860881)
+bones/3/rotation = Quaternion(-0.527633, -0.0193366, -0.0174342, 0.849073)
+bones/4/rotation = Quaternion(-0.182211, -0.321519, -0.0941868, 0.924421)
+bones/5/rotation = Quaternion(-0.166619, -0.124669, -0.694343, 0.688901)
+bones/6/rotation = Quaternion(-0.233624, 0.0826278, 0.715831, 0.652823)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.236057, -0.00778239, -0.113963, 0.965002)
-bones/9/rotation = Quaternion(0.231002, 0.024683, -0.148307, 0.961267)
+bones/8/rotation = Quaternion(0.302943, -0.0165057, -0.0504614, 0.951529)
+bones/9/rotation = Quaternion(0.181443, 0.00770099, -0.113269, 0.976826)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.177439, -0.0192665, 0.00415449, 0.983934)
+bones/11/rotation = Quaternion(-0.172509, 0.053599, 0.111168, 0.977246)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_hennifer" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_xwdhe")
@@ -113,7 +113,7 @@ visible = false
 
 [node name="MeleeWeapon" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.912266, 0.615398, -0.320664)
-melee_weapon_scene = ExtResource("4_dmp11")
+melee_weapon_scene = ExtResource("4_surp0")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state", "animation_tree")]
 starting_state = NodePath("Idle")

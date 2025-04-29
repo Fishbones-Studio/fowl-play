@@ -7,11 +7,6 @@ const STATE_TYPE: int = WeaponEnums.WeaponState.ATTACKING
 
 @onready var attack_timer: Timer = %AttackTimer
 
-# Set up the weapon and cache important nodes
-func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _entity_stats : LivingEntityStats) -> void:
-	super(_weapon_node, _melee_combat_transition_state, _entity_stats)
-
-
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary = {}) -> void:
 	weapon_node.attacking = true
