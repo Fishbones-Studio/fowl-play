@@ -8,7 +8,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Flank %s" % [LimboUtility.decorate_var(targe_var)]
+	return "Flank ➜ %s" % [LimboUtility.decorate_var(targe_var)]
 
 
 func _tick(_delta: float) -> Status:

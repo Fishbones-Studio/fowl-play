@@ -12,7 +12,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Face %s" % [LimboUtility.decorate_var(target_var)]
+	return "Face ➜ %s" % [LimboUtility.decorate_var(target_var)]
 
 
 func _tick(delta: float) -> Status:

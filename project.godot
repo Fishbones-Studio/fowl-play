@@ -45,6 +45,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
+[global_group]
+
+FollowCamera=""
+
 [gui]
 
 theme/custom="uid://besvom3pq3s63"

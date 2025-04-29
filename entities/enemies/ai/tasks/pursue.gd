@@ -12,7 +12,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Pursue %s" % [LimboUtility.decorate_var(target_var)]
+	return "Pursue ➜ %s" % [LimboUtility.decorate_var(target_var)]
 
 
 func _tick(delta: float) -> Status:
@@ -39,4 +39,5 @@ func _is_at_position(position: Vector3) -> bool:
 func _move_towards_position(position: Vector3, delta: float) -> void:
 	var speed: float = agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 	var desired_velocity: Vector3 = agent.global_position.direction_to(position) * speed
+	desired_velocity.y = 0
 	agent.velocity = desired_velocity

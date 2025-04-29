@@ -8,7 +8,9 @@ extends BTAction
 ## If the enemy should bounce on walls.
 @export var bounce: bool = false
 ## Angle variation when bouncing (in degrees).
-@export var bounce_angle_variation: float = 45
+@export_range(0.0, 180.0) var bounce_angle_variation: float = 45
+## Camera shake for bounce
+@export_range(0.0, 30.0) var camera_shake: float = 5.0
 
 var _current_direction: Vector3
 var _timed_out: bool
@@ -70,3 +72,9 @@ func _bounce() -> void:
 	var random_angle: float = deg_to_rad(randf_range(-bounce_angle_variation, bounce_angle_variation))
 	var rotation: Basis = Basis(Vector3.UP, random_angle) # Rotate around Y axis only
 	_current_direction = (rotation * new_direction).normalized()
+	_bounce_camera_shake()
+
+
+func _bounce_camera_shake() -> void:
+	var camera: FollowCamera = agent.get_tree().get_first_node_in_group("FollowCamera")
+	camera.apply_shake(camera_shake)
