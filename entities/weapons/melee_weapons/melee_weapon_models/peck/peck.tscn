@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://c6srj1sb1gdhm" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tres" id="3_fn1cq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fn1cq"]
-size = Vector3(1, 1, 1.4)
+size = Vector3(1, 1.5, 1.4)
 
 [sub_resource type="Animation" id="Animation_fn1cq"]
 resource_name = "Windup"

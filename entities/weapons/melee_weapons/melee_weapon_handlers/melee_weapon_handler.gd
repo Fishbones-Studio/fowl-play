@@ -68,6 +68,8 @@ func setup() -> void:
 
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
+		
+	current_weapon.entity_stats = owner_stats
 
 	add_child(current_weapon)
 

@@ -12,6 +12,7 @@ var attacking: bool = false:
 		attacking = value
 
 var hit_targets_this_swing: Array[Node] = []
+var entity_stats : LivingEntityStats
 
 @onready var hit_check_point: Marker3D = $HitCheckPoint
 @onready var weapon_hit_box : Area3D = $WeaponHitBox
