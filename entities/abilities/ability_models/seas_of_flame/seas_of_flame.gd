@@ -20,6 +20,7 @@ func activate() -> void:
 	cpu_particles.emitting = true
 
 	_toggle_collision_masks(true)
+
 	if ability_holder == ChickenPlayer:
 		SignalManager.activate_item_slot.emit(current_ability)
 
@@ -29,6 +30,7 @@ func activate() -> void:
 
 	if ability_holder == ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+
 	cooldown_timer.start()
 
 
@@ -64,5 +66,6 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	_apply_burn(body)
 
 	_toggle_collision_masks(false)
+
 	if ability_holder == ChickenPlayer:
 		SignalManager.deactivate_item_slot.emit(current_ability)

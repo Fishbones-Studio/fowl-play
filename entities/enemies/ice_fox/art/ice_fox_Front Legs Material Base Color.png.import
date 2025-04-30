@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djw2iuf0lgw1v"
-path.s3tc="res://.godot/imported/ice_fox_Front Legs Material Base Color.png-233128ac76a97142aa69c02b0cfefdea.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Front Legs Material Base Color.png-233128ac76a97142aa69c02b0cfefdea.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Front Legs Material Base Color.png-ff5057ab034b2169cf78ddea591259d1.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Front Legs Material Base Color.png-ff5057ab034b2169cf78ddea591259d1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Front Legs Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Front Legs Material Base Color.png-233128ac76a97142aa69c02b0cfefdea.s3tc.ctex", "res://.godot/imported/ice_fox_Front Legs Material Base Color.png-233128ac76a97142aa69c02b0cfefdea.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Front Legs Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Front Legs Material Base Color.png-ff5057ab034b2169cf78ddea591259d1.s3tc.ctex", "res://.godot/imported/ice_fox_Front Legs Material Base Color.png-ff5057ab034b2169cf78ddea591259d1.etc2.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@ var abilities: Dictionary[AbilitySlot, Ability]
 
 
 func _ready() -> void:
-	assert(enemy, "No enmey reference set for: %s" % name) # For debugging
+	assert(enemy, "No enemy reference set for: %s" % name) # For debugging
 
 	# Initialize all child AbilitySlots
 	for child: AbilitySlot in get_children():

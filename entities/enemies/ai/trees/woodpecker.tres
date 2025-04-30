@@ -1,0 +1,101 @@
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://dn83muanle5ic"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_nm0l6"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_h0qwm"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_ftfet"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_7lgdv"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_spagk"]
+
+[sub_resource type="BTAction" id="BTAction_ta6uh"]
+script = ExtResource("1_qws7o")
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_d51mb"]
+saved_value = NodePath("woodpecker/AnimationPlayer")
+resource_name = "woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_q1gun"]
+animation_player = SubResource("BBNode_d51mb")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_ppkk3"]
+script = ExtResource("2_ta6uh")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_nm0l6"]
+min_duration = 0.5
+max_duration = 1.4
+
+[sub_resource type="BTSequence" id="BTSequence_h0qwm"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_q1gun"), SubResource("BTAction_ppkk3"), SubResource("BTRandomWait_nm0l6")]
+
+[sub_resource type="BTCondition" id="BTCondition_mxuth"]
+script = ExtResource("3_nm0l6")
+distance_min = 5.0
+distance_max = 50.0
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_gwx8i"]
+saved_value = NodePath("woodpecker/AnimationPlayer")
+resource_name = "woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8n2b3"]
+animation_player = SubResource("BBNode_gwx8i")
+animation_name = &"Sprint"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_f1ys2"]
+script = ExtResource("4_h0qwm")
+target_var = &"target"
+rotation_speed = 10.0
+angle_threshold = 5.0
+duration = 0.0
+
+[sub_resource type="BTAction" id="BTAction_xl814"]
+script = ExtResource("5_ftfet")
+target_var = &"target"
+tolerance = 5.0
+aggro_distance = 50.0
+speed_factor = 10.0
+duration = 10.0
+
+[sub_resource type="BTCondition" id="BTCondition_bs3vf"]
+script = ExtResource("3_nm0l6")
+distance_min = 0.0
+distance_max = 5.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_ii3fn"]
+script = ExtResource("6_7lgdv")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_gghh5"]
+children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
+
+[sub_resource type="BTParallel" id="BTParallel_nupj8"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_f1ys2"), SubResource("BTAction_xl814"), SubResource("BTSequence_gghh5")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_h0qwm"]
+children = [SubResource("BTParallel_nupj8")]
+
+[sub_resource type="BTSequence" id="BTSequence_c8cr3"]
+custom_name = "Pursue"
+children = [SubResource("BTCondition_mxuth"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTTimeLimit_h0qwm")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_hnjin"]
+children = [SubResource("BTSequence_c8cr3")]
+
+[sub_resource type="BTSequence" id="BTSequence_spagk"]
+children = [SubResource("BTAction_ta6uh"), SubResource("BTSequence_h0qwm"), SubResource("BTProbabilitySelector_hnjin")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_spagk")
+root_task = SubResource("BTSequence_spagk")

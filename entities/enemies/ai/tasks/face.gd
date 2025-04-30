@@ -28,7 +28,6 @@ func _tick(delta: float) -> Status:
 	if duration and elapsed_time > duration:
 		return SUCCESS
 
-
 	_rotate_toward_direction(desired_direction, delta)
 	return RUNNING
 
@@ -43,7 +42,6 @@ func _is_at_direction(direction: Vector3) -> bool:
 
 func _rotate_toward_direction(direction: Vector3, delta: float) -> void:
 	var target_angle: float = atan2(-direction.x, -direction.z) # Calculate the angle to the target direction
-	var speed: float = agent.stats.calculate_speed(agent.movement_component.walk_speed_factor)
 
 	# Lerp the angle to smoothly rotate towards the target direction
-	agent.rotation.y = lerp_angle(agent.rotation.y, target_angle, speed * delta)
+	agent.rotation.y = lerp_angle(agent.rotation.y, target_angle, rotation_speed * delta)
