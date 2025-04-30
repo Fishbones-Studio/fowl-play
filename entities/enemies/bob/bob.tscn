@@ -18,6 +18,7 @@ viewport_path = NodePath("SubViewport")
 collision_layer = 4
 collision_mask = 25
 stats = ExtResource("2_fjbia")
+type = 1
 enemy_model = NodePath("ball_chicken")
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
@@ -40,11 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
 shape = SubResource("SphereShape3D_fjbia")
 
 [node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.75983, 0)
+transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.755416, 0)
 texture = SubResource("ViewportTexture_m0aa4")
 
 [node name="DamageNumberHandler" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83981, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
 [node name="BTPlayer" parent="." index="6"]
 behavior_tree = ExtResource("4_m0aa4")
