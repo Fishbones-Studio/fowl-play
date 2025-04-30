@@ -6,6 +6,10 @@ extends BTCondition
 @export_flags_3d_physics var player_layer: int = 2
 
 
+func _generate_name() -> String:
+	return "PlayerOnTop ➜ check_distance: %.1f" % check_distance
+
+
 func _tick(_delta: float) -> Status:
 	var result: bool = _is_player_on_top()
 	return SUCCESS if result else FAILURE 
@@ -20,5 +24,4 @@ func _is_player_on_top() -> bool:
 	params.collision_mask = player_layer
 
 	var hit: Dictionary = space_state.intersect_ray(params)
-	print(hit)
 	return hit and hit["collider"] is ChickenPlayer

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -25,6 +25,21 @@ resource_name = "20.0"
 variable = &"aggro_distance"
 value = SubResource("BBVariant_ghfjr")
 
+[sub_resource type="BTCondition" id="BTCondition_mnhi0"]
+script = ExtResource("3_schhj")
+check_distance = 7.0
+player_layer = 2
+
+[sub_resource type="BTAction" id="BTAction_fxtff"]
+script = ExtResource("7_7jrpa")
+target_var = &"target"
+flank_distance = 4.0
+vertical_offset = 0.0
+clearance_radius = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_k4t8y"]
+children = [SubResource("BTCondition_mnhi0"), SubResource("BTAction_fxtff")]
+
 [sub_resource type="BBNode" id="BBNode_nrghm"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
 resource_name = "chicken_hennifer/AnimationPlayer"
@@ -44,27 +59,6 @@ max_duration = 1.5
 [sub_resource type="BTSequence" id="BTSequence_iavk7"]
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_ynbrp"), SubResource("BTAction_8py2e"), SubResource("BTRandomWait_n8emp")]
-
-[sub_resource type="BTCondition" id="BTCondition_mnhi0"]
-script = ExtResource("3_schhj")
-check_distance = 4.0
-player_layer = 2
-
-[sub_resource type="BTAction" id="BTAction_fxtff"]
-script = ExtResource("8_ba5to")
-target_var = &"target"
-retreat_distance = 5.0
-speed_factor = 10.0
-rotation_speed = 6.0
-duration = 0.0
-
-[sub_resource type="BTSequence" id="BTSequence_k4t8y"]
-children = [SubResource("BTCondition_mnhi0"), SubResource("BTAction_fxtff")]
-
-[sub_resource type="BTParallel" id="BTParallel_xlk6v"]
-num_failures_required = 2
-repeat = true
-children = [SubResource("BTSequence_iavk7"), SubResource("BTSequence_k4t8y")]
 
 [sub_resource type="BTCondition" id="BTCondition_ddbif"]
 script = ExtResource("3_fxtff")
@@ -133,10 +127,10 @@ speed = 6.0
 
 [sub_resource type="BTAction" id="BTAction_n7fk8"]
 script = ExtResource("7_7jrpa")
-target_var = &"target"
+target_var = null
 flank_distance = 2.0
-vertical_offset = 0.1
-clearance_radius = 0.5
+vertical_offset = null
+clearance_radius = null
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
@@ -174,7 +168,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
 children = [SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
-metadata/_weight_ = 0.0
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTComment" id="BTComment_qjxos"]
 custom_name = "TODO: do sth else, e.g. drop egg bombs"
@@ -204,8 +198,16 @@ metadata/_weight_ = 0.0
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]
 children = [SubResource("BTSequence_a1uay"), SubResource("BTSequence_kwr7b"), SubResource("BTSequence_pia2r")]
 
+[sub_resource type="BTSequence" id="BTSequence_fxtff"]
+children = [SubResource("BTSequence_iavk7"), SubResource("BTProbabilitySelector_ptrup")]
+
+[sub_resource type="BTParallel" id="BTParallel_xlk6v"]
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTSequence_k4t8y"), SubResource("BTSequence_fxtff")]
+
 [sub_resource type="BTSequence" id="BTSequence_t2uqu"]
-children = [SubResource("BTAction_lg466"), SubResource("BTSetVar_igs77"), SubResource("BTParallel_xlk6v"), SubResource("BTProbabilitySelector_ptrup")]
+children = [SubResource("BTAction_lg466"), SubResource("BTSetVar_igs77"), SubResource("BTParallel_xlk6v")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_8swpl")
