@@ -7,15 +7,14 @@ extends CharacterBody3D
 
 
 func _ready() -> void:
-	print("ChickenPlayer is Ready!")
+	# load the stats from the save manager
+	stats = SaveManager.get_loaded_player_stats()
+	
 	stats.init()
 	GameManager.chicken_player = self
-	print("ChickenPlayer initialized and set in GameManager")
 	SignalManager.init_health.emit(stats.max_health, stats.current_health)
 	SignalManager.init_stamina.emit(stats.max_stamina, stats.current_stamina)
 	SignalManager.weapon_hit_target.connect(_on_weapon_hit_target)
-	
-	#var upgrades = SaveManager.load_game(stats)
 
 func _input(event: InputEvent) -> void:
 	movement_state_machine.input(event)

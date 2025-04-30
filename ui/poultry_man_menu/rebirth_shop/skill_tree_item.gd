@@ -13,6 +13,7 @@ extends VBoxContainer
 	$HBoxContainer/Level5
 ]
 
+# TODO: uid instead of string
 @export var upgrade_resources: Array = [
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level1.tres"),
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level2.tres"),
@@ -21,20 +22,15 @@ extends VBoxContainer
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level5.tres")
 ]
 
-var original_stats = ResourceLoader.load("res://entities/chicken_player/player_stats.tres")
 var current_level: int = 0
-var copied_stats = original_stats.duplicate()
+var copied_stats = SaveManager.get_loaded_player_stats()
 
 func _ready() -> void:
-	print("copied_stats properties:", copied_stats)
-	print("upgraded_stats properties:", upgrade_resources)
-		
 	kind_indicator_label.text = upgrade_type
-	#Load current level from saved data
-	current_level = SaveManager.load_game(copied_stats).get(upgrade_type, 0)
-	#Initialize the panels to the right level
+	# Load current level from saved upgrades dictionary
+	var upgrades = SaveManager.get_loaded_upgrades()
+	current_level = upgrades.get(upgrade_type, 0)
 	update_panels()
-	
 
 func _on_buy_button_pressed() -> void:
 	if current_level < max_level and can_afford_upgrade():
@@ -45,16 +41,16 @@ func _on_buy_button_pressed() -> void:
 		save_upgrades()
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
+
 func can_afford_upgrade() -> bool:
 	return GameManager.feathers_of_rebirth >= cost_per_level
-	
+
 func purchase_upgrade() -> void:
 	GameManager.feathers_of_rebirth -= cost_per_level
 
 func apply_upgrade() -> void:
 	if current_level <= upgrade_resources.size():
-		print("Current level:", current_level)
-		var upgrade_resource = upgrade_resources[current_level -1]
+		var upgrade_resource = upgrade_resources[current_level - 1]
 		if upgrade_resource == null:
 			push_error("Upgrade resource is null!")
 			return
@@ -63,27 +59,25 @@ func apply_upgrade() -> void:
 			return
 		match upgrade_type:
 			"Health":
-				copied_stats.max_health += upgrade_resources[current_level -1].value
+				copied_stats.max_health += upgrade_resource.value
 			"Stamina":
-				copied_stats.max_stamina += upgrade_resources[current_level -1].value
+				copied_stats.max_stamina += upgrade_resource.value
 			"Attack_Multiplier":
-				copied_stats.attack_multiplier += upgrade_resources[current_level-1].value
-				print("After upgrade - copied_stats.attack_multiplier:", copied_stats.attack_multiplier)
+				copied_stats.attack_multiplier += upgrade_resource.value
 			"Defence":
-				copied_stats.stats.defense += upgrade_resources[current_level-1].value
+				copied_stats.stats.defense += upgrade_resource.value
 			"Speed":
-				copied_stats.stats.speed += upgrade_resources[current_level - 1].value
+				copied_stats.stats.speed += upgrade_resource.value
 			"Weight":
-				copied_stats.stats.weight += upgrade_resources[current_level -1].value
-	print("Original stats attack_multiplier:", original_stats.attack_multiplier)
-	print("Copied stats attack_multiplier:", copied_stats.attack_multiplier)
+				copied_stats.stats.weight += upgrade_resource.value
+
 func update_panels() -> void:
 	for i in range(level_panels.size()):
 		level_panels[i].visible = i < current_level
-		
+
 func save_upgrades() -> void:
-	
-	var upgrades = SaveManager.load_game(copied_stats)
+	# Get the current upgrades dictionary
+	var upgrades = SaveManager.get_loaded_upgrades().duplicate()
 	upgrades[upgrade_type] = current_level
+	# Save the game with the updated upgrades
 	SaveManager.save_game(copied_stats, upgrades)
-			
