@@ -31,7 +31,7 @@ func _generate_name() -> String:
 		name += "bounce: %s  " % bounce
 
 	if bounce_angle_variation != 45.0:
-		name += "bounce_angle_variation: %1.f  " % bounce_angle_variation
+		name += "bounce_angle_variation: %.1f  " % bounce_angle_variation
 
 	if bounce_camera_shake != 5.0:
 		name += "bounce_camera_shake: %.1f" % bounce_camera_shake
