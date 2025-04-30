@@ -7,10 +7,12 @@
 script = ExtResource("1_uhva3")
 cooldown = 15.0
 name = "Earthquake"
-drop_chance = 0
-cost = 0
+drop_chance = 1
+cost = 250
 currency_type = 0
-description = "Channeling immense weight into the earth, the wielder crashes down with tectonic force, triggering a series of devastating quakes. Each successive tremor expands the radius by  [color=yellow]+20%[/color] and intensifies damage [color=yellow]+20% per pulse[/color], launching enemies with escalating force. Deals up to [color=orange](Weight x Defense) / Max Pulses[/color] damage."
+description = "Channeling immense weight into the earth, the wielder crashes down with tectonic force, triggering a series of devastating quakes. Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per pulse[/color], launching enemies with escalating force. 
+
+Deals more damage the greater the user's [color=orange]Weight[/color] and [color=orange]Defense[/color]. Can only be used while airborne and has a cooldown of %s."
 icon = ExtResource("1_uetiq")
 model_uid = "uid://bxc3j6moweqeh"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

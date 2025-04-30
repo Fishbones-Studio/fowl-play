@@ -17,6 +17,7 @@ var _current_quake_count: int = 0
 var _current_damage: float = 0.0
 var _current_knockback: float = 0.0
 var _hit_bodies: Array = []  # Track already hit bodies per activation
+var _stop_moving: bool = false
 
 @onready var camera: FollowCamera = get_tree().get_first_node_in_group("FollowCamera")
 @onready var quake_timer: Timer = $QuakeTimer
@@ -50,12 +51,15 @@ func activate() -> void:
 func _physics_process(delta: float) -> void:
 	if ability_holder.is_on_floor() and on_cooldown and quake_timer.is_stopped() and _current_quake_count == 0:
 		_start_quake_sequence()
+		_stop_moving = true
+	if _stop_moving:
+		ability_holder.velocity = Vector3.ZERO
 
 
 func _start_quake_sequence() -> void:
-	_pulse_quake()
-
 	quake_timer.wait_time = quake_interval
+
+	_pulse_quake()
 
 
 func _pulse_quake() -> void:
@@ -71,7 +75,6 @@ func _pulse_quake() -> void:
 
 	cpu_particles.emitting = true
 
-	print("EARTHQUAKE")
 	if camera:
 		camera.apply_shake(1.0)
 
@@ -81,8 +84,6 @@ func _pulse_quake() -> void:
 	# Damage calculation
 	_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
 	_current_knockback = initial_knockback_force
-	print_debug("CURRENT KNOCKBACK: ", initial_knockback_force)
-	print_debug("CURRENT DAMAGE: ", _current_damage)
 
 	# End sequence if max quakes reached
 	_current_quake_count += 1
@@ -90,6 +91,7 @@ func _pulse_quake() -> void:
 		quake_timer.start()
 	else:
 		_reset_ability()
+		_stop_moving = false
 
 	_hit_bodies.clear()
 
@@ -126,7 +128,7 @@ func _apply_knockback(body: Node3D) -> void:
 
 func _toggle_collision_masks(toggle: bool) -> void:
 	if ability_holder.collision_layer == 2:  # Player
-		hit_area.set_collision_mask_value(4, toggle)
+		hit_area.set_collision_mask_value(3, toggle)
 	if ability_holder.collision_layer == 4:  # Enemy
 		hit_area.set_collision_mask_value(2, toggle)
 	hit_area.set_collision_mask_value(1, toggle)  # World
