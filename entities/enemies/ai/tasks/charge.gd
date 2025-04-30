@@ -1,16 +1,17 @@
 @tool
 extends BTAction
 
-## Blackboard variable that stores desired speed.
+## Blackboard variable that stores our target.
+@export var target_var: StringName = &"target"
 @export var speed_factor: float = 0.0
 ## How long to perform this task (in seconds).
 @export var duration: float = 0.1
 ## If the enemy should bounce on walls.
 @export var bounce: bool = false
 ## Angle variation when bouncing (in degrees).
-@export_range(0.0, 180.0) var bounce_angle_variation: float = 45
+@export_range(0.0, 180.0) var bounce_angle_variation: float = 45.0
 ## Camera shake for bounce
-@export_range(0.0, 30.0) var camera_shake: float = 5.0
+@export_range(0.0, 30.0) var bounce_camera_shake: float = 5.0
 
 var _current_direction: Vector3
 var _timed_out: bool
@@ -18,10 +19,24 @@ var _timed_out: bool
 
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
-	return "MoveForward  speed: %.1f  duration: %ss" % [
-		speed_factor,
-		duration,
-		]
+	var name: String = "Charge ➜ "
+
+	if speed_factor > 0.0:
+		name += "speed_factor: %.1f  " % speed_factor
+
+	if duration != 0.1:
+		name += "duration: %.1f  " % duration
+
+	if bounce:
+		name += "bounce: %s  " % bounce
+
+	if bounce_angle_variation != 45.0:
+		name += "bounce_angle_variation: %1.f  " % bounce_angle_variation
+
+	if bounce_camera_shake != 5.0:
+		name += "bounce_camera_shake: %.1f" % bounce_camera_shake
+
+	return name if name != "Charge ➜ " else "Charge"
 
 
 func _enter() -> void:
@@ -51,7 +66,6 @@ func _tick(_delta: float) -> Status:
 
 
 func _get_current_speed() -> float:
-	var facing_direction: Vector3 = -agent.global_basis.z.normalized()
 	var base_speed: float = agent.stats.speed
 
 	if speed_factor > 0.0:
@@ -62,19 +76,21 @@ func _get_current_speed() -> float:
 
 func _bounce() -> void:
 	# Get normal of the wall we hit
-	var wall_normal = agent.get_wall_normal()
+	var wall_normal: Vector3 = agent.get_wall_normal()
 
 	# Calculate reflection direction
-	var new_direction = _current_direction.bounce(wall_normal)
+	var new_direction: Vector3 = _current_direction.bounce(wall_normal)
 	new_direction.y = 0 # Keep movement horizontal
 
 	# Add some randomness to the bounce
 	var random_angle: float = deg_to_rad(randf_range(-bounce_angle_variation, bounce_angle_variation))
 	var rotation: Basis = Basis(Vector3.UP, random_angle) # Rotate around Y axis only
+
 	_current_direction = (rotation * new_direction).normalized()
+
 	_bounce_camera_shake()
 
 
 func _bounce_camera_shake() -> void:
 	var camera: FollowCamera = agent.get_tree().get_first_node_in_group("FollowCamera")
-	camera.apply_shake(camera_shake)
+	camera.apply_shake(bounce_camera_shake)

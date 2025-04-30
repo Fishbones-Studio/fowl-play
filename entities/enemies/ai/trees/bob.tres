@@ -133,11 +133,12 @@ speed = 6.0
 
 [sub_resource type="BTAction" id="BTAction_j7hde"]
 script = ExtResource("6_ovltl")
+target_var = &"target"
 speed_factor = 5.0
 duration = 5.0
 bounce = true
 bounce_angle_variation = 45.0
-camera_shake = 1.0
+bounce_camera_shake = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_b8d52"]
 custom_name = "Charge!"
@@ -165,16 +166,16 @@ speed = 6.0
 [sub_resource type="BTAction" id="BTAction_gf8jg"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
-tolerance = 2.0
+tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 50.0
 duration = 0.0
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")
-jump_factor = 20.0
-duration = 0.38
-grounded = true
+jump_factor = 50.0
+duration = 0.0
+grounded = false
 
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
 children = [SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
