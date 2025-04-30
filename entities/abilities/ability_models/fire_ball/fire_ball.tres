@@ -10,7 +10,7 @@ name = "Fire Ball"
 drop_chance = 10
 cost = 240
 currency_type = 0
-description = "The user sets the seas ablaze, sacrificing [color=yellow]25%%[/color] of Max Health to unleash an AoE attack within a [color=yellow]25m[/color] radius. Targets caught in the flames are inflicted with Burn, taking damage over time. Has a cooldown of %s."
+description = "The user launches a fiery projectile straight ahead, dealing damage to targets in its path. The fireball travels at [color=\"yellow\"]6 m/s[/color] for up to [color=\"yellow\"]8 seconds[/color], gradually growing in size as it burns through the air. This ability has a cooldown of %s."
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
