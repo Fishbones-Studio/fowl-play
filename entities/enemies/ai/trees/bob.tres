@@ -1,13 +1,13 @@
 [gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_d6hvj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_m26ws"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mkwy1"]
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
+[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_i06h6"]
 var/target/name = &"target"
@@ -173,8 +173,8 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")
 jump_factor = 20.0
-duration = 0.0
-grounded = false
+duration = 0.38
+grounded = true
 
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
 children = [SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
@@ -190,6 +190,7 @@ animation_name = &"rolling "
 [sub_resource type="BTAction" id="BTAction_5cuga"]
 script = ExtResource("8_157vn")
 target_var = &"target"
+slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_gf8jg"]
 children = [SubResource("BTStopAnimation_m26ws"), SubResource("BTAction_5cuga")]

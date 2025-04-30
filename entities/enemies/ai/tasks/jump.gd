@@ -11,6 +11,21 @@ var _initial_jump_height: float
 var movement_component: EnemyMovementComponent
 
 
+func _generate_name() -> String:
+	var name: String = "Jump ➜ "
+
+	if not is_equal_approx(jump_factor, 1.0):
+		name += "factor: %.1f  " % jump_factor
+
+	if duration > 0:
+		name += "duration: %.1fs  " % duration
+
+	if grounded:
+		name += "grounded: %s" % grounded
+
+	return name
+
+
 func _enter() -> void:
 	movement_component = agent.movement_component
 
