@@ -1,0 +1,222 @@
+[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://g7414dn5u4kw"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_d6hvj"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_m26ws"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mkwy1"]
+[ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
+[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_i06h6"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = "The chicken player."
+var/aggro_distance/name = &"aggro_distance"
+var/aggro_distance/type = 3
+var/aggro_distance/value = 0.0
+var/aggro_distance/hint = 0
+var/aggro_distance/hint_string = "The distance for the enemy to become aggressive."
+
+[sub_resource type="BTAction" id="BTAction_sexgk"]
+script = ExtResource("1_gf8jg")
+target_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_sexgk"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_0xmxa"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_sexgk")
+
+[sub_resource type="BBNode" id="BBNode_8cml0"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_sexgk"]
+animation_player = SubResource("BBNode_8cml0")
+animation_name = &"idle"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_e381t"]
+script = ExtResource("2_ykixg")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_e381t"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_0xmxa"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_e381t"), SubResource("BTRandomWait_e381t")]
+
+[sub_resource type="BTCondition" id="BTCondition_yvhtp"]
+script = ExtResource("3_d6hvj")
+distance_min = 5.0
+distance_max = 100.0
+target_var = &"target"
+
+[sub_resource type="BBNode" id="BBNode_e381t"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0xmxa"]
+animation_player = SubResource("BBNode_e381t")
+animation_name = &"rolling "
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_yvhtp"]
+script = ExtResource("4_m26ws")
+target_var = &"target"
+rotation_speed = 25.0
+angle_threshold = 1.0
+duration = 5.0
+
+[sub_resource type="BTAction" id="BTAction_0xmxa"]
+script = ExtResource("5_mkwy1")
+target_var = &"target"
+tolerance = 5.0
+aggro_distance = 50.0
+speed_factor = 0.0
+duration = 5.0
+
+[sub_resource type="BTParallel" id="BTParallel_e381t"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTAction_yvhtp"), SubResource("BTAction_0xmxa")]
+
+[sub_resource type="BTSequence" id="BTSequence_jowcg"]
+custom_name = "Pursue target"
+children = [SubResource("BTCondition_yvhtp"), SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BBNode" id="BBNode_jowcg"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kbctg"]
+animation_player = SubResource("BBNode_jowcg")
+animation_name = &"rolling "
+blend = 0.2
+speed = 3.0
+
+[sub_resource type="BTAction" id="BTAction_sv4kc"]
+script = ExtResource("4_m26ws")
+target_var = &"target"
+rotation_speed = 25.0
+angle_threshold = 1.0
+duration = 2.0
+
+[sub_resource type="BTWait" id="BTWait_5cuga"]
+duration = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_cjgjq"]
+num_successes_required = 2
+children = [SubResource("BTAction_sv4kc"), SubResource("BTWait_5cuga")]
+
+[sub_resource type="BTSequence" id="BTSequence_g0ry3"]
+custom_name = "Anticipation"
+children = [SubResource("BTPlayAnimation_kbctg"), SubResource("BTParallel_cjgjq")]
+
+[sub_resource type="BBNode" id="BBNode_akjhg"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_2bbcu"]
+animation_player = SubResource("BBNode_akjhg")
+animation_name = &"rolling "
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_j7hde"]
+script = ExtResource("6_ovltl")
+speed_factor = 5.0
+duration = 5.0
+bounce = true
+bounce_angle_variation = 45.0
+camera_shake = 1.0
+
+[sub_resource type="BTSequence" id="BTSequence_b8d52"]
+custom_name = "Charge!"
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTAction_j7hde")]
+
+[sub_resource type="BTSequence" id="BTSequence_yvhtp"]
+custom_name = "Charge attack"
+children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
+custom_name = "Cooldown charge attack"
+children = [SubResource("BTSequence_yvhtp")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BBNode" id="BBNode_gf8jg"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ykixg"]
+animation_player = SubResource("BBNode_gf8jg")
+animation_name = &"rolling "
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_gf8jg"]
+script = ExtResource("5_mkwy1")
+target_var = &"target"
+tolerance = 2.0
+aggro_distance = 100.0
+speed_factor = 50.0
+duration = 0.0
+
+[sub_resource type="BTAction" id="BTAction_kbctg"]
+script = ExtResource("7_wwppe")
+jump_factor = 20.0
+duration = 0.0
+grounded = false
+
+[sub_resource type="BTParallel" id="BTParallel_d6hvj"]
+children = [SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
+
+[sub_resource type="BBNode" id="BBNode_d6hvj"]
+saved_value = NodePath("ball_chicken/AnimationPlayer")
+resource_name = "ball_chicken/AnimationPlayer"
+
+[sub_resource type="BTStopAnimation" id="BTStopAnimation_m26ws"]
+animation_player = SubResource("BBNode_d6hvj")
+animation_name = &"rolling "
+
+[sub_resource type="BTAction" id="BTAction_5cuga"]
+script = ExtResource("8_157vn")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_gf8jg"]
+children = [SubResource("BTStopAnimation_m26ws"), SubResource("BTAction_5cuga")]
+
+[sub_resource type="BTSequence" id="BTSequence_5cuga"]
+children = [SubResource("BTParallel_d6hvj"), SubResource("BTSequence_gf8jg")]
+
+[sub_resource type="BTWait" id="BTWait_jowcg"]
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_sv4kc"]
+custom_name = "Earthquake"
+children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTSequence_5cuga"), SubResource("BTWait_jowcg")]
+metadata/_weight_ = 0.985075
+
+[sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
+duration = 1.0
+custom_name = "Cooldown earthquake 10s"
+children = [SubResource("BTSequence_sv4kc")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_yvhtp"]
+children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp"), SubResource("BTCooldown_kbctg")]
+
+[sub_resource type="BTSequence" id="BTSequence_36efm"]
+children = [SubResource("BTAction_sexgk"), SubResource("BTSetVar_0xmxa"), SubResource("BTSequence_0xmxa"), SubResource("BTProbabilitySelector_yvhtp")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_i06h6")
+root_task = SubResource("BTSequence_36efm")

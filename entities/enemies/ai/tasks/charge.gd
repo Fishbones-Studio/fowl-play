@@ -2,7 +2,7 @@
 extends BTAction
 
 ## Blackboard variable that stores desired speed.
-@export var speed_factor: float
+@export var speed_factor: float = 0.0
 ## How long to perform this task (in seconds).
 @export var duration: float = 0.1
 ## If the enemy should bounce on walls.
@@ -54,7 +54,7 @@ func _get_current_speed() -> float:
 	var facing_direction: Vector3 = -agent.global_basis.z.normalized()
 	var base_speed: float = agent.stats.speed
 
-	if speed_factor:
+	if speed_factor > 0.0:
 		return speed_factor * base_speed
 	else:
 		return agent.movement_component.sprint_speed_factor * base_speed

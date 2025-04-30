@@ -1,8 +1,8 @@
 extends Ability
 
 @export var descent_velocity: float = -25.0
-@export var initial_knockback_force: float = 5.0
-@export var knockback_force_upwards: float = 3.0
+@export var initial_knockback_force: float = 9.0
+@export var knockback_force_upwards: float = 5.0
 @export var quake_interval: float = 0.5  # Time between quake pulses
 @export var quake_damage_increase: float = 0.2  # Damage multiplier per quake
 @export var quake_radius_increase: float = 2.0  # Radius multiplier per quake
@@ -80,7 +80,9 @@ func _pulse_quake() -> void:
 
 	# Damage calculation
 	_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
-	_current_knockback = initial_knockback_force * (1.0 + (_current_quake_count * quake_damage_increase))
+	_current_knockback = initial_knockback_force
+	print_debug("CURRENT KNOCKBACK: ", initial_knockback_force)
+	print_debug("CURRENT DAMAGE: ", _current_damage)
 
 	# End sequence if max quakes reached
 	_current_quake_count += 1
@@ -110,7 +112,7 @@ func _apply_knockback(body: Node3D) -> void:
 		var dir: Vector3 = ability_holder.global_position.direction_to(body.global_position)
 		var knockback: Vector3 = Vector3(
 			dir.x * _current_knockback,
-			dir.y * knockback_force_upwards,
+			abs(dir.y * knockback_force_upwards),
 			dir.z * _current_knockback
 		)
 		if body is ChickenPlayer:

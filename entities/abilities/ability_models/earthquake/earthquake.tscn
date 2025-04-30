@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxc3j6moweqeh"]
 
-[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
+[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
 [ext_resource type="Script" uid="uid://cbbjybahmxy5y" path="res://entities/abilities/ability_models/earthquake/earthquake.gd" id="2_1j166"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1j166"]
@@ -15,12 +15,12 @@ size = Vector2(1, 1)
 
 [node name="Earthquake" instance=ExtResource("1_57nyx")]
 script = ExtResource("2_1j166")
-descent_velocity = -50.0
-initial_knockback_force = 20.0
+descent_velocity = -25.0
+initial_knockback_force = 7.0
 knockback_force_upwards = 5.0
 quake_interval = 0.5
 quake_damage_increase = 0.2
-quake_radius_increase = 0.5
+quake_radius_increase = 1.0
 max_quakes = 3
 
 [node name="QuakeTimer" type="Timer" parent="." index="1"]

@@ -7,10 +7,10 @@ extends BTAction
 @export var tolerance: float = 2.0
 ## Desired distance from target.
 @export var aggro_distance: float = 20.0
+## Pursuit speed factor.
+@export var speed_factor: float = 0.0
 ## Duration the enemy will pursue the target.
 @export var duration: float
-## Set y-axis to 0
-@export var ignore_y: bool = true
 
 
 func _generate_name() -> String:
@@ -28,7 +28,7 @@ func _tick(delta: float) -> Status:
 	if _is_at_position(desired_pos):
 		return SUCCESS
 
-	if duration and elapsed_time > duration:
+	if bool(duration) and elapsed_time > duration:
 		return SUCCESS
 
 	_move_towards_position(desired_pos, delta)
@@ -40,7 +40,9 @@ func _is_at_position(position: Vector3) -> bool:
 
 
 func _move_towards_position(position: Vector3, delta: float) -> void:
-	var speed: float = agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
+	var speed: float = speed_factor if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
+
 	var desired_velocity: Vector3 = agent.global_position.direction_to(position) * speed
-	if ignore_y: desired_velocity.y = 0
-	agent.velocity = desired_velocity
+
+	agent.velocity.x = desired_velocity.x
+	agent.velocity.z = desired_velocity.z
