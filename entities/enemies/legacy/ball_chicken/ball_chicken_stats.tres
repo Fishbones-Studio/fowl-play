@@ -6,13 +6,13 @@
 script = ExtResource("1_w03qf")
 max_health = 3e+06
 max_stamina = 2.0
-attack = 20.0
+attack = 5.0
 defense = 100
 speed = 12.0
 weight = 50.0
 health_regen = 2
 stamina_regen = 0
-weight_factor = 0.02
+weight_factor = 0.01
 k_scaler = 100.0
 is_player = false
 metadata/_custom_type_script = "uid://up7hh823h5kw"

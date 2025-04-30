@@ -23,7 +23,7 @@ func _generate_name() -> String:
 	if grounded:
 		name += "grounded: %s" % grounded
 
-	return name
+	return name if name != "Jump ➜ " else "Jump"
 
 
 func _enter() -> void:
