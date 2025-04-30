@@ -2,10 +2,7 @@ extends Node
 
 signal prosperity_eggs_changed(new_value: int)
 signal feathers_of_rebirth_changed(new_value: int)
-
-# Preload default stats once to avoid repeated loading
-const DEFAULT_PLAYER_STATS_PATH: String = "uid://bwhuhbesdlyu5"
-var _default_player_stats: LivingEntityStats
+signal player_stats_updated(new_stats: LivingEntityStats)
 
 
 var chicken_player: ChickenPlayer = null:
@@ -14,8 +11,6 @@ var chicken_player: ChickenPlayer = null:
 			return # No change
 		chicken_player = value
 		print("GameManager.chicken_player set to:", value)
-		# Apply cheats immediately if a player is assigned
-		_apply_cheat_settings()
 
 var prosperity_eggs: int:
 	set(value):
@@ -65,7 +60,10 @@ var infinite_health: bool = false:
 		if infinite_health == value:
 			return # No change
 		infinite_health = value
-		_apply_cheat_settings() # Re-apply settings when toggle changes
+		if chicken_player:
+			chicken_player.stats = apply_cheat_settings(chicken_player.stats, SaveManager.get_loaded_player_stats()) # Re-apply settings when toggle changes
+		else:
+			push_warning("Chicken player not set, cannot apply health cheat settings.")
 
 
 var infinite_damage: bool = false:
@@ -73,56 +71,48 @@ var infinite_damage: bool = false:
 		if infinite_damage == value:
 			return # No change
 		infinite_damage = value
-		_apply_cheat_settings() # Re-apply settings when toggle changes
-
-
-func _ready() -> void:
-	# Load default stats during initialization
-	# TODO: once permanemt upgrades have been implemented, rewrite this
-	_default_player_stats = ResourceLoader.load(DEFAULT_PLAYER_STATS_PATH).duplicate()
-	if not _default_player_stats:
-		push_error(
-			"Failed to load default player stats from %s"
-			% DEFAULT_PLAYER_STATS_PATH
-		)
+		if chicken_player:
+			chicken_player.stats = apply_cheat_settings(chicken_player.stats, SaveManager.get_loaded_player_stats()) # Re-apply settings when toggle changes
+		else:
+			push_warning("Chicken player not set, cannot apply damage cheat settings.")
 
 
 ## Applies or removes cheat effects based on current toggle states.
-func _apply_cheat_settings() -> void:
-	# Only apply if we have a valid player instance
-	if not is_instance_valid(chicken_player):
-		return
-
-	# Ensure default stats are loaded before proceeding
-	if not _default_player_stats:
-		push_warning(
-			"Cannot apply cheat settings: Default player stats not loaded."
-		)
-		return
+func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntityStats, apply_only_when_on := false) -> LivingEntityStats:
+	if apply_only_when_on && !(infinite_health or infinite_damage):
+		print("Cheat settings not applied, both cheats are off.")
+		return stats
+	
+	if default_stats == null:
+		push_error("Apply cheats: Failed to load default player stats from SaveManager!")
+		return stats
 
 	# Health Cheat
 	if infinite_health:
 		print("Setting infinite health")
-		chicken_player.stats.max_health = INF
-		chicken_player.stats.current_health = INF
+		stats.max_health = INF
+		stats.current_health = INF
 		# Using a very large number for regen instead of INF, since INF is a float
-		chicken_player.stats.health_regen = 9223372036854775807 # Max int
+		stats.health_regen = 9223372036854775807 # Max int
 	else:
 		print("Restoring health stats from default resource for health")
 		# Restore health stats from the loaded default resource
-		chicken_player.stats.max_health = _default_player_stats.max_health
+		stats.max_health = default_stats.max_health
 		# Restore health, the current_health has a clamp in setter
-		chicken_player.stats.current_health = chicken_player.stats.current_health
-		chicken_player.stats.health_regen = _default_player_stats.health_regen
+		stats.current_health = default_stats.max_health
+		stats.health_regen = default_stats.health_regen
 
 	# Damage Cheats
 	if infinite_damage:
 		print("Setting infinite damage")
-		chicken_player.stats.attack = INF
+		stats.attack = INF
 	else:
 		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
-		chicken_player.stats.attack = _default_player_stats.attack
+		stats.attack = default_stats.attack
+		
+	player_stats_updated.emit(stats) # Emit signal to update player stats in the game
+	return stats
 
 
 func reset_game() -> void:

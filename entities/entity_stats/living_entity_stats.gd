@@ -2,12 +2,12 @@ class_name LivingEntityStats
 extends Resource
 
 @export_category("Base Stats")
-@export var max_health: float = 100.0 # Added default for safety
-@export var max_stamina: float = 100.0 # Added default for safety
-@export var attack: float = 10.0 # Added default for safety
+@export var max_health: float = 100.0
+@export var max_stamina: float = 100.0
+@export var attack: float = 10.0
 @export_range(0, 1000) var defense: int = 0
-@export var speed: float = 5.0 # Added default for safety
-@export var weight: float = 10.0 # Added default for safety
+@export var speed: float = 5.0
+@export var weight: float = 10.0
 
 @export_category("Factors")
 @export var health_regen: int = 1
@@ -54,12 +54,10 @@ func restore_stamina(amount: float) -> float:
 ## Reduces health by the given amount, taking defense into account.
 func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEnums.DamageTypes.NORMAL) -> float:
 	var actual_damage: float = 0.0
-	
-	if amount == -9223372036854775808.0:
+	if amount < -9000000:
 		# check for cheat
 		actual_damage = current_health
-			
-	if amount <= 0:
+	elif amount <= 0:
 		print("health drain amount is negative: " + str(amount))
 		return 0.0 # Don't drain if amount is zero or negative
 	else:

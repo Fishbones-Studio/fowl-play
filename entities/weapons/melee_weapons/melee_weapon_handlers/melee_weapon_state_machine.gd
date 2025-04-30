@@ -86,3 +86,10 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 # Gets the initial state when the game starts
 func _get_initial_state() -> BaseCombatState:
 	return starting_state if starting_state != null else get_child(0)
+	
+func update_entity_stats(_entity_stats : LivingEntityStats) -> void:
+	print("Updating the weapon entity stats")
+	for state_node: BaseCombatState in get_children():
+		states[state_node.STATE_TYPE] = state_node
+		# Pass the weapon to each state
+		state_node.entity_stats = _entity_stats

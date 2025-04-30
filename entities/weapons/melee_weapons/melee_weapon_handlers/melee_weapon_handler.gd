@@ -49,6 +49,15 @@ func _ready() -> void:
 			+ "returning LivingEntityStats! Weapon might not function correctly."
 		)
 		
+	if owner_stats.is_player:
+	
+		GameManager.player_stats_updated.connect(
+			func (new_stats: LivingEntityStats):
+				owner_stats = new_stats
+				melee_state_machine.update_entity_stats(owner_stats)
+				print("MeleeWeaponNode updated stats to: ", owner_stats)
+		)
+		
 	# In enemy, the export vars are set, so we can immediatly run the setup
 	if melee_weapon_scene or get_parent() is Enemy:
 		setup()

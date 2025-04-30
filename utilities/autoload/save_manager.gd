@@ -98,9 +98,9 @@ func reset_game() -> void:
 func get_loaded_player_stats() -> LivingEntityStats:
 	if _loaded_game_data.is_empty():
 		load_game()
-	return _loaded_game_data.get("stats", null)
+	return _loaded_game_data.get("stats", null).duplicate()
 
 func get_loaded_player_upgrades() -> Dictionary:
 	if _loaded_game_data.is_empty():
 		load_game()
-	return _loaded_game_data.get("upgrades", {})
+	return _loaded_game_data.get("upgrades", {}).duplicate()
