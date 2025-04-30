@@ -68,12 +68,6 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 	# Notify that loading is complete
 	SignalManager.loading_screen_finished.emit()
 
-	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
-	var loaded_resource: Resource = ResourceLoader.load_threaded_get(game_scene_path)
-
-	# Explicitly discard the resource if not needed
-	loaded_resource = null  
-
 	# Switch to the loaded game scene
 	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
 

@@ -44,24 +44,28 @@ func load_settings() -> void:
 			var volume: float = linear_to_db(clampf(saved_volume, 0.0, 100.0) / 100)
 			AudioServer.set_bus_volume_db(bus_idx, volume)
 
-func save_game(stats: LivingEntityStats, upgrades: Dictionary) -> void:
-	if stats == null:
-		push_error("Cannot save game: stats is null")
-		return
-
+func save_game(stats: LivingEntityStats = null, upgrades: Dictionary = {}) -> void:
+	# Try to load the config file
 	var config := ConfigFile.new()
+	config.load(SAVE_GAME_PATH)
+
 	# Serialize stats and upgrades
-	config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
-	config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
+	if stats:
+		config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
+	if upgrades:
+		config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
+	config.set_value(PLAYER_SAVE_SECTION, "f_o_r", GameManager.feathers_of_rebirth)
+	config.set_value(PLAYER_SAVE_SECTION, "p_eggs", GameManager.prosperity_eggs)
 	var err := config.save(SAVE_GAME_PATH)
 	if err != OK:
 		push_error("Failed to save game: %s" % error_string(err))
 		return
 
-	_loaded_game_data = {
-		"stats": stats.to_dict(),
-		"upgrades": upgrades
-	}
+	# updating loaded stats
+	if stats:
+		_loaded_game_data["stats"] = stats
+	if upgrades && !upgrades.is_empty():
+		_loaded_game_data["upgrades"] = upgrades
 	print("Game data saved successfully!")
 
 func load_game() -> Dictionary:
@@ -76,6 +80,8 @@ func load_game() -> Dictionary:
 
 	var stats_dict = config.get_value(PLAYER_SAVE_SECTION, "stats", null)
 	var upgrades = config.get_value(PLAYER_SAVE_SECTION, "upgrades", {})
+	GameManager.feathers_of_rebirth = config.get_value(PLAYER_SAVE_SECTION, "f_o_r", 0)
+	GameManager.prosperity_eggs = config.get_value(PLAYER_SAVE_SECTION, "p_eggs", 200) # Default value
 
 	var stats: LivingEntityStats = null
 	if stats_dict != null && stats_dict is Dictionary:

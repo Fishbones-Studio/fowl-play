@@ -30,24 +30,6 @@ var items_sorted_flattened : Array :
 	set(value):
 		ability_slot_two = _validate_slot(value, "Ability Two")
 
-@export_group("currency")
-@export var prosperity_eggs: int = 200 # starting money
-@export var feathers_of_rebirth: int = 0
-
-
-func _init(
-	_items: Array[BaseResource] = [],
-	_melee_weapon_slot: MeleeWeaponResource = null,
-	_ranged_weapon_slot: RangedWeaponResource = null,
-	_ability_slot_one: AbilityResource = null,
-	_ability_slot_two: AbilityResource = null
-) -> void:
-	items = _items
-	melee_weapon_slot = _melee_weapon_slot
-	ranged_weapon_slot = _ranged_weapon_slot
-	ability_slot_one = _ability_slot_one
-	ability_slot_two = _ability_slot_two
-
 
 ## Validates if an item can be equipped (must be in inventory or null)
 func _validate_slot(item: BaseResource, slot_name: String) -> BaseResource:

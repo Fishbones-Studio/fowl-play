@@ -16,13 +16,7 @@ var prosperity_eggs: int:
 	set(value):
 		if prosperity_eggs == value:
 			return
-		# print("Setting prosperity eggs to: ", value) # Optional debug print
 		prosperity_eggs = value
-		# Assuming Inventory and inventory_data are valid singletons/autoloads
-		if Inventory and Inventory.inventory_data:
-			Inventory.inventory_data.prosperity_eggs = value
-		else:
-			push_warning("Inventory or Inventory.inventory_data not available.")
 		prosperity_eggs_changed.emit(value)
 
 
@@ -31,10 +25,6 @@ var feathers_of_rebirth: int:
 		if feathers_of_rebirth == value:
 			return
 		feathers_of_rebirth = value
-		if Inventory and Inventory.inventory_data:
-			Inventory.inventory_data.feathers_of_rebirth = value
-		else:
-			push_warning("Inventory or Inventory.inventory_data not available.")
 		feathers_of_rebirth_changed.emit(value)
 
 
@@ -120,6 +110,7 @@ func reset_game() -> void:
 	prosperity_eggs = clamp(
 		(100 + current_round * int(arena_round_reward / 2.0)), 125, 200
 	)
+	SaveManager.save_game()
 	if Inventory:
 		Inventory.reset_inventory()
 	else:
