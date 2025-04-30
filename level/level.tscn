@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhnqi4fnso1hh"]
+[gd_scene load_steps=14 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
 [ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area.tscn" id="2_6gtgk"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="5_m3nah"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
 [ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="10_cw150"]
+[ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="11_rhqlf"]
+[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="12_l5lfc"]
 
 [sub_resource type="Curve3D" id="Curve3D_l5lfc"]
 _data = {
@@ -68,5 +70,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
-enemy_scenes = Array[PackedScene]([ExtResource("10_cw150")])
+enemy_scenes = Array[PackedScene]([ExtResource("10_cw150"), ExtResource("11_rhqlf"), ExtResource("12_l5lfc")])
 waiting_time = 1.5

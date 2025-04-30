@@ -97,6 +97,7 @@ children = [SubResource("BTAction_rbvfn"), SubResource("BTAction_qrmyx"), SubRes
 [sub_resource type="BTSequence" id="BTSequence_a1uay"]
 custom_name = "Pursue"
 children = [SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
+metadata/_weight_ = 1.0
 
 [sub_resource type="BBNode" id="BBNode_nthwi"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -176,7 +177,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
 children = [SubResource("BTSequence_5l4v5"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
-metadata/_weight_ = 0.010101
+metadata/_weight_ = 1.0
 
 [sub_resource type="BBNode" id="BBNode_fxtff"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -198,7 +199,7 @@ duration = 0.0
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"
 children = [SubResource("BTPlayAnimation_schhj"), SubResource("BTAction_mnhi0")]
-metadata/_weight_ = 0.497512
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]
 children = [SubResource("BTSequence_a1uay"), SubResource("BTSequence_kwr7b"), SubResource("BTSequence_pia2r")]
