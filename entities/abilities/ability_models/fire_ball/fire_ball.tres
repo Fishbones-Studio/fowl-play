@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cwwmblkt7dr02"]
+
+[ext_resource type="Texture2D" uid="uid://cqo1onb8cigi2" path="res://ui/loading_screen/art/pen_art.png" id="1_aief6"]
+[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_dllc3"]
+
+[resource]
+script = ExtResource("1_dllc3")
+cooldown = 10.0
+name = "Fire Ball"
+drop_chance = 10
+cost = 240
+currency_type = 0
+description = "The user sets the seas ablaze, sacrificing [color=yellow]25%%[/color] of Max Health to unleash an AoE attack within a [color=yellow]25m[/color] radius. Targets caught in the flames are inflicted with Burn, taking damage over time. Has a cooldown of %s."
+icon = ExtResource("1_aief6")
+model_uid = "uid://r2kfankkht6"
+metadata/_custom_type_script = "uid://cqht6vad2p0dc"
