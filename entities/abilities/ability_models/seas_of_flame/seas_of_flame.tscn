@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://df1clah7xvv32"]
 
-[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
 [ext_resource type="Script" uid="uid://c1esqie0rd4t3" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.gd" id="2_7fey8"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="3_nqrm3"]
 

@@ -10,7 +10,7 @@ name = "Ground Pound"
 drop_chance = 50
 cost = 125
 currency_type = 0
-description = "Performs a powerful ground pound, dealing damage based on Weight and Defense within a [color=yellow]10m[/color] radius and knocking targets back. Can only be used while airborne and has a cooldown of %s."
+description = "The user performs a powerful ground pound, dealing damage based on Weight and Defense within a [color=yellow]10m[/color] radius and knocking targets back. Can only be used while airborne and has a cooldown of %s."
 icon = ExtResource("1_7nl1e")
 model_uid = "uid://b7t7b5rawdkte"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

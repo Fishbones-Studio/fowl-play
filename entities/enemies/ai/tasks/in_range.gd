@@ -23,7 +23,7 @@ func _tick(_delta: float) -> Status:
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
 		push_warning("InRange: Target is not a valid ChickenPlayer (%s: %s)" % [
-				LimboUtility.decorate_var(target_var), blackboard.get_var(target_var)])
+			LimboUtility.decorate_var(target_var), blackboard.get_var(target_var)])
 		return FAILURE
 
 	var dist_sq: float = agent.global_position.distance_squared_to(target.global_position)

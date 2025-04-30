@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://5dsmkedrprey"]
+[gd_scene load_steps=14 format=3 uid="uid://5dsmkedrprey"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Script" uid="uid://dxxu6tfphed3m" path="res://entities/enemies/ice_fox/ice_fox.gd" id="2_cemmm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bkllq0utfdh6m" path="res://entities/enemies/abilities/handlers/enemy_ability_controller.tscn" id="7_wbtjo"]
 [ext_resource type="PackedScene" uid="uid://bfl0ebooy24av" path="res://entities/enemies/abilities/slots/enemy_ability_slot.tscn" id="8_ak1y5"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="9_fkrjg"]
+[ext_resource type="Resource" uid="uid://bfg3woijilvbn" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="10_ak1y5"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_psoce"]
 
@@ -97,7 +98,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="EnemyAbilityController" parent="." index="10" node_paths=PackedStringArray("enemy") instance=ExtResource("7_wbtjo")]
 enemy = NodePath("..")
 
-[node name="EnemyAbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("8_ak1y5")]
+[node name="EnemyAbilitySlotOne" parent="EnemyAbilityController" index="0" instance=ExtResource("8_ak1y5")]
 ability_resource = ExtResource("9_fkrjg")
+
+[node name="EnemyAbilitySlotTwo" parent="EnemyAbilityController" index="1" instance=ExtResource("8_ak1y5")]
+ability_resource = ExtResource("10_ak1y5")
 
 [editable path="ice_fox"]
