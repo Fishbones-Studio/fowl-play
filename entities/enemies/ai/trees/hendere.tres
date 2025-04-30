@@ -127,10 +127,10 @@ speed = 6.0
 
 [sub_resource type="BTAction" id="BTAction_n7fk8"]
 script = ExtResource("7_7jrpa")
-target_var = null
+target_var = &"target"
 flank_distance = 2.0
-vertical_offset = null
-clearance_radius = null
+vertical_offset = 0.0
+clearance_radius = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"

@@ -80,6 +80,7 @@ func _pulse_quake() -> void:
 
 	collision_shape.scale = Vector3.ONE * (1.0 + (_current_quake_count * quake_radius_increase))
 	cpu_particles.scale = collision_shape.scale
+	cpu_particles.amount += cpu_particles.amount * quake_radius_increase
 
 	# Damage calculation
 	_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
