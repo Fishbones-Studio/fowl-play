@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://towsqhy2adj7"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
+[ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
+[ext_resource type="BehaviorTree" uid="uid://dn83muanle5ic" path="res://entities/enemies/ai/trees/woodpecker.tres" id="4_1t2bg"]
+[ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
+[ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_br0sw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kh81q"]
+size = Vector3(1.5, 5, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kh81q"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Woodpecker" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_k6lf6")]
+stats = ExtResource("3_woodpecker_stats")
+enemy_model = NodePath("woodpecker")
+
+[node name="woodpecker" parent="." index="0" instance=ExtResource("4_woodpecker_model")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="woodpecker/Armature" index="0"]
+bones/1/position = Vector3(-0.534314, -0.211753, 0.385049)
+bones/1/rotation = Quaternion(0.40911, 0.13115, 0.90136, 0.0545716)
+bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
+bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
+bones/6/rotation = Quaternion(0.0921738, -2.5427e-08, -0.109848, 0.989665)
+bones/7/rotation = Quaternion(0.372215, 1.9392e-07, -0.443588, 0.815283)
+bones/8/rotation = Quaternion(-0.254674, -5.70863e-08, 0.303508, 0.918163)
+bones/9/rotation = Quaternion(-0.0929396, -1.66711e-08, 0.110761, 0.989492)
+bones/10/rotation = Quaternion(-0.0114476, 2.59773e-08, 0.0136427, 0.999842)
+bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
+bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
+bones/14/position = Vector3(0.0982326, 2.09585, -1.47197)
+bones/14/rotation = Quaternion(0.556543, -6.54378e-08, -0.663262, 0.500343)
+bones/15/position = Vector3(-1.34829, 2.09585, 0.251932)
+bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_kh81q")
+
+[node name="HealthbarSprite" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.5, 0)
+texture = SubResource("ViewportTexture_kh81q")
+
+[node name="DamageNumberHandler" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.75)
+
+[node name="BTPlayer" parent="." index="6"]
+behavior_tree = ExtResource("4_1t2bg")
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751483, 1.60008, -0.692675)
+melee_weapon_scene = ExtResource("5_br0sw")
+weapon_collision_mask = 2
+
+[editable path="woodpecker"]
