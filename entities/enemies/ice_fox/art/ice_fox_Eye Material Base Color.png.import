@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://be3u6mt0v3s6w"
-path.s3tc="res://.godot/imported/ice_fox_Eye Material Base Color.png-29a78f898ae9b7b1a9df1380d118b80a.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Eye Material Base Color.png-29a78f898ae9b7b1a9df1380d118b80a.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Eye Material Base Color.png-1352bd5419826700574a1f9ad01fc084.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Eye Material Base Color.png-1352bd5419826700574a1f9ad01fc084.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Eye Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Eye Material Base Color.png-29a78f898ae9b7b1a9df1380d118b80a.s3tc.ctex", "res://.godot/imported/ice_fox_Eye Material Base Color.png-29a78f898ae9b7b1a9df1380d118b80a.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Eye Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Eye Material Base Color.png-1352bd5419826700574a1f9ad01fc084.s3tc.ctex", "res://.godot/imported/ice_fox_Eye Material Base Color.png-1352bd5419826700574a1f9ad01fc084.etc2.ctex"]
 
 [params]
 

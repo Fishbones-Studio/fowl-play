@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/legacy/base_enemy/enemy_states/wander_state.gd" id="5_2ly6u"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/legacy/base_enemy/enemy_states/idle_state.gd" id="5_8q87k"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/legacy/base_enemy/enemy_states/chase_state.gd" id="6_lvw3e"]
-[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/legacy/ball_chicken/enemy_ability_controller.gd" id="7_3n7t4"]
-[ext_resource type="Script" uid="uid://ulhuksdmjxtn" path="res://entities/enemies/legacy/ball_chicken/enemy_ability_slot.gd" id="8_nnmdb"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_3n7t4"]
+[ext_resource type="Script" path="res://entities/enemies/abilities/slots/enemy_ability_slot.gd" id="8_nnmdb"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="10_2hblk"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="10_hsirj"]
 

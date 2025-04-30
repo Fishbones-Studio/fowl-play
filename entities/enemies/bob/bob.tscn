@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://0vmeubjcsxig"]
+[gd_scene load_steps=9 format=3 uid="uid://0vmeubjcsxig"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://8otmmhk675k0" path="res://entities/enemies/legacy/ball_chicken/ball_chicken_stats.tres" id="2_fjbia"]
 [ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="3_0xmxa"]
 [ext_resource type="BehaviorTree" uid="uid://g7414dn5u4kw" path="res://entities/enemies/ai/trees/bob.tres" id="4_m0aa4"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_8cml0"]
+[ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="6_e381t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 4.23
@@ -43,5 +45,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83981, 0)
 
 [node name="BTPlayer" parent="." index="6"]
 behavior_tree = ExtResource("4_m0aa4")
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
+ability_resource = ExtResource("6_e381t")
 
 [editable path="ball_chicken"]

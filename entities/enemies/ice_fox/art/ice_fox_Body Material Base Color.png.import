@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fmgi3276s6qn"
-path.s3tc="res://.godot/imported/ice_fox_Body Material Base Color.png-dc5d2f4503f4cdf8d1de4cb60e1f2977.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Body Material Base Color.png-dc5d2f4503f4cdf8d1de4cb60e1f2977.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Body Material Base Color.png-b1a5e8d097a6ec830bd9949b82e2a559.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Body Material Base Color.png-b1a5e8d097a6ec830bd9949b82e2a559.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Body Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Body Material Base Color.png-dc5d2f4503f4cdf8d1de4cb60e1f2977.s3tc.ctex", "res://.godot/imported/ice_fox_Body Material Base Color.png-dc5d2f4503f4cdf8d1de4cb60e1f2977.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Body Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Body Material Base Color.png-b1a5e8d097a6ec830bd9949b82e2a559.s3tc.ctex", "res://.godot/imported/ice_fox_Body Material Base Color.png-b1a5e8d097a6ec830bd9949b82e2a559.etc2.ctex"]
 
 [params]
 

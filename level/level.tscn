@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="5_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="5_m3nah"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
-[ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="10_cw150"]
+[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="10_cw150"]
 
 [sub_resource type="Curve3D" id="Curve3D_l5lfc"]
 closed = true

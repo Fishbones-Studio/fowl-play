@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2i8ama8vcvuu"
-path.s3tc="res://.godot/imported/ice_fox_Ears Material Base Color.png-8eaf96186698d707765f01b8cc3ab1cb.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Ears Material Base Color.png-8eaf96186698d707765f01b8cc3ab1cb.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Ears Material Base Color.png-7edeb38d5fe5d7f087de8f54e684a1e7.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Ears Material Base Color.png-7edeb38d5fe5d7f087de8f54e684a1e7.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Ears Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Ears Material Base Color.png-8eaf96186698d707765f01b8cc3ab1cb.s3tc.ctex", "res://.godot/imported/ice_fox_Ears Material Base Color.png-8eaf96186698d707765f01b8cc3ab1cb.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Ears Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Ears Material Base Color.png-7edeb38d5fe5d7f087de8f54e684a1e7.s3tc.ctex", "res://.godot/imported/ice_fox_Ears Material Base Color.png-7edeb38d5fe5d7f087de8f54e684a1e7.etc2.ctex"]
 
 [params]
 

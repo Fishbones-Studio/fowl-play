@@ -1,14 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=10 format=3 uid="uid://d2n75tu7hm7w0"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
+[ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
+[ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/legacy/base_enemy/base_enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_w4yt1"]
-[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/legacy/ball_chicken/enemy_ability_controller.gd" id="7_56i32"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
-[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="8_56i32"]
-[ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="9_56i32"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5xow2"]
 viewport_path = NodePath("SubViewport")
@@ -47,10 +45,7 @@ script = ExtResource("5_twyc1")
 visible = false
 
 [node name="EnemyAbilityController" type="Node3D" parent="." node_paths=PackedStringArray("enemy")]
-script = ExtResource("7_56i32")
+script = ExtResource("7_ipr6v")
 enemy = NodePath("..")
-
-[node name="AbilitySlot" parent="EnemyAbilityController" instance=ExtResource("8_56i32")]
-ability_resource = ExtResource("9_56i32")
 
 [connection signal="damage_taken" from="." to="DamageNumberHandler" method="display_damage"]

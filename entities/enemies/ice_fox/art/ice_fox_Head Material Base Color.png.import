@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm3ht12ermwt3"
-path.s3tc="res://.godot/imported/ice_fox_Head Material Base Color.png-793f4de943814b495e997c12a12d88f7.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Head Material Base Color.png-793f4de943814b495e997c12a12d88f7.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Head Material Base Color.png-75a1a37aeba4bda42c934fb998095ff1.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Head Material Base Color.png-75a1a37aeba4bda42c934fb998095ff1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Head Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Head Material Base Color.png-793f4de943814b495e997c12a12d88f7.s3tc.ctex", "res://.godot/imported/ice_fox_Head Material Base Color.png-793f4de943814b495e997c12a12d88f7.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Head Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Head Material Base Color.png-75a1a37aeba4bda42c934fb998095ff1.s3tc.ctex", "res://.godot/imported/ice_fox_Head Material Base Color.png-75a1a37aeba4bda42c934fb998095ff1.etc2.ctex"]
 
 [params]
 

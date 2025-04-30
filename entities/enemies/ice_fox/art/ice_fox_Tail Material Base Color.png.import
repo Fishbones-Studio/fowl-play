@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpq6xf5005isl"
-path.s3tc="res://.godot/imported/ice_fox_Tail Material Base Color.png-02850fccaf28a631b408b1d08f1f9c20.s3tc.ctex"
-path.etc2="res://.godot/imported/ice_fox_Tail Material Base Color.png-02850fccaf28a631b408b1d08f1f9c20.etc2.ctex"
+path.s3tc="res://.godot/imported/ice_fox_Tail Material Base Color.png-6ccb4ebb0ab3d876f73200d978808eb9.s3tc.ctex"
+path.etc2="res://.godot/imported/ice_fox_Tail Material Base Color.png-6ccb4ebb0ab3d876f73200d978808eb9.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox_Tail Material Base Color.png"
-dest_files=["res://.godot/imported/ice_fox_Tail Material Base Color.png-02850fccaf28a631b408b1d08f1f9c20.s3tc.ctex", "res://.godot/imported/ice_fox_Tail Material Base Color.png-02850fccaf28a631b408b1d08f1f9c20.etc2.ctex"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox_Tail Material Base Color.png"
+dest_files=["res://.godot/imported/ice_fox_Tail Material Base Color.png-6ccb4ebb0ab3d876f73200d978808eb9.s3tc.ctex", "res://.godot/imported/ice_fox_Tail Material Base Color.png-6ccb4ebb0ab3d876f73200d978808eb9.etc2.ctex"]
 
 [params]
 

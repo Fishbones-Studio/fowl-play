@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dq8e8ywfo7w7j"
-path="res://.godot/imported/ice_fox.glb-a7854c05c0a513853980b469a3510d37.scn"
+path="res://.godot/imported/ice_fox.glb-9a0d04a8379cb8a5717b51680090917f.scn"
 
 [deps]
 
-source_file="res://entities/enemies/legacy/ice_fox/art/ice_fox.glb"
-dest_files=["res://.godot/imported/ice_fox.glb-a7854c05c0a513853980b469a3510d37.scn"]
+source_file="res://entities/enemies/ice_fox/art/ice_fox.glb"
+dest_files=["res://.godot/imported/ice_fox.glb-9a0d04a8379cb8a5717b51680090917f.scn"]
 
 [params]
 
