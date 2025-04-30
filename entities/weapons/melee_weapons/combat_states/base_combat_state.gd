@@ -4,9 +4,10 @@ extends BaseState
 @export var ANIMATION_NAME: String
 
 var melee_combat_transition_state: Signal
-
+var state_type: int
 var weapon_node: MeleeWeapon
 var entity_stats: LivingEntityStats
+
 
 func setup(_weapon_node: MeleeWeapon, _melee_combat_transition_state: Signal, _entity_stats: LivingEntityStats) -> void:
 	if not _weapon_node:

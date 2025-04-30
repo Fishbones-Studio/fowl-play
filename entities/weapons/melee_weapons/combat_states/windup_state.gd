@@ -2,10 +2,12 @@
 class_name WindupState
 extends BaseCombatState
 
-# Constants
-const STATE_TYPE: int = WeaponEnums.WeaponState.WINDUP
 # Variables
 @onready var windup_timer: Timer = %WindupTimer
+
+
+func _init():
+	state_type = WeaponEnums.WeaponState.WINDUP
 
 
 # When entering this state, start the windup timer

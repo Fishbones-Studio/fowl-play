@@ -1,25 +1,24 @@
 ## State machine for the player melee system.
 ##
 ## This script manages the different states of the combat melee system, for the current melee weapon.
-class_name MeleeStateMachine
+class_name MeleeWeaponStateMachine
 extends Node
 
 signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
-
 @export var starting_state: BaseCombatState
 
 var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}
 var weapon: MeleeWeapon
 ## Variable to track if setup has run yet
-var initialized : bool = false
+var initialized: bool = false
 
 # The current active state (set when the scene loads)
 @onready var current_state: BaseCombatState = _get_initial_state()
 
 
-func setup(_weapon : MeleeWeapon, _entity_stats : LivingEntityStats) -> void:
+func setup(_weapon: MeleeWeapon, _entity_stats: LivingEntityStats) -> void:
 	weapon = _weapon
-	
+
 	if weapon == null:
 		push_error(owner.name + ": No weapon reference set. " + owner.name )
 
@@ -28,13 +27,13 @@ func setup(_weapon : MeleeWeapon, _entity_stats : LivingEntityStats) -> void:
 
 	# Get all states in the scene and store them in the dictionary
 	for state_node: BaseCombatState in get_children():
-		states[state_node.STATE_TYPE] = state_node
+		states[state_node.state_type] = state_node
 		# Pass the weapon to each state
 		state_node.setup(weapon, melee_combat_transition_state, _entity_stats)
-		
+
 	# Start in the initial state if it exists
 	if current_state:
-		current_state.enter(current_state.STATE_TYPE)
+		current_state.enter(current_state.state_type)
 
 	initialized = true
 
@@ -50,7 +49,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if initialized: 
+	if initialized:
 		if current_state == null:
 			push_error(owner.name + ": No state set.")
 			return
@@ -61,7 +60,7 @@ func _physics_process(delta: float) -> void:
 # Handles transitioning from one state to another, checks if the one sending the transition is the one receiving it.
 func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
 	# Prevent transitioning to the same state
-	if target_state == current_state.STATE_TYPE:
+	if target_state == current_state.state_type:
 		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
 		target_state = WeaponEnums.WeaponState.IDLE
 
@@ -77,15 +76,16 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 
 	if (weapon.animation_player and weapon):
 		if (current_state.ANIMATION_NAME != null and not current_state.ANIMATION_NAME.is_empty()  and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
-			# Play the animation for the new state
-			weapon.animation_player.play(current_state.ANIMATION_NAME)
+			if target_state != WeaponEnums.WeaponState.IDLE:
+				# Play the animation for the new state
+				weapon.animation_player.play(current_state.ANIMATION_NAME)
 		if target_state == WeaponEnums.WeaponState.IDLE:
 			if weapon.animation_player.has_animation("RESET"):
 				# resetting the property tracks
 				weapon.animation_player.queue("RESET")
 
 	# Enter the new state and carry over any necessary information
-	current_state.enter(previous_state.STATE_TYPE, information)
+	current_state.enter(previous_state.state_type, information)
 
 
 # Gets the initial state when the game starts

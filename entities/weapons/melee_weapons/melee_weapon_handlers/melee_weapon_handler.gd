@@ -28,7 +28,7 @@ extends Node3D
 var current_weapon: MeleeWeapon
 var owner_stats: LivingEntityStats
 
-@onready var melee_state_machine: MeleeStateMachine = $MeleeStateMachine
+@onready var melee_state_machine: MeleeWeaponStateMachine = $MeleeStateMachine
 
 
 func _ready() -> void:

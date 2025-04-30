@@ -35,7 +35,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("butter_knife")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 0, 2.5, 0, 1, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.3, 1, 0, 1, 0, 0.7, 1, 0, 2, 0, 1, 1, 0, 0, 0)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -43,10 +43,10 @@ tracks/1/path = NodePath("butter_knife:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1),
-"transitions": PackedFloat32Array(1, -2, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 2),
 "update": 0,
-"values": [Vector3(-3.59989e-21, 1.5708, -1.5708), Vector3(0, 1.5708, 4.88692), Vector3(0, 1.5708, 4.88692)]
+"values": [Vector3(-3.59989e-21, 1.5708, -1.5708), Vector3(0, 1.5708, 4.88692)]
 }
 
 [sub_resource type="Animation" id="Animation_wtiuw"]

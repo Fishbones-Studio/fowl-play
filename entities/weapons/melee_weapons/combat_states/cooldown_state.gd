@@ -2,10 +2,12 @@
 class_name CooldownState
 extends BaseCombatState
 
-# Constants
-const STATE_TYPE: int = WeaponEnums.WeaponState.COOLDOWN  # Defines this state as COOLDOWN
 # Variables
 @onready var cooldown_timer: Timer = %CooldownTimer
+
+
+func _init():
+	state_type = WeaponEnums.WeaponState.COOLDOWN
 
 
 # When entering this state, start the cooldown timer
