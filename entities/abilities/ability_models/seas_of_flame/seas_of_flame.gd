@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack_multiplier * (stats.max_health / stats.current_health) + stats.max_health
+		return stats.attack * (stats.max_health / stats.current_health) * stats.max_health
 
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
@@ -20,13 +20,15 @@ func activate() -> void:
 	cpu_particles.emitting = true
 
 	_toggle_collision_masks(true)
-	SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.activate_item_slot.emit(current_ability)
 
 	# Consumes a percentage of the holder's max health when activating the ability
 	# If the current HP is not sufficient, reduces HP to 1 (can't drop to 0 or below)
 	ability_holder.stats.current_health -= min(ability_holder.stats.max_health * (health_consumption / 100.0), ability_holder.stats.current_health - 1.0)
 
-	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+	if ability_holder == ChickenPlayer:
+		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 	cooldown_timer.start()
 
 
@@ -44,9 +46,9 @@ func _apply_burn(body: Node3D) -> void:
 				break
 
 			if body.collision_layer == 2: # Player
-				SignalManager.weapon_hit_target.emit(body, burn_damage)
+				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
 			if body.collision_layer == 4: # Enemy
-				SignalManager.weapon_hit_target.emit(body, burn_damage)
+				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
 
 
 func _toggle_collision_masks(toggle: bool) -> void:
@@ -62,4 +64,5 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	_apply_burn(body)
 
 	_toggle_collision_masks(false)
-	SignalManager.deactivate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.deactivate_item_slot.emit(current_ability)

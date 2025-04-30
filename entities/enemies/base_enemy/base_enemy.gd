@@ -45,9 +45,9 @@ func die() -> void:
 	queue_free()
 
 
-func _take_damage(target: PhysicsBody3D, damage: float) -> void:
+func _take_damage(target: PhysicsBody3D, damage: int, type: DamageEnums.DamageTypes) -> void:
 	if target == self:
-		damage_taken.emit(stats.drain_health(damage))
+		damage_taken.emit(stats.drain_health(damage, type))
 		health_bar.set_health(stats.current_health)
 		if stats.current_health <= 0:
 			die()

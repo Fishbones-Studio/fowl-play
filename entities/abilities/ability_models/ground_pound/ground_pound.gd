@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack_multiplier * stats.weight * stats.defense
+		return stats.attack * stats.weight * stats.defense
 
 var _particles_emitted: bool = false
 
@@ -27,7 +27,8 @@ func activate() -> void:
 	ability_holder.velocity.z = 0
 	ability_holder.velocity.y = descent_velocity
 	
-	SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+	if ability_holder == ChickenPlayer:
+		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 	cooldown_timer.start()
 
 
@@ -37,9 +38,9 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
 	if body.collision_layer == 2: # if target body is player
-		SignalManager.weapon_hit_target.emit(body, damage)
+		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
 	if body.collision_layer == 4: # if target body is enemy
-		SignalManager.weapon_hit_target.emit(body, damage)
+		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
 
 	_apply_knockback(body)
 
@@ -50,7 +51,8 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	ability_holder.velocity.y = 0
 
 	_toggle_collision_masks(false)
-	SignalManager.deactivate_item_slot.emit(current_ability)
+	if ability_holder == ChickenPlayer:
+		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _physics_process(_delta: float) -> void:
@@ -60,7 +62,8 @@ func _physics_process(_delta: float) -> void:
 		cpu_particles.emitting = true
 		_particles_emitted = true
 		_toggle_collision_masks(false)
-		SignalManager.deactivate_item_slot.emit(current_ability)
+		if ability_holder == ChickenPlayer:
+			SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _apply_knockback(body: Node3D) -> void:
