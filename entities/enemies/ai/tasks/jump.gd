@@ -1,7 +1,7 @@
 @tool
 extends BTAction
 
-@export_range(1.0, 100.0, 0.1) var jump_factor: float = 1.0
+@export_range(1.0, 500.0, 0.1) var jump_factor: float = 1.0
 ## Duration of the jump.
 @export var duration: float
 ## Oly return SUCCESS if enemy is on floor.

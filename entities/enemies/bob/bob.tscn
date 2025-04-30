@@ -16,7 +16,7 @@ viewport_path = NodePath("SubViewport")
 
 [node name="Bob" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_i06h6")]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 9
 stats = ExtResource("2_fjbia")
 type = 1
 enemy_model = NodePath("ball_chicken")
@@ -25,7 +25,7 @@ enemy_model = NodePath("ball_chicken")
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 2.87023, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(1.21893, 1.91399, 0, -1.91399, 1.21893, 0, 0, 0, 2.26917, 0, 0, 0)
+transform = Transform3D(-2.08152, -0.903553, 0, 0.903553, -2.08152, 0, 0, 0, 2.26917, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
 transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)

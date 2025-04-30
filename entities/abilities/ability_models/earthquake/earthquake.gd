@@ -57,9 +57,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _start_quake_sequence() -> void:
-	_pulse_quake()
-
 	quake_timer.wait_time = quake_interval
+
+	_pulse_quake()
 
 
 func _pulse_quake() -> void:
@@ -129,6 +129,6 @@ func _apply_knockback(body: Node3D) -> void:
 func _toggle_collision_masks(toggle: bool) -> void:
 	if ability_holder.collision_layer == 2:  # Player
 		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 3:  # Enemy
+	if ability_holder.collision_layer == 4:  # Enemy
 		hit_area.set_collision_mask_value(2, toggle)
 	hit_area.set_collision_mask_value(1, toggle)  # World
