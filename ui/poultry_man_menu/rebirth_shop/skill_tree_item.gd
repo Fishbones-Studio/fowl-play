@@ -28,7 +28,7 @@ var copied_stats = SaveManager.get_loaded_player_stats()
 func _ready() -> void:
 	kind_indicator_label.text = upgrade_type
 	# Load current level from saved upgrades dictionary
-	var upgrades = SaveManager.get_loaded_upgrades()
+	var upgrades = SaveManager.get_loaded_player_upgrades()
 	current_level = upgrades.get(upgrade_type, 0)
 	update_panels()
 

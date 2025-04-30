@@ -70,8 +70,9 @@ func load_game() -> Dictionary:
 
 	var config := ConfigFile.new()
 	if config.load(SAVE_GAME_PATH) != OK:
-		_loaded_game_data = {}
-		return {}
+		push_warning("Failed to load game data from %s" % SAVE_GAME_PATH)
+		save_game(ResourceLoader.load("uid://bwhuhbesdlyu5").duplicate(), {})
+		load_game()
 
 	var stats_dict = config.get_value(PLAYER_SAVE_SECTION, "stats", null)
 	var upgrades = config.get_value(PLAYER_SAVE_SECTION, "upgrades", {})
