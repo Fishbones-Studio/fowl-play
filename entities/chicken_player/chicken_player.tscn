@@ -1,8 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=58 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_4hg1i"]
-[ext_resource type="PackedScene" uid="uid://c0w6d53ulyk6x" path="res://entities/chicken_player/art/chicken_default.glb" id="3_qjuvu"]
+[ext_resource type="PackedScene" uid="uid://dsf0mkwko2tyg" path="res://entities/chicken_player/art/chicken_default.glb" id="3_qjuvu"]
 [ext_resource type="Script" uid="uid://cx7q766508cmj" path="res://entities/chicken_player/player_movement_state_machine.gd" id="3_wvtmh"]
 [ext_resource type="Script" uid="uid://b4a3n2p8jmh1g" path="res://entities/chicken_player/states/movement_states/dash_state.gd" id="4_7thud"]
 [ext_resource type="Script" uid="uid://nxjekf2tieqd" path="res://utilities/camera/culling_script.gd" id="4_qjuvu"]
@@ -19,26 +19,44 @@
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5aj8x"]
-animation = &"dash"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8i8jv"]
+animation = &"Dash"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_6mkbl"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vsiul"]
+animation = &"Hurt"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_1ij6v"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rq0op"]
+animation = &"Melee"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cx2nh"]
+fadein_time = 0.3
+fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hg1i"]
-animation = &"fall"
+animation = &"Glide"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n43gi"]
-animation = &"glide"
+animation = &"Glide"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qjuvu"]
-animation = &"idle"
+animation = &"Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hmi2t"]
-animation = &"jump"
+animation = &"Jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yiywh"]
-animation = &"sprint"
+animation = &"Sprint"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vclph"]
-animation = &"walking"
+animation = &"Walking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qqatk"]
 advance_mode = 2
@@ -113,37 +131,41 @@ xfade_time = 0.3
 xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y8j8d"]
-states/End/position = Vector2(1040, 521)
+states/End/position = Vector2(1081, 523)
 states/Fall/node = SubResource("AnimationNodeAnimation_4hg1i")
 states/Fall/position = Vector2(848, 395)
 states/Glide/node = SubResource("AnimationNodeAnimation_n43gi")
-states/Glide/position = Vector2(460, 509)
+states/Glide/position = Vector2(460, 510)
 states/Idle/node = SubResource("AnimationNodeAnimation_qjuvu")
-states/Idle/position = Vector2(355.5, 50.25)
+states/Idle/position = Vector2(362.5, 29.25)
 states/Jump/node = SubResource("AnimationNodeAnimation_hmi2t")
 states/Jump/position = Vector2(662.5, 129.5)
 states/Sprint/node = SubResource("AnimationNodeAnimation_yiywh")
-states/Sprint/position = Vector2(1003.5, 39.5)
-states/Start/position = Vector2(217, 48)
+states/Sprint/position = Vector2(1002.5, 39.5)
+states/Start/position = Vector2(217, 50.25)
 states/Walk/node = SubResource("AnimationNodeAnimation_vclph")
 states/Walk/position = Vector2(518, 367)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqatk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_yoq0e"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_s5wfe"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_iclyv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_gijp2"), "Walk", "Sprint", SubResource("AnimationNodeStateMachineTransition_7naj4"), "Sprint", "Walk", SubResource("AnimationNodeStateMachineTransition_cuo5c"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_u8bit"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_2wh4f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_7ahvc"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ee1u"), "Jump", "Sprint", SubResource("AnimationNodeStateMachineTransition_5h8xb"), "Sprint", "Jump", SubResource("AnimationNodeStateMachineTransition_vjble"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_udner"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_xo15m"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_oql7h"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_rucgp"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_2cs3l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n5g0g"), "Sprint", "Fall", SubResource("AnimationNodeStateMachineTransition_dhwnh"), "Fall", "Sprint", SubResource("AnimationNodeStateMachineTransition_tmwol"), "Fall", "Glide", SubResource("AnimationNodeStateMachineTransition_4atkk"), "Glide", "Fall", SubResource("AnimationNodeStateMachineTransition_8qh5d"), "Idle", "Glide", SubResource("AnimationNodeStateMachineTransition_xum6i")]
-graph_offset = Vector2(394.297, 68.2876)
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_vwm1c"]
-fadein_time = 0.1
-fadeout_time = 0.3
+graph_offset = Vector2(-388.66, -428.474)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yiywh"]
-graph_offset = Vector2(-875.85, -43.657)
-nodes/Dash/node = SubResource("AnimationNodeAnimation_5aj8x")
-nodes/Dash/position = Vector2(-248, 132)
+graph_offset = Vector2(-1016.98, -364.981)
+nodes/Dash/node = SubResource("AnimationNodeAnimation_8i8jv")
+nodes/Dash/position = Vector2(-640, 140)
+nodes/DashOneShot/node = SubResource("AnimationNodeOneShot_6mkbl")
+nodes/DashOneShot/position = Vector2(-160, 60)
+nodes/Hurt/node = SubResource("AnimationNodeAnimation_vsiul")
+nodes/Hurt/position = Vector2(-500, 520)
+nodes/HurtOneShot/node = SubResource("AnimationNodeOneShot_1ij6v")
+nodes/HurtOneShot/position = Vector2(40, 320)
+nodes/Melee/node = SubResource("AnimationNodeAnimation_rq0op")
+nodes/Melee/position = Vector2(-520, 740)
+nodes/MeleeOneShot/node = SubResource("AnimationNodeOneShot_cx2nh")
+nodes/MeleeOneShot/position = Vector2(340, 480)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_y8j8d")
-nodes/MovementStateMachine/position = Vector2(-280, -86)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_vwm1c")
-nodes/OneShot/position = Vector2(36, -28)
-nodes/output/position = Vector2(264, -14)
-node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Dash", &"output", 0, &"OneShot"]
+nodes/MovementStateMachine/position = Vector2(-500, -120)
+nodes/output/position = Vector2(860, 160)
+node_connections = [&"DashOneShot", 0, &"MovementStateMachine", &"DashOneShot", 1, &"Dash", &"HurtOneShot", 0, &"DashOneShot", &"HurtOneShot", 1, &"Hurt", &"MeleeOneShot", 0, &"HurtOneShot", &"MeleeOneShot", 1, &"Melee", &"output", 0, &"MeleeOneShot"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
 radius = 1.0
@@ -161,29 +183,35 @@ script = ExtResource("4_qjuvu")
 layer_to_add = 2
 recursive = true
 
-[node name="Skeleton3D" parent="chicken_default/Armature" index="2"]
+[node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
-bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.504704, -0.00246261, 0.00794589, 0.863252)
-bones/3/rotation = Quaternion(-0.526933, -0.0181883, -0.0166463, 0.849549)
-bones/4/rotation = Quaternion(-0.1806, -0.324651, -0.0900018, 0.924059)
-bones/5/rotation = Quaternion(-0.168598, -0.122684, -0.695922, 0.68718)
-bones/6/rotation = Quaternion(-0.232853, 0.0836191, 0.71524, 0.65362)
+bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
+bones/3/rotation = Quaternion(-0.527367, -0.0203354, -0.0180753, 0.849202)
+bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
+bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
+bones/6/rotation = Quaternion(-0.268938, 0.0361643, 0.74135, 0.613812)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.296919, -0.0157028, -0.0504059, 0.953442)
-bones/9/rotation = Quaternion(0.181204, 0.00790844, -0.113717, 0.976817)
+bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
+bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.172539, 0.0525169, 0.109501, 0.977488)
+bones/11/rotation = Quaternion(-0.176772, -0.00614296, 0.0234678, 0.983953)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_yiywh")
 anim_player = NodePath("../AnimationPlayer")
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
+parameters/DashOneShot/active = false
+parameters/DashOneShot/internal_active = false
+parameters/DashOneShot/request = 0
+parameters/HurtOneShot/active = false
+parameters/HurtOneShot/internal_active = false
+parameters/HurtOneShot/request = 0
+parameters/MeleeOneShot/active = false
+parameters/MeleeOneShot/internal_active = false
+parameters/MeleeOneShot/request = 0
 
 [node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350985, 0)

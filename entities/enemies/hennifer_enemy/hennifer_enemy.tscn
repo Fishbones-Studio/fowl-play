@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/hennifer_enemy_stats.tres" id="2_v8d7w"]
-[ext_resource type="PackedScene" uid="uid://duqairtxdtmx4" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
+[ext_resource type="PackedScene" uid="uid://bjkgfgk1x8lvk" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
 [ext_resource type="PackedScene" uid="uid://cyabnta5e4ldb" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tscn" id="4_surp0"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]
@@ -77,21 +77,6 @@ enemy_model = NodePath("chicken_hennifer")
 
 [node name="chicken_hennifer" parent="." index="0" instance=ExtResource("3_surp0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
-
-[node name="Skeleton3D" parent="chicken_hennifer/Armature_001" index="1"]
-bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
-bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.446387, 0.00074851, -0.00258394, 0.894836)
-bones/3/rotation = Quaternion(-0.531972, 0.0110696, 0.00179626, 0.846687)
-bones/4/rotation = Quaternion(-0.1202, 0.299389, -0.0991334, 0.941324)
-bones/5/rotation = Quaternion(-0.229593, -0.073823, -0.73362, 0.635326)
-bones/6/rotation = Quaternion(-0.147788, 0.187329, 0.64225, 0.72841)
-bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.314264, -0.0253715, -0.0878681, 0.94492)
-bones/9/rotation = Quaternion(0.181089, 0.0306769, -0.15501, 0.970689)
-bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
-bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.179378, -0.0923499, -0.103726, 0.973928)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_hennifer" index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_xwdhe")

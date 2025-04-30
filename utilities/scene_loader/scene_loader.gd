@@ -3,36 +3,127 @@
 ## This allows for a single point of entry for all scenes, seperate from UI elements
 extends Node
 
+# Variable to keep track of the scene currently being loaded in the background
+var _loading_scene_path: String = ""
+
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
+	# Disable processing by default, enable only when loading
+	set_process(false)
+
+
+func _process(_delta: float) -> void:
+	# This function runs every frame, but only when set_process(true) is called. We use it to check the status of the background loading.
+
+	# Should not happen, but safety check
+	if _loading_scene_path.is_empty():
+		set_process(false) # Disable processing if no path is set
+		return
+
+	# Check the status of the threaded load request
+	var load_status: ResourceLoader.ThreadLoadStatus = ResourceLoader.load_threaded_get_status(
+		_loading_scene_path
+	)
+
+	match load_status:
+		ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			# Scene is still loading in the background.
+			# Continuously update progress until loading is complete
+			var progress_array: Array[Variant] = []
+			ResourceLoader.load_threaded_get_status(_loading_scene_path, progress_array)
+			# Emit current loading progress (fallback to 0.0 if not available)
+			SignalManager.loading_progress_updated.emit(progress_array[0] if progress_array.size() > 0 else 0.0)
+			pass # Keep checking next frame
+
+		ResourceLoader.THREAD_LOAD_LOADED:
+			# Loading finished successfully!
+			print("Background scene load finished: ", _loading_scene_path)
+			var loaded_resource: Resource = ResourceLoader.load_threaded_get(
+				_loading_scene_path
+			)
+
+			# Store the path and reset the loading variable before instantiating, in case instantiation itself causes an error or another switch.
+			var scene_to_instantiate_path: String = _loading_scene_path
+			_loading_scene_path = ""
+			# Notify that loading is complete
+			SignalManager.loading_screen_finished.emit()
+			set_process(false) # Stop checking status
+	
+
+			# Now instantiate the loaded scene
+			_instantiate_and_add_scene(
+				loaded_resource, scene_to_instantiate_path
+			)
+
+		ResourceLoader.THREAD_LOAD_FAILED:
+			# An error occurred during loading.
+			push_error(
+				"Error: Failed to load scene thread: ", _loading_scene_path
+			)
+			_loading_scene_path = "" # Reset loading path
+			set_process(false) # Stop checking status
+
+		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+			# The path provided was invalid.
+			push_error(
+				"Error: Invalid resource path for threaded load: ",
+				_loading_scene_path
+			)
+			_loading_scene_path = "" # Reset loading path
+			set_process(false) # Stop checking status
 
 
 func _on_switch_game_scene(scene_path: String) -> void:
-	# Remove the current children
+	# If already loading something, the new request will overwrite the old one's tracking.
+	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
+	# The previous load will continue in the background but its result won't be used by this script.
+
+	if !_loading_scene_path.is_empty():
+		print(
+			"Warning: New scene requested while '%s' was still loading. Starting load for '%s'."
+			% [_loading_scene_path, scene_path]
+		)
+		
+	# Remove the current children immediately
 	for child in get_children():
 		child.queue_free()
+		
 
-	_on_add_game_scene(scene_path)
+	# Start loading the new scene in a background thread
+	var err: Error = ResourceLoader.load_threaded_request(scene_path)
+
+	if err != OK:
+		push_error(
+			"Error: Could not start threaded load request for path: ",
+			scene_path
+		)
+		return
+
+	# Store the path we are now loading and enable processing to check status
+	_loading_scene_path = scene_path
+	set_process(true)
+	print("Started loading scene in background: ", scene_path)
 
 
-# TODO: maybe loading optimization? We will prob not run into that issue, but it could be a good idea to load the scene in the background
-func _on_add_game_scene(scene_path: String) -> void:
-	# Load the scene from the path
-	var new_scene_resource: Resource = ResourceLoader.load(scene_path)
-
-	if new_scene_resource == null:
-		push_error("Error: Could not load scene at path: ", scene_path)
-		return  # Exit if the scene failed to load
+# Helper function to instantiate the scene once loaded
+func _instantiate_and_add_scene(
+	resource: Resource, scene_path: String
+) -> void:
+	if resource == null:
+		# This case should ideally be caught by THREAD_LOAD_FAILED
+		push_error("Error: Loaded resource is null for path: ", scene_path)
+		return
 
 	# Check if the loaded resource is a PackedScene
-	if new_scene_resource is PackedScene:
+	if resource is PackedScene:
 		# Instance the new scene
-		var new_scene: Node = new_scene_resource.instantiate()
-
-		await get_tree().process_frame ## Waits one frame to ensure the scene is fully loaded, can help with some issues
+		var new_scene: Node = resource.instantiate()
 
 		# Add it as a child of the scene loader
 		add_child(new_scene)
+		print("Scene instantiated and added: ", scene_path)
 	else:
-		push_error("Error: Resource at path is not a PackedScene: ", scene_path)
+		push_error(
+			"Error: Resource at path is not a PackedScene: ", scene_path
+		)

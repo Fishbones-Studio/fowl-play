@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1a8kqc6l8msl"
-path.s3tc="res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.s3tc.ctex"
-path.etc2="res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.etc2.ctex"
+uid="uid://vg43cef4i8vm"
+path.s3tc="res://.godot/imported/chicken_default_Material.png-3a8e10e65e4f9a576f685b3d3fcc11b0.s3tc.ctex"
+path.etc2="res://.godot/imported/chicken_default_Material.png-3a8e10e65e4f9a576f685b3d3fcc11b0.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "e0eb85b0253ce8286b83f7786deb4156"
+"md5": "0d2283b18ed1d8b9b80d38fd7c5f0d9a"
 }
 
 [deps]
 
-source_file="res://entities/enemies/hennifer_enemy/art/chicken_hennifer_Sphere_10.png"
-dest_files=["res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.s3tc.ctex", "res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.etc2.ctex"]
+source_file="res://entities/chicken_player/art/chicken_default_Material.png"
+dest_files=["res://.godot/imported/chicken_default_Material.png-3a8e10e65e4f9a576f685b3d3fcc11b0.s3tc.ctex", "res://.godot/imported/chicken_default_Material.png-3a8e10e65e4f9a576f685b3d3fcc11b0.etc2.ctex"]
 
 [params]
 

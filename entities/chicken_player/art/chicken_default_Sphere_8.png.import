@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cip13vm8glng6"
-path.s3tc="res://.godot/imported/chicken_default_chicken eye normal 1 Base Color.png-0c5d35540045eb43087b227674f14775.s3tc.ctex"
-path.etc2="res://.godot/imported/chicken_default_chicken eye normal 1 Base Color.png-0c5d35540045eb43087b227674f14775.etc2.ctex"
+uid="uid://nhi1fjtcu0mp"
+path.s3tc="res://.godot/imported/chicken_default_Sphere_8.png-a9958ed28101dfeaff8609a620a967a7.s3tc.ctex"
+path.etc2="res://.godot/imported/chicken_default_Sphere_8.png-a9958ed28101dfeaff8609a620a967a7.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/chicken_player/art/chicken_default_chicken eye normal 1 Base Color.png"
-dest_files=["res://.godot/imported/chicken_default_chicken eye normal 1 Base Color.png-0c5d35540045eb43087b227674f14775.s3tc.ctex", "res://.godot/imported/chicken_default_chicken eye normal 1 Base Color.png-0c5d35540045eb43087b227674f14775.etc2.ctex"]
+source_file="res://entities/chicken_player/art/chicken_default_Sphere_8.png"
+dest_files=["res://.godot/imported/chicken_default_Sphere_8.png-a9958ed28101dfeaff8609a620a967a7.s3tc.ctex", "res://.godot/imported/chicken_default_Sphere_8.png-a9958ed28101dfeaff8609a620a967a7.etc2.ctex"]
 
 [params]
 

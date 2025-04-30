@@ -22,6 +22,8 @@ var current_progress: float = 0.0
 var dot_count: int = 0
 
 var background_textures: Array[CompressedTexture2D] = []
+var next_ui: UIEnums.UI
+var next_ui_params: Dictionary = {}
 
 @onready var background_art: TextureRect = %BackgroundArt
 @onready var fact_label: Label = %FactLabel
@@ -72,7 +74,10 @@ func _load_background_textures() -> Array[CompressedTexture2D]:
 	return textures
 
 
-func _on_loading_started() -> void:
+func _on_loading_started(_next_ui : UIEnums.UI, _next_ui_params : Dictionary) -> void:
+	next_ui = _next_ui
+	next_ui_params = _next_ui_params
+	
 	current_progress = 0.0
 	target_progress = 0.0
 	progress_bar.value = 0
@@ -90,5 +95,10 @@ func _on_progress_updated(progress: float) -> void:
 func _on_loading_finished() -> void:
 	progress_bar.value = 100
 	loading_text.text = "Loading..."
+	
+	if next_ui && next_ui != UIEnums.UI.LOADING_SCREEN:
+		SignalManager.switch_ui_scene.emit(next_ui, next_ui_params)
+		next_ui = UIEnums.UI.LOADING_SCREEN
+		next_ui_params = {}
 
 	visible = false
