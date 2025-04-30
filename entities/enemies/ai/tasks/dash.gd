@@ -1,12 +1,16 @@
 @tool
 extends BTAction
 
+## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
+## Duration of the dash.
 @export var dash_duration: float = 0.2
-@export var min_distance: float = 3.0
+## Minimun travel distance of the dash.
+@export var dash_distance: float = 30.0
 
 var _dash_timer: float = 0.0
-var _target_position: Vector3
+var _dash_speed: float = 0.0
+var _dash_direction: Vector3 = Vector3.ZERO
 
 
 func _generate_name() -> String:
@@ -16,21 +20,19 @@ func _generate_name() -> String:
 func _enter() -> void:
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
-		push_warning("Dash: Target is not a valid ChickenPlayer (%s: %s)" % [
-			LimboUtility.decorate_var(target_var), blackboard.get_var(target_var)])
 		return
 
 	_dash_timer = dash_duration
-	_target_position = target.global_position
+	_dash_direction = -agent.global_basis.z.normalized()
+	_dash_speed = (dash_distance / dash_duration) + agent.stats.calculate_speed(agent.movement_component.dash_speed_factor)
 
 
 func _tick(delta: float) -> Status:
 	_dash_timer -= delta
 
-	agent.velocity = -agent.global_basis.z * agent.stats.calculate_speed(agent.movement_component.dash_speed_factor)
-	agent.move_and_slide()
+	agent.velocity = _dash_direction * _dash_speed
 
-	if agent.global_position.distance_to(_target_position) < min_distance or _dash_timer <= 0:
+	if _dash_timer <= 0:
 		return SUCCESS
 
 	return RUNNING

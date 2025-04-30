@@ -12,12 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="10_cw150"]
 
 [sub_resource type="Curve3D" id="Curve3D_l5lfc"]
-closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 11.797, 0, -2.758, 0, 0, 0, 0, 0, 0, 20.692, 0, -16.1, 0, 0, 0, 0, 0, 0, 17.622, 0, -33.116, 0, 0, 0, 0, 0, 0, -1.47, 0, -41.92, 0, 0, 0, 0, 0, 0, -13.982, 0, -34.752, 0, 0, 0, 0, 0, 0, -21.4088, -7.09679, -28.9869, 0, 0, 0, 0, 0, 0, -20.141, -10.5106, -16.9777, 0, 0, 0, 0, 0, 0, -9.09975, -9.82256, -4.35105),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, -0.4443, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2.29125, 4.34434, -10.8149, 0, 0, 0, 0, 0, 0, 9.8513, 4.30895, -11.5081),
+"tilts": PackedFloat32Array(0, 0)
 }
-point_count = 8
+point_count = 2
 
 [node name="Level" type="Node3D"]
 
@@ -25,12 +24,13 @@ point_count = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, -1, 0.9)
 
 [node name="Path3D" type="Path3D" parent="Arena"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 2, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, -2.01541, 0)
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Arena/Path3D"]
-transform = Transform3D(0.832036, 0, -0.554713, 0, 0.999998, 0, 0.554711, 0, 0.832038, 11.797, 0, -2.758)
+transform = Transform3D(0.0569953, 0.00290504, -0.998365, -1.16415e-10, 0.999992, 0.00290977, 0.998368, -0.000165844, 0.0569951, -2.29125, 4.34434, -10.8149)
 script = ExtResource("2_xii2b")
+movement_mode = 2
 
 [node name="GroundSaw" parent="Arena/Path3D/PathFollow3D" instance=ExtResource("3_rhqlf")]
 
