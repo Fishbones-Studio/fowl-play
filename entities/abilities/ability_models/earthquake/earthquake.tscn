@@ -66,6 +66,9 @@ quake_radius_increase = 0.5
 max_quakes = 3
 current_ability = ExtResource("3_bowoe")
 
+[node name="CooldownTimer" parent="." index="0"]
+wait_time = 5.0
+
 [node name="QuakeTimer" type="Timer" parent="." index="1"]
 one_shot = true
 

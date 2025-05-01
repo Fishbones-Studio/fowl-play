@@ -89,13 +89,12 @@ func _pulse_quake() -> void:
 	_current_quake_count += 1
 	if _current_quake_count < max_quakes:
 		var scale_factor: float = 1.0 + (_current_quake_count * quake_radius_increase)
-		
+
 		collision_shape.scale = Vector3.ONE * scale_factor
 		_particles[_current_quake_count].process_material.set("scale_min", scale_factor)
+		_current_knockback = _current_knockback * scale_factor
 
-	# Damage calculation
 		_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
-		_current_knockback = initial_knockback_force
 		quake_timer.start()
 	else:
 		_reset_ability()

@@ -35,7 +35,6 @@ func _tick(delta: float) -> Status:
 func _is_at_direction(direction: Vector3) -> bool:
 	var forwad_direction: Vector3 = -agent.global_basis.z.normalized()
 	var angle: float = rad_to_deg(forwad_direction.angle_to(direction))
-	#print("ANGLE: ", angle)
 
 	return angle <= angle_threshold
 
