@@ -5,25 +5,32 @@ extends Ability
 @export var knockback_force_upwards: float = 5.0
 @export var quake_interval: float = 0.5  # Time between quake pulses
 @export var quake_damage_increase: float = 0.2  # Damage multiplier per quake
-@export var quake_radius_increase: float = 2.0  # Radius multiplier per quake
+@export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.weight * stats.defense * 0.5) / max_quakes
+		return (stats.weight * stats.defense * 0.5) / max(1, max_quakes)
 
 var _current_quake_count: int = 0
 var _current_damage: float = 0.0
 var _current_knockback: float = 0.0
 var _hit_bodies: Array = []  # Track already hit bodies per activation
 var _stop_moving: bool = false
+var _particles: Array[GPUParticles3D] = []
 
 @onready var camera: FollowCamera = get_tree().get_first_node_in_group("FollowCamera")
 @onready var quake_timer: Timer = $QuakeTimer
 @onready var hit_area: Area3D = $HitArea
-@onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
+
+
+
+func _ready() -> void:
+	for particle in hit_area.get_children():
+		if particle is GPUParticles3D:
+			_particles.append(particle)
 
 
 func activate() -> void:
@@ -73,22 +80,22 @@ func _pulse_quake() -> void:
 			_apply_knockback(body)
 			_hit_bodies.append(body)
 
-	cpu_particles.emitting = true
+	_particles[_current_quake_count].emitting = true
 
 	if camera:
 		camera.apply_shake(1.0)
 
-	collision_shape.scale = Vector3.ONE * (1.0 + (_current_quake_count * quake_radius_increase))
-	cpu_particles.scale = collision_shape.scale
-	cpu_particles.amount += cpu_particles.amount * quake_radius_increase
-
-	# Damage calculation
-	_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
-	_current_knockback = initial_knockback_force
-
 	# End sequence if max quakes reached
 	_current_quake_count += 1
 	if _current_quake_count < max_quakes:
+		var scale_factor: float = 1.0 + (_current_quake_count * quake_radius_increase)
+		
+		collision_shape.scale = Vector3.ONE * scale_factor
+		_particles[_current_quake_count].process_material.set("scale_min", scale_factor)
+
+	# Damage calculation
+		_current_damage = damage * (1.0 + (_current_quake_count * quake_damage_increase))
+		_current_knockback = initial_knockback_force
 		quake_timer.start()
 	else:
 		_reset_ability()
@@ -100,7 +107,8 @@ func _pulse_quake() -> void:
 func _reset_ability() -> void:
 	# Reset size
 	collision_shape.scale = Vector3.ONE
-	cpu_particles.scale = Vector3.ONE
+	for particle in _particles:
+		particle.scale = Vector3.ONE
 
 	# Reset vertical velocity
 	ability_holder.velocity.y = 0
