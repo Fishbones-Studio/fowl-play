@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8p3bwxay2qb3"
-path.s3tc="res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.s3tc.ctex"
-path.etc2="res://.godot/imported/chicken_hennifer_Sphere_10.png-05dfb9881aaa5a622e8df1f158118bfb.etc2.ctex"
+path.s3tc="res://.godot/imported/chicken_hennifer_Sphere_10.png-a0cc8dc3478f9965447e4b2598fdcfe6.s3tc.ctex"
+path.etc2="res://.godot/imported/chicken_hennifer_Sphere_10.png-a0cc8dc3478f9965447e4b2598fdcfe6.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true

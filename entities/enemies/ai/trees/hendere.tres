@@ -46,7 +46,7 @@ resource_name = "chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ynbrp"]
 animation_player = SubResource("BBNode_nrghm")
-animation_name = &"idle"
+animation_name = &"Idle"
 blend = 0.3
 
 [sub_resource type="BTAction" id="BTAction_8py2e"]
@@ -72,7 +72,7 @@ resource_name = "chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_eatwp"]
 animation_player = SubResource("BBNode_k65bw")
-animation_name = &"walking"
+animation_name = &"Walking"
 blend = 0.2
 speed = 2.0
 
@@ -179,7 +179,7 @@ resource_name = "chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_schhj"]
 animation_player = SubResource("BBNode_fxtff")
-animation_name = &"walking"
+animation_name = &"Walking"
 speed = 2.0
 
 [sub_resource type="BTAction" id="BTAction_mnhi0"]
