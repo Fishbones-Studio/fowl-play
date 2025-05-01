@@ -121,7 +121,7 @@ resource_name = "chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_l0rnk"]
 animation_player = SubResource("BBNode_d0mtc")
-animation_name = &"dash"
+animation_name = &"Dash"
 blend = 0.2
 speed = 6.0
 

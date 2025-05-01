@@ -19,6 +19,7 @@ func _ready() -> void:
 	_initialize_health_bar()
 	collision_layer = 4
 	SignalManager.weapon_hit_target.connect(_take_damage)
+	GameManager.current_enemy = self
 
 
 func _physics_process(delta: float) -> void:

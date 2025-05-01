@@ -1,6 +1,6 @@
 extends Ability
 
-@export_range(1, 100, 1) var defense_debuff: float = 50.0
+@export_range(1, 100, 0.1) var defense_debuff: float = 50.0
 @export var debuff_duration: float = 5.0
 
 var damage: float:
