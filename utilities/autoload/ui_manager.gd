@@ -55,6 +55,7 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 	SignalManager.loading_screen_started.emit(hud_ui, {})
 
 	await get_tree().process_frame
+
 	# Switch to the loaded game scene
 	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
 

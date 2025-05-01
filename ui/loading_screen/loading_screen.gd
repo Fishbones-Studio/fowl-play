@@ -95,7 +95,7 @@ func _on_progress_updated(progress: float) -> void:
 func _on_loading_finished() -> void:
 	progress_bar.value = 100
 	loading_text.text = "Loading..."
-	
+
 	if next_ui && next_ui != UIEnums.UI.LOADING_SCREEN:
 		SignalManager.switch_ui_scene.emit(next_ui, next_ui_params)
 		next_ui = UIEnums.UI.LOADING_SCREEN

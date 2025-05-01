@@ -5,8 +5,8 @@ signal feathers_of_rebirth_changed(new_value: int)
 
 # Preload default stats once to avoid repeated loading
 const DEFAULT_PLAYER_STATS_PATH: String = "uid://bwhuhbesdlyu5"
-var _default_player_stats: LivingEntityStats
 
+var _default_player_stats: LivingEntityStats
 
 var chicken_player: ChickenPlayer = null:
 	set(value):
@@ -15,8 +15,8 @@ var chicken_player: ChickenPlayer = null:
 		chicken_player = value
 		# Apply cheats immediately if a player is assigned
 		_apply_cheat_settings()
-		
-var current_enemy : Enemy
+
+var current_enemy: Enemy
 
 
 var prosperity_eggs: int:

@@ -49,7 +49,6 @@ func _process(_delta: float) -> void:
 			# Notify that loading is complete
 			SignalManager.loading_screen_finished.emit()
 			set_process(false) # Stop checking status
-	
 
 			# Now instantiate the loaded scene
 			_instantiate_and_add_scene(

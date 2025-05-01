@@ -24,7 +24,7 @@ signal add_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal i
 signal switch_game_scene(scene_path: String) ## This signal is used to switch the game scene, replacing all current
 signal add_game_scene(scene_path: String) ## This signal is used to add an (additional) game scene
 signal loading_progress_updated(progress: float)  # 0.0 to 1.0
-signal loading_screen_started(next_ui : UIEnums.UI, params: Dictionary)
+signal loading_screen_started(next_ui: UIEnums.UI, params: Dictionary)
 signal loading_screen_finished
 
 # Enemy signals

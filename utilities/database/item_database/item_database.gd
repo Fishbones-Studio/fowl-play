@@ -32,7 +32,7 @@ static func load_scene_resources(
 				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.ends_with(".tres"):
 				var resource: Resource = load(subdir_path.path_join(file))
-				if resource is BaseResource && resource.purchasable:
+				if resource is BaseResource and resource.purchasable:
 					temp_items.append(resource)
 					resource_loaded = true
 					break  # Found .tres, skip to next subdir
