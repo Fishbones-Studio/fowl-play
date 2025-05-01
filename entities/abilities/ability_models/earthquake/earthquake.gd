@@ -4,7 +4,7 @@ extends Ability
 @export var initial_knockback_force: float = 9.0
 @export var knockback_force_upwards: float = 5.0
 @export var quake_interval: float = 0.5  # Time between quake pulses
-@export var quake_damage_increase: float = 0.2  # Damage multiplier per quake
+@export var quake_damage_increase: float = 0.5  # Damage multiplier per quake
 @export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
 

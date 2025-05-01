@@ -1,11 +1,11 @@
 [gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_fxtff"]
 [ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="3_schhj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_schhj"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_pia2r"]
 [ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]

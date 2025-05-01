@@ -38,7 +38,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.607843, 0, 0, 0, 0)
 gradient = SubResource("Gradient_mqfc4")
 
 [sub_resource type="Curve" id="Curve_bowoe"]
-_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0186916, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_mqfc4"]
@@ -53,33 +53,6 @@ color_ramp = SubResource("GradientTexture1D_si343")
 [sub_resource type="SphereMesh" id="SphereMesh_mqfc4"]
 radius = 10.0
 height = 20.0
-
-[sub_resource type="Gradient" id="Gradient_1j166"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 0.8, 0.2, 1, 0.8, 0.3, 0.1, 0.7, 0.2, 0.1, 0.05, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_57nyx"]
-gradient = SubResource("Gradient_1j166")
-
-[sub_resource type="Curve" id="Curve_bowoe"]
-_data = [Vector2(0.0186916, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_mqfc4"]
-curve = SubResource("Curve_bowoe")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_si343"]
-direction = Vector3(0, 0, 0)
-spread = 180.0
-flatness = 1.0
-initial_velocity_min = 5.0
-initial_velocity_max = 8.0
-radial_accel_min = -2.0
-radial_accel_max = -2.0
-scale_min = 0.5
-scale_curve = SubResource("CurveTexture_mqfc4")
-color_ramp = SubResource("GradientTexture1D_57nyx")
 
 [node name="Earthquake" instance=ExtResource("1_57nyx")]
 script = ExtResource("2_1j166")
@@ -139,13 +112,5 @@ lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_tsju7")
 draw_pass_1 = SubResource("SphereMesh_mqfc4")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="2"]
-emitting = false
-amount = 500
-lifetime = 1.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_si343")
 
 [connection signal="timeout" from="QuakeTimer" to="." method="_pulse_quake"]
