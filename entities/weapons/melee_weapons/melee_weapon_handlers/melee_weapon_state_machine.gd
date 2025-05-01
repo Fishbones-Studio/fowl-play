@@ -5,6 +5,7 @@ class_name MeleeWeaponStateMachine
 extends Node
 
 signal melee_combat_transition_state(target_state: WeaponEnums.WeaponState, information: Dictionary)
+
 @export var starting_state: BaseCombatState
 
 var states: Dictionary[WeaponEnums.WeaponState, BaseCombatState] = {}

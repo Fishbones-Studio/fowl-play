@@ -7,7 +7,7 @@ func play_attack_animation() -> void:
 
 	if entity_stats.is_player:
 		if GameManager.chicken_player and GameManager.chicken_player.animation_tree:
-			animation_tree  = GameManager.chicken_player.animation_tree
+			animation_tree = GameManager.chicken_player.animation_tree
 	else:
 		if GameManager.current_enemy and GameManager.current_enemy.animation_tree:
 			animation_tree = GameManager.current_enemy.animation_tree

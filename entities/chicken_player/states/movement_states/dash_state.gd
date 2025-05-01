@@ -36,7 +36,6 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 
 	# Fire the OneShot request
 	animation_tree.set("parameters/DashOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	
 
 	dash_duration_timer.start()
 	dash_cooldown_timer.start()

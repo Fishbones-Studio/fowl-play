@@ -6,7 +6,7 @@ extends BaseCombatState
 @onready var windup_timer: Timer = %WindupTimer
 
 
-func _init():
+func _init() -> void:
 	state_type = WeaponEnums.WeaponState.WINDUP
 
 

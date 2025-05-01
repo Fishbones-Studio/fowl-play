@@ -1,9 +1,7 @@
 [gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=3 format=3 uid="uid://cybaeim8kc5kk"]
 
+[ext_resource type="Texture2D" uid="uid://ckrv5snsxeiws" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.png" id="1_16jp6"]
 [ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_nt88w"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nt88w"]
-load_path = "res://.godot/imported/leek.png-8204e0ceea697db1e033e25a6d1a161c.ctex"
 
 [resource]
 script = ExtResource("1_nt88w")
@@ -17,6 +15,6 @@ drop_chance = 50
 cost = 90
 currency_type = 0
 description = "Deals %s Base Damage with a sharp leek after a windup of %s. The attack lasts %s, then enters a cooldown state for %s."
-icon = SubResource("CompressedTexture2D_nt88w")
+icon = ExtResource("1_16jp6")
 model_uid = "uid://bymaeu4dtl7ex"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

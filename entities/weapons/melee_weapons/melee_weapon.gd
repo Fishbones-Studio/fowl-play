@@ -12,10 +12,11 @@ var attacking: bool = false:
 		attacking = value
 
 var hit_targets_this_swing: Array[Node] = []
-var entity_stats : LivingEntityStats
+var entity_stats: LivingEntityStats
 
 @onready var hit_check_point: Marker3D = $HitCheckPoint
-@onready var weapon_hit_box : Area3D = $WeaponHitBox
+@onready var weapon_hit_box: Area3D = $WeaponHitBox
+
 
 func _physics_process(_delta: float) -> void:
 	if attacking:
@@ -26,7 +27,7 @@ func _check_for_hit() -> void:
 	if not hit_check_point or not weapon_hit_box:
 		printerr("MeleeWeapon: HitCheckPoint or WeaponHitBox node not found!")
 		return
-		
+
 	weapon_hit_box.collision_layer = 0
 	weapon_hit_box.collision_mask = hit_mask
 
@@ -43,7 +44,7 @@ func _check_for_hit() -> void:
 	if not space_state:
 		printerr("MeleeWeapon: Could not get DirectSpaceState!")
 		return
-	
+
 	var ray_origin: Vector3 = hit_check_point.global_position
 	var ray_direction: Vector3 = -global_transform.basis.z.normalized()
 	var ray_end: Vector3 = ray_origin + ray_direction * ray_length
@@ -61,7 +62,7 @@ func _check_for_hit() -> void:
 			hit_targets_this_swing.append(collider)
 			print("Melee hit (ray): ", collider.name)
 
+
 ## Funtion to call from animation tracks
-func set_attacking(attacking_value : bool) -> void:
+func set_attacking(attacking_value: bool) -> void:
 	attacking = attacking_value
-	

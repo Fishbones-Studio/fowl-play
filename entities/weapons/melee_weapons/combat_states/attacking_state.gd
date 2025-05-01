@@ -5,7 +5,7 @@ extends BaseCombatState
 @onready var attack_timer: Timer = %AttackTimer
 
 
-func _init():
+func _init() -> void:
 	state_type = WeaponEnums.WeaponState.ATTACKING
 
 

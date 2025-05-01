@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/hennifer_enemy_stats.tres" id="2_v8d7w"]
-[ext_resource type="PackedScene" uid="uid://bjkgfgk1x8lvk" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
+[ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://deqpnhqyoinff" path="res://entities/enemies/hennifer_enemy/art/animations/hennifer_animation_tree.tres" id="4_3wabf"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
 [ext_resource type="PackedScene" uid="uid://cyabnta5e4ldb" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tscn" id="4_surp0"]

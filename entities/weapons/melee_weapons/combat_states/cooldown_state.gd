@@ -6,7 +6,7 @@ extends BaseCombatState
 @onready var cooldown_timer: Timer = %CooldownTimer
 
 
-func _init():
+func _init() -> void:
 	state_type = WeaponEnums.WeaponState.COOLDOWN
 
 
