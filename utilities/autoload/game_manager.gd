@@ -15,6 +15,8 @@ var chicken_player: ChickenPlayer = null:
 		chicken_player = value
 		# Apply cheats immediately if a player is assigned
 		_apply_cheat_settings()
+		
+var current_enemy : Enemy
 
 
 var prosperity_eggs: int:
