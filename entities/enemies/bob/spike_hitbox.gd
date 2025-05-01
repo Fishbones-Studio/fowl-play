@@ -11,7 +11,7 @@ var _hit_bodies: Array = []
 @onready var hurt_timer: Timer = $HurtTimer
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body in _hit_bodies:
 			return
@@ -32,9 +32,6 @@ func _apply_knockback(body: Node3D) -> void:
 		var dir = owner.global_position.direction_to(body.global_position)
 		var knockback = dir * knockback_force
 		var immobile_time = max(0.02 * owner.velocity.length(), 0.1)
-		print(self.name, " - damage: ", damage)
-		print(self.name, " - knockback force: ", knockback_force)
-		print(self.name, " - immobile time: ", immobile_time)
 
 		SignalManager.player_transition_state.emit(
 			PlayerEnums.PlayerStates.HURT_STATE,

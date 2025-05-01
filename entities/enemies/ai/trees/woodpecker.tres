@@ -36,9 +36,9 @@ children = [SubResource("BTPlayAnimation_q1gun"), SubResource("BTAction_ppkk3"),
 
 [sub_resource type="BTCondition" id="BTCondition_mxuth"]
 script = ExtResource("3_nm0l6")
+target_var = &"target"
 distance_min = 5.0
 distance_max = 50.0
-target_var = &"target"
 
 [sub_resource type="BBNode" id="BBNode_gwx8i"]
 saved_value = NodePath("woodpecker/AnimationPlayer")
@@ -63,12 +63,14 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 20.0
 duration = 10.0
+stuck_interval = 1.0
+stuck_threshold = 2.5
 
 [sub_resource type="BTCondition" id="BTCondition_bs3vf"]
 script = ExtResource("3_nm0l6")
+target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
-target_var = &"target"
 
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
 script = ExtResource("6_7lgdv")

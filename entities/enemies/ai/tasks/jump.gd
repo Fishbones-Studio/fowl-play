@@ -4,11 +4,12 @@ extends BTAction
 @export_range(1.0, 500.0, 0.1) var jump_factor: float = 1.0
 ## Duration of the jump.
 @export var duration: float
-## Oly return SUCCESS if enemy is on floor.
+## Only return SUCCESS if enemy is on floor.
 @export var grounded: bool = false
 
-var _initial_jump_height: float
 var movement_component: EnemyMovementComponent
+
+var _initial_jump_height: float
 
 
 func _generate_name() -> String:
@@ -36,7 +37,7 @@ func _enter() -> void:
 	agent.velocity.y = agent.movement_component.get_jump_velocity()
 
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if agent.velocity.y < 0 and not bool(duration) and not grounded:
 		movement_component.jump_height = _initial_jump_height
 		return SUCCESS

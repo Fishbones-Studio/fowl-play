@@ -62,9 +62,9 @@ children = [SubResource("BTPlayAnimation_ynbrp"), SubResource("BTAction_8py2e"),
 
 [sub_resource type="BTCondition" id="BTCondition_ddbif"]
 script = ExtResource("3_fxtff")
+target_var = &"target"
 distance_min = 5.0
 distance_max = 100.0
-target_var = &"target"
 
 [sub_resource type="BBNode" id="BBNode_k65bw"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -90,12 +90,14 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
+stuck_interval = 1.0
+stuck_threshold = 2.5
 
 [sub_resource type="BTCondition" id="BTCondition_n7fk8"]
 script = ExtResource("3_fxtff")
+target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
-target_var = &"target"
 
 [sub_resource type="BTAction" id="BTAction_i6i68"]
 script = ExtResource("6_pia2r")

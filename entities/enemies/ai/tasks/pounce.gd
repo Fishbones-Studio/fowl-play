@@ -41,7 +41,7 @@ func _enter() -> void:
 	agent.velocity = _initial_jump_velocity
 
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if not _is_jumping:
 		return FAILURE
 

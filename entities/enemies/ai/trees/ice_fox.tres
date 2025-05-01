@@ -91,7 +91,7 @@ blend = 0.2
 script = ExtResource("3_yhbkp")
 target_var = &"target"
 rotation_speed = 8.0
-angle_threshold = 10.0
+angle_threshold = 25.0
 duration = 0.0
 
 [sub_resource type="BTWait" id="BTWait_u4hmx"]
@@ -118,9 +118,9 @@ children = [SubResource("BTSequence_ulmcl"), SubResource("BTSequence_40a5u")]
 
 [sub_resource type="BTCondition" id="BTCondition_40a5u"]
 script = ExtResource("2_wrjj1")
-distance_min = 0.0
-distance_max = 30.0
 target_var = &"target"
+distance_min = 0.0
+distance_max = 50.0
 
 [sub_resource type="BBNode" id="BBNode_qmoh7"]
 saved_value = NodePath("ice_fox/AnimationPlayer")
@@ -141,16 +141,18 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_nju8x"]
 script = ExtResource("8_k708t")
 target_var = &"target"
-tolerance = 0.0
+tolerance = 5.0
 aggro_distance = 20.0
 speed_factor = 0.0
 duration = 0.0
+stuck_interval = 1.0
+stuck_threshold = 2.5
 
 [sub_resource type="BTCondition" id="BTCondition_u4hmx"]
 script = ExtResource("2_wrjj1")
+target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
-target_var = &"target"
 
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("9_u4hmx")
@@ -171,7 +173,7 @@ children = [SubResource("BTSequence_4fcdy")]
 children = [SubResource("BTAction_fhbfq"), SubResource("BTAction_nju8x"), SubResource("BTRepeat_ocp3w")]
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_b2ogj"]
-time_limit = 6.0
+time_limit = 10.0
 children = [SubResource("BTParallel_yhbkp")]
 
 [sub_resource type="BTSequence" id="BTSequence_wrjj1"]

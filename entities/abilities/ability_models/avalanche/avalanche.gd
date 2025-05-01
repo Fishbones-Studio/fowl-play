@@ -9,7 +9,7 @@ var damage: float:
 		return (stats.attack + stats.speed) * 1.1
 
 var _target_stats: LivingEntityStats
-var _original_defense: float
+var _original_defense: int
 
 @onready var debuff_timer: Timer = %DebuffTimer
 @onready var hit_area: Area3D = $HitArea
@@ -37,7 +37,7 @@ func _apply_debuff(body: Node3D) -> void:
 		_target_stats = body.get_stats_resource()
 
 		_original_defense = _target_stats.defense
-		_target_stats.defense = _original_defense * (1 - defense_debuff / 100)
+		_target_stats.defense = int(_original_defense * (1 - defense_debuff / 100))
 
 		debuff_timer.start(debuff_duration)
 

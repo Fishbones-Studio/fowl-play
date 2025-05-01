@@ -1,14 +1,12 @@
 @tool
 extends BTCondition
 
-## Minimum distance to target.
-@export var distance_min: float
-
-## Maximum distance to target.
-@export var distance_max: float
-
 ## Blackboard variable that holds the target.
 @export var target_var: StringName = &"target"
+## Minimum distance to target.
+@export var distance_min: float
+## Maximum distance to target.
+@export var distance_max: float
 
 var _min_distance_squared: float
 var _max_distance_squared: float

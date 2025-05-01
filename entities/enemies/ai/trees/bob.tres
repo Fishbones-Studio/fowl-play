@@ -55,9 +55,9 @@ children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_e381t"),
 
 [sub_resource type="BTCondition" id="BTCondition_yvhtp"]
 script = ExtResource("3_d6hvj")
+target_var = &"target"
 distance_min = 5.0
 distance_max = 100.0
-target_var = &"target"
 
 [sub_resource type="BBNode" id="BBNode_e381t"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
@@ -82,6 +82,8 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
+stuck_interval = 1.0
+stuck_threshold = 2.5
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
@@ -170,6 +172,8 @@ tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
+stuck_interval = 1.0
+stuck_threshold = 2.5
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")

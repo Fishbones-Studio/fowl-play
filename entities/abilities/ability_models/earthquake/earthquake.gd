@@ -55,7 +55,7 @@ func activate() -> void:
 	cooldown_timer.start()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ability_holder.is_on_floor() and on_cooldown and quake_timer.is_stopped() and _current_quake_count == 0:
 		_start_quake_sequence()
 		_stop_moving = true
