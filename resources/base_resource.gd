@@ -5,6 +5,7 @@ extends Resource
 # Basic attributes for all resources
 @export var name: String
 # Shop Variable
+@export var purchasable := true
 @export var drop_chance: int
 @export var cost: int
 @export var currency_type: CurrencyEnums.CurrencyTypes

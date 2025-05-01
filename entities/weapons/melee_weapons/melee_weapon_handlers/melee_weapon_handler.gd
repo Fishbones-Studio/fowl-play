@@ -18,12 +18,17 @@ extends Node3D
 			melee_weapon_scene = null
 
 # Using flags for user-friendly layer selection in the editor
-@export_flags_3d_physics var weapon_collision_mask: int
+@export_flags_3d_physics var weapon_collision_mask: int:
+	set(value):
+		weapon_collision_mask = value
+		if current_weapon:
+			current_weapon.hit_mask = weapon_collision_mask
+		
 
 var current_weapon: MeleeWeapon
 var owner_stats: LivingEntityStats
 
-@onready var melee_state_machine: MeleeStateMachine = $MeleeStateMachine
+@onready var melee_state_machine: MeleeWeaponStateMachine = $MeleeStateMachine
 
 
 func _ready() -> void:
@@ -62,6 +67,8 @@ func setup() -> void:
 
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
+		
+	current_weapon.entity_stats = owner_stats
 
 	add_child(current_weapon)
 
