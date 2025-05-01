@@ -8,7 +8,7 @@ extends BTAction
 ## Movement speed during the pound sequence.
 @export var horizontal_speed: float = 40.0
 ## Minimum distance to target before returning SUCCESS.
-@export var min_distance: float = 5.0
+@export var min_distance: float = 10.0
 
 var _is_jumping: bool = false
 var _target_position: Vector3
@@ -41,15 +41,15 @@ func _enter() -> void:
 	agent.velocity = _initial_jump_velocity
 
 
-func _tick(_delta: float) -> Status:
+func _tick(delta: float) -> Status:
 	if not _is_jumping:
 		return FAILURE
 
 	var to_target: Vector3 = (_target_position - agent.global_position)
 	var horizontal_dir: Vector3 = Vector3(to_target.x, 0, to_target.z).normalized()
 
-	agent.velocity.x += horizontal_dir.x * horizontal_speed - agent.velocity.x
-	agent.velocity.z += horizontal_dir.z * horizontal_speed - agent.velocity.z
+	agent.velocity.x += (horizontal_dir.x * horizontal_speed - agent.velocity.x) * delta
+	agent.velocity.z += (horizontal_dir.z * horizontal_speed - agent.velocity.z) * delta
 
 	if agent.is_on_floor() and agent.velocity.y < 0:
 		_is_jumping = false

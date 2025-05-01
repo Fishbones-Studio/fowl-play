@@ -18,7 +18,6 @@ viewport_path = NodePath("SubViewport")
 [node name="IceFox" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
 enemy_model = NodePath("ice_fox")
-animation_tree = NodePath("ice_fox/AnimationTree")
 
 [node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
