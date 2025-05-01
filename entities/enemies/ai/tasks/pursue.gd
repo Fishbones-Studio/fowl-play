@@ -73,6 +73,4 @@ func _is_stuck() -> bool:
 	_last_position = current_position
 	_last_check_time = 0.0
 
-	print("aaaaaaaaaaa Distance moved while in pursue: %.2f" % moved_distance)
-
 	return moved_distance < stuck_threshold

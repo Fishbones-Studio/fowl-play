@@ -10,7 +10,7 @@ extends BTAction
 ## If we want to have chaotic movement patterns.
 @export var chaotic: bool = false
 ## The frequency of the enemy changing direction during chaotic movement.
-@export var wave_frequency: float = 3.0
+@export var wave_frequency: float = 2.0
 ## The intensity of how far the enemy deviates during chaotic movement.
 @export var wave_amplitude: float = 15.0
 
@@ -62,8 +62,6 @@ func _choose_new_patrol_target() -> void:
 		0,
 		sin(random_angle) * random_distance
 	)
-
-	print("aaaaaaaa enemy new patrol position: %s" % _target_position)
 
 
 func _move_to_position(delta: float) -> void:
