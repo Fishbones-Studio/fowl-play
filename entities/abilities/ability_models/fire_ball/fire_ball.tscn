@@ -1,29 +1,43 @@
-[gd_scene load_steps=13 format=3 uid="uid://r2kfankkht6"]
+[gd_scene load_steps=14 format=3 uid="uid://r2kfankkht6"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_l7j4w"]
 [ext_resource type="Script" uid="uid://5b8scwscjndl" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gd" id="2_ksrmm"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="3_fmore"]
+[ext_resource type="Shader" uid="uid://dlxoddwv36plh" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gdshader" id="4_58kgr"]
 
-[sub_resource type="Gradient" id="Gradient_ksrmm"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.258964, 0.418327, 0.750996, 0.880478)
-colors = PackedColorArray(1, 0.611765, 0, 1, 1, 0.235294, 0, 1, 1, 0.235294, 0, 1, 1, 0.508235, 0, 1)
+[sub_resource type="Gradient" id="Gradient_isl50"]
+offsets = PackedFloat32Array(0.155378, 0.330677, 0.51992, 0.770916, 0.906375)
+colors = PackedColorArray(0.637488, 0.0958055, 0.161079, 1, 0.888033, 0.516931, 0.184357, 1, 0.959418, 0.804632, 0.221466, 1, 0.816648, 0.229229, 0.147248, 1, 0.57489, 0.0491875, 0.165912, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fmore"]
-gradient = SubResource("Gradient_ksrmm")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vdo2j"]
+gradient = SubResource("Gradient_isl50")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58kgr"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.468612, 0.180942, 0.226692, 1)
-albedo_texture = SubResource("GradientTexture1D_fmore")
-grow_amount = 0.01
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_isl50"]
+render_priority = 0
+shader = ExtResource("4_58kgr")
+shader_parameter/_shield_gradient = SubResource("GradientTexture1D_vdo2j")
+shader_parameter/_shield_color_brightness = 1.5
+shader_parameter/_shield_intensity = 0.25
+shader_parameter/_rotation = Vector3(1.5, 0, 0)
+shader_parameter/_shield_size = 0.0
+shader_parameter/_shield_pulse_frequency = 1.0
+shader_parameter/_shield_pulse_density = 1.0
+shader_parameter/_shield_pulse_amplitude = 1.0
+shader_parameter/_shield_pulse_blend = 1.0
+shader_parameter/_shield_pulse_radius = 1.0
+shader_parameter/_impact_origin = Vector3(1, 0, 0)
+shader_parameter/_impact_frequency = 5.0
+shader_parameter/_impact_density = 5.0
+shader_parameter/_impact_amplitude = 6.0
+shader_parameter/_impact_blend = 0.0
+shader_parameter/_impact_radius = 1.1
+shader_parameter/_impact_anim = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_isl50"]
-material = SubResource("StandardMaterial3D_58kgr")
+material = SubResource("ShaderMaterial_isl50")
 radius = 1.0
 height = 2.0
-radial_segments = 12
+radial_segments = 10
 rings = 6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vdo2j"]
@@ -36,8 +50,8 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_ksrmm"]
 material = SubResource("StandardMaterial3D_ksrmm")
-radius = 0.25
-height = 0.5
+radius = 0.375
+height = 0.75
 radial_segments = 4
 rings = 2
 
@@ -46,14 +60,15 @@ _data = [Vector2(0, 0.298966), 0.0, 0.0, 0, 0, Vector2(0.503311, 1), 0.0, 0.0, 0
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_58kgr"]
-offsets = PackedFloat32Array(0.316364, 0.552727, 0.798182)
-colors = PackedColorArray(1, 0.960784, 0.419608, 1, 0.932783, 0.325613, 0.328412, 1, 0.43377, 0.100932, 0.130185, 1)
+offsets = PackedFloat32Array(0.454545, 0.66, 0.798182, 0.88)
+colors = PackedColorArray(1, 0.960784, 0.419608, 1, 0.932783, 0.325613, 0.328412, 1, 0.43377, 0.100932, 0.130185, 1, 0.540966, 0.149197, 0.172767, 1)
 
 [node name="FireBall" instance=ExtResource("1_l7j4w")]
 script = ExtResource("2_ksrmm")
-travel_speed = 6.0
-lifetime = 8.0
-scale_factor = 1.8
+travel_speed = 5.0
+lifetime = 6.0
+damage_interval = 0.2
+scale_factor = 1.75
 current_ability = ExtResource("3_fmore")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
@@ -72,10 +87,9 @@ shape = SubResource("SphereShape3D_vdo2j")
 [node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="2"]
 unique_name_in_owner = true
 emitting = false
-amount = 200
-lifetime = 0.75
+amount = 400
 randomness = 1.0
-lifetime_randomness = 0.4
+lifetime_randomness = 0.3
 mesh = SubResource("SphereMesh_ksrmm")
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -86,7 +100,8 @@ initial_velocity_max = 1.5
 scale_amount_min = 0.2
 scale_amount_max = 1.2
 scale_amount_curve = SubResource("Curve_fmore")
-color = Color(0.689811, 0.180819, 0.27975, 1)
+color = Color(0.65033, 0.258093, 0.129011, 1)
 color_ramp = SubResource("Gradient_58kgr")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]

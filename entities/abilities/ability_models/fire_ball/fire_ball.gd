@@ -1,17 +1,20 @@
 extends Ability
 
-@export var travel_speed: float = 6.0
-@export var lifetime: float = 8.0
-@export_range(1, 20, 0.1) var scale_factor: float = 1.8
+@export var travel_speed: float = 5.0 # Speed at which the fireball moves forward
+@export var lifetime: float = 6.0 # Duration before the fireball expires
+@export var damage_interval: float = 0.2
+@export_range(1, 2, 0.01) var scale_factor: float = 1.75
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * 2.5
+		return stats.attack + (stats.speed * 0.8)
 
 var _is_active: bool = false
 var _travel_direction: Vector3
+var _current_damage: float = 0.0
 var _remaining_lifetime: float = 0.0
+var _active_bodies: Dictionary[int, int] = {}
 
 @onready var hit_area: Area3D = %HitArea
 @onready var mesh_instance: MeshInstance3D = %MeshInstance3D
@@ -29,7 +32,9 @@ func activate() -> void:
 
 	_is_active = true
 	_travel_direction = -ability_holder.global_basis.z.normalized()
+	_current_damage = damage
 	_remaining_lifetime = lifetime
+	_active_bodies.clear()
 
 	mesh_instance.visible = true
 	cpu_particles.emitting = true
@@ -49,10 +54,17 @@ func _physics_process(delta: float) -> void:
 	if not _is_active:
 		return
 
+	if _active_bodies.size() > 0:
+		_apply_continuous_damage()
+
 	_remaining_lifetime -= delta
 
 	var scale_increment: Vector3 = mesh_instance.scale + Vector3.ONE * delta * scale_factor
 
+	# Increase the current damage depending on remaining lifetime and the speed it travels at
+	# As the remaining lifetime decreases, the damage will ramp up
+	_current_damage += damage * ((1.0 + (_remaining_lifetime / lifetime)) * delta) / (travel_speed * 2)
+	
 	mesh_instance.scale = scale_increment
 	collision_shape.scale = scale_increment
 	cpu_particles.scale = scale_increment
@@ -64,10 +76,35 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
-	if body.collision_layer == 2: # Player
-		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
-	if body.collision_layer == 4: # Enemy
-		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
+	if body is CharacterBody3D:
+		var id: int = body.get_instance_id()
+		if not _active_bodies.has(id):
+			_active_bodies[id] = Time.get_ticks_msec()
+
+
+func _on_hit_area_body_exited(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		var id: int = body.get_instance_id()
+		_active_bodies.erase(id)
+
+
+func _apply_continuous_damage() -> void:
+	var current_time: int = Time.get_ticks_msec()
+
+	for id in _active_bodies:
+		var body: CharacterBody3D = instance_from_id(id)
+
+		if not is_instance_valid(body):
+			_active_bodies.erase(body)
+			continue
+
+		# Check if the elapsed time has passed the interval
+		if (current_time - _active_bodies[id]) >= (damage_interval * 1000):
+			_active_bodies[id] = current_time
+
+			# Only apply damage if body is Player of Enemy
+			if body.collision_layer == 2 or body.collision_layer == 4:
+				SignalManager.weapon_hit_target.emit(body, _current_damage, DamageEnums.DamageTypes.NORMAL)
 
 
 func _reset_ability() -> void:
@@ -75,9 +112,11 @@ func _reset_ability() -> void:
 	_is_active = false
 	mesh_instance.visible = false
 	cpu_particles.emitting = false
+
 	mesh_instance.scale = Vector3.ONE
 	collision_shape.scale = Vector3.ONE
 	cpu_particles.scale = Vector3.ONE
+
 	_toggle_collision_masks(false)
 
 
