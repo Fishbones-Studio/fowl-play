@@ -64,7 +64,7 @@ func _choose_new_patrol_target() -> void:
 	)
 
 
-func _move_to_position(delta: float) -> void:
+func _move_to_position(_delta: float) -> void:
 	var base_direction: Vector3 = agent.global_position.direction_to(_target_position)
 	var movement: Vector3 = base_direction * speed
 

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://bc7ucld3pg5s8"]
+[gd_resource type="BehaviorTree" load_steps=62 format=3 uid="uid://bc7ucld3pg5s8"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
@@ -136,8 +136,52 @@ custom_name = "Dash sequence"
 children = [SubResource("BTPlayAnimation_ulmcl"), SubResource("BTAction_ca3xq"), SubResource("BTWait_u4hmx"), SubResource("BTAction_u4hmx"), SubResource("BTAction_40a5u")]
 metadata/_weight_ = 1.0
 
+[sub_resource type="BTCondition" id="BTCondition_t3gyd"]
+script = ExtResource("2_wrjj1")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 10.0
+
+[sub_resource type="BTAction" id="BTAction_pbs4t"]
+script = ExtResource("2_6nkjl")
+
+[sub_resource type="BTComment" id="BTComment_ulmcl"]
+custom_name = "TODO, add slash animation"
+
+[sub_resource type="BBNode" id="BBNode_40a5u"]
+saved_value = NodePath("ice_fox/AnimationPlayer")
+resource_name = "ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_4fcdy"]
+animation_player = SubResource("BBNode_40a5u")
+animation_name = &"Sprint"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_y7cob"]
+script = ExtResource("3_yhbkp")
+target_var = &"target"
+rotation_speed = 6.0
+angle_threshold = 25.0
+duration = 0.0
+
+[sub_resource type="BTAction" id="BTAction_8831e"]
+script = ExtResource("4_yhbkp")
+target_var = &"target"
+slot = 2
+
+[sub_resource type="BTSequence" id="BTSequence_pbs4t"]
+children = [SubResource("BTAction_y7cob"), SubResource("BTAction_8831e")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_8k4wv"]
+time_limit = 1.5
+children = [SubResource("BTSequence_pbs4t")]
+
+[sub_resource type="BTSequence" id="BTSequence_fhbfq"]
+custom_name = "Slash sequence"
+children = [SubResource("BTCondition_t3gyd"), SubResource("BTAction_pbs4t"), SubResource("BTComment_ulmcl"), SubResource("BTPlayAnimation_4fcdy"), SubResource("BTTimeLimit_8k4wv")]
+
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_b2ogj"]
-children = [SubResource("BTSequence_ulmcl"), SubResource("BTSequence_40a5u")]
+children = [SubResource("BTSequence_ulmcl"), SubResource("BTSequence_40a5u"), SubResource("BTSequence_fhbfq")]
 
 [sub_resource type="BTCondition" id="BTCondition_40a5u"]
 script = ExtResource("2_wrjj1")
@@ -177,11 +221,6 @@ target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
 
-[sub_resource type="BTAction" id="BTAction_8831e"]
-script = ExtResource("4_yhbkp")
-target_var = &"target"
-slot = 2
-
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("9_u4hmx")
 target_var = &"target"
@@ -191,7 +230,7 @@ duration = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_4fcdy"]
 custom_name = "Melee attack"
-children = [SubResource("BTCondition_u4hmx"), SubResource("BTAction_8831e"), SubResource("BTAction_uxecv"), SubResource("BTWait_t3gyd")]
+children = [SubResource("BTCondition_u4hmx"), SubResource("BTAction_uxecv"), SubResource("BTWait_t3gyd")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_ocp3w"]
 forever = true
