@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var stats: LivingEntityStats
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
+@onready var animation_tree: AnimationTree = %AnimationTree
 
 
 func _ready() -> void:

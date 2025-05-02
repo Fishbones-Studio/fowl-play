@@ -1,7 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://d0o65o2xsk53s"]
+[gd_scene load_steps=44 format=3 uid="uid://d0o65o2xsk53s"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_base_enemy"]
-[ext_resource type="Script" path="res://entities/enemies/woodpecker/woodpecker.gd" id="2_woodpecker_script"]
+
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="5_idle_state"]
@@ -117,13 +117,14 @@ states/Start/position = Vector2(155.5, 58.5)
 states/Wander/node = SubResource("AnimationNodeAnimation_gkpqn")
 states/Wander/position = Vector2(724.25, 23)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0xa62"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_o7e52"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_6ewx5"), "Idle", "Glide", SubResource("AnimationNodeStateMachineTransition_5r5io"), "Glide", "Idle", SubResource("AnimationNodeStateMachineTransition_abfhq"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_5rinl"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_w3cy3"), "Idle", "Wander", SubResource("AnimationNodeStateMachineTransition_72g1b"), "Wander", "Idle", SubResource("AnimationNodeStateMachineTransition_atjsy"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_p3qhl"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_6jkuk"), "Wander", "Chase", SubResource("AnimationNodeStateMachineTransition_3th2b"), "Chase", "Wander", SubResource("AnimationNodeStateMachineTransition_bgk4j"), "Chase", "Jump", SubResource("AnimationNodeStateMachineTransition_6uqpb"), "Jump", "Chase", SubResource("AnimationNodeStateMachineTransition_53kiu"), "Wander", "Jump", SubResource("AnimationNodeStateMachineTransition_f1nxv"), "Jump", "Wander", SubResource("AnimationNodeStateMachineTransition_rmwxs"), "Glide", "Fall", SubResource("AnimationNodeStateMachineTransition_hs2f2"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_pattv"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_airm3"), "Fall", "Wander", SubResource("AnimationNodeStateMachineTransition_g2yma"), "Wander", "Fall", SubResource("AnimationNodeStateMachineTransition_53vq1"), "Fall", "Chase", SubResource("AnimationNodeStateMachineTransition_3shf4"), "Chase", "Fall", SubResource("AnimationNodeStateMachineTransition_y5f2u")]
-graph_offset = Vector2(189.36, -88.86)
+graph_offset = Vector2(43.36, -128.86)
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_pwo3e"]
 fadein_time = 0.1
 fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dy42i"]
+graph_offset = Vector2(-217, -257)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_x6gfb")
 nodes/Dash/position = Vector2(130, 310)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_au6vf")
@@ -139,29 +140,29 @@ size = Vector3(1.5, 5, 2)
 [sub_resource type="ViewportTexture" id="ViewportTexture_woodpecker"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Woodpecker" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_base_enemy")]
-script = ExtResource("2_woodpecker_script")
+[node name="Woodpecker" node_paths=PackedStringArray("enemy_model", "animation_tree") instance=ExtResource("1_base_enemy")]
 stats = ExtResource("3_woodpecker_stats")
 enemy_model = NodePath("woodpecker")
+animation_tree = NodePath("woodpecker/AnimationTree")
 
 [node name="woodpecker" parent="." index="0" instance=ExtResource("4_woodpecker_model")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="woodpecker/Armature" index="0"]
-bones/1/position = Vector3(-0.434296, -0.211753, 0.49306)
-bones/1/rotation = Quaternion(0.4453, 0.0568399, 0.888738, 0.0928549)
+bones/1/position = Vector3(-0.534314, -0.211753, 0.385049)
+bones/1/rotation = Quaternion(0.40911, 0.13115, 0.90136, 0.0545716)
 bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
 bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
-bones/6/rotation = Quaternion(0.0472706, 0.0434011, -0.170242, 0.983311)
-bones/7/rotation = Quaternion(0.360303, 0.000136068, -0.433958, 0.82575)
-bones/8/rotation = Quaternion(-0.254674, -8.36347e-08, 0.303508, 0.918163)
-bones/9/rotation = Quaternion(-0.125734, 0.00181406, 0.176016, 0.976323)
-bones/10/rotation = Quaternion(0.138623, -0.0154762, 0.0620755, 0.988277)
+bones/6/rotation = Quaternion(0.0921738, -2.5427e-08, -0.109848, 0.989665)
+bones/7/rotation = Quaternion(0.372215, 1.9392e-07, -0.443588, 0.815283)
+bones/8/rotation = Quaternion(-0.254674, -5.70863e-08, 0.303508, 0.918163)
+bones/9/rotation = Quaternion(-0.0929396, -1.66711e-08, 0.110761, 0.989492)
+bones/10/rotation = Quaternion(-0.0114476, 2.59773e-08, 0.0136427, 0.999842)
 bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
 bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
-bones/14/position = Vector3(-0.0079461, 2.09585, -1.34543)
+bones/14/position = Vector3(0.0982326, 2.09585, -1.47197)
 bones/14/rotation = Quaternion(0.556543, -6.54378e-08, -0.663262, 0.500343)
-bones/15/position = Vector3(-1.26466, 2.09585, 0.152267)
+bones/15/position = Vector3(-1.34829, 2.09585, 0.251932)
 bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
 
 [node name="AnimationTree" type="AnimationTree" parent="woodpecker" index="2"]
