@@ -50,7 +50,7 @@ func restore_stamina(amount: float) -> float:
 func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEnums.DamageTypes.NORMAL) -> float:
 	var actual_damage: float = 0.0
 	
-	if amount == -9223372036854775808.0:
+	if amount == -9223372036854775807.0:
 		# check for cheat
 		actual_damage = current_health
 			

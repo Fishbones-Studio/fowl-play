@@ -6,7 +6,7 @@
 script = ExtResource("1_x5m08")
 max_health = 100.0
 max_stamina = 100.0
-attack = 80.0
+attack = 20.0
 defense = 100
 speed = 15.0
 weight = 3.0

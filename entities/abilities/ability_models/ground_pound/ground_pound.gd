@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * stats.weight
+		return stats.attack * (1 + 0.05 * stats.weight)
 
 var _particles_emitted: bool = false
 

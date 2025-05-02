@@ -37,7 +37,7 @@ script = ExtResource("2_7fey8")
 health_consumption = 25.0
 damage_duration = 2.0
 damage_interval = 0.2
-missing_health_damage_scaler = 20
+sof_damage_scaler = 10
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
