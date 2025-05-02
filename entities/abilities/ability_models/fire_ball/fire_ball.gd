@@ -28,7 +28,7 @@ func activate() -> void:
 	top_level = true
 	global_position = ability_holder.global_position + (Vector3.UP * 2) # Move Y up by 2, so it spawns a bit centered
 
-	_toggle_collision_masks(true)
+	_toggle_collision_masks(true, hit_area)
 
 	_is_active = true
 	_travel_direction = -ability_holder.global_basis.z.normalized()
@@ -117,13 +117,4 @@ func _reset_ability() -> void:
 	collision_shape.scale = Vector3.ONE
 	cpu_particles.scale = Vector3.ONE
 
-	_toggle_collision_masks(false)
-
-
-func _toggle_collision_masks(toggle: bool) -> void:
-	if ability_holder.collision_layer == 2: # Player
-		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_mask_value(2, toggle)
-
-	hit_area.set_collision_mask_value(1, toggle) # World
+	_toggle_collision_masks(false, hit_area)
