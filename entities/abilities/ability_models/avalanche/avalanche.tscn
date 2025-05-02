@@ -29,7 +29,7 @@ colors = PackedColorArray(0.784314, 0.894118, 0.941176, 1, 0.498039, 0.713726, 0
 
 [node name="Avalanche" instance=ExtResource("1_ubbc7")]
 script = ExtResource("2_30khn")
-defense_debuff = 50.0
+movement_debuff = 50.0
 debuff_duration = 5.0
 current_ability = ExtResource("3_5ybk7")
 
@@ -40,12 +40,12 @@ one_shot = true
 [node name="HitArea" type="Area3D" parent="." index="2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 shape = SubResource("SphereShape3D_5ybk7")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 emitting = false
 amount = 750
 one_shot = true

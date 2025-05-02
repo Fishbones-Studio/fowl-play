@@ -11,7 +11,7 @@ purchasable = true
 drop_chance = 10
 cost = 300
 currency_type = 0
-description = "The user unleashes a powerful AoA slash, hitting all targets [color=yellow]2 times[/color] within a [color=yellow]5 meter[/color] radius and [color=yellow]ignoring[/color] their Defense stats. This ability has a cooldown of %s."
+description = "The user unleashes a powerful AoA slash, hitting all targets [color=orange]2 times[/color] within a [color=yellow]5 meter[/color] radius and [color=orange]ignoring[/color] their Defense stats. This ability has a cooldown of %s."
 icon = ExtResource("1_niphc")
 model_uid = "uid://b2apjxceqsopi"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

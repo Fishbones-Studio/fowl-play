@@ -11,7 +11,7 @@ purchasable = true
 drop_chance = 5
 cost = 170
 currency_type = 0
-description = "The user summons a devastating avalanche in a [color=yellow]8m[/color] radius, dealing damage to all targets within range based on the user's Attack and Speed stats. Affected targets have their Defense reduced by [color=yellow]50%%[/color] for [color=yellow]5s[/color]. Can only be used while on the ground and has a cooldown of %s."
+description = "The user summons a devastating avalanche in a [color=yellow]8 meter[/color] radius, dealing damage to all targets within range based on the user's Attack and Speed stats. Affected targets have their Speed reduced by [color=yellow]50%%[/color] for [color=yellow]5 seconds[/color]. Can only be used while on the ground and has a cooldown of %s."
 icon = ExtResource("1_vvsio")
 model_uid = "uid://cjuc63cw3gda1"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
