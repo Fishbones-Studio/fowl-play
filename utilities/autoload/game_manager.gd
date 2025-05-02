@@ -4,15 +4,13 @@ signal prosperity_eggs_changed(new_value: int)
 signal feathers_of_rebirth_changed(new_value: int)
 signal player_stats_updated(new_stats: LivingEntityStats)
 
+
 var chicken_player: ChickenPlayer = null:
 	set(value):
 		if chicken_player == value:
 			return # No change
 		chicken_player = value
-		# Apply cheats immediately if a player is assigned
-		_apply_cheat_settings()
-
-var current_enemy: Enemy
+		print("GameManager.chicken_player set to:", value)
 
 var prosperity_eggs: int:
 	set(value):
