@@ -62,6 +62,10 @@ func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 
 
 func _is_position_clear(position: Vector3) -> bool:
+	if clearance_radius <= 0.0:
+		push_error("clearance_radius must be > 0 (current: %f)" % clearance_radius)
+		return false
+
 	# Create temporary shape for testing
 	var shape: SphereShape3D = SphereShape3D.new()
 	shape.radius = clearance_radius
