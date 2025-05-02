@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clboehdakwkt"
-path.s3tc="res://.godot/imported/chicken_hennifer_Cube_2.png-9f1d20aeae5f3ca3411fa148e99d0052.s3tc.ctex"
-path.etc2="res://.godot/imported/chicken_hennifer_Cube_2.png-9f1d20aeae5f3ca3411fa148e99d0052.etc2.ctex"
+uid="uid://xa60hgbo4ln7"
+path.s3tc="res://.godot/imported/chicken_hennifer_Sphere_9.png-fa5a8facd05ebc76d8299e3487b1d7d0.s3tc.ctex"
+path.etc2="res://.godot/imported/chicken_hennifer_Sphere_9.png-fa5a8facd05ebc76d8299e3487b1d7d0.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "fc08d39f0605e4d6860f92d281685a72"
+"md5": "b7356d546ddc879ec49342d0e1df3427"
 }
 
 [deps]
 
-source_file="res://entities/enemies/legacy/hennifer_enemy/art/chicken_hennifer_Cube_2.png"
-dest_files=["res://.godot/imported/chicken_hennifer_Cube_2.png-9f1d20aeae5f3ca3411fa148e99d0052.s3tc.ctex", "res://.godot/imported/chicken_hennifer_Cube_2.png-9f1d20aeae5f3ca3411fa148e99d0052.etc2.ctex"]
+source_file="res://entities/enemies/hendere/art/chicken_hennifer_Sphere_9.png"
+dest_files=["res://.godot/imported/chicken_hennifer_Sphere_9.png-fa5a8facd05ebc76d8299e3487b1d7d0.s3tc.ctex", "res://.godot/imported/chicken_hennifer_Sphere_9.png-fa5a8facd05ebc76d8299e3487b1d7d0.etc2.ctex"]
 
 [params]
 

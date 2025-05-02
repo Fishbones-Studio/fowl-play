@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bs2s1wqo2p7ns"
-path.s3tc="res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-67afff8ce481188f891230d25dd5d994.s3tc.ctex"
-path.etc2="res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-67afff8ce481188f891230d25dd5d994.etc2.ctex"
+path.s3tc="res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-082a793a2ca44067e2d8625d597a8107.s3tc.ctex"
+path.etc2="res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-082a793a2ca44067e2d8625d597a8107.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/legacy/hennifer_enemy/art/chicken_hennifer_hennifer wing 1 Base Color.png"
-dest_files=["res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-67afff8ce481188f891230d25dd5d994.s3tc.ctex", "res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-67afff8ce481188f891230d25dd5d994.etc2.ctex"]
+source_file="res://entities/enemies/hendere/art/chicken_hennifer_hennifer wing 1 Base Color.png"
+dest_files=["res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-082a793a2ca44067e2d8625d597a8107.s3tc.ctex", "res://.godot/imported/chicken_hennifer_hennifer wing 1 Base Color.png-082a793a2ca44067e2d8625d597a8107.etc2.ctex"]
 
 [params]
 

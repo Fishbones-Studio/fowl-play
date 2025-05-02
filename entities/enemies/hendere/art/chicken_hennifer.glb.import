@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cdhugp3scnr5p"
-path="res://.godot/imported/chicken_hennifer.glb-b17433b15896002bda5646a02f3cd36b.scn"
+path="res://.godot/imported/chicken_hennifer.glb-08eb0c37b5b8339d3e44470547bc5a2f.scn"
 
 [deps]
 
-source_file="res://entities/enemies/legacy/hennifer_enemy/art/chicken_hennifer.glb"
-dest_files=["res://.godot/imported/chicken_hennifer.glb-b17433b15896002bda5646a02f3cd36b.scn"]
+source_file="res://entities/enemies/hendere/art/chicken_hennifer.glb"
+dest_files=["res://.godot/imported/chicken_hennifer.glb-08eb0c37b5b8339d3e44470547bc5a2f.scn"]
 
 [params]
 
