@@ -2,12 +2,15 @@ extends Ability
 
 @export_range(0, 100, 1) var health_consumption: float = 25.0
 @export var damage_duration: float = 2.0
-@export var damage_interval: float = 0.2
+@export var damage_interval: float = 0.4
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * (stats.max_health / stats.current_health) * stats.max_health
+		return stats.attack * (stats.max_health / stats.current_health) + stats.max_health
+
+var _attack_duration: float = 0.0
+var _hit_bodies: Array = []
 
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
@@ -16,6 +19,9 @@ var damage: float:
 func activate() -> void:
 	if not ability_holder.is_on_floor():
 		return
+
+	_attack_duration = cpu_particles.lifetime
+	_hit_bodies.clear()
 
 	cpu_particles.emitting = true
 
@@ -34,11 +40,27 @@ func activate() -> void:
 	cooldown_timer.start()
 
 
+func _physics_process(delta: float) -> void:
+	_attack_duration -= delta
+
+	if _attack_duration <= 0:
+		_attack_duration = 0.0
+		_toggle_collision_masks(false, hit_area)
+
+	for body in hit_area.get_overlapping_bodies():
+		if body in _hit_bodies:
+			continue
+
+		if body.collision_layer == 2 or body.collision_layer == 4:  # Player or Enemy
+			_apply_burn(body)
+			_hit_bodies.append(body)
+
+
 func _apply_burn(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		# Get the amount of ticks the burn applies, rounded down
 		var burn_tick_count: int = floor(damage_duration / damage_interval)
-		var burn_damage: float = damage / burn_tick_count
+		var burn_damage: float = damage / burn_tick_count / 10
 
 		for i in range(burn_tick_count):
 			await get_tree().create_timer(damage_interval).timeout
@@ -51,12 +73,3 @@ func _apply_burn(body: Node3D) -> void:
 				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
 			if body.collision_layer == 4: # Enemy
 				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
-
-
-func _on_hit_area_body_entered(body: Node3D) -> void:
-	_apply_burn(body)
-
-	_toggle_collision_masks(false, hit_area)
-
-	if ability_holder == ChickenPlayer:
-		SignalManager.deactivate_item_slot.emit(current_ability)
