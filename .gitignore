@@ -24,6 +24,7 @@ mono_crash.*.json
 
 # Ignore everything in any addons directory
 **/addons/*
+!**/addons/limboai
 
 # Specifically allow markdown files in any addons directory
 !**/addons/*.md
