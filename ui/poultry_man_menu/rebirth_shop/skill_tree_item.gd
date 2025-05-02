@@ -2,7 +2,6 @@ extends VBoxContainer
 
 @export var upgrade_type: String = "Damage"
 @export var max_level: int = 5
-@export var cost_per_level: int = 100
 @onready var kind_indicator_label: Label = $Kind_Indicator_Label
 @onready var buy_button: Button = $HBoxContainer/Buy_Button
 @onready var level_panels: Array = [
@@ -57,10 +56,12 @@ func _on_buy_button_pressed() -> void:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
 
 func can_afford_upgrade() -> bool:
-	return GameManager.feathers_of_rebirth >= cost_per_level
+	var upgrade_resource = upgrade_resources[current_level]
+	return GameManager.feathers_of_rebirth >= upgrade_resource.cost
 
 func purchase_upgrade() -> void:
-	GameManager.feathers_of_rebirth -= cost_per_level
+	var upgrade_resource = upgrade_resources[current_level]
+	GameManager.feathers_of_rebirth -= upgrade_resource.cost
 
 func apply_upgrade() -> void:
 	if current_level <= upgrade_resources.size():
