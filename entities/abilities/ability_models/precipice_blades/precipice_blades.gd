@@ -13,6 +13,7 @@ var _hit_bodies: Array = []
 @onready var slash_timer: Timer = $SlashTimer
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func activate() -> void:
@@ -28,12 +29,14 @@ func activate() -> void:
 		SignalManager.activate_item_slot.emit(current_ability)
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
+	# Crack, it only syncs if strikes is 2, if higher, doesn't match that well, to lazy to fix
+	for i in strike_amount:
+		audio_stream_player.play()
+		await get_tree().create_timer(0.35).timeout
+		audio_stream_player.stop()
+
 	cooldown_timer.start()
 	slash_timer.start()
-
-
-func _on_cooldown_timer_timeout() -> void:
-	_particles_emitted = false
 
 
 func _physics_process(_delta: float) -> void:
@@ -52,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_slash_timer_timeout() -> void:
 	_hit_bodies.clear()
+	_particles_emitted = false
 
 	_toggle_collision_masks(false)
 

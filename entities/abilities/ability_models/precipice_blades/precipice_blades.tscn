@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://xa1t73lsf7d2"]
+[gd_scene load_steps=19 format=3 uid="uid://xa1t73lsf7d2"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_sef4d"]
 [ext_resource type="Script" uid="uid://mwu0hahe560x" path="res://entities/abilities/ability_models/precipice_blades/precipice_blades.gd" id="2_8qiki"]
 [ext_resource type="Shader" uid="uid://colb4bkfqrtx6" path="res://entities/abilities/ability_models/precipice_blades/precipice_blades.gdshader" id="2_u36ey"]
 [ext_resource type="Resource" uid="uid://8xguqcblf7ii" path="res://entities/abilities/ability_models/precipice_blades/precipice_blades.tres" id="3_f65cc"]
+[ext_resource type="AudioStream" uid="uid://0wraqsd63axn" path="res://entities/abilities/ability_models/precipice_blades/sword_swing.wav" id="5_r6ecg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f65cc"]
 height = 1.0
@@ -87,12 +88,16 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_8qiki")
 emitting = false
-amount = 1
+amount = 3
 lifetime = 0.5
 one_shot = true
 preprocess = 0.1
 speed_scale = 0.75
 mesh = SubResource("QuadMesh_f65cc")
 gravity = Vector3(0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("5_r6ecg")
+bus = &"SFX"
 
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
