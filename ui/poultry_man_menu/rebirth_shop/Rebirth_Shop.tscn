@@ -108,54 +108,53 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+[node name="Items" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Skill_tree_item_Damage" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item_Damage" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
-upgrade_type = "Damage"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Skill_tree_item2_Health" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item2_Health" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
 upgrade_type = "Health"
 upgrade_resources = [ExtResource("5_3iw7s"), ExtResource("6_yy28d"), ExtResource("7_2pggh"), ExtResource("8_rr1q6"), ExtResource("9_8rteu")]
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Skill_tree_item3_Speed" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item3_Speed" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
 upgrade_type = "Speed"
 upgrade_resources = [ExtResource("10_1j7u1"), ExtResource("11_ekow7"), ExtResource("12_dsqfu"), ExtResource("13_up0tv"), ExtResource("14_l2e87")]
 
-[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Skill_tree_item4_Defense" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item4_Defense" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
 upgrade_type = "Defense"
 upgrade_resources = [ExtResource("15_ag5ar"), ExtResource("16_yqf2v"), ExtResource("17_s6dal"), ExtResource("18_43dpb"), ExtResource("19_uwdoe")]
 
-[node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Skill_tree_item5_Stamina" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item5_Stamina" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
 upgrade_type = "Stamina"
 upgrade_resources = [ExtResource("20_1br0q"), ExtResource("21_xaq25"), ExtResource("22_0h6kw"), ExtResource("23_fvpl7"), ExtResource("24_7fr8m")]
 
-[node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Skill_tree_item6_Weight" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_rmc2l")]
+[node name="Skill_tree_item6_Weight" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
 layout_mode = 2
 upgrade_type = "Weight"
 upgrade_resources = [ExtResource("25_upyxi"), ExtResource("26_qxwyt"), ExtResource("27_0dajs"), ExtResource("28_qf17x"), ExtResource("29_vlvkw")]

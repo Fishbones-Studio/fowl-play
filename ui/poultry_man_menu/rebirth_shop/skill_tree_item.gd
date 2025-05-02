@@ -21,17 +21,22 @@ extends VBoxContainer
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level4.tres"),
 	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level5.tres")
 ]
-
+signal shop_refresh_needed
 var current_level: int = 0
 var copied_stats: LivingEntityStats
+var purchased_color: Color = Color(0, 1, 0)
+var unpurchased_color: Color = Color(0.5, 0.5, 0.5)
 
 func _ready() -> void:
 	kind_indicator_label.text = upgrade_type
 	# Load current level from saved upgrades dictionary
 	var upgrades = SaveManager.get_loaded_player_upgrades()
 	current_level = upgrades.get(upgrade_type, 0) 
-	copied_stats = SaveManager.get_loaded_player_stats()
-
+	
+	if not copied_stats:
+		copied_stats = SaveManager.get_loaded_player_stats()
+	
+	
 	update_panels()
 
 func _on_buy_button_pressed() -> void:
@@ -41,6 +46,7 @@ func _on_buy_button_pressed() -> void:
 		update_panels()
 		apply_upgrade()
 		save_upgrades()
+		emit_signal("shop_refresh_needed")
 		print("Damage: ",  copied_stats.attack)
 		print("Max Health: ", copied_stats.max_health)
 		print("Stamina: ", copied_stats.max_stamina)
@@ -65,6 +71,8 @@ func apply_upgrade() -> void:
 		if not upgrade_resource is PermUpgradeResource:
 			push_error("Upgrade resource is not a PermUpgradeResource!")
 			return
+		print("Upgrade Resource: ", upgrade_resource)
+		print("Health Bonus: ", upgrade_resource.health_bonus)
 		match upgrade_type:
 			"Health":
 				copied_stats.max_health += upgrade_resource.health_bonus
@@ -80,7 +88,14 @@ func apply_upgrade() -> void:
 				copied_stats.weight += upgrade_resource.weight_bonus
 func update_panels() -> void:
 	for i in range(level_panels.size()):
-		level_panels[i].visible = i < current_level
+		var panel = level_panels[i]
+		var color_rect = panel.get_node("ColorRect")
+		print("Panel ", i, " Child Node: ", color_rect)
+		if i < current_level:
+			color_rect.color = purchased_color
+		else:
+			color_rect.color = unpurchased_color
+	print("Updated Panels for: ", upgrade_type, " - Current Level: ", current_level)
 
 func save_upgrades() -> void:
 	# Get the current upgrades dictionary

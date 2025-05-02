@@ -154,6 +154,8 @@ func _on_select_current_item() -> void:
 	elif selected_item == rebirth_shop_item:
 		if UIEnums.UI.REBIRTH_SHOP in UIManager.ui_list:
 			UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+			var rebirth_shop = UIManager.ui_list[UIEnums.UI.REBIRTH_SHOP]
+			rebirth_shop._refresh_shop()
 		else:
 			SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP)
 

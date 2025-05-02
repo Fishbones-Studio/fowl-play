@@ -100,13 +100,17 @@ func load_game() -> Dictionary:
 func reset_game() -> void:
 	var default_stats: LivingEntityStats = ResourceLoader.load("uid://bwhuhbesdlyu5").duplicate()
 	var reset_upgrades: Dictionary = {}
+	
+	_loaded_game_data = {}
+	
 	save_game(default_stats, reset_upgrades)
-	
-	
+	print("Game Reset - Stats: ", default_stats.to_dict())
+	print("Game Reset - Upgrades: ", reset_upgrades)
 
 func get_loaded_player_stats() -> LivingEntityStats:
 	if _loaded_game_data.is_empty():
 		load_game()
+	print("Loaded Upgrades: ", _loaded_game_data.get("upgrades", {}))
 	return _loaded_game_data.get("stats", null).duplicate()
 
 func get_loaded_player_upgrades() -> Dictionary:
