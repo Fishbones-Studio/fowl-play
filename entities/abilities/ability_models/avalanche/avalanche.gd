@@ -23,7 +23,7 @@ func activate() -> void:
 
 	cpu_particles.emitting = true
 
-	_toggle_collision_masks(true)
+	_toggle_collision_masks(true, hit_area)
 
 	if ability_holder == ChickenPlayer:
 		SignalManager.activate_item_slot.emit(current_ability)
@@ -42,15 +42,6 @@ func _apply_debuff(body: Node3D) -> void:
 		debuff_timer.start(debuff_duration)
 
 
-func _toggle_collision_masks(toggle: bool) -> void:
-	if ability_holder.collision_layer == 2: # Player
-		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_mask_value(2, toggle)
-
-	hit_area.set_collision_mask_value(1, toggle) # World
-
-
 func _on_debuff_timer_timeout() -> void:
 	if is_instance_valid(_target_stats):
 		_target_stats.defense = _original_defense
@@ -64,7 +55,7 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 
 	_apply_debuff(body)
 
-	_toggle_collision_masks(false)
+	_toggle_collision_masks(false, hit_area)
 
 	if ability_holder == ChickenPlayer:
 		SignalManager.deactivate_item_slot.emit(current_ability)

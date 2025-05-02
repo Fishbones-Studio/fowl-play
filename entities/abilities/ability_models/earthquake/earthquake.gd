@@ -44,7 +44,7 @@ func activate() -> void:
 	_current_knockback = initial_knockback_force
 	_hit_bodies.clear()
 
-	_toggle_collision_masks(true)
+	_toggle_collision_masks(true, hit_area)
 
 	ability_holder.velocity = Vector3(0, descent_velocity, 0)
 
@@ -111,7 +111,7 @@ func _reset_ability() -> void:
 
 	# Reset vertical velocity
 	ability_holder.velocity.y = 0
-	_toggle_collision_masks(false)
+	_toggle_collision_masks(false, hit_area)
 
 	if ability_holder == ChickenPlayer:
 		SignalManager.deactivate_item_slot.emit(current_ability)
@@ -132,11 +132,3 @@ func _apply_knockback(body: Node3D) -> void:
 		})
 		elif body is Enemy:
 			body.velocity = knockback * ability_holder.stats.weight
-
-
-func _toggle_collision_masks(toggle: bool) -> void:
-	if ability_holder.collision_layer == 2:  # Player
-		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 4:  # Enemy
-		hit_area.set_collision_mask_value(2, toggle)
-	hit_area.set_collision_mask_value(1, toggle)  # World
