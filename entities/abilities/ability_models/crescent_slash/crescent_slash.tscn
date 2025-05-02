@@ -1,0 +1,102 @@
+[gd_scene load_steps=19 format=3 uid="uid://b2apjxceqsopi"]
+
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ybpx1"]
+[ext_resource type="Script" uid="uid://cq5rcn2ai5sxs" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gd" id="2_jgw1e"]
+[ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="3_y7jyb"]
+[ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gdshader" id="4_wydpc"]
+[ext_resource type="AudioStream" uid="uid://dmgl2h5qm05es" path="res://entities/abilities/ability_models/crescent_slash/sword_swing.wav" id="5_7785h"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xibu5"]
+height = 1.0
+radius = 5.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8hs8v"]
+noise_type = 2
+fractal_gain = 4.0
+cellular_distance_function = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8qiki"]
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_8hs8v")
+
+[sub_resource type="Gradient" id="Gradient_ybpx1"]
+offsets = PackedFloat32Array(0, 0.0850202, 0.176113, 0.319838)
+colors = PackedColorArray(0.294118, 0, 0.509804, 1, 0.501961, 0, 1, 1, 0.698039, 0.4, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f65cc"]
+gradient = SubResource("Gradient_ybpx1")
+
+[sub_resource type="Gradient" id="Gradient_jgw1e"]
+offsets = PackedFloat32Array(0.4, 0.42, 0.44)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8qiki"]
+gradient = SubResource("Gradient_jgw1e")
+
+[sub_resource type="Gradient" id="Gradient_y7jyb"]
+offsets = PackedFloat32Array(0.1, 0.2, 0.4, 0.45, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0.498039, 0.498039, 0.498039, 1, 0, 0, 0, 1, 0.498039, 0.498039, 0.498039, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r6ecg"]
+gradient = SubResource("Gradient_y7jyb")
+
+[sub_resource type="Gradient" id="Gradient_wydpc"]
+offsets = PackedFloat32Array(0.2, 0.4, 0.45)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3hpjx"]
+gradient = SubResource("Gradient_wydpc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7785h"]
+render_priority = 0
+shader = ExtResource("4_wydpc")
+shader_parameter/progress = 0.0
+shader_parameter/derive_progress = 1.0
+shader_parameter/ease_progress = 0.0
+shader_parameter/time_scale = 1.0
+shader_parameter/anim_rot_amt = 1.0
+shader_parameter/base_noise = SubResource("NoiseTexture2D_8qiki")
+shader_parameter/width_gradient_mask = SubResource("GradientTexture1D_3hpjx")
+shader_parameter/length_gradient_mask = SubResource("GradientTexture1D_r6ecg")
+shader_parameter/highlight = SubResource("GradientTexture1D_8qiki")
+shader_parameter/zoom = 0.4
+shader_parameter/rotate_all = 200.0
+shader_parameter/emission_strength = 1.0
+shader_parameter/mix_strength = 1.0
+shader_parameter/color_lookup = SubResource("GradientTexture1D_f65cc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ifr7y"]
+size = Vector2(10, 10)
+
+[node name="CrescentSlash" instance=ExtResource("1_ybpx1")]
+script = ExtResource("2_jgw1e")
+strike_amount = 2
+ignore_defense = true
+current_ability = ExtResource("3_y7jyb")
+
+[node name="SlashTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="HitArea" type="Area3D" parent="." index="2"]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+shape = SubResource("CylinderShape3D_xibu5")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_7785h")
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+preprocess = 0.1
+speed_scale = 0.75
+mesh = SubResource("QuadMesh_ifr7y")
+gravity = Vector3(0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("5_7785h")
+bus = &"SFX"
