@@ -88,7 +88,7 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
-use_navigation = false
+pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
@@ -184,8 +184,8 @@ tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
-use_navigation = true
-immediate_response = true
+pathfinding = false
+immediate_response = false
 path_update_interval = 0.05
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]

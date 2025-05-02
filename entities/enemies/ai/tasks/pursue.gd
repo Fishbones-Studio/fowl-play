@@ -12,7 +12,7 @@ extends BTAction
 ## Duration the enemy will pursue the target.
 @export var duration: float = 0.0
 ## Use path finding instead of normal movement
-@export var use_navigation: bool = false
+@export var pathfinding: bool = false
  ## Force immediate updates.
 @export var immediate_response: bool = false
 ## Path update frequency.
@@ -32,14 +32,14 @@ func _generate_name() -> String:
 func _enter() -> void:
 	target = blackboard.get_var(target_var, null)
 
-	if use_navigation:
+	if pathfinding:
 		if not agent.nav.velocity_computed.is_connected(_on_velocity_computed):
 			agent.nav.velocity_computed.connect(_on_velocity_computed, CONNECT_DEFERRED)
 			var shape: Shape3D = agent.shape.shape
 			if shape is CapsuleShape3D:
-				agent.nav.radius = agent.shape.shape.radius
+				agent.nav.radius = shape.radius
 			if shape is BoxShape3D:
-				agent.nav.radius = agent.shape.shape.size.x
+				agent.nav.radius = shape.size.x / 2.0
 
 		agent.nav.target_desired_distance = tolerance
 
@@ -51,7 +51,7 @@ func _tick(delta: float) -> Status:
 	var target_position: Vector3 = target.global_position
 	var target_moved: bool = _last_target_position.distance_to(target_position) > 0.1 # check target movement
 	
-	if use_navigation:
+	if pathfinding:
 		# Force immediate update if target moved significantly or we want immediate response
 		if immediate_response or target_moved or _last_path_update >= path_update_interval:
 			agent.nav.target_position = target_position
@@ -74,7 +74,7 @@ func _tick(delta: float) -> Status:
 func _move_towards_target(target_pos: Vector3, delta: float, target_moved: bool):
 	var speed = speed_factor if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 
-	if use_navigation:
+	if pathfinding:
 		_current_direction = (agent.nav.get_next_path_position() - agent.global_position).normalized()
 		# Apply raw velocity immediately if target moved
 		if immediate_response and target_moved:

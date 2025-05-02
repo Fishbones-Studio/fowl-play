@@ -7,10 +7,10 @@
 [ext_resource type="Script" uid="uid://b4c1y5nqjinua" path="res://entities/enemies/ai/tasks/pounce.gd" id="3_b2ogj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_yhbkp"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yhbkp"]
-[ext_resource type="Script" uid="uid://wrawtm8at4do" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="8_k708t"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="9_u4hmx"]
-[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_sfte8"]
 
@@ -218,6 +218,9 @@ tolerance = 5.0
 aggro_distance = 20.0
 speed_factor = 0.0
 duration = 0.0
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_u4hmx"]
 script = ExtResource("2_wrjj1")
