@@ -12,6 +12,8 @@ signal damage_taken
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
+@onready var nav: NavigationAgent3D = $NavigationAgent3D
+@onready var shape: CollisionShape3D = $CollisionShape3D
 
 
 func _ready() -> void:

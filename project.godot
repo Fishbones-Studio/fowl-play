@@ -45,10 +45,6 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
-[global_group]
-
-FollowCamera=""
-
 [gui]
 
 theme/custom="uid://besvom3pq3s63"
@@ -218,6 +214,10 @@ ability_two={
 
 behavior_tree/behavior_tree_default_dir="res://entities/enemies/ai/trees"
 behavior_tree/user_task_dirs=PackedStringArray("res://entities/enemies/ai/tasks")
+
+[navigation]
+
+3d/merge_rasterizer_cell_scale=0.001
 
 [panku]
 

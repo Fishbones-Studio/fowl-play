@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_d6hvj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_m26ws"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mkwy1"]
-[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_ykixg"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_ykixg"]
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
@@ -88,6 +88,9 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
+use_navigation = null
+immediate_response = null
+path_update_interval = null
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
@@ -181,6 +184,9 @@ tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
+use_navigation = null
+immediate_response = null
+path_update_interval = null
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")
