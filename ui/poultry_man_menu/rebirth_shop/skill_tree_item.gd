@@ -23,13 +23,15 @@ extends VBoxContainer
 ]
 
 var current_level: int = 0
-var copied_stats = SaveManager.get_loaded_player_stats()
+var copied_stats: LivingEntityStats
 
 func _ready() -> void:
 	kind_indicator_label.text = upgrade_type
 	# Load current level from saved upgrades dictionary
 	var upgrades = SaveManager.get_loaded_player_upgrades()
-	current_level = upgrades.get(upgrade_type, 0)
+	current_level = upgrades.get(upgrade_type, 0) 
+	copied_stats = SaveManager.get_loaded_player_stats()
+
 	update_panels()
 
 func _on_buy_button_pressed() -> void:
@@ -39,6 +41,12 @@ func _on_buy_button_pressed() -> void:
 		update_panels()
 		apply_upgrade()
 		save_upgrades()
+		print("Damage: ",  copied_stats.attack)
+		print("Max Health: ", copied_stats.max_health)
+		print("Stamina: ", copied_stats.max_stamina)
+		print("Speed: " , copied_stats.speed)
+		print("Weight: ", copied_stats.weight)
+		print("Defense: ", copied_stats.defense)
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
 
@@ -59,25 +67,26 @@ func apply_upgrade() -> void:
 			return
 		match upgrade_type:
 			"Health":
-				copied_stats.max_health += upgrade_resource.value
+				copied_stats.max_health += upgrade_resource.health_bonus
 			"Stamina":
-				copied_stats.max_stamina += upgrade_resource.value
-			"Attack_Multiplier":
-				copied_stats.attack_multiplier += upgrade_resource.value
-			"Defence":
-				copied_stats.stats.defense += upgrade_resource.value
+				copied_stats.max_stamina += upgrade_resource.stamina_bonus
+			"Damage":
+				copied_stats.attack += upgrade_resource.attack
+			"Defense":
+				copied_stats.defense += upgrade_resource.defense_bonus
 			"Speed":
-				copied_stats.stats.speed += upgrade_resource.value
+				copied_stats.speed += upgrade_resource.speed_bonus
 			"Weight":
-				copied_stats.stats.weight += upgrade_resource.value
-
+				copied_stats.weight += upgrade_resource.weight_bonus
 func update_panels() -> void:
 	for i in range(level_panels.size()):
 		level_panels[i].visible = i < current_level
 
 func save_upgrades() -> void:
 	# Get the current upgrades dictionary
-	var upgrades = SaveManager.get_loaded_upgrades().duplicate()
+	var upgrades = SaveManager.get_loaded_player_upgrades()
 	upgrades[upgrade_type] = current_level
 	# Save the game with the updated upgrades
 	SaveManager.save_game(copied_stats, upgrades)
+	print("Saving Stats: ", copied_stats.to_dict())
+	print("Saving Upgrades: ", upgrades)

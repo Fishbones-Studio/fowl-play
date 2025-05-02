@@ -64,7 +64,7 @@ func save_game(stats: LivingEntityStats = null, upgrades: Dictionary = {}) -> vo
 	# updating loaded stats
 	if stats:
 		_loaded_game_data["stats"] = stats
-	if upgrades && !upgrades.is_empty():
+	if upgrades:
 		_loaded_game_data["upgrades"] = upgrades
 	print("Game data saved successfully!")
 
@@ -99,7 +99,10 @@ func load_game() -> Dictionary:
 	
 func reset_game() -> void:
 	var default_stats: LivingEntityStats = ResourceLoader.load("uid://bwhuhbesdlyu5").duplicate()
-	save_game(default_stats, {})
+	var reset_upgrades: Dictionary = {}
+	save_game(default_stats, reset_upgrades)
+	
+	
 
 func get_loaded_player_stats() -> LivingEntityStats:
 	if _loaded_game_data.is_empty():

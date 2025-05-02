@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_4xcpo")
-health_bonus = 200
+health_bonus = 75
 stamina_bonus = 0
-attack_multiplier_bonus = 0.0
+attack = 0.0
 defense_bonus = 0
 speed_bonus = 0
 weight_bonus = 0
 name = ""
 drop_chance = 0
-cost = 0
+cost = 300
 currency_type = 1
 description = "PlaceHolder"
 model_uid = ""

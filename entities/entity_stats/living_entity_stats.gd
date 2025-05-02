@@ -164,4 +164,3 @@ static func from_dict(data: Dictionary) -> LivingEntityStats:
 	new_stats.is_player = data.get("is_player", false)
 	
 	return new_stats
-

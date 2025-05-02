@@ -6,13 +6,13 @@
 script = ExtResource("1_jf03r")
 health_bonus = 0
 stamina_bonus = 0
-attack_multiplier_bonus = 0.0
-defense_bonus = 50
+attack = 0.0
+defense_bonus = 5
 speed_bonus = 0
 weight_bonus = 0
 name = ""
 drop_chance = 0
-cost = 0
+cost = 125
 currency_type = 1
 description = "PlaceHolder"
 model_uid = ""
