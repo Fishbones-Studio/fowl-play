@@ -4,7 +4,7 @@ extends BTAction
 ## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
 ## Ability slot
-@export_range(0, 1) var slot: int = 0
+@export_range(0, 2) var slot: int = 0
 
 
 func _generate_name() -> String:

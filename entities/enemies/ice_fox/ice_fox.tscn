@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3vj6us77coyt"]
+[gd_scene load_steps=12 format=3 uid="uid://d3vj6us77coyt"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_72x12"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="6_psoce"]
 [ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="7_psoce"]
+[ext_resource type="Resource" uid="uid://8xguqcblf7ii" path="res://entities/abilities/ability_models/precipice_blades/precipice_blades.tres" id="9_wbtjo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ixwh"]
 size = Vector3(1.5, 4, 3.5)
@@ -89,5 +90,8 @@ ability_resource = ExtResource("6_psoce")
 
 [node name="AbilitySlot2" parent="EnemyAbilityController" index="1" instance=ExtResource("5_72x12")]
 ability_resource = ExtResource("7_psoce")
+
+[node name="AbilitySlot3" parent="EnemyAbilityController" index="2" instance=ExtResource("5_72x12")]
+ability_resource = ExtResource("9_wbtjo")
 
 [editable path="ice_fox"]

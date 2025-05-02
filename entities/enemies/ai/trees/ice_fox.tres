@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://bc7ucld3pg5s8"]
+[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://bc7ucld3pg5s8"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
@@ -177,6 +177,11 @@ target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
 
+[sub_resource type="BTAction" id="BTAction_8831e"]
+script = ExtResource("4_yhbkp")
+target_var = &"target"
+slot = 2
+
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("9_u4hmx")
 target_var = &"target"
@@ -186,7 +191,7 @@ duration = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_4fcdy"]
 custom_name = "Melee attack"
-children = [SubResource("BTCondition_u4hmx"), SubResource("BTAction_uxecv"), SubResource("BTWait_t3gyd")]
+children = [SubResource("BTCondition_u4hmx"), SubResource("BTAction_8831e"), SubResource("BTAction_uxecv"), SubResource("BTWait_t3gyd")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_ocp3w"]
 forever = true

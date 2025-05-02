@@ -86,7 +86,7 @@ func remove_ui_by_enum(ui_enum: UIEnums.UI) -> void:
 func remove_ui(ui: Control) -> void:
 	# Check if UI exists in our list and is valid
 	if not is_instance_valid(ui) or ui not in ui_list.values():
-		push_warning("Attempted to remove UI '", ui.name if is_instance_valid(ui) else "INVALID", "' not found in ui_list or invalid.")
+		push_warning("Attempted to remove UI '%s' not found in ui_list or invalid." % ui.name if is_instance_valid(ui) else "INVALID")
 		var key_to_remove = ui_list.find_key(ui)
 		if key_to_remove != null:
 			ui_list.erase(key_to_remove)
