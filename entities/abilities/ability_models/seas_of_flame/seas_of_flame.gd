@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * (stats.max_health / stats.current_health) * stats.max_health
+		return stats.attack + 10 * (stats.max_health / stats.current_health) 
 
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
