@@ -52,27 +52,12 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
 
 	# Notify that the loading screen has started
-	SignalManager.loading_screen_started.emit()
+	SignalManager.loading_screen_started.emit(hud_ui, {})
+
 	await get_tree().process_frame
-
-	# Begin loading the game scene in a separate thread
-	ResourceLoader.load_threaded_request(game_scene_path)
-	var progress: Array = []
-
-	# Continuously update progress until loading is complete
-	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		# Emit current loading progress (fallback to 0.0 if not available)
-		SignalManager.loading_progress_updated.emit(progress[0] if progress.size() > 0 else 0.0)
-		await get_tree().process_frame
-
-	# Notify that loading is complete
-	SignalManager.loading_screen_finished.emit()
 
 	# Switch to the loaded game scene
 	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
-
-	# Switch to the specified HUD UI
-	SignalManager.emit_throttled("switch_ui_scene", [hud_ui])
 
 
 ## Removes a specific UI control from the manager using its enum identifier.

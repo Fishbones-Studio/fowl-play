@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="3_rhqlf"]
 [ext_resource type="PackedScene" uid="uid://5dsmkedrprey" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="4_0v1st"]
-[ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="5_0v1st"]
 [ext_resource type="PackedScene" uid="uid://bw4u5qtf6bv0m" path="res://entities/enemies/ball_chicken/ball_chicken.tscn" id="5_6gtgk"]
-[ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_cw150"]
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="5_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="5_m3nah"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
+[ext_resource type="PackedScene" uid="uid://bdwr1kdxdlvqi" path="res://entities/enemies/hennifer_enemy/hennifer_enemy.tscn" id="11_xii2b"]
+[ext_resource type="PackedScene" uid="uid://d0o65o2xsk53s" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="12_l5lfc"]
 
 [sub_resource type="Curve3D" id="Curve3D_l5lfc"]
 closed = true
@@ -71,5 +71,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
-enemy_scenes = Array[PackedScene]([ExtResource("5_0v1st"), ExtResource("5_cw150"), ExtResource("4_0v1st"), ExtResource("5_6gtgk")])
+enemy_scenes = Array[PackedScene]([ExtResource("4_0v1st"), ExtResource("11_xii2b"), ExtResource("12_l5lfc"), ExtResource("5_6gtgk")])
 waiting_time = 1.5

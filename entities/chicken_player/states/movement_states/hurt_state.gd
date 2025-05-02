@@ -12,7 +12,8 @@ var _is_immobile: bool
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	super(prev_state)
 
-	#animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+	# Fire the OneShot request
+	animation_tree.set("parameters/HurtOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	player.velocity.x = 0
 	player.velocity.z = 0

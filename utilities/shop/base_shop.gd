@@ -10,13 +10,19 @@ var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
+var actual_max_items: int = max_items
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
 @onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
+@onready var shop_preview_size_placeholder: Control = %SizePlaceholder
+@onready var cheat_button_container: HBoxContainer = %CheatButtonsContainer
 
 
 func _ready() -> void:
+	if not OS.has_feature("debug"):
+		cheat_button_container.queue_free()
+	
 	_refresh_shop()
 	_setup_controller_navigation()
 
@@ -100,6 +106,7 @@ func _setup_controller_navigation() -> void:
 
 func _on_populate_visual_fields(item: BaseResource) -> void:
 	shop_preview_container.visible = item != null
+	shop_preview_size_placeholder.visible = item == null
 	if item == null:
 		return
 
@@ -109,3 +116,15 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 ## Abstract method
 func _on_close_button_pressed() -> void:
 	pass
+
+
+func _on_show_all_items_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		max_items = 99999
+	else:
+		max_items = actual_max_items
+	_refresh_shop()
+
+
+func _on_refresh_shop_button_pressed() -> void:
+	_refresh_shop()

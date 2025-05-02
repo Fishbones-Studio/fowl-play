@@ -12,7 +12,10 @@ var default_slot_config: Dictionary[ItemEnums.ItemTypes, int] = {
 	}
 
 ## State
-var inventory_data: InventoryData
+var inventory_data: InventoryData :
+	set(value):
+		_set_default_items(value)
+		inventory_data = value
 
 
 func _ready() -> void:
@@ -28,6 +31,13 @@ func _validate_equipment_operation(item: BaseResource, slot_index: int) -> bool:
 		return false
 
 	return true
+
+
+func _set_default_items(loaded : InventoryData) -> void:
+	if loaded.melee_weapon_slot == null:
+		var default_melee_weapon : BaseResource = ResourceLoader.load("uid://c6srj1sb1gdhm")
+		loaded.items.append(default_melee_weapon)
+		loaded.melee_weapon_slot = default_melee_weapon
 
 
 ## Function for setting the correct equipment slot

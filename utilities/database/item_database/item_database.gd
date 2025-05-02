@@ -31,8 +31,8 @@ static func load_scene_resources(
 			if file.ends_with(".remap"):
 				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.ends_with(".tres"):
-				var resource: BaseResource = load(subdir_path.path_join(file)) as BaseResource
-				if resource:
+				var resource: Resource = load(subdir_path.path_join(file))
+				if resource is BaseResource and resource.purchasable:
 					temp_items.append(resource)
 					resource_loaded = true
 					break  # Found .tres, skip to next subdir
@@ -47,7 +47,9 @@ static func load_scene_resources(
 			var instance: Node = scene.instantiate()
 
 			if instance.has_method("get") && instance.get(resource_property) is BaseResource:
-				temp_items.append(instance.get(resource_property))
+				var hidden_resouce : Resource = instance.get(resource_property)
+				if hidden_resouce == BaseResource && hidden_resouce.purchasable:
+					temp_items.append(hidden_resouce)
 
 			instance.queue_free()
 			break  # Process only first .tscn per directory

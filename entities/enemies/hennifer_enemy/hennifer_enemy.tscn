@@ -1,69 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdwr1kdxdlvqi"]
+[gd_scene load_steps=12 format=3 uid="uid://bdwr1kdxdlvqi"]
 
 [ext_resource type="PackedScene" uid="uid://ca8ot8h50lgrg" path="res://entities/enemies/base_enemy/base_enemy.tscn" id="1_5tp27"]
 [ext_resource type="Resource" uid="uid://uyc72mraeohg" path="res://entities/enemies/hennifer_enemy/hennifer_enemy_stats.tres" id="2_v8d7w"]
-[ext_resource type="PackedScene" uid="uid://duqairtxdtmx4" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="4_dmp11"]
+[ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hennifer_enemy/art/chicken_hennifer.glb" id="3_surp0"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://deqpnhqyoinff" path="res://entities/enemies/hennifer_enemy/art/animations/hennifer_animation_tree.tres" id="4_3wabf"]
 [ext_resource type="Script" uid="uid://bug6qlgvqnkwb" path="res://entities/enemies/base_enemy/enemy_states/idle_state.gd" id="4_knbep"]
+[ext_resource type="PackedScene" uid="uid://cyabnta5e4ldb" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tscn" id="4_surp0"]
 [ext_resource type="Script" uid="uid://cg3ydmohgja7v" path="res://entities/enemies/base_enemy/enemy_states/chase_state.gd" id="5_75fyq"]
 [ext_resource type="Script" uid="uid://cefytwqnqbwfy" path="res://entities/enemies/base_enemy/enemy_states/wander_state.gd" id="6_surp0"]
 [ext_resource type="Script" uid="uid://2htosw08ep1s" path="res://entities/enemies/base_enemy/enemy_states/dash_state.gd" id="7_rbpgh"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_surp0"]
-animation = &"dash"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3wabf"]
-animation = &"walking"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xwdhe"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q5l3a"]
-animation = &"walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw78k"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwi72"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ganh"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3t21"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ema6o"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ectbi"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e4ve4"]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vbjj3"]
-states/Chase/node = SubResource("AnimationNodeAnimation_3wabf")
-states/Chase/position = Vector2(650.5, 78)
-states/Idle/node = SubResource("AnimationNodeAnimation_xwdhe")
-states/Idle/position = Vector2(393.5, 89)
-states/Wander/node = SubResource("AnimationNodeAnimation_q5l3a")
-states/Wander/position = Vector2(492, 207)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kw78k"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_mwi72"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_5ganh"), "Idle", "Wander", SubResource("AnimationNodeStateMachineTransition_q3t21"), "Wander", "Idle", SubResource("AnimationNodeStateMachineTransition_ema6o"), "Wander", "Chase", SubResource("AnimationNodeStateMachineTransition_ectbi"), "Chase", "Wander", SubResource("AnimationNodeStateMachineTransition_e4ve4")]
-graph_offset = Vector2(-52.1996, 23.6551)
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_nhmno"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xwdhe"]
-graph_offset = Vector2(-365.76, -3.84)
-nodes/Dash/node = SubResource("AnimationNodeAnimation_surp0")
-nodes/Dash/position = Vector2(-50, 300)
-nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_vbjj3")
-nodes/MovementStateMachine/position = Vector2(-110, 40)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_nhmno")
-nodes/OneShot/position = Vector2(210, 100)
-nodes/output/position = Vector2(380, 160)
-node_connections = [&"OneShot", 0, &"MovementStateMachine", &"OneShot", 1, &"Dash", &"output", 0, &"OneShot"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8d7w"]
 size = Vector3(2, 4, 3)
@@ -71,34 +16,41 @@ size = Vector3(2, 4, 3)
 [sub_resource type="ViewportTexture" id="ViewportTexture_fgbet"]
 viewport_path = NodePath("SubViewport")
 
-[node name="HenniferEnemy" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_5tp27")]
+[node name="HenniferEnemy" node_paths=PackedStringArray("enemy_model", "animation_tree") instance=ExtResource("1_5tp27")]
 stats = ExtResource("2_v8d7w")
 enemy_model = NodePath("chicken_hennifer")
+animation_tree = NodePath("chicken_hennifer/AnimationTree")
 
 [node name="chicken_hennifer" parent="." index="0" instance=ExtResource("3_surp0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
 
-[node name="Skeleton3D" parent="chicken_hennifer/Armature_001" index="1"]
+[node name="Skeleton3D" parent="chicken_hennifer/Armature_002" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
-bones/1/rotation = Quaternion(-0.108072, 2.6297e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.492638, -0.00178873, 0.00573606, 0.870214)
-bones/3/rotation = Quaternion(-0.528126, -0.0154849, -0.0150066, 0.848892)
-bones/4/rotation = Quaternion(-0.105153, 0.045726, -0.016782, 0.993262)
-bones/5/rotation = Quaternion(-0.240982, -0.0531723, -0.745498, 0.619139)
-bones/6/rotation = Quaternion(-0.251518, 0.0593566, 0.729144, 0.633692)
+bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
+bones/3/rotation = Quaternion(-0.527367, -0.0203354, -0.0180753, 0.849202)
+bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
+bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
+bones/6/rotation = Quaternion(-0.268938, 0.0361643, 0.74135, 0.613812)
 bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.236057, -0.00778239, -0.113963, 0.965002)
-bones/9/rotation = Quaternion(0.231002, 0.024683, -0.148307, 0.961267)
+bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
+bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
 bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.177439, -0.0192665, 0.00415449, 0.983934)
+bones/11/rotation = Quaternion(-0.176772, -0.00614296, 0.0234678, 0.983953)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_hennifer" index="2"]
-tree_root = SubResource("AnimationNodeBlendTree_xwdhe")
+tree_root = ExtResource("4_3wabf")
 anim_player = NodePath("../AnimationPlayer")
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
+parameters/DashOneShot/active = false
+parameters/DashOneShot/internal_active = false
+parameters/DashOneShot/request = 0
+parameters/HurtOneShot/active = false
+parameters/HurtOneShot/internal_active = false
+parameters/HurtOneShot/request = 0
+parameters/MeleeOneShot/active = false
+parameters/MeleeOneShot/internal_active = false
+parameters/MeleeOneShot/request = 0
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(0.99771, 0, 0, 0, 0.99771, 0, 0, 0, 0.99771, 0, 1, 0)
@@ -112,8 +64,8 @@ texture = SubResource("ViewportTexture_fgbet")
 visible = false
 
 [node name="MeleeWeapon" parent="." index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.912266, 0.615398, -0.320664)
-melee_weapon_scene = ExtResource("4_dmp11")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92, 1.6, -0.7)
+melee_weapon_scene = ExtResource("4_surp0")
 
 [node name="EnemyStateMachine" parent="." index="7" node_paths=PackedStringArray("starting_state", "animation_tree")]
 starting_state = NodePath("Idle")
