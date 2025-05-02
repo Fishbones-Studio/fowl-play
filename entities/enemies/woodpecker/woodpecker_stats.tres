@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_bhfjj")
-max_health = 350.0
+max_health = 250.0
 max_stamina = 50.0
 attack = 12.0
 defense = 75
@@ -14,4 +14,5 @@ health_regen = 0
 stamina_regen = 0
 weight_factor = 0.07
 k_scaler = 100.0
+is_player = false
 metadata/_custom_type_script = "uid://up7hh823h5kw"
