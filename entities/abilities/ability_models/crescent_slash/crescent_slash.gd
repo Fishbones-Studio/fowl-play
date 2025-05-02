@@ -18,7 +18,7 @@ var _hit_bodies: Array = []
 
 
 func activate() -> void:
-	_toggle_collision_masks(true)
+	_toggle_collision_masks(true, hit_area)
 
 	cpu_particles.amount = strike_amount
 	cpu_particles.emitting = true
@@ -58,13 +58,4 @@ func _on_slash_timer_timeout() -> void:
 	_hit_bodies.clear()
 	_particles_emitted = false
 
-	_toggle_collision_masks(false)
-
-
-func _toggle_collision_masks(toggle: bool) -> void:
-	if ability_holder.collision_layer == 2: # Player
-		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_mask_value(2, toggle)
-
-	hit_area.set_collision_mask_value(1, toggle) # World
+	_toggle_collision_masks(false, hit_area)
