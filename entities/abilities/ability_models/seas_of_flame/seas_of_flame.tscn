@@ -36,7 +36,7 @@ colors = PackedColorArray(0.447771, 0.19073, 0.221989, 1, 0.649454, 0.194277, 0.
 script = ExtResource("2_7fey8")
 health_consumption = 25.0
 damage_duration = 2.0
-damage_interval = 0.2
+damage_interval = 0.4
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
@@ -78,5 +78,3 @@ scale_amount_min = 0.1
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_gdliy")
 color_initial_ramp = SubResource("Gradient_gdliy")
-
-[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

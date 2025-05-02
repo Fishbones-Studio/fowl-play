@@ -25,6 +25,7 @@ func activate() -> void:
 	slash_timer.wait_time = cpu_particles.lifetime
 
 	_particles_emitted = true
+	_hit_bodies.clear()
 
 	if ability_holder == ChickenPlayer:
 		SignalManager.activate_item_slot.emit(current_ability)
