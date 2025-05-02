@@ -88,9 +88,9 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
-use_navigation = null
-immediate_response = null
-path_update_interval = null
+use_navigation = false
+immediate_response = false
+path_update_interval = 0.05
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
@@ -184,9 +184,9 @@ tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
-use_navigation = null
-immediate_response = null
-path_update_interval = null
+use_navigation = true
+immediate_response = true
+path_update_interval = 0.05
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")

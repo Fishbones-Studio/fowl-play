@@ -97,8 +97,8 @@ aggro_distance = 50.0
 speed_factor = 0.0
 duration = 0.0
 use_navigation = true
-immediate_response = null
-path_update_interval = null
+immediate_response = true
+path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_n7fk8"]
 script = ExtResource("3_fxtff")
@@ -122,7 +122,7 @@ children = [SubResource("BTAction_rbvfn"), SubResource("BTCondition_pia2r"), Sub
 [sub_resource type="BTSequence" id="BTSequence_a1uay"]
 custom_name = "Pursue"
 children = [SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
-metadata/_weight_ = 1.0
+metadata/_weight_ = 19.0
 
 [sub_resource type="BBNode" id="BBNode_d0mtc"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -177,7 +177,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
 children = [SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
-metadata/_weight_ = 0.0
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTComment" id="BTComment_qjxos"]
 custom_name = "TODO: do sth else, e.g. drop egg bombs"
