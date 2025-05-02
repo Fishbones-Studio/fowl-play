@@ -3,11 +3,12 @@ extends Ability
 @export_range(0, 100, 1) var health_consumption: float = 25.0
 @export var damage_duration: float = 2.0
 @export var damage_interval: float = 0.2
+@export var missing_health_damage_scaler = 20
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack + 10 * (stats.max_health / stats.current_health) 
+		return stats.attack + missing_health_damage_scaler * (stats.max_health / stats.current_health) 
 
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
