@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=53 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=55 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_pia2r"]
 [ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_8swpl"]
@@ -83,6 +84,11 @@ rotation_speed = 10.0
 angle_threshold = 2.0
 duration = 0.0
 
+[sub_resource type="BTCondition" id="BTCondition_pia2r"]
+script = ExtResource("7_schhj")
+stuck_interval = 1.0
+stuck_threshold = 2.5
+
 [sub_resource type="BTAction" id="BTAction_qrmyx"]
 script = ExtResource("5_mnhi0")
 target_var = &"target"
@@ -90,8 +96,6 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
-stuck_interval = 1.0
-stuck_threshold = 2.5
 
 [sub_resource type="BTCondition" id="BTCondition_n7fk8"]
 script = ExtResource("3_fxtff")
@@ -110,7 +114,7 @@ children = [SubResource("BTCondition_n7fk8"), SubResource("BTAction_i6i68")]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTAction_rbvfn"), SubResource("BTAction_qrmyx"), SubResource("BTSequence_hcbj7")]
+children = [SubResource("BTAction_rbvfn"), SubResource("BTCondition_pia2r"), SubResource("BTAction_qrmyx"), SubResource("BTSequence_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_a1uay"]
 custom_name = "Pursue"

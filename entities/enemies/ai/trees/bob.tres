@@ -1,10 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=52 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=55 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_d6hvj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_m26ws"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mkwy1"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_ykixg"]
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
@@ -75,6 +76,11 @@ rotation_speed = 25.0
 angle_threshold = 1.0
 duration = 5.0
 
+[sub_resource type="BTCondition" id="BTCondition_d6hvj"]
+script = ExtResource("5_ykixg")
+stuck_interval = 1.0
+stuck_threshold = 2.5
+
 [sub_resource type="BTAction" id="BTAction_0xmxa"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
@@ -82,13 +88,11 @@ tolerance = 5.0
 aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
-stuck_interval = 1.0
-stuck_threshold = 2.5
 
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
 repeat = true
-children = [SubResource("BTAction_yvhtp"), SubResource("BTAction_0xmxa")]
+children = [SubResource("BTAction_yvhtp"), SubResource("BTCondition_d6hvj"), SubResource("BTAction_0xmxa")]
 
 [sub_resource type="BTSequence" id="BTSequence_jowcg"]
 custom_name = "Pursue target"
@@ -165,6 +169,11 @@ animation_name = &"rolling "
 blend = 0.2
 speed = 6.0
 
+[sub_resource type="BTCondition" id="BTCondition_ykixg"]
+script = ExtResource("5_ykixg")
+stuck_interval = 1.0
+stuck_threshold = 2.5
+
 [sub_resource type="BTAction" id="BTAction_gf8jg"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
@@ -172,8 +181,6 @@ tolerance = 5.0
 aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
-stuck_interval = 1.0
-stuck_threshold = 2.5
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")
@@ -182,7 +189,7 @@ duration = 0.0
 grounded = false
 
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
-children = [SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
+children = [SubResource("BTCondition_ykixg"), SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
 
 [sub_resource type="BBNode" id="BBNode_d6hvj"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
