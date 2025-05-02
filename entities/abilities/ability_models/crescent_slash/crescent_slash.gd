@@ -50,9 +50,7 @@ func _physics_process(_delta: float) -> void:
 
 		if body.collision_layer == 2 or body.collision_layer == 4:  # Player or Enemy
 			for i in strike_amount:
-				SignalManager.weapon_hit_target.emit(body, damage, 
-					DamageEnums.DamageTypes.NORMAL if not ignore_defense else DamageEnums.DamageTypes.TRUE
-				)
+				SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL if not ignore_defense else DamageEnums.DamageTypes.TRUE)
 			_hit_bodies.append(body)
 
 
