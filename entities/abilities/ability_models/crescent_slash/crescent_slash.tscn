@@ -89,7 +89,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_7785h")
 emitting = false
-amount = 3
+amount = 1
 lifetime = 0.5
 one_shot = true
 preprocess = 0.1
@@ -100,3 +100,5 @@ gravity = Vector3(0, 0, 0)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("5_7785h")
 bus = &"SFX"
+
+[connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
