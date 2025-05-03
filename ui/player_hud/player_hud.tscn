@@ -110,6 +110,7 @@ wait_time = 0.15
 one_shot = true
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -137,6 +138,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 
 [node name="BossBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
