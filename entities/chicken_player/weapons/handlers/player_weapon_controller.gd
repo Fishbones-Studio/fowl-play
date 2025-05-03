@@ -104,7 +104,7 @@ func _start_attack() -> void:
 	if active_weapon_slot is MeleeWeaponPlayerSlot:
 		if is_instance_valid(active_weapon_slot.melee_weapon_node) and \
 		is_instance_valid(active_weapon_slot.melee_weapon_node.melee_state_machine) and \
-		active_weapon_slot.melee_weapon_node.melee_state_machine.current_state.STATE_TYPE == WeaponEnums.WeaponState.IDLE:
+		active_weapon_slot.melee_weapon_node.melee_state_machine.current_state.state_type == WeaponEnums.WeaponState.IDLE:
 			active_weapon_slot.melee_weapon_node.melee_state_machine.melee_combat_transition_state.emit(WeaponEnums.WeaponState.WINDUP, {})
 	elif active_weapon_slot is RangedWeaponPlayerSlot:
 		if is_instance_valid(active_weapon_slot.ranged_weapon_player_controller):

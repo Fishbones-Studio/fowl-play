@@ -5,6 +5,8 @@
 [node name="BaseHazard" type="Node3D"]
 script = ExtResource("1_lcs4t")
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+
 [node name="HazardArea" type="Area3D" parent="."]
 collision_layer = 16
 collision_mask = 6

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://df1clah7xvv32"]
 
-[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
 [ext_resource type="Script" uid="uid://c1esqie0rd4t3" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.gd" id="2_7fey8"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="3_nqrm3"]
 
@@ -22,7 +22,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_rjsn0"]
 material = SubResource("StandardMaterial3D_3lj7w")
-size = Vector2(6, 6)
+size = Vector2(10, 10)
 
 [sub_resource type="Curve" id="Curve_gdliy"]
 _data = [Vector2(0, 0.00203478), 0.0, 0.0, 0, 0, Vector2(0.495633, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.401221), 0.0, 0.0, 0, 0]
@@ -36,7 +36,7 @@ colors = PackedColorArray(0.447771, 0.19073, 0.221989, 1, 0.649454, 0.194277, 0.
 script = ExtResource("2_7fey8")
 health_consumption = 25.0
 damage_duration = 2.0
-damage_interval = 0.2
+damage_interval = 0.4
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
@@ -52,9 +52,10 @@ shape = SubResource("CylinderShape3D_gdliy")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 emitting = false
-amount = 2000
+amount = 750
 one_shot = true
 randomness = 1.0
+lifetime_randomness = 0.2
 local_coords = true
 draw_order = 2
 mesh = SubResource("QuadMesh_rjsn0")
@@ -77,5 +78,3 @@ scale_amount_min = 0.1
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_gdliy")
 color_initial_ramp = SubResource("Gradient_gdliy")
-
-[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

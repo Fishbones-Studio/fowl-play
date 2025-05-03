@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://bxc3j6moweqeh"]
+
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
+[ext_resource type="Script" uid="uid://cbbjybahmxy5y" path="res://entities/abilities/ability_models/earthquake/earthquake.gd" id="2_1j166"]
+[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="3_57nyx"]
+[ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="3_bowoe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_57nyx"]
+radius = 10.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_57nyx"]
+noise_type = 4
+frequency = 0.129
+fractal_octaves = 1
+domain_warp_frequency = 5.0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bowoe"]
+seamless = true
+seamless_blend_skirt = 0.28
+noise = SubResource("FastNoiseLite_57nyx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57nyx"]
+render_priority = 0
+shader = ExtResource("3_57nyx")
+shader_parameter/distortionView = 0.15
+shader_parameter/tintColor = Color(0.141176, 0.184314, 0.231373, 1)
+shader_parameter/fesnelAmount = 1.8
+shader_parameter/fesnelViewEffectAmount = 0.064
+shader_parameter/DisplacementScale = 0.065
+shader_parameter/speedVertex = 0.13
+shader_parameter/NoiseScale = 0.2
+shader_parameter/NoiseTexture = SubResource("NoiseTexture3D_bowoe")
+
+[sub_resource type="Gradient" id="Gradient_mqfc4"]
+offsets = PackedFloat32Array(0, 0.547619, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.607843, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_si343"]
+gradient = SubResource("Gradient_mqfc4")
+
+[sub_resource type="Curve" id="Curve_bowoe"]
+_data = [Vector2(0.0186916, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mqfc4"]
+curve = SubResource("Curve_bowoe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tsju7"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mqfc4")
+color_ramp = SubResource("GradientTexture1D_si343")
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqfc4"]
+radius = 10.0
+height = 20.0
+
+[node name="Earthquake" instance=ExtResource("1_57nyx")]
+script = ExtResource("2_1j166")
+descent_velocity = -25.0
+initial_knockback_force = 7.0
+knockback_force_upwards = 5.0
+quake_interval = 0.5
+quake_damage_increase = 0.2
+quake_radius_increase = 0.5
+max_quakes = 3
+current_ability = ExtResource("3_bowoe")
+
+[node name="CooldownTimer" parent="." index="0"]
+wait_time = 5.0
+
+[node name="QuakeTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="HitArea" type="Area3D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("SphereShape3D_57nyx")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
+material_override = SubResource("ShaderMaterial_57nyx")
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_tsju7")
+draw_pass_1 = SubResource("SphereMesh_mqfc4")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="HitArea" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
+material_override = SubResource("ShaderMaterial_57nyx")
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_tsju7")
+draw_pass_1 = SubResource("SphereMesh_mqfc4")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="HitArea" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
+material_override = SubResource("ShaderMaterial_57nyx")
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_tsju7")
+draw_pass_1 = SubResource("SphereMesh_mqfc4")
+
+[connection signal="timeout" from="QuakeTimer" to="." method="_pulse_quake"]

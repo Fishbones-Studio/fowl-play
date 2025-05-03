@@ -13,10 +13,10 @@ extends Resource
 @export var health_regen: int
 @export var stamina_regen: int
 @export var weight_factor: float = 0.07 # Controls slowdown strength
-@export var k_scaler : float = 100.0 # Controlls scaling for damage and defense
+@export var k_scaler: float = 100.0 # Controlls scaling for damage and defense
 
 @export_group("Holder")
-@export var is_player : bool = false
+@export var is_player: bool = false
 @export var name: String
 
 var current_health: float:
@@ -39,9 +39,11 @@ func init() -> void:
 func calculate_speed(speed_factor: float) -> float:
 	return max(speed * exp(-(weight) * weight_factor) * speed_factor, 0.1)
 
+
 func restore_health(amount: float) -> float:
 	current_health = clamp(current_health + amount, 0, max_health)
 	return current_health
+
 
 func restore_stamina(amount: float) -> float:
 	current_stamina = clamp(current_stamina + amount, 0, max_stamina)
@@ -51,23 +53,22 @@ func restore_stamina(amount: float) -> float:
 ## Reduces health by the given amount, taking defense into account.
 func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEnums.DamageTypes.NORMAL) -> float:
 	var actual_damage: float = 0.0
-	
+
+	# check for cheat
 	if amount == -9223372036854775808.0:
-		# check for cheat
 		actual_damage = current_health
-			
 	if amount <= 0:
 		print("health is negative : " + str(amount))
 	else:
 		if damage_type == DamageEnums.DamageTypes.NORMAL:
 			var damage_multiplier: float = 100.0 / (k_scaler + float(defense))
 			actual_damage = max(floor(amount * damage_multiplier), 1)
-
 		elif damage_type == DamageEnums.DamageTypes.TRUE:
 			actual_damage = amount
 
 	current_health = clamp(current_health - actual_damage, 0, max_health)
 	return actual_damage
+
 
 func drain_stamina(amount: float) -> float:
 	current_stamina = clamp(current_stamina - amount, 0, max_stamina)
@@ -84,21 +85,21 @@ func regen_health(delta: float) -> float:
 func regen_stamina(delta: float) -> float:
 	current_stamina = clamp(current_stamina + (stamina_regen * delta), 0, max_stamina)
 	return current_stamina
-	
+
+
 ## Calculate the damage based on the attack and the k_scaler
 func calc_scaled_damage(damage: float) -> float:
 	var actual_damage: float
 	if is_inf(attack):
-		print("attack is inf %d", INF )
+		print("attack is inf %d", INF)
 		return INF
 	else:
 		var scale: float = 1.0 + (attack / (k_scaler + attack))
 		actual_damage = floor(damage * scale)
-	
+
 	return actual_damage
 
 
-## Calculate the defense based on the defense and the k_scaler
 func apply_upgrade(upgrade: UpgradeResource) -> void:
 	max_health += upgrade.health_bonus
 	current_health += upgrade.health_bonus

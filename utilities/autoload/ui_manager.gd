@@ -52,33 +52,12 @@ func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI =
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
 
 	# Notify that the loading screen has started
-	SignalManager.loading_screen_started.emit()
+	SignalManager.loading_screen_started.emit(hud_ui, {})
+
 	await get_tree().process_frame
-
-	# Begin loading the game scene in a separate thread
-	ResourceLoader.load_threaded_request(game_scene_path)
-	var progress: Array = []
-
-	# Continuously update progress until loading is complete
-	while ResourceLoader.load_threaded_get_status(game_scene_path, progress) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		# Emit current loading progress (fallback to 0.0 if not available)
-		SignalManager.loading_progress_updated.emit(progress[0] if progress.size() > 0 else 0.0)
-		await get_tree().process_frame
-
-	# Notify that loading is complete
-	SignalManager.loading_screen_finished.emit()
-
-	# Finalize the loading (actual scene resource is not used here, just ensures it's ready)
-	var loaded_resource: Resource = ResourceLoader.load_threaded_get(game_scene_path)
-
-	# Explicitly discard the resource if not needed
-	loaded_resource = null  
 
 	# Switch to the loaded game scene
 	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
-
-	# Switch to the specified HUD UI
-	SignalManager.emit_throttled("switch_ui_scene", [hud_ui])
 
 
 ## Removes a specific UI control from the manager using its enum identifier.
@@ -107,7 +86,7 @@ func remove_ui_by_enum(ui_enum: UIEnums.UI) -> void:
 func remove_ui(ui: Control) -> void:
 	# Check if UI exists in our list and is valid
 	if not is_instance_valid(ui) or ui not in ui_list.values():
-		push_warning("Attempted to remove UI '", ui.name if is_instance_valid(ui) else "INVALID", "' not found in ui_list or invalid.")
+		push_warning("Attempted to remove UI '%s' not found in ui_list or invalid." % ui.name if is_instance_valid(ui) else "INVALID")
 		var key_to_remove = ui_list.find_key(ui)
 		if key_to_remove != null:
 			ui_list.erase(key_to_remove)

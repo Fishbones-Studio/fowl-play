@@ -13,9 +13,8 @@ func _ready() -> void:
 		push_warning("No player ranged_weapon")
 		queue_free()
 		return
-	
+
 	ranged_weapon_node.ranged_weapon_scene = load(ranged_weapon.model_uid)
 
-	
 	ranged_weapon_node.setup()
 	ranged_weapon_player_controller.setup(ranged_weapon_node.current_weapon)
