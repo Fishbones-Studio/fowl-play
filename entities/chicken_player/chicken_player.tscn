@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
-[ext_resource type="Script" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
+[ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
