@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://0vmeubjcsxig"]
+[gd_scene load_steps=11 format=3 uid="uid://0vmeubjcsxig"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://dxril0olml25y" path="res://entities/enemies/bob/bob_stats.tres" id="2_fjbia"]
 [ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="3_0xmxa"]
 [ext_resource type="BehaviorTree" uid="uid://g7414dn5u4kw" path="res://entities/enemies/ai/trees/bob.tres" id="4_m0aa4"]
+[ext_resource type="Script" uid="uid://nxjekf2tieqd" path="res://utilities/camera/culling_script.gd" id="4_sexgk"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_8cml0"]
 [ext_resource type="Script" uid="uid://dltdrhrtk0btl" path="res://entities/enemies/bob/spike_hitbox.gd" id="5_fjbia"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="6_e381t"]
@@ -23,6 +24,9 @@ enemy_model = NodePath("ball_chicken")
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 2.87023, 0)
+script = ExtResource("4_sexgk")
+layer_to_add = 2
+recursive = true
 
 [node name="Sphere" parent="ball_chicken" index="0"]
 transform = Transform3D(-2.08152, -0.903553, 0, 0.903553, -2.08152, 0, 0, 0, 2.26917, 0, 0, 0)
