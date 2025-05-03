@@ -1,7 +1,133 @@
-[gd_scene load_steps=4 format=3 uid="uid://co3ix5krmh3qr"]
+[gd_scene load_steps=8 format=3 uid="uid://co3ix5krmh3qr"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_xcyw7"]
 [ext_resource type="PackedScene" uid="uid://c0vwp0sm5abaw" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword model2.glb" id="2_2s0e4"]
+
+[sub_resource type="Animation" id="Animation_vlb0o"]
+resource_name = "Attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword model2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.53058, 1.06116, 0), Vector3(-1.06116, 1.06116, 0.383972), Vector3(-1.76976, 1.06116, 0.820305), Vector3(-2.23228, 1.27933, 1.69297), Vector3(-2.23228, 1.27933, 1.69297)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.101519, 0.200319, 0.300025, 0.400638),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.53058, 1.06116, 0), Vector3(-1.06291, 1.06116, 0.385718), Vector3(-1.76976, 1.06116, 0.820305), Vector3(-2.23228, 1.27933, 1.69297)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.101519, 0.200319, 0.300025, 0.400638),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.135, 4.186, -1.1), Vector3(-3.69, 1.766, -0.125), Vector3(-3.955, -0.669, 1.39), Vector3(-0.835, 0.196, 3.665)]
+}
+
+[sub_resource type="Animation" id="Animation_2s0e4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword model2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.135, 4.186, -1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_4d8fe"]
+resource_name = "Cooldown"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sword model2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.300932, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.23228, 1.27933, 1.69297), Vector3(-1.76976, 1.06116, 0.820305), Vector3(-1.06291, 1.06116, 0.385718), Vector3(-0.539307, 1.06116, 0.00523599), Vector3(-0.00136535, -0.00208915, -1.84424e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.300932, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.23228, 1.27933, 1.69297), Vector3(-1.76976, 1.06116, 0.820305), Vector3(-1.06291, 1.06116, 0.385718), Vector3(-0.539307, 1.06116, 0.00523599), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.302745, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.835, 0.196, 3.665), Vector3(-3.48, -0.424, 1.14), Vector3(-3.635, 2.001, -0.25), Vector3(-1.965, 3.696, -1.255), Vector3(0, 4, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4d8fe"]
+_data = {
+&"Attack": SubResource("Animation_vlb0o"),
+&"Cooldown": SubResource("Animation_4d8fe"),
+&"RESET": SubResource("Animation_2s0e4")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlb0o"]
 size = Vector3(1, 1.75269, 1)
@@ -9,14 +135,18 @@ size = Vector3(1, 1.75269, 1)
 [node name="Sword" instance=ExtResource("1_xcyw7")]
 
 [node name="sword model2" parent="." index="0" instance=ExtResource("2_2s0e4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_4d8fe")
+}
 
 [node name="HitCheckPoint" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42421, 0)
 
 [node name="WeaponHitBox" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.18558, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.135, 4.186, -1.1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 3.94595, 0, 0, 0, 1, 0, 0.394524, 0)
