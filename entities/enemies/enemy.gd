@@ -15,7 +15,6 @@ signal damage_taken
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var shape: CollisionShape3D = $CollisionShape3D
 
-
 func _ready() -> void:
 	_initialize_stats()
 	_initialize_health_bar()
@@ -28,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	move_and_slide()
 
+func _process(delta: float) -> void:
+	SignalManager.boss_stats_changed.emit(stats)
 
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:

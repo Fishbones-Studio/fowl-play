@@ -44,6 +44,9 @@ shape = SubResource("SphereShape3D_fjbia")
 transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.755416, 0)
 texture = SubResource("ViewportTexture_m0aa4")
 
+[node name="HealthBar" parent="SubViewport" index="0"]
+visible = false
+
 [node name="DamageNumberHandler" parent="." index="5"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
