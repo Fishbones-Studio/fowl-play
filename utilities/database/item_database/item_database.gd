@@ -52,4 +52,4 @@ static func load_scene_resources(
 					temp_items.append(hidden_resouce)
 
 			instance.queue_free()
-			break  # Process only first .tscn per directory
+			continue  # Process only first .tscn per directory

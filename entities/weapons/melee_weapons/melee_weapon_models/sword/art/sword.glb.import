@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c0vwp0sm5abaw"
-path="res://.godot/imported/sword model2.glb-b4aa152b4a94464d9196fad18c4b3d9f.scn"
+uid="uid://lbrv8bntcb8m"
+path="res://.godot/imported/sword.glb-727b59d33b06c979c29d84ec8249101c.scn"
 
 [deps]
 
-source_file="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword model2.glb"
-dest_files=["res://.godot/imported/sword model2.glb-b4aa152b4a94464d9196fad18c4b3d9f.scn"]
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword.glb"
+dest_files=["res://.godot/imported/sword.glb-727b59d33b06c979c29d84ec8249101c.scn"]
 
 [params]
 
