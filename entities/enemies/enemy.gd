@@ -8,7 +8,7 @@ signal damage_taken
 @export var enemy_model: Node3D
 
 @onready var health_bar: HealthBar = %HealthBar
-@onready var bt_player: BTPlayer = $BTPlayer
+#@onready var bt_player: BTPlayer = $BTPlayer
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController

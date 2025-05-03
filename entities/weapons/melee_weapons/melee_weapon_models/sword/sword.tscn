@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://co3ix5krmh3qr"]
+
+[ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_xcyw7"]
+[ext_resource type="PackedScene" uid="uid://c0vwp0sm5abaw" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword model2.glb" id="2_2s0e4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vlb0o"]
+size = Vector3(1, 1.75269, 1)
+
+[node name="Sword" instance=ExtResource("1_xcyw7")]
+
+[node name="sword model2" parent="." index="0" instance=ExtResource("2_2s0e4")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+
+[node name="HitCheckPoint" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42421, 0)
+
+[node name="WeaponHitBox" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.18558, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 3.94595, 0, 0, 0, 1, 0, 0.394524, 0)
+shape = SubResource("BoxShape3D_vlb0o")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MeleeWeaponResource" load_steps=2 format=3 uid="uid://c4dujlqw5d4kl"]
+
+[ext_resource type="Script" uid="uid://bflt4m3fx7gmv" path="res://entities/weapons/melee_weapons/melee_weapon_resource.gd" id="1_tqsw4"]
+
+[resource]
+script = ExtResource("1_tqsw4")
+damage = 20
+windup_time = 0.0
+attack_duration = 0.5
+cooldown_time = 0.5
+name = "Sword"
+purchasable = true
+drop_chance = 50
+cost = 250
+currency_type = 0
+description = "Deals %s Base Damage with a long swing. The attack lasts %s, then enters a cooldown state for %s."
+model_uid = "uid://co3ix5krmh3qr"
