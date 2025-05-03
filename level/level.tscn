@@ -69,7 +69,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, -2
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Path3D"]
-transform = Transform3D(0.0569952, 0.00290504, -0.998362, -1.16414e-10, 0.999992, 0.00290976, 0.998365, -0.000165844, 0.056995, -2.29125, 4.34434, -10.8149)
+transform = Transform3D(0.0569951, 0.00290504, -0.998362, -1.16414e-10, 0.999992, 0.00290976, 0.998365, -0.000165844, 0.056995, -2.29125, 4.34434, -10.8149)
 script = ExtResource("2_xii2b")
 movement_mode = 2
 
