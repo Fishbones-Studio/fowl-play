@@ -149,7 +149,7 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
 size = Vector3(1.8, 3, 2)
 
-[node name="LeekModel" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
+[node name="Leek" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_e1ngp")
 
