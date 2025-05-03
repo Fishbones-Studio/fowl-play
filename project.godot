@@ -210,6 +210,15 @@ ability_two={
 3d_physics/layer_5="Hazard"
 3d_physics/layer_6="Interactables"
 
+[limbo_ai]
+
+behavior_tree/behavior_tree_default_dir="res://entities/enemies/ai/trees"
+behavior_tree/user_task_dirs=PackedStringArray("res://entities/enemies/ai/tasks")
+
+[navigation]
+
+3d/merge_rasterizer_cell_scale=0.001
+
 [panku]
 
 disable_on_release=true

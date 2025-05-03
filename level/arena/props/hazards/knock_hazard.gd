@@ -9,6 +9,7 @@ extends BaseHazard
 
 @onready var hazard_area: Area3D = $HazardArea
 
+
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if not body is CharacterBody3D:
 		return

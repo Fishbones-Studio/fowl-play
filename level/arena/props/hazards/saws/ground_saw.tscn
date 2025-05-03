@@ -4,9 +4,6 @@
 [ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/bleed_hazard.gd" id="2_fdjq5"]
 [ext_resource type="PackedScene" uid="uid://bvsgttl65srik" path="res://level/arena/props/hazards/saws/ground_saw.glb" id="3_fdjq5"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
-size = Vector3(0.5, 2.5, 2.5)
-
 [sub_resource type="Animation" id="Animation_w4h7w"]
 length = 0.001
 tracks/0/type = "value"
@@ -45,14 +42,16 @@ _data = {
 &"rotation": SubResource("Animation_fdjq5")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
+size = Vector3(0.5, 2.5, 2.5)
+
 [node name="GroundSaw" instance=ExtResource("1_odgku")]
 script = ExtResource("2_fdjq5")
 damage_interval = 1.0
 damage_duration = 5.0
 
-[node name="CollisionShape3D" parent="HazardArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0962822, 0)
-shape = SubResource("BoxShape3D_fdjq5")
+[node name="NavigationObstacle3D" parent="." index="0"]
+radius = 3.3
 
 [node name="ground_saw" parent="." index="1" instance=ExtResource("3_fdjq5")]
 
@@ -61,3 +60,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_qeog0")
 }
 autoplay = "rotation"
+
+[node name="CollisionShape3D" parent="HazardArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0962822, 0)
+shape = SubResource("BoxShape3D_fdjq5")
