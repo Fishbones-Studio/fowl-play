@@ -27,8 +27,7 @@ func activate() -> void:
 	_particles_emitted = true
 	_hit_bodies.clear()
 
-	if ability_holder == ChickenPlayer:
-		SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
 	# Crack, it only syncs if strikes is 2, if higher, doesn't match that well, to lazy to fix
