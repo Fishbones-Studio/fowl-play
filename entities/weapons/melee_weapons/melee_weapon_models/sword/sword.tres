@@ -7,7 +7,7 @@
 script = ExtResource("1_tqsw4")
 damage = 50
 windup_time = 0.0
-attack_duration = 0.5
+attack_duration = 0.6
 cooldown_time = 0.5
 name = "Sword"
 purchasable = true
