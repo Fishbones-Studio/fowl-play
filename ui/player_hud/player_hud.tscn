@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=26 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport_player.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://da8h6ap4j4yyi" path="res://ui/player_hud/player_hud.gd" id="1_8xek4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
 [ext_resource type="Shader" uid="uid://dscuhfc7v6toy" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
 [ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
+[ext_resource type="Shader" uid="uid://d04kjgvhm3ac" path="res://ui/player_hud/player_portrait_skew.gdshader" id="5_yfus2"]
 [ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
 [ext_resource type="PackedScene" uid="uid://77dxickbfdy8" path="res://ui/player_hud/player_crosshair/crosshair_container.tscn" id="9_8qpry"]
 [ext_resource type="Script" uid="uid://blkyc41lp0wdf" path="res://ui/player_hud/boss_bar_container.gd" id="9_hbnkv"]
@@ -31,6 +32,10 @@ shader_parameter/blur_strength = 2.3
 shader_parameter/glow_intensity = 1.8
 shader_parameter/heal_color = Color(0, 1, 0.4, 1)
 shader_parameter/overlay_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfus2"]
+shader = ExtResource("5_yfus2")
+shader_parameter/skew_x = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgno4"]
 shader = ExtResource("3_kgno4")
@@ -64,6 +69,10 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74l5y"]
+shader = ExtResource("5_yfus2")
+shader_parameter/skew_x = -1.0
+
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -93,27 +102,29 @@ theme_override_constants/separation = 5
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -20
+
+[node name="PlayerBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(108, 20)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
 hurt_shader = SubResource("ShaderMaterial_w7jxt")
 heal_shader = SubResource("ShaderMaterial_8qpry")
-normal_fov = 50.0
-effect_fov = 72.0
-border_starting_colour = Color(0.517184, 0.517185, 0.517184, 0.490196)
-border_heal_colour = Color(0, 1, 0.4, 1)
-border_hurt_colour = Color(0.8, 0, 0, 1)
+skew_shader = SubResource("ShaderMaterial_yfus2")
 
-[node name="Border" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer"]
-custom_minimum_size = Vector2(108, 108)
-layout_mode = 2
-
-[node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer"]
+[node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportPlayer" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer"]
+[node name="SubViewportPlayer" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
@@ -122,19 +133,19 @@ render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
 offset = Vector3(0, 1, -1.8)
 
-[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
+[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
 
-[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer"]
+[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer"]
 visible = false
 material = SubResource("ShaderMaterial_kgno4")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
-[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer"]
+[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer"]
 wait_time = 0.15
 one_shot = true
 
@@ -229,20 +240,26 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 35.0
 
-[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+[node name="BossVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -20
+
+[node name="BossBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(108, 20)
+layout_mode = 2
+
+[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("10_ohebb")
+skew_shader = SubResource("ShaderMaterial_74l5y")
 
-[node name="Border" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer"]
-custom_minimum_size = Vector2(108, 108)
-layout_mode = 2
-
-[node name="BossPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer"]
+[node name="BossPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer/BossPortraitViewportContainer"]
+[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
@@ -250,19 +267,19 @@ size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("12_uqc4p")
 
-[node name="ViewportCameraBoss" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
+[node name="ViewportCameraBoss" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
 
-[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer"]
+[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
 visible = false
 material = SubResource("ShaderMaterial_kgno4")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
-[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer"]
+[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
 wait_time = 0.15
 one_shot = true
 
@@ -281,6 +298,6 @@ script = ExtResource("8_w7jxt")
 [node name="CrosshairContainer" parent="." instance=ExtResource("9_8qpry")]
 layout_mode = 1
 
-[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar" method="_on_timer_timeout"]
-[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]

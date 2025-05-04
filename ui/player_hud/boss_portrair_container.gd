@@ -3,8 +3,10 @@ extends CenterContainer
 @export_group("Shaders")
 @export var hurt_time : float = 0.15
 @export var heal_time : float = 0.25
+@export var skew_x_value : float = -1.0
 @export var hurt_shader : ShaderMaterial
 @export var heal_shader : ShaderMaterial
+@export var skew_shader : ShaderMaterial 
 
 @export_group("Fov")
 @export var normal_fov : float = 65.0
@@ -20,12 +22,17 @@ var fov_tween : Tween ## Keeping track of the FOV tween
 
 @onready var duration_timer : Timer = $DurationTimer
 @onready var overlay_shader : ColorRect = $OverlayShader
-@onready var border : ColorRect = $Border
-@onready var camera : Camera3D = %ViewportCamera
+@onready var border : ColorRect = %BossBorder
+@onready var camera : Camera3D = %ViewportCameraBoss
 
 
 func _ready() -> void:
 	visible = false
+	border.visible = false
+	
+	if skew_shader:
+		border.material = skew_shader
+		skew_shader.set_shader_parameter("skew_x", skew_x_value)
 	
 	# Hide by default
 	overlay_shader.hide()
@@ -44,6 +51,7 @@ func _ready() -> void:
 func _on_boss_appeared(visible: bool) -> void:
 	# set visible when boss appears
 	self.visible = visible
+	border.visible = visible
 
 func _on_duration_timer_timeout() -> void:
 	# check if queue_free has been called
