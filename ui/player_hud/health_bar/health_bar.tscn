@@ -6,12 +6,26 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re7yl"]
 bg_color = Color(0.99683, 0, 0.26861, 1)
+skew = Vector2(-1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+shadow_size = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umwhf"]
 bg_color = Color(0, 0, 0, 1)
+skew = Vector2(-1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qx3t"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+skew = Vector2(-1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
 
 [node name="HealthBar" type="ProgressBar"]
 offset_right = 360.0

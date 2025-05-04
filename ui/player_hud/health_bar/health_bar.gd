@@ -18,8 +18,8 @@ func _ready() -> void:
 
 
 func _update_health_color() -> void:
-	var health_percent : float = health / max_value if max_value > 0 else 1.0
-	
+	var health_percent: float = health / max_value if max_value > 0 else 1.0
+
 	var current_color: Color
 	if health_percent > 0.55:
 		current_color = high_health_color
@@ -27,10 +27,14 @@ func _update_health_color() -> void:
 		current_color = medium_health_color
 	else:
 		current_color = critical_health_color
-	
-	var style_box : StyleBoxFlat = StyleBoxFlat.new()
-	style_box.bg_color = current_color
-	add_theme_stylebox_override("fill", style_box)
+
+	var original_style_box := get_theme_stylebox("fill") as StyleBoxFlat
+	if original_style_box:
+		var style_box = original_style_box.duplicate() as StyleBoxFlat
+		style_box.bg_color = current_color
+		add_theme_stylebox_override("fill", style_box)
+
+
 
 
 func set_health(_health: float) -> void:
