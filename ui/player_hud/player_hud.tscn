@@ -163,12 +163,24 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="StaminaBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer" instance=ExtResource("2_rtdb5")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer"]
+custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="StaminaBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer/HBoxContainer" instance=ExtResource("2_rtdb5")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 20.0
 
 [node name="Spacer" type="VSeparator" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer"]
 layout_mode = 2

@@ -5,6 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grqgw"]
 bg_color = Color(0, 0, 0, 1)
 skew = Vector2(-1, 0)
+expand_margin_right = 17.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cas2i"]
 bg_color = Color(0.95761, 0.700387, 0, 1)
@@ -14,6 +15,7 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
+expand_margin_right = 17.0
 shadow_size = 3
 
 [node name="StaminaBar" type="ProgressBar"]
