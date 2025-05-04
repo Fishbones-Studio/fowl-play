@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=23 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport_player.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://da8h6ap4j4yyi" path="res://ui/player_hud/player_hud.gd" id="1_8xek4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://blkyc41lp0wdf" path="res://ui/player_hud/boss_bar_container.gd" id="9_hbnkv"]
 [ext_resource type="Script" uid="uid://bay06b5th72gq" path="res://ui/player_hud/vs_label.gd" id="9_vd2g3"]
 [ext_resource type="Script" uid="uid://bum76k5i2y8t7" path="res://ui/player_hud/boss_portrair_container.gd" id="10_ohebb"]
+[ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="11_rmjiu"]
 [ext_resource type="Script" uid="uid://bwe77o530a06b" path="res://ui/player_hud/sub_viewport_boss.gd" id="12_uqc4p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]
@@ -38,15 +39,30 @@ shader_parameter/glow_intensity = 1.8
 shader_parameter/heal_color = Color(0, 1, 0.4, 1)
 shader_parameter/overlay_alpha = 0.5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqc4p"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lsalo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfus2"]
 bg_color = Color(0.99683, 0, 0.26861, 1)
-skew = Vector2(-1, 0)
+skew = Vector2(1, 0)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74l5y"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyt24"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+skew = Vector2(1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -173,16 +189,38 @@ size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 8
 script = ExtResource("9_hbnkv")
 
-[node name="BossHealthBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer" instance=ExtResource("1_vyppb")]
+[node name="BossHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
 unique_name_in_owner = true
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
-theme_override_styles/fill = SubResource("StyleBoxFlat_uqc4p")
+theme_override_styles/background = SubResource("StyleBoxEmpty_lsalo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yfus2")
+value = 50.0
+show_percentage = false
+script = ExtResource("11_rmjiu")
+
+[node name="DamageBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_74l5y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hyt24")
+value = 65.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 3
 text = "Boss Name"
 
@@ -244,4 +282,5 @@ script = ExtResource("8_w7jxt")
 layout_mode = 1
 
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar" method="_on_timer_timeout"]
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]
