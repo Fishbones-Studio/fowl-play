@@ -137,13 +137,14 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlb0o"]
-size = Vector3(1, 10, 1)
+size = Vector3(1, 2.2, 1)
 
 [node name="Sword" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_xcyw7")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_2s0e4")
 
 [node name="sword" parent="." index="0" instance=ExtResource("2_vlb0o")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="HitCheckPoint" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42421, 0)
