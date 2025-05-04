@@ -30,8 +30,7 @@ func activate() -> void:
 
 	_toggle_collision_masks(true, hit_area)
 
-	if ability_holder == ChickenPlayer:
-		SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
 	cooldown_timer.start()
