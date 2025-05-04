@@ -27,14 +27,11 @@ func activate() -> void:
 
 	_toggle_collision_masks(true, hit_area)
 
-	if ability_holder == ChickenPlayer:
-		SignalManager.activate_item_slot.emit(current_ability)
-
 	# Consumes a percentage of the holder's max health when activating the ability
 	# If the current HP is not sufficient, reduces HP to 1 (can't drop to 0 or below)
 	ability_holder.stats.current_health -= min(ability_holder.stats.max_health * (health_consumption / 100.0), ability_holder.stats.current_health - 1.0)
 
-	if ability_holder == ChickenPlayer:
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
 	cooldown_timer.start()

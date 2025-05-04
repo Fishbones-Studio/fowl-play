@@ -21,14 +21,14 @@ func activate() -> void:
 		return
 
 	_toggle_collision_masks(true, hit_area)
-	SignalManager.activate_item_slot.emit(current_ability)
 
 	ability_holder.velocity.x = 0
 	ability_holder.velocity.z = 0
 	ability_holder.velocity.y = descent_velocity
-	
-	if ability_holder == ChickenPlayer:
+
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+
 	cooldown_timer.start()
 
 
@@ -51,19 +51,17 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	ability_holder.velocity.y = 0
 
 	_toggle_collision_masks(false, hit_area)
-	if ability_holder == ChickenPlayer:
-		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _physics_process(_delta: float) -> void:
 	# Handles edge case where character lands without hitting an enemy
 	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
 		await get_tree().create_timer(0.2).timeout
+
 		cpu_particles.emitting = true
 		_particles_emitted = true
+
 		_toggle_collision_masks(false, hit_area)
-		if ability_holder == ChickenPlayer:
-			SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _apply_knockback(body: Node3D) -> void:
