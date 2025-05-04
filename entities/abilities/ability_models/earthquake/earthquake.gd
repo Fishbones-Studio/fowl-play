@@ -48,8 +48,7 @@ func activate() -> void:
 
 	ability_holder.velocity = Vector3(0, descent_velocity, 0)
 
-	if ability_holder == ChickenPlayer:
-		SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
 	cooldown_timer.start()
@@ -112,9 +111,6 @@ func _reset_ability() -> void:
 	# Reset vertical velocity
 	ability_holder.velocity.y = 0
 	_toggle_collision_masks(false, hit_area)
-
-	if ability_holder == ChickenPlayer:
-		SignalManager.deactivate_item_slot.emit(current_ability)
 
 
 func _apply_knockback(body: Node3D) -> void:

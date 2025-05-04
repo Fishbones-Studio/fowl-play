@@ -39,8 +39,7 @@ func activate() -> void:
 	mesh_instance.visible = true
 	cpu_particles.emitting = true
 
-	if ability_holder == ChickenPlayer:
-		SignalManager.activate_item_slot.emit(current_ability)
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
 
 	cooldown_timer.start()
