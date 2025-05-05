@@ -1,4 +1,4 @@
-extends BaseRangedCombatState
+class_name WindupIdleState extends BaseRangedCombatState
 
 var _windup_timer: float = 0.0
 

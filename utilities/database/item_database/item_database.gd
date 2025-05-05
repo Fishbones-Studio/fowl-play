@@ -49,4 +49,3 @@ static func load_scene_resources(
 				if hidden_resource is BaseResource and hidden_resource.purchasable:
 					temp_items.append(hidden_resource)
 			instance.queue_free()
-

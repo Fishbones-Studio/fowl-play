@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp3a4dva535bj"]
+
+[ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_0ydtd"]
+[ext_resource type="PackedScene" uid="uid://d4lvg7ysq6xya" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/art/slingshot.glb" id="2_4kivx"]
+[ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://entities/weapons/ranged_weapons/ranged_weapon_resource.gd" id="2_typvt"]
+[ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="4_2y1sc"]
+[ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="5_nje68"]
+[ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_nje68"]
+
+[sub_resource type="Resource" id="Resource_oolbx"]
+script = ExtResource("2_typvt")
+damage = 25
+windup_time = 0.0
+attack_duration = 0.0
+cooldown_time = 0.0
+allow_continuous_fire = false
+allow_early_release = false
+fire_rate_per_second = 0.0
+max_range = 100.0
+name = ""
+purchasable = true
+drop_chance = 0
+cost = 0
+currency_type = 0
+description = "PlaceHolder"
+model_uid = ""
+metadata/_custom_type_script = "uid://dm0sr7j8y5j30"
+
+[node name="SlingShot" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_0ydtd")]
+animation_player = NodePath("AnimationPlayer")
+current_weapon = SubResource("Resource_oolbx")
+
+[node name="slingshot" parent="." index="0" instance=ExtResource("2_4kivx")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
+script = ExtResource("4_2y1sc")
+
+[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
+script = ExtResource("5_nje68")
+
+[node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="2"]
+script = ExtResource("6_nje68")
+
+[node name="AttackOrigin" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39438, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]

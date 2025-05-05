@@ -1,4 +1,4 @@
-extends BaseRangedCombatState
+class_name CooldownIdleState extends BaseRangedCombatState
 
 var _cooldown_timer: float = 0.0
 
