@@ -108,6 +108,7 @@ one_shot = true
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/BotomHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 8
 size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 8
 script = ExtResource("1_sqrx6")
