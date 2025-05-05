@@ -54,7 +54,7 @@ ability_resource = ExtResource("6_e381t")
 texture = ExtResource("7_sexgk")
 
 [node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
-text = "All-Devouring \"Bob\""
+text = "\"All-Devouring\" Bob"
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
