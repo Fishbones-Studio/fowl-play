@@ -8,6 +8,8 @@ extends BaseResource
 @export var windup_time: float = 0.0
 @export var attack_duration: float = 0.0
 @export var cooldown_time: float = 0.0
+# Animation Variables
+@export var loop_animation := false
 
 
 func _init() -> void:
