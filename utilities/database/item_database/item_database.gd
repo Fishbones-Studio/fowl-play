@@ -11,9 +11,9 @@ static func _load_resources() -> Array[BaseResource]:
 
 static func load_scene_resources(
 	path: String,
-	resource_property: String, 
-	temp_items : Array[BaseResource]
-	) -> void:
+	resource_property: String,
+	temp_items: Array[BaseResource]
+) -> void:
 	var dir := DirAccess.open(path)
 	if !dir:
 		push_error("Can't open directory: ", path)
@@ -22,34 +22,31 @@ static func load_scene_resources(
 	for subdir in dir.get_directories():
 		var subdir_path := path.path_join(subdir)
 		var sub_dir := DirAccess.open(subdir_path)
-		var resource_loaded := false
-		var tscn_file: String
-		print("Looking in dir: " + subdir_path)
+		if !sub_dir:
+			continue
+
+		var tres_file: String = ""
+		var tscn_file: String = ""
 
 		# First try to load .tres file
 		for file in sub_dir.get_files():
-			if file.ends_with(".remap"):
-				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.ends_with(".tres"):
-				var resource: Resource = load(subdir_path.path_join(file))
-				if resource is BaseResource and resource.purchasable:
-					temp_items.append(resource)
-					resource_loaded = true
-					break  # Found .tres, skip to next subdir
-			if file.ends_with(".tscn"):
-				tscn_file = subdir_path.path_join(file)
-				break  # Save the .tscn file for later use
+				tres_file = file
+				break  # Prefer .tres, stop searching
+			elif file.ends_with(".tscn"):
+				if tscn_file == "":
+					tscn_file = file  # Use the first .tscn found
 
-		# Fall back to scene loading if no .tres found
-		if !resource_loaded && tscn_file:
-			print("No .tres file found in ", subdir_path, ", loading scene instead")
-			var scene := load(tscn_file) as PackedScene
+		if tres_file != "":
+			var resource: Resource = load(subdir_path.path_join(tres_file))
+			if resource is BaseResource and resource.purchasable:
+				temp_items.append(resource)
+		elif tscn_file != "":
+			var scene := load(subdir_path.path_join(tscn_file)) as PackedScene
 			var instance: Node = scene.instantiate()
-
-			if instance.has_method("get") && instance.get(resource_property) is BaseResource:
-				var hidden_resouce : Resource = instance.get(resource_property)
-				if hidden_resouce == BaseResource && hidden_resouce.purchasable:
-					temp_items.append(hidden_resouce)
-
+			if instance.has_method("get"):
+				var hidden_resource = instance.get(resource_property)
+				if hidden_resource is BaseResource and hidden_resource.purchasable:
+					temp_items.append(hidden_resource)
 			instance.queue_free()
-			break  # Process only first .tscn per directory
+
