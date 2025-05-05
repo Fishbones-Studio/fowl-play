@@ -62,8 +62,8 @@ func get_next_level_cost(levels : int = 1 ) -> int:
 		return cost
 	return int(cost_level_multiplier * (current_level + levels) * cost_level_step)
 
-func get_previous_level_cost(levels : int = 1 ) -> int:
-	levels = clamp(levels, 0, max_level - current_level)
-	if current_level == 0 || levels == 0:
+func get_previous_level_cost(levels : int = 1) -> int:
+	levels = clamp(levels, 0, current_level)
+	if current_level == 0 or levels == 0:
 		return cost
-	return int(cost_level_multiplier * (current_level + levels) * cost_level_step)
+	return int(cost_level_multiplier * (current_level - levels) * cost_level_step)

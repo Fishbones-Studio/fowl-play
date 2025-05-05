@@ -93,9 +93,18 @@ func _on_reset_button_pressed() -> void:
 
 					# Check if it's the expected resource type
 					if upgrade_resource is PermUpgradesResource:
-						var refund: int = int(
-							upgrade_resource.cost * refund_percentage
-						)
+						# Calculate the actual cost paid for this level
+						var level := i + 1
+						var cost := 0
+						if level == 1:
+							cost = upgrade_resource.cost
+						else:
+							cost = int(
+								upgrade_resource.cost_level_multiplier
+								* level
+								* upgrade_resource.cost_level_step
+							)
+						var refund: int = int(cost * refund_percentage)
 						match upgrade_resource.currency_type:
 							CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
 								total_feathers_refund += refund
@@ -137,3 +146,4 @@ func _on_reset_button_pressed() -> void:
 
 	# Refresh the UI to show 0 levels and updated currency
 	_refresh_shop()
+
