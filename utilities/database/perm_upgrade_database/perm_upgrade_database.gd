@@ -2,11 +2,11 @@
 class_name PermUpgradeDatabase
 extends BaseDatabase
 
-const UPGRADE_PATH = "res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/"
+const UPGRADE_PATH: String = "res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/"
 
 static func _load_resources() -> Array[BaseResource]:
 	var all_items: Array[BaseResource] = []
-	var files = get_files_from_path(UPGRADE_PATH)
+	var files: PackedStringArray       = get_files_from_path(UPGRADE_PATH)
 	for upgrade_type in StatsEnums.UpgradeTypes.values():
 		var upgrade_type_string: String = StatsEnums.upgrade_type_to_string(upgrade_type).to_lower()
 		for file in files:
@@ -17,7 +17,7 @@ static func _load_resources() -> Array[BaseResource]:
 	return all_items
 
 
-static func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
+func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 	var upgrades: Array[BaseResource] = []
 	var upgrade_type_string: String = StatsEnums.upgrade_type_to_string(upgrade_type).to_lower()
 	var files: PackedStringArray    = get_files_from_path(UPGRADE_PATH)
@@ -28,7 +28,7 @@ static func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 				upgrades.append(resource)
 	return upgrades
 
-static func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
+func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
 	var grouped: Dictionary[StatsEnums.UpgradeTypes, Array] = {}
 	var files = get_files_from_path(UPGRADE_PATH)
 	for upgrade_type in StatsEnums.UpgradeTypes.values():
