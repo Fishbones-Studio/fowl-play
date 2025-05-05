@@ -1,8 +1,9 @@
-class_name SkillTreeItem extends VBoxContainer
+class_name SkillTreeItem
+extends VBoxContainer
 
-@export var upgrade_type: String = "Damage"
+@export var upgrade_type: StatsEnums.UpgradeTypes
 @export var max_level: int = 5
-@onready var kind_indicator_label: Label = $Kind_Indicator_Label
+@onready var kind_indicator_label: Label = $KindIndicatorLabel
 @onready var buy_button: Button = $HBoxContainer/Buy_Button
 @onready var level_panels: Array = [
 	$HBoxContainer/Level1,
@@ -12,33 +13,34 @@ class_name SkillTreeItem extends VBoxContainer
 	$HBoxContainer/Level5
 ]
 
-# TODO: uid instead of string
-@export var upgrade_resources: Array = [
-	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level1.tres"),
-	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level2.tres"),
-	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level3.tres"),
-	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level4.tres"),
-	preload("res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/damage_level5.tres")
-]
 signal shop_refresh_needed
+
 var current_level: int = 0
 var copied_stats: LivingEntityStats
 var purchased_color: Color = Color(0, 1, 0)
 var unpurchased_color: Color = Color(0.5, 0.5, 0.5)
+var upgrade_resources: Array[PermUpgradeResource] = []
 
 func _ready() -> void:
-	kind_indicator_label.text = upgrade_type
-	# Load current level from saved upgrades dictionary
+	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(upgrade_type)
 	var upgrades = SaveManager.get_loaded_player_upgrades()
-	current_level = upgrades.get(upgrade_type, 0) 
-	
+	current_level = upgrades.get(upgrade_type, 0)
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
-	
-	
+	update_panels()
+	buy_button.pressed.connect(_on_buy_button_pressed)
+
+func init(_upgrade_type: StatsEnums.UpgradeTypes, _upgrades: Array[PermUpgradeResource], _copied_stats: LivingEntityStats) -> void:
+	upgrade_type = _upgrade_type
+	upgrade_resources = _upgrades
+	copied_stats = _copied_stats
+	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(upgrade_type)
+	var upgrades_dict = SaveManager.get_loaded_player_upgrades()
+	current_level = upgrades_dict.get(upgrade_type, 0)
 	update_panels()
 
 func _on_buy_button_pressed() -> void:
+	if !upgrade_resources : return
 	if current_level < max_level and can_afford_upgrade():
 		purchase_upgrade()
 		current_level += 1
@@ -56,6 +58,8 @@ func _on_buy_button_pressed() -> void:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
 
 func can_afford_upgrade() -> bool:
+	if current_level >= upgrade_resources.size():
+		return false
 	var upgrade_resource = upgrade_resources[current_level]
 	return GameManager.feathers_of_rebirth >= upgrade_resource.cost
 
@@ -64,45 +68,39 @@ func purchase_upgrade() -> void:
 	GameManager.feathers_of_rebirth -= upgrade_resource.cost
 
 func apply_upgrade() -> void:
-	if current_level <= upgrade_resources.size():
-		var upgrade_resource = upgrade_resources[current_level - 1]
-		if upgrade_resource == null:
-			push_error("Upgrade resource is null!")
-			return
-		if not upgrade_resource is PermUpgradeResource:
-			push_error("Upgrade resource is not a PermUpgradeResource!")
-			return
-		print("Upgrade Resource: ", upgrade_resource)
-		print("Health Bonus: ", upgrade_resource.health_bonus)
-		match upgrade_type:
-			"Health":
-				copied_stats.max_health += upgrade_resource.health_bonus
-			"Stamina":
-				copied_stats.max_stamina += upgrade_resource.stamina_bonus
-			"Damage":
-				copied_stats.attack += upgrade_resource.attack
-			"Defense":
-				copied_stats.defense += upgrade_resource.defense_bonus
-			"Speed":
-				copied_stats.speed += upgrade_resource.speed_bonus
-			"Weight":
-				copied_stats.weight += upgrade_resource.weight_bonus
+	if current_level == 0 or current_level > upgrade_resources.size():
+		return
+	var upgrade_resource = upgrade_resources[current_level - 1]
+	if upgrade_resource == null:
+		push_error("Upgrade resource is null!")
+		return
+	if not upgrade_resource is PermUpgradeResource:
+		push_error("Upgrade resource is not a PermUpgradeResource!")
+		return
+	match upgrade_type:
+		StatsEnums.UpgradeTypes.HEALTH:
+			copied_stats.max_health += upgrade_resource.health_bonus
+		StatsEnums.UpgradeTypes.STAMINA:
+			copied_stats.max_stamina += upgrade_resource.stamina_bonus
+		StatsEnums.UpgradeTypes.DAMAGE:
+			copied_stats.attack += upgrade_resource.attack
+		StatsEnums.UpgradeTypes.DEFENSE:
+			copied_stats.defense += upgrade_resource.defense_bonus
+		StatsEnums.UpgradeTypes.SPEED:
+			copied_stats.speed += upgrade_resource.speed_bonus
+		StatsEnums.UpgradeTypes.WEIGHT:
+			copied_stats.weight += upgrade_resource.weight_bonus
+
 func update_panels() -> void:
 	for i in range(level_panels.size()):
 		var panel = level_panels[i]
 		var color_rect = panel.get_node("ColorRect")
-		print("Panel ", i, " Child Node: ", color_rect)
 		if i < current_level:
 			color_rect.color = purchased_color
 		else:
 			color_rect.color = unpurchased_color
-	print("Updated Panels for: ", upgrade_type, " - Current Level: ", current_level)
 
 func save_upgrades() -> void:
-	# Get the current upgrades dictionary
 	var upgrades = SaveManager.get_loaded_player_upgrades()
 	upgrades[upgrade_type] = current_level
-	# Save the game with the updated upgrades
 	SaveManager.save_game(copied_stats, upgrades)
-	print("Saving Stats: ", copied_stats.to_dict())
-	print("Saving Upgrades: ", upgrades)

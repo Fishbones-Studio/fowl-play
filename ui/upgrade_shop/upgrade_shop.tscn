@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cuqpcy333m8d5" path="res://utilities/shop/base_shop.tscn" id="1_37cfq"]
 [ext_resource type="Script" uid="uid://jrjt7uk4668e" path="res://ui/upgrade_shop/upgrade_shop.gd" id="2_qprek"]
-[ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/upgrade_database/upgrade_database.tscn" id="3_i2pg2"]
+[ext_resource type="PackedScene" uid="uid://dalift7fdpsm4" path="res://utilities/database/run_upgrade_database/run_upgrade_database.tscn" id="3_i2pg2"]
 
 [node name="UpgradeShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_37cfq")]
 script = ExtResource("2_qprek")

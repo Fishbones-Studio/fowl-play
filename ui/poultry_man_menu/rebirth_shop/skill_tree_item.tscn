@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.gd" id="1_7dkd8"]
 
-[node name="Skill_tree_item" type="VBoxContainer"]
+[node name="SkillTreeItem" type="VBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_7dkd8")
-upgrade_type = ""
 
-[node name="Kind_Indicator_Label" type="Label" parent="."]
+[node name="KindIndicatorLabel" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Label"

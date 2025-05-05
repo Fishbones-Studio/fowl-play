@@ -1,36 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://dmgeue4l6fj4f"]
+[gd_scene load_steps=5 format=3 uid="uid://dmgeue4l6fj4f"]
 
 [ext_resource type="Script" uid="uid://c1y2iw2q8ee8l" path="res://ui/poultry_man_menu/rebirth_shop/rebirth_shop.gd" id="1_5h013"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_p65sv"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="3_lq5l4"]
-[ext_resource type="PackedScene" uid="uid://cdudy6ia0qr8w" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.tscn" id="4_rmc2l"]
-[ext_resource type="Resource" uid="uid://yflef0qyqkvj" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/health_level1.tres" id="5_3iw7s"]
-[ext_resource type="Resource" uid="uid://cxad0qjreeads" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/health_level2.tres" id="6_yy28d"]
-[ext_resource type="Resource" uid="uid://cykotj6scuajw" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/health_level3.tres" id="7_2pggh"]
-[ext_resource type="Resource" uid="uid://bdji2fk4sk6af" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/health_level4.tres" id="8_rr1q6"]
-[ext_resource type="Resource" uid="uid://c4c8n0f7twp20" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/health_level5.tres" id="9_8rteu"]
-[ext_resource type="Resource" uid="uid://b3a8l1a5k263a" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/speed_level1.tres" id="10_1j7u1"]
-[ext_resource type="Resource" uid="uid://pj8ie61nletn" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/speed_level2.tres" id="11_ekow7"]
-[ext_resource type="Resource" uid="uid://dne7rqo8o3d1w" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/speed_level3.tres" id="12_dsqfu"]
-[ext_resource type="Resource" uid="uid://dyw5sins7rbox" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/speed_level4.tres" id="13_up0tv"]
-[ext_resource type="Resource" uid="uid://bg5qbo7wx1gpn" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/speed_level5.tres" id="14_l2e87"]
-[ext_resource type="Resource" uid="uid://xex0a13xo4c5" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/defense_level1.tres" id="15_ag5ar"]
-[ext_resource type="Resource" uid="uid://c5bnxv45ul776" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/defense_level2.tres" id="16_yqf2v"]
-[ext_resource type="Resource" uid="uid://cvkqyg3vdqiw5" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/defense_level3.tres" id="17_s6dal"]
-[ext_resource type="Resource" uid="uid://orrx5x0br3c1" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/defense_level4.tres" id="18_43dpb"]
-[ext_resource type="Resource" uid="uid://bshh0u38owjhc" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/defense_level5.tres" id="19_uwdoe"]
-[ext_resource type="Resource" uid="uid://c6djqldqsx8y8" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/stamina_level1.tres" id="20_1br0q"]
-[ext_resource type="Resource" uid="uid://bxf486s7swwkc" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/stamina_level2.tres" id="21_xaq25"]
-[ext_resource type="Resource" uid="uid://dsia4vxyjtx6s" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/stamina_level3.tres" id="22_0h6kw"]
-[ext_resource type="Resource" uid="uid://mvrrivb0lyuf" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/stamina_level4.tres" id="23_fvpl7"]
-[ext_resource type="Resource" uid="uid://g33ca8444d0" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/stamina_level5.tres" id="24_7fr8m"]
-[ext_resource type="Resource" uid="uid://cpabeidmvrmnr" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/weight_level1.tres" id="25_upyxi"]
-[ext_resource type="Resource" uid="uid://le70pm2hlrua" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/weight_level2.tres" id="26_qxwyt"]
-[ext_resource type="Resource" uid="uid://b0hjexwgohmua" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/weight_level3.tres" id="27_0dajs"]
-[ext_resource type="Resource" uid="uid://cnfg3yc7bhgdf" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/weight_level4.tres" id="28_qf17x"]
-[ext_resource type="Resource" uid="uid://65ec8f64ff8u" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/weight_level5.tres" id="29_vlvkw"]
+[ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="30_p65sv"]
 
-[node name="RebirthShop" type="Control"]
+[node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5h013")
+item_database = NodePath("PermUpgradeDatabase")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -112,52 +88,8 @@ theme_override_constants/margin_bottom = 30
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Skill_tree_item_Damage" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="Skill_tree_item2_Health" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-upgrade_type = "Health"
-upgrade_resources = [ExtResource("5_3iw7s"), ExtResource("6_yy28d"), ExtResource("7_2pggh"), ExtResource("8_rr1q6"), ExtResource("9_8rteu")]
-
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="Skill_tree_item3_Speed" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-upgrade_type = "Speed"
-upgrade_resources = [ExtResource("10_1j7u1"), ExtResource("11_ekow7"), ExtResource("12_dsqfu"), ExtResource("13_up0tv"), ExtResource("14_l2e87")]
-
-[node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="Skill_tree_item4_Defense" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-upgrade_type = "Defense"
-upgrade_resources = [ExtResource("15_ag5ar"), ExtResource("16_yqf2v"), ExtResource("17_s6dal"), ExtResource("18_43dpb"), ExtResource("19_uwdoe")]
-
-[node name="HSeparator4" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="Skill_tree_item5_Stamina" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-upgrade_type = "Stamina"
-upgrade_resources = [ExtResource("20_1br0q"), ExtResource("21_xaq25"), ExtResource("22_0h6kw"), ExtResource("23_fvpl7"), ExtResource("24_7fr8m")]
-
-[node name="HSeparator5" type="HSeparator" parent="Panel/VBoxContainer/MarginContainer/Items"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="Skill_tree_item6_Weight" parent="Panel/VBoxContainer/MarginContainer/Items" instance=ExtResource("4_rmc2l")]
-layout_mode = 2
-upgrade_type = "Weight"
-upgrade_resources = [ExtResource("25_upyxi"), ExtResource("26_qxwyt"), ExtResource("27_0dajs"), ExtResource("28_qf17x"), ExtResource("29_vlvkw")]
+[node name="PermUpgradeDatabase" type="Node" parent="."]
+script = ExtResource("30_p65sv")
+metadata/_custom_type_script = "uid://bqo3jsn8ydal3"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
