@@ -130,7 +130,6 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
-offset = Vector3(0, 1, -1.8)
 camera = NodePath("ViewportCamera")
 
 [node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
@@ -211,11 +210,11 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 8
 script = ExtResource("1_sqrx6")
-health_bar = NodePath("BossHealthBar")
+entity_type = 1
+health_bar = NodePath("HealthBar")
 name_label = NodePath("EnemyNameLabel")
 
-[node name="BossHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
-unique_name_in_owner = true
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -226,7 +225,7 @@ value = 50.0
 show_percentage = false
 script = ExtResource("11_rmjiu")
 
-[node name="DamageBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar"]
+[node name="DamageBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -239,7 +238,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hyt24")
 value = 65.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar"]
+[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar"]
 wait_time = 0.4
 one_shot = true
 
@@ -284,7 +283,6 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
-offset = Vector3(0, 1, -2.5)
 camera = NodePath("ViewportCamera")
 entity_types = 1
 
@@ -319,5 +317,5 @@ script = ExtResource("8_w7jxt")
 layout_mode = 1
 
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
-[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/BossHealthBar" method="_on_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar" method="_on_timer_timeout"]
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]
