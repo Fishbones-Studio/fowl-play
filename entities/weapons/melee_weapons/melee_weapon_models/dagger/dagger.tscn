@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_8ap45"]
 [ext_resource type="Resource" uid="uid://blv5macbefk8v" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tres" id="2_6a4qq"]
-[ext_resource type="PackedScene" uid="uid://ov5d0pnsy350" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.glb" id="2_8qojw"]
+[ext_resource type="PackedScene" uid="uid://bkgd1wxb8r3im" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.glb" id="2_8qojw"]
 
 [sub_resource type="Animation" id="Animation_6a4qq"]
 resource_name = "Attack"
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.433333, 0.6, 0.8, 1.2),
 "transitions": PackedFloat32Array(1, 1.68179, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.139626, -5.41052, -1.39626), Vector3(1.309, 0, 0), Vector3(3.14159, 0, 0), Vector3(3.14159, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(-0.139626, -5.41052, -1.39626), Vector3(1.309, 0, 0), Vector3(2.0944, 0, 0), Vector3(1.309, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
