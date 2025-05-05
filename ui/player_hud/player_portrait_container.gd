@@ -28,10 +28,12 @@ var fov_tween : Tween ## Keeping track of the FOV tween
 @onready var duration_timer : Timer = $DurationTimer
 @onready var overlay_shader : ColorRect = $OverlayShader
 @onready var enemy_border : ColorRect = %EnemyBorder
-
+@onready var enemy_vbox_container : VBoxContainer = %EnemyVBoxContainer
 
 
 func _ready() -> void:
+	enemy_vbox_container.visible = false
+	
 	# Hide by default
 	overlay_shader.hide()
 	
@@ -48,6 +50,7 @@ func _ready() -> void:
 		printerr("ViewportCamera node not found!")
 
 	# Connect signals
+	SignalManager.enemy_appeared.connect(_on_enemy_appeared)
 	SignalManager.player_hurt.connect(
 		func():
 			_on_player_health(hurt_time, hurt_shader, border_hurt_colour)
@@ -57,6 +60,8 @@ func _ready() -> void:
 			_on_player_health(heal_time, heal_shader, border_heal_colour)
 	)
 
+func _on_enemy_appeared(visible: bool) -> void:
+	enemy_vbox_container.visible = visible
 
 func _on_player_health(time : float, shader_material : ShaderMaterial, colour: Color) -> void:
 	# check if queue_free has been called

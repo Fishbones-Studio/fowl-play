@@ -105,6 +105,7 @@ func _enter_in_progress() -> void:
 			_current_enemy = _pick_random_enemy(first_enemy_type)
 
 	_spawn_enemy_in_level()
+	SignalManager.enemy_appeared.emit(true)
 
 	await SignalManager.enemy_died
 
@@ -126,6 +127,7 @@ func _enter_concluding() -> void:
 
 	# Display enemy defeated message
 	if _current_enemy == null:
+		SignalManager.enemy_appeared.emit(false)
 		SignalManager.add_ui_scene.emit(
 			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!"}
 		)

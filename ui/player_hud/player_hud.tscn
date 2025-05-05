@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://djppnnip15vqi" path="res://ui/player_hud/stamina_bar/stamina_bar.tscn" id="2_rtdb5"]
 [ext_resource type="Shader" uid="uid://dscuhfc7v6toy" path="res://ui/player_hud/player_portrait_heal.gdshader" id="3_kgno4"]
 [ext_resource type="Shader" uid="uid://cojtu5loc1r81" path="res://ui/player_hud/player_portrait_hurt.gdshader" id="3_kpoie"]
-[ext_resource type="Shader" uid="uid://d04kjgvhm3ac" path="res://ui/player_hud/player_portrait_skew.gdshader" id="5_yfus2"]
+[ext_resource type="Shader" path="res://ui/player_hud/player_portrait_skew.gdshader" id="5_yfus2"]
 [ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
 [ext_resource type="PackedScene" uid="uid://77dxickbfdy8" path="res://ui/player_hud/player_crosshair/crosshair_container.tscn" id="9_8qpry"]
 [ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="11_rmjiu"]
@@ -130,6 +130,7 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
+offset = Vector3(0, 1, -1.8)
 camera = NodePath("ViewportCamera")
 
 [node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
@@ -193,6 +194,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 
 [node name="VSLabel" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -203,7 +205,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="BossBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer" node_paths=PackedStringArray("health_bar", "name_label")]
+[node name="EnemyBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer" node_paths=PackedStringArray("health_bar", "name_label")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -214,7 +217,7 @@ entity_type = 1
 health_bar = NodePath("HealthBar")
 name_label = NodePath("EnemyNameLabel")
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer"]
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -225,7 +228,7 @@ value = 50.0
 show_percentage = false
 script = ExtResource("11_rmjiu")
 
-[node name="DamageBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar"]
+[node name="DamageBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer/HealthBar"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -238,32 +241,33 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_hyt24")
 value = 65.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar"]
+[node name="Timer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer/HealthBar"]
 wait_time = 0.4
 one_shot = true
 
-[node name="EnemyNameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
+[node name="EnemyNameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 text = "Boss Name"
 
-[node name="Spacer" type="VSeparator" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
+[node name="Spacer" type="VSeparator" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 35.0
 
-[node name="BossVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+[node name="EnemyVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = -20
 
-[node name="EnemyBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
+[node name="EnemyBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(108, 20)
 layout_mode = 2
 
-[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer" node_paths=PackedStringArray("border", "camera")]
+[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer" node_paths=PackedStringArray("border", "camera")]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
@@ -272,32 +276,33 @@ skew_shader = SubResource("ShaderMaterial_vd2g3")
 border = NodePath("../EnemyBorder")
 camera = NodePath("BossPortraitViewportContainer/SubViewportBoss/ViewportCamera")
 
-[node name="BossPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
+[node name="BossPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer" node_paths=PackedStringArray("camera")]
+[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer" node_paths=PackedStringArray("camera")]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
+offset = Vector3(0, 1.5, -5)
 camera = NodePath("ViewportCamera")
 entity_types = 1
 
-[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
+[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
 
-[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
+[node name="OverlayShader" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer"]
 visible = false
 material = SubResource("ShaderMaterial_kgno4")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
-[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
+[node name="DurationTimer" type="Timer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer"]
 wait_time = 0.15
 one_shot = true
 
@@ -317,5 +322,5 @@ script = ExtResource("8_w7jxt")
 layout_mode = 1
 
 [connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer" method="_on_duration_timer_timeout"]
-[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer/HealthBar" method="_on_timer_timeout"]
-[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer/HealthBar/Timer" to="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyBarContainer/HealthBar" method="_on_timer_timeout"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer/DurationTimer" to="MarginContainer/VBoxContainer/TopHBoxContainer/EnemyVBoxContainer/BossPortrairContainer" method="_on_duration_timer_timeout"]
