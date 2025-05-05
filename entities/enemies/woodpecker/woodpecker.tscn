@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://towsqhy2adj7"]
+[gd_scene load_steps=10 format=3 uid="uid://towsqhy2adj7"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_br0sw"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="6_x6gfb"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
+[ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kh81q"]
 size = Vector3(1.5, 5, 2)
@@ -52,6 +53,11 @@ weapon_collision_mask = 2
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("6_x6gfb")]
 ability_resource = ExtResource("7_p6jwh")
+
+[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("8_p6jwh")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "Woodpecker"

@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bd2xkljpgossi" path="res://entities/enemies/hendere/hendere_stats.tres" id="2_n7fk8"]
 [ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hendere/art/chicken_hennifer.glb" id="3_i6i68"]
 [ext_resource type="BehaviorTree" uid="uid://cjwfnys8g6i4y" path="res://entities/enemies/ai/trees/hendere.tres" id="4_7al0x"]
-[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="6_uw30w"]
+[ext_resource type="Texture2D" uid="uid://r4er70ancjjp" path="res://entities/enemies/hendere/art/hendere_mugshot.png" id="6_uw30w"]
 [ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="10_f4t48"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pg7ui"]
@@ -21,17 +21,17 @@ transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 
 [node name="Skeleton3D" parent="chicken_hennifer/Armature_002" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.434138, -0.00257234, 0.0106214, 0.90078)
-bones/3/rotation = Quaternion(-0.685707, -0.0919002, 0.00572196, 0.72203)
-bones/4/rotation = Quaternion(-0.109824, 0.0204284, 0.0224777, 0.993487)
+bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
+bones/3/rotation = Quaternion(-0.514094, 0.00303936, -0.0152266, 0.857593)
+bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
 bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
 bones/6/rotation = Quaternion(-0.268938, 0.0361643, 0.74135, 0.613812)
-bones/7/rotation = Quaternion(0.150566, 0.0307317, 0.238495, 0.958909)
-bones/8/rotation = Quaternion(0.588505, -0.129407, -0.14376, 0.785015)
-bones/9/rotation = Quaternion(0.0662418, 0.151163, -0.146547, 0.975339)
-bones/10/rotation = Quaternion(0.308751, 0.0791932, 0.198242, 0.926877)
+bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
+bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
+bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
+bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.23933, 0.0450574, 0.053253, 0.968429)
+bones/11/rotation = Quaternion(-0.225762, -8.30913e-17, -8.30913e-17, 0.974182)
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17727, -0.0127716)
@@ -50,8 +50,11 @@ transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 
 melee_weapon_scene = ExtResource("10_f4t48")
 weapon_collision_mask = 2
 
-[node name="TextureRect" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(50, 50)
 texture = ExtResource("6_uw30w")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "Hendere"
