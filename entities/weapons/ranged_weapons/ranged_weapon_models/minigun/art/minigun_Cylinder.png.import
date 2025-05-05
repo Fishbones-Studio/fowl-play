@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://crglsnbmn4xrr"
+path.s3tc="res://.godot/imported/minigun_Cylinder.png-5ac7d871ba5b5da9f887495572acd802.s3tc.ctex"
+path.etc2="res://.godot/imported/minigun_Cylinder.png-5ac7d871ba5b5da9f887495572acd802.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b50aa7b3f7c24464bafd798389de229b"
+}
+
+[deps]
+
+source_file="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun_Cylinder.png"
+dest_files=["res://.godot/imported/minigun_Cylinder.png-5ac7d871ba5b5da9f887495572acd802.s3tc.ctex", "res://.godot/imported/minigun_Cylinder.png-5ac7d871ba5b5da9f887495572acd802.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
