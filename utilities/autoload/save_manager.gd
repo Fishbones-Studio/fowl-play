@@ -44,7 +44,7 @@ func load_settings() -> void:
 			var volume: float = linear_to_db(clampf(saved_volume, 0.0, 100.0) / 100)
 			AudioServer.set_bus_volume_db(bus_idx, volume)
 
-func save_game(stats: LivingEntityStats = null, upgrades: Dictionary = {}) -> void:
+func save_game(stats: LivingEntityStats = null, upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {}) -> void:
 	# Try to load the config file
 	var config := ConfigFile.new()
 	config.load(SAVE_GAME_PATH)
@@ -65,7 +65,11 @@ func save_game(stats: LivingEntityStats = null, upgrades: Dictionary = {}) -> vo
 	if stats:
 		_loaded_game_data["stats"] = stats
 	if upgrades:
+		print("Saving upgrades: ", upgrades)
+		# Saves upgrade type and its level
 		_loaded_game_data["upgrades"] = upgrades
+	else:
+		print("No upgrades to save.")
 	print("Game data saved successfully!")
 
 func load_game() -> Dictionary:
@@ -99,13 +103,20 @@ func load_game() -> Dictionary:
 	
 func reset_game() -> void:
 	var default_stats: LivingEntityStats = ResourceLoader.load("uid://bwhuhbesdlyu5").duplicate()
-	var reset_upgrades: Dictionary = {}
+	var default_upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {
+		StatsEnums.UpgradeTypes.MAX_HEALTH: 0,
+		StatsEnums.UpgradeTypes.DEFENSE: 0,
+		StatsEnums.UpgradeTypes.STAMINA: 0,
+		StatsEnums.UpgradeTypes.WEIGHT: 0,
+		StatsEnums.UpgradeTypes.DAMAGE: 0,
+		StatsEnums.UpgradeTypes.SPEED: 0
+	}
 	
 	_loaded_game_data = {}
 	
-	save_game(default_stats, reset_upgrades)
+	save_game(default_stats, default_upgrades)
 	print("Game Reset - Stats: ", default_stats.to_dict())
-	print("Game Reset - Upgrades: ", reset_upgrades)
+	print("Game Reset - Upgrades", default_upgrades)
 
 func get_loaded_player_stats() -> LivingEntityStats:
 	if _loaded_game_data.is_empty():
@@ -113,7 +124,38 @@ func get_loaded_player_stats() -> LivingEntityStats:
 	print("Loaded Upgrades: ", _loaded_game_data.get("upgrades", {}))
 	return _loaded_game_data.get("stats", null).duplicate()
 
-func get_loaded_player_upgrades() -> Dictionary:
+func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 	if _loaded_game_data.is_empty():
 		load_game()
-	return _loaded_game_data.get("upgrades", {}).duplicate()
+
+	var upgrades: Dictionary = _loaded_game_data.get("upgrades", {})
+	var typed_upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {}
+
+	for key in upgrades.keys():
+		# Ensure the key from the save file is actually an integer
+		if typeof(key) == TYPE_INT:
+			# Cast the integer key directly to the enum type
+			var upgrade_type: StatsEnums.UpgradeTypes = key as StatsEnums.UpgradeTypes
+			# Get the corresponding value (upgrade level)
+			var upgrade_level: int = upgrades[key] as int
+
+			# Check if the value is indeed an integer
+			if typeof(upgrade_level) == TYPE_INT:
+				typed_upgrades[upgrade_type] = upgrade_level
+			else:
+				printerr(
+					"Warning: Invalid value type for upgrade key ",
+					key,
+					" in saved data. Expected int, got: ",
+					typeof(upgrades[key])
+				)
+		else:
+			printerr(
+				"Warning: Invalid key type found in saved upgrades: ",
+				key,
+				". Expected int, got: ",
+				typeof(key)
+			)
+
+
+	return typed_upgrades

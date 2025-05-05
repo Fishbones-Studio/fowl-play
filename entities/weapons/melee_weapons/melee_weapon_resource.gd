@@ -3,12 +3,14 @@ class_name MeleeWeaponResource
 extends BaseResource
 
 # Weapon Attributes
+@export_group("Melee Weapon Attributes")
 @export var damage: int = 0
 # Timing Variables
 @export var windup_time: float = 0.0
 @export var attack_duration: float = 0.0
 @export var cooldown_time: float = 0.0
 # Animation Variables
+@export_group("Animation")
 @export var loop_animation := false
 
 

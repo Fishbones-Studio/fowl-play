@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PermUpgradesResource" load_steps=2 format=3 uid="uid://cv1ghafoiu6pn"]
+
+[ext_resource type="Script" uid="uid://ibkbkdkgs0yt" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resource.gd" id="1_q8bbj"]
+
+[resource]
+script = ExtResource("1_q8bbj")
+upgrade_type = 1
+bonus = 10
+bonus_level_step = 5
+bonus_level_multiplier = 2
+cost_level_step = 12
+cost_level_multiplier = 1
+max_level = 5
+current_level = 0
+name = "Max Health"
+purchasable = true
+drop_chance = 0
+cost = 10
+currency_type = 1
+description = "PlaceHolder"
+model_uid = ""
+metadata/_custom_type_script = "uid://ibkbkdkgs0yt"

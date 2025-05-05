@@ -1,6 +1,7 @@
 class_name AbilityResource
 extends BaseResource
 
+@export_group("Ability Settings")
 @export var cooldown: float
 
 
