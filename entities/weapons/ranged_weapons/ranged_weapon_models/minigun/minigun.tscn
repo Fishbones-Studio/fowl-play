@@ -1,12 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://8owdwg4pu4ht"]
+[gd_scene load_steps=11 format=3 uid="uid://8owdwg4pu4ht"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
 [ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
 [ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
 [ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
 [ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/idle_state.gd" id="3_vnsd5"]
+[ext_resource type="Animation" uid="uid://b02j3071rp3t0" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Attack.res" id="4_dbekv"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/windup_state.gd" id="4_w5bhe"]
+[ext_resource type="Animation" uid="uid://ytpkchyucjoj" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/cooldown_state.gd" id="6_04ypb"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mudr6"]
+_data = {
+&"Attack": ExtResource("4_dbekv"),
+&"Windup": ExtResource("5_i5s7k")
+}
 
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -19,13 +27,18 @@ current_weapon = ExtResource("2_h8kbp")
 transform = Transform3D(0.162841, -0.00196993, 0.0262144, -0.0261632, -0.0122609, 0.163159, 1.22882e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
 
 [node name="Cylinder_005" parent="minigun" index="2"]
-transform = Transform3D(0.108011, 0, 0, 0, 0.00546972, -0.108086, 0, 1.03926, 0.000568867, 0.000350159, 0.017893, 1.1732)
+transform = Transform3D(-0.108011, 8.91716e-09, 9.42166e-09, 9.41e-09, -0.00545374, 0.108086, 9.76264e-10, 1.03926, 0.000567205, 0.000350159, 0.017893, 1.1732)
 
 [node name="Cylinder_007" parent="minigun" index="4"]
-transform = Transform3D(0.10801, 2.1083e-10, 2.45782e-12, -2.39132e-17, 0.000255318, -0.108084, -4.68043e-10, 0.0486531, 0.000567194, -5.55411e-05, 0.0315108, 2.06677)
+transform = Transform3D(-0.10801, 6.28355e-10, 9.42394e-09, 9.40991e-09, -0.000255318, 0.108084, 1.44444e-09, 0.0486531, 0.000567194, -5.55411e-05, 0.0315108, 2.06677)
 
 [node name="Cylinder_008" parent="minigun" index="5"]
-transform = Transform3D(-0.423537, -7.80695e-13, 5.65268e-10, -5.64228e-10, 0.00117165, -0.424269, 4.30045e-12, 0.0768791, 0.00646592, 0.000575338, 0.0112242, 1.96039)
+transform = Transform3D(0.423537, -7.73596e-09, 3.6433e-08, -3.70111e-08, -0.00117165, 0.424269, 4.20543e-08, 0.0768791, 0.00646592, 0.000575338, 0.0112242, 1.96039)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="minigun" index="7"]
+libraries = {
+&"": SubResource("AnimationLibrary_mudr6")
+}
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
