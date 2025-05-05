@@ -83,7 +83,7 @@ func _enter_waiting() -> void:
 		{"display_text": "Round %d" % GameManager.current_round}
 	)
 	GameManager.chicken_player.global_position = (
-		player_default_position.global_position
+		player_default_position.global_position + Vector3(0, 0.5, 0)
 	)
 
 	await get_tree().create_timer(waiting_time).timeout
@@ -204,6 +204,7 @@ func _spawn_enemy_in_level() -> void:
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_default_position.global_position
+	_current_enemy.global_position.y += 0.5
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	SignalManager.enemy_died.connect(

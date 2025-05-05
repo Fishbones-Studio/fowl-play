@@ -102,4 +102,5 @@ func _cancel_purchase() -> void:
 
 
 func _on_close_button_pressed():
-	UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP_CONFIRMATION)
+	purchase_cancelled_signal.emit()
+	UIManager.remove_ui(self)

@@ -1,8 +1,12 @@
+################################################################################
 ## A camera system that follows a target entity with configurable parameters.
 ## 
-## The follow camera uses a SpringArm3D to maintain a specific distance from the target,
-## while handling collision avoidance. It updates the camera position based on the target's
-## movement and can apply the camera's Y rotation to the followed entity.
+## The follow camera uses a SpringArm3D to maintain a specific distance from the
+## target, while handling collision avoidance. It updates the camera position 
+## based on the target's movement and can apply the camera's Y rotation to the 
+## followed entity.
+################################################################################
+class_name FollowCamera
 extends Node3D
 
 @export_category("Camera")
@@ -19,11 +23,21 @@ extends Node3D
 @export_range(-90, 0 ) var min_degrees: float = -90.0
 @export_range(0, 90) var max_degrees: float = 45.0
 
-@export_group("Entity")
+@export_category("Entity")
 @export var entity_to_follow: CharacterBody3D
 @export var entity_follow_horizontal_offset: float = 2
 @export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
+
+@export_category("Screen Shake")
+@export var shake_intensity_limit := 30.0 ## The maximum (+ & -) shake effect. The higher this value, the more intense a shake will be.
+@export var shake_fade_speed: float = 5.0 ## The speed with which the shaking will fade after starting.
+
+## Create a random number generator
+var rng = RandomNumberGenerator.new()
+
+## The current intensity of the shake
+var shake_intensity: float = 0.0
 
 @onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
@@ -62,6 +76,29 @@ func _process(delta) -> void:
 	rotation.x += y_axis * vertical_sensitivity * delta * controller_sensitivity
 
 	_apply_camera_clamp()
+
+	## If shake intensity is more than 0, we are shaking the screen
+	if shake_intensity > 0:
+		## Decrease the shake intensity by lerping between the current intensity and 0.0
+		shake_intensity = lerp(shake_intensity, 0.0, shake_fade_speed * delta)
+		## The offset gets applied to the camera
+		camera_reference.h_offset = _get_random_offset().x
+		camera_reference.v_offset = _get_random_offset().y
+
+
+## Set the shake intensity to the intensity limit at the start of the screen shake
+func apply_shake(trauma: float) -> void:
+	shake_intensity = min(trauma, shake_intensity_limit)
+
+
+## This calculates a random offset between -current_shake_intensity and +current_shake_intensity
+## on both the x and y axis
+## Use rng to make the offset more 'random'
+func _get_random_offset() -> Vector2:
+	return Vector2(
+		rng.randf_range(-shake_intensity, shake_intensity),
+		rng.randf_range(-shake_intensity, shake_intensity)
+	)
 
 
 func _apply_camera_clamp() -> void:
