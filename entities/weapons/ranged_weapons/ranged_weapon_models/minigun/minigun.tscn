@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8owdwg4pu4ht"]
+[gd_scene load_steps=11 format=3 uid="uid://8owdwg4pu4ht"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
 [ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
@@ -8,6 +8,19 @@
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/windup_state.gd" id="4_w5bhe"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/cooldown_state.gd" id="6_04ypb"]
 
+[sub_resource type="Animation" id="Animation_h8kbp"]
+resource_name = "Attack"
+length = 2.1
+
+[sub_resource type="Animation" id="Animation_04blk"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dbekv"]
+_data = {
+&"Attack": SubResource("Animation_h8kbp"),
+&"RESET": SubResource("Animation_04blk")
+}
+
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 animation_player = NodePath("AnimationPlayer")
@@ -15,7 +28,25 @@ current_weapon = ExtResource("2_h8kbp")
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
-[node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
+[node name="Cylinder_002" parent="minigun" index="0"]
+transform = Transform3D(0.162841, -0.00196993, 0.0262144, -0.0261632, -0.0122609, 0.163159, 1.22882e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
+
+[node name="Cylinder_005" parent="minigun" index="2"]
+transform = Transform3D(0.0843091, 0.00341894, -0.0675621, -0.0675148, 0.0042693, -0.0843682, -6.28704e-09, 1.03926, 0.000568851, 0.000350159, 0.017893, 1.1732)
+
+[node name="Cylinder_007" parent="minigun" index="4"]
+transform = Transform3D(-0.0365915, 0.000240926, -0.101693, -0.101623, -8.67468e-05, 0.0366166, 7.06663e-09, 0.0486531, 0.000568863, -5.55411e-05, 0.0315108, 2.06677)
+
+[node name="Cylinder_008" parent="minigun" index="5"]
+transform = Transform3D(0.115808, -0.00113988, 0.412587, -0.411875, -0.000320506, 0.116009, -1.27508e-08, 0.0776613, 0.00653452, 0.000575338, 0.0112242, 1.96039)
+rotation_order = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_dbekv")
+}
+
+[node name="RangedWeaponStateMachine" parent="." index="2" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
 weapon = NodePath("..")
 
@@ -42,9 +73,9 @@ script = ExtResource("6_04ypb")
 ANIMATION_NAME = "COOLDOWN"
 state_type = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
-
 [node name="AttackOrigin" parent="." index="4"]
 transform = Transform3D(-0.992793, -0.119842, 0, 0.119842, -0.992793, 0, 0, 0, 1, 0, 0, 2.72573)
 
 [connection signal="timeout" from="RangedWeaponStateMachine/AttackState/AttackDurationTimer" to="RangedWeaponStateMachine/AttackState" method="_on_attack_duration_timer_timeout"]
+
+[editable path="minigun"]
