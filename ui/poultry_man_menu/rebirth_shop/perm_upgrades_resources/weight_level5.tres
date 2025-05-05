@@ -11,6 +11,7 @@ defense_bonus = 0
 speed_bonus = 0
 weight_bonus = 2
 name = ""
+purchasable = true
 drop_chance = 0
 cost = 300
 currency_type = 1

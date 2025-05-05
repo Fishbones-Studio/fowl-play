@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdudy6ia0qr8w"]
 
-[ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.gd" id="1_7dkd8"]
+[ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item/skill_tree_item.gd" id="1_7dkd8"]
 [ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="2_1mcw8"]
 
 [node name="SkillTreeItem" type="VBoxContainer"]
