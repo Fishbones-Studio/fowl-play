@@ -1,4 +1,5 @@
-class_name PauseScreen extends Control
+class_name PauseScreen 
+extends Control
 
 @export var chicken: Node3D
 @export var camera: Camera3D
@@ -43,7 +44,8 @@ func _on_settings_button_button_up() -> void:
 func _on_quit_button_button_up() -> void:
 	_return_to_main_menu()
 
-func _on_forfeit_button_pressed() -> void:
+
+func _on_forfeit_button_button_up() -> void:
 	GameManager.reset_game()
 	_return_to_game_menu()
 

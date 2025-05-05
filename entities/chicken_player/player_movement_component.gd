@@ -1,4 +1,3 @@
-
 class_name PlayerMovementComponent
 extends BaseMovementComponent
 
