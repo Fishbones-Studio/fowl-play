@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdudy6ia0qr8w"]
+[gd_scene load_steps=3 format=3 uid="uid://cdudy6ia0qr8w"]
 
 [ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.gd" id="1_7dkd8"]
+[ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="2_1mcw8"]
 
 [node name="SkillTreeItem" type="VBoxContainer"]
 anchors_preset = 10
@@ -12,6 +13,7 @@ size_flags_vertical = 3
 script = ExtResource("1_7dkd8")
 
 [node name="KindIndicatorLabel" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Label"
@@ -21,19 +23,42 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="ItemCurrencyIcon" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_1mcw8")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ItemCostLabel" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"ItemCost"
+text = "200"
+
 [node name="BuyButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "BUY"
 
 [node name="LevelProgressBar" type="ProgressBar" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 show_percentage = false
 
 [node name="LevelLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "MAX"
