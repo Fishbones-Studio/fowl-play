@@ -75,18 +75,30 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
-	if (weapon.animation_player and weapon):
-		if (current_state.ANIMATION_NAME != null and not current_state.ANIMATION_NAME.is_empty()  and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)):
-			if target_state != WeaponEnums.WeaponState.IDLE:
-				# Play the animation for the new state
-				weapon.animation_player.play(current_state.ANIMATION_NAME)
-		if target_state == WeaponEnums.WeaponState.IDLE:
+	if weapon and weapon.animation_player:
+		# Animation handling
+		var has_current_anim := current_state.ANIMATION_NAME != null \
+								and not current_state.ANIMATION_NAME.is_empty() \
+								and weapon \
+								and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)
+	
+		if has_current_anim:
+			var anim_name: String = current_state.ANIMATION_NAME
+			var anim: Animation   = weapon.animation_player.get_animation(anim_name)
+			if anim and weapon.current_weapon.loop_animation:
+				anim.loop = true
+			weapon.animation_player.play(anim_name)
+	
+			# If the next state does not have an animation, play RESET or stop
+		else:
 			if weapon.animation_player.has_animation("RESET"):
-				# resetting the property tracks
-				weapon.animation_player.queue("RESET")
+				weapon.animation_player.play("RESET")
+			else:
+				weapon.animation_player.stop()
 
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.state_type, information)
+
 
 
 # Gets the initial state when the game starts
