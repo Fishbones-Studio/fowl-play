@@ -1,0 +1,256 @@
+[gd_resource type="BehaviorTree" load_steps=61 format=3 uid="uid://cjwfnys8g6i4y"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_fxtff"]
+[ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="3_schhj"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_schhj"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_pia2r"]
+[ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
+[ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_8swpl"]
+
+[sub_resource type="BTAction" id="BTAction_lg466"]
+script = ExtResource("1_p83x8")
+target_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_ghfjr"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_igs77"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_ghfjr")
+
+[sub_resource type="BTCondition" id="BTCondition_mnhi0"]
+script = ExtResource("3_schhj")
+check_distance = 7.0
+player_layer = 2
+
+[sub_resource type="BTAction" id="BTAction_fxtff"]
+script = ExtResource("7_7jrpa")
+target_var = &"target"
+flank_distance = 4.0
+vertical_offset = 0.0
+clearance_radius = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_k4t8y"]
+children = [SubResource("BTCondition_mnhi0"), SubResource("BTAction_fxtff")]
+
+[sub_resource type="BBNode" id="BBNode_nrghm"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ynbrp"]
+animation_player = SubResource("BBNode_nrghm")
+animation_name = &"Idle"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_8py2e"]
+script = ExtResource("2_ba5to")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_n8emp"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_iavk7"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_ynbrp"), SubResource("BTAction_8py2e"), SubResource("BTRandomWait_n8emp")]
+
+[sub_resource type="BTCondition" id="BTCondition_ddbif"]
+script = ExtResource("3_fxtff")
+target_var = &"target"
+distance_min = 5.0
+distance_max = 100.0
+
+[sub_resource type="BBNode" id="BBNode_k65bw"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_eatwp"]
+animation_player = SubResource("BBNode_k65bw")
+animation_name = &"Walking"
+blend = 0.2
+speed = 2.0
+
+[sub_resource type="BTAction" id="BTAction_rbvfn"]
+script = ExtResource("4_schhj")
+target_var = &"target"
+rotation_speed = 10.0
+angle_threshold = 2.0
+duration = 0.0
+
+[sub_resource type="BTCondition" id="BTCondition_pia2r"]
+script = ExtResource("7_schhj")
+stuck_interval = 1.0
+stuck_threshold = 2.5
+
+[sub_resource type="BTAction" id="BTAction_qrmyx"]
+script = ExtResource("5_mnhi0")
+target_var = &"target"
+tolerance = 5.0
+aggro_distance = 50.0
+speed_factor = 0.0
+duration = 0.0
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
+
+[sub_resource type="BTCondition" id="BTCondition_n7fk8"]
+script = ExtResource("3_fxtff")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_i6i68"]
+script = ExtResource("6_pia2r")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_hcbj7"]
+children = [SubResource("BTCondition_n7fk8"), SubResource("BTAction_i6i68")]
+
+[sub_resource type="BTParallel" id="BTParallel_fjrrt"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_rbvfn"), SubResource("BTCondition_pia2r"), SubResource("BTAction_qrmyx"), SubResource("BTSequence_hcbj7")]
+
+[sub_resource type="BTSequence" id="BTSequence_a1uay"]
+custom_name = "Pursue"
+children = [SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
+metadata/_weight_ = 5.0
+
+[sub_resource type="BBNode" id="BBNode_d0mtc"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_l0rnk"]
+animation_player = SubResource("BBNode_d0mtc")
+animation_name = &"Dash"
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_n7fk8"]
+script = ExtResource("7_7jrpa")
+target_var = &"target"
+flank_distance = 2.0
+vertical_offset = 0.0
+clearance_radius = 0.5
+
+[sub_resource type="BTSequence" id="BTSequence_6e6ua"]
+custom_name = "Flank"
+children = [SubResource("BTPlayAnimation_l0rnk"), SubResource("BTAction_n7fk8")]
+
+[sub_resource type="BTWait" id="BTWait_i6i68"]
+duration = 0.2
+
+[sub_resource type="BTAction" id="BTAction_hcbj7"]
+script = ExtResource("6_pia2r")
+target_var = &"target"
+
+[sub_resource type="BTDelay" id="BTDelay_n7fk8"]
+seconds = 0.1
+children = [SubResource("BTAction_hcbj7")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_vidql"]
+times = 10
+children = [SubResource("BTDelay_n7fk8")]
+
+[sub_resource type="BTAction" id="BTAction_qjixf"]
+script = ExtResource("4_schhj")
+target_var = &"target"
+rotation_speed = 2.0
+angle_threshold = 2.0
+duration = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_hcbj7"]
+children = [SubResource("BTRepeat_vidql"), SubResource("BTAction_qjixf")]
+
+[sub_resource type="BTSequence" id="BTSequence_qjixf"]
+custom_name = "Shank"
+children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
+
+[sub_resource type="BTSequence" id="BTSequence_kwr7b"]
+custom_name = "Flank and shank"
+children = [SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTComment" id="BTComment_qjxos"]
+custom_name = "TODO: do sth else, e.g. drop egg bombs"
+
+[sub_resource type="BBNode" id="BBNode_fxtff"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_schhj"]
+animation_player = SubResource("BBNode_fxtff")
+animation_name = &"Walking"
+blend = 0.2
+speed = 2.0
+
+[sub_resource type="BTAction" id="BTAction_mnhi0"]
+script = ExtResource("8_ba5to")
+target_var = &"target"
+retreat_distance = 50.0
+speed_factor = 0.0
+rotation_speed = 6.0
+rotation_away_from_target = false
+duration = 10.0
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
+
+[sub_resource type="BTAction" id="BTAction_pia2r"]
+script = ExtResource("4_schhj")
+target_var = &"target"
+rotation_speed = 6.0
+angle_threshold = 5.0
+duration = 0.0
+
+[sub_resource type="BTCondition" id="BTCondition_schhj"]
+script = ExtResource("3_fxtff")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_7jrpa"]
+script = ExtResource("6_pia2r")
+target_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_gvblq"]
+children = [SubResource("BTCondition_schhj"), SubResource("BTAction_7jrpa")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_wv527"]
+children = [SubResource("BTSequence_gvblq")]
+
+[sub_resource type="BTParallel" id="BTParallel_5c880"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTAction_mnhi0"), SubResource("BTAction_pia2r"), SubResource("BTAlwaysSucceed_wv527")]
+
+[sub_resource type="BTSequence" id="BTSequence_pia2r"]
+custom_name = "Retreat"
+children = [SubResource("BTComment_qjxos"), SubResource("BTPlayAnimation_schhj"), SubResource("BTParallel_5c880")]
+metadata/_weight_ = 4.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]
+children = [SubResource("BTSequence_a1uay"), SubResource("BTSequence_kwr7b"), SubResource("BTSequence_pia2r")]
+
+[sub_resource type="BTSequence" id="BTSequence_fxtff"]
+children = [SubResource("BTSequence_iavk7"), SubResource("BTProbabilitySelector_ptrup")]
+
+[sub_resource type="BTParallel" id="BTParallel_xlk6v"]
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTSequence_k4t8y"), SubResource("BTSequence_fxtff")]
+
+[sub_resource type="BTSequence" id="BTSequence_t2uqu"]
+children = [SubResource("BTAction_lg466"), SubResource("BTSetVar_igs77"), SubResource("BTParallel_xlk6v")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_8swpl")
+root_task = SubResource("BTSequence_t2uqu")

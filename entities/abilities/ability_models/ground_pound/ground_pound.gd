@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * stats.weight * stats.defense
+		return (stats.weight * stats.defense) / 2
 
 var _particles_emitted: bool = false
 
@@ -20,15 +20,15 @@ func activate() -> void:
 		print("Cannot perform %s while on the ground." % name)
 		return
 
-	_toggle_collision_masks(true)
-	SignalManager.activate_item_slot.emit(current_ability)
+	_toggle_collision_masks(true, hit_area)
 
 	ability_holder.velocity.x = 0
 	ability_holder.velocity.z = 0
 	ability_holder.velocity.y = descent_velocity
-	
-	if ability_holder == ChickenPlayer:
+
+	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
+
 	cooldown_timer.start()
 
 
@@ -50,20 +50,18 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	# resetting vertical velocity
 	ability_holder.velocity.y = 0
 
-	_toggle_collision_masks(false)
-	if ability_holder == ChickenPlayer:
-		SignalManager.deactivate_item_slot.emit(current_ability)
+	_toggle_collision_masks(false, hit_area)
 
 
 func _physics_process(_delta: float) -> void:
 	# Handles edge case where character lands without hitting an enemy
 	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
 		await get_tree().create_timer(0.2).timeout
+
 		cpu_particles.emitting = true
 		_particles_emitted = true
-		_toggle_collision_masks(false)
-		if ability_holder == ChickenPlayer:
-			SignalManager.deactivate_item_slot.emit(current_ability)
+
+		_toggle_collision_masks(false, hit_area)
 
 
 func _apply_knockback(body: Node3D) -> void:
@@ -80,15 +78,3 @@ func _apply_knockback(body: Node3D) -> void:
 		)
 		# Knockback is a bit scuffed due to enemy not having a hurt state implemented.
 		body.velocity = knockback * ability_holder.stats.weight
-
-
-func _toggle_collision_masks(toggle: bool) -> void:
-	# Manages collision detection layers:
-	# - Enables/disables detection based on owner type
-
-	if ability_holder.collision_layer == 2: # Player
-		hit_area.set_collision_mask_value(3, toggle)
-	if ability_holder.collision_layer == 4: # Enemy
-		hit_area.set_collision_mask_value(2, toggle)
-
-	hit_area.set_collision_mask_value(1, toggle) # World

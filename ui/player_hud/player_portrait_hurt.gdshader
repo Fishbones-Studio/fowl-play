@@ -11,7 +11,7 @@ uniform float time;
 void fragment() {
     vec2 uv = SCREEN_UV;
 
-    // Add a subtle displacement. Higer weight for uv, but make it slightly different 
+    // Add a subtle displacement. Higer weight for uv, but make it slightly different
     uv += vec2(
         sin(uv.y * 50.0 + time * 5.0),
         cos(uv.x * 50.0 + time * 5.0)

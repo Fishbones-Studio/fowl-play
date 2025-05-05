@@ -27,7 +27,7 @@ func display_item(_item: BaseResource) -> void:
 			if empty_slot_texture == null: item_icon.hide()
 
 	else:
-		item == null
+		item = null
 		item_name.text = "Empty"
 		item_icon.texture = empty_slot_texture # Show empty slot texture
 		if empty_slot_texture == null: item_icon.hide()
