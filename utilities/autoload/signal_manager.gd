@@ -30,6 +30,8 @@ signal loading_screen_finished
 # Enemy signals
 signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 signal enemy_died
+signal enemy_stats_changed(stats: LivingEntityStats)
+signal enemy_appeared(visible: bool)
 
 # Weapon signals
 signal weapon_hit_target(target: PhysicsBody3D, damage: float, type: DamageEnums.DamageTypes)

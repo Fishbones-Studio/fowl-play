@@ -1,10 +1,13 @@
 extends CenterContainer
 
+
 @export_group("Shaders")
 @export var hurt_time : float = 0.15
 @export var heal_time : float = 0.25
+@export var skew_x_value : float
 @export var hurt_shader : ShaderMaterial
 @export var heal_shader : ShaderMaterial
+@export var skew_shader : ShaderMaterial 
 
 @export_group("Fov")
 @export var normal_fov : float = 65.0
@@ -12,24 +15,34 @@ extends CenterContainer
 @export var fov_tween_duration : float = 0.1 ## How fast the FOV changes
 
 @export_group("Border")
+@export var border : ColorRect 
 @export var border_starting_colour : Color
 @export var border_heal_colour : Color
 @export var border_hurt_colour : Color
+
+@export_group("Entity Types")
+@export var camera : Camera3D
 
 var fov_tween : Tween ## Keeping track of the FOV tween
 
 @onready var duration_timer : Timer = $DurationTimer
 @onready var overlay_shader : ColorRect = $OverlayShader
-@onready var border : ColorRect = $Border
-@onready var camera : Camera3D = %ViewportCamera
+@onready var enemy_border : ColorRect = %EnemyBorder
+@onready var enemy_vbox_container : VBoxContainer = %EnemyVBoxContainer
 
 
 func _ready() -> void:
+	enemy_vbox_container.visible = false
+	
 	# Hide by default
 	overlay_shader.hide()
 	
 	# set border colour
 	border.color = border_starting_colour
+	
+	if skew_shader:
+		border.material = skew_shader
+		skew_shader.set_shader_parameter("skew_x", skew_x_value)
 	
 	if camera:
 		camera.fov = normal_fov
@@ -37,6 +50,7 @@ func _ready() -> void:
 		printerr("ViewportCamera node not found!")
 
 	# Connect signals
+	SignalManager.enemy_appeared.connect(_on_enemy_appeared)
 	SignalManager.player_hurt.connect(
 		func():
 			_on_player_health(hurt_time, hurt_shader, border_hurt_colour)
@@ -46,6 +60,8 @@ func _ready() -> void:
 			_on_player_health(heal_time, heal_shader, border_heal_colour)
 	)
 
+func _on_enemy_appeared(visible: bool) -> void:
+	enemy_vbox_container.visible = visible
 
 func _on_player_health(time : float, shader_material : ShaderMaterial, colour: Color) -> void:
 	# check if queue_free has been called
@@ -58,6 +74,7 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 
 	# Setting the border colour
 	border.color = colour
+	enemy_border.color = colour
 
 	# Kill previous FOV tween if it's still running
 	if fov_tween and fov_tween.is_valid():
@@ -92,6 +109,7 @@ func _on_duration_timer_timeout() -> void:
 
 	# resetting border colour
 	border.color = border_starting_colour
+	enemy_border.color = border_starting_colour
 
 	# Kill previous FOV tween if it's still running (unlikely here, but safe)
 	if fov_tween and fov_tween.is_valid():

@@ -15,4 +15,5 @@ stamina_regen = 0
 weight_factor = 0.01
 k_scaler = 100.0
 is_player = false
+name = "Bob"
 metadata/_custom_type_script = "uid://up7hh823h5kw"

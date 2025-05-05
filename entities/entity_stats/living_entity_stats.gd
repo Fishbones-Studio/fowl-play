@@ -17,6 +17,7 @@ extends Resource
 
 @export_group("Holder")
 @export var is_player: bool = false
+@export var name: String
 
 var current_health: float:
 	set(value):
@@ -31,6 +32,7 @@ func init() -> void:
 	if max_stamina <= 0: push_error("Forgot to set max_stamina")
 	current_health = max_health
 	current_stamina = max_stamina
+
 
 
 ## Calculate the speed based on weight and speed factor
