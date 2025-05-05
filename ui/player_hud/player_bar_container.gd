@@ -1,27 +1,46 @@
 extends VBoxContainer
 
-@onready var health_bar: HealthBar = %HealthBar
-@onready var stamina_bar: StaminaBar = %StaminaBar
+@export var health_bar: HealthBar 
+@export var stamina_bar: StaminaBar 
+@export var name_label: Label
 
 
 func _ready() -> void:
-	# Initializing the health and stamina bars
-	SignalManager.init_health.connect(health_bar.init_health)
-	SignalManager.init_stamina.connect(stamina_bar.init)
+	# Initialize health bar
+	if health_bar:
+		SignalManager.init_health.connect(health_bar.init_health)
 
-	SignalManager.player_stats_changed.connect(_on_stats_changed)
+	# Initialize stamina bar only if it exists
+	if stamina_bar:
+		SignalManager.init_stamina.connect(stamina_bar.init)
+
+	SignalManager.player_stats_changed.connect(_on_player_stats_changed)
+	SignalManager.enemy_stats_changed.connect(_on_enemy_stats_changed)
 
 
-func _on_stats_changed(stats: LivingEntityStats) -> void:
-	# updating the max values
-	health_bar.max_value = stats.max_health
-	stamina_bar.max_value = stats.max_stamina
+func _on_player_stats_changed(stats: LivingEntityStats) -> void:
+	if health_bar:
+		health_bar.max_value = stats.max_health
+		health_bar.health = stats.current_health
 
-	# trigger hurt and health shaders
+	if stamina_bar:
+		stamina_bar.max_value = stats.max_stamina
+		stamina_bar.stamina = stats.current_stamina
+
+	if name_label:
+		name_label.text = stats.name
+
+	# Trigger hurt/heal effects only for player
 	if stats.current_health < health_bar.health:
 		SignalManager.player_hurt.emit()
 	elif stats.current_health > health_bar.health:
 		SignalManager.player_heal.emit()
 
-	health_bar.health = stats.current_health
-	stamina_bar.stamina = stats.current_stamina
+
+func _on_enemy_stats_changed(stats: LivingEntityStats) -> void:
+	if health_bar:
+		health_bar.max_value = stats.max_health
+		health_bar.health = stats.current_health
+
+	if name_label:
+		name_label.text = stats.name

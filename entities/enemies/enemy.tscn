@@ -1,17 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=9 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
-[ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
+[ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
+[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_w4yt1"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5xow2"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = "The chicken player."
+var/aggro_distance/name = &"aggro_distance"
+var/aggro_distance/type = 3
+var/aggro_distance/value = 0.0
+var/aggro_distance/hint = 0
+var/aggro_distance/hint_string = "The distance for the enemy to become aggressive."
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_ipr6v")
@@ -21,13 +29,6 @@ script = ExtResource("1_ipr6v")
 [node name="HealthbarSprite" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 texture = SubResource("ViewportTexture_5xow2")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(360, 512)
-
-[node name="HealthBar" parent="SubViewport" instance=ExtResource("2_gj3y3")]
-unique_name_in_owner = true
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_vabdn")

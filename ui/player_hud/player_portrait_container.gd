@@ -1,9 +1,10 @@
 extends CenterContainer
 
+
 @export_group("Shaders")
 @export var hurt_time : float = 0.15
 @export var heal_time : float = 0.25
-@export var skew_x_value : float = 1.0
+@export var skew_x_value : float
 @export var hurt_shader : ShaderMaterial
 @export var heal_shader : ShaderMaterial
 @export var skew_shader : ShaderMaterial 
@@ -14,16 +15,20 @@ extends CenterContainer
 @export var fov_tween_duration : float = 0.1 ## How fast the FOV changes
 
 @export_group("Border")
+@export var border : ColorRect 
 @export var border_starting_colour : Color
 @export var border_heal_colour : Color
 @export var border_hurt_colour : Color
+
+@export_group("Entity Types")
+@export var camera : Camera3D
 
 var fov_tween : Tween ## Keeping track of the FOV tween
 
 @onready var duration_timer : Timer = $DurationTimer
 @onready var overlay_shader : ColorRect = $OverlayShader
-@onready var border : ColorRect = %PlayerBorder
-@onready var camera : Camera3D = %ViewportCamera
+@onready var enemy_border : ColorRect = %EnemyBorder
+
 
 
 func _ready() -> void:
@@ -64,6 +69,7 @@ func _on_player_health(time : float, shader_material : ShaderMaterial, colour: C
 
 	# Setting the border colour
 	border.color = colour
+	enemy_border.color = colour
 
 	# Kill previous FOV tween if it's still running
 	if fov_tween and fov_tween.is_valid():
@@ -98,6 +104,7 @@ func _on_duration_timer_timeout() -> void:
 
 	# resetting border colour
 	border.color = border_starting_colour
+	enemy_border.color = border_starting_colour
 
 	# Kill previous FOV tween if it's still running (unlikely here, but safe)
 	if fov_tween and fov_tween.is_valid():

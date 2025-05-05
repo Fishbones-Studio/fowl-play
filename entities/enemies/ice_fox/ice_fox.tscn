@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3vj6us77coyt"]
+[gd_scene load_steps=13 format=3 uid="uid://d3vj6us77coyt"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
 [ext_resource type="BehaviorTree" uid="uid://bc7ucld3pg5s8" path="res://entities/enemies/ai/trees/ice_fox.tres" id="4_0uh03"]
+[ext_resource type="Script" uid="uid://nxjekf2tieqd" path="res://utilities/camera/culling_script.gd" id="4_ak1y5"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="4_qhcpj"]
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="5_7ghaq"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_72x12"]
@@ -22,6 +23,7 @@ enemy_model = NodePath("ice_fox")
 
 [node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
+script = ExtResource("4_ak1y5")
 
 [node name="Skeleton3D" parent="ice_fox/Armature" index="0"]
 bones/0/position = Vector3(9.72681e-17, 1.91494e-08, 0.438088)
@@ -77,7 +79,7 @@ shape = SubResource("BoxShape3D_8ixwh")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, -1.72496)
 texture = SubResource("ViewportTexture_mrdko")
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_0uh03")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]

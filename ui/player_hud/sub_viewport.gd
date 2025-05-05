@@ -1,6 +1,6 @@
 extends SubViewport
 
-enum EntityTypes { Chicken, Boss }
+enum EntityTypes { Chicken, Enemy }
 
 @export var offset: Vector3 = Vector3(0.0, 1.5, -1.8)
 @export var camera: Camera3D
@@ -9,18 +9,18 @@ enum EntityTypes { Chicken, Boss }
 var entity: Node3D = null
 
 
+
 func _process(_delta: float) -> void:
 	match entity_types:
 		EntityTypes.Chicken:
 			if GameManager.chicken_player: 
 				entity = GameManager.chicken_player
-		EntityTypes.Boss:
+		EntityTypes.Enemy:
 			if GameManager.current_enemy:
 				entity = GameManager.current_enemy
-		_:
-			push_error("Invalid entity type assigned to SubViewport")
 
 	if entity: _update_camera()
+
 
 
 func _update_camera() -> void:

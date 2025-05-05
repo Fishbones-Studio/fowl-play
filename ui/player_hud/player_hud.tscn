@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=22 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://da8h6ap4j4yyi" path="res://ui/player_hud/player_hud.gd" id="1_8xek4"]
@@ -11,9 +11,6 @@
 [ext_resource type="Shader" uid="uid://d04kjgvhm3ac" path="res://ui/player_hud/player_portrait_skew.gdshader" id="5_yfus2"]
 [ext_resource type="Script" uid="uid://cuwrrrvij7hrw" path="res://ui/player_hud/item_slot_container.gd" id="8_w7jxt"]
 [ext_resource type="PackedScene" uid="uid://77dxickbfdy8" path="res://ui/player_hud/player_crosshair/crosshair_container.tscn" id="9_8qpry"]
-[ext_resource type="Script" uid="uid://blkyc41lp0wdf" path="res://ui/player_hud/boss_bar_container.gd" id="9_hbnkv"]
-[ext_resource type="Script" uid="uid://bay06b5th72gq" path="res://ui/player_hud/vs_label.gd" id="9_vd2g3"]
-[ext_resource type="Script" uid="uid://bum76k5i2y8t7" path="res://ui/player_hud/boss_portrair_container.gd" id="10_ohebb"]
 [ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="11_rmjiu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]
@@ -68,7 +65,7 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_74l5y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd2g3"]
 shader = ExtResource("5_yfus2")
 shader_parameter/skew_x = -1.0
 
@@ -111,13 +108,16 @@ custom_minimum_size = Vector2(108, 20)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer"]
+[node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer" node_paths=PackedStringArray("border", "camera")]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
+skew_x_value = 1.0
 hurt_shader = SubResource("ShaderMaterial_w7jxt")
 heal_shader = SubResource("ShaderMaterial_8qpry")
 skew_shader = SubResource("ShaderMaterial_yfus2")
+border = NodePath("../PlayerBorder")
+camera = NodePath("PlayerPortraitViewportContainer/SubViewportPlayer/ViewportCamera")
 
 [node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer"]
 layout_mode = 2
@@ -134,7 +134,6 @@ offset = Vector3(0, 1, -1.8)
 camera = NodePath("ViewportCamera")
 
 [node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
-unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
@@ -149,13 +148,15 @@ layout_mode = 2
 wait_time = 0.15
 one_shot = true
 
-[node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+[node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer" node_paths=PackedStringArray("health_bar", "stamina_bar")]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = -1
 script = ExtResource("1_sqrx6")
+health_bar = NodePath("HealthBar")
+stamina_bar = NodePath("HBoxContainer/StaminaBar")
 
 [node name="HealthBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/PlayerBarContainer" instance=ExtResource("1_vyppb")]
 unique_name_in_owner = true
@@ -197,20 +198,21 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "V.S."
-script = ExtResource("9_vd2g3")
 
 [node name="SpacerRight" type="Control" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="BossBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer"]
+[node name="BossBarContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer" node_paths=PackedStringArray("health_bar", "name_label")]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 8
-script = ExtResource("9_hbnkv")
+script = ExtResource("1_sqrx6")
+health_bar = NodePath("BossHealthBar")
+name_label = NodePath("EnemyNameLabel")
 
 [node name="BossHealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
 unique_name_in_owner = true
@@ -241,7 +243,8 @@ show_percentage = false
 wait_time = 0.4
 one_shot = true
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
+[node name="EnemyNameLabel" type="Label" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossBarContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
@@ -256,16 +259,19 @@ size_flags_stretch_ratio = 35.0
 layout_mode = 2
 theme_override_constants/separation = -20
 
-[node name="BossBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
+[node name="EnemyBorder" type="ColorRect" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(108, 20)
 layout_mode = 2
 
-[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer"]
+[node name="BossPortrairContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer" node_paths=PackedStringArray("border", "camera")]
 layout_mode = 2
 size_flags_vertical = 0
-script = ExtResource("10_ohebb")
-skew_shader = SubResource("ShaderMaterial_74l5y")
+script = ExtResource("1_l7ggc")
+skew_x_value = -1.0
+skew_shader = SubResource("ShaderMaterial_vd2g3")
+border = NodePath("../EnemyBorder")
+camera = NodePath("BossPortraitViewportContainer/SubViewportBoss/ViewportCamera")
 
 [node name="BossPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer"]
 layout_mode = 2
@@ -278,12 +284,11 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
-offset = Vector3(0, 3.5, -8.5)
-camera = NodePath("ViewportCameraBoss")
+offset = Vector3(0, 1, -2.5)
+camera = NodePath("ViewportCamera")
 entity_types = 1
 
-[node name="ViewportCameraBoss" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
-unique_name_in_owner = true
+[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0

@@ -48,13 +48,10 @@ shape = SubResource("SphereShape3D_fjbia")
 transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.755416, 0)
 texture = SubResource("ViewportTexture_m0aa4")
 
-[node name="HealthBar" parent="SubViewport" index="0"]
-visible = false
-
-[node name="DamageNumberHandler" parent="." index="5"]
+[node name="DamageNumberHandler" parent="." index="4"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_m0aa4")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
