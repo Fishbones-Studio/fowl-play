@@ -28,13 +28,12 @@ func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
 	update_panels()
-	buy_button.pressed.connect(_on_buy_button_pressed)
 
 func init(_upgrade_type: StatsEnums.UpgradeTypes, _upgrades: Array[PermUpgradeResource], _copied_stats: LivingEntityStats) -> void:
 	upgrade_type = _upgrade_type
 	upgrade_resources = _upgrades
 	copied_stats = _copied_stats
-	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(upgrade_type)
+	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(_upgrade_type)
 	var upgrades_dict = SaveManager.get_loaded_player_upgrades()
 	current_level = upgrades_dict.get(upgrade_type, 0)
 	update_panels()

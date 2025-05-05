@@ -1,12 +1,20 @@
-extends BaseShop
+extends Control
 
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
+@onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
+@export var item_database: PermUpgradeDatabase
 
 func _ready() -> void:
 	shop_title_label.text = "Upgrades"
-	super()
+	_refresh_shop()
+	_setup_controller_navigation()
+	visibility_changed.connect(
+		func():
+			if visible:
+				_setup_controller_navigation()
+	)
 
 func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
@@ -15,20 +23,19 @@ func _refresh_shop() -> void:
 	for child in items.get_children():
 		child.queue_free()
 
-	var copied_stats                   = SaveManager.get_loaded_player_stats()
-	var available_upgrades: Dictionary[StatsEnums.UpgradeTypes, Array] = _get_available_items_grouped()
-
+	var copied_stats = SaveManager.get_loaded_player_stats()
+	var available_upgrades: Dictionary = _get_available_items_grouped()
 	var upgrade_types: Array = StatsEnums.UpgradeTypes.values()
+
 	for i in range(upgrade_types.size()):
 		var upgrade_type = upgrade_types[i]
-		print("Upgrade Type: ", upgrade_type)
 		var upgrades_raw: Array = available_upgrades.get(upgrade_type, [])
 		var upgrades: Array[PermUpgradeResource] = []
 		for u in upgrades_raw:
 			if u is PermUpgradeResource:
 				upgrades.append(u)
-		
-		var skill_tree_item : SkillTreeItem = SKILL_TREE_ITEM.instantiate()
+
+		var skill_tree_item: SkillTreeItem = SKILL_TREE_ITEM.instantiate()
 		items.add_child(skill_tree_item)
 		skill_tree_item.init(upgrade_type, upgrades, copied_stats)
 		if i < upgrade_types.size() - 1:
@@ -36,13 +43,7 @@ func _refresh_shop() -> void:
 			separator.add_theme_constant_override("separation", 25)
 			items.add_child(separator)
 
-func create_shop_item(_selected_item) -> BaseShopItem:
-	return null
-
-func _get_available_items() -> Array:
-	return []
-
-func _get_available_items_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
+func _get_available_items_grouped() -> Dictionary:
 	if item_database is PermUpgradeDatabase:
 		return item_database.get_all_upgrades_grouped()
 	return {}
