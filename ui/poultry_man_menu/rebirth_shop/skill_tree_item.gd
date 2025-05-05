@@ -13,6 +13,7 @@ var upgrade_resources: Array[PermUpgradeResource] = []
 @onready var kind_indicator_label: Label = $KindIndicatorLabel
 @onready var buy_button: Button = $HBoxContainer/Buy_Button
 @onready var level_progress_bar: ProgressBar = $HBoxContainer/LevelProgressBar
+@onready var level_label : Label = $HBoxContainer/LevelLabel
 
 func _ready() -> void:
 	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(upgrade_type)
@@ -41,7 +42,7 @@ func _on_buy_button_pressed() -> void:
 	if current_level < max_level and can_afford_upgrade():
 		purchase_upgrade()
 		current_level += 1
-		# --- Update progress bar instead of panels ---
+		# Update progress bar
 		update_progress_bar()
 		apply_upgrade()
 		save_upgrades()
@@ -100,6 +101,12 @@ func update_progress_bar() -> void:
 	level_progress_bar.value = current_level
 	# Disable buy button if max level is reached
 	buy_button.disabled = current_level >= max_level
+	
+	# update level label
+	if current_level < max_level:
+		level_label.text = str(current_level)
+	else:
+		level_label.text = "MAX"
 
 func save_upgrades() -> void:
 	var upgrades = SaveManager.get_loaded_player_upgrades()

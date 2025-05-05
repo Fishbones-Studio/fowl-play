@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item.gd" id="1_7dkd8"]
 
 [node name="SkillTreeItem" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 38.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_7dkd8")
 
 [node name="KindIndicatorLabel" type="Label" parent="."]
@@ -13,11 +17,11 @@ size_flags_horizontal = 4
 text = "Label"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Buy_Button" type="Button" parent="HBoxContainer"]
+[node name="BuyButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -26,11 +30,12 @@ text = "BUY"
 [node name="LevelProgressBar" type="ProgressBar" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 show_percentage = false
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "MAX"
 
-[connection signal="pressed" from="HBoxContainer/Buy_Button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
