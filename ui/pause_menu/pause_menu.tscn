@@ -182,4 +182,4 @@ expand_mode = 3
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_stats_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
 [connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_pressed"]
+[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_button_up"]
