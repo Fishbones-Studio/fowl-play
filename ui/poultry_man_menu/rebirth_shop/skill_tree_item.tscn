@@ -23,80 +23,10 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "BUY"
 
-[node name="Level1" type="Panel" parent="HBoxContainer"]
+[node name="LevelProgressBar" type="ProgressBar" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Level1"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.431
-offset_left = -7.545
-offset_top = -7.085
-offset_right = 64.675
-offset_bottom = 12.915
-scale = Vector2(1, 1.00279)
-
-[node name="Level2" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Level2"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.431
-offset_left = -7.545
-offset_top = -7.085
-offset_right = 64.675
-offset_bottom = 12.915
-scale = Vector2(1, 1.00279)
-
-[node name="Level3" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Level3"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.431
-offset_left = -7.545
-offset_top = -7.085
-offset_right = 64.675
-offset_bottom = 12.915
-scale = Vector2(1, 1.00279)
-
-[node name="Level4" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Level4"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.431
-offset_left = -7.545
-offset_top = -7.085
-offset_right = 64.675
-offset_bottom = 12.915
-scale = Vector2(1, 1.00279)
-
-[node name="Level5" type="Panel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Level5"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.431
-offset_left = -7.545
-offset_top = -7.085
-offset_right = 64.675
-offset_bottom = 12.915
-scale = Vector2(1, 1.00279)
+show_percentage = false
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
