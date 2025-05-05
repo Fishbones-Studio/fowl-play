@@ -4,14 +4,12 @@
 [ext_resource type="Resource" uid="uid://bd2xkljpgossi" path="res://entities/enemies/hendere/hendere_stats.tres" id="2_n7fk8"]
 [ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hendere/art/chicken_hennifer.glb" id="3_i6i68"]
 [ext_resource type="BehaviorTree" uid="uid://cjwfnys8g6i4y" path="res://entities/enemies/ai/trees/hendere.tres" id="4_7al0x"]
+[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="6_uw30w"]
 [ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="10_f4t48"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pg7ui"]
 radius = 1.0
 height = 2.4
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_tskui"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Hendere" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_legca")]
 stats = ExtResource("2_n7fk8")
@@ -39,21 +37,23 @@ bones/11/rotation = Quaternion(-0.23933, 0.0450574, 0.053253, 0.968429)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17727, -0.0127716)
 shape = SubResource("CapsuleShape3D_pg7ui")
 
-[node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.116262, 0)
-texture = SubResource("ViewportTexture_tskui")
-
-[node name="DamageNumberHandler" parent="." index="5"]
+[node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33002, 0)
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_7al0x")
 
-[node name="EnemyWeaponController" parent="." index="7"]
+[node name="EnemyWeaponController" parent="." index="5"]
 transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 1.01467, 1.12672, -0.399625)
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
 melee_weapon_scene = ExtResource("10_f4t48")
 weapon_collision_mask = 2
+
+[node name="TextureRect" parent="HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("6_uw30w")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "Hendere"
 
 [editable path="chicken_hennifer"]

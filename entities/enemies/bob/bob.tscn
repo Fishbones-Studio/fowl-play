@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0vmeubjcsxig"]
+[gd_scene load_steps=9 format=3 uid="uid://0vmeubjcsxig"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://dxril0olml25y" path="res://entities/enemies/bob/bob_stats.tres" id="2_fjbia"]
@@ -10,9 +10,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 4.25
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_m0aa4"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Bob" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_i06h6")]
 collision_layer = 4
@@ -40,18 +37,17 @@ transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
 shape = SubResource("SphereShape3D_fjbia")
 
-[node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.755416, 0)
-texture = SubResource("ViewportTexture_m0aa4")
-
-[node name="DamageNumberHandler" parent="." index="5"]
+[node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_m0aa4")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
 ability_resource = ExtResource("6_e381t")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "All-Devouring Bob"
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)

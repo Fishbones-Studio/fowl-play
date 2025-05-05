@@ -1,33 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=12 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
+[ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
+[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_w4yt1"]
-[ext_resource type="Script" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
+[ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="7_gj3y3"]
+[ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5xow2"]
-viewport_path = NodePath("SubViewport")
-
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56i32"]
+shader = ExtResource("7_56i32")
+shader_parameter/corner_radius = 1.0
+shader_parameter/border_width = 0.02
+shader_parameter/border_color = Color(0, 0, 0, 1)
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_ipr6v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-
-[node name="HealthbarSprite" type="Sprite3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-texture = SubResource("ViewportTexture_5xow2")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(360, 512)
-
-[node name="HealthBar" parent="SubViewport" instance=ExtResource("2_gj3y3")]
-unique_name_in_owner = true
 
 [node name="MovementComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_vabdn")
@@ -50,5 +44,42 @@ enemy = NodePath("..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
+
+[node name="HealthBarContainer" type="MarginContainer" parent="."]
+offset_left = 276.0
+offset_right = 876.0
+offset_bottom = 59.0
+theme_override_constants/margin_top = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthBarContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="HealthBarContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_56i32")
+layout_mode = 2
+texture = ExtResource("7_gj3y3")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthBarContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HealthBarContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HealthBar" parent="HealthBarContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_gj3y3")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(550, 15)
+layout_mode = 2
+high_health_color = Color(1, 0, 0, 1)
+medium_health_color = Color(1, 0, 0, 1)
 
 [connection signal="damage_taken" from="." to="DamageNumberHandler" method="display_damage"]

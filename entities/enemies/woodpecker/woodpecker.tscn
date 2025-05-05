@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://towsqhy2adj7"]
+[gd_scene load_steps=9 format=3 uid="uid://towsqhy2adj7"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
@@ -10,9 +10,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kh81q"]
 size = Vector3(1.5, 5, 2)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_kh81q"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Woodpecker" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_k6lf6")]
 stats = ExtResource("3_woodpecker_stats")
@@ -42,14 +39,10 @@ bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_kh81q")
 
-[node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.5, 0)
-texture = SubResource("ViewportTexture_kh81q")
-
-[node name="DamageNumberHandler" parent="." index="5"]
+[node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.75)
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_1t2bg")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
@@ -59,5 +52,8 @@ weapon_collision_mask = 2
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("6_x6gfb")]
 ability_resource = ExtResource("7_p6jwh")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "Woodpecker"
 
 [editable path="woodpecker"]

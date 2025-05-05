@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3vj6us77coyt"]
+[gd_scene load_steps=11 format=3 uid="uid://d3vj6us77coyt"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
@@ -12,9 +12,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ixwh"]
 size = Vector3(1.5, 4, 3.5)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_mrdko"]
-viewport_path = NodePath("SubViewport")
 
 [node name="IceFox" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
@@ -73,11 +70,7 @@ bones/33/rotation = Quaternion(0.995026, 5.29396e-23, -0.0996115, -6.28657e-23)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_8ixwh")
 
-[node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, -1.72496)
-texture = SubResource("ViewportTexture_mrdko")
-
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_0uh03")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
@@ -93,5 +86,8 @@ ability_resource = ExtResource("7_psoce")
 
 [node name="AbilitySlot3" parent="EnemyAbilityController" index="2" instance=ExtResource("5_72x12")]
 ability_resource = ExtResource("9_wbtjo")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "BoreAss, Detonator of Foxes"
 
 [editable path="ice_fox"]
