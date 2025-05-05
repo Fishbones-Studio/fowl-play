@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bclqq0y24jveb" path="res://ui/poultry_man_menu/forfeit/forfeit_confirmation_popup.gd" id="1_rehxx"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_vuox5"]
 
-[node name="Forfeit_ConfirmationPopup" type="Control"]
+[node name="ForfeitConfirmationPopup" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

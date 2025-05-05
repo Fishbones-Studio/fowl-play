@@ -2,9 +2,12 @@ extends Control
 
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
+
+@export var item_database: PermUpgradeDatabase
+@export var refund_percentage := 1.0 ## For balancing purpouses, might change the refund amount
+
 @onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
-@export var item_database: PermUpgradeDatabase
 
 func _ready() -> void:
 	shop_title_label.text = "Upgrades"
@@ -61,3 +64,35 @@ func _setup_controller_navigation() -> void:
 
 	if focusable_items.size() > 0:
 		focusable_items[0].grab_focus()
+
+
+func _on_reset_button_pressed() -> void:
+	var upgrades = SaveManager.get_loaded_player_upgrades()
+	var total_feathers_refund := 0
+	var total_eggs_refund := 0
+
+	# Loop through all upgrade types
+	for upgrade_type in upgrades.keys():
+		var level = upgrades[upgrade_type]
+		if level > 0:
+			# Get the upgrade resources for this type
+			var upgrades_raw: Array = _get_available_items_grouped().get(upgrade_type, [])
+			for i in range(level):
+				var upgrade_resource = upgrades_raw[i]
+				if upgrade_resource is PermUpgradeResource:
+					var refund = int(upgrade_resource.cost * refund_percentage)
+					match upgrade_resource.currency_type:
+						CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+							total_feathers_refund += refund
+						CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+							total_eggs_refund += refund
+			# Reset the upgrade level
+			upgrades[upgrade_type] = 0
+
+	# Apply the refunds
+	GameManager.feathers_of_rebirth += total_feathers_refund
+	GameManager.prosperity_eggs += total_eggs_refund
+
+	# Reset player stats (optional, if you want to fully reset)
+	SaveManager.reset_game()
+	_refresh_shop()

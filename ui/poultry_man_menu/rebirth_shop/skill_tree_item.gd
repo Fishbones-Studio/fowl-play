@@ -4,8 +4,6 @@ extends VBoxContainer
 @export var upgrade_type: StatsEnums.UpgradeTypes
 @export var max_level: int = 5
 
-signal shop_refresh_needed
-
 var current_level: int = 0
 var copied_stats: LivingEntityStats
 var upgrade_resources: Array[PermUpgradeResource] = []
@@ -49,7 +47,6 @@ func _on_buy_button_pressed() -> void:
 		update_ui_elements()
 		apply_upgrade()
 		save_upgrades()
-		emit_signal("shop_refresh_needed")
 		print("Damage: ", copied_stats.attack)
 		print("Max Health: ", copied_stats.max_health)
 		print("Stamina: ", copied_stats.max_stamina)

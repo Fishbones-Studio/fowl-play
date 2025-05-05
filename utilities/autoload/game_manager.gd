@@ -112,7 +112,7 @@ func reset_game() -> void:
 	prosperity_eggs = clamp(
 		(100 + current_round * int(arena_round_reward / 2.0)), 125, 200
 	)
-	SaveManager.save_game()
+	SaveManager.reset_game()
 	if Inventory:
 		Inventory.reset_inventory()
 	else:

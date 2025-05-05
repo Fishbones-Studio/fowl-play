@@ -136,6 +136,5 @@ func _setup_enter_and_exit_transitions() -> void:
 
 
 func _on_reset_save_button_pressed() -> void:
-	SaveManager.reset_game()
 	GameManager.reset_game()
 	_return_to_game_menu()
