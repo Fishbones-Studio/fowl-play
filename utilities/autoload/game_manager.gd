@@ -11,6 +11,8 @@ var chicken_player: ChickenPlayer = null:
 			return # No change
 		chicken_player = value
 		print("GameManager.chicken_player set to:", value)
+		
+var current_enemy: Enemy
 
 var prosperity_eggs: int:
 	set(value):
