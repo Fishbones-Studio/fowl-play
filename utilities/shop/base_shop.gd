@@ -20,7 +20,7 @@ var actual_max_items: int = max_items
 
 
 func _ready() -> void:
-	if not OS.has_feature("debug"):
+	if not OS.has_feature("debug") && cheat_button_container:
 		cheat_button_container.queue_free()
 	
 	_refresh_shop()

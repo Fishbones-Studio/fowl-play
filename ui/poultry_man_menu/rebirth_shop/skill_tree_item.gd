@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name SkillTreeItem extends VBoxContainer
 
 @export var upgrade_type: String = "Damage"
 @export var max_level: int = 5
