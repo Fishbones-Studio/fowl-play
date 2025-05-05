@@ -131,9 +131,10 @@ size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
 offset = Vector3(0, 1, -1.8)
-camera = NodePath("ViewportCameraPlayer")
+camera = NodePath("ViewportCamera")
 
-[node name="ViewportCameraPlayer" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
+[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
+unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
@@ -277,6 +278,7 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
+offset = Vector3(0, 3.5, -8.5)
 camera = NodePath("ViewportCameraBoss")
 entity_types = 1
 
