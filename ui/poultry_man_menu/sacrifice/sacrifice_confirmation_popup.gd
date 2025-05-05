@@ -1,5 +1,6 @@
 extends Control
 
+#TODO: add money based on rounds won with chicken
 
 
 func _cancel() -> void:

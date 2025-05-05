@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqt3s2usixpf3"]
 
-[ext_resource type="Script" uid="uid://bclqq0y24jveb" path="res://ui/poultry_man_menu/forfeit/forfeit_confirmation_popup.gd" id="1_rehxx"]
+[ext_resource type="Script" uid="uid://bclqq0y24jveb" path="res://ui/poultry_man_menu/sacrifice/sacrifice_confirmation_popup.gd" id="1_rehxx"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_vuox5"]
 
-[node name="ForfeitConfirmationPopup" type="Control"]
+[node name="SacrificeConfirmationPopup" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,11 +39,11 @@ layout_mode = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Forfeit" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="SacrifceLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"HeaderMedium"
-text = "Forfeit run?"
+text = "Sacrifice your Chicken?"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

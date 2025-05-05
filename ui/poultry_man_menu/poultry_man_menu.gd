@@ -14,7 +14,7 @@ var focusable_items: Array[Focusable3D] = []
 @onready var shop_item: Focusable3D = $MenuItems/Shop
 @onready var inventory_item: Focusable3D = $MenuItems/Inventory
 @onready var rebirth_shop_item: Focusable3D = $MenuItems/Rebirth_Shop
-@onready var forfeit_item: Focusable3D = $MenuItems/Forfeit
+@onready var sacrifice_item: Focusable3D = $MenuItems/Sacrifice
 
 
 func _ready() -> void:
@@ -137,27 +137,14 @@ func _on_select_current_item() -> void:
 	if selected_item == flyer_item:
 		UIManager.load_game_with_loading_screen("uid://bhnqi4fnso1hh")
 	elif selected_item == shop_item:
-		if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP)
-		else:
-			SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP)
+		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP)
 	elif selected_item == inventory_item:
-		if UIEnums.UI.CHICKEN_INVENTORY in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.CHICKEN_INVENTORY)
-		else:
-			SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY)
-	elif selected_item == forfeit_item:
-		if UIEnums.UI.FORFEIT_POPUP in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.FORFEIT_POPUP)
-		else:
-			SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
+		SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_INVENTORY)
+	elif selected_item == sacrifice_item:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
 	elif selected_item == rebirth_shop_item:
-		if UIEnums.UI.REBIRTH_SHOP in UIManager.ui_list:
-			UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
-			var rebirth_shop = UIManager.ui_list[UIEnums.UI.REBIRTH_SHOP]
-			rebirth_shop._refresh_shop()
-		else:
-			SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP)
+		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+
 
 
 func _on_keyboard_navigation_activated() -> void:

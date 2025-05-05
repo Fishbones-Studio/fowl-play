@@ -32,6 +32,7 @@ size = Vector3(1, 0.1, 1)
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_k5ek6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jhi5u"]
+height = 0.2
 
 [sub_resource type="TorusMesh" id="TorusMesh_k5ek6"]
 
@@ -159,28 +160,28 @@ transform = Transform3D(0.56, 0, 0, 0, 0.1, 0, 0, 0, 0.6, -1, 2, 0)
 mesh = SubResource("TubeTrailMesh_k5ek6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Rebirth_Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0)
 shape = SubResource("CylinderShape3D_jhi5u")
 
 [node name="Rebirth_Shop Label" type="Label3D" parent="MenuItems/Rebirth_Shop"]
 transform = Transform3D(0.958884, 0, 0.283798, 0, 1, 0, -0.283798, 0, 0.958884, -1.05282, 2.66212, -0.00119543)
 text = "Rebirth Shop"
 
-[node name="Forfeit" type="Area3D" parent="MenuItems"]
+[node name="Sacrifice" type="Area3D" parent="MenuItems"]
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="Forfeit" type="MeshInstance3D" parent="MenuItems/Forfeit"]
+[node name="Sacrifice" type="MeshInstance3D" parent="MenuItems/Sacrifice"]
 transform = Transform3D(0.337386, 0, 0, 0, 0.337386, 0, 0, 0, 0.337386, -1.5344, 2.55179, 0.468091)
 mesh = SubResource("TorusMesh_k5ek6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Forfeit"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Sacrifice"]
 transform = Transform3D(0.862454, 0, 0, 0, 0.862454, 0, 0, 0, 0.862454, -1.53732, 1.86659, 0.461297)
 shape = SubResource("CylinderShape3D_bfy7c")
 
-[node name="Label3D" type="Label3D" parent="MenuItems/Forfeit"]
+[node name="Label3D" type="Label3D" parent="MenuItems/Sacrifice"]
 transform = Transform3D(0.941512, 0, 0.33698, 0, 1, 0, -0.33698, 0, 0.941512, -1.73851, 2.77418, -0.0855815)
-text = "Forfeit"
+text = "Sacrifice"
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_og4p7")

@@ -132,5 +132,3 @@ func _setup_enter_and_exit_transitions() -> void:
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.1, 1.1)))
 	game_logo_container.mouse_exited.connect(func(): 
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.0, 1.0)))
-
-
