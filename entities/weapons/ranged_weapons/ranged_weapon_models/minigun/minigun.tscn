@@ -27,18 +27,19 @@ current_weapon = ExtResource("2_h8kbp")
 transform = Transform3D(0.162841, -0.00196993, 0.0262144, -0.0261632, -0.0122609, 0.163159, 1.22882e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
 
 [node name="Cylinder_005" parent="minigun" index="2"]
-transform = Transform3D(0.108011, 0, 0, 0, 0.00546972, -0.108086, 0, 1.03926, 0.000568867, 0.000350159, 0.017893, 1.1732)
+transform = Transform3D(-1.9474e-08, 0.00546972, -0.108086, -0.108011, -2.9321e-07, 1.93276e-08, -3.03711e-08, 1.03926, 0.000568867, 0.000350159, 0.017893, 1.1732)
 
 [node name="Cylinder_007" parent="minigun" index="4"]
-transform = Transform3D(0.10801, 2.1083e-10, 2.45782e-12, -2.39132e-17, 0.000255318, -0.108084, -4.68043e-10, 0.0486531, 0.000567194, -5.55411e-05, 0.0315108, 2.06677)
+transform = Transform3D(-1.29005e-08, 0.00025606, -0.108084, -0.10801, -2.12672e-09, 1.28848e-08, -4.65344e-09, 0.0486531, 0.000568843, -5.55411e-05, 0.0315108, 2.06677)
 
 [node name="Cylinder_008" parent="minigun" index="5"]
-transform = Transform3D(-0.423537, 1.34832e-12, -9.76326e-10, 9.74529e-10, 0.00117165, -0.424269, -7.42723e-12, 0.0768791, 0.00646592, 0.000575338, 0.0112242, 1.96039)
+transform = Transform3D(2.41899e-08, 0.00117216, -0.424269, 0.423537, 1.25266e-08, 2.52913e-08, -6.93798e-08, 0.0768791, 0.00646874, 0.000575338, 0.0112242, 1.96039)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="minigun" index="7"]
 libraries = {
 &"": SubResource("AnimationLibrary_mudr6")
 }
+blend_times = [&"Attack", &"Attack", 0.1, &"Attack", &"Windup", 0.05]
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
