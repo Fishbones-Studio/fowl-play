@@ -39,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861
 camera_reference = NodePath("../PlayerCamera")
 camera_spring_length = 3.8
 entity_to_follow = NodePath("../Player")
-entity_follow_height = 1.8
+entity_follow_height = 2.3
 entity_follow_distance = 20.0
 
 [node name="Player" parent="." instance=ExtResource("2_ivpvi")]
@@ -47,11 +47,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
