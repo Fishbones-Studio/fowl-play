@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://xhakfqnxgnrr"]
+[gd_scene load_steps=25 format=3 uid="uid://xhakfqnxgnrr"]
 
 [ext_resource type="Script" uid="uid://8m0uac31b8ke" path="res://ui/player_hud/sub_viewport_player.gd" id="1_4cl3s"]
 [ext_resource type="Script" uid="uid://da8h6ap4j4yyi" path="res://ui/player_hud/player_hud.gd" id="1_8xek4"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://bay06b5th72gq" path="res://ui/player_hud/vs_label.gd" id="9_vd2g3"]
 [ext_resource type="Script" uid="uid://bum76k5i2y8t7" path="res://ui/player_hud/boss_portrair_container.gd" id="10_ohebb"]
 [ext_resource type="Script" uid="uid://doo0x17exy20c" path="res://ui/player_hud/health_bar/health_bar.gd" id="11_rmjiu"]
-[ext_resource type="Script" uid="uid://bwe77o530a06b" path="res://ui/player_hud/sub_viewport_boss.gd" id="12_uqc4p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w7jxt"]
 shader = ExtResource("3_kpoie")
@@ -124,7 +123,7 @@ skew_shader = SubResource("ShaderMaterial_yfus2")
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportPlayer" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer"]
+[node name="SubViewportPlayer" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer" node_paths=PackedStringArray("camera")]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
@@ -132,9 +131,9 @@ size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
 offset = Vector3(0, 1, -1.8)
+camera = NodePath("ViewportCameraPlayer")
 
-[node name="ViewportCamera" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
-unique_name_in_owner = true
+[node name="ViewportCameraPlayer" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/VBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewportPlayer"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
@@ -271,16 +270,17 @@ skew_shader = SubResource("ShaderMaterial_74l5y")
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer"]
+[node name="SubViewportBoss" type="SubViewport" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer" node_paths=PackedStringArray("camera")]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
-script = ExtResource("12_uqc4p")
+script = ExtResource("1_4cl3s")
+camera = NodePath("ViewportCameraBoss")
+entity_types = 1
 
 [node name="ViewportCameraBoss" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
-unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
