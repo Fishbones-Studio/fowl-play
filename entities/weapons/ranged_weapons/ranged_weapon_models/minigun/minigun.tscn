@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8owdwg4pu4ht"]
+[gd_scene load_steps=13 format=3 uid="uid://8owdwg4pu4ht"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
 [ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
@@ -11,10 +11,50 @@
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/cooldown_state.gd" id="6_04ypb"]
 [ext_resource type="Animation" uid="uid://db2uvllkg5ui1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
 
+[sub_resource type="Animation" id="Animation_i5s7k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder_005:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.56554, 8.30515e-06, 3.14158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder_007:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.56554, 7.89566e-06, 3.14158)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder_008:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.55555, -3.14159, 2.65796e-06)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mudr6"]
 _data = {
 &"Attack": ExtResource("4_dbekv"),
 &"Cooldown": ExtResource("6_i5s7k"),
+&"RESET": SubResource("Animation_i5s7k"),
 &"Windup": ExtResource("5_i5s7k")
 }
 
@@ -26,16 +66,16 @@ current_weapon = ExtResource("2_h8kbp")
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
 [node name="Cylinder_002" parent="minigun" index="0"]
-transform = Transform3D(0.162841, -0.00196993, 0.0262144, -0.0261632, -0.0122609, 0.163159, 1.22882e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
+transform = Transform3D(0.162841, -0.00196993, 0.0262142, -0.0261632, -0.0122609, 0.163159, 2.45764e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
 
 [node name="Cylinder_005" parent="minigun" index="2"]
-transform = Transform3D(0.108011, 2.60879e-10, -5.14064e-09, -5.13707e-09, 0.00545374, -0.108086, -1.96471e-13, 1.03926, 0.000567205, 0.000350159, 0.017893, 1.1732)
+transform = Transform3D(-0.108011, 4.969e-08, 4.7209e-09, 4.6903e-09, -0.00546551, 0.108086, 5.18897e-09, 1.03926, 0.00056843, 0.000350159, 0.017893, 1.1732)
 
 [node name="Cylinder_007" parent="minigun" index="4"]
-transform = Transform3D(0.10801, 2.22933e-10, -5.13809e-09, -5.13702e-09, 0.000255318, -0.108084, -4.67989e-10, 0.0486531, 0.000567194, -5.55411e-05, 0.0315108, 2.06677)
+transform = Transform3D(-0.108011, -5.99721e-09, 4.48807e-09, 4.55488e-09, -0.000255869, 0.108085, -1.32899e-08, 0.0486531, 0.000568422, -5.55411e-05, 0.0315108, 2.06677)
 
 [node name="Cylinder_008" parent="minigun" index="5"]
-transform = Transform3D(-0.423537, -1.83025e-08, -2.10171e-08, 1.94396e-08, 0.00117165, -0.424269, -1.01127e-07, 0.0768791, 0.00646592, 0.000575338, 0.0112242, 1.96039)
+transform = Transform3D(0.423536, 8.86687e-09, 1.79384e-08, -1.71588e-08, -0.00117194, 0.424269, -4.91103e-08, 0.0768791, 0.00646754, 0.000575338, 0.0112242, 1.96039)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="minigun" index="7"]
 libraries = {
