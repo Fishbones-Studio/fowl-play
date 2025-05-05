@@ -43,8 +43,7 @@ func _on_settings_button_button_up() -> void:
 func _on_quit_button_button_up() -> void:
 	_return_to_main_menu()
 
-
-func _on_forfeit_button_button_up() -> void:
+func _on_forfeit_button_pressed() -> void:
 	GameManager.reset_game()
 	_return_to_game_menu()
 
@@ -135,6 +134,3 @@ func _setup_enter_and_exit_transitions() -> void:
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.0, 1.0)))
 
 
-func _on_reset_save_button_pressed() -> void:
-	GameManager.reset_game()
-	_return_to_game_menu()
