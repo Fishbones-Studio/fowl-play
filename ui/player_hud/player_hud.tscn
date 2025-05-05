@@ -283,6 +283,7 @@ camera = NodePath("ViewportCameraBoss")
 entity_types = 1
 
 [node name="ViewportCameraBoss" type="Camera3D" parent="MarginContainer/VBoxContainer/TopHBoxContainer/BossVBoxContainer/BossPortrairContainer/BossPortraitViewportContainer/SubViewportBoss"]
+unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 cull_mask = 1047554
 fov = 65.0
