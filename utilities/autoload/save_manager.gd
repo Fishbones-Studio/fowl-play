@@ -1,6 +1,6 @@
 ################################################################################
 ## Handles all game data persistance, including:
-## - Settings (Controls, Key Bindings, Graphics, Audio, Display)
+## - Settings (Controls, Key Bindings, Graphics, Audio)
 ## - Save Game Data (Stats, Upgrades)
 ##
 ################################################################################
