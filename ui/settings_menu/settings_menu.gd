@@ -8,14 +8,12 @@ extends Control
 @onready var key_bindings: Button = %KeyBindings
 @onready var graphics: Button = %Graphics
 @onready var audio: Button = %Audio
-@onready var display: Button = %Display
 @onready var cheat: Button = %Cheat
 
 @onready var controls_menu: PackedScene
 @onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
-@onready var graphics_menu: PackedScene = preload("uid://col4hec8qpgio")
+@onready var graphics_menu: PackedScene = preload("uid://dcr1ox6uqifst")
 @onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
-@onready var display_menu: PackedScene = preload("uid://dcr1ox6uqifst")
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 
 @onready var sidebar_container: VBoxContainer = %SidebarContainer
@@ -67,8 +65,6 @@ func _update_content(sidebar_item: SiderBarItem) -> void:
 			content.add_child(graphics_menu.instantiate())
 		audio:
 			content.add_child(audio_menu.instantiate())
-		display:
-			content.add_child(display_menu.instantiate())
 		cheat:
 			content.add_child(cheat_menu.instantiate())
 

@@ -11,7 +11,6 @@ const SETTINGS_CFG_NAME_CONTROLS: String = "controls"
 const SETTINGS_CFG_NAME_KEYBINDS: String = "keybinds"
 const SETTINGS_CFG_NAME_GRAPHICS: String = "graphics"
 const SETTINGS_CFG_NAME_AUDIO: String = "audio"
-const SETTINGS_CFG_NAME_DISPLAY: String = "display"
 const SAVE_GAME_PATH: String = "user://save_game.cfg"
 const PLAYER_SAVE_SECTION: String = "player"
 
@@ -47,11 +46,21 @@ func load_settings(item: String = "") -> void:
 
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
 		if config.has_section(SETTINGS_CFG_NAME_GRAPHICS):
+			var resolution: Vector2i
 			for graphics_setting in config.get_section_keys(SETTINGS_CFG_NAME_GRAPHICS):
 				var value = config.get_value(SETTINGS_CFG_NAME_GRAPHICS, graphics_setting)
 				match graphics_setting:
-					"fps":
-						Engine.max_fps = value
+					"resolution":
+						resolution = value
+						DisplayServer.window_set_size(value)
+						DisplayUtils.center_window(get_window())
+					"display_mode": DisplayServer.window_set_mode(value)
+					"borderless": 
+						DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, value)
+						DisplayServer.window_set_size(resolution)
+						DisplayUtils.center_window(get_window())
+					"v_sync": DisplayServer.window_set_vsync_mode(value)
+					"fps": Engine.max_fps = value
 
 	if item == SETTINGS_CFG_NAME_AUDIO or item.is_empty():
 		# Load audio settings
@@ -61,21 +70,6 @@ func load_settings(item: String = "") -> void:
 				var bus_idx: int = AudioServer.get_bus_index(audio_bus_name)
 				var volume: float = linear_to_db(clampf(saved_volume, 0.0, 100.0) / 100)
 				AudioServer.set_bus_volume_db(bus_idx, volume)
-
-	if item == SETTINGS_CFG_NAME_DISPLAY or item.is_empty():
-		if config.has_section(SETTINGS_CFG_NAME_DISPLAY):
-			for display_setting in config.get_section_keys(SETTINGS_CFG_NAME_DISPLAY):
-				var value = config.get_value(SETTINGS_CFG_NAME_DISPLAY, display_setting)
-				match display_setting:
-					"resolution":
-						DisplayServer.window_set_size(value)
-						var centre_screen: Vector2i = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
-						var window_size: Vector2i = get_window().get_size_with_decorations()
-						get_window().set_position(centre_screen - window_size/2)
-					"window_mode":
-						DisplayServer.window_set_mode(value)
-					"v_sync":
-						DisplayServer.window_set_vsync_mode(value)
 
 
 func save_game(stats: LivingEntityStats = null, upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {}) -> void:
