@@ -7,7 +7,8 @@ enum ItemTypes {
 	ABILITY,
 	HELMET,
 	BOOTS,
-	UPGRADE
+	UPGRADE,
+	PERM_UPGRADE,
 }
 
 ## Helper function to convert the enum to a readable string

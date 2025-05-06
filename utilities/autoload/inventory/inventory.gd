@@ -20,17 +20,6 @@ var inventory_data: InventoryData :
 
 func _ready() -> void:
 	load_inventory()
-	GameManager.prosperity_eggs_changed.connect(
-		func(value): 
-			print("Setting prosperity eggs in save system to: ", value)
-			inventory_data.prosperity_eggs = value
-			save_inventory()
-	)
-	GameManager.feathers_of_rebirth_changed.connect(
-		func(value): 
-			inventory_data.feathers_of_rebirth = value
-			save_inventory()
-	)
 
 
 ## Function to validate if an item can be equipped
@@ -219,8 +208,6 @@ func load_inventory() -> void:
 		var loaded: Resource = ResourceLoader.load(SAVE_FILE_PATH)
 		if loaded is InventoryData:
 			inventory_data = loaded
-			GameManager.prosperity_eggs = inventory_data.prosperity_eggs
-			GameManager.feathers_of_rebirth = inventory_data.feathers_of_rebirth
 			print("Loaded inventory with %d items" % inventory_data.items.size())
 			return
 	else:
@@ -231,6 +218,4 @@ func load_inventory() -> void:
 func reset_inventory() -> void:
 	inventory_data = InventoryData.new()
 	# setting the currency, since that is persistent
-	inventory_data.prosperity_eggs = GameManager.prosperity_eggs
-	inventory_data.feathers_of_rebirth = GameManager.feathers_of_rebirth
 	save_inventory()

@@ -1,6 +1,7 @@
 class_name UpgradeResource
 extends BaseResource
 
+@export_group("Upgrade Settings")
 @export var health_bonus: int = 0
 @export var stamina_bonus: int = 0
 @export var attack_bonus: int = 0
