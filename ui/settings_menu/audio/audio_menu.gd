@@ -52,7 +52,7 @@ func _load_audio_busses() -> void:
 		child.queue_free()
 
 	for audio_bus in audio_busses:
-		var instance: SettingsSliderItem = audio_slider.instantiate()
+		var instance: SettingsSlider = audio_slider.instantiate()
 		content_container.add_child(instance)
 
 		instance.set_text(audio_bus)

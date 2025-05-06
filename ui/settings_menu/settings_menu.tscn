@@ -112,6 +112,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Audio"
 
+[node name="Display" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Display"
+
 [node name="Cheat" parent="VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer" instance=ExtResource("2_424ss")]
 unique_name_in_owner = true
 layout_mode = 2

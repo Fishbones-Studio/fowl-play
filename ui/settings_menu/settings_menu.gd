@@ -8,9 +8,12 @@ extends Control
 @onready var key_bindings: Button = %KeyBindings
 @onready var graphics: Button = %Graphics
 @onready var audio: Button = %Audio
+@onready var display: Button = %Display
 @onready var cheat: Button = %Cheat
 
+@onready var controls_menu: PackedScene
 @onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
+@onready var graphics_menu: PackedScene
 @onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 

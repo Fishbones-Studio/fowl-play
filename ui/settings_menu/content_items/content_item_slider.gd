@@ -1,4 +1,4 @@
-class_name SettingsSliderItem
+class_name SettingsSlider
 extends Control
 
 @onready var label: Label = %Label

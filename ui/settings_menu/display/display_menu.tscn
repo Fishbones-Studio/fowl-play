@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcr1ox6uqifst"]
+
+[ext_resource type="Script" uid="uid://bm5wirtj5twe7" path="res://ui/settings_menu/display/display_menu.gd" id="1_8u2b0"]
+[ext_resource type="PackedScene" uid="uid://dt0fhn02p7ukk" path="res://ui/settings_menu/content_items/content_item_dropdown.tscn" id="2_888lq"]
+
+[node name="DisplayMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8u2b0")
+
+[node name="VBoxContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Resolutions" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolutions/MarginContainer/HBoxContainer" index="0"]
+text = "Resolution"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolutions/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 0
+
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/Resolutions"]

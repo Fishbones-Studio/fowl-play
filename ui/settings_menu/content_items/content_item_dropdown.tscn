@@ -1,4 +1,6 @@
-[gd_scene load_steps=0 format=3 uid="uid://dt0fhn02p7ukk"]
+[gd_scene load_steps=2 format=3 uid="uid://dt0fhn02p7ukk"]
+
+[ext_resource type="Script" uid="uid://by0asx0ka1c2b" path="res://ui/settings_menu/content_items/content_item_dropdown.gd" id="1_2q2x0"]
 
 [node name="ContentItemDropdown" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -7,6 +9,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 3
+script = ExtResource("1_2q2x0")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 35)
