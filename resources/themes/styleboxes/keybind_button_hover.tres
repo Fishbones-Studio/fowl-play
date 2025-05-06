@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxFlat" load_steps=0 format=3 uid="uid://bodvnbefb8mna"]
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://bodvnbefb8mna"]
 
 [resource]
 bg_color = Color(0.819608, 0.72549, 0.568627, 1)
