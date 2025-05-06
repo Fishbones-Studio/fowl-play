@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 	if _cooldown > 0.0:
 		_cooldown -= delta
 
+
 func _equip_weapons() -> void:
 	for weapon_handler in get_children():
 		if weapon_handler is MeleeWeaponNode:
@@ -75,5 +76,5 @@ func use_weapon() -> bool:
 
 	elif active_weapon is RangedWeaponNode:
 		return false
-		
+
 	return false

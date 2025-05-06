@@ -10,5 +10,6 @@ func _generate_name() -> String:
 
 
 func _tick(_delta: float) -> Status:
-	if agent.enemy_weapon_controller.use_weapon() :	return SUCCESS
+	if agent.enemy_weapon_controller.use_weapon():
+		return SUCCESS
 	return FAILURE

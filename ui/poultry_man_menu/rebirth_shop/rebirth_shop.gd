@@ -11,7 +11,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 @onready var reset_label : RichTextLabel = %ResetLabel
 
 func _ready() -> void:
-	shop_title_label.text = "Upgrades"
+	shop_title_label.text = "Rebirth Shop"
 	_refresh_shop()
 	_setup_controller_navigation()
 	visibility_changed.connect(
