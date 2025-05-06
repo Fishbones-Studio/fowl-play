@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=3 format=3 uid="uid://e28hxersxled"]
+
+[ext_resource type="Texture2D" uid="uid://66h4iajbhhw1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/art/slingshot.png" id="1_26unw"]
+[ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://entities/weapons/ranged_weapons/ranged_weapon_resource.gd" id="1_g1vt4"]
+
+[resource]
+script = ExtResource("1_g1vt4")
+damage = 25
+windup_time = 1.0
+attack_duration = 0.0
+cooldown_time = 1.0
+allow_continuous_fire = true
+allow_early_release = true
+fire_rate_per_second = 0.0
+max_range = 0.0
+loop_animation = false
+name = "Slingshot"
+purchasable = true
+drop_chance = 0
+cost = 200
+currency_type = 0
+description = "Hold the attack button to line up the perfect shot. Release to launch a powerful egg that explodes on impact, dealing %s Base Damage in an area after a windup of %s. After firing, the slingshot needs to recover for %s before it can be used again.
+
+This weapon %s and %s.
+"
+icon = ExtResource("1_26unw")
+model_uid = "uid://dp3a4dva535bj"
+metadata/_custom_type_script = "uid://dm0sr7j8y5j30"

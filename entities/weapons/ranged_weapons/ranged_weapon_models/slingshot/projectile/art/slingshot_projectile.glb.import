@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dkf3wtonixjkt"
-path="res://.godot/imported/slingshot.glb-3aa8496c5fb1a92428d4b385a5118611.scn"
+uid="uid://bw0uve5cfu27a"
+path="res://.godot/imported/slingshot_projectile.glb-e680a986cb21cde144a1248521a79511.scn"
 
 [deps]
 
-source_file="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/art/slingshot.glb"
-dest_files=["res://.godot/imported/slingshot.glb-3aa8496c5fb1a92428d4b385a5118611.scn"]
+source_file="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/slingshot_projectile.glb"
+dest_files=["res://.godot/imported/slingshot_projectile.glb-e680a986cb21cde144a1248521a79511.scn"]
 
 [params]
 

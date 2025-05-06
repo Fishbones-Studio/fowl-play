@@ -5,11 +5,11 @@
 [ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
 [ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
 [ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="3_vnsd5"]
-[ext_resource type="Animation" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Attack.res" id="4_dbekv"]
+[ext_resource type="Animation" uid="uid://b02j3071rp3t0" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Attack.res" id="4_dbekv"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="4_w5bhe"]
-[ext_resource type="Animation" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
+[ext_resource type="Animation" uid="uid://ytpkchyucjoj" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_04ypb"]
-[ext_resource type="Animation" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
+[ext_resource type="Animation" uid="uid://db2uvllkg5ui1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
 
 [sub_resource type="Animation" id="Animation_i5s7k"]
 length = 0.001
