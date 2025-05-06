@@ -1,4 +1,5 @@
-class_name PauseScreen extends Control
+class_name PauseScreen 
+extends Control
 
 @export var chicken: Node3D
 @export var camera: Camera3D

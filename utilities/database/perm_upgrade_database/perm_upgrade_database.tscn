@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5a6745x1fm5k"]
+
+[ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="1_24hpr"]
+
+[node name="PermUpgradeDatabase" type="Node"]
+script = ExtResource("1_24hpr")

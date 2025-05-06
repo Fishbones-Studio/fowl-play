@@ -24,6 +24,7 @@ var _current_weight: float
 
 
 func _ready() -> void:
+	await owner.ready
 	_current_weight = entity.stats.weight
 	_update_physics_based_on_weight(entity.stats.weight)
 

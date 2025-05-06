@@ -7,10 +7,14 @@ var active_weapon_slot: Node3D           = null
 var active_weapon_resource: BaseResource = null
 var valid_weapon_slots: Array[Node3D]    = []
 
+@onready var melee_weapon_slot : MeleeWeaponPlayerSlot = $MeleeWeaponPlayerSlot
+@onready var ranged_weapon_slot : RangedWeaponPlayerSlot = $RangedWeaponPlayerSlot
+
 
 func _ready() -> void:
 	# Initialize the weapon state
 	call_deferred("_update_weapon_state")
+	GameManager.chicken_player_set.connect(_on_chicken_player_set)
 
 
 func _input(event: InputEvent) -> void:
@@ -23,6 +27,13 @@ func _input(event: InputEvent) -> void:
 		_start_attack()
 	elif event.is_action_released("attack"):
 		_stop_attack()
+
+
+func _on_chicken_player_set() -> void:
+	#init the weapons
+	if GameManager.chicken_player:
+		melee_weapon_slot.setup()
+		ranged_weapon_slot.setup()
 
 
 func _update_weapon_state() -> void:

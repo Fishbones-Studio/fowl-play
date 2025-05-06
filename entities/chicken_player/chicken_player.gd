@@ -8,8 +8,15 @@ extends CharacterBody3D
 
 
 func _ready() -> void:
+	# load the stats from the save manager
+	stats = SaveManager.get_loaded_player_stats()
+	if stats == null:
+		push_error("Failed to load player stats from SaveManager!")
+		return
+	stats = GameManager.apply_cheat_settings(stats, stats.duplicate(), true)
 	stats.init()
 	GameManager.chicken_player = self
+
 	SignalManager.init_health.emit(stats.max_health, stats.current_health)
 	SignalManager.init_stamina.emit(stats.max_stamina, stats.current_stamina)
 	SignalManager.weapon_hit_target.connect(_on_weapon_hit_target)
@@ -29,8 +36,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _exit_tree() -> void:
+	print("ChickenPlayer exited tree")
 	GameManager.chicken_player = null
-	
+
 
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:

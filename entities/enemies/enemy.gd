@@ -17,8 +17,8 @@ signal damage_taken
 
 
 func _ready() -> void:
-	_initialize_stats()
-	_initialize_health_bar()
+	stats.init()
+	health_bar.init_health(stats.max_health, stats.current_health)
 	collision_layer = 4
 	SignalManager.weapon_hit_target.connect(_take_damage)
 	GameManager.current_enemy = self
@@ -33,18 +33,6 @@ func get_stats_resource() -> LivingEntityStats:
 	if stats == null:
 		push_warning("Attempted to get stats resource before it was assigned!")
 	return stats
-
-
-func _initialize_stats() -> void:
-	if stats:
-		stats.init()
-	else:
-		printerr("ERROR: Stats resource is NULL!")
-
-
-func _initialize_health_bar() -> void:
-	if health_bar:
-		health_bar.init_health(stats.max_health, stats.current_health)
 
 
 func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums.DamageTypes) -> void:
