@@ -7,12 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_8cml0"]
 [ext_resource type="Script" uid="uid://dltdrhrtk0btl" path="res://entities/enemies/bob/spike_hitbox.gd" id="5_fjbia"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="6_e381t"]
+[ext_resource type="Texture2D" uid="uid://jqwcldieg7q3" path="res://entities/enemies/bob/art/bob_mugshot.png" id="7_sexgk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 4.25
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_m0aa4"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Bob" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_i06h6")]
 collision_layer = 4
@@ -25,13 +23,16 @@ enemy_model = NodePath("ball_chicken")
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 2.87023, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-2.08152, -0.903553, 0, 0.903553, -2.08152, 0, 0, 0, 2.26917, 0, 0, 0)
+transform = Transform3D(-1.67408, 1.17, 0.988786, -1.33486, -0.395638, -1.79186, -0.751494, -1.9036, 0.980143, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
 transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
 transform = Transform3D(0.215651, 0.0854379, -0.0245268, -0.0878412, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
+
+[node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
+transform = Transform3D(0.0413089, 0.0520154, -0.0812714, 0.022335, 0.0808505, 0.0630985, 0.0938711, -0.0421269, 0.0207511, -0.737007, 0.707179, 0.157209)
 
 [node name="Sphere_004" parent="ball_chicken/Sphere" index="5"]
 transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
@@ -40,18 +41,20 @@ transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
 shape = SubResource("SphereShape3D_fjbia")
 
-[node name="HealthbarSprite" parent="." index="2"]
-transform = Transform3D(-3, 0, -4.52987e-07, 0, 3, 0, 4.52987e-07, 0, -3, 0, 0.755416, 0)
-texture = SubResource("ViewportTexture_m0aa4")
-
-[node name="DamageNumberHandler" parent="." index="5"]
+[node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
-[node name="BTPlayer" parent="." index="6"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_m0aa4")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
 ability_resource = ExtResource("6_e381t")
+
+[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("7_sexgk")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "\"All-Devouring\" Bob"
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
