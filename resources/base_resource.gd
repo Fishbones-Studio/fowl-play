@@ -2,16 +2,18 @@
 class_name BaseResource
 extends Resource
 
-# Basic attributes for all resources
+@export_group("General")
 @export var name: String
-# Shop Variable
+@export_group("Shop")
 @export var purchasable := true
 @export var drop_chance: int
 @export var cost: int
 @export var currency_type: CurrencyEnums.CurrencyTypes
 
+@export_group("Description")
 @export_multiline var description: String = "PlaceHolder" # Flavour text. Should always be displayed in a RichTextLabel with BBCode support
-# Visual & UI Elements
+
+@export_group("Visual & UI")
 @export var icon: Texture  # The icon for the shop/inventory
 @export var model_uid: String # The uid of the model, for saving and loading purpouses
 
