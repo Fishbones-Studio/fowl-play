@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56i32"]
 shader = ExtResource("7_56i32")
-shader_parameter/corner_radius = 1.0
+shader_parameter/corner_radius = 0.05
 shader_parameter/border_width = 0.02
 shader_parameter/border_color = Color(0, 0, 0, 1)
 
