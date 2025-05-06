@@ -17,8 +17,6 @@ extends BaseResource
 @export var current_level: int = 0 :
 	set(value):
 		current_level = clamp(value, 0, max_level)
-		# Update the cost of the upgrade based on the new level
-		cost += get_next_level_cost()
 
 
 func _init() -> void:
@@ -27,7 +25,7 @@ func _init() -> void:
 
 func get_upgrade_resource() -> UpgradeResource:
 	var upgrade_resource: UpgradeResource = UpgradeResource.new()
-	var value: int = bonus  * bonus_level_multiplier * (current_level + bonus_level_step)
+	var value: int = bonus * bonus_level_multiplier * (current_level + bonus_level_step)
 
 	match upgrade_type:
 		StatsEnums.UpgradeTypes.MAX_HEALTH:
@@ -56,14 +54,12 @@ func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 
 	return modifiers
 	
-func get_next_level_cost(levels : int = 1 ) -> int:
-	levels = clamp(levels, 0, max_level - current_level)
-	if current_level == 0 || levels == 0:
+func get_level_cost(target_level: int) -> int:
+	target_level = clamp(target_level, 0, max_level)
+	if target_level == 0:
 		return cost
-	return int(cost_level_multiplier * (current_level + levels) * cost_level_step)
-
-func get_previous_level_cost(levels : int = 1) -> int:
-	levels = clamp(levels, 0, current_level)
-	if current_level == 0 or levels == 0:
-		return cost
-	return int(cost_level_multiplier * (current_level - levels) * cost_level_step)
+	
+	# Calculate the cost for the target level using geometric progression
+	return int(cost * pow(cost_level_multiplier, target_level - 1) + 
+			cost_level_step * (target_level - 1))
+	

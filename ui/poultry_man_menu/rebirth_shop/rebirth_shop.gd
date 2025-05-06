@@ -88,55 +88,38 @@ func _on_reset_button_pressed() -> void:
 				)
 				continue # Skip to the next upgrade type
 
-			for i in range(current_level):
-				# Boundary check: Ensure we don't access beyond the defined levels
-				if i < upgrade_levels_data.size():
-					var upgrade_resource = upgrade_levels_data[i]
+			# Get the base upgrade resource (level 1)
+			var base_upgrade = upgrade_levels_data[0] if upgrade_levels_data.size() > 0 else null
+			if not base_upgrade is PermUpgradesResource:
+				printerr(
+					"Warning: Invalid base upgrade resource for type: ",
+					StatsEnums.UpgradeTypes.get(upgrade_type)
+				)
+				continue
 
-					# Check if it's the expected resource type
-					if upgrade_resource is PermUpgradesResource:
-						# Calculate the actual cost paid for this level
-						var level := i + 1
-						var cost := 0
-						if level == 1:
-							cost = upgrade_resource.cost
-						else:
-							cost = int(
-								upgrade_resource.cost_level_multiplier
-								* level
-								* upgrade_resource.cost_level_step
-							)
-						var refund: int = int(cost * refund_percentage)
-						match upgrade_resource.currency_type:
-							CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
-								total_feathers_refund += refund
-							CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
-								total_eggs_refund += refund
-					else:
-						printerr(
-							"Warning: Unexpected resource type found at index ",
-							i,
-							" for upgrade type: ",
-							StatsEnums.UpgradeTypes.get(upgrade_type)
-						)
-				else:
-					# handles if saved level > defined max level
-					printerr(
-						"Warning: Saved level (",
-						current_level,
-						") for upgrade type ",
-						StatsEnums.UpgradeTypes.get(upgrade_type),
-						" exceeds defined max level (",
-						upgrade_levels_data.size(),
-						"). Refund calculation might be incomplete."
-					)
-					break
+			# Calculate total cost paid for all levels using the new cost calculation
+			var total_cost = base_upgrade.get_level_cost(current_level)
+			var refund: int = int(total_cost * refund_percentage)
+			
+			match base_upgrade.currency_type:
+				CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+					total_feathers_refund += refund
+				CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+					total_eggs_refund += refund
+
+			# Debug print for verification
+			print(
+				"Refunding ", upgrade_type, 
+				" (Level ", current_level, 
+				"): Cost=", total_cost, 
+				" Refund=", refund
+			)
 
 	# Apply the calculated refunds
 	GameManager.feathers_of_rebirth += total_feathers_refund
 	GameManager.prosperity_eggs += total_eggs_refund
 	print(
-		"Refunded: ",
+		"Total Refunded: ",
 		total_feathers_refund,
 		" Feathers, ",
 		total_eggs_refund,
