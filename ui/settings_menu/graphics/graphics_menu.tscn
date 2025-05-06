@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcr1ox6uqifst"]
+
+[ext_resource type="Script" uid="uid://bm5wirtj5twe7" path="res://ui/settings_menu/graphics/graphics_menu.gd" id="1_8u2b0"]
+[ext_resource type="PackedScene" uid="uid://dt0fhn02p7ukk" path="res://ui/settings_menu/content_items/content_item_dropdown.tscn" id="2_888lq"]
+[ext_resource type="PackedScene" uid="uid://cukdcvp0jsd4j" path="res://ui/settings_menu/content_items/content_item_check_button.tscn" id="3_7gtwp"]
+
+[node name="GraphicsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8u2b0")
+
+[node name="VBoxContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Resolution" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer" index="0"]
+text = "Resolution"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[node name="DisplayMode" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/DisplayMode/MarginContainer/HBoxContainer" index="0"]
+text = "Display Mode"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/DisplayMode/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[node name="Borderless" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_7gtwp")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/Borderless/MarginContainer/HBoxContainer" index="0"]
+text = "Borderless"
+
+[node name="VSync" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer" index="0"]
+text = "V-Sync"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[node name="FPS" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/FPS/MarginContainer/HBoxContainer" index="0"]
+text = "FPS"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/FPS/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_resolution"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/DisplayMode/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_display_mode"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/ContentContainer/Borderless/MarginContainer/HBoxContainer/CheckButton" to="." method="_set_borderless"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_vsync"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/FPS/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_fps"]
+
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/Resolution"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/DisplayMode"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/Borderless"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/VSync"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/FPS"]
