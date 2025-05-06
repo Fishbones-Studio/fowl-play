@@ -8,6 +8,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
+@onready var reset_label : RichTextLabel = %ResetLabel
 
 func _ready() -> void:
 	shop_title_label.text = "Upgrades"
@@ -18,6 +19,7 @@ func _ready() -> void:
 			if visible:
 				_setup_controller_navigation()
 	)
+	reset_label.text = "[center][font_size=25][color=gray][i]Resetting refunds [color=orange]%.f%%[/color] of currency spent.[/i][/color][/font_size][/center]" % (refund_percentage * 100)
 
 func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
@@ -146,4 +148,3 @@ func _on_reset_button_pressed() -> void:
 
 	# Refresh the UI to show 0 levels and updated currency
 	_refresh_shop()
-

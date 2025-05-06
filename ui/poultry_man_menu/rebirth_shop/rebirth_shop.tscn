@@ -99,14 +99,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ResetButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 15
+
+[node name="ResetButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Reset"
+
+[node name="ResetLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ItemDescription"
+bbcode_enabled = true
+text = "PLACEHOLDER"
+fit_content = true
 
 [node name="PermUpgradeDatabase" type="Node" parent="."]
 script = ExtResource("30_p65sv")
 metadata/_custom_type_script = "uid://bqo3jsn8ydal3"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
