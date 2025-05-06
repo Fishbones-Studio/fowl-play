@@ -8,7 +8,7 @@ extends ProgressBar
 var health: float:
 	set = set_health
 
-@onready var timer: Timer= $Timer
+@onready var timer: Timer = $Timer
 @onready var damage_bar: ProgressBar = $DamageBar
 
 
