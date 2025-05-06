@@ -101,6 +101,8 @@ func calc_scaled_damage(damage: float) -> float:
 		print(scale)
 		actual_damage = floor(damage * scale)
 	
+	print("Damage: " + str(damage) + " Attack: " + str(attack) + " Scaled Damage: " + str(actual_damage))
+	
 	return actual_damage
 
 

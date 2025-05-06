@@ -3,6 +3,7 @@ extends Node
 signal prosperity_eggs_changed(new_value: int)
 signal feathers_of_rebirth_changed(new_value: int)
 signal player_stats_updated(new_stats: LivingEntityStats)
+signal chicken_player_set()
 
 
 var chicken_player: ChickenPlayer = null:
@@ -11,6 +12,7 @@ var chicken_player: ChickenPlayer = null:
 			return # No change
 		chicken_player = value
 		print("GameManager.chicken_player set to:", value)
+		chicken_player_set.emit()
 		
 var current_enemy: Enemy
 
