@@ -60,7 +60,7 @@ layout_mode = 2
 size_flags_vertical = 10
 
 [node name="PlayerPortraitContainer" type="CenterContainer" parent="MarginContainer/BotomHBoxContainer"]
-custom_minimum_size = Vector2(108, 108)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_l7ggc")
@@ -73,7 +73,7 @@ border_heal_colour = Color(0, 1, 0.4, 1)
 border_hurt_colour = Color(0.8, 0, 0, 1)
 
 [node name="Border" type="ColorRect" parent="MarginContainer/BotomHBoxContainer/PlayerPortraitContainer"]
-custom_minimum_size = Vector2(108, 108)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="PlayerPortraitViewportContainer" type="SubViewportContainer" parent="MarginContainer/BotomHBoxContainer/PlayerPortraitContainer"]
@@ -107,7 +107,6 @@ one_shot = true
 
 [node name="PlayerBarContainer" type="VBoxContainer" parent="MarginContainer/BotomHBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 8
 size_flags_stretch_ratio = 0.5
 theme_override_constants/separation = 8
@@ -115,13 +114,13 @@ script = ExtResource("1_sqrx6")
 
 [node name="HealthBar" parent="MarginContainer/BotomHBoxContainer/PlayerBarContainer" instance=ExtResource("1_vyppb")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 20)
+custom_minimum_size = Vector2(200, 15)
 layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="StaminaBar" parent="MarginContainer/BotomHBoxContainer/PlayerBarContainer" instance=ExtResource("2_rtdb5")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(150, 15)
 layout_mode = 2
 size_flags_horizontal = 0
 
