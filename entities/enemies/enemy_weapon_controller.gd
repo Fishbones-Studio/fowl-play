@@ -6,8 +6,7 @@ var _weapon_equiped: bool = false
 var _cooldown: float = 0.0:
 	set(value):
 		# clamping _cooldown to avoid float impressisions
-		_cooldown = max(value, 0.0)
-
+		_cooldown = max(snapped(value, 0.1), 0.0)
 
 func _ready() -> void:
 	_equip_weapons()
