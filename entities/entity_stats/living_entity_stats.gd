@@ -13,8 +13,6 @@ extends Resource
 @export var health_regen: int = 1
 @export var stamina_regen: int = 5
 @export var weight_factor: float = 0.07 # Controls slowdown strength
-@export var k_scaler : float = 100.0 # Controlls scaling for damage and defense
-
 @export_group("Holder")
 @export var is_player : bool = false
 
@@ -62,7 +60,7 @@ func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEn
 		return 0.0 # Don't drain if amount is zero or negative
 	else:
 		if damage_type == DamageEnums.DamageTypes.NORMAL:
-			var damage_multiplier: float = 100.0 / (k_scaler + float(defense))
+			var damage_multiplier: float = 1 - ((0.05 * defense) / (9 + 0.05 * defense))
 			actual_damage = max(floor(amount * damage_multiplier), 1)
 
 		elif damage_type == DamageEnums.DamageTypes.TRUE:
@@ -90,16 +88,7 @@ func regen_stamina(delta: float) -> float:
 ## Calculate the damage based on the attack and the k_scaler
 func calc_scaled_damage(damage: float) -> float:
 	var actual_damage: float
-	if is_inf(attack):
-		return INF
-	elif attack < -k_scaler:
-		# Avoid division by zero or negative denominator if attack is very negative
-		printerr("Attack value is too low, results may be unexpected.")
-		return floor(damage)
-	else:
-		var scale: float = 1.0 + (attack / (k_scaler + attack))
-		print(scale)
-		actual_damage = floor(damage * scale)
+	actual_damage = floor(damage * (1.0 + (attack / 100)))
 	
 	print("Damage: " + str(damage) + " Attack: " + str(attack) + " Scaled Damage: " + str(actual_damage))
 	
@@ -140,7 +129,6 @@ func to_dict() -> Dictionary:
 		"health_regen": health_regen,
 		"stamina_regen": stamina_regen,
 		"weight_factor": weight_factor,
-		"k_scaler": k_scaler,
 	# Holder
 		"is_player": is_player,
 	}
@@ -161,7 +149,6 @@ static func from_dict(data: Dictionary) -> LivingEntityStats:
 	new_stats.health_regen = data.get("health_regen", 1)
 	new_stats.stamina_regen = data.get("stamina_regen", 5)
 	new_stats.weight_factor = data.get("weight_factor", 0.07)
-	new_stats.k_scaler = data.get("k_scaler", 100.0)
 
 	# Load Holder
 	new_stats.is_player = data.get("is_player", false)

@@ -7,7 +7,7 @@ extends BaseResource
 @export var attack_bonus: int = 0
 @export var defense_bonus: int = 0
 @export var speed_bonus: int = 0
-@export var weight_bonus: int = 0
+@export var weight_bonus: float = 0.0
 
 
 func _init() -> void:

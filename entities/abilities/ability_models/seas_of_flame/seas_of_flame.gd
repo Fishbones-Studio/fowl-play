@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * (stats.max_health / stats.current_health) + stats.max_health
+		return (stats.max_health / stats.current_health) * (1.0 + (stats.attack / 100))
 
 var _attack_duration: float = 0.0
 var _hit_bodies: Array = []
@@ -19,7 +19,7 @@ var _hit_bodies: Array = []
 func activate() -> void:
 	if not ability_holder.is_on_floor():
 		return
-
+	damage
 	_attack_duration = cpu_particles.lifetime
 	_hit_bodies.clear()
 
@@ -57,8 +57,7 @@ func _apply_burn(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		# Get the amount of ticks the burn applies, rounded down
 		var burn_tick_count: int = floor(damage_duration / damage_interval)
-		var burn_damage: float = damage / burn_tick_count / 10
-
+		var burn_damage: float = damage / burn_tick_count
 		for i in range(burn_tick_count):
 			await get_tree().create_timer(damage_interval).timeout
 

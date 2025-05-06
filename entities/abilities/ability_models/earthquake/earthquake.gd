@@ -11,7 +11,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.weight * stats.defense * 0.5) / max(1, max_quakes)
+		return (stats.weight)  * 3
 
 var _current_quake_count: int = 0
 var _current_damage: float = 0.0

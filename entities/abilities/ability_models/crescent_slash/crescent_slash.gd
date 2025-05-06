@@ -6,7 +6,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack * 1.2
+		return (15) * ((1.0 + (stats.attack / 100)) + 1.2)
 
 var _particles_emitted: bool = false
 var _hit_bodies: Array = []
