@@ -6,7 +6,7 @@
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("1_j2a53")
-path = ""
+path = "move_backward"
 show_mode = 0
 force_controller_icon_style = -1
 force_type = 0
