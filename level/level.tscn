@@ -69,7 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6187, -1.73461, -16.0408)
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Path3D"]
-transform = Transform3D(-0.688334, 0.0668462, 0.722307, 0, 0.995745, -0.0921516, -0.725393, -0.0634311, -0.685406, -9.88359, 4.26124, 0.899846)
+transform = Transform3D(-0.688336, 0.0668467, 0.722305, 3.72529e-09, 0.995745, -0.0921527, -0.725391, -0.0634321, -0.685408, -9.88359, 4.26124, 0.899846)
 script = ExtResource("2_xii2b")
 movement_mode = 2
 
@@ -81,7 +81,7 @@ transform = Transform3D(-0.79148, 0, 0.611196, 0, 1, 0, -0.611196, 0, -0.79148, 
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Path3D2"]
-transform = Transform3D(-0.688334, 0.0668462, 0.722307, 0, 0.995745, -0.0921516, -0.725393, -0.0634311, -0.685406, -9.88359, 4.26124, 0.899846)
+transform = Transform3D(-0.688336, 0.0668467, 0.722305, 3.72529e-09, 0.995745, -0.0921527, -0.725391, -0.0634321, -0.685408, -9.88359, 4.26124, 0.899846)
 script = ExtResource("2_xii2b")
 movement_mode = 2
 
@@ -94,17 +94,17 @@ transform = Transform3D(0.0556124, 0, -0.998452, 0, 1, 0, 0.998452, 0, 0.0556124
 [node name="SpikeBall2" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
 transform = Transform3D(-0.988977, 0, -0.148068, 0, 1, 0, 0.148068, 0, -0.988977, -10.1603, 3.89056, 6.61349)
 
-[node name="RegularSpike2" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
+[node name="RegularSpike" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.89016, 2.49751, -3.36142)
 
-[node name="RegularSpike4" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
+[node name="RegularSpike2" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0846, 2.49751, -15.9066)
 
-[node name="RegularSpike5" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
+[node name="RegularSpike3" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2729, 2.49751, 0.794023)
 
-[node name="RegularSpike6" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
+[node name="RegularSpike4" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8113, 2.49751, 9.28552)
 
-[node name="RegularSpike7" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
+[node name="RegularSpike5" parent="NavigationRegion3D/Arena" instance=ExtResource("5_l5lfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2316, 2.49751, 13.5386)
