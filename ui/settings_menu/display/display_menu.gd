@@ -7,16 +7,17 @@
 extends Control
 
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
-	"1152x648": Vector2i(1152, 648),
-	"1280x720": Vector2i(1280, 720),
-	"1366x768": Vector2i(1366, 768),
-	"1600x900": Vector2i(1600, 900),
-	"1920x1080": Vector2i(1920, 1080),
-	"2560x1440": Vector2i(2560, 1440),
-	"3840x2160": Vector2i(3840, 2160),
+	"1152x648 (HD)": Vector2i(1152, 648),
+	"1280x720 (HD)": Vector2i(1280, 720),
+	"1366x768 (HD)": Vector2i(1366, 768),
+	"1600x900 (HD+)": Vector2i(1600, 900),
+	"1920x1080 (Full HD)": Vector2i(1920, 1080),
+	"2560x1440 (QHD)": Vector2i(2560, 1440),
+	"3840x2160 (4K)": Vector2i(3840, 2160),
 }
 const WINDOW_MODES: Dictionary[String, DisplayServer.WindowMode] = {
 	"Windowed" : DisplayServer.WINDOW_MODE_WINDOWED,
+	"Maximized" : DisplayServer.WINDOW_MODE_MAXIMIZED,
 	"Fullscreen" : DisplayServer.WINDOW_MODE_FULLSCREEN,
 	"Exlusive Fullscreen" : DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 }
@@ -105,6 +106,6 @@ func _set_vsync(index: int):
 
 
 func _set_display_values() -> void:
-	_set_resolution(max(RESOLUTIONS.keys().find(RESOLUTIONS.find_key(DisplayServer.window_get_size())), 0))
-	_set_window_mode(WINDOW_MODES.keys().find(WINDOW_MODES.find_key(DisplayServer.window_get_mode())))
-	_set_vsync(V_SYNC.keys().find(V_SYNC.find_key(DisplayServer.window_get_vsync_mode())))
+	_set_resolution(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
+	_set_window_mode(WINDOW_MODES.values().find(DisplayServer.window_get_mode()))
+	_set_vsync(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
