@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=41 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=40 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -90,8 +90,6 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_tvx0j"]
 image = SubResource("Image_20od3")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_03ohx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27a07"]
 bg_color = Color(0.376471, 0.411765, 0.478431, 1)
@@ -241,7 +239,6 @@ PopupMenu/constants/outline_size = 0
 PopupMenu/constants/v_separation = 15
 PopupMenu/icons/radio_checked = SubResource("ImageTexture_6bdnh")
 PopupMenu/icons/radio_checked_disabled = SubResource("ImageTexture_tvx0j")
-PopupMenu/icons/radio_unchecked = SubResource("ViewportTexture_03ohx")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_27a07")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_7ucis")
 SettingsContentLabel/base_type = &"Label"

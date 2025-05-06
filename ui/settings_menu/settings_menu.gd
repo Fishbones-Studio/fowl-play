@@ -15,6 +15,7 @@ extends Control
 @onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
 @onready var graphics_menu: PackedScene
 @onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
+@onready var display_menu: PackedScene = preload("uid://dcr1ox6uqifst")
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 
 @onready var sidebar_container: VBoxContainer = %SidebarContainer
@@ -66,6 +67,8 @@ func _update_content(sidebar_item: SiderBarItem) -> void:
 			pass
 		audio:
 			content.add_child(audio_menu.instantiate())
+		display:
+			content.add_child(display_menu.instantiate())
 		cheat:
 			content.add_child(cheat_menu.instantiate())
 

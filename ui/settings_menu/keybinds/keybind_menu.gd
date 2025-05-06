@@ -85,11 +85,7 @@ func _load_input_settings():
 	InputMap.load_from_project_settings()
 	var config = ConfigFile.new()
 
-	if config.load(config_path) == OK and config.has_section(config_name):
-		for action in config.get_section_keys(config_name):
-			InputMap.action_erase_events(action)
-			for event in config.get_value(config_name, action):
-				InputMap.action_add_event(action, event)
+	SaveManager.load_settings(config_name)
 
 	_create_action_list()
 

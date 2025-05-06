@@ -36,14 +36,52 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Resolutions" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+[node name="Resolution" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolutions/MarginContainer/HBoxContainer" index="0"]
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer" index="0"]
 text = "Resolution"
 
-[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolutions/MarginContainer/HBoxContainer/Panel" index="0"]
-item_count = 0
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
 
-[editable path="VBoxContainer/ScrollContainer/ContentContainer/Resolutions"]
+[node name="WindowMode" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/WindowMode/MarginContainer/HBoxContainer" index="0"]
+text = "Window Mode"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/WindowMode/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[node name="VSync" parent="VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer" index="0"]
+text = "V-Sync"
+
+[node name="OptionButton" parent="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer/Panel" index="0"]
+item_count = 2
+popup/item_0/text = "dad"
+popup/item_0/id = 0
+popup/item_1/text = "dadad"
+popup/item_1/id = 1
+
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_resolution"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/WindowMode/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_window_mode"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_vsync"]
+
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/Resolution"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/WindowMode"]
+[editable path="VBoxContainer/ScrollContainer/ContentContainer/VSync"]
