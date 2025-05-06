@@ -87,7 +87,7 @@ canvas_cull_mask = 4294966274
 size = Vector2i(96, 96)
 render_target_update_mode = 4
 script = ExtResource("1_4cl3s")
-offset = Vector3(0, 1, -1.8)
+offset = Vector3(0, 1, -2.1)
 
 [node name="ViewportCamera" type="Camera3D" parent="MarginContainer/BotomHBoxContainer/PlayerPortraitContainer/PlayerPortraitViewportContainer/SubViewport"]
 unique_name_in_owner = true
@@ -130,7 +130,7 @@ size_flags_horizontal = 3
 
 [node name="ItemSlotContainer" type="HBoxContainer" parent="MarginContainer/BotomHBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 5
 script = ExtResource("8_w7jxt")
 
 [node name="CrosshairContainer" parent="." instance=ExtResource("9_8qpry")]
