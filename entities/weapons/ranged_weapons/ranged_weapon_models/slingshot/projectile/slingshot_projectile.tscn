@@ -8,8 +8,8 @@ radius = 0.25
 height = 0.6
 
 [node name="SlingshotProjectile" type="RigidBody3D"]
-collision_layer = 9
-collision_mask = 6
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_ppp8x")
 
 [node name="slingshot_projectile" parent="." instance=ExtResource("1_0dfwy")]
@@ -17,3 +17,5 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_0dfwy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
