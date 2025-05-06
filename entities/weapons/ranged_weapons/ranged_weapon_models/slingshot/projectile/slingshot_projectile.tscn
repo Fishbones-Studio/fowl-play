@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1jf4shjaqq4n"]
+[gd_scene load_steps=4 format=3 uid="uid://d1jf4shjaqq4n"]
 
 [ext_resource type="PackedScene" uid="uid://bw0uve5cfu27a" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/slingshot_projectile.glb" id="1_0dfwy"]
+[ext_resource type="Script" uid="uid://b4ttu6b1mcyjh" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/slingshot_projectile.gd" id="1_ppp8x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0dfwy"]
 radius = 0.25
 height = 0.6
 
 [node name="SlingshotProjectile" type="RigidBody3D"]
+collision_layer = 9
+collision_mask = 6
+script = ExtResource("1_ppp8x")
 
 [node name="slingshot_projectile" parent="." instance=ExtResource("1_0dfwy")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)

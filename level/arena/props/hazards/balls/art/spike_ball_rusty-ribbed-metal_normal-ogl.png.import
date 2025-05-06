@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dtf4u5mwl5l6m"
+path.s3tc="res://.godot/imported/spike_ball_rusty-ribbed-metal_normal-ogl.png-a2aa8037df9f28bba07cf7938935db50.s3tc.ctex"
+path.etc2="res://.godot/imported/spike_ball_rusty-ribbed-metal_normal-ogl.png-a2aa8037df9f28bba07cf7938935db50.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "f7ea4a20e9a8b714a69dd0f23effb51f"
+}
+
+[deps]
+
+source_file="res://level/arena/props/hazards/balls/art/spike_ball_rusty-ribbed-metal_normal-ogl.png"
+dest_files=["res://.godot/imported/spike_ball_rusty-ribbed-metal_normal-ogl.png-a2aa8037df9f28bba07cf7938935db50.s3tc.ctex", "res://.godot/imported/spike_ball_rusty-ribbed-metal_normal-ogl.png-a2aa8037df9f28bba07cf7938935db50.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://level/arena/props/hazards/balls/spike_ball_rusty-ribbed-metal_normal-ogl.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

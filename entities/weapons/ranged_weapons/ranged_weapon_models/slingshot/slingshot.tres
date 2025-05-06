@@ -19,7 +19,7 @@ purchasable = true
 drop_chance = 0
 cost = 200
 currency_type = 0
-description = "Hold the attack button to line up the perfect shot. Release to launch a powerful egg that explodes on impact, dealing %s Base Damage in an area after a windup of %s. After firing, the slingshot needs to recover for %s before it can be used again.
+description = "Hold the attack button to line up the perfect shot—aim for as long as you like! Release to launch a powerful egg that explodes on impact, dealing %s Base Damage in an area after a windup of %s. After firing, the slingshot needs to recover for %s before it can be used again.
 
 This weapon %s and %s.
 "
