@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_wkrne")
 upgrade_type = 5
-bonus = 0
-bonus_level_step = null
-bonus_level_multiplier = 1
-cost_level_step = null
-cost_level_multiplier = 1
-max_level = 6
+bonus = 5
+bonus_level_step = 5
+bonus_level_multiplier = 2
+cost_level_step = 35
+cost_level_multiplier = 2
+max_level = 3
 current_level = 0
 name = "Weight"
 purchasable = true

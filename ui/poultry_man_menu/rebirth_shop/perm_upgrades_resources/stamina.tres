@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_2w7im")
 upgrade_type = 4
-bonus = 0
-bonus_level_step = null
+bonus = 20
+bonus_level_step = 20
 bonus_level_multiplier = 1
-cost_level_step = null
+cost_level_step = 30
 cost_level_multiplier = 1
-max_level = 6
+max_level = 4
 current_level = 0
 name = "Stamina"
 purchasable = true
