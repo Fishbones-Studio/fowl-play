@@ -46,7 +46,12 @@ func load_settings(item: String = "") -> void:
 					InputMap.action_add_event(action, event)
 
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
-		pass
+		if config.has_section(SETTINGS_CFG_NAME_GRAPHICS):
+			for graphics_setting in config.get_section_keys(SETTINGS_CFG_NAME_GRAPHICS):
+				var value = config.get_value(SETTINGS_CFG_NAME_GRAPHICS, graphics_setting)
+				match graphics_setting:
+					"fps":
+						Engine.max_fps = value
 
 	if item == SETTINGS_CFG_NAME_AUDIO or item.is_empty():
 		# Load audio settings
@@ -61,7 +66,6 @@ func load_settings(item: String = "") -> void:
 		if config.has_section(SETTINGS_CFG_NAME_DISPLAY):
 			for display_setting in config.get_section_keys(SETTINGS_CFG_NAME_DISPLAY):
 				var value = config.get_value(SETTINGS_CFG_NAME_DISPLAY, display_setting)
-
 				match display_setting:
 					"resolution":
 						DisplayServer.window_set_size(value)

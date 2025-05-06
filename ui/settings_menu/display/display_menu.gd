@@ -7,13 +7,13 @@
 extends Control
 
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
-	"1152x648 (HD)": Vector2i(1152, 648),
-	"1280x720 (HD)": Vector2i(1280, 720),
-	"1366x768 (HD)": Vector2i(1366, 768),
-	"1600x900 (HD+)": Vector2i(1600, 900),
-	"1920x1080 (Full HD)": Vector2i(1920, 1080),
-	"2560x1440 (QHD)": Vector2i(2560, 1440),
-	"3840x2160 (4K)": Vector2i(3840, 2160),
+	"1152x648 - HD": Vector2i(1152, 648),
+	"1280x720 - HD": Vector2i(1280, 720),
+	"1366x768 - HD": Vector2i(1366, 768),
+	"1600x900 - HD+": Vector2i(1600, 900),
+	"1920x1080 - Full HD": Vector2i(1920, 1080),
+	"2560x1440 - QHD": Vector2i(2560, 1440),
+	"3840x2160 - 4K": Vector2i(3840, 2160),
 }
 const WINDOW_MODES: Dictionary[String, DisplayServer.WindowMode] = {
 	"Windowed" : DisplayServer.WINDOW_MODE_WINDOWED,

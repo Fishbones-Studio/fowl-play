@@ -13,7 +13,7 @@ extends Control
 
 @onready var controls_menu: PackedScene
 @onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
-@onready var graphics_menu: PackedScene
+@onready var graphics_menu: PackedScene = preload("uid://col4hec8qpgio")
 @onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
 @onready var display_menu: PackedScene = preload("uid://dcr1ox6uqifst")
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
@@ -64,7 +64,7 @@ func _update_content(sidebar_item: SiderBarItem) -> void:
 		key_bindings:
 			content.add_child(keybinds_menu.instantiate())
 		graphics:
-			pass
+			content.add_child(graphics_menu.instantiate())
 		audio:
 			content.add_child(audio_menu.instantiate())
 		display:
