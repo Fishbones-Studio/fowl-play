@@ -1,8 +1,9 @@
 ################################################################################
-### Script to display and manage display settings in a UI.
-###
-### This script handles the display settings UI, allowing users to set the  
-### of busses and save their preferences.
+## Script to display and manage graphics settings in a UI.
+##
+## This script handles the graphics settings UI, allowing users to adjust and 
+## save their graphics preferences. Handles resolution, window mode, borderless 
+## toggle, VSync, and FPS limits.
 ################################################################################
 extends Control
 
@@ -35,7 +36,7 @@ const FPS: Dictionary[String, int] = {
 
 var config_path: String = "user://settings.cfg"
 var config_name: String = "graphics"
-var graphics_settings: Dictionary
+var graphics_settings: Dictionary = {}
 
 @onready var resolution: ContentItemDropdown = %Resolution
 @onready var display_mode: ContentItemDropdown = %DisplayMode

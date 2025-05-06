@@ -28,6 +28,7 @@ var current_stamina: float:
 		# Clamp based on the *current* max_stamina
 		current_stamina = clamp(value, 0, max_stamina)
 
+
 # Initialize stats, setting health and stamina to max
 func init() -> void:
 	if max_health <= 0: push_error("Max health must be positive.")

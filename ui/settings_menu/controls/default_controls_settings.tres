@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="ControlsSetting" load_steps=2 format=3 uid="uid://b7ndswiwixuqa"]
+
+[ext_resource type="Script" uid="uid://w2juma8gwel" path="res://ui/settings_menu/controls/controls_settings.gd" id="1_2capb"]
+
+[resource]
+script = ExtResource("1_2capb")
+default_settings = Dictionary[String, Dictionary]({
+"camera_down_tilt": {
+"max": 0,
+"min": -90,
+"step": 1,
+"type": "slider",
+"value": -90
+},
+"camera_up_tilt": {
+"max": 90,
+"min": 0,
+"step": 1,
+"type": "slider",
+"value": 45
+},
+"controller_sensivity": {
+"max": 8.0,
+"min": 0.1,
+"step": 0.1,
+"type": "slider",
+"value": 8.0
+},
+"horizontal_sensitivity": {
+"max": 2.0,
+"min": 0.1,
+"step": 0.1,
+"type": "slider",
+"value": 0.5
+},
+"invert_x_axis": {
+"type": "check_button",
+"value": false
+},
+"invert_y_axis": {
+"type": "check_button",
+"value": false
+},
+"vertical_sensivity": {
+"max": 2.0,
+"min": 0.1,
+"step": 0.1,
+"type": "slider",
+"value": 0.5
+}
+})
+metadata/_custom_type_script = "uid://w2juma8gwel"

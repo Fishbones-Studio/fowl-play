@@ -11,7 +11,7 @@ func set_text(text: String) -> void:
 
 
 func set_value(value: float) -> void:
-	slider.value = clampf(value, 0.0, 100.0)
+	slider.value = clampf(value, slider.min_value, slider.max_value)
 
 
 func _on_h_slider_value_changed(value: float) -> void:

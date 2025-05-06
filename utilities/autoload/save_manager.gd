@@ -33,9 +33,6 @@ func load_settings(item: String = "") -> void:
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
 		return
 
-	if item == SETTINGS_CFG_NAME_CONTROLS or item.is_empty():
-		pass
-
 	if item == SETTINGS_CFG_NAME_KEYBINDS or item.is_empty():
 		# Load keybind settings
 		if config.has_section(SETTINGS_CFG_NAME_KEYBINDS):
