@@ -24,32 +24,34 @@ var owner_stats: LivingEntityStats
 
 
 func _ready() -> void:
-	var current_node: Node = get_parent()
-	while current_node != null:
-		# Check if the node has the getter function
-		if current_node.has_method("get_stats_resource"):
-			var potential_stats = current_node.get_stats_resource()
-			if potential_stats is LivingEntityStats:
-				owner_stats = potential_stats
-				print(
-					"RangedWeaponNode found stats on: ",
-					current_node.name
-				)
-				break # Stop searching once found
+	if ranged_weapon_scene:
+		setup()
 
-		# Move up to the next parent
-		current_node = current_node.get_parent()
+
+func setup() -> void:
+	if !owner_stats:
+		var current_node: Node = get_parent()
+		while current_node != null:
+			# Check if the node has the getter function
+			if current_node.has_method("get_stats_resource"):
+				var potential_stats = current_node.get_stats_resource()
+				if potential_stats is LivingEntityStats:
+					owner_stats = potential_stats
+					print(
+						"RangedWeaponNode found stats on: ",
+						current_node.name
+					)
+					break # Stop searching once found
+	
+			# Move up to the next parent
+			current_node = current_node.get_parent()
 
 	if owner_stats == null:
 		push_error(
 			"RangedWeaponNode could not find a parent with get_stats_resource() "
 			+ "returning LivingEntityStats! Weapon might not function correctly."
 		)
-	if ranged_weapon_scene || get_parent() is Enemy:
-		setup()
-
-
-func setup() -> void:
+		
 	if not ranged_weapon_scene:
 		push_error("No valid weapon scene assigned!")
 		return

@@ -32,34 +32,46 @@ var owner_stats: LivingEntityStats
 
 
 func _ready() -> void:
-	var current_node: Node = get_parent()
-	while current_node != null:
-		# Check if the node has the getter function
-		if current_node.has_method("get_stats_resource"):
-			var potential_stats: LivingEntityStats = current_node.get_stats_resource()
-			if potential_stats is LivingEntityStats:
-				owner_stats = potential_stats
-				print(
-					"MeleeWeaponNode found stats on: ",
-					current_node.name
-				)
-				break # Stop searching once found
+	# In enemy, the export vars are set, so we can immediatly run the setup
+	var parent: Node = get_parent()
+	if melee_weapon_scene:
+		setup()
 
-		# Move up to the next parent
-		current_node = current_node.get_parent()
+
+
+func setup() -> void:
+	if !owner_stats:
+		# If owner_stats is not set, we need to search for it in the parent chain
+		var current_node: Node = get_parent()
+		while current_node != null:
+			# Check if the node has the getter function
+			if current_node.has_method("get_stats_resource"):
+				var potential_stats: LivingEntityStats = current_node.get_stats_resource()
+				if potential_stats is LivingEntityStats:
+					owner_stats = potential_stats
+					print(
+						"MeleeWeaponNode found stats on: ",
+						current_node.name
+					)
+					break # Stop searching once found
+	
+			# Move up to the next parent
+			current_node = current_node.get_parent()
 
 	if owner_stats == null:
 		push_error(
 			"MeleeWeaponNode could not find a parent with get_stats_resource() "
 			+ "returning LivingEntityStats! Weapon might not function correctly."
 		)
+
+	if owner_stats.is_player:
+		GameManager.player_stats_updated.connect(
+			func (new_stats: LivingEntityStats):
+				owner_stats = new_stats
+				melee_state_machine.update_entity_stats(owner_stats)
+				print("MeleeWeaponNode updated stats to: ", owner_stats)
+		)
 		
-	# In enemy, the export vars are set, so we can immediatly run the setup
-	if melee_weapon_scene or get_parent() is Enemy:
-		setup()
-
-
-func setup() -> void:
 	if not melee_weapon_scene:
 		push_warning("No valid weapon scene assigned!")
 		queue_free()
@@ -67,8 +79,9 @@ func setup() -> void:
 
 	if not current_weapon:
 		current_weapon = melee_weapon_scene.instantiate() as MeleeWeapon
-		
+
 	current_weapon.entity_stats = owner_stats
+	print(owner_stats.to_dict())
 
 	add_child(current_weapon)
 

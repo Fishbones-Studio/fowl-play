@@ -2,6 +2,7 @@ class_name RangedWeaponResource
 extends BaseResource
 
 # Weapon Attributes
+@export_group("Ranged Weapon Attributes")
 @export var damage: int
 # Timing Variables
 @export var windup_time: float
@@ -12,6 +13,7 @@ extends BaseResource
 @export var fire_rate_per_second: float = 0.0 # for interval based weapons
 @export var max_range: float = 100.0 # for ranged weapons
 # Animation Variables
+@export_group("Animation")
 @export var loop_animation := false
 
 
