@@ -3,7 +3,7 @@ extends BasePlayerMovementState
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
-	#animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
+	animation_tree.set("parameters/DeathOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	if "initial_velocity" in information:
 		player.velocity = information["initial_velocity"]
