@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cw81sd3kyuelj"]
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_7c7ba"]
-[ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/bleed_hazard.gd" id="2_tbxjw"]
+[ext_resource type="Script" uid="uid://d13bdxdcv1qdo" path="res://level/arena/props/hazards/fire_pool/fire_pool.gd" id="2_8y1qe"]
 [ext_resource type="Shader" uid="uid://ce80vscr4kt8y" path="res://level/arena/props/hazards/fire_pool/fire_pool.gdshader" id="3_8y1qe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbxjw"]
-size = Vector3(3, 1, 3)
+size = Vector3(4, 1.5, 4)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8y1qe"]
 
@@ -32,10 +32,13 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_khrxl")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ysydq"]
 material = SubResource("ShaderMaterial_khrxl")
-size = Vector2(3, 3)
+size = Vector2(4, 4)
+subdivide_width = 24
+subdivide_depth = 24
 
 [node name="FirePool" instance=ExtResource("1_7c7ba")]
-script = ExtResource("2_tbxjw")
+script = ExtResource("2_8y1qe")
+alive_time = 2.0
 damage_interval = 1.0
 damage_duration = 5.0
 
@@ -47,3 +50,7 @@ shape = SubResource("BoxShape3D_tbxjw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 mesh = SubResource("PlaneMesh_ysydq")
+
+[node name="RemoveTimer" type="Timer" parent="." index="3"]
+
+[connection signal="timeout" from="RemoveTimer" to="." method="_on_remove_timer_timeout"]

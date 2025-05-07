@@ -54,6 +54,8 @@ func _fire_projectile() -> void:
 			weapon.entity_stats,
 			weapon.current_weapon.damage
 		)
+	else:
+		push_error("Provided projectile cannot be set up")
 
 func exit() -> void:
 	_fire_projectile()

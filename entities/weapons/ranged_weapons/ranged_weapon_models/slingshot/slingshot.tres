@@ -19,10 +19,11 @@ purchasable = true
 drop_chance = 0
 cost = 200
 currency_type = 0
-description = "Hold the attack button to line up the perfect shot—aim for as long as you like! Release to launch a powerful egg that explodes on impact, dealing %s Base Damage in an area after a windup of %s. After firing, the slingshot needs to recover for %s before it can be used again.
+description = "Hold the attack button to line up the perfect shot. Take as much time as you need! Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s. Upon exploding, the egg leaves behind a [color=orange]fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
 
-This weapon %s and %s.
-"
+After firing, the slingshot requires %s to recover before it can be used again.  
+
+This weapon %s and %s."
 icon = ExtResource("1_26unw")
 model_uid = "uid://dp3a4dva535bj"
 metadata/_custom_type_script = "uid://dm0sr7j8y5j30"
