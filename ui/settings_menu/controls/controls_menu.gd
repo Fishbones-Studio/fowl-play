@@ -24,7 +24,7 @@ func _load_controls_settings() -> void:
 	var config = ConfigFile.new()
 
 	# Initialize with default settings
-	controls_settings = controls_settings_resource.default_settings
+	controls_settings = controls_settings_resource.default_settings.duplicate(true)
 
 	# Try to load config file
 	if config.load(config_path) == OK and config.has_section(config_name):
@@ -86,5 +86,7 @@ func _on_restore_defaults_button_up() -> void:
 	if FileAccess.file_exists(config_path):
 		DirAccess.remove_absolute(config_path)
 
-	controls_settings = controls_settings_resource.default_settings
+	controls_settings.clear()
+	controls_settings = controls_settings_resource.default_settings.duplicate(true)
+
 	_load_controls_items()
