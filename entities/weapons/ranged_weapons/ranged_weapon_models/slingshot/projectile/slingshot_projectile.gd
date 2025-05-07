@@ -49,12 +49,12 @@ func _physics_process(delta: float) -> void:
 		_spawn_hazard()
 
 func _on_body_entered(body: Node) -> void:
-	cracking_sound.play_random()
-	if _has_spawned_hazard:
-		return
-
 	# Ignore collisions during invincibility
 	if _invincibility_timer < invincibility_time:
+		return
+		
+	cracking_sound.play_random()
+	if _has_spawned_hazard:
 		return
 
 	if not (body is Enemy or body is ChickenPlayer):
