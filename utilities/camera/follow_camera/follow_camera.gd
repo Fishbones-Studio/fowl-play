@@ -115,7 +115,6 @@ func _apply_camera_clamp() -> void:
 
 
 func _load_camera_settings() -> void:
-	print("Hello thereASdasdasdasdsadas")
 	var config: ConfigFile = ConfigFile.new()
 	var cfg_path: String = "user://settings.cfg"
 	var cfg_name: String = "controls"
