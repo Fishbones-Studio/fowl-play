@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://4qwnqq8jvrgj"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_wehyl"]
+[ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/insighter/insighter_stats.tres" id="2_1dq5o"]
+[ext_resource type="PackedScene" uid="uid://18tmfpnik0vd" path="res://entities/enemies/insighter/art/insighter.glb" id="2_e0uej"]
+[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="3_l5l0p"]
+[ext_resource type="BehaviorTree" uid="uid://bdgx5thgd0gx4" path="res://entities/enemies/ai/trees/insighter.tres" id="4_n8hr6"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_e3er2"]
+[ext_resource type="PackedScene" uid="uid://co3ix5krmh3qr" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword.tscn" id="5_mahx6"]
+[ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="6_mahx6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mahx6"]
+height = 3.0
+
+[node name="Insighter" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_wehyl")]
+stats = ExtResource("2_1dq5o")
+enemy_model = NodePath("insighter")
+
+[node name="insighter" parent="." index="0" instance=ExtResource("2_e0uej")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
+
+[node name="Armature" parent="insighter" index="0"]
+transform = Transform3D(0.000670522, -0.602317, 0, 0.602317, 0.000670522, 0, 0, 0, 0.602318, -0.405866, 1.42919, -0.00256465)
+
+[node name="Skeleton3D" parent="insighter/Armature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0.000393661, 0.707107, -0.000393594)
+bones/1/rotation = Quaternion(0.707107, 0.000393594, 0.707107, 0.000393594)
+bones/2/rotation = Quaternion(-3.55483e-09, 3.63408e-08, 0.0164768, 0.999864)
+bones/3/rotation = Quaternion(3.74863e-09, -2.03517e-08, -0.0159202, 0.999873)
+bones/4/position = Vector3(0.789193, -0.559539, 0.803955)
+bones/4/rotation = Quaternion(0.174826, 0.263962, 0.752147, 0.577958)
+bones/5/rotation = Quaternion(0.0118424, -0.000231475, -0.00347466, 0.999924)
+bones/6/position = Vector3(0.839534, -0.85045, -0.739377)
+bones/6/rotation = Quaternion(-0.759836, 0.267271, 0.278839, 0.522938)
+bones/7/rotation = Quaternion(-0.0167451, -0.747819, -0.0105161, 0.663608)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26129, 0)
+shape = SubResource("CapsuleShape3D_mahx6")
+
+[node name="BTPlayer" parent="." index="4"]
+behavior_tree = ExtResource("4_n8hr6")
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+transform = Transform3D(-0.169487, 0, -0.985533, 0, 1, 0, 0.985533, 0, -0.169487, 0.61008, 1.69719, 0.157371)
+melee_weapon_scene = ExtResource("5_mahx6")
+weapon_collision_mask = 2
+
+[node name="EnemyAbilityController" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60472, 0)
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_e3er2")]
+ability_resource = ExtResource("6_mahx6")
+
+[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("3_l5l0p")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "Insighter \"Molten Cheese Tart\""
+
+[editable path="insighter"]

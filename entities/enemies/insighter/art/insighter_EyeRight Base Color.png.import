@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qr46qe41rel2"
+uid="uid://bq0mr2cvlt0up"
 path.s3tc="res://.godot/imported/insighter_EyeRight Base Color.png-9fbe86d56d8f0fb7c3f9e3b1daab2342.s3tc.ctex"
 path.etc2="res://.godot/imported/insighter_EyeRight Base Color.png-9fbe86d56d8f0fb7c3f9e3b1daab2342.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "03eb3d3d4b1ef65e0d301a6215269049"
+"md5": "50d8e9b3e642042893be224bee6640bf"
 }
 
 [deps]
