@@ -4,7 +4,8 @@ extends BaseRangedCombatState
 @export var attack_origin: Node3D
 @export var launch_speed: float = 20.0
 @export var launch_angle_degrees: float = 30.0
-@export var trajectory_line_color: Color = Color(1.0, 1.0, 0.0, 0.5)
+@export var trajectory_line_color: Color = Color(1.0, 1.0, 0.0, 0.21568628)
+@export var trajectory_line_width: float = 0.2 # Width of the trajectory visualization
 
 # Number of points in the trajectory line
 const MAX_TRAJECTORY_POINTS: int = 50
@@ -103,11 +104,36 @@ func _update_trajectory_preview() -> void:
 		_trajectory_preview_mesh_instance.visible = false
 		return
 
-	var arrays: Array = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = points
-	_trajectory_preview_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, arrays)
+	# Generate a wide strip along the trajectory
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	var color: Color = trajectory_line_color
+
+	for i in range(points.size()):
+		var p: Vector3 = points[i]
+		var tangent: Vector3
+		if i < points.size() - 1:
+			tangent = (points[i + 1] - p).normalized()
+		else:
+			tangent = (p - points[i - 1]).normalized()
+		var up: Vector3 = Vector3.UP
+		var normal: Vector3 = tangent.cross(up).normalized()
+		if normal.length() < 0.01:
+			normal = Vector3.RIGHT
+		var offset: Vector3 = normal * (trajectory_line_width * 0.5)
+		st.set_color(color)
+		st.add_vertex(p + offset)
+		st.set_color(color)
+		st.add_vertex(p - offset)
+
+	#  use commit_to_arrays and add_surface_from_arrays
+	var arrays = st.commit_to_arrays()
+	_trajectory_preview_mesh.add_surface_from_arrays(
+		Mesh.PRIMITIVE_TRIANGLE_STRIP,
+		arrays
+	)
 	_trajectory_preview_mesh_instance.visible = true
+
 
 func _fire_projectile() -> void:
 	if not projectile_scene:
