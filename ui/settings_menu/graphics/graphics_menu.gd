@@ -55,9 +55,9 @@ const RENDER_SCALE: Dictionary[String, float] = {
 	"Performance": 0.5,
 }
 const RENDER_MODE: Dictionary[String, Viewport.Scaling3DMode] = {
-	"Bilinear": Viewport.SCALING_3D_MODE_BILINEAR,
-	"FSR 1.0": Viewport.SCALING_3D_MODE_FSR,
-	"FSR 2.0": Viewport.SCALING_3D_MODE_FSR2,
+	"Bilinear - Fastest": Viewport.SCALING_3D_MODE_BILINEAR,
+	"FSR 1.0 - Fast": Viewport.SCALING_3D_MODE_FSR,
+	"FSR 2.0 - Slow": Viewport.SCALING_3D_MODE_FSR2,
 }
 
 var config_path: String = "user://settings.cfg"
@@ -77,43 +77,7 @@ var graphics_settings: Dictionary = {}
 
 
 func _ready() -> void:
-	resolution.options.clear()
-	for res_text in RESOLUTIONS:
-		resolution.options.add_item(res_text)
-
-	display_mode.options.clear()
-	for dis_text in DISPLAY_MODES:
-		display_mode.options.add_item(dis_text)
-
-	v_sync.options.clear()
-	for v_text in V_SYNC:
-		v_sync.options.add_item(v_text)
-
-	fps.options.clear()
-	for fps_text in FPS:
-		fps.options.add_item(fps_text)
-
-	msaa.options.clear()
-	for msaa_text in MSAA:
-		msaa.options.add_item(msaa_text)
-
-	fxaa.options.clear()
-	for fxaa_text in FXAA:
-		fxaa.options.add_item(fxaa_text)
-
-	taa.options.clear()
-	for taa_text in TAA:
-		taa.options.add_item(taa_text)
-
-	render_scale.options.clear()
-	for scale_text in RENDER_SCALE:
-		render_scale.options.add_item(scale_text)
-
-	render_mode.options.clear()
-	for scale_text in RENDER_MODE:
-		render_mode.options.add_item(scale_text)
-
-	_load_graphics_settings()
+	_load_graphics_items()
 
 
 func _load_graphics_settings() -> void:
@@ -237,6 +201,8 @@ func _set_render_scale(index: int) -> void:
 	render_scale.options.selected = index
 	graphics_settings["render_scale"] = value
 
+	_save_graphics_settings()
+
 
 func _set_render_mode(index: int) -> void:
 	var value: int = RENDER_MODE.values()[index]
@@ -248,14 +214,61 @@ func _set_render_mode(index: int) -> void:
 	_save_graphics_settings()
 
 
+func _load_graphics_items() -> void:
+	resolution.options.clear()
+	for res_text in RESOLUTIONS:
+		resolution.options.add_item(res_text)
+
+	display_mode.options.clear()
+	for dis_text in DISPLAY_MODES:
+		display_mode.options.add_item(dis_text)
+
+	v_sync.options.clear()
+	for v_text in V_SYNC:
+		v_sync.options.add_item(v_text)
+
+	fps.options.clear()
+	for fps_text in FPS:
+		fps.options.add_item(fps_text)
+
+	msaa.options.clear()
+	for msaa_text in MSAA:
+		msaa.options.add_item(msaa_text)
+
+	fxaa.options.clear()
+	for fxaa_text in FXAA:
+		fxaa.options.add_item(fxaa_text)
+
+	taa.options.clear()
+	for taa_text in TAA:
+		taa.options.add_item(taa_text)
+
+	render_scale.options.clear()
+	for scale_text in RENDER_SCALE:
+		render_scale.options.add_item(scale_text)
+
+	render_mode.options.clear()
+	for scale_text in RENDER_MODE:
+		render_mode.options.add_item(scale_text)
+
+	_load_graphics_settings()
+
+
 func _set_graphics_values() -> void:
-	_set_resolution(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
-	_set_display_mode(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
+	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
+	display_mode.options.select(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
-	_set_vsync(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
-	_set_fps(FPS.values().find(Engine.max_fps))
-	_set_msaa(MSAA.values().find(get_viewport().msaa_3d))
-	_set_fxaa(FXAA.values().find(get_viewport().screen_space_aa))
-	_set_taa(TAA.values().find(get_viewport().use_taa))
-	_set_render_scale(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
-	_set_render_mode(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
+	v_sync.options.select(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
+	fps.options.select(FPS.values().find(Engine.max_fps))
+	msaa.options.select(MSAA.values().find(get_viewport().msaa_3d))
+	fxaa.options.select(FXAA.values().find(get_viewport().screen_space_aa))
+	taa.options.select(TAA.values().find(get_viewport().use_taa))
+	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
+	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
+
+
+func _on_restore_defaults_button_up() -> void:
+	if FileAccess.file_exists(config_path):
+		DirAccess.remove_absolute(config_path)
+
+	_load_graphics_items()

@@ -11,6 +11,7 @@ const SETTINGS_CFG_NAME_CONTROLS: String = "controls"
 const SETTINGS_CFG_NAME_KEYBINDS: String = "keybinds"
 const SETTINGS_CFG_NAME_GRAPHICS: String = "graphics"
 const SETTINGS_CFG_NAME_AUDIO: String = "audio"
+const DEFAULT_GRAPHICS_SETTINGS: GraphicsSettings = preload("uid://bj6f5mcuyrlnf")
 const SAVE_GAME_PATH: String = "user://save_game.cfg"
 const PLAYER_SAVE_SECTION: String = "player"
 
@@ -29,8 +30,11 @@ var _loaded_game_data: Dictionary = {}
 func load_settings(item: String = "") -> void:
 	var config := ConfigFile.new()
 
-	# Attempt to load config file - return if failed
+	# Attempt to load config file - if failed, use defaults for requested section
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
+		# Load default graphics settings
+		if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
+			_apply_graphics_settings(DEFAULT_GRAPHICS_SETTINGS.default_settings.duplicate(true))
 		return
 
 	if item == SETTINGS_CFG_NAME_KEYBINDS or item.is_empty():
@@ -42,27 +46,12 @@ func load_settings(item: String = "") -> void:
 					InputMap.action_add_event(action, event)
 
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
+		# Load graphics settings
+		var graphics_settings: Dictionary = DEFAULT_GRAPHICS_SETTINGS.default_settings.duplicate(true)
 		if config.has_section(SETTINGS_CFG_NAME_GRAPHICS):
-			var resolution: Vector2i
 			for graphics_setting in config.get_section_keys(SETTINGS_CFG_NAME_GRAPHICS):
-				var value = config.get_value(SETTINGS_CFG_NAME_GRAPHICS, graphics_setting)
-				match graphics_setting:
-					"resolution":
-						resolution = value
-						DisplayServer.window_set_size(value)
-						DisplayUtils.center_window(get_window())
-					"display_mode": DisplayServer.window_set_mode(value)
-					"borderless": 
-						DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, value)
-						DisplayServer.window_set_size(resolution)
-						DisplayUtils.center_window(get_window())
-					"v_sync": DisplayServer.window_set_vsync_mode(value)
-					"fps": Engine.max_fps = value
-					"msaa": get_viewport().msaa_3d = value
-					"fxaa": get_viewport().screen_space_aa = value
-					"taa": get_viewport().use_taa = value
-					"render_scale": get_viewport().scaling_3d_scale = value
-					"render_mode": get_viewport().scaling_3d_mode = value
+				graphics_settings[graphics_setting] = config.get_value(SETTINGS_CFG_NAME_GRAPHICS, graphics_setting)
+		_apply_graphics_settings(graphics_settings)
 
 	if item == SETTINGS_CFG_NAME_AUDIO or item.is_empty():
 		# Load audio settings
@@ -192,3 +181,19 @@ func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 			)
 
 	return typed_upgrades
+
+
+func _apply_graphics_settings(settings: Dictionary) -> void:
+	var viewport: Viewport = get_viewport()
+	var window: Window = get_window()
+
+	DisplayServer.window_set_size(settings["resolution"])
+	DisplayServer.window_set_mode(settings["display_mode"])
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
+	DisplayServer.window_set_vsync_mode(settings["v_sync"])
+	Engine.max_fps = settings["fps"]
+	viewport.msaa_3d = settings["msaa"]
+	viewport.screen_space_aa = settings["fxaa"]
+	viewport.use_taa = settings["taa"]
+	viewport.scaling_3d_scale = settings["render_scale"]
+	viewport.scaling_3d_mode = settings["render_mode"]
