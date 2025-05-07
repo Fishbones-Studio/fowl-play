@@ -33,8 +33,8 @@ var vertical_sensitivity: float = 0.5
 var controller_sensitivity: float = 8.0
 var max_degrees: float = 45.0
 var min_degrees: float = -90.0
-var invert_y_axis: bool = false
 var invert_x_axis: bool = false
+var invert_y_axis: bool = false
 
 @onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
@@ -61,16 +61,22 @@ func _ready() -> void:
 
 func _input(event) -> void:
 	if event is InputEventMouseMotion:
+	 	# Apply inversion to mouse input
+		var x_input: float = event.relative.x * (-1 if invert_x_axis else 1)
+		var y_input: float = event.relative.y * (-1 if invert_y_axis else 1)
+
 		# Mouse sensitivity control
-		entity_to_follow.rotate_y(deg_to_rad(-event.relative.x) * horizontal_sensitivity)
-		rotate_x(deg_to_rad(-event.relative.y) * vertical_sensitivity)
+		entity_to_follow.rotate_y(deg_to_rad(-x_input) * horizontal_sensitivity)
+		rotate_x(deg_to_rad(-y_input) * vertical_sensitivity)
 		_apply_camera_clamp()
 
 
 func _process(delta) -> void:
 	# Calculate controller input
-	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
-	var y_axis: float = Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down")
+	var x_axis: float = Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right") \
+		if invert_x_axis else Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
+	var y_axis: float = Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down") \
+		if invert_y_axis else Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right")
 
 	# Apply controller input with sensitivity
 	entity_to_follow.rotation.y += x_axis * horizontal_sensitivity * delta * controller_sensitivity
@@ -109,6 +115,7 @@ func _apply_camera_clamp() -> void:
 
 
 func _load_camera_settings() -> void:
+	print("Hello thereASdasdasdasdsadas")
 	var config: ConfigFile = ConfigFile.new()
 	var cfg_path: String = "user://settings.cfg"
 	var cfg_name: String = "controls"
@@ -128,3 +135,5 @@ func _load_camera_settings() -> void:
 				"controller_sensitivity": controller_sensitivity = value["value"]
 				"camera_up_tilt": max_degrees = value["value"]
 				"camera_down_tilt": min_degrees = value["value"]
+				"invert_x_axis": invert_x_axis = value["value"]
+				"invert_y_axis": invert_y_axis = value["value"]
