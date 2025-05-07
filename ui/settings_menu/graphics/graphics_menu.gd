@@ -178,11 +178,6 @@ func _set_vsync(index: int) -> void:
 	graphics_settings["v_sync"] = value
 
 	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 ## The rendering FPS affects the appearance of TAA, as higher framerates allow 
@@ -196,11 +191,6 @@ func _set_fps(index: int) -> void:
 	graphics_settings["fps"] = value
 
 	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 ## Multi-sample anti-aliasing. High quality, but slow. It also does not smooth 
@@ -213,11 +203,7 @@ func _set_msaa(index: int) -> void:
 	graphics_settings["msaa"] = value
 
 	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
+
 
 ## Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha 
 ## scissor edges), but blurs the whole scene rendering slightly.
@@ -229,11 +215,6 @@ func _set_fxaa(index: int) -> void:
 	graphics_settings["fxaa"] = value
 
 	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 ## Temporal antialiasing. Smooths out everything including specular aliasing, 
@@ -247,26 +228,14 @@ func _set_taa(index: int) -> void:
 	graphics_settings["taa"] = value
 
 	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 func _set_render_scale(index: int) -> void:
-	var value: int = RENDER_SCALE.values()[index]
+	var value: float = RENDER_SCALE.values()[index]
 	get_viewport().scaling_3d_scale = value
 
 	render_scale.options.selected = index
 	graphics_settings["render_scale"] = value
-
-	_save_graphics_settings()
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 func _set_render_mode(index: int) -> void:
@@ -278,12 +247,6 @@ func _set_render_mode(index: int) -> void:
 
 	_save_graphics_settings()
 
-	print("MSAA: ", get_viewport().msaa_3d)
-	print("FXAA: ", get_viewport().screen_space_aa)
-	print("TAA: ", get_viewport().use_taa)
-	print("SCALE: ", get_viewport().scaling_3d_scale)
-	print("MODE: ", get_viewport().scaling_3d_mode)
-
 
 func _set_graphics_values() -> void:
 	_set_resolution(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
@@ -294,5 +257,5 @@ func _set_graphics_values() -> void:
 	_set_msaa(MSAA.values().find(get_viewport().msaa_3d))
 	_set_fxaa(FXAA.values().find(get_viewport().screen_space_aa))
 	_set_taa(TAA.values().find(get_viewport().use_taa))
-	_set_render_scale(RENDER_SCALE.values().find(max(get_viewport().scaling_3d_scale, 0.5)))
+	_set_render_scale(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	_set_render_mode(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
