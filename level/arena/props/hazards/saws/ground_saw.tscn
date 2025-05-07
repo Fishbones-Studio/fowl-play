@@ -50,16 +50,16 @@ script = ExtResource("2_fdjq5")
 damage_interval = 1.0
 damage_duration = 5.0
 
-[node name="NavigationObstacle3D" parent="." index="0"]
-radius = 3.3
+[node name="ground_saw" parent="." index="0" instance=ExtResource("3_fdjq5")]
 
-[node name="ground_saw" parent="." index="1" instance=ExtResource("3_fdjq5")]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_qeog0")
 }
 autoplay = "rotation"
+
+[node name="NavigationObstacle3D" parent="." index="2"]
+radius = 1.75
 
 [node name="CollisionShape3D" parent="HazardArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0962822, 0)
