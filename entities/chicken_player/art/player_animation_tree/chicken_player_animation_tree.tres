@@ -1,9 +1,16 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=38 format=3 uid="uid://dm6yb6sbbuoyr"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=40 format=3 uid="uid://dm6yb6sbbuoyr"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8i8jv"]
 animation = &"Dash"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_6mkbl"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ncdpi"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uerlf"]
 fadein_time = 0.3
 fadeout_time = 0.3
 
@@ -130,11 +137,15 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-388.66, -428.474)
 
 [resource]
-graph_offset = Vector2(-317.615, -55.2045)
+graph_offset = Vector2(-39.5759, 161.041)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_8i8jv")
 nodes/Dash/position = Vector2(-230, 170)
 nodes/DashOneShot/node = SubResource("AnimationNodeOneShot_6mkbl")
 nodes/DashOneShot/position = Vector2(-30, 40)
+nodes/Death/node = SubResource("AnimationNodeAnimation_ncdpi")
+nodes/Death/position = Vector2(480, 540)
+nodes/DeathOneShot/node = SubResource("AnimationNodeOneShot_uerlf")
+nodes/DeathOneShot/position = Vector2(710, 260)
 nodes/Hurt/node = SubResource("AnimationNodeAnimation_vsiul")
 nodes/Hurt/position = Vector2(-80, 430)
 nodes/HurtOneShot/node = SubResource("AnimationNodeOneShot_1ij6v")
@@ -145,5 +156,5 @@ nodes/MeleeOneShot/node = SubResource("AnimationNodeOneShot_cx2nh")
 nodes/MeleeOneShot/position = Vector2(420, 180)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_y8j8d")
 nodes/MovementStateMachine/position = Vector2(-300, -70)
-nodes/output/position = Vector2(730, 180)
-node_connections = [&"DashOneShot", 0, &"MovementStateMachine", &"DashOneShot", 1, &"Dash", &"HurtOneShot", 0, &"DashOneShot", &"HurtOneShot", 1, &"Hurt", &"MeleeOneShot", 0, &"HurtOneShot", &"MeleeOneShot", 1, &"Melee", &"output", 0, &"MeleeOneShot"]
+nodes/output/position = Vector2(920, 250)
+node_connections = [&"DashOneShot", 0, &"MovementStateMachine", &"DashOneShot", 1, &"Dash", &"DeathOneShot", 0, &"MeleeOneShot", &"DeathOneShot", 1, &"Death", &"HurtOneShot", 0, &"DashOneShot", &"HurtOneShot", 1, &"Hurt", &"MeleeOneShot", 0, &"HurtOneShot", &"MeleeOneShot", 1, &"Melee", &"output", 0, &"DeathOneShot"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://6g2at2l4u6sk" path="res://ui/player_hud/stamina_bar/stamina_bar.gd" id="1_cas2i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grqgw"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.517647, 0.517647, 0.517647, 0.490196)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cas2i"]
 bg_color = Color(0.95761, 0.700387, 0, 1)

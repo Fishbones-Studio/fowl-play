@@ -36,6 +36,7 @@ func _on_chicken_player_set() -> void:
 	if is_instance_valid(ranged_weapon_slot):
 		ranged_weapon_slot.setup()
 
+
 func _update_weapon_state() -> void:
 	var previously_active_slot: Node3D = active_weapon_slot
 	valid_weapon_slots.clear()
