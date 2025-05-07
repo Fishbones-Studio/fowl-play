@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="4_h6t4k"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_q1l3l"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="5_pd8xg"]
-[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="9_smr14"]
 
