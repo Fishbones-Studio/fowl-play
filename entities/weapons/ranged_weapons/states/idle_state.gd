@@ -1,1 +1,1 @@
-class_name RangedIdleState extends BaseRangedCombatState
+extends BaseRangedCombatState
