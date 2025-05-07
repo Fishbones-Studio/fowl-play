@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpba8wvtfww4x"]
 
-[ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybind_menu/remap_panel.gd" id="1_q71b7"]
+[ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybinds/remap_panel.gd" id="1_q71b7"]
 
 [node name="ContentItemKeybind" type="Control"]
 custom_minimum_size = Vector2(0, 35)

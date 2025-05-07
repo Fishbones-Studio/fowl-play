@@ -71,7 +71,7 @@ func _tick(delta: float) -> Status:
 	return RUNNING
 
 
-func _move_towards_target(target_pos: Vector3, delta: float, target_moved: bool):
+func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool):
 	var speed = speed_factor if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 
 	if pathfinding:

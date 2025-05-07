@@ -33,7 +33,6 @@ var owner_stats: LivingEntityStats
 
 func _ready() -> void:
 	# In enemy, the export vars are set, so we can immediatly run the setup
-	var parent: Node = get_parent()
 	if melee_weapon_scene:
 		setup()
 

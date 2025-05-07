@@ -1,17 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkbsjmbi2yaoh"]
+[gd_scene load_steps=3 format=3 uid="uid://cq223dym52whr"]
 
-[ext_resource type="Script" uid="uid://bxwrji2padbpx" path="res://ui/settings_menu/keybind_menu/keybind_menu.gd" id="1_tg1i7"]
+[ext_resource type="Script" uid="uid://b84knbxx7uyqh" path="res://ui/settings_menu/controls/controls_menu.gd" id="1_orgt5"]
+[ext_resource type="PackedScene" uid="uid://c61t75veylfqw" path="res://ui/buttons/restore_defaults_button.tscn" id="2_44ya2"]
 
-[node name="KeybindMenu" type="Control"]
+[node name="ControlsMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("1_tg1i7")
+script = ExtResource("1_orgt5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -43,7 +42,6 @@ size_flags_vertical = 3
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
-size_flags_vertical = 8
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 25
@@ -56,23 +54,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ErrorTextLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="RestoreDefaultsButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_44ya2")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 6.0
-text = "Et est et quia. Excepturi soluta aut ea. Cumque facere unde voluptatibus. Est quia et ullam. Non incidunt omnis voluptatibus et veniam esse. Libero dolor distinctio esse excepturi molestiae magnam voluptate et."
-autowrap_mode = 3
 
-[node name="RestoreDefaultsButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 45)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_type_variation = &"KeybindResDefButton"
-text = "Restore Defaults"
-
-[connection signal="button_down" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_button_down"]
-[connection signal="button_up" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_up"]
