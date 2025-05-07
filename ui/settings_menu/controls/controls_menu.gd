@@ -8,7 +8,7 @@ extends Control
 
 var config_path: String = "user://settings.cfg"
 var config_name: String = "controls"
-var controls_settings: Dictionary = {}
+var controls_settings: Array[Dictionary] = []
 
 @onready var content_container: VBoxContainer = %ContentContainer
 @onready var slider_resource: PackedScene = preload("uid://6air6r3l5p61")
@@ -28,10 +28,13 @@ func _load_controls_settings() -> void:
 
 	# Try to load config file
 	if config.load(config_path) == OK and config.has_section(config_name):
+		controls_settings.clear()
 		# Override defaults with saved settings
 		for controls_setting in config.get_section_keys(config_name):
-			controls_settings[controls_setting] = config.get_value(config_name, controls_setting)
-	print(controls_settings_resource.default_settings)
+			controls_settings.append({
+				controls_setting: config.get_value(config_name, controls_setting)
+				})
+
 	_load_controls_items()
 
 
@@ -39,8 +42,8 @@ func _save_controls_settings() -> void:
 	var config = ConfigFile.new()
 	config.load(config_path) # Load existing settings
 
-	for controls_setting: String in controls_settings:
-		config.set_value(config_name, controls_setting, controls_settings[controls_setting])
+	for controls_setting: Dictionary in controls_settings:
+		config.set_value(config_name, controls_setting.keys()[0], controls_setting.values()[0])
 
 	config.save(config_path)
 	SignalManager.controls_settings_changed.emit()
@@ -51,26 +54,29 @@ func _load_controls_items() -> void:
 		content_container.remove_child(child)
 		child.queue_free()
 
-	for item: String in controls_settings:
-		match controls_settings[item]["type"]:
+	for item: Dictionary in controls_settings:
+		var item_name: String = item.keys()[0]
+		var item_values: Dictionary = item.values()[0]
+
+		match item_values["type"]:
 			"slider":
 				var slider: SettingsSlider = slider_resource.instantiate()
 				content_container.add_child(slider)
-				slider.label.text = item.capitalize()
-				slider.slider.min_value = controls_settings[item]["min"]
-				slider.slider.max_value = controls_settings[item]["max"]
-				slider.slider.step = controls_settings[item]["step"]
-				slider.slider.value = controls_settings[item]["value"]
+				slider.label.text = item_name.capitalize()
+				slider.slider.min_value = item_values["min"]
+				slider.slider.max_value = item_values["max"]
+				slider.slider.step = item_values["step"]
+				slider.slider.value = item_values["value"]
 				slider.slider.value_changed.connect(_value_changed.bind(item))
 			"check_button":
 				var check_button: SettingsCheckButton = check_button_resource.instantiate()
 				content_container.add_child(check_button)
-				check_button.set_pressed_no_signal(controls_settings[item]["value"])
-				check_button.label.text = item.capitalize()
+				check_button.set_pressed_no_signal(item_values["value"])
+				check_button.label.text = item_name.capitalize()
 				check_button.toggled.connect(_value_changed.bind(item))
 
 
-func _value_changed(value: float, item: String) -> void:
-	controls_settings[item]["value"] = value
+func _value_changed(value: float, item: Dictionary) -> void:
+	controls_settings[controls_settings.find(item)].values()[0]["value"] = value
 
 	_save_controls_settings()

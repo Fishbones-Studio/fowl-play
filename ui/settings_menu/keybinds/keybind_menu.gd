@@ -83,7 +83,6 @@ func _save_input_settings():
 func _load_input_settings():
 	# Load defaults first, then override with saved config
 	InputMap.load_from_project_settings()
-	var config = ConfigFile.new()
 
 	SaveManager.load_settings(config_name)
 

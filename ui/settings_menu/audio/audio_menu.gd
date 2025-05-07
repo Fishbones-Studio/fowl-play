@@ -23,8 +23,6 @@ func _ready() -> void:
 
 
 func _load_audio_settings() -> void:
-	var config = ConfigFile.new()
-
 	SaveManager.load_settings(config_name)
 
 	_load_audio_busses()

@@ -66,8 +66,6 @@ func _ready() -> void:
 
 
 func _load_graphics_settings() -> void:
-	var config = ConfigFile.new()
-
 	SaveManager.load_settings(config_name)
 
 	_set_graphics_values()
@@ -112,7 +110,6 @@ func _set_borderless(value: bool) -> void:
 	graphics_settings["borderless"] = value
 
 	_save_graphics_settings()
-	print(DisplayServer.window_get_size())
 
 
 func _set_vsync(index: int):
@@ -138,6 +135,6 @@ func _set_fps(index: int):
 func _set_graphics_values() -> void:
 	_set_resolution(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	_set_display_mode(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
-	borderless.set_pressed_no_signal(DisplayServer.WINDOW_FLAG_BORDERLESS)
+	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	_set_vsync(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	_set_fps(FPS.values().find(Engine.max_fps))

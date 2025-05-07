@@ -128,5 +128,3 @@ func _load_camera_settings() -> void:
 				"controller_sensitivity": controller_sensitivity = value["value"]
 				"camera_up_tilt": max_degrees = value["value"]
 				"camera_down_tilt": min_degrees = value["value"]
-	
-	print("SETTINGS: ", camera_settings)
