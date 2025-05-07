@@ -23,18 +23,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7
 [node name="Armature" parent="insighter" index="0"]
 transform = Transform3D(0.000670522, -0.602317, 0, 0.602317, 0.000670522, 0, 0, 0, 0.602318, -0.405866, 1.42919, -0.00256465)
 
-[node name="Skeleton3D" parent="insighter/Armature" index="0"]
-bones/0/rotation = Quaternion(0.707107, 0.000393661, 0.707107, -0.000393594)
-bones/1/rotation = Quaternion(0.707107, 0.000393594, 0.707107, 0.000393594)
-bones/2/rotation = Quaternion(-3.55483e-09, 3.63408e-08, 0.0164768, 0.999864)
-bones/3/rotation = Quaternion(3.74863e-09, -2.03517e-08, -0.0159202, 0.999873)
-bones/4/position = Vector3(0.789193, -0.559539, 0.803955)
-bones/4/rotation = Quaternion(0.174826, 0.263962, 0.752147, 0.577958)
-bones/5/rotation = Quaternion(0.0118424, -0.000231475, -0.00347466, 0.999924)
-bones/6/position = Vector3(0.839534, -0.85045, -0.739377)
-bones/6/rotation = Quaternion(-0.759836, 0.267271, 0.278839, 0.522938)
-bones/7/rotation = Quaternion(-0.0167451, -0.747819, -0.0105161, 0.663608)
-
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_mahx6")

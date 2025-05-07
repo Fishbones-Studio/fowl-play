@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_epyd4")
-max_health = 300.0
-max_stamina = 200.0
-attack = 300.0
-defense = 100
-speed = 5.0
-weight = 10.0
-health_regen = 1
+max_health = 50.0
+max_stamina = 100.0
+attack = 15.0
+defense = 150
+speed = 20.0
+weight = 1.0
+health_regen = 10
 stamina_regen = 5
-weight_factor = 0.07
+weight_factor = 0.01
 k_scaler = 100.0
 is_player = false
 metadata/_custom_type_script = "uid://up7hh823h5kw"
