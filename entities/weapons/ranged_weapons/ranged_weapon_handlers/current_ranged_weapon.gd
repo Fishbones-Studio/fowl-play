@@ -53,7 +53,7 @@ func setup() -> void:
 		)
 		
 	if not ranged_weapon_scene:
-		push_error("No valid weapon scene assigned!")
+		push_warning("No valid weapon scene assigned!")
 		return
 
 	if not current_weapon:

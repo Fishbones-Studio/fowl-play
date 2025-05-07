@@ -1,18 +1,21 @@
 ################################################################################
 ## Handles all game data persistance, including:
-## - Settings (Controls, Key Bindings, Controls, Audio)
+## - Settings (Controls, Key Bindings, Graphics, Audio)
 ## - Save Game Data (Stats, Upgrades)
 ##
 ################################################################################
 extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"
+const SETTINGS_CFG_NAME_CONTROLS: String = "controls"
 const SETTINGS_CFG_NAME_KEYBINDS: String = "keybinds"
+const SETTINGS_CFG_NAME_GRAPHICS: String = "graphics"
 const SETTINGS_CFG_NAME_AUDIO: String = "audio"
+const DEFAULT_GRAPHICS_SETTINGS: GraphicsSettings = preload("uid://bj6f5mcuyrlnf")
 const SAVE_GAME_PATH: String = "user://save_game.cfg"
 const PLAYER_SAVE_SECTION: String = "player"
 
-# Input remapping 
+# Input remapping
 # Signal would not work here, since signal order is not guaranteed, which can 
 # cause multiple input buttons to be pressed at the same time or other bugs
 var is_remapping: bool = false
@@ -22,27 +25,43 @@ var action_to_remap: String = ""
 # Cache for loaded game data
 var _loaded_game_data: Dictionary = {}
 
+
 ## Load all saved settings from the user's configuration file.
-func load_settings() -> void:
+func load_settings(item: String = "") -> void:
 	var config := ConfigFile.new()
-	# Attempt to load config file - return if failed
+
+	# Attempt to load config file - if failed, use defaults for requested section
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
+		# Load default graphics settings
+		if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
+			_apply_graphics_settings(DEFAULT_GRAPHICS_SETTINGS.default_settings.duplicate(true))
 		return
 
-	# Load keybind settings
-	if config.has_section(SETTINGS_CFG_NAME_KEYBINDS):
-		for action in config.get_section_keys(SETTINGS_CFG_NAME_KEYBINDS):
-			InputMap.action_erase_events(action)
-			for event in config.get_value(SETTINGS_CFG_NAME_KEYBINDS, action):
-				InputMap.action_add_event(action, event)
+	if item == SETTINGS_CFG_NAME_KEYBINDS or item.is_empty():
+		# Load keybind settings
+		if config.has_section(SETTINGS_CFG_NAME_KEYBINDS):
+			for action in config.get_section_keys(SETTINGS_CFG_NAME_KEYBINDS):
+				InputMap.action_erase_events(action)
+				for event in config.get_value(SETTINGS_CFG_NAME_KEYBINDS, action):
+					InputMap.action_add_event(action, event)
 
-	# Load audio settings
-	if config.has_section(SETTINGS_CFG_NAME_AUDIO):
-		for audio_bus_name in config.get_section_keys(SETTINGS_CFG_NAME_AUDIO):
-			var saved_volume: float = config.get_value(SETTINGS_CFG_NAME_AUDIO, audio_bus_name)
-			var bus_idx: int = AudioServer.get_bus_index(audio_bus_name)
-			var volume: float = linear_to_db(clampf(saved_volume, 0.0, 100.0) / 100)
-			AudioServer.set_bus_volume_db(bus_idx, volume)
+	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
+		# Load graphics settings
+		var graphics_settings: Dictionary = DEFAULT_GRAPHICS_SETTINGS.default_settings.duplicate(true)
+		if config.has_section(SETTINGS_CFG_NAME_GRAPHICS):
+			for graphics_setting in config.get_section_keys(SETTINGS_CFG_NAME_GRAPHICS):
+				graphics_settings[graphics_setting] = config.get_value(SETTINGS_CFG_NAME_GRAPHICS, graphics_setting)
+		_apply_graphics_settings(graphics_settings)
+
+	if item == SETTINGS_CFG_NAME_AUDIO or item.is_empty():
+		# Load audio settings
+		if config.has_section(SETTINGS_CFG_NAME_AUDIO):
+			for audio_bus_name in config.get_section_keys(SETTINGS_CFG_NAME_AUDIO):
+				var saved_volume: float = config.get_value(SETTINGS_CFG_NAME_AUDIO, audio_bus_name)
+				var bus_idx: int = AudioServer.get_bus_index(audio_bus_name)
+				var volume: float = linear_to_db(clampf(saved_volume, 0.0, 100.0) / 100)
+				AudioServer.set_bus_volume_db(bus_idx, volume)
+
 
 func save_game(stats: LivingEntityStats = null, upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {}) -> void:
 	# Try to load the config file
@@ -61,7 +80,7 @@ func save_game(stats: LivingEntityStats = null, upgrades: Dictionary[StatsEnums.
 		push_error("Failed to save game: %s" % error_string(err))
 		return
 
-	# updating loaded stats
+	# Updating loaded stats
 	if stats:
 		_loaded_game_data["stats"] = stats
 	if upgrades:
@@ -71,6 +90,7 @@ func save_game(stats: LivingEntityStats = null, upgrades: Dictionary[StatsEnums.
 	else:
 		print("No upgrades to save.")
 	print("Game data saved successfully!")
+
 
 func load_game() -> Dictionary:
 	if not _loaded_game_data.is_empty():
@@ -100,7 +120,8 @@ func load_game() -> Dictionary:
 		"upgrades": upgrades
 	}
 	return _loaded_game_data
-	
+
+
 func reset_game() -> void:
 	var default_stats: LivingEntityStats = ResourceLoader.load("uid://bwhuhbesdlyu5").duplicate()
 	var default_upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = {
@@ -118,11 +139,13 @@ func reset_game() -> void:
 	print("Game Reset - Stats: ", default_stats.to_dict())
 	print("Game Reset - Upgrades", default_upgrades)
 
+
 func get_loaded_player_stats() -> LivingEntityStats:
 	if _loaded_game_data.is_empty():
 		load_game()
 	print("Loaded Upgrades: ", _loaded_game_data.get("upgrades", {}))
 	return _loaded_game_data.get("stats", null).duplicate()
+
 
 func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 	if _loaded_game_data.is_empty():
@@ -157,5 +180,20 @@ func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 				typeof(key)
 			)
 
-
 	return typed_upgrades
+
+
+func _apply_graphics_settings(settings: Dictionary) -> void:
+	var viewport: Viewport = get_viewport()
+	var window: Window = get_window()
+
+	DisplayServer.window_set_size(settings["resolution"])
+	DisplayServer.window_set_mode(settings["display_mode"])
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
+	DisplayServer.window_set_vsync_mode(settings["v_sync"])
+	Engine.max_fps = settings["fps"]
+	viewport.msaa_3d = settings["msaa"]
+	viewport.screen_space_aa = settings["fxaa"]
+	viewport.use_taa = settings["taa"]
+	viewport.scaling_3d_scale = settings["render_scale"]
+	viewport.scaling_3d_mode = settings["render_mode"]

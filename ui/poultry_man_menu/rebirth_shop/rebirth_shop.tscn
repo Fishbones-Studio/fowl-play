@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1y2iw2q8ee8l" path="res://ui/poultry_man_menu/rebirth_shop/rebirth_shop.gd" id="1_5h013"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_p65sv"]
-[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="3_lq5l4"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="3_lq5l4"]
 [ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="30_p65sv"]
 
 [node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database")]

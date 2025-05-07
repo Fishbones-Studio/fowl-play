@@ -42,6 +42,9 @@ signal purchase_completed
 # Round signals
 signal start_next_round # to trigger the next round
 
+# Setting signals
+signal controls_settings_changed
+
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}
 

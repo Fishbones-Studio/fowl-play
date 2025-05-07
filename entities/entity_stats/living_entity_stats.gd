@@ -28,6 +28,7 @@ var current_stamina: float:
 		# Clamp based on the *current* max_stamina
 		current_stamina = clamp(value, 0, max_stamina)
 
+
 # Initialize stats, setting health and stamina to max
 func init() -> void:
 	if max_health <= 0: push_error("Max health must be positive.")
@@ -42,9 +43,11 @@ func init() -> void:
 func calculate_speed(speed_factor: float) -> float:
 	return max(speed * exp(-(weight) * weight_factor) * speed_factor, 0.1)
 
+
 func restore_health(amount: float) -> float:
 	current_health = clamp(current_health + amount, 0, max_health)
 	return current_health
+
 
 func restore_stamina(amount: float) -> float:
 	current_stamina = clamp(current_stamina + amount, 0, max_stamina)
@@ -71,6 +74,7 @@ func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEn
 	current_health = clamp(current_health - actual_damage, 0, max_health)
 	return actual_damage
 
+
 func drain_stamina(amount: float) -> float:
 	current_stamina = clamp(current_stamina - amount, 0, max_stamina)
 	return current_stamina
@@ -86,6 +90,7 @@ func regen_health(delta: float) -> float:
 func regen_stamina(delta: float) -> float:
 	current_stamina = clamp(current_stamina + (stamina_regen * delta), 0, max_stamina)
 	return current_stamina
+
 
 ## Calculate the damage based on the attack and the k_scaler
 func calc_scaled_damage(damage: float) -> float:
@@ -126,6 +131,7 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	current_health = clamp(current_health, 0, max_health)
 	current_stamina = clamp(current_stamina, 0, max_stamina)
 
+
 ## Convert the current state of this resource to a Dictionary for saving.
 func to_dict() -> Dictionary:
 	return {
@@ -144,6 +150,7 @@ func to_dict() -> Dictionary:
 	# Holder
 		"is_player": is_player,
 	}
+
 
 ## Create a new LivingEntityStats instance from a Dictionary.
 static func from_dict(data: Dictionary) -> LivingEntityStats:

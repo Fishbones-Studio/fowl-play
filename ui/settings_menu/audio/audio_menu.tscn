@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://6xd2kic6u58a"]
 
-[ext_resource type="Script" uid="uid://bauwbqmskptjp" path="res://ui/settings_menu/audio_menu/audio_menu.gd" id="1_ooq2j"]
+[ext_resource type="Script" uid="uid://bauwbqmskptjp" path="res://ui/settings_menu/audio/audio_menu.gd" id="1_ooq2j"]
 
 [node name="AudioMenu" type="Control"]
 layout_mode = 3

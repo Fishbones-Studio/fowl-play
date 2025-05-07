@@ -10,7 +10,9 @@ extends Control
 @onready var audio: Button = %Audio
 @onready var cheat: Button = %Cheat
 
+@onready var controls_menu: PackedScene = preload("uid://cq223dym52whr")
 @onready var keybinds_menu: PackedScene = preload("uid://bkbsjmbi2yaoh")
+@onready var graphics_menu: PackedScene = preload("uid://dcr1ox6uqifst")
 @onready var audio_menu: PackedScene = preload("uid://6xd2kic6u58a")
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 
@@ -56,11 +58,11 @@ func _update_content(sidebar_item: SiderBarItem) -> void:
 
 	match sidebar_item:
 		controls:
-			pass
+			content.add_child(controls_menu.instantiate())
 		key_bindings:
 			content.add_child(keybinds_menu.instantiate())
 		graphics:
-			pass
+			content.add_child(graphics_menu.instantiate())
 		audio:
 			content.add_child(audio_menu.instantiate())
 		cheat:
