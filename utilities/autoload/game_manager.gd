@@ -12,7 +12,8 @@ var chicken_player: ChickenPlayer = null:
 			return # No change
 		chicken_player = value
 		print("GameManager.chicken_player set to:", value)
-		chicken_player_set.emit()
+		if value != null:
+			chicken_player_set.emit()
 		
 var current_enemy: Enemy
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck8yr85ffg28t"]
+
+[ext_resource type="Script" uid="uid://cdccglf2rcjxu" path="res://utilities/sound/interval_random_sfx_player/inteval_random_sfx_player.gd" id="1_vbtp1"]
+
+[node name="IntervalRandomSFXPlayer" type="AudioStreamPlayer3D"]
+bus = &"Music"
+script = ExtResource("1_vbtp1")

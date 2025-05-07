@@ -12,17 +12,18 @@ var check_inventory: bool = true
 var prevent_duplicates: bool = true
 var actual_max_items: int = max_items
 
+var current_previewed_item: BaseResource = null
+
 @onready var shop_title_label: Label = %ShopLabel
 @onready var shop_items_container: GridContainer = %ShopItemsContainer
 @onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
 @onready var shop_preview_size_placeholder: Control = %SizePlaceholder
 @onready var cheat_button_container: HBoxContainer = %CheatButtonsContainer
 
-
 func _ready() -> void:
-	if not OS.has_feature("debug") && cheat_button_container:
+	if not OS.has_feature("debug") and cheat_button_container:
 		cheat_button_container.queue_free()
-	
+
 	_refresh_shop()
 	_setup_controller_navigation()
 
@@ -34,7 +35,6 @@ func _ready() -> void:
 	)
 
 	SignalManager.purchase_completed.connect(_setup_controller_navigation)
-	SignalManager.preview_shop_item.connect(_on_populate_visual_fields)
 
 
 func _refresh_shop() -> void:
@@ -61,9 +61,6 @@ func _refresh_shop() -> void:
 	# Add items up to our limit
 	for i in range(items_to_show):
 		var selected_item: BaseResource = available_items[i]
-		#if selected_item.drop_chance <= 0.0:
-			#continue
-
 		shop_items.append(selected_item)
 
 		var shop_item: BaseShopItem = create_shop_item(selected_item)
@@ -72,7 +69,11 @@ func _refresh_shop() -> void:
 			continue
 
 		shop_items_container.add_child(shop_item)
-
+		
+		# Connect signals for preview logic
+		shop_item.hovered.connect(_on_populate_visual_fields)
+		shop_item.focused.connect(_on_populate_visual_fields)
+		shop_item.unhovered.connect(_on_shop_item_unhovered)
 
 func _get_available_items() -> Array[BaseResource]:
 	var valid_items: Array[BaseResource] = []
@@ -109,6 +110,7 @@ func _setup_controller_navigation() -> void:
 
 
 func _on_populate_visual_fields(item: BaseResource) -> void:
+	current_previewed_item = item
 	shop_preview_container.visible = item != null
 	shop_preview_size_placeholder.visible = item == null
 	if item == null:
@@ -116,6 +118,16 @@ func _on_populate_visual_fields(item: BaseResource) -> void:
 
 	shop_preview_container.setup(item)
 
+func _maybe_clear_preview(leaving_item: BaseResource) -> void:
+	if current_previewed_item == leaving_item:
+		current_previewed_item = null
+		_on_populate_visual_fields(null)
+
+func _on_shop_item_unhovered(item: BaseResource) -> void:
+	await get_tree().process_frame
+	var focused: Control = get_viewport().gui_get_focus_owner()
+	if not (focused and focused.is_in_group("shop_item")):
+		_maybe_clear_preview(item)
 
 ## Abstract method
 func _on_close_button_pressed() -> void:

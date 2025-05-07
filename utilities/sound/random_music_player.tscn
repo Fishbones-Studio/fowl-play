@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfvuupl5t1kb0"]
-
-[ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="1_8wovf"]
-[ext_resource type="Script" uid="uid://cjf3p06i6ibad" path="res://utilities/sound/random_music_player.gd" id="2_76vqs"]
-
-[node name="RandomMusicPlayer" type="AudioStreamPlayer"]
-stream = ExtResource("1_8wovf")
-bus = &"Music"
-script = ExtResource("2_76vqs")

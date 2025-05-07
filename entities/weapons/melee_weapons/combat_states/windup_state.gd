@@ -1,5 +1,4 @@
 ## WindupState: The weapon is preparing to attack.
-class_name WindupState
 extends BaseCombatState
 
 # Variables
