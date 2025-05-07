@@ -13,6 +13,11 @@ var _has_spawned_hazard: bool = false
 var _invincibility_timer: float = 0.0
 var _original_collision_mask: int = 0
 
+@onready var debris_effect : GPUParticles3D = $Debris
+@onready var fire_effect : GPUParticles3D = $Fire
+@onready var smoke_effect : GPUParticles3D = $Smoke
+@onready var egg_model : Node3D = $slingshot_projectile
+
 func setup_projectile(p_firer_stats: LivingEntityStats, p_damage: int) -> void:
 	base_damage = p_damage
 
@@ -58,20 +63,34 @@ func _on_body_entered(body: Node) -> void:
 	print("Projectile collided with: ", body.name)
 	SignalManager.weapon_hit_target.emit(body, base_damage, DamageEnums.DamageTypes.NORMAL)
 	_spawn_hazard()
+	
+func _explode() -> void:
+	egg_model.hide()
+	# TODO: sound
+	# Emitting the explosion effect
+	debris_effect.one_shot = true
+	fire_effect.one_shot = true
+	smoke_effect.one_shot = true
+
+	debris_effect.emitting = true
+	fire_effect.emitting = true
+	smoke_effect.emitting = true
 
 func _spawn_hazard() -> void:
 	if _has_spawned_hazard:
 		return
 	_has_spawned_hazard = true
+	
+	_explode()
 
 	if not is_inside_tree():
 		print("Not in tree, aborting hazard spawn.")
-		queue_free()
+		_queue_free_when_particles_done()
 		return
 
 	if not is_instance_valid(hazard):
 		push_error("Hazard PackedScene is not set for the projectile!")
-		queue_free()
+		_queue_free_when_particles_done()
 		return
 
 	var hazard_instance: BaseHazard = hazard.instantiate()
@@ -79,11 +98,24 @@ func _spawn_hazard() -> void:
 	var parent_node: Node = get_parent()
 	var scene_tree: SceneTree = get_tree()
 
-	queue_free()
-
 	if is_instance_valid(parent_node):
 		parent_node.add_child(hazard_instance)
 	else:
 		scene_tree.current_scene.add_child(hazard_instance)
 	hazard_instance.global_position = global_position
 	hazard_instance.damage = base_damage * fire_pool_damage_modifier
+
+	_queue_free_when_particles_done()
+
+func _queue_free_when_particles_done() -> void:
+	# Wait until all particles are finished, then queue_free
+	await _all_particles_finished()
+	if is_inside_tree():
+		queue_free()
+
+func _all_particles_finished() -> void:
+	# Wait for all three particles to finish
+	var effects: Array[Variant] = [debris_effect, fire_effect, smoke_effect]
+	for effect in effects:
+		if effect.emitting:
+			await effect.finished
