@@ -15,9 +15,11 @@ var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
 @onready var item_cost_label: Label = %ItemCostLabel
 
+
 func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
+
 
 func init(
 	_upgrade_type: StatsEnums.UpgradeTypes,
@@ -32,6 +34,7 @@ func init(
 	kind_indicator_label.text = StatsEnums.upgrade_type_to_string(_upgrade_type)
 	update_ui_elements()
 
+
 func _on_buy_button_pressed() -> void:
 	if not upgrade_resource:
 		return
@@ -44,6 +47,7 @@ func _on_buy_button_pressed() -> void:
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
 
+
 func can_afford_upgrade() -> bool:
 	if upgrade_resource.current_level >= upgrade_resource.max_level:
 		return false
@@ -55,12 +59,14 @@ func can_afford_upgrade() -> bool:
 		_:
 			return false
 
+
 func purchase_upgrade() -> void:
 	match upgrade_resource.currency_type:
 		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
 			GameManager.feathers_of_rebirth -= upgrade_resource.get_level_cost(upgrade_resource.current_level)
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
 			GameManager.prosperity_eggs -= upgrade_resource.get_level_cost(upgrade_resource.current_level)
+
 
 func apply_upgrade() -> void:
 	if upgrade_resource.current_level == 0 or upgrade_resource.current_level > upgrade_resource.max_level:
@@ -84,6 +90,7 @@ func apply_upgrade() -> void:
 			copied_stats.speed += upgrade_resource.get_upgrade_resource().speed_bonus
 		StatsEnums.UpgradeTypes.WEIGHT:
 			copied_stats.weight += upgrade_resource.get_upgrade_resource().weight_bonus
+
 
 func update_ui_elements() -> void:
 	level_progress_bar.max_value = upgrade_resource.max_level
@@ -109,6 +116,7 @@ func update_ui_elements() -> void:
 		level_label.text = str(upgrade_resource.current_level)
 	else:
 		level_label.text = "MAX"
+
 
 func save_upgrades() -> void:
 	var upgrades : Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()

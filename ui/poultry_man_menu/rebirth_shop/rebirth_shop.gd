@@ -10,6 +10,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 @onready var items: VBoxContainer = %Items
 @onready var reset_label : RichTextLabel = %ResetLabel
 
+
 func _ready() -> void:
 	shop_title_label.text = "Rebirth Shop"
 	_refresh_shop()
@@ -21,8 +22,10 @@ func _ready() -> void:
 	)
 	reset_label.text = "[center][font_size=25][color=gray][i]Resetting refunds [color=orange]%.f%%[/color] of currency spent.[/i][/color][/font_size][/center]" % (refund_percentage * 100)
 
+
 func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+
 
 func _refresh_shop() -> void:
 	for child in items.get_children():
@@ -45,10 +48,12 @@ func _refresh_shop() -> void:
 			separator.add_theme_constant_override("separation", 25)
 			items.add_child(separator)
 
+
 func _get_available_items_grouped() -> Dictionary:
 	if item_database is PermUpgradeDatabase:
 		return item_database.get_all_upgrades_grouped()
 	return {}
+
 
 func _setup_controller_navigation() -> void:
 	await get_tree().process_frame

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqt3s2usixpf3"]
 
 [ext_resource type="Script" uid="uid://bclqq0y24jveb" path="res://ui/poultry_man_menu/sacrifice/sacrifice_confirmation_popup.gd" id="1_rehxx"]
-[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_vuox5"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="2_vuox5"]
 
 [node name="SacrificeConfirmationPopup" type="Control"]
 layout_mode = 3
