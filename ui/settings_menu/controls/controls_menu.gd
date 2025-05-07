@@ -90,3 +90,4 @@ func _on_restore_defaults_button_up() -> void:
 	controls_settings = controls_settings_resource.default_settings.duplicate(true)
 
 	_load_controls_items()
+	_save_controls_settings()
