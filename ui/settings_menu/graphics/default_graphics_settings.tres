@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GraphicsSettings" load_steps=2 format=3 uid="uid://bj6f5mcuyrlnf"]
+
+[ext_resource type="Script" uid="uid://bsu4hq2uwmp3e" path="res://ui/settings_menu/graphics/graphics_settings.gd" id="1_ubm2d"]
+
+[resource]
+script = ExtResource("1_ubm2d")
+default_settings = {
+"borderless": false,
+"display_mode": 2,
+"fps": 0,
+"fxaa": 0,
+"msaa": 0,
+"render_mode": 0,
+"render_scale": 1.0,
+"resolution": Vector2i(1152, 648),
+"taa": false,
+"v_sync": 1
+}
+metadata/_custom_type_script = "uid://bsu4hq2uwmp3e"

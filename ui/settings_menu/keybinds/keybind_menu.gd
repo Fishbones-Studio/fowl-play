@@ -9,7 +9,6 @@ extends Control
 var config_path: String = "user://settings.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
-@onready var stylebox_focus: StyleBoxFlat = load("uid://dwicgkvjluob0")
 @onready var input_button_scene: PackedScene = preload("uid://bpba8wvtfww4x")
 @onready var error_text_label: Label = %ErrorTextLabel
 @onready var restore_defaults_button: Button = %RestoreDefaultsButton
@@ -83,13 +82,8 @@ func _save_input_settings():
 func _load_input_settings():
 	# Load defaults first, then override with saved config
 	InputMap.load_from_project_settings()
-	var config = ConfigFile.new()
 
-	if config.load(config_path) == OK and config.has_section(config_name):
-		for action in config.get_section_keys(config_name):
-			InputMap.action_erase_events(action)
-			for event in config.get_value(config_name, action):
-				InputMap.action_add_event(action, event)
+	SaveManager.load_settings(config_name)
 
 	_create_action_list()
 
@@ -251,7 +245,7 @@ func _set_label_text(row: Node, container_name: String, event: InputEvent, actio
 	panel.action_to_remap = action_to_remap
 
 
-func _on_restore_defaults_button_button_up() -> void:
+func _on_restore_defaults_button_up() -> void:
 	SaveManager.is_remapping = false
 	SaveManager.action_to_remap = ""
 
@@ -262,11 +256,3 @@ func _on_restore_defaults_button_button_up() -> void:
 		DirAccess.remove_absolute(config_path)
 
 	_create_action_list()
-
-	TweenManager.create_scale_tween(null, restore_defaults_button, Vector2(1.0, 1.0))
-	restore_defaults_button.add_theme_stylebox_override("focus", stylebox_focus)
-
-
-func _on_restore_defaults_button_button_down() -> void:
-	TweenManager.create_scale_tween(null, restore_defaults_button, Vector2(0.9, 0.9))
-	restore_defaults_button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())

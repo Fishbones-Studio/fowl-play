@@ -108,6 +108,6 @@ func _get_initial_state() -> BaseCombatState:
 func update_entity_stats(_entity_stats : LivingEntityStats) -> void:
 	print("Updating the weapon entity stats")
 	for state_node: BaseCombatState in get_children():
-		states[state_node.STATE_TYPE] = state_node
+		states[state_node.state_type] = state_node
 		# Pass the weapon to each state
 		state_node.entity_stats = _entity_stats

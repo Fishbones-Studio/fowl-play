@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ddkveip8o00su" path="res://utilities/shop/base_shop.gd" id="1_jjkbf"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_jh0jc"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_1w0y0"]
-[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="3_5kcef"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="3_5kcef"]
 
 [node name="BaseShop" type="Control"]
 process_mode = 3

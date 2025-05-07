@@ -23,15 +23,7 @@ func _ready() -> void:
 
 
 func _load_audio_settings() -> void:
-	var config = ConfigFile.new()
-
-	if config.load(config_path) == OK and config.has_section(config_name):
-		# Replace audio setttings with user's saved preferences
-		for audio_bus_name in config.get_section_keys(config_name):
-			var saved_volume = config.get_value(config_name, audio_bus_name)
-			audio_busses[audio_bus_name] = saved_volume
-			
-			_set_volume(audio_bus_name, saved_volume)
+	SaveManager.load_settings(config_name)
 
 	_load_audio_busses()
 
@@ -52,7 +44,7 @@ func _load_audio_busses() -> void:
 		child.queue_free()
 
 	for audio_bus in audio_busses:
-		var instance: SettingsSliderItem = audio_slider.instantiate()
+		var instance: SettingsSlider = audio_slider.instantiate()
 		content_container.add_child(instance)
 
 		instance.set_text(audio_bus)

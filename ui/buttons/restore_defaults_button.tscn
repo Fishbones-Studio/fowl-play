@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c61t75veylfqw"]
+
+[ext_resource type="Script" uid="uid://b4utdcl35ihaj" path="res://ui/buttons/restore_defaults_button.gd" id="1_m4gtg"]
+
+[node name="RestoreDefaultsButton" type="Button"]
+custom_minimum_size = Vector2(200, 45)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_type_variation = &"KeybindResDefButton"
+text = "Restore Defaults"
+script = ExtResource("1_m4gtg")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
