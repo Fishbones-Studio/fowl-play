@@ -31,8 +31,9 @@ func _input(event: InputEvent) -> void:
 
 func _on_chicken_player_set() -> void:
 	# Init the weapons
-	if GameManager.chicken_player:
+	if is_instance_valid(melee_weapon_slot):
 		melee_weapon_slot.setup()
+	if is_instance_valid(ranged_weapon_slot):
 		ranged_weapon_slot.setup()
 
 

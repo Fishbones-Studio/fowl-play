@@ -58,6 +58,11 @@ func load_settings(item: String = "") -> void:
 						DisplayUtils.center_window(get_window())
 					"v_sync": DisplayServer.window_set_vsync_mode(value)
 					"fps": Engine.max_fps = value
+					"msaa": get_viewport().msaa_3d = value
+					"fxaa": get_viewport().screen_space_aa = value
+					"taa": get_viewport().use_taa = value
+					"render_scale": get_viewport().scaling_3d_scale = value
+					"render_mode": get_viewport().scaling_3d_mode = value
 
 	if item == SETTINGS_CFG_NAME_AUDIO or item.is_empty():
 		# Load audio settings

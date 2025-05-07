@@ -31,7 +31,33 @@ const FPS: Dictionary[String, int] = {
 	"30": 30,
 	"60": 60,
 	"120": 120,
+	"240": 240,
 	"Unlimited": 0,
+}
+const MSAA: Dictionary[String, Viewport.MSAA] = {
+	"Disabled - Fastest": Viewport.MSAA_DISABLED,
+	"2x - Average": Viewport.MSAA_2X,
+	"4x - Slow": Viewport.MSAA_4X,
+	"8x - Slower": Viewport.MSAA_8X,
+}
+const FXAA: Dictionary[String, Viewport.ScreenSpaceAA] = {
+	"Disabled - Fastest": Viewport.SCREEN_SPACE_AA_DISABLED,
+	"Enabled - Fast": Viewport.SCREEN_SPACE_AA_FXAA,
+}
+const TAA: Dictionary[String, bool] = {
+	"Disabled - Fastest": false,
+	"Enabled - Average": true,
+}
+const RENDER_SCALE: Dictionary[String, float] = {
+	"Ultra Quality": 0.77,
+	"Quality": 0.67,
+	"Balanced": 0.59,
+	"Performance": 0.5,
+}
+const RENDER_MODE: Dictionary[String, Viewport.Scaling3DMode] = {
+	"Bilinear": Viewport.SCALING_3D_MODE_BILINEAR,
+	"FSR 1.0": Viewport.SCALING_3D_MODE_FSR,
+	"FSR 2.0": Viewport.SCALING_3D_MODE_FSR2,
 }
 
 var config_path: String = "user://settings.cfg"
@@ -43,6 +69,11 @@ var graphics_settings: Dictionary = {}
 @onready var borderless: SettingsCheckButton = %Borderless
 @onready var v_sync: ContentItemDropdown = %VSync
 @onready var fps: ContentItemDropdown = %FPS
+@onready var msaa: ContentItemDropdown = %MSAA
+@onready var fxaa: ContentItemDropdown = %FXAA
+@onready var taa: ContentItemDropdown = %TAA
+@onready var render_scale: ContentItemDropdown = %RenderScale
+@onready var render_mode: ContentItemDropdown = %RenderMode
 
 
 func _ready() -> void:
@@ -61,6 +92,26 @@ func _ready() -> void:
 	fps.options.clear()
 	for fps_text in FPS:
 		fps.options.add_item(fps_text)
+
+	msaa.options.clear()
+	for msaa_text in MSAA:
+		msaa.options.add_item(msaa_text)
+
+	fxaa.options.clear()
+	for fxaa_text in FXAA:
+		fxaa.options.add_item(fxaa_text)
+
+	taa.options.clear()
+	for taa_text in TAA:
+		taa.options.add_item(taa_text)
+
+	render_scale.options.clear()
+	for scale_text in RENDER_SCALE:
+		render_scale.options.add_item(scale_text)
+
+	render_mode.options.clear()
+	for scale_text in RENDER_MODE:
+		render_mode.options.add_item(scale_text)
 
 	_load_graphics_settings()
 
@@ -112,7 +163,14 @@ func _set_borderless(value: bool) -> void:
 	_save_graphics_settings()
 
 
-func _set_vsync(index: int):
+## Vsync is enabled by default.
+## Vertical synchronization locks framerate and makes screen tearing not visible
+## at the cost of higher input latency and stuttering when the framerate target
+## is not met.Adaptive V-Sync automatically disables V-Sync when the framerate 
+## target is not met, and enables V-Sync otherwise. This prevents suttering and 
+## reduces input latency when the framerate target is not met, at the cost of 
+## visible tearing.
+func _set_vsync(index: int) -> void:
 	var value: DisplayServer.VSyncMode = V_SYNC.values()[index]
 	DisplayServer.window_set_vsync_mode(value)
 
@@ -120,9 +178,17 @@ func _set_vsync(index: int):
 	graphics_settings["v_sync"] = value
 
 	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
-func _set_fps(index: int):
+## The rendering FPS affects the appearance of TAA, as higher framerates allow 
+## it to converge faster. On high refresh rate monitors, TAA ghosting issues 
+## may appear less noticeable as a result (if the GPU can keep up).
+func _set_fps(index: int) -> void:
 	var value: int = FPS.values()[index]
 	Engine.set_max_fps(value)
 
@@ -130,6 +196,93 @@ func _set_fps(index: int):
 	graphics_settings["fps"] = value
 
 	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
+
+
+## Multi-sample anti-aliasing. High quality, but slow. It also does not smooth 
+## out the edges of transparent (alpha scissor) textures.
+func _set_msaa(index: int) -> void:
+	var value: int = MSAA.values()[index]
+	get_viewport().msaa_3d = value
+
+	msaa.options.selected = index
+	graphics_settings["msaa"] = value
+
+	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
+
+## Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha 
+## scissor edges), but blurs the whole scene rendering slightly.
+func _set_fxaa(index: int) -> void:
+	var value: int = FXAA.values()[index]
+	get_viewport().screen_space_aa = value
+
+	fxaa.options.selected = index
+	graphics_settings["fxaa"] = value
+
+	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
+
+
+## Temporal antialiasing. Smooths out everything including specular aliasing, 
+## but can introduce ghosting artifacts and blurring in motion. 
+## Moderate performance cost.
+func _set_taa(index: int) -> void:
+	var value: int = TAA.values()[index]
+	get_viewport().use_taa = value
+
+	taa.options.selected = index
+	graphics_settings["taa"] = value
+
+	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
+
+
+func _set_render_scale(index: int) -> void:
+	var value: int = RENDER_SCALE.values()[index]
+	get_viewport().scaling_3d_scale = value
+
+	render_scale.options.selected = index
+	graphics_settings["render_scale"] = value
+
+	_save_graphics_settings()
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
+
+
+func _set_render_mode(index: int) -> void:
+	var value: int = RENDER_MODE.values()[index]
+	get_viewport().scaling_3d_mode = value
+
+	render_mode.options.selected = index
+	graphics_settings["render_mode"] = value
+
+	_save_graphics_settings()
+
+	print("MSAA: ", get_viewport().msaa_3d)
+	print("FXAA: ", get_viewport().screen_space_aa)
+	print("TAA: ", get_viewport().use_taa)
+	print("SCALE: ", get_viewport().scaling_3d_scale)
+	print("MODE: ", get_viewport().scaling_3d_mode)
 
 
 func _set_graphics_values() -> void:
@@ -138,3 +291,8 @@ func _set_graphics_values() -> void:
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	_set_vsync(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	_set_fps(FPS.values().find(Engine.max_fps))
+	_set_msaa(MSAA.values().find(get_viewport().msaa_3d))
+	_set_fxaa(FXAA.values().find(get_viewport().screen_space_aa))
+	_set_taa(TAA.values().find(get_viewport().use_taa))
+	_set_render_scale(RENDER_SCALE.values().find(max(get_viewport().scaling_3d_scale, 0.5)))
+	_set_render_mode(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
