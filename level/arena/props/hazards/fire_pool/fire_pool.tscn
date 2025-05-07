@@ -3,38 +3,42 @@
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_7c7ba"]
 [ext_resource type="Script" uid="uid://d13bdxdcv1qdo" path="res://level/arena/props/hazards/fire_pool/fire_pool.gd" id="2_8y1qe"]
 [ext_resource type="Shader" uid="uid://ce80vscr4kt8y" path="res://level/arena/props/hazards/fire_pool/fire_pool.gdshader" id="3_8y1qe"]
+[ext_resource type="AudioStream" uid="uid://co5vnmmteibtq" path="res://level/arena/props/hazards/fire_pool/art/egg_cooking.ogg" id="4_khrxl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbxjw"]
 size = Vector3(4, 1.5, 4)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8y1qe"]
-
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_khrxl"]
-noise = SubResource("FastNoiseLite_8y1qe")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_khrxl"]
 render_priority = 0
 shader = ExtResource("3_8y1qe")
-shader_parameter/speed = 1.0
-shader_parameter/target_color = Color(0.623529, 0, 0, 0.101961)
-shader_parameter/tolerance = 1.0
-shader_parameter/NoiseResolution = 1.0
-shader_parameter/Lacunarity = 2.0
-shader_parameter/Gain = 0.5
-shader_parameter/Ball_rad = 0.3
-shader_parameter/Ball_roll_spd = 0.5
-shader_parameter/Dark_lava_spd = 0.5
-shader_parameter/Dark_island_spd = 0.7
-shader_parameter/color1 = Color(1, 0.3, 0.1, 1)
-shader_parameter/color2 = Color(0.8, 0.1, 0, 1)
-shader_parameter/emission_intensity = 2.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_khrxl")
+shader_parameter/hot_color = Color(1, 0.5, 0, 1)
+shader_parameter/mid_color = Color(0.7, 0.2, 0, 1)
+shader_parameter/cool_color = Color(0.2, 0.05, 0, 1)
+shader_parameter/master_time_scale = 1.0
+shader_parameter/noise_scale_primary = 2.5
+shader_parameter/noise_scale_secondary = 5.0
+shader_parameter/flow_speed_primary = 0.06
+shader_parameter/flow_speed_secondary = 0.035
+shader_parameter/distortion_scale = 4.0
+shader_parameter/distortion_speed = 0.04
+shader_parameter/distortion_strength = 0.02
+shader_parameter/emission_boost = 4.0
+shader_parameter/cool_thresh = 0.35
+shader_parameter/mid_thresh = 0.6
+shader_parameter/bubble_strength = 0.08
+shader_parameter/bubble_scale = 2.0
+shader_parameter/bubble_speed = 0.7
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ysydq"]
+[sub_resource type="BoxMesh" id="BoxMesh_ysydq"]
 material = SubResource("ShaderMaterial_khrxl")
-size = Vector2(4, 4)
-subdivide_width = 24
-subdivide_depth = 24
+size = Vector3(4, 1.5, 4)
+subdivide_width = 256
+subdivide_height = 256
+subdivide_depth = 10
 
 [node name="FirePool" instance=ExtResource("1_7c7ba")]
 script = ExtResource("2_8y1qe")
@@ -49,8 +53,12 @@ radius = 3.0
 shape = SubResource("BoxShape3D_tbxjw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
-mesh = SubResource("PlaneMesh_ysydq")
+mesh = SubResource("BoxMesh_ysydq")
 
 [node name="RemoveTimer" type="Timer" parent="." index="3"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("4_khrxl")
+bus = &"SFX"
 
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_remove_timer_timeout"]

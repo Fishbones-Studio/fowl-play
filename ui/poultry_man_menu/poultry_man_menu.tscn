@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
-[ext_resource type="PackedScene" uid="uid://dfvuupl5t1kb0" path="res://utilities/sound/random_music_player.tscn" id="3_n15us"]
-[ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/random_sfx_player.tscn" id="4_iajuv"]
+[ext_resource type="PackedScene" uid="uid://dfvuupl5t1kb0" path="res://utilities/sound/interval_random_music_player/interval_random_music_player.tscn" id="3_n15us"]
+[ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="4_iajuv"]
 [ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/poultry_man_menu/game_menu_handlers/input_handler.gd" id="5_x5v8y"]
 [ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]

@@ -17,6 +17,8 @@ var _original_collision_mask: int = 0
 @onready var fire_effect : GPUParticles3D = $Fire
 @onready var smoke_effect : GPUParticles3D = $Smoke
 @onready var egg_model : Node3D = $slingshot_projectile
+@onready var cracking_sound : RandomSFXPlayer = $CrackingSound
+@onready var exposion_sound : RandomSFXPlayer = $ExplosionSound
 
 func setup_projectile(p_firer_stats: LivingEntityStats, p_damage: int) -> void:
 	base_damage = p_damage
@@ -47,6 +49,7 @@ func _physics_process(delta: float) -> void:
 		_spawn_hazard()
 
 func _on_body_entered(body: Node) -> void:
+	cracking_sound.play_random()
 	if _has_spawned_hazard:
 		return
 
@@ -66,7 +69,7 @@ func _on_body_entered(body: Node) -> void:
 	
 func _explode() -> void:
 	egg_model.hide()
-	# TODO: sound
+	exposion_sound.play_random()
 	# Emitting the explosion effect
 	debris_effect.one_shot = true
 	fire_effect.one_shot = true

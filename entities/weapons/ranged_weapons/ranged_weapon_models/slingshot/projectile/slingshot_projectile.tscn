@@ -1,15 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://d1jf4shjaqq4n"]
+[gd_scene load_steps=24 format=3 uid="uid://d1jf4shjaqq4n"]
 
 [ext_resource type="PackedScene" uid="uid://bw0uve5cfu27a" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/slingshot_projectile.glb" id="1_0dfwy"]
 [ext_resource type="Script" uid="uid://b4ttu6b1mcyjh" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/slingshot_projectile.gd" id="1_ppp8x"]
+[ext_resource type="PackedScene" uid="uid://3bxwdb0hal41" path="res://utilities/sound/random_sfx_player/random_sfx_player.tscn" id="3_lp41j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0dfwy"]
 radius = 0.25
 height = 0.6
 
 [sub_resource type="Curve" id="Curve_ppp8x"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.688, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.011236), 0.0, 0.0, 0, 0]
-point_count = 3
+_limits = [0.0, 1.2, 0.0, 1.0]
+_data = [Vector2(0.056, 0), 0.0, 0.0, 0, 0, Vector2(0.504, 0.647191), 2.74985, 2.74985, 0, 0, Vector2(0.768, 0.460674), 0.0, 0.0, 0, 0, Vector2(0.984, 1.2), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_lp41j"]
 curve = SubResource("Curve_ppp8x")
@@ -26,14 +28,13 @@ scale_curve = SubResource("CurveTexture_lp41j")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5moxe"]
 albedo_color = Color(0.960096, 0.458444, 0.243836, 1)
 emission_enabled = true
-emission = Color(0.74549, 0.388984, 0.0434401, 1)
+emission = Color(0.988083, 0.986336, 0.98602, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_33agn"]
 material = SubResource("StandardMaterial3D_5moxe")
 top_radius = 0.1
 bottom_radius = 0.0
-height = 1.5
 
 [sub_resource type="Curve" id="Curve_lp41j"]
 _data = [Vector2(0, 0.0224719), 0.0, 0.0, 0, 0, Vector2(0.552, 0.808989), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -125,6 +126,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_1mcu8")
 draw_pass_1 = SubResource("CylinderMesh_33agn")
 
@@ -146,5 +148,15 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_bg70n")
 draw_pass_1 = SubResource("SphereMesh_ais2s")
+
+[node name="CrackingSound" parent="." instance=ExtResource("3_lp41j")]
+bus = &"SFX"
+sounds_folder = "res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/cracking_sounds/"
+
+[node name="ExplosionSound" parent="." instance=ExtResource("3_lp41j")]
+volume_db = 3.0
+max_db = 6.0
+bus = &"SFX"
+sounds_folder = "res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/explosion/"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
