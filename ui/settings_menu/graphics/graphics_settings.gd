@@ -10,6 +10,6 @@ extends Resource
 	"msaa": Viewport.MSAA_DISABLED,
 	"fxaa": Viewport.SCREEN_SPACE_AA_DISABLED,
 	"taa": false,
-	"render_scale": 0.5,
+	"render_scale": 1.0,
 	"render_mode": Viewport.SCALING_3D_MODE_BILINEAR,
 }

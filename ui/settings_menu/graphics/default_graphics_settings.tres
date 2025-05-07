@@ -11,7 +11,7 @@ default_settings = {
 "fxaa": 0,
 "msaa": 0,
 "render_mode": 0,
-"render_scale": 0.5,
+"render_scale": 1.0,
 "resolution": Vector2i(1152, 648),
 "taa": false,
 "v_sync": 1
