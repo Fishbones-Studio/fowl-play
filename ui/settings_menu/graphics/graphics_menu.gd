@@ -57,7 +57,7 @@ const RENDER_SCALE: Dictionary[String, float] = {
 const RENDER_MODE: Dictionary[String, Viewport.Scaling3DMode] = {
 	"Bilinear - Fastest": Viewport.SCALING_3D_MODE_BILINEAR,
 	"FSR 1.0 - Fast": Viewport.SCALING_3D_MODE_FSR,
-	"FSR 2.0 - Slow": Viewport.SCALING_3D_MODE_FSR2,
+	"FSR 2.2 - Slow": Viewport.SCALING_3D_MODE_FSR2,
 }
 
 var config_path: String = "user://settings.cfg"
