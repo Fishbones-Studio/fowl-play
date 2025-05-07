@@ -70,10 +70,6 @@ func _on_body_entered(body: Node) -> void:
 func _explode() -> void:
 	egg_model.hide()
 	exposion_sound.play_random()
-	# Emitting the explosion effect
-	debris_effect.one_shot = true
-	fire_effect.one_shot = true
-	smoke_effect.one_shot = true
 
 	debris_effect.emitting = true
 	fire_effect.emitting = true
