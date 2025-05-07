@@ -49,6 +49,7 @@ const TAA: Dictionary[String, bool] = {
 	"Enabled - Average": true,
 }
 const RENDER_SCALE: Dictionary[String, float] = {
+	"Default": 1.0,
 	"Ultra Quality": 0.77,
 	"Quality": 0.67,
 	"Balanced": 0.59,
