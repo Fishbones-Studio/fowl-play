@@ -38,7 +38,7 @@ subdivide_depth = 24
 
 [node name="FirePool" instance=ExtResource("1_7c7ba")]
 script = ExtResource("2_8y1qe")
-alive_time = 2.0
+alive_time = 3.0
 damage_interval = 1.0
 damage_duration = 5.0
 

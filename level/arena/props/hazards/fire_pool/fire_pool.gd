@@ -1,6 +1,6 @@
 extends BleedHazard
 
-@export var alive_time : float = 2.0
+@export var alive_time : float = 3.0
 
 @onready var remove_timer : Timer = $RemoveTimer
 

@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_g1vt4")
-damage = 25
-windup_time = 1.0
+damage = 35
+windup_time = 0.5
 attack_duration = 0.0
 cooldown_time = 1.0
 allow_continuous_fire = true
@@ -19,7 +19,7 @@ purchasable = true
 drop_chance = 0
 cost = 200
 currency_type = 0
-description = "Hold the attack button to line up the perfect shot. Take as much time as you need! Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s. Upon exploding, the egg leaves behind a [color=orange]fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
+description = "Hold the attack button to line up the perfect shot. Take as much time as you need! Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s. Upon exploding, the egg leaves behind a [color=orange]temporary fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
 
 After firing, the slingshot requires %s to recover before it can be used again.  
 
