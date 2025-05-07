@@ -68,12 +68,21 @@ func _on_body_entered(body: Node) -> void:
 	_spawn_hazard()
 	
 func _explode() -> void:
+	# Stop all movement and collisions
+	collision_layer = 0
+	collision_mask = 0
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	call_deferred("set_contact_monitor", false)
+	set_freeze_enabled(FREEZE_MODE_STATIC)
+
 	egg_model.hide()
 	exposion_sound.play_random()
 
 	debris_effect.emitting = true
 	fire_effect.emitting = true
 	smoke_effect.emitting = true
+
 
 func _spawn_hazard() -> void:
 	if _has_spawned_hazard:
