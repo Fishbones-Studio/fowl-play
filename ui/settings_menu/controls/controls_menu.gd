@@ -80,3 +80,11 @@ func _value_changed(value: float, item: Dictionary) -> void:
 	controls_settings[controls_settings.find(item)].values()[0]["value"] = value
 
 	_save_controls_settings()
+
+
+func _on_restore_defaults_button_up() -> void:
+	if FileAccess.file_exists(config_path):
+		DirAccess.remove_absolute(config_path)
+
+	controls_settings = controls_settings_resource.default_settings
+	_load_controls_items()

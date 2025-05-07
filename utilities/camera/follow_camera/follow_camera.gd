@@ -112,10 +112,10 @@ func _load_camera_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	var cfg_path: String = "user://settings.cfg"
 	var cfg_name: String = "controls"
-	var camera_settings: Dictionary = {}
+	var camera_settings: Array[Dictionary] = []
 	var default_settings_resource: ControlsSetting = preload("uid://b7ndswiwixuqa")
 
-	camera_settings = default_settings_resource.default_settings.duplicate()
+	camera_settings = default_settings_resource.default_settings
 
 	# Attempt to load config file - return if failed
 	if config.load(cfg_path) == OK and config.has_section(cfg_name):
