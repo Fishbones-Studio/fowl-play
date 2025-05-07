@@ -1,8 +1,8 @@
 ################################################################################
 ### Script to display and manage controls settings in a UI.
 ###
-### This script handles the controls settings UI, allowing users to set the  
-### of busses and save their preferences.
+### This script handles the controls settings UI, allowing users to set game 
+### control settings. Handles both mouse and controller configurations.
 ################################################################################
 extends Control
 
