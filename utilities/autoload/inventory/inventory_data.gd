@@ -11,7 +11,7 @@ var recalc_items_sorted := true
 ## Sorted inventory
 var items_sorted_flattened : Array :
 	get: 
-		if items_sorted_flattened == null || recalc_items_sorted:
+		if items_sorted_flattened == null or recalc_items_sorted:
 			items_sorted_flattened = _get_items_sorted_flattened()
 			recalc_items_sorted = false
 		return items_sorted_flattened
@@ -33,10 +33,11 @@ var items_sorted_flattened : Array :
 
 ## Validates if an item can be equipped (must be in inventory or null)
 func _validate_slot(item: BaseResource, slot_name: String) -> BaseResource:
-	if item == null || items.has(item):
+	if item == null or items.has(item):
 		return item
 	push_error("%s not in inventory!" % slot_name)
 	return null
+
 
 ## Returns a flat array of all items sorted by their type
 func _get_items_sorted_flattened() -> Array:
@@ -47,6 +48,7 @@ func _get_items_sorted_flattened() -> Array:
 	for item_list in sorted_items.values():
 		flattened_items += item_list
 	return flattened_items
+
 
 ## Returns a list of items sorted by their type, first melee, then ranged, then abilities
 func get_items_sorted() -> Dictionary[ItemEnums.ItemTypes, Array]:

@@ -114,7 +114,16 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_swap_abilities_button_pressed() -> void:
-	# swapp the abilities in slot one and two
+	var ability1_index: int = Inventory.inventory_data.items.find(ability_1)
+	var ability2_index: int = Inventory.inventory_data.items.find(ability_2)
+
+	# Whack
+	if ability1_index != -1 and ability2_index != -1:
+		var temp := Inventory.inventory_data.items[ability1_index]
+		Inventory.inventory_data.items[ability1_index] = Inventory.inventory_data.items[ability2_index]
+		Inventory.inventory_data.items[ability2_index] = temp
+
+	# Swap the abilities in slot one and two
 	Inventory.inventory_data.ability_slot_one = ability_2
 	Inventory.inventory_data.ability_slot_two = ability_1
 	Inventory.save_inventory()

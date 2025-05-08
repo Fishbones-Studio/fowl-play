@@ -89,7 +89,6 @@ func _unequip_item_from_slot(item: BaseResource, slot_index: int) -> bool:
 		_:
 			push_error("Unknown item type: ", item.type)
 			return false
-			
 	return true
 
 
