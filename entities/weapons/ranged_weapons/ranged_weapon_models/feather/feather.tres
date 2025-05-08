@@ -17,11 +17,13 @@ handle_attack_end_by_state = false
 loop_animation = false
 name = "Feather"
 purchasable = true
-drop_chance = 0
+drop_chance = 70
 cost = 125
 currency_type = 0
-description = "description = Deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
-This weapon deals [color=orange]TRUE DAMAGE[/color] and [color=orange]PENETRATES ARMOR[/color].
+description = "Deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
+
+This weapon deals [color=orange]True Damage, ignoring targets Defense stats[/color].
+
 This weapon %s and %s."
 icon = ExtResource("1_j6iuc")
 model_uid = "uid://qj6ygx6ak84a"
