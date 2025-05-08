@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck8yr85ffg28t"]
-
-[ext_resource type="Script" uid="uid://cdccglf2rcjxu" path="res://utilities/sound/random_sfx_player.gd" id="1_c00xq"]
-
-[node name="RandomSFXPlayer" type="AudioStreamPlayer3D"]
-bus = &"Music"
-script = ExtResource("1_c00xq")
