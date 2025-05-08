@@ -55,7 +55,7 @@ func _refresh_shop() -> void:
 	available_items = _get_available_items()
 
 	# Determine how many items we can actually show
-	var items_to_show = min(available_items.size(), actual_max_items)
+	var items_to_show = min(available_items.size(), max_items)
 
 	var selected_items: Array[BaseResource] = _get_shop_selection(
 		available_items, items_to_show
