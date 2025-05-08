@@ -12,7 +12,7 @@ static func _load_resources() -> Array[BaseResource]:
 		for file in files:
 			if file.begins_with(upgrade_type_string) and file.ends_with(".tres"):
 				var resource: Resource = load(UPGRADE_PATH.path_join(file))
-				if resource is BaseResource and resource.purchasable:
+				if resource is BaseResource:
 					all_items.append(resource)
 	return all_items
 
@@ -24,7 +24,7 @@ func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 	for file in files:
 		if file.begins_with(upgrade_type_string) and file.ends_with(".tres"):
 			var resource: Resource = load(UPGRADE_PATH.path_join(file))
-			if resource is BaseResource and resource.purchasable:
+			if resource is BaseResource:
 				upgrades.append(resource)
 	return upgrades
 
@@ -37,6 +37,6 @@ func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
 		for file in files:
 			if file.begins_with(upgrade_type_string) and file.ends_with(".tres"):
 				var resource: Resource = load(UPGRADE_PATH.path_join(file))
-				if resource is BaseResource and resource.purchasable:
+				if resource is BaseResource:
 					grouped[upgrade_type].append(resource)
 	return grouped

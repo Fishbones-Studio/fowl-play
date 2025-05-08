@@ -6,7 +6,7 @@ extends Resource
 @export var name: String
 @export_group("Shop")
 @export var purchasable := true
-@export var drop_chance: int
+@export_range(0, 100, 1) var drop_chance: int
 @export var cost: int
 @export var currency_type: CurrencyEnums.CurrencyTypes
 
