@@ -18,16 +18,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource("1_bkhin")
 
-[node name="ItemBackground" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(88, 88)
-layout_mode = 1
-offset_left = -17.0
-offset_top = 20.0
-offset_right = 71.0
-offset_bottom = 108.0
-scale = Vector2(0.399999, 0.439999)
-color = Color(0.517647, 0.517647, 0.517647, 0.490196)
-
-[node name="Sprite2D" type="Sprite2D" parent="ItemBackground"]
-position = Vector2(43, 46)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-54.52, 93.4)
+scale = Vector2(0.36, 0.399999)
 texture = ExtResource("2_8xpnx")

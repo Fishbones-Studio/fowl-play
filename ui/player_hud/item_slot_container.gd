@@ -69,7 +69,7 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 		Inventory.get_equipped_item(ItemEnums.ItemTypes.ABILITY, 1)
 	]
 	
-	if item in melee_items or ranged_items:
+	if item in melee_items or item in ranged_items:
 		return "attack"    # weapon slots
 	elif item == abilities[0]:  # First ability slot
 		return "ability_one"

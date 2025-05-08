@@ -6,7 +6,7 @@ extends Control
 		if is_inside_tree():
 			_update_controller_icon()
 
-@onready var controller_icon: Sprite2D = $ItemBackground/Sprite2D
+@onready var controller_icon: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	_update_controller_icon()
