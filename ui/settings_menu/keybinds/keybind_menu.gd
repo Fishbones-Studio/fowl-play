@@ -257,3 +257,5 @@ func _on_restore_defaults_button_up() -> void:
 		DirAccess.remove_absolute(config_path)
 
 	_create_action_list()
+	
+	SignalManager.keybind_changed.emit()
