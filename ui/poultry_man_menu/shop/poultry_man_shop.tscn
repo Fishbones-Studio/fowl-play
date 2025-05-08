@@ -6,6 +6,7 @@
 
 [node name="PoultryManShop" node_paths=PackedStringArray("item_database") instance=ExtResource("1_ybcue")]
 script = ExtResource("2_2mh6r")
+max_items = 6
 item_database = NodePath("ItemDatabase")
 
 [node name="ItemDatabase" parent="." index="1" instance=ExtResource("4_syjhg")]

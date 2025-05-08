@@ -64,10 +64,6 @@ func _set_equipment_panels(item: ItemEnums.ItemTypes, panel: ChickenEquipmentPan
 			)
 			panel.label.text += str(_ability_slot + 1) + " "
 			_ability_slot += 1
-		ItemEnums.ItemTypes.HELMET:
-			pass
-		ItemEnums.ItemTypes.BOOTS:
-			pass
 		ItemEnums.ItemTypes.UPGRADE:
 			pass
 
