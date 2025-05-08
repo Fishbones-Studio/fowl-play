@@ -1,4 +1,3 @@
-## **NOTE** this file is work in progress and not all sections are complete
 extends BasePlayerMovementState
 
 @export var knockback_decay: int = 50 # Rate at which the knockback decays per second
@@ -20,8 +19,9 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 
 	if "knockback" in info:
 		_knockback = info["knockback"]
-	if "immobile_time" in info:
-		immobile_timer.wait_time = info["immobile_time"]
+
+		# Set immobile time
+		immobile_timer.wait_time = _knockback.length() / knockback_decay
 		immobile_timer.start()
 		_is_immobile = true
 
