@@ -67,7 +67,9 @@ func _tick(delta: float) -> Status:
 	if duration > 0 and elapsed_time > duration:
 		return SUCCESS
 
-	_move_towards_target(target_position, delta, target_moved)
+	if not agent.is_immobile:
+		_move_towards_target(target_position, delta, target_moved)
+
 	return RUNNING
 
 

@@ -18,17 +18,14 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 	var knockback_direction : Vector3 = self.global_position.direction_to(body.global_position)
 	var knockback : Vector3 = calculate_knockback(knockback_direction)
 
-	if body.collision_layer == 2:  # Player 
-		SignalManager.player_transition_state.emit(
-			PlayerEnums.PlayerStates.HURT_STATE, {
+	if body.collision_layer in [2, 4]:  # Player 
+		SignalManager.weapon_hit_target.emit(
+				body,
+				damage,
+				DamageEnums.DamageTypes.TRUE,
+				{
 				"knockback": knockback,
-				"immobile_time": 0.5,
-				}
-		)
-	else:  # TODO: for other entities
-		body.velocity += knockback
-
-	super(body)
+			})
 
 
 func calculate_knockback(direction: Vector3) -> Vector3:

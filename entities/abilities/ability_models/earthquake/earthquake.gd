@@ -1,8 +1,8 @@
 extends Ability
 
 @export var descent_velocity: float = -25.0
-@export var initial_knockback_force: float = 9.0
-@export var knockback_force_upwards: float = 5.0
+@export var initial_knockback_force: float = 1.0
+@export var knockback_force_upwards: float = 0.5
 @export var quake_interval: float = 0.5  # Time between quake pulses
 @export var quake_damage_increase: float = 0.5  # Damage multiplier per quake
 @export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
@@ -75,9 +75,15 @@ func _pulse_quake() -> void:
 		if body in _hit_bodies:
 			continue
 
-		if body.collision_layer == 2 or body.collision_layer == 4:  # Player or Enemy
-			SignalManager.weapon_hit_target.emit(body, _current_damage, DamageEnums.DamageTypes.NORMAL)
-			_apply_knockback(body)
+		if body.collision_layer in [2, 4]:  # Player or Enemy
+			SignalManager.weapon_hit_target.emit(
+					body,
+					_current_damage,
+					DamageEnums.DamageTypes.NORMAL,
+					{
+					"knockback": _calculate_knockback(body),
+					},
+				)
 			_hit_bodies.append(body)
 
 	_particles[_current_quake_count].emitting = true
@@ -114,18 +120,16 @@ func _reset_ability() -> void:
 	_toggle_collision_masks(false, hit_area)
 
 
-func _apply_knockback(body: Node3D) -> void:
+func _calculate_knockback(body: Node3D) -> Vector3:
 	if body is CharacterBody3D:
 		var dir: Vector3 = ability_holder.global_position.direction_to(body.global_position)
+
 		var knockback: Vector3 = Vector3(
-			dir.x * _current_knockback,
-			abs(dir.y * knockback_force_upwards),
-			dir.z * _current_knockback
+			sign(dir.x) * _current_knockback,
+			sign(dir.x) * knockback_force_upwards,
+			sign(dir.z) * _current_knockback,
 		)
-		if body is ChickenPlayer:
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, {
-			"knockback": knockback,
-			"immobile_time": 0.5,
-		})
-		elif body is Enemy:
-			body.velocity = knockback * ability_holder.stats.weight
+
+		return knockback * max(ability_holder.stats.weight, 7)
+
+	return Vector3.ZERO
