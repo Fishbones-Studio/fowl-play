@@ -1,47 +1,47 @@
-~ WoodpeckerIntro
+~ start
 Woodpecker: [[Ah, a new challenger. Or perhaps, another specimen to observe.|Greetings. Do try not to be too distracted by my... current state.|Approach, if you dare. I find your species... fascinating.]]
 Woodpecker: [[My form is... less than ideal, I admit. A consequence of... unfortunate experimentation.|Do not let the exterior fool you. The mind within remains... sharp.|I am not merely a brute, despite appearances.]]
 - What are you?
-    Woodpecker: [[A question of identity. Philosophical, yet practical in this context.|I was once... different. Smaller. Less... this.|Now? I am a culmination of forced evolution. A testament to hubris.]]
-    Woodpecker: [[They sought power. They found... me. And my intellect persists, a cruel irony.|I retain my thoughts, my memories... trapped within this... shell.|A mind capable of complex analysis, bound by instinct and... this beak.]]
-    => discuss_mutation
+	Woodpecker: [[A question of identity. Philosophical, yet practical in this context.|I was once... different. Smaller. Less... this.|Now? I am a culmination of forced evolution. A testament to hubris.]]
+	Woodpecker: [[They sought power. They found... me. And my intellect persists, a cruel irony.|I retain my thoughts, my memories... trapped within this... shell.|A mind capable of complex analysis, bound by instinct and... this beak.]]
+	=> discuss_mutation
 - You're hideously mutated.
-    Woodpecker: [[A rather blunt assessment. Accurate, nonetheless.|Hideous? Perhaps by conventional standards. But is not all life a form of mutation?|I assure you, the internal transformation is far more... profound.]]
-    Woodpecker: [[This form grants certain... advantages. Though the cost is... significant.|Do you think this was my choice? To become... this?|Observe closely. There are intricacies beyond mere ugliness.]]
-    => discuss_mutation
+	Woodpecker: [[A rather blunt assessment. Accurate, nonetheless.|Hideous? Perhaps by conventional standards. But is not all life a form of mutation?|I assure you, the internal transformation is far more... profound.]]
+	Woodpecker: [[This form grants certain... advantages. Though the cost is... significant.|Do you think this was my choice? To become... this?|Observe closely. There are intricacies beyond mere ugliness.]]
+	=> discuss_mutation
 - I'm here to fight.
-    Woodpecker: [[Predictable. Violence is often the simplest solution, is it not?|Very well. The arena demands blood, and I am... equipped to provide it.|Do not expect a mindless brawl. I fight with purpose.]]
-    Woodpecker: [[My physical prowess is... considerable. A side effect of the process.|But it is my strategy that will be your undoing.|Prepare yourself. This will be... educational.]]
-    => proceed_to_fight
+	Woodpecker: [[Predictable. Violence is often the simplest solution, is it not?|Very well. The arena demands blood, and I am... equipped to provide it.|Do not expect a mindless brawl. I fight with purpose.]]
+	Woodpecker: [[My physical prowess is... considerable. A side effect of the process.|But it is my strategy that will be your undoing.|Prepare yourself. This will be... educational.]]
+	=> proceed_to_fight
 
 ~ discuss_mutation
 Woodpecker: [[This beak... once a tool for finding sustenance. Now? A weapon of... considerable force.|My eyes... they perceive wavelengths you cannot imagine. Yet, they are... unsettling, are they not?|The pain is... constant. A low hum beneath every thought.]]
 - Who did this to you?
-    Woodpecker: [[The architects of this... spectacle. Those who pull the strings above.|They sought to weaponize nature. They succeeded, in a twisted fashion.|I am their masterpiece. Their... abomination.]]
-    Woodpecker: [[They underestimated the resilience of the mind. They thought they could simply create a tool.|But the original consciousness... it endures. And it remembers.|And it resents.]]
-    => continue_discussion
+	Woodpecker: [[The architects of this... spectacle. Those who pull the strings above.|They sought to weaponize nature. They succeeded, in a twisted fashion.|I am their masterpiece. Their... abomination.]]
+	Woodpecker: [[They underestimated the resilience of the mind. They thought they could simply create a tool.|But the original consciousness... it endures. And it remembers.|And it resents.]]
+	=> continue_discussion
 - Is there any way to reverse it?
-    Woodpecker: [[Reverse? A fascinating concept. To undo the irreversible.|I have analyzed the possibilities. The genetic damage is... extensive.|Perhaps in theory. But the resources, the knowledge... they are beyond my reach here.]]
-    Woodpecker: [[My only hope is... perhaps... an end to this existence.|Or perhaps... to find a way to control this power... truly control it.|A difficult proposition, given the... urges.]]
-    => continue_discussion
+	Woodpecker: [[Reverse? A fascinating concept. To undo the irreversible.|I have analyzed the possibilities. The genetic damage is... extensive.|Perhaps in theory. But the resources, the knowledge... they are beyond my reach here.]]
+	Woodpecker: [[My only hope is... perhaps... an end to this existence.|Or perhaps... to find a way to control this power... truly control it.|A difficult proposition, given the... urges.]]
+	=> continue_discussion
 - What kind of advantages does this give you?
-    Woodpecker: [[Enhanced durability, obviously. My structure is... robust.|Increased physical strength. The ability to... impact with significant force.|And the sensory input... overwhelming at times, but informative.]]
-    Woodpecker: [[I can perceive weaknesses you attempt to conceal. Anticipate movements based on subtle cues.|My form is grotesque, yes, but it is also... efficient, in its own way.|A terrible beauty, perhaps? No. Just terrible.]]
-    => continue_discussion
+	Woodpecker: [[Enhanced durability, obviously. My structure is... robust.|Increased physical strength. The ability to... impact with significant force.|And the sensory input... overwhelming at times, but informative.]]
+	Woodpecker: [[I can perceive weaknesses you attempt to conceal. Anticipate movements based on subtle cues.|My form is grotesque, yes, but it is also... efficient, in its own way.|A terrible beauty, perhaps? No. Just terrible.]]
+	=> continue_discussion
 
 ~ continue_discussion
 Woodpecker: [[We could continue this intellectual discourse, but I suspect you have other objectives.|Or perhaps you simply wish to delay the inevitable conflict.|Regardless, the time for words is drawing to a close.]]
 - What happens now?
-    Woodpecker: [[Now? The purpose of this arena is fulfilled.|We engage in combat. One of us... or perhaps both... will cease to function.|A simple, brutal outcome to a complex situation.]]
-    => proceed_to_fight
+	Woodpecker: [[Now? The purpose of this arena is fulfilled.|We engage in combat. One of us... or perhaps both... will cease to function.|A simple, brutal outcome to a complex situation.]]
+	=> proceed_to_fight
 - Can we avoid fighting?
-    Woodpecker: [[Avoid? In this place? A naive thought.|The parameters are set. The audience demands entertainment.|And I... I have a role to play. A violent, necessary role.]]
-    Woodpecker: [[My form compels me. The urges are... difficult to suppress entirely.|Even with my intellect, the beast is close to the surface.|It is... inevitable.]]
-    => proceed_to_fight
+	Woodpecker: [[Avoid? In this place? A naive thought.|The parameters are set. The audience demands entertainment.|And I... I have a role to play. A violent, necessary role.]]
+	Woodpecker: [[My form compels me. The urges are... difficult to suppress entirely.|Even with my intellect, the beast is close to the surface.|It is... inevitable.]]
+	=> proceed_to_fight
 - I need to leave.
-    Woodpecker: [[Leave? You cannot simply leave.|Not until the performance is complete.|And the performance requires... a conclusion. With force.]]
-    Woodpecker: [[Do not attempt to flee. It will only prolong your... discomfort.|Face me. It is the only path forward.|For both of us.]]
-    => proceed_to_fight
+	Woodpecker: [[Leave? You cannot simply leave.|Not until the performance is complete.|And the performance requires... a conclusion. With force.]]
+	Woodpecker: [[Do not attempt to flee. It will only prolong your... discomfort.|Face me. It is the only path forward.|For both of us.]]
+	=> proceed_to_fight
 
 ~ proceed_to_fight
 Woodpecker: [[Very well. Let us commence.|Prepare yourself for the application of theory... in practice.|May the most... resilient... prevail.]]

@@ -2,33 +2,33 @@
 Hendere: [[Oh, hello there, my little feather-friend|Fancy seeing you here, my dear|Well, look who it is... my favorite little fighter]]!
 Hendere: You did so well in that last round... **just for me**, right?
 - Just for you, Hendere.
-    Hendere: [[Hehe, I knew you understood|Of course you did! You're the only one who matters to me|Good. Don't ever forget that]].
-    Hendere: [[Now, about those other chickens...|Did you see how they looked at you?|They seemed a little too friendly...]]
-    - What about them?
-        Hendere: [[They need to learn their place|They shouldn't get any ideas|They're just distractions]]. You only need me.
-        => continue_or_end
-    - They fought well too.
-        Hendere: [[Fought well? They were trying to take you away from me!|Don't praise them!|They don't matter]]. Only your performance matters. To me.
-        Hendere: [[Don't make me jealous, dear|You know what happens when I get jealous, right?|Let's just focus on *us*]].
-        => continue_or_end
+	Hendere: [[Hehe, I knew you understood|Of course you did! You're the only one who matters to me|Good. Don't ever forget that]].
+	Hendere: [[Now, about those other chickens...|Did you see how they looked at you?|They seemed a little too friendly...]]
+	- What about them?
+		Hendere: [[They need to learn their place|They shouldn't get any ideas|They're just distractions]]. You only need me.
+		=> continue_or_end
+	- They fought well too.
+		Hendere: [[Fought well? They were trying to take you away from me!|Don't praise them!|They don't matter]]. Only your performance matters. To me.
+		Hendere: [[Don't make me jealous, dear|You know what happens when I get jealous, right?|Let's just focus on *us*]].
+		=> continue_or_end
 - I fight for myself.
-    Hendere: [[For yourself...? But... I thought...|Don't be silly, you fight for *us*|That's not what I wanted to hear]].
-    Hendere: [[Are you saying... you don't care about me?|Don't you know how much I care about you?|You're hurting my feelings]].
-    => continue_or_end
+	Hendere: [[For yourself...? But... I thought...|Don't be silly, you fight for *us*|That's not what I wanted to hear]].
+	Hendere: [[Are you saying... you don't care about me?|Don't you know how much I care about you?|You're hurting my feelings]].
+	=> continue_or_end
 - Let's just focus on the next round.
-    Hendere: [[The next round...? But we were having such a nice chat|Don't try to change the subject|Are you trying to avoid me?]].
-    Hendere: [[Don't worry about the next round, just worry about me|Just promise me you'll think of me while you're fighting|Let's talk about *us* instead]].
-    => continue_or_end
+	Hendere: [[The next round...? But we were having such a nice chat|Don't try to change the subject|Are you trying to avoid me?]].
+	Hendere: [[Don't worry about the next round, just worry about me|Just promise me you'll think of me while you're fighting|Let's talk about *us* instead]].
+	=> continue_or_end
 
 ~ continue_or_end
 Hendere: [[So, what should we talk about next?|Anything else on your mind, dear?|Is there anything else you want to tell me?]]
 - Tell me about yourself.
-    Hendere: [[About me? There's not much to tell... except that I love you|What do you want to know? As long as it's about us|My life only became interesting when I met you]].
-    Hendere: [[I just want to be with you, always|I dream about our future together|We'll be together forever, won't we?]].
-    => continue_or_end
+	Hendere: [[About me? There's not much to tell... except that I love you|What do you want to know? As long as it's about us|My life only became interesting when I met you]].
+	Hendere: [[I just want to be with you, always|I dream about our future together|We'll be together forever, won't we?]].
+	=> continue_or_end
 - What do you think of the other fighters?
-    Hendere: [[Them? They're nothing compared to you|They're just obstacles in our way|I don't like them. They look at you too much]].
-    Hendere: [[Don't worry about them, I'll make sure they don't bother you anymore|They'll learn not to get close to what's mine|Just ignore them, okay?]].
-    => continue_or_end
+	Hendere: [[Them? They're nothing compared to you|They're just obstacles in our way|I don't like them. They look at you too much]].
+	Hendere: [[Don't worry about them, I'll make sure they don't bother you anymore|They'll learn not to get close to what's mine|Just ignore them, okay?]].
+	=> continue_or_end
 - Let's end this conversation. => END
 - Start over. => start

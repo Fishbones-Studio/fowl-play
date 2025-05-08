@@ -1,39 +1,39 @@
-~ InsighterIntro
+~ start
 Insighter: [[Oh goody! A fight! A fight!|Hehehe! Time to break things! And people!|Hello there, little fighter! Ready to meet your end?!]]
 Insighter: [[I just *love* the sound of cracking shells! And bones!|Dying is just the beginning, you know! The *exciting* beginning!|Are you going to die beautifully?! I hope so!]]
 - You're... happy about this?
-    Insighter: [[Happy?! Ecstatic! Overjoyed! It's the best part!|Why wouldn't I be?! Death is everywhere! It's wonderful!|Watching things cease... it's a glorious spectacle!]]
-    => discuss_death_obsession
+	Insighter: [[Happy?! Ecstatic! Overjoyed! It's the best part!|Why wouldn't I be?! Death is everywhere! It's wonderful!|Watching things cease... it's a glorious spectacle!]]
+	=> discuss_death_obsession
 - What's wrong with you?
-    Insighter: [[Wrong?! Nothing is wrong! Everything is right! Especially the dying part!|You think death is wrong?! How silly! It's the natural order!|Perhaps you just haven't experienced the *joy* of it yet! Hehe!]]
-    => discuss_death_obsession
+	Insighter: [[Wrong?! Nothing is wrong! Everything is right! Especially the dying part!|You think death is wrong?! How silly! It's the natural order!|Perhaps you just haven't experienced the *joy* of it yet! Hehe!]]
+	=> discuss_death_obsession
 - Let's just fight.
-    Insighter: [[Yes! The best idea! No more talking, just... ending!|Talking is boring! Killing is fun! Let's get to the fun part!|Prepare yourself! Or don't! It doesn't really matter in the end!]]
-    => proceed_to_fight
+	Insighter: [[Yes! The best idea! No more talking, just... ending!|Talking is boring! Killing is fun! Let's get to the fun part!|Prepare yourself! Or don't! It doesn't really matter in the end!]]
+	=> proceed_to_fight
 
 ~ discuss_death_obsession
 Insighter: [[The arena is a garden! A garden of decay and rebirth!|Every crack! Every splatter! It's all part of the dance!|Do you feel it?! The pull towards oblivion?! It's so freeing!]]
 - Why are you like this?
-    Insighter: [[Like this...? I see the truth! The beautiful, messy truth!|Life is just a brief flicker before the glorious darkness!|Why cling to it?! Embrace the end!]]
-    => continue_morbid_chat
+	Insighter: [[Like this...? I see the truth! The beautiful, messy truth!|Life is just a brief flicker before the glorious darkness!|Why cling to it?! Embrace the end!]]
+	=> continue_morbid_chat
 - That's messed up.
-    Insighter: [[Messed up?! It's perfect! The ultimate release!|You fear it, don't you? The great unknown!|Don't worry! I'll help you get there! Quickly!]]
-    => continue_morbid_chat
+	Insighter: [[Messed up?! It's perfect! The ultimate release!|You fear it, don't you? The great unknown!|Don't worry! I'll help you get there! Quickly!]]
+	=> continue_morbid_chat
 - What happens when things die?
-    Insighter: [[They return! To the great soup! The source!|Their energy is released! Free to become something new!|Perhaps... another egg?! Hehehe!]]
-    => continue_morbid_chat
+	Insighter: [[They return! To the great soup! The source!|Their energy is released! Free to become something new!|Perhaps... another egg?! Hehehe!]]
+	=> continue_morbid_chat
 
 ~ continue_morbid_chat
 Insighter: [[So many ways to go! Crushed! Torn! Eaten! Which is your favorite?!|I wonder how *your* shell will break! Will it be a big crack?! Or many little ones?!|Let's find out together! Shall we?!]]
 - Stop talking about death.
-    Insighter: [[But it's the only thing worth talking about! The grand finale!|Don't be a spoilsport! It's inevitable anyway!|You can't avoid it forever! No one can!]]
-    => end_options
+	Insighter: [[But it's the only thing worth talking about! The grand finale!|Don't be a spoilsport! It's inevitable anyway!|You can't avoid it forever! No one can!]]
+	=> end_options
 - You're terrifying.
-    Insighter: [[Terrifying?! Me?! Just a little egg!|Hehe! Good! Fear makes the ending even sweeter!|Just relax! It'll all be over soon!]]
-    => end_options
+	Insighter: [[Terrifying?! Me?! Just a little egg!|Hehe! Good! Fear makes the ending even sweeter!|Just relax! It'll all be over soon!]]
+	=> end_options
 - Let's fight now.
-    Insighter: [[Yes! Finally! The main event!|Enough chatter! Time for the symphony of destruction!|I can't wait to see you... pop!]]
-    => proceed_to_fight
+	Insighter: [[Yes! Finally! The main event!|Enough chatter! Time for the symphony of destruction!|I can't wait to see you... pop!]]
+	=> proceed_to_fight
 
 ~ end_options
 Insighter: [[Alright, alright! If you insist! But the thought will linger!|You'll be thinking about it during the fight! I know you will!|It's always there... waiting...]]

@@ -2,42 +2,42 @@
 Bob: [[Hrrrk... You... here...|Grk... Another... one...|Raaagh... Look... at... you...]]
 Bob: [[Pain... always... pain...|Mutate... twist... break...|This... is... me... now...]]
 - What happened to you?
-    Bob: [[Happen...?|They... did... this...|Them... up there...]]
-    Bob: [[Changed... me...|Made... me... monster...|Grk... Spike... hurt...]]
-    => explore_mutations
+	Bob: [[Happen...?|They... did... this...|Them... up there...]]
+	Bob: [[Changed... me...|Made... me... monster...|Grk... Spike... hurt...]]
+	=> explore_mutations
 - You look... different.
-    Bob: [[Different...?|Yes... different...|Not... chicken... anymore...]]
-    Bob: [[Eyes... see... too much...|Spikes... grow... inside...|Hrrrk... Itching... burning...]]
-    => explore_mutations
+	Bob: [[Different...?|Yes... different...|Not... chicken... anymore...]]
+	Bob: [[Eyes... see... too much...|Spikes... grow... inside...|Hrrrk... Itching... burning...]]
+	=> explore_mutations
 - Are you in pain?
-    Bob: [[Pain...?|ALWAYS... PAIN!|Grk... Every... moment...]]
-    Bob: [[Skin... tears...|Bones... shift...|Raaagh... Make... it... stop...]]
-    => explore_mutations
+	Bob: [[Pain...?|ALWAYS... PAIN!|Grk... Every... moment...]]
+	Bob: [[Skin... tears...|Bones... shift...|Raaagh... Make... it... stop...]]
+	=> explore_mutations
 
 ~ explore_mutations
 Bob: [[Look... at... me...|See... what... they... did...|This... is... power...?]]
 Bob: [[More... eyes... see... everything...|More... spikes... for... them...|Hrrrk... Just... want... rest...]]
 - Who did this to you?
-    Bob: [[Them...|The... ones... who... watch...|Up... there...]]
-    Bob: [[They... want... monsters...|They... made... me... their... monster...|Grk... Hate... them...]]
-    => continue_or_end
+	Bob: [[Them...|The... ones... who... watch...|Up... there...]]
+	Bob: [[They... want... monsters...|They... made... me... their... monster...|Grk... Hate... them...]]
+	=> continue_or_end
 - Does it hurt all the time?
-    Bob: [[All... time...|Like... fire... under... skin...|Like... tearing... apart...]]
-    Bob: [[Only... fighting... helps...|Distracts... from... pain...|Raaagh!]]
-    => continue_or_end
+	Bob: [[All... time...|Like... fire... under... skin...|Like... tearing... apart...]]
+	Bob: [[Only... fighting... helps...|Distracts... from... pain...|Raaagh!]]
+	=> continue_or_end
 - Why are you fighting?
-    Bob: [[Fight...?|It's... all... there... is...|They... want... it...]]
-    Bob: [[Or... maybe... to... make... pain... stop...|By... making... others... feel... it...|Grk... You... will... feel... it...]]
-    => continue_or_end
+	Bob: [[Fight...?|It's... all... there... is...|They... want... it...]]
+	Bob: [[Or... maybe... to... make... pain... stop...|By... making... others... feel... it...|Grk... You... will... feel... it...]]
+	=> continue_or_end
 
 ~ continue_or_end
 Bob: [[Enough... talk...|Time... for... pain...|Your... pain... now...]]
 - I'll end your suffering.
-    Bob: [[End...?|You...?|Hah... Weakling...]]
-    Bob: [[Try...|You... will... break... first...|Grk... I... will... break... you...]]
-    => END
+	Bob: [[End...?|You...?|Hah... Weakling...]]
+	Bob: [[Try...|You... will... break... first...|Grk... I... will... break... you...]]
+	=> END
 - You're just a monster.
-    Bob: [[Monster...?|Yes... monster...|They... made... me...]]
-    Bob: [[But... I... am... strong... monster...|Stronger... than... you...|Raaagh!]]
-    => END
+	Bob: [[Monster...?|Yes... monster...|They... made... me...]]
+	Bob: [[But... I... am... strong... monster...|Stronger... than... you...|Raaagh!]]
+	=> END
 - (Attack) => END
