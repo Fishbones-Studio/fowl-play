@@ -69,10 +69,8 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 		Inventory.get_equipped_item(ItemEnums.ItemTypes.ABILITY, 1)
 	]
 	
-	if item in melee_items:
-		return "attack"
-	elif item in ranged_items:
-		return "attack"
+	if item in melee_items or ranged_items:
+		return "attack"    # weapon slots
 	elif item == abilities[0]:  # First ability slot
 		return "ability_one"
 	elif item == abilities[1]:  # Second ability slot
@@ -86,7 +84,7 @@ func _init_item_slots(items: Array) -> void:
 		if not item is BaseResource:
 			continue
 
-		# Create slots as before...
+		# Create slots...
 		var item_slot := ITEM_SLOT.instantiate() as UiItemSlot
 		var controller_slot := ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
 		if !item_slot or !controller_slot:
@@ -95,6 +93,5 @@ func _init_item_slots(items: Array) -> void:
 		add_child(item_slot)
 		add_child(controller_slot)
 		item_slot.item = item
-		
-		# Dynamic action assignment
+
 		controller_slot.input_action = _get_input_action_for_item(item)
