@@ -43,6 +43,7 @@ func _tick(_delta: float) -> Status:
 	agent.global_position = flank_position
 	agent.velocity = Vector3.ZERO
 	agent.look_at(target.global_position)
+
 	return SUCCESS
 
 
@@ -62,7 +63,7 @@ func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 
 
 func _is_position_clear(position: Vector3) -> bool:
-	if clearance_radius <= 0.0:
+	if is_equal_approx(clearance_radius, 0.0):
 		push_error("clearance_radius must be > 0 (current: %f)" % clearance_radius)
 		return false
 
@@ -79,4 +80,5 @@ func _is_position_clear(position: Vector3) -> bool:
 	# Perform query
 	var space_state: PhysicsDirectSpaceState3D = agent.get_world_3d().direct_space_state
 	var results: Array[Dictionary] = space_state.intersect_shape(params, 1)
+
 	return results.is_empty()
