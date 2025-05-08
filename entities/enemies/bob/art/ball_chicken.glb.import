@@ -34,7 +34,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "animations": {
-"idle": {
+"Idle": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -1833,10 +1833,10 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"rolling ": {
-"save_to_file/enabled": true,
+"Roll": {
+"save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://entities/enemies/bob/art/rolling.res",
+"save_to_file/path": "",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
