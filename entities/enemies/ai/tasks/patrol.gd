@@ -46,8 +46,9 @@ func _tick(delta: float) -> Status:
 		_choose_new_patrol_target()
 		_current_timer = 0.0
 
-	_update_rotation(delta)
-	_move_to_position(delta)
+	if not agent.is_immobile:
+		_update_rotation(delta)
+		_move_to_position(delta)
 
 	return RUNNING
 

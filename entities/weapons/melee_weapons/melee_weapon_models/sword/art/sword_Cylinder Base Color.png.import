@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0meislelcn4w"
+path.s3tc="res://.godot/imported/sword_Cylinder Base Color.png-19aa9368aac45f473c8b14657db4d4de.s3tc.ctex"
+path.etc2="res://.godot/imported/sword_Cylinder Base Color.png-19aa9368aac45f473c8b14657db4d4de.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "32679d99d22b2bf257cb038399a298ce"
+}
+
+[deps]
+
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword_Cylinder Base Color.png"
+dest_files=["res://.godot/imported/sword_Cylinder Base Color.png-19aa9368aac45f473c8b14657db4d4de.s3tc.ctex", "res://.godot/imported/sword_Cylinder Base Color.png-19aa9368aac45f473c8b14657db4d4de.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
