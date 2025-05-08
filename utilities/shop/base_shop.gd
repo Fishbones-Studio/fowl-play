@@ -55,12 +55,12 @@ func _refresh_shop() -> void:
 	available_items = _get_available_items()
 
 	# Determine how many items we can actually show
-	var items_to_show = min(available_items.size(), max_items)
+	var items_to_show = min(available_items.size(), actual_max_items)
 
 	var selected_items: Array[BaseResource] = _get_shop_selection(
 		available_items, items_to_show
 	)
-	
+
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
 
@@ -70,7 +70,7 @@ func _refresh_shop() -> void:
 			continue
 
 		shop_items_container.add_child(shop_item)
-		
+
 		# Connect signals for preview logic
 		shop_item.hovered.connect(_on_populate_visual_fields)
 		shop_item.focused.connect(_on_populate_visual_fields)
