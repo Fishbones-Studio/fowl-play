@@ -59,9 +59,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/DashOneShot/active = false
 parameters/DashOneShot/internal_active = false
 parameters/DashOneShot/request = 0
-parameters/DeathOneShot/active = false
-parameters/DeathOneShot/internal_active = false
-parameters/DeathOneShot/request = 0
 parameters/HurtOneShot/active = false
 parameters/HurtOneShot/internal_active = false
 parameters/HurtOneShot/request = 0
@@ -131,6 +128,9 @@ one_shot = true
 script = ExtResource("14_pq2r3")
 state_type = 8
 
+[node name="Timer" type="Timer" parent="MovementStateMachine/Death"]
+one_shot = true
+
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("12_5aj8x")
 entity = NodePath("..")
@@ -151,5 +151,6 @@ player = NodePath("..")
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Fall/CoyoteTimer" to="MovementStateMachine/Fall" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="MovementStateMachine/Death/Timer" to="MovementStateMachine/Death" method="_on_timer_timeout"]
 
 [editable path="chicken_default"]
