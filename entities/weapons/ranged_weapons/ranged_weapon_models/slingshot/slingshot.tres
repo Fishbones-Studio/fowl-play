@@ -17,7 +17,7 @@ loop_animation = false
 name = "Slingshot"
 purchasable = true
 drop_chance = 15
-cost = 250
+cost = 150
 currency_type = 0
 description = "Hold the attack button to line up the perfect shot. Take as much time as you need! Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s. Upon exploding, the egg leaves behind a [color=orange]temporary fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
 
