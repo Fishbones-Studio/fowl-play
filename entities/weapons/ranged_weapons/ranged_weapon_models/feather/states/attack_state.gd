@@ -1,17 +1,19 @@
 extends BaseRangedCombatState
 
 @export var attack_origin: Node3D
+@export_group("Wind Effect")
+@export var wind_lag_time: float = 0.15
+@export var _wind_attack_elapsed: float = 0.0
 
 var _pending_raycast: RayCast3D = null
 var _visualization_timer: Timer = null
+var _feather_start_pos: Vector3
+var _feather_end_pos: Vector3
+var _attack_elapsed: float = 0.0
 
 @onready var feather_model : Node3D = $"../../feather"
 @onready var wind_effect : GPUParticles3D = $"../../WindEffect"
 @onready var launch_effect : GPUParticles3D = $"../../LaunchEffect"
-
-var _feather_start_pos: Vector3
-var _feather_end_pos: Vector3
-var _attack_elapsed: float = 0.0
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	if weapon.entity_stats.is_player:
@@ -25,6 +27,7 @@ func enter(_previous_state, _info: Dictionary = {}) -> void:
 	wind_effect.emitting = true
 	feather_model.visible = true
 	_attack_elapsed = 0.0
+	_wind_attack_elapsed = 0.0
 	launch_effect.emitting = true
 
 func physics_process(delta: float) -> void:
@@ -39,15 +42,20 @@ func physics_process(delta: float) -> void:
 		var t = clamp(_attack_elapsed / weapon.current_weapon.attack_duration, 0.0, 1.0)
 		feather_model.global_position = _feather_start_pos.lerp(_feather_end_pos, t)
 
+		# Wind effect lags behind the feather
+		_wind_attack_elapsed += delta
+		var wind_t = clamp((_wind_attack_elapsed - wind_lag_time) / weapon.current_weapon.attack_duration, 0.0, 1.0)
+		wind_effect.global_position = _feather_start_pos.lerp(_feather_end_pos, wind_t)
+
 func exit() -> void:
 	_pending_raycast = null
 	if _visualization_timer:
 		_visualization_timer.queue_free()
 		_visualization_timer = null
-	# Resetting the feather model position to zero
 	wind_effect.emitting = false
 	feather_model.visible = false
 	feather_model.position = Vector3.ZERO
+	wind_effect.position = Vector3(0, 0, -0.6)
 
 func _fire_single_shot() -> void:
 	var fire_direction: Vector3 = -attack_origin.global_basis.z.normalized()
