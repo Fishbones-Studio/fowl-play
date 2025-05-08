@@ -55,12 +55,10 @@ func _refresh_shop() -> void:
 	# Determine how many items we can actually show
 	var items_to_show = min(available_items.size(), max_items)
 
-	# Shuffle the available items to randomize selection
-	available_items.shuffle()
-
 	# Add items up to our limit
-	for i in range(items_to_show):
-		var selected_item: BaseResource = available_items[i]
+	var selected_items: Array[BaseResource] = _get_shop_selection(available_items, items_to_show)
+
+	for selected_item in selected_items:
 		shop_items.append(selected_item)
 
 		var shop_item: BaseShopItem = create_shop_item(selected_item)
@@ -92,8 +90,67 @@ func create_shop_item(_selected_item: BaseResource) -> BaseShopItem:
 
 
 func _should_skip_item(item: BaseResource) -> bool:
-	return (check_inventory and item in Inventory.get_all_items()) or (prevent_duplicates and item in shop_items)
+	if not item.purchasable or item.drop_chance <= 0:
+		return true
+	if check_inventory and item in Inventory.get_all_items():
+		return true
+	if prevent_duplicates and item in shop_items:
+		return true
+	return false
 
+func _group_items_by_type(items: Array[BaseResource]) -> Dictionary:
+	var groups := {}
+	for item in items:
+		if not groups.has(item.type):
+			groups[item.type] = []
+		groups[item.type].append(item)
+	return groups
+
+func _get_weighted_random_items(items: Array[BaseResource], count: int) -> Array[BaseResource]:
+	var selected: Array[BaseResource] = []
+	var pool := items.duplicate()
+	while selected.size() < count and pool.size() > 0:
+		var total_weight := 0
+		for item in pool:
+			total_weight += item.drop_chance
+		if total_weight == 0:
+			break
+		var r := randi() % total_weight
+		var cumulative := 0
+		var chosen_index := -1
+		for i in pool.size():
+			cumulative += pool[i].drop_chance
+			if r < cumulative:
+				chosen_index = i
+				break
+		if chosen_index >= 0:
+			selected.append(pool[chosen_index])
+			pool.remove_at(chosen_index)
+	return selected
+
+func _select_one_per_type(groups: Dictionary) -> Array[BaseResource]:
+	var selected: Array[BaseResource] = []
+	for type in groups.keys():
+		var group: Array = groups[type]
+		if group.size() > 0:
+			var weighted_items := _get_weighted_random_items(group, 1) as Array[BaseResource]
+			if weighted_items.size() > 0:
+				selected.append(weighted_items[0])
+	return selected
+	
+	
+func _fill_remaining(selected: Array[BaseResource], items: Array[BaseResource], count: int) -> Array[BaseResource]:
+	var pool := items.duplicate()
+	for item in selected:
+		pool.erase(item)
+	var remaining := _get_weighted_random_items(pool, count)
+	return selected + remaining
+
+func _get_shop_selection(items: Array[BaseResource], _max_items: int) -> Array[BaseResource]:
+	var groups: Dictionary            = _group_items_by_type(items)
+	var selected: Array[BaseResource] = _select_one_per_type(groups)
+	var remaining_count               = max(0, _max_items - selected.size())
+	return _fill_remaining(selected, items, remaining_count)
 
 func _setup_controller_navigation() -> void:
 	# Make all shop items are focusable
