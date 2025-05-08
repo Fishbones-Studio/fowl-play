@@ -6,7 +6,7 @@
 script = ExtResource("1_nq4pi")
 health_bonus = 0
 stamina_bonus = 0
-attack_bonus = 10
+attack_bonus = 0
 defense_bonus = 40
 speed_bonus = 0
 weight_bonus = 0.0
