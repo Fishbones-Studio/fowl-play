@@ -19,7 +19,6 @@ var _hit_bodies: Array = []
 func activate() -> void:
 	if not ability_holder.is_on_floor():
 		return
-	damage
 	_attack_duration = cpu_particles.lifetime
 	_hit_bodies.clear()
 

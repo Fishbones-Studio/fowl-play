@@ -7,11 +7,12 @@ extends Ability
 @export var quake_damage_increase: float = 0.5  # Damage multiplier per quake
 @export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
+@export var damage_scaler: int = 3
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.weight)  * 3
+		return (stats.weight) * damage_scaler
 
 var _current_quake_count: int = 0
 var _current_damage: float = 0.0

@@ -2,17 +2,31 @@ class_name LivingEntityStats
 extends Resource
 
 @export_category("Base Stats")
+## Sets base maximum health, defining how much damage the character can take. Maximum health is also used to calculate damage for certain abilities.
 @export var max_health: float = 100.0
+## Sets base maximum stamina, defining how long the character can run, dash, glide and use certain abilities.
 @export var max_stamina: float = 100.0
-@export var attack: float = 10.0
-@export_range(0, 1000) var defense: int = 0
+## Sets base attack. Attack increases damage done by 1% per whole number.
+@export var attack:float = 0.0
+## Sets base defense, which decreases damage taken according to following formula, where the resulting number is damage taken as a percentage: 
+##\n 1 - ((defense_multiplier * defense) / (defense_decelerator + defense_multiplier * defense))
+@export var defense: int = 0
+## Sets base speed of the character, deciding how fast the move and how far they dash. Is also used to calulate damage for certain abilities.
 @export var speed: float = 5.0
+## Sets base weight of the character. If this stat is higher the jump height and speed of the character are lowered.
 @export var weight: float = 10.0
 
 @export_category("Factors")
+## Sets base health regeneration for the character. This makes the character regain health over time.
 @export var health_regen: int = 1
+## Sets base stamina regeneration for the character. This allows the character to regain stamina over time.
 @export var stamina_regen: int = 5
-@export var weight_factor: float = 0.07 # Controls slowdown strength
+## Controls how much impact weight has on speed.
+@export var weight_factor: float = 0.07 
+## This decided how fast defense will scale damage reduction, if this is higher defense will scale damage reduction quicker. Should always be below 1
+@export_range(0.0, 1.0) var defense_multiplier: float = 0.05
+## This causes the defense stat to be less impactful to damage reduction, if this is higher defense is less impactful.
+@export var defense_decelerator: float = 9.0
 @export_group("Holder")
 @export var is_player : bool = false
 
@@ -63,7 +77,7 @@ func drain_health(amount: float, damage_type: DamageEnums.DamageTypes = DamageEn
 		return 0.0 # Don't drain if amount is zero or negative
 	else:
 		if damage_type == DamageEnums.DamageTypes.NORMAL:
-			var damage_multiplier: float = 1 - ((0.05 * defense) / (9 + 0.05 * defense))
+			var damage_multiplier: float = 1 - ((defense_multiplier * defense) / (defense_decelerator + defense_multiplier * defense))
 			actual_damage = max(floor(amount * damage_multiplier), 1)
 
 		elif damage_type == DamageEnums.DamageTypes.TRUE:
@@ -93,7 +107,10 @@ func regen_stamina(delta: float) -> float:
 ## Calculate the damage based on the attack and the k_scaler
 func calc_scaled_damage(damage: float) -> float:
 	var actual_damage: float
-	actual_damage = floor(damage * (1.0 + (attack / 100)))
+	if is_inf(attack):
+		return INF
+	else:
+		actual_damage = floor(damage * (1.0 + (attack / 100)))
 	
 	print("Damage: " + str(damage) + " Attack: " + str(attack) + " Scaled Damage: " + str(actual_damage))
 	

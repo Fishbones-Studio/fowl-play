@@ -2,11 +2,12 @@ extends Ability
 
 @export_range(1, 3) var strike_amount: int = 2
 @export var ignore_defense: bool = true
+@export var base_damage: float = 15.0
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (15) * ((1.0 + (stats.attack / 100)) + 1.2)
+		return base_damage * ((1.0 + (stats.attack / 100)))
 
 var _particles_emitted: bool = false
 var _hit_bodies: Array = []
