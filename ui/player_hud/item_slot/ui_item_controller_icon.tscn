@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://yq62iccynmnp"]
+
+[ext_resource type="Script" uid="uid://dafimxhd5ss3c" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
+[ext_resource type="Texture2D" uid="uid://ehott5ouvhsj" path="res://resources/controller-icons/attack.tres" id="2_8xpnx"]
+
+[node name="UiItemControllerIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 82.0
+offset_right = 35.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_bkhin")
+
+[node name="ItemBackground" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 1
+offset_left = -17.0
+offset_top = 20.0
+offset_right = 71.0
+offset_bottom = 108.0
+scale = Vector2(0.399999, 0.439999)
+color = Color(0.517647, 0.517647, 0.517647, 0.490196)
+
+[node name="Sprite2D" type="Sprite2D" parent="ItemBackground"]
+position = Vector2(43, 46)
+texture = ExtResource("2_8xpnx")
