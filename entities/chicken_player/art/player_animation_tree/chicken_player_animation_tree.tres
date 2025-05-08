@@ -7,13 +7,6 @@ animation = &"Dash"
 fadein_time = 0.3
 fadeout_time = 0.3
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ncdpi"]
-animation = &"Death"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uerlf"]
-fadein_time = 0.3
-fadeout_time = 0.3
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vsiul"]
 animation = &"Hurt"
 
@@ -27,6 +20,9 @@ animation = &"Melee"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cx2nh"]
 fadein_time = 0.3
 fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ncdpi"]
+animation = &"Death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hg1i"]
 animation = &"Glide"
@@ -118,8 +114,14 @@ xfade_time = 0.3
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xum6i"]
 xfade_time = 0.3
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ncdpi"]
+xfade_time = 0.2
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y8j8d"]
-states/End/position = Vector2(1081, 523)
+states/Death/node = SubResource("AnimationNodeAnimation_ncdpi")
+states/Death/position = Vector2(1119.34, 197)
+states/End/position = Vector2(1297, 197)
 states/Fall/node = SubResource("AnimationNodeAnimation_4hg1i")
 states/Fall/position = Vector2(848, 395)
 states/Glide/node = SubResource("AnimationNodeAnimation_n43gi")
@@ -133,19 +135,15 @@ states/Sprint/position = Vector2(1002.5, 39.5)
 states/Start/position = Vector2(217, 50.25)
 states/Walk/node = SubResource("AnimationNodeAnimation_vclph")
 states/Walk/position = Vector2(518, 367)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqatk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_yoq0e"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_s5wfe"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_iclyv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_gijp2"), "Walk", "Sprint", SubResource("AnimationNodeStateMachineTransition_7naj4"), "Sprint", "Walk", SubResource("AnimationNodeStateMachineTransition_cuo5c"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_u8bit"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_2wh4f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_7ahvc"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ee1u"), "Jump", "Sprint", SubResource("AnimationNodeStateMachineTransition_5h8xb"), "Sprint", "Jump", SubResource("AnimationNodeStateMachineTransition_vjble"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_udner"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_xo15m"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_oql7h"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_rucgp"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_2cs3l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n5g0g"), "Sprint", "Fall", SubResource("AnimationNodeStateMachineTransition_dhwnh"), "Fall", "Sprint", SubResource("AnimationNodeStateMachineTransition_tmwol"), "Fall", "Glide", SubResource("AnimationNodeStateMachineTransition_4atkk"), "Glide", "Fall", SubResource("AnimationNodeStateMachineTransition_8qh5d"), "Idle", "Glide", SubResource("AnimationNodeStateMachineTransition_xum6i")]
-graph_offset = Vector2(-388.66, -428.474)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqatk"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_yoq0e"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_s5wfe"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_iclyv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_gijp2"), "Walk", "Sprint", SubResource("AnimationNodeStateMachineTransition_7naj4"), "Sprint", "Walk", SubResource("AnimationNodeStateMachineTransition_cuo5c"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_u8bit"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_2wh4f"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_7ahvc"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_1ee1u"), "Jump", "Sprint", SubResource("AnimationNodeStateMachineTransition_5h8xb"), "Sprint", "Jump", SubResource("AnimationNodeStateMachineTransition_vjble"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_udner"), "Fall", "Jump", SubResource("AnimationNodeStateMachineTransition_xo15m"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_oql7h"), "Fall", "Idle", SubResource("AnimationNodeStateMachineTransition_rucgp"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_2cs3l"), "Fall", "Walk", SubResource("AnimationNodeStateMachineTransition_n5g0g"), "Sprint", "Fall", SubResource("AnimationNodeStateMachineTransition_dhwnh"), "Fall", "Sprint", SubResource("AnimationNodeStateMachineTransition_tmwol"), "Fall", "Glide", SubResource("AnimationNodeStateMachineTransition_4atkk"), "Glide", "Fall", SubResource("AnimationNodeStateMachineTransition_8qh5d"), "Idle", "Glide", SubResource("AnimationNodeStateMachineTransition_xum6i"), "Death", "End", SubResource("AnimationNodeStateMachineTransition_ncdpi")]
+graph_offset = Vector2(802, -8)
 
 [resource]
-graph_offset = Vector2(-39.5759, 161.041)
+graph_offset = Vector2(-502.941, -85.3291)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_8i8jv")
 nodes/Dash/position = Vector2(-230, 170)
 nodes/DashOneShot/node = SubResource("AnimationNodeOneShot_6mkbl")
 nodes/DashOneShot/position = Vector2(-30, 40)
-nodes/Death/node = SubResource("AnimationNodeAnimation_ncdpi")
-nodes/Death/position = Vector2(480, 540)
-nodes/DeathOneShot/node = SubResource("AnimationNodeOneShot_uerlf")
-nodes/DeathOneShot/position = Vector2(710, 260)
 nodes/Hurt/node = SubResource("AnimationNodeAnimation_vsiul")
 nodes/Hurt/position = Vector2(-80, 430)
 nodes/HurtOneShot/node = SubResource("AnimationNodeOneShot_1ij6v")
@@ -156,5 +154,5 @@ nodes/MeleeOneShot/node = SubResource("AnimationNodeOneShot_cx2nh")
 nodes/MeleeOneShot/position = Vector2(420, 180)
 nodes/MovementStateMachine/node = SubResource("AnimationNodeStateMachine_y8j8d")
 nodes/MovementStateMachine/position = Vector2(-300, -70)
-nodes/output/position = Vector2(920, 250)
-node_connections = [&"DashOneShot", 0, &"MovementStateMachine", &"DashOneShot", 1, &"Dash", &"DeathOneShot", 0, &"MeleeOneShot", &"DeathOneShot", 1, &"Death", &"HurtOneShot", 0, &"DashOneShot", &"HurtOneShot", 1, &"Hurt", &"MeleeOneShot", 0, &"HurtOneShot", &"MeleeOneShot", 1, &"Melee", &"output", 0, &"DeathOneShot"]
+nodes/output/position = Vector2(720, 260)
+node_connections = [&"DashOneShot", 0, &"MovementStateMachine", &"DashOneShot", 1, &"Dash", &"HurtOneShot", 0, &"DashOneShot", &"HurtOneShot", 1, &"Hurt", &"MeleeOneShot", 0, &"HurtOneShot", &"MeleeOneShot", 1, &"Melee", &"output", 0, &"MeleeOneShot"]
