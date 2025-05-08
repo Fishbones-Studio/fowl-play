@@ -40,7 +40,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_sexgk"]
 animation_player = SubResource("BBNode_8cml0")
-animation_name = &"idle"
+animation_name = &"Idle"
 blend = 0.3
 
 [sub_resource type="BTAction" id="BTAction_e381t"]
@@ -66,7 +66,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0xmxa"]
 animation_player = SubResource("BBNode_e381t")
-animation_name = &"rolling "
+animation_name = &"Roll"
 blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_yvhtp"]
@@ -108,7 +108,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kbctg"]
 animation_player = SubResource("BBNode_jowcg")
-animation_name = &"rolling "
+animation_name = &"Roll"
 blend = 0.2
 speed = 3.0
 
@@ -136,7 +136,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_2bbcu"]
 animation_player = SubResource("BBNode_akjhg")
-animation_name = &"rolling "
+animation_name = &"Roll"
 blend = 0.2
 speed = 6.0
 
@@ -168,7 +168,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ykixg"]
 animation_player = SubResource("BBNode_gf8jg")
-animation_name = &"rolling "
+animation_name = &"Roll"
 blend = 0.2
 speed = 6.0
 
@@ -203,7 +203,7 @@ resource_name = "ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTStopAnimation" id="BTStopAnimation_m26ws"]
 animation_player = SubResource("BBNode_d6hvj")
-animation_name = &"rolling "
+animation_name = &"Roll"
 
 [sub_resource type="BTAction" id="BTAction_5cuga"]
 script = ExtResource("8_157vn")
