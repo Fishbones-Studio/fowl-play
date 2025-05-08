@@ -12,6 +12,7 @@ extends BaseResource
 @export var allow_early_release: bool = false   # For interruptible attacks
 @export var fire_rate_per_second: float = 0.0 # for interval based weapons
 @export var max_range: float = 100.0 # for ranged weapons
+@export var handle_attack_end_by_state: bool = false # for ranged weapons that need to handle attack end in the state itself
 # Animation Variables
 @export_group("Animation")
 @export var loop_animation := false

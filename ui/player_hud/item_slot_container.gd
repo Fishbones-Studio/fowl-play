@@ -55,7 +55,7 @@ func _ready() -> void:
 			else:
 				push_warning("No item slot found at index: ", index)
 	)
-	
+
 	SignalManager.cooldown_item_slot.connect(
 		func(item: BaseResource, cd: float, create_tween : bool):
 			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
@@ -65,7 +65,7 @@ func _ready() -> void:
 			if item_slot:
 				item_slot.start_cooldown(cd, create_tween)
 	)
-	
+
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
 
