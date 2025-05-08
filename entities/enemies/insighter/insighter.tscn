@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_wehyl"]
 [ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/insighter/insighter_stats.tres" id="2_1dq5o"]
 [ext_resource type="PackedScene" uid="uid://18tmfpnik0vd" path="res://entities/enemies/insighter/art/insighter.glb" id="2_e0uej"]
-[ext_resource type="BehaviorTree" uid="uid://bdgx5thgd0gx4" path="res://entities/enemies/ai/trees/insighter.tres" id="4_n8hr6"]
+[ext_resource type="BehaviorTree" uid="uid://k7wyinj46uqk" path="res://entities/enemies/ai/trees/insighter.tres" id="4_n8hr6"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_e3er2"]
 [ext_resource type="PackedScene" uid="uid://co3ix5krmh3qr" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword.tscn" id="5_mahx6"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="6_mahx6"]

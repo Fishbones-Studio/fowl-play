@@ -5,17 +5,13 @@
 [resource]
 script = ExtResource("1_2w7im")
 upgrade_type = 4
-bonus = 20
-bonus_level_step = 20
-bonus_level_multiplier = 1
-cost_level_step = 30
-cost_level_multiplier = 1
+bonus = 50
 max_level = 4
 current_level = 0
 name = "Stamina"
 purchasable = true
 drop_chance = 0
-cost = 30
+cost = 2
 currency_type = 1
 description = "PlaceHolder"
 model_uid = ""

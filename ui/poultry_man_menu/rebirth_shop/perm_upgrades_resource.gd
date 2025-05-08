@@ -5,14 +5,6 @@ extends BaseResource
 @export var upgrade_type: StatsEnums.UpgradeTypes
 @export_group("Bonus")
 @export var bonus: int = 0
-## How much bonus the upgrade applies more at each level
-@export var bonus_level_step: int = bonus
-# The multiplier for the bonus at each level
-@export_range(1, 10) var bonus_level_multiplier: int = 1
-## How much more the upgrade costs at each level
-@export var cost_level_step: int = cost
-## Multiplies cost of the upgrade at each level
-@export_range(1, 10) var cost_level_multiplier: int = 1
 @export var max_level: int = 6
 @export var current_level: int = 0 :
 	set(value):
@@ -25,7 +17,7 @@ func _init() -> void:
 
 func get_upgrade_resource() -> UpgradeResource:
 	var upgrade_resource: UpgradeResource = UpgradeResource.new()
-	var value: int = bonus * bonus_level_multiplier * (current_level + bonus_level_step)
+	var value: int = bonus * current_level
 
 	match upgrade_type:
 		StatsEnums.UpgradeTypes.MAX_HEALTH:
@@ -60,6 +52,5 @@ func get_level_cost(target_level: int) -> int:
 		return cost
 	
 	# Calculate the cost for the target level using geometric progression
-	return int(cost * pow(cost_level_multiplier, target_level - 1) + 
-			cost_level_step * (target_level - 1))
+	return (current_level + 1) * cost
 	

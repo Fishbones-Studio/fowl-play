@@ -3,11 +3,12 @@ extends Ability
 @export var descent_velocity: float = -50.0
 @export var knockback_force: float = 1
 @export var knockback_force_upwards: float = 1
+@export var damage_scaler: int = 9
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.weight * stats.defense) / 2
+		return damage_scaler * stats.weight
 
 var _particles_emitted: bool = false
 

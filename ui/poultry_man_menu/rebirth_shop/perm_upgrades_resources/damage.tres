@@ -5,17 +5,13 @@
 [resource]
 script = ExtResource("1_s7mu1")
 upgrade_type = 0
-bonus = 15
-bonus_level_step = 15
-bonus_level_multiplier = 1
-cost_level_step = 25
-cost_level_multiplier = 1
-max_level = 7
+bonus = 10
+max_level = 5
 current_level = 0
 name = "Damage"
 purchasable = true
 drop_chance = 0
-cost = 25
+cost = 2
 currency_type = 1
 description = "PlaceHolder"
 model_uid = ""

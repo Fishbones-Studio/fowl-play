@@ -5,10 +5,10 @@ extends Ability
 @export var damage_interval: float = 0.2
 @export_range(1, 2, 0.01) var scale_factor: float = 1.75
 
+var stamina_drain: float
 var damage: float:
 	get:
-		var stats: LivingEntityStats = ability_holder.stats
-		return stats.attack + (stats.speed * 0.8)
+		return stamina_drain
 
 var _is_active: bool = false
 var _travel_direction: Vector3
@@ -16,6 +16,7 @@ var _current_damage: float = 0.0
 var _remaining_lifetime: float = 0.0
 var _active_bodies: Dictionary[int, int] = {}
 
+@onready var stats: LivingEntityStats 
 @onready var hit_area: Area3D = %HitArea
 @onready var mesh_instance: MeshInstance3D = %MeshInstance3D
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
@@ -23,13 +24,16 @@ var _active_bodies: Dictionary[int, int] = {}
 
 
 func activate() -> void:
+	stats = ability_holder.stats
 	# Ignore the parent's transform
 	# This ensures the fireball moves independently, without being affected by the player's movement
 	top_level = true
 	global_position = ability_holder.global_position + (Vector3.UP * 2) # Move Y up by 2, so it spawns a bit centered
-
+	stamina_drain = ((stats.current_stamina / stats.max_stamina) * 100) / 2
+	stats.current_stamina -= stamina_drain
+	
 	_toggle_collision_masks(true, hit_area)
-
+	
 	_is_active = true
 	_travel_direction = -ability_holder.global_basis.z.normalized()
 	_current_damage = damage
