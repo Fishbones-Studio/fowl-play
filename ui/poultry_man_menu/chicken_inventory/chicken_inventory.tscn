@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgvqsvn6p7ojh" path="res://ui/poultry_man_menu/chicken_inventory/chicken_inventory.gd" id="1_uruig"]
 [ext_resource type="PackedScene" uid="uid://cc55r8e7gadvt" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.tscn" id="2_abcde"]
-[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/close_button/close_button.tscn" id="2_x0uxr"]
+[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="2_x0uxr"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="3_x0uxr"]
 
 [node name="ChickenInventory" type="Control"]

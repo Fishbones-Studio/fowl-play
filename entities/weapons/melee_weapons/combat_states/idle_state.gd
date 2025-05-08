@@ -1,5 +1,4 @@
 ## IdleState: The weapon is idle and waiting for input.
-class_name IdleState
 extends BaseCombatState
 
 ## The minimum time (in seconds) to wait before potentially playing the idle animation.

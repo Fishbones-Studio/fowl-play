@@ -1,6 +1,10 @@
 class_name BaseShopItem
 extends PanelContainer
 
+signal hovered(item)
+signal unhovered(item)
+signal focused(item)
+
 # Common properties
 static var purchase_in_progress: bool = false :
 	set(value):
@@ -17,11 +21,10 @@ var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 
-
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	populate_visual_fields()
-
+	add_to_group("shop_item")
 
 func can_afford() -> bool:
 	match shop_item.currency_type:
@@ -32,7 +35,6 @@ func can_afford() -> bool:
 		_:
 			return false
 
-
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -40,38 +42,32 @@ func _on_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept") and has_focus():
 		attempt_purchase()
 
-
 func _on_focus_entered() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
-
 	SignalManager.preview_shop_item.emit(shop_item)
-
+	focused.emit(shop_item)
 
 func _on_focus_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
-	
-	SignalManager.preview_shop_item.emit(null)
-
+	unhovered.emit(shop_item)
 
 func _on_mouse_entered() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
 	grab_focus()
-
 	SignalManager.preview_shop_item.emit(shop_item)
-
+	hovered.emit(shop_item)
 
 func _on_mouse_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
-	
-	SignalManager.preview_shop_item.emit(null)
+	unhovered.emit(shop_item)
 
 
 ## Abstract method, overwrite in child class

@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2vh7na31m8hi"]
+[gd_scene load_steps=8 format=3 uid="uid://c2vh7na31m8hi"]
 
 [ext_resource type="Script" uid="uid://c1b516aq1e48v" path="res://ui/chicken_stats/chicken_stats.gd" id="1_5okfq"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_rolus"]
 [ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="2_7na05"]
-[ext_resource type="Script" uid="uid://bnu30qphqw85k" path="res://ui/settings_menu/close_button.gd" id="2_yykr0"]
 [ext_resource type="PackedScene" uid="uid://cnj4tl7mxfwi6" path="res://ui/chicken_stats/chicken_equipment_container.tscn" id="5_l08ed"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="6_l08ed"]
 
@@ -79,7 +78,6 @@ custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 theme_type_variation = &"SettingsExitButton"
 text = "X"
-script = ExtResource("2_yykr0")
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2

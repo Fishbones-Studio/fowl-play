@@ -10,6 +10,7 @@ func _generate_name() -> String:
 
 
 func _tick(_delta: float) -> Status:
+	if agent.enemy_weapon_controller._cooldown > 0.0: return RUNNING
 	if agent.enemy_weapon_controller.use_weapon():
 		return SUCCESS
 	return FAILURE

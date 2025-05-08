@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_odgku"]
 [ext_resource type="Script" uid="uid://bb32gka6x1oe8" path="res://level/arena/props/hazards/bleed_hazard.gd" id="2_fdjq5"]
-[ext_resource type="PackedScene" uid="uid://bvsgttl65srik" path="res://level/arena/props/hazards/saws/ground_saw.glb" id="3_fdjq5"]
+[ext_resource type="PackedScene" uid="uid://bvsgttl65srik" path="res://level/arena/props/hazards/saws/art/ground_saw.glb" id="3_fdjq5"]
 
 [sub_resource type="Animation" id="Animation_w4h7w"]
 length = 0.001
