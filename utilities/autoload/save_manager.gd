@@ -197,3 +197,4 @@ func _apply_graphics_settings(settings: Dictionary) -> void:
 	viewport.use_taa = settings["taa"]
 	viewport.scaling_3d_scale = settings["render_scale"]
 	viewport.scaling_3d_mode = settings["render_mode"]
+	DisplayUtils.center_window(window)
