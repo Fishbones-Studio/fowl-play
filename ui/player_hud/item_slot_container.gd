@@ -31,6 +31,7 @@ func _ready() -> void:
 			if item_slot and controller_slot:
 				item_slot.active = true
 				controller_slot.visible = true
+				controller_slot.input_action = "attack" 
 				print("Activated item slot: ", item_slot)
 			else:
 				push_warning("No item slot found at index: ", index)
@@ -48,7 +49,8 @@ func _ready() -> void:
 			var controller_slot: Control = get_child(index * 2 + 1) as Control
 			if item_slot and controller_slot:
 				item_slot.active = false
-				controller_slot.visible = false
+				controller_slot.visible = true
+				controller_slot.input_action = "switch_weapon" 
 				print("Deactivated item slot: ", item_slot)
 			else:
 				push_warning("No item slot found at index: ", index)
@@ -88,7 +90,7 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 	elif item == abilities[1]:  # Second ability slot
 		return "ability_two"
 	else:
-		return ""  # Not equipped or unknown type
+		return ""  # Not equipped
 
 func _init_item_slots(items: Array) -> void:
 	for i in range(items.size()):
