@@ -234,6 +234,7 @@ func _finalize_remapping():
 	SaveManager.action_to_remap = ""
 	_create_action_list()
 
+	SignalManager.keybind_changed.emit()
 
 func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
 	# Helper to safely set text on labels with fallback

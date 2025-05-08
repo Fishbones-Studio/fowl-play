@@ -6,6 +6,16 @@ const ITEM_CONTROLLER_ICON_SLOT: PackedScene = preload("uid://yq62iccynmnp")
 
 
 func _ready() -> void:
+	# Add this to ensure ALL controller slots update on keybind changes
+	SignalManager.keybind_changed.connect(
+		func():
+			for i in range(get_child_count() / 2):
+				var item_slot = get_child(i * 2) as UiItemSlot
+				var controller_slot = get_child(i * 2 + 1) as Control
+				if controller_slot:
+					controller_slot.input_action = _get_input_action_for_item(item_slot.item)
+	)
+	
 	SignalManager.activate_item_slot.connect(
 		func(item: BaseResource):
 			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
@@ -55,6 +65,8 @@ func _ready() -> void:
 	)
 	
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
+
+
 
 # Returns the input action based on the item's equipped type
 func _get_input_action_for_item(item: BaseResource) -> String:
