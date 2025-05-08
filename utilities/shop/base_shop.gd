@@ -3,7 +3,7 @@
 class_name BaseShop
 extends Control
 
-@export var max_items: int = 8
+@export_range(4, 8) var max_items: int = 8
 @export var item_database: BaseDatabase
 
 var shop_items: Array[BaseResource]
@@ -58,8 +58,6 @@ func _refresh_shop() -> void:
 	var selected_items: Array[BaseResource] = _get_shop_selection(
 		available_items, items_to_show
 	)
-	
-	selected_items.shuffle()
 	
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
@@ -127,24 +125,37 @@ func _get_weighted_random_items(
 	return selected
 
 func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
-	var selected: Array[BaseResource] = []
-	var selected_types: Array[ItemEnums.ItemTypes ] = []
-	
+	var items_by_type : Dictionary[ItemEnums.ItemTypes, Array]= {}
 	for item in items:
-		if item.type in selected_types:
-			continue
-		selected.append(item)
-		selected_types.append(item.type)
-		
+		if not items_by_type.has(item.type):
+			items_by_type[item.type] = []
+		items_by_type[item.type].append(item)
+
+	var selected: Array[BaseResource] = []
+	for type in items_by_type.keys():
+		var typed_items : Array[BaseResource] = []
+		# Convert to Array[BaseResource] for type safety
+		for item in items_by_type[type]:
+			if not item is BaseResource:
+				push_error("Item is not a BaseResource: ", item)
+				continue
+			else:
+				typed_items.append(item)
+
+		var chosen := _get_weighted_random_items(typed_items, 1)
+		if chosen.size() > 0:
+			selected.append(chosen[0])
 	return selected
 
-
+# Fill the remaining slots with random items from the pool
 func _fill_remaining(
 	selected_items: Array[BaseResource],
 	all_items: Array[BaseResource],
 	count: int
 ) -> Array[BaseResource]:
-	var pool := all_items.duplicate()
+	# Making a copy of the pool to avoid modifying the original
+	var pool: Array = all_items.duplicate()
+	# Remove already selected items from the pool
 	for item in selected_items:
 		if item in pool: # Ensure item is actually in pool before erasing
 			pool.erase(item)
@@ -155,8 +166,11 @@ func _fill_remaining(
 func _get_shop_selection(
 	items: Array[BaseResource], current_max_items: int
 ) -> Array[BaseResource]:
+	# Select at least one item per type, so the player always has some variety
 	var selected_by_type: Array[BaseResource] = _select_one_per_type(items)
+	# If we have enough items, return them
 	var remaining_count = max(0, current_max_items - selected_by_type.size())
+	# Else, fill the rest with random items
 	return _fill_remaining(selected_by_type, items, remaining_count)
 
 
