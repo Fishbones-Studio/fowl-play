@@ -1,8 +1,8 @@
 extends Ability
 
 @export var descent_velocity: float = -50.0
-@export var knockback_force: float = 200
-@export var knockback_force_upwards: float = 10
+@export var knockback_force: float = 1
+@export var knockback_force_upwards: float = 1
 
 var damage: float:
 	get:
@@ -37,12 +37,15 @@ func _on_cooldown_timer_timeout() -> void:
 
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
-	if body.collision_layer == 2: # if target body is player
-		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
-	if body.collision_layer == 4: # if target body is enemy
-		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
-
-	_apply_knockback(body)
+	 # If target body is player or enemy
+	if body.collision_layer in [2, 4]:
+		SignalManager.weapon_hit_target.emit(
+			body,
+			damage,
+			DamageEnums.DamageTypes.NORMAL,
+			{"knockback": _calculate_knockback(body)
+			},
+		)
 
 	cpu_particles.emitting = true
 	_particles_emitted = true
@@ -64,17 +67,20 @@ func _physics_process(_delta: float) -> void:
 		_toggle_collision_masks(false, hit_area)
 
 
-func _apply_knockback(body: Node3D) -> void:
+func _calculate_knockback(body: Node3D) -> Vector3:
 	if body is CharacterBody3D:
-		body.velocity.x = 0
-		body.velocity.z = 0
-
 		var dir: Vector3 = ability_holder.global_position.direction_to(body.global_position)
 
 		var knockback: Vector3 = Vector3(
-			dir.x * knockback_force,
-			dir.y * knockback_force_upwards,
-			dir.z * knockback_force
+			sign(dir.x) * knockback_force,
+			max(1, sign(dir.y)) * knockback_force_upwards,
+			sign(dir.z) * knockback_force,
 		)
-		# Knockback is a bit scuffed due to enemy not having a hurt state implemented.
-		body.velocity = knockback * ability_holder.stats.weight
+
+		return Vector3(
+				knockback.x,
+				knockback.y * max(ability_holder.stats.weight, 7),
+				knockback.z,
+				)
+
+	return Vector3.ZERO
