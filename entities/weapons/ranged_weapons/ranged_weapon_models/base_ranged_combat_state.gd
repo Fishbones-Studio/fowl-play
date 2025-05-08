@@ -25,7 +25,7 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 	pass
 
 
-func process_raycast_hit(raycast: RayCast3D) -> void:
+func process_raycast_hit(raycast: RayCast3D, damage_type : DamageEnums.DamageTypes = DamageEnums.DamageTypes.NORMAL) -> void:
 	# make the raycast immediately check for collisions
 	raycast.force_raycast_update()
 
@@ -37,4 +37,4 @@ func process_raycast_hit(raycast: RayCast3D) -> void:
 			DebugDrawer.draw_debug_impact(raycast.get_collision_point(), collider)
 			print("Colliding with:" + collider.name)
 			# TODO: hit marker
-			SignalManager.weapon_hit_target.emit(collider, weapon.entity_stats.calc_scaled_damage(weapon.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
+			SignalManager.weapon_hit_target.emit(collider, weapon.entity_stats.calc_scaled_damage(weapon.current_weapon.damage), damage_type)
