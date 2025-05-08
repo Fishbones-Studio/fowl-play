@@ -1,8 +1,8 @@
 extends Ability
 
 @export var descent_velocity: float = -50.0
-@export var knockback_force: float = 200
-@export var knockback_force_upwards: float = 10
+@export var knockback_force: float = 1
+@export var knockback_force_upwards: float = 1
 @export var damage_scaler: int = 9
 
 
