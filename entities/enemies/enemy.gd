@@ -6,6 +6,7 @@ signal damage_taken
 @export var stats: LivingEntityStats
 @export var type: EnemyEnums.EnemyTypes
 @export var enemy_model: Node3D
+@export_dir var dialogue_path: String
 
 @onready var health_bar: HealthBar = %HealthBar
 @onready var bt_player: BTPlayer = $BTPlayer

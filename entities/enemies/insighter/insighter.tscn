@@ -16,6 +16,7 @@ height = 3.5
 [node name="Insighter" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_wehyl")]
 stats = ExtResource("2_1dq5o")
 enemy_model = NodePath("insighter")
+dialogue_path = "res://entities/enemies/insighter/dialogue"
 
 [node name="insighter" parent="." index="0" instance=ExtResource("2_e0uej")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)

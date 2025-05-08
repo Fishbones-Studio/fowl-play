@@ -18,6 +18,7 @@ collision_mask = 9
 stats = ExtResource("2_fjbia")
 type = 1
 enemy_model = NodePath("ball_chicken")
+dialogue_path = "res://entities/enemies/bob/dialogue"
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 2.87023, 0)
