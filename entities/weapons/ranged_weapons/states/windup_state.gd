@@ -2,6 +2,11 @@ extends BaseRangedCombatState
 
 var _windup_timer: float = 0.0
 
+func _init()-> void:
+	state_type = WeaponEnums.WeaponState.WINDUP
+	if ANIMATION_NAME.is_empty():
+		ANIMATION_NAME = "Windup"
+
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	_windup_timer = 0.0
