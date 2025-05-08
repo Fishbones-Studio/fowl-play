@@ -8,7 +8,7 @@ script = ExtResource("1_dllc3")
 cooldown = 10.0
 name = "Fire Ball"
 purchasable = true
-drop_chance = 10
+drop_chance = 20
 cost = 300
 currency_type = 0
 description = "The user launches a fiery projectile straight ahead, dealing damage to targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], growing in size and intensity—the longer it remains on the arena, the more powerful its damage becomes. Targets caught within the fireball take damage every [color=\"yellow\"]0.2 seconds[/color]. This ability has a cooldown of %s."
