@@ -3,14 +3,14 @@
 class_name BaseShop
 extends Control
 
-@export_range(4, 8) var max_items: int = 8
+@export_range(4, 8) var max_items: int
 @export var item_database: BaseDatabase
 
 var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
 var check_inventory: bool = true
 var prevent_duplicates: bool = true
-var actual_max_items: int = max_items
+var actual_max_items: int
 
 var current_previewed_item: BaseResource = null
 
@@ -33,6 +33,8 @@ func _ready() -> void:
 			if visible:
 				_setup_controller_navigation()
 	)
+
+	actual_max_items = max_items
 
 	SignalManager.purchase_completed.connect(_setup_controller_navigation)
 
