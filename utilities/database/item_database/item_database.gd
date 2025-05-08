@@ -39,13 +39,13 @@ static func load_scene_resources(
 
 		if tres_file != "":
 			var resource: Resource = load(subdir_path.path_join(tres_file))
-			if resource is BaseResource and resource.purchasable:
+			if resource is BaseResource:
 				temp_items.append(resource)
 		elif tscn_file != "":
 			var scene := load(subdir_path.path_join(tscn_file)) as PackedScene
 			var instance: Node = scene.instantiate()
 			if instance.has_method("get"):
 				var hidden_resource = instance.get(resource_property)
-				if hidden_resource is BaseResource and hidden_resource.purchasable:
+				if hidden_resource is BaseResource:
 					temp_items.append(hidden_resource)
 			instance.queue_free()

@@ -9,6 +9,7 @@ damage = 10
 windup_time = 0.2
 attack_duration = 0.4
 cooldown_time = 0.3
+loop_animation = false
 name = "Peck"
 purchasable = false
 drop_chance = 0

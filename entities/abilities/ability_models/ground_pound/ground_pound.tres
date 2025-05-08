@@ -8,7 +8,7 @@ script = ExtResource("1_ve8n7")
 cooldown = 5.0
 name = "Ground Pound"
 purchasable = true
-drop_chance = 50
+drop_chance = 40
 cost = 125
 currency_type = 0
 description = "The user performs a powerful ground pound, dealing damage based on Weight and Defense within a [color=yellow]10 meter[/color] radius and knocking targets back. Can only be used while airborne and has a cooldown of %s."
