@@ -17,8 +17,8 @@ size = Vector2(1, 1)
 [node name="GroundPound" instance=ExtResource("1_qn7uh")]
 script = ExtResource("1_pv44g")
 descent_velocity = -50.0
-knockback_force = 200.0
-knockback_force_upwards = 10.0
+knockback_force = 1.0
+knockback_force_upwards = 1.0
 current_ability = ExtResource("2_qn7uh")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
