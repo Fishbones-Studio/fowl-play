@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=2 format=3 uid="uid://xugbt3rir6fn"]
+[gd_resource type="Resource" script_class="RangedWeaponResource" load_steps=3 format=3 uid="uid://xugbt3rir6fn"]
 
 [ext_resource type="Script" uid="uid://dm0sr7j8y5j30" path="res://entities/weapons/ranged_weapons/ranged_weapon_resource.gd" id="1_ddm8g"]
+[ext_resource type="Texture2D" uid="uid://bogv88bhar46o" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather.png" id="1_j6iuc"]
 
 [resource]
 script = ExtResource("1_ddm8g")
-damage = 5
+damage = 8
 windup_time = 0.0
 attack_duration = 0.0
 cooldown_time = 2.0
@@ -21,5 +22,6 @@ currency_type = 0
 description = "description = Deals %s Base Damage per bullet. The attack is instantanious, with a max range of %s, then enters a cooldown state for %s.
 This weapon deals [color=orange]TRUE DAMAGE[/color] and [color=orange]PENETRATES ARMOR[/color].
 This weapon %s and %s."
+icon = ExtResource("1_j6iuc")
 model_uid = "uid://qj6ygx6ak84a"
 metadata/_custom_type_script = "uid://dm0sr7j8y5j30"

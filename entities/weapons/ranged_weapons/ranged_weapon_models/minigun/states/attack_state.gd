@@ -82,7 +82,7 @@ func _create_raycast(origin: Vector3, direction: Vector3, max_range: float) -> R
 	var raycast := RayCast3D.new()
 	raycast.enabled = true
 	raycast.target_position = direction * max_range
-	raycast.collision_mask = 0b0110 # check for collisions on layer 2 (player) and layer 3 (enemy)
+	raycast.collision_mask = 0b0111 # check for collisions on layer 1 (world), layer 2 (player) and layer 3 (enemy)
 
 	# Add to physics space first
 	get_tree().root.add_child(raycast)

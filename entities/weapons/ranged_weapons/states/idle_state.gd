@@ -1,4 +1,4 @@
-extends BaseRangedCombatState
+class_name RangedIdleState extends BaseRangedCombatState
 
 func _init()-> void:
 	state_type = WeaponEnums.WeaponState.IDLE

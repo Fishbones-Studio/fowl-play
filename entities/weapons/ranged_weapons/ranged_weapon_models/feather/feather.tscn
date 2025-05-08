@@ -1,25 +1,65 @@
-[gd_scene load_steps=7 format=3 uid="uid://qj6ygx6ak84a"]
+[gd_scene load_steps=13 format=3 uid="uid://qj6ygx6ak84a"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_t6w12"]
 [ext_resource type="Resource" uid="uid://xugbt3rir6fn" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/feather.tres" id="2_j4etn"]
-[ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="3_umcfy"]
+[ext_resource type="PackedScene" uid="uid://bv13jhnjs0eb6" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather.glb" id="3_aj7fy"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="4_aj7fy"]
+[ext_resource type="Script" uid="uid://c3b6bookdmh70" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/states/idle_state.gd" id="4_ef5ly"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="5_ef5ly"]
 [ext_resource type="Script" uid="uid://cnuya14h82qcq" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/states/attack_state.gd" id="5_umcfy"]
+
+[sub_resource type="Curve" id="Curve_aj7fy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.972973, 0.41573), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ef5ly"]
+curve = SubResource("Curve_aj7fy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c1ggn"]
+lifetime_randomness = 0.2
+direction = Vector3(1, 0, -10)
+spread = 25.0
+initial_velocity_min = 6.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_ef5ly")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aj7fy"]
+transparency = 1
+albedo_color = Color(0.796078, 0.796078, 0.796078, 0.494118)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wf8ey"]
+material = SubResource("StandardMaterial3D_aj7fy")
+size = Vector3(0.05, 0.5, 0.05)
+subdivide_width = 10
+subdivide_height = 10
+subdivide_depth = 10
 
 [node name="Feather" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_t6w12")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_j4etn")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." index="0"]
-size = Vector3(0.2, 0.2, 0.2)
+[node name="feather" parent="." index="0" instance=ExtResource("3_aj7fy")]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0)
+
+[node name="WindEffect" type="GPUParticles3D" parent="feather" index="1"]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, 0, -3.36841, 1.47238e-07)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_c1ggn")
+draw_pass_1 = SubResource("BoxMesh_wf8ey")
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
 weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
-script = ExtResource("3_umcfy")
+script = ExtResource("4_ef5ly")
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
 script = ExtResource("4_aj7fy")

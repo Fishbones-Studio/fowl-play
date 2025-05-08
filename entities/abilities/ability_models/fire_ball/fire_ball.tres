@@ -7,6 +7,7 @@
 script = ExtResource("1_dllc3")
 cooldown = 10.0
 name = "Fire Ball"
+purchasable = true
 drop_chance = 10
 cost = 300
 currency_type = 0
