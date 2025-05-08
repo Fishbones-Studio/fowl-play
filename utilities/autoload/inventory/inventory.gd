@@ -155,6 +155,26 @@ func get_equipped_item(
 			push_error("Unknown item type: ", item_type)
 			return null
 
+func get_equipped_items(item_type: ItemEnums.ItemTypes) -> Array[BaseResource]:
+	var result: Array[BaseResource] = []
+
+	match item_type:
+		ItemEnums.ItemTypes.MELEE_WEAPON:
+			if inventory_data.melee_weapon_slot != null:
+				result.append(inventory_data.melee_weapon_slot)
+		ItemEnums.ItemTypes.RANGED_WEAPON:
+			if inventory_data.ranged_weapon_slot != null:
+				result.append(inventory_data.ranged_weapon_slot)
+		ItemEnums.ItemTypes.ABILITY:
+			if inventory_data.ability_slot_one != null:
+				result.append(inventory_data.ability_slot_one)
+			if inventory_data.ability_slot_two != null:
+				result.append(inventory_data.ability_slot_two)
+		_:
+			push_error("Unknown item type for get_equipped_items: ", item_type)
+
+	return result
+
 
 ## Inventory Queries
 func add_item(

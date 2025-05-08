@@ -3,6 +3,8 @@ extends HBoxContainer
 const ITEM_SLOT: PackedScene = preload("uid://ckypq3131wkcv")
 const ITEM_CONTROLLER_ICON_SLOT: PackedScene = preload("uid://yq62iccynmnp")
 
+
+
 func _ready() -> void:
 	SignalManager.activate_item_slot.connect(
 		func(item: BaseResource):
@@ -54,45 +56,45 @@ func _ready() -> void:
 	
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
+# Returns the input action based on the item's equipped type
+func _get_input_action_for_item(item: BaseResource) -> String:
+	if item == null:
+		return ""
+	
+	# Check if item is equipped as melee/ranged/ability
+	var melee_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.MELEE_WEAPON)
+	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
+	var abilities = [
+		Inventory.get_equipped_item(ItemEnums.ItemTypes.ABILITY, 0),
+		Inventory.get_equipped_item(ItemEnums.ItemTypes.ABILITY, 1)
+	]
+	
+	if item in melee_items:
+		return "attack"
+	elif item in ranged_items:
+		return "attack"
+	elif item == abilities[0]:  # First ability slot
+		return "ability_one"
+	elif item == abilities[1]:  # Second ability slot
+		return "ability_two"
+	else:
+		return ""  # Not equipped or unknown type
 
 func _init_item_slots(items: Array) -> void:
-	print("Initializing item slots with items: ", items)
-	# Clear the container
-	for child in get_children():
-		child.queue_free()
-
-	# Create item slots and corresponding controller icons
 	for i in range(items.size()):
 		var item = items[i]
 		if not item is BaseResource:
-			if item != null: # Only warn if it's not null but wrong type
-				push_warning("Item at index ", i, " is not a BaseResource.")
-			continue # Skip null or wrong type items
-
-		# Create regular item slot
-		var item_slot: UiItemSlot = ITEM_SLOT.instantiate() as UiItemSlot
-		if item_slot:
-			add_child(item_slot)
-			item_slot.item = item
-		else:
-			push_error("Failed to instantiate or cast ITEM_SLOT scene.")
-			continue # Skip if instantiation fails
-
-		# Create controller icon slot
-		var controller_slot: Control = ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
-		if controller_slot:
-			add_child(controller_slot)
-			
-			# Set the input action based on slot position
-			match i:
-				2:  # 3rd slot (index 2)
-					controller_slot.input_action = "ability_one"
-				3:  # 4th slot (index 3)
-					controller_slot.input_action = "ability_two"
-				_:  # Other slots
-					controller_slot.input_action = ""  # or set a default action
-		else:
-			push_error("Failed to instantiate or cast ITEM_CONTROLLER_ICON_SLOT scene.")
-			# Remove the item slot we just added if controller slot failed
-			item_slot.queue_free()
 			continue
+
+		# Create slots as before...
+		var item_slot := ITEM_SLOT.instantiate() as UiItemSlot
+		var controller_slot := ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
+		if !item_slot or !controller_slot:
+			continue
+			
+		add_child(item_slot)
+		add_child(controller_slot)
+		item_slot.item = item
+		
+		# Dynamic action assignment
+		controller_slot.input_action = _get_input_action_for_item(item)
