@@ -34,14 +34,8 @@ func _update_controller_icon() -> void:
 	if not is_inside_tree() or not controller_icon or input_action.is_empty():
 		return
 
-	var icon_path = "res://resources/controller-icons/%s.tres" % input_action.to_lower()
-	var icon_resource = ResourceLoader.load(icon_path, "Texture2D", ResourceLoader.CACHE_MODE_IGNORE)
-	
-	if icon_resource and icon_resource is Texture2D:
-		controller_icon.texture = icon_resource  # Apply the icon texture
-	else:
-		print("Failed to load icon for: ", input_action)
-		controller_icon.texture = null  # Clear icon if loading fails
+	var icon_texture: Texture2D = IconManager.get_icon_texture(input_action)
+	controller_icon.texture = icon_texture
 
 # Updates the visibility of the "Hold" label and adjusts icon position
 func _update_hold_label() -> void:

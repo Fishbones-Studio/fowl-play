@@ -30,12 +30,6 @@ func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
 func _update_interact_icon() -> void:
 	if not is_instance_valid(interact_icon):
 		return
-		
-	var icon_path = "res://resources/controller-icons/interact.tres"
-	var icon_resource = ResourceLoader.load(icon_path, "Texture2D", ResourceLoader.CACHE_MODE_IGNORE)
-	
-	if icon_resource and icon_resource is Texture2D:
-		interact_icon.texture = icon_resource
-	else:
-		print("Failed to load interact icon")
-		interact_icon.texture = null
+
+	var icon_texture: Texture2D = IconManager.get_icon_texture("interact")
+	interact_icon.texture = icon_texture

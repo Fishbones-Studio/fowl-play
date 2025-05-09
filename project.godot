@@ -31,6 +31,7 @@ DebugDrawer="*res://utilities/autoload/debug_drawer.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+IconManager="*res://utilities/autoload/icon_manager.gd"
 
 [display]
 
