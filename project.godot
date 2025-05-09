@@ -34,6 +34,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
 
+runtime/balloon_path="uid://cfg06xxv1turn"
 runtime/advanced/ignore_missing_state_values=true
 
 [display]
