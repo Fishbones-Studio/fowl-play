@@ -12,7 +12,6 @@ var is_immobile: bool = false
 var _knockback: Vector3 = Vector3.ZERO
 
 @onready var health_bar: HealthBar = %HealthBar
-@onready var bt_player: BTPlayer = $BTPlayer
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
