@@ -120,6 +120,7 @@ func _enter_concluding() -> void:
 		print("all rounds completed, back to poultry man menu")
 		GameManager.prosperity_eggs += GameManager.arena_completion_reward
 		GameManager.feathers_of_rebirth += 5 # TODO: improve later
+		SignalManager.add_ui_scene.emit(UIEnums.UI.VICTORY_SCREEN)
 		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 		# Don't proceed further in this function if game is ending
 		return
