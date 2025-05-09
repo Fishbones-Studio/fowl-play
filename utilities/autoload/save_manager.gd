@@ -96,7 +96,12 @@ func save_currency(feathers: int, eggs: int) -> void:
 		", Prosperity Eggs: ",
 		eggs
 	)
-
+	
+# Helper function to increment rounds_won
+func save_rounds_one_by_one() -> void:
+	_ensure_game_data_loaded()
+	var current_rounds_won: int = get_loaded_rounds_won()
+	save_rounds_won(current_rounds_won + 1)
 
 func save_rounds_won(rounds: int) -> void:
 	_ensure_game_data_loaded()
@@ -106,6 +111,15 @@ func save_rounds_won(rounds: int) -> void:
 	_loaded_game_data["rounds_won"] = rounds
 	print("Rounds won saved: ", rounds)
 
+# Helper function to increment enemy encounters
+func save_enemy_encounter(enemy_name: String) -> void:
+	_ensure_game_data_loaded()
+	var encounters: Dictionary[String, int] = get_loaded_enemy_encounters()
+	if encounters.has(enemy_name):
+		encounters[enemy_name] += 1
+	else:
+		encounters[enemy_name] = 1
+	save_enemy_encounters(encounters)
 
 func save_enemy_encounters(encounters: Dictionary[String, int]) -> void:
 	_ensure_game_data_loaded()
