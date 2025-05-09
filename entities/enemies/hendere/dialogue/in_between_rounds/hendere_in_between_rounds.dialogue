@@ -1,6 +1,10 @@
 ~ start
-Hendere: [[Oh, hello there, my little feather-friend|Fancy seeing you here, my dear|Well, look who it is... my favorite little fighter]]!
-Hendere: You did so well in that last round... **just for me**, right?
+if SaveManager.get_enemy_encounter_count("hendere") > 0:
+	Hendere: [[Oh, it's you again, my little obsession|Back for more, darling?|You just can't stay away, can you?]]
+	Hendere: You fought so well last time... **for me**, right?
+else:
+	Hendere: [[Oh, hello there, my little feather-friend|Fancy seeing you here, my dear|Well, look who it is... my favorite little fighter]]!
+	Hendere: You did so well in that last round... **just for me**, right?
 - Just for you, Hendere.
 	Hendere: [[Hehe, I knew you understood|Of course you did! You're the only one who matters to me|Good. Don't ever forget that]].
 	Hendere: [[Now, about those other chickens...|Did you see how they looked at you?|They seemed a little too friendly...]]
@@ -21,14 +25,14 @@ Hendere: You did so well in that last round... **just for me**, right?
 	=> continue_or_end
 
 ~ continue_or_end
-Hendere: [[So, what should we talk about next?|Anything else on your mind, dear?|Is there anything else you want to tell me?]]
-- Tell me about yourself.
-	Hendere: [[About me? There's not much to tell... except that I love you|What do you want to know? As long as it's about us|My life only became interesting when I met you]].
-	Hendere: [[I just want to be with you, always|I dream about our future together|We'll be together forever, won't we?]].
-	=> continue_or_end
-- What do you think of the other fighters?
-	Hendere: [[Them? They're nothing compared to you|They're just obstacles in our way|I don't like them. They look at you too much]].
-	Hendere: [[Don't worry about them, I'll make sure they don't bother you anymore|They'll learn not to get close to what's mine|Just ignore them, okay?]].
-	=> continue_or_end
-- Let's end this conversation. => END
-- Start over. => start
+	Hendere: [[So, what should we talk about next?|Anything else on your mind, dear?|Is there anything else you want to tell me?]]
+	- Tell me about yourself.
+		Hendere: [[About me? There's not much to tell... except that I love you|What do you want to know? As long as it's about us|My life only became interesting when I met you]].
+		Hendere: [[I just want to be with you, always|I dream about our future together|We'll be together forever, won't we?]].
+		=> continue_or_end
+	- What do you think of the other fighters?
+		Hendere: [[Them? They're nothing compared to you|They're just obstacles in our way|I don't like them. They look at you too much]].
+		Hendere: [[Don't worry about them, I'll make sure they don't bother you anymore|They'll learn not to get close to what's mine|Just ignore them, okay?]].
+		=> continue_or_end
+	- Let's end this conversation. => END
+	- Start over. => start
