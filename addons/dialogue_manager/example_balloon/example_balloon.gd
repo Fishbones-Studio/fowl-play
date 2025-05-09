@@ -1,4 +1,4 @@
-class_name DialogueBalloon extends Control
+class_name DialogueManagerExampleBalloon extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
 ## The action to use for advancing the dialogue
@@ -49,7 +49,7 @@ var mutation_cooldown: Timer = Timer.new()
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 
 ## The menu of responses
-@onready var responses_menu: ResponsesMenu = %ResponsesMenu
+@onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
 
 
 func _ready() -> void:
@@ -78,9 +78,9 @@ func _notification(what: int) -> void:
 		if visible_ratio < 1:
 			dialogue_label.skip_typing()
 
+
 ## Start some dialogue
 func start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
-	self.mouse_filter = Control.MOUSE_FILTER_STOP
 	temporary_game_states = [self] + extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource

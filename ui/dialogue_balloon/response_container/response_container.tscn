@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbumw5xcjq0tn"]
+
+[ext_resource type="Script" uid="uid://cv74hb3amkor0" path="res://ui/dialogue_balloon/response_container/response_container.gd" id="1_y266i"]
+
+[node name="ResponseContainer" type="MarginContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_y266i")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_type_variation = &"SettingsHeaderContainer"
+
+[node name="ResponseButton" type="Button" parent="CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"SettingsExitButton"
+text = "Response example"

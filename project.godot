@@ -30,7 +30,7 @@ UIManager="*res://utilities/autoload/ui_manager.gd"
 DebugDrawer="*res://utilities/autoload/debug_drawer.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DialogueManager="*res://utilities/autoload/dialogue_manager.gd"
 
 [dialogue_manager]
 

@@ -380,9 +380,6 @@ func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_vis
 		if not _is_any_visible():
 			previous_mouse_mode = Input.mouse_mode
 
-		#if is_instance_valid(current_ui):
-			#current_ui.visible = false
-
 		swap_ui(current_ui, new_ui_node)
 
 		new_ui_node.visible = true
