@@ -1,41 +1,37 @@
 extends Control
 
-# Exposed variable to set the input action name from the editor
 @export var input_action: String = "":
 	set(value):
 		if input_action != value:
 			input_action = value
-			_update_controller_icon()  # Update icon when input action changes
+			_update_controller_icon()
 
-# References the Sprite2D node for displaying the controller icon
-@onready var controller_icon: Sprite2D = %Sprite2D
-# Stores the original X position of the controller icon
-@onready var original_x_position: float = controller_icon.position.x 
-
-# Exposed variable to toggle showing a "Hold" label
 @export var show_hold_label: bool = false:
 	set(value):
 		if show_hold_label != value:
 			show_hold_label = value
-			_update_hold_label()  # Update label visibility and icon position
+			_update_hold_label()
 
-# Called when the node enters the scene tree
+@onready var controller_icon: Sprite2D = %Sprite2D
+@onready var original_x_position: float = controller_icon.position.x
+
 func _ready() -> void:
-	SignalManager.keybind_changed.connect(_on_keybind_changed)  # Connect to keybind change signal
-	_update_controller_icon()  # Set the initial controller icon
-	_update_hold_label()       # Set the initial label visibility
+	SignalManager.keybind_changed.connect(_on_keybind_changed)
+	_update_controller_icon()
+	_update_hold_label()
 
-# Called when the keybind is changed
 func _on_keybind_changed() -> void:
-	_update_controller_icon()  # Refresh the controller icon
+	# clear cache and reload this icon
+	IconManager.clear_cache()
+	_update_controller_icon()
 
-# Updates the controller icon based on the input action
 func _update_controller_icon() -> void:
 	if not is_inside_tree() or not controller_icon or input_action.is_empty():
 		return
 
-	var icon_texture: Texture2D = IconManager.get_icon_texture(input_action)
-	controller_icon.texture = icon_texture
+	var tex: Texture2D = IconManager.get_icon_texture(input_action)
+	controller_icon.texture = tex
+	controller_icon.visible = tex != null
 
 # Updates the visibility of the "Hold" label and adjusts icon position
 func _update_hold_label() -> void:
