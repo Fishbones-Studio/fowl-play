@@ -1,3 +1,4 @@
+@tool
 class_name LivingEntityStats
 extends Resource
 
@@ -12,11 +13,15 @@ extends Resource
 @export_category("Factors")
 @export var health_regen: int = 1
 @export var stamina_regen: int = 5
-@export var weight_factor: float = 0.07 # Controls slowdown strength
-@export var k_scaler : float = 100.0 # Controlls scaling for damage and defense
+@export var weight_factor: float = 0.07 ## Controls slowdown strength
+@export var k_scaler : float = 100.0 ## Controlls scaling for damage and defense
 
 @export_group("Holder")
 @export var is_player : bool = false
+## All names are stored lowercase and must be unique. Use snake_case
+@export var name : StringName = "" :
+	set(value):
+		name = value.to_lower()
 
 var current_health: float:
 	set(value):

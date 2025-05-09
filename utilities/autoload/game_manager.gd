@@ -47,6 +47,7 @@ var current_round: int = 1:
 		# If the round progresses, add more prosperity eggs
 		if value > current_round:
 			# Use the setter to ensure signal emission and inventory update
+			SaveManager.save_rounds_one_by_one()
 			self.prosperity_eggs += arena_round_reward * value
 		current_round = value
 
