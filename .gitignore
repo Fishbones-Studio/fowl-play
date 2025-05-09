@@ -23,7 +23,7 @@ mono_crash.*.json
 *.vsix
 
 # Ignore everything in any addons directory
-**/addons/*
+#**/addons/*
 
 # Specifically allow markdown files in any addons directory
 !**/addons/*.md
