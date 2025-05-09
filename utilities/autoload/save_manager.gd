@@ -1,27 +1,25 @@
 ################################################################################
 ## Handles game data persistance, including:
-## - Save Game Data (Stats, Upgrades, Rounds Won, Enemy Encounters)
+## - Save Game Data (Stats, Upgrades, Rounds Won, Enemy Encounters, Currency)
 ################################################################################
 extends Node
 
 const SAVE_GAME_PATH: String = "user://save_game.cfg"
 const PLAYER_SAVE_SECTION: String = "player"
 const WORLD_SAVE_SECTION: String = "world"
+const CURRENCY_SAVE_SECTION: String = "currency"
 
 # Default player stats resource
 const DEFAULT_PLAYER_STATS_PATH: String = "uid://bwhuhbesdlyu5"
 
-
 # Cache for loaded game data
 var _loaded_game_data: Dictionary = {}
-
 
 func _load_game_config() -> ConfigFile:
 	var config := ConfigFile.new()
 	# load() returns an Error enum, but we handle file-not-found in load_game_data
 	config.load(SAVE_GAME_PATH)
 	return config
-
 
 func _save_game_config(config: ConfigFile) -> void:
 	var err: Error = config.save(SAVE_GAME_PATH)
@@ -30,11 +28,9 @@ func _save_game_config(config: ConfigFile) -> void:
 			"Failed to save game config: %s" % error_string(err)
 		)
 
-
 func _ensure_game_data_loaded() -> void:
 	if _loaded_game_data.is_empty():
 		load_game_data()
-
 
 func _get_default_player_stats() -> LivingEntityStats:
 	var default_stats_res: Resource = ResourceLoader.load(
@@ -81,8 +77,8 @@ func save_player_upgrades(
 func save_currency(feathers: int, eggs: int) -> void:
 	_ensure_game_data_loaded()
 	var config := _load_game_config()
-	config.set_value(PLAYER_SAVE_SECTION, "f_o_r", feathers)
-	config.set_value(PLAYER_SAVE_SECTION, "p_eggs", eggs)
+	config.set_value(CURRENCY_SAVE_SECTION, "f_o_r", feathers)
+	config.set_value(CURRENCY_SAVE_SECTION, "p_eggs", eggs)
 	_save_game_config(config)
 	_loaded_game_data["f_o_r"] = feathers
 	_loaded_game_data["p_eggs"] = eggs
@@ -92,7 +88,7 @@ func save_currency(feathers: int, eggs: int) -> void:
 		", Prosperity Eggs: ",
 		eggs
 	)
-	
+
 # Helper function to increment rounds_won
 func save_rounds_one_by_one() -> void:
 	_ensure_game_data_loaded()
@@ -215,7 +211,7 @@ func load_game_data() -> Dictionary:
 						"Invalid enemy encounter entry in save: Key '%s', Value '%s'. Skipping."
 						% [k_var, v_var]
 					)
-					all_valid = false # Mark that at least one entry was bad
+					all_valid = false
 			if not all_valid and not parsed_encounters.is_empty():
 				push_warning(
 					"Some enemy encounter entries were invalid but others were loaded."
@@ -232,12 +228,12 @@ func load_game_data() -> Dictionary:
 				)
 			final_enemy_encounters = {} 
 
-		# Load currency
+		# Load currency from currency section
 		final_feathers_of_rebirth = config.get_value(
-			PLAYER_SAVE_SECTION, "f_o_r", 0
+			CURRENCY_SAVE_SECTION, "f_o_r", 0
 		) as int
 		final_prosperity_eggs = config.get_value(
-			PLAYER_SAVE_SECTION, "p_eggs", 200
+			CURRENCY_SAVE_SECTION, "p_eggs", 200
 		) as int
 
 	if GameManager:
@@ -271,10 +267,10 @@ func _create_default_save_file(
 	var config := ConfigFile.new()
 	config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
 	config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
-	config.set_value(PLAYER_SAVE_SECTION, "f_o_r", feathers)
-	config.set_value(PLAYER_SAVE_SECTION, "p_eggs", eggs)
 	config.set_value(WORLD_SAVE_SECTION, "rounds_won", rounds_won)
 	config.set_value(WORLD_SAVE_SECTION, "enemy_encounters", enemy_encounters)
+	config.set_value(CURRENCY_SAVE_SECTION, "f_o_r", feathers)
+	config.set_value(CURRENCY_SAVE_SECTION, "p_eggs", eggs)
 	_save_game_config(config)
 
 func reset_game_data() -> void:
@@ -392,7 +388,7 @@ func get_loaded_enemy_encounters() -> Dictionary[String, int]:
 		"Cached enemy encounters are not of type Dictionary[String, int] or missing. Returning empty."
 	)
 	return {} as Dictionary[String, int]
-	
+
 # helper function for getting specific enemy encounter count
 func get_enemy_encounter_count(enemy_name: String) -> int:
 	enemy_name = enemy_name.to_lower()
