@@ -88,7 +88,7 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 		return "ability_one"
 	elif item == ability_1:
 		return "ability_two"
-	return "switch_weapon"
+	return ""
 
 # Finds and returns the item slot UI element for a given item
 func _get_item_slot_for_item(item: BaseResource) -> UiItemSlot:
