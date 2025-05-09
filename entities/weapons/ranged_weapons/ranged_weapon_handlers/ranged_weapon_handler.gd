@@ -26,6 +26,7 @@ func start_use() -> void:
 ## Called when attack action is released (button released)
 func end_use() -> void:
 	print("Stopping weapon")
+	if state_machine.weapon.current_weapon.handle_attack_end_by_state : return
 	match state_machine.current_state.state_type:
 		WeaponEnums.WeaponState.WINDUP:
 			# Cancel windup if released early

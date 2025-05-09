@@ -21,16 +21,16 @@ enemy_model = NodePath("ball_chicken")
 dialogue_path = "res://entities/enemies/bob/dialogue"
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
-transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 2.87023, 0)
+transform = Transform3D(-6.55671e-08, 1.31134e-07, 1.5, 0, -1.5, 1.31134e-07, 1.5, 5.73206e-15, 6.55671e-08, 0, 2.87023, 0)
 
 [node name="Sphere" parent="ball_chicken" index="0"]
-transform = Transform3D(-1.67408, 1.17, 0.988786, -1.33486, -0.395638, -1.79186, -0.751494, -1.9036, 0.980143, 0, 0, 0)
+transform = Transform3D(2.26917, 0, 0, 0, 2.26917, 0, 0, 0, 2.26917, 0, 0, 0)
 
 [node name="Sphere_001" parent="ball_chicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302848, 0.345107, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="ball_chicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854379, -0.0245268, -0.0878412, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.215651, 0.085438, -0.0245268, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="ball_chicken/Sphere" index="4"]
 transform = Transform3D(0.0413089, 0.0520154, -0.0812714, 0.022335, 0.0808505, 0.0630985, 0.0938711, -0.0421269, 0.0207511, -0.737007, 0.707179, 0.157209)
