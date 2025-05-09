@@ -22,6 +22,7 @@ var prosperity_eggs: int:
 		if prosperity_eggs == value:
 			return
 		prosperity_eggs = value
+		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
 		prosperity_eggs_changed.emit(value)
 
 
@@ -30,6 +31,7 @@ var feathers_of_rebirth: int:
 		if feathers_of_rebirth == value:
 			return
 		feathers_of_rebirth = value
+		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
 		feathers_of_rebirth_changed.emit(value)
 
 
@@ -115,7 +117,7 @@ func reset_game() -> void:
 	prosperity_eggs = clamp(
 		(100 + current_round * int(arena_round_reward / 2.0)), 125, 200
 	)
-	SaveManager.reset_game()
+	SaveManager.reset_game_data()
 	if Inventory:
 		Inventory.reset_inventory()
 	else:

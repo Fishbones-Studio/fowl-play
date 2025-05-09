@@ -32,6 +32,10 @@ Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
+[dialogue_manager]
+
+runtime/advanced/ignore_missing_state_values=true
+
 [display]
 
 window/stretch/mode="canvas_items"

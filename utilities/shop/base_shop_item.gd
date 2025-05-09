@@ -10,7 +10,6 @@ static var purchase_in_progress: bool = false :
 	set(value):
 		purchase_in_progress = value
 		if !value:
-			SaveManager.save_game()
 			SignalManager.purchase_completed.emit()
 
 var shop_item: BaseResource

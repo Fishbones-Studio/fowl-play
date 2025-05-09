@@ -121,4 +121,4 @@ func update_ui_elements() -> void:
 func save_upgrades() -> void:
 	var upgrades : Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()
 	upgrades[upgrade_type] = upgrade_resource.current_level
-	SaveManager.save_game(copied_stats, upgrades)
+	SaveManager.save_player_upgrades(upgrades)

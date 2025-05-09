@@ -16,14 +16,14 @@ var audio_busses: Dictionary[String, float]
 
 func _ready() -> void:
 	for index in range(AudioServer.get_bus_count()):
-		var bus_name = AudioServer.get_bus_name(index)
+		var bus_name: String = AudioServer.get_bus_name(index)
 		audio_busses[bus_name] = AudioServer.get_bus_volume_linear(index) * 100
 
 	_load_audio_settings()
 
 
 func _load_audio_settings() -> void:
-	SaveManager.load_settings(config_name)
+	SettingsManager.load_settings(get_viewport(),get_window(),config_name)
 
 	_load_audio_busses()
 
@@ -59,7 +59,7 @@ func _volume_changed(value: float, bus_name: String) -> void:
 
 ## Set volume for a specific bus (using percentage)
 func _set_volume(bus_name: String, volume: float) -> void:
-	var bus_idx = AudioServer.get_bus_index(bus_name)
+	var bus_idx: int = AudioServer.get_bus_index(bus_name)
 	if bus_idx == -1:
 		return
 

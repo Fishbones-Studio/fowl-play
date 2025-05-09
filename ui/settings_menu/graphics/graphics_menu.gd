@@ -82,7 +82,7 @@ func _ready() -> void:
 
 
 func _load_graphics_settings() -> void:
-	SaveManager.load_settings(config_name)
+	SettingsManager.load_settings(get_viewport(),get_window(),config_name)
 
 	_set_graphics_values()
 
