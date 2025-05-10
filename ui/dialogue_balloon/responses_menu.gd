@@ -1,4 +1,4 @@
-@icon("./assets/responses_menu.svg")
+@icon("res://addons/dialogue_manager/assets/responses_menu.svg")
 
 ## A [Container] for dialogue responses provided by [b]Dialogue Manager[/b].
 class_name ResponsesMenu extends Container
@@ -9,7 +9,7 @@ signal response_selected(response)
 
 
 ## Optionally specify a control to duplicate for each response
-@export var response_template: ResponseContainer
+@export var response_template: DialogueResponseContainer
 
 ## The action for accepting a response (is possibly overridden by parent dialogue balloon).
 @export var next_action: StringName = &""
@@ -36,7 +36,7 @@ var responses: Array = []:
 			for response in responses:
 				if hide_failed_responses and not response.is_allowed: continue
 
-				var item: ResponseContainer
+				var item: DialogueResponseContainer
 				if is_instance_valid(response_template):
 					item = response_template.duplicate(DUPLICATE_GROUPS | DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS | DUPLICATE_USE_INSTANTIATION)
 					item.show()
@@ -45,14 +45,10 @@ var responses: Array = []:
 					item.name = item.name + &"Disallowed"
 					item.disabled = true
 
-				# setting the text
-				item.response_text = response.text
-
 				item.set_meta("response", response)
 
 				add_child(item)
-				# TODO: fix button press
-				item.update_button_text(response.text)
+				item.setup_response_button(response, response_selected)
 
 			_configure_focus()
 
