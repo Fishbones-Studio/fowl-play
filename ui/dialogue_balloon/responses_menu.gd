@@ -9,7 +9,7 @@ signal response_selected(response)
 
 
 ## Optionally specify a control to duplicate for each response
-@export var response_template: Control
+@export var response_template: ResponseContainer
 
 ## The action for accepting a response (is possibly overridden by parent dialogue balloon).
 @export var next_action: StringName = &""
@@ -36,28 +36,23 @@ var responses: Array = []:
 			for response in responses:
 				if hide_failed_responses and not response.is_allowed: continue
 
-				var item: Control
+				var item: ResponseContainer
 				if is_instance_valid(response_template):
-					item = response_template.duplicate(DUPLICATE_GROUPS | DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS)
+					item = response_template.duplicate(DUPLICATE_GROUPS | DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS | DUPLICATE_USE_INSTANTIATION)
 					item.show()
-				else:
-					item = Button.new()
 				item.name = "Response%d" % get_child_count()
 				if not response.is_allowed:
 					item.name = item.name + &"Disallowed"
 					item.disabled = true
 
-				# If the item has a response property then use that
-				if "response" in item:
-					item.response = response
-				# Otherwise assume we can just set the text
-				else:
-					# TODO: fix
-					item.response_button.text = response.text
+				# setting the text
+				item.response_text = response.text
 
 				item.set_meta("response", response)
 
 				add_child(item)
+				# TODO: fix button press
+				item.update_button_text(response.text)
 
 			_configure_focus()
 
@@ -90,7 +85,7 @@ func get_menu_items() -> Array:
 
 # Prepare the menu for keyboard and mouse navigation.
 func _configure_focus() -> void:
-	var items = get_menu_items()
+	var items: Array = get_menu_items()
 	for i in items.size():
 		var item: Control = items[i]
 
