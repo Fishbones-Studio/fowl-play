@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbumw5xcjq0tn"]
+
+[ext_resource type="Script" uid="uid://cv74hb3amkor0" path="res://ui/dialogue_balloon/response_container/dialogue_response_container.gd" id="1_y266i"]
+[ext_resource type="Script" uid="uid://bohb7b5culexc" path="res://ui/dialogue_balloon/response_container/dialogue_response_button.gd" id="2_d6bph"]
+
+[node name="DialogueResponseContainer" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 63.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"ConfirmationContainer"
+script = ExtResource("1_y266i")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"SettingsHeaderContainer"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DialogueResponseButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"SettingsExitButton"
+text = "Response example"
+script = ExtResource("2_d6bph")
+
+[connection signal="pressed" from="MarginContainer/DialogueResponseButton" to="MarginContainer/DialogueResponseButton" method="_on_pressed"]
