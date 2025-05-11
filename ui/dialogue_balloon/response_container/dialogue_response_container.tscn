@@ -10,6 +10,7 @@ offset_bottom = 63.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 2
 theme_type_variation = &"ConfirmationContainer"
 script = ExtResource("1_y266i")
 
@@ -32,4 +33,5 @@ theme_type_variation = &"SettingsExitButton"
 text = "Response example"
 script = ExtResource("2_d6bph")
 
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="pressed" from="MarginContainer/DialogueResponseButton" to="MarginContainer/DialogueResponseButton" method="_on_pressed"]

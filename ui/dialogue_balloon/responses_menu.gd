@@ -52,61 +52,61 @@ var responses: Array = []:
 
 			_configure_focus()
 
-
 func _ready() -> void:
 	visibility_changed.connect(func():
-		if visible and get_menu_items().size() > 0:
-			var first_item: Control = get_menu_items()[0]
-			if first_item.is_inside_tree():
-				first_item.grab_focus()
+		if visible:
+			var items = get_menu_items()
+			if items.size() > 0:
+				var first_item: Control = items[0]
+				if first_item.is_inside_tree():
+					first_item.grab_focus()
 	)
 
 	if is_instance_valid(response_template):
 		response_template.hide()
 
-
-## Get the selectable items in the menu.
+## Get the selectable buttons in the menu.
 func get_menu_items() -> Array:
 	var items: Array = []
 	for child in get_children():
 		if not child.visible: continue
 		if "Disallowed" in child.name: continue
-		items.append(child)
-
+		items.append(child) # The container itself
 	return items
 
 
 #region Internal
 
-
-# Prepare the menu for keyboard and mouse navigation.
 func _configure_focus() -> void:
 	var items: Array = get_menu_items()
+	if items.is_empty():
+		return
+
 	for i in items.size():
 		var item: Control = items[i]
-
 		item.focus_mode = Control.FOCUS_ALL
 
 		item.focus_neighbor_left = item.get_path()
 		item.focus_neighbor_right = item.get_path()
 
 		if i == 0:
-			item.focus_neighbor_top = item.get_path()
-			item.focus_neighbor_left = item.get_path()
-			item.focus_previous = item.get_path()
+			item.focus_neighbor_top = items[items.size() - 1].get_path()
+			item.focus_previous = items[items.size() - 1].get_path()
 		else:
 			item.focus_neighbor_top = items[i - 1].get_path()
-			item.focus_neighbor_left = items[i - 1].get_path()
 			item.focus_previous = items[i - 1].get_path()
 
 		if i == items.size() - 1:
-			item.focus_neighbor_bottom = item.get_path()
-			item.focus_neighbor_right = item.get_path()
-			item.focus_next = item.get_path()
+			item.focus_neighbor_bottom = items[0].get_path()
+			item.focus_next = items[0].get_path()
 		else:
 			item.focus_neighbor_bottom = items[i + 1].get_path()
-			item.focus_neighbor_right = items[i + 1].get_path()
 			item.focus_next = items[i + 1].get_path()
+
+		if item.mouse_entered.is_connected(_on_response_mouse_entered):
+			item.mouse_entered.disconnect(_on_response_mouse_entered)
+		if item.gui_input.is_connected(_on_response_gui_input):
+			item.gui_input.disconnect(_on_response_gui_input)
 
 		item.mouse_entered.connect(_on_response_mouse_entered.bind(item))
 		item.gui_input.connect(_on_response_gui_input.bind(item, item.get_meta("response")))
@@ -118,12 +118,8 @@ func _configure_focus() -> void:
 
 #region Signals
 
-
 func _on_response_mouse_entered(item: Control) -> void:
-	if "Disallowed" in item.name: return
-
 	item.grab_focus()
-
 
 func _on_response_gui_input(event: InputEvent, item: Control, response) -> void:
 	if "Disallowed" in item.name: return
@@ -131,9 +127,17 @@ func _on_response_gui_input(event: InputEvent, item: Control, response) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		get_viewport().set_input_as_handled()
 		response_selected.emit(response)
-	elif event.is_action_pressed(&"ui_accept" if next_action.is_empty() else next_action) and item in get_menu_items():
+	elif event.is_action_pressed(&"ui_accept" if next_action.is_empty() else next_action):
 		get_viewport().set_input_as_handled()
 		response_selected.emit(response)
-
+	elif event is InputEventKey and event.is_pressed():
+		var items: Array = get_menu_items()
+		var idx: int = items.find(item)
+		if idx == -1:
+			return
+		if event.keycode == KEY_UP or event.keycode == KEY_W:
+			items[(idx - 1) % items.size()].grab_focus()
+		elif event.keycode == KEY_DOWN or event.keycode == KEY_S:
+			items[(idx + 1) % items.size()].grab_focus()
 
 #endregion

@@ -17,7 +17,6 @@ var _loaded_game_data: Dictionary = {}
 
 func _load_game_config() -> ConfigFile:
 	var config := ConfigFile.new()
-	# load() returns an Error enum, but we handle file-not-found in load_game_data
 	config.load(SAVE_GAME_PATH)
 	return config
 
@@ -89,19 +88,30 @@ func save_currency(feathers: int, eggs: int) -> void:
 		eggs
 	)
 
-# Helper function to increment rounds_won
+# Helper function to increment rounds_won (player section) and total_rounds_won (world section)
 func save_rounds_one_by_one() -> void:
 	_ensure_game_data_loaded()
 	var current_rounds_won: int = get_loaded_rounds_won()
+	var current_total_rounds_won: int = get_loaded_total_rounds_won()
 	save_rounds_won(current_rounds_won + 1)
+	save_total_rounds_won(current_total_rounds_won + 1)
 
 func save_rounds_won(rounds: int) -> void:
 	_ensure_game_data_loaded()
 	var config := _load_game_config()
-	config.set_value(WORLD_SAVE_SECTION, "rounds_won", rounds)
+	config.set_value(PLAYER_SAVE_SECTION, "rounds_won", rounds)
 	_save_game_config(config)
 	_loaded_game_data["rounds_won"] = rounds
 	print("Rounds won saved: ", rounds)
+
+# Helper for total_rounds_won (world section, persists)
+func save_total_rounds_won(total_rounds: int) -> void:
+	_ensure_game_data_loaded()
+	var config := _load_game_config()
+	config.set_value(WORLD_SAVE_SECTION, "total_rounds_won", total_rounds)
+	_save_game_config(config)
+	_loaded_game_data["total_rounds_won"] = total_rounds
+	print("Total rounds won saved: ", total_rounds)
 
 # Helper function to increment enemy encounters
 func save_enemy_encounter(enemy_name: String) -> void:
@@ -131,6 +141,7 @@ func load_game_data() -> Dictionary:
 	var final_stats: LivingEntityStats
 	var final_upgrades: Dictionary
 	var final_rounds_won: int
+	var final_total_rounds_won: int
 	var final_enemy_encounters: Dictionary[String, int]
 	var final_feathers_of_rebirth: int
 	var final_prosperity_eggs: int
@@ -143,6 +154,7 @@ func load_game_data() -> Dictionary:
 		final_stats = _get_default_player_stats()
 		final_upgrades = _get_default_upgrades()
 		final_rounds_won = 0
+		final_total_rounds_won = 0
 		final_enemy_encounters = {} as Dictionary[String, int]
 		final_feathers_of_rebirth = 0
 		final_prosperity_eggs = 200
@@ -150,6 +162,7 @@ func load_game_data() -> Dictionary:
 			final_stats,
 			final_upgrades,
 			final_rounds_won,
+			final_total_rounds_won,
 			final_enemy_encounters,
 			final_feathers_of_rebirth,
 			final_prosperity_eggs
@@ -189,9 +202,14 @@ func load_game_data() -> Dictionary:
 				)
 			final_upgrades = _get_default_upgrades()
 
-		# Load rounds_won from world section
+		# Load rounds_won from player section
 		final_rounds_won = config.get_value(
-			WORLD_SAVE_SECTION, "rounds_won", 0
+			PLAYER_SAVE_SECTION, "rounds_won", 0
+		) as int
+
+		# Load total_rounds_won from world section
+		final_total_rounds_won = config.get_value(
+			WORLD_SAVE_SECTION, "total_rounds_won", 0
 		) as int
 
 		# Load enemy_encounters from world section
@@ -226,7 +244,7 @@ func load_game_data() -> Dictionary:
 				push_warning(
 					"Enemy encounters in save file is not a Dictionary. Using empty default."
 				)
-			final_enemy_encounters = {} 
+			final_enemy_encounters = {}
 
 		# Load currency from currency section
 		final_feathers_of_rebirth = config.get_value(
@@ -248,6 +266,7 @@ func load_game_data() -> Dictionary:
 		"stats": final_stats,
 		"upgrades": final_upgrades,
 		"rounds_won": final_rounds_won,
+		"total_rounds_won": final_total_rounds_won,
 		"enemy_encounters": final_enemy_encounters,
 		"f_o_r": final_feathers_of_rebirth,
 		"p_eggs": final_prosperity_eggs
@@ -260,6 +279,7 @@ func _create_default_save_file(
 	stats: LivingEntityStats,
 	upgrades: Dictionary[StatsEnums.UpgradeTypes, int],
 	rounds_won: int,
+	total_rounds_won: int,
 	enemy_encounters: Dictionary[String, int],
 	feathers: int,
 	eggs: int
@@ -267,7 +287,8 @@ func _create_default_save_file(
 	var config := ConfigFile.new()
 	config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
 	config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
-	config.set_value(WORLD_SAVE_SECTION, "rounds_won", rounds_won)
+	config.set_value(PLAYER_SAVE_SECTION, "rounds_won", rounds_won)
+	config.set_value(WORLD_SAVE_SECTION, "total_rounds_won", total_rounds_won)
 	config.set_value(WORLD_SAVE_SECTION, "enemy_encounters", enemy_encounters)
 	config.set_value(CURRENCY_SAVE_SECTION, "f_o_r", feathers)
 	config.set_value(CURRENCY_SAVE_SECTION, "p_eggs", eggs)
@@ -280,11 +301,13 @@ func reset_game_data() -> void:
 	var default_enemy_encounters: Dictionary[String, int] = (
 		{} as Dictionary[String, int]
 	)
+	var total_rounds_won: int = get_loaded_total_rounds_won() # persist total
 
 	_loaded_game_data = {
 		"stats": default_stats,
 		"upgrades": upgrades,
 		"rounds_won": default_rounds_won,
+		"total_rounds_won": total_rounds_won,
 		"enemy_encounters": default_enemy_encounters,
 		"f_o_r": GameManager.feathers_of_rebirth,
 		"p_eggs": GameManager.prosperity_eggs
@@ -293,6 +316,7 @@ func reset_game_data() -> void:
 		default_stats,
 		upgrades,
 		default_rounds_won,
+		total_rounds_won,
 		default_enemy_encounters,
 		GameManager.feathers_of_rebirth,
 		GameManager.prosperity_eggs
@@ -303,6 +327,7 @@ func reset_game_data() -> void:
 	print("Reset Upgrades: ", upgrades)
 	print("Reset Rounds Won: ", default_rounds_won)
 	print("Reset Enemy Encounters: ", default_enemy_encounters)
+	print("Total Rounds Won (persisted): ", total_rounds_won)
 
 func get_loaded_player_stats() -> LivingEntityStats:
 	_ensure_game_data_loaded()
@@ -359,7 +384,7 @@ func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 			push_warning("Loaded upgrades were present but all entries were invalid or unrecognised. Returning default upgrades.")
 			return _get_default_upgrades()
 		return typed_upgrades
-	
+
 	push_error("Cached player upgrades are not a Dictionary or missing. Returning defaults.")
 	return _get_default_upgrades()
 
@@ -370,6 +395,16 @@ func get_loaded_rounds_won() -> int:
 		return rounds_variant as int
 	push_warning(
 		"Cached rounds_won is not an int (type: %s). Returning default 0." % typeof(rounds_variant)
+	)
+	return 0
+
+func get_loaded_total_rounds_won() -> int:
+	_ensure_game_data_loaded()
+	var total_rounds_variant = _loaded_game_data.get("total_rounds_won", 0)
+	if typeof(total_rounds_variant) == TYPE_INT:
+		return total_rounds_variant as int
+	push_warning(
+		"Cached total_rounds_won is not an int (type: %s). Returning default 0." % typeof(total_rounds_variant)
 	)
 	return 0
 

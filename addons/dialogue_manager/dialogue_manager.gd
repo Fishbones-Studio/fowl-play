@@ -1,3 +1,5 @@
+## NOTE: This class has been changed in order to work with our UIManager
+## If you update the DialogueManager addon, please make sure to update this class too
 class_name DialogueManagerBase extends Node
 
 const DialogueResource = preload("./dialogue_resource.gd")

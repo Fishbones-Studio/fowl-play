@@ -1,3 +1,4 @@
+## Custom wrapper for the DialogueManager to handle balloon display via UIManager.
 extends DialogueManagerBase
 
 func _ready() -> void:
