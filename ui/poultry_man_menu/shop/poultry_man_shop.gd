@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
-	var shop_item_instance = SHOP_ITEM_SCENE.instantiate()
+	var shop_item_instance: Node = SHOP_ITEM_SCENE.instantiate()
 
 	if not shop_item_instance:
 		push_error("Failed to instantiate Shop Item scene!")
