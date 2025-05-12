@@ -18,6 +18,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if UIManager.game_input_blocked: return
 	if not is_instance_valid(active_weapon_slot):
 		return
 

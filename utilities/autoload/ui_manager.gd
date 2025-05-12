@@ -5,7 +5,15 @@
 ################################################################################
 extends CanvasLayer
 
-var current_ui: Control # Currently active UI control
+var current_ui: Control: # Currently active UI control
+	set(value):
+		# Prevent setting current UI to the same value
+		if current_ui == value:
+			return
+		current_ui = value
+		# Update game input blocked state based on the new UI
+		_update_game_input_blocked()
+
 var previous_ui: Control # Previously active UI control (for navigation history)
 # Stores the mouse mode before UI changes (for proper restoration)
 var previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_CAPTURED # Default to captured
@@ -20,6 +28,9 @@ var paused := false:
 			return
 		paused = value
 		get_tree().paused = value
+
+## Flag to block game input when certain UI elements are active
+var game_input_blocked: bool = false
 
 
 func _ready() -> void:
@@ -247,10 +258,6 @@ func handle_pause() -> void:
 			ui_to_restore = ui_list.get(UIEnums.UI.PLAYER_HUD) if ui_list.has(UIEnums.UI.PLAYER_HUD) else null
 
 		swap_ui(pause_menu, ui_to_restore)
-#
-		#if is_instance_valid(current_ui):
-			#current_ui.visible = true
-			#move_child(current_ui, get_child_count() - 1)
 
 		_handle_mouse_mode(_is_any_visible())
 
@@ -319,7 +326,7 @@ func _is_any_visible() -> bool:
 		var node = ui_list[ui_enum]
 		if is_instance_valid(node) and node.visible:
 			return true
-
+		
 	return false
 
 
@@ -387,3 +394,16 @@ func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_vis
 		_handle_mouse_mode(true)
 	else:
 		new_ui_node.visible = false
+
+## Updates the game_input_blocked state based on the current UI
+## This function checks if any UI that blocks game input is currently active.
+func _update_game_input_blocked() -> void:
+	if !current_ui: 
+		game_input_blocked = false
+		return
+	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
+	if ui_enum == null:
+		game_input_blocked = false
+		return
+	# Check if any UI is visible and set game_input_blocked accordingly
+	game_input_blocked = UIEnums.UI_BLOCK_GAME_INPUT.has(ui_enum)

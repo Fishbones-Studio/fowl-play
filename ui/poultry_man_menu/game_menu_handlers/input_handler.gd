@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if UIManager.current_ui and UIManager.current_ui.visible: # TODO: whack
+	if UIManager.game_input_blocked:
 		return
 
 	if event is InputEventMouseMotion:
@@ -36,8 +36,8 @@ func _input(event: InputEvent) -> void:
 		controller_was_used = false
 	
 	if is_controller_connected and event is InputEventJoypadMotion:
-		var axis_value = event.axis_value
-		var axis = event.axis
+		var axis_value: float = event.axis_value
+		var axis: int = event.axis
 		
 		if axis == 0 and abs(axis_value) > 0.5:
 			if can_move_with_stick:
