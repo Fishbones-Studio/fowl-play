@@ -24,6 +24,7 @@ func setup(_weapon: MeleeWeapon, _entity_stats: LivingEntityStats) -> void:
 		push_error(owner.name + ": No weapon reference set. " + owner.name )
 
 	# Listen for state transition signals
+
 	melee_combat_transition_state.connect(_transition_to_next_state)
 
 	# Get all states in the scene and store them in the dictionary

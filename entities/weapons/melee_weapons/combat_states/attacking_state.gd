@@ -11,7 +11,6 @@ func _init() -> void:
 
 # When entering this state, start the attack timer and attack
 func enter(_previous_state, _information: Dictionary = {}) -> void:
-	weapon_node.attacking = true
 	if entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, false)
 	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
@@ -24,7 +23,6 @@ func physics_process(_delta: float) -> void:
 
 # When exiting this state, stop and remove the attack timer
 func exit() -> void:
-	weapon_node.attacking = false
 	if attack_timer:
 		attack_timer.stop()
 
@@ -36,12 +34,12 @@ func _on_attack_timer_timeout() -> void:
 
 func _attack() -> void:
 	if weapon_node.attacking:
-		# Get targets for the given area in the attack area. 
+		# Get targets for the given area in the attack area.
 		var targets: Array[Node] = weapon_node.hit_targets_this_swing
+
 		for target in targets:
-			if target is ChickenPlayer or target is Enemy:
+			if target is Enemy or target is ChickenPlayer:
 				SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
-				weapon_node.attacking = false
-			elif target != null:
+			elif target:
 				print("Hit target is not a valid target!" + target.name)
 				return
