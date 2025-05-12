@@ -85,6 +85,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 	
 		if has_current_anim:
 			var anim_name: String = current_state.ANIMATION_NAME
+			if anim_name == "Idle" : return # we don't want to immediatly play the idle animation. Idle animation plays on an interval in the idle state
 			var anim: Animation   = weapon.animation_player.get_animation(anim_name)
 			if anim and weapon.current_weapon.loop_animation:
 				anim.loop = true
