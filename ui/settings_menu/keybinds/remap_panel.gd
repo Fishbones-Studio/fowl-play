@@ -12,12 +12,12 @@ func _ready():
 
 
 func _on_input_button_up() -> void:
-	if SaveManager.is_remapping:
+	if SettingsManager.is_remapping:
 		print("Already remapping a different key")
 		return
 
 	print("The set remapping action: %s" % action_to_remap )
-	SaveManager.action_to_remap = action_to_remap
-	SaveManager.input_type = input_type
-	SaveManager.is_remapping = true
+	SettingsManager.action_to_remap = action_to_remap
+	SettingsManager.input_type = input_type
+	SettingsManager.is_remapping = true
 	button.text = "Press any key..."

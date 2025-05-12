@@ -105,6 +105,8 @@ func _enter_in_progress() -> void:
 			_current_enemy = _pick_random_enemy(first_enemy_type)
 
 	_spawn_enemy_in_level()
+	
+	SaveManager.save_enemy_encounter(_current_enemy.stats.name)
 
 	await SignalManager.enemy_died
 
@@ -177,21 +179,35 @@ func _enter_intermission() -> void:
 	# TODO: spawn next enemy in the intermission area
 
 
-# Selects a random enemy instance from the pool, removes it, and returns it
 func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
-	if (
-		not available_enemies.has(enemy_type)
-		or available_enemies[enemy_type].is_empty()
-	):
+	if not available_enemies.has(enemy_type):
 		printerr(
 			"Attempted to pick an enemy of type %s, but none are available!"
 			% EnemyEnums.EnemyTypes.keys()[enemy_type]
 		)
-		return null # Or handle error appropriately
+		return null
+
+	# If the pool is empty but there was only one enemy in enemy_scenes, re-instantiate it
+	if available_enemies[enemy_type].is_empty():
+		# Find the original scene for this type
+		for scene in enemy_scenes:
+			var temp_enemy: Enemy = scene.instantiate()
+			if temp_enemy.type == enemy_type:
+				available_enemies[enemy_type].append(scene.instantiate())
+				break
+
+	# If still empty, error out
+	if available_enemies[enemy_type].is_empty():
+		printerr(
+			"Attempted to pick an enemy of type %s, but none are available after refill!"
+			% EnemyEnums.EnemyTypes.keys()[enemy_type]
+		)
+		return null
 
 	var index: int = randi_range(0, available_enemies[enemy_type].size() - 1)
 	var picked_enemy: Enemy = available_enemies[enemy_type].pop_at(index)
 	return picked_enemy
+
 
 
 func _spawn_enemy_in_level() -> void:

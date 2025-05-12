@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://boh7v3as35u6l"
+path="res://.godot/imported/woodpecker_in_between_rounds.dialogue-dcd64c5d3acf15d7891ddfe8ca5380a2.tres"
+
+[deps]
+
+source_file="res://entities/enemies/woodpecker/dialogue/in_between_rounds/woodpecker_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/woodpecker_in_between_rounds.dialogue-dcd64c5d3acf15d7891ddfe8ca5380a2.tres"]
+
+[params]
+
+defaults=true

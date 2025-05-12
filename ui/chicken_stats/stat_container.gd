@@ -16,4 +16,4 @@ func _ready() -> void:
 	var stat_value: float = GameManager.chicken_player.stats.get(stat_name)
 
 	stat_label.text = stat_name.capitalize()
-	stat_value_label.text = str(stat_value) if stat_value else ""
+	stat_value_label.text = str(stat_value)

@@ -17,6 +17,7 @@ enum UI {
 	CHICKEN_STATS,
 	FORFEIT_POPUP,
 	REBIRTH_SHOP,
+	DIALOGUE_BALLOON,
 }
 
 const PATHS: Dictionary[UI, String] = {
@@ -36,7 +37,25 @@ const PATHS: Dictionary[UI, String] = {
 	UI.CHICKEN_STATS: "uid://c2vh7na31m8hi",
 	UI.FORFEIT_POPUP: "uid://bqt3s2usixpf3",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
+	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
 }
+
+## List of UI elements that should block game input outside of the UI
+const UI_BLOCK_GAME_INPUT: Array[UI] = [
+	UI.SETTINGS_MENU,
+	UI.PAUSE_MENU,
+	UI.CHICKEN_INVENTORY,
+	UI.POULTRYMAN_SHOP,
+	UI.POULTRYMAN_SHOP_CONFIRMATION,
+	UI.DIALOGUE_BALLOON,
+	UI.IN_ARENA_SHOP,
+	UI.ROUND_SCREEN,
+	UI.LOADING_SCREEN,
+	UI.REBIRTH_SHOP,
+	UI.DEATH_SCREEN,
+	UI.CHICKEN_STATS,
+	UI.FORFEIT_POPUP
+]
 
 
 static func ui_to_string(ui: UI) -> String:

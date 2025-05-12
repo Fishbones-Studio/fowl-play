@@ -7,6 +7,7 @@ signal damage_taken
 @export var type: EnemyEnums.EnemyTypes
 @export var enemy_model: Node3D
 @export var knockback_decay: int = 50 # Rate at which the knockback decays per second
+@export_dir var dialogue_path: String
 
 var is_immobile: bool = false
 var _knockback: Vector3 = Vector3.ZERO
@@ -39,6 +40,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func _process(delta: float) -> void:
+	stats.regen_stamina(stats.stamina_regen)
+	stats.regen_health(stats.health_regen)
+
+
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:
 		push_warning("Attempted to get stats resource before it was assigned!")
@@ -55,9 +61,11 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 				_knockback *= 2
 
 			# Set immobile time
-			immobile_timer.wait_time = _knockback.length() / knockback_decay
-			immobile_timer.start()
-			is_immobile = true
+			var immobile_time: float = _knockback.length() / knockback_decay
+			if not is_equal_approx(immobile_time, 0):
+				immobile_timer.wait_time = immobile_time
+				immobile_timer.start()
+				is_immobile = true
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 		health_bar.set_health(stats.current_health)
