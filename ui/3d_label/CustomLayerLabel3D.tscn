@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt524x0mvxt0j"]
+
+[ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="1_7bvfy"]
+
+[node name="CustomLayerLabel3d" type="Label3D"]
+layers = 0
+script = ExtResource("1_7bvfy")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=28 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="4_iajuv"]
 [ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/poultry_man_menu/game_menu_handlers/input_handler.gd" id="5_x5v8y"]
 [ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
+[ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="7_jhi5u"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]
 [ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/poultry_man_menu/art/light_switch.ogg" id="9_78wky"]
 
@@ -137,6 +138,8 @@ transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 
 text = "Shop
 "
 font_size = 67
+script = ExtResource("7_jhi5u")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Flyer" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.60808, 1.95472, 0.381649)
@@ -152,7 +155,7 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Flyer"]
 shape = SubResource("BoxShape3D_t1gii")
 
-[node name="Arenas Label" type="Label3D" parent="MenuItems/Flyer"]
+[node name="ArenasLabel" type="Label3D" parent="MenuItems/Flyer"]
 transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, 0.048014, 1.64521, 0.179505)
 text = "Arena's
 "
@@ -162,7 +165,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.6, -0.6)
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="Rebirth_Shop" type="MeshInstance3D" parent="MenuItems/Rebirth_Shop"]
+[node name="RebirthShop" type="MeshInstance3D" parent="MenuItems/Rebirth_Shop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0)
 mesh = SubResource("CylinderMesh_k5ek6")
 
@@ -170,9 +173,11 @@ mesh = SubResource("CylinderMesh_k5ek6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 0)
 shape = SubResource("CylinderShape3D_jhi5u")
 
-[node name="Rebirth_Shop Label" type="Label3D" parent="MenuItems/Rebirth_Shop"]
+[node name="RebirthShopLabel" type="Label3D" parent="MenuItems/Rebirth_Shop"]
 transform = Transform3D(0.958884, 0, 0.283798, 0, 1, 0, -0.283798, 0, 0.958884, -1.05282, 2.66212, -0.00119543)
 text = "Rebirth Shop"
+script = ExtResource("7_jhi5u")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Sacrifice" type="Area3D" parent="MenuItems"]
 script = ExtResource("6_dqtu2")
@@ -186,9 +191,11 @@ mesh = SubResource("SphereMesh_k5ek6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.6, 0.5)
 shape = SubResource("SphereShape3D_jhi5u")
 
-[node name="Label3D" type="Label3D" parent="MenuItems/Sacrifice"]
+[node name="SacrificeLabel" type="Label3D" parent="MenuItems/Sacrifice"]
 transform = Transform3D(0.941512, 0, 0.33698, 0, 1, 0, -0.33698, 0, 0.941512, -1.58083, 2.77418, 0.103162)
 text = "Sacrifice"
+script = ExtResource("7_jhi5u")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_og4p7")
