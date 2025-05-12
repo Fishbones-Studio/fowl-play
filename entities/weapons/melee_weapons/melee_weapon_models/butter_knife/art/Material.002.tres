@@ -6,6 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ujwkj"]
 render_priority = 0
 shader = ExtResource("2_l0b8q")
+shader_parameter/enabled = false
 shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/progress = 1.2
 shader_parameter/shine_width = 0.5

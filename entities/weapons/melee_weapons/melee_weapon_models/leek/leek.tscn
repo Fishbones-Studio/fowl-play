@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bymaeu4dtl7ex"]
+[gd_scene load_steps=11 format=3 uid="uid://bymaeu4dtl7ex"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_e1ngp"]
 [ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_e1ngp"]
@@ -103,8 +103,31 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_yaitn"]
 resource_name = "Idle"
-length = 2.0
 loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHitBox/leek:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 2, 1, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7), Vector3(0.4, 0.4, 0.4), Vector3(0.3, 0.3, 0.3), Vector3(0.4, 0.4, 0.4), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox/leek:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15, 0.42, 0.666667, 0.833333, 0.9, 1),
+"transitions": PackedFloat32Array(1, -0.5, 0.5, 0.5, 0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2.30383, 0), Vector3(0, 0.0593412, 0.0872665), Vector3(0, 0.0418879, -0.0872665), Vector3(0, 0.0244346, 0.0349066), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_rovfi"]
 length = 0.001
@@ -144,18 +167,37 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0.000333309, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_e1ngp"]
-resource_name = "Windup"
-length = 0.4
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHitBox/leek:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/leek:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axwbb"]
 _data = {
 &"Attack": SubResource("Animation_em7sn"),
 &"Cooldown": SubResource("Animation_k4qq2"),
 &"Idle": SubResource("Animation_yaitn"),
-&"RESET": SubResource("Animation_rovfi"),
-&"Windup": SubResource("Animation_e1ngp")
+&"RESET": SubResource("Animation_rovfi")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
