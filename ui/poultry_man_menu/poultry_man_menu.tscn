@@ -180,7 +180,7 @@ metadata/_custom_type_script = "uid://c4docd5kunare"
 [node name="ArenasLabel" type="Label3D" parent="MenuItems/Flyer"]
 transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, -0.017761, 0.98544, 0.427444)
 billboard = 1
-text = "Arena's
+text = "Arenas
 "
 
 [node name="pillar" parent="MenuItems/Flyer" instance=ExtResource("10_iajuv")]
