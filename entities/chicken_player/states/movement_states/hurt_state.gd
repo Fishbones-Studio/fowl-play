@@ -21,9 +21,11 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 		_knockback = info["knockback"]
 
 		# Set immobile time
-		immobile_timer.wait_time = _knockback.length() / knockback_decay
-		immobile_timer.start()
-		_is_immobile = true
+		var immobile_time: float = _knockback.length() / knockback_decay
+		if not is_equal_approx(immobile_time, 0):
+			immobile_timer.wait_time = immobile_time
+			immobile_timer.start()
+			_is_immobile = true
 
 
 func process(_delta: float) -> void:

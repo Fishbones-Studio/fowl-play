@@ -13,6 +13,7 @@ allow_continuous_fire = true
 allow_early_release = true
 fire_rate_per_second = 0.0
 max_range = 0.0
+handle_attack_end_by_state = false
 loop_animation = false
 name = "Slingshot"
 purchasable = true

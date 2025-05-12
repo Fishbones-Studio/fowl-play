@@ -15,3 +15,4 @@ func play_attack_animation() -> void:
 	if animation_tree:
 		# Fire the OneShot request
 		animation_tree.set("parameters/MeleeOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		set_attacking(true)

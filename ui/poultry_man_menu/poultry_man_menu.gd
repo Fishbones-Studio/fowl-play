@@ -13,7 +13,7 @@ var focusable_items: Array[Focusable3D] = []
 @onready var flyer_item: Focusable3D = $MenuItems/Flyer  
 @onready var shop_item: Focusable3D = $MenuItems/Shop
 @onready var inventory_item: Focusable3D = $MenuItems/Inventory
-@onready var rebirth_shop_item: Focusable3D = $MenuItems/Rebirth_Shop
+@onready var rebirth_shop_item: Focusable3D = $MenuItems/RebirthShop
 @onready var sacrifice_item: Focusable3D = $MenuItems/Sacrifice
 
 
