@@ -99,7 +99,7 @@ func _should_show_hold_label(item: BaseResource) -> bool:
 	if item == null:
 		return false
 	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
-	return item in ranged_items and _get_input_action_for_item(item) == "attack"
+	return item in ranged_items and item.allow_continuous_fire
 
 # Initializes all item slots in the UI
 func _init_item_slots(items: Array) -> void:
