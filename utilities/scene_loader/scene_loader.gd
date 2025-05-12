@@ -86,6 +86,7 @@ func _on_switch_game_scene(scene_path: String) -> void:
 		
 	# Remove the current children immediately
 	for child in get_children():
+		if child is Pixelate : continue
 		child.queue_free()
 		
 

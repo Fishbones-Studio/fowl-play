@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwghksknwpfhu"]
+
+[ext_resource type="Script" uid="uid://yhr57kmj6eg7" path="res://utilities/pixelate/pixelate.gd" id="1_o7ljr"]
+[ext_resource type="Shader" uid="uid://bq40ju7xgq53v" path="res://utilities/pixelate/shaders/pixelate.gdshader" id="2_5k2e1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2udny"]
+shader = ExtResource("2_5k2e1")
+shader_parameter/pixel_size = 4
+shader_parameter/screen_size = Vector2(1920, 1080)
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 1
+shader_parameter/alpha = 1.0
+shader_parameter/scale = 1.0
+shader_parameter/border_mask = 2.0
+shader_parameter/strength = 0.0
+
+[node name="Pixelate" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_o7ljr")
+
+[node name="PixelateShader" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2udny")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
