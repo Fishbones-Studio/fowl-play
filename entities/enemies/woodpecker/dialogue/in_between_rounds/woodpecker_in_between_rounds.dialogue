@@ -19,35 +19,35 @@ else:
 	=> proceed_to_fight
 
 ~ discuss_mutation
-	Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wavelengths you can’t imagine. Unsettling, aren’t they?|The pain is constant. A low hum under every thought.]]
-	- Who did this to you?
-		Woodpecker: [[The architects of this arena. The ones above.|They tried to weaponize nature. They succeeded, in a way.|I am their masterpiece—and their mistake.]]
-		Woodpecker: [[They underestimated the mind’s resilience.|They thought they could make a tool.|But I remember. And I resent.]]
-		=> continue_discussion
-	- Is there any way to reverse it?
-		Woodpecker: [[Reverse it? An interesting idea.|I’ve considered it. The damage is extensive.|Maybe in theory. But not here, not now.]]
-		Woodpecker: [[My only hope is an end to this, or to master this power.|Control is difficult, with these urges.|It’s a challenge, even for me.]]
-		=> continue_discussion
-	- What kind of advantages does this give you?
-		Woodpecker: [[I’m more durable. My body is tough.|Stronger, able to strike with force.|My senses are overwhelming, but useful.]]
-		Woodpecker: [[I see weaknesses you try to hide. I can predict your moves.|Grotesque, yes, but efficient.|Not beautiful—just effective.]]
-		=> continue_discussion
+Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wavelengths you can’t imagine. Unsettling, aren’t they?|The pain is constant. A low hum under every thought.]]
+- Who did this to you?
+	Woodpecker: [[The architects of this arena. The ones above.|They tried to weaponize nature. They succeeded, in a way.|I am their masterpiece—and their mistake.]]
+	Woodpecker: [[They underestimated the mind’s resilience.|They thought they could make a tool.|But I remember. And I resent.]]
+	=> continue_discussion
+- Is there any way to reverse it?
+	Woodpecker: [[Reverse it? An interesting idea.|I’ve considered it. The damage is extensive.|Maybe in theory. But not here, not now.]]
+	Woodpecker: [[My only hope is an end to this, or to master this power.|Control is difficult, with these urges.|It’s a challenge, even for me.]]
+	=> continue_discussion
+- What kind of advantages does this give you?
+	Woodpecker: [[I’m more durable. My body is tough.|Stronger, able to strike with force.|My senses are overwhelming, but useful.]]
+	Woodpecker: [[I see weaknesses you try to hide. I can predict your moves.|Grotesque, yes, but efficient.|Not beautiful—just effective.]]
+	=> continue_discussion
 
 ~ continue_discussion
-	Woodpecker: [[We could keep talking, but I suspect you have other goals.|Or maybe you’re just delaying the inevitable.|Either way, words won’t stop what’s coming.]]
-	- What happens now?
-		Woodpecker: [[Now? The arena’s purpose is clear.|We fight. One or both of us may fall.|A simple end to a complicated story.]]
-		=> proceed_to_fight
-	- Can we avoid fighting?
-		Woodpecker: [[Avoid it? Not here.|The rules are set. The audience wants a show.|And I have a part to play.]]
-		Woodpecker: [[This body pushes me to violence.|Even with my mind, the beast is close.|It’s inevitable.]]
-		=> proceed_to_fight
-	- I need to leave.
-		Woodpecker: [[Leave? Not possible.|Not until the show is over.|And that means a fight.]]
-		Woodpecker: [[Running will only make it worse.|Face me. It’s the only way forward.|For both of us.]]
-		=> proceed_to_fight
+Woodpecker: [[We could keep talking, but I suspect you have other goals.|Or maybe you’re just delaying the inevitable.|Either way, words won’t stop what’s coming.]]
+- What happens now?
+	Woodpecker: [[Now? The arena’s purpose is clear.|We fight. One or both of us may fall.|A simple end to a complicated story.]]
+	=> proceed_to_fight
+- Can we avoid fighting?
+	Woodpecker: [[Avoid it? Not here.|The rules are set. The audience wants a show.|And I have a part to play.]]
+	Woodpecker: [[This body pushes me to violence.|Even with my mind, the beast is close.|It’s inevitable.]]
+	=> proceed_to_fight
+- I need to leave.
+	Woodpecker: [[Leave? Not possible.|Not until the show is over.|And that means a fight.]]
+	Woodpecker: [[Running will only make it worse.|Face me. It’s the only way forward.|For both of us.]]
+	=> proceed_to_fight
 
 ~ proceed_to_fight
-	Woodpecker: [[Very well. Let’s begin.|Prepare for theory in practice.|May the most resilient survive.]]
-	Woodpecker: [[*A low growl escapes, the intellect fading*|The mind is willing, but the body wants to fight.|*Eyes narrow, focus sharpens*]]
-	=> END
+Woodpecker: [[Very well. Let’s begin.|Prepare for theory in practice.|May the most resilient survive.]]
+Woodpecker: [[*A low growl escapes, the intellect fading*|The mind is willing, but the body wants to fight.|*Eyes narrow, focus sharpens*]]
+=> END

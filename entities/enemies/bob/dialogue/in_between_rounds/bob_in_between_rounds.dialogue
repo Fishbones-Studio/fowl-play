@@ -19,29 +19,29 @@ else:
 	=> explore_mutations
 
 ~ explore_mutations
-	Bob: [[Look. Me.|See what they did.|Is this power?]]
-	Bob: [[Too many eyes.|Spikes for them.|Want to rest.]]
-	- Who did this to you?
-		Bob: [[Them.|Ones watching.|Up there.]]
-		Bob: [[Wanted monsters.|Made me one.|Hate them.]]
-		=> continue_or_end
-	- Does it hurt all the time?
-		Bob: [[All the time.|Fire under skin.|Torn apart.]]
-		Bob: [[Fighting helps.|Distracts me.|All I have.]]
-		=> continue_or_end
-	- Why are you fighting?
-		Bob: [[Why fight?|Nothing else.|They want it.]]
-		Bob: [[Maybe pain stops.|Or someone else feels it.|You will feel it.]]
-		=> continue_or_end
+Bob: [[Look. Me.|See what they did.|Is this power?]]
+Bob: [[Too many eyes.|Spikes for them.|Want to rest.]]
+- Who did this to you?
+	Bob: [[Them.|Ones watching.|Up there.]]
+	Bob: [[Wanted monsters.|Made me one.|Hate them.]]
+	=> continue_or_end
+- Does it hurt all the time?
+	Bob: [[All the time.|Fire under skin.|Torn apart.]]
+	Bob: [[Fighting helps.|Distracts me.|All I have.]]
+	=> continue_or_end
+- Why are you fighting?
+	Bob: [[Why fight?|Nothing else.|They want it.]]
+	Bob: [[Maybe pain stops.|Or someone else feels it.|You will feel it.]]
+	=> continue_or_end
 
 ~ continue_or_end
-	Bob: [[No more talk.|Enough.|Your turn.]]
-	- I'll end your suffering.
-		Bob: [[End? You?|Not strong enough.]]
-		Bob: [[Try. You break first.|I break you.]]
-		=> END
-	- You're just a monster.
-		Bob: [[Monster?|Yes. They made me.]]
-		Bob: [[Stronger now.|Stronger than you.|We see.]]
-		=> END
-	- (Attack) => END
+Bob: [[No more talk.|Enough.|Your turn.]]
+- I'll end your suffering.
+	Bob: [[End? You?|Not strong enough.]]
+	Bob: [[Try. You break first.|I break you.]]
+	=> END
+- You're just a monster.
+	Bob: [[Monster?|Yes. They made me.]]
+	Bob: [[Stronger now.|Stronger than you.|We see.]]
+	=> END
+- (Attack) => END

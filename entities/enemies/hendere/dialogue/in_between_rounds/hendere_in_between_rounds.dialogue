@@ -25,14 +25,14 @@ else:
 	=> continue_or_end
 
 ~ continue_or_end
-	Hendere: [[So, what should we talk about now?|Anything else on your mind?|Is there something you want to tell me?]]
-	- Tell me about yourself.
-		Hendere: [[About me? There’s not much, except that I love you|What do you want to know? As long as it’s about us|My life only got interesting when I met you]]
-		Hendere: [[I just want to be with you|I think about our future together|We’ll always have each other, right?]]
-		=> continue_or_end
-	- What do you think of the other fighters?
-		Hendere: [[Them? They’re nothing compared to you|They’re just in the way|I don’t like how they look at you]]
-		Hendere: [[Don’t worry, I’ll make sure they don’t bother you|They’ll learn to keep their distance|Just ignore them, alright?]]
-		=> continue_or_end
-	- Let’s end this conversation. => END
-	- Start over. => start
+Hendere: [[So, what should we talk about now?|Anything else on your mind?|Is there something you want to tell me?]]
+- Tell me about yourself.
+	Hendere: [[About me? There’s not much, except that I love you|What do you want to know? As long as it’s about us|My life only got interesting when I met you]]
+	Hendere: [[I just want to be with you|I think about our future together|We’ll always have each other, right?]]
+	=> continue_or_end
+- What do you think of the other fighters?
+	Hendere: [[Them? They’re nothing compared to you|They’re just in the way|I don’t like how they look at you]]
+	Hendere: [[Don’t worry, I’ll make sure they don’t bother you|They’ll learn to keep their distance|Just ignore them, alright?]]
+	=> continue_or_end
+- Let’s end this conversation. => END
+- Start over. => start

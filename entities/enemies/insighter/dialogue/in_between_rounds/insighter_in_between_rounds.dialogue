@@ -16,34 +16,34 @@ else:
 	=> proceed_to_fight
 
 ~ discuss_death_obsession
-	Insighter: [[The arena is a garden—decay and rebirth everywhere!|Every crack, every splatter, it’s all part of the dance!|Do you feel it? The pull toward oblivion? It’s so freeing!]]
-	- Why are you like this?
-		Insighter: [[Why? I see the truth—the beautiful, messy truth!|Life is just a flicker before the darkness!|Why cling to it? Embrace the end!]]
-		=> continue_morbid_chat
-	- That's messed up.
-		Insighter: [[Messed up? It’s perfect! The ultimate release!|You’re scared, aren’t you? The great unknown!|Don’t worry, I’ll help you get there—quickly!]]
-		=> continue_morbid_chat
-	- What happens when things die?
-		Insighter: [[They return to the great soup! The source!|Their energy is set free—ready to become something new!|Maybe... another egg? Hehehe!]]
-		=> continue_morbid_chat
+Insighter: [[The arena is a garden—decay and rebirth everywhere!|Every crack, every splatter, it’s all part of the dance!|Do you feel it? The pull toward oblivion? It’s so freeing!]]
+- Why are you like this?
+	Insighter: [[Why? I see the truth—the beautiful, messy truth!|Life is just a flicker before the darkness!|Why cling to it? Embrace the end!]]
+	=> continue_morbid_chat
+- That's messed up.
+	Insighter: [[Messed up? It’s perfect! The ultimate release!|You’re scared, aren’t you? The great unknown!|Don’t worry, I’ll help you get there—quickly!]]
+	=> continue_morbid_chat
+- What happens when things die?
+	Insighter: [[They return to the great soup! The source!|Their energy is set free—ready to become something new!|Maybe... another egg? Hehehe!]]
+	=> continue_morbid_chat
 
 ~ continue_morbid_chat
-	Insighter: [[So many ways to go! Crushed, torn, eaten! Which do you prefer?|I wonder how your shell will break—one big crack, or lots of little ones?|Let’s find out together!]]
-	- Stop talking about death.
-		Insighter: [[But it’s the only thing worth talking about! The grand finale!|Don’t be a spoilsport! It’s coming, no matter what!|You can’t avoid it forever! No one can!]]
-		=> end_options
-	- You're terrifying.
-		Insighter: [[Terrifying? Me? Just a little egg!|Hehe! Good! Fear makes the ending sweeter!|Relax! It’ll all be over soon!]]
-		=> end_options
-	- Let's fight now.
-		Insighter: [[Yes! Finally! The main event!|Enough talk! Time for the symphony of destruction!|I can’t wait to see you... pop!]]
-		=> proceed_to_fight
-
-~ end_options
-	Insighter: [[Alright, alright! If you insist! But you’ll be thinking about it!|You’ll remember this during the fight—I know you will!|It’s always there... waiting...]]
+Insighter: [[So many ways to go! Crushed, torn, eaten! Which do you prefer?|I wonder how your shell will break—one big crack, or lots of little ones?|Let’s find out together!]]
+- Stop talking about death.
+	Insighter: [[But it’s the only thing worth talking about! The grand finale!|Don’t be a spoilsport! It’s coming, no matter what!|You can’t avoid it forever! No one can!]]
+	=> end_options
+- You're terrifying.
+	Insighter: [[Terrifying? Me? Just a little egg!|Hehe! Good! Fear makes the ending sweeter!|Relax! It’ll all be over soon!]]
+	=> end_options
+- Let's fight now.
+	Insighter: [[Yes! Finally! The main event!|Enough talk! Time for the symphony of destruction!|I can’t wait to see you... pop!]]
 	=> proceed_to_fight
 
+~ end_options
+Insighter: [[Alright, alright! If you insist! But you’ll be thinking about it!|You’ll remember this during the fight—I know you will!|It’s always there... waiting...]]
+=> proceed_to_fight
+
 ~ proceed_to_fight
-	Insighter: [[Here we go! The moment of truth—or the moment of death! Hehehe!|Don’t hold back! Give me a good show! Make it count!|Let the cracking begin!]]
-	Insighter: [[*A high-pitched, gleeful cackle*|*Wobbles with excitement*|*Eyes shine with anticipation*]]
-	=> END
+Insighter: [[Here we go! The moment of truth—or the moment of death! Hehehe!|Don’t hold back! Give me a good show! Make it count!|Let the cracking begin!]]
+Insighter: [[*A high-pitched, gleeful cackle*|*Wobbles with excitement*|*Eyes shine with anticipation*]]
+=> END

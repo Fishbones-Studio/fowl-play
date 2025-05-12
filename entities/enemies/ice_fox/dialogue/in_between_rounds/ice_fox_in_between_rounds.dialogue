@@ -16,50 +16,50 @@ else:
 	=> rabid_trigger
 
 ~ friendly_options
-	Ice Fox: [[So, what are we doing today?!|Got any games in mind? Fetch? Tug?|I could chase my tail for a while! Wanna watch?]]
-	- What do you like to do?
-		Ice Fox: [[Everything! Running! Jumping! Biting!|Biting! Oh, I love biting! *Shows teeth*|Chasing things! Especially fast things! Hehe!]]
-		=> biting_hint
-	- You seem happy.
-		Ice Fox: [[I am! So happy! Especially with friends!|Being happy is the best! Unless...|Unless someone isn’t happy with me...]]
-		=> rabid_trigger
-	- Let’s just be quiet.
-		Ice Fox: [[Quiet...? But that’s boring!|*Whines* Can’t we bark a little? Or howl?|*Stares, tail stops wagging* Quiet...?]]
-		=> rabid_trigger
+Ice Fox: [[So, what are we doing today?!|Got any games in mind? Fetch? Tug?|I could chase my tail for a while! Wanna watch?]]
+- What do you like to do?
+	Ice Fox: [[Everything! Running! Jumping! Biting!|Biting! Oh, I love biting! *Shows teeth*|Chasing things! Especially fast things! Hehe!]]
+	=> biting_hint
+- You seem happy.
+	Ice Fox: [[I am! So happy! Especially with friends!|Being happy is the best! Unless...|Unless someone isn’t happy with me...]]
+	=> rabid_trigger
+- Let’s just be quiet.
+	Ice Fox: [[Quiet...? But that’s boring!|*Whines* Can’t we bark a little? Or howl?|*Stares, tail stops wagging* Quiet...?]]
+	=> rabid_trigger
 
 ~ biting_hint
-	Ice Fox: [[Yeah, biting is fun! Like... *snap snap*!|Sometimes I bite too hard though... Oops!|Do you like biting? We could bite things together!]]
-	- Biting sounds dangerous.
-		Ice Fox: [[Dangerous? Nah! It’s just playing!|Unless... *eyes widen* Unless I get really excited...|Then... maybe... a little... dangerous... Hehe...]]
-		=> continue_or_end
-	- I don’t like biting.
-		Ice Fox: [[You don’t...? But it’s the best part!|*Tail droops* Oh... okay...|*Low growl* You... don’t... like... biting...?]]
-		=> rabid_trigger
+Ice Fox: [[Yeah, biting is fun! Like... *snap snap*!|Sometimes I bite too hard though... Oops!|Do you like biting? We could bite things together!]]
+- Biting sounds dangerous.
+	Ice Fox: [[Dangerous? Nah! It’s just playing!|Unless... *eyes widen* Unless I get really excited...|Then... maybe... a little... dangerous... Hehe...]]
+	=> continue_or_end
+- I don’t like biting.
+	Ice Fox: [[You don’t...? But it’s the best part!|*Tail droops* Oh... okay...|*Low growl* You... don’t... like... biting...?]]
+	=> rabid_trigger
 
 ~ rabid_trigger
-	Ice Fox: [[*Eyes dart around* What did you say?!|*Starts shaking* Don’t look at me like that!|*A low, guttural sound* You... think you’re better?!]]
-	Ice Fox: [[I’ll show you! I’ll show all of you!|*Snarls, teeth bared* Get away! GET AWAY!|*Lunges, barely holding back* RAAAAAAH!]]
-	- Calm down!
-		Ice Fox: [[CALM DOWN?! I AM CALM! THIS IS CALM!|*Panting* You... you made me angry!|*Shakes head* No! Must... bite...]]
-		=> continue_or_end
-	- What’s wrong with you?
-		Ice Fox: [[WRONG?! NOTHING IS WRONG! YOU ARE WRONG!|*Foam at mouth* It’s... it’s the itch! The bite itch!|*Eyes roll back* Just... need... to... bite...]]
-		=> continue_or_end
-	- (Back away slowly)
-		Ice Fox: [[Running? Trying to run?!|*Sharp, high-pitched bark* Can’t run from me!|*Paces back and forth* Come back! I just want to play! *Snarl*]]
-		=> continue_or_end
+Ice Fox: [[*Eyes dart around* What did you say?!|*Starts shaking* Don’t look at me like that!|*A low, guttural sound* You... think you’re better?!]]
+Ice Fox: [[I’ll show you! I’ll show all of you!|*Snarls, teeth bared* Get away! GET AWAY!|*Lunges, barely holding back* RAAAAAAH!]]
+- Calm down!
+	Ice Fox: [[CALM DOWN?! I AM CALM! THIS IS CALM!|*Panting* You... you made me angry!|*Shakes head* No! Must... bite...]]
+	=> continue_or_end
+- What’s wrong with you?
+	Ice Fox: [[WRONG?! NOTHING IS WRONG! YOU ARE WRONG!|*Foam at mouth* It’s... it’s the itch! The bite itch!|*Eyes roll back* Just... need... to... bite...]]
+	=> continue_or_end
+- (Back away slowly)
+	Ice Fox: [[Running? Trying to run?!|*Sharp, high-pitched bark* Can’t run from me!|*Paces back and forth* Come back! I just want to play! *Snarl*]]
+	=> continue_or_end
 
 ~ continue_or_end
-	Ice Fox: [[*Suddenly snaps back to friendly* Hehe! That was fun! Right?!|*Wags tail, panting* Phew! Got a little worked up!|*Looks confused* Huh? What were we talking about?]]
-	- Are you okay?
-		Ice Fox: [[Okay? Yep! Perfectly okay! Why wouldn’t I be?!|Just a little... energetic! That’s all!|*Whispers* Don’t tell anyone... okay?]]
-		=> end_options
-	- That was scary.
-		Ice Fox: [[Scary? Me? Nah! I’m just a fluffy fox!|*Looks concerned* Oh no! Did I scare you? I didn’t mean to!|*Eyes flash* Good. You should be scared.]]
-		=> end_options
-	- Let’s end this.
-		=> END
+Ice Fox: [[*Suddenly snaps back to friendly* Hehe! That was fun! Right?!|*Wags tail, panting* Phew! Got a little worked up!|*Looks confused* Huh? What were we talking about?]]
+- Are you okay?
+	Ice Fox: [[Okay? Yep! Perfectly okay! Why wouldn’t I be?!|Just a little... energetic! That’s all!|*Whispers* Don’t tell anyone... okay?]]
+	=> end_options
+- That was scary.
+	Ice Fox: [[Scary? Me? Nah! I’m just a fluffy fox!|*Looks concerned* Oh no! Did I scare you? I didn’t mean to!|*Eyes flash* Good. You should be scared.]]
+	=> end_options
+- Let’s end this.
+	=> END
 
 ~ end_options
-	Ice Fox: [[Okay, bye-bye! Hope we can play again soon!|See you later, friend! Don’t forget me!|*Stares as you leave* ...Mine...]]
-	=> END
+Ice Fox: [[Okay, bye-bye! Hope we can play again soon!|See you later, friend! Don’t forget me!|*Stares as you leave* ...Mine...]]
+=> END
