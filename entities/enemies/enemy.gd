@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	stats.regen_stamina(stats.stamina_regen)
+	stats.regen_health(stats.health_regen)
 
 
 func get_stats_resource() -> LivingEntityStats:
