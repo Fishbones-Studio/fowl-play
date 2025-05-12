@@ -3,7 +3,7 @@ if SaveManager.get_enemy_encounter_count("ice_fox") > 0:
 	Ice Fox: [[Oh! You’re back! Yay!|Back for more playtime?|My favorite friend returns!]]
 	Ice Fox: [[You still smell like chicken! Even better this time!|Ready to play again?|Did you bring more treats this time?]]
 else:
-	Ice Fox: [[Woof woof! Hi there!|Hey, friend! Wag wag!|Oh boy, a new friend!]]
+	Ice Fox: [[Hi there!|Hey, friend! Wag wag!|Oh boy, a new friend!]]
 	Ice Fox: [[You smell nice! Like... chicken! Yum!|Ready to play? I love playing!|Is that a treat you have? Is it?]]
 - Hey there, Ice Fox.
 	Ice Fox: [[Hehe, you know my name! Smart friend!|Yep, that’s me! Ready for fun?|*Wags tail furiously* You’re the best!]]
