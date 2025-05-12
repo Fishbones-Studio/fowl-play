@@ -12,7 +12,6 @@ var is_immobile: bool = false
 var _knockback: Vector3 = Vector3.ZERO
 
 @onready var health_bar: HealthBar = %HealthBar
-@onready var bt_player: BTPlayer = $BTPlayer
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
@@ -38,6 +37,11 @@ func _physics_process(delta: float) -> void:
 		_knockback = _knockback.move_toward(Vector3.ZERO, knockback_decay * delta)
 
 	move_and_slide()
+
+
+func _process(delta: float) -> void:
+	stats.regen_stamina(stats.stamina_regen)
+	stats.regen_health(stats.health_regen)
 
 
 func get_stats_resource() -> LivingEntityStats:

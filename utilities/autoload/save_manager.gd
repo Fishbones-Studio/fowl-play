@@ -105,7 +105,7 @@ func load_game() -> Dictionary:
 	var stats_dict = config.get_value(PLAYER_SAVE_SECTION, "stats", null)
 	var upgrades = config.get_value(PLAYER_SAVE_SECTION, "upgrades", {})
 	GameManager.feathers_of_rebirth = config.get_value(PLAYER_SAVE_SECTION, "f_o_r", 0)
-	GameManager.prosperity_eggs = config.get_value(PLAYER_SAVE_SECTION, "p_eggs", 200) # Default value
+	GameManager.prosperity_eggs = config.get_value(PLAYER_SAVE_SECTION, "p_eggs", 300) # Default value
 
 	var stats: LivingEntityStats = null
 	if stats_dict != null && stats_dict is Dictionary:
