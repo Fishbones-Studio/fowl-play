@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://up7hh823h5kw" path="res://entities/entity_stats/living_entity_stats.gd" id="1_epyd4"]
 
 [resource]
+resource_name = "Insighter"
 script = ExtResource("1_epyd4")
 max_health = 50.0
 max_stamina = 100.0
@@ -16,4 +17,5 @@ weight_factor = 0.01
 defense_multiplier = 0.05
 defense_decelerator = 9.0
 is_player = false
+name = &"insighter"
 metadata/_custom_type_script = "uid://up7hh823h5kw"

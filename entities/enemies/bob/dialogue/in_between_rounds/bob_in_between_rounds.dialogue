@@ -1,0 +1,47 @@
+~ start
+if SaveManager.get_enemy_encounter_count("bob") > 0:
+	Bob: [[You. Back again?|Can’t stay away?|Always come back.]]
+	Bob: [[Still hurts. Never stops.|Twisted inside.|This is me now.]]
+else:
+	Bob: [[You. Here.|Another one comes.|Look at you.]]
+	Bob: [[Always pain.|Everything wrong.|This is me now.]]
+- What happened to you?
+	Bob: [[What... happened?|They did this.|Ones above.]]
+	Bob: [[Changed me.|Made me this.|Spikes hurt.]]
+	=> explore_mutations
+- You look different.
+	Bob: [[Different?|Not same.|Not what I was.]]
+	Bob: [[See too much.|Spikes everywhere.|Never stops.]]
+	=> explore_mutations
+- Are you in pain?
+	Bob: [[Pain?|Always.|Every second.]]
+	Bob: [[Skin tears.|Bones move.|Want it to stop.]]
+	=> explore_mutations
+
+~ explore_mutations
+Bob: [[Look. Me.|See what they did.|Is this power?]]
+Bob: [[Too many eyes.|Spikes for them.|Want to rest.]]
+- Who did this to you?
+	Bob: [[Them.|Ones watching.|Up there.]]
+	Bob: [[Wanted monsters.|Made me one.|Hate them.]]
+	=> continue_or_end
+- Does it hurt all the time?
+	Bob: [[All the time.|Fire under skin.|Torn apart.]]
+	Bob: [[Fighting helps.|Distracts me.|All I have.]]
+	=> continue_or_end
+- Why are you fighting?
+	Bob: [[Why fight?|Nothing else.|They want it.]]
+	Bob: [[Maybe pain stops.|Or someone else feels it.|You will feel it.]]
+	=> continue_or_end
+
+~ continue_or_end
+Bob: [[No more talk.|Enough.|Your turn.]]
+- I'll end your suffering.
+	Bob: [[End? You?|Not strong enough.]]
+	Bob: [[Try. You break first.|I break you.]]
+	=> END
+- You're just a monster.
+	Bob: [[Monster?|Yes. They made me.]]
+	Bob: [[Stronger now.|Stronger than you.|We see.]]
+	=> END
+- (Attack) => END

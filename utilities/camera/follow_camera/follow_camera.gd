@@ -60,6 +60,7 @@ func _ready() -> void:
 
 
 func _input(event) -> void:
+	if UIManager.game_input_blocked: return
 	if event is InputEventMouseMotion:
 	 	# Apply inversion to mouse input
 		var x_input: float = event.relative.x * (-1 if invert_x_axis else 1)
@@ -72,11 +73,12 @@ func _input(event) -> void:
 
 
 func _process(delta) -> void:
+	if UIManager.game_input_blocked: return
 	# Calculate controller input
-	var x_axis: float = Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right") \
-		if invert_x_axis else Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
-	var y_axis: float = Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down") \
-		if invert_y_axis else Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right")
+	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left") \
+		if invert_x_axis else Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right")
+	var y_axis: float = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up") \
+		if invert_y_axis else Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down")
 
 	# Apply controller input with sensitivity
 	entity_to_follow.rotation.y += x_axis * horizontal_sensitivity * delta * controller_sensitivity
