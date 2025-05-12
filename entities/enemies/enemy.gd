@@ -61,9 +61,11 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 				_knockback *= 2
 
 			# Set immobile time
-			immobile_timer.wait_time = _knockback.length() / knockback_decay
-			immobile_timer.start()
-			is_immobile = true
+			var immobile_time: float = _knockback.length() / knockback_decay
+			if not is_equal_approx(immobile_time, 0):
+				immobile_timer.wait_time = immobile_time
+				immobile_timer.start()
+				is_immobile = true
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 		health_bar.set_health(stats.current_health)
