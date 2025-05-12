@@ -283,4 +283,4 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.093, 0)
 shape = SubResource("BoxShape3D_6a4qq")
 
 [node name="dagger" parent="WeaponHitBox" index="1" instance=ExtResource("2_8qojw")]
-transform = Transform3D(-0.699999, 0, -6.11959e-08, 0, 0.699999, 0, 6.11959e-08, 0, -0.7, 0, 0.391005, 0)
+transform = Transform3D(-0.699999, 0, 1.77463e-06, 0, 0.699999, 0, -1.77462e-06, 0, -0.7, 0, 0.391005, 0)

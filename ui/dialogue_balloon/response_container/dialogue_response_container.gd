@@ -11,5 +11,5 @@ func setup_response_button(response: DialogueResponse, press_signal : Signal) ->
 
 func _on_focus_entered():
 	# Forward focus to the button for highlight
-	if has_node("MarginContainer/DialogueResponseButton"):
-		$MarginContainer/DialogueResponseButton.grab_focus()
+	if response_button:
+		response_button.grab_focus()
