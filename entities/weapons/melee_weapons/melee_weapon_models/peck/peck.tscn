@@ -34,16 +34,13 @@ script = ExtResource("2_1cyw5")
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("3_fn1cq")
 
-[node name="HitCheckPoint" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92, 0.6, -0.8)
-
-[node name="WeaponHitBox" parent="." index="1"]
+[node name="WeaponHitBox" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92, 0.64, -0.8)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
 shape = SubResource("BoxShape3D_fn1cq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_wyl0x")
 }
