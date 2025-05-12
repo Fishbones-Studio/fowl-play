@@ -2,11 +2,12 @@ extends Ability
 
 @export_range(1, 100, 0.1) var movement_debuff: float = 50.0
 @export var debuff_duration: float = 5.0
+@export var damage_scaler: float = 1.5
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.attack + stats.speed) * 1.1
+		return (damage_scaler * stats.speed) * (1.0 + (stats.attack / 100))
 
 var _attack_duration: float = 0.0
 var _hit_bodies: Array = []

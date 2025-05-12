@@ -7,17 +7,17 @@
 script = ExtResource("1_dlpss")
 damage = 5
 windup_time = 1.0
-attack_duration = 3.1
-cooldown_time = 1.8
+attack_duration = 5.0
+cooldown_time = 2.5
 allow_continuous_fire = true
 allow_early_release = true
 fire_rate_per_second = 0.2
-max_range = 25.0
+max_range = 30.0
 loop_animation = true
 name = "Minigun"
 purchasable = true
 drop_chance = 25
-cost = 200
+cost = 150
 currency_type = 0
 description = "Deals %s Base Damage per bullet, with a fire rate of %s after a windup of %s. The attack lasts %s, with a max range of %s, then enters a cooldown state for %s.
 
