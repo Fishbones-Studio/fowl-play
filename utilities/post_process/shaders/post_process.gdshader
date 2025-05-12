@@ -17,6 +17,10 @@ uniform float scale : hint_range(1.0, 2.0) = 1.0;
 uniform float border_mask: hint_range(0.0, 5.0) = 2.0;
 uniform float strength : hint_range(0, 25) = 0.0;
 
+// Chromatic aberration uniforms
+uniform float aberration_strength : hint_range(0.0, 1.0) = 0.015;
+uniform vec2 aberration_offset = vec2(0.5);
+
 float dithering_pattern(ivec2 fragcoord) {
 	const float pattern[] = {
 		0.00, 0.50, 0.10, 0.65,
@@ -59,10 +63,13 @@ void fragment() {
 	vec2 uvs = uv * scale_reverse + vec2(1.0 - scale_reverse) / 2.0;
 	vec2 mask = pow(2.0 * abs(UV - 0.5), vec2(border_mask));
 
-	// --- Sample color channels with border mask and strength ---
-	float r = texture(SCREEN_TEXTURE, uvs + vec2(SCREEN_PIXEL_SIZE * strength) * mask, 0.0).r;
+	// --- Chromatic aberration offsets ---
+	vec2 offset = (uvs - aberration_offset) * aberration_strength;
+
+	// --- Sample color channels with chromatic aberration, border mask, and strength ---
+	float r = texture(SCREEN_TEXTURE, uvs + offset + vec2(SCREEN_PIXEL_SIZE * strength) * mask, 0.0).r;
 	float g = texture(SCREEN_TEXTURE, uvs + vec2(SCREEN_PIXEL_SIZE) * mask, 0.0).g;
-	float b = texture(SCREEN_TEXTURE, uvs + vec2(SCREEN_PIXEL_SIZE * strength) * mask, 0.0).b;
+	float b = texture(SCREEN_TEXTURE, uvs - offset + vec2(SCREEN_PIXEL_SIZE * strength) * mask, 0.0).b;
 	vec4 raw = vec4(r, g, b, 1.0);
 
 	// --- Dithering and palette quantization ---
