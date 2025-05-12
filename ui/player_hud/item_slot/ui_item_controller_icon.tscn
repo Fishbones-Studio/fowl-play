@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://yq62iccynmnp"]
 
-[ext_resource type="Script" uid="uid://dafimxhd5ss3c" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
+[ext_resource type="Script" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
 [ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_8xpnx"]
 
 [node name="UiItemControllerIcon" type="Control"]

@@ -67,10 +67,7 @@ func _ready() -> void:
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
 # Returns the appropriate input action for the given item
-func _get_input_action_for_item(item: BaseResource) -> String:
-	if item == null:
-		return ""
-	
+func _get_input_action_for_item(item: BaseResource) -> String:	
 	# Get all equipped items of different types
 	var melee_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.MELEE_WEAPON)
 	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
@@ -114,7 +111,7 @@ func _init_item_slots(items: Array) -> void:
 		# Create new item slot and controller icon
 		var item_slot := ITEM_SLOT.instantiate() as UiItemSlot
 		var controller_slot := ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
-		if !item_slot or !controller_slot:
+		if not item_slot or not controller_slot:
 			continue
 			
 		# Add to scene and configure

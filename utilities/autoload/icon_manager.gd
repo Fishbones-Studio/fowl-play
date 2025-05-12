@@ -3,6 +3,10 @@ extends Node
 # Simple cache so we don't hammer the disk every frame
 var _icon_cache: Dictionary = {}
 
+func _ready() -> void:
+	# whenever keybinds change, we want to reload our icons
+	SignalManager.keybind_changed.connect(clear_cache)
+
 # Public: get the icon texture for a given action name
 func get_icon_texture(action: String) -> Texture2D:
 	if action.is_empty():
@@ -25,8 +29,3 @@ func get_icon_texture(action: String) -> Texture2D:
 # Public: clear everything in the cache
 func clear_cache() -> void:
 	_icon_cache.clear()
-
-
-func _ready() -> void:
-	# whenever keybinds change, we want to reload our icons
-	SignalManager.keybind_changed.connect(clear_cache)
