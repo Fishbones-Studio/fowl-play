@@ -14,7 +14,7 @@ tracks/0/path = NodePath("WeaponHitBox:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.533333, 0.633333, 0.8, 0.9, 1.4, 1.83333, 2),
+"times": PackedFloat32Array(0.00325486, 0.103255, 0.203255, 0.303255, 0.436588, 0.535503, 0.634418, 0.801085, 0.9, 1.4, 1.83333, 2),
 "transitions": PackedFloat32Array(0.5, 3, 3, 1, 3, 3, 1, 1, 1, 1, 0.5, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398), Vector3(-0.785398, 1.5708, -1.5708), Vector3(0, 3.14159, -1.91986), Vector3(3.14159, 3.14159, -2.35619), Vector3(3.92699, 1.5708, -1.5708), Vector3(3.14159, 0, -1.0472), Vector3(0, 0, -1.5708), Vector3(0, 0, -1.5708), Vector3(0, 25.1327, -1.5708), Vector3(0, 50.2655, -1.5708), Vector3(0, 50.2655, 0)]
@@ -118,7 +118,31 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ktt1h"]
 resource_name = "Idle"
-length = 0.5
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHitBox/dagger:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.533333, 0.75, 1, 1.2),
+"transitions": PackedFloat32Array(1, 0.482968, 1, 1, -1.6245, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.0472, -1.5708), Vector3(0, 6.28319, -1.13446), Vector3(0, 10.821, -0.139626), Vector3(0, 4.88692, -0.349066), Vector3(0, 0, -0.712094)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox/dagger:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector3(0, 0.391005, 0), Vector3(0, 2.3, 0), Vector3(0, 0.391, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_666u7"]
 length = 0.001
@@ -158,6 +182,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHitBox/dagger:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.391005, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/dagger:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.71153)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fr5cn"]
 _data = {
@@ -187,4 +235,4 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.093, 0)
 shape = SubResource("BoxShape3D_6a4qq")
 
 [node name="dagger" parent="WeaponHitBox" index="1" instance=ExtResource("2_8qojw")]
-transform = Transform3D(-0.7, 0, -1.05697e-07, 0, 0.7, 0, 1.05697e-07, 0, -0.7, 0, 0.391005, 0)
+transform = Transform3D(0.530154, 0.457095, 0, -0.457095, 0.530154, 0, 0, 0, 0.7, 0, 0.391005, 0)
