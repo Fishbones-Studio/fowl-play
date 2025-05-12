@@ -17,15 +17,15 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5ek6"]
 albedo_color = Color(0.186146, 0.0855308, 0.00461659, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qvty8"]
-size = Vector3(1.66708, 5.97906, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_bfy7c"]
+custom_solver_bias = 1.0
+radius = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhi5u"]
 size = Vector3(1.04858, 1, 4.02013)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bfy7c"]
-custom_solver_bias = 1.0
-radius = 1.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_qvty8"]
+size = Vector3(1.66708, 5.97906, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iajuv"]
 size = Vector3(1.20062, 0.658325, 1.74261)
@@ -96,23 +96,22 @@ material = SubResource("StandardMaterial3D_k5ek6")
 
 [node name="MenuItems" type="Node3D" parent="."]
 
-[node name="Inventory" type="Area3D" parent="MenuItems"]
-transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, 0.0488258, 2.42125, -0.695685)
+[node name="Sacrifice" type="Area3D" parent="MenuItems"]
+transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, -1.30815, 2.668, 0.562441)
 script = ExtResource("6_dqtu2")
-highlight_scale_factor = 1.2
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="InventoryLabel" type="Label3D" parent="MenuItems/Inventory"]
-transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.412459, 1.67651, 0.704661)
+[node name="RebirthShopLabel" type="Label3D" parent="MenuItems/Sacrifice"]
+transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
 billboard = 1
-text = "Equipment"
+text = "Sacrifice"
 
-[node name="sword" parent="MenuItems/Inventory" instance=ExtResource("7_x5v8y")]
-transform = Transform3D(0.5, 4.37114e-08, -0.866025, 8.74228e-08, -1, 0, -0.866025, -7.57103e-08, -0.5, -0.104491, 5.26695, 0.165047)
+[node name="GroundSaw" parent="MenuItems/Sacrifice" instance=ExtResource("8_bfy7c")]
+transform = Transform3D(0.52171, 0, -0.853123, 0, 1, 0, 0.853123, 0, 0.52171, -0.392122, -0.984015, -0.159684)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Inventory"]
-transform = Transform3D(0.895308, 0, -0.445448, 0, 1, 0, 0.445448, 0, 0.895308, -0.0176091, 2.48953, -0.00876212)
-shape = SubResource("BoxShape3D_qvty8")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Sacrifice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.529123, 0, 0.573004)
+shape = SubResource("SphereShape3D_bfy7c")
 
 [node name="RebirthShop" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, -1.11387, 2.543, -0.740728)
@@ -132,22 +131,23 @@ transform = Transform3D(-0.0777689, -0.0529222, -0.491071, 0.489175, 0.0604498, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.633071, 0, 0.242775)
 shape = SubResource("BoxShape3D_jhi5u")
 
-[node name="Sacrifice" type="Area3D" parent="MenuItems"]
-transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, -1.30815, 2.668, 0.562441)
+[node name="Inventory" type="Area3D" parent="MenuItems"]
+transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.211227, 0.0488258, 2.42125, -0.695685)
 script = ExtResource("6_dqtu2")
+highlight_scale_factor = 1.2
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="RebirthShopLabel" type="Label3D" parent="MenuItems/Sacrifice"]
-transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
+[node name="InventoryLabel" type="Label3D" parent="MenuItems/Inventory"]
+transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.412459, 1.67651, 0.704661)
 billboard = 1
-text = "Sacrifice"
+text = "Equipment"
 
-[node name="GroundSaw" parent="MenuItems/Sacrifice" instance=ExtResource("8_bfy7c")]
-transform = Transform3D(0.52171, 0, -0.853123, 0, 1, 0, 0.853123, 0, 0.52171, -0.392122, -0.984015, -0.159684)
+[node name="sword" parent="MenuItems/Inventory" instance=ExtResource("7_x5v8y")]
+transform = Transform3D(0.5, 4.37114e-08, -0.866025, 8.74228e-08, -1, 0, -0.866025, -7.57103e-08, -0.5, -0.104491, 5.26695, 0.165047)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Sacrifice"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.529123, 0, 0.573004)
-shape = SubResource("SphereShape3D_bfy7c")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Inventory"]
+transform = Transform3D(0.895308, 0, -0.445448, 0, 1, 0, 0.445448, 0, 0.895308, -0.0176091, 2.48953, -0.00876212)
+shape = SubResource("BoxShape3D_qvty8")
 
 [node name="Shop" type="Area3D" parent="MenuItems"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.23576, 2.54873, -0.784794)
