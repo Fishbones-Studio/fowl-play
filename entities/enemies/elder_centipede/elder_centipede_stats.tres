@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LivingEntityStats" load_steps=2 format=3 uid="uid://wveh2ajtskfi"]
+
+[ext_resource type="Script" uid="uid://up7hh823h5kw" path="res://entities/entity_stats/living_entity_stats.gd" id="1_m5dqr"]
+
+[resource]
+script = ExtResource("1_m5dqr")
+max_health = 500.0
+max_stamina = 100.0
+attack = 40.0
+defense = 40
+speed = 15.0
+weight = 10.0
+health_regen = 50
+stamina_regen = 200
+weight_factor = 0.07
+defense_multiplier = 0.05
+defense_decelerator = 9.0
+is_player = false
+name = &""
+metadata/_custom_type_script = "uid://up7hh823h5kw"

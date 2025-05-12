@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c51s5rs0dxnmr"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
+[ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
+[ext_resource type="PackedScene" uid="uid://cxdsrst2sht5x" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="3_djom0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djom0"]
+
+[node name="ElderCentipede" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_urhlp")]
+stats = ExtResource("2_5cdes")
+type = 1
+enemy_model = NodePath("chicken_centipede")
+
+[node name="chicken_centipede" parent="." index="0" instance=ExtResource("3_djom0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("CapsuleShape3D_djom0")
+
+[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+text = "Elder Centipede \"Evolved\""
+
+[editable path="chicken_centipede"]
