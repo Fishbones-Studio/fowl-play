@@ -87,33 +87,64 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7r5tl")
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -219.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Balloon/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainerResponse" type="MarginContainer" parent="Balloon/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 25
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/VBoxContainer/MarginContainerResponse" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("3_xs0yr")
+response_template = NodePath("ResponseContainer")
+
+[node name="ResponseContainer" parent="Balloon/VBoxContainer/MarginContainerResponse/ResponsesMenu" instance=ExtResource("4_xs0yr")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Balloon/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 15
 
-[node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Balloon/VBoxContainer/MarginContainer"]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/VBoxContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
@@ -123,34 +154,11 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_bci5f")]
+[node name="DialogueLabel" parent="Balloon/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_bci5f")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."
 
-[node name="MarginContainerResponse" type="MarginContainer" parent="Balloon"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 106.0
-grow_horizontal = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 25
-
-[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/MarginContainerResponse" node_paths=PackedStringArray("response_template")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/separation = 20
-alignment = 1
-script = ExtResource("3_xs0yr")
-response_template = NodePath("ResponseContainer")
-
-[node name="ResponseContainer" parent="Balloon/MarginContainerResponse/ResponsesMenu" instance=ExtResource("4_xs0yr")]
-layout_mode = 2
-
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="response_selected" from="Balloon/MarginContainerResponse/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
+[connection signal="response_selected" from="Balloon/VBoxContainer/MarginContainerResponse/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
