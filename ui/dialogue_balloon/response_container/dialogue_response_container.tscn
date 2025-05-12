@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbumw5xcjq0tn"]
+[gd_scene load_steps=4 format=3 uid="uid://bbumw5xcjq0tn"]
 
 [ext_resource type="Script" uid="uid://cv74hb3amkor0" path="res://ui/dialogue_balloon/response_container/dialogue_response_container.gd" id="1_y266i"]
+[ext_resource type="Theme" uid="uid://besvom3pq3s63" path="res://resources/themes/main_theme.tres" id="2_bfkdk"]
 [ext_resource type="Script" uid="uid://bohb7b5culexc" path="res://ui/dialogue_balloon/response_container/dialogue_response_button.gd" id="2_d6bph"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfkdk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q73e0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y44xi"]
 
 [node name="DialogueResponseContainer" type="PanelContainer"]
 anchors_preset = 10
@@ -30,10 +25,8 @@ theme_override_constants/margin_bottom = 10
 [node name="DialogueResponseButton" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bfkdk")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_q73e0")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_y44xi")
+theme = ExtResource("2_bfkdk")
+theme_type_variation = &"DialogueButton"
 text = "Response example!"
 script = ExtResource("2_d6bph")
 
