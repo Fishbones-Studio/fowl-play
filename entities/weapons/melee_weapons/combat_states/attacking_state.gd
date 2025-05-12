@@ -40,6 +40,7 @@ func _attack() -> void:
 		for target in targets:
 			if target is Enemy or target is ChickenPlayer:
 				SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
+				weapon_node.attacking = false
 			elif target:
 				print("Hit target is not a valid target!" + target.name)
 				return

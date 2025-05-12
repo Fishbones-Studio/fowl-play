@@ -9,8 +9,7 @@ extends Node3D
 var attacking: bool = false:
 	set(value):
 		attacking = value
-		if value: hit_targets_this_swing.clear()
-		print("ATTACKING: ", value)
+		hit_targets_this_swing.clear()
 
 var hit_targets_this_swing: Array[Node] = []
 var entity_stats: LivingEntityStats
@@ -35,7 +34,6 @@ func _check_for_hit() -> void:
 	for body in overlapping_bodies:
 		if body is Node3D and not hit_targets_this_swing.has(body):
 			hit_targets_this_swing.append(body)
-			print("Melee hit (area): ", body.name)
 			return
 
 
