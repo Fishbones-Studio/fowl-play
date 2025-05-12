@@ -231,10 +231,9 @@ func _finalize_remapping():
 	# Update storage and UI after successful remapping
 	_save_input_settings()
 	SaveManager.is_remapping = false
+	SignalManager.keybind_changed.emit(SaveManager.action_to_remap)
 	SaveManager.action_to_remap = ""
 	_create_action_list()
-
-	SignalManager.keybind_changed.emit()
 
 func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
 	# Helper to safely set text on labels with fallback
@@ -258,4 +257,4 @@ func _on_restore_defaults_button_up() -> void:
 
 	_create_action_list()
 	
-	SignalManager.keybind_changed.emit()
+	SignalManager.keybind_changed.emit("*") 
