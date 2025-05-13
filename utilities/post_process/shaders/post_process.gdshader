@@ -1,6 +1,5 @@
 shader_type canvas_item;
 
-// Screen texture and size
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest_mipmap;
 uniform vec2 screen_size = vec2(1920.0, 1080.0);
 
@@ -8,8 +7,9 @@ uniform vec2 screen_size = vec2(1920.0, 1080.0);
 uniform int colors : hint_range(1, 16) = 12;
 uniform int dither_size : hint_range(1, 8) = 1;
 // Color shift for dithering
-uniform float dither_shift : hint_range(-1.0, 1.0) = -1.0;
-uniform float dither_strength : hint_range (-1.0, 1.0) = 0.5;
+uniform float dither_shift : hint_range(-0.5, 0.5) = 0.1;
+uniform float dither_strength : hint_range(0.0, 1.0) = 0.5;
+uniform float dither_hue_shift : hint_range(-3.1416, 3.1416) = 0.0; // radians
 
 // Visual controls
 uniform float alpha : hint_range(0.0, 1.0) = 1.0;
@@ -26,7 +26,26 @@ float dithering_pattern(ivec2 fragcoord) {
     };
     int x = fragcoord.x % 4;
     int y = fragcoord.y % 4;
-    return pattern[y * 4 + x] + dither_strength;
+    return pattern[y * 4 + x] * dither_strength;
+}
+
+// Manual hue rotation for a vec3 color
+vec3 hue_shift(vec3 color, float angle) {
+    // Convert RGB to YIQ
+    float Y = dot(color, vec3(0.299, 0.587, 0.114));
+    float I = dot(color, vec3(0.596, -0.274, -0.322));
+    float Q = dot(color, vec3(0.211, -0.523, 0.312));
+    // Rotate I and Q
+    float cosA = cos(angle);
+    float sinA = sin(angle);
+    float I2 = I * cosA - Q * sinA;
+    float Q2 = I * sinA + Q * cosA;
+    // Convert back to RGB
+    return vec3(
+        Y + 0.956 * I2 + 0.621 * Q2,
+        Y - 0.272 * I2 - 0.647 * Q2,
+        Y - 1.106 * I2 + 1.703 * Q2
+    );
 }
 
 // Reduces a color channel to a limited palette, with dithering
@@ -67,16 +86,19 @@ void fragment() {
 
     // Dithering coordinates
     ivec2 dither_uv = ivec2(FRAGCOORD.xy / float(dither_size));
-    float dithering_value = dithering_pattern(dither_uv);
+    float dither_base = dithering_pattern(dither_uv);
 
-    // Dithering values per channel (original formula + color shift)
-    float dither_r = (dithering_value) * dithering_value + dither_shift;
-    float dither_g = (dithering_value) * dithering_value - dither_shift;
-    float dither_b = (dithering_value) * dithering_value;
+    // Compose dither as a vector, apply shift
+    vec3 dither_vec = vec3(
+        dither_base + dither_shift,
+        dither_base - dither_shift,
+        dither_base
+    );
+    // Apply hue shift to the dither vector
+    dither_vec = hue_shift(dither_vec, dither_hue_shift);
 
-    // Reduce color channels with dithering and color shift
-    COLOR.r = reduce_color(raw.r, dither_r, colors - 1);
-    COLOR.g = reduce_color(raw.g, dither_g, colors - 1);
-    COLOR.b = reduce_color(raw.b, dither_b, colors - 1);
+    COLOR.r = reduce_color(raw.r, dither_vec.r, colors - 1);
+    COLOR.g = reduce_color(raw.g, dither_vec.g, colors - 1);
+    COLOR.b = reduce_color(raw.b, dither_vec.b, colors - 1);
     COLOR.a = alpha;
 }

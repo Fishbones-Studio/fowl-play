@@ -6,4 +6,5 @@
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_150bd")
 
-[node name="Pixelate" parent="." instance=ExtResource("2_nsksp")]
+[node name="shader" parent="." instance=ExtResource("2_nsksp")]
+visible = false

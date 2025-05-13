@@ -10,6 +10,7 @@ shader_parameter/colors = 12
 shader_parameter/dither_size = 1
 shader_parameter/dither_shift = 0.0
 shader_parameter/dither_strength = 0.5
+shader_parameter/dither_hue_shift = 0.0
 shader_parameter/alpha = 1.0
 shader_parameter/scale = 1.0
 shader_parameter/border_mask = 2.0

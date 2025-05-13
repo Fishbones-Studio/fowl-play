@@ -82,7 +82,7 @@ func _return_to_game_menu() -> void:
 
 
 func _return_to_main_menu() -> void:
-	SignalManager.switch_game_scene.emit(UIEnums.PATHS[UIEnums.UI.MAIN_MENU])
+	SignalManager.switch_game_scene.emit(null)
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU)
 	UIManager.remove_ui(self)
 	UIManager.paused = false

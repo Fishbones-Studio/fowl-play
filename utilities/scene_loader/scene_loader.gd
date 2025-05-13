@@ -6,6 +6,7 @@ extends Node
 # Variable to keep track of the scene currently being loaded in the background
 var _loading_scene_path: String = ""
 
+@onready var shader : PostProcess = $shader
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
@@ -77,6 +78,24 @@ func _on_switch_game_scene(scene_path: String) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
 	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
 	# The previous load will continue in the background but its result won't be used by this script.
+	
+	# If the scene path is null, remove all children (except the shader) and stop processing
+	if scene_path == null:
+		print("Scene path is null, removing all children and stopping processing.")
+		for child in get_children():
+			if child is PostProcess : continue
+			child.queue_free()
+		shader.show()
+		set_process(false)
+		return
+	else:
+		# If the scene path is empty, print a warning and return
+		if scene_path.is_empty():
+			push_warning("Scene path is empty, not loading anything.")
+			return
+		else:
+			shader.show()
+	
 
 	if !_loading_scene_path.is_empty():
 		print(
