@@ -25,6 +25,7 @@ func _ready() -> void:
 				item_slot.active = true
 				controller_slot.visible = true
 				controller_slot.input_action = "attack"
+				controller_slot.show_switch_icon = false
 				controller_slot.show_hold_label = _should_show_hold_label(item)
 				print("Activated item slot: ", item_slot)
 			else:
@@ -35,22 +36,17 @@ func _ready() -> void:
 	SignalManager.deactivate_item_slot.connect(
 		func(item: BaseResource):
 			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
-			print("Deactivating item slot at index: ", index)
 			if index < 0 or index >= get_child_count() / 2:
 				return
 				
 			var item_slot: UiItemSlot = get_child(index * 2) as UiItemSlot
 			var controller_slot: Control = get_child(index * 2 + 1) as Control
 			if item_slot and controller_slot:
-				# Deactivate the slot and update controller icon
 				item_slot.active = false
 				controller_slot.visible = true
-				controller_slot.input_action = "switch_weapon"
+				controller_slot.input_action = _get_input_action_for_item(item)
 				controller_slot.show_hold_label = false
-				controller_slot.show_switch_icon = false
-				print("Deactivated item slot: ", item_slot)
-			else:
-				push_warning("No item slot found at index: ", index)
+				controller_slot.show_switch_icon = _should_show_switch_icon(item)
 	)
 
 	# Connect to signal that starts cooldown on an item slot
@@ -68,7 +64,7 @@ func _ready() -> void:
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
 
 # Returns the appropriate input action for the given item
-func _get_input_action_for_item(item: BaseResource) -> String:	
+func _get_input_action_for_item(item: BaseResource) -> String:    
 	# Get all equipped items of different types
 	var melee_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.MELEE_WEAPON)
 	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
@@ -105,8 +101,7 @@ func _should_show_hold_label(item: BaseResource) -> bool:
 func _should_show_switch_icon(item: BaseResource) -> bool:
 	if item == null:
 		return false
-	var has_second_weapon = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
-	return item in has_second_weapon
+	return _get_input_action_for_item(item) == "switch_weapon"
 
 # Initializes all item slots in the UI
 func _init_item_slots(items: Array) -> void:
