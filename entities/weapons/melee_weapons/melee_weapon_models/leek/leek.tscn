@@ -262,7 +262,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_axwbb")
 }
 
-[node name="WeaponHitBox" parent="." index="1"]
+[node name="WeaponHitBox" parent="." index="2"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.000333309, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]

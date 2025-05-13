@@ -275,7 +275,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_fr5cn")
 }
 
-[node name="WeaponHitBox" parent="." index="1"]
+[node name="WeaponHitBox" parent="." index="2"]
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]

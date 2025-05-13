@@ -5,18 +5,14 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_awa8k"]
 shader = ExtResource("2_5k2e1")
-shader_parameter/pixel_size = 2
 shader_parameter/screen_size = Vector2(1920, 1080)
-shader_parameter/enabled = true
-shader_parameter/dithering = true
 shader_parameter/colors = 12
 shader_parameter/dither_size = 1
+shader_parameter/dither_shift = 0.0
+shader_parameter/dither_strength = 0.5
 shader_parameter/alpha = 1.0
 shader_parameter/scale = 1.0
 shader_parameter/border_mask = 2.0
-shader_parameter/strength = 0.0
-shader_parameter/aberration_strength = 0.015
-shader_parameter/aberration_offset = Vector2(0.5, 0.5)
 
 [node name="PostProcess" type="Control"]
 layout_mode = 3

@@ -1,6 +1,6 @@
 class_name PostProcess extends Control
 
-@onready var pixelate_shader: SubViewportContainer = %PostProcessShader
+@onready var post_process_shader: SubViewportContainer = %PostProcessShader
 ## Using a subviewport, so we can exclude objects from the shader
 @onready var subviewport : SubViewport = %SubViewport
 
@@ -13,6 +13,6 @@ func _ready():
 
 func _update_shader_params():
 	var viewport_size = get_viewport().size
-	var shader_material: ShaderMaterial = pixelate_shader.material as ShaderMaterial
-	shader_material.set_shader_parameter("screen_size", viewport_size)
+	var pp_shader_material: ShaderMaterial = post_process_shader.material as ShaderMaterial
+	pp_shader_material.set_shader_parameter("screen_size", viewport_size)
 	subviewport.size = viewport_size
