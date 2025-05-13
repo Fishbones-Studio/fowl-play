@@ -48,6 +48,7 @@ func input(event: InputEvent) -> void:
 	if current_state == null:
 		push_error(name + ": No state set.")
 		return
+	if UIManager.game_input_blocked : return
 	current_state.input(event)
 
 

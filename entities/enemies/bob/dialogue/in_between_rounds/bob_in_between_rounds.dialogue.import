@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://btmqor2bjyywl"
+path="res://.godot/imported/bob_in_between_rounds.dialogue-5a17b9533b83f03916de33077121302b.tres"
+
+[deps]
+
+source_file="res://entities/enemies/bob/dialogue/in_between_rounds/bob_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/bob_in_between_rounds.dialogue-5a17b9533b83f03916de33077121302b.tres"]
+
+[params]
+
+defaults=true

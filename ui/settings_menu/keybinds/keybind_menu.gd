@@ -29,14 +29,14 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-	if SaveManager.is_remapping:
+	if SettingsManager.is_remapping:
 		if event is InputEventMouseMotion:
 			return
 
 		get_viewport().set_input_as_handled()
 
 		# Validate event type matches input mode
-		if not _is_valid_event_for_input_type(event, SaveManager.input_type):
+		if not _is_valid_event_for_input_type(event, SettingsManager.input_type):
 			error_text_label.text = "Invalid input event for this action"
 			return
 
@@ -46,19 +46,19 @@ func _input(event: InputEvent) -> void:
 			event.double_click = false
 
 		# Check for existing assignments
-		if _is_event_already_assigned(event, SaveManager.action_to_remap):
+		if _is_event_already_assigned(event, SettingsManager.action_to_remap):
 			error_text_label.text = "Input event already assigned to another action"
 			return
 
-		var current_events: Array[InputEvent] = InputMap.action_get_events(SaveManager.action_to_remap)
+		var current_events: Array[InputEvent] = InputMap.action_get_events(SettingsManager.action_to_remap)
 		var split_events: Dictionary = _split_events_by_type(current_events)
 
 		# Replace existing binding of same type
-		var old_event: InputEvent = _get_event_to_replace(split_events, SaveManager.input_type)
+		var old_event: InputEvent = _get_event_to_replace(split_events, SettingsManager.input_type)
 		if old_event:
-			InputMap.action_erase_event(SaveManager.action_to_remap, old_event)
+			InputMap.action_erase_event(SettingsManager.action_to_remap, old_event)
 
-		InputMap.action_add_event(SaveManager.action_to_remap, event)
+		InputMap.action_add_event(SettingsManager.action_to_remap, event)
 		_finalize_remapping()
 	else:
 
@@ -83,7 +83,7 @@ func _load_input_settings():
 	# Load defaults first, then override with saved config
 	InputMap.load_from_project_settings()
 
-	SaveManager.load_settings(config_name)
+	SettingsManager.load_settings(get_viewport(),get_window(),config_name)
 
 	_create_action_list()
 
@@ -230,9 +230,9 @@ func _get_event_to_replace(split_events: Dictionary, input_type: int) -> InputEv
 func _finalize_remapping():
 	# Update storage and UI after successful remapping
 	_save_input_settings()
-	SaveManager.is_remapping = false
+	SettingsManager.is_remapping = false
 	SignalManager.keybind_changed.emit(SaveManager.action_to_remap)
-	SaveManager.action_to_remap = ""
+	SettingsManager.action_to_remap = ""
 	_create_action_list()
 
 func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
@@ -246,8 +246,8 @@ func _set_label_text(row: Node, container_name: String, event: InputEvent, actio
 
 
 func _on_restore_defaults_button_up() -> void:
-	SaveManager.is_remapping = false
-	SaveManager.action_to_remap = ""
+	SettingsManager.is_remapping = false
+	SettingsManager.action_to_remap = ""
 
 	# Restore default bindings and remove config file
 	InputMap.load_from_project_settings()

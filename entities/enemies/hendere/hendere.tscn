@@ -14,6 +14,7 @@ height = 2.4
 [node name="Hendere" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_legca")]
 stats = ExtResource("2_n7fk8")
 enemy_model = NodePath("chicken_hennifer")
+dialogue_path = "res://entities/enemies/hendere/dialogue"
 
 [node name="chicken_hennifer" parent="." index="0" instance=ExtResource("3_i6i68")]
 transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 0, 1.13557, 0)

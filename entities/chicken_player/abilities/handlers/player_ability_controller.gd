@@ -25,6 +25,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
+	if UIManager.game_input_blocked: return
 	if abilities.size() > 0 and Input.is_action_just_pressed("ability_one"):
 		_try_activate_ability(abilities.keys()[0])
 	if abilities.size() > 1 and Input.is_action_just_pressed("ability_two"):
