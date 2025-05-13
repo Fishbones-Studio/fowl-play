@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://btoxyw6mh25u2"]
+
+[ext_resource type="Shader" uid="uid://cwgwggbws82va" path="res://resources/shaders/shine_shader.gdshader" id="1_q1nqd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chvqh"]
+render_priority = 0
+shader = ExtResource("1_q1nqd")
+shader_parameter/enabled = false
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.5
+shader_parameter/shine_width = 0.3
+shader_parameter/shine_angle_x = 0.0
+shader_parameter/shine_angle_y = 0.0
+shader_parameter/shine_angle_z = -90.0
+
+[resource]
+resource_name = "Material.001"
+next_pass = SubResource("ShaderMaterial_chvqh")
+cull_mode = 2
+roughness = 0.5

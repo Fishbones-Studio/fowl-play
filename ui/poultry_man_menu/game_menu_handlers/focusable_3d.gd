@@ -15,6 +15,7 @@ var is_focused: bool = false
 
 @onready var label: Label3D = _find_label()
 
+
 func _ready() -> void:
 	original_scale = scale
 	if label:
@@ -25,6 +26,7 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	input_event.connect(_on_input_event)
 
+
 func _find_label() -> Label3D:
 	for child in get_children():
 		if child is Label3D:
@@ -34,35 +36,41 @@ func _find_label() -> Label3D:
 			return found
 	return null
 
+
 func _on_mouse_entered() -> void:
 	focus()
 
+
 func _on_mouse_exited() -> void:
 	unfocus()
+
 
 func _on_input_event(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		press()
 
+
 func focus() -> void:
 	if is_focused:
 		return
-	
+
 	is_focused = true
 	scale = original_scale * highlight_scale_factor
 	if label:
 		label.modulate = highlight_color
 	emit_signal("focused")
 
+
 func unfocus() -> void:
 	if not is_focused:
 		return
-	
+
 	is_focused = false
 	scale = original_scale
 	if label:
 		label.modulate = original_label_color
 	emit_signal("unfocused")
+
 
 func press() -> void:
 	emit_signal("pressed")

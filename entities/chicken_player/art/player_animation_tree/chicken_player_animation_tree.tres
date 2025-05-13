@@ -139,7 +139,6 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(802, -8)
 
 [resource]
-graph_offset = Vector2(-502.941, -85.3291)
 nodes/Dash/node = SubResource("AnimationNodeAnimation_8i8jv")
 nodes/Dash/position = Vector2(-230, 170)
 nodes/DashOneShot/node = SubResource("AnimationNodeOneShot_6mkbl")

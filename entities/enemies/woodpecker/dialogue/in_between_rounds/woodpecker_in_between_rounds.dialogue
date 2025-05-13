@@ -1,0 +1,53 @@
+~ start
+if SaveManager.get_enemy_encounter_count("woodpecker") > 0:
+	Woodpecker: [[You return. As expected. Another chance to observe.|Back again? I anticipated this.|Persistent, aren’t you? More data for my research.]]
+	Woodpecker: [[My form remains the same. The experiments continue.|Repetition is not ignorance. I learn from every encounter.|Still trapped, but less surprised to see you.]]
+else:
+	Woodpecker: [[A new challenger. Or just another specimen?|Greetings. Try not to be distracted by my condition.|Come closer, if you’re curious. I find your kind fascinating.]]
+	Woodpecker: [[My form is... not ideal. The result of failed experiments.|Don’t judge by appearance. My mind is still sharp.|I’m not just a brute, despite what you see.]]
+- What are you?
+	Woodpecker: [[A question of identity. Practical, here.|I was once smaller. Simpler. Not this.|Now? I’m forced evolution. A warning, not a triumph.]]
+	Woodpecker: [[They wanted power. They got me. My mind survived, ironically.|I remember everything, trapped in this shell.|A thinking mind, bound by instinct and this beak.]]
+	=> discuss_mutation
+- You're hideously mutated.
+	Woodpecker: [[Blunt, but true.|Hideous? By some standards. But all life mutates.|The real change is inside.]]
+	Woodpecker: [[This form has its uses, though the cost is high.|You think I chose this? To become... this?|Look closer. There’s more than ugliness here.]]
+	=> discuss_mutation
+- I'm here to fight.
+	Woodpecker: [[Predictable. Violence is the easy answer.|Very well. The arena demands blood, and I’m ready.|Don’t expect a mindless brawl. I fight with purpose.]]
+	Woodpecker: [[My strength is considerable. A side effect of the process.|But it’s my strategy that will defeat you.|Prepare yourself. This will be... instructive.]]
+	=> proceed_to_fight
+
+~ discuss_mutation
+Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wavelengths you can’t imagine. Unsettling, aren’t they?|The pain is constant. A low hum under every thought.]]
+- Who did this to you?
+	Woodpecker: [[The architects of this arena. The ones above.|They tried to weaponize nature. They succeeded, in a way.|I am their masterpiece—and their mistake.]]
+	Woodpecker: [[They underestimated the mind’s resilience.|They thought they could make a tool.|But I remember. And I resent.]]
+	=> continue_discussion
+- Is there any way to reverse it?
+	Woodpecker: [[Reverse it? An interesting idea.|I’ve considered it. The damage is extensive.|Maybe in theory. But not here, not now.]]
+	Woodpecker: [[My only hope is an end to this, or to master this power.|Control is difficult, with these urges.|It’s a challenge, even for me.]]
+	=> continue_discussion
+- What kind of advantages does this give you?
+	Woodpecker: [[I’m more durable. My body is tough.|Stronger, able to strike with force.|My senses are overwhelming, but useful.]]
+	Woodpecker: [[I see weaknesses you try to hide. I can predict your moves.|Grotesque, yes, but efficient.|Not beautiful—just effective.]]
+	=> continue_discussion
+
+~ continue_discussion
+Woodpecker: [[We could keep talking, but I suspect you have other goals.|Or maybe you’re just delaying the inevitable.|Either way, words won’t stop what’s coming.]]
+- What happens now?
+	Woodpecker: [[Now? The arena’s purpose is clear.|We fight. One or both of us may fall.|A simple end to a complicated story.]]
+	=> proceed_to_fight
+- Can we avoid fighting?
+	Woodpecker: [[Avoid it? Not here.|The rules are set. The audience wants a show.|And I have a part to play.]]
+	Woodpecker: [[This body pushes me to violence.|Even with my mind, the beast is close.|It’s inevitable.]]
+	=> proceed_to_fight
+- I need to leave.
+	Woodpecker: [[Leave? Not possible.|Not until the show is over.|And that means a fight.]]
+	Woodpecker: [[Running will only make it worse.|Face me. It’s the only way forward.|For both of us.]]
+	=> proceed_to_fight
+
+~ proceed_to_fight
+Woodpecker: [[Very well. Let’s begin.|Prepare for theory in practice.|May the most resilient survive.]]
+Woodpecker: [[*A low growl escapes, the intellect fading*|The mind is willing, but the body wants to fight.|*Eyes narrow, focus sharpens*]]
+=> END

@@ -6,18 +6,111 @@
 
 [sub_resource type="Animation" id="Animation_em7sn"]
 resource_name = "Attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHitBox:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(0.5, 3, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.270526, 0, 0), Vector3(-2.00713, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(0.5, 3, 1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7), Vector3(1, 1, 1), Vector3(0.7, 0.7, 0.7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(0.5, 3, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.000333309, 0), Vector3(0, 0.4, 0.5), Vector3(0, 0, -1.5), Vector3(0, 0.000333309, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_attacking"
+}, {
+"args": [false],
+"method": &"set_attacking"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/leek:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7, 0.7, 0.7)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHitBox/leek:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.19, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponHitBox/leek:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k4qq2"]
+resource_name = "Cooldown"
 length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("leek:rotation")
+tracks/0/path = NodePath("WeaponHitBox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667, 0.56),
+"times": PackedFloat32Array(0.2, 0.5, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -26,60 +119,49 @@ tracks/1/path = NodePath("WeaponHitBox:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.266667, 0.566667),
+"times": PackedFloat32Array(0.2, 0.5, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0), Vector3(0, 12.5664, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("leek:scale")
+tracks/2/path = NodePath("WeaponHitBox:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.26, 0.32, 0.42),
-"transitions": PackedFloat32Array(1, 2, 1, 0.5),
+"times": PackedFloat32Array(0.2, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.7, 0.7, 0.7), Vector3(0.7, 0.7, 0.7), Vector3(0.7, 0.55, 0.7), Vector3(0.7, 0.7, 0.7)]
+"values": [Vector3(0.7, 0.7, 0.7), Vector3(1, 1, 1), Vector3(0.7, 0.7, 0.7)]
 }
 
 [sub_resource type="Animation" id="Animation_yaitn"]
-resource_name = "Cooldown"
-length = 0.8
+resource_name = "Idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("leek:scale")
+tracks/0/path = NodePath("WeaponHitBox/leek:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.27, 0.566667, 0.8),
-"transitions": PackedFloat32Array(1, 2, 0.5, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 2, 1, 0.5, 1),
 "update": 0,
-"values": [Vector3(0.7, 0.7, 0.7), Vector3(0.4, 0.4, 0.4), Vector3(0.6, 0.6, 0.6), Vector3(0.5, 0.5, 0.5)]
+"values": [Vector3(0.7, 0.7, 0.7), Vector3(0.4, 0.4, 0.4), Vector3(0.3, 0.3, 0.3), Vector3(0.4, 0.4, 0.4), Vector3(0.7, 0.7, 0.7)]
 }
-
-[sub_resource type="Animation" id="Animation_k4qq2"]
-resource_name = "Idle"
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("leek")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.5, 0.5, 0.5, 0.3, 1, 0.6, 0.8, 0.3, 0.666667, 1, 0.3, 0.4, 0.6, 1, 1, 0.5, 0.5, 0.5)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("leek:rotation")
+tracks/1/path = NodePath("WeaponHitBox/leek:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.433333, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.15, 0.42, 0.666667, 0.833333, 0.9, 1),
+"transitions": PackedFloat32Array(1, -0.5, 0.5, 0.5, 0.5, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.20944), Vector3(0.282743, 0, -0.174533), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 2.30383, 0), Vector3(0, 0.0593412, 0.0872665), Vector3(0, 0.0418879, -0.0872665), Vector3(0, 0.0244346, 0.0349066), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_rovfi"]
@@ -87,7 +169,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("leek:rotation")
+tracks/0/path = NodePath("WeaponHitBox:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,71 +181,97 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponHitBox:rotation")
+tracks/1/path = NodePath("WeaponHitBox:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0.7, 0.7, 0.7)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("leek:scale")
+tracks/2/path = NodePath("WeaponHitBox:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.5, 0.5, 0.5)]
+"values": [Vector3(0, 0.000333309, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_e1ngp"]
-resource_name = "Windup"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("leek:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHitBox/leek:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.5, 0.5, 0.5), Vector3(0.7, 0.7, 0.7)]
+"values": [Vector3(0.7, 0.7, 0.7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/leek:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHitBox/leek:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.19, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axwbb"]
 _data = {
 &"Attack": SubResource("Animation_em7sn"),
-&"Cooldown": SubResource("Animation_yaitn"),
-&"Idle": SubResource("Animation_k4qq2"),
-&"RESET": SubResource("Animation_rovfi"),
-&"Windup": SubResource("Animation_e1ngp")
+&"Cooldown": SubResource("Animation_k4qq2"),
+&"Idle": SubResource("Animation_yaitn"),
+&"RESET": SubResource("Animation_rovfi")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
-size = Vector3(1.8, 3, 2)
+size = Vector3(0.57618, 1.83258, 1.34822)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaitn"]
+size = Vector3(0.454041, 1.41137, 0.442017)
 
 [node name="Leek" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
 animation_player = NodePath("AnimationPlayer")
 current_weapon = ExtResource("2_e1ngp")
 
-[node name="leek" parent="." index="0" instance=ExtResource("3_k4qq2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0.007)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 libraries = {
 &"": SubResource("AnimationLibrary_axwbb")
 }
 
-[node name="HitCheckPoint" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28178, 0)
+[node name="WeaponHitBox" parent="." index="1"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.000333309, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27101, -0.00256348)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0116823, 2.31428, 0.0256882)
 shape = SubResource("BoxShape3D_e1ngp")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitBox" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0118103, 0.70288, -0.00543213)
+shape = SubResource("BoxShape3D_yaitn")
+
+[node name="leek" parent="WeaponHitBox" index="2" instance=ExtResource("3_k4qq2")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.19, 0)

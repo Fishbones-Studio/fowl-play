@@ -130,9 +130,8 @@ func _on_reset_button_pressed() -> void:
 		total_eggs_refund,
 		" Eggs."
 	)
-
-	# Reset the saved game data 
-	SaveManager.reset_game()
+	# Reset the player's upgrades
+	SaveManager.save_player_upgrades({})
 
 	# Refresh the UI to show 0 levels and updated currency
 	_refresh_shop()

@@ -30,6 +30,12 @@ UIManager="*res://utilities/autoload/ui_manager.gd"
 DebugDrawer="*res://utilities/autoload/debug_drawer.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+DialogueManager="*res://utilities/autoload/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/balloon_path="uid://cfg06xxv1turn"
+runtime/advanced/ignore_missing_state_values=true
 
 [display]
 
@@ -43,7 +49,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/panku_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
 [gui]
 
@@ -200,6 +206,10 @@ ability_two={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://entities/enemies/bob/dialogue/in_between_rounds/bob_in_between_rounds.dialogue", "res://entities/enemies/hendere/dialogue/in_between_rounds/hendere_in_between_rounds.dialogue", "res://entities/enemies/ice_fox/dialogue/in_between_rounds/ice_fox_in_between_rounds.dialogue", "res://entities/enemies/woodpecker/dialogue/in_between_rounds/woodpecker_in_between_rounds.dialogue", "res://entities/enemies/insighter/dialogue/in_between_rounds/insighter_in_between_rounds.dialogue")
 
 [layer_names]
 

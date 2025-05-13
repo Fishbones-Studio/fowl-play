@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dx5yip7f241bh"
+path="res://.godot/imported/hendere_in_between_rounds.dialogue-0a0a31a2b7d4b2e016438fc1462994e0.tres"
+
+[deps]
+
+source_file="res://entities/enemies/hendere/dialogue/in_between_rounds/hendere_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/hendere_in_between_rounds.dialogue-0a0a31a2b7d4b2e016438fc1462994e0.tres"]
+
+[params]
+
+defaults=true
