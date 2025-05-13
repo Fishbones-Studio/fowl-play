@@ -16,6 +16,9 @@ uniform float alpha : hint_range(0.0, 1.0) = 1.0;
 uniform float scale : hint_range(1.0, 2.0) = 1.0;
 uniform float border_mask : hint_range(0.0, 5.0) = 2.0;
 
+// Pixelation: size of each pixel block in screen pixels
+uniform int pixel_size : hint_range(1, 64) = 2;
+
 // 4x4 Bayer matrix for dithering
 float dithering_pattern(ivec2 fragcoord) {
     const float pattern[] = {
@@ -70,12 +73,13 @@ float reduce_color(float raw, float dither, int depth) {
 }
 
 void fragment() {
-    // Normalized screen UV
-    vec2 uv = FRAGCOORD.xy / screen_size;
+    // Pixelate: snap FRAGCOORD to pixel grid
+    ivec2 pixelated_coord = ivec2(FRAGCOORD.xy) / pixel_size * pixel_size + pixel_size / 2;
+    vec2 pixel_uv = vec2(pixelated_coord) / screen_size;
 
     // Border mask and scaling
     float scale_reverse = 2.0 - scale;
-    vec2 uvs = uv * scale_reverse + vec2(1.0 - scale_reverse) / 2.0;
+    vec2 uvs = pixel_uv * scale_reverse + vec2(1.0 - scale_reverse) / 2.0;
     vec2 mask = pow(2.0 * abs(UV - 0.5), vec2(border_mask));
 
     // Sample color channels with border mask and scaling
@@ -84,8 +88,8 @@ void fragment() {
     float b = texture(SCREEN_TEXTURE, uvs + vec2(SCREEN_PIXEL_SIZE) * mask, 0.0).b;
     vec4 raw = vec4(r, g, b, 1.0);
 
-    // Dithering coordinates
-    ivec2 dither_uv = ivec2(FRAGCOORD.xy / float(dither_size));
+    // Use pixelated_coord for dithering as well
+    ivec2 dither_uv = pixelated_coord / dither_size;
     float dither_base = dithering_pattern(dither_uv);
 
     // Compose dither as a vector, apply shift
