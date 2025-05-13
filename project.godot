@@ -30,12 +30,15 @@ UIManager="*res://utilities/autoload/ui_manager.gd"
 DebugDrawer="*res://utilities/autoload/debug_drawer.gd"
 Panku="*res://addons/panku_console/console.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+IconManager="*res://utilities/autoload/icon_manager.gd"
 DialogueManager="*res://utilities/autoload/dialogue_manager.gd"
 
 [dialogue_manager]
 
 runtime/balloon_path="uid://cfg06xxv1turn"
 runtime/advanced/ignore_missing_state_values=true
+
 
 [display]
 
@@ -49,7 +52,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/panku_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
 [gui]
 

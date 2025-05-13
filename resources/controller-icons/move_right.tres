@@ -1,0 +1,14 @@
+[gd_resource type="Texture2D" script_class="ControllerIconTexture" load_steps=2 format=3 uid="uid://dvgjswckymow4"]
+
+[ext_resource type="Script" uid="uid://bm4gvuidoyke4" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="1_q0grd"]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_q0grd")
+path = "move_right"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+metadata/_custom_type_script = "uid://bm4gvuidoyke4"

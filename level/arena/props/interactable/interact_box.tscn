@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://rou530ix2je3"]
+[gd_scene load_steps=5 format=3 uid="uid://rou530ix2je3"]
 
 [ext_resource type="Script" uid="uid://bhlgtdwbupe1q" path="res://level/arena/props/interactable/interact_box.gd" id="1_fpr1w"]
+[ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_pkj54"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xq2d5"]
 size = Vector3(4, 2, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brd77"]
-size = Vector3(6, 4, 4)
+size = Vector3(6, 4.66492, 8.33762)
 
 [node name="InteractBox" type="StaticBody3D"]
 collision_layer = 32
@@ -27,14 +28,48 @@ collision_layer = 32
 collision_mask = 63
 
 [node name="DetectionArea" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332458, -0.320999)
 shape = SubResource("BoxShape3D_brd77")
 
-[node name="InteractLabel" type="Label3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 0.610077, 2.81642)
+[node name="InteractUi" type="Control" parent="."]
+unique_name_in_owner = true
 visible = false
-modulate = Color(1, 1, 0.854902, 1)
-text = "Press E to interact"
-font_size = 51
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InteractUi"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 165
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InteractUi/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InteractUi/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Press          to interact"
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractUi/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+position = Vector2(66, 7)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_pkj54")
+
+[node name="VBoxContainer" type="VSeparator" parent="InteractUi/VBoxContainer"]
+layout_mode = 2
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
