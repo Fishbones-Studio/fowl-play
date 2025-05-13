@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://yq62iccynmnp"]
+[gd_scene load_steps=4 format=3 uid="uid://yq62iccynmnp"]
 
-[ext_resource type="Script" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
+[ext_resource type="Script" uid="uid://dafimxhd5ss3c" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
 [ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_8xpnx"]
+[ext_resource type="Texture2D" uid="uid://50id2oygjojr" path="res://ui/player_hud/item_slot/art/weapon_switch_icon.svg" id="3_n88yd"]
 
 [node name="UiItemControllerIcon" type="Control"]
 layout_mode = 3
@@ -34,3 +35,10 @@ offset_bottom = 2.49993
 grow_vertical = 2
 theme_override_font_sizes/font_size = 51
 text = "HOLD (    )"
+
+[node name="weapon_switch_icon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-86, 93.4)
+scale = Vector2(0.03, 0.027)
+texture = ExtResource("3_n88yd")

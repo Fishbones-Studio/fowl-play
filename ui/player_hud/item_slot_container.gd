@@ -47,6 +47,7 @@ func _ready() -> void:
 				controller_slot.visible = true
 				controller_slot.input_action = "switch_weapon"
 				controller_slot.show_hold_label = false
+				controller_slot.show_switch_icon = false
 				print("Deactivated item slot: ", item_slot)
 			else:
 				push_warning("No item slot found at index: ", index)
@@ -101,6 +102,12 @@ func _should_show_hold_label(item: BaseResource) -> bool:
 	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
 	return item in ranged_items and item.allow_continuous_fire
 
+func _should_show_switch_icon(item: BaseResource) -> bool:
+	if item == null:
+		return false
+	var has_second_weapon = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
+	return item in has_second_weapon
+
 # Initializes all item slots in the UI
 func _init_item_slots(items: Array) -> void:
 	for i in range(items.size()):
@@ -122,3 +129,4 @@ func _init_item_slots(items: Array) -> void:
 		# Set up controller icon properties
 		controller_slot.input_action = _get_input_action_for_item(item)
 		controller_slot.show_hold_label = _should_show_hold_label(item)
+		controller_slot.show_switch_icon = _should_show_switch_icon(item)

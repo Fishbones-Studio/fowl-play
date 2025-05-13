@@ -12,8 +12,15 @@ extends Control
 			show_hold_label = value
 			_update_hold_label()
 
+@export var show_switch_icon: bool = false:
+	set(value):
+		if show_switch_icon != value:
+			show_switch_icon = value
+			_update_switch_icon()
+
 @onready var controller_icon: Sprite2D = %Sprite2D
 @onready var original_x_position: float = controller_icon.position.x
+@onready var weapon_switch_icon: Sprite2D = %weapon_switch_icon
 
 func _ready() -> void:
 	SignalManager.keybind_changed.connect(_on_keybind_changed)
@@ -41,3 +48,11 @@ func _update_hold_label() -> void:
 		%HoldLabel.visible = show_hold_label
 	
 	controller_icon.position.x = original_x_position + 10 if show_hold_label else original_x_position
+
+func _update_switch_icon() -> void:
+	if not is_inside_tree() or not controller_icon:
+		return
+
+	if has_node("%weapon_switch_icon"):
+		weapon_switch_icon.visible = show_switch_icon
+	
