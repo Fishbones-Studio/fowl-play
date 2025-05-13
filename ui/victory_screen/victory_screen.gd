@@ -4,11 +4,13 @@ var is_transitioning: bool = false
 
 @onready var label: Label = $Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var victory_music_player : AudioStreamPlayer = $VictoryMusicPlayer
 
 
 
 func _ready() -> void:
 	get_tree().paused = true
+	victory_music_player.play()
 	animation_player.play("victory")
 
 
@@ -25,6 +27,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _return_to_game_menu() -> void:
+	victory_music_player.stop()
 	is_transitioning = true
 	animation_player.play("RESET")
 

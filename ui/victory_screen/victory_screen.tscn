@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://sjvml6sgskxh"]
+[gd_scene load_steps=6 format=3 uid="uid://sjvml6sgskxh"]
 
 [ext_resource type="Script" uid="uid://bog7cr78ndrmh" path="res://ui/victory_screen/victory_screen.gd" id="1_w5gup"]
+[ext_resource type="AudioStream" uid="uid://btgwex2n8rxut" path="res://ui/victory_screen/art/music/song_3.mp3" id="2_axvl8"]
 
 [sub_resource type="Animation" id="Animation_w5gup"]
 length = 0.001
@@ -112,10 +113,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -193.0
-offset_top = -71.0
-offset_right = 307.0
-offset_bottom = 79.0
+offset_left = -250.0
+offset_top = -75.0
+offset_right = 250.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 1, 0.27451, 0)
@@ -127,3 +128,8 @@ text = "Victory !"
 libraries = {
 &"": SubResource("AnimationLibrary_axvl8")
 }
+
+[node name="VictoryMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_axvl8")
+volume_db = -5.0
+bus = &"Music"
