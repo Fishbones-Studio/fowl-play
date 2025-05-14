@@ -1,0 +1,25 @@
+[gd_resource type="BehaviorTree" load_steps=7 format=3 uid="uid://i5wmmsqipq8o"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_85ywm"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_an1k6"]
+
+[sub_resource type="BTAction" id="BTAction_kcuvh"]
+script = ExtResource("1_85ywm")
+target_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_g4fhc"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_6oy8c"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_g4fhc")
+
+[sub_resource type="BTSequence" id="BTSequence_vunty"]
+children = [SubResource("BTAction_kcuvh"), SubResource("BTSetVar_6oy8c")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_an1k6")
+root_task = SubResource("BTSequence_vunty")
