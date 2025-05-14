@@ -63,6 +63,7 @@ func _input(event: InputEvent) -> void:
 
 func _save_input_settings():
 	var config = ConfigFile.new()
+	config.load(config_path) # Load existing settings
 
 	# Skip Godot's built-in UI actions to prevent accidental override
 	for action in InputMap.get_actions():

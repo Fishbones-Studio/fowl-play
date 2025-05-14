@@ -51,6 +51,13 @@ func _input(_event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
+		var focused = get_viewport().gui_get_focus_owner()
+
+		if focused is LineEdit or focused is TextEdit:
+			# Let text controls handle it naturally
+			get_viewport().set_input_as_handled()
+			return
+
 		_handle_ui_cancel_action()
 
 
