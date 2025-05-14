@@ -9,9 +9,10 @@ signal damage_taken
 @export var knockback_decay: int = 50 # Rate at which the knockback decays per second
 @export_dir var dialogue_path: String
 # String template, requires 1 %s which will be replaced with the name specified in the associated stats
-@export var name_label_template_string : String
+@export var name_label_template_string: String
 
 var is_immobile: bool = false
+
 var _knockback: Vector3 = Vector3.ZERO
 
 @onready var health_bar: HealthBar = %EnemyHealthBar
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	stats.regen_stamina(stats.stamina_regen)
 	stats.regen_health(stats.health_regen)
 

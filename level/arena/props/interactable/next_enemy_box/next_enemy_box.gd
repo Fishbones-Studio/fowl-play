@@ -1,11 +1,11 @@
 # NextEnemy box, for starting the next round
-class_name NextEnemyBox extends InteractableBox
+class_name NextEnemyBox 
+extends InteractableBox
 
-var dialogue_folder_path : String:
+var dialogue_folder_path: String:
 	set = _on_dialogue_folder_path_set
 
-
-var dialogue_path : String
+var dialogue_path: String
 
 
 func _on_dialogue_folder_path_set(value: String) -> void:
@@ -24,6 +24,7 @@ func _on_dialogue_folder_path_set(value: String) -> void:
 		else:
 			push_warning("No Dialogue Found")
 			dialogue_path = ""
+
 
 func interact() -> void:
 	if dialogue_path and not dialogue_folder_path.is_empty():
