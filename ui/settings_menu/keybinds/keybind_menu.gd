@@ -15,7 +15,7 @@ var config_name: String = "keybinds" ## name of the config section, mostly usefu
 @onready var content_container: VBoxContainer = %ContentContainer
 
 
-func _ready():
+func _ready() -> void:
 	# Make this block input to lower layers
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
 
@@ -61,7 +61,7 @@ func _input(event: InputEvent) -> void:
 			_activate_focused_button()
 
 
-func _save_input_settings():
+func _save_input_settings() -> void:
 	var config = ConfigFile.new()
 	config.load(config_path) # Load existing settings
 
@@ -75,7 +75,7 @@ func _save_input_settings():
 	config.save(config_path)
 
 
-func _load_input_settings():
+func _load_input_settings() -> void:
 	# Load defaults first, then override with saved config
 	InputMap.load_from_project_settings()
 
@@ -84,7 +84,7 @@ func _load_input_settings():
 	_create_action_list()
 
 
-func _create_action_list():
+func _create_action_list() -> void:
 	error_text_label.text = ""
 
 	# Clear existing children
@@ -181,7 +181,7 @@ func _get_event_to_replace(split_events: Dictionary, input_type: int) -> InputEv
 		_: return null
 
 
-func _finalize_remapping():
+func _finalize_remapping() -> void:
 	# Update storage and UI after successful remapping
 	_save_input_settings()
 
@@ -192,7 +192,7 @@ func _finalize_remapping():
 	_create_action_list()
 
 
-func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
+func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = "") -> void:
 	# Helper to safely set text on labels with fallback
 	var panel: RemapPanel = row.find_child(container_name)
 	if event:
@@ -217,6 +217,6 @@ func _on_restore_defaults_button_up() -> void:
 	SignalManager.keybind_changed.emit("*") 
 
 
-func _activate_focused_button():
+func _activate_focused_button() -> void:
 	var focused: Button = get_viewport().gui_get_focus_owner()
 	if focused: focused.emit_signal("pressed")

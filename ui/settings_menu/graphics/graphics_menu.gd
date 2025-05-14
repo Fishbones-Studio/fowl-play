@@ -98,6 +98,7 @@ func _save_graphics_settings() -> void:
 	config.save(config_path)
 	SignalManager.graphics_settings_changed.emit()
 
+
 func _set_resolution(index: int) -> void:
 	var value: Vector2i = RESOLUTIONS.values()[index]
 	DisplayServer.window_set_size(value)
@@ -216,10 +217,12 @@ func _set_render_mode(index: int) -> void:
 
 	_save_graphics_settings()
 
+
 ## Slider for the post processing effect
-func _on_post_processing_strength_slider_value_changed(value):
+func _on_post_processing_strength_slider_value_changed(value) -> void:
 	graphics_settings["pp_shader"] = value
 	_save_graphics_settings()
+
 
 func _load_graphics_items() -> void:
 	resolution.options.clear()

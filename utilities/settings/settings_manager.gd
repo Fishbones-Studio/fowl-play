@@ -49,7 +49,6 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 				else:
 					push_warning("Events for action '%s' not an array in settings." % action)
 
-
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
 		# Load graphics settings
 		var graphics_settings: Dictionary
@@ -89,7 +88,8 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 	viewport.scaling_3d_scale = settings["render_scale"]
 	viewport.scaling_3d_mode = settings["render_mode"]
 	DisplayUtils.center_window(window)
-	
+
+
 # Method to get a specific setting from the config file
 static func get_setting(section: String, key: String, default : Variant) -> Variant:
 	var config := ConfigFile.new()
