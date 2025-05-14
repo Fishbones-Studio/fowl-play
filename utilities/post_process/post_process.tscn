@@ -20,6 +20,7 @@ shader_parameter/pixel_size = 2
 script = ExtResource("1_o7ljr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+light_mask = 0
 material = SubResource("ShaderMaterial_awa8k")
 anchors_preset = 15
 anchor_right = 1.0
