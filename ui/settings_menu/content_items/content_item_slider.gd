@@ -1,5 +1,5 @@
 class_name ContentItemSlider
-extends Control
+extends ContentItem
 
 signal slider_value_changed(value: float)
 
@@ -19,7 +19,7 @@ func set_value(value: float) -> void:
 
 func _on_h_slider_value_changed(value: float) -> void:
 	slider_label.text = str(value)
-  slider_value_changed.emit(value)
+	slider_value_changed.emit(value)
 
 
 func _on_focus_entered() -> void:
