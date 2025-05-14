@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://yq62iccynmnp"]
+
+[ext_resource type="Script" uid="uid://dafimxhd5ss3c" path="res://ui/player_hud/item_slot/ui_item_controller_icon.gd" id="1_bkhin"]
+[ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_8xpnx"]
+[ext_resource type="Texture2D" uid="uid://50id2oygjojr" path="res://ui/player_hud/item_slot/art/weapon_switch_icon.svg" id="3_n88yd"]
+
+[node name="UiItemControllerIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_bkhin")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-54.52, 93.4)
+scale = Vector2(0.36, 0.399999)
+texture = ExtResource("2_8xpnx")
+
+[node name="HoldLabel" type="Label" parent="Sprite2D"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.132
+anchor_bottom = 0.5
+offset_left = -148.556
+offset_top = -73.5
+offset_right = 74.2446
+offset_bottom = 2.49993
+grow_vertical = 2
+theme_override_font_sizes/font_size = 51
+text = "HOLD (    )"
+
+[node name="weapon_switch_icon" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-82, 78)
+scale = Vector2(0.03, 0.027)
+texture = ExtResource("3_n88yd")

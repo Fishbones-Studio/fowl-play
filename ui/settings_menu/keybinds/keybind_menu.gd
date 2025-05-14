@@ -231,9 +231,9 @@ func _finalize_remapping():
 	# Update storage and UI after successful remapping
 	_save_input_settings()
 	SettingsManager.is_remapping = false
+	SignalManager.keybind_changed.emit(SaveManager.action_to_remap)
 	SettingsManager.action_to_remap = ""
 	_create_action_list()
-
 
 func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
 	# Helper to safely set text on labels with fallback
@@ -256,3 +256,5 @@ func _on_restore_defaults_button_up() -> void:
 		DirAccess.remove_absolute(config_path)
 
 	_create_action_list()
+	
+	SignalManager.keybind_changed.emit("*") 
