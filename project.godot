@@ -39,7 +39,6 @@ DialogueManager="*res://utilities/autoload/dialogue_manager.gd"
 runtime/balloon_path="uid://cfg06xxv1turn"
 runtime/advanced/ignore_missing_state_values=true
 
-
 [display]
 
 window/stretch/mode="canvas_items"
