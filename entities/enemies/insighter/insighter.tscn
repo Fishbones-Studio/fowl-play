@@ -17,6 +17,7 @@ height = 3.5
 stats = ExtResource("2_1dq5o")
 enemy_model = NodePath("insighter")
 dialogue_path = "res://entities/enemies/insighter/dialogue"
+name_label_template_string = "%s \"Molten Cheese Tart\""
 
 [node name="insighter" parent="." index="0" instance=ExtResource("2_e0uej")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.7, 0)
@@ -42,10 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60472, 0)
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_e3er2")]
 ability_resource = ExtResource("6_mahx6")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("8_mahx6")
-
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
-text = "Insighter \"Molten Cheese Tart\""
 
 [editable path="insighter"]

@@ -41,8 +41,10 @@ point_count = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0)
 round_handler = NodePath("../RoundHandler")
 
-[node name="PlayerCamera" type="Camera3D" parent="."]
+[node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
 transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 4)
+cull_mask = 1047553
+current = true
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_0v1st")]
 transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)

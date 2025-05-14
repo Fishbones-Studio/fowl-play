@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=27 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="4_iajuv"]
 [ext_resource type="Script" uid="uid://b83ijgmhi4cur" path="res://ui/poultry_man_menu/game_menu_handlers/input_handler.gd" id="5_x5v8y"]
 [ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
-[ext_resource type="PackedScene" uid="uid://bv13jhnjs0eb6" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather.glb" id="7_jhi5u"]
 [ext_resource type="PackedScene" uid="uid://lbrv8bntcb8m" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword.glb" id="7_x5v8y"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="8_bfy7c"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]
 [ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/poultry_man_menu/art/light_switch.ogg" id="9_78wky"]
+[ext_resource type="PackedScene" uid="uid://bv13jhnjs0eb6" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather.glb" id="9_dqtu2"]
 [ext_resource type="PackedScene" uid="uid://bbnpnhjgrkwt4" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="9_n15us"]
 [ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/props/arena_parts/pillar/pillar.glb" id="10_iajuv"]
+[ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="11_qvty8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5ek6"]
 albedo_color = Color(0.186146, 0.0855308, 0.00461659, 1)
@@ -84,8 +85,10 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 sky_mode = 2
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." groups=["gameplay_camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.853687, 0.520786, 0, -0.520786, 0.853687, -0.000134945, 4.27109, 2.46062)
+cull_mask = 1047553
+current = true
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 
@@ -101,10 +104,10 @@ transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.21122
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="RebirthShopLabel" type="Label3D" parent="MenuItems/Sacrifice"]
+[node name="RebirthShopLabel" parent="MenuItems/Sacrifice" instance=ExtResource("11_qvty8")]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
-billboard = 1
 text = "Sacrifice"
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="GroundSaw" parent="MenuItems/Sacrifice" instance=ExtResource("8_bfy7c")]
 transform = Transform3D(0.52171, 0, -0.853123, 0, 1, 0, 0.853123, 0, 0.52171, -0.392122, -0.984015, -0.159684)
@@ -119,12 +122,12 @@ script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.2
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="RebirthShopLabel" type="Label3D" parent="MenuItems/RebirthShop"]
+[node name="RebirthShopLabel" parent="MenuItems/RebirthShop" instance=ExtResource("11_qvty8")]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.400056, 1.70672, 0.0977945)
-billboard = 1
 text = "Rebirth Shop"
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
-[node name="feather" parent="MenuItems/RebirthShop" instance=ExtResource("7_jhi5u")]
+[node name="feather" parent="MenuItems/RebirthShop" instance=ExtResource("9_dqtu2")]
 transform = Transform3D(-0.0777689, -0.0529222, -0.491071, 0.489175, 0.0604498, -0.0839832, 0.0682595, -0.493503, 0.0423743, -0.595522, -0.0831976, 0.242712)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/RebirthShop"]
@@ -137,10 +140,10 @@ script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.2
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="InventoryLabel" type="Label3D" parent="MenuItems/Inventory"]
+[node name="InventoryLabel" parent="MenuItems/Inventory" instance=ExtResource("11_qvty8")]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.412459, 1.67651, 0.704661)
-billboard = 1
 text = "Equipment"
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="sword" parent="MenuItems/Inventory" instance=ExtResource("7_x5v8y")]
 transform = Transform3D(0.5, 4.37114e-08, -0.866025, 8.74228e-08, -1, 0, -0.866025, -7.57103e-08, -0.5, -0.104491, 5.26695, 0.165047)
@@ -155,11 +158,11 @@ script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.2
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="ShopLabel" type="Label3D" parent="MenuItems/Shop"]
+[node name="ShopLabel" parent="MenuItems/Shop" instance=ExtResource("11_qvty8")]
 transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 0.109611, 0.929264, -0.00843561)
-billboard = 1
 text = "Equipment Shop"
 font_size = 67
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="leek" parent="MenuItems/Shop" instance=ExtResource("9_n15us")]
 transform = Transform3D(2.31677e-08, 0.530016, -0.457256, 0.7, -3.0598e-08, 0, -1.99873e-08, -0.457256, -0.530016, -1.04502, -0.0660677, 1.23278)
@@ -177,11 +180,11 @@ transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 1.60808, 1
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="ArenasLabel" type="Label3D" parent="MenuItems/Flyer"]
+[node name="ArenasLabel" parent="MenuItems/Flyer" instance=ExtResource("11_qvty8")]
 transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, -0.017761, 0.98544, 0.427444)
-billboard = 1
 text = "Arenas
 "
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="pillar" parent="MenuItems/Flyer" instance=ExtResource("10_iajuv")]
 transform = Transform3D(-6.55671e-09, -0.15, -7.45058e-09, 0.15, -6.55671e-09, -1.37089e-15, 1.33227e-15, -7.45058e-09, 0.15, 0.486684, 0.61328, 0.430042)

@@ -75,6 +75,7 @@ var graphics_settings: Dictionary = {}
 @onready var taa: ContentItemDropdown = %TAA
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
+@onready var post_processing_strength : ContentItemSlider = %PostProcessingStrength
 
 
 func _ready() -> void:
@@ -95,7 +96,7 @@ func _save_graphics_settings() -> void:
 		config.set_value(config_name, graphics_setting, graphics_settings[graphics_setting])
 
 	config.save(config_path)
-
+	SignalManager.graphics_settings_changed.emit()
 
 func _set_resolution(index: int) -> void:
 	var value: Vector2i = RESOLUTIONS.values()[index]
@@ -214,6 +215,10 @@ func _set_render_mode(index: int) -> void:
 
 	_save_graphics_settings()
 
+## Slider for the post processing effect
+func _on_post_processing_strength_slider_value_changed(value):
+	graphics_settings["pp_shader"] = value
+	_save_graphics_settings()
 
 func _load_graphics_items() -> void:
 	resolution.options.clear()
@@ -266,6 +271,7 @@ func _set_graphics_values() -> void:
 	taa.options.select(TAA.values().find(get_viewport().use_taa))
 	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
+	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
 
 
 func _on_restore_defaults_button_up() -> void:
