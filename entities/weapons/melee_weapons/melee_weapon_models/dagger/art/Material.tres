@@ -3,20 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://dk522kcw130kr" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger_Material Base Color.png" id="1_4e4kq"]
 [ext_resource type="Shader" uid="uid://cwgwggbws82va" path="res://resources/shaders/shine_shader.gdshader" id="2_ta48k"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7wbnw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ta48k"]
 render_priority = 0
 shader = ExtResource("2_ta48k")
 shader_parameter/enabled = true
-shader_parameter/shine_color = Color(1, 1, 1, 0.45098)
-shader_parameter/progress = 1.4
-shader_parameter/shine_width = 0.1
-shader_parameter/shine_angle_x = -90.0
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.5
+shader_parameter/shine_width = 0.5
+shader_parameter/shine_angle_x = 0.0
 shader_parameter/shine_angle_y = 0.0
 shader_parameter/shine_angle_z = 0.0
 
 [resource]
 resource_name = "Material"
-next_pass = SubResource("ShaderMaterial_7wbnw")
+next_pass = SubResource("ShaderMaterial_ta48k")
 cull_mode = 2
 albedo_texture = ExtResource("1_4e4kq")
 roughness = 0.5
