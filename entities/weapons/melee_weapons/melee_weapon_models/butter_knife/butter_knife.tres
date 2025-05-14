@@ -15,6 +15,6 @@ purchasable = true
 drop_chance = 40
 cost = 150
 currency_type = 0
-description = "Winds up for %s and deals %s Base Damage with a quick stab. The attack lasts %s, then enters a cooldown state for %s."
+description = "Deals %s Base Damage with a quick stab after winding up for %s. The attack lasts %s, then enters a cooldown state for %s."
 icon = ExtResource("1_m3duu")
 model_uid = "uid://db68ojqri7xqs"

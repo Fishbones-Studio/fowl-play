@@ -15,8 +15,8 @@ purchasable = true
 drop_chance = 12
 cost = 150
 currency_type = 0
-description = "Winds up for %s and deals %s Base Damage with a powerful swing. The attack lasts %s, then enters a cooldown state for %s.
+description = "Deals %s Base Damage per hit after winding up for %s. The attack lasts %s, then enters a cooldown state for %s.
 
-Allows for [color=orange]2 hits per attack[/color]."
+Allows for [color=orange]multiple hits per attack[/color]."
 icon = ExtResource("1_8lwf8")
 model_uid = "uid://dldj0suybdnhl"
