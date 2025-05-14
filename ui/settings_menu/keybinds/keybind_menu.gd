@@ -14,15 +14,10 @@ var config_name: String = "keybinds" ## name of the config section, mostly usefu
 @onready var restore_defaults_button: Button = %RestoreDefaultsButton
 @onready var content_container: VBoxContainer = %ContentContainer
 
-# Navigation focus tracking
-var _current_focus_index: int = 0
-var _focusable_buttons: Array[Button] = []
-
 
 func _ready():
 	# Make this block input to lower layers
 	self.mouse_filter = Control.MOUSE_FILTER_STOP
-	self.focus_mode = Control.FOCUS_ALL
 
 	# Initial load of saved settings when scene enters tree
 	_load_input_settings()
@@ -93,6 +88,7 @@ func _create_action_list():
 
 	# Clear existing children
 	for child in content_container.get_children():
+		content_container.remove_child(child)
 		child.queue_free()
 
 	# Add action rows
@@ -110,46 +106,7 @@ func _create_action_list():
 
 		content_container.add_child(action_row)
 
-	# Setup navigation after creating UI
-	_setup_navigation()
-
-
-func _setup_navigation():
-	_focusable_buttons.clear()
-	var grid: Array = _get_button_grid()
-
-	# Flatten grid into focusable buttons array (row-major order)
-	for row in grid:
-		_focusable_buttons.append_array(row)
-
-
-func _get_button_grid() -> Array:
-	var grid: Array = []
-
-	# Build grid of remap buttons per row
-	for row in content_container.get_children():
-		var row_buttons: Array[Button] = []
-		for panel_name in ["PrimaryPanel", "SecondaryPanel", "ControllerPanel"]:
-			var panel := row.find_child(panel_name) as RemapPanel
-			if panel and panel.button is Button:
-				panel.button.focus_mode = Control.FOCUS_ALL
-				row_buttons.append(panel.button)
-		if row_buttons.size() > 0:
-			grid.append(row_buttons)
-
-	# Add restore defaults button as its own row
-	if restore_defaults_button is Button:
-		restore_defaults_button.focus_mode = Control.FOCUS_ALL
-		grid.append([restore_defaults_button])
-
-	return grid
-
-
-func _activate_focused_button():
-	var focused := get_viewport().gui_get_focus_owner() as Button
-	if focused:
-		focused.emit_signal("pressed")
-
+	content_container.get_child(0).grab_focus()
 
 func _trim_mapping_suffix(mapping: String) -> String:
 	# Clean up display text by removing technical suffixes
@@ -225,10 +182,13 @@ func _get_event_to_replace(split_events: Dictionary, input_type: int) -> InputEv
 func _finalize_remapping():
 	# Update storage and UI after successful remapping
 	_save_input_settings()
+
 	SettingsManager.is_remapping = false
 	SignalManager.keybind_changed.emit(SettingsManager.action_to_remap)
 	SettingsManager.action_to_remap = ""
+
 	_create_action_list()
+
 
 func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = ""):
 	# Helper to safely set text on labels with fallback
@@ -253,3 +213,8 @@ func _on_restore_defaults_button_up() -> void:
 	_create_action_list()
 	
 	SignalManager.keybind_changed.emit("*") 
+
+
+func _activate_focused_button():
+	var focused: Button = get_viewport().gui_get_focus_owner()
+	if focused: focused.emit_signal("pressed")
