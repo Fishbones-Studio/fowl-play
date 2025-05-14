@@ -2,8 +2,8 @@
 ## Handles settings data persistance:
 ## - Settings (Controls, Key Bindings, Graphics, Audio)
 #################################################################################
-
-class_name SettingsManager extends Node
+class_name SettingsManager
+extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"
 const SETTINGS_CFG_NAME_CONTROLS: String = "controls"
@@ -18,6 +18,7 @@ const DEFAULT_GRAPHICS_SETTINGS: GraphicsSettings = preload("uid://bj6f5mcuyrlnf
 static var is_remapping: bool = false
 static var input_type: SaveEnums.InputType
 static var action_to_remap: String = ""
+
 
 ## Load all saved settings from the user's configuration file.
 static func load_settings( viewport: Viewport, window: Window, item: String = "") -> void:

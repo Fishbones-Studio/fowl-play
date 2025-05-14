@@ -70,7 +70,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CloseButton" parent="VBoxContainer/Panel/HeaderContainer/HBoxContainer2" instance=ExtResource("3_424ss")]
+unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../MarginContainer/HBoxContainer/SidebarContainer/Controls")
+focus_neighbor_bottom = NodePath("../../../../MarginContainer/HBoxContainer/SidebarContainer/Controls")
+focus_next = NodePath("../../../../MarginContainer/HBoxContainer/SidebarContainer/Controls")
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
@@ -127,8 +131,6 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Graphics")
 focus_neighbor_right = NodePath("../../Content")
-focus_neighbor_bottom = NodePath("../Cheat")
-focus_next = NodePath("../Cheat")
 focus_previous = NodePath("../Graphics")
 text = "Audio"
 
@@ -137,8 +139,8 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Audio")
 focus_neighbor_right = NodePath("../../Content")
-focus_neighbor_bottom = NodePath("../../../../Panel/HeaderContainer/HBoxContainer2/CloseButton")
-focus_next = NodePath("../../../../Panel/HeaderContainer/HBoxContainer2/CloseButton")
+focus_neighbor_bottom = NodePath("../Controls")
+focus_next = NodePath("../Controls")
 focus_previous = NodePath("../Audio")
 text = "Cheat"
 
@@ -147,5 +149,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
+focus_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/MarginContainer/HBoxContainer/Content" to="." method="_on_content_focus_entered"]

@@ -122,11 +122,6 @@ func _setup_navigation():
 	for row in grid:
 		_focusable_buttons.append_array(row)
 
-	# Set initial focus
-	if _focusable_buttons.size() > 0:
-		_current_focus_index = 0
-		_focusable_buttons[_current_focus_index].grab_focus()
-
 
 func _get_button_grid() -> Array:
 	var grid: Array = []
@@ -231,7 +226,7 @@ func _finalize_remapping():
 	# Update storage and UI after successful remapping
 	_save_input_settings()
 	SettingsManager.is_remapping = false
-	SignalManager.keybind_changed.emit(SaveManager.action_to_remap)
+	SignalManager.keybind_changed.emit(SettingsManager.action_to_remap)
 	SettingsManager.action_to_remap = ""
 	_create_action_list()
 

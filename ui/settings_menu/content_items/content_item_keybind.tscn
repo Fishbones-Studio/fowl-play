@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpba8wvtfww4x"]
+[gd_scene load_steps=3 format=3 uid="uid://bpba8wvtfww4x"]
 
 [ext_resource type="Script" uid="uid://cj301yjou7m41" path="res://ui/settings_menu/keybinds/remap_panel.gd" id="1_q71b7"]
+[ext_resource type="Script" uid="uid://clu3js2a2vurr" path="res://ui/settings_menu/content_items/content_item_keybind.gd" id="1_ww1rs"]
 
 [node name="ContentItemKeybind" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -9,6 +10,8 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 3
+focus_mode = 2
+script = ExtResource("1_ww1rs")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 35)
@@ -23,6 +26,7 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
 [node name="Panel" type="Panel" parent="MarginContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsContentPanel"
@@ -60,6 +64,7 @@ script = ExtResource("1_q71b7")
 button = NodePath("PrimaryButton")
 
 [node name="PrimaryButton" type="Button" parent="MarginContainer/HBoxContainer/PrimaryPanel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
@@ -83,6 +88,7 @@ button = NodePath("SecondaryButton")
 input_type = 1
 
 [node name="SecondaryButton" type="Button" parent="MarginContainer/HBoxContainer/SecondaryPanel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
@@ -106,6 +112,7 @@ button = NodePath("ControllerButton")
 input_type = 2
 
 [node name="ControllerButton" type="Button" parent="MarginContainer/HBoxContainer/ControllerPanel"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(156, 27)
 layout_mode = 1
 anchors_preset = 8
@@ -117,3 +124,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"SettingsKeybindButton"
 text = "Unasigned"
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/PrimaryPanel/PrimaryButton" to="." method="_on_button_focus_entered" binds= [1]]
+[connection signal="focus_exited" from="MarginContainer/HBoxContainer/PrimaryPanel/PrimaryButton" to="." method="_on_button_focus_exited"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/SecondaryPanel/SecondaryButton" to="." method="_on_button_focus_entered" binds= [2]]
+[connection signal="focus_exited" from="MarginContainer/HBoxContainer/SecondaryPanel/SecondaryButton" to="." method="_on_button_focus_exited"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/ControllerPanel/ControllerButton" to="." method="_on_button_focus_entered" binds= [3]]
+[connection signal="focus_exited" from="MarginContainer/HBoxContainer/ControllerPanel/ControllerButton" to="." method="_on_button_focus_exited"]
