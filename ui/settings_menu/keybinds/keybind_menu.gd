@@ -106,7 +106,8 @@ func _create_action_list():
 
 		content_container.add_child(action_row)
 
-	content_container.get_child(0).grab_focus()
+	SignalManager.focus_lost.emit()
+
 
 func _trim_mapping_suffix(mapping: String) -> String:
 	# Clean up display text by removing technical suffixes
@@ -211,7 +212,7 @@ func _on_restore_defaults_button_up() -> void:
 		DirAccess.remove_absolute(config_path)
 
 	_create_action_list()
-	
+
 	SignalManager.keybind_changed.emit("*") 
 
 

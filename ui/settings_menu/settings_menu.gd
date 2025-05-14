@@ -35,6 +35,8 @@ func _ready() -> void:
 	audio.focus_neighbor_bottom = cheat.get_path() if cheat else controls.get_path()
 	audio.focus_next = cheat.get_path() if cheat else controls.get_path()
 
+	SignalManager.focus_lost.connect(_on_focus_lost)
+
 
 func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
@@ -126,3 +128,7 @@ func _on_content_focus_entered() -> void:
 		child.focus_neighbor_left = focused_sidebar_item.get_path()
 
 	first_child.grab_focus()
+
+
+func _on_focus_lost() -> void:
+	focused_sidebar_item.grab_focus()
