@@ -1,5 +1,7 @@
-class_name SettingsSlider
+class_name ContentItemSlider
 extends Control
+
+signal slider_value_changed(value: float)
 
 @onready var label: Label = %Label
 @onready var slider_label: Label = %SliderLabel
@@ -16,3 +18,4 @@ func set_value(value: float) -> void:
 
 func _on_h_slider_value_changed(value: float) -> void:
 	slider_label.text = str(value)
+	slider_value_changed.emit(value)
