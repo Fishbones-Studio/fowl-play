@@ -6,7 +6,8 @@ extends Node
 # Variable to keep track of the scene currently being loaded in the background
 var _loading_scene_path: String = ""
 
-@onready var shader : PostProcess = $shader
+@onready var shader : PostProcess = $Shader
+@onready var subviewport : LayerSubViewPort = %LayerViewPort
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
@@ -141,6 +142,10 @@ func _instantiate_and_add_scene(
 
 		# Add it as a child of the scene loader
 		add_child(new_scene)
+		var cameras = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
+		if cameras.size() > 0:
+			print("Found gameplay camera")
+			subviewport.active_camera = cameras[0]
 		print("Scene instantiated and added: ", scene_path)
 	else:
 		push_error(

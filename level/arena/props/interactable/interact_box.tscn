@@ -20,6 +20,7 @@ shape = SubResource("BoxShape3D_xq2d5")
 
 [node name="NameLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 1.65892, 0)
+layers = 0
 modulate = Color(0, 1, 0.188235, 1)
 text = "PlaceHolder"
 font_size = 63

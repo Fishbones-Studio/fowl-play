@@ -53,6 +53,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/csgtomesh/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
+[global_group]
+
+gameplay_camera="The camera used for gameplay"
+
 [gui]
 
 theme/custom="uid://besvom3pq3s63"
