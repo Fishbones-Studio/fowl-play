@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dldj0suybdnhl"]
+[gd_scene load_steps=11 format=3 uid="uid://dldj0suybdnhl"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_8ap45"]
 [ext_resource type="Resource" uid="uid://blv5macbefk8v" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tres" id="2_6a4qq"]
@@ -254,13 +254,66 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector3(0.699999, 0.699999, 0.7), Vector3(0.699999, 0.699999, 0.7)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponHitBox/dagger/Cube:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponHitBox/dagger/Cube_001:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+
+[sub_resource type="Animation" id="Animation_7m64e"]
+resource_name = "Windup"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHitBox/dagger/Cube:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0387146, 0.466667),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [-2.0, -0.55, 1.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox/dagger/Cube_001:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266927, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [-2.0, 0.35, 2.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fr5cn"]
 _data = {
 &"Attack": SubResource("Animation_6a4qq"),
 &"Cooldown": SubResource("Animation_fr5cn"),
 &"Idle": SubResource("Animation_ktt1h"),
-&"RESET": SubResource("Animation_666u7")
+&"RESET": SubResource("Animation_666u7"),
+&"Windup": SubResource("Animation_7m64e")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6a4qq"]
@@ -284,3 +337,5 @@ shape = SubResource("BoxShape3D_6a4qq")
 
 [node name="dagger" parent="WeaponHitBox" index="1" instance=ExtResource("2_8qojw")]
 transform = Transform3D(-0.699999, 0, 1.77463e-06, 0, 0.699999, 0, -1.77462e-06, 0, -0.7, 0, 0.391005, 0)
+
+[editable path="WeaponHitBox/dagger"]
