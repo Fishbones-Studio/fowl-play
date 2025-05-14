@@ -5,6 +5,10 @@ if SaveManager.get_enemy_encounter_count("bob") > 0:
 else:
 	Bob: [[You. Here.|Another one comes.|Look at you.]]
 	Bob: [[Always pain.|Everything wrong.|This is me now.]]
+- Attack => END!
+- Talk => standard_dialogue
+
+~ standard_dialogue
 - What happened to you?
 	Bob: [[What... happened?|They did this.|Ones above.]]
 	Bob: [[Changed me.|Made me this.|Spikes hurt.]]
@@ -44,4 +48,4 @@ Bob: [[No more talk.|Enough.|Your turn.]]
 	Bob: [[Monster?|Yes. They made me.]]
 	Bob: [[Stronger now.|Stronger than you.|We see.]]
 	=> END
-- (Attack) => END
+- Attack => END
