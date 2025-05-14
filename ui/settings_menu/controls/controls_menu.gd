@@ -60,7 +60,7 @@ func _load_controls_items() -> void:
 
 		match item_values["type"]:
 			"slider":
-				var slider: SettingsSlider = slider_resource.instantiate()
+				var slider: ContentItemSlider = slider_resource.instantiate()
 				content_container.add_child(slider)
 				slider.label.text = item_name.capitalize()
 				slider.slider.min_value = item_values["min"]
