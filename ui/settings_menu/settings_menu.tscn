@@ -151,5 +151,6 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 focus_mode = 2
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/Panel/HeaderContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="focus_entered" from="VBoxContainer/MarginContainer/HBoxContainer/Content" to="." method="_on_content_focus_entered"]

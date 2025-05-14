@@ -27,6 +27,16 @@ func _ready() -> void:
 	input_field.text = last_valid_text
 
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		if has_focus():
+			input_field.grab_focus()
+	if Input.is_action_just_pressed("pause"):
+		if input_field.has_focus():
+			grab_focus()
+			get_viewport().set_input_as_handled()
+
+
 func set_label_text(text: String) -> void:
 	if label:
 		label.text = text
@@ -95,7 +105,14 @@ func _on_text_changed() -> void:
 
 
 func _on_focus_entered() -> void:
-	input_field.grab_focus()
+	_toggle_active(panel, true)
+
+
+func _on_focus_exited() -> void:
+	if input_field.has_focus():
+		return
+
+	_toggle_active(panel, false)
 
 
 func _on_input_field_focus_entered() -> void:

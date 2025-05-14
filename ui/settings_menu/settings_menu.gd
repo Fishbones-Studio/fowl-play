@@ -132,3 +132,9 @@ func _on_content_focus_entered() -> void:
 
 func _on_focus_lost() -> void:
 	focused_sidebar_item.grab_focus()
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		if controls:
+			controls.grab_focus()

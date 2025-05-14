@@ -140,10 +140,10 @@ func _is_valid_event_for_input_type(event: InputEvent, input_type: int) -> bool:
 func _split_events_by_type(events: Array[InputEvent]) -> Dictionary:
 	# Categorize inputs by type with priority: primary > secondary > controller
 	var result: Dictionary = {
-								 primary = null,
-								 secondary = null,
-								 controller = null
-							 }
+			primary = null,
+			secondary = null,
+			controller = null,
+		}
 
 	for event in events:
 		if event is InputEventJoypadButton or event is InputEventJoypadMotion:
