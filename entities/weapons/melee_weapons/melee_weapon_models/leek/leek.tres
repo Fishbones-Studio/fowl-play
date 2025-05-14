@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_nt88w")
 damage = 20
-windup_time = 0.0
-attack_duration = 0.6
+windup_time = 0.2
+attack_duration = 0.4
 cooldown_time = 0.8
 loop_animation = false
 name = "Leek"
@@ -15,7 +15,7 @@ purchasable = true
 drop_chance = 90
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage with a sharp leek. The attack lasts %s, then enters a cooldown state for %s."
+description = "Deals %s Base Damage with a sharp leek after winding up for %s. The attack lasts %s, then enters a cooldown state for %s."
 icon = ExtResource("1_16jp6")
 model_uid = "uid://bymaeu4dtl7ex"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"
