@@ -1,6 +1,9 @@
+// This shader is a post-processing effect, which pixelates, dithers and reduces the color depth of the screen texture.
+// It is designed to be used in a Godot 4.4 project.
 shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest_mipmap;
+// NOTE: Set the actual viewport resolution by code and update it every time the viewport changes
 uniform vec2 screen_size = vec2(1920.0, 1080.0);
 
 // Color and dithering controls
@@ -9,7 +12,7 @@ uniform int dither_size : hint_range(1, 8) = 1;
 // Color shift for dithering
 uniform float dither_shift : hint_range(-0.5, 0.5) = 0.1;
 uniform float dither_strength : hint_range(0.0, 1.0) = 0.5;
-uniform float dither_hue_shift : hint_range(-3.1416, 3.1416) = 0.0; // radians
+uniform float dither_hue_shift : hint_range(-3.1416, 3.1416) = 0.0;
 
 // Visual controls
 uniform float alpha : hint_range(0.0, 1.0) = 1.0;
@@ -33,6 +36,10 @@ float dithering_pattern(ivec2 fragcoord) {
 }
 
 // Manual hue rotation for a vec3 color
+// This is a simple rotation in the YIQ color space
+// YIQ is a color space that separates luminance (Y) from chrominance (I and Q)
+// The hue rotation is done by rotating the I and Q components
+// Even if angle is 0, some slight color variation will occur due to the conversion and float precision.
 vec3 hue_shift(vec3 color, float angle) {
     // Convert RGB to YIQ
     float Y = dot(color, vec3(0.299, 0.587, 0.114));
@@ -52,6 +59,9 @@ vec3 hue_shift(vec3 color, float angle) {
 }
 
 // Reduces a color channel to a limited palette, with dithering
+// raw: the raw color value (0.0 to 1.0)
+// dither: the dither value (0.0 to 1.0)
+// depth: the number of colors in the palette (1 to 16)
 float reduce_color(float raw, float dither, int depth) {
     float div = 1.0 / float(depth);
     float val = 0.0;
