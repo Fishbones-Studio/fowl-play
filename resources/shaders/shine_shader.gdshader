@@ -5,7 +5,7 @@ render_mode unshaded, depth_draw_never;
 
 uniform bool enabled = true;
 uniform vec4 shine_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform float progress : hint_range(-2.0, 2.0, 0.05) = 0.5;
+uniform float progress : hint_range(-2.0, 2.5, 0.05) = 0.5;
 uniform float shine_width : hint_range(0.01, 1.0, 0.01) = 0.5;
 
 uniform float shine_angle_x : hint_range(-90.0, 90.0, 15.0) = 0.0;
@@ -54,7 +54,7 @@ void fragment() {
         ALPHA = 0.0;
         discard;
     } else {
-	    vec3 vertex = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	    vec3 vertex = VERTEX.xyz;
 	    mat3 rotation = rotation_matrix();
 	    vertex = rotation * vertex;
 	    
