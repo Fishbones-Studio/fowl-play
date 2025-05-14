@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3vj6us77coyt"]
+[gd_scene load_steps=13 format=3 uid="uid://d3vj6us77coyt"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/ice_fox/ice_fox_stats.tres" id="3_7ghaq"]
 [ext_resource type="BehaviorTree" uid="uid://bc7ucld3pg5s8" path="res://entities/enemies/ai/trees/ice_fox.tres" id="4_0uh03"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/ice_fox/art/ice_fox.glb" id="4_qhcpj"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="5_7ghaq"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_72x12"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_ak1y5"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="6_fkrjg"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="6_psoce"]
 [ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="7_psoce"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="9_wbtjo"]
@@ -76,9 +77,9 @@ shape = SubResource("BoxShape3D_8ixwh")
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_0uh03")
 
-[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_ak1y5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.842227, 1.17218, -2.31409)
-melee_weapon_scene = ExtResource("5_7ghaq")
+melee_weapon_scene = ExtResource("6_fkrjg")
 weapon_collision_mask = 2
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_72x12")]

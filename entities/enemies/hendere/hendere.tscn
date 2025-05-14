@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm3hcx1pvcnnd"]
+[gd_scene load_steps=9 format=3 uid="uid://cm3hcx1pvcnnd"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_legca"]
 [ext_resource type="Resource" uid="uid://bd2xkljpgossi" path="res://entities/enemies/hendere/hendere_stats.tres" id="2_n7fk8"]
 [ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hendere/art/chicken_hennifer.glb" id="3_i6i68"]
 [ext_resource type="BehaviorTree" uid="uid://cjwfnys8g6i4y" path="res://entities/enemies/ai/trees/hendere.tres" id="4_7al0x"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_uw30w"]
 [ext_resource type="Texture2D" uid="uid://r4er70ancjjp" path="res://entities/enemies/hendere/art/hendere_mugshot.png" id="6_uw30w"]
 [ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="10_f4t48"]
 
@@ -48,7 +49,7 @@ behavior_tree = ExtResource("4_7al0x")
 [node name="EnemyWeaponController" parent="." index="5"]
 transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 1.01467, 1.12672, -0.399625)
 
-[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_uw30w")]
 melee_weapon_scene = ExtResource("10_f4t48")
 weapon_collision_mask = 2
 

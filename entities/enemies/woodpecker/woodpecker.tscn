@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://towsqhy2adj7"]
+[gd_scene load_steps=11 format=3 uid="uid://towsqhy2adj7"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
 [ext_resource type="BehaviorTree" uid="uid://dn83muanle5ic" path="res://entities/enemies/ai/trees/woodpecker.tres" id="4_1t2bg"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
 [ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_br0sw"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_vfx5i"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="6_x6gfb"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
 [ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
@@ -48,7 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.75)
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_1t2bg")
 
-[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_vfx5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751483, 1.60008, -0.692675)
 melee_weapon_scene = ExtResource("5_br0sw")
 weapon_collision_mask = 2

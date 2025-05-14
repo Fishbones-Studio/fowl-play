@@ -6,7 +6,8 @@
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="Texture2D" uid="uid://dvrovqnjw05ab" path="res://entities/enemies/elder_centipede/art/elder_centipede_mugshot.png" id="5_67o2n"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_djom0"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_67o2n"]
+size = Vector3(2.5, 3.5, 25)
 
 [node name="ElderCentipede" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_urhlp")]
 stats = ExtResource("2_5cdes")
@@ -16,11 +17,14 @@ dialogue_path = "res://entities/enemies/elder_centipede/dialogue"
 name_label_template_string = "%s \"Evolved\""
 
 [node name="chicken_centipede" parent="." index="0" instance=ExtResource("3_djom0")]
-transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.5, 0, 4.37114e-08, 0, 0.5, 0, -4.37114e-08, 0, -0.5, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="." index="1"]
-visible = false
-shape = SubResource("CapsuleShape3D_djom0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 3.25)
+shape = SubResource("BoxShape3D_67o2n")
+
+[node name="DamageNumberHandler" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.01741, -8.21457)
 
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_y8gm0")
