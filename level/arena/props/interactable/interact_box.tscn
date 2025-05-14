@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://rou530ix2je3"]
+[gd_scene load_steps=6 format=3 uid="uid://rou530ix2je3"]
 
 [ext_resource type="Script" uid="uid://bhlgtdwbupe1q" path="res://level/arena/props/interactable/interact_box.gd" id="1_fpr1w"]
+[ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="2_bf2km"]
 [ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_pkj54"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xq2d5"]
@@ -22,6 +23,8 @@ transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 
 modulate = Color(0, 1, 0.188235, 1)
 text = "PlaceHolder"
 font_size = 63
+script = ExtResource("2_bf2km")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 32

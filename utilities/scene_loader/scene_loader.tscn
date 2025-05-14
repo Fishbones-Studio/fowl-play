@@ -7,4 +7,3 @@
 script = ExtResource("1_150bd")
 
 [node name="shader" parent="." instance=ExtResource("2_nsksp")]
-visible = false

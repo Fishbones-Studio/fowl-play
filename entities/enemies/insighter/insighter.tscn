@@ -42,10 +42,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60472, 0)
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_e3er2")]
 ability_resource = ExtResource("6_mahx6")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("8_mahx6")
 
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="NameLabel" parent="CanvasLayer/HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "Insighter \"Molten Cheese Tart\""
 
 [editable path="insighter"]

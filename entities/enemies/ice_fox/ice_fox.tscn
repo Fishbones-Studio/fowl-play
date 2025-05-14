@@ -89,11 +89,11 @@ ability_resource = ExtResource("7_psoce")
 [node name="AbilitySlot3" parent="EnemyAbilityController" index="2" instance=ExtResource("5_72x12")]
 ability_resource = ExtResource("9_wbtjo")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("10_ak1y5")
 expand_mode = 3
 
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="NameLabel" parent="CanvasLayer/HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "BoreAss, Detonator of Foxes"
 
 [editable path="ice_fox"]

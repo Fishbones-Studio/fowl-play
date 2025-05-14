@@ -7,3 +7,4 @@ extends Label3D
 
 func _ready() -> void:
 	visual_layer = 1 << (visual_layer - 1)
+	print("Visual layer: %d" % visual_layer)

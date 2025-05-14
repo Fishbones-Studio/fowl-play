@@ -83,7 +83,7 @@ func _on_switch_game_scene(scene_path: String) -> void:
 	if scene_path == null:
 		print("Scene path is null, removing all children and stopping processing.")
 		for child in get_children():
-			if child is PostProcess : continue
+			if child is PostProcess or child is CanvasLayer : continue
 			child.queue_free()
 		shader.show()
 		set_process(false)
@@ -105,7 +105,7 @@ func _on_switch_game_scene(scene_path: String) -> void:
 		
 	# Remove the current children immediately
 	for child in get_children():
-		if child is PostProcess : continue
+		if child is PostProcess or child is CanvasLayer : continue
 		child.queue_free()
 		
 

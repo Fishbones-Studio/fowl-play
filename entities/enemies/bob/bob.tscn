@@ -51,10 +51,10 @@ behavior_tree = ExtResource("4_m0aa4")
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
 ability_resource = ExtResource("6_e381t")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("7_sexgk")
 
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="NameLabel" parent="CanvasLayer/HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "\"All-Devouring\" Bob"
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="9"]

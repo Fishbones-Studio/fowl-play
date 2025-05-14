@@ -51,13 +51,13 @@ transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 
 melee_weapon_scene = ExtResource("10_f4t48")
 weapon_collision_mask = 2
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 custom_minimum_size = Vector2(50, 50)
 texture = ExtResource("6_uw30w")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="NameLabel" parent="CanvasLayer/HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "Hendere"
 
 [editable path="chicken_hennifer"]

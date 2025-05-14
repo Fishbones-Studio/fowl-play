@@ -55,12 +55,12 @@ weapon_collision_mask = 2
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("6_x6gfb")]
 ability_resource = ExtResource("7_p6jwh")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("8_p6jwh")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="NameLabel" parent="CanvasLayer/HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
 text = "Woodpecker"
 
 [editable path="woodpecker"]
