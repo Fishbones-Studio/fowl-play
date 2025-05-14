@@ -5,6 +5,10 @@ if SaveManager.get_enemy_encounter_count("insighter") > 0:
 else:
 	Insighter: [[Oh, good! A new fight!|Hehehe! Time to break things—and people!|Hello, little fighter! Ready to meet your end?]]
 	Insighter: [[I just love the sound of cracking shells! And bones!|Dying is just the beginning, you know—the exciting part!|Are you going to die beautifully? I hope so!]]
+- Attack => END!
+- Talk => standard_dialogue
+
+~ standard_dialogue
 - You're... happy about this?
 	Insighter: [[Happy? I’m thrilled! This is the best part!|Why wouldn’t I be? Death is everywhere—it’s wonderful!|Watching things end is a glorious show!]]
 	=> discuss_death_obsession
@@ -31,17 +35,13 @@ Insighter: [[The arena is a garden—decay and rebirth everywhere!|Every crack, 
 Insighter: [[So many ways to go! Crushed, torn, eaten! Which do you prefer?|I wonder how your shell will break—one big crack, or lots of little ones?|Let’s find out together!]]
 - Stop talking about death.
 	Insighter: [[But it’s the only thing worth talking about! The grand finale!|Don’t be a spoilsport! It’s coming, no matter what!|You can’t avoid it forever! No one can!]]
-	=> end_options
+	=> proceed_to_fight
 - You're terrifying.
 	Insighter: [[Terrifying? Me? Just a little egg!|Hehe! Good! Fear makes the ending sweeter!|Relax! It’ll all be over soon!]]
-	=> end_options
+	=> proceed_to_fight
 - Let's fight now.
 	Insighter: [[Yes! Finally! The main event!|Enough talk! Time for the symphony of destruction!|I can’t wait to see you... pop!]]
 	=> proceed_to_fight
-
-~ end_options
-Insighter: [[Alright, alright! If you insist! But you’ll be thinking about it!|You’ll remember this during the fight—I know you will!|It’s always there... waiting...]]
-=> proceed_to_fight
 
 ~ proceed_to_fight
 Insighter: [[Here we go! The moment of truth—or the moment of death! Hehehe!|Don’t hold back! Give me a good show! Make it count!|Let the cracking begin!]]

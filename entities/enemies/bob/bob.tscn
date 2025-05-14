@@ -19,6 +19,7 @@ stats = ExtResource("2_fjbia")
 type = 1
 enemy_model = NodePath("ball_chicken")
 dialogue_path = "res://entities/enemies/bob/dialogue"
+name_label_template_string = "\"All-Devouring\" %s"
 
 [node name="ball_chicken" parent="." index="0" instance=ExtResource("3_0xmxa")]
 transform = Transform3D(-6.55671e-08, 1.31134e-07, 1.5, 0, -1.5, 1.31134e-07, 1.5, 5.73206e-15, 6.55671e-08, 0, 2.87023, 0)
@@ -51,11 +52,8 @@ behavior_tree = ExtResource("4_m0aa4")
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
 ability_resource = ExtResource("6_e381t")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("7_sexgk")
-
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
-text = "\"All-Devouring\" Bob"
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)

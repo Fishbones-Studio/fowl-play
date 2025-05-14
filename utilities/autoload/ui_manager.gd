@@ -42,6 +42,8 @@ func _ready() -> void:
 
 	# Initialize with main menu (or potentially nothing, depending on game start)
 	_on_add_ui_scene(UIEnums.UI.MAIN_MENU)
+	
+	layer = 3
 
 
 func _input(_event: InputEvent) -> void:

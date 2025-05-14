@@ -89,3 +89,12 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 	viewport.scaling_3d_scale = settings["render_scale"]
 	viewport.scaling_3d_mode = settings["render_mode"]
 	DisplayUtils.center_window(window)
+	
+# Method to get a specific setting from the config file
+static func get_setting(section: String, key: String, default : Variant) -> Variant:
+	var config := ConfigFile.new()
+	if config.load(SETTINGS_CONFIG_PATH) == OK and config.has_section(section):
+		return config.get_value(section, key, default)
+	else:
+		push_warning("Failed to load setting '%s' from section '%s'." % [key, section])
+		return null
