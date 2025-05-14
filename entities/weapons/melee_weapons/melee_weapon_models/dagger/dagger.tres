@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_43o3y")
-damage = 6
-windup_time = 0.0
+damage = 8
+windup_time = 0.5
 attack_duration = 2.0
 cooldown_time = 2.5
 loop_animation = false
@@ -15,7 +15,7 @@ purchasable = true
 drop_chance = 12
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage with a powerful swing. The attack lasts %s, then enters a cooldown state for %s.
+description = "Winds up for %s and deals %s Base Damage with a powerful swing. The attack lasts %s, then enters a cooldown state for %s.
 
 Allows for [color=orange]2 hits per attack[/color]."
 icon = ExtResource("1_8lwf8")

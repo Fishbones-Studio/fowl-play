@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://db68ojqri7xqs"]
+[gd_scene load_steps=11 format=3 uid="uid://db68ojqri7xqs"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_rk4tr"]
 [ext_resource type="PackedScene" uid="uid://cwgmtrf1rjw48" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb" id="2_aea71"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_bax8f"]
 resource_name = "Attack"
-length = 0.3
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14,10 +14,10 @@ tracks/0/path = NodePath("WeaponHitBox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 0.5, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -2), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 1), Vector3(0, 0, -2), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -38,7 +38,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.05, 0.2),
+"times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [true],
@@ -203,12 +203,41 @@ tracks/5/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_bpbh2"]
+resource_name = "Windup"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHitBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHitBox:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bpbh2"]
 _data = {
 &"Attack": SubResource("Animation_bax8f"),
 &"Cooldown": SubResource("Animation_ggphi"),
 &"Idle": SubResource("Animation_vmu4i"),
-&"RESET": SubResource("Animation_wtiuw")
+&"RESET": SubResource("Animation_wtiuw"),
+&"Windup": SubResource("Animation_bpbh2")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmu4i"]
