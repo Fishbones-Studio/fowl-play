@@ -3,18 +3,10 @@ extends Node3D
 
 var _current_weapon_slot: int = 0
 var _weapon_equiped: bool = false
-var _cooldown: float = 0.0:
-	set(value):
-		# clamping _cooldown to avoid float impressisions
-		_cooldown = max(snapped(value, 0.1), 0.0)
+
 
 func _ready() -> void:
 	_equip_weapons()
-
-
-func _process(delta: float) -> void:
-	if _cooldown > 0.0:
-		_cooldown -= delta
 
 
 func _equip_weapons() -> void:
@@ -57,23 +49,37 @@ func swap_weapon() -> void:
 	get_child(_current_weapon_slot).visible = true
 
 
-func use_weapon() -> bool:
+func use_weapon(ignore_cooldown: bool = false, start_state: WeaponEnums.WeaponState = WeaponEnums.WeaponState.WINDUP) -> int:
 	if not _weapon_equiped:
 		push_warning(owner.name, " has no weapon equpped.")
-		return false
+		return 0
 
 	var active_weapon: Node3D = get_child(_current_weapon_slot)
 
 	if active_weapon is MeleeWeaponNode:
-		if _cooldown > 0.0:
-			push_warning(owner.name, ": weapon on cooldown " + str(_cooldown))
-			return false
+		var current_state: BaseCombatState = active_weapon.melee_state_machine.current_state
+		var cooldown_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.COOLDOWN]
+		var attacking_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.ATTACKING]
+		var windup_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.WINDUP]
 
-		active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.WINDUP)
-		_cooldown = active_weapon.current_weapon.current_weapon.cooldown_time
-		return true
+		match start_state:
+			WeaponEnums.WeaponState.WINDUP:
+				if current_state == cooldown_state and not ignore_cooldown:
+					return 0
+				if current_state == windup_state:
+					return 2
+				if current_state == attacking_state and not ignore_cooldown:
+					return 2
+				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.WINDUP)
+				return 1
+			WeaponEnums.WeaponState.IDLE:
+				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.IDLE)
+				return 1
+			WeaponEnums.WeaponState.COOLDOWN:
+				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.COOLDOWN)
+				return 1
 
 	elif active_weapon is RangedWeaponNode:
-		return false
+		return 0
 
-	return false
+	return 0
