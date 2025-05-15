@@ -5,8 +5,6 @@ extends EnemyBTAction
 @export var target_var: StringName = &"target"
 ## How close should the agent be to the desired position to return SUCCESS.
 @export var tolerance: float = 2.0
-## Desired distance from target.
-@export var aggro_distance: float = 20.0
 ## Pursuit speed factor.
 @export var speed_factor: float = 0.0
 ## Duration the enemy will pursue the target.

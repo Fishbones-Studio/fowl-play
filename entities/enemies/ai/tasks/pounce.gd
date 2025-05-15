@@ -5,10 +5,12 @@ extends BTAction
 @export var target_var: StringName = &"target"
 ## Controls the height of the pounce.
 @export_range(1.0, 100.0, 0.1) var jump_factor: float = 1.0
-## Movement speed during the pound sequence.
+## Movement speed during the pounce sequence.
 @export var horizontal_speed: float = 40.0
 ## Minimum distance to target before returning SUCCESS.
 @export var min_distance: float = 10.0
+## The maximun duration the pounce sequence should last
+@export var duration: float = 1.0
 
 var _is_jumping: bool = false
 var _target_position: Vector3
@@ -21,6 +23,7 @@ func _generate_name() -> String:
 
 func _enter() -> void:
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
+
 	if not is_instance_valid(target):
 		push_warning("Pounce: Target is not a valid ChickenPlayer (%s: %s)" % [
 			LimboUtility.decorate_var(target_var), blackboard.get_var(target_var)])
@@ -52,6 +55,10 @@ func _tick(delta: float) -> Status:
 	agent.velocity.z += (horizontal_dir.z * horizontal_speed - agent.velocity.z) * delta
 
 	if agent.is_on_floor() and agent.velocity.y < 0:
+		_is_jumping = false
+		return SUCCESS
+
+	if elapsed_time > duration:
 		_is_jumping = false
 		return SUCCESS
 
