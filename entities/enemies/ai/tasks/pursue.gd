@@ -81,7 +81,8 @@ func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool
 		agent.nav.set_velocity(_current_direction * speed)
 	else:
 		_current_direction = agent.global_position.direction_to(target_pos)
-		agent.velocity = _current_direction * speed
+		agent.velocity.x = _current_direction.x * speed
+		agent.velocity.z = _current_direction.z * speed
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
