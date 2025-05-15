@@ -2,7 +2,7 @@ extends Control
 
 var is_transitioning: bool = false
 
-@onready var label: Label = $Label
+@onready var label: Label = $VBoxContainer/VictoryLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var victory_music_player : AudioStreamPlayer = $VictoryMusicPlayer
 

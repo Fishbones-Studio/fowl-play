@@ -8,7 +8,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VboxContainer/Label:modulate")
+tracks/0/path = NodePath("VboxContainer/TitleLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -36,7 +36,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VboxContainer/Label:modulate")
+tracks/0/path = NodePath("VboxContainer/TitleLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -97,7 +97,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="VboxContainer"]
+[node name="TitleLabel" type="Label" parent="VboxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
 text = "$"

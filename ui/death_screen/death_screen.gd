@@ -3,7 +3,7 @@ extends Control
 var is_transitioning: bool = false
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var title: Label = $TitleLabel
+@onready var title: Label = $VBoxContainer/TitleLabel
 
 
 func _ready() -> void:

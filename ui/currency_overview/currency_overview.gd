@@ -19,6 +19,7 @@ func _add_labels_to_container() -> void:
 	column_two_label.text = column_two_title
 	label_container.add_child(column_one_label)
 	label_container.add_child(column_two_label)
+	
 
 	for key in label_amount_dictionary.currency_dict.keys():
 		var label: Label = Label.new()
@@ -31,4 +32,7 @@ func _add_labels_to_container() -> void:
 func update_label_container() -> void:
 	for child in label_container.get_children():
 		child.queue_free()
+	if label_amount_dictionary.currency_dict.is_empty():
+		push_warning("No currency dict")
+		return
 	_add_labels_to_container()
