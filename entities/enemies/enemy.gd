@@ -22,6 +22,7 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
+@onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
 
 
 func _ready() -> void:
@@ -71,11 +72,15 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 				immobile_timer.start()
 				is_immobile = true
 
+		# Play hurt sound
+		on_hurt.play()
+
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 		health_bar.set_health(stats.current_health)
 
 		if stats.current_health <= 0:
 			_die()
+
 
 
 func _die() -> void:

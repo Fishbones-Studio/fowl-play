@@ -49,6 +49,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_8uudm"]
 script = ExtResource("5_pd8xg")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTParallel" id="BTParallel_53l80"]
@@ -115,9 +116,9 @@ stuck_threshold = 2.5
 script = ExtResource("7_53l80")
 target_var = &"target"
 tolerance = 5.0
-aggro_distance = 60.0
 speed_factor = 0.0
 duration = 0.0
+ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05

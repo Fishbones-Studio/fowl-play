@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=22 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_6mkbl"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
+[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="13_vsiul"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
 [ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
@@ -39,19 +40,19 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.510856, -0.00280821, 0.00907921, 0.859614)
-bones/3/rotation = Quaternion(-0.528363, -0.0197474, -0.0177102, 0.848604)
-bones/4/rotation = Quaternion(-0.177215, -0.30952, -0.0922992, 0.929663)
-bones/5/rotation = Quaternion(-0.174127, -0.00122577, -0.562791, 0.80805)
-bones/6/rotation = Quaternion(-0.520555, -0.28973, -0.480429, 0.643635)
-bones/7/rotation = Quaternion(-0.251105, -0.00599498, 0.602782, 0.75734)
-bones/8/rotation = Quaternion(-0.473611, 0.317475, 0.509815, 0.644198)
+bones/2/rotation = Quaternion(-0.47392, -0.0012082, 0.00150737, 0.880566)
+bones/3/rotation = Quaternion(-0.413765, 0.117226, 0.0946851, 0.897826)
+bones/4/rotation = Quaternion(0.00775404, -0.314548, 0.10267, 0.943641)
+bones/5/rotation = Quaternion(-0.327256, 0.0880287, -0.631365, 0.697519)
+bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572916)
+bones/7/rotation = Quaternion(-0.167631, 0.0618566, 0.554246, 0.812948)
+bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.30415, -0.0167777, -0.0506861, 0.951127)
-bones/11/rotation = Quaternion(0.181434, 0.00785356, -0.113608, 0.976787)
+bones/10/rotation = Quaternion(0.22215, -0.00569617, -0.0598673, 0.973156)
+bones/11/rotation = Quaternion(0.169152, 0.0297078, -0.155867, 0.972734)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.172644, 0.0519954, 0.108823, 0.977573)
+bones/13/rotation = Quaternion(-0.173846, -0.0437086, -0.03523, 0.983171)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -105,6 +106,10 @@ state_type = 6
 [node name="ImmobileTimer" type="Timer" parent="MovementStateMachine/Hurt"]
 wait_time = 0.05
 one_shot = true
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Hurt"]
+stream = ExtResource("13_vsiul")
+bus = &"SFX"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")
