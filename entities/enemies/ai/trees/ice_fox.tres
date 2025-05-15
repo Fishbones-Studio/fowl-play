@@ -39,8 +39,8 @@ blend = 0.2
 script = ExtResource("2_6nkjl")
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_sq422"]
-min_duration = 0.5
-max_duration = 1.3
+min_duration = 0.6
+max_duration = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_qmoh7"]
 custom_name = "Pause before action"
@@ -144,8 +144,8 @@ duration = 0.0
 children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAction_4fcdy")]
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_y7cob"]
-min_duration = 0.3
-max_duration = 0.7
+min_duration = 0.8
+max_duration = 1.6
 
 [sub_resource type="BTSequence" id="BTSequence_t3gyd"]
 custom_name = "Get ready"
@@ -210,6 +210,7 @@ angle_threshold = 5.0
 duration = 0.0
 
 [sub_resource type="BTWait" id="BTWait_u4hmx"]
+duration = 2.0
 
 [sub_resource type="BTParallel" id="BTParallel_40a5u"]
 children = [SubResource("BTAction_ca3xq"), SubResource("BTWait_u4hmx")]
