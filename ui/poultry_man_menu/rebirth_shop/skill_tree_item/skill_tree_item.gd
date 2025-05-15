@@ -39,7 +39,6 @@ func _on_buy_button_pressed() -> void:
 	if not upgrade_resource:
 		return
 	if upgrade_resource.current_level < upgrade_resource.max_level and can_afford_upgrade():
-		upgrade_resource.current_level += 1
 		purchase_upgrade()
 		update_ui_elements()
 		apply_upgrade()
@@ -53,9 +52,9 @@ func can_afford_upgrade() -> bool:
 		return false
 	match upgrade_resource.currency_type:
 		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
-			return GameManager.feathers_of_rebirth >= upgrade_resource.cost
+			return GameManager.feathers_of_rebirth >= upgrade_resource.get_level_cost(upgrade_resource.current_level+1)
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
-			return GameManager.prosperity_eggs >= upgrade_resource.cost
+			return GameManager.prosperity_eggs >= upgrade_resource.get_level_cost(upgrade_resource.current_level+1)
 		_:
 			return false
 
@@ -63,9 +62,10 @@ func can_afford_upgrade() -> bool:
 func purchase_upgrade() -> void:
 	match upgrade_resource.currency_type:
 		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
-			GameManager.feathers_of_rebirth -= upgrade_resource.get_level_cost(upgrade_resource.current_level)
+			GameManager.feathers_of_rebirth -= upgrade_resource.get_level_cost(upgrade_resource.current_level+1)
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
-			GameManager.prosperity_eggs -= upgrade_resource.get_level_cost(upgrade_resource.current_level)
+			GameManager.prosperity_eggs -= upgrade_resource.get_level_cost(upgrade_resource.current_level+1)
+	upgrade_resource.current_level += 1
 
 
 func apply_upgrade() -> void:
