@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cwwmblkt7dr02"]
 
-[ext_resource type="Texture2D" uid="uid://cqo1onb8cigi2" path="res://ui/loading_screen/art/pen_art.png" id="1_aief6"]
+[ext_resource type="Texture2D" uid="uid://3rpjm7rltqlk" path="res://entities/abilities/ability_models/fire_ball/fire_ball.png" id="1_aief6"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_dllc3"]
 
 [resource]
