@@ -72,6 +72,9 @@ bones/33/rotation = Quaternion(0.995026, 5.29396e-23, -0.0996115, -6.28657e-23)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_8ixwh")
 
+[node name="DamageNumberHandler" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15096, -1.68246)
+
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_0uh03")
 

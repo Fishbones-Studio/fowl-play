@@ -9,8 +9,6 @@ extends BTAction
 @export var horizontal_speed: float = 40.0
 ## Minimum distance to target before returning SUCCESS.
 @export var min_distance: float = 10.0
-## The maximun duration the pounce sequence should last
-@export var duration: float = 1.0
 
 var _is_jumping: bool = false
 var _target_position: Vector3
@@ -55,10 +53,6 @@ func _tick(delta: float) -> Status:
 	agent.velocity.z += (horizontal_dir.z * horizontal_speed - agent.velocity.z) * delta
 
 	if agent.is_on_floor() and agent.velocity.y < 0:
-		_is_jumping = false
-		return SUCCESS
-
-	if elapsed_time > duration:
 		_is_jumping = false
 		return SUCCESS
 
