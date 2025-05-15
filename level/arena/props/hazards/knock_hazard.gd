@@ -20,7 +20,7 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 	if body.collision_layer in [2, 4]:
 		if body is Enemy:
-			if body.type == EnemyEnums.EnemyTypes.REGULAR:
+			if body.type == EnemyEnums.EnemyTypes.BOSS:
 				damage /= 10
 		SignalManager.weapon_hit_target.emit(
 				body,
