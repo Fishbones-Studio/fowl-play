@@ -119,6 +119,7 @@ tolerance = 5.0
 aggro_distance = 60.0
 speed_factor = 0.0
 duration = 0.0
+ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05

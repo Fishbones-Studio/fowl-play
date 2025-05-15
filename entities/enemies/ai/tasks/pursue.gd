@@ -11,6 +11,8 @@ extends EnemyBTAction
 @export var speed_factor: float = 0.0
 ## Duration the enemy will pursue the target.
 @export var duration: float = 0.0
+## Ignore y if not using pathfinding
+@export var ignore_y: bool = true
 ## Use path finding instead of normal movement
 @export var pathfinding: bool = false
  ## Force immediate updates.
@@ -82,6 +84,7 @@ func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool
 	else:
 		_current_direction = agent.global_position.direction_to(target_pos)
 		agent.velocity.x = _current_direction.x * speed
+		if not ignore_y: agent.velocity.y = _current_direction.y * speed
 		agent.velocity.z = _current_direction.z * speed
 
 
