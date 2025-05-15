@@ -13,6 +13,9 @@ func _init() -> void:
 func enter(_previous_state, _information: Dictionary = {}) -> void:
 	if entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, false)
+
+	weapon_node.weapon_attack_sfx.play()
+
 	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
 	attack_timer.start()
 
@@ -36,8 +39,6 @@ func _attack() -> void:
 	if weapon_node.attacking:
 		# Get targets for the given area in the attack area.
 		var targets: Array[Node] = weapon_node.hit_targets_this_swing
-
-		weapon_node.weapon_attack_sfx.play()
 
 		for target in targets:
 			if target is Enemy or target is ChickenPlayer:
