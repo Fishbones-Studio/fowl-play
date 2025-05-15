@@ -164,7 +164,7 @@ func _set_fps(index: int) -> void:
 ## Multi-sample anti-aliasing. High quality, but slow. It also does not smooth 
 ## out the edges of transparent (alpha scissor) textures.
 func _set_msaa(index: int) -> void:
-	var value: int = MSAA.values()[index]
+	var value: Viewport.MSAA = MSAA.values()[index]
 	get_viewport().msaa_3d = value
 
 	msaa.options.selected = index
@@ -176,7 +176,7 @@ func _set_msaa(index: int) -> void:
 ## Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha 
 ## scissor edges), but blurs the whole scene rendering slightly.
 func _set_fxaa(index: int) -> void:
-	var value: int = FXAA.values()[index]
+	var value: Viewport.ScreenSpaceAA = FXAA.values()[index]
 	get_viewport().screen_space_aa = value
 
 	fxaa.options.selected = index
@@ -189,7 +189,7 @@ func _set_fxaa(index: int) -> void:
 ## but can introduce ghosting artifacts and blurring in motion. 
 ## Moderate performance cost.
 func _set_taa(index: int) -> void:
-	var value: int = TAA.values()[index]
+	var value: bool = TAA.values()[index]
 	get_viewport().use_taa = value
 
 	taa.options.selected = index
@@ -209,7 +209,7 @@ func _set_render_scale(index: int) -> void:
 
 
 func _set_render_mode(index: int) -> void:
-	var value: int = RENDER_MODE.values()[index]
+	var value: Viewport.Scaling3DMode = RENDER_MODE.values()[index]
 	get_viewport().scaling_3d_mode = value
 
 	render_mode.options.selected = index
@@ -275,7 +275,8 @@ func _set_graphics_values() -> void:
 	taa.options.select(TAA.values().find(get_viewport().use_taa))
 	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
-	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
+	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", 2)
+	post_processing_strength.set_value(saved_step if saved_step != null else 2)
 
 	_update_resolution_visibility()
 

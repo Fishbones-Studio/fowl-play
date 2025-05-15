@@ -29,7 +29,8 @@ func _update_shader_params() -> void:
 
 
 func _apply_saved_variation(pp_shader_material: ShaderMaterial) -> void:
-	var step : int = int(SettingsManager.get_setting("graphics", "pp_shader", default_step))
+	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", default_step) 
+	var step: int = saved_step if saved_step != null else default_step
 
 	if !shader_steps.has(step): # Check if the step exists in the dictionary
 		printerr("PostProcess: Shader step %d not found in dictionary." % step)
