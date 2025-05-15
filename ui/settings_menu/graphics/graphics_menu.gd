@@ -98,6 +98,7 @@ func _save_graphics_settings() -> void:
 	config.save(config_path)
 	SignalManager.graphics_settings_changed.emit()
 
+
 func _set_resolution(index: int) -> void:
 	var value: Vector2i = RESOLUTIONS.values()[index]
 	DisplayServer.window_set_size(value)
@@ -116,12 +117,13 @@ func _set_display_mode(index: int) -> void:
 	display_mode.options.selected = index
 	graphics_settings["display_mode"] = value
 
+	_update_resolution_visibility()
 	_save_graphics_settings()
 
 
 func _set_borderless(value: bool) -> void:
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, value)
-	DisplayServer.window_set_size(graphics_settings["resolution"])
+	DisplayServer.window_set_size(RESOLUTIONS.values()[resolution.options.selected])
 	DisplayUtils.center_window(get_window())
 
 	graphics_settings["borderless"] = value
@@ -215,10 +217,12 @@ func _set_render_mode(index: int) -> void:
 
 	_save_graphics_settings()
 
+
 ## Slider for the post processing effect
-func _on_post_processing_strength_slider_value_changed(value):
+func _on_post_processing_strength_slider_value_changed(value) -> void:
 	graphics_settings["pp_shader"] = value
 	_save_graphics_settings()
+
 
 func _load_graphics_items() -> void:
 	resolution.options.clear()
@@ -273,9 +277,20 @@ func _set_graphics_values() -> void:
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
 	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
 
+	_update_resolution_visibility()
+
 
 func _on_restore_defaults_button_up() -> void:
 	if FileAccess.file_exists(config_path):
 		DirAccess.remove_absolute(config_path)
 
 	_load_graphics_items()
+
+
+func _update_resolution_visibility() -> void:
+	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
+
+	resolution.visible = selected_mode not in [
+		DisplayServer.WINDOW_MODE_FULLSCREEN,
+		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+	]

@@ -2,8 +2,8 @@
 ## Handles settings data persistance:
 ## - Settings (Controls, Key Bindings, Graphics, Audio)
 #################################################################################
-
-class_name SettingsManager extends Node
+class_name SettingsManager
+extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"
 const SETTINGS_CFG_NAME_CONTROLS: String = "controls"
@@ -18,6 +18,7 @@ const DEFAULT_GRAPHICS_SETTINGS: GraphicsSettings = preload("uid://bj6f5mcuyrlnf
 static var is_remapping: bool = false
 static var input_type: SaveEnums.InputType
 static var action_to_remap: String = ""
+
 
 ## Load all saved settings from the user's configuration file.
 static func load_settings( viewport: Viewport, window: Window, item: String = "") -> void:
@@ -47,7 +48,6 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 							push_warning("Invalid event type for action '%s' in settings." % action)
 				else:
 					push_warning("Events for action '%s' not an array in settings." % action)
-
 
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
 		# Load graphics settings
@@ -88,7 +88,8 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 	viewport.scaling_3d_scale = settings["render_scale"]
 	viewport.scaling_3d_mode = settings["render_mode"]
 	DisplayUtils.center_window(window)
-	
+
+
 # Method to get a specific setting from the config file
 static func get_setting(section: String, key: String, default : Variant) -> Variant:
 	var config := ConfigFile.new()

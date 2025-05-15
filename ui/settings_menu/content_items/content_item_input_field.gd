@@ -1,5 +1,5 @@
 class_name InputValidator 
-extends Control
+extends ContentItem
 
 signal value_committed(new_value: Variant)
 
@@ -18,20 +18,31 @@ var last_caret_column: int = 0
 
 @onready var input_field: TextEdit = %InputField
 @onready var label : Label = %Label
+@onready var panel: Panel = $MarginContainer2/Panel
 
 
 func _ready() -> void:
 	input_field.text_changed.connect(_on_text_changed)
-	input_field.focus_exited.connect(_on_focus_exited)
 	last_valid_text = default_value if _is_valid(default_value) else _fallback_value()
 	input_field.text = last_valid_text
-	
+
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		if has_focus():
+			input_field.grab_focus()
+	if Input.is_action_just_pressed("pause"):
+		if input_field.has_focus():
+			grab_focus()
+			get_viewport().set_input_as_handled()
+
 
 func set_label_text(text: String) -> void:
 	if label:
 		label.text = text
 	else:
 		push_error("Label node not found. Ensure the scene structure is correct.")
+
 
 func _fallback_value() -> String:
 	match validation_type:
@@ -93,5 +104,22 @@ func _on_text_changed() -> void:
 	_validate_text(input_field.text)
 
 
+func _on_focus_entered() -> void:
+	_toggle_active(panel, true)
+
+
 func _on_focus_exited() -> void:
+	if input_field.has_focus():
+		return
+
+	_toggle_active(panel, false)
+
+
+func _on_input_field_focus_entered() -> void:
+	_set_neighbors_for(input_field)
+	_toggle_active(panel, true)
+
+
+func _on_input_field_focus_exited() -> void:
 	_validate_text(input_field.text)
+	_toggle_active(panel, false)

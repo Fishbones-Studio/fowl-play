@@ -9,6 +9,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 3
+focus_mode = 2
 script = ExtResource("1_2q2x0")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
@@ -26,7 +27,7 @@ theme_override_constants/margin_bottom = 0
 [node name="Panel" type="Panel" parent="MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"SettingsContentPanel"
+theme_type_variation = &"SettingsContentPanelInactive"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -71,4 +72,7 @@ size_flags_stretch_ratio = 2.0
 alignment = 1
 text_overrun_behavior = 4
 clip_text = true
-selected = 0
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_on_option_button_focus_entered"]
+[connection signal="focus_exited" from="MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_on_option_button_focus_exited"]
