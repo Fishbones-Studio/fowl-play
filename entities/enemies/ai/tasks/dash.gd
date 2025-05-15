@@ -8,7 +8,6 @@ extends BTAction
 ## Minimun travel distance of the dash.
 @export var dash_distance: float = 30.0
 
-var _dash_timer: float = 0.0
 var _dash_speed: float = 0.0
 var _dash_direction: Vector3 = Vector3.ZERO
 
@@ -22,17 +21,14 @@ func _enter() -> void:
 	if not is_instance_valid(target):
 		return
 
-	_dash_timer = dash_duration
-	_dash_direction = -agent.global_basis.z.normalized()
+	_dash_direction = (target.global_position - agent.global_position).normalized()
 	_dash_speed = (dash_distance / dash_duration) + agent.stats.calculate_speed(agent.movement_component.dash_speed_factor)
 
 
-func _tick(delta: float) -> Status:
-	_dash_timer -= delta
-
+func _tick(_delta: float) -> Status:
 	agent.velocity = _dash_direction * _dash_speed
 
-	if _dash_timer <= 0:
+	if dash_duration > 0 and elapsed_time > dash_duration:
 		return SUCCESS
 
 	return RUNNING

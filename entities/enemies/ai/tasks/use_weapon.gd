@@ -3,8 +3,11 @@ extends BTAction
 
 ## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
+## If true, can be used regardless of the cooldown state of a weapon.
 @export var ignore_cooldown: bool = false
+## The initial state of the weapon.
 @export var start_state: WeaponEnums.WeaponState = WeaponEnums.WeaponState.WINDUP
+
 
 func _generate_name() -> String:
 	return "Use weapon ➜ %s" % [LimboUtility.decorate_var(target_var)]
