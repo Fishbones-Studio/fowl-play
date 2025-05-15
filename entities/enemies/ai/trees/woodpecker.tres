@@ -121,6 +121,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]

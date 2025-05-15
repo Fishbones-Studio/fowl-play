@@ -49,6 +49,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_8uudm"]
 script = ExtResource("5_pd8xg")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTParallel" id="BTParallel_53l80"]

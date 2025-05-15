@@ -95,6 +95,7 @@ min_distance = 10.0
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_ulmcl"]
@@ -130,6 +131,7 @@ dash_distance = 30.0
 [sub_resource type="BTAction" id="BTAction_40a5u"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 1
 
 [sub_resource type="BTSequence" id="BTSequence_40a5u"]
@@ -168,6 +170,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_8831e"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 2
 
 [sub_resource type="BTSequence" id="BTSequence_pbs4t"]
