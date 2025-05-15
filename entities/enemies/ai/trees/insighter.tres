@@ -131,8 +131,8 @@ distance_max = 10.0
 [sub_resource type="BTAction" id="BTAction_ien84"]
 script = ExtResource("8_j3vma")
 target_var = &"target"
-ignore_cooldown = null
-start_state = null
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_vte2v"]
 children = [SubResource("BTCondition_jinyb"), SubResource("BTAction_ien84")]

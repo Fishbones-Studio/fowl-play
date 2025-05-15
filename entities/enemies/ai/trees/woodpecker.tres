@@ -82,8 +82,8 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
 script = ExtResource("7_ftfet")
 target_var = &"target"
-ignore_cooldown = null
-start_state = null
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_gghh5"]
 children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]

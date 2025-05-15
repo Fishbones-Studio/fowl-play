@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yhbkp"]
 [ext_resource type="Script" uid="uid://wrawtm8at4do" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="8_k708t"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="11_ulmcl"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_sfte8"]
@@ -231,8 +231,8 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("11_ulmcl")
 target_var = &"target"
-ignore_cooldown = null
-start_state = null
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTWait" id="BTWait_t3gyd"]
 duration = 0.5

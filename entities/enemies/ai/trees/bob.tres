@@ -192,9 +192,9 @@ path_update_interval = 0.05
 script = ExtResource("7_wwppe")
 jump_factor = 200.0
 duration = 0.0
-is_falling = null
-has_landed = null
-reached_peak = null
+is_falling = false
+has_landed = true
+reached_peak = false
 
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
 children = [SubResource("BTCondition_ykixg"), SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
