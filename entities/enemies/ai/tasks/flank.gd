@@ -8,7 +8,7 @@ extends BTAction
 ## Vertical offset to prevent ground clipping
 @export var vertical_offset: float = 0.0
 ## Radius to check for clear space
-@export_range(0.1, 5.0, 0.1) var clearance_radius: float = 0.5
+@export_range(0.1, 5.0, 0.1) var clearance_radius: float = 1.0
 
 
 # Display a customized name (requires @tool).
@@ -24,7 +24,7 @@ func _generate_name() -> String:
 	if vertical_offset > 0:
 		name += "vertical_offset: %.1f  " % vertical_offset
 
-	if clearance_radius != 0.5:
+	if clearance_radius != 1.0:
 		name += "clearance_radius: %.1f" % clearance_radius
 
 	return name if name != "Flank ➜ " else "Flank"
@@ -51,6 +51,8 @@ func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 	var base_dir: Vector3 = -target.global_transform.basis.z.normalized()
 	var test_angles: Array[float] = [180, 90, -90, 45, -45, 0]  # Test multiple approach angles
 
+	test_angles.shuffle()
+
 	for angle in test_angles:
 		var rotated_dir: Vector3 = base_dir.rotated(Vector3.UP, deg_to_rad(angle))
 		var test_pos: Vector3 = target.global_position + (rotated_dir * flank_distance)
@@ -67,7 +69,6 @@ func _is_position_clear(position: Vector3) -> bool:
 		push_error("clearance_radius must be > 0 (current: %f)" % clearance_radius)
 		return false
 
-	# Create temporary shape for testing
 	var shape: SphereShape3D = SphereShape3D.new()
 	shape.radius = clearance_radius
 
@@ -79,6 +80,5 @@ func _is_position_clear(position: Vector3) -> bool:
 
 	# Perform query
 	var space_state: PhysicsDirectSpaceState3D = agent.get_world_3d().direct_space_state
-	var results: Array[Dictionary] = space_state.intersect_shape(params, 1)
 
-	return results.is_empty()
+	return space_state.intersect_shape(params).is_empty()

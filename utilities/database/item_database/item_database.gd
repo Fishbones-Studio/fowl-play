@@ -30,6 +30,8 @@ static func load_scene_resources(
 
 		# First try to load .tres file
 		for file in sub_dir.get_files():
+			if file.ends_with(".remap"):
+				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.ends_with(".tres"):
 				tres_file = file
 				break  # Prefer .tres, stop searching
