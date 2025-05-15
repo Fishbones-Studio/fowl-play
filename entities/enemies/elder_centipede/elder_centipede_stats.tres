@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource("1_m5dqr")
 max_health = 500.0
-max_stamina = 100.0
-attack = 50.0
-defense = 50
-speed = 15.0
-weight = 5.0
+max_stamina = 10.0
+attack = 0.0
+defense = 80
+speed = 10.0
+weight = 10.0
 health_regen = 0
-stamina_regen = 10
+stamina_regen = 0
 weight_factor = 0.07
 defense_multiplier = 0.05
 defense_decelerator = 9.0

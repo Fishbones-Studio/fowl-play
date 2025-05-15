@@ -8,8 +8,7 @@ signal damage_taken
 @export var enemy_model: Node3D
 @export var knockback_decay: int = 50 # Rate at which the knockback decays per second
 @export_dir var dialogue_path: String
-# String template, requires 1 %s which will be replaced with the name specified in the associated stats
-@export var name_label_template_string: String
+@export var name_label_template_string: String # String template, requires 1 %s which will be replaced with the name specified in the associated stats
 
 var is_immobile: bool = false
 
@@ -28,12 +27,11 @@ var _knockback: Vector3 = Vector3.ZERO
 func _ready() -> void:
 	stats.init()
 	health_bar.init_health(stats.max_health, stats.current_health)
+	enemy_name_label.text = name_label_template_string % stats.name.capitalize()
 
 	collision_layer = 4
 	GameManager.current_enemy = self
 	SignalManager.weapon_hit_target.connect(_take_damage)
-	
-	enemy_name_label.text = name_label_template_string % stats.name.capitalize()
 
 
 func _physics_process(delta: float) -> void:

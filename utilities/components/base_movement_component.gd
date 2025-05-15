@@ -27,7 +27,7 @@ var time_to_peak: float = 0.0
 var time_to_descent: float = 0.0
 
 
-func _ready():
+func _ready() -> void:
 	_recalculate_jump_params()
 
 
@@ -36,7 +36,7 @@ func _ready():
 ## - Displacement = initial_velocity * time + 0.5 * acceleration * time²
 ## - Rearrange to solve for velocity = 2 * displacement / time
 ## - Rearrange to solve for accelleration = 2 * displacement / time²
-func _recalculate_jump_params():
+func _recalculate_jump_params() -> void:
 	time_to_peak = DEFAULT_TIME_TO_PEAK * sqrt(jump_height / DEFAULT_JUMP_HEIGHT)
 	time_to_descent = DEFAULT_TIME_TO_DESCENT * sqrt(jump_height / DEFAULT_JUMP_HEIGHT)
 	

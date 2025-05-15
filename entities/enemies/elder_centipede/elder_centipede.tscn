@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dvrovqnjw05ab" path="res://entities/enemies/elder_centipede/art/elder_centipede_mugshot.png" id="5_67o2n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67o2n"]
+radius = 1.75
+height = 25.0
 
 [node name="ElderCentipede" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_urhlp")]
 stats = ExtResource("2_5cdes")
@@ -16,7 +18,7 @@ dialogue_path = "res://entities/enemies/elder_centipede/dialogue"
 name_label_template_string = "%s \"Evolved\""
 
 [node name="chicken_centipede" parent="." index="0" instance=ExtResource("3_djom0")]
-transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.0154228, 0.0466528, -0.000320435)
 
 [node name="Skeleton3D" parent="chicken_centipede/Armature" index="0"]
 bones/0/position = Vector3(0.0703216, 4.42665, 13.0418)
@@ -249,7 +251,7 @@ bones/236/rotation = Quaternion(-0.37807, 0.619643, 0.649455, -0.226526)
 bones/237/position = Vector3(-1.52343, 0.258552, -28.0989)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03777, -4.62055)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.79985, 3.23488)
 shape = SubResource("CapsuleShape3D_67o2n")
 
 [node name="DamageNumberHandler" parent="." index="3"]
