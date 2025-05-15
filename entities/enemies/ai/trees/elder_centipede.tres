@@ -1,6 +1,7 @@
-[gd_resource type="BehaviorTree" load_steps=7 format=3 uid="uid://i5wmmsqipq8o"]
+[gd_resource type="BehaviorTree" load_steps=13 format=3 uid="uid://i5wmmsqipq8o"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_85ywm"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_kcuvh"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_an1k6"]
 
@@ -17,8 +18,28 @@ resource_name = "20.0"
 variable = &"aggro_distance"
 value = SubResource("BBVariant_g4fhc")
 
+[sub_resource type="BBNode" id="BBNode_85ywm"]
+saved_value = NodePath("chicken_centipede/AnimationPlayer")
+resource_name = "chicken_centipede/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kcuvh"]
+animation_player = SubResource("BBNode_85ywm")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_g4fhc"]
+script = ExtResource("2_kcuvh")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_6oy8c"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_0t4uy"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_kcuvh"), SubResource("BTAction_g4fhc"), SubResource("BTRandomWait_6oy8c")]
+
 [sub_resource type="BTSequence" id="BTSequence_vunty"]
-children = [SubResource("BTAction_kcuvh"), SubResource("BTSetVar_6oy8c")]
+children = [SubResource("BTAction_kcuvh"), SubResource("BTSetVar_6oy8c"), SubResource("BTSequence_0t4uy")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_an1k6")

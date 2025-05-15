@@ -5,11 +5,11 @@ func _ready() -> void:
 	SettingsManager.load_settings( get_viewport(),get_window())
 
 
-func _on_quit_button_pressed():
+func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_play_button_pressed():
+func _on_play_button_pressed() -> void:
 	SaveManager.load_game_data()
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 	UIManager.remove_ui_by_enum(UIEnums.UI.SETTINGS_MENU)
