@@ -1,7 +1,0 @@
-~ start
-if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
-	Elder Centipede: [[Test. |Test. |Test.]]
-else:
-	Elder Centipede: [[Test. |Test. |Test.]]
-
-- Fatass. => END!
