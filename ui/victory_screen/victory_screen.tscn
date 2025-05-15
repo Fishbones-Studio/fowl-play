@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://sjvml6sgskxh"]
+[gd_scene load_steps=7 format=3 uid="uid://sjvml6sgskxh"]
 
 [ext_resource type="Script" uid="uid://bog7cr78ndrmh" path="res://ui/victory_screen/victory_screen.gd" id="1_w5gup"]
 [ext_resource type="AudioStream" uid="uid://btgwex2n8rxut" path="res://ui/victory_screen/art/music/song_3.mp3" id="2_axvl8"]
+[ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="3_6h7er"]
 
 [sub_resource type="Animation" id="Animation_w5gup"]
 length = 0.001
@@ -20,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -32,7 +33,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Label:theme_override_colors/font_outline_color")
+tracks/2/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -60,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:theme_override_colors/font_color")
+tracks/1/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -72,7 +73,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Label:theme_override_colors/font_outline_color")
+tracks/2/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -106,19 +107,32 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.521569, 0.462745, 0.388235, 0)
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -31.5
+offset_right = 147.5
+offset_bottom = 31.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="VictoryLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0.27451, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 90
 text = "Victory !"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="CurrencyOverview" parent="VBoxContainer" instance=ExtResource("3_6h7er")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

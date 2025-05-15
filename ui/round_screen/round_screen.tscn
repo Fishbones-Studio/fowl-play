@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://61l26wjx0fux"]
+[gd_scene load_steps=6 format=3 uid="uid://61l26wjx0fux"]
 
 [ext_resource type="Script" uid="uid://db2fbascumuc6" path="res://ui/round_screen/round_screen.gd" id="1_kdt2t"]
+[ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="2_15mxv"]
 
 [sub_resource type="Animation" id="Animation_15mxv"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer/Label:modulate")
+tracks/0/path = NodePath("VboxContainer/Label:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +36,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer/Label:modulate")
+tracks/0/path = NodePath("VboxContainer/Label:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -81,18 +82,30 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.3)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VboxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -42.0
+offset_right = 20.5
+offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="CenterContainer"]
+[node name="Label" type="Label" parent="VboxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
 text = "$"
+
+[node name="CurrencyOverview" parent="VboxContainer" instance=ExtResource("2_15mxv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
