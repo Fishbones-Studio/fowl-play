@@ -132,7 +132,6 @@ text = "Victory !"
 [node name="CurrencyOverview" parent="VBoxContainer" instance=ExtResource("3_6h7er")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
