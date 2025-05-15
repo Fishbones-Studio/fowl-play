@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PostProcessShaderStep" load_steps=2 format=3 uid="uid://c2u6u6v5jjdd2"]
+
+[ext_resource type="Script" uid="uid://bijgrc0h7606l" path="res://utilities/post_process/shaders/shader_steps/post_process_shader_step.gd" id="1_gw2mt"]
+
+[resource]
+script = ExtResource("1_gw2mt")
+use_shader = true
+colors = 10
+dither_size = 2
+dither_shift = 0.2
+dither_strength = 0.8
+dither_hue_shift = 0.4004
+alpha = 1.0
+scale = 1.0
+border_mask = 4.0
+pixel_size = 4
+metadata/_custom_type_script = "uid://bijgrc0h7606l"

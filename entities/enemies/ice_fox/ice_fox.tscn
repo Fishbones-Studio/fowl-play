@@ -18,6 +18,7 @@ size = Vector3(1.5, 4, 3.5)
 stats = ExtResource("3_7ghaq")
 enemy_model = NodePath("ice_fox")
 dialogue_path = "res://entities/enemies/ice_fox/dialogue"
+name_label_template_string = "%s , Detonator of Foxes"
 
 [node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
@@ -89,11 +90,8 @@ ability_resource = ExtResource("7_psoce")
 [node name="AbilitySlot3" parent="EnemyAbilityController" index="2" instance=ExtResource("5_72x12")]
 ability_resource = ExtResource("9_wbtjo")
 
-[node name="Icon" parent="HealthBarContainer/HBoxContainer" index="0"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("10_ak1y5")
 expand_mode = 3
-
-[node name="NameLabel" parent="HealthBarContainer/HBoxContainer/VBoxContainer" index="0"]
-text = "BoreAss, Detonator of Foxes"
 
 [editable path="ice_fox"]

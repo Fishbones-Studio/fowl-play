@@ -22,7 +22,7 @@ signal cooldown_item_slot(item: BaseResource, cooldown: float, create_tween: boo
 signal switch_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
 signal add_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to add an (additional) UI scene
 signal switch_game_scene(scene_path: String) ## This signal is used to switch the game scene, replacing all current
-signal add_game_scene(scene_path: String) ## This signal is used to add an (additional) game scene
+signal remove_all_game_scenes() ## This signal is used to remove all game scenes
 signal loading_progress_updated(progress: float)  # 0.0 to 1.0
 signal loading_screen_started(next_ui: UIEnums.UI, params: Dictionary)
 signal loading_screen_finished
@@ -44,7 +44,9 @@ signal start_next_round # to trigger the next round
 
 # Setting signals
 signal controls_settings_changed
+signal graphics_settings_changed
 signal keybind_changed(action_name: String)
+signal focus_lost
 
 
 ## Dictionary to store cooldowns for signals

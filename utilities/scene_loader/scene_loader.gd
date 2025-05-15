@@ -6,9 +6,12 @@ extends Node
 # Variable to keep track of the scene currently being loaded in the background
 var _loading_scene_path: String = ""
 
+@onready var shader : PostProcess = $Shader
+@onready var subviewport : LayerSubViewPort = %LayerViewPort
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
+	SignalManager.remove_all_game_scenes.connect(_remove_all_game_scenes)
 	# Disable processing by default, enable only when loading
 	set_process(false)
 
@@ -77,6 +80,19 @@ func _on_switch_game_scene(scene_path: String) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
 	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
 	# The previous load will continue in the background but its result won't be used by this script.
+	
+	# If the scene path is null, throw error
+	if scene_path == null:
+		push_error("Provided scene path is null")
+		return
+	else:
+		# If the scene path is empty, print a warning and return
+		if scene_path.is_empty():
+			push_warning("Scene path is empty, not loading anything.")
+			return
+		else:
+			shader.show()
+	
 
 	if !_loading_scene_path.is_empty():
 		print(
@@ -86,6 +102,7 @@ func _on_switch_game_scene(scene_path: String) -> void:
 		
 	# Remove the current children immediately
 	for child in get_children():
+		if child is PostProcess or child is CanvasLayer : continue
 		child.queue_free()
 		
 
@@ -121,8 +138,19 @@ func _instantiate_and_add_scene(
 
 		# Add it as a child of the scene loader
 		add_child(new_scene)
+		var cameras = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
+		if cameras.size() > 0:
+			print("Found gameplay camera")
+			subviewport.active_camera = cameras[0]
 		print("Scene instantiated and added: ", scene_path)
 	else:
 		push_error(
 			"Error: Resource at path is not a PackedScene: ", scene_path
 		)
+
+func _remove_all_game_scenes() -> void:
+	for child in get_children():
+		if child is PostProcess or child is CanvasLayer : continue
+		child.queue_free()
+	set_process(false)
+	subviewport.active_camera = null
