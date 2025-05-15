@@ -19,7 +19,7 @@ func _enter() -> void:
 	_last_check_time = 0.0
 
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if elapsed_time < stuck_interval:
 		return RUNNING
 

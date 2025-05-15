@@ -120,21 +120,23 @@ func _load_camera_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	var cfg_path: String = "user://settings.cfg"
 	var cfg_name: String = "controls"
-	var camera_settings: Array[Dictionary] = []
+	var camera_settings: Dictionary = {}
 	var default_settings_resource: ControlsSetting = preload("uid://b7ndswiwixuqa")
 
-	camera_settings = default_settings_resource.default_settings
+	for dict: Dictionary in default_settings_resource.default_settings.duplicate(true):
+		camera_settings[dict.keys()[0]] = dict.values()[0]
 
 	# Attempt to load config file - return if failed
 	if config.load(cfg_path) == OK and config.has_section(cfg_name):
 		for control_setting in config.get_section_keys(cfg_name):
-			var value = config.get_value(cfg_name, control_setting)
-			match control_setting:
-				"horizontal_sensitivity": horizontal_sensitivity = value["value"]
-				"vertical_sensitivity": vertical_sensitivity = value["value"]
-				"controller_sensitivity": controller_sensitivity = value["value"]
-				"controller_sensitivity": controller_sensitivity = value["value"]
-				"camera_up_tilt": max_degrees = value["value"]
-				"camera_down_tilt": min_degrees = value["value"]
-				"invert_x_axis": invert_x_axis = value["value"]
-				"invert_y_axis": invert_y_axis = value["value"]
+			camera_settings[control_setting] = config.get_value(cfg_name, control_setting)
+
+	match camera_settings.keys():
+		"horizontal_sensitivity": horizontal_sensitivity = camera_settings["horizontal_sensitivity"]["value"]
+		"vertical_sensitivity": vertical_sensitivity = camera_settings["vertical_sensitivity"]["value"]
+		"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
+		"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
+		"camera_up_tilt": max_degrees = camera_settings["camera_up_tilt"]["value"]
+		"camera_down_tilt": min_degrees = camera_settings["camera_down_tilt"]["value"]
+		"invert_x_axis": invert_x_axis = camera_settings["invert_x_axis"]["value"]
+		"invert_y_axis": invert_y_axis = camera_settings["invert_y_axis"]["value"]
