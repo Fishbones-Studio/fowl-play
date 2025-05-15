@@ -1,15 +1,17 @@
-[gd_resource type="BehaviorTree" load_steps=61 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=71 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_fxtff"]
 [ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="3_schhj"]
+[ext_resource type="Script" uid="uid://c0y08orvf36q3" path="res://entities/enemies/ai/tasks/check_health.gd" id="4_pia2r"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_schhj"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
-[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_pia2r"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="6_pia2r"]
 [ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
-[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
+[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="10_mnhi0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_8swpl"]
 
@@ -41,25 +43,31 @@ clearance_radius = 0.5
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTCondition_mnhi0"), SubResource("BTAction_fxtff")]
 
-[sub_resource type="BBNode" id="BBNode_nrghm"]
+[sub_resource type="BTCondition" id="BTCondition_7jrpa"]
+script = ExtResource("4_pia2r")
+comparison = 1
+threshold = 30.0
+use_percentage = false
+
+[sub_resource type="BBNode" id="BBNode_gvblq"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
 resource_name = "chicken_hennifer/AnimationPlayer"
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ynbrp"]
-animation_player = SubResource("BBNode_nrghm")
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wv527"]
+animation_player = SubResource("BBNode_gvblq")
 animation_name = &"Idle"
 blend = 0.3
 
-[sub_resource type="BTAction" id="BTAction_8py2e"]
+[sub_resource type="BTAction" id="BTAction_5c880"]
 script = ExtResource("2_ba5to")
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_n8emp"]
+[sub_resource type="BTRandomWait" id="BTRandomWait_504pj"]
 min_duration = 0.7
 max_duration = 1.5
 
-[sub_resource type="BTSequence" id="BTSequence_iavk7"]
+[sub_resource type="BTSequence" id="BTSequence_viady"]
 custom_name = "Pause before action"
-children = [SubResource("BTPlayAnimation_ynbrp"), SubResource("BTAction_8py2e"), SubResource("BTRandomWait_n8emp")]
+children = [SubResource("BTPlayAnimation_wv527"), SubResource("BTAction_5c880"), SubResource("BTRandomWait_504pj")]
 
 [sub_resource type="BTCondition" id="BTCondition_ddbif"]
 script = ExtResource("3_fxtff")
@@ -109,6 +117,8 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_i6i68"]
 script = ExtResource("6_pia2r")
 target_var = &"target"
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_hcbj7"]
 children = [SubResource("BTCondition_n7fk8"), SubResource("BTAction_i6i68")]
@@ -121,8 +131,40 @@ children = [SubResource("BTAction_rbvfn"), SubResource("BTCondition_pia2r"), Sub
 
 [sub_resource type="BTSequence" id="BTSequence_a1uay"]
 custom_name = "Pursue"
-children = [SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
+children = [SubResource("BTCondition_7jrpa"), SubResource("BTSequence_viady"), SubResource("BTCondition_ddbif"), SubResource("BTPlayAnimation_eatwp"), SubResource("BTParallel_fjrrt")]
 metadata/_weight_ = 5.0
+
+[sub_resource type="BBNode" id="BBNode_k7lfl"]
+saved_value = NodePath("chicken_hennifer/AnimationPlayer")
+resource_name = "chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_a51uw"]
+animation_player = SubResource("BBNode_k7lfl")
+animation_name = &"Idle"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_dbsnm"]
+script = ExtResource("2_ba5to")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_cgerr"]
+min_duration = 0.7
+max_duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_cofkk"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_a51uw"), SubResource("BTAction_dbsnm"), SubResource("BTRandomWait_cgerr")]
+
+[sub_resource type="BTAction" id="BTAction_gvblq"]
+script = ExtResource("10_mnhi0")
+jump_factor = 1.0
+duration = 0.0
+is_falling = false
+has_landed = false
+reached_peak = true
+
+[sub_resource type="BTSequence" id="BTSequence_wv527"]
+custom_name = "Anticipation"
+children = [SubResource("BTAction_gvblq")]
 
 [sub_resource type="BBNode" id="BBNode_d0mtc"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -139,25 +181,27 @@ script = ExtResource("7_7jrpa")
 target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
-clearance_radius = 0.5
+clearance_radius = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
 children = [SubResource("BTPlayAnimation_l0rnk"), SubResource("BTAction_n7fk8")]
 
 [sub_resource type="BTWait" id="BTWait_i6i68"]
-duration = 0.2
+duration = 0.1
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
 target_var = &"target"
+ignore_cooldown = true
+start_state = 1
 
 [sub_resource type="BTDelay" id="BTDelay_n7fk8"]
 seconds = 0.1
 children = [SubResource("BTAction_hcbj7")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_vidql"]
-times = 10
+times = 5
 children = [SubResource("BTDelay_n7fk8")]
 
 [sub_resource type="BTAction" id="BTAction_qjixf"]
@@ -176,11 +220,14 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
-children = [SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_wv527"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
 metadata/_weight_ = 1.0
 
-[sub_resource type="BTComment" id="BTComment_qjxos"]
-custom_name = "TODO: do sth else, e.g. drop egg bombs"
+[sub_resource type="BTCondition" id="BTCondition_f2bow"]
+script = ExtResource("4_pia2r")
+comparison = 3
+threshold = 30.0
+use_percentage = true
 
 [sub_resource type="BBNode" id="BBNode_fxtff"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -220,6 +267,8 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_7jrpa"]
 script = ExtResource("6_pia2r")
 target_var = &"target"
+ignore_cooldown = true
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_gvblq"]
 children = [SubResource("BTCondition_schhj"), SubResource("BTAction_7jrpa")]
@@ -234,14 +283,14 @@ children = [SubResource("BTAction_mnhi0"), SubResource("BTAction_pia2r"), SubRes
 
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"
-children = [SubResource("BTComment_qjxos"), SubResource("BTPlayAnimation_schhj"), SubResource("BTParallel_5c880")]
+children = [SubResource("BTCondition_f2bow"), SubResource("BTPlayAnimation_schhj"), SubResource("BTParallel_5c880")]
 metadata/_weight_ = 4.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]
 children = [SubResource("BTSequence_a1uay"), SubResource("BTSequence_kwr7b"), SubResource("BTSequence_pia2r")]
 
 [sub_resource type="BTSequence" id="BTSequence_fxtff"]
-children = [SubResource("BTSequence_iavk7"), SubResource("BTProbabilitySelector_ptrup")]
+children = [SubResource("BTProbabilitySelector_ptrup")]
 
 [sub_resource type="BTParallel" id="BTParallel_xlk6v"]
 num_failures_required = 2

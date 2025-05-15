@@ -87,7 +87,7 @@ func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool
 func _on_velocity_computed(safe_velocity: Vector3):
 	# Always apply the computed velocity, but immediate responses already moved
 	if not (immediate_response and _last_target_position.distance_to(target.global_position) > 0.1):
-		agent.velocity = agent.velocity.move_toward(safe_velocity, 0.25)
+		agent.velocity = safe_velocity
 
 
 func _is_at_position(position: Vector3) -> bool:

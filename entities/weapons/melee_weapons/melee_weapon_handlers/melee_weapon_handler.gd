@@ -37,7 +37,6 @@ func _ready() -> void:
 		setup()
 
 
-
 func setup() -> void:
 	if !owner_stats:
 		# If owner_stats is not set, we need to search for it in the parent chain
