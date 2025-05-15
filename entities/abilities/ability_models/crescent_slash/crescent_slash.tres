@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://c612o2d6cro3c"]
 
-[ext_resource type="Texture2D" uid="uid://dywqlrmxh3im0" path="res://resources/splashscreen/fishbones-splashscreen-black.png" id="1_niphc"]
+[ext_resource type="Texture2D" uid="uid://wmaii8pxv6yq" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.png" id="1_niphc"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="2_eefhx"]
 
 [resource]
