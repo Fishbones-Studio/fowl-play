@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=12 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
+[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="9_56i32"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
 
@@ -93,6 +94,10 @@ medium_health_color = Color(1, 0, 0, 1)
 
 [node name="ImmobileTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="OnHurtAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_56i32")
+bus = &"SFX"
 
 [connection signal="damage_taken" from="." to="DamageNumberHandler" method="display_damage"]
 [connection signal="timeout" from="ImmobileTimer" to="." method="_on_immobile_timer_timeout"]
