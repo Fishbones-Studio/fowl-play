@@ -34,6 +34,7 @@ resource_name = "20.0"
 [sub_resource type="BTSetVar" id="BTSetVar_0xmxa"]
 variable = &"aggro_distance"
 value = SubResource("BBVariant_sexgk")
+_enabled = false
 
 [sub_resource type="BBNode" id="BBNode_8cml0"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
@@ -130,7 +131,7 @@ children = [SubResource("BTAction_yvhtp"), SubResource("BTAction_0xmxa"), SubRes
 [sub_resource type="BTSequence" id="BTSequence_jowcg"]
 custom_name = "Pursue target"
 children = [SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
-metadata/_weight_ = 198.0
+metadata/_weight_ = 1.0
 
 [sub_resource type="BBNode" id="BBNode_jowcg"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
@@ -202,7 +203,6 @@ custom_name = "Charge attack"
 children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
-duration = 0.0
 custom_name = "Charge attack  cooldown: 10s"
 children = [SubResource("BTSequence_yvhtp")]
 metadata/_weight_ = 1.0
