@@ -68,6 +68,7 @@ target_var = &"target"
 tolerance = 5.0
 speed_factor = 20.0
 duration = 10.0
+ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
@@ -120,6 +121,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]

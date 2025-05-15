@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	stats.regen_stamina(stats.stamina_regen)
 	stats.regen_health(stats.health_regen)
 

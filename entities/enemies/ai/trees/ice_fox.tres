@@ -62,7 +62,7 @@ duration = 0.0
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("11_ulmcl")
 target_var = &"target"
-ignore_cooldown = false
+ignore_cooldown = true
 start_state = 1
 
 [sub_resource type="BTParallel" id="BTParallel_y7cob"]
@@ -107,6 +107,7 @@ target_var = &"target"
 tolerance = 5.0
 speed_factor = 0.0
 duration = 10.0
+ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
@@ -174,6 +175,7 @@ children = [SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd")]
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_pbs4t"]
@@ -228,6 +230,7 @@ dash_distance = 60.0
 [sub_resource type="BTAction" id="BTAction_40a5u"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 1
 
 [sub_resource type="BTParallel" id="BTParallel_t3gyd"]
