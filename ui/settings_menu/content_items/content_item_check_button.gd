@@ -1,11 +1,12 @@
 class_name SettingsCheckButton
-extends Control
+extends ContentItem
 
 ## Signal emitted when the checkbox state changes.
 signal toggled(is_pressed: bool)
 
 @onready var label: Label = %Label
 @onready var checkbutton: CheckButton = %CheckButton
+@onready var panel: Panel = %Panel
 
 
 func _ready() -> void:
@@ -46,3 +47,16 @@ func is_pressed() -> bool:
 func _on_checkbutton_toggled(button_pressed: bool) -> void:
 	# Emit our custom signal
 	toggled.emit(button_pressed)
+
+
+func _on_focus_entered() -> void:
+	checkbutton.grab_focus()
+
+
+func _on_check_button_focus_entered() -> void:
+	_set_neighbors_for(checkbutton)
+	_toggle_active(panel, true)
+
+
+func _on_check_button_focus_exited() -> void:
+	_toggle_active(panel, false)

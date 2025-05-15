@@ -212,6 +212,7 @@ func _on_shop_item_unhovered(item: BaseResource) -> void:
 	if not (focused and focused.is_in_group("shop_item")):
 		_maybe_clear_preview(item)
 
+
 ## Abstract method
 func _on_close_button_pressed() -> void:
 	pass

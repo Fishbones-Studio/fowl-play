@@ -1,6 +1,8 @@
 class_name SettingsMenu 
 extends Control
 
+var focused_sidebar_item: SiderBarItem = null
+
 @onready var settings_label: Label = %SettingsLabel
 @onready var content: Control = %Content
 
@@ -17,6 +19,7 @@ extends Control
 @onready var cheat_menu: PackedScene = preload("uid://b8gcj7dpmbadg")
 
 @onready var sidebar_container: VBoxContainer = %SidebarContainer
+@onready var close_button: Button = %CloseButton
 
 
 func _ready() -> void:
@@ -28,6 +31,11 @@ func _ready() -> void:
 		cheat.queue_free()
 
 	controls.grab_focus()
+
+	audio.focus_neighbor_bottom = cheat.get_path() if cheat else controls.get_path()
+	audio.focus_next = cheat.get_path() if cheat else controls.get_path()
+
+	SignalManager.focus_lost.connect(_on_focus_lost)
 
 
 func _input(_event: InputEvent) -> void:
@@ -41,6 +49,7 @@ func _input(_event: InputEvent) -> void:
 func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
 	for item: SiderBarItem in sidebar_container.get_children():
 		item.active = item == sidebar_item
+		if item.active: focused_sidebar_item = item
 
 	_update_content(sidebar_item)
 
@@ -84,3 +93,48 @@ func _format_text(text: String) -> String:
 		result += character
 
 	return result
+
+
+func _on_content_focus_entered() -> void:
+	var content_container: VBoxContainer = content.find_child("ContentContainer", true, false)
+	var restore_defaults_button: RestoreDefaultsButton = content.find_child("RestoreDefaultsButton", true, false)
+	var children: Array[Node] = content_container.get_children()
+
+	var first_child: Control = children[0]
+	var last_child: Control = children[-1]
+	var prev_child: Control = null
+
+	for index in children.size():
+		var child: Control = children[index]
+
+		if index > 0:
+			# Set focus_previous to the previous child
+			child.focus_neighbor_top = children[index - 1].get_path()
+			child.focus_previous = child.focus_neighbor_top # TODO: Doesn't seem to work
+		else:
+			# Set focus and neighbor top for first child
+			child.focus_neighbor_top = focused_sidebar_item.get_path()
+			child.focus_previous = child.focus_neighbor_top # TODO: Doesn't seem to work
+
+		if index == children.size() - 1:
+			# Set neighbor for last child
+			child.focus_neighbor_bottom = restore_defaults_button.get_path() if restore_defaults_button else first_child.get_path()
+			child.focus_next = restore_defaults_button.get_path() if restore_defaults_button else first_child.get_path()
+		else:
+			child.focus_neighbor_bottom = children[index + 1].get_path()
+			child.focus_next = child.focus_neighbor_bottom # TODO: Doesn't seem to work
+
+		child.focus_neighbor_right = restore_defaults_button.get_path() if restore_defaults_button else close_button.get_path()
+		child.focus_neighbor_left = focused_sidebar_item.get_path()
+
+	first_child.grab_focus()
+
+
+func _on_focus_lost() -> void:
+	focused_sidebar_item.grab_focus()
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		if controls:
+			controls.grab_focus()

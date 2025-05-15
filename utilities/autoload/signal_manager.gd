@@ -46,6 +46,7 @@ signal start_next_round # to trigger the next round
 signal controls_settings_changed
 signal graphics_settings_changed
 signal keybind_changed(action_name: String)
+signal focus_lost
 
 
 ## Dictionary to store cooldowns for signals

@@ -19,6 +19,7 @@ static var is_remapping: bool = false
 static var input_type: SaveEnums.InputType
 static var action_to_remap: String = ""
 
+
 ## Load all saved settings from the user's configuration file.
 static func load_settings( viewport: Viewport, window: Window, item: String = "") -> void:
 	var config := ConfigFile.new()
@@ -47,7 +48,6 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 							push_warning("Invalid event type for action '%s' in settings." % action)
 				else:
 					push_warning("Events for action '%s' not an array in settings." % action)
-
 
 	if item == SETTINGS_CFG_NAME_GRAPHICS or item.is_empty():
 		# Load graphics settings

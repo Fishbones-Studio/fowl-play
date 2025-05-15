@@ -1,12 +1,14 @@
-class_name PostProcess extends CanvasLayer
+class_name PostProcess 
+extends CanvasLayer
 
 @export var shader_steps: Dictionary[int, PostProcessShaderStep] = {}
-@export var default_step := 2
+@export var default_step: int = 2
 
 ## Using a subviewport, so we can exclude objects from the shader
 @onready var color_rect: ColorRect = $ColorRect
 
-func _ready():
+
+func _ready() -> void:
 	_update_shader_params()
 	
 	# Conneting update signals
@@ -17,12 +19,14 @@ func _ready():
 		if child is Control:
 			child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-func _update_shader_params():
+
+func _update_shader_params() -> void:
 	var viewport_size = get_viewport().size
 	var pp_shader_material: ShaderMaterial = color_rect.material as ShaderMaterial
 	if pp_shader_material:
 		pp_shader_material.set_shader_parameter("screen_size", viewport_size)
 	_apply_saved_variation(pp_shader_material)
+
 
 func _apply_saved_variation(pp_shader_material: ShaderMaterial) -> void:
 	var step : int = int(SettingsManager.get_setting("graphics", "pp_shader", default_step))
