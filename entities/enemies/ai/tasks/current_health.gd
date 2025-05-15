@@ -3,7 +3,7 @@ extends BTCondition
 
 @export var comparison: ComparisonEnums.ComparisonType = ComparisonEnums.ComparisonType.LESS_THAN
 @export var threshold: float = 0.0
-@export var use_percentage: bool = false
+@export var use_percentage: bool = true
 
 var _current_health: float
 var _condition_met: bool

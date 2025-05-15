@@ -46,85 +46,6 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_qmoh7"), SubResource("BTAction_k708t"), SubResource("BTRandomWait_sq422")]
 
-[sub_resource type="BBNode" id="BBNode_b2ogj"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_yhbkp"]
-animation_player = SubResource("BBNode_b2ogj")
-animation_name = &"Jump"
-blend = 0.2
-
-[sub_resource type="BTAction" id="BTAction_4fcdy"]
-script = ExtResource("3_yhbkp")
-target_var = &"target"
-rotation_speed = 6.0
-angle_threshold = 25.0
-duration = 0.0
-
-[sub_resource type="BBNode" id="BBNode_k708t"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_u4hmx"]
-animation_player = SubResource("BBNode_k708t")
-animation_name = &"Fall"
-blend = 0.2
-
-[sub_resource type="BTAction" id="BTAction_t3gyd"]
-script = ExtResource("3_b2ogj")
-target_var = &"target"
-jump_factor = 2.2
-horizontal_speed = 40.0
-min_distance = 10.0
-
-[sub_resource type="BTAction" id="BTAction_ulmcl"]
-script = ExtResource("4_yhbkp")
-target_var = &"target"
-ignore_cooldown = true
-slot = 0
-
-[sub_resource type="BTSequence" id="BTSequence_ulmcl"]
-custom_name = "Pounce sequence"
-children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAction_4fcdy"), SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd"), SubResource("BTAction_ulmcl")]
-metadata/_weight_ = 1.0
-
-[sub_resource type="BBNode" id="BBNode_t3gyd"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ulmcl"]
-animation_player = SubResource("BBNode_t3gyd")
-animation_name = &"Dash"
-blend = 0.2
-
-[sub_resource type="BTAction" id="BTAction_ca3xq"]
-script = ExtResource("3_yhbkp")
-target_var = &"target"
-rotation_speed = 8.0
-angle_threshold = 25.0
-duration = 0.0
-
-[sub_resource type="BTWait" id="BTWait_u4hmx"]
-duration = 0.2
-
-[sub_resource type="BTAction" id="BTAction_u4hmx"]
-script = ExtResource("6_k708t")
-target_var = &"target"
-dash_duration = 0.2
-dash_distance = 30.0
-
-[sub_resource type="BTAction" id="BTAction_40a5u"]
-script = ExtResource("4_yhbkp")
-target_var = &"target"
-ignore_cooldown = true
-slot = 1
-
-[sub_resource type="BTSequence" id="BTSequence_40a5u"]
-custom_name = "Dash sequence"
-children = [SubResource("BTPlayAnimation_ulmcl"), SubResource("BTAction_ca3xq"), SubResource("BTWait_u4hmx"), SubResource("BTAction_u4hmx"), SubResource("BTAction_40a5u")]
-metadata/_weight_ = 1.0
-
 [sub_resource type="BTCondition" id="BTCondition_t3gyd"]
 script = ExtResource("2_wrjj1")
 target_var = &"target"
@@ -142,7 +63,6 @@ duration = 0.0
 script = ExtResource("11_ulmcl")
 target_var = &"target"
 ignore_cooldown = true
-slot = 2
 start_state = 1
 
 [sub_resource type="BTParallel" id="BTParallel_y7cob"]
@@ -255,6 +175,7 @@ children = [SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd")]
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_pbs4t"]
@@ -309,6 +230,7 @@ dash_distance = 60.0
 [sub_resource type="BTAction" id="BTAction_40a5u"]
 script = ExtResource("4_yhbkp")
 target_var = &"target"
+ignore_cooldown = true
 slot = 1
 
 [sub_resource type="BTParallel" id="BTParallel_t3gyd"]
