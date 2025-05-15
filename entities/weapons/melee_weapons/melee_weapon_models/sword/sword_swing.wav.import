@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dmgl2h5qm05es"
-path="res://.godot/imported/sword_swing.wav-2ddb018af989ea58cdb69fec3cd5bc5f.sample"
+path="res://.godot/imported/sword_swing.wav-4a7ece37bf30f22588c51ca1990d8339.sample"
 
 [deps]
 
-source_file="res://entities/abilities/ability_models/crescent_slash/sword_swing.wav"
-dest_files=["res://.godot/imported/sword_swing.wav-2ddb018af989ea58cdb69fec3cd5bc5f.sample"]
+source_file="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword_swing.wav"
+dest_files=["res://.godot/imported/sword_swing.wav-4a7ece37bf30f22588c51ca1990d8339.sample"]
 
 [params]
 
