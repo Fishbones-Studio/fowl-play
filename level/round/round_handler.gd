@@ -125,8 +125,8 @@ func _enter_concluding() -> void:
 		})
 		GameManager.prosperity_eggs += prosperity_eggs
 		GameManager.feathers_of_rebirth += feathers_of_rebirth
+		SignalManager.game_won.emit()
 		SignalManager.add_ui_scene.emit(UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_overview_dict})
-		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 		# Don't proceed further in this function if game is ending
 		return
 

@@ -12,6 +12,7 @@ class_name RandomMusicPlayer extends AudioStreamPlayer3D
 var available_music: Array[AudioStream] = []
 var current_index: int = -1
 var transitioning: bool = false
+var stopped: bool = false
 
 var tween: Tween
 
@@ -43,13 +44,13 @@ func _load_music_files() -> void:
 		push_error("Could not open music directory: %s" % music_folder)
 
 func play_random_music() -> void:
+	if stopped:
+		return
 	if available_music.is_empty():
 		push_warning("No music files available to play.")
 		return
-
 	if transitioning:
 		return
-
 	transitioning = true
 	# Only fade out if a song is currently playing
 	if playing:
@@ -78,13 +79,15 @@ func _on_fade_out_finished() -> void:
 	_play_next_track()
 
 func _play_next_track() -> void:
+	if stopped:
+		transitioning = false
+		return
 	var next_index := current_index
 	if available_music.size() > 1 and avoid_repeats:
 		while next_index == current_index:
 			next_index = randi() % available_music.size()
 	else:
 		next_index = randi() % available_music.size()
-
 	current_index = next_index
 	stream = available_music[current_index]
 	play()
@@ -94,5 +97,12 @@ func _on_fade_in_finished() -> void:
 	transitioning = false
 
 func _on_finished() -> void:
-	if not transitioning:
+	if not transitioning and not stopped:
 		play_random_music()
+
+func stop_playback() -> void:
+	stopped = true
+	if tween:
+		tween.kill()
+	stop()
+	volume_db = MIN_DB
