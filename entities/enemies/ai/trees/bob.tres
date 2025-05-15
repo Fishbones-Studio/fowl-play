@@ -85,7 +85,6 @@ stuck_threshold = 2.5
 script = ExtResource("5_mkwy1")
 target_var = &"target"
 tolerance = 5.0
-aggro_distance = 50.0
 speed_factor = 0.0
 duration = 5.0
 pathfinding = false
@@ -181,7 +180,6 @@ stuck_threshold = 2.5
 script = ExtResource("5_mkwy1")
 target_var = &"target"
 tolerance = 5.0
-aggro_distance = 100.0
 speed_factor = 100.0
 duration = 0.0
 pathfinding = false
@@ -192,7 +190,9 @@ path_update_interval = 0.05
 script = ExtResource("7_wwppe")
 jump_factor = 200.0
 duration = 0.0
-grounded = false
+is_falling = false
+has_landed = true
+reached_peak = false
 
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
 children = [SubResource("BTCondition_ykixg"), SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]

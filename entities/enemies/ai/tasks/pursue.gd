@@ -1,12 +1,10 @@
 @tool
-extends BTAction
+extends EnemyBTAction
 
 ## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
 ## How close should the agent be to the desired position to return SUCCESS.
 @export var tolerance: float = 2.0
-## Desired distance from target.
-@export var aggro_distance: float = 20.0
 ## Pursuit speed factor.
 @export var speed_factor: float = 0.0
 ## Duration the enemy will pursue the target.
@@ -35,11 +33,7 @@ func _enter() -> void:
 	if pathfinding:
 		if not agent.nav.velocity_computed.is_connected(_on_velocity_computed):
 			agent.nav.velocity_computed.connect(_on_velocity_computed, CONNECT_DEFERRED)
-			var shape: Shape3D = agent.shape.shape
-			if shape is CapsuleShape3D:
-				agent.nav.radius = shape.radius
-			if shape is BoxShape3D:
-				agent.nav.radius = shape.size.x / 2.0
+			_set_agent_avoidance()
 
 		agent.nav.target_desired_distance = tolerance
 

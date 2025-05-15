@@ -20,9 +20,7 @@ func _enter() -> void:
 
 
 func _tick(delta: float) -> Status:
-	_last_check_time += delta
-
-	if _last_check_time < stuck_interval:
+	if elapsed_time < stuck_interval:
 		return RUNNING
 
 	var current_position: Vector3 = agent.global_position

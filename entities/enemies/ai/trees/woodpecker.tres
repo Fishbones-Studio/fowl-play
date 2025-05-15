@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_h0qwm"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_7lgdv"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_ftfet"]
-[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="6_7lgdv"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="7_ftfet"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="7_h0qwm"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_spagk"]
@@ -66,7 +66,6 @@ stuck_threshold = 2.5
 script = ExtResource("5_ftfet")
 target_var = &"target"
 tolerance = 5.0
-aggro_distance = 50.0
 speed_factor = 20.0
 duration = 10.0
 pathfinding = true
@@ -80,8 +79,10 @@ distance_min = 0.0
 distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
-script = ExtResource("6_7lgdv")
+script = ExtResource("7_ftfet")
 target_var = &"target"
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_gghh5"]
 children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
