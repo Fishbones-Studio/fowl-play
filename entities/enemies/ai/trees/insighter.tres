@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="5_pd8xg"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
-[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/weapon_attack.gd" id="9_smr14"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="8_j3vma"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
@@ -129,8 +129,10 @@ distance_min = 0.0
 distance_max = 10.0
 
 [sub_resource type="BTAction" id="BTAction_ien84"]
-script = ExtResource("9_smr14")
+script = ExtResource("8_j3vma")
 target_var = &"target"
+ignore_cooldown = false
+start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_vte2v"]
 children = [SubResource("BTCondition_jinyb"), SubResource("BTAction_ien84")]

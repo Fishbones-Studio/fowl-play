@@ -1,5 +1,5 @@
 @tool
-extends BTAction
+extends EnemyBTAction
 
 ## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
@@ -35,11 +35,7 @@ func _enter() -> void:
 	if pathfinding:
 		if not agent.nav.velocity_computed.is_connected(_on_velocity_computed):
 			agent.nav.velocity_computed.connect(_on_velocity_computed, CONNECT_DEFERRED)
-			var shape: Shape3D = agent.shape.shape
-			if shape is CapsuleShape3D:
-				agent.nav.radius = shape.radius
-			if shape is BoxShape3D:
-				agent.nav.radius = shape.size.x / 2.0
+			_set_agent_avoidance()
 
 		agent.nav.target_desired_distance = tolerance
 
