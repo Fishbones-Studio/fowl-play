@@ -141,7 +141,6 @@ angle_threshold = 25.0
 duration = 0.0
 
 [sub_resource type="BTParallel" id="BTParallel_8831e"]
-num_successes_required = 2
 children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAction_4fcdy")]
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_y7cob"]
