@@ -40,19 +40,19 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.482872, -0.00154243, 0.00341826, 0.875683)
-bones/3/rotation = Quaternion(-0.408405, 0.123312, 0.0996724, 0.898924)
-bones/4/rotation = Quaternion(-0.0591085, -0.301692, 0.111471, 0.94502)
-bones/5/rotation = Quaternion(-0.333816, 0.0919627, -0.633746, 0.691719)
+bones/2/rotation = Quaternion(-0.47392, -0.0012082, 0.00150737, 0.880566)
+bones/3/rotation = Quaternion(-0.413765, 0.117226, 0.0946851, 0.897826)
+bones/4/rotation = Quaternion(0.00775404, -0.314548, 0.10267, 0.943641)
+bones/5/rotation = Quaternion(-0.327256, 0.0880287, -0.631365, 0.697519)
 bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572916)
-bones/7/rotation = Quaternion(-0.163711, 0.064961, 0.55178, 0.815179)
+bones/7/rotation = Quaternion(-0.167631, 0.0618566, 0.554246, 0.812948)
 bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.219182, -0.00506272, -0.0624069, 0.973673)
-bones/11/rotation = Quaternion(0.168676, 0.0312824, -0.157655, 0.972479)
+bones/10/rotation = Quaternion(0.22215, -0.00569617, -0.0598673, 0.973156)
+bones/11/rotation = Quaternion(0.169152, 0.0297078, -0.155867, 0.972734)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.173777, -0.0481084, -0.0418682, 0.982718)
+bones/13/rotation = Quaternion(-0.173846, -0.0437086, -0.03523, 0.983171)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -107,8 +107,9 @@ state_type = 6
 wait_time = 0.05
 one_shot = true
 
-[node name="HurtAudio" type="AudioStreamPlayer" parent="MovementStateMachine/Hurt"]
+[node name="HurtSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Hurt"]
 stream = ExtResource("13_vsiul")
+bus = &"SFX"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("4_7thud")

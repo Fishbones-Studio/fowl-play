@@ -6,15 +6,15 @@ var _knockback: Vector3
 var _is_immobile: bool
 
 @onready var immobile_timer: Timer = $ImmobileTimer
-@onready var on_hurt: AudioStreamPlayer = $HurtAudio
+@onready var on_hurt: AudioStreamPlayer = $HurtSFX
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	super(prev_state)
-	
+
 	# Play hurt sound
 	on_hurt.play()
-	
+
 	# Fire the OneShot request
 	animation_tree.set("parameters/HurtOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
