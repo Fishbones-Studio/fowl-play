@@ -5,6 +5,7 @@ extends BleedHazard
 @onready var remove_timer : Timer = $RemoveTimer
 @onready var audio_stream_player : AudioStreamPlayer3D = $AudioStreamPlayer3D
 
+
 func _ready() -> void:
 	var audio_length = audio_stream_player.stream.get_length()
 	var max_start = max(audio_length - alive_time, 0.0)
@@ -12,6 +13,7 @@ func _ready() -> void:
 	audio_stream_player.seek(start_position)
 	audio_stream_player.play()
 	remove_timer.start(alive_time)
+
 
 func _on_remove_timer_timeout():
 	audio_stream_player.stop()
