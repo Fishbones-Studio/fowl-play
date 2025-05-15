@@ -16,6 +16,7 @@ enum ComparisonType {
 var _current_health: float
 var _condition_met: bool
 
+
 func _generate_name() -> String:
 	var comp_text: String
 	match comparison:

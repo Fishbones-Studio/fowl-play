@@ -10,8 +10,8 @@
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="6_mahx6"]
 [ext_resource type="Texture2D" uid="uid://b3joypn7lbpdu" path="res://entities/enemies/insighter/art/insighter_mugshot.png" id="8_mahx6"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mahx6"]
-radius = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_udlhp"]
+radius = 1.5
 
 [node name="Insighter" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_wehyl")]
 script = ExtResource("2_mahx6")
@@ -28,7 +28,7 @@ transform = Transform3D(0.000670522, -0.602317, 0, 0.602317, 0.000670522, 0, 0, 
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25892, 0)
-shape = SubResource("CapsuleShape3D_mahx6")
+shape = SubResource("SphereShape3D_udlhp")
 
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_n8hr6")
