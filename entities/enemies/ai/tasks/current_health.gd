@@ -1,15 +1,7 @@
 @tool
 extends BTCondition
 
-enum ComparisonType {
-	LESS_THAN,
-	GREATER_THAN,
-	EQUAL,
-	LESS_THAN_OR_EQUAL,
-	GREATER_THAN_OR_EQUAL
-}
-
-@export var comparison: ComparisonType = ComparisonType.LESS_THAN
+@export var comparison: ComparisonEnums.ComparisonType = ComparisonEnums.ComparisonType.LESS_THAN
 @export var threshold: float = 0.0
 @export var use_percentage: bool = false
 
@@ -20,15 +12,15 @@ var _condition_met: bool
 func _generate_name() -> String:
 	var comp_text: String
 	match comparison:
-		ComparisonType.LESS_THAN:
+		ComparisonEnums.ComparisonType.LESS_THAN:
 			comp_text = "<"
-		ComparisonType.GREATER_THAN:
+		ComparisonEnums.ComparisonType.GREATER_THAN:
 			comp_text = ">"
-		ComparisonType.EQUAL:
+		ComparisonEnums.ComparisonType.EQUAL:
 			comp_text = "=="
-		ComparisonType.LESS_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.LESS_THAN_OR_EQUAL:
 			comp_text = "<="
-		ComparisonType.GREATER_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			comp_text = ">="
 
 	var value_text: String
@@ -48,15 +40,15 @@ func _tick(_delta: float) -> Status:
 		_current_health = agent.stats.current_health
 
 	match comparison:
-		ComparisonType.LESS_THAN:
+		ComparisonEnums.ComparisonType.LESS_THAN:
 			_condition_met = _current_health < threshold
-		ComparisonType.GREATER_THAN:
+		ComparisonEnums.ComparisonType.GREATER_THAN:
 			_condition_met = _current_health > threshold
-		ComparisonType.EQUAL:
+		ComparisonEnums.ComparisonType.EQUAL:
 			_condition_met = is_equal_approx(_current_health, threshold)
-		ComparisonType.LESS_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.LESS_THAN_OR_EQUAL:
 			_condition_met = _current_health <= threshold
-		ComparisonType.GREATER_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			_condition_met = _current_health >= threshold
 	
 	return SUCCESS if _condition_met else FAILURE

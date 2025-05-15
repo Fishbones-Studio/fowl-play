@@ -1,16 +1,9 @@
 @tool
 extends BTCondition
 
-enum ComparisonType {
-	LESS_THAN,
-	GREATER_THAN,
-	EQUAL,
-	LESS_THAN_OR_EQUAL,
-	GREATER_THAN_OR_EQUAL
-}
 
 @export var target_var: String = "target"  # Blackboard variable name
-@export var comparison: ComparisonType = ComparisonType.GREATER_THAN_OR_EQUAL
+@export var comparison: ComparisonEnums.ComparisonType = ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL
 @export var height_threshold: float = 3.0
 @export var use_relative: bool = true  # Compare to agent's height or absolute world Y
 @export var target_on_floor: bool = true
@@ -22,15 +15,15 @@ var _condition_met: bool
 func _generate_name() -> String:
 	var comp_text: String
 	match comparison:
-		ComparisonType.LESS_THAN:
+		ComparisonEnums.ComparisonType.LESS_THAN:
 			comp_text = "<"
-		ComparisonType.GREATER_THAN:
+		ComparisonEnums.ComparisonType.GREATER_THAN:
 			comp_text = ">"
-		ComparisonType.EQUAL:
+		ComparisonEnums.ComparisonType.EQUAL:
 			comp_text = "=="
-		ComparisonType.LESS_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.LESS_THAN_OR_EQUAL:
 			comp_text = "<="
-		ComparisonType.GREATER_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			comp_text = ">="
 	
 	return "Height ➜ %s %s %.1f" % [LimboUtility.decorate_var(target_var), comp_text, height_threshold]
@@ -53,15 +46,15 @@ func _tick(_delta: float) -> Status:
 		height_to_check = target.global_position.y
 
 	match comparison:
-		ComparisonType.LESS_THAN:
+		ComparisonEnums.ComparisonType.LESS_THAN:
 			_condition_met = height_to_check < height_threshold
-		ComparisonType.GREATER_THAN:
+		ComparisonEnums.ComparisonType.GREATER_THAN:
 			_condition_met = height_to_check > height_threshold
-		ComparisonType.EQUAL:
+		ComparisonEnums.ComparisonType.EQUAL:
 			_condition_met = is_equal_approx(height_to_check, height_threshold)
-		ComparisonType.LESS_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.LESS_THAN_OR_EQUAL:
 			_condition_met = height_to_check <= height_threshold
-		ComparisonType.GREATER_THAN_OR_EQUAL:
+		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			_condition_met = height_to_check >= height_threshold
 
 	if target_on_floor:
