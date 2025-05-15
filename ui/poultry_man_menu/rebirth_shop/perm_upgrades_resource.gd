@@ -52,5 +52,5 @@ func get_level_cost(target_level: int) -> int:
 		return cost
 	
 	# Calculate the cost for the target level using geometric progression
-	return (current_level + 1) * cost
+	return target_level * cost
 	
