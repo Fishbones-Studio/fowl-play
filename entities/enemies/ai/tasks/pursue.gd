@@ -59,7 +59,7 @@ func _tick(delta: float) -> Status:
 
 	_last_target_position = target_position
 
-	if _is_at_position(target_position):
+	if _is_at_position(target_position) and tolerance > 0:
 		return SUCCESS
 
 	if duration > 0 and elapsed_time > duration:

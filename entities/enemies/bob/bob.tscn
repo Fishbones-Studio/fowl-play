@@ -16,6 +16,7 @@ radius = 4.25
 stats = ExtResource("2_fjbia")
 type = 1
 enemy_model = NodePath("ball_chicken")
+knockback_decay = 10000
 dialogue_path = "res://entities/enemies/bob/dialogue"
 name_label_template_string = "\"All-Devouring\" %s"
 

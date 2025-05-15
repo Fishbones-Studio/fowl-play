@@ -25,10 +25,17 @@ func _tick(delta: float) -> Status:
 	if _last_check_time < stuck_interval:
 		return RUNNING
 
+	if _is_stuck():
+		return FAILURE
+
+	return SUCCESS
+
+
+func _is_stuck() -> bool:
 	var current_position: Vector3 = agent.global_position
 	var moved_distance: float = current_position.distance_to(_last_position)
 
 	_last_position = current_position
 	_last_check_time = 0.0
 
-	return FAILURE if moved_distance < stuck_threshold else SUCCESS
+	return true if moved_distance < stuck_threshold else false
