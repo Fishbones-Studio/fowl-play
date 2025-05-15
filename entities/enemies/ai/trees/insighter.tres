@@ -116,7 +116,6 @@ stuck_threshold = 2.5
 script = ExtResource("7_53l80")
 target_var = &"target"
 tolerance = 5.0
-aggro_distance = 60.0
 speed_factor = 0.0
 duration = 0.0
 ignore_y = true

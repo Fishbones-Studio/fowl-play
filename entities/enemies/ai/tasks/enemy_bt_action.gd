@@ -11,5 +11,5 @@ func _set_agent_avoidance() -> void:
 		agent.nav.radius = shape.radius
 		agent.nav.height = shape.radius
 	if shape is BoxShape3D:
-		agent.nav.radius = shape.size.x / 2.0
-		agent.nav.height = shape.size.y / 2.0
+		agent.nav.radius = shape.size.x
+		agent.nav.height = shape.size.y
