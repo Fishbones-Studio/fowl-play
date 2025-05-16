@@ -11,7 +11,6 @@ func _input(event: InputEvent) -> void:
 			_on_play_button_pressed()
 
 
-
 func _on_play_button_pressed() -> void:
 	SaveManager.load_game_data()
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
