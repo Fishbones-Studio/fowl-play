@@ -10,6 +10,7 @@ var _rotation: float = 0.0
 
 func _ready() -> void:
 	super._ready()
+	randomize()
 	set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 	visible = false
 
@@ -19,6 +20,7 @@ func show_hit_marker(screen_position: Vector2) -> void:
 	_visible = true
 	visible = true
 	_rotation = randf_range(0.0, TAU)
+	rotation = _rotation
 	position = screen_position - size * 0.5
 	queue_redraw()
 
@@ -31,12 +33,3 @@ func _process(delta: float) -> void:
 				_visible = false
 				visible = false
 		queue_redraw()
-
-func _draw() -> void:
-	if _visible:
-		var color = DOT_COLOR
-		color.a *= _fade
-		var center = Vector2(size.x, size.y) * 0.5
-		draw_set_transform(center, _rotation, Vector2.ONE)
-		draw_circle(Vector2.ZERO, DOT_RADIUS, color)
-		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)

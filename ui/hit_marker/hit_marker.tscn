@@ -15,25 +15,26 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bpkwr")
+SHOW_TIME = 0.1
 DOT_RADIUS = 2.0
 DOT_COLOR = Color(1, 1, 1, 0)
 
 [node name="Down" type="Line2D" parent="."]
 points = PackedVector2Array(0, 5, 0, 15)
 width = 4.0
-default_color = Color(0.412308, 0.381627, 0.331801, 1)
+default_color = Color(0.411765, 0.380392, 0.333333, 0.392157)
 
 [node name="Left" type="Line2D" parent="."]
 points = PackedVector2Array(-5, 0, -15, 0)
 width = 4.0
-default_color = Color(0.411765, 0.380392, 0.333333, 1)
+default_color = Color(0.411765, 0.380392, 0.333333, 0.392157)
 
 [node name="Top" type="Line2D" parent="."]
 points = PackedVector2Array(0, -5, 0, -15)
 width = 4.0
-default_color = Color(0.411765, 0.380392, 0.333333, 1)
+default_color = Color(0.411765, 0.380392, 0.333333, 0.392157)
 
 [node name="Right" type="Line2D" parent="."]
 points = PackedVector2Array(5, 0, 15, 0)
 width = 4.0
-default_color = Color(0.411765, 0.380392, 0.333333, 1)
+default_color = Color(0.411765, 0.380392, 0.333333, 0.392157)

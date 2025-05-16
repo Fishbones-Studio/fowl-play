@@ -44,6 +44,13 @@ func _attack() -> void:
 			if target is Enemy or target is ChickenPlayer:
 				SignalManager.weapon_hit_target.emit(target, entity_stats.calc_scaled_damage(weapon_node.current_weapon.damage), DamageEnums.DamageTypes.NORMAL)
 				weapon_node.attacking = false
+				if target is Enemy:
+					var camera: Camera3D = get_viewport().get_camera_3d()
+					if camera:
+						var screen_pos: Vector2 = camera.unproject_position(weapon_node.global_position)
+						var hit_marker: Node    = UIManager.get_or_add_ui_by_enum(UIEnums.UI.HIT_MARKER)
+						if hit_marker && is_instance_valid(hit_marker) && hit_marker is UIHitMarker:
+							hit_marker.show_hit_marker(screen_pos)
 			elif target:
 				print("Hit target is not a valid target!" + target.name)
 				return

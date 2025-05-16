@@ -59,6 +59,13 @@ func _on_body_entered(body: Node) -> void:
 
 	if not (body is Enemy or body is ChickenPlayer):
 		return
+		
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera:
+		var screen_pos: Vector2 = camera.unproject_position(global_position)
+		var hit_marker: Node    = UIManager.get_or_add_ui_by_enum(UIEnums.UI.HIT_MARKER)
+		if hit_marker && is_instance_valid(hit_marker) && hit_marker is UIHitMarker:
+			hit_marker.show_hit_marker(screen_pos)
 
 	if not is_inside_tree():
 		return

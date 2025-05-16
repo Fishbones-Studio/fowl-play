@@ -44,7 +44,7 @@ func process_raycast_hit(
 				damage_type
 			)
 
-			# Hit Marker TODO: Make in 3d world
+			# Hit Marker
 			var camera: Camera3D = get_viewport().get_camera_3d()
 			if camera:
 				var hit_position: Vector3 = raycast.get_collision_point()
