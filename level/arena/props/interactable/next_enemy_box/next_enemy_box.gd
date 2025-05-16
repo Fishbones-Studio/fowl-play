@@ -11,10 +11,11 @@ var dialogue_path : String
 func _on_dialogue_folder_path_set(value: String) -> void:
 		dialogue_folder_path = value
 		var in_between_rounds_path: String = dialogue_folder_path.path_join("in_between_rounds")
-		var dir: DirAccess                 = DirAccess.open(in_between_rounds_path)
+		var dir: DirAccess   = DirAccess.open(in_between_rounds_path)
 		if dir:
 			dir.list_dir_begin()
 			var file_name: String = dir.get_next()
+			print(file_name)
 			while file_name != "":
 				if not dir.current_is_dir() and not file_name.begins_with(".") and file_name.ends_with(".dialogue"):
 					dialogue_path = in_between_rounds_path.path_join(file_name)
