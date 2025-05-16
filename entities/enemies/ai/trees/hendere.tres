@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=72 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=71 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -91,6 +91,7 @@ target_var = &"target"
 rotation_speed = 10.0
 angle_threshold = 2.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTCondition" id="BTCondition_pia2r"]
 script = ExtResource("7_schhj")
@@ -210,6 +211,7 @@ target_var = &"target"
 rotation_speed = 2.0
 angle_threshold = 2.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTParallel" id="BTParallel_hcbj7"]
 children = [SubResource("BTRepeat_vidql"), SubResource("BTAction_qjixf")]
@@ -245,18 +247,11 @@ target_var = &"target"
 retreat_distance = 50.0
 speed_factor = 0.0
 rotation_speed = 6.0
-rotation_away_from_target = false
 duration = 10.0
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
-
-[sub_resource type="BTAction" id="BTAction_pia2r"]
-script = ExtResource("4_schhj")
-target_var = &"target"
-rotation_speed = 6.0
-angle_threshold = 5.0
-duration = 0.0
+face_moving_direction = true
 
 [sub_resource type="BTCondition" id="BTCondition_schhj"]
 script = ExtResource("3_fxtff")
@@ -283,7 +278,7 @@ children = [SubResource("BTSequence_gvblq")]
 [sub_resource type="BTParallel" id="BTParallel_5c880"]
 num_successes_required = 2
 repeat = true
-children = [SubResource("BTAction_mnhi0"), SubResource("BTAction_pia2r"), SubResource("BTAlwaysSucceed_wv527")]
+children = [SubResource("BTAction_mnhi0"), SubResource("BTAlwaysSucceed_wv527")]
 
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"
