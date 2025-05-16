@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=55 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_m26ws"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mkwy1"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_ykixg"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/target_height.gd" id="6_d6hvj"]
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
@@ -33,6 +34,7 @@ resource_name = "20.0"
 [sub_resource type="BTSetVar" id="BTSetVar_0xmxa"]
 variable = &"aggro_distance"
 value = SubResource("BBVariant_sexgk")
+_enabled = false
 
 [sub_resource type="BBNode" id="BBNode_8cml0"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
@@ -54,12 +56,6 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_e381t"), SubResource("BTRandomWait_e381t")]
 
-[sub_resource type="BTCondition" id="BTCondition_yvhtp"]
-script = ExtResource("3_d6hvj")
-target_var = &"target"
-distance_min = 5.0
-distance_max = 100.0
-
 [sub_resource type="BBNode" id="BBNode_e381t"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
 resource_name = "ball_chicken/AnimationPlayer"
@@ -73,33 +69,67 @@ blend = 0.2
 script = ExtResource("4_m26ws")
 target_var = &"target"
 rotation_speed = 25.0
-angle_threshold = 1.0
-duration = 5.0
-
-[sub_resource type="BTCondition" id="BTCondition_d6hvj"]
-script = ExtResource("5_ykixg")
-stuck_interval = 1.0
-stuck_threshold = 2.5
+angle_threshold = -1.0
+duration = 10.0
 
 [sub_resource type="BTAction" id="BTAction_0xmxa"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
-tolerance = 5.0
-aggro_distance = 50.0
-speed_factor = 0.0
-duration = 5.0
+tolerance = 0.0
+speed_factor = 1.3
+duration = 10.0
+ignore_y = true
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
+[sub_resource type="BTCondition" id="BTCondition_d6hvj"]
+script = ExtResource("5_ykixg")
+stuck_interval = 1.0
+stuck_threshold = 1.0
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_gf8jg"]
+children = [SubResource("BTCondition_d6hvj")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_ykixg"]
+children = [SubResource("BTRepeatUntilFailure_gf8jg")]
+
+[sub_resource type="BTCondition" id="BTCondition_m26ws"]
+script = ExtResource("6_d6hvj")
+target_var = "target"
+comparison = 4
+height_threshold = 3.0
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTCondition" id="BTCondition_mkwy1"]
+script = ExtResource("3_d6hvj")
+target_var = &"target"
+distance_min = 5.0
+distance_max = 100.0
+
+[sub_resource type="BTAction" id="BTAction_mkwy1"]
+script = ExtResource("7_wwppe")
+jump_factor = 10.0
+duration = 0.0
+is_falling = false
+has_landed = true
+reached_peak = false
+
+[sub_resource type="BTSequence" id="BTSequence_ykixg"]
+children = [SubResource("BTCondition_m26ws"), SubResource("BTCondition_mkwy1"), SubResource("BTAction_mkwy1")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_d6hvj"]
+forever = true
+children = [SubResource("BTSequence_ykixg")]
+
 [sub_resource type="BTParallel" id="BTParallel_e381t"]
 num_successes_required = 2
-repeat = true
-children = [SubResource("BTAction_yvhtp"), SubResource("BTCondition_d6hvj"), SubResource("BTAction_0xmxa")]
+children = [SubResource("BTAction_yvhtp"), SubResource("BTAction_0xmxa"), SubResource("BTAlwaysFail_ykixg"), SubResource("BTRepeat_d6hvj")]
 
 [sub_resource type="BTSequence" id="BTSequence_jowcg"]
 custom_name = "Pursue target"
-children = [SubResource("BTCondition_yvhtp"), SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
+children = [SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BBNode" id="BBNode_jowcg"]
@@ -149,16 +179,30 @@ bounce = true
 bounce_angle_variation = 45.0
 bounce_camera_shake = 1.0
 
+[sub_resource type="BTCondition" id="BTCondition_gf8jg"]
+script = ExtResource("5_ykixg")
+stuck_interval = 0.5
+stuck_threshold = 1.0
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_ykixg"]
+children = [SubResource("BTCondition_gf8jg")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_d6hvj"]
+children = [SubResource("BTRepeatUntilFailure_ykixg")]
+
+[sub_resource type="BTParallel" id="BTParallel_m26ws"]
+children = [SubResource("BTAction_j7hde"), SubResource("BTAlwaysFail_d6hvj")]
+
 [sub_resource type="BTSequence" id="BTSequence_b8d52"]
 custom_name = "Charge!"
-children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTAction_j7hde")]
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws")]
 
 [sub_resource type="BTSequence" id="BTSequence_yvhtp"]
 custom_name = "Charge attack"
 children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
-custom_name = "Cooldown charge attack"
+custom_name = "Charge attack  cooldown: 10s"
 children = [SubResource("BTSequence_yvhtp")]
 metadata/_weight_ = 1.0
 
@@ -172,61 +216,58 @@ animation_name = &"Roll"
 blend = 0.2
 speed = 6.0
 
-[sub_resource type="BTCondition" id="BTCondition_ykixg"]
-script = ExtResource("5_ykixg")
-stuck_interval = 1.0
-stuck_threshold = 2.5
+[sub_resource type="BTAction" id="BTAction_kbctg"]
+script = ExtResource("7_wwppe")
+jump_factor = 10.0
+duration = 0.0
+is_falling = true
+has_landed = false
+reached_peak = false
 
-[sub_resource type="BTAction" id="BTAction_gf8jg"]
+[sub_resource type="BTAction" id="BTAction_ykixg"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
-tolerance = 5.0
-aggro_distance = 100.0
-speed_factor = 100.0
+tolerance = 2.0
+speed_factor = 50.0
 duration = 0.0
+ignore_y = true
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
-[sub_resource type="BTAction" id="BTAction_kbctg"]
-script = ExtResource("7_wwppe")
-jump_factor = 200.0
-duration = 0.0
-grounded = false
-
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
-children = [SubResource("BTCondition_ykixg"), SubResource("BTAction_gf8jg"), SubResource("BTAction_kbctg")]
+children = [SubResource("BTAction_kbctg"), SubResource("BTAction_ykixg")]
 
-[sub_resource type="BBNode" id="BBNode_d6hvj"]
+[sub_resource type="BTSequence" id="BTSequence_5cuga"]
+children = [SubResource("BTParallel_d6hvj")]
+
+[sub_resource type="BBNode" id="BBNode_ykixg"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
 resource_name = "ball_chicken/AnimationPlayer"
 
-[sub_resource type="BTStopAnimation" id="BTStopAnimation_m26ws"]
-animation_player = SubResource("BBNode_d6hvj")
+[sub_resource type="BTStopAnimation" id="BTStopAnimation_d6hvj"]
+animation_player = SubResource("BBNode_ykixg")
 animation_name = &"Roll"
 
-[sub_resource type="BTAction" id="BTAction_5cuga"]
+[sub_resource type="BTAction" id="BTAction_m26ws"]
 script = ExtResource("8_157vn")
 target_var = &"target"
+ignore_cooldown = true
 slot = 0
 
-[sub_resource type="BTSequence" id="BTSequence_gf8jg"]
-children = [SubResource("BTStopAnimation_m26ws"), SubResource("BTAction_5cuga")]
-
-[sub_resource type="BTSequence" id="BTSequence_5cuga"]
-children = [SubResource("BTParallel_d6hvj"), SubResource("BTSequence_gf8jg")]
+[sub_resource type="BTSequence" id="BTSequence_mkwy1"]
+children = [SubResource("BTStopAnimation_d6hvj"), SubResource("BTAction_m26ws")]
 
 [sub_resource type="BTWait" id="BTWait_jowcg"]
 duration = 2.0
 
 [sub_resource type="BTSequence" id="BTSequence_sv4kc"]
 custom_name = "Earthquake"
-children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTSequence_5cuga"), SubResource("BTWait_jowcg")]
+children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTSequence_5cuga"), SubResource("BTSequence_mkwy1"), SubResource("BTWait_jowcg")]
 metadata/_weight_ = 0.985075
 
 [sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
-duration = 1.0
-custom_name = "Cooldown earthquake 10s"
+custom_name = "Earthquake  cooldown: 10s"
 children = [SubResource("BTSequence_sv4kc")]
 metadata/_weight_ = 1.0
 

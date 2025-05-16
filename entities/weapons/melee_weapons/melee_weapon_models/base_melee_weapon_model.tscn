@@ -8,3 +8,6 @@ script = ExtResource("1_br2vt")
 [node name="WeaponHitBox" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 0
+
+[node name="WeaponAttackSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

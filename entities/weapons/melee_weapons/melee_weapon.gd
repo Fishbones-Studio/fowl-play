@@ -15,6 +15,7 @@ var hit_targets_this_swing: Array[Node] = []
 var entity_stats: LivingEntityStats
 
 @onready var weapon_hit_box: Area3D = $WeaponHitBox
+@onready var weapon_attack_sfx: AudioStreamPlayer = $WeaponAttackSFX
 
 
 func _physics_process(_delta: float) -> void:

@@ -13,11 +13,10 @@
 radius = 4.25
 
 [node name="Bob" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_i06h6")]
-collision_layer = 4
-collision_mask = 9
 stats = ExtResource("2_fjbia")
 type = 1
 enemy_model = NodePath("ball_chicken")
+knockback_decay = 10000
 dialogue_path = "res://entities/enemies/bob/dialogue"
 name_label_template_string = "\"All-Devouring\" %s"
 

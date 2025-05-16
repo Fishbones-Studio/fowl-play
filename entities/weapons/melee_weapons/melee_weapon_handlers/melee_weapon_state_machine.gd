@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 func _transition_to_next_state(target_state: WeaponEnums.WeaponState, information: Dictionary = {}) -> void:
 	# Prevent transitioning to the same state
 	if target_state == current_state.state_type:
-		push_error(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
+		push_warning(owner.name + ": Trying to transition to the same state: " + str(target_state) + ". Falling back to idle.")
 		target_state = WeaponEnums.WeaponState.IDLE
 
 	# Exit the current state before switching
@@ -79,9 +79,9 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 	if weapon and weapon.animation_player:
 		# Animation handling
 		var has_current_anim := current_state.ANIMATION_NAME != null \
-								and not current_state.ANIMATION_NAME.is_empty() \
-								and weapon \
-								and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)
+				and not current_state.ANIMATION_NAME.is_empty() \
+				and weapon \
+				and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)
 	
 		if has_current_anim:
 			var anim_name: String = current_state.ANIMATION_NAME
