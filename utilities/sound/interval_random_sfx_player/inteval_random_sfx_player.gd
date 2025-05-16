@@ -9,7 +9,7 @@ extends AudioStreamPlayer3D
 @export var avoid_repeats: bool = true ## Avoid playing the same sound consecutively
 
 func _ready() -> void:
-	var _random_player := RandomAudioPlayer.new(sounds_folder, file_extensions, min_interval, max_interval, true, avoid_repeats)
+	var _random_player := IntervalAudioPlayer.new(sounds_folder, file_extensions, min_interval, max_interval, true, avoid_repeats)
 	_random_player.play_audio.connect(_on_play_sound)
 	add_child(_random_player)
 
