@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dab0i61vj1n23"]
+[gd_scene load_steps=8 format=3 uid="uid://dab0i61vj1n23"]
 
 [ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
+[ext_resource type="Texture2D" uid="uid://cl6he212hdrt5" path="res://ui/main_menu/art/square_fowlplay.png" id="2_i5wg5"]
 [ext_resource type="AudioStream" uid="uid://wnqtkl4c2rw4" path="res://ui/main_menu/art/song_1.wav" id="2_mu8pm"]
-[ext_resource type="Script" uid="uid://c7aisl0ti2rec" path="res://utilities/button_focus.gd" id="2_omy8q"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="3_3c04x"]
+[ext_resource type="Texture2D" uid="uid://blxf01i3gahjg" path="res://ui/main_menu/art/quit_icon.png" id="4_3c04x"]
+[ext_resource type="Texture2D" uid="uid://d2hk0nmi73swv" path="res://ui/main_menu/art/settings_icon.png" id="4_joh67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
+shader = ExtResource("3_3c04x")
+shader_parameter/blur_amount = 0.1
+shader_parameter/mix_amount = 0.15
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +21,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uhj5c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i5wg5")
+expand_mode = 2
+
+[node name="BlurRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_joh67")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -25,46 +53,49 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="PlayButton" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_constants/separation = 70
+size_flags_vertical = 8
+focus_neighbor_left = NodePath("../ButtonContainer/QuitButton")
+focus_next = NodePath("../ButtonContainer/SettingsButton")
+focus_previous = NodePath("../ButtonContainer/QuitButton")
+theme_type_variation = &"MainMenuLabelButton"
+text = "Press anywhere to start"
 
-[node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]Fowl Play[/center]"
-fit_content = true
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../../PlayButton")
+theme_type_variation = &"MainMenuIconButton"
+icon = ExtResource("4_joh67")
+icon_alignment = 1
+expand_icon = true
 
-[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 25
-
-[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-text = "Start Game"
-script = ExtResource("2_omy8q")
-
-[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-text = "Settings
-"
-
-[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
-layout_mode = 2
-text = "Quit
-"
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_right = NodePath("../../PlayButton")
+focus_next = NodePath("../../PlayButton")
+focus_previous = NodePath(".")
+theme_type_variation = &"MainMenuIconButton"
+icon = ExtResource("4_3c04x")
+icon_alignment = 1
+expand_icon = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mu8pm")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
