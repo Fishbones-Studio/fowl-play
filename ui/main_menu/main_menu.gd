@@ -19,7 +19,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_play_button_pressed() -> void:
 	SaveManager.load_game_data()
-	# Load Poutrly Man menu with loading screen
+	# Load Poultry Man menu with loading screen
 	# TODO: doesn't work as expected
 	UIManager.load_game_with_loading_screen("uid://21r458rvciqo")
 	UIManager.clear_ui()
