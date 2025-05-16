@@ -5,7 +5,7 @@ func _ready() -> void:
 	SettingsManager.load_settings( get_viewport(),get_window())
 
 
-func _input(event: InputEvent) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventJoypadButton:
 		if event.pressed:
 			_on_play_button_pressed()
