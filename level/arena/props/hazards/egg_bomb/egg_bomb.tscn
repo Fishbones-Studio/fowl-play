@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1kqvn5lvj320"]
+
+[ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_osose"]
+[ext_resource type="Script" uid="uid://b1emsl0k1se1q" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.gd" id="2_lgtnq"]
+[ext_resource type="PackedScene" uid="uid://bw0uve5cfu27a" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/slingshot_projectile.glb" id="3_n4vfd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cttch"]
+size = Vector3(1, 0.92569, 0.979889)
+
+[sub_resource type="Animation" id="Animation_eb4dk"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardArea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HazardArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3g6vn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardArea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HazardArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jt5sa"]
+_data = {
+&"RESET": SubResource("Animation_3g6vn"),
+&"idle": SubResource("Animation_eb4dk")
+}
+
+[node name="EggBomb" instance=ExtResource("1_osose")]
+script = ExtResource("2_lgtnq")
+knockback_force = 3.0
+vertical_knockback_force = 3.0
+despawn_time = 5.0
+
+[node name="CollisionShape3D" parent="HazardArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461688, 0)
+shape = SubResource("BoxShape3D_cttch")
+
+[node name="slingshot_projectile" parent="HazardArea" index="1" instance=ExtResource("3_n4vfd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227102, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_jt5sa")
+}
+
+[node name="DespawnTimer" type="Timer" parent="." index="3"]
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
