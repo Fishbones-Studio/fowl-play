@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://blc88hxvg3otq"]
 
-[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="1_ihale"]
+[ext_resource type="Texture2D" uid="uid://blpntkncy22f7" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.png" id="1_ihale"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="2_opwiw"]
 
 [resource]

@@ -22,7 +22,7 @@ func _tick(delta: float) -> Status:
 
 	var desired_direction: Vector3 = agent.global_position.direction_to(target.global_position)
 
-	if _is_at_direction(desired_direction):
+	if _is_at_direction(desired_direction) and angle_threshold < 0:
 		return SUCCESS
 
 	if duration and elapsed_time > duration:

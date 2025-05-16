@@ -101,8 +101,6 @@ func _on_content_focus_entered() -> void:
 	var children: Array[Node] = content_container.get_children()
 
 	var first_child: Control = children[0]
-	var last_child: Control = children[-1]
-	var prev_child: Control = null
 
 	for index in children.size():
 		var child: Control = children[index]

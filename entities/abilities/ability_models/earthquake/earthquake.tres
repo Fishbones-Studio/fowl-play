@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cot4w1aawwija"]
 
-[ext_resource type="Texture2D" uid="uid://c8654s5idl77v" path="res://ui/loading_screen/art/chicken_headshot_half.png" id="1_uetiq"]
+[ext_resource type="Texture2D" uid="uid://djbfno2hluufe" path="res://entities/abilities/ability_models/earthquake/earthquake.png" id="1_uetiq"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_uhva3"]
 
 [resource]

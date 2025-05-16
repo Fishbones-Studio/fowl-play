@@ -1,16 +1,16 @@
 @tool
-extends BTAction
+extends EnemyBTAction
 
 ## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
 ## How close should the agent be to the desired position to return SUCCESS.
 @export var tolerance: float = 2.0
-## Desired distance from target.
-@export var aggro_distance: float = 20.0
 ## Pursuit speed factor.
 @export var speed_factor: float = 0.0
 ## Duration the enemy will pursue the target.
 @export var duration: float = 0.0
+## Ignore y if not using pathfinding
+@export var ignore_y: bool = true
 ## Use path finding instead of normal movement
 @export var pathfinding: bool = false
  ## Force immediate updates.
@@ -35,11 +35,7 @@ func _enter() -> void:
 	if pathfinding:
 		if not agent.nav.velocity_computed.is_connected(_on_velocity_computed):
 			agent.nav.velocity_computed.connect(_on_velocity_computed, CONNECT_DEFERRED)
-			var shape: Shape3D = agent.shape.shape
-			if shape is CapsuleShape3D:
-				agent.nav.radius = shape.radius
-			if shape is BoxShape3D:
-				agent.nav.radius = shape.size.x / 2.0
+			_set_agent_avoidance()
 
 		agent.nav.target_desired_distance = tolerance
 
@@ -61,7 +57,7 @@ func _tick(delta: float) -> Status:
 
 	_last_target_position = target_position
 
-	if _is_at_position(target_position):
+	if _is_at_position(target_position) and tolerance > 0:
 		return SUCCESS
 
 	if duration > 0 and elapsed_time > duration:
@@ -85,7 +81,9 @@ func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool
 		agent.nav.set_velocity(_current_direction * speed)
 	else:
 		_current_direction = agent.global_position.direction_to(target_pos)
-		agent.velocity = _current_direction * speed
+		agent.velocity.x = _current_direction.x * speed
+		if not ignore_y: agent.velocity.y = _current_direction.y * speed
+		agent.velocity.z = _current_direction.z * speed
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
