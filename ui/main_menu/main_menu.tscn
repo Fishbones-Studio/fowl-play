@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dab0i61vj1n23"]
+[gd_scene load_steps=8 format=3 uid="uid://dab0i61vj1n23"]
 
 [ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
 [ext_resource type="Texture2D" uid="uid://cl6he212hdrt5" path="res://ui/main_menu/art/square_fowlplay.png" id="2_i5wg5"]
 [ext_resource type="AudioStream" uid="uid://wnqtkl4c2rw4" path="res://ui/main_menu/art/song_1.wav" id="2_mu8pm"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="3_3c04x"]
 [ext_resource type="Texture2D" uid="uid://blxf01i3gahjg" path="res://ui/main_menu/art/quit_icon.png" id="4_3c04x"]
+[ext_resource type="Texture2D" uid="uid://d2hk0nmi73swv" path="res://ui/main_menu/art/settings_icon.png" id="4_joh67"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("3_3c04x")
@@ -61,11 +62,22 @@ text = "Press anywhere to start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitButton" type="Button" parent="MarginContainer"]
-custom_minimum_size = Vector2(40, 40)
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_type_variation = &"IconButton"
+icon = ExtResource("4_joh67")
+icon_alignment = 1
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
 theme_type_variation = &"IconButton"
 icon = ExtResource("4_3c04x")
 icon_alignment = 1
@@ -76,4 +88,5 @@ stream = ExtResource("2_mu8pm")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
