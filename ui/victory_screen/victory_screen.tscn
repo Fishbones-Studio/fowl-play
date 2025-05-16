@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://sjvml6sgskxh"]
 
 [ext_resource type="Script" uid="uid://bog7cr78ndrmh" path="res://ui/victory_screen/victory_screen.gd" id="1_w5gup"]
-[ext_resource type="AudioStream" uid="uid://btgwex2n8rxut" path="res://ui/victory_screen/art/music/song_3.mp3" id="2_axvl8"]
 [ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="3_6h7er"]
+[ext_resource type="AudioStream" uid="uid://kwodeio65r2c" path="res://ui/victory_screen/art/music/song_3_no_dist.mp3" id="3_pobfu"]
 
 [sub_resource type="Animation" id="Animation_w5gup"]
 length = 0.001
@@ -139,6 +139,5 @@ libraries = {
 }
 
 [node name="VictoryMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_axvl8")
-volume_db = -5.0
+stream = ExtResource("3_pobfu")
 bus = &"Music"
