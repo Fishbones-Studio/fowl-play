@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=47 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=49 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -18,6 +18,7 @@
 [ext_resource type="StyleBox" uid="uid://c6x8bod707wjc" path="res://resources/themes/styleboxes/pause_menu_button_normal.tres" id="8_yoenm"]
 [ext_resource type="StyleBox" uid="uid://bs2x4gjk4xumb" path="res://resources/themes/styleboxes/pause_menu_button_pressed.tres" id="9_tvx0j"]
 [ext_resource type="StyleBox" uid="uid://d3oipv5i4i1q3" path="res://resources/themes/styleboxes/keybind_button_normal.tres" id="10_6bdnh"]
+[ext_resource type="Texture2D" uid="uid://cwo1048wpwh12" path="res://resources/themes/styleboxes/main_menu_label.tres" id="12_lt88i"]
 [ext_resource type="StyleBox" uid="uid://d0attnbn6qun" path="res://resources/themes/styleboxes/settings_content_panel_active.tres" id="18_g1eo5"]
 [ext_resource type="StyleBox" uid="uid://bbqtljrqykyc4" path="res://resources/themes/styleboxes/settings_content_panel_inactive.tres" id="19_yig1m"]
 
@@ -71,6 +72,9 @@ content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_07ai7"]
+texture = ExtResource("12_lt88i")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7adcq"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
@@ -215,6 +219,10 @@ KeybindResDefButton/styles/pressed = ExtResource("7_27a07")
 Label/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 Label/constants/outline_size = 3
 Label/font_sizes/font_size = 20
+MainMenuLabel/base_type = &"Label"
+MainMenuLabel/colors/font_color = Color(1, 1, 1, 1)
+MainMenuLabel/font_sizes/font_size = 20
+MainMenuLabel/styles/normal = SubResource("StyleBoxTexture_07ai7")
 MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0
