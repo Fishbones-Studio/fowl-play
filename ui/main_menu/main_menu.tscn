@@ -57,7 +57,10 @@ theme_override_constants/margin_bottom = 25
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
-theme_type_variation = &"MainMenuLabel"
+focus_neighbor_left = NodePath("../ButtonContainer/QuitButton")
+focus_next = NodePath("../ButtonContainer/SettingsButton")
+focus_previous = NodePath("../ButtonContainer/QuitButton")
+theme_type_variation = &"MainMenuLabelButton"
 text = "Press anywhere to start"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -68,7 +71,10 @@ size_flags_vertical = 8
 [node name="SettingsButton" type="Button" parent="MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_type_variation = &"IconButton"
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../../PlayButton")
+theme_type_variation = &"MainMenuIconButton"
 icon = ExtResource("4_joh67")
 icon_alignment = 1
 expand_icon = true
@@ -76,7 +82,11 @@ expand_icon = true
 [node name="QuitButton" type="Button" parent="MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_type_variation = &"IconButton"
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_right = NodePath("../../PlayButton")
+focus_next = NodePath("../../PlayButton")
+focus_previous = NodePath(".")
+theme_type_variation = &"MainMenuIconButton"
 icon = ExtResource("4_3c04x")
 icon_alignment = 1
 expand_icon = true

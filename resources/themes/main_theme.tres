@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=51 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=50 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -18,7 +18,9 @@
 [ext_resource type="StyleBox" uid="uid://c6x8bod707wjc" path="res://resources/themes/styleboxes/pause_menu_button_normal.tres" id="8_yoenm"]
 [ext_resource type="StyleBox" uid="uid://bs2x4gjk4xumb" path="res://resources/themes/styleboxes/pause_menu_button_pressed.tres" id="9_tvx0j"]
 [ext_resource type="StyleBox" uid="uid://d3oipv5i4i1q3" path="res://resources/themes/styleboxes/keybind_button_normal.tres" id="10_6bdnh"]
-[ext_resource type="Texture2D" uid="uid://cwo1048wpwh12" path="res://resources/themes/styleboxes/main_menu_label.tres" id="12_lt88i"]
+[ext_resource type="StyleBox" uid="uid://dhgnct3drebh3" path="res://resources/themes/styleboxes/main_menu_button_normal.tres" id="12_07ai7"]
+[ext_resource type="StyleBox" uid="uid://r0uacy3yxc0c" path="res://resources/themes/styleboxes/main_menu_button_hover.tres" id="12_px7dm"]
+[ext_resource type="StyleBox" uid="uid://bt1cytf8urqn" path="res://resources/themes/styleboxes/main_menu_play_button_normal.tres" id="14_px7dm"]
 [ext_resource type="StyleBox" uid="uid://d0attnbn6qun" path="res://resources/themes/styleboxes/settings_content_panel_active.tres" id="18_g1eo5"]
 [ext_resource type="StyleBox" uid="uid://bbqtljrqykyc4" path="res://resources/themes/styleboxes/settings_content_panel_inactive.tres" id="19_yig1m"]
 
@@ -43,21 +45,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07ai7"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt88i"]
-bg_color = Color(0.878431, 0.878431, 0.878431, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-shadow_size = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtbu8"]
 content_margin_left = 2.0
@@ -87,9 +74,6 @@ content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_07ai7"]
-texture = ExtResource("12_lt88i")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7adcq"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
@@ -206,10 +190,6 @@ HeaderLarge/font_sizes/font_size = 75
 HeaderMedium/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 HeaderMedium/font_sizes/font_size = 50
 HeaderSmall/font_sizes/font_size = 30
-IconButton/base_type = &"Button"
-IconButton/constants/icon_max_width = 30
-IconButton/styles/hover = SubResource("StyleBoxFlat_07ai7")
-IconButton/styles/normal = SubResource("StyleBoxFlat_lt88i")
 ItemCost/base_type = &"Label"
 ItemCost/colors/font_color = Color(0.309804, 0.352941, 0.388235, 1)
 ItemCost/font_sizes/font_size = 24
@@ -238,10 +218,22 @@ KeybindResDefButton/styles/pressed = ExtResource("7_27a07")
 Label/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 Label/constants/outline_size = 3
 Label/font_sizes/font_size = 20
-MainMenuLabel/base_type = &"Label"
-MainMenuLabel/colors/font_color = Color(1, 1, 1, 1)
-MainMenuLabel/font_sizes/font_size = 20
-MainMenuLabel/styles/normal = SubResource("StyleBoxTexture_07ai7")
+MainMenuIconButton/base_type = &"Button"
+MainMenuIconButton/colors/font_color = Color(1, 1, 1, 1)
+MainMenuIconButton/constants/icon_max_width = 30
+MainMenuIconButton/styles/focus = ExtResource("12_px7dm")
+MainMenuIconButton/styles/hover = ExtResource("12_px7dm")
+MainMenuIconButton/styles/normal = ExtResource("12_07ai7")
+MainMenuIconButton/styles/pressed = ExtResource("12_px7dm")
+MainMenuLabelButton/base_type = &"Button"
+MainMenuLabelButton/colors/font_color = Color(1, 1, 1, 1)
+MainMenuLabelButton/colors/font_focus_color = Color(0.8, 0.796078, 0.780392, 1)
+MainMenuLabelButton/colors/font_hover_color = Color(0.8, 0.796078, 0.780392, 1)
+MainMenuLabelButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+MainMenuLabelButton/font_sizes/font_size = 20
+MainMenuLabelButton/styles/focus = ExtResource("14_px7dm")
+MainMenuLabelButton/styles/hover = ExtResource("14_px7dm")
+MainMenuLabelButton/styles/normal = ExtResource("14_px7dm")
 MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0

@@ -28,5 +28,6 @@ func _on_settings_button_pressed() -> void:
 	else:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU)
 
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
