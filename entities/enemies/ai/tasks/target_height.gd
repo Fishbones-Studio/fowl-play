@@ -29,7 +29,7 @@ func _generate_name() -> String:
 	return "Height ➜ %s %s %.1f" % [LimboUtility.decorate_var(target_var), comp_text, height_threshold]
 
 
-func _enter():
+func _enter() -> void:
 	if use_relative:
 		_initial_height = agent.global_position.y
 

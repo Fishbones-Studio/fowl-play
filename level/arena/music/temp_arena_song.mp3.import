@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/temp_arena_song.mp3-e60afecf2340d98d56b4d697b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0
