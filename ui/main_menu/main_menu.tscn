@@ -53,14 +53,12 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="PlayButton" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"MainMenuLabel"
 text = "Press anywhere to start"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -88,5 +86,6 @@ stream = ExtResource("2_mu8pm")
 autoplay = true
 bus = &"Music"
 
+[connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
