@@ -19,9 +19,10 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_play_button_pressed() -> void:
 	SaveManager.load_game_data()
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	UIManager.remove_ui_by_enum(UIEnums.UI.SETTINGS_MENU)
-	UIManager.remove_ui(self)
+	# Load Poutrly Man menu with loading screen
+	# TODO: doesn't work as expected
+	UIManager.load_game_with_loading_screen("uid://21r458rvciqo")
+	UIManager.clear_ui()
 
 
 func _on_settings_button_pressed() -> void:
