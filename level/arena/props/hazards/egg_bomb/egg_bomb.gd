@@ -10,6 +10,8 @@ var spawner: CharacterBody3D
 @onready var hazard_area: Area3D = $HazardArea
 @onready var despawn_timer: Timer = $DespawnTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var explosion_sound: RandomSFXPlayer = $ExplosionSound
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
 
 
 func _ready() -> void:
@@ -62,5 +64,9 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 
 
 func _on_despawn_timer_timeout() -> void:
+	animation_player.play("explode")
+
+
+func _remove_self() -> void:
 	get_parent().remove_child(self)
 	queue_free()
