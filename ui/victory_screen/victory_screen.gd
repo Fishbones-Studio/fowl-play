@@ -1,24 +1,18 @@
 extends Control
 
 var is_transitioning: bool = false
+var currency_overview_change : CurrencyOverviewDict
 
+@onready var label: Label = $VBoxContainer/VictoryLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var title: Label = $VBoxContainer/TitleLabel
+@onready var victory_music_player : AudioStreamPlayer = $VictoryMusicPlayer
 @onready var currency_overview : CurrencyOverview = %CurrencyOverview
 
 
 func _ready() -> void:
 	get_tree().paused = true
-	
-	# Resetting the game and calculating the difference in prosperity eggs
-	var pre_reset_pe = GameManager.prosperity_eggs
-	GameManager.reset_game()
-	var pe_diff = GameManager.prosperity_eggs - pre_reset_pe
-	var currency_overview_change : CurrencyOverviewDict = CurrencyOverviewDict.new({
-		"Prosperity Eggs": pe_diff,
-	})
-	
-	animation_player.play("fade_to_black")
+	victory_music_player.play()
+	animation_player.play("victory")
 	currency_overview.label_amount_dictionary = currency_overview_change
 	currency_overview.update_label_container()
 
@@ -36,10 +30,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _return_to_game_menu() -> void:
+	victory_music_player.stop()
 	is_transitioning = true
-	animation_player.play("fade_to_white")
+	animation_player.play("RESET")
 
 	get_tree().paused = false
 	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 	
 	UIManager.remove_ui(self)
+
+func setup(params: Dictionary) -> void:
+	currency_overview_change = params.get("currency_dict", CurrencyOverviewDict.new({}))
