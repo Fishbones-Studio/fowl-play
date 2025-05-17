@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://dn4y6rw2w6ydt"]
+[gd_scene load_steps=29 format=3 uid="uid://dn4y6rw2w6ydt"]
 
 [ext_resource type="PackedScene" uid="uid://bwi0t0rjkr75f" path="res://level/arena/art/sewer_arena.glb" id="1_b4aaq"]
+[ext_resource type="Script" uid="uid://snfhcmfpjpc5" path="res://level/arena/arena.gd" id="1_wdiye"]
 [ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="3_b4aaq"]
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="5_byl6v"]
 
@@ -98,6 +99,7 @@ size = Vector3(30, 50, 0.5)
 size = Vector3(30, 50, 0.5)
 
 [node name="Arena" type="StaticBody3D"]
+script = ExtResource("1_wdiye")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_co35n")
