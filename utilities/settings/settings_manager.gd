@@ -2,7 +2,7 @@
 ## Handles settings data persistance:
 ## - Settings (Controls, Key Bindings, Graphics, Audio)
 #################################################################################
-class_name SettingsManager
+class_name SettingsManager 
 extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"

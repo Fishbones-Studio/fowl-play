@@ -1,0 +1,26 @@
+~ start
+if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
+	Elder Centipede: [[Your scent is familiar. |You've fought I, the "Great" Elder Centipede before. |Do you want to get humiliated again?]]
+	Elder Centipede: I will.. ERASE your whole existence!
+else:
+	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool who dares to challenges me. |Weakling.]]
+	Elder Centipede: [[Consider yourself "Lucky", as I, the "Great" Elder Centipede WILL NOT SHOW MERCY. |You won't make it out intact. Feel honored, weakling. |I WILL GRIND YOUR BONES TO DUST.]]
+- Attack => END!
+- Talk => standard_dialogue
+
+~ standard_dialogue
+- You think you can beat me?
+	Elder Centipede: [[You? Win? HAHAHA. You don't stand a chance against me.|Confident, aren't you? That's the first thing I will rip from you.|I will make a thophy out of you.]]
+	Elder Centipede: I have burried countless of fools like you in the past. Tremble in fear, your grave wait beneath my legs.
+	=> explore_mutations
+- Why do you keep fighting?
+	Elder Centipede: [[I am the honored one.|Strength is everything. I am the strongest.|Fools keep approaching me.]]
+	Elder Centipede: [[The strongest creature is I. No one is stronger than me. NO ONE.|The weak will bow before my strength.|I simply make an example out of them.]]
+	=> explore_mutations
+
+~ explore_mutations
+Elder Centipede: In the past, I have massacred thousands of challengers, and each of them thought they had a chance against me.
+Elder Centipede: Every single one was torn apart by my strength. I still hear their screams lingering in my mind.
+Elder Centipede: No one escapes my wrath, and no one leaves unscattered.
+Elder Centipede: Got any last words before I completely annihilate you?
+- Fatass. => END

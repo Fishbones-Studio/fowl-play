@@ -9,11 +9,11 @@ var dialogue_folder_path: String:
 
 var dialogue_path: String
 
+
 func _on_dialogue_folder_path_set(value: String) -> void:
 	dialogue_folder_path = value
 	dialogue_path = "" # Reset dialogue_path initially
 
-	
 	var in_between_rounds_path: String = dialogue_folder_path.path_join(
 		dialogue_subfolder_path
 	)

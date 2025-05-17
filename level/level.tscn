@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhnqi4fnso1hh"]
+[gd_scene load_steps=20 format=3 uid="uid://bhnqi4fnso1hh"]
 
 [ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
 [ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area.tscn" id="2_6gtgk"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="8_m5ivw"]
 [ext_resource type="Script" uid="uid://rfkmyg6k21l6" path="res://level/round/round_handler.gd" id="9_cw150"]
 [ext_resource type="PackedScene" uid="uid://4qwnqq8jvrgj" path="res://entities/enemies/insighter/insighter.tscn" id="9_fm1jd"]
+[ext_resource type="PackedScene" uid="uid://c51s5rs0dxnmr" path="res://entities/enemies/elder_centipede/elder_centipede.tscn" id="10_7jqyl"]
 [ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="11_rhqlf"]
 [ext_resource type="Script" uid="uid://do0p6h1krl7eu" path="res://level/arena/hazard_marker.gd" id="13_m3nah"]
 
@@ -66,7 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
-enemy_scenes = Array[PackedScene]([ExtResource("11_rhqlf"), ExtResource("7_7jqyl"), ExtResource("6_fm1jd"), ExtResource("8_m5ivw"), ExtResource("9_fm1jd")])
+enemy_scenes = Array[PackedScene]([ExtResource("11_rhqlf"), ExtResource("7_7jqyl"), ExtResource("6_fm1jd"), ExtResource("8_m5ivw"), ExtResource("9_fm1jd"), ExtResource("10_7jqyl")])
 waiting_time = 1.5
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." groups=["NavRegion"]]
