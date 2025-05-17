@@ -115,25 +115,33 @@ func _enter_in_progress() -> void:
 
 func _enter_concluding() -> void:
 	# Check if all rounds are completed (boss defeated)
-	if (
-		GameManager.current_round == max_rounds
-		and _current_enemy == null # Ensure the enemy is actually defeated
-	):
+	if (GameManager.current_round == max_rounds	and _current_enemy == null):
 		print("all rounds completed, back to poultry man menu")
-		GameManager.prosperity_eggs += GameManager.arena_completion_reward
-		GameManager.feathers_of_rebirth += 5 # TODO: improve later
-		SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
+		var feathers_of_rebirth := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0))
+		var prosperity_eggs := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0))
+		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({
+			"Feathers of Rebirth": feathers_of_rebirth,
+			"Prosperity Eggs": prosperity_eggs
+		})
+		GameManager.prosperity_eggs += prosperity_eggs
+		GameManager.feathers_of_rebirth += feathers_of_rebirth
+		SignalManager.game_won.emit()
+		SignalManager.add_ui_scene.emit(UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_overview_dict})
 		# Don't proceed further in this function if game is ending
 		return
 
-	# Display enemy defeated message
+
+	# Display enemy defeated message and add currency
 	if _current_enemy == null:
+		var prosperity_eggs : int = int(GameManager.arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0)) * GameManager.current_round
+		GameManager.prosperity_eggs += prosperity_eggs
+		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({"Prosperity Eggs" : prosperity_eggs})
 		SignalManager.add_ui_scene.emit(
-			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!"}
+			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!", "currency_dict": currency_overview_dict}
 		)
 
 	# Decide and store the next enemy *before* the wait time
-	# Ensure we don't try to pick an enemy after the last round
+	# Ensure we don't try to pick an enemy after the last round, kind of redundant check
 	if GameManager.current_round < max_rounds:
 		var next_round_number: int = GameManager.current_round + 1
 		var next_enemy_type: EnemyEnums.EnemyTypes = (
@@ -175,7 +183,6 @@ func _enter_intermission() -> void:
 		-400, 2.5, 0
 	) # teleport player to the intermission area
 	SignalManager.upgrades_shop_refreshed.emit()
-	# TODO: spawn next enemy in the intermission area
 
 
 func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
