@@ -11,7 +11,7 @@ shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.7
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="SettingsMenu" type="Control"]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("focus_node")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -20,6 +20,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cobfr")
+handle_focus = true
+focus_node = NodePath("VBoxContainer/MarginContainer/HBoxContainer/SidebarContainer/Controls")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_gjkyi")

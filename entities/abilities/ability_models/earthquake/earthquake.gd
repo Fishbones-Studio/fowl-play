@@ -126,7 +126,7 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 
 		var knockback: Vector3 = Vector3(
 			sign(dir.x) * _current_knockback,
-			sign(dir.x) * knockback_force_upwards,
+			sign(dir.y) * knockback_force_upwards,
 			sign(dir.z) * _current_knockback,
 		)
 

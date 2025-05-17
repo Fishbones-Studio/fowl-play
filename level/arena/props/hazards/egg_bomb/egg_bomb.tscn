@@ -1,0 +1,248 @@
+[gd_scene load_steps=21 format=3 uid="uid://c1kqvn5lvj320"]
+
+[ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_osose"]
+[ext_resource type="Script" uid="uid://b1emsl0k1se1q" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.gd" id="2_lgtnq"]
+[ext_resource type="PackedScene" uid="uid://bw0uve5cfu27a" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/slingshot_projectile.glb" id="3_n4vfd"]
+[ext_resource type="Shader" uid="uid://djlk7jfxdcd2r" path="res://level/arena/props/hazards/egg_bomb/explosion.gdshader" id="4_n4vfd"]
+[ext_resource type="PackedScene" uid="uid://3bxwdb0hal41" path="res://utilities/sound/random_sfx_player/random_sfx_player.tscn" id="5_cttch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cttch"]
+size = Vector3(1, 0.92569, 0.979889)
+
+[sub_resource type="Animation" id="Animation_3g6vn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardArea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HazardArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_eb4dk"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardArea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HazardArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cttch"]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExplosionParticles:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_remove_self"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HazardArea")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jt5sa"]
+_data = {
+&"RESET": SubResource("Animation_3g6vn"),
+&"explode": SubResource("Animation_cttch"),
+&"idle": SubResource("Animation_eb4dk")
+}
+
+[sub_resource type="Gradient" id="Gradient_n4vfd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cttch"]
+noise_type = 2
+frequency = 0.1407
+fractal_type = 2
+fractal_octaves = 2
+fractal_lacunarity = 0.225
+fractal_gain = 8.0
+fractal_weighted_strength = 0.43
+cellular_jitter = 0.98
+domain_warp_enabled = true
+domain_warp_amplitude = 5.0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_eb4dk"]
+width = 128
+height = 128
+depth = 128
+invert = true
+seamless = true
+seamless_blend_skirt = 0.321
+color_ramp = SubResource("Gradient_n4vfd")
+noise = SubResource("FastNoiseLite_cttch")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cttch"]
+render_priority = 0
+shader = ExtResource("4_n4vfd")
+shader_parameter/NoiseTexture = SubResource("NoiseTexture3D_eb4dk")
+shader_parameter/NoiseTexturePower = 0.5
+shader_parameter/NoiseTextureSoftness = 0.2
+shader_parameter/ColorTint = Color(0.317647, 0.317647, 0.317647, 1)
+shader_parameter/AlphaCutoff = 0.5
+shader_parameter/TimeScale = -0.5
+shader_parameter/NoiseScale = 0.3
+shader_parameter/EmissionPower = 20.0
+shader_parameter/EmissionAlphaPower = 1.0
+shader_parameter/DisplacementScale = 0.285
+
+[sub_resource type="Gradient" id="Gradient_eb4dk"]
+offsets = PackedFloat32Array(0.0114286, 0.0657143, 0.137143, 0.265714, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.984, 0.97, 1, 0.878431, 0.486275, 0.145098, 1, 0.866667, 0.286275, 0.0901961, 0.945098, 0.0745098, 0.0196078, 0.00784314, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3g6vn"]
+gradient = SubResource("Gradient_eb4dk")
+
+[sub_resource type="Curve" id="Curve_jt5sa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.125, 0.0589452), 0.902645, 0.902645, 0, 0, Vector2(0.356383, 0.885729), 0.0, 0.0, 0, 0, Vector2(1, 0.522751), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_bt7vl"]
+curve = SubResource("Curve_jt5sa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p1csg"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 0.6
+gravity = Vector3(0, 3, 0)
+scale_min = 2.0
+scale_max = 2.2
+scale_curve = SubResource("CurveTexture_bt7vl")
+color_ramp = SubResource("GradientTexture1D_3g6vn")
+
+[sub_resource type="SphereMesh" id="SphereMesh_tdtsj"]
+
+[node name="EggBomb" instance=ExtResource("1_osose")]
+script = ExtResource("2_lgtnq")
+knockback_force = 3.0
+vertical_knockback_force = 3.0
+despawn_time = 5.0
+
+[node name="CollisionShape3D" parent="HazardArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461688, 0)
+shape = SubResource("BoxShape3D_cttch")
+
+[node name="slingshot_projectile" parent="HazardArea" index="1" instance=ExtResource("3_n4vfd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227102, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_jt5sa")
+}
+
+[node name="DespawnTimer" type="Timer" parent="." index="3"]
+
+[node name="ExplosionParticles" type="GPUParticles3D" parent="." index="4"]
+material_override = SubResource("ShaderMaterial_cttch")
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-1.492, -1.045, -1.363, 2.983, 3.926, 3.926)
+process_material = SubResource("ParticleProcessMaterial_p1csg")
+draw_pass_1 = SubResource("SphereMesh_tdtsj")
+
+[node name="ExplosionSound" parent="." index="5" instance=ExtResource("5_cttch")]
+volume_db = 3.0
+max_db = 6.0
+bus = &"SFX"
+audio_folder = "res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/explosion/"
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

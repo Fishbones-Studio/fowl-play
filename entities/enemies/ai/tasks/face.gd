@@ -9,10 +9,13 @@ extends BTAction
 @export var angle_threshold: float = 25.0
 ## How long to perform this task (in seconds).
 @export var duration: float
+## If true, face away from target instead of toward it.
+@export var face_away: bool = false
 
 
 func _generate_name() -> String:
-	return "Face ➜ %s" % [LimboUtility.decorate_var(target_var)]
+	var direction = "Away ➜" if face_away else "Toward ➜"
+	return "Face %s %s" % [direction, LimboUtility.decorate_var(target_var)]
 
 
 func _tick(delta: float) -> Status:
@@ -21,6 +24,8 @@ func _tick(delta: float) -> Status:
 		return FAILURE
 
 	var desired_direction: Vector3 = agent.global_position.direction_to(target.global_position)
+	# Reverse direction if facing away
+	if face_away: desired_direction = -desired_direction
 
 	if _is_at_direction(desired_direction) and angle_threshold < 0:
 		return SUCCESS
@@ -40,7 +45,7 @@ func _is_at_direction(direction: Vector3) -> bool:
 
 
 func _rotate_toward_direction(direction: Vector3, delta: float) -> void:
-	var target_angle: float = atan2(-direction.x, -direction.z) # Calculate the angle to the target direction
-
+	 # Calculate the angle to the target direction
+	var target_angle: float = atan2(-direction.x, -direction.z)
 	# Lerp the angle to smoothly rotate towards the target direction
 	agent.rotation.y = lerp_angle(agent.rotation.y, target_angle, rotation_speed * delta)
