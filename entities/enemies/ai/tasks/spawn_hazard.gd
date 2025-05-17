@@ -1,7 +1,7 @@
 @tool
 extends BTAction
 
-## Resource for the harzard
+## Resource for the hazard
 @export var hazard_resource: PackedScene
 
 
