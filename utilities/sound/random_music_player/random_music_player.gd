@@ -10,6 +10,8 @@ const MAX_DB := 0.0
 @export var start_on_ready: bool = true
 
 var transitioning: bool = false
+var stopped: bool = false
+
 var tween: Tween
 
 
@@ -24,16 +26,15 @@ func _ready() -> void:
 
 
 func play_random_music() -> void:
+	if stopped: return
 	if _available_streams.is_empty():
 		push_warning(
 			"RandomMusicPlayer: No music files available to play from '%s'."
 			% audio_folder
 		)
 		return
-
 	if transitioning:
 		return
-
 	transitioning = true
 	if playing:
 		fade_out()
@@ -60,6 +61,9 @@ func _on_fade_out_finished() -> void:
 	_play_next_track_with_fade()
 
 func _play_next_track_with_fade() -> void:
+	if stopped:
+		transitioning = false
+		return
 	var next_music_stream := _get_next_random_stream()
 
 	if next_music_stream:
@@ -76,5 +80,12 @@ func _on_fade_in_finished() -> void:
 	transitioning = false
 
 func _on_finished() -> void:
-	if not transitioning: # Only auto-play next if not already in a transition (e.g. manual stop)
+	if not transitioning and not stopped: # Only auto-play next if not already in a transition (e.g. manual stop)
 		play_random_music()
+
+func stop_playback() -> void:
+	stopped = true
+	if tween:
+		tween.kill()
+	stop()
+	volume_db = MIN_DB

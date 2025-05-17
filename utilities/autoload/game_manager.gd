@@ -36,9 +36,14 @@ var feathers_of_rebirth: int:
 
 
 ## Amount of prosperity eggs earned per round. Gets multiplied by the round number
-var arena_round_reward: int = 50
+var arena_round_reward : Dictionary[CurrencyEnums.CurrencyTypes, int] = {
+	CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: 50,
+}
 ## Amount of prosperity eggs earned for completing the arena (aka the final round)
-var arena_completion_reward: int = 200
+var arena_completion_reward: Dictionary[CurrencyEnums.CurrencyTypes, int] = {
+	CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: 200,
+	CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH: 5,
+}
 
 var current_round: int = 1:
 	set(value):
@@ -48,7 +53,6 @@ var current_round: int = 1:
 		if value > current_round:
 			# Use the setter to ensure signal emission and inventory update
 			SaveManager.save_rounds_one_by_one()
-			self.prosperity_eggs += arena_round_reward * value
 		current_round = value
 
 
@@ -116,7 +120,7 @@ func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntit
 func reset_game() -> void:
 	# Use the setter for prosperity_eggs to ensure signals/updates happen
 	prosperity_eggs = clamp(
-		(100 + current_round * int(arena_round_reward / 2.0)), 300, 300
+		(100 + current_round * int(arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 50) / 2.0)), 300, 300
 	)
 	SaveManager.reset_game_data()
 	if Inventory:
