@@ -1,4 +1,4 @@
-extends CenterContainer
+class_name DrawMarker extends CenterContainer
 
 @export var DOT_RADIUS : float = 1.0
 @export var DOT_COLOR : Color = Color.WHITE

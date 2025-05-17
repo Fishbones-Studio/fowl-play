@@ -53,7 +53,7 @@ func _input(_event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
-		var focused = get_viewport().gui_get_focus_owner()
+		var focused: Control = get_viewport().gui_get_focus_owner()
 
 		if focused is LineEdit or focused is TextEdit:
 			# Let text controls handle it naturally
@@ -269,6 +269,11 @@ func handle_pause() -> void:
 		swap_ui(pause_menu, ui_to_restore)
 
 		_handle_mouse_mode(_is_any_visible())
+		
+func get_or_add_ui_by_enum(ui_enum: UIEnums.UI) -> Control:
+	if not ui_list.has(ui_enum) or not is_instance_valid(ui_list[ui_enum]):
+		_on_add_ui_scene(ui_enum, {}, false)
+	return ui_list.get(ui_enum, null)
 
 
 ## Handles the "ui_cancel" input action (e.g., Escape key)
