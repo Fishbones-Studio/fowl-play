@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=43 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -107,10 +107,16 @@ blend = 0.2
 [sub_resource type="BTAction" id="BTAction_h0qwm"]
 script = ExtResource("4_h0qwm")
 target_var = &"target"
-rotation_speed = 6.0
-angle_threshold = 25.0
+rotation_speed = 15.0
+angle_threshold = 5.0
 duration = 0.0
 face_away = false
+
+[sub_resource type="BTWait" id="BTWait_7lgdv"]
+duration = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_ftfet"]
+children = [SubResource("BTAction_h0qwm"), SubResource("BTWait_7lgdv")]
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
@@ -118,12 +124,9 @@ target_var = &"target"
 ignore_cooldown = true
 slot = 0
 
-[sub_resource type="BTParallel" id="BTParallel_ftfet"]
-children = [SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]
-
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]
 custom_name = "Fireball!"
-children = [SubResource("BTPlayAnimation_ftfet"), SubResource("BTParallel_ftfet")]
+children = [SubResource("BTPlayAnimation_ftfet"), SubResource("BTParallel_ftfet"), SubResource("BTAction_ftfet")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_mxuth"]
 children = [SubResource("BTSequence_7lgdv")]
@@ -145,6 +148,7 @@ min_distance = 0.5
 chaotic = true
 wave_frequency = 2.0
 wave_amplitude = 15.0
+duration = 5.0
 
 [sub_resource type="BTCondition" id="BTCondition_7lgdv"]
 script = ExtResource("3_nm0l6")

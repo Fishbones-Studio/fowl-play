@@ -13,6 +13,8 @@ extends BTAction
 @export var wave_frequency: float = 2.0
 ## The intensity of how far the enemy deviates during chaotic movement.
 @export var wave_amplitude: float = 15.0
+## The max duration the agent is allowed to patrol before returning SUCCESS.
+@export var duration: float = 5.0
 
 var speed: float:
 	get:
@@ -38,6 +40,9 @@ func _enter() -> void:
 func _tick(delta: float) -> Status:
 	_current_timer += delta
 	_wave_timer += delta
+
+	if elapsed_time > duration:
+		return SUCCESS
 
 	if agent.global_position.distance_to(_target_position) < min_distance:
 		return SUCCESS
