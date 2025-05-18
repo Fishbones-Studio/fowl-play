@@ -58,7 +58,7 @@ slot = 0
 children = [SubResource("BTAction_4rvb4"), SubResource("BTAction_8uudm")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_smr14"]
-duration = 1.0
+duration = 2.0
 children = [SubResource("BTParallel_53l80")]
 
 [sub_resource type="BTSequence" id="BTSequence_jgv6p"]
