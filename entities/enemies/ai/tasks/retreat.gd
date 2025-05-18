@@ -91,7 +91,7 @@ func _tick(delta: float) -> Status:
 
 
 func _move_away_from_target(delta: float, target_moved: bool):
-	var speed = agent.stats.calculate_speed(speed_factor) if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
+	var speed: float = agent.stats.calculate_speed(speed_factor) if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 
 	if pathfinding:
 		_current_direction = (agent.nav.get_next_path_position() - agent.global_position).normalized()
