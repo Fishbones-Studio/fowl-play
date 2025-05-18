@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=45 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -17,11 +17,6 @@
 script = ExtResource("1_qws7o")
 target_var = &"target"
 
-[sub_resource type="BTAction" id="BTAction_ppkk3"]
-script = ExtResource("2_ta6uh")
-min_wait_time = 0.0
-max_wait_time = 0.0
-
 [sub_resource type="BBNode" id="BBNode_d51mb"]
 saved_value = NodePath("woodpecker/AnimationPlayer")
 resource_name = "woodpecker/AnimationPlayer"
@@ -31,13 +26,14 @@ animation_player = SubResource("BBNode_d51mb")
 animation_name = &"Idle"
 blend = 0.2
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_nm0l6"]
-min_duration = 0.5
-max_duration = 1.4
+[sub_resource type="BTAction" id="BTAction_ppkk3"]
+script = ExtResource("2_ta6uh")
+min_wait_time = 0.1
+max_wait_time = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_h0qwm"]
 custom_name = "Pause before action"
-children = [SubResource("BTAction_ppkk3"), SubResource("BTPlayAnimation_q1gun"), SubResource("BTRandomWait_nm0l6")]
+children = [SubResource("BTPlayAnimation_q1gun"), SubResource("BTAction_ppkk3")]
 
 [sub_resource type="BBNode" id="BBNode_gwx8i"]
 saved_value = NodePath("woodpecker/AnimationPlayer")
