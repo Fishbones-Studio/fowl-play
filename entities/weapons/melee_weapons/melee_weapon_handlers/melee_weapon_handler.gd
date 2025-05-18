@@ -69,7 +69,7 @@ func setup() -> void:
 				melee_state_machine.update_entity_stats(owner_stats)
 				print("MeleeWeaponNode updated stats to: ", owner_stats)
 		)
-		
+
 	if not melee_weapon_scene:
 		push_warning("No valid weapon scene assigned!")
 		queue_free()

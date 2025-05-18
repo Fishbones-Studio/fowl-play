@@ -80,6 +80,7 @@ func use_weapon(ignore_cooldown: bool = false, start_state: WeaponEnums.WeaponSt
 				return 1
 
 	elif active_weapon is RangedWeaponNode:
-		return 0
+		active_weapon.current_weapon.handler.start_use()
+		return 1
 
 	return 0
