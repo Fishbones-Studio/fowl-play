@@ -1,5 +1,5 @@
 class_name PauseScreen 
-extends Control
+extends UserInterface
 
 @export var chicken: Node3D
 @export var camera: Camera3D
@@ -16,6 +16,8 @@ func _ready():
 		func():
 			if visible: UIManager.paused = true
 	)
+
+	super()
 
 
 func setup(_params: Dictionary = {}) -> void:
