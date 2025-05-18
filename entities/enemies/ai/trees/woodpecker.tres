@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=43 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=45 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -93,8 +93,17 @@ children = [SubResource("BTAction_f1ys2"), SubResource("BTCondition_gwx8i"), Sub
 
 [sub_resource type="BTSequence" id="BTSequence_c8cr3"]
 custom_name = "Pursue"
-children = [SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
+children = [SubResource("BTSequence_h0qwm"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
 metadata/_weight_ = 2.49943
+
+[sub_resource type="BBNode" id="BBNode_mxuth"]
+saved_value = NodePath("woodpecker/AnimationPlayer")
+resource_name = "woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_gwx8i"]
+animation_player = SubResource("BBNode_mxuth")
+animation_name = &"Sprint"
+blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_gwx8i"]
 script = ExtResource("8_mxuth")
@@ -133,7 +142,7 @@ slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]
 custom_name = "Fireball!"
-children = [SubResource("BTAction_gwx8i"), SubResource("BTPlayAnimation_ftfet"), SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]
+children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_gwx8i"), SubResource("BTPlayAnimation_ftfet"), SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_mxuth"]
 children = [SubResource("BTSequence_7lgdv")]
@@ -178,7 +187,7 @@ metadata/_weight_ = 1.49943
 children = [SubResource("BTSequence_c8cr3"), SubResource("BTCooldown_mxuth"), SubResource("BTSequence_gwx8i")]
 
 [sub_resource type="BTSequence" id="BTSequence_spagk"]
-children = [SubResource("BTAction_ta6uh"), SubResource("BTSequence_h0qwm"), SubResource("BTProbabilitySelector_hnjin")]
+children = [SubResource("BTAction_ta6uh"), SubResource("BTProbabilitySelector_hnjin")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_spagk")
