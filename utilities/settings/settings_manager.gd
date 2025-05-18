@@ -70,7 +70,7 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 				var saved_volume: float = config.get_value(SETTINGS_CFG_NAME_AUDIO, audio_bus_name)
 				var bus_idx: int = AudioServer.get_bus_index(audio_bus_name)
 				if bus_idx != -1: # Check if bus exists
-					var volume_db: float = linear_to_db(clampf(saved_volume, 0.0, 1.0)) # Assuming saved_volume is 0-1
+					var volume_db: float = linear_to_db(clampf(saved_volume / 100, 0.0, 1.0)) # Assuming saved_volume is 0-100
 					AudioServer.set_bus_volume_db(bus_idx, volume_db)
 				else:
 					push_warning("Audio bus '%s' not found." % audio_bus_name)
