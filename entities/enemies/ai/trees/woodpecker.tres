@@ -19,6 +19,8 @@ target_var = &"target"
 
 [sub_resource type="BTAction" id="BTAction_ppkk3"]
 script = ExtResource("2_ta6uh")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BBNode" id="BBNode_d51mb"]
 saved_value = NodePath("woodpecker/AnimationPlayer")
