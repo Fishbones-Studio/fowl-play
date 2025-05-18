@@ -7,7 +7,7 @@ extends Resource
 ## Sets base maximum stamina, defining how long the character can run, dash, glide and use certain abilities.
 @export var max_stamina: float = 100.0
 ## Sets base attack. Attack increases damage done by 1% per whole number.
-@export var attack:float = 0.0
+@export var attack: float = 0.0
 ## Sets base defense, which decreases damage taken according to following formula, where the resulting number is damage taken as a percentage: 
 ##\n 1 - ((defense_multiplier * defense) / (defense_decelerator + defense_multiplier * defense))
 @export var defense: int = 0
@@ -27,10 +27,11 @@ extends Resource
 @export_range(0.0, 1.0) var defense_multiplier: float = 0.05
 ## This causes the defense stat to be less impactful to damage reduction, if this is higher defense is less impactful.
 @export var defense_decelerator: float = 9.0
+
 @export_group("Holder")
-@export var is_player : bool = false
+@export var is_player: bool = false
 ## All names are stored lowercase and must be unique. Use snake_case
-@export var name : StringName = "" :
+@export var name: StringName = "" :
 	set(value):
 		name = value.to_lower()
 
@@ -121,7 +122,16 @@ func calc_scaled_damage(damage: float) -> float:
 	return actual_damage
 
 
-## Calculate the defense based on the defense and the k_scaler
+## Applies a temporary status effect (buff or debuff) to a given stat by modifying it by a percentage.
+func apply_stat_effect(stat_name: StringName, percent: float) -> float:
+	var original_value: float = get(stat_name)
+	var new_value: float = original_value * (1.0 - percent / 100.0)
+	set(stat_name, new_value)
+
+	return original_value
+
+
+## Applies in run upgrade effect to holder stats
 func apply_upgrade(upgrade: UpgradeResource) -> void:
 	max_health += upgrade.health_bonus
 	current_health += upgrade.health_bonus
@@ -180,5 +190,5 @@ static func from_dict(data: Dictionary) -> LivingEntityStats:
 
 	# Load Holder
 	new_stats.is_player = data.get("is_player", false)
-	
+
 	return new_stats
