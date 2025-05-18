@@ -112,16 +112,17 @@ angle_threshold = 5.0
 duration = 0.0
 face_away = false
 
-[sub_resource type="BTWait" id="BTWait_7lgdv"]
-duration = 2.0
+[sub_resource type="BTRandomWait" id="BTRandomWait_7lgdv"]
+min_duration = 1.3
+max_duration = 2.2
 
 [sub_resource type="BTParallel" id="BTParallel_ftfet"]
-children = [SubResource("BTAction_h0qwm"), SubResource("BTWait_7lgdv")]
+children = [SubResource("BTAction_h0qwm"), SubResource("BTRandomWait_7lgdv")]
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
 target_var = &"target"
-ignore_cooldown = true
+ignore_cooldown = false
 slot = 0
 
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]
