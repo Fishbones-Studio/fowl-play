@@ -95,7 +95,6 @@ expand_icon = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mu8pm")
-autoplay = true
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]

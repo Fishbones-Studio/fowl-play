@@ -1,10 +1,14 @@
 extends UserInterface
 
 @onready var play_button: Button = $MarginContainer/PlayButton
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 
 func _ready() -> void:
 	SettingsManager.load_settings(get_viewport(), get_window())
+
+	if not music_player.playing:
+		music_player.play()
 
 	if play_button:
 		play_button.grab_focus()
