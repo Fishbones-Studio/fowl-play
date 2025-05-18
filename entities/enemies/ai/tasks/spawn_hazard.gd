@@ -23,7 +23,7 @@ func _spawn_hazard() -> bool:
 		return false
 
 	hazard.spawner = agent
-	hazard.global_position = agent.global_position
 	agent.get_tree().current_scene.add_child(hazard)
+	hazard.global_position = agent.global_position
 
 	return true

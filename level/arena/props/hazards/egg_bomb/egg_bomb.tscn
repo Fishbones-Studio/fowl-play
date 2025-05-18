@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c1kqvn5lvj320"]
+[gd_scene load_steps=22 format=3 uid="uid://c1kqvn5lvj320"]
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_osose"]
 [ext_resource type="Script" uid="uid://b1emsl0k1se1q" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.gd" id="2_lgtnq"]
@@ -47,34 +47,29 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
-
-[sub_resource type="Animation" id="Animation_eb4dk"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HazardArea:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HazardArea/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HazardArea:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExplosionArea/CollisionShape3D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_cttch"]
@@ -112,26 +107,68 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"_explode"
+}, {
 "args": [],
 "method": &"_remove_self"
 }]
 }
-tracks/3/type = "method"
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HazardArea")
+tracks/3/path = NodePath("HazardArea/CollisionShape3D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExplosionArea/CollisionShape3D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_eb4dk"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardArea:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HazardArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jt5sa"]
@@ -207,6 +244,9 @@ color_ramp = SubResource("GradientTexture1D_3g6vn")
 
 [sub_resource type="SphereMesh" id="SphereMesh_tdtsj"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_cttch"]
+radius = 1.5
+
 [node name="EggBomb" instance=ExtResource("1_osose")]
 script = ExtResource("2_lgtnq")
 knockback_force = 3.0
@@ -245,4 +285,14 @@ max_db = 6.0
 bus = &"SFX"
 audio_folder = "res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/projectile/art/explosion/"
 
+[node name="ExplosionArea" type="Area3D" parent="." index="6"]
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.378109, 0)
+shape = SubResource("SphereShape3D_cttch")
+disabled = true
+
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_hazard_area_body_entered"]
