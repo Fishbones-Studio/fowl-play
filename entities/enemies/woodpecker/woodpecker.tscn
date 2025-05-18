@@ -48,8 +48,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.75)
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_1t2bg")
 
+[node name="EnemyWeaponController" parent="." index="5"]
+transform = Transform3D(1.26061, 0.223603, 0.22551, -0.216576, 1.28047, -0.0589719, -0.232267, 0.0196159, 1.27893, 0.866819, 2.05749, -0.270321)
+
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751483, 1.60008, -0.692675)
 melee_weapon_scene = ExtResource("5_p6jwh")
 weapon_collision_mask = 2
 
