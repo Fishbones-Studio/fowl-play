@@ -93,8 +93,8 @@ blend = 0.2
 [sub_resource type="BTAction" id="BTAction_fhbfq"]
 script = ExtResource("3_yhbkp")
 target_var = &"target"
-rotation_speed = 10.0
-angle_threshold = 2.0
+rotation_speed = 15.0
+angle_threshold = 10.0
 duration = 0.0
 face_away = false
 
@@ -211,7 +211,7 @@ blend = 0.2
 script = ExtResource("3_yhbkp")
 target_var = &"target"
 rotation_speed = 15.0
-angle_threshold = 5.0
+angle_threshold = 25.0
 duration = 0.0
 face_away = false
 
