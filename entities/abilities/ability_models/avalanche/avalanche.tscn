@@ -31,13 +31,10 @@ colors = PackedColorArray(0.784314, 0.894118, 0.941176, 1, 0.498039, 0.713726, 0
 script = ExtResource("2_30khn")
 movement_debuff = 50.0
 debuff_duration = 5.0
+damage_scaler = 1.5
 current_ability = ExtResource("3_5ybk7")
 
-[node name="DebuffTimer" type="Timer" parent="." index="1"]
-unique_name_in_owner = true
-one_shot = true
-
-[node name="HitArea" type="Area3D" parent="." index="2"]
+[node name="HitArea" type="Area3D" parent="." index="1"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
@@ -64,5 +61,4 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_30khn")
 color_ramp = SubResource("Gradient_30khn")
 
-[connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

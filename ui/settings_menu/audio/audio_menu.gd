@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _load_audio_settings() -> void:
-	SettingsManager.load_settings(get_viewport(),get_window(),config_name)
+	SettingsManager.load_settings(get_viewport(), get_window(), config_name)
 
 	_load_audio_busses()
 

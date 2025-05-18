@@ -11,10 +11,7 @@ var damage: float:
 
 var _attack_duration: float = 0.0
 var _hit_bodies: Array = []
-var _target_stats: LivingEntityStats
-var _original_speed: float
 
-@onready var debuff_timer: Timer = %DebuffTimer
 @onready var hit_area: Area3D = $HitArea
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 
@@ -59,14 +56,11 @@ func _apply_debuff(body: Node3D) -> void:
 		if not body.has_method("get_stats_resource"):
 			return
 
-		_target_stats = body.get_stats_resource()
+		var stats: LivingEntityStats = body.get_stats_resource()
 
-		_original_speed = _target_stats.speed
-		_target_stats.speed = _original_speed * (1 - movement_debuff / 100)
+		var original_speed: float = stats.apply_stat_effect("speed", movement_debuff)
 
-		debuff_timer.start(debuff_duration)
-
-
-func _on_debuff_timer_timeout() -> void:
-	if is_instance_valid(_target_stats):
-		_target_stats.speed = _original_speed
+		get_tree().create_timer(debuff_duration).timeout.connect(func():
+			if is_instance_valid(stats):
+				stats.speed = original_speed
+		)
