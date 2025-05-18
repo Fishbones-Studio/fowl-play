@@ -2,9 +2,8 @@
 ##
 ## It handles the basic functionality of detecting when a body enters the hazard area
 ## and applying damage to the player or enemy. Child classes can extend this functionality
-
 class_name BaseHazard
-extends Node
+extends Node3D
 
 @export var damage: int = 10
 

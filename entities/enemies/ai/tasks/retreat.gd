@@ -9,7 +9,6 @@ extends BTAction
 @export var speed_factor: float = 0.0
 ## Speed the entity should rotate at.
 @export var rotation_speed: float = 6.0
-@export var rotation_away_from_target: bool = false
 ## Maximum retreat duration.
 @export var duration: float = 0.0
 ## Use path finding for retreat.
@@ -18,6 +17,8 @@ extends BTAction
 @export var immediate_response: bool = false
 ## Path update frequency.
 @export var path_update_interval: float = 0.05
+## Face toward moving direction
+@export var face_moving_direction: bool = true
 
 var target: ChickenPlayer
 var retreat_position: Vector3 = Vector3.ZERO
@@ -101,11 +102,10 @@ func _move_away_from_target(delta: float, target_moved: bool):
 		# Direct retreat movement
 		_current_direction = target.global_position.direction_to(agent.global_position)
 		agent.velocity = _current_direction * speed
-	
-	 # Rotate towards opposite direction (Disabled, because I want to moonwalk)
-	if _current_direction.length() > 0 and rotation_away_from_target:
-		var target_rotation: Basis = Basis.looking_at(_current_direction, Vector3.UP)
-		agent.transform.basis = agent.transform.basis.slerp(target_rotation, rotation_speed * delta)
+
+	# Face moving direction if enabled
+	if face_moving_direction and _current_direction != Vector3.ZERO:
+		_rotate_toward_direction(_current_direction, delta)
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
@@ -115,3 +115,8 @@ func _on_velocity_computed(safe_velocity: Vector3):
 
 func _has_retreated() -> bool:
 	return agent.global_position.distance_to(target.global_position) >= retreat_distance
+
+
+func _rotate_toward_direction(direction: Vector3, delta: float) -> void:
+	var target_angle: float = atan2(-direction.x, -direction.z)
+	agent.rotation.y = lerp_angle(agent.rotation.y, target_angle, 10 * delta)

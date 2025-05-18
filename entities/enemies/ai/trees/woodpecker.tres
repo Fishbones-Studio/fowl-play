@@ -56,6 +56,7 @@ target_var = &"target"
 rotation_speed = 10.0
 angle_threshold = 5.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTCondition" id="BTCondition_gwx8i"]
 script = ExtResource("5_7lgdv")
@@ -117,6 +118,7 @@ target_var = &"target"
 rotation_speed = 6.0
 angle_threshold = 25.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")

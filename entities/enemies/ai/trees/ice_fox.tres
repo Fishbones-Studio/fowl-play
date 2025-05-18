@@ -58,6 +58,7 @@ target_var = &"target"
 rotation_speed = 15.0
 angle_threshold = 5.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("11_ulmcl")
@@ -95,6 +96,7 @@ target_var = &"target"
 rotation_speed = 10.0
 angle_threshold = 2.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTCondition" id="BTCondition_4fcdy"]
 script = ExtResource("9_ulmcl")
@@ -140,6 +142,7 @@ target_var = &"target"
 rotation_speed = 15.0
 angle_threshold = 25.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTParallel" id="BTParallel_8831e"]
 children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAction_4fcdy")]
@@ -210,6 +213,7 @@ target_var = &"target"
 rotation_speed = 15.0
 angle_threshold = 5.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTWait" id="BTWait_u4hmx"]
 duration = 2.0

@@ -73,7 +73,8 @@ func _on_body_entered(body: Node) -> void:
 	print("Projectile collided with: ", body.name)
 	SignalManager.weapon_hit_target.emit(body, base_damage, DamageEnums.DamageTypes.NORMAL)
 	_spawn_hazard()
-	
+
+
 func _explode() -> void:
 	# Stop all movement and collisions
 	collision_layer = 0

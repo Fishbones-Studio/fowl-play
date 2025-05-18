@@ -15,8 +15,8 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 		return
 
 	# Calculate knockback direction
-	var knockback_direction : Vector3 = self.global_position.direction_to(body.global_position)
-	var knockback : Vector3 = calculate_knockback(knockback_direction)
+	var knockback_direction: Vector3 = self.global_position.direction_to(body.global_position)
+	var knockback: Vector3 = calculate_knockback(knockback_direction)
 
 	if body.collision_layer in [2, 4]:
 		if body is Enemy:

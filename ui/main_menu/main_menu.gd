@@ -1,4 +1,4 @@
-extends Control
+extends UserInterface
 
 @onready var play_button: Button = $MarginContainer/PlayButton
 
@@ -8,6 +8,8 @@ func _ready() -> void:
 
 	if play_button:
 		play_button.grab_focus()
+
+	super()
 
 
 func _gui_input(event: InputEvent) -> void:

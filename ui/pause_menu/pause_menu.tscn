@@ -28,7 +28,7 @@ sky_rotation = Vector3(1.00356, 0, 0)
 [sub_resource type="World3D" id="World3D_3qrb2"]
 environment = SubResource("Environment_uraes")
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "game_logo_container")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("chicken", "camera", "game_logo_container", "focus_node")]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -41,6 +41,8 @@ script = ExtResource("1_c3jo5")
 chicken = NodePath("ChickenContainer/SubViewportContainer/SubViewport/chicken_default")
 camera = NodePath("ChickenContainer/SubViewportContainer/SubViewport/Camera3D")
 game_logo_container = NodePath("GameLogoContainer")
+handle_focus = true
+focus_node = NodePath("HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton")
 
 [node name="BlurRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_jbgdu")

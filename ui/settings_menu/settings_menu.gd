@@ -1,5 +1,5 @@
 class_name SettingsMenu 
-extends Control
+extends UserInterface
 
 var focused_sidebar_item: SiderBarItem = null
 
@@ -35,14 +35,12 @@ func _ready() -> void:
 	audio.focus_neighbor_bottom = cheat.get_path() if cheat else controls.get_path()
 	audio.focus_next = cheat.get_path() if cheat else controls.get_path()
 
-	SignalManager.focus_lost.connect(_on_focus_lost)
+	super()
 
 
 func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
-	if (Input.is_action_just_pressed("pause") \
-	or Input.is_action_just_pressed("ui_cancel") ) \
-	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.PAUSE_MENU):
+	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
 		_on_close_button_pressed()
 
 
@@ -56,9 +54,9 @@ func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
 
 func _on_close_button_pressed() -> void:
 	UIManager.remove_ui(self)
-	UIManager.handle_pause() # Close
-	UIManager.handle_pause() # Open, so resume button focuses again.
 	UIManager.get_viewport().set_input_as_handled()
+
+	SignalManager.focus_lost.emit()
 
 
 func _update_content(sidebar_item: SiderBarItem) -> void:
@@ -128,11 +126,13 @@ func _on_content_focus_entered() -> void:
 	first_child.grab_focus()
 
 
-func _on_focus_lost() -> void:
-	focused_sidebar_item.grab_focus()
-
-
 func _on_visibility_changed() -> void:
 	if visible:
 		if controls:
 			controls.grab_focus()
+
+
+func _on_focus_lost() -> void:
+	focus_node = focused_sidebar_item
+
+	super()
