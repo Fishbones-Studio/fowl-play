@@ -25,8 +25,6 @@ var _current_enemy: Enemy = null # The one currently in the arena fighting
 @onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
 @onready var player_default_position: Marker3D = %PlayerPosition
 
-# TODO (in future branch), since gamemanager has a current enemy now, we can just use that to spawn the enemy model in the intermission area
-
 
 func _ready() -> void:
 	GameManager.current_round = 1
@@ -213,7 +211,6 @@ func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
 	var index: int = randi_range(0, available_enemies[enemy_type].size() - 1)
 	var picked_enemy: Enemy = available_enemies[enemy_type].pop_at(index)
 	return picked_enemy
-
 
 
 func _spawn_enemy_in_level() -> void:

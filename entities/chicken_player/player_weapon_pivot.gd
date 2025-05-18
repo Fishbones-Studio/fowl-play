@@ -8,7 +8,7 @@ var screen_center: Vector2 = Vector2.ZERO
 var last_viewport_size: Vector2 = Vector2.ZERO
 
 
-func _ready():
+func _ready() -> void:
 	# Grab the active 3D camera from the viewport
 	camera = get_viewport().get_camera_3d()
 	if camera:
@@ -34,7 +34,7 @@ func _process(_delta) -> void:
 	rotation.y = 0
 
 
-func _update_screen_center():
+func _update_screen_center() -> void:
 	# Get current viewport size and set the screen center 
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	screen_center = viewport_size / 2.1

@@ -1,8 +1,7 @@
 @tool
 extends BTCondition
 
-
-@export var target_var: String = "target"  # Blackboard variable name
+@export var target_var: StringName = &"target" # Blackboard variable name
 @export var comparison: ComparisonEnums.ComparisonType = ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL
 @export var height_threshold: float = 3.0
 @export var use_relative: bool = true  # Compare to agent's height or absolute world Y
