@@ -76,6 +76,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("2_k2yrv")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_8uudm"]
 min_duration = 0.4
