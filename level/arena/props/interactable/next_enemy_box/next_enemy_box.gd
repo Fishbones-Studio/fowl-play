@@ -1,6 +1,6 @@
 # NextEnemy box, for starting the next round
 class_name NextEnemyBox
-extends InteractableBox
+extends InteractBox
 
 @export var dialogue_subfolder_path : String = "in_between_rounds"
 

@@ -8,6 +8,7 @@
 script = ExtResource("2_qprek")
 max_items = 8
 item_database = NodePath("UpgradeDatabase")
+first_item_free = true
 
 [node name="UpgradeDatabase" parent="." index="1" instance=ExtResource("3_i2pg2")]
 

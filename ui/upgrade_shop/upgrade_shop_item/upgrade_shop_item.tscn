@@ -22,17 +22,17 @@ texture = ExtResource("2_q4qen")
 expand_mode = 5
 stretch_mode = 6
 
-[node name="NameLabel" type="Label" parent="ShopItemContainer"]
+[node name="NameLabel" type="RichTextLabel" parent="ShopItemContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_type_variation = &"ItemTitle"
+theme_type_variation = &"RichtItemTitle"
+bbcode_enabled = true
 text = "Name"
+fit_content = true
 horizontal_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ShopItemContainer"]
 custom_minimum_size = Vector2(165, 0)
