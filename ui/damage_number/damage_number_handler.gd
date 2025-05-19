@@ -16,7 +16,7 @@ extends Marker3D
 
 
 func display_damage(value: int) -> void:
-	if value <= 0: return
+	if value == 0: return
 
 	var damage_number: DamageNumber = damage_number_resource.instantiate()
 
