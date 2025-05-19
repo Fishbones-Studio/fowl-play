@@ -1,0 +1,179 @@
+[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://i5wmmsqipq8o"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_85ywm"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_kcuvh"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_0t4uy"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_xatg1"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_0skmy"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="5_g4wna"]
+[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="5_gdjx3"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="6_gdjx3"]
+[ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="7_xatg1"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_an1k6"]
+
+[sub_resource type="BTAction" id="BTAction_kcuvh"]
+script = ExtResource("1_85ywm")
+target_var = &"target"
+
+[sub_resource type="BBVariant" id="BBVariant_g4fhc"]
+type = 3
+saved_value = 20.0
+resource_name = "20.0"
+
+[sub_resource type="BTSetVar" id="BTSetVar_6oy8c"]
+variable = &"aggro_distance"
+value = SubResource("BBVariant_g4fhc")
+
+[sub_resource type="BBNode" id="BBNode_85ywm"]
+saved_value = NodePath("chicken_centipede/AnimationPlayer")
+resource_name = "chicken_centipede/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kcuvh"]
+animation_player = SubResource("BBNode_85ywm")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_g4fhc"]
+script = ExtResource("2_kcuvh")
+min_wait_time = 0.0
+max_wait_time = 0.0
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_6oy8c"]
+min_duration = 1.1
+max_duration = 2.3
+
+[sub_resource type="BTSequence" id="BTSequence_0t4uy"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_kcuvh"), SubResource("BTAction_g4fhc"), SubResource("BTRandomWait_6oy8c")]
+
+[sub_resource type="BTCondition" id="BTCondition_q2pti"]
+script = ExtResource("3_0t4uy")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 20.0
+
+[sub_resource type="BTAction" id="BTAction_w55nl"]
+script = ExtResource("4_xatg1")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = 10.0
+duration = 1.0
+face_away = false
+
+[sub_resource type="BTAction" id="BTAction_jsrsq"]
+script = ExtResource("5_g4wna")
+target_var = &"target"
+ignore_cooldown = true
+start_state = 1
+
+[sub_resource type="BTCooldown" id="BTCooldown_otwd7"]
+duration = 2.0
+children = [SubResource("BTAction_jsrsq")]
+
+[sub_resource type="BTSequence" id="BTSequence_xatg1"]
+custom_name = "Sword swing!"
+children = [SubResource("BTCondition_q2pti"), SubResource("BTAction_w55nl"), SubResource("BTCooldown_otwd7")]
+
+[sub_resource type="BBNode" id="BBNode_q2pti"]
+saved_value = NodePath("chicken_centipede/AnimationPlayer")
+resource_name = "chicken_centipede/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_w55nl"]
+animation_player = SubResource("BBNode_q2pti")
+animation_name = &"Walk"
+blend = 0.2
+speed = 1.5
+
+[sub_resource type="BTAction" id="BTAction_pnqqn"]
+script = ExtResource("4_xatg1")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = 5.0
+duration = 0.0
+face_away = false
+
+[sub_resource type="BTCondition" id="BTCondition_eto2h"]
+script = ExtResource("5_0skmy")
+stuck_interval = 2.0
+stuck_threshold = 2.5
+
+[sub_resource type="BTAction" id="BTAction_evasg"]
+script = ExtResource("6_gdjx3")
+target_var = &"target"
+tolerance = 10.0
+speed_factor = 0.0
+duration = 5.0
+ignore_y = true
+pathfinding = false
+immediate_response = false
+path_update_interval = 0.05
+
+[sub_resource type="BTParallel" id="BTParallel_jsrsq"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_pnqqn"), SubResource("BTCondition_eto2h"), SubResource("BTAction_evasg")]
+
+[sub_resource type="BTSequence" id="BTSequence_otwd7"]
+custom_name = "Pursue target"
+children = [SubResource("BTPlayAnimation_w55nl"), SubResource("BTParallel_jsrsq")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BBNode" id="BBNode_xatg1"]
+saved_value = NodePath("chicken_centipede/AnimationPlayer")
+resource_name = "chicken_centipede/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0skmy"]
+animation_player = SubResource("BBNode_xatg1")
+animation_name = &"Walk"
+blend = 0.2
+speed = 4.0
+
+[sub_resource type="BTAction" id="BTAction_g4wna"]
+script = ExtResource("4_xatg1")
+target_var = &"target"
+rotation_speed = 25.0
+angle_threshold = 2.0
+duration = 1.0
+face_away = false
+
+[sub_resource type="BTWait" id="BTWait_q2pti"]
+
+[sub_resource type="BTParallel" id="BTParallel_w55nl"]
+num_successes_required = 2
+children = [SubResource("BTAction_g4wna"), SubResource("BTWait_q2pti")]
+
+[sub_resource type="BTAction" id="BTAction_eto2h"]
+script = ExtResource("7_xatg1")
+target_var = &"target"
+speed_factor = 20.0
+duration = 3.0
+bounce = true
+bounce_angle_variation = 45.0
+bounce_camera_shake = 1.5
+
+[sub_resource type="BTAction" id="BTAction_q2pti"]
+script = ExtResource("5_gdjx3")
+target_var = &"target"
+ignore_cooldown = true
+slot = 0
+
+[sub_resource type="BTSequence" id="BTSequence_jsrsq"]
+custom_name = "Charge towards target"
+children = [SubResource("BTPlayAnimation_0skmy"), SubResource("BTParallel_w55nl"), SubResource("BTAction_eto2h"), SubResource("BTAction_q2pti")]
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_wmqqf"]
+children = [SubResource("BTSequence_otwd7"), SubResource("BTSequence_jsrsq")]
+
+[sub_resource type="BTParallel" id="BTParallel_xatg1"]
+num_failures_required = 3
+repeat = true
+children = [SubResource("BTSequence_xatg1"), SubResource("BTProbabilitySelector_wmqqf")]
+
+[sub_resource type="BTSequence" id="BTSequence_vunty"]
+children = [SubResource("BTAction_kcuvh"), SubResource("BTSetVar_6oy8c"), SubResource("BTSequence_0t4uy"), SubResource("BTParallel_xatg1")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_an1k6")
+root_task = SubResource("BTSequence_vunty")

@@ -69,7 +69,7 @@ func _tick(delta: float) -> Status:
 	return RUNNING
 
 
-func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool):
+func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool) -> void:
 	var speed: float = agent.stats.calculate_speed(speed_factor) if speed_factor > 0.0 else agent.stats.calculate_speed(agent.movement_component.sprint_speed_factor)
 
 	if pathfinding:
@@ -86,7 +86,7 @@ func _move_towards_target(target_pos: Vector3, _delta: float, target_moved: bool
 		agent.velocity.z = _current_direction.z * speed
 
 
-func _on_velocity_computed(safe_velocity: Vector3):
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	# Always apply the computed velocity, but immediate responses already moved
 	if not (immediate_response and _last_target_position.distance_to(target.global_position) > 0.1):
 		agent.velocity = safe_velocity

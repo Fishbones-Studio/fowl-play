@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c1whvbjxfeyxf"
+path="res://.godot/imported/elder_centipede_in_between_rounds.dialogue-57138c1b97f4e3806ae9c99998a52428.tres"
+
+[deps]
+
+source_file="res://entities/enemies/elder_centipede/dialogue/in_between_rounds/elder_centipede_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/elder_centipede_in_between_rounds.dialogue-57138c1b97f4e3806ae9c99998a52428.tres"]
+
+[params]
+
+defaults=true
