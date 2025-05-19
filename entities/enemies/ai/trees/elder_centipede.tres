@@ -103,7 +103,7 @@ script = ExtResource("6_gdjx3")
 target_var = &"target"
 tolerance = 10.0
 speed_factor = 0.0
-duration = 0.0
+duration = 5.0
 ignore_y = true
 pathfinding = false
 immediate_response = false
@@ -111,6 +111,7 @@ path_update_interval = 0.05
 
 [sub_resource type="BTParallel" id="BTParallel_jsrsq"]
 num_successes_required = 2
+num_failures_required = 2
 repeat = true
 children = [SubResource("BTAction_pnqqn"), SubResource("BTCondition_eto2h"), SubResource("BTAction_evasg")]
 
