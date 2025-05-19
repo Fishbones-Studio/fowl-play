@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dab0i61vj1n23"]
+[gd_scene load_steps=9 format=3 uid="uid://dab0i61vj1n23"]
 
 [ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
 [ext_resource type="Texture2D" uid="uid://cl6he212hdrt5" path="res://ui/main_menu/art/square_fowlplay.png" id="2_i5wg5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="3_3c04x"]
 [ext_resource type="Texture2D" uid="uid://blxf01i3gahjg" path="res://ui/main_menu/art/quit_icon.png" id="4_3c04x"]
 [ext_resource type="Texture2D" uid="uid://d2hk0nmi73swv" path="res://ui/main_menu/art/settings_icon.png" id="4_joh67"]
+[ext_resource type="Texture2D" uid="uid://du3k1r6e51wvj" path="res://ui/main_menu/art/reset_icon.png" id="4_u184e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("3_3c04x")
@@ -71,15 +72,24 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="ResetButton" type="Button" parent="MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-text = "Reset"
+focus_neighbor_right = NodePath("../../PlayButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+theme_type_variation = &"MainMenuIconButton"
+icon = ExtResource("4_u184e")
+icon_alignment = 1
+expand_icon = true
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+focus_neighbor_top = NodePath("../ResetButton")
+focus_neighbor_right = NodePath("../../PlayButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
-focus_previous = NodePath("../../PlayButton")
+focus_previous = NodePath("../ResetButton")
 theme_type_variation = &"MainMenuIconButton"
 icon = ExtResource("4_joh67")
 icon_alignment = 1

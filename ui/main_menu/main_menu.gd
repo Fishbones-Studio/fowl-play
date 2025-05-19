@@ -40,4 +40,4 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_reset_button_pressed() -> void:
-	GameManager.reset_game()
+	SignalManager.add_ui_scene.emit(UIEnums.UI.DELETE_SAVE_POPUP)
