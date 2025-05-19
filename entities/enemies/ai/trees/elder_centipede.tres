@@ -166,6 +166,8 @@ children = [SubResource("BTPlayAnimation_0skmy"), SubResource("BTParallel_w55nl"
 children = [SubResource("BTSequence_otwd7"), SubResource("BTSequence_jsrsq")]
 
 [sub_resource type="BTParallel" id="BTParallel_xatg1"]
+num_failures_required = 3
+repeat = true
 children = [SubResource("BTSequence_xatg1"), SubResource("BTProbabilitySelector_wmqqf")]
 
 [sub_resource type="BTSequence" id="BTSequence_vunty"]
