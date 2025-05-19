@@ -2,7 +2,7 @@ class_name UpgradeShopItem
 extends BaseShopItem
 
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var name_label: Label = %NameLabel
+@onready var name_label: RichTextLabel = %NameLabel
 @onready var currency_icon: TextureRect = %CurrencyIcon
 @onready var cost_label: Label = %CostLabel
 
@@ -24,7 +24,8 @@ func set_item_data(item: Resource) -> void:
 
 func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	name_label.text = shop_item.name
+	var name_string : String = "[color=yellow]%s[/color]" if shop_item.cost != 0 else "[color=orange]%s[/color]"
+	name_label.text = name_string % shop_item.name
 	currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	cost_label.text = str(shop_item.cost)
 
