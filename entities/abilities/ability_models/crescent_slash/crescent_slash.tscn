@@ -73,6 +73,7 @@ size = Vector2(10, 10)
 script = ExtResource("2_jgw1e")
 strike_amount = 2
 ignore_defense = true
+base_damage = 15.0
 current_ability = ExtResource("3_y7jyb")
 
 [node name="SlashTimer" type="Timer" parent="." index="1"]
