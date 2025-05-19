@@ -90,6 +90,7 @@ func apply_upgrade() -> void:
 			copied_stats.speed += upgrade_resource.get_upgrade_resource().speed_bonus
 		StatsEnums.UpgradeTypes.WEIGHT:
 			copied_stats.weight += upgrade_resource.get_upgrade_resource().weight_bonus
+	SaveManager.save_player_stats(copied_stats)
 
 
 func update_ui_elements() -> void:

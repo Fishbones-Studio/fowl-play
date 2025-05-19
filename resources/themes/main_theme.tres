@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=50 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=51 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -151,6 +151,8 @@ shadow_color = Color(0, 0, 0, 0.101961)
 shadow_size = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ucis"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_px7dm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7adcq"]
 
@@ -309,5 +311,7 @@ SidebarButton/colors/font_focus_color = Color(0.938624, 0.925614, 0.933812, 1)
 SidebarButton/constants/outline_size = 1
 SidebarButton/font_sizes/font_size = 22
 SidebarButton/styles/disabled = SubResource("StyleBoxEmpty_7ucis")
+TooltipLabel/colors/font_color = Color(0.282353, 0.321569, 0.4, 1)
+TooltipPanel/styles/panel = SubResource("StyleBoxEmpty_px7dm")
 VBoxContainer/constants/separation = 10
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_7adcq")
