@@ -59,11 +59,11 @@ _data = {
 }
 
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 animation_player = NodePath("minigun/AnimationPlayer")
 current_weapon = ExtResource("2_h8kbp")
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Cylinder_002" parent="minigun" index="0"]
 transform = Transform3D(0.162841, -0.00196993, 0.0262142, -0.0261632, -0.0122609, 0.163159, 2.45764e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)

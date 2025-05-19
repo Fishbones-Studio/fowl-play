@@ -34,6 +34,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_g4fhc"]
 script = ExtResource("2_kcuvh")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_6oy8c"]
 min_duration = 0.7
@@ -65,6 +67,7 @@ target_var = &"target"
 rotation_speed = 15.0
 angle_threshold = 5.0
 duration = 0.0
+face_away = false
 
 [sub_resource type="BTCondition" id="BTCondition_eto2h"]
 script = ExtResource("5_0skmy")
@@ -75,9 +78,9 @@ stuck_threshold = 2.5
 script = ExtResource("6_gdjx3")
 target_var = &"target"
 tolerance = 10.0
-aggro_distance = 60.0
 speed_factor = 0.0
 duration = 0.0
+ignore_y = true
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
@@ -108,6 +111,7 @@ target_var = &"target"
 rotation_speed = 25.0
 angle_threshold = 2.0
 duration = 1.0
+face_away = false
 
 [sub_resource type="BTWait" id="BTWait_q2pti"]
 
