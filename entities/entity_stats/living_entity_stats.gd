@@ -50,10 +50,8 @@ var current_stamina: float:
 func init() -> void:
 	if max_health <= 0: push_error("Max health must be positive.")
 	if max_stamina <= 0: push_error("Max stamina must be positive.")
-	if current_health == 0:
-		current_health = max_health
-	if current_stamina == 0:
-		current_stamina = max_stamina
+	current_health = max_health
+	current_stamina = max_stamina
 
 
 ## Calculate the speed based on weight and speed factor
@@ -116,9 +114,9 @@ func calc_scaled_damage(damage: float) -> float:
 		return INF
 	else:
 		actual_damage = floor(damage * (1.0 + (attack / 100)))
-	
+
 	print("Damage: " + str(damage) + " Attack: " + str(attack) + " Scaled Damage: " + str(actual_damage))
-	
+
 	return actual_damage
 
 

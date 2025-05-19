@@ -103,7 +103,7 @@ func _enter_in_progress() -> void:
 			_current_enemy = _pick_random_enemy(first_enemy_type)
 
 	_spawn_enemy_in_level()
-	
+
 	SaveManager.save_enemy_encounter(_current_enemy.stats.name)
 
 	await SignalManager.enemy_died
@@ -127,7 +127,6 @@ func _enter_concluding() -> void:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_overview_dict})
 		# Don't proceed further in this function if game is ending
 		return
-
 
 	# Display enemy defeated message and add currency
 	if _current_enemy == null:
