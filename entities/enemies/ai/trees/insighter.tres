@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=45 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_isvs4"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_k2yrv"]
@@ -88,12 +88,6 @@ max_duration = 1.1
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg"), SubResource("BTRandomWait_8uudm")]
 
-[sub_resource type="BTCondition" id="BTCondition_p7jkp"]
-script = ExtResource("4_h6t4k")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 100.0
-
 [sub_resource type="BBNode" id="BBNode_secwn"]
 saved_value = NodePath("insighter/AnimationPlayer")
 resource_name = "insighter/AnimationPlayer"
@@ -120,7 +114,7 @@ stuck_threshold = 2.5
 [sub_resource type="BTAction" id="BTAction_53a43"]
 script = ExtResource("7_53l80")
 target_var = &"target"
-tolerance = 5.0
+tolerance = 15.0
 speed_factor = 0.0
 duration = 0.0
 ignore_y = true
@@ -140,6 +134,7 @@ target_var = &"target"
 weapon_offset = Vector3(3, 2.5, 0)
 max_down_angle = -45.0
 max_up_angle = 45.0
+rotation_speed = 0.1
 
 [sub_resource type="BTAction" id="BTAction_ien84"]
 script = ExtResource("8_j3vma")
@@ -168,7 +163,7 @@ children = [SubResource("BTAction_c7qb4"), SubResource("BTCondition_w7w8f"), Sub
 
 [sub_resource type="BTSequence" id="BTSequence_ucb6i"]
 custom_name = "Pursue"
-children = [SubResource("BTCondition_p7jkp"), SubResource("BTPlayAnimation_7st8f"), SubResource("BTParallel_cmfip")]
+children = [SubResource("BTPlayAnimation_7st8f"), SubResource("BTParallel_cmfip")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_q1l3l"]
