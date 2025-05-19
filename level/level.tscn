@@ -68,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 [node name="RoundHandler" type="Node" parent="."]
 script = ExtResource("9_cw150")
 enemy_scenes = Array[PackedScene]([ExtResource("11_rhqlf"), ExtResource("7_7jqyl"), ExtResource("6_fm1jd"), ExtResource("8_m5ivw"), ExtResource("9_fm1jd"), ExtResource("10_7jqyl")])
-waiting_time = 1.5
+waiting_time = 2.5
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." groups=["NavRegion"]]
 navigation_mesh = SubResource("NavigationMesh_l5lfc")
