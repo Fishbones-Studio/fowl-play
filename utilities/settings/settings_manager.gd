@@ -78,9 +78,9 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 
 static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, window: Window) -> void:
 	DisplayServer.window_set_size(settings["resolution"])
-	DisplayServer.window_set_mode(settings["display_mode"])
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
-	DisplayServer.window_set_vsync_mode(settings["v_sync"])
+	if DisplayServer.window_get_mode() != settings["display_mode"]: DisplayServer.window_set_mode(settings["display_mode"])
+	if DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS) != settings["borderless"]: DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
+	if DisplayServer.window_get_vsync_mode() != settings["v_sync"]: DisplayServer.window_set_vsync_mode(settings["v_sync"])
 	Engine.max_fps = settings["fps"]
 	viewport.msaa_3d = settings["msaa"]
 	viewport.screen_space_aa = settings["fxaa"]
