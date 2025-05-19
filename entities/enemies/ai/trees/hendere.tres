@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=82 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=93 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -44,8 +44,17 @@ height_threshold = 3.0
 use_relative = true
 target_on_floor = true
 
+[sub_resource type="BTCondition" id="BTCondition_viady"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 3
+height_threshold = -3.0
+use_relative = true
+target_on_floor = true
+
 [sub_resource type="BTParallel" id="BTParallel_504pj"]
-children = [SubResource("BTCondition_mnhi0"), SubResource("BTCondition_wv527")]
+num_failures_required = 3
+children = [SubResource("BTCondition_mnhi0"), SubResource("BTCondition_wv527"), SubResource("BTCondition_viady")]
 
 [sub_resource type="BTAction" id="BTAction_fxtff"]
 script = ExtResource("7_7jrpa")
@@ -56,6 +65,28 @@ clearance_radius = 0.5
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_fxtff")]
+
+[sub_resource type="BTCondition" id="BTCondition_504pj"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 3
+height_threshold = -3.0
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTInvert" id="BTInvert_wv527"]
+children = [SubResource("BTCondition_504pj")]
+
+[sub_resource type="BTCondition" id="BTCondition_k7lfl"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 4
+height_threshold = 3.0
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTInvert" id="BTInvert_a51uw"]
+children = [SubResource("BTCondition_k7lfl")]
 
 [sub_resource type="BTCondition" id="BTCondition_gvblq"]
 script = ExtResource("11_pia2r")
@@ -79,6 +110,34 @@ children = [SubResource("BTCondition_cofkk")]
 
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_5c880"]
 children = [SubResource("BTRepeatUntilFailure_wv527")]
+
+[sub_resource type="BTCondition" id="BTCondition_5c880"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 4
+height_threshold = 3.0
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_viady"]
+children = [SubResource("BTCondition_5c880")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_k7lfl"]
+children = [SubResource("BTRepeatUntilSuccess_viady")]
+
+[sub_resource type="BTCondition" id="BTCondition_dbsnm"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 3
+height_threshold = -3.0
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_cgerr"]
+children = [SubResource("BTCondition_dbsnm")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_cofkk"]
+children = [SubResource("BTRepeatUntilSuccess_cgerr")]
 
 [sub_resource type="BBNode" id="BBNode_5c880"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
@@ -153,12 +212,12 @@ children = [SubResource("BTAction_cgerr"), SubResource("BTAction_f2bow"), SubRes
 children = [SubResource("BTSequence_k7lfl"), SubResource("BTPlayAnimation_dbsnm"), SubResource("BTParallel_qjxos")]
 
 [sub_resource type="BTParallel" id="BTParallel_viady"]
-children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880"), SubResource("BTSequence_504pj")]
+children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880"), SubResource("BTAlwaysFail_k7lfl"), SubResource("BTAlwaysFail_cofkk"), SubResource("BTSequence_504pj")]
 
 [sub_resource type="BTSequence" id="BTSequence_lsbnu"]
 custom_name = "Pursue"
-children = [SubResource("BTParallel_viady")]
-metadata/_weight_ = 1.0
+children = [SubResource("BTInvert_wv527"), SubResource("BTInvert_a51uw"), SubResource("BTParallel_viady")]
+metadata/_weight_ = 5.0
 
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("chicken_hennifer/AnimationPlayer")
