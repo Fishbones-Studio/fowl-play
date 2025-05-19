@@ -70,6 +70,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
+[node name="ResetButton" type="Button" parent="MarginContainer/ButtonContainer"]
+layout_mode = 2
+text = "Reset"
+
 [node name="SettingsButton" type="Button" parent="MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -98,5 +102,6 @@ stream = ExtResource("2_mu8pm")
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ButtonContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
