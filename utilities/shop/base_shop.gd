@@ -24,6 +24,7 @@ var current_previewed_item: BaseResource = null
 @onready var shop_preview_size_placeholder: Control = %SizePlaceholder
 @onready var cheat_button_container: HBoxContainer = %CheatButtonsContainer
 
+
 func _ready() -> void:
 	if not OS.has_feature("debug") and cheat_button_container:
 		cheat_button_container.queue_free()
@@ -64,12 +65,12 @@ func _refresh_shop() -> void:
 	var selected_items: Array[BaseResource] = _get_shop_selection(
 		available_items, items_to_show
 	)
-	
-	if first_item_free && available_items.size() > 0:
-		available_items.get(0).cost = 0
 
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
+
+		if first_item_free and selected_item == selected_items.get(0):
+			selected_item.cost = 0
 
 		var shop_item: BaseShopItem = create_shop_item(selected_item)
 		if not shop_item:
@@ -109,6 +110,7 @@ func _should_skip_item(item: BaseResource) -> bool:
 		return true
 	return false
 
+
 func _get_weighted_random_items(
 	items: Array[BaseResource], count: int
 ) -> Array[BaseResource]:
@@ -133,6 +135,7 @@ func _get_weighted_random_items(
 			pool.remove_at(chosen_index)
 	return selected
 
+
 func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
 	var items_by_type : Dictionary[ItemEnums.ItemTypes, Array]= {}
 	for item in items:
@@ -155,6 +158,7 @@ func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
 		if chosen.size() > 0:
 			selected.append(chosen[0])
 	return selected
+
 
 # Fill the remaining slots with random items from the pool
 func _fill_remaining(
