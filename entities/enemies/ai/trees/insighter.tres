@@ -117,9 +117,9 @@ target_var = &"target"
 tolerance = 15.0
 speed_factor = 0.0
 duration = 0.0
-ignore_y = true
-pathfinding = true
-immediate_response = true
+ignore_y = false
+pathfinding = false
+immediate_response = false
 path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_53l80"]
