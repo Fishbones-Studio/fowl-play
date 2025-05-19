@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=9 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
 [ext_resource type="PackedScene" uid="uid://d4ayhkovgvwtn" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="3_djom0"]
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="Texture2D" uid="uid://dvrovqnjw05ab" path="res://entities/enemies/elder_centipede/art/elder_centipede_mugshot.png" id="5_67o2n"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_bv6h5"]
+[ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="6_r8ukm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67o2n"]
 radius = 1.75
@@ -14,6 +16,7 @@ height = 25.0
 stats = ExtResource("2_5cdes")
 type = 1
 enemy_model = NodePath("chicken_centipede")
+knockback_decay = 10000
 dialogue_path = "res://entities/enemies/elder_centipede/dialogue"
 name_label_template_string = "%s \"Evolved\""
 
@@ -259,6 +262,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.01741, -8.21457)
 
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_y8gm0")
+
+[node name="EnemyAbilityController" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_bv6h5")]
+ability_resource = ExtResource("6_r8ukm")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("5_67o2n")
