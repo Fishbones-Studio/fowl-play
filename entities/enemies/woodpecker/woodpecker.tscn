@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
 [ext_resource type="BehaviorTree" uid="uid://dn83muanle5ic" path="res://entities/enemies/ai/trees/woodpecker.tres" id="4_1t2bg"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
-[ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_br0sw"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_vfx5i"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="6_vfx5i"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="6_x6gfb"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
 [ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
@@ -31,7 +31,7 @@ bones/6/rotation = Quaternion(0.0921738, -2.5427e-08, -0.109848, 0.989665)
 bones/7/rotation = Quaternion(0.372215, 1.9392e-07, -0.443588, 0.815283)
 bones/8/rotation = Quaternion(-0.254674, -5.70863e-08, 0.303508, 0.918163)
 bones/9/rotation = Quaternion(-0.0929396, -1.66711e-08, 0.110761, 0.989492)
-bones/10/rotation = Quaternion(-0.0114476, 2.59861e-08, 0.0136427, 0.999841)
+bones/10/rotation = Quaternion(-0.0114476, 2.59773e-08, 0.0136427, 0.999842)
 bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
 bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
 bones/14/position = Vector3(0.0982326, 2.09585, -1.47197)
@@ -51,7 +51,7 @@ behavior_tree = ExtResource("4_1t2bg")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_vfx5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751483, 1.60008, -0.692675)
-melee_weapon_scene = ExtResource("5_br0sw")
+melee_weapon_scene = ExtResource("6_vfx5i")
 weapon_collision_mask = 2
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("6_x6gfb")]
