@@ -131,12 +131,13 @@ func _load_camera_settings() -> void:
 		for control_setting in config.get_section_keys(cfg_name):
 			camera_settings[control_setting] = config.get_value(cfg_name, control_setting)
 
-	match camera_settings.keys():
-		"horizontal_sensitivity": horizontal_sensitivity = camera_settings["horizontal_sensitivity"]["value"]
-		"vertical_sensitivity": vertical_sensitivity = camera_settings["vertical_sensitivity"]["value"]
-		"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
-		"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
-		"camera_up_tilt": max_degrees = camera_settings["camera_up_tilt"]["value"]
-		"camera_down_tilt": min_degrees = camera_settings["camera_down_tilt"]["value"]
-		"invert_x_axis": invert_x_axis = camera_settings["invert_x_axis"]["value"]
-		"invert_y_axis": invert_y_axis = camera_settings["invert_y_axis"]["value"]
+	for key in camera_settings.keys():
+		match key:
+			"horizontal_sensitivity": horizontal_sensitivity = camera_settings["horizontal_sensitivity"]["value"]
+			"vertical_sensitivity": vertical_sensitivity = camera_settings["vertical_sensitivity"]["value"]
+			"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
+			"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
+			"camera_up_tilt": max_degrees = camera_settings["camera_up_tilt"]["value"]
+			"camera_down_tilt": min_degrees = camera_settings["camera_down_tilt"]["value"]
+			"invert_x_axis": invert_x_axis = camera_settings["invert_x_axis"]["value"]
+			"invert_y_axis": invert_y_axis = camera_settings["invert_y_axis"]["value"]
