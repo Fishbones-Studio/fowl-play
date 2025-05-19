@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://fgrmwyv0t0py"]
+[gd_scene load_steps=5 format=3 uid="uid://fgrmwyv0t0py"]
 
 [ext_resource type="Script" uid="uid://dtoj7aj6q2ce8" path="res://ui/delete_save_confirmaiton/delete_save_confirmation_popup.gd" id="1_6sbdx"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="1_x3tba"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_17t2b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gws5"]
+shader = ExtResource("2_17t2b")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.7
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [node name="DeleteSaveConfirmationPopup" type="Control"]
 layout_mode = 3
@@ -11,6 +18,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6sbdx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5gws5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
