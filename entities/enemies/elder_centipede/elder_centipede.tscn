@@ -6,7 +6,7 @@
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="Texture2D" uid="uid://dvrovqnjw05ab" path="res://entities/enemies/elder_centipede/art/elder_centipede_mugshot.png" id="5_67o2n"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_bv6h5"]
-[ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="6_r8ukm"]
+[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="6_bv6h5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67o2n"]
 radius = 1.75
@@ -267,7 +267,7 @@ behavior_tree = ExtResource("4_y8gm0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_bv6h5")]
-ability_resource = ExtResource("6_r8ukm")
+ability_resource = ExtResource("6_bv6h5")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("5_67o2n")
