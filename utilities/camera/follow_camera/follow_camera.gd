@@ -130,7 +130,6 @@ func _load_camera_settings() -> void:
 	if config.load(cfg_path) == OK and config.has_section(cfg_name):
 		for control_setting in config.get_section_keys(cfg_name):
 			camera_settings[control_setting] = config.get_value(cfg_name, control_setting)
-		print(camera_settings.keys())
 
 	for key in camera_settings.keys():
 		match key:
