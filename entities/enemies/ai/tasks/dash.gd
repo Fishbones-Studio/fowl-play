@@ -22,6 +22,7 @@ func _enter() -> void:
 		return
 
 	_dash_direction = (target.global_position - agent.global_position).normalized()
+	_dash_direction.y = 0
 	_dash_speed = (dash_distance / dash_duration) + agent.stats.calculate_speed(agent.movement_component.dash_speed_factor)
 
 

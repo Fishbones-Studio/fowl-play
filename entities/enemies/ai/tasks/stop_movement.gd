@@ -16,7 +16,7 @@ func _generate_name() -> String:
 		name += " %.1fs" % min_wait_time
 	else:
 		name += " %.1f-%.1fs" % [min_wait_time, max_wait_time]
-	
+
 	return name
 
 
@@ -25,7 +25,7 @@ func _enter() -> void:
 	agent.velocity = Vector3.ZERO
 
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	# Keep velocity at zero while waiting
 	agent.velocity = Vector3.ZERO
 

@@ -29,7 +29,7 @@ func display_damage(value: int) -> void:
 	add_child(damage_number)
 
 	damage_number.global_position = spawn_position
-	damage_number.label.text = str(sign(value))
+	damage_number.label.text = str(abs(value))
 	damage_number.label.font_size = base_size * randi_range(1, size_variation)
 	damage_number.label.modulate = damage_color if value >= 0 else heal_color
 

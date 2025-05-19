@@ -14,7 +14,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	var direction = "Away ➜" if face_away else "Toward ➜"
+	var direction: String = "Away ➜" if face_away else "Toward ➜"
 	return "Face %s %s" % [direction, LimboUtility.decorate_var(target_var)]
 
 
@@ -27,7 +27,7 @@ func _tick(delta: float) -> Status:
 	# Reverse direction if facing away
 	if face_away: desired_direction = -desired_direction
 
-	if _is_at_direction(desired_direction) and angle_threshold < 0:
+	if _is_at_direction(desired_direction):
 		return SUCCESS
 
 	if duration and elapsed_time > duration:

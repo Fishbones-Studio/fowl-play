@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=67 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
@@ -25,16 +25,6 @@ var/aggro_distance/hint_string = "The distance for the enemy to become aggressiv
 [sub_resource type="BTAction" id="BTAction_sexgk"]
 script = ExtResource("1_gf8jg")
 target_var = &"target"
-
-[sub_resource type="BBVariant" id="BBVariant_sexgk"]
-type = 3
-saved_value = 20.0
-resource_name = "20.0"
-
-[sub_resource type="BTSetVar" id="BTSetVar_0xmxa"]
-variable = &"aggro_distance"
-value = SubResource("BBVariant_sexgk")
-_enabled = false
 
 [sub_resource type="BBNode" id="BBNode_8cml0"]
 saved_value = NodePath("ball_chicken/AnimationPlayer")
@@ -293,7 +283,7 @@ metadata/_weight_ = 1.0
 children = [SubResource("BTSequence_jowcg"), SubResource("BTCooldown_yvhtp"), SubResource("BTCooldown_kbctg")]
 
 [sub_resource type="BTSequence" id="BTSequence_36efm"]
-children = [SubResource("BTAction_sexgk"), SubResource("BTSetVar_0xmxa"), SubResource("BTSequence_0xmxa"), SubResource("BTProbabilitySelector_yvhtp")]
+children = [SubResource("BTAction_sexgk"), SubResource("BTSequence_0xmxa"), SubResource("BTProbabilitySelector_yvhtp")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_i06h6")
