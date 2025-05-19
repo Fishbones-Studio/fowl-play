@@ -4,12 +4,15 @@ extends BaseDatabase
 
 const UPGRADE_PATH: String = "res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/"
 
+
 static func _load_resources() -> Array[BaseResource]:
 	var all_items: Array[BaseResource] = []
-	var files: PackedStringArray       = get_files_from_path(UPGRADE_PATH)
+	var files: PackedStringArray = get_files_from_path(UPGRADE_PATH)
 	for upgrade_type in StatsEnums.UpgradeTypes.values():
 		var upgrade_type_string: String = StatsEnums.upgrade_type_to_string(upgrade_type).to_lower()
 		for file in files:
+			if file.ends_with(".remap"):
+				file = file.substr(0, file.length() - 6)  # Remove .remap
 			if file.begins_with(upgrade_type_string) and file.ends_with(".tres"):
 				var resource: Resource = load(UPGRADE_PATH.path_join(file))
 				if resource is BaseResource:
@@ -27,6 +30,7 @@ func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 			if resource is BaseResource:
 				upgrades.append(resource)
 	return upgrades
+
 
 func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
 	var grouped: Dictionary[StatsEnums.UpgradeTypes, Array] = {}

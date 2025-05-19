@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4qwnqq8jvrgj"]
+[gd_scene load_steps=13 format=3 uid="uid://4qwnqq8jvrgj"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_wehyl"]
 [ext_resource type="PackedScene" uid="uid://18tmfpnik0vd" path="res://entities/enemies/insighter/art/insighter.glb" id="2_e0uej"]
@@ -7,6 +7,7 @@
 [ext_resource type="BehaviorTree" uid="uid://k7wyinj46uqk" path="res://entities/enemies/ai/trees/insighter.tres" id="4_n8hr6"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_e3er2"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="6_mahx6"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_nc4gp"]
 [ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="7_cf4q1"]
 [ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="8_1o75w"]
 [ext_resource type="Texture2D" uid="uid://b3joypn7lbpdu" path="res://entities/enemies/insighter/art/insighter_mugshot.png" id="8_mahx6"]
@@ -46,8 +47,8 @@ shape = SubResource("SphereShape3D_udlhp")
 [node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("4_n8hr6")
 
-[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
-transform = Transform3D(-0.169487, 0, -0.985533, 0, 1, 0, 0.985533, 0, -0.169487, 0.61008, 1.69719, 0.157371)
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_nc4gp")]
+visible = false
 
 [node name="RangedWeapon" type="Node3D" parent="EnemyWeaponController" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.832657, 2.34926, 0.134357)
