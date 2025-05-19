@@ -58,8 +58,8 @@ grow_vertical = 2
 [node name="ProsperityEggsIcon" type="TextureRect" parent="ProsperityEggsContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_rilcm")
-expand_mode = 2
-stretch_mode = 6
+expand_mode = 3
+stretch_mode = 5
 
 [node name="ProsperityEggsAmount" type="Label" parent="ProsperityEggsContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -90,7 +90,7 @@ grow_vertical = 2
 [node name="FeathersOfRebirthIcon" type="TextureRect" parent="FeathersOfRebirthContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_85tee")
-expand_mode = 2
+expand_mode = 3
 stretch_mode = 5
 
 [node name="FeathersOfRebirthAmount" type="Label" parent="FeathersOfRebirthContainer/HBoxContainer"]
