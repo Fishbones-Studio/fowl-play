@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_isvs4"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_k2yrv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="8_j3vma"]
+[ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="9_53l80"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
@@ -57,7 +58,7 @@ slot = 0
 children = [SubResource("BTAction_4rvb4"), SubResource("BTAction_8uudm")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_smr14"]
-duration = 5.0
+duration = 2.0
 children = [SubResource("BTParallel_53l80")]
 
 [sub_resource type="BTSequence" id="BTSequence_jgv6p"]
@@ -76,6 +77,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("2_k2yrv")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_8uudm"]
 min_duration = 0.4
@@ -84,12 +87,6 @@ max_duration = 1.1
 [sub_resource type="BTSequence" id="BTSequence_4rvb4"]
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg"), SubResource("BTRandomWait_8uudm")]
-
-[sub_resource type="BTCondition" id="BTCondition_p7jkp"]
-script = ExtResource("4_h6t4k")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 100.0
 
 [sub_resource type="BBNode" id="BBNode_secwn"]
 saved_value = NodePath("insighter/AnimationPlayer")
@@ -104,7 +101,7 @@ speed = 1.5
 [sub_resource type="BTAction" id="BTAction_c7qb4"]
 script = ExtResource("4_q1l3l")
 target_var = &"target"
-rotation_speed = 30.0
+rotation_speed = 20.0
 angle_threshold = 2.0
 duration = 0.0
 face_away = false
@@ -117,7 +114,7 @@ stuck_threshold = 2.5
 [sub_resource type="BTAction" id="BTAction_53a43"]
 script = ExtResource("7_53l80")
 target_var = &"target"
-tolerance = 5.0
+tolerance = 15.0
 speed_factor = 0.0
 duration = 0.0
 ignore_y = true
@@ -125,11 +122,19 @@ pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
 
-[sub_resource type="BTCondition" id="BTCondition_jinyb"]
+[sub_resource type="BTCondition" id="BTCondition_53l80"]
 script = ExtResource("4_h6t4k")
 target_var = &"target"
 distance_min = 0.0
-distance_max = 10.0
+distance_max = 45.0
+
+[sub_resource type="BTAction" id="BTAction_smr14"]
+script = ExtResource("9_53l80")
+target_var = &"target"
+weapon_offset = Vector3(3, 2.5, 0)
+max_down_angle = -45.0
+max_up_angle = 45.0
+rotation_speed = 0.1
 
 [sub_resource type="BTAction" id="BTAction_ien84"]
 script = ExtResource("8_j3vma")
@@ -138,24 +143,31 @@ ignore_cooldown = false
 start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_vte2v"]
-children = [SubResource("BTCondition_jinyb"), SubResource("BTAction_ien84")]
+custom_name = "Fire minigun!"
+children = [SubResource("BTAction_ien84")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_8uudm"]
+duration = 4.0
+children = [SubResource("BTSequence_vte2v")]
+
+[sub_resource type="BTParallel" id="BTParallel_smr14"]
+num_successes_required = 3
+repeat = true
+children = [SubResource("BTCondition_53l80"), SubResource("BTAction_smr14"), SubResource("BTCooldown_8uudm")]
 
 [sub_resource type="BTParallel" id="BTParallel_cmfip"]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTAction_c7qb4"), SubResource("BTCondition_w7w8f"), SubResource("BTAction_53a43"), SubResource("BTSequence_vte2v")]
+children = [SubResource("BTAction_c7qb4"), SubResource("BTCondition_w7w8f"), SubResource("BTAction_53a43"), SubResource("BTParallel_smr14")]
 
 [sub_resource type="BTSequence" id="BTSequence_ucb6i"]
 custom_name = "Pursue"
-children = [SubResource("BTCondition_p7jkp"), SubResource("BTPlayAnimation_7st8f"), SubResource("BTParallel_cmfip")]
-metadata/_weight_ = 4.0
-
-[sub_resource type="BTComment" id="BTComment_4rvb4"]
-custom_name = "TODO, add other sequences"
+children = [SubResource("BTPlayAnimation_7st8f"), SubResource("BTParallel_cmfip")]
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_q1l3l"]
-children = [SubResource("BTSequence_ucb6i"), SubResource("BTComment_4rvb4")]
+children = [SubResource("BTSequence_ucb6i")]
 
 [sub_resource type="BTSequence" id="BTSequence_j3vma"]
 children = [SubResource("BTSequence_4rvb4"), SubResource("BTProbabilitySelector_q1l3l")]

@@ -16,6 +16,7 @@ func _ready() -> void:
 
 	ranged_weapon_node.ranged_weapon_scene = load(ranged_weapon.model_uid)
 
+
 func setup() -> void:
 	ranged_weapon_node.setup()
 	ranged_weapon_player_controller.setup(ranged_weapon_node.current_weapon)

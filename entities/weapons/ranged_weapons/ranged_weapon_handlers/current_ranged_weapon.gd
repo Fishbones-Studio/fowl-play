@@ -51,17 +51,18 @@ func setup() -> void:
 			"RangedWeaponNode could not find a parent with get_stats_resource() "
 			+ "returning LivingEntityStats! Weapon might not function correctly."
 		)
-		
+
 	if not ranged_weapon_scene:
 		push_warning("No valid weapon scene assigned!")
 		return
 
 	if not current_weapon:
 		current_weapon = ranged_weapon_scene.instantiate() as RangedWeapon
+
 	if not current_weapon:
 		push_error("Failed to instantiate ranged weapon!")
 		return
 
 	current_weapon.entity_stats = owner_stats
-	
+
 	add_child(current_weapon)

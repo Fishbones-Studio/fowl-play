@@ -47,6 +47,8 @@ blend = 0.3
 
 [sub_resource type="BTAction" id="BTAction_e381t"]
 script = ExtResource("2_ykixg")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_e381t"]
 min_duration = 0.7
@@ -97,7 +99,7 @@ children = [SubResource("BTRepeatUntilFailure_gf8jg")]
 
 [sub_resource type="BTCondition" id="BTCondition_m26ws"]
 script = ExtResource("6_d6hvj")
-target_var = "target"
+target_var = &"target"
 comparison = 4
 height_threshold = 2.0
 use_relative = true

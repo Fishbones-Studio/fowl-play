@@ -1,9 +1,12 @@
-class_name RangedWeaponPlayerController extends Node
+class_name RangedWeaponPlayerController 
+extends Node
 
 @export var current_weapon : RangedWeapon
 
+
 func setup(_weapon : RangedWeapon) -> void:
 	current_weapon = _weapon
+
 
 func start_firing() -> void:
 	if not is_instance_valid(current_weapon):
@@ -12,6 +15,7 @@ func start_firing() -> void:
 
 	if current_weapon.handler:
 		current_weapon.handler.start_use()
+
 
 func stop_firing() -> void:
 	if not is_instance_valid(current_weapon):

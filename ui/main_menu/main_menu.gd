@@ -37,3 +37,7 @@ func _on_settings_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_reset_button_pressed() -> void:
+	SignalManager.add_ui_scene.emit(UIEnums.UI.DELETE_SAVE_POPUP)

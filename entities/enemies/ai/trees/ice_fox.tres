@@ -37,6 +37,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_k708t"]
 script = ExtResource("2_6nkjl")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_sq422"]
 min_duration = 0.6
@@ -126,6 +128,8 @@ metadata/_weight_ = 1.33333
 
 [sub_resource type="BTAction" id="BTAction_ocp3w"]
 script = ExtResource("2_6nkjl")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BBNode" id="BBNode_b2ogj"]
 saved_value = NodePath("ice_fox/AnimationPlayer")
@@ -197,6 +201,8 @@ metadata/_weight_ = 0.999999
 
 [sub_resource type="BTAction" id="BTAction_y7cob"]
 script = ExtResource("2_6nkjl")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BBNode" id="BBNode_t3gyd"]
 saved_value = NodePath("ice_fox/AnimationPlayer")
