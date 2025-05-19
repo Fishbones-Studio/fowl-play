@@ -224,14 +224,14 @@ duration = 2.0
 children = [SubResource("BTAction_ca3xq"), SubResource("BTWait_u4hmx")]
 
 [sub_resource type="BTSequence" id="BTSequence_fhbfq"]
-custom_name = "Prepare the hunt!"
+custom_name = "I venture forth to hunt!"
 children = [SubResource("BTAction_y7cob"), SubResource("BTPlayAnimation_ulmcl"), SubResource("BTParallel_40a5u")]
 
 [sub_resource type="BTAction" id="BTAction_u4hmx"]
 script = ExtResource("6_k708t")
 target_var = &"target"
-dash_duration = 0.5
-dash_distance = 60.0
+dash_duration = 0.4
+dash_distance = 50.0
 
 [sub_resource type="BTAction" id="BTAction_40a5u"]
 script = ExtResource("4_yhbkp")
@@ -244,7 +244,7 @@ num_successes_required = 2
 children = [SubResource("BTAction_u4hmx"), SubResource("BTAction_40a5u")]
 
 [sub_resource type="BTSequence" id="BTSequence_8k4wv"]
-custom_name = "Venture forward!"
+custom_name = "Always soaring, forever triumphant!"
 children = [SubResource("BTParallel_t3gyd")]
 
 [sub_resource type="BTSequence" id="BTSequence_40a5u"]
