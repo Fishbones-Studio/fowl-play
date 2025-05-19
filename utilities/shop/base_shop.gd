@@ -3,8 +3,12 @@
 class_name BaseShop
 extends Control
 
+## Amount of items to show in the shop
 @export_range(4, 8) var max_items: int
+## Database Node extending `BaseDatabase`
 @export var item_database: BaseDatabase
+## Make the first item free
+@export var first_item_free := false
 
 var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
@@ -60,6 +64,9 @@ func _refresh_shop() -> void:
 	var selected_items: Array[BaseResource] = _get_shop_selection(
 		available_items, items_to_show
 	)
+	
+	if first_item_free && available_items.size() > 0:
+		available_items.get(0).cost = 0
 
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
