@@ -18,6 +18,7 @@ enum UI {
 	FORFEIT_POPUP,
 	REBIRTH_SHOP,
 	DIALOGUE_BALLOON,
+	DELETE_SAVE_POPUP
 }
 
 const PATHS: Dictionary[UI, String] = {
@@ -38,6 +39,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.FORFEIT_POPUP: "uid://bqt3s2usixpf3",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
+	UI.DELETE_SAVE_POPUP : "uid://fgrmwyv0t0py"
 }
 
 ## List of UI elements that should block game input outside of the UI

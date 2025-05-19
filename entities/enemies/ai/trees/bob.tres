@@ -99,7 +99,7 @@ children = [SubResource("BTRepeatUntilFailure_gf8jg")]
 
 [sub_resource type="BTCondition" id="BTCondition_m26ws"]
 script = ExtResource("6_d6hvj")
-target_var = "target"
+target_var = &"target"
 comparison = 4
 height_threshold = 2.0
 use_relative = true
