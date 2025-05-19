@@ -1,4 +1,4 @@
-class_name InteractableBox 
+class_name InteractBox 
 extends StaticBody3D
 
 var player_in_area: bool = false
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact") and player_in_area:
+	if Input.is_action_just_pressed("interact") and player_in_area && !UIManager.game_input_blocked:
 		interact()
 
 func interact() -> void:

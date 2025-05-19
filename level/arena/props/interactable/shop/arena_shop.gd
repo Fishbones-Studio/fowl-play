@@ -1,5 +1,5 @@
 # Arena 
-extends InteractableBox
+extends InteractBox
 
 func interact() -> void:
 	if UIEnums.UI.IN_ARENA_SHOP in UIManager.ui_list:
