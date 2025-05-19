@@ -321,12 +321,12 @@ func reset_game_data() -> void:
 
 	_loaded_game_data = {
 		"stats": default_stats,
-		"upgrades": upgrades,
+		"upgrades": upgrades, # Upgrades are persisted
 		"rounds_won": default_rounds_won,
-		"total_rounds_won": total_rounds_won,
+		"total_rounds_won": total_rounds_won, # Total rounds won is persisted
 		"enemy_encounters": default_enemy_encounters,
-		"f_o_r": GameManager.feathers_of_rebirth,
-		"p_eggs": GameManager.prosperity_eggs
+		"f_o_r": GameManager.feathers_of_rebirth, # Currency is persisted
+		"p_eggs": GameManager.prosperity_eggs # Currency is persisted
 	}
 	_create_default_save_file(
 		default_stats,
@@ -338,12 +338,57 @@ func reset_game_data() -> void:
 		GameManager.prosperity_eggs
 	)
 
-	print("Game data reset.")
+	print("Game data reset (soft reset).")
 	print("Reset Stats: ", default_stats.to_dict())
-	print("Reset Upgrades: ", upgrades)
+	print("Persisted Upgrades: ", upgrades)
 	print("Reset Rounds Won: ", default_rounds_won)
 	print("Reset Enemy Encounters: ", default_enemy_encounters)
-	print("Total Rounds Won (persisted): ", total_rounds_won)
+	print("Persisted Total Rounds Won: ", total_rounds_won)
+	print(
+		"Persisted Currency: Feathers: %s, Eggs: %s"
+		% [GameManager.feathers_of_rebirth, GameManager.prosperity_eggs]
+	)
+
+
+func hard_reset_game_data() -> void:
+	print("Performing hard reset of all game data...")
+
+	# Clear the in-memory cache
+	_loaded_game_data = {}
+	print("In-memory game data cache cleared.")
+
+	# Delete the physical save file
+	# FileAccess.file_exists works with "user://" paths directly.
+	if FileAccess.file_exists(SAVE_GAME_PATH):
+		var global_path_for_removal: String = ProjectSettings.globalize_path(
+			SAVE_GAME_PATH
+		)
+		var err: Error = DirAccess.remove_absolute(global_path_for_removal)
+		if err == OK:
+			print(
+				"Save file deleted successfully: %s" % global_path_for_removal
+			)
+		else:
+			push_error(
+				"Failed to delete save file '%s'. Error: %s. Proceeding to load/create defaults."
+				% [global_path_for_removal, error_string(err)]
+			)
+	else:
+		print(
+			"No save file found to delete at: %s. A new default save will be created."
+			% SAVE_GAME_PATH
+		)
+
+	# Load game data. This will:
+	#    - Find no save file (as it was just deleted or never existed).
+	#    - Create a new default save file with initial values.
+	#    - Populate the _loaded_game_data cache with these initial default values.
+	#    - Update GameManager currency to initial defaults (0 feathers, 200 eggs).
+	load_game_data()
+
+	print(
+		"Hard reset complete. Game data is now at initial default state."
+	)
 
 
 func get_loaded_player_stats() -> LivingEntityStats:
@@ -401,7 +446,7 @@ func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 		if typed_upgrades.is_empty() and not upgrades_dict.is_empty():
 			push_warning("Loaded upgrades were present but all entries were invalid or unrecognised. Returning default upgrades.")
 			return _get_default_upgrades()
-		return typed_upgrades
+		return typed_upgrades.duplicate() # Return a duplicate to prevent direct modification of cache
 
 	push_error("Cached player upgrades are not a Dictionary or missing. Returning defaults.")
 	return _get_default_upgrades()
@@ -435,10 +480,23 @@ func get_loaded_enemy_encounters() -> Dictionary[String, int]:
 	if encounters_variant is Dictionary[String, int]:
 		return (encounters_variant as Dictionary[String, int]).duplicate()
 	elif encounters_variant is Dictionary:
-		push_warning("Cached enemy encounters is a generic Dictionary, not Dictionary[String, int]. Attempting to return as is, but structure might be incorrect.")
-		var dict_form = encounters_variant as Dictionary[String, int]
-		if dict_form:
-			return dict_form.duplicate()
+		# Attempt to cast and validate if it's a generic dictionary
+		var dict_form := {} as Dictionary[String, int]
+		var all_valid_entries : bool = true
+		for k in (encounters_variant as Dictionary):
+			var v = (encounters_variant as Dictionary)[k]
+			if k is String and typeof(v) == TYPE_INT:
+				dict_form[k as String] = v as int
+			else:
+				all_valid_entries = false
+				push_warning("Invalid entry in cached enemy encounters: Key '%s', Value '%s'. Skipping." % [k,v])
+		if not all_valid_entries and dict_form.is_empty() and not (encounters_variant as Dictionary).is_empty():
+			push_warning("All entries in cached enemy encounters were invalid. Returning empty.")
+			return {} as Dictionary[String, int]
+		elif not all_valid_entries:
+			push_warning("Some entries in cached enemy encounters were invalid but others were loaded.")
+		return dict_form.duplicate()
+
 
 	push_error(
 		"Cached enemy encounters are not of type Dictionary[String, int] or missing. Returning empty."
@@ -454,5 +512,4 @@ func get_enemy_encounter_count(enemy_name: String) -> int:
 	if encounters.has(enemy_name):
 		return encounters[enemy_name]
 	else:
-		push_warning("Enemy encounter for '%s' not found. Returning 0." % enemy_name)
 		return 0
