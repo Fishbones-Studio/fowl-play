@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://1qgrwjubgwjk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vsiul"]
+radius = 1.553
+height = 17.842
+
+[sub_resource type="MeshTexture" id="MeshTexture_vsiul"]
+mesh = SubResource("CapsuleMesh_vsiul")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq0op"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("MeshTexture_vsiul")
+billboard_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cx2nh"]
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmi2t"]
+lightmap_size_hint = Vector2i(5, 3)
+radius = 0.1
+height = 0.2
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_rq0op")
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cx2nh")
+draw_pass_1 = SubResource("SphereMesh_hmi2t")
