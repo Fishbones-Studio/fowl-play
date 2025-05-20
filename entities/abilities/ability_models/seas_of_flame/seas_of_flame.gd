@@ -72,7 +72,7 @@ func _apply_burn(body: Node3D) -> void:
 
 			# Gradually decreasing the burn damage from peak to default across the damage tick count
 			var weight: float = i as float / (burn_tick_count - 1)
-			var burn_damage: float = lerp((peak_burn_modifier / 100.0), 1.0, weight) * (damage / burn_tick_count)
+			var burn_damage: float = lerp(peak_burn_modifier / 100.0, 1.0, weight) * (damage / burn_tick_count)
 
 			if body.collision_layer == 2: # Player
 				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)
