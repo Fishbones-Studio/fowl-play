@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=27 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_6mkbl"]
@@ -25,6 +25,30 @@
 radius = 1.0
 height = 2.8
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vsiul"]
+radius = 1.553
+height = 17.842
+
+[sub_resource type="MeshTexture" id="MeshTexture_vsiul"]
+mesh = SubResource("CapsuleMesh_vsiul")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq0op"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("MeshTexture_vsiul")
+billboard_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cx2nh"]
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmi2t"]
+lightmap_size_hint = Vector2i(5, 3)
+radius = 0.1
+height = 0.2
+
 [node name="ChickenPlayer" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 45
@@ -40,19 +64,19 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.47392, -0.0012082, 0.00150737, 0.880566)
-bones/3/rotation = Quaternion(-0.413765, 0.117226, 0.0946851, 0.897826)
-bones/4/rotation = Quaternion(0.00775404, -0.314548, 0.10267, 0.943641)
-bones/5/rotation = Quaternion(-0.327256, 0.0880287, -0.631365, 0.697519)
-bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572916)
-bones/7/rotation = Quaternion(-0.167631, 0.0618566, 0.554246, 0.812948)
-bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
+bones/2/rotation = Quaternion(-0.439657, 0.000687625, -0.00491301, 0.898152)
+bones/3/rotation = Quaternion(-0.532044, 0.0114598, 0.00204307, 0.846636)
+bones/4/rotation = Quaternion(-0.117203, 0.300538, -0.09976, 0.94127)
+bones/5/rotation = Quaternion(-0.248555, 0.0328673, -0.595113, 0.763532)
+bones/6/rotation = Quaternion(-0.448775, -0.0645802, -0.662537, 0.596218)
+bones/7/rotation = Quaternion(-0.141593, 0.0823503, 0.53756, 0.827163)
+bones/8/rotation = Quaternion(-0.447087, 0.129278, 0.672361, 0.575613)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.22215, -0.00569617, -0.0598673, 0.973156)
-bones/11/rotation = Quaternion(0.169152, 0.0297078, -0.155867, 0.972734)
+bones/10/rotation = Quaternion(0.314616, -0.0259556, -0.0852847, 0.945024)
+bones/11/rotation = Quaternion(0.180594, 0.0300813, -0.154915, 0.970815)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.173846, -0.0437086, -0.03523, 0.983171)
+bones/13/rotation = Quaternion(-0.179376, -0.092154, -0.103436, 0.973978)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -153,6 +177,16 @@ weapon_collision_mask = 4
 
 [node name="PlayerAbilityController" parent="." node_paths=PackedStringArray("player") instance=ExtResource("17_pq2r3")]
 player = NodePath("..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_rq0op")
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cx2nh")
+draw_pass_1 = SubResource("SphereMesh_hmi2t")
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]

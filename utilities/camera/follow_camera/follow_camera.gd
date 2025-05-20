@@ -14,6 +14,7 @@ extends Node3D
 @export var camera_spring_length: float = 4.8
 @export var camera_margin: float = 0.5
 @export var camera_smoothness: float = 6.0
+@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 
 @export_category("Entity")
 @export var entity_to_follow: CharacterBody3D
@@ -115,7 +116,15 @@ func _apply_camera_clamp() -> void:
 	rotation.z = 0
 	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))
 
-
+func flash_read() -> void:
+	color_rect.color = Color(1, 0, 0, 0.3)	
+	
+	color_rect.visible = true
+	var tween = create_tween()
+	tween.tween_property(color_rect, "color:a", 0.0, 0.1)
+	tween.tween_callback(color_rect.hide)
+	
+	
 func _load_camera_settings() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	var cfg_path: String = "user://settings.cfg"
