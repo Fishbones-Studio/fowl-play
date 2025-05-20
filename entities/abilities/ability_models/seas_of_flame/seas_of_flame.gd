@@ -7,7 +7,7 @@ extends Ability
 ## The interval between each instance of damage applied
 @export var damage_interval: float = 0.2
 ## The maximum damage multiplier applied at the start of the burn effect
-@export var peak_burn_modifier: float = 350
+@export var peak_burn_modifier: float = 175
 
 var damage: float:
 	get:
