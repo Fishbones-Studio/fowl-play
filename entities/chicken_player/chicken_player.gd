@@ -53,4 +53,4 @@ func _on_weapon_hit_target(target: PhysicsBody3D, damage: int, type: DamageEnums
 		stats.drain_health(damage, type)
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, info)
 		gpu_particles_3d.emitting = true
-		camera.flash_read()
+		camera.flash_red()

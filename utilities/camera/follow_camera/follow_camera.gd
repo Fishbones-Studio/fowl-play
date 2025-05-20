@@ -116,7 +116,7 @@ func _apply_camera_clamp() -> void:
 	rotation.z = 0
 	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))
 
-func flash_read() -> void:
+func flash_red() -> void:
 	color_rect.color = Color(1, 0, 0, 0.3)	
 	
 	color_rect.visible = true
