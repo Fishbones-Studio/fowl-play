@@ -1,6 +1,6 @@
 extends BasePlayerMovementState
 
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = $DeathTimer
 
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
@@ -27,6 +27,6 @@ func physics_process(delta: float) -> void:
 
 # Using timer since for some reason AnimationNodeStateMachinePlayback never
 # stops playing, and it also transitions immediately when comparing anim length.
-func _on_timer_timeout() -> void:
+func _on_death_timer_timeout() -> void:
 	UIManager.game_input_blocked = false
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.DEATH_SCREEN)
