@@ -11,7 +11,7 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user launches a fiery projectile straight ahead, dealing damage to targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], growing in size and intensity—the longer it remains on the arena, the more powerful its damage becomes. Targets caught within the fireball take damage every [color=\"yellow\"]0.2 seconds[/color]. This ability has a cooldown of %s."
+description = "The user launches a fiery projectile straight ahead, dealing damage to targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], growing in size and intensity—the longer it remains on the arena, the more powerful its damage becomes. Targets caught within the fireball take damage immediately, then every [color=\"yellow\"]0.4 seconds[/color] afterward. This ability has a cooldown of %s."
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
