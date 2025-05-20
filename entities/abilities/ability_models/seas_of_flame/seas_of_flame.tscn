@@ -6,7 +6,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gdliy"]
 height = 3.0
-radius = 25.0
+radius = 20.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lj7w"]
 transparency = 1
@@ -32,11 +32,12 @@ point_count = 3
 offsets = PackedFloat32Array(0.170792, 0.529703, 0.943069)
 colors = PackedColorArray(0.447771, 0.19073, 0.221989, 1, 0.649454, 0.194277, 0.285676, 1, 0.701369, 0.336546, 0.2301, 1)
 
-[node name="SeaOfFlame" instance=ExtResource("1_vfv0y")]
+[node name="SeasOfFlame" instance=ExtResource("1_vfv0y")]
 script = ExtResource("2_7fey8")
-health_consumption = 25.0
+health_consumption = 20
 damage_duration = 2.0
-damage_interval = 0.4
+damage_interval = 0.2
+peak_burn_modifier = 3.5
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
@@ -50,7 +51,6 @@ shape = SubResource("CylinderShape3D_gdliy")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 emitting = false
 amount = 750
 one_shot = true
@@ -63,7 +63,7 @@ emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 3.0
 emission_ring_radius = 0.5
-emission_ring_inner_radius = 25.0
+emission_ring_inner_radius = 20.0
 emission_ring_cone_angle = 90.0
 direction = Vector3(0, 1, 0)
 spread = 0.0
