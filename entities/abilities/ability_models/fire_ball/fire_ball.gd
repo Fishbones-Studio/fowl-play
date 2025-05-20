@@ -1,8 +1,12 @@
 extends Ability
 
-@export var travel_speed: float = 5.0 # Speed at which the fireball moves forward
-@export var lifetime: float = 6.0 # Duration before the fireball expires
+## The movement speed of the fireball
+@export var travel_speed: float = 5.0
+## The duration before the fireball is automatically destroyed
+@export var lifetime: float = 6.0
+## The time interval between each instance of damage while a target remains inside the fireball
 @export var damage_interval: float = 0.4
+## The maximum scale factor the fireball can grow to over its lifetime
 @export_range(1, 2, 0.01) var scale_factor: float = 1.75
 
 var damage: float:
