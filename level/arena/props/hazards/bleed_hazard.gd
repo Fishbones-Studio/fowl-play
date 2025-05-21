@@ -35,4 +35,4 @@ func _apply_continuous_damage() -> void:
 			bodies_to_remove.append(id)
 		elif fmod(elapsed, damage_interval) < 0.01: # Small threshold for float comparison
 			print("Sting hazard hurt entity")
-			_on_hazard_area_body_entered(body)
+			super._on_hazard_area_body_entered(body)
