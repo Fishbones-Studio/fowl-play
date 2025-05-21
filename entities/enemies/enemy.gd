@@ -82,7 +82,6 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 			_die()
 
 
-
 func _die() -> void:
 	SignalManager.enemy_died.emit()
 	print(name, " has died!")

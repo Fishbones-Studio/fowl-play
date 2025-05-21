@@ -16,24 +16,17 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 	# Calculate knockback direction
 	var knockback_direction: Vector3 = self.global_position.direction_to(body.global_position)
-	var knockback: Vector3 = calculate_knockback(knockback_direction)
 
-	if body.collision_layer in [2, 4]:
-		if body is Enemy:
-			if body.type == EnemyEnums.EnemyTypes.BOSS:
-				damage /= 10
-		SignalManager.weapon_hit_target.emit(
-				body,
-				damage,
-				DamageEnums.DamageTypes.TRUE,
-				{
-				"knockback": knockback,
-			})
+	hazard_information = {
+		"knockback": calculate_knockback(knockback_direction)
+	}
+
+	super._on_hazard_area_body_entered(body)
 
 
 func calculate_knockback(direction: Vector3) -> Vector3:
 	var horizontal_component := func(axis: float) -> float:
-		var magnitude = abs(axis) * knockback_force
+		var magnitude: float = abs(axis) * knockback_force
 		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
 		return magnitude * sign(axis)
 
@@ -42,4 +35,5 @@ func calculate_knockback(direction: Vector3) -> Vector3:
 		clamp(max(abs(direction.y) * knockback_force, minimum_vertical_knockback), minimum_vertical_knockback, maximum_vertical_knockback),
 		horizontal_component.call(direction.z)
 	)
+
 	return knockback

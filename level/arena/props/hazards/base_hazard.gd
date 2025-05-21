@@ -11,6 +11,8 @@ extends Node3D
 var active_bodies: Dictionary[int, int] = {} ## Dictionary[body_id, entry_time]. By using id (int), we prevent errors after the body no longer existing.
 var bodies_to_remove: Array[int] = [] ## List of bodies to remove after iteration. By using id (int), we prevent errors after the body no longer existing.
 
+var hazard_information: Dictionary = {} ## List of additional information related to the hazard. (e.g. knockback vectors)
+
 
 func _process(_delta: float) -> void:
 	erase_invalid_bodies()
@@ -18,11 +20,11 @@ func _process(_delta: float) -> void:
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body.collision_layer in [2, 4]:
+		# Boss enemies are immune to hazard damage and additional effect, like knockback force
 		if body is Enemy and body.type == EnemyEnums.EnemyTypes.BOSS:
-			# Boss enemies are immune to hazard damage
 			return
 
-		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.TRUE)
+		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.TRUE, hazard_information)
 
 
 ## Overwrite in child class

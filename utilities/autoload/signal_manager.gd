@@ -32,7 +32,7 @@ signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information:
 signal enemy_died
 
 # Weapon signals
-signal weapon_hit_target(target: PhysicsBody3D, damage: float, type: DamageEnums.DamageTypes)
+signal weapon_hit_target(target: PhysicsBody3D, damage: float, type: DamageEnums.DamageTypes, information: Dictionary)
 
 # Shop signals
 signal preview_shop_item(item: BaseResource)
