@@ -6,12 +6,12 @@
 script = ExtResource("1_gw2mt")
 use_shader = true
 colors = 10
-dither_size = 2
+dither_size = 3
 dither_shift = 0.2
 dither_strength = 0.8
-dither_hue_shift = 0.4004
+dither_hue_shift = 0.1004
 alpha = 1.0
 scale = 1.0
 border_mask = 4.0
-pixel_size = 4
+pixel_size = 6
 metadata/_custom_type_script = "uid://bijgrc0h7606l"
