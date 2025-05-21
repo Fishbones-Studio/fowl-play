@@ -49,18 +49,12 @@ layout_mode = 2
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer" index="0"]
 text = "Resolution"
 
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/Resolution/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
-
 [node name="DisplayMode" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/DisplayMode/MarginContainer/HBoxContainer" index="0"]
 text = "Display Mode"
-
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/DisplayMode/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
 
 [node name="Borderless" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_7gtwp")]
 unique_name_in_owner = true
@@ -76,18 +70,12 @@ layout_mode = 2
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer" index="0"]
 text = "V-Sync"
 
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/VSync/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
-
 [node name="FPS" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/FPS/MarginContainer/HBoxContainer" index="0"]
 text = "FPS"
-
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/FPS/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
 
 [node name="MSAA" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
@@ -96,18 +84,12 @@ layout_mode = 2
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/MSAA/MarginContainer/HBoxContainer" index="0"]
 text = "MSAA"
 
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/MSAA/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
-
 [node name="FXAA" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/FXAA/MarginContainer/HBoxContainer" index="0"]
 text = "FXAA"
-
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/FXAA/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
 
 [node name="TAA" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
@@ -116,9 +98,6 @@ layout_mode = 2
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/TAA/MarginContainer/HBoxContainer" index="0"]
 text = "TAA"
 
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/TAA/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
-
 [node name="RenderScale" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -126,18 +105,12 @@ layout_mode = 2
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderScale/MarginContainer/HBoxContainer" index="0"]
 text = "Render Scale"
 
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderScale/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
-
 [node name="RenderMode" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("2_888lq")]
 unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderMode/MarginContainer/HBoxContainer" index="0"]
 text = "Render Mode"
-
-[node name="OptionButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderMode/MarginContainer/HBoxContainer/Panel" index="0"]
-selected = -1
 
 [node name="PostProcessingStrength" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("4_vn031")]
 unique_name_in_owner = true
@@ -150,10 +123,10 @@ text = "Post Processing Strength"
 text = "2"
 
 [node name="HSlider" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PostProcessingStrength/MarginContainer/HBoxContainer" index="3"]
-max_value = 3.0
+max_value = 4.0
 step = 1.0
 value = 2.0
-tick_count = 4
+tick_count = 5
 ticks_on_borders = true
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
