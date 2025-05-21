@@ -6,6 +6,7 @@ extends BaseHazard
 @export var despawn_time: float = 5.0
 
 var spawner: CharacterBody3D
+
 var _hit_bodies: Array[CharacterBody3D] = []
 
 @onready var hazard_area: Area3D = $HazardArea
@@ -64,17 +65,11 @@ func _on_despawn_timer_timeout() -> void:
 
 func _explode() -> void:
 	for body in _hit_bodies:
-		if body is Enemy:
-			if body.type == EnemyEnums.EnemyTypes.BOSS:
-				damage /= 10
+		hazard_information = {
+			"knockback": _calculate_knockback(body),
+		}
 
-		SignalManager.weapon_hit_target.emit(
-				body,
-				damage,
-				DamageEnums.DamageTypes.TRUE,
-				{
-				"knockback": _calculate_knockback(body),
-			})
+		super._on_hazard_area_body_entered(body)
 
 		if not despawn_timer.is_stopped(): despawn_timer.stop()
 	animation_player.play("explode")
