@@ -7,10 +7,11 @@ extends BaseHazard
 @export var damage_duration: float = 5.0  ## Total duration of damage
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if active_bodies.size() > 0:
 		_apply_continuous_damage()
-	super(_delta)
+
+	super(delta)
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
@@ -35,4 +36,4 @@ func _apply_continuous_damage() -> void:
 			bodies_to_remove.append(id)
 		elif fmod(elapsed, damage_interval) < 0.01: # Small threshold for float comparison
 			print("Sting hazard hurt entity")
-			_on_hazard_area_body_entered(body)
+			super._on_hazard_area_body_entered(body)

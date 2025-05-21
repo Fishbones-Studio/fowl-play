@@ -18,9 +18,10 @@ func _process(_delta: float) -> void:
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
 	if body.collision_layer in [2, 4]:
-		if body is Enemy:
-			if body.type == EnemyEnums.EnemyTypes.BOSS:
-				damage /= 10
+		if body is Enemy and body.type == EnemyEnums.EnemyTypes.BOSS:
+			# Boss enemies are immune to hazard damage
+			return
+
 		SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.TRUE)
 
 
