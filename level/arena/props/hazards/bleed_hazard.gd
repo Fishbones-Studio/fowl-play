@@ -7,10 +7,11 @@ extends BaseHazard
 @export var damage_duration: float = 5.0  ## Total duration of damage
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if active_bodies.size() > 0:
 		_apply_continuous_damage()
-	super(_delta)
+
+	super(delta)
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
