@@ -16,7 +16,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		player.velocity.x = 0
 		player.velocity.z = 0
 
-	timer.start()
+	if timer.is_stopped():
+		timer.start()
 
 
 func physics_process(delta: float) -> void:

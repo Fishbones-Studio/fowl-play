@@ -49,5 +49,4 @@ func get_stats_resource() -> LivingEntityStats:
 func _on_weapon_hit_target(target: PhysicsBody3D, damage: int, type: DamageEnums.DamageTypes, info: Dictionary = {}) -> void:
 	if target == self:
 		stats.drain_health(damage, type)
-		if movement_state_machine.current_state != movement_state_machine.states.get(PlayerEnums.PlayerStates.DEATH_STATE):
-			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, info)
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, info)
