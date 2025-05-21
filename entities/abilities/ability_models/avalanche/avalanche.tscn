@@ -7,13 +7,13 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_5ybk7"]
 radius = 8.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30khn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ybk7"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_5ybk7"]
 lightmap_size_hint = Vector2i(20, 20)
-material = SubResource("StandardMaterial3D_30khn")
+material = SubResource("StandardMaterial3D_5ybk7")
 radius = 1.25
 height = 2.5
 radial_segments = 4

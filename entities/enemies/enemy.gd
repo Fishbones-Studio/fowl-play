@@ -23,6 +23,7 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
 @onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
+@onready var gpu_particles_3d: GPUParticles3D = $DamageNumberHandler/GPUParticles3D
 
 
 func _ready() -> void:
@@ -76,6 +77,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 		on_hurt.play()
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
+		gpu_particles_3d.emitting = true
 		health_bar.set_health(stats.current_health)
 
 		if stats.current_health <= 0:

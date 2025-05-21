@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dlxxvlr6g8xye" path="res://utilities/scene_loader/scene_loader.gd" id="1_150bd"]
 [ext_resource type="PackedScene" uid="uid://dwghksknwpfhu" path="res://utilities/post_process/post_process.tscn" id="2_nsksp"]
 [ext_resource type="Script" uid="uid://bijgrc0h7606l" path="res://utilities/post_process/shaders/shader_steps/post_process_shader_step.gd" id="3_lfill"]
-[ext_resource type="Script" uid="uid://0d1xjdocr0cb" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
+[ext_resource type="Script" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
 [ext_resource type="Resource" uid="uid://cbterwnvlrlj" path="res://utilities/post_process/shaders/shader_steps/step_0.tres" id="4_kub3r"]
 [ext_resource type="Resource" uid="uid://ddwwo0ytmvshm" path="res://utilities/post_process/shaders/shader_steps/step_1.tres" id="5_oxdtv"]
 [ext_resource type="Resource" uid="uid://cqa02qnm3uygy" path="res://utilities/post_process/shaders/shader_steps/step_2.tres" id="6_umohs"]
