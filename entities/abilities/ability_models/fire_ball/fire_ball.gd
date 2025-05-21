@@ -1,14 +1,18 @@
 extends Ability
 
-@export var travel_speed: float = 5.0 # Speed at which the fireball moves forward
-@export var lifetime: float = 6.0 # Duration before the fireball expires
-@export var damage_interval: float = 0.2
+## The movement speed of the fireball
+@export var travel_speed: float = 5.0
+## The duration before the fireball is automatically destroyed
+@export var lifetime: float = 6.0
+## The time interval between each instance of damage while a target remains inside the fireball
+@export var damage_interval: float = 1.0
+## The maximum scale factor the fireball can grow to over its lifetime
 @export_range(1, 2, 0.01) var scale_factor: float = 1.75
 
-var stamina_drain: float
 var damage: float:
 	get:
-		return stamina_drain
+		var stats: LivingEntityStats = ability_holder.stats
+		return ((stats.current_stamina / stats.max_stamina) * 100) / 2
 
 var _is_active: bool = false
 var _travel_direction: Vector3
@@ -16,7 +20,6 @@ var _current_damage: float = 0.0
 var _remaining_lifetime: float = 0.0
 var _active_bodies: Dictionary[int, int] = {}
 
-@onready var stats: LivingEntityStats 
 @onready var hit_area: Area3D = %HitArea
 @onready var mesh_instance: MeshInstance3D = %MeshInstance3D
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
@@ -24,16 +27,15 @@ var _active_bodies: Dictionary[int, int] = {}
 
 
 func activate() -> void:
-	stats = ability_holder.stats
 	# Ignore the parent's transform
 	# This ensures the fireball moves independently, without being affected by the player's movement
 	top_level = true
 	global_position = ability_holder.global_position + (Vector3.UP * 2) # Move Y up by 2, so it spawns a bit centered
-	stamina_drain = ((stats.current_stamina / stats.max_stamina) * 100) / 2
-	stats.current_stamina -= stamina_drain
-	
+
+	ability_holder.stats.current_stamina -= damage
+
 	_toggle_collision_masks(true, hit_area)
-	
+
 	_is_active = true
 	_travel_direction = -ability_holder.global_basis.z.normalized()
 	_current_damage = damage
@@ -67,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	# Increase the current damage depending on remaining lifetime and the speed it travels at
 	# As the remaining lifetime decreases, the damage will ramp up
 	_current_damage += damage * ((1.0 + (_remaining_lifetime / lifetime)) * delta) / (travel_speed * 2)
-	
+
 	mesh_instance.scale = scale_increment
 	collision_shape.scale = scale_increment
 	cpu_particles.scale = scale_increment
@@ -83,6 +85,8 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 		var id: int = body.get_instance_id()
 		if not _active_bodies.has(id):
 			_active_bodies[id] = Time.get_ticks_msec()
+
+			_apply_damage(body)
 
 
 func _on_hit_area_body_exited(body: Node3D) -> void:
@@ -106,8 +110,12 @@ func _apply_continuous_damage() -> void:
 			_active_bodies[id] = current_time
 
 			# Only apply damage if body is Player of Enemy
-			if body.collision_layer == 2 or body.collision_layer == 4:
-				SignalManager.weapon_hit_target.emit(body, _current_damage, DamageEnums.DamageTypes.NORMAL)
+			_apply_damage(body)
+
+
+func _apply_damage(body: CharacterBody3D) -> void:
+	if body.collision_layer == 2 or body.collision_layer == 4:
+		SignalManager.weapon_hit_target.emit(body, _current_damage, DamageEnums.DamageTypes.NORMAL)
 
 
 func _reset_ability() -> void:

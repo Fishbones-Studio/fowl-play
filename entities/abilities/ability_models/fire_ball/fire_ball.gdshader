@@ -2,7 +2,7 @@
 // All credits goes to original author.
 // This shader has been modified to allow for gradient colors.
 shader_type spatial;
-render_mode shadows_disabled, specular_disabled, ambient_light_disabled, unshaded;
+render_mode cull_disabled, shadows_disabled, specular_disabled, ambient_light_disabled, unshaded;
 
 
 group_uniforms Shield_Color;
