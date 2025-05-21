@@ -5,7 +5,7 @@ extends Ability
 ## The duration before the fireball is automatically destroyed
 @export var lifetime: float = 6.0
 ## The time interval between each instance of damage while a target remains inside the fireball
-@export var damage_interval: float = 0.4
+@export var damage_interval: float = 1.0
 ## The maximum scale factor the fireball can grow to over its lifetime
 @export_range(1, 2, 0.01) var scale_factor: float = 1.75
 
