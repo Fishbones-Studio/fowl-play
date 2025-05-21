@@ -66,7 +66,7 @@ func physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 
-func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dictionary = {} ) -> void:
+func _transition_to_next_state(target_state: PlayerEnums.PlayerStates, info: Dictionary = {}) -> void:
 	previous_state = current_state
 	previous_state.exit()
 
