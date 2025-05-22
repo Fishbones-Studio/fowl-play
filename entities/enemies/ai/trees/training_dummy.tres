@@ -1,0 +1,13 @@
+[gd_resource type="BehaviorTree" load_steps=4 format=3 uid="uid://bji8hyd1lawvy"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_atvp0"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_r0jxf"]
+
+[sub_resource type="BTAction" id="BTAction_mvev2"]
+script = ExtResource("1_atvp0")
+target_var = &"target"
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_r0jxf")
+root_task = SubResource("BTAction_mvev2")
