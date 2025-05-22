@@ -11,11 +11,9 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path, gradually growing in size
+description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path. The fireball travels for up to [color=yellow]6 seconds[/color], gradually growing in size and intensity—the longer it remains on the field, the more damage it deals.
 
-Cooldown: %s
-Cost: [color=red] Half your current Stamina [/color]
-Damage: [color=yellow]Half % of current stamina[/color]"
+Cooldown: %s."
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
