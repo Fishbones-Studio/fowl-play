@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvlnoaw18itex"
-path.s3tc="res://.godot/imported/sewer_arena_tiles.png-0b350d311685a1449cc3915783ff647d.s3tc.ctex"
-path.etc2="res://.godot/imported/sewer_arena_tiles.png-0b350d311685a1449cc3915783ff647d.etc2.ctex"
+uid="uid://cl0w58iv6pfel"
+path.s3tc="res://.godot/imported/sewer_arena_metal bars.png-475a5f4540a265fbd34a5c16613ccffa.s3tc.ctex"
+path.etc2="res://.godot/imported/sewer_arena_metal bars.png-475a5f4540a265fbd34a5c16613ccffa.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "fa6fcd001220530e091c302c80cf7210"
+"md5": "4e77db261c006b77bb0c72b4ac09fdac"
 }
 
 [deps]
 
-source_file="res://level/arena/art/sewer_arena_tiles.png"
-dest_files=["res://.godot/imported/sewer_arena_tiles.png-0b350d311685a1449cc3915783ff647d.s3tc.ctex", "res://.godot/imported/sewer_arena_tiles.png-0b350d311685a1449cc3915783ff647d.etc2.ctex"]
+source_file="res://level/arena/sewer_arena/art/sewer_arena_metal bars.png"
+dest_files=["res://.godot/imported/sewer_arena_metal bars.png-475a5f4540a265fbd34a5c16613ccffa.s3tc.ctex", "res://.godot/imported/sewer_arena_metal bars.png-475a5f4540a265fbd34a5c16613ccffa.etc2.ctex"]
 
 [params]
 

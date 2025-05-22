@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bhnqi4fnso1hh"]
 
-[ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/arena.tscn" id="1_44x8d"]
-[ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area.tscn" id="2_6gtgk"]
+[ext_resource type="PackedScene" uid="uid://dn4y6rw2w6ydt" path="res://level/arena/sewer_arena/sewer_arena.tscn" id="1_44x8d"]
+[ext_resource type="PackedScene" uid="uid://b37klg6och4oh" path="res://level/arena/intermission_area/intermission_area.tscn" id="2_6gtgk"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="2_ivpvi"]
 [ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="2_xii2b"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_0v1st"]
