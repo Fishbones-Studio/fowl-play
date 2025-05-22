@@ -11,9 +11,14 @@ purchasable = true
 drop_chance = 10
 cost = 150
 currency_type = 0
-description = "Channeling immense weight into the earth, the user crashes down with tectonic force, triggering a series of devastating quakes. Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per quake[/color], launching targets with escalating force. 
+description = "Channeling immense weight into the earth, the user crashes down with tectonic force, triggering a series of devastating quakes. 
 
-Deals more damage the greater the user's [color=orange]Weight[/color] and [color=orange]Defense[/color]. Can only be used while airborne and has a cooldown of %s."
+Scales off of the players [color=orange]Weight[/color]. 
+Cooldown: %s
+
+[color=red]Can only be used while airborne[/color]
+
+Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per quake[/color], launching targets with escalating force. "
 icon = ExtResource("1_uetiq")
 model_uid = "uid://bxc3j6moweqeh"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

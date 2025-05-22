@@ -15,6 +15,6 @@ purchasable = true
 drop_chance = 25
 cost = 200
 currency_type = 0
-description = "The wind blows behind the user's back and increases Speed by %s."
+description = "%s [color=green]Speed[/color]"
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

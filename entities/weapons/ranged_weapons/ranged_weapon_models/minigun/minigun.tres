@@ -20,7 +20,12 @@ purchasable = true
 drop_chance = 25
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage per bullet, with a fire rate of %s after a windup of %s. The attack lasts %s, with a max range of %s, then enters a cooldown state for %s.
+description = "Base Damage: %s 
+Fire Rate: %s 
+Windup Time: %s. 
+Fire Time: %s, 
+Max Range: %s
+Coldown: %s.
 
 This weapon %s and %s."
 icon = ExtResource("1_f0db6")

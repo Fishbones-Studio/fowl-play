@@ -15,7 +15,10 @@ purchasable = false
 drop_chance = 0
 cost = 0
 currency_type = 0
-description = "[color=orange]Default weapon:[/color] The fearsome PECK! Your trusty beak unleashes %s Base Damage after a %s windup. The pecking lasts %s, after which your beak needs a breather for %s. Wouldn't want to break it, right?"
+description = "Base Damage:  %s 
+Windup TIme:  %s
+Attack duration: %s
+Cooldown %s"
 icon = ExtResource("1_gp07i")
 model_uid = "uid://cyabnta5e4ldb"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

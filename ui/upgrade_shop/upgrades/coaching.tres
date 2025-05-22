@@ -15,6 +15,7 @@ purchasable = true
 drop_chance = 85
 cost = 200
 currency_type = 0
-description = "Increases the user's Attack by %s and Defense by %s."
+description = "%s [color=green]Damage[/color]
+%s [color=green]Defense[/color]"
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

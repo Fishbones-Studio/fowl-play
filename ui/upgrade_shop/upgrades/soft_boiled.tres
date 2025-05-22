@@ -15,6 +15,6 @@ purchasable = true
 drop_chance = 80
 cost = 100
 currency_type = 0
-description = "Increases the user's Health by %s."
+description = "%s [color=green]Health[/color]"
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

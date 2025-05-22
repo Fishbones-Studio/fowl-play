@@ -20,7 +20,10 @@ purchasable = true
 drop_chance = 70
 cost = 125
 currency_type = 0
-description = "Deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
+description = "Base Damage: %s
+Attack Duration: %s
+Max Range: %s 
+Cooldown: %s.
 
 This weapon deals [color=orange]True Damage, ignoring targets Defense stats[/color].
 

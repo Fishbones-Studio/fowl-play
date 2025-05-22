@@ -11,7 +11,11 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], gradually growing in size and intensity—the longer it remains on the field, the more damage it deals. Targets caught within the fireball take damage instantly, then again every [color=\"yellow\"]second[/color] while inside. This ability has a cooldown of %s."
+description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path, gradually growing in size
+
+Cooldown: %s
+Cost: [color=red] Half your current Stamina [/color]
+Damage: [color=yellow]Half % of current stamina[/color]"
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

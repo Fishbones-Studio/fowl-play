@@ -15,7 +15,10 @@ purchasable = true
 drop_chance = 12
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage per hit after winding up for %s. The attack lasts %s, then enters a cooldown state for %s.
+description = "Base Damage:  %s 
+Windup TIme:  %s
+Attack duration: %s
+Cooldown %s
 
 Allows for [color=orange]multiple hits per attack[/color]."
 icon = ExtResource("1_8lwf8")

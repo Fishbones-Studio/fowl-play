@@ -15,6 +15,6 @@ purchasable = true
 drop_chance = 50
 cost = 150
 currency_type = 0
-description = "The user ruffles its feathers and increases its Speed by %s."
+description = "%s [color=green]Speed[/color]"
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
