@@ -1,29 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ftt1f5ca2ju"]
 
+[ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
 [ext_resource type="PackedScene" uid="uid://b4cnrmx3uvron" path="res://entities/enemies/training_dummy/training_dummy.tscn" id="2_mudht"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_kk74r"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="4_gmul1"]
 
 [node name="TrainingArea" type="Node3D"]
-
-[node name="BasicArena" parent="." instance=ExtResource("1_podw5")]
-
-[node name="TrainingDummy" parent="." instance=ExtResource("2_mudht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64293, 0)
+script = ExtResource("1_gmul1")
 
 [node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
-transform = Transform3D(0.996195, -0.000152115, 0.0871555, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 12.24)
+transform = Transform3D(0.996195, -0.000152127, 0.0871555, -0.0685962, 0.615515, 0.785134, -0.053765, -0.788125, 0.613163, 0, 26.087, 19.045)
 cull_mask = 1047553
 current = true
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
-transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 8.23999)
 camera_reference = NodePath("../PlayerCamera")
-camera_spring_length = 3.8
+camera_spring_length = 2.8
 entity_to_follow = NodePath("../Player")
-entity_follow_height = 2.3
-entity_follow_distance = 20.0
+entity_follow_height = 0.8
+entity_follow_distance = 1.0
 
 [node name="Player" parent="." instance=ExtResource("4_gmul1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 8.23999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 1.48562)
+
+[node name="TrainingDummy" parent="." instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.71943, 0)
+
+[node name="PlayerPosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -31.78)
+
+[node name="BasicArena" parent="." instance=ExtResource("1_podw5")]

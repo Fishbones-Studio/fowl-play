@@ -54,7 +54,6 @@ func _ready() -> void:
 
 	# Change the parent of the follow camera and set it's position
 	call_deferred("reparent", entity_to_follow)
-	position = Vector3(entity_follow_horizontal_offset, entity_follow_height, entity_follow_distance)
 
 	SignalManager.controls_settings_changed.connect(_load_camera_settings)
 
@@ -73,6 +72,9 @@ func _input(event) -> void:
 
 
 func _process(delta) -> void:
+	global_position = entity_to_follow.global_position
+	position = Vector3(entity_follow_horizontal_offset, entity_follow_height, entity_follow_distance)
+	
 	if UIManager.game_input_blocked: return
 	# Calculate controller input
 	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left") \

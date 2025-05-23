@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4cnrmx3uvron"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_4x0ml"]
-[ext_resource type="Resource" uid="uid://by6vg1q7litie" path="res://entities/enemies/training_dummy/training_dummy.tres" id="2_r0jxf"]
+[ext_resource type="Resource" uid="uid://by6vg1q7litie" path="res://entities/enemies/training_dummy/training_dummy_stats.tres" id="2_r0jxf"]
 [ext_resource type="BehaviorTree" uid="uid://bji8hyd1lawvy" path="res://entities/enemies/ai/trees/training_dummy.tres" id="3_qjdjk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0jxf"]
@@ -13,13 +13,18 @@ enemy_model = NodePath("CSGBox3D")
 dialogue_path = "res://entities/enemies/training_dummy/dialogue"
 name_label_template_string = "Training %s"
 
-[node name="CollisionShape3D" parent="." index="0"]
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(0.8, 2.2, 0.8)
+
+[node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_r0jxf")
 
-[node name="BTPlayer" parent="." index="3"]
+[node name="BTPlayer" parent="." index="4"]
 behavior_tree = ExtResource("3_qjdjk")
+active = false
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-size = Vector3(0.6, 2.2, 0.6)
+[node name="NavigationAgent3D" parent="." index="7"]
+avoidance_enabled = false
+keep_y_velocity = false

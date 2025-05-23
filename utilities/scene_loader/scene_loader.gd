@@ -138,7 +138,7 @@ func _instantiate_and_add_scene(
 
 		# Add it as a child of the scene loader
 		add_child(new_scene)
-		var cameras = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
+		var cameras: Array[Node] = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
 		if cameras.size() > 0:
 			print("Found gameplay camera")
 			subviewport.active_camera = cameras[0]
