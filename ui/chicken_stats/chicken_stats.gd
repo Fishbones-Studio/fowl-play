@@ -2,7 +2,6 @@ extends Control
 
 
 func _input(_event: InputEvent) -> void:
-	# Remove stats menu, and make pause focusable again, if conditions are true
 	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
 		_on_close_button_button_up()
 
