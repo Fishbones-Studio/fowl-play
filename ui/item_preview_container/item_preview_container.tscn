@@ -44,3 +44,17 @@ theme_override_constants/line_separation = 6
 bbcode_enabled = true
 text = "Description"
 fit_content = true
+
+[node name="ItemPreviewDescriptionToggle" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="ItemPreviewDescriptionToggle"]
+layout_mode = 2
+text = "Brief Description"
+
+[node name="ItemPreviewDescriptionToggleButton" type="CheckButton" parent="ItemPreviewDescriptionToggle"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1

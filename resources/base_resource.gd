@@ -12,6 +12,7 @@ extends Resource
 
 @export_group("Description")
 @export_multiline var description: String = "PlaceHolder" # Flavour text. Should always be displayed in a RichTextLabel with BBCode support
+@export_multiline var short_description: String
 
 @export_group("Visual & UI")
 @export var icon: Texture  # The icon for the shop/inventory
