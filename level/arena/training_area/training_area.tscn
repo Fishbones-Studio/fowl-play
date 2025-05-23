@@ -14,13 +14,6 @@ transform = Transform3D(0.996195, -0.000152127, 0.0871555, -0.0685962, 0.615515,
 cull_mask = 1047553
 current = true
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
-camera_reference = NodePath("../PlayerCamera")
-camera_spring_length = 2.8
-entity_to_follow = NodePath("../Player")
-entity_follow_height = 0.8
-entity_follow_distance = 1.0
-
 [node name="Player" parent="." instance=ExtResource("4_gmul1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 1.48562)
 
@@ -32,3 +25,12 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -31.78)
 
 [node name="BasicArena" parent="." instance=ExtResource("1_podw5")]
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
+camera_reference = NodePath("../PlayerCamera")
+camera_spring_length = 3.8
+entity_to_follow = NodePath("../Player")
+entity_follow_horizontal_offset = 1.6
+entity_follow_height = 1.4
+entity_follow_distance = 3.0

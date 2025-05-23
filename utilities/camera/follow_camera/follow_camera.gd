@@ -17,7 +17,7 @@ extends Node3D
 
 @export_category("Entity")
 @export var entity_to_follow: CharacterBody3D
-@export var entity_follow_horizontal_offset: float = 2
+@export var entity_follow_horizontal_offset: float = 2.0
 @export var entity_follow_height: float = 4.3
 @export var entity_follow_distance: float = 0.0
 
@@ -39,51 +39,75 @@ var invert_y_axis: bool = false
 @onready var spring_arm_3d: SpringArm3D = %SpringArm3D
 @onready var follow_camera_transformer: RemoteTransform3D = %FollowCameraTransformer
 
-
 func _ready() -> void:
 	_load_camera_settings()
 
-	if !camera_reference:
+	if not camera_reference:
 		push_error("No Camera3D set")
+	if not entity_to_follow:
+		push_error("No entity_to_follow set")
+	if not spring_arm_3d:
+		push_error("SpringArm3D node not found")
+	if not follow_camera_transformer:
+		push_error("FollowCameraTransformer node not found")
 
 	spring_arm_3d.spring_length = camera_spring_length
 	spring_arm_3d.margin = camera_margin
 
 	follow_camera_transformer.remote_path = camera_reference.get_path()
-	follow_camera_transformer.lerp_weight = camera_smoothness
 
-	# Change the parent of the follow camera and set it's position
-	call_deferred("reparent", entity_to_follow)
+	# Ensure this node is a child of the entity to follow
+	if get_parent() != entity_to_follow and entity_to_follow:
+		call_deferred("reparent", entity_to_follow)
 
 	SignalManager.controls_settings_changed.connect(_load_camera_settings)
 
-
 func _input(event) -> void:
-	if UIManager.game_input_blocked: return
+	if UIManager.game_input_blocked:
+		return
 	if event is InputEventMouseMotion:
 	 	# Apply inversion to mouse input
 		var x_input: float = event.relative.x * (-1 if invert_x_axis else 1)
 		var y_input: float = event.relative.y * (-1 if invert_y_axis else 1)
-
-		# Mouse sensitivity control
-		entity_to_follow.rotate_y(deg_to_rad(-x_input) * horizontal_sensitivity)
+		if entity_to_follow:
+			# Mouse sensitivity control
+			entity_to_follow.rotate_y(deg_to_rad(-x_input) * horizontal_sensitivity)
 		rotate_x(deg_to_rad(-y_input) * vertical_sensitivity)
 		_apply_camera_clamp()
 
-
 func _process(delta) -> void:
-	global_position = entity_to_follow.global_position
-	position = Vector3(entity_follow_horizontal_offset, entity_follow_height, entity_follow_distance)
-	
-	if UIManager.game_input_blocked: return
+	# Always maintain the offset relative to the entity
+	if entity_to_follow and get_parent() == entity_to_follow:
+		position = Vector3(
+			entity_follow_horizontal_offset,
+			entity_follow_height,
+			entity_follow_distance
+		)
+		
+	if UIManager.game_input_blocked:
+		return
+		
 	# Calculate controller input
-	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left") \
-		if invert_x_axis else Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right")
-	var y_axis: float = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up") \
-		if invert_y_axis else Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down")
+	var x_axis: float = (
+		Input.get_action_strength("right_stick_right")
+		- Input.get_action_strength("right_stick_left")
+		if invert_x_axis
+		else Input.get_action_strength("right_stick_left")
+			- Input.get_action_strength("right_stick_right")
+	)
+	var y_axis: float = (
+		Input.get_action_strength("right_stick_down")
+		- Input.get_action_strength("right_stick_up")
+		if invert_y_axis
+		else Input.get_action_strength("right_stick_up")
+			- Input.get_action_strength("right_stick_down")
+	)
 
 	# Apply controller input with sensitivity
-	entity_to_follow.rotation.y += x_axis * horizontal_sensitivity * delta * controller_sensitivity
+	if entity_to_follow:
+		entity_to_follow.rotation.y += (
+			x_axis * horizontal_sensitivity * delta * controller_sensitivity
+		)
 	rotation.x += y_axis * vertical_sensitivity * delta * controller_sensitivity
 
 	_apply_camera_clamp()
@@ -92,9 +116,10 @@ func _process(delta) -> void:
 	if shake_intensity > 0:
 		## Decrease the shake intensity by lerping between the current intensity and 0.0
 		shake_intensity = lerp(shake_intensity, 0.0, shake_fade_speed * delta)
-		## The offset gets applied to the camera
-		camera_reference.h_offset = _get_random_offset().x
-		camera_reference.v_offset = _get_random_offset().y
+		if camera_reference:
+			## The offset gets applied to the camera
+			camera_reference.h_offset = _get_random_offset().x
+			camera_reference.v_offset = _get_random_offset().y
 
 
 ## Set the shake intensity to the intensity limit at the start of the screen shake
@@ -114,7 +139,7 @@ func _get_random_offset() -> Vector2:
 
 func _apply_camera_clamp() -> void:
 	# Clamp the rotation to prevent flipping
-	rotation.z = 0
+	rotation.z = 0.0
 	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))
 
 
@@ -125,13 +150,17 @@ func _load_camera_settings() -> void:
 	var camera_settings: Dictionary = {}
 	var default_settings_resource: ControlsSetting = preload("uid://b7ndswiwixuqa")
 
-	for dict: Dictionary in default_settings_resource.default_settings.duplicate(true):
-		camera_settings[dict.keys()[0]] = dict.values()[0]
+	if default_settings_resource and default_settings_resource.default_settings:
+		for dict_item: Dictionary in default_settings_resource.default_settings.duplicate(true):
+			if not dict_item.is_empty():
+				camera_settings[dict_item.keys()[0]] = dict_item.values()[0]
 
 	# Attempt to load config file - return if failed
 	if config.load(cfg_path) == OK and config.has_section(cfg_name):
-		for control_setting in config.get_section_keys(cfg_name):
-			camera_settings[control_setting] = config.get_value(cfg_name, control_setting)
+		for control_setting_key in config.get_section_keys(cfg_name):
+			camera_settings[control_setting_key] = config.get_value(
+				cfg_name, control_setting_key
+			)
 
 	for key in camera_settings.keys():
 		match key:
