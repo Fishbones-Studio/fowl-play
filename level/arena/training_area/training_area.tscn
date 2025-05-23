@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=11 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
 [ext_resource type="PackedScene" uid="uid://b4cnrmx3uvron" path="res://entities/enemies/training_dummy/training_dummy.tscn" id="2_mudht"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_kk74r"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="4_gmul1"]
+[ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="6_0n1dd"]
+[ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="7_7e81l"]
+[ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="8_wk2id"]
+[ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="9_23v1m"]
+
+[sub_resource type="Curve3D" id="Curve3D_ldbqm"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.4722, 0, 4.30455, 0, 0, 0, 0, 0, 0, -16.3455, 0, -2.9408, 0, 0, 0, 0, 0, 0, -8.62079, 0, -17.3611, 0, 0, 0, 0, 0, 0, 3.46522, 0, -11.0408, 0, 0, 0, 0, 0, 0, 9.53378, 0, -4.11338),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="TrainingArea" type="Node3D"]
 script = ExtResource("1_gmul1")
@@ -17,6 +29,12 @@ current = true
 [node name="Player" parent="." instance=ExtResource("4_gmul1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 10.6843)
 
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
+camera_reference = NodePath("../PlayerCamera")
+camera_spring_length = 2.8
+entity_to_follow = NodePath("../Player")
+
 [node name="TrainingDummy" parent="." instance=ExtResource("2_mudht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.71943, 0)
 
@@ -26,11 +44,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28956, 3, 17.3493)
 
 [node name="BasicArena" parent="." instance=ExtResource("1_podw5")]
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
-transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
-camera_reference = NodePath("../PlayerCamera")
-camera_spring_length = 3.8
-entity_to_follow = NodePath("../Player")
-entity_follow_horizontal_offset = 1.6
-entity_follow_height = 1.4
-entity_follow_distance = 3.0
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2598, 1.38483, 34.572)
+
+[node name="RegularSpike" parent="Node3D" instance=ExtResource("9_23v1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="SpikeBall" parent="Node3D" instance=ExtResource("7_7e81l")]
+
+[node name="Path3D" type="Path3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+curve = SubResource("Curve3D_ldbqm")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Node3D/Path3D"]
+transform = Transform3D(0.359314, 0, 0.933214, 0, 1, 0, -0.933214, 0, 0.359314, 2.4722, 0, 4.30455)
+script = ExtResource("8_wk2id")
+
+[node name="GroundSaw" parent="Node3D/Path3D/PathFollow3D" instance=ExtResource("6_0n1dd")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D"]
+transform = Transform3D(0.8953, 0.30485, 0.324814, 0.0358342, -0.776083, 0.629612, 0.44402, -0.552052, -0.705751, 5.7423, 17.3928, -21.4318)
+layers = 3
+light_energy = 60.0
+spot_range = 50.0
+spot_angle = 55.0
