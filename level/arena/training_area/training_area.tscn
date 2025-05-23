@@ -10,19 +10,19 @@
 script = ExtResource("1_gmul1")
 
 [node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
-transform = Transform3D(0.996195, -0.000152127, 0.0871555, -0.0685962, 0.615515, 0.785134, -0.053765, -0.788125, 0.613163, 0, 26.087, 19.045)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.087, 19.045)
 cull_mask = 1047553
 current = true
 
 [node name="Player" parent="." instance=ExtResource("4_gmul1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 1.48562)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 10.6843)
 
 [node name="TrainingDummy" parent="." instance=ExtResource("2_mudht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.71943, 0)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -31.78)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28956, 3, 17.3493)
 
 [node name="BasicArena" parent="." instance=ExtResource("1_podw5")]
 

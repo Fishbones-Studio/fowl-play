@@ -14,7 +14,7 @@ extends Resource
 ## Sets base speed of the character, deciding how fast the move and how far they dash. Is also used to calulate damage for certain abilities.
 @export var speed: float = 5.0
 ## Sets base weight of the character. If this stat is higher the jump height and speed of the character are lowered.
-@export var weight: float = 10.0
+@export_range (0.1, 9999, 0.1) var weight: float = 10.0
 
 @export_category("Factors")
 ## Sets base health regeneration for the character. This makes the character regain health over time.

@@ -28,3 +28,6 @@ active = false
 [node name="NavigationAgent3D" parent="." index="7"]
 avoidance_enabled = false
 keep_y_velocity = false
+
+[node name="CanvasLayer" parent="." index="8"]
+visible = false
