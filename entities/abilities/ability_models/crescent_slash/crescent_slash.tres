@@ -11,8 +11,8 @@ purchasable = true
 drop_chance = 5
 cost = 150
 currency_type = 0
-description = "The user unleashes a powerful AoA slash, hitting all targets [color=orange]2 times[/color] within a [color=yellow]5 meter[/color] radius and [color=orange]ignoring[/color] their Defense stats. This ability has a cooldown of %s."
-short_description = "The user performs an [color=yellow]AoE slash[/color] that hits all targets [color=yellow]twice[/color], dealing [color=yellow]True Damage[/color]."
+description = "The user unleashes a powerful AoA slash, striking all targets [color=yellow]2 times[/color] within a [color=yellow]5 meter[/color] radius. Each hit deals [color=orange]True Damage[/color], which ignores target's Defense, and scales with [color=yellow]115%%[/color] of the user's Attack. This ability has a cooldown of %s."
+short_description = "The user performs an AoE slash that hits all targets [color=yellow]twice[/color], dealing [color=orange]True Damage[/color] based on the user's Attack."
 icon = ExtResource("1_niphc")
 model_uid = "uid://b2apjxceqsopi"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
