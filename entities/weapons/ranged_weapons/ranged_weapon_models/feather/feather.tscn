@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://qj6ygx6ak84a"]
+[gd_scene load_steps=23 format=4 uid="uid://qj6ygx6ak84a"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_t6w12"]
 [ext_resource type="Resource" uid="uid://xugbt3rir6fn" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/feather.tres" id="2_j4etn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="5_ef5ly"]
 [ext_resource type="Script" uid="uid://cnuya14h82qcq" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/states/attack_state.gd" id="5_umcfy"]
 [ext_resource type="Texture2D" uid="uid://dfs6niiy0t5at" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather_Feather Base Color.png" id="8_ef5ly"]
+[ext_resource type="AudioStream" uid="uid://dxl0kmu5cbpeb" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather_launch.wav" id="9_c1ggn"]
 
 [sub_resource type="Gradient" id="Gradient_ef5ly"]
 offsets = PackedFloat32Array(0, 0.448485, 0.763636)
@@ -129,8 +130,9 @@ weapon = NodePath("..")
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("4_ef5ly")
 
-[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
+[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1" node_paths=PackedStringArray("windup_sound")]
 script = ExtResource("4_aj7fy")
+windup_sound = NodePath("../../WindupSound")
 
 [node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin")]
 script = ExtResource("5_umcfy")
@@ -156,3 +158,7 @@ explosiveness = 0.8
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wf8ey")
 draw_pass_1 = SubResource("ArrayMesh_wf8ey")
+
+[node name="WindupSound" parent="." index="7"]
+stream = ExtResource("9_c1ggn")
+bus = &"SFX"

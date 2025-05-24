@@ -1,5 +1,7 @@
 class_name CooldownIdleState extends BaseRangedCombatState
 
+@export var cooldown_sound: AudioStreamPlayer3D
+
 var _cooldown_timer: float = 0.0
 
 func _init()-> void:
@@ -11,6 +13,9 @@ func enter(_previous_state, _info: Dictionary = {}) -> void:
 	if weapon.entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.cooldown_time, true)
 	_cooldown_timer = 0.0
+	
+	if cooldown_sound:
+		cooldown_sound.play()
 
 
 func physics_process(delta: float) -> void:
