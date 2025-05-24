@@ -1,6 +1,9 @@
 extends BaseRangedCombatState
 
+@export var windup_sound: AudioStreamPlayer
+
 var _windup_timer: float = 0.0
+
 
 func _init()-> void:
 	state_type = WeaponEnums.WeaponState.WINDUP
@@ -10,6 +13,7 @@ func _init()-> void:
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	_windup_timer = 0.0
+	windup_sound.play()
 
 
 func process(delta: float) -> void:

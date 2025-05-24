@@ -4,6 +4,7 @@ extends BaseRangedCombatState
 @export var barrel_radius: float = 0.2  # Radius of minigun barrel arrangement
 @export var spiral_spread: float = 25.0  # Degrees between each bullet's angle
 @export var max_spread_angle: float = 45.0  # Max spray angle
+@export var shooting_sound: AudioStreamPlayer
 
 var _fire_timer: float = 0.0
 var _current_angle: float = 0.0
@@ -20,7 +21,8 @@ func enter(_previous_state, _info: Dictionary = {}) -> void:
 	_current_angle = 0.0
 	_angle_direction = 1
 	attack_duration_timer.start(weapon.current_weapon.attack_duration)
-
+	
+	shooting_sound.play()
 
 func process(delta: float) -> void:
 	_fire_timer += delta
