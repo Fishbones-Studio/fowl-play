@@ -2,6 +2,7 @@ class_name ItemPreviewContainer
 extends VBoxContainer
 
 var _current_item: BaseResource
+var _can_toggle: bool = false
 
 @onready var shop_preview_label: Label = %ItemPreviewLabel
 @onready var shop_preview_icon: TextureRect = %ItemPreviewIcon
@@ -17,7 +18,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") and _can_toggle:
 		shop_preview_description_toggle_button.button_pressed = !shop_preview_description_toggle_button.button_pressed
 
 
@@ -31,9 +32,11 @@ func setup(item: BaseResource) -> void:
 		shop_preview_icon.texture = item.icon
 	shop_preview_type.text = ItemEnums.item_type_to_string(item.type)
 
-	if item.short_description.is_empty(): 
+	if item.short_description.is_empty():
+		_can_toggle = false
 		shop_preview_description_container.hide()
 	else:
+		_can_toggle = true
 		shop_preview_description_container.show()
 
 	_on_update_description(shop_preview_description_toggle_button.button_pressed)
