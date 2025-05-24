@@ -144,6 +144,7 @@ size_flags_horizontal = 8
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
@@ -153,7 +154,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Swap Abilities"
 
-[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

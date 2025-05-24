@@ -35,7 +35,7 @@ func _setup_controller_navigation() -> void:
 	if swap_abilities_button:
 		swap_abilities_button.focus_mode = Control.FOCUS_ALL
 
-	if melee_slot and ranged_slot and ability_slot_1 and ability_slot_2	and close_button and swap_abilities_button:
+	if melee_slot and ranged_slot and ability_slot_1 and ability_slot_2 and close_button and swap_abilities_button:
 		melee_slot.focus_neighbor_right  = close_button.get_path()
 		melee_slot.focus_neighbor_bottom = ranged_slot.get_path()
 

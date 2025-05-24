@@ -2,6 +2,7 @@ extends Node
 
 var _icon_cache: Dictionary = {}
 
+
 # Public: get the icon texture for a given action name
 func get_icon_texture(action: String) -> Texture2D:
 	if action.is_empty():
@@ -19,6 +20,7 @@ func get_icon_texture(action: String) -> Texture2D:
 
 	_icon_cache[action] = null
 	return null
+
 
 # clear entire cache or just one entry
 func clear_cache(action_name: String = "*") -> void:

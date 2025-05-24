@@ -27,7 +27,6 @@ var _particles: Array[GPUParticles3D] = []
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
 
 
-
 func _ready() -> void:
 	for particle in hit_area.get_children():
 		if particle is GPUParticles3D:
