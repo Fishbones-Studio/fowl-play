@@ -16,6 +16,11 @@ func _ready() -> void:
 	shop_preview_description_toggle_button.toggled.connect(_on_update_description)
 
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("interact"):
+		shop_preview_description_toggle_button.button_pressed = !shop_preview_description_toggle_button.button_pressed
+
+
 func setup(item: BaseResource) -> void:
 	await get_tree().process_frame
 
