@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact") && !UIManager.game_input_blocked:
+	if Input.is_action_just_pressed("interact"):
 		shop_preview_description_toggle_button.button_pressed = !shop_preview_description_toggle_button.button_pressed
 
 
