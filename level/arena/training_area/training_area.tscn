@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="7_7e81l"]
 [ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="8_wk2id"]
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="9_23v1m"]
+[ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="10_wk2id"]
 
 [sub_resource type="Curve3D" id="Curve3D_ldbqm"]
 closed = true
@@ -46,6 +47,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28956, 3, 17.3493)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2598, 1.38483, 34.572)
+
+[node name="HazardTitle" parent="Node3D" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8, 9, 0)
+modulate = Color(0, 1, 0.188235, 1)
+text = "Hazards"
+font_size = 200
 
 [node name="RegularSpike" parent="Node3D" instance=ExtResource("9_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
