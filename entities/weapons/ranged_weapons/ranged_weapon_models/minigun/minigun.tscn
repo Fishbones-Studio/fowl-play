@@ -125,6 +125,7 @@ bus = &"SFX"
 
 [node name="ShootingSound" parent="." index="5"]
 stream = ExtResource("12_2ydk5")
+bus = &"SFX"
 
 [node name="CooldownSound" parent="." index="6"]
 stream = ExtResource("13_qvsea")
