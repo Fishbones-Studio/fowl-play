@@ -23,3 +23,8 @@ func process(delta: float) -> void:
 	
 	if _windup_timer >= weapon.current_weapon.windup_time:
 		transition_signal.emit(WeaponEnums.WeaponState.ATTACKING, {})
+
+
+func exit() -> void:
+	if windup_sound and windup_sound.playing:
+		windup_sound.stop()
