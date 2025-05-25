@@ -57,6 +57,9 @@ func exit() -> void:
 
 	# Clear ray cast queue, allows existing raycasts to still be processed
 	_ray_queue.clear()
+	
+	if shooting_sound and shooting_sound.playing:
+		shooting_sound.stop()
 
 
 # The visualization should start immediatly for game feel, but Raycasts need to be processed in physics_process to work
