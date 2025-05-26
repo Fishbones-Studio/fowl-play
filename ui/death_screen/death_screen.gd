@@ -2,12 +2,19 @@ extends Control
 
 @export var death_lines: Array[String] = [
 	"Your Feathers Line the Arena Floor.",
+	"Your Feathers Line the Arena Floor.",
+	"The Pecking Order Claims Another.",
 	"The Pecking Order Claims Another.",
 	"Plucked. Beheaded. Devoured.",
 	"Clucked Your Last Cluck.",
+	"Clucked Your Last Cluck.",
+	"Your Egg Was Doomed From the Start.",
 	"Your Egg Was Doomed From the Start.",
 	"No One Remembers the Fallen Roosters.",
-	"You Died."
+	"No One Remembers the Fallen Roosters.",
+	"You Died.",
+	"You Died.",
+	"You Died Like A Bitch.",
 ]
 
 var is_transitioning: bool = false
@@ -29,6 +36,7 @@ func _ready() -> void:
 			CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: pe_diff,
 		}
 	animation_player.play("fade_to_black")
+	currency_overview.label.text = "Lost" # I'm lazy.
 	currency_overview.update_label_container(currency_overview_dict)
 
 
