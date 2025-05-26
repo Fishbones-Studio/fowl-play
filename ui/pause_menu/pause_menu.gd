@@ -77,9 +77,9 @@ func _get_scene_loader_children() -> Array:
 
 
 func _return_to_game_menu() -> void:
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
 	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
 	UIManager.remove_ui(self)
+	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU , UIEnums.UI.NULL)
 	UIManager.paused = false
 
 

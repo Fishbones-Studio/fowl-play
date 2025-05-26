@@ -135,8 +135,7 @@ func _on_select_current_item() -> void:
 	var selected_item: Focusable3D = focusable_items[current_index]
 
 	if selected_item == flyer_item:
-		#UIManager.load_game_with_loading_screen("uid://bhnqi4fnso1hh")
-		UIManager.load_game_with_loading_screen("uid://c3ftt1f5ca2ju")
+		UIManager.load_game_with_loading_screen(SceneEnums.Scenes.TRAINING_AREA)
 	elif selected_item == shop_item:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP)
 	elif selected_item == inventory_item:

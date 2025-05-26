@@ -53,7 +53,7 @@ func _input(_event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
-		var focused = get_viewport().gui_get_focus_owner()
+		var focused: Control = get_viewport().gui_get_focus_owner()
 
 		if focused is LineEdit or focused is TextEdit:
 			# Let text controls handle it naturally
@@ -66,18 +66,18 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Loads a game scene with a loading screen, then switches to HUD and target game scene
 ##
 ## @param: game_scene_path - The resource path or UID to the game scene
-## @param: hud_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
-func load_game_with_loading_screen(game_scene_path: String, hud_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD) -> void:
+## @param: next_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
+func load_game_with_loading_screen(game_scene_enum: SceneEnums.Scenes, next_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD, ) -> void:
 	# Show the loading screen UI
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
 
 	# Notify that the loading screen has started
-	SignalManager.loading_screen_started.emit(hud_ui, {})
+	SignalManager.loading_screen_started.emit(next_ui, {})
 
 	await get_tree().process_frame
 
 	# Switch to the loaded game scene
-	SignalManager.emit_throttled("switch_game_scene", [game_scene_path])
+	SignalManager.emit_throttled("switch_game_scene", [game_scene_enum])
 
 
 ## Removes a specific UI control from the manager using its enum identifier.
@@ -355,6 +355,10 @@ func _on_switch_ui(new_ui_enum: UIEnums.UI, params: Dictionary = {}) -> void:
 ## @param: params - Dictionary of initialization parameters for setup method
 ## @param: make_visible - Should the UI be immediately visible? (Defaults true)
 func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_visible: bool = true) -> void:
+	if new_ui_enum == UIEnums.UI.NULL:
+		print("Ui enum null passed, skipping")
+		return
+	
 	if ui_list.has(new_ui_enum) and is_instance_valid(ui_list[new_ui_enum]):
 		push_warning("Attempted to add UI '", UIEnums.ui_to_string(new_ui_enum), "' which already exists.")
 		if make_visible and not ui_list[new_ui_enum].visible:

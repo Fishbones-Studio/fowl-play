@@ -18,9 +18,11 @@ enum UI {
 	FORFEIT_POPUP,
 	REBIRTH_SHOP,
 	DIALOGUE_BALLOON,
-	DELETE_SAVE_POPUP
+	DELETE_SAVE_POPUP,
+	NULL ## Specific value for when no ui should be loaded
 }
 
+## Ui uid pair
 const PATHS: Dictionary[UI, String] = {
 	UI.MAIN_MENU: "uid://dab0i61vj1n23",
 	UI.SETTINGS_MENU: "uid://81fy3yb0j33w",
@@ -39,7 +41,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.FORFEIT_POPUP: "uid://bqt3s2usixpf3",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
-	UI.DELETE_SAVE_POPUP : "uid://fgrmwyv0t0py"
+	UI.DELETE_SAVE_POPUP : "uid://fgrmwyv0t0py",
 }
 
 ## List of UI elements that should block game input outside of the UI

@@ -76,10 +76,12 @@ func _process(_delta: float) -> void:
 			set_process(false) # Stop checking status
 
 
-func _on_switch_game_scene(scene_path: String) -> void:
+func _on_switch_game_scene(scene_enum: SceneEnums.Scenes) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
 	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
 	# The previous load will continue in the background but its result won't be used by this script.
+	
+	var scene_path : String = SceneEnums.PATHS[scene_enum]
 	
 	# If the scene path is null, throw error
 	if scene_path == null:

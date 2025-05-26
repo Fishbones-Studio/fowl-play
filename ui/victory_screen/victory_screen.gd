@@ -35,9 +35,8 @@ func _return_to_game_menu() -> void:
 	animation_player.play("RESET")
 
 	get_tree().paused = false
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	
 	UIManager.remove_ui(self)
+	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU , UIEnums.UI.NULL)
 
 func setup(params: Dictionary) -> void:
 	currency_overview_change = params.get("currency_dict", CurrencyOverviewDict.new({}))
