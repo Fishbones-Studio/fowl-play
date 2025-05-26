@@ -9,7 +9,7 @@ extends UserInterface
 @onready var overview_button: Button = %OverviewButton
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
-
+@onready var poultry_menu_button : Button = %PoultryMenuButton
 
 func _ready():
 	visibility_changed.connect(
@@ -25,41 +25,45 @@ func setup(_params: Dictionary = {}) -> void:
 	_setup_enter_and_exit_transitions()
 
 
-func _on_resume_button_button_up() -> void:
+func _on_resume_button_pressed() -> void:
 	UIManager.handle_pause()
 
 
-func _on_stats_button_button_up() -> void:
+func _on_overview_button_pressed() -> void:
 	if UIEnums.UI.CHICKEN_STATS in UIManager.ui_list:
 		UIManager.toggle_ui(UIEnums.UI.CHICKEN_STATS)
 	else:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.CHICKEN_STATS) 
 
 
-func _on_settings_button_button_up() -> void:
+func _on_settings_button_pressed() -> void:
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
 		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 	else:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU) 
 
 
-func _on_quit_button_button_up() -> void:
+func _on_quit_button_pressed() -> void:
+	# TODO: some popup about save state being possibly behind
 	_return_to_main_menu()
 
 
-func _on_forfeit_button_button_up() -> void:
+func _on_forfeit_button_pressed() -> void:
 	GameManager.reset_game()
+	_return_to_game_menu()
+	
+func _on_poultry_menu_button_pressed() -> void:
 	_return_to_game_menu()
 
 
 func _set_button_visibility() -> void: 
 	if not ready:
 		await ready
-	var children: Array = _get_scene_loader_children()
-
-	quit_button.visible = "PoultryManMenu" in children # TODO: Whack
-	forfeit_button.visible = "Level" in children # TODO: Whack
-	overview_button.visible = "Level" in children # TODO: Whack
+		
+	quit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.POULTRY_MAN_MENU)
+	poultry_menu_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.TRAINING_AREA)
+	forfeit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.SEWER_LEVEL)
+	overview_button.visible = (SceneLoader.current_scene in [SceneEnums.Scenes.SEWER_LEVEL, SceneEnums.Scenes.TRAINING_AREA])
 
 
 func _get_scene_loader_children() -> Array:

@@ -1,7 +1,10 @@
 ## This scene loader is used as a parent for all gameplay scenes
 ##
 ## This allows for a single point of entry for all scenes, seperate from UI elements
-extends Node
+class_name SceneLoader extends Node
+
+## variable to keep track of the currently loaded game scene
+static var current_scene : SceneEnums.Scenes
 
 # Variable to keep track of the scene currently being loaded in the background
 var _loading_scene_path: String = ""
@@ -120,6 +123,7 @@ func _on_switch_game_scene(scene_enum: SceneEnums.Scenes) -> void:
 
 	# Store the path we are now loading and enable processing to check status
 	_loading_scene_path = scene_path
+	current_scene = scene_enum
 	set_process(true)
 	print("Started loading scene in background: ", scene_path)
 

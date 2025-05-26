@@ -74,7 +74,7 @@ stretch = true
 world_3d = SubResource("World3D_3qrb2")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="ChickenContainer/SubViewportContainer/SubViewport"]
@@ -129,6 +129,22 @@ keep_pressed_outside = true
 text = "Overview"
 alignment = 0
 
+[node name="PoultryMenuButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Return to Poultry Man Menu"
+alignment = 0
+
+[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Forfeit"
+alignment = 0
+
 [node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -142,15 +158,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
 keep_pressed_outside = true
-text = "Quit"
-alignment = 0
-
-[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"PauseMenuButton"
-keep_pressed_outside = true
-text = "Forfeit"
+text = "Main Menu"
 alignment = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
@@ -180,8 +188,9 @@ texture = ExtResource("4_b4b0p")
 expand_mode = 3
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_button_up"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_stats_button_button_up"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_button_up"]
-[connection signal="button_up" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_button_up"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_overview_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/PoultryMenuButton" to="." method="_on_poultry_menu_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
