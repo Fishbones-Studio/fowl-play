@@ -1,15 +1,15 @@
 extends Control
 
 @export var death_lines: Array[String] = [
-	"Your Feathers Line the Arena Floor.",
-	"The Pecking Order Claims Another.",
+	"Your Feathers Line the Arena Floor",
+	"The Pecking Order Claims Another",
 	"Plucked. Beheaded. Devoured.",
-	"Clucked Your Last Cluck.",
-	"Your Egg Was Doomed From the Start.",
-	"No One Remembers the Fallen Hens.",
-	"You Died.",
-	"Mortuus Es Ut Scortum.",
-	"Your Mother Must Be Proud.",
+	"Clucked Your Last Cluck",
+	"Your Egg Was Doomed From the Start",
+	"No One Remembers the Fallen Hens",
+	"You Died",
+	"Mortuus Es Ut Scortum",
+	"Your Mother Must Be Proud",
 	"You Died Like a █████",
 ]
 
