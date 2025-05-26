@@ -18,12 +18,12 @@
 script = ExtResource("1_yhbkp")
 target_var = &"target"
 
-[sub_resource type="BBNode" id="BBNode_sq422"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_ulmcl"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qmoh7"]
-animation_player = SubResource("BBNode_sq422")
+animation_player = SubResource("BBNode_ulmcl")
 animation_name = &"Idle"
 blend = 0.2
 
@@ -67,12 +67,12 @@ start_state = 1
 [sub_resource type="BTSequence" id="BTSequence_4fcdy"]
 children = [SubResource("BTParallel_y7cob"), SubResource("BTAction_uxecv")]
 
-[sub_resource type="BBNode" id="BBNode_qmoh7"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_40a5u"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wrjj1"]
-animation_player = SubResource("BBNode_qmoh7")
+animation_player = SubResource("BBNode_40a5u")
 animation_name = &"Sprint"
 blend = 0.2
 
@@ -128,12 +128,12 @@ script = ExtResource("2_6nkjl")
 min_wait_time = 0.0
 max_wait_time = 0.7
 
-[sub_resource type="BBNode" id="BBNode_b2ogj"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_4fcdy"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_yhbkp"]
-animation_player = SubResource("BBNode_b2ogj")
+animation_player = SubResource("BBNode_4fcdy")
 animation_name = &"Jump"
 blend = 0.2
 
@@ -156,12 +156,12 @@ max_duration = 1.6
 custom_name = "Get ready.."
 children = [SubResource("BTAction_ocp3w"), SubResource("BTParallel_8831e"), SubResource("BTRandomWait_y7cob")]
 
-[sub_resource type="BBNode" id="BBNode_k708t"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_fhbfq"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_u4hmx"]
-animation_player = SubResource("BBNode_k708t")
+animation_player = SubResource("BBNode_fhbfq")
 animation_name = &"Fall"
 blend = 0.2
 
@@ -202,12 +202,12 @@ script = ExtResource("2_6nkjl")
 min_wait_time = 0.5
 max_wait_time = 1.0
 
-[sub_resource type="BBNode" id="BBNode_t3gyd"]
-saved_value = NodePath("ice_fox/AnimationPlayer")
-resource_name = "ice_fox/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_nju8x"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ulmcl"]
-animation_player = SubResource("BBNode_t3gyd")
+animation_player = SubResource("BBNode_nju8x")
 animation_name = &"Dash"
 blend = 0.2
 

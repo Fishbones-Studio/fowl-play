@@ -132,8 +132,8 @@ children = [SubResource("BTCondition_dbsnm")]
 children = [SubResource("BTRepeatUntilSuccess_cgerr")]
 
 [sub_resource type="BBNode" id="BBNode_5c880"]
-saved_value = NodePath("chicken_hennifer/AnimationPlayer")
-resource_name = "chicken_hennifer/AnimationPlayer"
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_504pj"]
 animation_player = SubResource("BBNode_5c880")
@@ -149,12 +149,12 @@ max_wait_time = 0.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_504pj"), SubResource("BTAction_wv527")]
 
-[sub_resource type="BBNode" id="BBNode_a51uw"]
-saved_value = NodePath("chicken_hennifer/AnimationPlayer")
-resource_name = "chicken_hennifer/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_504pj"]
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_dbsnm"]
-animation_player = SubResource("BBNode_a51uw")
+animation_player = SubResource("BBNode_504pj")
 animation_name = &"Walking"
 blend = 0.2
 speed = 2.0
@@ -211,12 +211,12 @@ custom_name = "Pursue"
 children = [SubResource("BTInvert_wv527"), SubResource("BTInvert_a51uw"), SubResource("BTParallel_viady")]
 metadata/_weight_ = 5.0
 
-[sub_resource type="BBNode" id="BBNode_k7lfl"]
-saved_value = NodePath("chicken_hennifer/AnimationPlayer")
-resource_name = "chicken_hennifer/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_viady"]
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_a51uw"]
-animation_player = SubResource("BBNode_k7lfl")
+animation_player = SubResource("BBNode_viady")
 animation_name = &"Idle"
 blend = 0.3
 
@@ -245,12 +245,12 @@ reached_peak = true
 custom_name = "Anticipation"
 children = [SubResource("BTAction_gvblq")]
 
-[sub_resource type="BBNode" id="BBNode_d0mtc"]
-saved_value = NodePath("chicken_hennifer/AnimationPlayer")
-resource_name = "chicken_hennifer/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_k7lfl"]
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_l0rnk"]
-animation_player = SubResource("BBNode_d0mtc")
+animation_player = SubResource("BBNode_k7lfl")
 animation_name = &"Dash"
 blend = 0.2
 speed = 6.0
@@ -309,12 +309,12 @@ comparison = 0
 threshold = 30.0
 use_percentage = true
 
-[sub_resource type="BBNode" id="BBNode_fxtff"]
-saved_value = NodePath("chicken_hennifer/AnimationPlayer")
-resource_name = "chicken_hennifer/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_a51uw"]
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_schhj"]
-animation_player = SubResource("BBNode_fxtff")
+animation_player = SubResource("BBNode_a51uw")
 animation_name = &"Walking"
 blend = 0.2
 speed = 2.0

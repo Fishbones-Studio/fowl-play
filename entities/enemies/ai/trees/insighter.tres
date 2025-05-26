@@ -32,12 +32,12 @@ target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
 
-[sub_resource type="BBNode" id="BBNode_j3vma"]
-saved_value = NodePath("insighter/AnimationPlayer")
-resource_name = "insighter/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_53l80"]
+saved_value = NodePath("Model/insighter/AnimationPlayer")
+resource_name = "Model/insighter/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8uudm"]
-animation_player = SubResource("BBNode_j3vma")
+animation_player = SubResource("BBNode_53l80")
 animation_name = &"Idle"
 blend = 0.2
 
@@ -67,12 +67,12 @@ custom_name = "Slash!"
 children = [SubResource("BTCondition_4rvb4"), SubResource("BTPlayAnimation_8uudm"), SubResource("BTCooldown_smr14")]
 metadata/_weight_ = 66.0
 
-[sub_resource type="BBNode" id="BBNode_jgv6p"]
-saved_value = NodePath("insighter/AnimationPlayer")
-resource_name = "insighter/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_smr14"]
+saved_value = NodePath("Model/insighter/AnimationPlayer")
+resource_name = "Model/insighter/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_q1l3l"]
-animation_player = SubResource("BBNode_jgv6p")
+animation_player = SubResource("BBNode_smr14")
 animation_name = &"Idle"
 blend = 0.2
 
@@ -89,12 +89,12 @@ max_duration = 1.1
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg"), SubResource("BTRandomWait_8uudm")]
 
-[sub_resource type="BBNode" id="BBNode_secwn"]
-saved_value = NodePath("insighter/AnimationPlayer")
-resource_name = "insighter/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_p7jkp"]
+saved_value = NodePath("Model/insighter/AnimationPlayer")
+resource_name = "Model/insighter/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_7st8f"]
-animation_player = SubResource("BBNode_secwn")
+animation_player = SubResource("BBNode_p7jkp")
 animation_name = &"Idle"
 blend = 0.2
 speed = 1.5

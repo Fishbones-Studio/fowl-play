@@ -5,10 +5,10 @@ signal damage_taken
 
 @export var stats: LivingEntityStats
 @export var type: EnemyEnums.EnemyTypes
-@export var enemy_model: Node3D
 @export var knockback_decay: int = 50 ## Rate at which the knockback decays per second
 @export_dir var dialogue_path: String
 @export var name_label_template_string: String ## String template, requires 1 %s which will be replaced with the name specified in the associated stats
+@export var model: Node3D # bc onready doesn't work with intermission and I dunno why
 
 var is_immobile: bool = false
 var is_stunned: bool = false

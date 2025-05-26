@@ -18,12 +18,12 @@
 script = ExtResource("1_qws7o")
 target_var = &"target"
 
-[sub_resource type="BBNode" id="BBNode_d51mb"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_gwx8i"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_q1gun"]
-animation_player = SubResource("BBNode_d51mb")
+animation_player = SubResource("BBNode_gwx8i")
 animation_name = &"Idle"
 blend = 0.2
 
@@ -36,12 +36,12 @@ max_wait_time = 0.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1gun"), SubResource("BTAction_ppkk3")]
 
-[sub_resource type="BBNode" id="BBNode_gwx8i"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_8n2b3"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8n2b3"]
-animation_player = SubResource("BBNode_gwx8i")
+animation_player = SubResource("BBNode_8n2b3")
 animation_name = &"Sprint"
 blend = 0.2
 
@@ -93,14 +93,14 @@ children = [SubResource("BTAction_f1ys2"), SubResource("BTCondition_gwx8i"), Sub
 [sub_resource type="BTSequence" id="BTSequence_c8cr3"]
 custom_name = "Pursue"
 children = [SubResource("BTSequence_h0qwm"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
-metadata/_weight_ = 2.49943
+metadata/_weight_ = 1.0
 
-[sub_resource type="BBNode" id="BBNode_mxuth"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_f1ys2"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_gwx8i"]
-animation_player = SubResource("BBNode_mxuth")
+animation_player = SubResource("BBNode_f1ys2")
 animation_name = &"Sprint"
 blend = 0.2
 
@@ -108,20 +108,20 @@ blend = 0.2
 script = ExtResource("8_mxuth")
 target_var = &"target"
 retreat_distance = 10.0
-speed_factor = 15.0
-rotation_speed = 6.0
+speed_factor = 30.0
+rotation_speed = 15.0
 duration = 2.0
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
 face_moving_direction = true
 
-[sub_resource type="BBNode" id="BBNode_h0qwm"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_xl814"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ftfet"]
-animation_player = SubResource("BBNode_h0qwm")
+animation_player = SubResource("BBNode_xl814")
 animation_name = &"Attack"
 blend = 0.2
 
@@ -146,7 +146,7 @@ children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_gwx8i"),
 [sub_resource type="BTCooldown" id="BTCooldown_mxuth"]
 duration = 5.0
 children = [SubResource("BTSequence_7lgdv")]
-metadata/_weight_ = 1.0
+metadata/_weight_ = 9.0
 
 [sub_resource type="BBNode" id="BBNode_7lgdv"]
 saved_value = NodePath("woodpecker/AnimationPlayer")
