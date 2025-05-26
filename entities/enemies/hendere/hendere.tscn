@@ -12,17 +12,16 @@
 radius = 1.0
 height = 2.4
 
-[node name="Hendere" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_legca")]
+[node name="Hendere" instance=ExtResource("1_legca")]
 collision_mask = 25
 stats = ExtResource("2_n7fk8")
-enemy_model = NodePath("chicken_hennifer")
 dialogue_path = "res://entities/enemies/hendere/dialogue"
 name_label_template_string = "%s"
 
-[node name="chicken_hennifer" parent="." index="0" instance=ExtResource("3_i6i68")]
+[node name="chicken_hennifer" parent="Model" index="0" instance=ExtResource("3_i6i68")]
 transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 0, 1.13557, 0)
 
-[node name="Skeleton3D" parent="chicken_hennifer/Armature_002" index="1"]
+[node name="Skeleton3D" parent="Model/chicken_hennifer/Armature_002" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
 bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
@@ -60,4 +59,4 @@ texture = ExtResource("6_uw30w")
 expand_mode = 3
 stretch_mode = 5
 
-[editable path="chicken_hennifer"]
+[editable path="Model/chicken_hennifer"]
