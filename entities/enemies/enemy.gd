@@ -11,6 +11,7 @@ signal damage_taken
 @export var name_label_template_string: String ## String template, requires 1 %s which will be replaced with the name specified in the associated stats
 
 var is_immobile: bool = false
+var is_stunned: bool = false
 
 var _knockback: Vector3 = Vector3.ZERO
 
@@ -41,6 +42,9 @@ func _physics_process(delta: float) -> void:
 	if is_immobile:
 		velocity += _knockback
 		_knockback = _knockback.move_toward(Vector3.ZERO, knockback_decay * delta)
+	if is_stunned and _knockback.is_zero_approx():
+		velocity.x = 0.0
+		velocity.z = 0.0
 
 	move_and_slide()
 
@@ -58,19 +62,29 @@ func get_stats_resource() -> LivingEntityStats:
 
 func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums.DamageTypes, info: Dictionary = {}) -> void:
 	if target == self:
+		var immobile_time: float = 0.0
 		if "knockback" in info:
 			# Set knockback force
 			_knockback = info["knockback"]
 
-			if not velocity.is_equal_approx(Vector3.ZERO):
+			if not velocity.is_zero_approx():
 				_knockback *= 2
 
 			# Set immobile time
-			var immobile_time: float = _knockback.length() / knockback_decay
-			if not is_equal_approx(immobile_time, 0):
-				immobile_timer.wait_time = immobile_time
-				immobile_timer.start()
-				is_immobile = true
+			immobile_time = _knockback.length() / knockback_decay
+		if "stun_time" in info:
+			var stun_time: float = info["stun_time"]
+
+			if stun_time > immobile_time:
+				immobile_time = stun_time
+				is_stunned = true
+
+		if not is_zero_approx(immobile_time):
+			immobile_timer.wait_time = immobile_time
+			immobile_timer.start()
+			is_immobile = true
+			immobile_time = 0.0
+
 
 		# Play hurt sound
 		on_hurt.play()
@@ -95,3 +109,4 @@ func apply_gravity(delta: float) -> void:
 
 func _on_immobile_timer_timeout() -> void:
 	is_immobile = false
+	is_stunned = false

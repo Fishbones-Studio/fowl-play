@@ -5,6 +5,7 @@ extends Node3D
 @export var animation_player: AnimationPlayer
 @export var current_weapon: MeleeWeaponResource
 @export var hit_mask: int = 2
+@export var enable_stun: bool = true
 
 var attacking: bool = false:
 	set(value):
