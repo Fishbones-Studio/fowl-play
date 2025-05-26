@@ -14,7 +14,6 @@ currency_type = 0
 description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], gradually growing in size and intensity—the longer it remains on the field, the more damage it deals. Targets caught within the fireball take damage instantly, with damage scaling based on [color=yellow]100%%[/color] the user's Stamina, then again every [color=\"yellow\"]second[/color] while inside, and scaling based on the user's Stamina. 
 
 This ability consumes [color=yellow]50%%[/color] of the user's Max Stamina and has a cooldown of %s."
-short_description = "The user launches a fireball that [color=yellow]expands over time[/color], dealing [color=yellow]strong continuous[/color] damage to targets within, with damage scaling based on the user's Stamina, before fading after a [color=yellow]moderate duration[/color]."
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

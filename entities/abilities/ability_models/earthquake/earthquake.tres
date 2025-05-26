@@ -14,7 +14,6 @@ currency_type = 0
 description = "Channeling immense weight into the earth, the user crashes down with tectonic force, triggering a series of devastating quakes. Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per quake[/color], launching targets with escalating force.
 
 Damage scales with [color=yellow]100%%[/color] of the user's [color=yellow]Weight[/color]. Can only be used while airborne and has a cooldown of %s."
-short_description = "The user crashes down, dealing [color=yellow]significant knockback[/color] to targets hit and triggering quakes that expand [color=yellow]thrice[/color], dealing [color=yellow]greatly increased[/color] damage based on the user's Weight."
 icon = ExtResource("1_uetiq")
 model_uid = "uid://bxc3j6moweqeh"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
