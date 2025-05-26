@@ -161,4 +161,3 @@ draw_pass_1 = SubResource("ArrayMesh_wf8ey")
 
 [node name="WindupSound" parent="." index="7"]
 stream = ExtResource("9_c1ggn")
-bus = &"SFX"

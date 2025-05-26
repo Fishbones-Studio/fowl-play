@@ -10,9 +10,9 @@
 [ext_resource type="Animation" uid="uid://ytpkchyucjoj" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_04ypb"]
 [ext_resource type="Animation" uid="uid://db2uvllkg5ui1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
-[ext_resource type="AudioStream" uid="uid://dq677fpyoc1my" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/mini_gun_windup.wav" id="11_ja327"]
-[ext_resource type="AudioStream" uid="uid://utwdhg8pr0fx" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/mini_gun_shooting.wav" id="12_2ydk5"]
-[ext_resource type="AudioStream" uid="uid://dv8le0v6eghh4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/mini_gun_cooldown.wav" id="13_qvsea"]
+[ext_resource type="AudioStream" uid="uid://dq677fpyoc1my" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_windup.wav" id="11_ja327"]
+[ext_resource type="AudioStream" uid="uid://utwdhg8pr0fx" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_shooting.wav" id="12_2ydk5"]
+[ext_resource type="AudioStream" uid="uid://dv8le0v6eghh4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_cooldown.wav" id="13_qvsea"]
 
 [sub_resource type="Animation" id="Animation_i5s7k"]
 length = 0.001
@@ -125,6 +125,7 @@ bus = &"SFX"
 
 [node name="ShootingSound" parent="." index="5"]
 stream = ExtResource("12_2ydk5")
+bus = &"SFX"
 
 [node name="CooldownSound" parent="." index="6"]
 stream = ExtResource("13_qvsea")
