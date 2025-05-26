@@ -289,10 +289,10 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
-size = Vector3(0.57618, 1.83258, 1.34822)
+size = Vector3(2, 3, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yaitn"]
-size = Vector3(0.454041, 1.41137, 0.442017)
+size = Vector3(1, 1.4, 1)
 
 [node name="Leek" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
 animation_player = NodePath("AnimationPlayer")
@@ -303,11 +303,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_axwbb")
 }
 
-[node name="WeaponHitBox" parent="." index="2"]
+[node name="WeaponHitBox" parent="." index="1"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.000333309, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0116823, 2.31428, 0.0256882)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0116823, 2.92183, 0.0232468)
 shape = SubResource("BoxShape3D_e1ngp")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitBox" index="1"]
