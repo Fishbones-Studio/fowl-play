@@ -24,8 +24,7 @@ func set_item_data(item: Resource) -> void:
 
 func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	var name_string : String = "[color=yellow]%s[/color]" if shop_item.cost != 0 else "[color=orange]%s[/color]"
-	name_label.text = name_string % shop_item.name
+	_update_name_label(name_label)
 	currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	cost_label.text = str(shop_item.cost)
 

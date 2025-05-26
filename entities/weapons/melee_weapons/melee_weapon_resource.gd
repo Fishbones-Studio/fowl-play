@@ -9,6 +9,7 @@ extends BaseResource
 @export var windup_time: float
 @export var attack_duration: float
 @export var cooldown_time: float
+@export var stun_time: float
 # Animation Variables
 @export_group("Animation")
 @export var loop_animation := false
@@ -29,6 +30,8 @@ func get_modifier_string(hex_code: String = "#ffff00") -> Array[String]:
 		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, attack_duration])
 	if cooldown_time:
 		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, cooldown_time])
+	if stun_time:
+		modifiers.append("[color=%s]%.2fs[/color]" % [hex_code, stun_time])
 
 	return modifiers
 
@@ -53,6 +56,11 @@ func get_modifier() -> Array[float]:
 
 	if cooldown_time:
 		modifiers.append(cooldown_time)
+	else:
+		modifiers.append(0.0)
+
+	if stun_time:
+		modifiers.append(stun_time)
 	else:
 		modifiers.append(0.0)
 

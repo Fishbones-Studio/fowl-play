@@ -14,18 +14,17 @@
 radius = 1.75
 height = 25.0
 
-[node name="ElderCentipede" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_urhlp")]
+[node name="ElderCentipede" instance=ExtResource("1_urhlp")]
 stats = ExtResource("2_5cdes")
 type = 1
-enemy_model = NodePath("chicken_centipede")
 knockback_decay = 10000
 dialogue_path = "res://entities/enemies/elder_centipede/dialogue"
 name_label_template_string = "%s \"Evolved\""
 
-[node name="chicken_centipede" parent="." index="0" instance=ExtResource("3_djom0")]
+[node name="chicken_centipede" parent="Model" index="0" instance=ExtResource("3_djom0")]
 transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0.0154228, 0.0466528, -0.000320435)
 
-[node name="Skeleton3D" parent="chicken_centipede/Armature" index="0"]
+[node name="Skeleton3D" parent="Model/chicken_centipede/Armature" index="0"]
 bones/0/position = Vector3(0.0703216, 4.42665, 13.0418)
 bones/1/rotation = Quaternion(0.00295003, 0.188449, -0.77218, 0.606809)
 bones/2/rotation = Quaternion(0.0553284, 0.0089587, 0.434061, 0.899138)
@@ -280,4 +279,4 @@ ability_resource = ExtResource("6_bv6h5")
 texture = ExtResource("5_67o2n")
 expand_mode = 3
 
-[editable path="chicken_centipede"]
+[editable path="Model/chicken_centipede"]

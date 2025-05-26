@@ -14,16 +14,15 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ixwh"]
 size = Vector3(1.5, 4, 3.5)
 
-[node name="IceFox" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_cemmm")]
+[node name="IceFox" instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
-enemy_model = NodePath("ice_fox")
 dialogue_path = "res://entities/enemies/ice_fox/dialogue"
 name_label_template_string = "%s, Detonator of Foxes"
 
-[node name="ice_fox" parent="." index="0" instance=ExtResource("4_qhcpj")]
+[node name="ice_fox" parent="Model" index="0" instance=ExtResource("4_qhcpj")]
 transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ice_fox/Armature" index="0"]
+[node name="Skeleton3D" parent="Model/ice_fox/Armature" index="0"]
 bones/0/position = Vector3(9.72681e-17, 1.91494e-08, 0.438088)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
@@ -94,4 +93,4 @@ ability_resource = ExtResource("7_psoce")
 texture = ExtResource("10_ak1y5")
 expand_mode = 3
 
-[editable path="ice_fox"]
+[editable path="Model/ice_fox"]
