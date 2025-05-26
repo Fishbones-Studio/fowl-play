@@ -3,14 +3,14 @@ extends Control
 var display_text: String
 var currency_overview_change : Dictionary
 
-@onready var title: Label = $VboxContainer/TitleLabel
+@onready var title_label: Label = %TitleLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_timer: Timer = $AnimationTimer
 @onready var currency_overview : CurrencyOverview = %CurrencyOverview
 
 
 func _ready() -> void:
-	title.text = display_text
+	title_label.text = display_text
 	animation_player.play("fade")
 	animation_timer.start()
 
