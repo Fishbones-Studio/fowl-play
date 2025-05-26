@@ -5,7 +5,6 @@ extends Node3D
 @export var animation_player: AnimationPlayer
 @export var current_weapon: MeleeWeaponResource
 @export var hit_mask: int = 2
-@export var enable_stun: bool = true
 
 var attacking: bool = false:
 	set(value):
@@ -14,6 +13,7 @@ var attacking: bool = false:
 
 var hit_targets_this_swing: Array[Node] = []
 var entity_stats: LivingEntityStats
+var enable_stun: bool = true
 
 @onready var weapon_hit_box: Area3D = $WeaponHitBox
 @onready var weapon_attack_sfx: AudioStreamPlayer = $WeaponAttackSFX
