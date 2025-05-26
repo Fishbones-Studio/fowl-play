@@ -9,7 +9,8 @@ extends Control
 	"No One Remembers the Fallen Hens.",
 	"You Died.",
 	"Mortuus Es Ut Scortum.",
-	"Your Must Be Proud.",
+	"Your Mother Must Be Proud.",
+	"You Died Like a █████",
 ]
 
 var is_transitioning: bool = false
