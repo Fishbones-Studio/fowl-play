@@ -13,6 +13,8 @@ extends Control
 	"No One Remembers the Fallen Roosters.",
 	"No One Remembers the Fallen Roosters.",
 	"You Died.",
+	"You Died.",
+	"You Died Like A Bitch.",
 ]
 
 var is_transitioning: bool = false
