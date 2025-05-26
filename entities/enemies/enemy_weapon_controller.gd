@@ -1,6 +1,8 @@
 class_name EnemyWeaponController
 extends Node3D
 
+@export var enable_stun: bool = false
+
 var _current_weapon_slot: int = 0
 var _weapon_equiped: bool = false
 
@@ -14,6 +16,7 @@ func _equip_weapons() -> void:
 		if weapon_handler is MeleeWeaponNode:
 			if weapon_handler.melee_weapon_scene:
 				weapon_handler.visible = true
+				weapon_handler.current_weapon.enable_stun = enable_stun
 				_current_weapon_slot = 0
 				_weapon_equiped = true
 				return

@@ -26,12 +26,12 @@ var/aggro_distance/hint_string = "The distance for the enemy to become aggressiv
 script = ExtResource("1_gf8jg")
 target_var = &"target"
 
-[sub_resource type="BBNode" id="BBNode_8cml0"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_d6hvj"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_sexgk"]
-animation_player = SubResource("BBNode_8cml0")
+animation_player = SubResource("BBNode_d6hvj")
 animation_name = &"Idle"
 blend = 0.3
 
@@ -48,12 +48,12 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_e381t"), SubResource("BTRandomWait_e381t")]
 
-[sub_resource type="BBNode" id="BBNode_e381t"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_m26ws"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0xmxa"]
-animation_player = SubResource("BBNode_e381t")
+animation_player = SubResource("BBNode_m26ws")
 animation_name = &"Roll"
 blend = 0.2
 
@@ -139,12 +139,12 @@ custom_name = "Pursue target"
 children = [SubResource("BTPlayAnimation_0xmxa"), SubResource("BTParallel_e381t")]
 metadata/_weight_ = 1.0
 
-[sub_resource type="BBNode" id="BBNode_jowcg"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_mkwy1"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kbctg"]
-animation_player = SubResource("BBNode_jowcg")
+animation_player = SubResource("BBNode_mkwy1")
 animation_name = &"Roll"
 blend = 0.2
 speed = 3.0
@@ -168,12 +168,12 @@ children = [SubResource("BTAction_sv4kc"), SubResource("BTWait_5cuga")]
 custom_name = "Anticipation"
 children = [SubResource("BTPlayAnimation_kbctg"), SubResource("BTParallel_cjgjq")]
 
-[sub_resource type="BBNode" id="BBNode_akjhg"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_ovltl"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_2bbcu"]
-animation_player = SubResource("BBNode_akjhg")
+animation_player = SubResource("BBNode_ovltl")
 animation_name = &"Roll"
 blend = 0.2
 speed = 6.0
@@ -214,12 +214,12 @@ custom_name = "Charge attack  cooldown: 10s"
 children = [SubResource("BTSequence_yvhtp")]
 metadata/_weight_ = 1.0
 
-[sub_resource type="BBNode" id="BBNode_gf8jg"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_wwppe"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ykixg"]
-animation_player = SubResource("BBNode_gf8jg")
+animation_player = SubResource("BBNode_wwppe")
 animation_name = &"Roll"
 blend = 0.2
 speed = 6.0
@@ -249,12 +249,12 @@ children = [SubResource("BTAction_kbctg"), SubResource("BTAction_ykixg")]
 [sub_resource type="BTSequence" id="BTSequence_5cuga"]
 children = [SubResource("BTParallel_d6hvj")]
 
-[sub_resource type="BBNode" id="BBNode_ykixg"]
-saved_value = NodePath("ball_chicken/AnimationPlayer")
-resource_name = "ball_chicken/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_157vn"]
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTStopAnimation" id="BTStopAnimation_d6hvj"]
-animation_player = SubResource("BBNode_ykixg")
+animation_player = SubResource("BBNode_157vn")
 animation_name = &"Roll"
 
 [sub_resource type="BTAction" id="BTAction_m26ws"]
