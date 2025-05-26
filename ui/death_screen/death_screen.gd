@@ -1,13 +1,24 @@
 extends Control
 
+@export var death_lines: Array[String] = [
+	"Your Feathers Line the Arena Floor.",
+	"The Pecking Order Claims Another.",
+	"Plucked. Beheaded. Devoured.",
+	"Clucked Your Last Cluck.",
+	"Your Egg Was Doomed From the Start.",
+	"No One Remembers the Fallen Roosters.",
+	"You Died."
+]
+
 var is_transitioning: bool = false
 
+@onready var title_label: Label = %TitleLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var title: Label = $VBoxContainer/TitleLabel
 @onready var currency_overview : CurrencyOverview = %CurrencyOverview
 
 
 func _ready() -> void:
+	title_label.text = death_lines.pick_random()
 	get_tree().paused = true
 
 	# Resetting the game and calculating the difference in prosperity eggs
