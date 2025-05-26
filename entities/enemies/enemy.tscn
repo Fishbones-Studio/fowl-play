@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=11 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]

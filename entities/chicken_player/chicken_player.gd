@@ -2,6 +2,8 @@ class_name ChickenPlayer
 extends CharacterBody3D
 
 @export var stats: LivingEntityStats
+## When on, the player can die
+@export var killable := true
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 @onready var animation_tree: AnimationTree = %AnimationTree
@@ -29,6 +31,11 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	movement_state_machine.process(delta)
 	SignalManager.player_stats_changed.emit(stats)
+	
+	if stats.current_health <= 0 && killable:
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {
+				"initial_velocity": velocity,
+			})
 
 
 func _physics_process(delta: float) -> void:
