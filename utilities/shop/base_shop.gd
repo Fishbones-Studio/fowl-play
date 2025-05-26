@@ -69,6 +69,9 @@ func _refresh_shop() -> void:
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
 
+		if selected_item.cost == 0:
+			continue
+
 		if first_item_free and selected_item == selected_items.get(0):
 			selected_item.cost = 0
 

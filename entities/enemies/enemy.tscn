@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
 [ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
-[ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
+[ext_resource type="Script" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
@@ -17,10 +17,13 @@ shader_parameter/corner_radius = 0.05
 shader_parameter/border_width = 0.02
 shader_parameter/border_color = Color(0, 0, 0, 1)
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("model")]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_ipr6v")
+model = NodePath("Model")
+
+[node name="Model" type="Node3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 

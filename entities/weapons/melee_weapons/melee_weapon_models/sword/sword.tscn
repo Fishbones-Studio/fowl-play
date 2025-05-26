@@ -56,10 +56,10 @@ tracks/3/path = NodePath("WeaponHitBox:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.433333, 0.75),
-"transitions": PackedFloat32Array(2, 0.05, 1),
+"times": PackedFloat32Array(0, 0.4, 0.75),
+"transitions": PackedFloat32Array(10, 0.05, 1),
 "update": 0,
-"values": [Vector3(1.2, 1.2, 1.2), Vector3(1.4, 1.4, 1.4), Vector3(1, 1, 1)]
+"values": [Vector3(1.2, 1.2, 1.2), Vector3(3, 3, 3), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_4d8fe"]
@@ -217,7 +217,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlb0o"]
-size = Vector3(0.298645, 2.38057, 0.591309)
+size = Vector3(0.3, 2.4, 0.6)
 
 [node name="Sword" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_xcyw7")]
 animation_player = NodePath("AnimationPlayer")
