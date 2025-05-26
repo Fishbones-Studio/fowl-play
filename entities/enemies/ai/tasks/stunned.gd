@@ -3,7 +3,7 @@ extends BTCondition
 
 
 func _generate_name() -> String:
-	return "Stunned ➜ self"
+	return "Stunned ➜ Agent"
 
 
 func _tick(_delta: float) -> Status:

@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_isvs4"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_k2yrv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="8_j3vma"]
 [ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="9_53l80"]
+[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_53l80"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
@@ -169,8 +170,20 @@ metadata/_weight_ = 1.0
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_q1l3l"]
 children = [SubResource("BTSequence_ucb6i")]
 
+[sub_resource type="BTCondition" id="BTCondition_smr14"]
+script = ExtResource("10_53l80")
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_p7jkp"]
+children = [SubResource("BTCondition_smr14")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_secwn"]
+children = [SubResource("BTRepeatUntilFailure_p7jkp")]
+
+[sub_resource type="BTParallel" id="BTParallel_7st8f"]
+children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
+
 [sub_resource type="BTSequence" id="BTSequence_j3vma"]
-children = [SubResource("BTSequence_4rvb4"), SubResource("BTProbabilitySelector_q1l3l")]
+children = [SubResource("BTSequence_4rvb4"), SubResource("BTParallel_7st8f")]
 
 [sub_resource type="BTParallel" id="BTParallel_8uudm"]
 num_failures_required = 3
