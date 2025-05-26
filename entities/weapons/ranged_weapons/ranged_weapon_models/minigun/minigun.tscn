@@ -121,15 +121,12 @@ transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 
 
 [node name="WindupSound" parent="." index="4"]
 stream = ExtResource("11_ja327")
-bus = &"SFX"
 
 [node name="ShootingSound" parent="." index="5"]
 stream = ExtResource("12_2ydk5")
-bus = &"SFX"
 
 [node name="CooldownSound" parent="." index="6"]
 stream = ExtResource("13_qvsea")
-bus = &"SFX"
 
 [connection signal="timeout" from="RangedWeaponStateMachine/AttackState/AttackDurationTimer" to="RangedWeaponStateMachine/AttackState" method="_on_attack_duration_timer_timeout"]
 

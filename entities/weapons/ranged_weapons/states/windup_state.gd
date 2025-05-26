@@ -13,7 +13,7 @@ func _init()-> void:
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	_windup_timer = 0.0
-	
+
 	if windup_sound:
 		windup_sound.play()
 
@@ -26,5 +26,5 @@ func process(delta: float) -> void:
 
 
 func exit() -> void:
-	if windup_sound and windup_sound.playing:
+	if windup_sound and windup_sound.playing and weapon.current_weapon.allow_early_release:
 		windup_sound.stop()
