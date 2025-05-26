@@ -16,3 +16,15 @@ state_machine = NodePath("../RangedWeaponStateMachine")
 
 [node name="AttackOrigin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93543, 0)
+
+[node name="WindupSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="ShootingSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="CooldownSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
