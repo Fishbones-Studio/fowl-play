@@ -6,6 +6,7 @@
 [node name="DialogueBox" instance=ExtResource("1_kdsns")]
 script = ExtResource("2_we8in")
 dialogue_subfolder_path = ""
+dialogue_file_name = ""
 
 [node name="NameLabel" parent="." index="1"]
 visible = false

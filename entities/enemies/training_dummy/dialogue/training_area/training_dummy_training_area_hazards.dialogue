@@ -1,15 +1,48 @@
+import "uid://b8js24eelbiop" as snippets
 ~ start
-Training Dummy: hello
-- Ground Saw => saw_hazard
-- Spikes => END
-- Spike Ball => END
-- Other hazards => other_hazards
+Training Dummy: Welcome, recruit! I'm here to guide you through some of the basics. Take a look around. We can discuss these hazards here, or that handy machine. What piques your interest first?
+=> starting_options
+
+~ starting_options
+- What am I doing here? 
+	Training Dummy: Okay, if you insist. But you might not hear what you like
+	=>< snippets/explain_game_story_intro
+	=> starting_options
+- I want to know about the hazards => hazard_questions
+- What's the machine on the left? => healing_station
+- I've learned enough for now. => end_conversation
+
+~ hazard_questions
+- Tell me about the Ground Saw. => saw_hazard
+- What are those Spikes? => spikes
+- That Spike Ball looks dangerous. => spike_ball
 
 ~ saw_hazard
-Training Dummy: The saw hazard deals damage [wave amp=25 freq=5]while standin on it[/wave]
-Training Dummy: Don't worry, the damage is applied on an interval
+Training Dummy: The Ground Saw is a nasty hazard. If you spot one spinning, keep your distance! [wave amp=25 freq=5]Touching it[/wave] will quickly drain your health, [color=orange]and the effect lingers for a short while even after you step away[/color].
+Training Dummy: It won't kill you instantly, the damage comes in bursts, but it's best not to push your luck.
+=> common_hazard_follow_up
 
-~ other_hazards
-Training Dummy: Certain weapons and enemies [wave amp=25 freq=5]spawn their own different hazards[/wave]
-Training Dummy: But thats a [shake rate=20 level=10]secret[/shake].
+~ spikes
+Training Dummy: Ah, the Spikes. A classic obstacle you'll encounter. These will [wave amp=25 freq=5]inflict damage over time[/wave] [color=orange]if you're standing on them[/color]. So, watch your step!
+=> common_hazard_follow_up
 
+~ spike_ball
+Training Dummy: The Spike Ball! Now this one packs a serious punch. It deals significant damage and will [shake rate=15 level=15]knock you back[/shake] quite a bit.
+Training Dummy: Definitely something to avoid getting hit by. Or, if you're clever, perhaps you can use its momentum against your foes.
+=> common_hazard_follow_up
+
+~ common_hazard_follow_up
+Training Dummy: And a general piece of advice: these aren't the only types of dangers you'll face. Some weapons and even certain enemies can [wave amp=25 freq=5]introduce their own unique hazards[/wave] to the field. That's a more [shake rate=20 level=10]advanced topic[/shake] for another training session, though.
+Training Dummy: Anything else you'd like to cover from our list?
+=> starting_options
+
+~ healing_station
+Training Dummy: Good eye! That's a Healing Station. You'll find these scattered around between rounds. A welcome sight, believe me.
+Training Dummy: They're for restoring your health. Usually, they require [color=orange]a small payment[/color], but this one here in the training yard is on the house. So, if you take a few knocks while practicing, feel free to use it.
+Training Dummy: What else can I help you with today?
+=> starting_options
+
+~ end_conversation
+Training Dummy: Very well. Before you go, take this advice to heart: [[Remember, these traps aren't just a threat to you, they can harm your enemies too! Use that to your advantage.|Situational awareness is paramount. Always be on the lookout for these dangers if you want to make it through.|A clever fighter uses everything at their disposal. Traps can be tools, if you're smart about it.]]
+Training Dummy: Now, go on and apply what you've learned. Good luck out there, recruit!
+=> END

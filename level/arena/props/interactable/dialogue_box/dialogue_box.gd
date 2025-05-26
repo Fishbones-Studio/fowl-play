@@ -33,6 +33,7 @@ func _on_dialogue_folder_path_set(value: String) -> void:
 
 	var found := false
 	for file_name in file_names:
+		print("Dialogue file: "+ file_name)
 		if file_name.ends_with("/") or file_name.begins_with("."):
 			continue
 		if not file_name.ends_with(".dialogue"):

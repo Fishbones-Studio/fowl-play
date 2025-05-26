@@ -16,6 +16,7 @@ drop_chance = 90
 cost = 150
 currency_type = 0
 description = "Deals %s Base Damage with a sharp leek after winding up for %s. The attack lasts %s, then enters a cooldown state for %s."
+short_description = ""
 icon = ExtResource("1_16jp6")
 model_uid = "uid://bymaeu4dtl7ex"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

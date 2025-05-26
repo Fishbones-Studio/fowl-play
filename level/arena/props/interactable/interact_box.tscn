@@ -12,7 +12,7 @@ size = Vector3(6, 4.66492, 8.33762)
 
 [node name="InteractBox" type="StaticBody3D"]
 collision_layer = 32
-collision_mask = 31
+collision_mask = 2
 script = ExtResource("1_fpr1w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

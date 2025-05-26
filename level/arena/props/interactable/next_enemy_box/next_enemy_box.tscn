@@ -6,6 +6,7 @@
 [node name="NextEnemyBox" instance=ExtResource("1_j2ldq")]
 script = ExtResource("2_ptpwp")
 dialogue_subfolder_path = "in_between_rounds"
+dialogue_file_name = ""
 
 [node name="NameLabel" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 6, 0)

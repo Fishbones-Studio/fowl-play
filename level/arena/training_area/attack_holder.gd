@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var attack_dialogue : DialogueBox = %AttackDialogueBox
+@onready var attack_dialogue : DialogueBox = $AttackDialogueBox
 @onready var training_dummy : Enemy = $TrainingDummy
 
 func _ready() -> void:
