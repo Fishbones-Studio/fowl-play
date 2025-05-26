@@ -1,7 +1,7 @@
 extends Control
 
 var is_transitioning: bool = false
-var currency_overview_change : CurrencyOverviewDict
+var currency_overview_change : Dictionary
 
 @onready var label: Label = $VBoxContainer/VictoryLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -13,8 +13,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	victory_music_player.play()
 	animation_player.play("victory")
-	currency_overview.label_amount_dictionary = currency_overview_change
-	currency_overview.update_label_container()
+	currency_overview.update_label_container(currency_overview_change)
 
 
 func _input(event: InputEvent) -> void:
@@ -39,5 +38,6 @@ func _return_to_game_menu() -> void:
 	
 	UIManager.remove_ui(self)
 
+
 func setup(params: Dictionary) -> void:
-	currency_overview_change = params.get("currency_dict", CurrencyOverviewDict.new({}))
+	currency_overview_change = params.get("currency_dict", {})
