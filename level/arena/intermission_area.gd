@@ -25,6 +25,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_next_enemy_selected(next_enemy: Enemy) -> void:
+	if next_enemy.model and next_enemy.model.get_child_count():
+		enemy_model = next_enemy.model.get_child(0).duplicate()
+		assert(enemy_model, "No enemy model")
 		next_enemy_box.add_child(enemy_model)
 		next_enemy_box.dialogue_folder_path = next_enemy.dialogue_path
 		initial_enemy_rotation = enemy_model.basis.orthonormalized()
