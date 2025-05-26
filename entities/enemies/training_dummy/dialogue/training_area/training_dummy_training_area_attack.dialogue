@@ -1,0 +1,19 @@
+~ start
+Training Dummy: Ohhh, you’ve returned! What are you planning? Are you planning to [wave amp=25 freq=5]hurt me[/wave]? Or will you [shake rate=20 level=10]humiliate me[/shake]? What’s your pleasure?
+- How does combat work? => combat_tutorial
+- Why do you enjoy this? => talk
+- [[Guess you'll get what you want|]] => proceed_to_fight
+
+~ combat_tutorial
+Training Dummy: You want rules?
+Training Dummy: [wave amp=25 freq=5]Fine.[/wave] What do you want to know?
+Training Dummy: Now. [shake rate=20 level=10]Prove you’ve listened.[/shake]
+=> start
+
+~ talk
+Training Dummy: WIP
+=> start
+
+~ proceed_to_fight
+Training Dummy: [[At Last|Fulfill my dreams small one]]
+=> END

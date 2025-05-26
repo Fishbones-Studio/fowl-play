@@ -14,3 +14,6 @@ label_lookat_player = true
 
 [node name="DetectionArea" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.94979)
+
+[node name="InteractLabel" parent="CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
+text = "Press          to talk"

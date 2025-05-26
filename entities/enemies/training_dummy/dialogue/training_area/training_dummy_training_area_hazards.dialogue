@@ -1,0 +1,15 @@
+~ start
+Training Dummy: hello
+- Ground Saw => saw_hazard
+- Spikes => END
+- Spike Ball => END
+- Other hazards => other_hazards
+
+~ saw_hazard
+Training Dummy: The saw hazard deals damage [wave amp=25 freq=5]while standin on it[/wave]
+Training Dummy: Don't worry, the damage is applied on an interval
+
+~ other_hazards
+Training Dummy: Certain weapons and enemies [wave amp=25 freq=5]spawn their own different hazards[/wave]
+Training Dummy: But thats a [shake rate=20 level=10]secret[/shake].
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=15 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="9_23v1m"]
 [ext_resource type="PackedScene" uid="uid://b8qivryw6ihb4" path="res://level/arena/props/interactable/healing_station/healing_station.tscn" id="10_23v1m"]
 [ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="10_wk2id"]
+[ext_resource type="PackedScene" uid="uid://dl88fq1w4mqjl" path="res://level/arena/props/interactable/dialogue_box/dialogue_box.tscn" id="11_23v1m"]
+[ext_resource type="Script" uid="uid://ccs8vwbxf4kq5" path="res://level/arena/training_area/attack_holder.gd" id="11_ldbqm"]
 
 [sub_resource type="Curve3D" id="Curve3D_ldbqm"]
 closed = true
@@ -121,7 +123,20 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.334
 health = 200
 cost = 0
 
+[node name="TrainingDummy" parent="HazardHolder" instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
+
+[node name="DialogueBox" parent="HazardHolder/TrainingDummy" instance=ExtResource("11_23v1m")]
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_hazards.dialogue"
+
 [node name="AttackHolder" type="Node3D" parent="."]
+script = ExtResource("11_ldbqm")
+
+[node name="AttackDialogueBox" parent="AttackHolder" instance=ExtResource("11_23v1m")]
+unique_name_in_owner = true
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_attack.dialogue"
 
 [node name="TrainingDummy" parent="AttackHolder" instance=ExtResource("2_mudht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
