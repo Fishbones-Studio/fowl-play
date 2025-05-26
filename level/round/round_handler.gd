@@ -78,7 +78,7 @@ func _start_round() -> void:
 func _enter_waiting() -> void:
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Round %d" % GameManager.current_round}
+		{"display_text": "Round\n\n%d" % GameManager.current_round}
 	)
 	GameManager.chicken_player.global_position = player_default_position.global_position
 
