@@ -50,7 +50,7 @@ func _attack() -> void:
 						"stun_time": weapon_node.current_weapon.stun_time if weapon_node.enable_stun else 0.0
 					},
 				)
-				if target is Enemy:
+				if target is Enemy and target.type != EnemyEnums.EnemyTypes.BOSS:
 					weapon_node.weapon_hit_effect(target)
 				weapon_node.attacking = false
 			elif target:
