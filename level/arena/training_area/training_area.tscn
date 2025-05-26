@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=18 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="10_wk2id"]
 [ext_resource type="PackedScene" uid="uid://dl88fq1w4mqjl" path="res://level/arena/props/interactable/dialogue_box/dialogue_box.tscn" id="11_23v1m"]
 [ext_resource type="Script" uid="uid://ccs8vwbxf4kq5" path="res://level/arena/training_area/attack_holder.gd" id="11_ldbqm"]
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="15_8p48n"]
+[ext_resource type="Script" uid="uid://575pjgnos8wx" path="res://level/arena/props/interactable/movement_teleport_box.gd" id="16_580ga"]
 
 [sub_resource type="Curve3D" id="Curve3D_ldbqm"]
 closed = true
@@ -156,3 +158,46 @@ label_lookat_player = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 text = "Test your Equipment"
 label_lookat_player = true
+
+[node name="MovementHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -40)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MovementHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 11)
+use_collision = true
+collision_mask = 6
+size = Vector3(20, 0.5, 30)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 0.805215, 0.592983, 0, -0.592983, 0.805215, 0, -2.5, 8)
+light_energy = 25.0
+spot_range = 30.0
+
+[node name="MovementTrainingDummy" parent="MovementHolder" instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76141, 0, 13.2988)
+
+[node name="DialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106087, 0, -0.056694)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder"]
+transform = Transform3D(-0.999095, 0.00661382, 0.0420179, 0.0257756, -0.691664, 0.721759, 0.0338359, 0.722189, 0.690868, -1.49048, 14.1687, 33.9112)
+layers = 3
+light_energy = 60.0
+spot_range = 30.0
+spot_angle = 55.0
+
+[node name="MovementTeleportBox" parent="MovementHolder" instance=ExtResource("15_8p48n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.398, 2.00617)
+script = ExtResource("16_580ga")
+
+[node name="NameLabel" parent="MovementHolder/MovementTeleportBox" index="1"]
+text = "Movement"
+label_lookat_player = true
+
+[node name="InteractLabel" parent="MovementHolder/MovementTeleportBox/CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
+text = "Press          to teleport up"
+
+[node name="PlayerTeleportMarker" type="Marker3D" parent="MovementHolder/MovementTeleportBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.398, 3.99383)
+
+[editable path="MovementHolder/MovementTeleportBox"]
