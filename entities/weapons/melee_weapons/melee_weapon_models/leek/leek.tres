@@ -16,8 +16,8 @@ purchasable = true
 drop_chance = 90
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage with a sharp leek after winding up for %s. The attack lasts %s, then enters a cooldown state for %s."
-short_description = "The user swing a [color=yellow]sharp leek[/color], dealing [color=yellow]moderate[/color] damage."
+description = "Deals %s Base Damage with a sharp leek after winding up for %s. The attack lasts %s, then enters a cooldown state for %s, and stuns targets hit for %s."
+short_description = "The user swing a [color=yellow]sharp leek[/color], dealing [color=yellow]moderate[/color] damage that applies a [color=yellow]brief[/color] stun effect."
 icon = ExtResource("1_16jp6")
 model_uid = "uid://bymaeu4dtl7ex"
 metadata/_custom_type_script = "uid://bflt4m3fx7gmv"

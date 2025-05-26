@@ -16,9 +16,9 @@ purchasable = true
 drop_chance = 12
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage per hit after winding up for %s. The attack lasts %s, then enters a cooldown state for %s.
+description = "Deals %s Base Damage per hit after winding up for %s. The attack lasts %s, then enters a cooldown state for %s, and stuns targets hit for %s.
 
 Allows for [color=orange]multiple hits per attack[/color]."
-short_description = "The user hurls their dagger, hitting targets [color=yellow]multiple times[/color] as it travels forward, dealing [color=yellow]minor[/color] damage."
+short_description = "The user hurls their dagger, hitting targets [color=yellow]multiple times[/color] as it travels forward, dealing [color=yellow]minor[/color] damage and stunning targets [color=yellow]slightly[/color]."
 icon = ExtResource("1_8lwf8")
 model_uid = "uid://dldj0suybdnhl"
