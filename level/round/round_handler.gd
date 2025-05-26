@@ -78,7 +78,7 @@ func _start_round() -> void:
 func _enter_waiting() -> void:
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Round %d" % GameManager.current_round}
+		{"display_text": "Round\n\n%d" % GameManager.current_round}
 	)
 	GameManager.chicken_player.global_position = player_default_position.global_position
 
@@ -117,10 +117,10 @@ func _enter_concluding() -> void:
 		print("all rounds completed, back to poultry man menu")
 		var feathers_of_rebirth := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0))
 		var prosperity_eggs := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0))
-		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({
-			"Feathers of Rebirth": feathers_of_rebirth,
-			"Prosperity Eggs": prosperity_eggs
-		})
+		var currency_overview_dict : Dictionary[CurrencyEnums.CurrencyTypes, int] = {
+			CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH: feathers_of_rebirth,
+			CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs,
+		}
 		GameManager.prosperity_eggs += prosperity_eggs
 		GameManager.feathers_of_rebirth += feathers_of_rebirth
 		SignalManager.game_won.emit()
@@ -132,7 +132,9 @@ func _enter_concluding() -> void:
 	if _current_enemy == null:
 		var prosperity_eggs : int = int(GameManager.arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0)) * GameManager.current_round
 		GameManager.prosperity_eggs += prosperity_eggs
-		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({"Prosperity Eggs" : prosperity_eggs})
+		var currency_overview_dict : Dictionary[CurrencyEnums.CurrencyTypes, int] = {
+			CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs,
+		}
 		SignalManager.add_ui_scene.emit(
 			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!", "currency_dict": currency_overview_dict}
 		)
