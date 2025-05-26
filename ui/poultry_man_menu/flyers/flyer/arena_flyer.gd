@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func setup(flyer_resource : ArenaFlyerResource):
 	scene_to_load = flyer_resource.scene_to_load
-	arena_icon = arena_icon
+	arena_icon.texture = flyer_resource.arena_icon
 	
 	arena_label.text = SceneEnums.scene_to_string(scene_to_load)
 
