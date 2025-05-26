@@ -26,10 +26,10 @@ tracks/1/path = NodePath("WeaponHitBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.533333, 0.633333, 0.8, 1.4, 1.83333, 2),
-"transitions": PackedFloat32Array(0.5, 3, 3, 1, 3, 3, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.533333, 0.633333, 1.4, 1.83333, 2),
+"transitions": PackedFloat32Array(0.5, 3, 3, 1, 3, 3, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(2, 1.5, 0), Vector3(0, 1, -2), Vector3(-2, 0.5, 0), Vector3(-2, 1.5, 0), Vector3(0, 1, -2), Vector3(2, 0.5, 0), Vector3(2, 1.5, 0), Vector3(0, 1.5, -7), Vector3(0, 1.5, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(2, 1.5, 0), Vector3(0, 1, -2), Vector3(-2, 0.5, 0), Vector3(-2, 1.5, 0), Vector3(0, 1, -2), Vector3(2, 0.5, 0), Vector3(0, 0.5, -7), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -38,10 +38,10 @@ tracks/2/path = NodePath("WeaponHitBox:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.533333, 0.633333),
-"transitions": PackedFloat32Array(0.5, 3, 1, 3, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.533333, 0.633333, 1.4, 1.83208),
+"transitions": PackedFloat32Array(0.5, 3, 1, 3, 0.8, 3, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+"values": [Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -306,6 +306,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [-2.0, 0.35, 2.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHitBox/dagger:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.391005, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHitBox/dagger:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.699999, 0.699999, 0.7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHitBox/dagger:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fr5cn"]
 _data = {
@@ -317,7 +353,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6a4qq"]
-size = Vector3(0.8, 3.741, 0.8)
+size = Vector3(1, 4, 1.3)
 
 [node name="Dagger" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_8ap45")]
 animation_player = NodePath("AnimationPlayer")
@@ -332,7 +368,7 @@ libraries = {
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.093, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.093, -0.180836)
 shape = SubResource("BoxShape3D_6a4qq")
 
 [node name="dagger" parent="WeaponHitBox" index="1" instance=ExtResource("2_8qojw")]
