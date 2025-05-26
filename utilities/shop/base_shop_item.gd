@@ -92,3 +92,10 @@ func attempt_purchase() -> void:
 func populate_visual_fields() -> void:
 	push_error("populate_visual_fields() must be implemented by child class")
 	return
+
+
+func _update_name_label(label: RichTextLabel) -> void:
+	var name_string : String = "[color=yellow]%s[/color]"
+	if shop_item.cost == 0: name_string = "[color=orange]%s[/color]"
+	if shop_item.cost > GameManager.prosperity_eggs : name_string = "[color=red]%s[/color]"
+	label.text = name_string % shop_item.name
