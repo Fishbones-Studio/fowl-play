@@ -44,7 +44,6 @@ enemy = NodePath("..")
 path_height_offset = 0.1
 avoidance_enabled = true
 time_horizon_obstacles = 10.0
-debug_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

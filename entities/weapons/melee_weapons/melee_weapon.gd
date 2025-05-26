@@ -42,3 +42,7 @@ func _check_for_hit() -> void:
 ## Funtion to call from animation tracks
 func set_attacking(attacking_value: bool) -> void:
 	attacking = attacking_value
+
+
+func weapon_hit_effect(body: CharacterBody3D) -> void:
+	pass
