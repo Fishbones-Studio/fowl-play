@@ -15,20 +15,19 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_udlhp"]
 radius = 1.5
 
-[node name="Insighter" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_wehyl")]
+[node name="Insighter" instance=ExtResource("1_wehyl")]
 script = ExtResource("2_mahx6")
 stats = ExtResource("3_udlhp")
-enemy_model = NodePath("insighter")
 dialogue_path = "res://entities/enemies/insighter/dialogue"
 name_label_template_string = "%s \"Molten Cheese Tart\""
 
-[node name="insighter" parent="." index="0" instance=ExtResource("2_e0uej")]
+[node name="insighter" parent="Model" index="0" instance=ExtResource("2_e0uej")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
 
-[node name="Armature" parent="insighter" index="0"]
+[node name="Armature" parent="Model/insighter" index="0"]
 transform = Transform3D(0.000670522, -0.602317, 0, 0.602317, 0.000670522, 0, 0, 0, 0.602318, -0.405866, 1.42919, -0.00256465)
 
-[node name="Skeleton3D" parent="insighter/Armature" index="0"]
+[node name="Skeleton3D" parent="Model/insighter/Armature" index="0"]
 bones/0/rotation = Quaternion(0.707107, 0.000393661, 0.707107, -0.000393594)
 bones/1/rotation = Quaternion(0.707107, 0.000393594, 0.707107, 0.000393594)
 bones/2/rotation = Quaternion(-3.55483e-09, 3.63408e-08, 0.0164768, 0.999864)
@@ -65,4 +64,4 @@ ability_resource = ExtResource("6_mahx6")
 texture = ExtResource("8_mahx6")
 expand_mode = 3
 
-[editable path="insighter"]
+[editable path="Model/insighter"]

@@ -26,8 +26,8 @@ variable = &"aggro_distance"
 value = SubResource("BBVariant_g4fhc")
 
 [sub_resource type="BBNode" id="BBNode_85ywm"]
-saved_value = NodePath("chicken_centipede/AnimationPlayer")
-resource_name = "chicken_centipede/AnimationPlayer"
+saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
+resource_name = "Model/chicken_centipede/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kcuvh"]
 animation_player = SubResource("BBNode_85ywm")
@@ -76,8 +76,8 @@ custom_name = "Sword swing!"
 children = [SubResource("BTCondition_q2pti"), SubResource("BTAction_w55nl"), SubResource("BTCooldown_otwd7")]
 
 [sub_resource type="BBNode" id="BBNode_q2pti"]
-saved_value = NodePath("chicken_centipede/AnimationPlayer")
-resource_name = "chicken_centipede/AnimationPlayer"
+saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
+resource_name = "Model/chicken_centipede/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_w55nl"]
 animation_player = SubResource("BBNode_q2pti")
@@ -120,12 +120,12 @@ custom_name = "Pursue target"
 children = [SubResource("BTPlayAnimation_w55nl"), SubResource("BTParallel_jsrsq")]
 metadata/_weight_ = 1.0
 
-[sub_resource type="BBNode" id="BBNode_xatg1"]
-saved_value = NodePath("chicken_centipede/AnimationPlayer")
-resource_name = "chicken_centipede/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_gdjx3"]
+saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
+resource_name = "Model/chicken_centipede/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0skmy"]
-animation_player = SubResource("BBNode_xatg1")
+animation_player = SubResource("BBNode_gdjx3")
 animation_name = &"Walk"
 blend = 0.2
 speed = 4.0
