@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @export var stats: LivingEntityStats
 ## When on, the player can die
+# Should almost always be on, currently only off in the training arena
 @export var killable := true
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
