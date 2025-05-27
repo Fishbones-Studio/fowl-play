@@ -10,6 +10,7 @@ extends Control
 
 func close_ui() -> void:
 	UIManager.remove_ui(self)
+	SignalManager.focus_lost.emit()
 
 
 func on_cancel_button_pressed() -> void:
