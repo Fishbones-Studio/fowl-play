@@ -44,7 +44,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.FORFEIT_POPUP: "uid://f7nhygrw6kbd",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
-	UI.DELETE_SAVE_POPUP : "uid://d1gtrx56xraue"
+	UI.DELETE_SAVE_POPUP : "uid://d1gtrx56xraue",
 	UI.CONTROL_OVERVIEW: "uid://by11faodnc0sv",
 }
 
