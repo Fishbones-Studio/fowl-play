@@ -77,6 +77,7 @@ theme_override_constants/margin_bottom = 50
 [node name="DescriptionLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/VBoxContainer/ConfirmationContentItem/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ConfirmationDescriptionLabel"
 bbcode_enabled = true
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 fit_content = true
