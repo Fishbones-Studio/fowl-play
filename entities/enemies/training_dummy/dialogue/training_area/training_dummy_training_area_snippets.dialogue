@@ -1,0 +1,59 @@
+~ explain_game_story_intro
+Training Dummy: Let me be direct. In the eyes of those who run this establishment, you are essentially [[a consumable product|a source of amusement for the wealthy|raw material for a rather grim spectacle]].
+Training Dummy: You will be subjected to procedures designed to alter your form, then forced into brutal combat within these arenas. This continues until your eventual, and quite inevitable, demise. That is the established protocol here.
+=> explain_initial_questions
+
+~ explain_initial_questions
+Training Dummy: I suspect this raises some questions. What is foremost on your mind?
+- What reason for all of this? => explain_overall_purpose
+- Who is behind this operation? => explain_the_operators
+- Any chance of escape? => explain_chances_of_escape
+- I've heard enough. => END
+
+~ explain_overall_purpose
+Training Dummy: You seek the reason? The world beyond these walls is in a state of profound decay. Conventional food sources have become scarce, their safety compromised. Trust in what sustains life is a forgotten luxury for many.
+Training Dummy: In this environment of widespread anxiety and desperation, a new, albeit controversial, 'delicacy' has gained prominence among the wealthy elite: mutated chicken meat. It serves as a status symbol, a perverse form of entertainment and consumption for those insulated from the daily struggle for survival.
+Training Dummy: This demand created an opening for individuals commonly referred to as 'Poultry Men.' They are the orchestrators of these clandestine, illegal fighting circuits. They procure subjects, such as yourself, and through various modifications and rigorous, often brutal, conditioning, prepare them for the arena.
+Training Dummy: These combat arenas, frequently established in repurposed industrial zones or forgotten subterranean networks, are intentionally designed as harsh, unforgiving environments. The objective is to create a visceral spectacle, pushing combatants to their absolute limits.
+Training Dummy: And the audience for this? A concealed, affluent clientele. They derive a unique form of entertainment from these brutal contests, and for them, you are both the performer and, ultimately, the prize.
+Training Dummy: Thus, the 'purpose' is a confluence of factors: substantial profit for the Poultry Men, a unique form of diversion and a prized commodity for the elite, all built upon the foundations of a decaying world. You are an integral component in this grim economic cycle.
+Training Dummy: Does this clarify the broader context, or are there other aspects you wish to explore?
+- Explain the Poultry Men => explain_the_operators_detailed
+- Tell me about the elite => explain_the_elite_audience
+- What is the outside world? => explain_outside_world_conditions
+- I have another question. => explain_initial_questions
+- I've heard enough. => END
+
+~ explain_the_operators
+Training Dummy: If you're asking about direct responsibility, several layers are involved.
+Training Dummy: Primarily, there are the 'Poultry Men.' Consider them the managers, the impresarios of this entire enterprise. They oversee the acquisition of subjects, the... 'enhancement' processes, and the staging of the fights. Their motivation is largely profit, derived from catering to the unique tastes of their clientele.
+Training Dummy: Then, there is the clientele itself – the wealthy elite. While they may not directly manage the arenas, their demand for this specific form of entertainment and for the resulting 'product' is what fuels the entire system. Without their patronage, these operations would likely cease.
+Training Dummy: One might also argue that the dire state of the world itself is a contributing factor, creating the conditions of scarcity and desperation that allow such enterprises to flourish.
+Training Dummy: Do you wish for more detail on any of these groups?
+- Yes, elaborate on the Poultry Men. => explain_the_operators_detailed
+- Tell me more about the elite. => explain_the_elite_audience
+- I have another question. => explain_initial_questions
+- I've heard enough. => END
+
+~ explain_chances_of_escape
+Training Dummy: The prospect of escape? This facility, and others like it, are designed to be secure. The individuals who run these operations have a vested interest in maintaining control over their... assets.
+Training Dummy: While tales and rumors might circulate, the reality is that successful evasion is exceedingly rare. The system is built upon your eventual participation and demise. Hope, in this context, is a scarce commodity.
+Training Dummy: However, the arena itself is a place of chaos. What happens within its confines is not always predictable. That is all I can say on that matter.
+Training Dummy: What else is on your mind?
+- What is the fundamental reason for all of this? => explain_overall_purpose
+- Who, specifically, is behind this operation? => explain_the_operators
+- I have another question. => explain_initial_questions
+- I've heard enough. => END
+
+
+~ explain_the_operators_detailed
+Training Dummy: The Poultry Men are a varied group, from different backgrounds, but united by their ambition and willingness to operate outside conventional laws. Each may have their own territory, their own methods for 'training' and 'enhancing' their fighters. They are shrewd, often ruthless, and deeply embedded in this underground economy. They are the visible hand that guides you towards the arena.
+=> explain_overall_purpose 
+
+~ explain_the_elite_audience
+Training Dummy: The elite are largely an unseen force, their identities shielded. They are individuals of significant wealth and influence, for whom conventional entertainments have perhaps grown stale. They seek novelty, intensity, and the status that comes with partaking in something so exclusive and illicit. Their exact motivations are their own, but their demand is undeniable.
+=> explain_overall_purpose 
+
+~ explain_outside_world_conditions
+Training Dummy: Direct information about the outside world is fragmented and often unreliable down here. What is understood is a pervasive sense of decline. Environmental damage has led to widespread food insecurity. Old societal structures are strained, and new, often harsher, realities have taken hold. These arenas are but one symptom of a world struggling to cope with profound challenges.
+=> explain_overall_purpose

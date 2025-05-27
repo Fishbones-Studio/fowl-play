@@ -33,15 +33,11 @@ func process(delta: float) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.WALK_STATE, {})
 		return
 
-	if player.stats.current_health <= 0:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
-		return
-
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)
 
-	var velocity = get_player_direction() * player.stats.calculate_speed(movement_component.sprint_speed_factor)
+	var velocity: Vector3 = get_player_direction() * player.stats.calculate_speed(movement_component.sprint_speed_factor)
 
 	# Handle state transitions
 	if not player.is_on_floor():

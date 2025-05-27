@@ -57,17 +57,17 @@ void fragment() {
 	    vec3 vertex = VERTEX.xyz;
 	    mat3 rotation = rotation_matrix();
 	    vertex = rotation * vertex;
-	    
+
 	    // Convert vertex position to 0-1 range along the Z-axis
 	    float pos = (vertex.z + 1.0) / 2.0;
-	    
+
 	    // Create progress-based shine effect
-	    float shine = smoothstep(progress - shine_width, progress, pos) * 
+	    float shine = smoothstep(progress - shine_width, progress, pos) *
 	                (1.0 - smoothstep(progress, progress + shine_width, pos));
-	    
+
 	    // Apply fresnel effect for edge glow
 	    float fresnel = 1.0 - dot(NORMAL, VIEW);
-	    
+
 	    ALBEDO = shine_color.rgb;
 	    ALPHA = clamp(fresnel * shine * shine_color.a, 0.0, 1.0);
 	    EMISSION = shine_color.rgb * shine * fresnel;

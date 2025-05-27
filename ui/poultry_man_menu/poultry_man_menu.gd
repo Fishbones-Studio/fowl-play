@@ -135,7 +135,7 @@ func _on_select_current_item() -> void:
 	var selected_item: Focusable3D = focusable_items[current_index]
 
 	if selected_item == flyer_item:
-		UIManager.load_game_with_loading_screen("uid://bhnqi4fnso1hh")
+		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_FIGHT_FLYERS)
 	elif selected_item == shop_item:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP)
 	elif selected_item == inventory_item:
@@ -143,7 +143,7 @@ func _on_select_current_item() -> void:
 	elif selected_item == sacrifice_item:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
 	elif selected_item == rebirth_shop_item:
-		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+		SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP)
 
 
 

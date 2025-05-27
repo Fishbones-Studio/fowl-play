@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bu4l3qdt0753l"
+path="res://.godot/imported/training_dummy_training_area_hazards.dialogue-47ee079650b950e35a5b8995d203b268.tres"
+
+[deps]
+
+source_file="res://entities/enemies/training_dummy/dialogue/training_area/training_dummy_training_area_hazards.dialogue"
+dest_files=["res://.godot/imported/training_dummy_training_area_hazards.dialogue-47ee079650b950e35a5b8995d203b268.tres"]
+
+[params]
+
+defaults=true

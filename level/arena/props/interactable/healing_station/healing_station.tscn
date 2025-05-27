@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8qivryw6ihb4"]
+
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_l8km2"]
+[ext_resource type="Script" uid="uid://5qxt35wq354t" path="res://level/arena/props/interactable/healing_station/healing_station.gd" id="2_i3g3c"]
+
+[node name="HealingStation" instance=ExtResource("1_l8km2")]
+script = ExtResource("2_i3g3c")
+health = 10
+cost = 10
+currency_type = 0
+interact_label_placeholder_text = "Press          to heal %d (costs %d %s)"
+
+[node name="NameLabel" parent="." index="1"]
+text = "Healing "
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="." index="4"]
+outer_radius = 3.956

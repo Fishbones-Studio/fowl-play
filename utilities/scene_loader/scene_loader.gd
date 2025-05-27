@@ -1,13 +1,18 @@
 ## This scene loader is used as a parent for all gameplay scenes
 ##
 ## This allows for a single point of entry for all scenes, seperate from UI elements
+class_name SceneLoader 
 extends Node
+
+## variable to keep track of the currently loaded game scene
+static var current_scene : SceneEnums.Scenes
 
 # Variable to keep track of the scene currently being loaded in the background
 var _loading_scene_path: String = ""
 
 @onready var shader : PostProcess = $Shader
 @onready var subviewport : LayerSubViewPort = %LayerViewPort
+
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
@@ -76,10 +81,12 @@ func _process(_delta: float) -> void:
 			set_process(false) # Stop checking status
 
 
-func _on_switch_game_scene(scene_path: String) -> void:
+func _on_switch_game_scene(scene_enum: SceneEnums.Scenes) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
 	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
 	# The previous load will continue in the background but its result won't be used by this script.
+	
+	var scene_path : String = SceneEnums.PATHS[scene_enum]
 	
 	# If the scene path is null, throw error
 	if scene_path == null:
@@ -118,6 +125,7 @@ func _on_switch_game_scene(scene_path: String) -> void:
 
 	# Store the path we are now loading and enable processing to check status
 	_loading_scene_path = scene_path
+	current_scene = scene_enum
 	set_process(true)
 	print("Started loading scene in background: ", scene_path)
 
@@ -138,7 +146,7 @@ func _instantiate_and_add_scene(
 
 		# Add it as a child of the scene loader
 		add_child(new_scene)
-		var cameras = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
+		var cameras: Array[Node] = new_scene.get_tree().get_nodes_in_group("gameplay_camera")
 		if cameras.size() > 0:
 			print("Found gameplay camera")
 			subviewport.active_camera = cameras[0]
@@ -147,6 +155,7 @@ func _instantiate_and_add_scene(
 		push_error(
 			"Error: Resource at path is not a PackedScene: ", scene_path
 		)
+
 
 func _remove_all_game_scenes() -> void:
 	for child in get_children():
