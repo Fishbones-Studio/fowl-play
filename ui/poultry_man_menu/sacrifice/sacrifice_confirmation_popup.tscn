@@ -1,101 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqt3s2usixpf3"]
+[gd_scene load_steps=3 format=3 uid="uid://f7nhygrw6kbd"]
 
+[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_0v1f0"]
 [ext_resource type="Script" uid="uid://bclqq0y24jveb" path="res://ui/poultry_man_menu/sacrifice/sacrifice_confirmation_popup.gd" id="1_rehxx"]
-[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_aa2cm"]
-[ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="2_vuox5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynykd"]
-shader = ExtResource("2_aa2cm")
-shader_parameter/blur_amount = 3.0
-shader_parameter/mix_amount = 0.7
-shader_parameter/color_over = Color(0, 0, 0, 1)
-
-[node name="SacrificeConfirmationPopup" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SacrificeConfirmationPopup" instance=ExtResource("1_0v1f0")]
 script = ExtResource("1_rehxx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_ynykd")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -114.0
-offset_top = -80.5
-offset_right = 114.0
-offset_bottom = 80.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel/VBoxContainer/ScrollContainer/ConfirmationContentItem" index="0"]
 layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SacrifceLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_type_variation = &"HeaderMedium"
-text = "Sacrifice your Chicken?"
-
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CloseButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("2_vuox5")]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="FORLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="FORLabel" type="RichTextLabel" parent="CenterContainer/Panel/VBoxContainer/ScrollContainer/ConfirmationContentItem/MarginContainer" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "This will award %d Feathers Of Rebirth"
+theme_override_constants/line_separation = 5
+bbcode_enabled = true
+fit_content = true
 horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 50
-
-[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 44
-text = "Yes"
-
-[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 44
-text = "No"
-
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+vertical_alignment = 1

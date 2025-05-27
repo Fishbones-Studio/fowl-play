@@ -36,10 +36,10 @@ const PATHS: Dictionary[UI, String] = {
 	UI.ROUND_SCREEN: "uid://61l26wjx0fux",
 	UI.LOADING_SCREEN: "uid://cu2ima27whcct",
 	UI.CHICKEN_STATS: "uid://c2vh7na31m8hi",
-	UI.FORFEIT_POPUP: "uid://bqt3s2usixpf3",
+	UI.FORFEIT_POPUP: "uid://f7nhygrw6kbd",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
-	UI.DELETE_SAVE_POPUP : "uid://fgrmwyv0t0py"
+	UI.DELETE_SAVE_POPUP : "uid://d1gtrx56xraue"
 }
 
 ## List of UI elements that should block game input outside of the UI
