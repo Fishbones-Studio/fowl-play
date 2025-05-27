@@ -4,6 +4,7 @@ extends CenterContainer
 @onready var label_container: HBoxContainer = %LabelContainer
 @onready var currency_overview_item_resource: PackedScene = preload("uid://chcpdmtyutre6")
 @onready var label: Label = $VBoxContainer/Label
+@onready var click_label: Label = $VBoxContainer/Label2
 
 
 func update_label_container(currency_dict: Dictionary) -> void:
