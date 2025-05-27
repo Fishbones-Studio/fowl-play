@@ -4,14 +4,12 @@ const FOR_LABEL_TEMPLATE_TEXT: String = "Sacrificing your chicken will grant you
 
 var _rounds_won_this_run: int
 
-@onready var for_label: RichTextLabel = %FORLabel
-
 
 func _ready() -> void:
 	cancel_button.grab_focus()
 	_rounds_won_this_run = SaveManager.get_loaded_rounds_won()
 	title.text = "Sacrifice Chicken"
-	for_label.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
+	description.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
 
 
 func on_confirm_button_pressed() -> void:

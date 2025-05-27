@@ -28,7 +28,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.PLAYER_HUD: "uid://xhakfqnxgnrr",
 	UI.CHICKEN_INVENTORY: "uid://dvkxcgdk0goul",
 	UI.POULTRYMAN_SHOP: "uid://bir1j5qouane0",
-	UI.POULTRYMAN_SHOP_CONFIRMATION: "uid://da6m7g6ijjyop",
+	UI.POULTRYMAN_SHOP_CONFIRMATION: "uid://c5dp7ogav2j86",
 	UI.DEATH_SCREEN: "uid://ba8j8ajmddtai",
 	UI.VICTORY_SCREEN: "uid://sjvml6sgskxh",
 	UI.IN_ARENA_SHOP: "uid://djg6luy3rxi23",

@@ -5,19 +5,3 @@
 
 [node name="SacrificeConfirmationPopup" instance=ExtResource("1_0v1f0")]
 script = ExtResource("1_rehxx")
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel/VBoxContainer/ScrollContainer/ConfirmationContentItem" index="0"]
-layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 50
-
-[node name="FORLabel" type="RichTextLabel" parent="CenterContainer/Panel/VBoxContainer/ScrollContainer/ConfirmationContentItem/MarginContainer" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/line_separation = 5
-bbcode_enabled = true
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1

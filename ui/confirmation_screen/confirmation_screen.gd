@@ -2,7 +2,8 @@ class_name ConfirmationScreen
 extends Control
 
 @onready var title: Label = %TitleLabel
-@onready var container: VBoxContainer = %ConfirmationContentItem
+@onready var container: HBoxContainer = %ConfirmationContentItem
+@onready var description: RichTextLabel = %DescriptionLabel
 @onready var cancel_button: Button = %CancelButton
 @onready var confirm_button: Button = %ConfirmButton
 
