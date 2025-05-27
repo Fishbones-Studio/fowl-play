@@ -117,12 +117,18 @@ func _apply_camera_clamp() -> void:
 	rotation.x = clamp(rotation.x, deg_to_rad(min_degrees), deg_to_rad(max_degrees))
 
 func flash_red() -> void:
-	color_rect.color = Color(1, 0, 0, 0.3)	
+	
+	#print("RED")
+	var shader_material = color_rect.material as ShaderMaterial
 	
 	color_rect.visible = true
 	var tween = create_tween()
-	tween.tween_property(color_rect, "color:a", 0.0, 0.1)
+	tween.tween_method(_set_shader_alpha, 0.5, 0.0, 0.5)
 	tween.tween_callback(color_rect.hide)
+	
+func _set_shader_alpha(value: float) -> void:
+	var shader_material = color_rect.material as ShaderMaterial
+	shader_material.set_shader_parameter("alpha", value)
 	
 	
 func _load_camera_settings() -> void:
