@@ -9,6 +9,7 @@ size = Vector3(1, 2.4, 1)
 
 [node name="TrainingDummy" instance=ExtResource("1_4x0ml")]
 stats = ExtResource("2_r0jxf")
+knockback_decay = 9999999999
 dialogue_path = "res://entities/enemies/training_dummy/dialogue"
 name_label_template_string = "Training %s"
 

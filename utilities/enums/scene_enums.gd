@@ -7,7 +7,7 @@ enum Scenes {
 }
 
 ## Scene, uid pair
-const PATHS :  Dictionary[Scenes, String] = {
+const PATHS: Dictionary[Scenes, String] = {
 	Scenes.TRAINING_AREA: "uid://c3ftt1f5ca2ju",
 	Scenes.SEWER_LEVEL : "uid://bhnqi4fnso1hh",
 	Scenes.POULTRY_MAN_MENU : "uid://21r458rvciqo"

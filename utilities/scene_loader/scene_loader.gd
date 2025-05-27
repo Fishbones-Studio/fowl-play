@@ -1,7 +1,8 @@
 ## This scene loader is used as a parent for all gameplay scenes
 ##
 ## This allows for a single point of entry for all scenes, seperate from UI elements
-class_name SceneLoader extends Node
+class_name SceneLoader 
+extends Node
 
 ## variable to keep track of the currently loaded game scene
 static var current_scene : SceneEnums.Scenes
@@ -11,6 +12,7 @@ var _loading_scene_path: String = ""
 
 @onready var shader : PostProcess = $Shader
 @onready var subviewport : LayerSubViewPort = %LayerViewPort
+
 
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
@@ -153,6 +155,7 @@ func _instantiate_and_add_scene(
 		push_error(
 			"Error: Resource at path is not a PackedScene: ", scene_path
 		)
+
 
 func _remove_all_game_scenes() -> void:
 	for child in get_children():
