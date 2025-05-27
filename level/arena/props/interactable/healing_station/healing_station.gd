@@ -9,7 +9,7 @@ extends InteractBox
 
 func _ready() -> void:
 	super()
-	interact_label.text = interact_label_placeholder_text % [health, cost, CurrencyEnums.currency_type_to_string(currency_type, true)]
+	interact_label.text = interact_label_placeholder_text % [health, cost, CurrencyEnums.type_to_string(currency_type, true)]
 
 func interact() -> void:
 	GameManager.chicken_player.stats.restore_health(health)
