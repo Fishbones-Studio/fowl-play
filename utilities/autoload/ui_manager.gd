@@ -13,10 +13,9 @@ var current_ui: Control: # Currently active UI control
 		current_ui = value
 		# Update game input blocked state based on the new UI
 		_update_game_input_blocked()
+		_update_game_mouse_mode()
 
 var previous_ui: Control # Previously active UI control (for navigation history)
-# Stores the mouse mode before UI changes (for proper restoration)
-var previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_CAPTURED # Default to captured
 # Dictionary mapping UI enums to their instantiated Control nodes
 var ui_list: Dictionary[UIEnums.UI, Control] = {}
 
@@ -134,8 +133,6 @@ func remove_ui(ui: Control) -> void:
 	if ui_enum == UIEnums.UI.PAUSE_MENU and paused:
 		paused = false
 
-	_handle_mouse_mode(_is_any_visible())
-
 
 ## Clears all UI elements from the manager
 ##
@@ -153,8 +150,7 @@ func clear_ui() -> void:
 	previous_ui = null
 	current_ui = null
 	paused = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	previous_mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_update_game_mouse_mode()
 
 
 ## Swaps the current and previous UI references
@@ -201,9 +197,6 @@ func toggle_ui(ui_enum: UIEnums.UI) -> void:
 		elif not is_instance_valid(current_ui):
 			swap_ui(null, ui_to_toggle)
 
-		if not _is_any_visible():
-			previous_mouse_mode = Input.mouse_mode
-
 		ui_to_toggle.visible = true
 		move_child(ui_to_toggle, get_child_count() - 1)
 	else:
@@ -217,16 +210,13 @@ func toggle_ui(ui_enum: UIEnums.UI) -> void:
 				current_ui.visible = true
 				move_child(current_ui, get_child_count() - 1)
 
-	_handle_mouse_mode(_is_any_visible())
-
 
 ## Handles pause state and UI visibility changes
 ##
 ## @note: Manages the complex interplay between pause menu and other UIs
 func handle_pause() -> void:
 	# check if any ui, besides HUD and/or pause menu, is visible
-	var ui_exceptions: Array[UIEnums.UI] = [UIEnums.UI.PLAYER_HUD, UIEnums.UI.PAUSE_MENU]
-	if _is_any_visible_besides_list(ui_exceptions):
+	if _is_any_visible_besides_list(UIEnums.UI_EXCEMPT_VISIBLE_CHECK):
 		push_warning("Attempted to pause while other UI is visible. Ignoring.")
 		_handle_ui_cancel_action()
 		return
@@ -243,11 +233,9 @@ func handle_pause() -> void:
 	var is_pausing: bool = not paused
 
 	if is_pausing:
-		if not _is_any_visible():
-			previous_mouse_mode = Input.mouse_mode
 
 		if is_instance_valid(current_ui) and current_ui:
-			current_ui.visible = ui_list.find_key(current_ui) == UIEnums.UI.PLAYER_HUD
+			current_ui.visible = ui_list.find_key(current_ui) in UIEnums.UI_MOUSE_CAPTURED
 			swap_ui(current_ui, pause_menu)
 		elif not is_instance_valid(current_ui):
 			swap_ui(null, pause_menu)
@@ -255,7 +243,6 @@ func handle_pause() -> void:
 		pause_menu.visible = true
 		move_child(pause_menu, get_child_count() - 1)
 		paused = true
-		_handle_mouse_mode(true)
 	else:
 		# Unpausing (can be triggered by pause button or ui_cancel)
 		pause_menu.visible = false
@@ -267,8 +254,6 @@ func handle_pause() -> void:
 			ui_to_restore = ui_list.get(UIEnums.UI.PLAYER_HUD) if ui_list.has(UIEnums.UI.PLAYER_HUD) else null
 
 		swap_ui(pause_menu, ui_to_restore)
-
-		_handle_mouse_mode(_is_any_visible())
 
 
 ## Handles the "ui_cancel" input action (e.g., Escape key)
@@ -287,7 +272,7 @@ func _handle_ui_cancel_action() -> void:
 		return
 
 	# If any other valid UI is currently active and visible (and not the HUD)
-	if is_instance_valid(current_ui) and current_ui.visible and ui_list.find_key(current_ui) != UIEnums.UI.PLAYER_HUD:
+	if is_instance_valid(current_ui) and current_ui.visible and ui_list.find_key(current_ui) not in UIEnums.UI_MOUSE_CAPTURED:
 		current_ui.visible = false # Hide the current UI
 
 		# Determine the UI to switch back to (the previous one)
@@ -301,16 +286,9 @@ func _handle_ui_cancel_action() -> void:
 			current_ui.visible = true
 			move_child(current_ui, get_child_count() - 1) # Bring it to front
 
-		# Update mouse mode based on whether any UI (except HUD) is still visible
-		_handle_mouse_mode(_is_any_visible())
 		return
 
 	# If no specific UI is active (e.g., only HUD is visible), do nothing on cancel
-
-
-## Sets the mouse mode based on UI visibility
-func _handle_mouse_mode(ui_visible: bool) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if ui_visible else previous_mouse_mode
 
 
 ## checks if any UI, besides the passed in list of enums, is currently visible
@@ -329,7 +307,7 @@ func _is_any_visible_besides_list(ui_exceptions: Array[UIEnums.UI]) -> bool:
 ## Checks if any UI (excluding Player HUD) is currently visible
 func _is_any_visible() -> bool:
 	for ui_enum in ui_list:
-		if ui_enum == UIEnums.UI.PLAYER_HUD:
+		if ui_enum in UIEnums.UI_MOUSE_CAPTURED:
 			continue
 
 		var node = ui_list[ui_enum]
@@ -397,14 +375,11 @@ func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_vis
 	ui_list[new_ui_enum] = new_ui_node
 
 	if make_visible:
-		if not _is_any_visible():
-			previous_mouse_mode = Input.mouse_mode
 
 		swap_ui(current_ui, new_ui_node)
 
 		new_ui_node.visible = true
 		move_child(new_ui_node, get_child_count() - 1)
-		_handle_mouse_mode(true)
 	else:
 		new_ui_node.visible = false
 
@@ -421,3 +396,18 @@ func _update_game_input_blocked() -> void:
 		return
 	# Check if any UI is visible and set game_input_blocked accordingly
 	game_input_blocked = UIEnums.UI_BLOCK_GAME_INPUT.has(ui_enum)
+
+## Sets the mouse mode based on the UI
+func _update_game_mouse_mode() -> void:
+	if !current_ui: 
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		return
+	
+	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
+	if ui_enum == null:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		return
+	elif ui_enum in UIEnums.UI_MOUSE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=23 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -27,6 +27,9 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_y2fk0"]
+size = Vector3(80, 15, 20)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5l6g1"]
 render_priority = 0
 shader = ExtResource("16_y2fk0")
@@ -34,6 +37,9 @@ shader_parameter/lod_level = 6
 shader_parameter/brightness = 0.4
 shader_parameter/distortion_intensity = 0.004
 shader_parameter/transparency = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5l6g1"]
+size = Vector3(40, 30, 40)
 
 [node name="TrainingArea" type="Node3D"]
 script = ExtResource("1_gmul1")
@@ -170,6 +176,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 text = "Test your Equipment"
 label_lookat_player = true
 
+[node name="PlayerDetector" type="Area3D" parent="AttackHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.9101, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHolder/PlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42007, 0)
+shape = SubResource("BoxShape3D_y2fk0")
+
 [node name="MovementHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -40)
 script = ExtResource("15_kbfm1")
@@ -215,5 +230,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.398, 3.99383)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 text = "See what you can do"
 label_lookat_player = true
+
+[node name="PlayerDetector" type="Area3D" parent="MovementHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.85535)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementHolder/PlayerDetector"]
+shape = SubResource("BoxShape3D_5l6g1")
+
+[connection signal="body_entered" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_entered"]
+[connection signal="body_entered" from="MovementHolder/PlayerDetector" to="MovementHolder" method="_on_player_detector_body_entered"]
 
 [editable path="MovementHolder/MovementTeleportBox"]

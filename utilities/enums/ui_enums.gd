@@ -20,6 +20,7 @@ enum UI {
 	REBIRTH_SHOP,
 	DIALOGUE_BALLOON,
 	DELETE_SAVE_POPUP,
+	CONTROL_OVERVIEW,
 	NULL ## Specific value for when no ui should be loaded
 }
 
@@ -44,6 +45,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
 	UI.DELETE_SAVE_POPUP : "uid://fgrmwyv0t0py",
+	UI.CONTROL_OVERVIEW: "uid://by11faodnc0sv",
 }
 
 ## List of UI elements that should block game input outside of the UI
@@ -64,6 +66,20 @@ const UI_BLOCK_GAME_INPUT: Array[UI] = [
 	UI.FORFEIT_POPUP
 ]
 
+## List of UI elements that should have mouse captured when active
+const UI_MOUSE_CAPTURED : Array[UI] = [ 
+	UI.PLAYER_HUD,
+	UI.CONTROL_OVERVIEW,
+	UI.ROUND_SCREEN,
+	UI.DEATH_SCREEN,
+	UI.VICTORY_SCREEN
+]
+
+const UI_EXCEMPT_VISIBLE_CHECK : Array[UI] =  [
+  UI.PLAYER_HUD,
+  UI.CONTROL_OVERVIEW, 
+  UI.PAUSE_MENU
+]
 
 static func ui_to_string(ui: UI) -> String:
 	return UI.keys()[ui]
