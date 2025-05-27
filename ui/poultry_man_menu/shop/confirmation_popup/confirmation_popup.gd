@@ -7,7 +7,11 @@ var new_item_resource: BaseResource
 var purchased_signal: Signal
 var purchase_cancelled_signal: Signal
 
+var highlight_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+
 var _selected_item_resource: BaseResource # Item to remove at the end
+var _selected_item_node: ConfirmationItem # Node to highlight
+var _is_swapping: bool = false
 
 
 func setup(params: Dictionary) -> void:
@@ -28,6 +32,7 @@ func _ready() -> void:
 		_update_confirmation_text()
 	else:
 		title.text = "Swap Item"
+		_is_swapping = true
 		_load_items()
 
 
@@ -44,14 +49,19 @@ func _input(_event: InputEvent) -> void:
 
 
 func _load_items() -> void:
-	# Empty the container content first
 	for child in container.get_children():
 		container.remove_child(child)
 		child.queue_free()
 
+	var item_highlighted: bool = false
+
 	for item in existing_item_resource:
-		var t: ConfirmationItem = _create_confirmation_item(item)
-		container.add_child(t)
+		var confirmation_item: ConfirmationItem = _create_confirmation_item(item)
+		container.add_child(confirmation_item)
+
+		if not item_highlighted:
+			_select_item(item)
+			item_highlighted = true
 
 
 # Helper function for safe instantiation
@@ -67,8 +77,28 @@ func _create_confirmation_item(display_resource: Resource, compare_resource: Bas
 		return null
 
 	item.set_item_data(display_resource, compare_resource)
+	item.gui_input.connect(_on_item_selected.bind(display_resource))
 
 	return item
+
+
+func _on_item_selected(event: InputEvent, item: BaseResource) -> void:
+	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) \
+	or (event.is_action_pressed("ui_accept")):
+		_select_item(item)
+
+
+func _select_item(item: BaseResource) -> void:
+	_selected_item_resource = item
+
+	if _selected_item_node:
+		_selected_item_node.remove_theme_stylebox_override("panel")
+
+	for child in container.get_children():
+		if child is ConfirmationItem and child.shop_item == item:
+			_selected_item_node = child
+			child.add_theme_stylebox_override("panel", highlight_stylebox)
+			break
 
 
 func _update_confirmation_text() -> void:
@@ -81,5 +111,7 @@ func on_cancel_button_pressed() -> void:
 
 
 func on_confirm_button_pressed() -> void:
+	if _is_swapping and _selected_item_resource: 
+		Inventory.remove_item(_selected_item_resource)
 	purchased_signal.emit()
 	close_ui()
