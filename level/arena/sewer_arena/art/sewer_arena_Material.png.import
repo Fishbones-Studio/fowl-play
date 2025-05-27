@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c27k4n8gkeoci"
-path.s3tc="res://.godot/imported/sewer_arena_main pipes.png-e0a5f9be8247ee42f5f952bf3f3f4b42.s3tc.ctex"
-path.etc2="res://.godot/imported/sewer_arena_main pipes.png-e0a5f9be8247ee42f5f952bf3f3f4b42.etc2.ctex"
+uid="uid://vehvy4e6cien"
+path.s3tc="res://.godot/imported/sewer_arena_Material.png-c498d04391dcaec77222f14307d73f5d.s3tc.ctex"
+path.etc2="res://.godot/imported/sewer_arena_Material.png-c498d04391dcaec77222f14307d73f5d.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "83f74e6e9bd848df2d2d77e8cd75e2cf"
+"md5": "0f6eb77aef06e3b39fab214ee669072a"
 }
 
 [deps]
 
-source_file="res://level/arena/art/sewer_arena_main pipes.png"
-dest_files=["res://.godot/imported/sewer_arena_main pipes.png-e0a5f9be8247ee42f5f952bf3f3f4b42.s3tc.ctex", "res://.godot/imported/sewer_arena_main pipes.png-e0a5f9be8247ee42f5f952bf3f3f4b42.etc2.ctex"]
+source_file="res://level/arena/sewer_arena/art/sewer_arena_Material.png"
+dest_files=["res://.godot/imported/sewer_arena_Material.png-c498d04391dcaec77222f14307d73f5d.s3tc.ctex", "res://.godot/imported/sewer_arena_Material.png-c498d04391dcaec77222f14307d73f5d.etc2.ctex"]
 
 [params]
 

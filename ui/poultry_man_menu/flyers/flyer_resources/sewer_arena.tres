@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=3 format=3 uid="uid://dfr8ywvkphcjj"]
+
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_ndj5k"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/flyer_resource.gd" id="2_3dpc6"]
+
+[resource]
+script = ExtResource("2_3dpc6")
+scene_to_load = 1
+description = "Fight against 2 enemies and 2 boss"
+arena_icon = ExtResource("1_ndj5k")
+metadata/_custom_type_script = "uid://ctoq181od8w0k"

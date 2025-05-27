@@ -10,9 +10,6 @@ var _is_immobile: bool
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
-	if player.stats.current_health <= 0:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
-		return
 
 	super(prev_state)
 
@@ -34,13 +31,7 @@ func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 			immobile_timer.wait_time = immobile_time
 			immobile_timer.start()
 			_is_immobile = true
-
-
-func process(_delta: float) -> void:
-	if player.stats.current_health <= 0:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
-		return
-
+			
 
 func physics_process(delta: float) -> void:
 	apply_gravity(delta)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl88fq1w4mqjl"]
+
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_kdsns"]
+[ext_resource type="Script" uid="uid://b54p0l5iu7h6q" path="res://level/arena/props/interactable/dialogue_box/dialogue_box.gd" id="2_we8in"]
+
+[node name="DialogueBox" instance=ExtResource("1_kdsns")]
+script = ExtResource("2_we8in")
+dialogue_subfolder_path = ""
+dialogue_file_name = ""
+
+[node name="NameLabel" parent="." index="1"]
+visible = false
+
+[node name="InteractLabel" parent="CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
+text = "Press          to talk"

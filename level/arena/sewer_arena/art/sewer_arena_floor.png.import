@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6j7wbpd1tf31"
-path.s3tc="res://.godot/imported/sewer_arena_pothole.png-b6179a705a338a659dec669414877c28.s3tc.ctex"
-path.etc2="res://.godot/imported/sewer_arena_pothole.png-b6179a705a338a659dec669414877c28.etc2.ctex"
+uid="uid://bjkuxmefeyqwc"
+path.s3tc="res://.godot/imported/sewer_arena_floor.png-f46e6dded0abb4bd7921d4d0c44aa804.s3tc.ctex"
+path.etc2="res://.godot/imported/sewer_arena_floor.png-f46e6dded0abb4bd7921d4d0c44aa804.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "4585597da39d1a9866344e26f81395cd"
+"md5": "88e3bb6bcfe7cad6200fc75111c44617"
 }
 
 [deps]
 
-source_file="res://level/arena/art/sewer_arena_pothole.png"
-dest_files=["res://.godot/imported/sewer_arena_pothole.png-b6179a705a338a659dec669414877c28.s3tc.ctex", "res://.godot/imported/sewer_arena_pothole.png-b6179a705a338a659dec669414877c28.etc2.ctex"]
+source_file="res://level/arena/sewer_arena/art/sewer_arena_floor.png"
+dest_files=["res://.godot/imported/sewer_arena_floor.png-f46e6dded0abb4bd7921d4d0c44aa804.s3tc.ctex", "res://.godot/imported/sewer_arena_floor.png-f46e6dded0abb4bd7921d4d0c44aa804.etc2.ctex"]
 
 [params]
 
