@@ -240,6 +240,8 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5l6g1")
 
 [connection signal="body_entered" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_exited"]
 [connection signal="body_entered" from="MovementHolder/PlayerDetector" to="MovementHolder" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="MovementHolder/PlayerDetector" to="MovementHolder" method="_on_player_detector_body_exited"]
 
 [editable path="MovementHolder/MovementTeleportBox"]

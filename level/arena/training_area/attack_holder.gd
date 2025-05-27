@@ -20,3 +20,8 @@ func _on_player_detector_body_entered(body: Node3D) -> void:
 	if body is ChickenPlayer:
 		UIManager.remove_ui_by_enum(UIEnums.UI.CONTROL_OVERVIEW)
 		SignalManager.add_ui_scene.emit(UIEnums.UI.CONTROL_OVERVIEW, {"control_text_dict" : control_text_dict})
+
+
+func _on_player_detector_body_exited(body):
+	if body is ChickenPlayer:
+		UIManager.remove_ui_by_enum(UIEnums.UI.CONTROL_OVERVIEW)

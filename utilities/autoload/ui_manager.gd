@@ -115,7 +115,10 @@ func remove_ui(ui: Control) -> void:
 
 	# Handle references before removing
 	if current_ui == ui:
-		current_ui = previous_ui if is_instance_valid(previous_ui) else null
+		current_ui = previous_ui if (is_instance_valid(previous_ui) && ui_list.find_key(previous_ui) not in UIEnums.UI_EXCEMPT_VISIBLE_CHECK ) else null
+		# If current_ui is null, check once more if the player hud is visible or not
+		if not is_instance_valid(current_ui) and not _is_any_visible():
+			current_ui = ui_list.get(UIEnums.UI.PLAYER_HUD) if ui_list.has(UIEnums.UI.PLAYER_HUD) else null
 		previous_ui = null
 		if is_instance_valid(current_ui):
 			current_ui.visible = true
@@ -150,7 +153,6 @@ func clear_ui() -> void:
 	previous_ui = null
 	current_ui = null
 	paused = false
-	_update_game_mouse_mode()
 
 
 ## Swaps the current and previous UI references
@@ -402,7 +404,7 @@ func _update_game_mouse_mode() -> void:
 	if !current_ui: 
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		return
-	
+	print(current_ui)
 	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
 	if ui_enum == null:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

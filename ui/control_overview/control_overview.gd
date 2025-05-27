@@ -10,17 +10,16 @@ extends Control
 var _icon_nodes: Dictionary = {}
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if control_text_dict && !control_text_dict.is_empty() && control_container:
 		_update_control_visuals()
 	SignalManager.keybind_changed.connect(_on_keybind_changed)
 
 func _on_keybind_changed(keybind : String) -> void:
-	var name = StringName(keybind)
-	if _icon_nodes.has(name):
-		var texture_rect: TextureRect = _icon_nodes[name]
+	var keybind_name: StringName = StringName(keybind)
+	if _icon_nodes.has(keybind_name):
+		var texture_rect: TextureRect = _icon_nodes[keybind_name]
 		var controller_texture_icon := ControllerIconTexture.new()
-		controller_texture_icon.path = name
+		controller_texture_icon.path = keybind_name
 		texture_rect.texture = controller_texture_icon
 
 func _update_control_visuals() -> void:
@@ -31,18 +30,18 @@ func _update_control_visuals() -> void:
 		child.queue_free()
 	_icon_nodes.clear()
 
-	for name: StringName in control_text_dict.keys():
+	for keybind_name: StringName in control_text_dict.keys():
 		var texture_rect := TextureRect.new()
 		var controller_texture_icon := ControllerIconTexture.new()
-		controller_texture_icon.path = name
+		controller_texture_icon.path = keybind_name
 		texture_rect.texture = controller_texture_icon
 		texture_rect.custom_minimum_size = Vector2(48, 48)
 		texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		control_container.add_child(texture_rect)
-		_icon_nodes[name] = texture_rect
+		_icon_nodes[keybind_name] = texture_rect
 
 		var label := Label.new()
-		label.text = control_text_dict[name]
+		label.text = control_text_dict[keybind_name]
 		label.theme_type_variation = "HeaderSmall"
 		control_container.add_child(label)
 

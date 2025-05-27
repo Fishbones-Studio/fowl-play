@@ -32,7 +32,7 @@ Training Dummy: [color=orange]Don't exhaust yourself though, little one[/color].
 
 ~ jump_mechanics
 Training Dummy: Oh my! Your jumping ability is quite wonderful for such a little chicken! Just press the jump button and up you go, dear.
-Training Dummy: You can [wave amp=30 freq=6]reach impressive heights[/wave] and even jump while moving to get over obstacles. [color=orange]Good timing with your jumps[/color] can help you avoid those nasty ground hazards too.
+Training Dummy: You can [wave amp=30 freq=6]reach impressive heights[/wave] and even [color=orange]jump twice[/color]! Good timing with your jumps can help you avoid those nasty ground hazards too.
 Training Dummy: Go ahead, try jumping around the platform, sweetie. Mama's watching to make sure you're safe.
 => movement_follow_up
 

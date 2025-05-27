@@ -28,5 +28,3 @@ func setup(params: Dictionary) -> void:
 
 func _on_animation_timer_timeout() -> void:
 	UIManager.remove_ui(self)
-	# Since remove_ui will trigger mouse_mode_visible, explicitly set captured here
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
