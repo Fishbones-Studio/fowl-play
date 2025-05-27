@@ -1,18 +1,12 @@
-extends Control
+extends ConfirmationScreen
 
-@onready var cancel_button : Button = %Cancel
 
 func _ready() -> void:
 	cancel_button.grab_focus()
+	title.text = "Delete save file"
+	description.text = "This will [color=yellow]permanently delete[/color] your save file, including all your progress, items, equipment, unlocked abilities, and any other data associated with your game. This action cannot be undone."
 
-func _on_close_button_pressed() -> void:
-	UIManager.remove_ui(self)
 
-
-func _on_confirm_pressed() -> void:
+func on_confirm_button_pressed() -> void:
 	GameManager.hard_reset_game()
-	_on_close_button_pressed()
-
-
-func _on_cancel_pressed() -> void:
-	_on_close_button_pressed()
+	close_ui()

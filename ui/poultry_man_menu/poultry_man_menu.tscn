@@ -71,7 +71,6 @@ bus = &"Music"
 stream = null
 volume_db = -10.0
 music_folder = "res://ui/poultry_man_menu/art/random_music/"
-file_extensions = null
 min_interval = null
 max_interval = null
 avoid_repeats = null

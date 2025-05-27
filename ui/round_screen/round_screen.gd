@@ -15,6 +15,7 @@ func _ready() -> void:
 	animation_timer.start()
 
 	currency_overview.update_label_container(currency_overview_change)
+	currency_overview.click_label.visible = false
 
 
 func _input(_event: InputEvent) -> void:
