@@ -19,9 +19,9 @@ signal ui_disabled(previous_ui: Control)
 signal cooldown_item_slot(item: BaseResource, cooldown: float, create_tween: bool)
 
 # Loader signals
-signal switch_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
-signal add_ui_scene(scene_path: UIEnums.UI, params: Dictionary) ## This signal is used to add an (additional) UI scene
-signal switch_game_scene(scene_path: String) ## This signal is used to switch the game scene, replacing all current
+signal switch_ui_scene(scene_enum: UIEnums.UI, params: Dictionary) ## This signal is used to switch the UI scene, replacing all current
+signal add_ui_scene(scene_enum: UIEnums.UI, params: Dictionary) ## This signal is used to add an (additional) UI scene
+signal switch_game_scene(scene_enum: SceneEnums.Scenes) ## This signal is used to switch the game scene, replacing all current
 signal remove_all_game_scenes() ## This signal is used to remove all game scenes
 signal loading_progress_updated(progress: float)  # 0.0 to 1.0
 signal loading_screen_started(next_ui: UIEnums.UI, params: Dictionary)

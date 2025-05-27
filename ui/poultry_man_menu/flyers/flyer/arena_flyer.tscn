@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://b68pl3dx4qrx7"]
+
+[ext_resource type="Script" uid="uid://rig55oexle1s" path="res://ui/poultry_man_menu/flyers/flyer/arena_flyer.gd" id="1_3md2e"]
+[ext_resource type="Texture2D" uid="uid://6qna05lrjfyj" path="res://ui/player_hud/art/temp_hennifer_headshot.png" id="2_uguq6"]
+
+[node name="ArenaFlyer" type="PanelContainer"]
+offset_right = 185.0
+offset_bottom = 250.0
+focus_mode = 2
+script = ExtResource("1_3md2e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ArenaIcon" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_uguq6")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="ArenaLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemTitle"
+text = "Sewer"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -53,6 +53,4 @@ func _return_to_game_menu() -> void:
 	animation_player.play("fade_to_white")
 
 	get_tree().paused = false
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	
-	UIManager.remove_ui(self)
+	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU , UIEnums.UI.NULL)

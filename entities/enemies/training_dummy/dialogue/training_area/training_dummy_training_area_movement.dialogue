@@ -1,0 +1,61 @@
+import "uid://b8js24eelbiop" as snippets
+~ start
+Training Dummy: Oh hello there, little one! Let's get those precious feathers moving. We're up here on this platform for a very special reason, dear. It's the perfect spot to practice your aerial maneuvers safely.
+Training Dummy: As a chicken, you've got some wonderful movement capabilities that make you quite special, sweetie. You can [wave amp=20 freq=4]walk, run, and even take to the air[/wave] when needed. Which aspect of movement would you like mama to teach you first?
+=> starting_options
+
+~ starting_options
+- What am I doing here? 
+	Training Dummy: Oh my sweet child, but this story might be a bit heavy for such a young heart.
+	=>< snippets/explain_game_story_intro
+	=> starting_options
+- Teach me about movement => movement_questions
+- Leave => movement_complete
+
+~ movement_questions
+- How do I move around? => basic_movement
+- Tell me about jumping => jump_mechanics
+- What's this dash ability? => dash_mechanics
+- How does gliding work? => glide_mechanics
+- I think I've got the hang of it => movement_complete
+
+~ basic_movement
+Training Dummy: Of course, dear! The basics are so important. You can move [color=orange]forward, backward, left, and right[/color] using your movement controls. Even up here, your little [wave amp=15 freq=3]talons give you excellent grip[/wave], so mama doesn't need to worry about you slipping.
+Training Dummy: Practice moving in all directions on this platform, sweetie. You'll need that agility to stay safe out there!
+=> sprint_mechanics
+
+~ sprint_mechanics
+Training Dummy: Ah yes, speed my dear! You have two ground speeds: [color=orange]walking and sprinting[/color]. Walking is your gentle, steady pace.
+Training Dummy: But when you need to [shake rate=10 level=8]move quickly[/shake], whether you're chasing something or need to get away from danger, you can sprint! You'll move much faster, but it does tire you out over time.
+Training Dummy: [color=orange]Don't exhaust yourself though, little one[/color]. Running out of stamina at the wrong moment could put you in harm's way, and mama worries!
+=> movement_follow_up
+
+~ jump_mechanics
+Training Dummy: Oh my! Your jumping ability is quite wonderful for such a little chicken! Just press the jump button and up you go, dear.
+Training Dummy: You can [wave amp=30 freq=6]reach impressive heights[/wave] and even [color=orange]jump twice[/color]! Good timing with your jumps can help you avoid those nasty ground hazards too.
+Training Dummy: Go ahead, try jumping around the platform, sweetie. Mama's watching to make sure you're safe.
+=> movement_follow_up
+
+~ dash_mechanics
+Training Dummy: Now this is something special, dear! The dash is a [shake rate=25 level=12]quick burst of movement[/shake] in whatever direction you're facing. It's like a little rocket boost!
+Training Dummy: It's much faster than sprinting and covers ground instantly. Think of it as your emergency escape when mama can't be there to protect you, or a way to quickly reach safety.
+Training Dummy: [color=orange]But please use it carefully, little one[/color]. There's a brief rest period between dashes and it [color=orange]uses your stamina[/color], so don't rely on it too much. Master the timing and you'll be able to stay out of trouble!
+=> movement_follow_up
+
+~ glide_mechanics
+Training Dummy: Oh, this is mama's favorite! The most beautiful ability you have, sweet chicken of mine. After jumping, hold the jump button again to [wave amp=35 freq=4]spread your precious wings and glide[/wave].
+Training Dummy: You won't go higher, but you can [color=orange]travel such lovely distances[/color] and float down gently.
+Training Dummy: This platform is perfect for practicing, dear. Feel free to [shake rate=10 level=5]hop off the edge[/shake] and glide around. Don't you worry one bit,[color=orange]you won't get hurt from falling[/color].
+Training Dummy: Here's a special tip from mama: combine gliding with a dash for amazing distance, or use it to position yourself above enemies for surprise attacks!
+Training Dummy: [color=orange]Just watch your stamina[/color], sweetheart.
+=> movement_follow_up
+
+~ movement_follow_up
+Training Dummy: Practice makes perfect, my dear. Try [shake rate=15 level=8]combining these techniques[/shake], sprint into a jump, dash to change direction in the air, then glide to safety. Mama is so proud watching you learn!
+Training Dummy: What other movement techniques would you like mama to teach you?
+=> starting_options
+
+~ movement_complete
+Training Dummy: Oh, I'm so proud of you, sweetie! You're ready to spread those wings and explore. Remember what mama taught you: [[Stay moving, little one. A mobile chicken is a safe chicken.|Good movement keeps you out of trouble. Use everything mama taught you.|The world is your playground, dear, but always be careful out there.]]
+Training Dummy: Now go show everyone what a clever little chicken you are! Mama will always be here if you need more guidance.
+=> END

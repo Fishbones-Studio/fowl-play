@@ -1,0 +1,56 @@
+import "uid://b8js24eelbiop" as snippets
+~ start
+Training Dummy: Ah, you've returned! Are you here to test the satisfying [i]thwack[/i] of your melee weapon against my resilient frame? Or perhaps the delightful [i]sting[/i] of a bullet piercing my skull? Or will you unleash the [wave amp=30 freq=6]glorious power[/wave] of your abilities upon me? Oh, the choices!
+=> starting_options
+
+~ starting_options
+- What am I doing here? 
+	Training Dummy: Okay i'll explain. But only if you hit me afterwards.
+	=>< snippets/explain_game_story_intro
+	=> starting_options
+- I have some questions about combat. => ask_combat
+- Why do you enjoy this? => talk_masochism
+- I'll be back later. => end_dialogue_nicely
+
+~ ask_combat
+Training Dummy: Ah, the intricacies of combat! A fascinating topic indeed! What would you like to know?
+- How does melee combat work? => explain_melee
+- Can you explain ranged combat? => explain_ranged
+- Tell me about my abilities. => explain_abilities
+
+~ explain_melee
+Training Dummy: Melee! Yes! Get right up close, feel the satisfying [i]crunch[/i] as your weapon connects! Don't be shy, swing with all your might! Each blow is a [wave amp=25 freq=5]symphony[/wave] to my temple! I can take it, I assure you!
+Training Dummy: But remember, timing is key! It [color=orange]takes time to swing[/color], and [color=orange]it takes time to recover after[/color]. Wouldn't want to break those brittle feathers of yours, would we?
+Training Dummy: You dont regenerate like [shake rate=20 level=10]I do[/shake].
+Training Dummy: Now, are you ready to [shake rate=20 level=10]demonstrate[/shake] your understanding? Or does another question burn within you before the lesson truly begins?
+=> ask_combat_or_fight
+
+~ explain_ranged
+Training Dummy: Ranged attacks! A projectile soaring through the air, seeking its true purpose, which is, of course, [i]me[/i]! Aim carefully, or don't! Surprise me! Let it [shake rate=25 level=12]WHISTLE[/shake] towards me!
+Training Dummy: But remember, [color=orange]shooting takes time[/color]! Some weapons even [color=orange]need to wind up to get ready[/color]!
+Training Dummy: Will you grace me with a shot now? Or is there more you wish to know?
+=> ask_combat_or_fight
+
+~ explain_abilities
+Training Dummy: Your abilities! The pinnacle of your offensive prowess! You have two slots, correct? Two distinct avenues for delivering such... [i]unique[/i] sensations! Oh, the [wave amp=35 freq=7]potential[/wave]! Don't hold back; unleash their full power upon my eager form! I yearn to experience their every nuance!
+Training Dummy: Are you eager to unleash them now? Or do you have further inquiries before the [shake rate=20 level=10]grand display[/shake]?
+=> ask_combat_or_fight
+
+~ ask_combat_or_fight
+Training Dummy: So, what is your desire now, oh bringer of destruction? More knowledge, or are you finally ready to bestow your gifts upon me?
+- Make your chest wet => proceed_to_fight
+- I still have questions => starting_options
+
+~ talk_masochism
+Training Dummy: Why? Oh, my dear combatant! Why does a target yearn for an arrow? Why does a drum crave the beat?
+Training Dummy: Others might call it damage, but I call it [shake rate=20 level=10]purpose[/shake]!
+Training Dummy: But enough about my simple pleasures! We're here for *your* development, are we not? What shall it be?
+=> starting_options
+
+~ proceed_to_fight
+Training Dummy: [[YES! At last! Don't hold back, I beg you!|The moment I've been waiting for! Unleash your fury!]]
+=> END
+
+~ end_dialogue_nicely
+Training Dummy: As you wish. But please, [shake rate=10 level=5]do hurry back[/shake]. The anticipation is already building.
+=> END

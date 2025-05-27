@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://dn4y6rw2w6ydt"]
 
-[ext_resource type="PackedScene" uid="uid://bwi0t0rjkr75f" path="res://level/arena/art/sewer_arena.glb" id="1_b4aaq"]
-[ext_resource type="Script" uid="uid://snfhcmfpjpc5" path="res://level/arena/arena.gd" id="1_wdiye"]
+[ext_resource type="PackedScene" uid="uid://bwi0t0rjkr75f" path="res://level/arena/sewer_arena/art/sewer_arena.glb" id="1_b4aaq"]
+[ext_resource type="Script" uid="uid://snfhcmfpjpc5" path="res://level/arena/sewer_arena/sewer_arena.gd" id="1_wdiye"]
 [ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="3_b4aaq"]
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="5_byl6v"]
 
@@ -256,6 +256,6 @@ shape = SubResource("BoxShape3D_wdiye")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 40, 0)
 volume_db = 30.0
 unit_size = 50.0
-audio_folder = "res://level/arena/music/"
+audio_folder = "res://level/arena/sewer_arena/music/"
 
 [editable path="sewer_arena"]

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bwi0t0rjkr75f"
-path="res://.godot/imported/sewer_arena.glb-53e0a92e47f0f03f65ffb86f5ca20c34.scn"
+path="res://.godot/imported/sewer_arena.glb-9d99a759aacf70c9dc3bd86bcd19e13a.scn"
 
 [deps]
 
-source_file="res://level/arena/art/sewer_arena.glb"
-dest_files=["res://.godot/imported/sewer_arena.glb-53e0a92e47f0f03f65ffb86f5ca20c34.scn"]
+source_file="res://level/arena/sewer_arena/art/sewer_arena.glb"
+dest_files=["res://.godot/imported/sewer_arena.glb-9d99a759aacf70c9dc3bd86bcd19e13a.scn"]
 
 [params]
 

@@ -85,7 +85,6 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 			is_immobile = true
 			immobile_time = 0.0
 
-
 		# Play hurt sound
 		on_hurt.play()
 
