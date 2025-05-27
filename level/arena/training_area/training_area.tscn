@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=21 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -15,7 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://dl88fq1w4mqjl" path="res://level/arena/props/interactable/dialogue_box/dialogue_box.tscn" id="11_23v1m"]
 [ext_resource type="Script" uid="uid://ccs8vwbxf4kq5" path="res://level/arena/training_area/attack_holder.gd" id="11_ldbqm"]
 [ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="15_8p48n"]
+[ext_resource type="Script" uid="uid://b8jjidh4p4bg1" path="res://level/arena/training_area/movement_holder.gd" id="15_kbfm1"]
 [ext_resource type="Script" uid="uid://575pjgnos8wx" path="res://level/arena/props/interactable/movement_teleport_box.gd" id="16_580ga"]
+[ext_resource type="Shader" uid="uid://cbg4jd8y4jfsy" path="res://level/arena/training_area/shaders/glass.gdshader" id="16_y2fk0"]
 
 [sub_resource type="Curve3D" id="Curve3D_ldbqm"]
 closed = true
@@ -24,6 +26,14 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5l6g1"]
+render_priority = 0
+shader = ExtResource("16_y2fk0")
+shader_parameter/lod_level = 6
+shader_parameter/brightness = 0.4
+shader_parameter/distortion_intensity = 0.004
+shader_parameter/transparency = 0.6
 
 [node name="TrainingArea" type="Node3D"]
 script = ExtResource("1_gmul1")
@@ -130,6 +140,7 @@ cost = 0
 
 [node name="HazardDialogueBox" parent="HazardHolder" instance=ExtResource("11_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
+collision_mask = 2
 dialogue_subfolder_path = "training_area"
 dialogue_file_name = "training_dummy_training_area_hazards.dialogue"
 
@@ -161,29 +172,29 @@ label_lookat_player = true
 
 [node name="MovementHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -40)
+script = ExtResource("15_kbfm1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="MovementHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 11)
+material_override = SubResource("ShaderMaterial_5l6g1")
 use_collision = true
 collision_mask = 6
 size = Vector3(20, 0.5, 30)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 0.805215, 0.592983, 0, -0.592983, 0.805215, 0, -2.5, 8)
-light_energy = 25.0
-spot_range = 30.0
-
 [node name="MovementTrainingDummy" parent="MovementHolder" instance=ExtResource("2_mudht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76141, 0, 13.2988)
 
-[node name="DialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
+[node name="MovementDialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106087, 0, -0.056694)
+collision_mask = 2
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_movement.dialogue"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder"]
 transform = Transform3D(-0.999095, 0.00661382, 0.0420179, 0.0257756, -0.691664, 0.721759, 0.0338359, 0.722189, 0.690868, -1.49048, 14.1687, 33.9112)
 layers = 3
-light_energy = 60.0
-spot_range = 30.0
+light_energy = 30.0
+spot_range = 50.0
 spot_angle = 55.0
 
 [node name="MovementTeleportBox" parent="MovementHolder" instance=ExtResource("15_8p48n")]
@@ -199,5 +210,10 @@ text = "Press          to teleport up"
 
 [node name="PlayerTeleportMarker" type="Marker3D" parent="MovementHolder/MovementTeleportBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.398, 3.99383)
+
+[node name="MovementText" parent="MovementHolder/MovementTeleportBox" instance=ExtResource("10_wk2id")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "See what you can do"
+label_lookat_player = true
 
 [editable path="MovementHolder/MovementTeleportBox"]

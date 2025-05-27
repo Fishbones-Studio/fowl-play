@@ -7,9 +7,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0jxf"]
 size = Vector3(1, 2.4, 1)
 
-[node name="TrainingDummy" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_4x0ml")]
+[node name="TrainingDummy" instance=ExtResource("1_4x0ml")]
 stats = ExtResource("2_r0jxf")
-enemy_model = NodePath("CSGBox3D")
 dialogue_path = "res://entities/enemies/training_dummy/dialogue"
 name_label_template_string = "Training %s"
 
@@ -17,17 +16,17 @@ name_label_template_string = "Training %s"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 size = Vector3(0.8, 2.2, 0.8)
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_r0jxf")
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("3_qjdjk")
 active = false
 
-[node name="NavigationAgent3D" parent="." index="7"]
+[node name="NavigationAgent3D" parent="." index="8"]
 avoidance_enabled = false
 keep_y_velocity = false
 
-[node name="CanvasLayer" parent="." index="8"]
+[node name="CanvasLayer" parent="." index="9"]
 visible = false

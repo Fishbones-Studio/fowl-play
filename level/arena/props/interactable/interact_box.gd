@@ -19,14 +19,16 @@ func _input(_event: InputEvent) -> void:
 func interact() -> void:
 	push_error("Overwrite in child class")
 
-func _on_area_3d_body_entered(_body: ChickenPlayer) -> void:
-	player_in_area = true
-	interact_control.visible = true
-	_update_interact_icon()  # Update icon when player enters
+func _on_area_3d_body_entered(_body: Node3D) -> void:
+	if _body is ChickenPlayer:
+		player_in_area = true
+		interact_control.visible = true
+		_update_interact_icon()  # Update icon when player enters
 
-func _on_area_3d_body_exited(_body: ChickenPlayer) -> void:
-	interact_control.visible = false
-	player_in_area = false
+func _on_area_3d_body_exited(_body: Node3D) -> void:
+	if _body is ChickenPlayer:
+		interact_control.visible = false
+		player_in_area = false
 
 func _on_keybind_changed(action_name: String) -> void:
 	if action_name == "*" or action_name.to_lower() == "interact":
