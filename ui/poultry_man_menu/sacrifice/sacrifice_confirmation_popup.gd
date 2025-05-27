@@ -6,6 +6,7 @@ var _rounds_won_this_run: int
 
 
 func _ready() -> void:
+	await get_tree().process_frame
 	cancel_button.grab_focus()
 	_rounds_won_this_run = SaveManager.get_loaded_rounds_won()
 	title.text = "Sacrifice Chicken"

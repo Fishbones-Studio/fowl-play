@@ -67,7 +67,7 @@ const UI_BLOCK_GAME_INPUT: Array[UI] = [
 ]
 
 ## List of UI elements that should have mouse captured when active
-const UI_MOUSE_CAPTURED : Array[UI] = [ 
+const UI_MOUSE_CAPTURED : Array[UI] = [
 	UI.PLAYER_HUD,
 	UI.CONTROL_OVERVIEW,
 	UI.ROUND_SCREEN,
@@ -77,7 +77,7 @@ const UI_MOUSE_CAPTURED : Array[UI] = [
 
 const UI_EXCEMPT_VISIBLE_CHECK : Array[UI] =  [
   UI.PLAYER_HUD,
-  UI.CONTROL_OVERVIEW, 
+  UI.CONTROL_OVERVIEW,
   UI.PAUSE_MENU
 ]
 
