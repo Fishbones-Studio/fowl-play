@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://chcpdmtyutre6"]
+
+[ext_resource type="Script" uid="uid://cq7qlkyqfe1o5" path="res://ui/currency_overview/currency_overview_item.gd" id="1_hk46l"]
+[ext_resource type="Texture2D" uid="uid://brgdaqksfgmqu" path="res://utilities/shop/art/feathers_of_rebirth_icon.png" id="2_8sk6d"]
+[ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="3_7tkbq"]
+
+[node name="CurrencyOverviewItem" type="Control"]
+custom_minimum_size = Vector2(90, 160)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hk46l")
+icons = Dictionary[int, CompressedTexture2D]({
+0: ExtResource("3_7tkbq"),
+1: ExtResource("2_8sk6d")
+})
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(90, 120)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_type_variation = &"CurrencyOverviewItemContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_7tkbq")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"CurrencyOverviewItemPanel"
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_type_variation = &"CurrencyOverviewItemLabel"
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.938624, 0.925614, 0.933812, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "Prosperity Eggs"
+horizontal_alignment = 1
+autowrap_mode = 3

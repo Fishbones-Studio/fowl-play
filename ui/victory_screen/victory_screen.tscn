@@ -1,27 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://sjvml6sgskxh"]
+[gd_scene load_steps=9 format=3 uid="uid://sjvml6sgskxh"]
 
 [ext_resource type="Script" uid="uid://bog7cr78ndrmh" path="res://ui/victory_screen/victory_screen.gd" id="1_w5gup"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_pobfu"]
 [ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="3_6h7er"]
 [ext_resource type="AudioStream" uid="uid://kwodeio65r2c" path="res://ui/victory_screen/art/music/song_3_no_dist.mp3" id="3_pobfu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l05"]
+shader = ExtResource("2_pobfu")
+shader_parameter/blur_amount = -2.0
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_w5gup"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.521569, 0.462745, 0.388235, 0)]
+"values": [Color(0, 0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_color")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/VictoryLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,60 +40,84 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/blur_amount")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [-2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:material:shader_parameter/mix_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_qqa70"]
-resource_name = "victory"
+resource_name = "fade"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.98, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Color(0.521569, 0.462745, 0.388235, 0), Color(0.521569, 0.462745, 0.388235, 0.313726), Color(0.521569, 0.462745, 0.388235, 0.470588)]
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_color")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/VictoryLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.99, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Color(0, 1, 0.27451, 0), Color(0.269995, 0.536403, 0, 0.513726), Color(0.270588, 0.537255, 0, 0.980392)]
+"values": [Color(0, 1, 0.27451, 0), Color(0.529412, 0.501961, 0.345098, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/VictoryLabel:theme_override_colors/font_outline_color")
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/blur_amount")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.99, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.3, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.462745), Color(0, 0, 0, 1)]
+"values": [-2.0, 3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:material:shader_parameter/mix_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [0.0, 0.8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axvl8"]
 _data = {
 &"RESET": SubResource("Animation_w5gup"),
-&"victory": SubResource("Animation_qqa70")
+&"fade": SubResource("Animation_qqa70")
 }
 
 [node name="VictoryScreen" type="Control"]
@@ -99,39 +130,47 @@ grow_vertical = 2
 script = ExtResource("1_w5gup")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_j3l05")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.521569, 0.462745, 0.388235, 0)
+color = Color(0.521569, 0.462745, 0.388235, 0.470588)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -147.5
-offset_top = -31.5
-offset_right = 147.5
-offset_bottom = 31.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/margin_top = 100
 
-[node name="VictoryLabel" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="VictoryLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0.529412, 0.501961, 0.345098, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLarge"
 theme_override_colors/font_color = Color(0, 1, 0.27451, 0)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 90
-text = "Victory !"
+text = "The Weak Perish, You Endure."
+horizontal_alignment = 1
 
-[node name="CurrencyOverview" parent="VBoxContainer" instance=ExtResource("3_6h7er")]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="CurrencyOverview" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_6h7er")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

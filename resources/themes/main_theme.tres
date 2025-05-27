@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=51 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=53 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -25,6 +25,31 @@
 [ext_resource type="StyleBox" uid="uid://bbqtljrqykyc4" path="res://resources/themes/styleboxes/settings_content_panel_inactive.tres" id="19_yig1m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtbu8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_px7dm"]
+bg_color = Color(0.529412, 0.501961, 0.345098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905882, 0.843137, 0.678431, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0.47451, 0.439216, 0.384314, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8xsr"]
+bg_color = Color(0.938624, 0.925614, 0.933812, 1)
+border_width_left = 35
+border_width_top = 35
+border_width_right = 35
+border_width_bottom = 35
+border_color = Color(0.905882, 0.843137, 0.678431, 1)
+border_blend = true
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20od3"]
 
@@ -178,6 +203,16 @@ ChickenStatValueLabel/font_sizes/font_size = 18
 ChickenStatValueLabel/styles/normal = ExtResource("6_g1eo5")
 ConfirmationContainer/base_type = &"PanelContainer"
 ConfirmationContainer/styles/panel = ExtResource("4_dagba")
+CurrencyOverviewItemContainer/base_type = &"PanelContainer"
+CurrencyOverviewItemContainer/styles/panel = SubResource("StyleBoxFlat_px7dm")
+CurrencyOverviewItemLabel/base_type = &"Label"
+CurrencyOverviewItemLabel/colors/font_color = Color(0.282353, 0.321569, 0.4, 1)
+CurrencyOverviewItemLabel/colors/font_shadow_color = Color(0.164706, 0.164706, 0.164706, 1)
+CurrencyOverviewItemLabel/constants/outline_size = 0
+CurrencyOverviewItemLabel/constants/shadow_outline_size = 0
+CurrencyOverviewItemLabel/font_sizes/font_size = 25
+CurrencyOverviewItemPanel/base_type = &"Panel"
+CurrencyOverviewItemPanel/styles/panel = SubResource("StyleBoxFlat_o8xsr")
 DialogueButton/base_type = &"Button"
 DialogueButton/font_sizes/font_size = 22
 DialogueButton/fonts/font = ExtResource("8_20od3")

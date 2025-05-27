@@ -6,13 +6,6 @@ enum CurrencyTypes {
 	FEATHERS_OF_REBIRTH,
 }
 
-static func currency_type_to_string(currencyType : CurrencyTypes, short := false) -> String:
-	var currency_string: String = CurrencyTypes.keys()[currencyType]
-	if short:
-		var parts = currency_string.split("_")
-		var short_parts = []
-		for part in parts:
-			if part.length() > 0:
-				short_parts.append(part[0])
-		return ".".join(short_parts) + "."
-	return currency_string.capitalize()
+
+static func type_to_string(currency_type: CurrencyTypes) -> String:
+	return CurrencyTypes.keys()[currency_type].capitalize()
