@@ -1,4 +1,4 @@
-extends Control
+class_name ControlOverview extends Control
 
 @export var control_text_dict : Dictionary[StringName, String]:
 	set(value):

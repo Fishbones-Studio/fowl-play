@@ -164,7 +164,7 @@ horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 45
 
 [node name="CurrencyOverview" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_6h7er")]
 unique_name_in_owner = true

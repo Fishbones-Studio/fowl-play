@@ -19,7 +19,7 @@ var focusable_items: Array[Focusable3D] = []
 
 func _ready() -> void:
 	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
-	
+
 	# Get all focusable items
 	focusable_items = _get_focusable_items()
 
@@ -43,7 +43,7 @@ func _ready() -> void:
 
 	# Reset highlights initially (will be overwritten by initial focus)
 	reset_highlights()
-	
+
 	# Find the index of the flyer_item in the focusable_items array
 	var flyer_index: int = focusable_items.find(flyer_item)
 
@@ -131,7 +131,7 @@ func _on_select_current_item() -> void:
 		printerr("Current index out of bounds: ", current_index)
 		current_index = 0 # Reset to first item as a fallback
 		if focusable_items.is_empty(): return # Check again if list is now empty
-		
+
 	var selected_item: Focusable3D = focusable_items[current_index]
 
 	if selected_item == flyer_item:
@@ -144,7 +144,6 @@ func _on_select_current_item() -> void:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_POPUP)
 	elif selected_item == rebirth_shop_item:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP)
-
 
 
 func _on_keyboard_navigation_activated() -> void:

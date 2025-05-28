@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://7atjxrx8a47x"]
+
+[ext_resource type="Script" uid="uid://d0pruh8tcyysg" path="res://ui/confirmation_screen/confirmation_screen.gd" id="1_aev1a"]
+[ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_waiyw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aev1a"]
+shader = ExtResource("1_waiyw")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.8
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[node name="ConfirmationScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aev1a")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_aev1a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(550, 300)
+layout_mode = 2
+theme_type_variation = &"ConfirmationPanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/CenterContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ConfirmationTitle"
+text = "Title"
+
+[node name="ConfirmationContentItem" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/ConfirmationContentItem"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/VBoxContainer/ConfirmationContentItem/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ConfirmationDescriptionLabel"
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+focus_neighbor_right = NodePath("../ConfirmButton")
+theme_type_variation = &"ConfirmationButton"
+text = "Cancel"
+
+[node name="ConfirmButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+focus_neighbor_left = NodePath("../CancelButton")
+theme_type_variation = &"ConfirmationButton"
+text = "Confirm
+"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton" to="." method="on_cancel_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm_button_pressed"]
