@@ -10,6 +10,8 @@ var _is_immobile: bool
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
+	if player.stats.current_health <= 0 and player.killable:
+		return
 
 	super(prev_state)
 
