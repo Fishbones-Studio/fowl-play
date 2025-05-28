@@ -10,9 +10,6 @@ var _is_immobile: bool
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
-	if player.stats.current_health <= 0:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
-		return
 
 	super(prev_state)
 
