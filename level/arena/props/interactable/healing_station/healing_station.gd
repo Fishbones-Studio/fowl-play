@@ -14,8 +14,12 @@ func _ready() -> void:
 
 
 func interact() -> void:
-	GameManager.chicken_player.stats.restore_health(health)
 	if currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+		if GameManager.prosperity_eggs < cost:
+			return
 		GameManager.prosperity_eggs -= cost
 	elif currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+		if GameManager.feathers_of_rebirth < cost:
+			return
 		GameManager.feathers_of_rebirth -= cost
+	GameManager.chicken_player.stats.restore_health(health)
