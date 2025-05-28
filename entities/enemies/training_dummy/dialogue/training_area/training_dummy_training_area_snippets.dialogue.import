@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b8js24eelbiop"
+path="res://.godot/imported/training_dummy_training_area_snippets.dialogue-55657db322a87444018cd583704aa7f9.tres"
+
+[deps]
+
+source_file="res://entities/enemies/training_dummy/dialogue/training_area/training_dummy_training_area_snippets.dialogue"
+dest_files=["res://.godot/imported/training_dummy_training_area_snippets.dialogue-55657db322a87444018cd583704aa7f9.tres"]
+
+[params]
+
+defaults=true

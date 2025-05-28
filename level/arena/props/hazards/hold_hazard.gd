@@ -6,10 +6,11 @@ extends BaseHazard
 @export var damage_interval: float = 2.0  ## Time between damage ticks
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if active_bodies.size() > 0:
 		_apply_continuous_damage()
-	super(_delta)
+
+	super(delta)
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
@@ -37,5 +38,4 @@ func _apply_continuous_damage() -> void:
 
 		var elapsed: float = (current_time - active_bodies[id]) / 1000.0
 		if fmod(elapsed, damage_interval) < 0.01: # Small threshold for float comparison
-			print("Temp hold hazard hurt entity")
 			super._on_hazard_area_body_entered(body)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bymaeu4dtl7ex"]
+[gd_scene load_steps=13 format=3 uid="uid://bymaeu4dtl7ex"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_e1ngp"]
-[ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="2_e1ngp"]
+[ext_resource type="Script" uid="uid://du7ortc8e7k4y" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.gd" id="2_e1ngp"]
 [ext_resource type="PackedScene" uid="uid://bbnpnhjgrkwt4" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="3_k4qq2"]
+[ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="3_yaitn"]
 
 [sub_resource type="Animation" id="Animation_em7sn"]
 resource_name = "Attack"
@@ -289,14 +290,15 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ngp"]
-size = Vector3(0.57618, 1.83258, 1.34822)
+size = Vector3(2, 3, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yaitn"]
-size = Vector3(0.454041, 1.41137, 0.442017)
+size = Vector3(1, 1.4, 1)
 
 [node name="Leek" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_e1ngp")]
+script = ExtResource("2_e1ngp")
 animation_player = NodePath("AnimationPlayer")
-current_weapon = ExtResource("2_e1ngp")
+current_weapon = ExtResource("3_yaitn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
 libraries = {
@@ -307,7 +309,7 @@ libraries = {
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.000333309, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0116823, 2.31428, 0.0256882)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0116823, 2.92183, 0.0232468)
 shape = SubResource("BoxShape3D_e1ngp")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WeaponHitBox" index="1"]

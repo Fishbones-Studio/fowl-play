@@ -1,0 +1,247 @@
+[gd_scene load_steps=23 format=3 uid="uid://c3ftt1f5ca2ju"]
+
+[ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
+[ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
+[ext_resource type="PackedScene" uid="uid://b4cnrmx3uvron" path="res://entities/enemies/training_dummy/training_dummy.tscn" id="2_mudht"]
+[ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_kk74r"]
+[ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="4_gmul1"]
+[ext_resource type="Script" uid="uid://c4b8yxkhx5fq1" path="res://level/arena/training_area/hazard_holder.gd" id="5_urxko"]
+[ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="6_0n1dd"]
+[ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="7_7e81l"]
+[ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="8_wk2id"]
+[ext_resource type="PackedScene" uid="uid://bow5xxyn5tu4o" path="res://level/arena/props/hazards/spikes/regular_spike.tscn" id="9_23v1m"]
+[ext_resource type="PackedScene" uid="uid://b8qivryw6ihb4" path="res://level/arena/props/interactable/healing_station/healing_station.tscn" id="10_23v1m"]
+[ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="10_wk2id"]
+[ext_resource type="PackedScene" uid="uid://dl88fq1w4mqjl" path="res://level/arena/props/interactable/dialogue_box/dialogue_box.tscn" id="11_23v1m"]
+[ext_resource type="Script" uid="uid://ccs8vwbxf4kq5" path="res://level/arena/training_area/attack_holder.gd" id="11_ldbqm"]
+[ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="15_8p48n"]
+[ext_resource type="Script" uid="uid://b8jjidh4p4bg1" path="res://level/arena/training_area/movement_holder.gd" id="15_kbfm1"]
+[ext_resource type="Script" uid="uid://575pjgnos8wx" path="res://level/arena/props/interactable/movement_teleport_box.gd" id="16_580ga"]
+[ext_resource type="Shader" uid="uid://cbg4jd8y4jfsy" path="res://level/arena/training_area/shaders/glass.gdshader" id="16_y2fk0"]
+
+[sub_resource type="Curve3D" id="Curve3D_ldbqm"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.4722, 0, 4.30455, 0, 0, 0, 0, 0, 0, -8.89057, 0, -4.86428, 0, 0, 0, 0, 0, 0, -13.1289, 0, -15.1179, 0, 0, 0, 0, 0, 0, 1.11917, 0, -14.548, 0, 0, 0, 0, 0, 0, 8.18194, 0, -4.11338),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y2fk0"]
+size = Vector3(80, 15, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5l6g1"]
+render_priority = 0
+shader = ExtResource("16_y2fk0")
+shader_parameter/lod_level = 6
+shader_parameter/brightness = 0.4
+shader_parameter/distortion_intensity = 0.004
+shader_parameter/transparency = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5l6g1"]
+size = Vector3(40, 30, 40)
+
+[node name="TrainingArea" type="Node3D"]
+script = ExtResource("1_gmul1")
+
+[node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.087, 19.045)
+cull_mask = 1047553
+current = true
+
+[node name="Player" parent="." instance=ExtResource("4_gmul1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9394, 29.4202, 10.6843)
+killable = false
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
+transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
+camera_reference = NodePath("../PlayerCamera")
+camera_spring_length = 2.8
+entity_to_follow = NodePath("../Player")
+
+[node name="PlayerPosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28956, 3, 17.3493)
+
+[node name="BasicArena" parent="." instance=ExtResource("1_podw5")]
+
+[node name="HazardHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2598, 1.38483, 34.572)
+script = ExtResource("5_urxko")
+
+[node name="HazardTitle" parent="HazardHolder" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.58513, 6, 0)
+modulate = Color(0, 1, 0.188235, 1)
+text = "Hazards"
+font_size = 200
+label_lookat_player = true
+
+[node name="RegularSpike" parent="HazardHolder" instance=ExtResource("9_23v1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4545, 0, 0)
+
+[node name="SpikeTitle" parent="HazardHolder/RegularSpike" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 0)
+modulate = Color(1, 0.647059, 0, 1)
+text = "Spikes"
+font_size = 72
+label_lookat_player = true
+
+[node name="SpikeExplainText" parent="HazardHolder/RegularSpike" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 0)
+text = "Applies damage while standing on"
+font_size = 48
+label_lookat_player = true
+
+[node name="SpikeBall" parent="HazardHolder" instance=ExtResource("7_7e81l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.29767, 0, 0)
+
+[node name="SpikeBallTitle" parent="HazardHolder/SpikeBall" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 0)
+modulate = Color(1, 0.647059, 0, 1)
+text = "Spike Ball"
+font_size = 72
+label_lookat_player = true
+
+[node name="SpikeBallExplainText" parent="HazardHolder/SpikeBall" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 0)
+text = "Applies damage once and knocks you back"
+font_size = 48
+label_lookat_player = true
+
+[node name="GroundSawTitle" parent="HazardHolder" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-0.999996, 0, -8.74225e-08, 0, 1, 0, 8.74225e-08, 0, -0.999996, -7.23, 4, -12.692)
+modulate = Color(1, 0.647059, 0, 1)
+text = "Ground Saw"
+font_size = 72
+label_lookat_player = true
+
+[node name="GroundSawExplainLabel" parent="HazardHolder" instance=ExtResource("10_wk2id")]
+transform = Transform3D(-0.999996, 0, -8.74225e-08, 0, 1, 0, 8.74225e-08, 0, -0.999996, -7.23, 3, -12.692)
+text = "Makes you bleed and take damage for a while"
+font_size = 48
+label_lookat_player = true
+
+[node name="Path3D" type="Path3D" parent="HazardHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.23789, 0.3, -4.08034)
+curve = SubResource("Curve3D_ldbqm")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="HazardHolder/Path3D"]
+transform = Transform3D(0.627971, 0, 0.778233, 0, 1, 0, -0.778233, 0, 0.627971, 2.4722, 0, 4.30455)
+script = ExtResource("8_wk2id")
+
+[node name="GroundSaw" parent="HazardHolder/Path3D/PathFollow3D" instance=ExtResource("6_0n1dd")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="HazardHolder"]
+transform = Transform3D(0.8953, 0.30485, 0.324814, 0.0223432, -0.758973, 0.650739, 0.444903, -0.575349, -0.68632, 5.7423, 25.425, -36.2907)
+layers = 3
+light_energy = 60.0
+spot_range = 60.0
+spot_angle = 55.0
+
+[node name="HealingStation" parent="HazardHolder" instance=ExtResource("10_23v1m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.334, 0, -5.45156)
+collision_mask = 31
+health = 200
+cost = 0
+
+[node name="HazardDialogueBox" parent="HazardHolder" instance=ExtResource("11_23v1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
+collision_mask = 2
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_hazards.dialogue"
+
+[node name="TrainingDummy" parent="HazardHolder" instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
+
+[node name="AttackHolder" type="Node3D" parent="."]
+script = ExtResource("11_ldbqm")
+
+[node name="AttackDialogueBox" parent="AttackHolder" instance=ExtResource("11_23v1m")]
+collision_mask = 31
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_attack.dialogue"
+
+[node name="TrainingDummy" parent="AttackHolder" instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="AtackTitle" parent="AttackHolder" instance=ExtResource("10_wk2id")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+modulate = Color(0, 1, 0.188235, 1)
+text = "Attack"
+font_size = 200
+label_lookat_player = true
+
+[node name="AtackText" parent="AttackHolder" instance=ExtResource("10_wk2id")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+text = "Test your Equipment"
+label_lookat_player = true
+
+[node name="PlayerDetector" type="Area3D" parent="AttackHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.9101, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHolder/PlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42007, 0)
+shape = SubResource("BoxShape3D_y2fk0")
+
+[node name="MovementHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, -40)
+script = ExtResource("15_kbfm1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MovementHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 11)
+material_override = SubResource("ShaderMaterial_5l6g1")
+use_collision = true
+collision_mask = 6
+size = Vector3(20, 0.5, 30)
+
+[node name="MovementTrainingDummy" parent="MovementHolder" instance=ExtResource("2_mudht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76141, 0, 13.2988)
+
+[node name="MovementDialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106087, 0, -0.056694)
+collision_mask = 2
+dialogue_subfolder_path = "training_area"
+dialogue_file_name = "training_dummy_training_area_movement.dialogue"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder"]
+transform = Transform3D(-0.999095, 0.00661382, 0.0420179, 0.0257756, -0.691664, 0.721759, 0.0338359, 0.722189, 0.690868, -1.49048, 14.1687, 33.9112)
+layers = 3
+light_energy = 30.0
+spot_range = 50.0
+spot_angle = 55.0
+
+[node name="MovementTeleportBox" parent="MovementHolder" instance=ExtResource("15_8p48n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11.398, 2.00617)
+script = ExtResource("16_580ga")
+
+[node name="NameLabel" parent="MovementHolder/MovementTeleportBox" index="1"]
+text = "Movement"
+label_lookat_player = true
+
+[node name="InteractLabel" parent="MovementHolder/MovementTeleportBox/CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
+text = "Press          to teleport up"
+
+[node name="PlayerTeleportMarker" type="Marker3D" parent="MovementHolder/MovementTeleportBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.398, 3.99383)
+
+[node name="MovementText" parent="MovementHolder/MovementTeleportBox" instance=ExtResource("10_wk2id")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "See what you can do"
+label_lookat_player = true
+
+[node name="PlayerDetector" type="Area3D" parent="MovementHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.85535)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementHolder/PlayerDetector"]
+shape = SubResource("BoxShape3D_5l6g1")
+
+[connection signal="body_entered" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="MovementHolder/PlayerDetector" to="MovementHolder" method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="MovementHolder/PlayerDetector" to="MovementHolder" method="_on_player_detector_body_exited"]
+
+[editable path="MovementHolder/MovementTeleportBox"]

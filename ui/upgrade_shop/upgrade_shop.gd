@@ -33,9 +33,5 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	return shop_item_script_node
 
 
-func _on_visibility_changed() -> void:
-	if visible: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-
 func _on_close_button_pressed()-> void:
 	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)

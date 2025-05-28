@@ -1,24 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bu4jhshnfcfa8"]
+[gd_scene load_steps=4 format=3 uid="uid://bu4jhshnfcfa8"]
 
 [ext_resource type="Script" uid="uid://dlxxvlr6g8xye" path="res://utilities/scene_loader/scene_loader.gd" id="1_150bd"]
 [ext_resource type="PackedScene" uid="uid://dwghksknwpfhu" path="res://utilities/post_process/post_process.tscn" id="2_nsksp"]
+
 [ext_resource type="Script" uid="uid://bijgrc0h7606l" path="res://utilities/post_process/shaders/shader_steps/post_process_shader_step.gd" id="3_lfill"]
-[ext_resource type="Script" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
+[ext_resource type="Script" uid="uid://0d1xjdocr0cb" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
 [ext_resource type="Resource" uid="uid://cbterwnvlrlj" path="res://utilities/post_process/shaders/shader_steps/step_0.tres" id="4_kub3r"]
 [ext_resource type="Resource" uid="uid://ddwwo0ytmvshm" path="res://utilities/post_process/shaders/shader_steps/step_1.tres" id="5_oxdtv"]
 [ext_resource type="Resource" uid="uid://cqa02qnm3uygy" path="res://utilities/post_process/shaders/shader_steps/step_2.tres" id="6_umohs"]
 [ext_resource type="Resource" uid="uid://c2u6u6v5jjdd2" path="res://utilities/post_process/shaders/shader_steps/step_3.tres" id="7_7nhrq"]
 
+
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_150bd")
 
 [node name="Shader" parent="." instance=ExtResource("2_nsksp")]
-shader_steps = Dictionary[int, ExtResource("3_lfill")]({
-0: ExtResource("4_kub3r"),
-1: ExtResource("5_oxdtv"),
-2: ExtResource("6_umohs"),
-3: ExtResource("7_7nhrq")
-})
 
 [node name="3DLabelCanvasLayer" type="CanvasLayer" parent="."]
 

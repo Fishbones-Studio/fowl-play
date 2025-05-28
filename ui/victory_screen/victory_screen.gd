@@ -1,20 +1,27 @@
 extends Control
 
-var is_transitioning: bool = false
-var currency_overview_change : CurrencyOverviewDict
+@export var victory_lines: Array[String] = [
+	"The Weak Perish, You Endure.",
+	"The Arena Bows",
+	"Bloody Triumph!",
+	"Coop de Grâce!",
+]
 
-@onready var label: Label = $VBoxContainer/VictoryLabel
+var is_transitioning: bool = false
+var currency_overview_change : Dictionary
+
+@onready var victory_label: Label = $MarginContainer/VBoxContainer/VictoryLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var victory_music_player : AudioStreamPlayer = $VictoryMusicPlayer
 @onready var currency_overview : CurrencyOverview = %CurrencyOverview
 
 
 func _ready() -> void:
+	victory_label.text = victory_lines.pick_random()
 	get_tree().paused = true
 	victory_music_player.play()
-	animation_player.play("victory")
-	currency_overview.label_amount_dictionary = currency_overview_change
-	currency_overview.update_label_container()
+	animation_player.play("fade")
+	currency_overview.update_label_container(currency_overview_change)
 
 
 func _input(event: InputEvent) -> void:
@@ -35,9 +42,9 @@ func _return_to_game_menu() -> void:
 	animation_player.play("RESET")
 
 	get_tree().paused = false
-	SignalManager.switch_game_scene.emit("uid://21r458rvciqo")
-	
 	UIManager.remove_ui(self)
+	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU, UIEnums.UI.NULL)
+
 
 func setup(params: Dictionary) -> void:
-	currency_overview_change = params.get("currency_dict", CurrencyOverviewDict.new({}))
+	currency_overview_change = params.get("currency_dict", {})

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=3 format=3 uid="uid://b0yajffbj51o8"]
+
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_gtvp4"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/flyer_resource.gd" id="2_f4bho"]
+
+[resource]
+script = ExtResource("2_f4bho")
+scene_to_load = 0
+description = "Tutorial"
+arena_icon = ExtResource("1_gtvp4")
+metadata/_custom_type_script = "uid://ctoq181od8w0k"

@@ -64,19 +64,21 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.439657, 0.000687625, -0.00491301, 0.898152)
-bones/3/rotation = Quaternion(-0.532044, 0.0114598, 0.00204307, 0.846636)
-bones/4/rotation = Quaternion(-0.117203, 0.300538, -0.09976, 0.94127)
-bones/5/rotation = Quaternion(-0.248555, 0.0328673, -0.595113, 0.763532)
-bones/6/rotation = Quaternion(-0.448775, -0.0645802, -0.662537, 0.596218)
-bones/7/rotation = Quaternion(-0.141593, 0.0823503, 0.53756, 0.827163)
-bones/8/rotation = Quaternion(-0.447087, 0.129278, 0.672361, 0.575613)
+
+bones/2/rotation = Quaternion(-0.43914, 0.000578273, -0.0053722, 0.898402)
+bones/3/rotation = Quaternion(-0.532054, 0.0115203, 0.00208133, 0.84663)
+bones/4/rotation = Quaternion(-0.115708, 0.300542, -0.0990653, 0.941526)
+bones/5/rotation = Quaternion(-0.247919, 0.0324968, -0.594829, 0.763975)
+bones/6/rotation = Quaternion(-0.435585, -0.0328934, -0.683042, 0.585352)
+bones/7/rotation = Quaternion(-0.141734, 0.0822401, 0.537653, 0.82709)
+bones/8/rotation = Quaternion(-0.441005, 0.102251, 0.691468, 0.562966)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.314616, -0.0259556, -0.0852847, 0.945024)
-bones/11/rotation = Quaternion(0.180594, 0.0300813, -0.154915, 0.970815)
+bones/10/rotation = Quaternion(0.314612, -0.0260279, -0.0848801, 0.945059)
+bones/11/rotation = Quaternion(0.180583, 0.0299558, -0.154846, 0.970832)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.179376, -0.092154, -0.103436, 0.973978)
+bones/13/rotation = Quaternion(-0.179375, -0.0919757, -0.103172, 0.974023)
+
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -159,7 +161,8 @@ one_shot = true
 script = ExtResource("14_pq2r3")
 state_type = 8
 
-[node name="Timer" type="Timer" parent="MovementStateMachine/Death"]
+[node name="DeathTimer" type="Timer" parent="MovementStateMachine/Death"]
+wait_time = 2.0
 one_shot = true
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
@@ -192,6 +195,6 @@ draw_pass_1 = SubResource("SphereMesh_hmi2t")
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashCooldownTimer" to="MovementStateMachine/Dash" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Fall/CoyoteTimer" to="MovementStateMachine/Fall" method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="MovementStateMachine/Death/Timer" to="MovementStateMachine/Death" method="_on_timer_timeout"]
+[connection signal="timeout" from="MovementStateMachine/Death/DeathTimer" to="MovementStateMachine/Death" method="_on_death_timer_timeout"]
 
 [editable path="chicken_default"]

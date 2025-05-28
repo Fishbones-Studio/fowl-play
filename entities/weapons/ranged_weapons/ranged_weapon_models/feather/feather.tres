@@ -25,6 +25,7 @@ description = "Deals %s Base Damage per bullet. The attack starts instantanious,
 This weapon deals [color=orange]True Damage, ignoring targets Defense stats[/color].
 
 This weapon %s and %s."
+short_description = "The user throws its feather with [color=yellow]high velocity[/color], striking from [color=yellow]Long Range[/color] and dealing [color=orange]True Damage[/color]."
 icon = ExtResource("1_j6iuc")
 model_uid = "uid://qj6ygx6ak84a"
 metadata/_custom_type_script = "uid://dm0sr7j8y5j30"
