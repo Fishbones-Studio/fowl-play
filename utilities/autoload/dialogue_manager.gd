@@ -27,7 +27,7 @@ func _show_balloon_via_manager(
 
 	var existing_balloon = UIManager.ui_list.get(UIEnums.UI.DIALOGUE_BALLOON)
 	if is_instance_valid(existing_balloon):
-		UIManager.remove_ui_by_enum(UIEnums.UI.DIALOGUE_BALLOON)
+		UIManager.toggle_ui(UIEnums.UI.DIALOGUE_BALLOON)
 		await get_tree().process_frame
 
 	SignalManager.add_ui_scene.emit(UIEnums.UI.DIALOGUE_BALLOON, {})
@@ -61,7 +61,7 @@ func _start_balloon(balloon: Node, resource: DialogueResource, title: String, ex
 func _on_wrapper_dialogue_ended(_resource: DialogueResource) -> void:
 	var balloon_in_list = UIManager.ui_list.get(UIEnums.UI.DIALOGUE_BALLOON)
 	if is_instance_valid(balloon_in_list):
-		UIManager.remove_ui_by_enum(UIEnums.UI.DIALOGUE_BALLOON)
+		UIManager.toggle_ui(UIEnums.UI.DIALOGUE_BALLOON)
 
 # Overridden public methods from DialogueManager 
 
