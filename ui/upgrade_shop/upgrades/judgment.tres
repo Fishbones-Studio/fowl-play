@@ -16,5 +16,6 @@ drop_chance = 1
 cost = 500
 currency_type = 0
 description = "The user is gazed by the creator of the world. Increases the user's Health by %s, Stamina by %s, Attack by %s, and Defense by %s. Additionally, the user grows longer legs and increases Speed by %s."
+short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

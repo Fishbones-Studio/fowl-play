@@ -8,6 +8,7 @@ extends BaseShopItem
 
 
 func _ready() -> void:
+	GameManager.prosperity_eggs_changed.connect(func(_new_value: int): _update_name_label(name_label))
 	super()
 
 
