@@ -16,5 +16,6 @@ drop_chance = 25
 cost = 200
 currency_type = 0
 description = "The wind blows behind the user's back and increases Speed by %s."
+short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
