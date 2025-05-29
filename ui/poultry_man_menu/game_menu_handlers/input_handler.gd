@@ -36,6 +36,12 @@ func _ready() -> void:
 	_setup_controller_detection()
 	_setup_stick_cooldown_timer()
 
+func _input(event: InputEvent) -> void:
+	if UIManager.game_input_blocked:
+		return
+
+	_handle_input_event(event)
+
 func _setup_controller_detection() -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_controller_status()
@@ -45,12 +51,6 @@ func _setup_stick_cooldown_timer() -> void:
 	add_child(stick_cooldown_timer)
 	stick_cooldown_timer.one_shot = true
 	stick_cooldown_timer.timeout.connect(_on_stick_cooldown_timeout)
-
-func _input(event: InputEvent) -> void:
-	if UIManager.game_input_blocked:
-		return
-	
-	_handle_input_event(event)
 
 func _handle_input_event(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -132,27 +132,6 @@ func _activate_keyboard_navigation() -> void:
 
 func _deactivate_keyboard_navigation() -> void:
 	keyboard_navigation_deactivated.emit()
-
-func handle_item_click(item: Area3D, event: InputEvent) -> void:
-	if not _is_valid_left_click(event):
-		return
-	
-	var menu: Node = get_parent()
-	if not _has_get_item_index_method(menu):
-		printerr("Parent menu does not have get_item_index method")
-		return
-	
-	var index: int = menu.get_item_index(item)
-	if index >= 0:
-		item_clicked.emit(index)
-
-func _is_valid_left_click(event: InputEvent) -> bool:
-	return (event is InputEventMouseButton and 
-			event.pressed and 
-			event.button_index == MOUSE_BUTTON_LEFT)
-
-func _has_get_item_index_method(menu: Node) -> bool:
-	return menu != null and menu.has_method("get_item_index")
 
 func _on_joy_connection_changed(_device: int, _connected: bool) -> void:
 	_update_controller_status()

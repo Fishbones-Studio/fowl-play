@@ -166,6 +166,10 @@ func _on_keyboard_navigation_deactivated() -> void:
 	if not is_mouse_hovering:
 		reset_highlights()
 
+func _unfocus_all_items() -> void:
+	for item in focusable_items:
+		item.unfocus()
+
 func reset_highlights() -> void:
 	if is_updating_focus: # Prevent issues if called during a focus update
 		return
@@ -195,7 +199,3 @@ func highlight_current_item() -> void:
 		# Directly call the item's focus method
 		focusable_items[current_index].focus()
 	is_updating_focus = false
-
-func _unfocus_all_items() -> void:
-	for item in focusable_items:
-		item.unfocus()
