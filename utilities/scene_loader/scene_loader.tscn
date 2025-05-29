@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlxxvlr6g8xye" path="res://utilities/scene_loader/scene_loader.gd" id="1_150bd"]
 [ext_resource type="PackedScene" uid="uid://dwghksknwpfhu" path="res://utilities/post_process/post_process.tscn" id="2_nsksp"]
-[ext_resource type="Script" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
+[ext_resource type="Script" uid="uid://0d1xjdocr0cb" path="res://utilities/scene_loader/sub_viewport.gd" id="3_wruej"]
 
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_150bd")
