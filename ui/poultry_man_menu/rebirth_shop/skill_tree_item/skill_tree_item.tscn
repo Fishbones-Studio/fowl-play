@@ -63,4 +63,9 @@ layout_mode = 2
 size_flags_horizontal = 6
 text = "MAX"
 
+[node name="Statslabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "MAX"
+
 [connection signal="pressed" from="HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

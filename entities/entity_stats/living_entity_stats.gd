@@ -169,7 +169,19 @@ func to_dict() -> Dictionary:
 		"is_player": is_player,
 	}
 
-
+func return_value(type):
+	match type:
+		0:
+			return attack
+			print("Attackkk: ", attack)
+		1:
+			return max_health
+		2:
+			return speed	
+		3:
+			return defense
+		4:
+			return max_stamina
 ## Create a new LivingEntityStats instance from a Dictionary.
 static func from_dict(data: Dictionary) -> LivingEntityStats:
 	var new_stats := LivingEntityStats.new()

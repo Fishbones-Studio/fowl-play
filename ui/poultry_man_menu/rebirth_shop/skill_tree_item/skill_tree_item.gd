@@ -14,6 +14,7 @@ var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu
 @onready var level_label: Label = %LevelLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
 @onready var item_cost_label: Label = %ItemCostLabel
+@onready var statslabel: Label = $HBoxContainer/Statslabel
 
 
 func _ready() -> void:
@@ -45,7 +46,7 @@ func _on_buy_button_pressed() -> void:
 		save_upgrades()
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
-
+	update_ui_elements()
 
 func can_afford_upgrade() -> bool:
 	if upgrade_resource.current_level >= upgrade_resource.max_level:
@@ -66,6 +67,8 @@ func purchase_upgrade() -> void:
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
 			GameManager.prosperity_eggs -= upgrade_resource.get_level_cost(upgrade_resource.current_level+1)
 	upgrade_resource.current_level += 1
+	
+	update_ui_elements()
 
 
 func apply_upgrade() -> void:
@@ -91,7 +94,7 @@ func apply_upgrade() -> void:
 		StatsEnums.UpgradeTypes.WEIGHT:
 			copied_stats.weight += upgrade_resource.get_upgrade_resource().weight_bonus
 	SaveManager.save_player_stats(copied_stats)
-
+	
 
 func update_ui_elements() -> void:
 	level_progress_bar.max_value = upgrade_resource.max_level
@@ -117,6 +120,8 @@ func update_ui_elements() -> void:
 		level_label.text = str(upgrade_resource.current_level)
 	else:
 		level_label.text = "MAX"
+		
+	statslabel.text = str(copied_stats.return_value(upgrade_type),  " + ", upgrade_resource.bonus)
 
 
 func save_upgrades() -> void:
