@@ -350,7 +350,11 @@ func hard_reset_inventory() -> void:
 	#    - Create a new InventoryData instance.
 	#    - The inventory_data setter will call _set_default_items, populating defaults.
 	#    - load_inventory() will also call save_inventory() if it creates a new file.
-	load_inventory()
+	#load_inventory()
+
+	# Manual reset to fix issue of loading cached inventory
+	inventory_data = InventoryData.new()
+	save_inventory()
 
 	print(
 		"Inventory hard reset complete. Inventory is now at initial default state."
