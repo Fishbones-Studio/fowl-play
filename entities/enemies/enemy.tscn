@@ -1,39 +1,14 @@
-
-[gd_scene load_steps=11 format=3 uid="uid://d2n75tu7hm7w0"]
-
+[gd_scene load_steps=12 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
+[ext_resource type="PackedScene" uid="uid://1qgrwjubgwjk" path="res://resources/effects/gpu_particles_3d.tscn" id="4_56i32"]
 [ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
 [ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="9_56i32"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gj3y3"]
-radius = 1.553
-height = 17.842
-
-[sub_resource type="MeshTexture" id="MeshTexture_56i32"]
-mesh = SubResource("CapsuleMesh_gj3y3")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sb13e"]
-transparency = 1
-albedo_color = Color(1, 0, 0, 1)
-albedo_texture = SubResource("MeshTexture_56i32")
-billboard_mode = 1
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3udgd"]
-spread = 180.0
-initial_velocity_min = 3.0
-initial_velocity_max = 5.0
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="SphereMesh" id="SphereMesh_vabdn"]
-lightmap_size_hint = Vector2i(5, 3)
-radius = 0.1
-height = 0.2
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
 
@@ -59,15 +34,7 @@ entity = NodePath("..")
 
 [node name="DamageNumberHandler" parent="." instance=ExtResource("7_nrfwl")]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="DamageNumberHandler"]
-material_override = SubResource("StandardMaterial3D_sb13e")
-emitting = false
-amount = 20
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_3udgd")
-draw_pass_1 = SubResource("SphereMesh_vabdn")
+[node name="GPUParticles3D" parent="DamageNumberHandler" instance=ExtResource("4_56i32")]
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_ipr6v")

@@ -8,10 +8,8 @@
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="8_j3vma"]
-
-[ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="9_53l80"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="9_53l80"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_53l80"]
-
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
