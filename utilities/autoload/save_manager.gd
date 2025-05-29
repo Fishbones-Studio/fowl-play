@@ -171,7 +171,7 @@ func load_game_data() -> Dictionary:
 		final_total_rounds_won = 0
 		final_enemy_encounters = {} as Dictionary[String, int]
 		final_feathers_of_rebirth = 0
-		final_prosperity_eggs = 200
+		final_prosperity_eggs = 300
 		_create_default_save_file(
 			final_stats,
 			final_upgrades,
@@ -265,7 +265,7 @@ func load_game_data() -> Dictionary:
 			CURRENCY_SAVE_SECTION, "f_o_r", 0
 		) as int
 		final_prosperity_eggs = config.get_value(
-			CURRENCY_SAVE_SECTION, "p_eggs", 200
+			CURRENCY_SAVE_SECTION, "p_eggs", 300
 		) as int
 
 	if GameManager:
