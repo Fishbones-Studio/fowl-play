@@ -13,6 +13,8 @@ signal purchase_cancelled
 func _ready() -> void:
 	purchased.connect(_on_purchase_complete)
 	purchase_cancelled.connect(func(): purchase_in_progress = false)
+	GameManager.prosperity_eggs_changed.connect(func(_new_value: int): _update_name_label(item_label))
+
 	super()
 
 
