@@ -3,7 +3,7 @@ extends Node3D
 # Exported Variables
 @export var input_handler: Node
 @export var light_handler: Node
-@export var default_focused_item_name: String = "Flyer"
+@export var default_focused_item_name: StringName = &"Flyer"
 
 # Navigation State
 var current_index: int = 0
@@ -13,11 +13,11 @@ var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
 
 var menu_actions: Dictionary = {
-	"Flyer": UIEnums.UI.POULTRYMAN_FIGHT_FLYERS,
-	"Shop": UIEnums.UI.POULTRYMAN_SHOP,
-	"Inventory": UIEnums.UI.CHICKEN_INVENTORY,
-	"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
-	"RebirthShop": UIEnums.UI.REBIRTH_SHOP
+	&"Flyer": UIEnums.UI.POULTRYMAN_FIGHT_FLYERS,
+	&"Shop": UIEnums.UI.POULTRYMAN_SHOP,
+	&"Inventory": UIEnums.UI.CHICKEN_INVENTORY,
+	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
+	&"RebirthShop": UIEnums.UI.REBIRTH_SHOP
 }
 
 func _ready() -> void:
@@ -58,7 +58,7 @@ func _set_initial_focus() -> void:
 	is_keyboard_navigation_active = true # Act as if keyboard nav is active for initial focus
 	highlight_current_item() # Highlight and grab focus of the initial item
 
-func _find_item_index_by_name(item_name: String) -> int:
+func _find_item_index_by_name(item_name: StringName) -> int:
 	for i in focusable_items.size():
 		if focusable_items[i].name == item_name:
 			return i
@@ -138,7 +138,7 @@ func _on_select_current_item() -> void:
 	if not _is_valid_selection():
 		return
 	var selected_item: Focusable3D = focusable_items[current_index]
-	var item_name: String = selected_item.name
+	var item_name: StringName = selected_item.name
 	if item_name in menu_actions:
 		SignalManager.add_ui_scene.emit(menu_actions[item_name])
 	else:
