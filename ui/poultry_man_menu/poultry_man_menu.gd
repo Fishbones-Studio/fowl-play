@@ -12,7 +12,7 @@ var is_mouse_hovering: bool = false
 var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
 
-var menu_actions: Dictionary = {
+var menu_actions: Dictionary[StringName, UIEnums.UI] = {
 	&"Flyer": UIEnums.UI.POULTRYMAN_FIGHT_FLYERS,
 	&"Shop": UIEnums.UI.POULTRYMAN_SHOP,
 	&"Inventory": UIEnums.UI.CHICKEN_INVENTORY,
@@ -20,11 +20,13 @@ var menu_actions: Dictionary = {
 	&"RebirthShop": UIEnums.UI.REBIRTH_SHOP
 }
 
+
 func _ready() -> void:
 	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
 	_initialize_focusable_items()
 	_connect_input_signals()
 	_set_initial_focus() # Handles initial highlight and focus
+
 
 func _initialize_focusable_items() -> void:
 	# Get all focusable items
@@ -40,6 +42,7 @@ func _initialize_focusable_items() -> void:
 		item.unfocused.connect(_on_item_unfocused.bind(i))
 		item.pressed.connect(_on_item_pressed.bind(i))
 
+
 func _connect_input_signals() -> void:
 	# Connect input handler signals
 	if not input_handler:
@@ -48,6 +51,7 @@ func _connect_input_signals() -> void:
 	input_handler.current_item_selected.connect(_on_select_current_item)
 	input_handler.keyboard_navigation_activated.connect(_on_keyboard_navigation_activated)
 	input_handler.keyboard_navigation_deactivated.connect(_on_keyboard_navigation_deactivated)
+
 
 func _set_initial_focus() -> void:
 	if focusable_items.is_empty():
@@ -58,12 +62,14 @@ func _set_initial_focus() -> void:
 	is_keyboard_navigation_active = true # Act as if keyboard nav is active for initial focus
 	highlight_current_item() # Highlight and grab focus of the initial item
 
+
 func _find_item_index_by_name(item_name: StringName) -> int:
 	for i in focusable_items.size():
 		if focusable_items[i].name == item_name:
 			return i
 	printerr(item_name + " not found in focusable_items array!")
 	return -1
+
 
 func _get_focusable_items() -> Array[Focusable3D]:
 	var items: Array[Focusable3D] = []
@@ -77,26 +83,28 @@ func _get_focusable_items() -> Array[Focusable3D]:
 		items = _find_focusable_children()
 	return items
 
+
 func _find_focusable_children() -> Array[Focusable3D]:
 	var result: Array[Focusable3D] = []
 	var visited: Dictionary = {}
 	var stack: Array[Node] = [self]
-	
+
 	while not stack.is_empty():
 		var current_node: Node = stack.pop_back()
-		
+
 		if current_node in visited:
 			continue
 		visited[current_node] = true
-		
+
 		if current_node is Focusable3D and current_node != self:
 			result.append(current_node)
-		
+
 		for child in current_node.get_children():
 			if child not in visited:
 				stack.push_back(child)
-	
+
 	return result
+
 
 func _on_item_focused(index: int) -> void:
 	if is_updating_focus: # Prevent re-triggering during highlight_current_item
@@ -117,11 +125,13 @@ func _on_item_unfocused(_index: int) -> void:
 	# else: # If keyboard nav is active, the highlight_current_item in _on_move_selection or _on_keyboard_navigation_activated will handle it.
 		# highlight_current_item() # This could cause issues if unfocus is part of a focus switch
 
+
 func _on_item_pressed(index: int) -> void:
 	# When an item is pressed (e.g., by mouse click), set the current index.
 	current_index = index
 	# The highlight should already be on the item due to mouse hover/focus.
 	_on_select_current_item()
+
 
 func _on_move_selection(direction: int) -> void:
 	# Clear mouse hover state and activate keyboard navigation
@@ -134,6 +144,7 @@ func _on_move_selection(direction: int) -> void:
 	# Highlight the newly selected item
 	highlight_current_item()
 
+
 func _on_select_current_item() -> void:
 	if not _is_valid_selection():
 		return
@@ -143,6 +154,7 @@ func _on_select_current_item() -> void:
 		SignalManager.add_ui_scene.emit(menu_actions[item_name])
 	else:
 		printerr("No action defined for item: ", item_name)
+
 
 func _is_valid_selection() -> bool:
 	if focusable_items.is_empty():
@@ -155,10 +167,12 @@ func _is_valid_selection() -> bool:
 		return not focusable_items.is_empty() # Check again if list is now empty
 	return true
 
+
 func _on_keyboard_navigation_activated() -> void:
 	is_keyboard_navigation_active = true
 	is_mouse_hovering = false # Mouse hover should be secondary
 	highlight_current_item() # Highlight the item at the current index
+
 
 func _on_keyboard_navigation_deactivated() -> void:
 	is_keyboard_navigation_active = false
@@ -166,9 +180,11 @@ func _on_keyboard_navigation_deactivated() -> void:
 	if not is_mouse_hovering:
 		reset_highlights()
 
+
 func _unfocus_all_items() -> void:
 	for item in focusable_items:
 		item.unfocus()
+
 
 func reset_highlights() -> void:
 	if is_updating_focus: # Prevent issues if called during a focus update
@@ -180,6 +196,7 @@ func reset_highlights() -> void:
 	is_updating_focus = true
 	_unfocus_all_items()
 	is_updating_focus = false
+
 
 func highlight_current_item() -> void:
 	if is_updating_focus or focusable_items.is_empty():
