@@ -75,7 +75,7 @@ var graphics_settings: Dictionary = {}
 @onready var taa: ContentItemDropdown = %TAA
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
-@onready var post_processing_strength : ContentItemSlider = %PostProcessingStrength
+@onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
 
 
 func _ready() -> void:
@@ -83,7 +83,7 @@ func _ready() -> void:
 
 
 func _load_graphics_settings() -> void:
-	SettingsManager.load_settings(get_viewport(),get_window(),config_name)
+	SettingsManager.load_settings(get_viewport(),get_window(), config_name)
 
 	_set_graphics_values()
 
