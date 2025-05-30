@@ -37,7 +37,7 @@ script = ExtResource("2_7fey8")
 health_consumption = 20
 damage_duration = 2.0
 damage_interval = 0.2
-peak_burn_modifier = 175.0
+peak_burn_modifier = 175
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
