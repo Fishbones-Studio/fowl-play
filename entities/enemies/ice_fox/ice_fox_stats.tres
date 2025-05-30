@@ -4,14 +4,14 @@
 
 [resource]
 script = ExtResource("1_wr5p1")
-max_health = 150.0
-max_stamina = 150.0
-attack = 60.0
-defense = 20
+max_health = 100.0
+max_stamina = 50.0
+attack = 50.0
+defense = 0
 speed = 10.0
 weight = 5.0
 health_regen = 0
-stamina_regen = 20
+stamina_regen = 5
 weight_factor = 0.07
 defense_multiplier = 0.05
 defense_decelerator = 9.0

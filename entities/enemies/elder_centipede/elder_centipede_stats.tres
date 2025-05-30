@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_m5dqr")
-max_health = 1000.0
-max_stamina = 10.0
+max_health = 750.0
+max_stamina = 50.0
 attack = 0.0
 defense = 100
 speed = 10.0

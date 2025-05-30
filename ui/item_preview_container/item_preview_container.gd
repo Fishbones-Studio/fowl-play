@@ -35,7 +35,6 @@ func setup(item: BaseResource) -> void:
 		shop_preview_description_container.hide()
 	else:
 		shop_preview_description_container.show()
-
 	_on_update_description(shop_preview_description_toggle_button.button_pressed)
 
 
