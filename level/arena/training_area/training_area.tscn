@@ -151,7 +151,7 @@ dialogue_subfolder_path = "training_area"
 dialogue_file_name = "training_dummy_training_area_hazards.dialogue"
 
 [node name="TrainingDummy" parent="HazardHolder" instance=ExtResource("2_mudht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 12, 2, -9)
 
 [node name="AttackHolder" type="Node3D" parent="."]
 script = ExtResource("11_ldbqm")
@@ -197,7 +197,7 @@ collision_mask = 6
 size = Vector3(20, 0.5, 30)
 
 [node name="MovementTrainingDummy" parent="MovementHolder" instance=ExtResource("2_mudht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76141, 0, 13.2988)
+transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, -8, 0, 14)
 
 [node name="MovementDialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106087, 0, -0.056694)

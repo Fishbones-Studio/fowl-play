@@ -15,5 +15,6 @@ drop_chance = 0
 cost = 2
 currency_type = 1
 description = "PlaceHolder"
+short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://ibkbkdkgs0yt"

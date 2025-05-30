@@ -36,9 +36,7 @@ func _process(delta: float) -> void:
 	SignalManager.player_stats_changed.emit(stats)
 
 	if stats.current_health <= 0 and killable:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {
-			"initial_velocity": velocity,
-		})
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
 
 
 func _physics_process(delta: float) -> void:
