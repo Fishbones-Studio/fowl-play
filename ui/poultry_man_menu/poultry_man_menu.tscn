@@ -23,7 +23,7 @@ custom_solver_bias = 1.0
 radius = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhi5u"]
-size = Vector3(1.04858, 1, 4.02013)
+size = Vector3(1.98227, 1, 4.67852)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvty8"]
 size = Vector3(1.66708, 5.97906, 1)
@@ -131,10 +131,10 @@ text = "Rebirth Shop"
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="feather" parent="MenuItems/RebirthShop" instance=ExtResource("9_dqtu2")]
-transform = Transform3D(-0.0777689, -0.0529222, -0.491071, 0.489175, 0.0604498, -0.0839832, 0.0682595, -0.493503, 0.0423743, -0.595522, -0.0831976, 0.242712)
+transform = Transform3D(-0.489558, -0.0792937, 0.0636008, -0.0828075, 0.129665, -0.475741, 0.0589531, -0.47634, -0.140089, -0.617863, -0.0831976, 0.352248)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/RebirthShop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.633071, 0, 0.242775)
+transform = Transform3D(0.994012, 0, 0.109266, 0, 1, 0, -0.109266, 0, 0.994012, -0.747629, 0, -0.0992746)
 shape = SubResource("BoxShape3D_jhi5u")
 
 [node name="Inventory" type="Area3D" parent="MenuItems"]
