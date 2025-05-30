@@ -18,21 +18,20 @@ func _init() -> void:
 
 func get_upgrade_resource() -> UpgradeResource:
 	var upgrade_resource: UpgradeResource = UpgradeResource.new()
-	var value: int = bonus
 
 	match upgrade_type:
 		StatsEnums.UpgradeTypes.MAX_HEALTH:
-			upgrade_resource.health_bonus = value
+			upgrade_resource.health_bonus = bonus
 		StatsEnums.UpgradeTypes.DEFENSE:
-			upgrade_resource.defense_bonus = value
+			upgrade_resource.defense_bonus = bonus
 		StatsEnums.UpgradeTypes.STAMINA:
-			upgrade_resource.stamina_bonus = value
+			upgrade_resource.stamina_bonus = bonus
 		StatsEnums.UpgradeTypes.WEIGHT:
-			upgrade_resource.weight_bonus = value
+			upgrade_resource.weight_bonus = bonus
 		StatsEnums.UpgradeTypes.DAMAGE:
-			upgrade_resource.attack_bonus = value
+			upgrade_resource.attack_bonus = bonus
 		StatsEnums.UpgradeTypes.SPEED:
-			upgrade_resource.speed_bonus = value
+			upgrade_resource.speed_bonus = bonus
 		_:
 			printerr("Unknown upgrade type: %s" % [str(upgrade_type)])
 
