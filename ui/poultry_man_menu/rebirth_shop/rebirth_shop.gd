@@ -2,7 +2,6 @@ extends Control
 
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
-
 @export var item_database: PermUpgradeDatabase
 @export var refund_percentage := 0.8 ## For balancing purpouses, might change the refund amount
 
@@ -130,8 +129,10 @@ func _on_reset_button_pressed() -> void:
 		total_eggs_refund,
 		" Eggs."
 	)
-	# Reset the player's upgrades
+
+	# Reset the player's upgrades and player's stats to default
 	SaveManager.save_player_upgrades({})
+	SaveManager.save_player_stats(SaveManager.get_default_player_stats())
 
 	# Refresh the UI to show 0 levels and updated currency
 	_refresh_shop()

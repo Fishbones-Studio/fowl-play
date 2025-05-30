@@ -35,7 +35,7 @@ func _ensure_game_data_loaded() -> void:
 		load_game_data()
 
 
-func _get_default_player_stats() -> LivingEntityStats:
+func get_default_player_stats() -> LivingEntityStats:
 	var default_stats_res: Resource = ResourceLoader.load(
 		DEFAULT_PLAYER_STATS_PATH
 	)
@@ -49,7 +49,7 @@ func _get_default_player_stats() -> LivingEntityStats:
 	return LivingEntityStats.new()
 
 
-func _get_default_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
+func get_default_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 	return {
 		StatsEnums.UpgradeTypes.MAX_HEALTH: 0,
 		StatsEnums.UpgradeTypes.DEFENSE: 0,
@@ -165,8 +165,8 @@ func load_game_data() -> Dictionary:
 			"Failed to load game data from %s. Creating default save."
 			% SAVE_GAME_PATH
 		)
-		final_stats = _get_default_player_stats()
-		final_upgrades = _get_default_upgrades()
+		final_stats = get_default_player_stats()
+		final_upgrades = get_default_upgrades()
 		final_rounds_won = 0
 		final_total_rounds_won = 0
 		final_enemy_encounters = {} as Dictionary[String, int]
@@ -196,13 +196,13 @@ func load_game_data() -> Dictionary:
 				push_warning(
 					"Failed to parse player stats from dictionary. Using defaults."
 				)
-				final_stats = _get_default_player_stats()
+				final_stats = get_default_player_stats()
 		else:
 			if stats_variant != null:
 				push_warning(
 					"Player stats in save file is not a Dictionary. Using defaults."
 				)
-			final_stats = _get_default_player_stats()
+			final_stats = get_default_player_stats()
 
 		var upgrades_variant: Variant = config.get_value(
 			PLAYER_SAVE_SECTION, "upgrades", null
@@ -214,7 +214,7 @@ func load_game_data() -> Dictionary:
 				push_warning(
 					"Player upgrades in save file is not a Dictionary. Using defaults."
 				)
-			final_upgrades = _get_default_upgrades()
+			final_upgrades = get_default_upgrades()
 
 		# Load rounds_won from player section
 		final_rounds_won = config.get_value(
@@ -311,7 +311,7 @@ func _create_default_save_file(
 
 
 func reset_game_data() -> void:
-	var default_stats: LivingEntityStats = _get_default_player_stats()
+	var default_stats: LivingEntityStats = get_default_player_stats()
 	var upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = get_loaded_player_upgrades()
 	var default_rounds_won: int = 0
 	var default_enemy_encounters: Dictionary[String, int] = (
@@ -399,7 +399,7 @@ func get_loaded_player_stats() -> LivingEntityStats:
 	push_error(
 		"Cached player stats are not of type LivingEntityStats or missing. Returning default."
 	)
-	return _get_default_player_stats()
+	return get_default_player_stats()
 
 
 func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
@@ -445,11 +445,11 @@ func get_loaded_player_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 				)
 		if typed_upgrades.is_empty() and not upgrades_dict.is_empty():
 			push_warning("Loaded upgrades were present but all entries were invalid or unrecognised. Returning default upgrades.")
-			return _get_default_upgrades()
+			return get_default_upgrades()
 		return typed_upgrades.duplicate() # Return a duplicate to prevent direct modification of cache
 
 	push_error("Cached player upgrades are not a Dictionary or missing. Returning defaults.")
-	return _get_default_upgrades()
+	return get_default_upgrades()
 
 
 func get_loaded_rounds_won() -> int:
