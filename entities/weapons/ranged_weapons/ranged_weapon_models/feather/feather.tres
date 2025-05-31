@@ -20,9 +20,9 @@ purchasable = true
 drop_chance = 70
 cost = 50
 currency_type = 0
-description = "Deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
+description = "A stolen feather, still burning with its owner's wrath, its color now faded by sorrow. This weapon deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
 
-This weapon deals [color=orange]True Damage, ignoring targets Defense stats[/color].
+This weapon deals [color=orange]True Damage, ignoring targets Defense[/color].
 
 This weapon %s and %s."
 short_description = "The user throws its feather with [color=yellow]high velocity[/color], striking from [color=yellow]Long Range[/color] and dealing [color=orange]True Damage[/color]."
