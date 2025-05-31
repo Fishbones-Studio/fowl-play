@@ -5,11 +5,11 @@
 [resource]
 resource_name = "Insighter"
 script = ExtResource("1_epyd4")
-max_health = 50.0
-max_stamina = 100.0
+max_health = 100.0
+max_stamina = 50.0
 attack = -50.0
 defense = 60
-speed = 20.0
+speed = 10.0
 weight = 1.0
 health_regen = 0
 stamina_regen = 5

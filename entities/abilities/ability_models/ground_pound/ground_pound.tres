@@ -9,7 +9,7 @@ cooldown = 5.0
 name = "Ground Pound"
 purchasable = true
 drop_chance = 40
-cost = 150
+cost = 125
 currency_type = 0
 description = "The user performs a powerful ground pound, dealing damage based on [color=yellow]100%%[/color] of the user's Weight within a [color=yellow]10 meter[/color] radius and knocking targets with average force. Can only be used while airborne and has a cooldown of %s."
 short_description = "The user slams the ground, dealing [color=yellow]great[/color] damage that scales based of the user's Weight and applying [color=yellow]moderate knockback[/color] to all targets hit."
