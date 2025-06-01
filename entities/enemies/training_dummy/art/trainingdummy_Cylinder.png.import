@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4kn7v6xodw4w"
+uid="uid://cjbmpjk6ovob6"
 path.s3tc="res://.godot/imported/trainingdummy_Cylinder.png-dafb5ff27f3576467be6430d8f013434.s3tc.ctex"
 path.etc2="res://.godot/imported/trainingdummy_Cylinder.png-dafb5ff27f3576467be6430d8f013434.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ead4ebdb58fcd86196b947830398264e"
+"md5": "3726b9e48cc6f7650cea6bf1ee2a9421"
 }
 
 [deps]
