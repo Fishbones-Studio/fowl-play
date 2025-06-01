@@ -94,7 +94,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 		health_bar.set_health(stats.current_health)
 
-		var damage_percentage: int = damage/stats.max_health
+		var damage_percentage: int = damage / (stats.max_health * 0.3)
 		blood_splash_handler.splash_blood(damage_percentage)
 
 		if stats.current_health <= 0:
