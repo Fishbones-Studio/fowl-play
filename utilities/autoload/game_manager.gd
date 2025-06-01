@@ -25,7 +25,7 @@ var prosperity_eggs: int:
 			push_error("Prosperity Eggs cannot be negative, setting to 0 instead.")
 			value = 0
 		prosperity_eggs = value
-		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
+		SaveManager.save_currency(prosperity_eggs, CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS)
 		prosperity_eggs_changed.emit(value)
 
 
@@ -37,7 +37,7 @@ var feathers_of_rebirth: int:
 			push_error("Feathers of Rebirth cannot be negative, setting to 0 instead.")
 			value = 0
 		feathers_of_rebirth = value
-		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
+		SaveManager.save_currency(feathers_of_rebirth, CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH)
 		feathers_of_rebirth_changed.emit(value)
 
 

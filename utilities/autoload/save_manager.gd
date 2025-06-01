@@ -81,20 +81,21 @@ func save_player_upgrades(
 	print("Player upgrades saved: ", upgrades)
 
 
-func save_currency(feathers: int, eggs: int) -> void:
+func save_currency(value: int, currency_type: CurrencyEnums.CurrencyTypes) -> void:
 	_ensure_game_data_loaded()
 	var config := _load_game_config()
-	config.set_value(CURRENCY_SAVE_SECTION, "f_o_r", feathers)
-	config.set_value(CURRENCY_SAVE_SECTION, "p_eggs", eggs)
+	
+	match currency_type:
+		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+			config.set_value(CURRENCY_SAVE_SECTION, "f_o_r", value)
+			_loaded_game_data["f_o_r"] = value
+			print("Feathers of Rebirth saved: ", value)
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+			config.set_value(CURRENCY_SAVE_SECTION, "p_eggs", value)
+			_loaded_game_data["p_eggs"] = value
+			print("Prosperity Eggs saved: ", value)
+
 	_save_game_config(config)
-	_loaded_game_data["f_o_r"] = feathers
-	_loaded_game_data["p_eggs"] = eggs
-	print(
-		"Currency saved: Feathers of Rebirth: ",
-		feathers,
-		", Prosperity Eggs: ",
-		eggs
-	)
 
 
 # Helper function to increment rounds_won (player section) and total_rounds_won (world section)
