@@ -43,7 +43,10 @@ bones/7/rotation = Quaternion(-0.0167451, -0.747819, -0.0105161, 0.663608)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("SphereShape3D_udlhp")
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49412, 0)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_n8hr6")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_nc4gp")]
@@ -54,7 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.832657, 2.34926, 0.134357)
 script = ExtResource("7_cf4q1")
 ranged_weapon_scene = ExtResource("8_1o75w")
 
-[node name="EnemyAbilityController" parent="." index="6"]
+[node name="EnemyAbilityController" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60472, 0)
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_e3er2")]
@@ -65,3 +68,4 @@ texture = ExtResource("8_mahx6")
 expand_mode = 3
 
 [editable path="Model/insighter"]
+[editable path="BloodSplashHandler/BloodSplash"]

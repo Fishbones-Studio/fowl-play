@@ -8,8 +8,7 @@ extends CharacterBody3D
 
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 @onready var animation_tree: AnimationTree = %AnimationTree
-@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
-@onready var camera: FollowCamera = get_tree().get_first_node_in_group("FollowCamera")
+@onready var blood_splash_handler: BloodSplashHandler = $BloodSplashHandler
 
 
 func _ready() -> void:
@@ -58,5 +57,6 @@ func _on_weapon_hit_target(target: PhysicsBody3D, damage: int, type: DamageEnums
 	if target == self:
 		stats.drain_health(damage, type)
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, info)
-		gpu_particles_3d.emitting = true
-		camera.flash_red()
+
+		var damage_percent: int = damage/stats.max_health
+		blood_splash_handler.splash_blood(damage_percent)

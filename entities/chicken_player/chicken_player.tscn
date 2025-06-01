@@ -19,7 +19,7 @@
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
 [ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
-[ext_resource type="PackedScene" uid="uid://1qgrwjubgwjk" path="res://resources/effects/gpu_particles_3d.tscn" id="21_1ij6v"]
+[ext_resource type="PackedScene" uid="uid://mgedhih6o02q" path="res://resources/effects/blood_splash/blood_splash_handler.tscn" id="21_1ij6v"]
 [ext_resource type="PackedScene" uid="uid://7fek21ei1eri" path="res://entities/chicken_player/weapons/handlers/player_weapon_controller.tscn" id="26_vclph"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_abrql"]
@@ -156,7 +156,8 @@ weapon_collision_mask = 4
 [node name="PlayerAbilityController" parent="." node_paths=PackedStringArray("player") instance=ExtResource("17_pq2r3")]
 player = NodePath("..")
 
-[node name="GPUParticles3D" parent="." instance=ExtResource("21_1ij6v")]
+[node name="BloodSplashHandler" parent="." instance=ExtResource("21_1ij6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491085, -0.214849)
 
 [connection signal="timeout" from="MovementStateMachine/Hurt/ImmobileTimer" to="MovementStateMachine/Hurt" method="_on_immobile_timer_timeout"]
 [connection signal="timeout" from="MovementStateMachine/Dash/DashDurationTimer" to="MovementStateMachine/Dash" method="_on_dash_duration_timer_timeout"]

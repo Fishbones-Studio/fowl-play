@@ -44,7 +44,10 @@ shape = SubResource("SphereShape3D_fjbia")
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.19255, 0)
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 3.50073, 0)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_m0aa4")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_8cml0")]
@@ -71,3 +74,4 @@ texture = ExtResource("7_sexgk")
 [connection signal="timeout" from="SpikeHitbox/HurtTimer" to="SpikeHitbox" method="_on_hurt_timer_timeout"]
 
 [editable path="Model/ball_chicken"]
+[editable path="BloodSplashHandler/BloodSplash"]

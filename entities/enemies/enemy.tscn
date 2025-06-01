@@ -34,7 +34,8 @@ entity = NodePath("..")
 
 [node name="DamageNumberHandler" parent="." instance=ExtResource("7_nrfwl")]
 
-[node name="GPUParticles3D" parent="DamageNumberHandler" instance=ExtResource("4_56i32")]
+[node name="BloodSplashHandler" parent="." instance=ExtResource("4_56i32")]
+unique_name_in_owner = true
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_ipr6v")
