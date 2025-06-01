@@ -283,4 +283,3 @@ texture = ExtResource("5_67o2n")
 expand_mode = 3
 
 [editable path="Model/chicken_centipede"]
-[editable path="BloodSplashHandler/BloodSplash"]

@@ -68,4 +68,3 @@ texture = ExtResource("8_mahx6")
 expand_mode = 3
 
 [editable path="Model/insighter"]
-[editable path="BloodSplashHandler/BloodSplash"]

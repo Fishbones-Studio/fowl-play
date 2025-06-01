@@ -97,4 +97,3 @@ texture = ExtResource("10_ak1y5")
 expand_mode = 3
 
 [editable path="Model/ice_fox"]
-[editable path="BloodSplashHandler/BloodSplash"]
