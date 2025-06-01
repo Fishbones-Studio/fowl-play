@@ -249,3 +249,7 @@ shape = SubResource("CylinderShape3D_qo3bk")
 
 [node name="floor" parent="Floor" instance=ExtResource("4_t02p4")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 1, 1, -1)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28992, 0)
+size = Vector3(90, 0.65, 90)

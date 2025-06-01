@@ -43,10 +43,13 @@ shape = SubResource("CapsuleShape3D_pg7ui")
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33002, 0)
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28003, -0.131363)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_7al0x")
 
-[node name="EnemyWeaponController" parent="." index="5"]
+[node name="EnemyWeaponController" parent="." index="6"]
 transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 1.01467, 1.12672, -0.399625)
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_uw30w")]

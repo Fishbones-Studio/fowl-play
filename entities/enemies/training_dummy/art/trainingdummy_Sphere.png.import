@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3uv2itk6k71t"
+uid="uid://cgn420otfutv4"
 path.s3tc="res://.godot/imported/trainingdummy_Sphere.png-e9934afa5aa69afd5cf67f607acf7ef6.s3tc.ctex"
 path.etc2="res://.godot/imported/trainingdummy_Sphere.png-e9934afa5aa69afd5cf67f607acf7ef6.etc2.ctex"
 metadata={
@@ -10,7 +10,7 @@ metadata={
 "vram_texture": true
 }
 generator_parameters={
-"md5": "24b95b62260a5026d35be32e5bcb441c"
+"md5": "0549ce324e43b2588d9b6d293534a055"
 }
 
 [deps]

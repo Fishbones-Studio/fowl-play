@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://hwkjcijdwi1j"]
+
+[ext_resource type="Shader" uid="uid://bv6j05554gwcu" path="res://resources/shaders/vignette.gdshader" id="1_1q2yi"]
+[ext_resource type="Script" uid="uid://c64ddk7igbjbw" path="res://entities/chicken_player/hurt/hurt_vignette.gd" id="2_bqdkl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cx2nh"]
+shader = ExtResource("1_1q2yi")
+shader_parameter/alpha = 0.0
+shader_parameter/inner_radius = 0.2
+shader_parameter/outer_radius = 1.0
+shader_parameter/color = Color(0.384314, 0, 0, 0.196078)
+
+[node name="HurtRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_cx2nh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_bqdkl")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://db55kjv7kn4oc"]
+
+[ext_resource type="Script" uid="uid://dinpse4k1qunk" path="res://resources/effects/blood_splash/blood_splash.gd" id="1_q3yji"]
+[ext_resource type="Shader" uid="uid://i4530fmjfaxo" path="res://resources/shaders/splash.tres" id="2_n76hd"]
+[ext_resource type="Shader" uid="uid://b1wdkryuh65mm" path="res://resources/shaders/splatter.tres" id="3_q3yji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4qsq"]
+render_priority = 0
+shader = ExtResource("2_n76hd")
+shader_parameter/ColorParameter = Color(1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_bki1m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nrfwl"]
+curve = SubResource("Curve_bki1m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaa30"]
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_nrfwl")
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ftujp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_424jk"]
+render_priority = 0
+shader = ExtResource("3_q3yji")
+shader_parameter/ColorParameter = Color(1, 0, 0.071664, 1)
+
+[sub_resource type="Curve" id="Curve_4urvo"]
+_data = [Vector2(0.00265958, 0.697518), 0.0, 0.0, 0, 0, Vector2(0.151596, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vabdn"]
+curve = SubResource("Curve_4urvo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a2m3c"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_vabdn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_vv82n"]
+orientation = 1
+
+[node name="BloodSplash" type="Node3D"]
+script = ExtResource("1_q3yji")
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_x4qsq")
+emitting = false
+amount = 100
+sub_emitter = NodePath("../Splatter")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eaa30")
+draw_pass_1 = SubResource("QuadMesh_ftujp")
+
+[node name="Splatter" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_424jk")
+cast_shadow = 0
+emitting = false
+amount = 300
+lifetime = 30.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_a2m3c")
+draw_pass_1 = SubResource("QuadMesh_vv82n")
+
+[connection signal="finished" from="Splatter" to="." method="_on_splatter_finished"]
