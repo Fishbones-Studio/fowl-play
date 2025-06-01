@@ -12,6 +12,7 @@ signal damage_taken
 
 var is_immobile: bool = false
 var is_stunned: bool = false
+var hurt_ticks: Array = []
 
 var _knockback: Vector3 = Vector3.ZERO
 
@@ -85,6 +86,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 			is_immobile = true
 			immobile_time = 0.0
 
+		hurt_ticks.append(Time.get_ticks_msec())
 		# Play hurt sound
 		on_hurt.play()
 
