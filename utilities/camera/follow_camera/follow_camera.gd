@@ -40,6 +40,7 @@ var invert_y_axis: bool = false
 
 var _offset_set: bool = false
 
+
 func _ready() -> void:
 	_load_camera_settings()
 
@@ -73,6 +74,7 @@ func _ready() -> void:
 
 	SignalManager.controls_settings_changed.connect(_load_camera_settings)
 
+
 func reparent_to_entity(new_parent: Node) -> void:
 	var offset := Vector3(
 		entity_follow_horizontal_offset,
@@ -103,6 +105,7 @@ func _input(event) -> void:
 			entity_to_follow.rotate_y(deg_to_rad(-x_input) * horizontal_sensitivity)
 		rotate_x(deg_to_rad(-y_input) * vertical_sensitivity)
 		_apply_camera_clamp()
+
 
 func _process(delta) -> void:
 	# Only set the offset once after reparenting

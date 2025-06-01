@@ -75,7 +75,10 @@ shape = SubResource("BoxShape3D_8ixwh")
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15096, -1.68246)
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0468, -0.556412)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_0uh03")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_ak1y5")]

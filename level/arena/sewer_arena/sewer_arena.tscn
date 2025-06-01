@@ -116,6 +116,10 @@ spot_angle = 60.0
 
 [node name="sewer_arena" parent="." instance=ExtResource("1_b4aaq")]
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="sewer_arena/Cube_118" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.636, 1, -8.259)
+size = Vector3(51.68, 0.6, 49.34)
+
 [node name="StaticBody3D" type="StaticBody3D" parent="sewer_arena/Cylinder_009" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sewer_arena/Cylinder_009/StaticBody3D"]

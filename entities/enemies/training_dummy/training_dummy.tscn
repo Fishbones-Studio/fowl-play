@@ -26,14 +26,14 @@ bones/4/rotation = Quaternion(0.639885, -0.447955, -0.44379, 0.439242)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.17)
 shape = SubResource("BoxShape3D_r0jxf")
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("3_qjdjk")
 
-[node name="NavigationAgent3D" parent="." index="7"]
+[node name="NavigationAgent3D" parent="." index="8"]
 avoidance_enabled = false
 keep_y_velocity = false
 
-[node name="CanvasLayer" parent="." index="8"]
+[node name="CanvasLayer" parent="." index="9"]
 visible = false
 
 [editable path="Model/trainingdummy"]

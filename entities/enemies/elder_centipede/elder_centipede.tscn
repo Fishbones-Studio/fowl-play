@@ -261,7 +261,10 @@ shape = SubResource("CapsuleShape3D_67o2n")
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.01741, -8.21457)
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97034, -7.96051)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_y8gm0")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_l658y")]
@@ -269,7 +272,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52112, 1.77696, -7.81547)
 melee_weapon_scene = ExtResource("6_b6m30")
 weapon_collision_mask = 2
 
-[node name="EnemyAbilityController" parent="." index="6"]
+[node name="EnemyAbilityController" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_bv6h5")]

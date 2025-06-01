@@ -25,6 +25,7 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
 @onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
+@onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
 
 
 func _ready() -> void:
@@ -92,6 +93,9 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 		health_bar.set_health(stats.current_health)
+
+		var damage_percentage: int = damage/stats.max_health
+		blood_splash_handler.splash_blood(damage_percentage)
 
 		if stats.current_health <= 0:
 			_die()
