@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
-[ext_resource type="PackedScene" uid="uid://1qgrwjubgwjk" path="res://resources/effects/gpu_particles_3d.tscn" id="4_56i32"]
+[ext_resource type="PackedScene" uid="uid://mgedhih6o02q" path="res://resources/effects/blood_splash/blood_splash_handler.tscn" id="4_56i32"]
 [ext_resource type="Script" uid="uid://bq2dom4xlgm4g" path="res://entities/enemies/enemy_weapon_controller.gd" id="5_twyc1"]
 [ext_resource type="Script" uid="uid://dbuarbncwrweg" path="res://entities/enemies/enemy_movement_component.gd" id="6_vabdn"]
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]

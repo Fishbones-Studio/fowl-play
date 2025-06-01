@@ -1,1 +1,2 @@
-class_name PlayerHud extends Control
+class_name PlayerHud 
+extends Control

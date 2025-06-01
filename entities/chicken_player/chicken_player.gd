@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var movement_state_machine: MovementStateMachine = $MovementStateMachine
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var blood_splash_handler: BloodSplashHandler = $BloodSplashHandler
+@onready var hurt_vignette: HurtVignette = %HurtVignette
 
 
 func _ready() -> void:
@@ -60,3 +61,5 @@ func _on_weapon_hit_target(target: PhysicsBody3D, damage: int, type: DamageEnums
 
 		var damage_percent: int = damage/stats.max_health
 		blood_splash_handler.splash_blood(damage_percent)
+
+		hurt_vignette.trigger()
