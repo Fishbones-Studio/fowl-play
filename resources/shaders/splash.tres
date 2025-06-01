@@ -2,6 +2,7 @@
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_xmodr"]
 parameter_name = "ColorParameter"
+qualifier = 2
 default_value_enabled = true
 default_value = Color(1, 0, 0, 1)
 
@@ -57,7 +58,6 @@ output_port_for_preview = 0
 operator = 2
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_27ury"]
-output_port_for_preview = 0
 operator = 2
 
 [sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_3w3hf"]
@@ -72,7 +72,7 @@ input_name = "instance_id"
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-uniform vec4 ColorParameter : source_color = vec4(1.000000, 0.000000, 0.000000, 1.000000);
+instance uniform vec4 ColorParameter : source_color = vec4(1.000000, 0.000000, 0.000000, 1.000000);
 uniform sampler2D tex_frg_2;
 
 
@@ -193,6 +193,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(163.21, -140.187)
 nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_3w3hf")
 nodes/vertex/2/position = Vector2(-180, 600)
 nodes/vertex/3/node = SubResource("VisualShaderNodeInput_tmsm5")
