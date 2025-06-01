@@ -70,9 +70,9 @@ material_override = SubResource("ShaderMaterial_424jk")
 cast_shadow = 0
 emitting = false
 amount = 300
-lifetime = 3.0
+lifetime = 30.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_a2m3c")
 draw_pass_1 = SubResource("QuadMesh_vv82n")
 
-[connection signal="finished" from="Splash" to="." method="_on_splash_finished"]
+[connection signal="finished" from="Splatter" to="." method="_on_splatter_finished"]

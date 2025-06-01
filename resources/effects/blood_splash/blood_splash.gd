@@ -10,6 +10,6 @@ func set_color(color: Color) -> void:
 	splatter.material_override.set("shader_parameter/ColorParameter", color)
 
 
-func _on_splash_finished() -> void:
+func _on_splatter_finished() -> void:
 	get_parent().remove_child(self)
 	queue_free()
