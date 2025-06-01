@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_ddm8g")
-damage = 10
+damage = 20
 windup_time = 0.0
-attack_duration = 1.5
-cooldown_time = 2.0
+attack_duration = 0.5
+cooldown_time = 0.5
 allow_continuous_fire = false
 allow_early_release = false
 fire_rate_per_second = 0.0
@@ -18,11 +18,11 @@ loop_animation = false
 name = "Feather"
 purchasable = true
 drop_chance = 70
-cost = 125
+cost = 50
 currency_type = 0
-description = "Deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
+description = "A stolen feather, still burning with its owner's wrath, its color now faded by sorrow. This weapon deals %s Base Damage per bullet. The attack starts instantanious, and takes %s, with a max range of %s, then enters a cooldown state for %s.
 
-This weapon deals [color=orange]True Damage, ignoring targets Defense stats[/color].
+This weapon deals [color=orange]True Damage, ignoring targets Defense[/color].
 
 This weapon %s and %s."
 short_description = "The user throws its feather with [color=yellow]high velocity[/color], striking from [color=yellow]Long Range[/color] and dealing [color=orange]True Damage[/color]."
