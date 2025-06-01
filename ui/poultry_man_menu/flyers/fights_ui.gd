@@ -1,20 +1,22 @@
 extends Control
 
-const ARENA_FLYER = preload("uid://b68pl3dx4qrx7")
+@export var flyers_to_setup: Array[ArenaFlyerResource]
 
-@onready var fights_container : GridContainer = %FightsContainer
+@onready var fights_container: GridContainer = %FightsContainer
+@onready var arena_flyer_resource: PackedScene = preload("uid://b68pl3dx4qrx7")
 
-@export var flyers_to_setup : Array[ArenaFlyerResource]
 
 func _ready() -> void:
 	_add_arena_flyers()
 	_setup_controller_navigation()
 
+
 func _add_arena_flyers() -> void:
 	for flyer_resource in flyers_to_setup:
-		var flyer = ARENA_FLYER.instantiate()
+		var flyer: PanelContainer = arena_flyer_resource.instantiate()
 		fights_container.add_child(flyer)
 		flyer.setup(flyer_resource)
+
 
 func _setup_controller_navigation() -> void:
 	await get_tree().process_frame
@@ -28,6 +30,7 @@ func _setup_controller_navigation() -> void:
 
 	if focusable_flyers.size() > 0:
 		focusable_flyers[0].grab_focus()
+
 
 func _on_close_button_pressed() -> void:
 	UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_FIGHT_FLYERS)
