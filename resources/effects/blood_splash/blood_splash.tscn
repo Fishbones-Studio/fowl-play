@@ -4,10 +4,9 @@
 [ext_resource type="Shader" uid="uid://i4530fmjfaxo" path="res://resources/shaders/splash.tres" id="2_n76hd"]
 [ext_resource type="Shader" uid="uid://b1wdkryuh65mm" path="res://resources/shaders/splatter.tres" id="3_q3yji"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4qsq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3yji"]
 render_priority = 0
 shader = ExtResource("2_n76hd")
-shader_parameter/ColorParameter = Color(1, 0, 0, 1)
 
 [sub_resource type="Curve" id="Curve_bki1m"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -33,7 +32,6 @@ sub_emitter_amount_at_collision = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_424jk"]
 render_priority = 0
 shader = ExtResource("3_q3yji")
-shader_parameter/ColorParameter = Color(1, 0, 0.071664, 1)
 
 [sub_resource type="Curve" id="Curve_4urvo"]
 _data = [Vector2(0.00265958, 0.697518), 0.0, 0.0, 0, 0, Vector2(0.151596, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -54,7 +52,8 @@ orientation = 1
 script = ExtResource("1_q3yji")
 
 [node name="Splash" type="GPUParticles3D" parent="."]
-material_override = SubResource("ShaderMaterial_x4qsq")
+material_override = SubResource("ShaderMaterial_q3yji")
+instance_shader_parameters/ColorParameter = Color(1, 1, 1, 1)
 emitting = false
 amount = 100
 sub_emitter = NodePath("../Splatter")

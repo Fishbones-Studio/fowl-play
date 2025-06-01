@@ -59,7 +59,7 @@ func _on_poultry_menu_button_pressed() -> void:
 func _set_button_visibility() -> void: 
 	if not ready:
 		await ready
-		
+
 	quit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.POULTRY_MAN_MENU)
 	poultry_menu_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.TRAINING_AREA)
 	forfeit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.SEWER_LEVEL)
