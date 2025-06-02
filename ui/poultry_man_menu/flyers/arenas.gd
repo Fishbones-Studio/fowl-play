@@ -47,8 +47,6 @@ func _setup_controller_navigation() -> void:
 	# Set up focus neighbors for better controller navigation
 	_setup_focus_neighbors(focusable_flyers)
 
-	SignalManager.focus_lost.emit()
-
 
 func _setup_focus_neighbors(flyers: Array) -> void:
 	if flyers.size() <= 1:
