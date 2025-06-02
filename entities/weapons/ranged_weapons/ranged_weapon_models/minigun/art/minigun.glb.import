@@ -1833,6 +1833,36 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 }
+},
+"materials": {
+"Material.001": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.001.tres"
+},
+"Material.002": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.002.tres"
+},
+"Material.003": {
+"use_external/enabled": true,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.003.tres"
+},
+"Material.004": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.004.tres"
+},
+"Material.005": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.005.tres"
+},
+"Material.006": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.006.tres"
+},
+"Material.007": {
+"use_external/enabled": false,
+"use_external/path": "res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Material.007.tres"
+}
 }
 }
 gltf/naming_version=1
