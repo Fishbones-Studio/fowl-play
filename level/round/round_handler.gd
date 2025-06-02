@@ -17,6 +17,7 @@ signal next_enemy_selected(enemy: Enemy)
 @export_category("Spawn")
 @export var enemy_spawn_position: Marker3D
 @export var player_spawn_position: Marker3D
+@export var intermission_spawn_position: Marker3D
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 
@@ -180,7 +181,7 @@ func _enter_concluding() -> void:
 
 ## Handles the intermission state, including player teleport and shop refresh.
 func _enter_intermission() -> void:
-	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0)
+	GameManager.chicken_player.global_position = intermission_spawn_position.global_position
 	SignalManager.upgrades_shop_refreshed.emit()
 
 
