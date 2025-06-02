@@ -21,7 +21,7 @@ func enter(_previous_state, _info: Dictionary = {}) -> void:
 
 func process(delta: float) -> void:
 	_windup_timer += delta
-	
+
 	if _windup_timer >= weapon.current_weapon.windup_time:
 		transition_signal.emit(WeaponEnums.WeaponState.ATTACKING, {})
 
