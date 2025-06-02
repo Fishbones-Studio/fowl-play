@@ -25,7 +25,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_next_enemy_selected(next_enemy: Enemy) -> void:
-	if next_enemy.model and next_enemy.model.get_child_count():
+	if next_enemy and next_enemy.model and next_enemy.model.get_child_count():
 		enemy_model = next_enemy.model.get_child(0).duplicate()
 		next_enemy_box.add_child(enemy_model)
 		next_enemy_box.dialogue_folder_path = next_enemy.dialogue_path
@@ -43,13 +43,13 @@ func _on_next_enemy_selected(next_enemy: Enemy) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body == GameManager.chicken_player:
+	if body == GameManager.chicken_player and enemy_model:
 		enemy_model.visible = true
 		player_in_area = true
 
 
 func _on_body_exited(body: Node) -> void:
-	if body == GameManager.chicken_player:
+	if body == GameManager.chicken_player and enemy_model:
 		player_in_area = false
 		enemy_model.visible = false
 		if next_enemy_box:

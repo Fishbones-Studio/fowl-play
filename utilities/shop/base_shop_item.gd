@@ -44,7 +44,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept") and has_focus():
 		attempt_purchase()
 
-	if event is InputEventMouseMotion or \
+	if (event is InputEventMouseButton and event.is_pressed()) or \
 	(event is InputEventJoypadMotion and event.axis in [JOY_AXIS_RIGHT_X, JOY_AXIS_RIGHT_Y]):
 		get_viewport().set_input_as_handled()
 

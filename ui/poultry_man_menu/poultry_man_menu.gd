@@ -13,7 +13,7 @@ var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
 
 var menu_actions: Dictionary[StringName, UIEnums.UI] = {
-	&"Flyer": UIEnums.UI.POULTRYMAN_FIGHT_FLYERS,
+	&"Flyer": UIEnums.UI.ARENAS,
 	&"Shop": UIEnums.UI.POULTRYMAN_SHOP,
 	&"Inventory": UIEnums.UI.CHICKEN_INVENTORY,
 	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
@@ -26,6 +26,7 @@ func _ready() -> void:
 	_initialize_focusable_items()
 	_connect_input_signals()
 	_set_initial_focus() # Handles initial highlight and focus
+	_preload_items()
 
 
 func _initialize_focusable_items() -> void:
@@ -49,8 +50,12 @@ func _connect_input_signals() -> void:
 		return
 	input_handler.selection_moved.connect(_on_move_selection)
 	input_handler.current_item_selected.connect(_on_select_current_item)
-	input_handler.keyboard_navigation_activated.connect(_on_keyboard_navigation_activated)
-	input_handler.keyboard_navigation_deactivated.connect(_on_keyboard_navigation_deactivated)
+	input_handler.keyboard_navigation_activated.connect(
+		_on_keyboard_navigation_activated
+	)
+	input_handler.keyboard_navigation_deactivated.connect(
+		_on_keyboard_navigation_deactivated
+	)
 
 
 func _set_initial_focus() -> void:
@@ -149,7 +154,8 @@ func _on_select_current_item() -> void:
 	var selected_item: Focusable3D = focusable_items[current_index]
 	var item_name: StringName = selected_item.name
 	if item_name in menu_actions:
-		SignalManager.add_ui_scene.emit(menu_actions[item_name])
+		UIManager.toggle_ui(menu_actions[item_name])
+		UIManager.get_viewport().set_input_as_handled()
 	else:
 		printerr("No action defined for item: ", item_name)
 
@@ -182,6 +188,14 @@ func _on_keyboard_navigation_deactivated() -> void:
 func _unfocus_all_items() -> void:
 	for item in focusable_items:
 		item.unfocus()
+
+
+func _preload_items() -> void:
+	print("Adding UI menu items in poultry man menu...")
+	# for all menu_actions, call SignalManager.add_ui_scene
+	for scene_enum_value in menu_actions.values():
+		SignalManager.add_ui_scene.emit(scene_enum_value, {}, false)
+	print("UI loaded for poultry man menu")
 
 
 func reset_highlights() -> void:
