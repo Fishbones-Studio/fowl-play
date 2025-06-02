@@ -9,7 +9,7 @@ var compare_item: BaseResource = null
 @onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var item_cost_label: Label = %ItemCostLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
-@onready var currency_container: HBoxContainer = $ConfirmationItemContainer/CurrencyHboxContainer
+@onready var currency_container: HBoxContainer = %CurrencyHboxContainer
 
 
 func _ready() -> void:
@@ -119,7 +119,7 @@ func populate_visual_fields() -> void:
 
 	if compare_item:
 		currency_container.visible = true
-		description_label.text = _create_compare_item_description()
+		description_label.text = compare_item.short_description
 	else:
 		currency_container.visible = false
 		description_label.text = shop_item.short_description
