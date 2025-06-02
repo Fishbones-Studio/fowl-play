@@ -36,18 +36,16 @@ theme_type_variation = &"ItemType"
 text = "TYPE"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ConfirmationItemContainer"]
-custom_minimum_size = Vector2(200, 150)
+custom_minimum_size = Vector2(200, 125)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="ConfirmationItemContainer/ScrollContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"ItemDescription"
-theme_override_constants/line_separation = 6
 bbcode_enabled = true
 text = "DESCRIPTION"
 fit_content = true
