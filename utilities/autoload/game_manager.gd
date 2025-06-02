@@ -122,6 +122,7 @@ func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntit
 	player_stats_updated.emit(stats) # Emit signal to update player stats in the game
 	return stats
 
+
 ## Game reset to be used in game, with persisting upgrades, f.o.r. and encounters 
 func reset_game() -> void:
 	# Use the setter for prosperity_eggs to ensure signals/updates happen
@@ -133,6 +134,7 @@ func reset_game() -> void:
 		Inventory.reset_inventory()
 	else:
 		push_warning("Inventory not available for reset.")
+
 
 ## Deletes the save files
 func hard_reset_game() -> void:

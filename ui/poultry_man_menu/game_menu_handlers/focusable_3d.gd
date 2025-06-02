@@ -20,7 +20,7 @@ func _ready() -> void:
 	original_scale = scale
 	if label:
 		original_label_color = label.modulate
-	
+
 	# Connect Area3D signals
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
