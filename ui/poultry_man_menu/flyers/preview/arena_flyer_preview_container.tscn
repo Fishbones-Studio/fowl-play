@@ -28,6 +28,7 @@ layout_mode = 2
 [node name="RoundsLabel" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ItemTitle"
 text = "Rounds"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
@@ -37,6 +38,8 @@ size_flags_horizontal = 3
 [node name="BossLabel" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ItemTitle"
+theme_override_colors/font_color = Color(1, 0.647059, 0, 1)
 text = "Boss"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]

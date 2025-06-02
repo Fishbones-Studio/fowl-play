@@ -1,3 +1,4 @@
+class_name ArenaFlyer
 extends PanelContainer
 
 signal hovered(item)
@@ -16,6 +17,10 @@ var flyer_resource: ArenaFlyerResource
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	add_theme_stylebox_override("panel", normal_stylebox)
+	if flyer_resource.include_boss:
+		arena_label.set("theme_override_colors/font_color", Color.ORANGE)
+	else:
+		arena_label.set("theme_override_colors/font_color", Color.YELLOW)
 
 func setup(_flyer_resource: ArenaFlyerResource) -> void:
 	flyer_resource = _flyer_resource
