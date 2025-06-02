@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dab0i61vj1n23"]
+[gd_scene load_steps=13 format=3 uid="uid://dab0i61vj1n23"]
 
 [ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
-[ext_resource type="Texture2D" uid="uid://cl6he212hdrt5" path="res://ui/main_menu/art/square_fowlplay.png" id="2_i5wg5"]
+[ext_resource type="Texture2D" uid="uid://yleov0pgrsrq" path="res://ui/main_menu/art/IMG_0407.png" id="2_4e78x"]
 [ext_resource type="AudioStream" uid="uid://wnqtkl4c2rw4" path="res://ui/main_menu/art/song_1.wav" id="2_mu8pm"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="3_3c04x"]
+[ext_resource type="Texture2D" uid="uid://bbevnes47ws5i" path="res://ui/main_menu/art/IMG_0405.png" id="3_s4pem"]
+[ext_resource type="Script" uid="uid://dwlls26p258s6" path="res://ui/main_menu/parallax_background.gd" id="3_xio0d"]
 [ext_resource type="Texture2D" uid="uid://blxf01i3gahjg" path="res://ui/main_menu/art/quit_icon.png" id="4_3c04x"]
 [ext_resource type="Texture2D" uid="uid://d2hk0nmi73swv" path="res://ui/main_menu/art/settings_icon.png" id="4_joh67"]
 [ext_resource type="Texture2D" uid="uid://du3k1r6e51wvj" path="res://ui/main_menu/art/reset_icon.png" id="4_u184e"]
+[ext_resource type="Texture2D" uid="uid://cbcgvhyecft5v" path="res://ui/main_menu/art/IMG_0406.png" id="4_xio0d"]
+[ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="6_s4pem"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("3_3c04x")
@@ -32,8 +36,49 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_i5wg5")
+texture = ExtResource("2_4e78x")
 expand_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("3_xio0d")
+
+[node name="FightArtLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/FightArtLayer"]
+position = Vector2(626, 353)
+scale = Vector2(0.544444, 0.544444)
+texture = ExtResource("3_s4pem")
+
+[node name="TitleLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/ParallaxBackground"]
+
+[node name="GreenBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/TitleLayer"]
+position = Vector2(394, 175)
+rotation = -0.0872665
+scale = Vector2(0.387963, 0.387963)
+texture = ExtResource("4_xio0d")
+
+[node name="Logo" type="Sprite2D" parent="SubViewportContainer/SubViewport/ParallaxBackground/TitleLayer"]
+position = Vector2(190, 200)
+rotation = -0.0872665
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("6_s4pem")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 
 [node name="BlurRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_joh67")
@@ -113,6 +158,8 @@ expand_icon = true
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mu8pm")
 bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/ResetButton" to="." method="_on_reset_button_pressed"]
