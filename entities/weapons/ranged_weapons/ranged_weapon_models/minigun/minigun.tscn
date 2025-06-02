@@ -1,65 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://8owdwg4pu4ht"]
+[gd_scene load_steps=11 format=3 uid="uid://8owdwg4pu4ht"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
 [ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
 [ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
 [ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
 [ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="3_vnsd5"]
-[ext_resource type="Animation" uid="uid://b02j3071rp3t0" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Attack.res" id="4_dbekv"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="4_w5bhe"]
-[ext_resource type="Animation" uid="uid://ytpkchyucjoj" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_04ypb"]
-[ext_resource type="Animation" uid="uid://db2uvllkg5ui1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
 [ext_resource type="AudioStream" uid="uid://dq677fpyoc1my" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_windup.wav" id="11_ja327"]
 [ext_resource type="AudioStream" uid="uid://utwdhg8pr0fx" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_shooting.wav" id="12_2ydk5"]
 [ext_resource type="AudioStream" uid="uid://dv8le0v6eghh4" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_cooldown.wav" id="13_qvsea"]
-
-[sub_resource type="Animation" id="Animation_i5s7k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder_005:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.56554, 8.30515e-06, 3.14158)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Cylinder_007:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.56554, 7.89566e-06, 3.14158)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Cylinder_008:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.55555, -3.14159, 2.65796e-06)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mudr6"]
-_data = {
-&"Attack": ExtResource("4_dbekv"),
-&"Cooldown": ExtResource("6_i5s7k"),
-&"RESET": SubResource("Animation_i5s7k"),
-&"Windup": ExtResource("5_i5s7k")
-}
 
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -68,23 +18,8 @@ current_weapon = ExtResource("2_h8kbp")
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
-[node name="Cylinder_002" parent="minigun" index="0"]
-transform = Transform3D(0.162841, -0.00196993, 0.0262142, -0.0261632, -0.0122609, 0.163159, 2.45764e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
-
-[node name="Cylinder_005" parent="minigun" index="2"]
-transform = Transform3D(-0.108011, -4.4104e-06, 4.71853e-09, 7.12447e-09, -0.00546279, 0.108086, -4.58338e-07, 1.03926, 0.000568145, 0.000350159, 0.017893, 1.1732)
-
-[node name="Cylinder_007" parent="minigun" index="4"]
-transform = Transform3D(-0.108011, -2.26396e-07, 4.48584e-09, 7.12447e-09, -0.000255741, 0.108085, -5.02567e-07, 0.0486531, 0.00056814, -5.55411e-05, 0.0315108, 2.06677)
-
-[node name="Cylinder_008" parent="minigun" index="5"]
-transform = Transform3D(0.423536, -9.46284e-09, 1.64002e-08, -1.71628e-08, -0.00117222, 0.424269, 5.18702e-08, 0.0768791, 0.00646905, 0.000575338, 0.0112242, 1.96039)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="minigun" index="7"]
-libraries = {
-&"": SubResource("AnimationLibrary_mudr6")
-}
-blend_times = [&"Attack", &"Attack", 0.3, &"Attack", &"Cooldown", 0.05, &"Attack", &"Windup", 0.3, &"Cooldown", &"Attack", 0.3, &"Cooldown", &"Cooldown", 0.3, &"Cooldown", &"Windup", 0.1]
+[node name="Skeleton3D" parent="minigun/Armature" index="0"]
+bones/2/rotation = Quaternion(1.77636e-15, -1, -7.13678e-24, 4.37114e-08)
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
@@ -92,19 +27,19 @@ weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("3_vnsd5")
-ANIMATION_NAME = "Idle"
+animation_name = "Idle"
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1" node_paths=PackedStringArray("windup_sound")]
 script = ExtResource("4_w5bhe")
 windup_sound = NodePath("../../WindupSound")
-ANIMATION_NAME = "Windup"
+animation_name = "Windup"
 state_type = 1
 
 [node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin", "shooting_sound")]
 script = ExtResource("3_uw0c0")
 attack_origin = NodePath("../../AttackOrigin")
 shooting_sound = NodePath("../../ShootingSound")
-ANIMATION_NAME = "Attack"
+animation_name = "Attack"
 state_type = 2
 
 [node name="AttackDurationTimer" type="Timer" parent="RangedWeaponStateMachine/AttackState" index="0"]
@@ -113,7 +48,7 @@ one_shot = true
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3" node_paths=PackedStringArray("cooldown_sound")]
 script = ExtResource("6_04ypb")
 cooldown_sound = NodePath("../../CooldownSound")
-ANIMATION_NAME = "Cooldown"
+animation_name = "Cooldown"
 state_type = 3
 
 [node name="AttackOrigin" parent="." index="3"]
