@@ -9,7 +9,7 @@ signal next_enemy_selected(enemy: Enemy)
 
 @export_category("Round Settings")
 ## Default max rounds (overridden by round_setup)
-@export var default_max_rounds: int = 3
+@export var max_rounds: int = 3
 ## Enable/disable intermission between rounds
 @export var intermission_enabled: bool = true
 ## Time between round transitions
@@ -78,7 +78,7 @@ func _enter_in_progress() -> void:
 			_next_enemy = null
 		else:
 			# This case should only happen for the very first round
-			if GameManager.current_round == default_max_rounds:
+			if GameManager.current_round == max_rounds:
 				_current_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
 				if not _current_enemy: # No boss enemies available
 					printerr(
@@ -111,27 +111,20 @@ func _enter_in_progress() -> void:
 ## Handles the end of a round, including rewards and next enemy selection.
 func _enter_concluding() -> void:
 	# Check if all rounds are completed (boss defeated)
-	if GameManager.current_round == default_max_rounds:
+	if GameManager.current_round == max_rounds:
 		_handle_victory()
 		return
+		
+	var currency_dict := _handle_round_reward()
 
-	# Display enemy defeated message and add currency
-	var prosperity_eggs: int = GameManager.arena_round_reward.get(
-		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0
-	) * GameManager.current_round
-
-	GameManager.prosperity_eggs += prosperity_eggs
-	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {
-		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs
-	}
-
+	# Show the round screen
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
 		{"display_text": "Enemy Defeated!", "currency_dict": currency_dict}
 	)
 
 	# Decide and store the next enemy *before* the wait time
-	if GameManager.current_round + 1 == default_max_rounds:
+	if GameManager.current_round + 1 == max_rounds:
 		_next_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
 		if not _next_enemy: # No boss enemies available
 			printerr(
@@ -156,6 +149,19 @@ func _enter_concluding() -> void:
 		else RoundEnums.RoundTypes.WAITING
 	)
 	_start_round()
+
+## Method for handling normal round rewards	
+func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
+	
+	# Add currency
+	var prosperity_eggs: int = GameManager.arena_round_reward.get(
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0
+	) * GameManager.current_round
+
+	GameManager.prosperity_eggs += prosperity_eggs
+	return {
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs
+	} as Dictionary[CurrencyEnums.CurrencyTypes, int]
 
 ## Handles the intermission state, including player teleport and shop refresh.
 func _enter_intermission() -> void:
@@ -217,15 +223,18 @@ func _spawn_enemy() -> void:
 ## Handles the end-of-game victory logic and reward distribution.
 func _handle_victory() -> void:
 	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {}
-	for currency_type in GameManager.arena_completion_reward:
-		var amount = GameManager.arena_completion_reward[currency_type]
-		currency_dict[currency_type] = amount
-
-		match currency_type:
-			CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
-				GameManager.feathers_of_rebirth += amount
-			CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
-				GameManager.prosperity_eggs += amount
+	if _current_enemy.type ==  EnemyEnums.EnemyTypes.BOSS:
+		for currency_type in GameManager.arena_completion_reward:
+			var amount = GameManager.arena_completion_reward[currency_type]
+			currency_dict[currency_type] = amount
+	
+			match currency_type:
+				CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+					GameManager.feathers_of_rebirth += amount
+				CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+					GameManager.prosperity_eggs += amount
+	else:
+		currency_dict = _handle_round_reward()
 
 	SignalManager.game_won.emit()
 	SignalManager.add_ui_scene.emit(
@@ -233,13 +242,13 @@ func _handle_victory() -> void:
 	)
 
 ## Sets up the round system with the provided enemies and max rounds.
-func setup_rounds(enemies: Array[PackedScene], max_rounds: int) -> void:
+func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:
 	if enemies.is_empty():
 		push_error("RoundHandler: No enemies provided for setup!")
 		return
 
-	if max_rounds > 0:
-		default_max_rounds = max_rounds
+	if _max_rounds > 0:
+		max_rounds = _max_rounds
 
 	_categorize_enemies(enemies)
 	GameManager.current_round = 1
