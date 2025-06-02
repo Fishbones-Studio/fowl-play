@@ -1,8 +1,5 @@
 extends ParallaxBackground
 
-@onready var fight_art_layer: ParallaxLayer = $FightArtLayer
-@onready var title_layer: ParallaxLayer = $TitleLayer
-
 @export_group("Parallax Settings")
 ## Overall parallax intensity
 @export var parallax_strength: float = 0.08
@@ -29,29 +26,35 @@ var target_offset: Vector2 = Vector2.ZERO
 var current_offset: Vector2 = Vector2.ZERO
 var controller_input_vector: Vector2 = Vector2.ZERO
 
+@onready var fight_art_layer: ParallaxLayer = $FightArtLayer
+@onready var title_layer: ParallaxLayer = $TitleLayer
+
+
 func _ready() -> void:
 	# Set initial motion scale for layers
 	fight_art_layer.motion_scale = Vector2.ZERO
 	title_layer.motion_scale = Vector2.ZERO
 
+
 func _process(delta: float) -> void:
 	update_parallax_offset(delta)
 
+
 func update_parallax_offset(delta: float) -> void:
-	var viewport_size = get_viewport().get_visible_rect().size
-	var center = viewport_size * 0.5
-	var final_input_offset = Vector2.ZERO # This will be normalized (-1 to 1)
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var center: Vector2 = viewport_size * 0.5
+	var final_input_offset: Vector2 = Vector2.ZERO # This will be normalized (-1 to 1)
 
 	# Handle mouse input
-	var mouse_pos = get_viewport().get_mouse_position()
-	var mouse_movement_from_center = mouse_pos - center
-	var normalized_mouse_offset = Vector2(
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	var mouse_movement_from_center: Vector2 = mouse_pos - center
+	var normalized_mouse_offset: Vector2 = Vector2(
 		mouse_movement_from_center.x / center.x,
 		mouse_movement_from_center.y / center.y
 	)
 
 	# Handle controller input
-	var raw_controller_stick = _get_controller_stick_input()
+	var raw_controller_stick: Vector2 = _get_controller_stick_input()
 	
 	# If controller is active, it influences the controller_input_vector
 	if raw_controller_stick.length_squared() > 0.01: # Small deadzone
@@ -73,19 +76,20 @@ func update_parallax_offset(delta: float) -> void:
 		controller_input_vector = controller_input_vector.lerp(Vector2.ZERO, 10.0 * delta)
 	else: # Use controller input
 		final_input_offset = controller_input_vector
-	
+
 	# Apply parallax strength and max_offset
 	target_offset = final_input_offset * parallax_strength * max_offset
 	# Ensure target_offset itself doesn't exceed max_offset due to strength
 	target_offset.x = clamp(target_offset.x, -max_offset, max_offset)
 	target_offset.y = clamp(target_offset.y, -max_offset, max_offset)
-	
+
 	# Smooth interpolation
 	current_offset = current_offset.lerp(target_offset, smooth_speed * delta)
-	
+
 	# Apply to layers with different multipliers for depth
 	fight_art_layer.motion_offset = current_offset * fight_art_multiplier
 	title_layer.motion_offset = current_offset * title_multiplier
+
 
 func _get_controller_stick_input() -> Vector2:
 	# Get right stick input (following your 3D camera pattern)
@@ -96,5 +100,5 @@ func _get_controller_stick_input() -> Vector2:
 		x_axis *= -1.0
 	if invert_controller_y:
 		y_axis *= -1.0
-	
+
 	return Vector2(x_axis, y_axis)
