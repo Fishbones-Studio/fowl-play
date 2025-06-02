@@ -17,16 +17,17 @@ var flyer_resource: ArenaFlyerResource
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
 	add_theme_stylebox_override("panel", normal_stylebox)
-	if flyer_resource.include_boss:
-		arena_label.set("theme_override_colors/font_color", Color.ORANGE)
-	else:
-		arena_label.set("theme_override_colors/font_color", Color.YELLOW)
+
 
 func setup(_flyer_resource: ArenaFlyerResource) -> void:
 	flyer_resource = _flyer_resource
 	scene_to_load = flyer_resource.scene_to_load
 	arena_icon.texture = flyer_resource.icon
 	arena_label.text = flyer_resource.title
+	if flyer_resource.include_boss:
+		arena_label.set("theme_override_colors/font_color", Color.ORANGE)
+	else:
+		arena_label.set("theme_override_colors/font_color", Color.YELLOW)
 
 func _trigger_scene_load() -> void:
 	await get_tree().process_frame
