@@ -35,7 +35,7 @@ func _add_arena_flyers() -> void:
 
 		# Connect signals
 		flyer.focused.connect(_on_flyer_focused)
-		flyer.hovered.connect(_on_flyer_focused)  # Show preview on hover too
+		flyer.hovered.connect(_on_flyer_focused) # Show preview on hover too
 		flyer.unhovered.connect(_on_flyer_unhovered)
 
 

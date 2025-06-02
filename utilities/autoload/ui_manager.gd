@@ -66,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 ##
 ## @param: game_scene_path - The resource path or UID to the game scene
 ## @param: next_ui - Optional: Which HUD UI to show after loading (default: PLAYER_HUD)
-func load_game_with_loading_screen(game_scene_enum: SceneEnums.Scenes, next_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD, next_ui_params : Dictionary = {}, game_params : Dictionary = {}) -> void:
+func load_game_with_loading_screen(game_scene_enum: SceneEnums.Scenes, next_ui: UIEnums.UI = UIEnums.UI.PLAYER_HUD, next_ui_params: Dictionary = {}, game_params: Dictionary = {}) -> void:
 	# Show the loading screen UI
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.LOADING_SCREEN)
 

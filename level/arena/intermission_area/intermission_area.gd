@@ -43,13 +43,13 @@ func _on_next_enemy_selected(next_enemy: Enemy) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body == GameManager.chicken_player && enemy_model:
+	if body == GameManager.chicken_player and enemy_model:
 		enemy_model.visible = true
 		player_in_area = true
 
 
 func _on_body_exited(body: Node) -> void:
-	if body == GameManager.chicken_player  && enemy_model:
+	if body == GameManager.chicken_player and enemy_model:
 		player_in_area = false
 		enemy_model.visible = false
 		if next_enemy_box:

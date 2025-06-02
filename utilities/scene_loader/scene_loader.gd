@@ -78,14 +78,14 @@ func _process(_delta: float) -> void:
 			_loading_params = {}  # Clear params on failure
 			set_process(false)
 
-func _on_switch_game_scene(scene_enum: SceneEnums.Scenes, params : Dictionary) -> void:
+func _on_switch_game_scene(scene_enum: SceneEnums.Scenes, params: Dictionary) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
 	# ResourceLoader handles multiple requests, but we'll only instantiate the last one requested.
 	# The previous load will continue in the background but its result won't be used by this script.
 	# Clear previous parameters immediately when starting a new scene load
 	_loading_params = {}
 	
-	var scene_path : String = SceneEnums.PATHS[scene_enum]
+	var scene_path: String = SceneEnums.PATHS[scene_enum]
 	
 	if scene_path == null:
 		push_error("Provided scene path is null")
@@ -97,7 +97,7 @@ func _on_switch_game_scene(scene_enum: SceneEnums.Scenes, params : Dictionary) -
 		else:
 			shader.show()
 
-	if !_loading_scene_path.is_empty():
+	if not _loading_scene_path.is_empty():
 		print(
 			"Warning: New scene requested while '%s' was still loading. Starting load for '%s'."
 			% [_loading_scene_path, scene_path]
