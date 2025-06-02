@@ -23,7 +23,7 @@ func setup(flyer_resource: ArenaFlyerResource) -> void:
 	if flyer_resource.icon:
 		arena_preview_icon.texture = flyer_resource.icon
 	else:
-		arena_preview_icon.texture = null # Or a default placeholder icon
+		arena_preview_icon.texture = null
 
 	arena_preview_description.text = flyer_resource.description
 	
