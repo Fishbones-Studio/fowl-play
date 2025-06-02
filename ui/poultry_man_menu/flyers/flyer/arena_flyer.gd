@@ -4,6 +4,7 @@ extends PanelContainer
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var flyer_resource : ArenaFlyerResource
 
 @onready var arena_label : Label = %ArenaLabel
 @onready var arena_icon : TextureRect = %ArenaIcon
@@ -16,16 +17,18 @@ func _ready() -> void:
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
 
 
-func setup(flyer_resource : ArenaFlyerResource):
+func setup(_flyer_resource : ArenaFlyerResource):
+	flyer_resource = _flyer_resource
+	
 	scene_to_load = flyer_resource.scene_to_load
 	arena_icon.texture = flyer_resource.arena_icon
 	
-	arena_label.text = SceneEnums.scene_to_string(scene_to_load)
+	arena_label.text = flyer_resource.title
 
 
 func _trigger_scene_load() -> void:
 	await get_tree().process_frame
-	UIManager.load_game_with_loading_screen(scene_to_load)
+	UIManager.load_game_with_loading_screen(scene_to_load, UIEnums.UI.PLAYER_HUD, {}, {"enemies" : flyer_resource.get_combined_enemy_scenes(), "max_rounds" : flyer_resource.rounds})
 
 
 func _on_gui_input(event: InputEvent) -> void:

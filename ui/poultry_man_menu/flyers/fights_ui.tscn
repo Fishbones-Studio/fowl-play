@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://n7ew83nu7xpl"]
 
 [ext_resource type="Script" uid="uid://dd1h4kjc6mdxx" path="res://ui/poultry_man_menu/flyers/fights_ui.gd" id="1_aupui"]
-[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/flyer_resource.gd" id="2_1mibp"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_1mibp"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="2_ab47u"]
 [ext_resource type="Resource" uid="uid://b0yajffbj51o8" path="res://ui/poultry_man_menu/flyers/flyer_resources/training_arena.tres" id="3_tmca3"]
 [ext_resource type="Resource" uid="uid://dfr8ywvkphcjj" path="res://ui/poultry_man_menu/flyers/flyer_resources/sewer_arena.tres" id="4_5bo25"]
@@ -58,7 +58,7 @@ theme_override_constants/separation = 15
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
-text = "Fight"
+text = "Arenas"
 vertical_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
