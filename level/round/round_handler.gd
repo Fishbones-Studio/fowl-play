@@ -64,6 +64,7 @@ func _enter_waiting() -> void:
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
+	GameManager.chicken_player.look_at(enemy_spawn_position.global_position)
 	await get_tree().create_timer(transition_delay).timeout
 
 	round_state = RoundEnums.RoundTypes.IN_PROGRESS
