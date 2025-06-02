@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://c2ufmouxg5vt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/states/attack_state.gd" id="7_2h67y"]
 
 [node name="SlingShot" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_31fjd")]
-animation_player = NodePath("AnimationPlayer")
+animation_player = NodePath("slingshot/AnimationPlayer")
 current_weapon = ExtResource("2_2h67y")
 
 [node name="slingshot" parent="." index="0" instance=ExtResource("3_nqd1d")]
@@ -21,6 +21,7 @@ weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("4_bkwn1")
+ANIMATION_NAME = "Idle"
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
 script = ExtResource("5_adhto")
@@ -38,4 +39,4 @@ state_type = 2
 [node name="AttackOrigin" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[editable path="slingshot"]
