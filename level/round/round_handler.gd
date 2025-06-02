@@ -244,6 +244,7 @@ func _spawn_enemy() -> void:
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_spawn_position.global_position
+	_current_enemy.look_at(player_spawn_position.global_position)
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	var death_callback = func():
