@@ -61,9 +61,12 @@ func _start_round() -> void:
 
 ## Handles the waiting period before a round starts.
 func _enter_waiting() -> void:
+	var current_round_string: String = "Round " + NumberUtils.to_words(GameManager.current_round)
+	if GameManager.current_round == max_rounds:
+		current_round_string = "Final Round"
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Round %d" % GameManager.current_round}
+		{"display_text": current_round_string}
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
