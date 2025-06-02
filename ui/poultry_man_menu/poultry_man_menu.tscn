@@ -79,8 +79,6 @@ avoid_repeats = null
 volume_db = 2.0
 sounds_folder = "res://ui/poultry_man_menu/art/random_sounds/"
 max_random_distance = 20.0
-min_interval = 1.0
-max_interval = 2.0
 
 [node name="InputHandler" type="Node" parent="."]
 script = ExtResource("5_x5v8y")
