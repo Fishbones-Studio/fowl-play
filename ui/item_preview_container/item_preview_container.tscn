@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_pi0rk"]
 
 [node name="ItemPreviewContainer" type="VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(256, 0)
 offset_right = 250.0
 offset_bottom = 331.0

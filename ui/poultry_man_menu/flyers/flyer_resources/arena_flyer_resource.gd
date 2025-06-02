@@ -6,7 +6,7 @@ class_name ArenaFlyerResource extends Resource
 ## Scene description
 @export_multiline var description : String
 ## Icon that shows up in the flyer scene
-@export var arena_icon : Texture2D = preload("uid://2ktdp66oojeb")
+@export var icon : Texture2D = preload("uid://2ktdp66oojeb")
 @export_group("Enemies")
 ## Regular enemies
 @export var standard_enemy_scenes: Array[PackedScene]
