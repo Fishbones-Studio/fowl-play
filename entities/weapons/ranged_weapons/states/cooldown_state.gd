@@ -1,4 +1,4 @@
-class_name RangedCooldown
+class_name RangedCooldownState
 extends BaseRangedCombatState
 
 @export var cooldown_sound: AudioStreamPlayer3D

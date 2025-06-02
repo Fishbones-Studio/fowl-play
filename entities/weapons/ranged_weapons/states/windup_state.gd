@@ -1,3 +1,4 @@
+class_name RangedWindupState
 extends BaseRangedCombatState
 
 @export var windup_sound: AudioStreamPlayer3D
