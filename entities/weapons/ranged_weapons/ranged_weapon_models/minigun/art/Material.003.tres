@@ -7,12 +7,12 @@
 render_priority = 0
 shader = ExtResource("2_nywjk")
 shader_parameter/enabled = true
-shader_parameter/shine_color = Color(1, 0, 0, 1)
+shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/progress = -2.0
 shader_parameter/shine_width = 1.0
-shader_parameter/shine_angle_x = 0.0
-shader_parameter/shine_angle_y = -90.0
-shader_parameter/shine_angle_z = 0.0
+shader_parameter/shine_angle_x = 90.0
+shader_parameter/shine_angle_y = 90.0
+shader_parameter/shine_angle_z = 90.0
 
 [resource]
 resource_name = "Material.003"
