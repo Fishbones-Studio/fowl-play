@@ -62,6 +62,7 @@ input_handler = NodePath("InputHandler")
 light_handler = NodePath("Lamp")
 
 [node name="WindMusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("2_bfy7c")
 volume_db = -15.0
 autoplay = true
@@ -71,9 +72,6 @@ bus = &"Music"
 stream = null
 volume_db = -10.0
 music_folder = "res://ui/poultry_man_menu/art/random_music/"
-min_interval = null
-max_interval = null
-avoid_repeats = null
 
 [node name="RandomSFXPlayer" parent="." instance=ExtResource("4_iajuv")]
 volume_db = 2.0
@@ -231,5 +229,6 @@ spot_angle = 68.9063
 [node name="FlickerTimer" type="Timer" parent="Lamp"]
 
 [node name="FlickerPlayer" type="AudioStreamPlayer" parent="Lamp"]
+process_mode = 3
 stream = ExtResource("9_78wky")
 bus = &"SFX"

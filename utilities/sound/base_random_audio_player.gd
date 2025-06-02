@@ -9,8 +9,11 @@ extends AudioStreamPlayer3D
 var _available_streams: Array[AudioStream] = []
 var _current_stream_index: int = -1
 
+
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load_audio_streams()
+
 
 func _load_audio_streams() -> void:
 	_available_streams.clear()
@@ -78,7 +81,6 @@ func _get_next_random_stream() -> AudioStream:
 		next_index = randi() % _available_streams.size()
 	else: # Should not happen if initial check passes, but as a fallback
 		return null
-
 
 	_current_stream_index = next_index
 	return _available_streams[_current_stream_index]

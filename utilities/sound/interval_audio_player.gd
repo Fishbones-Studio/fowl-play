@@ -14,7 +14,9 @@ var start_playing: bool
 
 var available_audio: Array[AudioStream] = []
 var current_index: int = -1
+
 var _timer: Timer
+
 
 func _init(
 	_audio_folder: String,
@@ -33,7 +35,9 @@ func _init(
 
 	_load_audio_files()
 
+
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_setup_timer()
 	if available_audio.size() > 0:
 		# Start playing immediately if start_playing is true
@@ -45,12 +49,14 @@ func _ready() -> void:
 	else:
 		push_warning("No audio files found in: %s" % audio_folder)
 
+
 func get_current_audio_name() -> String:
 	if current_index >= 0 and current_index < available_audio.size():
 		var audio_stream: AudioStream = available_audio[current_index]
 		if audio_stream != null and audio_stream.resource_path != "":
 			return audio_stream.resource_path.get_file().get_basename()
 	return ""
+
 
 func _load_audio_files() -> void:
 	available_audio.clear()
