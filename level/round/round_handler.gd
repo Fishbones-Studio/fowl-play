@@ -24,6 +24,7 @@ var _current_enemy: Enemy = null # The one currently in the arena fighting
 var _enemy_scenes_by_type: Dictionary = {} # Categorized enemy scenes by type
 var _used_enemies: Array[PackedScene] = [] # Tracks enemies already spawned in the current run
 
+
 ## Categorizes enemy scenes by their type for efficient selection.
 func _categorize_enemies(enemies: Array[PackedScene]) -> void:
 	_enemy_scenes_by_type.clear()
@@ -43,6 +44,7 @@ func _categorize_enemies(enemies: Array[PackedScene]) -> void:
 		_enemy_scenes_by_type[enemy_type].append(scene)
 		temp_enemy.queue_free()
 
+
 ## Main round state machine entry point.
 func _start_round() -> void:
 	match round_state:
@@ -57,11 +59,15 @@ func _start_round() -> void:
 		_:
 			push_error("RoundHandler: Invalid state: %s" % round_state)
 
+
 ## Handles the waiting period before a round starts.
 func _enter_waiting() -> void:
+	var current_round_string: String = "Round " + NumberUtils.to_words(GameManager.current_round)
+	if GameManager.current_round == max_rounds:
+		current_round_string = "Final Round"
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Round %d" % GameManager.current_round}
+		{"display_text": current_round_string}
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
@@ -70,6 +76,7 @@ func _enter_waiting() -> void:
 
 	round_state = RoundEnums.RoundTypes.IN_PROGRESS
 	_start_round()
+
 
 ## Handles the round in-progress state, including enemy selection and spawning.
 func _enter_in_progress() -> void:
@@ -109,6 +116,7 @@ func _enter_in_progress() -> void:
 	await SignalManager.enemy_died
 	round_state = RoundEnums.RoundTypes.CONCLUDING
 	_start_round()
+
 
 ## Handles the end of a round, including rewards and next enemy selection.
 func _enter_concluding() -> void:
@@ -152,6 +160,7 @@ func _enter_concluding() -> void:
 	)
 	_start_round()
 
+
 ## Method for handling normal round rewards
 func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 	# Add currency
@@ -164,10 +173,12 @@ func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs
 	} as Dictionary[CurrencyEnums.CurrencyTypes, int]
 
+
 ## Handles the intermission state, including player teleport and shop refresh.
 func _enter_intermission() -> void:
 	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0)
 	SignalManager.upgrades_shop_refreshed.emit()
+
 
 ## Proceeds to the next round from intermission.
 func _proceed_to_next_round() -> void:
@@ -177,6 +188,7 @@ func _proceed_to_next_round() -> void:
 
 	round_state = RoundEnums.RoundTypes.WAITING
 	_start_round()
+
 
 ## Instantiates a random enemy of the given type, avoiding repeats if possible.
 func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
@@ -224,6 +236,7 @@ func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
 
 	return scene_to_instantiate.instantiate() as Enemy
 
+
 ## Spawns the current enemy in the arena and connects its death signal.
 func _spawn_enemy() -> void:
 	assert(_current_enemy, "Attempted to spawn null enemy!")
@@ -234,18 +247,19 @@ func _spawn_enemy() -> void:
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_spawn_position.global_position
+	_current_enemy.look_at(player_spawn_position.global_position)
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	var death_callback = func():
 		if is_instance_valid(_current_enemy):
 			_current_enemy.queue_free()
 		_current_enemy = null
-		SignalManager.enemy_died.emit()
 
 	if is_instance_valid(_current_enemy):
 		_current_enemy.tree_exiting.connect(death_callback, CONNECT_ONE_SHOT)
 	else:
 		push_error("RoundHandler: _current_enemy became invalid before connecting death_callback.")
+
 
 ## Handles the end-of-game victory logic and reward distribution.
 func _handle_victory() -> void:
@@ -267,6 +281,7 @@ func _handle_victory() -> void:
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_dict}
 	)
+
 
 ## Sets up the round system with the provided enemies and max rounds.
 func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:

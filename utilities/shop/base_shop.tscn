@@ -135,6 +135,7 @@ layout_mode = 2
 
 [node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_1w0y0")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="SizePlaceholder" type="Control" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
