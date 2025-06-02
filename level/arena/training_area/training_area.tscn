@@ -56,7 +56,6 @@ killable = false
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("camera_reference", "entity_to_follow") instance=ExtResource("3_kk74r")]
 transform = Transform3D(1, 0, 0, 0, 0.995861, -0.0908933, 0, 0.0908933, 0.995861, 0, 0, 0)
 camera_reference = NodePath("../PlayerCamera")
-camera_spring_length = 2.8
 entity_to_follow = NodePath("../Player")
 
 [node name="PlayerPosition" type="Marker3D" parent="."]

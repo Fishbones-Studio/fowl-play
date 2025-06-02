@@ -1,6 +1,8 @@
 class_name ItemPreviewContainer 
 extends VBoxContainer
 
+@export var scroll_speed: float = 10.0
+
 var _current_item: BaseResource
 
 @onready var shop_preview_label: Label = %ItemPreviewLabel
@@ -9,6 +11,7 @@ var _current_item: BaseResource
 @onready var shop_preview_description: RichTextLabel = %ItemPreviewDescription
 @onready var shop_preview_description_container: HBoxContainer = %ItemPreviewDescriptionToggle
 @onready var shop_preview_description_toggle_button: CheckButton = %ItemPreviewDescriptionToggleButton
+@onready var scroll_container: ScrollContainer = $ScrollContainer
 
 
 func _ready() -> void:
@@ -16,9 +19,14 @@ func _ready() -> void:
 	shop_preview_description_toggle_button.toggled.connect(_on_update_description)
 
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact") and shop_preview_description_container.visible:
 		shop_preview_description_toggle_button.button_pressed = !shop_preview_description_toggle_button.button_pressed
+	if event is InputEventMouseButton and event.is_pressed():
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			scroll_container.scroll_vertical -= scroll_speed
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			scroll_container.scroll_vertical += scroll_speed
 
 
 func setup(item: BaseResource) -> void:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=57 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=58 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://di6rhmqney7un" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/art/peck_180.png" id="17_px7dm"]
 [ext_resource type="StyleBox" uid="uid://d0attnbn6qun" path="res://resources/themes/styleboxes/settings_content_panel_active.tres" id="18_g1eo5"]
 [ext_resource type="StyleBox" uid="uid://bbqtljrqykyc4" path="res://resources/themes/styleboxes/settings_content_panel_inactive.tres" id="19_yig1m"]
+[ext_resource type="FontFile" uid="uid://b44q0nqku5vvj" path="res://resources/Roboto-VariableFont_wdth,wght.ttf" id="24_mrf81"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtbu8"]
 
@@ -352,6 +353,8 @@ PopupMenu/icons/radio_checked = SubResource("ImageTexture_6bdnh")
 PopupMenu/icons/radio_checked_disabled = SubResource("ImageTexture_tvx0j")
 PopupMenu/styles/hover = SubResource("StyleBoxFlat_27a07")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_7ucis")
+RichTextLabel/fonts/mono_font = ExtResource("24_mrf81")
+RichTextLabel/fonts/normal_font = ExtResource("24_mrf81")
 RichtItemTitle/base_type = &"RichTextLabel"
 RichtItemTitle/colors/default_color = Color(1, 1, 0, 1)
 RichtItemTitle/colors/font_outline_color = Color(0.180392, 0.180392, 0.180392, 1)
