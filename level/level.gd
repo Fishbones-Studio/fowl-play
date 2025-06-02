@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var round_handler: RoundHandler = %RoundHandler
 
+
 func setup(params: Dictionary) -> void:
 	if not round_handler:
 		push_error("No round handler found")
