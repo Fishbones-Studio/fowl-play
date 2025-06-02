@@ -122,8 +122,6 @@ func _on_item_unfocused(_index: int) -> void:
 	is_mouse_hovering = false
 	if not is_keyboard_navigation_active:
 		reset_highlights()
-	# else: # If keyboard nav is active, the highlight_current_item in _on_move_selection or _on_keyboard_navigation_activated will handle it.
-		# highlight_current_item() # This could cause issues if unfocus is part of a focus switch
 
 
 func _on_item_pressed(index: int) -> void:

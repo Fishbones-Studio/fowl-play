@@ -6,7 +6,6 @@ signal selection_moved(direction: int)
 signal current_item_selected()
 signal keyboard_navigation_activated()
 signal keyboard_navigation_deactivated()
-signal item_clicked(item_index: int)
 
 const STICK_THRESHOLD: float = 0.5
 const STICK_COOLDOWN_TIME: float = 0.3

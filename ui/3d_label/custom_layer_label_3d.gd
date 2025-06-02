@@ -8,11 +8,13 @@ extends Label3D
 		label_lookat_player = value
 		set_process(value)
 
+
 func _ready() -> void:
 	layers = 1 << (visual_layer - 1)
 	set_process(label_lookat_player)
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	if GameManager.chicken_player:
 		var player_global_pos: Vector3 = GameManager.chicken_player.global_position
 		

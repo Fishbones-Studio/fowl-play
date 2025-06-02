@@ -11,8 +11,14 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user summons a devastating avalanche in a [color=yellow]8 meter[/color] radius, dealing damage to all targets within range. The damage scales with [color=yellow]100%%[/color] of the user's Attack and Speed. Affected targets have their Speed reduced by [color=yellow]50%%[/color] for [color=yellow]5 seconds[/color], after which they regain their original Speed. Can only be used while on the ground and has a cooldown of %s."
-short_description = "The user summons an avalanche, dealing [color=yellow]moderate[/color] damage based on the user's Attack and Speed, and [color=yellow]temporarily halving[/color] the movement speed of targets hit."
+description = "The user summons a devastating avalanche in a [color=yellow]8 meter[/color] radius, dealing damage to all targets within range.
+
+The damage scales with [color=yellow]100%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]50%%[/color] for [color=yellow]5 seconds[/color], after which they regain their original Speed.
+
+Can only be used while [color=orange]on the ground[/color] and has a cooldown of %s."
+short_description = "The user summons an avalanche, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]temporarily halving[/color] the movement speed of targets hit.
+
+Can only be used while [color=orange]on the ground[/color]."
 icon = ExtResource("1_vvsio")
 model_uid = "uid://cjuc63cw3gda1"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

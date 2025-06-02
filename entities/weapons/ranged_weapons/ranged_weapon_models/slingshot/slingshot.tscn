@@ -21,22 +21,22 @@ weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("4_bkwn1")
-ANIMATION_NAME = "Idle"
+animation_name = "Idle"
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
 script = ExtResource("5_adhto")
-ANIMATION_NAME = "Windup"
+animation_name = "Windup"
 state_type = 1
 
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="2"]
 script = ExtResource("6_bnim2")
-ANIMATION_NAME = "Cooldown"
+animation_name = "Cooldown"
 state_type = 3
 
 [node name="HoldingState" type="Node" parent="RangedWeaponStateMachine" index="3" node_paths=PackedStringArray("attack_origin")]
 script = ExtResource("7_2h67y")
 attack_origin = NodePath("../../AttackOrigin")
-ANIMATION_NAME = "Holding"
+animation_name = "Holding"
 state_type = 2
 
 [node name="AttackOrigin" parent="." index="3"]

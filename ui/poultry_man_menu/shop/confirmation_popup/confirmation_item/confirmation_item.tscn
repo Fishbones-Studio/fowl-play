@@ -35,17 +35,23 @@ size_flags_vertical = 0
 theme_type_variation = &"ItemType"
 text = "TYPE"
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="ConfirmationItemContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="ConfirmationItemContainer"]
+custom_minimum_size = Vector2(200, 125)
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="ConfirmationItemContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_type_variation = &"ItemDescription"
-theme_override_constants/line_separation = 6
 bbcode_enabled = true
 text = "DESCRIPTION"
 fit_content = true
 
 [node name="CurrencyHboxContainer" type="HBoxContainer" parent="ConfirmationItemContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
@@ -66,5 +72,9 @@ text = "200"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="ConfirmationItemContainer/ScrollContainer" to="." method="_on_scroll_container_gui_input"]
+[connection signal="mouse_entered" from="ConfirmationItemContainer/ScrollContainer" to="." method="_on_scroll_container_mouse_entered"]
+[connection signal="focus_entered" from="ConfirmationItemContainer/ScrollContainer/DescriptionLabel" to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="ConfirmationItemContainer/ScrollContainer/DescriptionLabel" to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="ConfirmationItemContainer/ScrollContainer/DescriptionLabel" to="." method="_on_gui_input"]
