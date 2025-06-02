@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bxc3j6moweqeh"]
 
-[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
 [ext_resource type="Script" uid="uid://cbbjybahmxy5y" path="res://entities/abilities/ability_models/earthquake/earthquake.gd" id="2_1j166"]
 [ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="3_57nyx"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="3_bowoe"]
