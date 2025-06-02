@@ -17,6 +17,12 @@ func _ready() -> void:
 	super()
 
 
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_on_focus_entered()
+
+
 # Create a string of the difference between the two items
 func _create_compare_item_description() -> String:
 	var compare_item_modifier: Array[float] = compare_item.get_modifier()
@@ -123,4 +129,3 @@ func populate_visual_fields() -> void:
 	else:
 		currency_container.visible = false
 		description_label.text = shop_item.short_description
-		#description_label.text = "\n".join(shop_item.get_modifier_string())

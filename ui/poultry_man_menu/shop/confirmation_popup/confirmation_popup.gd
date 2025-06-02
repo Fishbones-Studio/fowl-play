@@ -8,6 +8,7 @@ var purchased_signal: Signal
 var purchase_cancelled_signal: Signal
 
 var highlight_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 var _selected_item_resource: BaseResource # Item to remove at the end
 var _selected_item_node: ConfirmationItem # Node to highlight
@@ -78,6 +79,7 @@ func _create_confirmation_item(display_resource: Resource, compare_resource: Bas
 
 	item.set_item_data(display_resource, compare_resource)
 	item.gui_input.connect(_on_item_selected.bind(display_resource))
+	item.focused.connect(_select_item)
 
 	return item
 
@@ -92,7 +94,7 @@ func _select_item(item: BaseResource) -> void:
 	_selected_item_resource = item
 
 	if _selected_item_node:
-		_selected_item_node.remove_theme_stylebox_override("panel")
+		_selected_item_node.add_theme_stylebox_override("panel", normal_stylebox)
 
 	for child in container.get_children():
 		if child is ConfirmationItem and child.shop_item == item:

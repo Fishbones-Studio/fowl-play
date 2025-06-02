@@ -1,7 +1,7 @@
 class_name ItemPreviewContainer 
 extends VBoxContainer
 
-@export var scroll_speed: float = 15.0
+@export var scroll_speed: int = 15
 
 var _current_item: BaseResource
 
