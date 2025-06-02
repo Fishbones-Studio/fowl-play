@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://r2kfankkht6"]
 
-[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_l7j4w"]
+[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_l7j4w"]
 [ext_resource type="Script" uid="uid://5b8scwscjndl" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gd" id="2_ksrmm"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="3_fmore"]
 [ext_resource type="Shader" uid="uid://dlxoddwv36plh" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gdshader" id="4_58kgr"]
@@ -67,7 +67,7 @@ colors = PackedColorArray(1, 0.960784, 0.419608, 1, 0.932783, 0.325613, 0.328412
 script = ExtResource("2_ksrmm")
 travel_speed = 5.0
 lifetime = 6.0
-damage_interval = 0.4
+damage_interval = 1.0
 scale_factor = 1.75
 current_ability = ExtResource("3_fmore")
 
