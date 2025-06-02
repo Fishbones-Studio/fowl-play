@@ -2,13 +2,11 @@
 class_name BaseDatabase
 extends Node
 
-static var items: Array[BaseResource] = []
-
-
 # Child classes should override this to load their specific resources
 static func _load_resources() -> Array[BaseResource]:
 	return []
 
+var items: Array[BaseResource] = []
 
 func _ready() -> void:
 	items = _load_resources()

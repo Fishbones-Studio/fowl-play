@@ -1,31 +1,48 @@
+class_name ArenaFlyer
 extends PanelContainer
 
-@export var scene_to_load : SceneEnums.Scenes
+signal hovered(item)
+signal unhovered(item)
+signal focused(item)
+
+@export var scene_to_load: SceneEnums.Scenes
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var flyer_resource: ArenaFlyerResource
 
-@onready var arena_label : Label = %ArenaLabel
-@onready var arena_icon : TextureRect = %ArenaIcon
+@onready var arena_label: Label = %ArenaLabel
+@onready var arena_icon: TextureRect = %ArenaIcon
 
 
 func _ready() -> void:
-	focus_mode = Control.FOCUS_ALL
-	if not theme:
-		theme = Theme.new()
-	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	add_theme_stylebox_override("panel", normal_stylebox)
 
 
-func setup(flyer_resource : ArenaFlyerResource):
+func setup(_flyer_resource: ArenaFlyerResource) -> void:
+	flyer_resource = _flyer_resource
 	scene_to_load = flyer_resource.scene_to_load
-	arena_icon.texture = flyer_resource.arena_icon
-	
-	arena_label.text = SceneEnums.scene_to_string(scene_to_load)
+	arena_icon.texture = flyer_resource.icon
+	arena_label.text = flyer_resource.title
+
+	if flyer_resource.include_boss:
+		arena_label.set("theme_override_colors/font_color", Color.ORANGE)
+	else:
+		arena_label.set("theme_override_colors/font_color", Color.YELLOW)
 
 
 func _trigger_scene_load() -> void:
 	await get_tree().process_frame
-	UIManager.load_game_with_loading_screen(scene_to_load)
+
+	UIManager.load_game_with_loading_screen(
+		scene_to_load,
+		UIEnums.UI.PLAYER_HUD,
+		{},
+		{
+			"enemies": flyer_resource.get_combined_enemy_scenes(),
+			"max_rounds": flyer_resource.rounds
+		}
+	)
 
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -37,20 +54,20 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func _on_focus_entered() -> void:
-	if not theme:
-		theme = Theme.new()
-	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
+	add_theme_stylebox_override("panel", hover_stylebox)
+	focused.emit(flyer_resource)
 
 
 func _on_focus_exited() -> void:
-	if not theme:
-		theme = Theme.new()
-	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	add_theme_stylebox_override("panel", normal_stylebox)
+	unhovered.emit(flyer_resource)
 
 
 func _on_mouse_entered() -> void:
 	grab_focus()
+	hovered.emit(flyer_resource)
 
 
 func _on_mouse_exited() -> void:
 	_on_focus_exited()
+	unhovered.emit(flyer_resource)

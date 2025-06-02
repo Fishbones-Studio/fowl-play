@@ -11,6 +11,5 @@ enum EnemyStates {
 
 enum EnemyTypes {
 	REGULAR,
-	#ELITE,
 	BOSS,
 }
