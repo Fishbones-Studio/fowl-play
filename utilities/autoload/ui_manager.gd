@@ -399,6 +399,7 @@ func _update_game_input_blocked() -> void:
 	# Check if any UI is visible and set game_input_blocked accordingly
 	game_input_blocked = UIEnums.UI_BLOCK_GAME_INPUT.has(ui_enum)
 
+
 ## Sets the mouse mode based on the UI
 func _update_game_mouse_mode() -> void:
 	if !current_ui: 

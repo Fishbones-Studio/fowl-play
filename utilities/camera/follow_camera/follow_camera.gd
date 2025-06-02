@@ -10,9 +10,10 @@ extends Node3D
 
 @export_category("Camera")
 @export var camera_reference: Camera3D
-@export var camera_spring_length: float = 3.0
+@export_range(2.0, 6.0, 0.1) var camera_spring_length: float = 3.0
 @export var camera_margin: float = 0.5
 @export var camera_smoothness: float = 6.0
+@export_range(75.0, 120.0, 0.1) var camera_fov: float = 75.0
 
 @export_category("Entity")
 @export var entity_to_follow: CharacterBody3D
@@ -64,6 +65,8 @@ func _ready() -> void:
 
 	spring_arm_3d.spring_length = camera_spring_length
 	spring_arm_3d.margin = camera_margin
+
+	camera_reference.fov = camera_fov
 
 	if follow_camera_transformer and camera_reference:
 		follow_camera_transformer.remote_path = camera_reference.get_path()
@@ -203,5 +206,11 @@ func _load_camera_settings() -> void:
 			"controller_sensitivity": controller_sensitivity = camera_settings["controller_sensitivity"]["value"]
 			"camera_up_tilt": max_degrees = camera_settings["camera_up_tilt"]["value"]
 			"camera_down_tilt": min_degrees = camera_settings["camera_down_tilt"]["value"]
+			"camera_spring_length": 
+				camera_spring_length = camera_settings["camera_spring_length"]["value"]
+				spring_arm_3d.spring_length = camera_spring_length
+			"camera_fov": 
+				camera_fov = camera_settings["camera_fov"]["value"]
+				camera_reference.fov = camera_fov
 			"invert_x_axis": invert_x_axis = camera_settings["invert_x_axis"]["value"]
 			"invert_y_axis": invert_y_axis = camera_settings["invert_y_axis"]["value"]

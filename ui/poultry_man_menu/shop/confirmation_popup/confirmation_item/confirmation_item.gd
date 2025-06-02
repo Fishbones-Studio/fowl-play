@@ -9,12 +9,18 @@ var compare_item: BaseResource = null
 @onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var item_cost_label: Label = %ItemCostLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
-@onready var currency_container: HBoxContainer = $ConfirmationItemContainer/CurrencyHboxContainer
+@onready var currency_container: HBoxContainer = %CurrencyHboxContainer
 
 
 func _ready() -> void:
 	currency_container.visible = false
 	super()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_on_focus_entered()
 
 
 # Create a string of the difference between the two items
@@ -119,8 +125,7 @@ func populate_visual_fields() -> void:
 
 	if compare_item:
 		currency_container.visible = true
-		description_label.text = _create_compare_item_description()
+		description_label.text = compare_item.short_description
 	else:
 		currency_container.visible = false
 		description_label.text = shop_item.short_description
-		#description_label.text = "\n".join(shop_item.get_modifier_string())

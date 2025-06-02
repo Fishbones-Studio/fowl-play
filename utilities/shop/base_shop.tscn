@@ -117,6 +117,8 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
 [node name="ShopItemsContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
