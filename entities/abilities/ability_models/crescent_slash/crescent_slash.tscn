@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b2apjxceqsopi"]
 
-[ext_resource type="PackedScene" uid="uid://ewtev0tsouye" path="res://entities/abilities/ability.tscn" id="1_ybpx1"]
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ybpx1"]
 [ext_resource type="Script" uid="uid://cq5rcn2ai5sxs" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gd" id="2_jgw1e"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="3_y7jyb"]
 [ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gdshader" id="4_wydpc"]
