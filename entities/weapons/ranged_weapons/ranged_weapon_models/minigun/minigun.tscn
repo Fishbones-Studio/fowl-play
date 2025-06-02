@@ -44,10 +44,10 @@ tracks/0/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/materi
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.13333, 1.93698),
+"times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(0.5, 0.5, 1),
 "update": 0,
-"values": [2.5, 2.5, -2.0]
+"values": [-2.0, 2.5, -2.0]
 }
 
 [sub_resource type="Animation" id="Animation_ja327"]
@@ -92,7 +92,7 @@ current_weapon = ExtResource("2_h8kbp")
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
 [node name="Skeleton3D" parent="minigun/Armature" index="0"]
-bones/2/rotation = Quaternion(-1.46597e-15, 0.825267, 1.00319e-15, 0.564743)
+bones/2/rotation = Quaternion(1.77636e-15, -1, -7.13678e-24, 4.37114e-08)
 
 [node name="AnimationPlayer" parent="minigun" index="1"]
 libraries = {
