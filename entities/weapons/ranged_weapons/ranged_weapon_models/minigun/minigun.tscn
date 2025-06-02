@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
 [ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
 [ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="3_vnsd5"]
+[ext_resource type="Animation" uid="uid://c3nb5u3dpxwfm" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Idle.res" id="4_mudr6"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="4_w5bhe"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_04ypb"]
 [ext_resource type="AudioStream" uid="uid://dq677fpyoc1my" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun_windup.wav" id="11_ja327"]
@@ -34,32 +35,6 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, -1.77636e-15, 1, 1.20065e-22, 1.39071e-07, 0.0333333, 1, -1.77548e-15, 0.999507, -1.13493e-17, -0.0314106, 0.0666667, 1, 1.77285e-15, -0.998027, 8.93119e-17, 0.0627904, 1.63333, 1, 1.135e-17, -0.0314111, 1.77548e-15, 0.999507, 1.66667, 1, -1.6934e-22, 2.38498e-08, 1.77636e-15, 1, 2.5, 1, -1.25607e-15, 0.707107, 1.25607e-15, 0.707106)
 
-[sub_resource type="Animation" id="Animation_1wy5a"]
-resource_name = "Idle"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(0.5, 0.5, 1),
-"update": 0,
-"values": [-2.0, 2.5, -2.0]
-}
-
-[sub_resource type="Animation" id="Animation_ja327"]
-resource_name = "Windup"
-tracks/0/type = "rotation_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Front")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -1.26974e-22, -1.57772e-30, 1.77636e-15, 1, 0.966667, 1, -1.77392e-15, 0.99863, 3.93585e-18, 0.0523359, 1, 1, 1.77636e-15, -1, -7.13678e-24, 4.37114e-08)
-
 [sub_resource type="Animation" id="Animation_2ydk5"]
 length = 0.001
 tracks/0/type = "value"
@@ -75,11 +50,21 @@ tracks/0/keys = {
 "values": [-2.0]
 }
 
+[sub_resource type="Animation" id="Animation_ja327"]
+resource_name = "Windup"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Front")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.26974e-22, -1.57772e-30, 1.77636e-15, 1, 0.966667, 1, -1.77392e-15, 0.99863, 3.93585e-18, 0.0523359, 1, 1, 1.77636e-15, -1, -7.13678e-24, 4.37114e-08)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ydk5"]
 _data = {
 &"Attack": SubResource("Animation_i5s7k"),
 &"Cooldown": SubResource("Animation_mudr6"),
-&"Idle": SubResource("Animation_1wy5a"),
+&"Idle": ExtResource("4_mudr6"),
 &"RESET": SubResource("Animation_2ydk5"),
 &"Windup": SubResource("Animation_ja327")
 }
