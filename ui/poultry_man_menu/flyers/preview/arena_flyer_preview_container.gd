@@ -5,9 +5,10 @@ var _current_item: ArenaFlyerResource
 
 @onready var arena_preview_label: Label = %ArenaPreviewLabel
 @onready var arena_preview_icon: TextureRect = %ArenaPreviewIcon
-@onready var arena_preview_description: Label = %ArenaPreviewDescription
-@onready var boss_label : Label = %BossLabel
-@onready var rounds_label : Label = %RoundsLabel
+@onready var arena_preview_description: RichTextLabel = %ArenaPreviewDescription
+@onready var boss_label: Label = %BossLabel
+@onready var rounds_label: Label = %RoundsLabel
+
 
 func setup(flyer_resource: ArenaFlyerResource) -> void:
 	await get_tree().process_frame
@@ -26,11 +27,11 @@ func setup(flyer_resource: ArenaFlyerResource) -> void:
 		arena_preview_icon.texture = null
 
 	arena_preview_description.text = flyer_resource.description
-	
+
 	if flyer_resource.include_boss:
 		boss_label.text = "Boss Fight"
 		boss_label.show()
 	else:
 		boss_label.hide()
-		
+
 	rounds_label.text = "Rounds: %s" % flyer_resource.rounds

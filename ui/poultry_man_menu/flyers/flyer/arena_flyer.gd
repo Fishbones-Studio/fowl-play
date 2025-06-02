@@ -14,8 +14,8 @@ var flyer_resource: ArenaFlyerResource
 @onready var arena_label: Label = %ArenaLabel
 @onready var arena_icon: TextureRect = %ArenaIcon
 
+
 func _ready() -> void:
-	focus_mode = Control.FOCUS_ALL
 	add_theme_stylebox_override("panel", normal_stylebox)
 
 
@@ -24,13 +24,16 @@ func setup(_flyer_resource: ArenaFlyerResource) -> void:
 	scene_to_load = flyer_resource.scene_to_load
 	arena_icon.texture = flyer_resource.icon
 	arena_label.text = flyer_resource.title
+
 	if flyer_resource.include_boss:
 		arena_label.set("theme_override_colors/font_color", Color.ORANGE)
 	else:
 		arena_label.set("theme_override_colors/font_color", Color.YELLOW)
 
+
 func _trigger_scene_load() -> void:
 	await get_tree().process_frame
+
 	UIManager.load_game_with_loading_screen(
 		scene_to_load,
 		UIEnums.UI.PLAYER_HUD,
@@ -41,6 +44,7 @@ func _trigger_scene_load() -> void:
 		}
 	)
 
+
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -48,17 +52,21 @@ func _on_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept") and has_focus():
 		_trigger_scene_load()
 
+
 func _on_focus_entered() -> void:
 	add_theme_stylebox_override("panel", hover_stylebox)
 	focused.emit(flyer_resource)
+
 
 func _on_focus_exited() -> void:
 	add_theme_stylebox_override("panel", normal_stylebox)
 	unhovered.emit(flyer_resource)
 
+
 func _on_mouse_entered() -> void:
 	grab_focus()
 	hovered.emit(flyer_resource)
+
 
 func _on_mouse_exited() -> void:
 	_on_focus_exited()
