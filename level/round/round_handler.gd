@@ -16,13 +16,14 @@ signal next_enemy_selected(enemy: Enemy)
 @export var transition_delay: float = 2.0
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
-var _next_enemy: Enemy = null
-var _current_enemy: Enemy = null
-var _enemy_scenes_by_type: Dictionary = {}
+var _next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
+var _current_enemy: Enemy = null # The one currently in the arena fighting
+var _enemy_scenes_by_type: Dictionary = {} # Categorized enemy scenes by type
 
-@onready var enemy_spawn_position: Marker3D = %EnemyPosition
+@onready var enemy_spawn_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
 @onready var player_spawn_position: Marker3D = %PlayerPosition
 
+## Categorizes enemy scenes by their type for efficient selection.
 func _categorize_enemies(enemies: Array[PackedScene]) -> void:
 	_enemy_scenes_by_type.clear()
 
@@ -41,7 +42,7 @@ func _categorize_enemies(enemies: Array[PackedScene]) -> void:
 		_enemy_scenes_by_type[enemy_type].append(scene)
 		temp_enemy.queue_free()
 
-
+## Main round state machine entry point.
 func _start_round() -> void:
 	match round_state:
 		RoundEnums.RoundTypes.WAITING:
@@ -55,7 +56,7 @@ func _start_round() -> void:
 		_:
 			push_error("RoundHandler: Invalid state: %s" % round_state)
 
-
+## Handles the waiting period before a round starts.
 func _enter_waiting() -> void:
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
@@ -68,15 +69,15 @@ func _enter_waiting() -> void:
 	round_state = RoundEnums.RoundTypes.IN_PROGRESS
 	_start_round()
 
-
+## Handles the round in-progress state, including enemy selection and spawning.
 func _enter_in_progress() -> void:
-	# Handle enemy selection
+	# Use the pre-selected next_enemy if available, otherwise pick one (for the first round)
 	if not _current_enemy:
 		if _next_enemy:
 			_current_enemy = _next_enemy
 			_next_enemy = null
 		else:
-			# For the first round or when there's no next enemy set
+			# This case should only happen for the very first round
 			if GameManager.current_round == default_max_rounds:
 				_current_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
 				if not _current_enemy: # No boss enemies available
@@ -107,14 +108,14 @@ func _enter_in_progress() -> void:
 	round_state = RoundEnums.RoundTypes.CONCLUDING
 	_start_round()
 
-
+## Handles the end of a round, including rewards and next enemy selection.
 func _enter_concluding() -> void:
-	# Handle victory condition
+	# Check if all rounds are completed (boss defeated)
 	if GameManager.current_round == default_max_rounds:
 		_handle_victory()
 		return
 
-	# Award currency
+	# Display enemy defeated message and add currency
 	var prosperity_eggs: int = GameManager.arena_round_reward.get(
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0
 	) * GameManager.current_round
@@ -129,7 +130,7 @@ func _enter_concluding() -> void:
 		{"display_text": "Enemy Defeated!", "currency_dict": currency_dict}
 	)
 
-	# Prepare next enemy
+	# Decide and store the next enemy *before* the wait time
 	if GameManager.current_round + 1 == default_max_rounds:
 		_next_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
 		if not _next_enemy: # No boss enemies available
@@ -147,7 +148,7 @@ func _enter_concluding() -> void:
 
 	await get_tree().create_timer(transition_delay).timeout
 
-	# Advance round
+	# Increment round *after* picking the next enemy and waiting
 	GameManager.current_round += 1
 	round_state = (
 		RoundEnums.RoundTypes.INTERMISSION
@@ -156,12 +157,12 @@ func _enter_concluding() -> void:
 	)
 	_start_round()
 
-
+## Handles the intermission state, including player teleport and shop refresh.
 func _enter_intermission() -> void:
 	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0)
 	SignalManager.upgrades_shop_refreshed.emit()
 
-
+## Proceeds to the next round from intermission.
 func _proceed_to_next_round() -> void:
 	if round_state != RoundEnums.RoundTypes.INTERMISSION:
 		push_error("Proceed called outside intermission state!")
@@ -170,7 +171,7 @@ func _proceed_to_next_round() -> void:
 	round_state = RoundEnums.RoundTypes.WAITING
 	_start_round()
 
-
+## Instantiates a random enemy of the given type.
 func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
 	var scenes = _enemy_scenes_by_type.get(type, [])
 	if scenes.is_empty():
@@ -190,17 +191,18 @@ func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
 	var scene = scenes.pick_random()
 	return scene.instantiate() as Enemy
 
-
+## Spawns the current enemy in the arena and connects its death signal.
 func _spawn_enemy() -> void:
 	assert(_current_enemy, "Attempted to spawn null enemy!")
 
+	# Ensure the enemy node is not already in the tree if reusing instances
 	if _current_enemy.get_parent():
 		_current_enemy.get_parent().remove_child(_current_enemy)
 
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_spawn_position.global_position
 
-	# Connect death signal with cleanup
+	# Connect death signal (one-shot ensures it disconnects after firing)
 	var death_callback = func():
 		if is_instance_valid(_current_enemy):
 			_current_enemy.queue_free()
@@ -212,7 +214,7 @@ func _spawn_enemy() -> void:
 	else:
 		push_error("RoundHandler: _current_enemy became invalid before connecting death_callback.")
 
-
+## Handles the end-of-game victory logic and reward distribution.
 func _handle_victory() -> void:
 	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {}
 	for currency_type in GameManager.arena_completion_reward:
@@ -230,6 +232,7 @@ func _handle_victory() -> void:
 		UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_dict}
 	)
 
+## Sets up the round system with the provided enemies and max rounds.
 func setup_rounds(enemies: Array[PackedScene], max_rounds: int) -> void:
 	if enemies.is_empty():
 		push_error("RoundHandler: No enemies provided for setup!")
