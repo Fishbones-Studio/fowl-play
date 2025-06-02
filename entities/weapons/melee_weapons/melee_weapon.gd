@@ -44,5 +44,5 @@ func set_attacking(attacking_value: bool) -> void:
 	attacking = attacking_value
 
 
-func weapon_hit_effect(body: CharacterBody3D) -> void:
+func weapon_hit_effect(_body: CharacterBody3D) -> void:
 	pass

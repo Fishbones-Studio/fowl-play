@@ -79,13 +79,13 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		current_state = previous_state
 
 	# Animation handling
-	var has_current_anim := current_state.ANIMATION_NAME != null \
-		and not current_state.ANIMATION_NAME.is_empty() \
+	var has_current_anim := current_state.animation_name != null \
+		and not current_state.animation_name.is_empty() \
 		and weapon \
-		and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)
+		and weapon.animation_player.has_animation(current_state.animation_name)
 
 	if has_current_anim:
-		var anim_name: String = current_state.ANIMATION_NAME
+		var anim_name: String = current_state.animation_name
 		var anim: Animation   = weapon.animation_player.get_animation(anim_name)
 		if anim and weapon.current_weapon.loop_animation:
 			anim.loop = true
