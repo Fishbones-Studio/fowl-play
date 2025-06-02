@@ -45,6 +45,22 @@ default_settings = Array[Dictionary]([{
 "value": -90
 }
 }, {
+"camera_spring_length": {
+"max": 6.0,
+"min": 2.5,
+"step": 0.1,
+"type": "slider",
+"value": 3.0
+}
+}, {
+"camera_fov": {
+"max": 120.0,
+"min": 75.0,
+"step": 0.1,
+"type": "slider",
+"value": 75.0
+}
+}, {
 "invert_x_axis": {
 "type": "check_button",
 "value": false
