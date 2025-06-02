@@ -44,6 +44,8 @@ func _on_gui_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept") and has_focus():
 		attempt_purchase()
 
+	get_viewport().set_input_as_handled()
+
 
 func _on_focus_entered() -> void:
 	if not theme:
