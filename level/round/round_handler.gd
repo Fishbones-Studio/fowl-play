@@ -14,14 +14,15 @@ signal next_enemy_selected(enemy: Enemy)
 @export var intermission_enabled: bool = true
 ## Time between round transitions
 @export var transition_delay: float = 2.0
+@export_category("Spawn")
+@export var enemy_spawn_position: Marker3D
+@export var player_spawn_position: Marker3D
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
 var _next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 var _current_enemy: Enemy = null # The one currently in the arena fighting
 var _enemy_scenes_by_type: Dictionary = {} # Categorized enemy scenes by type
-
-@onready var enemy_spawn_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
-@onready var player_spawn_position: Marker3D = %PlayerPosition
+var _used_enemies: Array[PackedScene] = [] # Tracks enemies already spawned in the current run
 
 
 ## Categorizes enemy scenes by their type for efficient selection.
@@ -67,6 +68,7 @@ func _enter_waiting() -> void:
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
+	GameManager.chicken_player.look_at(enemy_spawn_position.global_position)
 	await get_tree().create_timer(transition_delay).timeout
 
 	round_state = RoundEnums.RoundTypes.IN_PROGRESS
@@ -119,7 +121,7 @@ func _enter_concluding() -> void:
 	if GameManager.current_round == max_rounds:
 		_handle_victory()
 		return
-		
+
 	var currency_dict := _handle_round_reward()
 
 	# Show the round screen
@@ -156,9 +158,8 @@ func _enter_concluding() -> void:
 	_start_round()
 
 
-## Method for handling normal round rewards	
+## Method for handling normal round rewards
 func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
-	
 	# Add currency
 	var prosperity_eggs: int = GameManager.arena_round_reward.get(
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0
@@ -186,25 +187,51 @@ func _proceed_to_next_round() -> void:
 	_start_round()
 
 
-## Instantiates a random enemy of the given type.
+## Instantiates a random enemy of the given type, avoiding repeats if possible.
 func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
-	var scenes = _enemy_scenes_by_type.get(type, [])
-	if scenes.is_empty():
-		var type_name: String = "UNKNOWN_TYPE"
-		# Get the enum name if possible
-		if EnemyEnums.EnemyTypes.values().has(type):
-			for key in EnemyEnums.EnemyTypes:
-				if EnemyEnums.EnemyTypes[key] == type:
-					type_name = key
-					break
-		else:
-			type_name = str(type)
-		
-		push_warning("No enemies available for type: %s" % type_name)
+	var all_scenes_for_type: Array = _enemy_scenes_by_type.get(
+		type, []
+	)
+	
+	if all_scenes_for_type.is_empty():
+		push_warning(
+			"RoundHandler: No enemy scenes available for type: %s" % str(type)
+		)
 		return null
 
-	var scene = scenes.pick_random()
-	return scene.instantiate() as Enemy
+	var available_unique_scenes: Array[PackedScene] = []
+	for scene in all_scenes_for_type:
+		if not _used_enemies.has(scene):
+			available_unique_scenes.append(scene)
+
+	var scene_to_instantiate: PackedScene = null
+
+	if not available_unique_scenes.is_empty():
+		# Prefer to pick an enemy that hasn't been used yet in this run
+		scene_to_instantiate = available_unique_scenes.pick_random()
+		if scene_to_instantiate:
+			_used_enemies.append(scene_to_instantiate)
+	else:
+		# All unique enemies of this type have been used in this run.
+		# Allow re-picking from the full list for this type.
+		push_warning(
+			(
+				"RoundHandler: All unique enemies of type '%s' have been used in this run. "
+				+ "Re-picking from the full list for this type."
+			)
+			% str(type)
+		)
+		scene_to_instantiate = all_scenes_for_type.pick_random()
+
+	if not scene_to_instantiate:
+		# This should ideally not happen if all_scenes_for_type was not empty
+		push_error(
+			"RoundHandler: Failed to select an enemy scene for type: %s"
+			% str(type)
+		)
+		return null
+
+	return scene_to_instantiate.instantiate() as Enemy
 
 
 ## Spawns the current enemy in the arena and connects its death signal.
@@ -262,6 +289,7 @@ func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:
 		max_rounds = _max_rounds
 
 	_categorize_enemies(enemies)
+	_used_enemies.clear() # Reset the used enemies list at the start of a new run
 	GameManager.current_round = 1
 	SignalManager.start_next_round.connect(_proceed_to_next_round)
 	_start_round()

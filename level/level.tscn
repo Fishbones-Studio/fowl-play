@@ -58,9 +58,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
-[node name="RoundHandler" type="Node" parent="."]
+[node name="RoundHandler" type="Node" parent="." node_paths=PackedStringArray("enemy_spawn_position", "player_spawn_position")]
 unique_name_in_owner = true
 script = ExtResource("9_cw150")
+enemy_spawn_position = NodePath("../EnemyPosition")
+player_spawn_position = NodePath("../PlayerPosition")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." groups=["NavRegion"]]
 navigation_mesh = SubResource("NavigationMesh_l5lfc")
