@@ -21,7 +21,7 @@ static var action_to_remap: String = ""
 
 
 ## Load all saved settings from the user's configuration file.
-static func load_settings( viewport: Viewport, window: Window, item: String = "") -> void:
+static func load_settings(viewport: Viewport, window: Window, item: String = "") -> void:
 	var config := ConfigFile.new()
 
 	# Attempt to load config file - if failed, use defaults for requested section
@@ -77,7 +77,7 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 
 
 static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, window: Window) -> void:
-	DisplayServer.window_set_size(settings["resolution"])
+	if settings["display_mode"] not in [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN]: DisplayServer.window_set_size(settings["resolution"])
 	if DisplayServer.window_get_mode() != settings["display_mode"]: DisplayServer.window_set_mode(settings["display_mode"])
 	if DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS) != settings["borderless"]: DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
 	if DisplayServer.window_get_vsync_mode() != settings["v_sync"]: DisplayServer.window_set_vsync_mode(settings["v_sync"])

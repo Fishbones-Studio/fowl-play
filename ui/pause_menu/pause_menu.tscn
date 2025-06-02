@@ -121,14 +121,6 @@ text = "Resume"
 alignment = 0
 script = ExtResource("4_c3jo5")
 
-[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"PauseMenuButton"
-keep_pressed_outside = true
-text = "Settings"
-alignment = 0
-
 [node name="OverviewButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -137,12 +129,20 @@ keep_pressed_outside = true
 text = "Overview"
 alignment = 0
 
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PauseMenuButton"
+keep_pressed_outside = true
+text = "Settings"
+alignment = 0
+
 [node name="PoultryMenuButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
 keep_pressed_outside = true
-text = "Return to Poultry Man Menu"
+text = "Poultry Man Menu"
 alignment = 0
 
 [node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
@@ -192,8 +192,8 @@ stretch_mode = 5
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_overview_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/PoultryMenuButton" to="." method="_on_poultry_menu_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_pressed"]
