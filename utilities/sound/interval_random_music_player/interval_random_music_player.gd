@@ -9,7 +9,6 @@ extends AudioStreamPlayer
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	var _random_player := IntervalAudioPlayer.new(music_folder, file_extensions, min_interval, max_interval, false, avoid_repeats)
 	_random_player.play_audio.connect(_on_play_sound)
 	add_child(_random_player)

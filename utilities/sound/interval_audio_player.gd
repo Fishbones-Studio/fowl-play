@@ -37,7 +37,6 @@ func _init(
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	_setup_timer()
 	if available_audio.size() > 0:
 		# Start playing immediately if start_playing is true
