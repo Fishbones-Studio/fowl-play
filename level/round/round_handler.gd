@@ -17,12 +17,30 @@ signal next_enemy_selected(enemy: Enemy)
 @export_category("Spawn")
 @export var enemy_spawn_position: Marker3D
 @export var player_spawn_position: Marker3D
+@export var intermission_spawn_position: Marker3D
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
+
 var _next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 var _current_enemy: Enemy = null # The one currently in the arena fighting
 var _enemy_scenes_by_type: Dictionary = {} # Categorized enemy scenes by type
 var _used_enemies: Array[PackedScene] = [] # Tracks enemies already spawned in the current run
+
+
+## Sets up the round system with the provided enemies and max rounds.
+func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:
+	if enemies.is_empty():
+		push_error("RoundHandler: No enemies provided for setup!")
+		return
+
+	if _max_rounds > 0:
+		max_rounds = _max_rounds
+
+	_categorize_enemies(enemies)
+	_used_enemies.clear() # Reset the used enemies list at the start of a new run
+	GameManager.current_round = 1
+	SignalManager.start_next_round.connect(_proceed_to_next_round)
+	_start_round()
 
 
 ## Categorizes enemy scenes by their type for efficient selection.
@@ -161,6 +179,12 @@ func _enter_concluding() -> void:
 	_start_round()
 
 
+## Handles the intermission state, including player teleport and shop refresh.
+func _enter_intermission() -> void:
+	GameManager.chicken_player.global_position = intermission_spawn_position.global_position
+	SignalManager.upgrades_shop_refreshed.emit()
+
+
 ## Method for handling normal round rewards
 func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 	# Add currency
@@ -172,12 +196,6 @@ func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 	return {
 		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs
 	} as Dictionary[CurrencyEnums.CurrencyTypes, int]
-
-
-## Handles the intermission state, including player teleport and shop refresh.
-func _enter_intermission() -> void:
-	GameManager.chicken_player.global_position = Vector3(-400, 2.5, 0)
-	SignalManager.upgrades_shop_refreshed.emit()
 
 
 ## Proceeds to the next round from intermission.
@@ -195,7 +213,7 @@ func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
 	var all_scenes_for_type: Array = _enemy_scenes_by_type.get(
 		type, []
 	)
-	
+
 	if all_scenes_for_type.is_empty():
 		push_warning(
 			"RoundHandler: No enemy scenes available for type: %s" % str(type)
@@ -281,19 +299,3 @@ func _handle_victory() -> void:
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_dict}
 	)
-
-
-## Sets up the round system with the provided enemies and max rounds.
-func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:
-	if enemies.is_empty():
-		push_error("RoundHandler: No enemies provided for setup!")
-		return
-
-	if _max_rounds > 0:
-		max_rounds = _max_rounds
-
-	_categorize_enemies(enemies)
-	_used_enemies.clear() # Reset the used enemies list at the start of a new run
-	GameManager.current_round = 1
-	SignalManager.start_next_round.connect(_proceed_to_next_round)
-	_start_round()

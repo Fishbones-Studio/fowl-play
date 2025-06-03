@@ -34,8 +34,12 @@ point_count = 2
 script = ExtResource("1_xii2b")
 
 [node name="IntermissionArea" parent="." node_paths=PackedStringArray("round_handler") instance=ExtResource("2_6gtgk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250, 0)
 round_handler = NodePath("../RoundHandler")
+
+[node name="IntermissionPosition" type="Marker3D" parent="IntermissionArea"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
 transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 4)
@@ -58,11 +62,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
-[node name="RoundHandler" type="Node" parent="." node_paths=PackedStringArray("enemy_spawn_position", "player_spawn_position")]
+[node name="RoundHandler" type="Node" parent="." node_paths=PackedStringArray("enemy_spawn_position", "player_spawn_position", "intermission_spawn_position")]
 unique_name_in_owner = true
 script = ExtResource("9_cw150")
 enemy_spawn_position = NodePath("../EnemyPosition")
 player_spawn_position = NodePath("../PlayerPosition")
+intermission_spawn_position = NodePath("../IntermissionArea/IntermissionPosition")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." groups=["NavRegion"]]
 navigation_mesh = SubResource("NavigationMesh_l5lfc")
