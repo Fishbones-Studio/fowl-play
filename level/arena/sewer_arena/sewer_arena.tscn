@@ -261,7 +261,12 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 40, 0)
 volume_db = 30.0
 unit_size = 100.0
-debug_pause_effects = true
+pause_eq_enabled = true
+pause_eq_band_2_db = -20.0
+pause_eq_band_3_db = -30.0
+pause_eq_band_4_db = -30.0
+pause_eq_band_5_db = -30.0
+pause_volume_adjustment_db = -10.0
 audio_folder = "res://level/arena/sewer_arena/music/"
 
 [editable path="sewer_arena"]
