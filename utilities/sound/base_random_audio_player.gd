@@ -11,7 +11,6 @@ var _current_stream_index: int = -1
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load_audio_streams()
 
 
