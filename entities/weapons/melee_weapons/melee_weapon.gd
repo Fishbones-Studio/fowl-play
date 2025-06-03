@@ -20,7 +20,6 @@ var enable_stun: bool = true
 
 
 func _physics_process(_delta: float) -> void:
-	
 	if attacking:
 		_check_for_hit()
 
