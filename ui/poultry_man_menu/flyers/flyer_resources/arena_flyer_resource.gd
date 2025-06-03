@@ -17,7 +17,7 @@ extends Resource
 @export var include_boss: bool = false
 @export_group("Scene")
 ## How many rounds the arena will have
-@export_range(1, 5, 1) var rounds: int= 2
+@export_range(1, 5, 1) var rounds: int = 2
 ## Scene where the flyer leads too
 @export var scene_to_load: SceneEnums.Scenes
 

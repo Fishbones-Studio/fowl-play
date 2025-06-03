@@ -1,5 +1,6 @@
 ## Plays a random sound effect from a specified folder at random intervals.
 extends AudioStreamPlayer3D
+
 @export var sounds_folder: String = "res://ui/game_menu/art/random_sounds/" ## Folder containing sound effect files
 @export var min_random_distance: float = 2.0 ## Minimum distance from the player in 3D space
 @export var max_random_distance: float = 10.0 ## Maximum distance from the player in 3D space
@@ -7,6 +8,7 @@ extends AudioStreamPlayer3D
 @export var min_interval: float = 5.0 ## Minimum time between sound effects in seconds
 @export var max_interval: float = 15.0 ## Maximum time between sound effects in seconds
 @export var avoid_repeats: bool = true ## Avoid playing the same sound consecutively
+
 
 func _ready() -> void:
 	var _random_player := IntervalAudioPlayer.new(sounds_folder, file_extensions, min_interval, max_interval, true, avoid_repeats)

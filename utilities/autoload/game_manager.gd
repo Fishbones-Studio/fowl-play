@@ -118,7 +118,7 @@ func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntit
 		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
 		stats.attack = default_stats.attack
-		
+
 	player_stats_updated.emit(stats) # Emit signal to update player stats in the game
 	return stats
 

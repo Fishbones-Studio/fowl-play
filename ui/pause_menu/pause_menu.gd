@@ -11,14 +11,6 @@ extends UserInterface
 @onready var forfeit_button: Button = %ForfeitButton
 @onready var poultry_menu_button : Button = %PoultryMenuButton
 
-func _ready():
-	visibility_changed.connect(
-		func():
-			if visible: UIManager.paused = true
-	)
-
-	super()
-
 
 func setup(_params: Dictionary = {}) -> void:
 	_squish_chicken()
@@ -51,7 +43,8 @@ func _on_quit_button_pressed() -> void:
 func _on_forfeit_button_pressed() -> void:
 	GameManager.reset_game()
 	_return_to_game_menu()
-	
+
+
 func _on_poultry_menu_button_pressed() -> void:
 	_return_to_game_menu()
 
@@ -81,8 +74,6 @@ func _get_scene_loader_children() -> Array:
 
 
 func _return_to_game_menu() -> void:
-	UIManager.remove_ui_by_enum(UIEnums.UI.PLAYER_HUD)
-	UIManager.remove_ui(self)
 	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU , UIEnums.UI.NULL)
 	UIManager.paused = false
 
@@ -95,7 +86,10 @@ func _return_to_main_menu() -> void:
 
 
 func _on_visibility_changed() -> void:
-	_squish_chicken()
+	if visible: 
+		UIManager.paused = true
+		_squish_chicken()
+
 	if is_inside_tree():
 		resume_button.grab_focus()
 		_set_button_visibility()
