@@ -38,7 +38,7 @@ health_consumption = 20
 damage_duration = 2.0
 damage_interval = 0.2
 peak_burn_modifier = 175
-minimum_damage = 40.0
+max_multiplier = 10.0
 current_ability = ExtResource("3_nqrm3")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]

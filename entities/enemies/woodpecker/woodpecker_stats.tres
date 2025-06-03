@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_bhfjj")
-max_health = 200.0
+max_health = 600.0
 max_stamina = 150.0
 attack = 0.0
 defense = 40

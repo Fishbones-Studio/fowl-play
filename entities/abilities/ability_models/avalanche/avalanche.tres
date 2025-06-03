@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_bhrhl")
-cooldown = 10.0
+cooldown = 5.0
 name = "Avalanche"
 purchasable = true
 drop_chance = 20

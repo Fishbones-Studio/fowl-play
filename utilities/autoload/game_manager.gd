@@ -127,7 +127,7 @@ func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntit
 func reset_game() -> void:
 	# Use the setter for prosperity_eggs to ensure signals/updates happen
 	prosperity_eggs = clamp(
-		(100 + current_round * int(arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 50) / 2.0)), 300, 300
+		(100 + current_round * int(arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 50) / 2.0)), 200, 200
 	)
 	SaveManager.reset_game_data()
 	if Inventory:

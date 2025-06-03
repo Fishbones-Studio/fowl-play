@@ -98,7 +98,6 @@ windup_sound = NodePath("../../WindupSound")
 [node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin")]
 script = ExtResource("5_umcfy")
 attack_origin = NodePath("../../AttackOrigin")
-ANIMATION_NAME = "Attack"
 state_type = 2
 
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3"]

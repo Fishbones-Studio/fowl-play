@@ -31,7 +31,7 @@ colors = PackedColorArray(0.784314, 0.894118, 0.941176, 1, 0.498039, 0.713726, 0
 script = ExtResource("2_30khn")
 movement_debuff = 50.0
 debuff_duration = 5.0
-damage_scaler = 1.5
+damage_scaler = 3.0
 current_ability = ExtResource("3_5ybk7")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
