@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsvdnoqpn766s"]
+
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_deltf"]
+[ext_resource type="Script" uid="uid://b4qvwmcfsv15w" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.gd" id="2_hntii"]
+[ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="3_2cn0f"]
+
+[node name="SanctuaryOfFirebloom" instance=ExtResource("1_deltf")]
+script = ExtResource("2_hntii")
+current_ability = ExtResource("3_2cn0f")
