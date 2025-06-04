@@ -172,16 +172,16 @@ transform = Transform3D(3.88029, 0, 1.60727, 0, 2.2, 0, -1.60727, 0, 3.88029, -1
 [node name="PillarOne" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarOne"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 20, 43)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 20, 44)
 shape = SubResource("BoxShape3D_hip3n")
 
 [node name="pillar" parent="PillarOne" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 43.5235)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 44)
 
 [node name="PillarTwo" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarTwo"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 20, -43)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 20, -44)
 shape = SubResource("BoxShape3D_xspcp")
 
 [node name="pillar" parent="PillarTwo" instance=ExtResource("3_1p63f")]
@@ -190,56 +190,56 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -44.0682)
 [node name="PillarThree" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarThree"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -43, 20, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -44, 20, 0)
 shape = SubResource("BoxShape3D_phpxf")
 
 [node name="pillar" parent="PillarThree" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -43.9829, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -44, 0, 0)
 
 [node name="PillarFour" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarFour"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 43, 20, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 44, 20, 0)
 shape = SubResource("BoxShape3D_6qrd5")
 
 [node name="pillar" parent="PillarFour" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 44.0214, 0.0206337, -0.0320072)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 44, 0, 0)
 
 [node name="PillarFive" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarFive"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 20, -30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31, 20, -31)
 shape = SubResource("BoxShape3D_8npqt")
 
 [node name="pillar" parent="PillarFive" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31.2746, 0, -30.9115)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31, 0, -31)
 
 [node name="PillarSix" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarSix"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30, 20, 30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31, 20, 31)
 shape = SubResource("BoxShape3D_7jada")
 
 [node name="pillar" parent="PillarSix" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31.1725, 0, 31.149)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 31, 0, 31)
 
 [node name="PillarSeven" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarSeven"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 20, 30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31, 20, 31)
 shape = SubResource("BoxShape3D_kmlbg")
 
 [node name="pillar" parent="PillarSeven" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.3197, 0, 31.0486)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31, 0, 31)
 
 [node name="PillarEight" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PillarEight"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30, 20, -30)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31, 20, -31)
 shape = SubResource("BoxShape3D_l85jq")
 
 [node name="pillar" parent="PillarEight" instance=ExtResource("3_1p63f")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31.3865, 0, -29.9581)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31, 0, -31)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 

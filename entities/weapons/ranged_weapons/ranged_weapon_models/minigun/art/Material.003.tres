@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bnu6bmypxxn7p"]
+
+[ext_resource type="Texture2D" uid="uid://dvlfpr254fxb1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun_Cylinder_3.png" id="1_ub3fh"]
+[ext_resource type="Shader" uid="uid://cwgwggbws82va" path="res://resources/shaders/shine_shader.gdshader" id="2_nywjk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nywjk"]
+render_priority = 0
+shader = ExtResource("2_nywjk")
+shader_parameter/enabled = true
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/progress = -2.0
+shader_parameter/shine_width = 1.0
+shader_parameter/shine_angle_x = 90.0
+shader_parameter/shine_angle_y = 90.0
+shader_parameter/shine_angle_z = 90.0
+
+[resource]
+resource_name = "Material.003"
+next_pass = SubResource("ShaderMaterial_nywjk")
+cull_mode = 2
+albedo_texture = ExtResource("1_ub3fh")
+roughness = 0.5

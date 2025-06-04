@@ -1,7 +1,7 @@
 class_name BaseCombatState
 extends BaseState
 
-@export var ANIMATION_NAME: String
+@export var animation_name: String
 
 var melee_combat_transition_state: Signal
 var state_type: int

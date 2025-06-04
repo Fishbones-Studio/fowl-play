@@ -16,7 +16,9 @@ purchasable = false
 drop_chance = 0
 cost = 0
 currency_type = 0
-description = "[color=orange]Default weapon:[/color] The fearsome PECK! Your trusty beak unleashes %s Base Damage after a %s windup. The pecking lasts %s, after which your beak needs a breather for %s, and stuns targets hit for %s. Wouldn't want to break it, right?"
+description = "[color=orange]Default weapon:[/color] The fearsome PECK! 
+
+Your trusty beak unleashes %s Base Damage after a %s windup. The pecking lasts %s, after which your beak needs a breather for %s — Wouldn't want to break it, right? Targets hit are stunned for %s."
 short_description = "The user performs a quick [color=yellow]peck attack[/color] that deals [color=yellow]minor[/color] damage and stunning targets [color=yellow]slightly[/color].
 "
 icon = ExtResource("1_gp07i")

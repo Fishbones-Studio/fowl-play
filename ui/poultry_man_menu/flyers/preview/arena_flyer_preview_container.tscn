@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://d14bjxvd3x8qf"]
+
+[ext_resource type="Script" uid="uid://cqvnejhx8keq6" path="res://ui/poultry_man_menu/flyers/preview/arena_flyer_preview_container.gd" id="1_fdutt"]
+[ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_gghku"]
+
+[node name="ArenaFlyerPreviewContainer" type="VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+offset_right = 256.0
+offset_bottom = 341.0
+size_flags_horizontal = 10
+script = ExtResource("1_fdutt")
+
+[node name="ArenaPreviewLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ItemTitle"
+text = "Label"
+
+[node name="ArenaPreviewIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_gghku")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RoundsLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ItemTitle"
+text = "Rounds"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BossLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ItemTitle"
+theme_override_colors/font_color = Color(1, 0.647059, 0, 1)
+text = "Boss"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ArenaPreviewDescription" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 16)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ItemDescription"
+text = "Description"

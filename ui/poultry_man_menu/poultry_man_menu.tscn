@@ -62,20 +62,20 @@ input_handler = NodePath("InputHandler")
 light_handler = NodePath("Lamp")
 
 [node name="WindMusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("2_bfy7c")
 volume_db = -15.0
 autoplay = true
 bus = &"Music"
 
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("3_n15us")]
+process_mode = 3
 stream = null
 volume_db = -10.0
 music_folder = "res://ui/poultry_man_menu/art/random_music/"
-min_interval = null
-max_interval = null
-avoid_repeats = null
 
 [node name="RandomSFXPlayer" parent="." instance=ExtResource("4_iajuv")]
+process_mode = 3
 volume_db = 2.0
 sounds_folder = "res://ui/poultry_man_menu/art/random_sounds/"
 max_random_distance = 20.0
@@ -107,7 +107,7 @@ transform = Transform3D(0.211227, 0, 0.133728, 0, 0.25, 0, -0.133728, 0, 0.21122
 script = ExtResource("6_dqtu2")
 metadata/_custom_type_script = "uid://c4docd5kunare"
 
-[node name="RebirthShopLabel" parent="MenuItems/Sacrifice" instance=ExtResource("11_qvty8")]
+[node name="SacrificeLabel" parent="MenuItems/Sacrifice" instance=ExtResource("11_qvty8")]
 transform = Transform3D(3.55256, 0.755949, -1.67565, -0.00418234, 3.64944, 1.63753, 1.83828, -1.45261, 3.24202, -0.134636, 1.70672, 0.265832)
 text = "Sacrifice"
 metadata/_custom_type_script = "uid://di546rbu7b42s"
@@ -163,7 +163,7 @@ metadata/_custom_type_script = "uid://c4docd5kunare"
 
 [node name="ShopLabel" parent="MenuItems/Shop" instance=ExtResource("11_qvty8")]
 transform = Transform3D(1, 0, 0, 0, 0.880337, 0.474349, 0, -0.474349, 0.880337, 0.109611, 0.929264, -0.00843561)
-text = "Equipment Shop"
+text = "Poultry Man Shop"
 font_size = 67
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
@@ -231,5 +231,6 @@ spot_angle = 68.9063
 [node name="FlickerTimer" type="Timer" parent="Lamp"]
 
 [node name="FlickerPlayer" type="AudioStreamPlayer" parent="Lamp"]
+process_mode = 3
 stream = ExtResource("9_78wky")
 bus = &"SFX"

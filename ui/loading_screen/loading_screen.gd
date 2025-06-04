@@ -77,7 +77,7 @@ func _load_background_textures() -> Array[CompressedTexture2D]:
 func _on_loading_started(_next_ui : UIEnums.UI, _next_ui_params : Dictionary) -> void:
 	next_ui = _next_ui
 	next_ui_params = _next_ui_params
-	
+
 	current_progress = 0.0
 	target_progress = 0.0
 	progress_bar.value = 0

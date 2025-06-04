@@ -98,7 +98,7 @@ func drain_stamina(amount: float) -> float:
 
 ## Regenerate health over delta time
 func regen_health(delta: float) -> float:
-	current_health = clamp(current_health + (current_health * delta), 0, max_health)
+	current_health = clamp(current_health + (health_regen * delta), 0, max_health)
 	return current_health
 
 

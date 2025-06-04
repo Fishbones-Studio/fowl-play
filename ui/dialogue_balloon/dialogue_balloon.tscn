@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfg06xxv1turn"]
+[gd_scene load_steps=11 format=3 uid="uid://cfg06xxv1turn"]
 
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="1_bci5f"]
 [ext_resource type="Script" uid="uid://do3tm0jps0uhh" path="res://ui/dialogue_balloon/dialogue_balloon.gd" id="1_smusc"]
 [ext_resource type="Script" uid="uid://byrec5x3e8q0i" path="res://ui/dialogue_balloon/responses_menu.gd" id="3_xs0yr"]
+[ext_resource type="FontFile" uid="uid://b1nic8hb7y5lm" path="res://resources/fonts/Frost Scream.otf" id="4_j2kku"]
 [ext_resource type="PackedScene" uid="uid://bbumw5xcjq0tn" path="res://ui/dialogue_balloon/response_container/dialogue_response_container.tscn" id="4_xs0yr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -149,6 +150,8 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_j2kku")
+theme_override_fonts/mono_font = ExtResource("4_j2kku")
 bbcode_enabled = true
 text = "Character"
 fit_content = true

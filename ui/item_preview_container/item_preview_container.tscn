@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dbrl2j52kvydc" path="res://ui/player_hud/art/tem_headshot.png" id="1_pi0rk"]
 
 [node name="ItemPreviewContainer" type="VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(256, 0)
 offset_right = 250.0
 offset_bottom = 331.0
@@ -14,6 +13,7 @@ script = ExtResource("1_inxb6")
 [node name="ItemPreviewLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ItemTitle"
 text = "Label"
 
 [node name="ItemPreviewIcon" type="TextureRect" parent="."]
@@ -26,6 +26,7 @@ stretch_mode = 5
 [node name="ItemPreviewType" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"ItemType"
 text = "TYpe"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -40,7 +41,7 @@ size_flags_vertical = 3
 [node name="ItemPreviewDescription" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/line_separation = 6
+theme_type_variation = &"ItemDescription"
 bbcode_enabled = true
 text = "Description"
 fit_content = true

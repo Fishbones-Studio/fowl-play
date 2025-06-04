@@ -1,7 +1,7 @@
 class_name BaseRangedCombatState
 extends BaseState
 
-@export var ANIMATION_NAME: String
+@export var animation_name: String
 @export var state_type: WeaponEnums.WeaponState
 
 var weapon: RangedWeapon

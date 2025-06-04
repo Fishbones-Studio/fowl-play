@@ -59,7 +59,7 @@ func _on_weapon_hit_target(target: PhysicsBody3D, damage: int, type: DamageEnums
 		stats.drain_health(damage, type)
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.HURT_STATE, info)
 
-		var damage_percent: int = damage/stats.max_health
+		var damage_percent: int = round(damage/stats.max_health)
 		blood_splash_handler.splash_blood(damage_percent)
 
 		hurt_vignette.trigger()
