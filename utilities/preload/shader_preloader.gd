@@ -117,12 +117,37 @@ func _process_mesh_instance_materials(mesh_instance: MeshInstance3D) -> void:
 func _process_particle_materials(particles: GPUParticles3D) -> void:
 	if particles.process_material:
 		await _process_material(particles.process_material)
+
+	# Iterate through all configured draw passes for the GPUParticles3D node
+	# particles.draw_passes is an int representing the number of active passes.
+	for pass_idx in range(particles.draw_passes):
+		# get_draw_pass_mesh uses 1-based indexing for passes (1 to 4)
+		var current_draw_pass_mesh: Mesh = particles.get_draw_pass_mesh(pass_idx + 1)
+
+		if current_draw_pass_mesh:
+			# Use get_surface_count() for Godot 4
+			var surface_count: int = current_draw_pass_mesh.get_surface_count()
+			if surface_count > 0:
+				for surf_idx in range(surface_count):
+					# surface_get_material() is correct for Godot 4
+					var material: Material = current_draw_pass_mesh.surface_get_material(surf_idx)
+					if material:
+						await _process_material(material)
 	
-	if particles.draw_pass_1 and particles.draw_pass_1.surface_get_material_count() > 0:
-		for i in range(particles.draw_pass_1.surface_get_material_count()):
-			var material: Material = particles.draw_pass_1.surface_get_material(i)
-			if material:
-				await _process_material(material)
+	# If you still want to trigger particle emission to help compile shaders:
+	if particles.amount > 0: # Only try to emit if there are particles to emit
+		var original_emitting_state: bool = particles.emitting
+		particles.emitting = true
+		particles.restart() # Make sure particles are emitted
+		
+		# Give it a moment to process
+		# Adjust frame count or duration as needed
+		for _i in range(5): # Wait a few frames
+			await get_tree().process_frame 
+			
+		particles.emitting = original_emitting_state # Restore original state
+		if not original_emitting_state: # If it wasn't emitting, clear particles
+			particles.restart() # Restarting after setting emitting to false clears them
 
 func _process_material(material: Material) -> void:
 	if not material:

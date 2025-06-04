@@ -55,6 +55,8 @@ func activate() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not is_instance_valid(ability_holder):
+		return
 	if ability_holder.is_on_floor() and on_cooldown and quake_timer.is_stopped() and _current_quake_count == 0:
 		_start_quake_sequence()
 		_stop_moving = true

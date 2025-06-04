@@ -43,7 +43,7 @@ func _setup_shader_preloading() -> void:
 	preload_manager.preloader.preloading_completed.connect(_on_preloading_completed)
 	preload_manager.preloader.preloading_failed.connect(_on_preloading_failed)
 	
-	# Start preloading
+	# Start preloading TODO: Call defered
 	preload_manager.preload_all_shaders()
 
 func _on_preloading_started(total_scenes: int) -> void:
