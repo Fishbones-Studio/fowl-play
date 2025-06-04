@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://towsqhy2adj7"]
+[gd_scene load_steps=13 format=3 uid="uid://towsqhy2adj7"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
@@ -10,32 +10,11 @@
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
 [ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="9_ioi28"]
-[ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="10_egqbq"]
-[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="11_gkpqn"]
+[ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="10_cx7ru"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vfx5i"]
 radius = 1.5
 height = 5.0
-
-[sub_resource type="Resource" id="Resource_4o270"]
-script = ExtResource("11_gkpqn")
-cooldown = 5.0
-name = "Sanctuary of Firebloom"
-purchasable = true
-drop_chance = 100
-cost = 100
-currency_type = 1
-description = "The user is engulfed in a protective bloom of flame, becoming [color=\"orange\"]immobile[/color] and [color=\"orange\"]invulnerable[/color] for [color=\"yellow\"]5 seconds[/color].
-
-During this time, the user's health is fully restored. When the duration ends, the sanctuary erupts in a violent explosion, unleashing massive [color=\"orange\"]AoE[/color] damage in two consecutive bursts. Each burst scales with [color=yellow]150%[/color] of the user's [color=orange]Max Health[/color].
-
-This ability can only be activated [color=yellow]once[/color] and only when the user's Health is below [color=yellow]5%[/color].
-
-%s"
-short_description = "The user becomes [color=\"orange\"]immobile[/color] and [color=\"orange\"]invulnerable[/color] for a [color=yellow]moderate duration[/color], fully restoring their health, before unleashing a massive explosion that deals [color=yellow]great[/color] damage scaling based on the user's [color=\"orange\"]Max Health[/color]."
-icon = ExtResource("10_egqbq")
-model_uid = "uid://dsvdnoqpn766s"
-metadata/_custom_type_script = "uid://cqht6vad2p0dc"
 
 [node name="Woodpecker" instance=ExtResource("1_k6lf6")]
 stats = ExtResource("3_woodpecker_stats")
@@ -87,7 +66,7 @@ ability_resource = ExtResource("7_p6jwh")
 ability_resource = ExtResource("9_ioi28")
 
 [node name="AbilitySlot3" parent="EnemyAbilityController" index="2" instance=ExtResource("6_x6gfb")]
-ability_resource = SubResource("Resource_4o270")
+ability_resource = ExtResource("10_cx7ru")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("8_p6jwh")
