@@ -7,12 +7,13 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return 10
+		return pow(2, max_blasts) * ((1.0 + (stats.attack / 100)))
 
 var target: Node3D = null
 
 var _hit_bodies: Array = []
 var _blast_count: int = 0
+var _current_damage: float = 0.0
 
 @onready var blast_timer: Timer = $BlastTimer
 @onready var detection_area: Area3D = $DetectionArea
@@ -34,6 +35,7 @@ func activate() -> void:
 
 	_hit_bodies.clear()
 	_blast_count = 0
+	_current_damage = damage
 
 	_toggle_collision_masks(true, hit_area)
 
@@ -78,7 +80,7 @@ func _on_blast_timer_timeout() -> void:
 			_hit_bodies.append(body)
 			SignalManager.weapon_hit_target.emit(
 				body,
-				damage,
+				_current_damage,
 				DamageEnums.DamageTypes.NORMAL,
 				{
 					"stun_time": stun_time
@@ -89,6 +91,7 @@ func _on_blast_timer_timeout() -> void:
 
 	_blast_count += 1
 	if _blast_count < max_blasts:
+		_current_damage = damage * (1.0 + (_blast_count * 0.25))
 		blast_timer.start()
 	else:
 		_toggle_collision_masks(false, hit_area)
