@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=67 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cpkmn42fix4yg" path="res://entities/enemies/ai/tasks/charge.gd" id="6_ovltl"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="7_wwppe"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="8_157vn"]
+[ext_resource type="Script" uid="uid://bddir0kb35n5d" path="res://entities/enemies/ai/tasks/stun.gd" id="11_m26ws"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_i06h6"]
 var/target/name = &"target"
@@ -201,9 +202,13 @@ children = [SubResource("BTRepeatUntilFailure_ykixg")]
 [sub_resource type="BTParallel" id="BTParallel_m26ws"]
 children = [SubResource("BTAction_j7hde"), SubResource("BTAlwaysFail_d6hvj")]
 
+[sub_resource type="BTAction" id="BTAction_ovltl"]
+script = ExtResource("11_m26ws")
+stun_time = 6.0
+
 [sub_resource type="BTSequence" id="BTSequence_b8d52"]
 custom_name = "Charge!"
-children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws")]
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws"), SubResource("BTAction_ovltl")]
 
 [sub_resource type="BTSequence" id="BTSequence_yvhtp"]
 custom_name = "Charge attack"
@@ -266,12 +271,13 @@ slot = 0
 [sub_resource type="BTSequence" id="BTSequence_mkwy1"]
 children = [SubResource("BTStopAnimation_d6hvj"), SubResource("BTAction_m26ws")]
 
-[sub_resource type="BTWait" id="BTWait_jowcg"]
-duration = 2.0
+[sub_resource type="BTAction" id="BTAction_wwppe"]
+script = ExtResource("11_m26ws")
+stun_time = 4.0
 
 [sub_resource type="BTSequence" id="BTSequence_sv4kc"]
 custom_name = "Earthquake"
-children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTSequence_5cuga"), SubResource("BTSequence_mkwy1"), SubResource("BTWait_jowcg")]
+children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTSequence_5cuga"), SubResource("BTSequence_mkwy1"), SubResource("BTAction_wwppe")]
 metadata/_weight_ = 0.985075
 
 [sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
