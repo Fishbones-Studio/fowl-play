@@ -50,8 +50,8 @@ func _setup_shader_preloading() -> void:
 	else:
 		printerr("MainMenu: Preloader not ready in ShaderPreloadManager during _setup_shader_preloading.")
 
-	# Start preloading deferred (this is already in ShaderPreloadManager)
-	preload_manager.call_deferred("preload_all_shaders")
+	# Start preloading
+	preload_manager.preload_all_shaders()
 
 func _on_preloading_started(total_scenes: int) -> void:
 	_total_scenes_to_preload = total_scenes
