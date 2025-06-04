@@ -4,18 +4,18 @@ extends RefCounted
 # Location to store the scene paths to preload
 const CONFIG_FILE_PATH: String             = "user://shader_preload_config.json"
 # Directories to exclude from scanning
-const EXCLUDED_DIRECTORIES: Array[String] = ["addons", ".godot", ".import", "autoload", "ui"]
+const EXCLUDED_DIRECTORIES: Array[String] = ["addons", ".godot", ".import", "autoload", "ui", "sound", "art"]
 # Scenes to exclude from preloading
-const EXCLUDED_SCENES: Array[String]      = ["main.tscn"]
+const EXCLUDED_SCENES: Array[String]      = ["main.tscn", "ability.tscn", "enemy.tscn"]
 
 static func scan_project_scenes() -> Array[String]:
 	var all_candidate_scenes: Array[String] = []
-	# Step 1: Collect all .tscn files that are not in excluded directories or lists
+	# Collect all .tscn files that are not in excluded directories or lists
 	_collect_all_tscn_files("res://", all_candidate_scenes)
 
-	var instanced_scenes_by_others: Dictionary = {} # Using Dictionary as a Set for quick lookups
+	var instanced_scenes_by_others: Dictionary = {}
 
-	# Step 2 & 3: Identify scenes that are instanced within other candidate scenes
+	# Identify scenes that are instanced within other candidate scenes
 	for scene_path in all_candidate_scenes:
 		var packed_scene: PackedScene = load(scene_path)
 		if packed_scene:
@@ -39,7 +39,7 @@ static func scan_project_scenes() -> Array[String]:
 		else:
 			printerr("SceneScanner: Failed to load PackedScene for ", scene_path)
 
-	# Step 4: Filter to get only top-level scenes
+	# Filter to get only top-level scenes
 	var scenes_to_preload: Array[String] = []
 	for scene_path in all_candidate_scenes:
 		if not instanced_scenes_by_others.has(scene_path):
@@ -87,7 +87,6 @@ static func _collect_all_tscn_files(
 
 		if current_is_dir:
 			# Check if the directory name itself is in EXCLUDED_DIRECTORIES
-			# full_path.get_file() gets the last component (the directory name)
 			if full_path.get_file() in EXCLUDED_DIRECTORIES:
 				file_name = dir.get_next()
 				continue
@@ -106,8 +105,7 @@ static func _recursively_find_instanced_sub_scenes(
 	current_parsing_scene_path: String
 ) -> void:
 	# node.scene_file_path is the path of the .tscn file this node was instanced from.
-	# If it's non-empty and different from the scene we are currently parsing,
-	# it means this 'node' is an instance of another scene (a sub-scene).
+	# If it's non-empty and different from the scene we are currently parsing, it means this 'node' is an instance of another scene (a sub-scene).
 	if (
 		node.scene_file_path != ""
 		and node.scene_file_path != current_parsing_scene_path
