@@ -7,9 +7,9 @@
 script = ExtResource("1_a2hla")
 cooldown = 10.0
 name = "Sanctuary of Firebloom"
-purchasable = false
-drop_chance = 0
-cost = 0
+purchasable = true
+drop_chance = 5
+cost = 200
 currency_type = 0
 description = "The user is engulfed in a protective bloom of flame, becoming [color=\"orange\"]immobile[/color] and [color=\"orange\"]invulnerable[/color] for [color=\"yellow\"]5 seconds[/color].
 
