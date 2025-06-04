@@ -102,8 +102,10 @@ func _find_and_process_materials_in_node(node: Node) -> void:
 		await _process_cpu_particle_materials(node as CPUParticles3D)
 	
 	# Process material override if present
-	if node.has_method("get_material_override") and node.get_material_override():
-		await _process_material_resource(node.get_material_override())
+	if node.has_method("get_material_override"):
+		var material_override = node.get_material_override()
+		if material_override:
+			await _process_material_resource(material_override)
 	
 	for child in node.get_children():
 		await _find_and_process_materials_in_node(child)
