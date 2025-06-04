@@ -2,7 +2,7 @@ extends Ability
 
 @export var max_blasts: int = 5
 @export var blasts_interval: float = 0.25
-@export var stun_time: float = 0.1
+@export var stun_time: float = 0.15
 
 var damage: float:
 	get:
