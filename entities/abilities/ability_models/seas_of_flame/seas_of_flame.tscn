@@ -1,36 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://df1clah7xvv32"]
+[gd_scene load_steps=10 format=3 uid="uid://df1clah7xvv32"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
 [ext_resource type="Script" uid="uid://c1esqie0rd4t3" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.gd" id="2_7fey8"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="3_nqrm3"]
+[ext_resource type="Shader" uid="uid://doc3hxpx75yxm" path="res://entities/abilities/ability_models/seas_of_flame/ember.tres" id="4_7fey8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gdliy"]
 height = 3.0
 radius = 20.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lj7w"]
-transparency = 1
-blend_mode = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.230603, 0.156685, 0.0584118, 1)
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7fey8"]
+render_priority = 0
+shader = ExtResource("4_7fey8")
+shader_parameter/Speed = Vector2(0, 1.5)
 
 [sub_resource type="QuadMesh" id="QuadMesh_rjsn0"]
-material = SubResource("StandardMaterial3D_3lj7w")
-size = Vector2(10, 10)
+material = SubResource("ShaderMaterial_7fey8")
+size = Vector2(15, 15)
 
 [sub_resource type="Curve" id="Curve_gdliy"]
-_data = [Vector2(0, 0.00203478), 0.0, 0.0, 0, 0, Vector2(0.495633, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.401221), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.00203478), 0.0, 0.0, 0, 0, Vector2(0.50431, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.247718), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_gdliy"]
-offsets = PackedFloat32Array(0.170792, 0.529703, 0.943069)
-colors = PackedColorArray(0.447771, 0.19073, 0.221989, 1, 0.649454, 0.194277, 0.285676, 1, 0.701369, 0.336546, 0.2301, 1)
+[sub_resource type="Gradient" id="Gradient_7fey8"]
+offsets = PackedFloat32Array(0, 0.5, 0.8)
+colors = PackedColorArray(0.520083, 0.118222, 0.305555, 1, 0.643152, 0.224506, 0.181893, 1, 0.717329, 0.300318, 0.384193, 1)
 
 [node name="SeasOfFlame" instance=ExtResource("1_vfv0y")]
 script = ExtResource("2_7fey8")
@@ -47,16 +41,16 @@ collision_mask = 0
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_gdliy")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
 emitting = false
-amount = 750
+amount = 1000
 one_shot = true
+explosiveness = 0.3
 randomness = 1.0
-lifetime_randomness = 0.2
+lifetime_randomness = 0.1
 local_coords = true
 draw_order = 2
 mesh = SubResource("QuadMesh_rjsn0")
@@ -71,11 +65,12 @@ spread = 0.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 10.0
-angular_velocity_max = 25.0
+angular_velocity_max = 20.0
 linear_accel_min = 1.0
 linear_accel_max = 5.0
 angle_max = 360.0
 scale_amount_min = 0.1
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_gdliy")
-color_initial_ramp = SubResource("Gradient_gdliy")
+color = Color(0.921343, 0.235837, 0.145519, 1)
+color_ramp = SubResource("Gradient_7fey8")

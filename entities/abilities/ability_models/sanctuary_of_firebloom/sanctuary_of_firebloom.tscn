@@ -7,3 +7,7 @@
 [node name="SanctuaryOfFirebloom" instance=ExtResource("1_deltf")]
 script = ExtResource("2_hntii")
 current_ability = ExtResource("3_2cn0f")
+
+[node name="HitArea" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_a2hla")
-cooldown = 0.0
+cooldown = 10.0
 name = "Sanctuary of Firebloom"
 purchasable = false
 drop_chance = 0
@@ -13,9 +13,11 @@ cost = 0
 currency_type = 0
 description = "The user is engulfed in a protective bloom of flame, becoming [color=\"orange\"]immobile[/color] and [color=\"orange\"]invulnerable[/color] for [color=\"yellow\"]5 seconds[/color].
 
-During this time, the user's health is fully restored. When the duration ends, the sanctuary erupts in a violent explosion, unleashing massive [color=\"orange\"]AoE[/color] damage in two consecutive bursts. Each burst scales with [color=yellow]150%%[/color] of the user's [color=orange]Max Health[/color].
+During this time, the user's health is fully restored. When the duration ends, the sanctuary erupts in a violent explosion, unleashing massive [color=\"orange\"]AoE[/color] damage in two consecutive bursts. Each burst scales with [color=yellow]150%[/color] of the user's [color=orange]Max Health[/color].
 
-This ability can only be activated [color=yellow]once[/color] and only when the user's Health is below [color=yellow]5%%[/color]."
+This ability can only be activated [color=yellow]once[/color] and only when the user's Health is below [color=yellow]5%[/color].
+
+%s"
 short_description = "The user becomes [color=\"orange\"]immobile[/color] and [color=\"orange\"]invulnerable[/color] for a [color=yellow]moderate duration[/color], fully restoring their health, before unleashing a massive explosion that deals [color=yellow]great[/color] damage scaling based on the user's [color=\"orange\"]Max Health[/color]."
 icon = ExtResource("1_st7dl")
 model_uid = "uid://dsvdnoqpn766s"

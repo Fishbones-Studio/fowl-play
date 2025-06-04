@@ -77,6 +77,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 			# Set immobile time
 			immobile_time = _knockback.length() / knockback_decay
+
 		if "stun_time" in info:
 			var stun_time: float = info["stun_time"]
 
