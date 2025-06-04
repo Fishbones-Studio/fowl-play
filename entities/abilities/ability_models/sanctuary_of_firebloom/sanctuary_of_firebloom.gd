@@ -7,7 +7,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return pow(2, max_blasts) * ((1.0 + (stats.attack / 100)))
+		return pow(max_blasts, 1.5) * ((1.0 + (stats.attack / 100)))
 
 var target: Node3D = null
 
@@ -25,6 +25,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	_toggle_collision_masks(true, detection_area)
+
+	super()
 
 
 func activate() -> void:
