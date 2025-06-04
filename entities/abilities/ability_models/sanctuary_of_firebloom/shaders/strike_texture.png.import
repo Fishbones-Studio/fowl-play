@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c26q8cmcvnc83"
-path.s3tc="res://.godot/imported/fire_texture.png-6b016ff5aaf1fa0decf3817a9d5005c5.s3tc.ctex"
-path.etc2="res://.godot/imported/fire_texture.png-6b016ff5aaf1fa0decf3817a9d5005c5.etc2.ctex"
+uid="uid://devg352qb5chd"
+path.s3tc="res://.godot/imported/strike_texture.png-d3ff6e3f9fc70baed42714e2b4167f53.s3tc.ctex"
+path.etc2="res://.godot/imported/strike_texture.png-d3ff6e3f9fc70baed42714e2b4167f53.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://entities/abilities/ability_models/seas_of_flame/fire_texture.png"
-dest_files=["res://.godot/imported/fire_texture.png-6b016ff5aaf1fa0decf3817a9d5005c5.s3tc.ctex", "res://.godot/imported/fire_texture.png-6b016ff5aaf1fa0decf3817a9d5005c5.etc2.ctex"]
+source_file="res://entities/abilities/ability_models/sanctuary_of_firebloom/shaders/strike_texture.png"
+dest_files=["res://.godot/imported/strike_texture.png-d3ff6e3f9fc70baed42714e2b4167f53.s3tc.ctex", "res://.godot/imported/strike_texture.png-d3ff6e3f9fc70baed42714e2b4167f53.etc2.ctex"]
 
 [params]
 
