@@ -7,11 +7,12 @@ const CONFIG_FILE_PATH: String = "user://shader_preload_config.json"
 const EXCLUDED_DIRECTORIES: Array[String] = [
 	"addons",
 	".godot",
-	".import", # Typically contains imported resources, not raw .tscn for levels
-	"autoload",
-	"ui", # Often contains UI scenes, not primary game levels
-	"sound",
-	"art" # Art assets, not usually scenes to preload directly
+	".import",
+	"export", # Exported game assets, doesn't contain anything actually used in the game
+	"ui", # UI Scenes, minimal shader and material use
+	"utilities",
+	"resources",
+	"art" # Art assets
 ]
 # Scenes to exclude from preloading (filenames)
 const EXCLUDED_SCENES: Array[String] = ["main.tscn", "ability.tscn", "enemy.tscn"]
@@ -55,7 +56,7 @@ static func _collect_all_tscn_files_rl(
 
 
 static func scan_project_scenes() -> Array[String]:
-	var context_msg = "(Editor)" if Engine.is_editor_hint() else "(Exported Game)"
+	var context_msg: String = "(Editor)" if Engine.is_editor_hint() else "(Exported Game)"
 	print("SceneScanner: ", context_msg, " Starting scene scan using ResourceLoader.list_directory...")
 	
 	var all_candidate_scenes: Array[String] = []
@@ -307,7 +308,7 @@ static func load_scene_config() -> Array[String]:
 
 
 static func generate_and_save_config() -> void:
-	var context_msg = "(Editor)" if OS.has_feature("debug") else "(Exported Game)"
+	var context_msg: String = "(Editor)" if OS.has_feature("debug") else "(Exported Game)"
 	print(
 		"SceneScanner: ", context_msg, " Starting project scan to generate config..."
 	)
