@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://doi5p8miuy5bv" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/shaders/wave_texture.png" id="4_iwgfl"]
 
 [sub_resource type="Gradient" id="Gradient_ovnh7"]
-offsets = PackedFloat32Array(0, 0.503185, 0.757962, 1)
-colors = PackedColorArray(0.917647, 0.901961, 1, 1, 0.827451, 0.678431, 1, 1, 0.627451, 0.462745, 1, 1, 0.235294, 0, 0.552941, 1)
+offsets = PackedFloat32Array(0.00318471, 0.503185, 0.757962, 1)
+colors = PackedColorArray(0.698039, 0.133333, 0.133333, 1, 1, 0.270588, 0, 1, 1, 0.54902, 0, 1, 1, 0.843137, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jg3pe"]
 gradient = SubResource("Gradient_ovnh7")
@@ -21,7 +21,8 @@ shader_parameter/Texture = ExtResource("2_ovnh7")
 shader_parameter/Color = SubResource("GradientTexture1D_jg3pe")
 
 [sub_resource type="Gradient" id="Gradient_i32ub"]
-colors = PackedColorArray(0.235294, 0, 0.552941, 1, 0.917647, 0.901961, 1, 1)
+offsets = PackedFloat32Array(0, 0.538217, 1)
+colors = PackedColorArray(1, 0.843137, 0, 1, 1, 0.54902, 0, 1, 0.698039, 0.133333, 0.133333, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ovnh7"]
 gradient = SubResource("Gradient_i32ub")
@@ -34,7 +35,7 @@ shader_parameter/Texture = ExtResource("3_ovnh7")
 
 [sub_resource type="Gradient" id="Gradient_iwgfl"]
 offsets = PackedFloat32Array(0, 0.436306, 0.914013)
-colors = PackedColorArray(0.917647, 0.901961, 1, 1, 0.627451, 0.462745, 1, 1, 0.235294, 0, 0.552941, 1)
+colors = PackedColorArray(0.698039, 0.133333, 0.133333, 1, 1, 0.270588, 0, 1, 1, 0.843137, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i32ub"]
 gradient = SubResource("Gradient_iwgfl")
