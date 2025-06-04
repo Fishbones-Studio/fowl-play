@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=23 format=3 uid="uid://doc3hxpx75yxm"]
 
-[ext_resource type="Texture2D" uid="uid://c26q8cmcvnc83" path="res://entities/abilities/ability_models/seas_of_flame/fire_texture.png" id="1_w1dm6"]
+[ext_resource type="Texture2D" uid="uid://c26q8cmcvnc83" path="res://entities/abilities/ability_models/seas_of_flame/fire_texture.png" id="1_bib2b"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_bhl4j"]
 output_port_for_preview = 0
@@ -45,7 +45,7 @@ input_name = "color"
 parameter_name = "Speed"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_e2jmy"]
-texture = ExtResource("1_w1dm6")
+texture = ExtResource("1_bib2b")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_vax3h"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]

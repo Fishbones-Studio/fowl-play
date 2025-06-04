@@ -24,7 +24,7 @@ point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_7fey8"]
 offsets = PackedFloat32Array(0, 0.5, 0.8)
-colors = PackedColorArray(0.520083, 0.118222, 0.305555, 1, 0.643152, 0.224506, 0.181893, 1, 0.717329, 0.300318, 0.384193, 1)
+colors = PackedColorArray(0.859342, 0.454894, 0, 1, 0.784529, 0.305464, 9.62615e-08, 1, 0.532845, 0.197122, 0, 1)
 
 [node name="SeasOfFlame" instance=ExtResource("1_vfv0y")]
 script = ExtResource("2_7fey8")
@@ -72,5 +72,5 @@ angle_max = 360.0
 scale_amount_min = 0.1
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_gdliy")
-color = Color(0.921343, 0.235837, 0.145519, 1)
+color = Color(0.83096, 0.225515, 0.201298, 1)
 color_ramp = SubResource("Gradient_7fey8")
