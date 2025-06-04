@@ -155,6 +155,18 @@ icon = ExtResource("4_3c04x")
 icon_alignment = 1
 expand_icon = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LoadingLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loading"
+
+[node name="LoadingProgress" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mu8pm")
 bus = &"Music"

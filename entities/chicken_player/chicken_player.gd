@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	print("ChickenPlayer exited tree")
+	print("ChickenPlayer exitexited tree")
 	GameManager.chicken_player = null
 
 
