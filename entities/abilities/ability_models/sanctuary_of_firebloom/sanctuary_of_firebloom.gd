@@ -39,7 +39,7 @@ func activate() -> void:
 	_blast_count = 0
 	_current_damage = damage
 
-	_toggle_collision_masks(true, hit_area)
+	_toggle_collision_masks(true, hit_area, true)
 
 	blast_timer.wait_time = blasts_interval
 	blast_timer.start()
@@ -99,6 +99,6 @@ func _on_blast_timer_timeout() -> void:
 		_current_damage = damage * (1.0 + (_blast_count * 0.25))
 		blast_timer.start()
 	else:
-		_toggle_collision_masks(false, hit_area)
+		_toggle_collision_masks(false, hit_area, true)
 
 	_hit_bodies.clear()
