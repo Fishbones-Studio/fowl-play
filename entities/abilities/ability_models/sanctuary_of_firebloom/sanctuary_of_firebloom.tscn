@@ -34,7 +34,7 @@ color_ramp = SubResource("GradientTexture1D_uurjp")
 script = ExtResource("2_hntii")
 max_blasts = 5
 blasts_interval = 0.25
-stun_time = 0.2
+stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 
 [node name="BlastTimer" type="Timer" parent="." index="1"]
