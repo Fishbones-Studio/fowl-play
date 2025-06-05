@@ -15,7 +15,7 @@ const EXCLUDED_DIRECTORIES: Array[String] = [
 	"art" # Art assets
 ]
 # Scenes to exclude from preloading (filenames)
-const EXCLUDED_SCENES: Array[String] = ["main.tscn", "ability.tscn", "enemy.tscn"]
+const EXCLUDED_SCENES: Array[String] = ["main.tscn", "ability.tscn", "enemy.tscn", "enemy_melee_handler.tscn", "base_melee_weapon_model.tscn", "base_ranged_weapon_model.tscn"]
 
 
 # Helper to collect all .tscn files using ResourceLoader.list_directory

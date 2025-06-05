@@ -13,6 +13,7 @@ extends BTAction
 
 var _movement_component: EnemyMovementComponent
 var _initial_jump_height: float
+var _has_jumped: bool = false
 
 
 func _generate_name() -> String:
@@ -44,6 +45,8 @@ func _enter() -> void:
 		_movement_component.jump_height *= jump_factor
 
 	agent.velocity.y = _movement_component.get_jump_velocity()
+	await agent.get_tree().process_frame
+	_has_jumped = true
 
 
 func _tick(_delta: float) -> Status:
@@ -51,7 +54,7 @@ func _tick(_delta: float) -> Status:
 		_reset_jump()
 		return SUCCESS
 
-	if agent.is_on_floor() and has_landed:
+	if agent.is_on_floor() and has_landed and _has_jumped:
 		_reset_jump()
 		return SUCCESS
 
@@ -68,3 +71,4 @@ func _tick(_delta: float) -> Status:
 
 func _reset_jump() -> void:
 	_movement_component.jump_height = _initial_jump_height
+	_has_jumped = false

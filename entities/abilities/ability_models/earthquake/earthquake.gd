@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func activate() -> void:
 	if ability_holder.is_on_floor():
-		print("Cannot perform %s while on the ground." % name)
+		print("%s: cannot perform %s while on the ground." % [ability_holder.name, name])
 		return
 
 	# Initialize quake properties

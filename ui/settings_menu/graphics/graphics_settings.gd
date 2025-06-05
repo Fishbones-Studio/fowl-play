@@ -13,5 +13,5 @@ extends Resource
 	"render_scale": 1.0,
 	"render_mode": Viewport.SCALING_3D_MODE_BILINEAR,
 	"pp_shader": 2,
-	"preload_shaders": true
+	"preload_shaders": true,
 }
