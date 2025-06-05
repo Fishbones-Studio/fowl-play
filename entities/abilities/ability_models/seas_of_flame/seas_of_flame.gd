@@ -8,12 +8,13 @@ extends Ability
 @export var damage_interval: float = 0.2
 ## The maximum damage multiplier applied at the start of the burn effect
 @export var peak_burn_modifier: int = 175
-@export var max_multiplier : float = 10
+@export var max_multiplier: float = 10
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
 		return (stats.max_health / max_multiplier) * min(max_multiplier, (stats.max_health / stats.current_health))
+
 var _attack_duration: float = 0.0
 var _hit_bodies: Array = []
 
