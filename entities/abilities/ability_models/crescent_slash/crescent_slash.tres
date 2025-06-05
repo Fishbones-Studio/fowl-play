@@ -5,13 +5,13 @@
 
 [resource]
 script = ExtResource("2_eefhx")
-cooldown = 3.0
+cooldown = 5.0
 name = "Crescent Slash"
 purchasable = true
 drop_chance = 5
 cost = 150
 currency_type = 0
-description = "The user unleashes a powerful AoA slash, striking all targets [color=yellow]2 times[/color] within a [color=yellow]5 meter[/color] radius. 
+description = "The user unleashes a powerful AoE slash, striking all targets [color=yellow]2 times[/color] within a [color=yellow]7.5 meter[/color] radius. 
 
 Each hit deals [color=orange]True Damage[/color], which ignores target's [color=orange]Defense[/color], and scales with [color=yellow]115%%[/color] of the user's [color=orange]Attack[/color].
 
