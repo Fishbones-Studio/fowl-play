@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba8j8ajmddtai"]
+[gd_scene load_steps=10 format=3 uid="uid://ba8j8ajmddtai"]
 
 [ext_resource type="Script" uid="uid://t51xudcjie2v" path="res://ui/death_screen/death_screen.gd" id="1_t6qdb"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_4iqn7"]
 [ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="2_t6qdb"]
+[ext_resource type="AudioStream" uid="uid://cpvji4fxajar6" path="res://ui/death_screen/art/game_over.mp3" id="4_lmqk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmqk2"]
 shader = ExtResource("2_4iqn7")
@@ -189,3 +190,7 @@ size_flags_vertical = 2
 libraries = {
 &"": SubResource("AnimationLibrary_4cp6t")
 }
+
+[node name="DeathMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lmqk2")
+bus = &"Music"
