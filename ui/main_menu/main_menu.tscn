@@ -184,8 +184,6 @@ expand_icon = true
 stream = ExtResource("2_mu8pm")
 bus = &"Music"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

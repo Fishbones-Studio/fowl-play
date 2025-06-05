@@ -61,7 +61,7 @@ func _on_preloading_started(total_scenes: int) -> void:
 
 
 func _on_preloading_progress(current_scene_index: int, scene_path: String) -> void:
-	if loading_label:
+	if loading_label && OS.has_feature("debug"):
 		loading_label.text = "Loading: " + scene_path.get_file() + " (" + str(current_scene_index) + "/" + str(_total_scenes_to_preload) + ")"
 
 	if loading_progress and _total_scenes_to_preload > 0:
@@ -88,6 +88,7 @@ func _on_preloading_completed() -> void:
 
 
 func _on_preloading_failed(error_message: String) -> void:
+	preload_manager.queue_free()
 	print("Shader preloading failed: ", error_message)
 	is_loading_complete = true # Allow game to proceed
 
@@ -106,16 +107,16 @@ func _on_preloading_failed(error_message: String) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not is_loading_complete:
 		return
-
+		
 	# Input handling after loading is complete
 	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or \
 	   (event is InputEventKey and event.pressed and not event.is_echo()):
-		if play_button.visible and not play_button.disabled and play_button.get_global_rect().has_point(get_global_mouse_position()):
+		if play_button.visible and not play_button.disabled:
 			_on_play_button_pressed()
-			get_tree().set_input_as_handled()
 
 
 func _on_play_button_pressed() -> void:
+	print("play button pressed")
 	if not is_loading_complete:
 		print("Cannot play: Loading not complete.")
 		return
