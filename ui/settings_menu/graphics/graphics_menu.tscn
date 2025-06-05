@@ -129,6 +129,16 @@ value = 2.0
 tick_count = 5
 ticks_on_borders = true
 
+[node name="PreloadShadersMaterials" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer" instance=ExtResource("3_7gtwp")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PreloadShadersMaterials/MarginContainer/HBoxContainer" index="0"]
+text = "Preload Shaders and Materials"
+
+[node name="CheckButton" parent="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PreloadShadersMaterials/MarginContainer/HBoxContainer" index="2"]
+button_pressed = true
+
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
@@ -169,6 +179,7 @@ layout_mode = 2
 [connection signal="item_selected" from="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderScale/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_render_scale"]
 [connection signal="item_selected" from="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderMode/MarginContainer/HBoxContainer/Panel/OptionButton" to="." method="_set_render_mode"]
 [connection signal="slider_value_changed" from="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PostProcessingStrength" to="." method="_on_post_processing_strength_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PreloadShadersMaterials" to="." method="_set_preload_shaders"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_up"]
 
 [editable path="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/Resolution"]
@@ -182,3 +193,4 @@ layout_mode = 2
 [editable path="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderScale"]
 [editable path="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/RenderMode"]
 [editable path="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PostProcessingStrength"]
+[editable path="VBoxContainer/VBoxContainer/ScrollContainer/ContentContainer/PreloadShadersMaterials"]
