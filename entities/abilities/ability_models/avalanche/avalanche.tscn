@@ -17,7 +17,7 @@ size = Vector3(8, 8, 8)
 gradient = SubResource("Gradient_7ele6")
 
 [sub_resource type="Curve" id="Curve_lx86c"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.296407, 1), 2.0109e-07, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.200599, 1), 2.84399e-07, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_n884g"]
