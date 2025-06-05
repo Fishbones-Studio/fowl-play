@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=42 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="7_ftfet"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="7_h0qwm"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_mxuth"]
-[ext_resource type="Script" uid="uid://cnafxaxl4fat8" path="res://entities/enemies/ai/tasks/patrol.gd" id="9_7lgdv"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_gwx8i"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_spagk"]
@@ -148,43 +147,8 @@ duration = 5.0
 children = [SubResource("BTSequence_7lgdv")]
 metadata/_weight_ = 9.0
 
-[sub_resource type="BBNode" id="BBNode_7lgdv"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_mxuth"]
-animation_player = SubResource("BBNode_7lgdv")
-animation_name = &"Walk"
-
-[sub_resource type="BTAction" id="BTAction_mxuth"]
-script = ExtResource("9_7lgdv")
-patrol_radius = 8.0
-patrol_interval = 2.0
-min_distance = 0.5
-chaotic = true
-wave_frequency = 2.0
-wave_amplitude = 15.0
-duration = 5.0
-
-[sub_resource type="BTCondition" id="BTCondition_7lgdv"]
-script = ExtResource("3_nm0l6")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 10.0
-
-[sub_resource type="BTParallel" id="BTParallel_mxuth"]
-num_failures_required = 2
-repeat = true
-children = [SubResource("BTAction_mxuth"), SubResource("BTCondition_7lgdv")]
-
-[sub_resource type="BTSequence" id="BTSequence_gwx8i"]
-custom_name = "Wander around"
-children = [SubResource("BTPlayAnimation_mxuth"), SubResource("BTParallel_mxuth")]
-_enabled = false
-metadata/_weight_ = 1.49943
-
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_hnjin"]
-children = [SubResource("BTSequence_c8cr3"), SubResource("BTCooldown_mxuth"), SubResource("BTSequence_gwx8i")]
+children = [SubResource("BTSequence_c8cr3"), SubResource("BTCooldown_mxuth")]
 
 [sub_resource type="BTCondition" id="BTCondition_8n2b3"]
 script = ExtResource("11_gwx8i")

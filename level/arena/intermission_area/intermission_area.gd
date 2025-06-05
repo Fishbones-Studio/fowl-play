@@ -20,7 +20,9 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if player_in_area and enemy_model and GameManager.chicken_player:
-		enemy_model.look_at(GameManager.chicken_player.global_position)
+		var target: Vector3 = GameManager.chicken_player.global_position
+		target.y = enemy_model.global_transform.origin.y
+		enemy_model.look_at(target)
 		enemy_model.basis = enemy_model.basis * initial_enemy_rotation
 
 
