@@ -1,8 +1,9 @@
 extends Ability
 
 @export_range(1, 100, 0.1) var movement_debuff: float = 80.0
+@export_range(1, 100, 0.1) var defense_debuff: float = 50.0
 @export var debuff_duration: float = 8.0
-@export var damage_scaler: float = 3.5
+@export var damage_scaler: float = 4.5
 @export var impact_time: float = 0.3
 
 var damage: float:
@@ -51,18 +52,18 @@ func _physics_process(_delta: float) -> void:
 		global_position = _target.global_position
 
 
-func _apply_debuff(body: Node3D) -> void:
+func _apply_debuff(body: Node3D, stat_name: StringName, amount: float) -> void:
 	if body is CharacterBody3D:
 		if not body.has_method("get_stats_resource"):
 			return
 
 		var stats: LivingEntityStats = body.get_stats_resource()
 
-		var original_speed: float = stats.apply_stat_effect("speed", movement_debuff)
+		var original_value: float = stats.apply_stat_effect(stat_name, amount)
 
 		get_tree().create_timer(debuff_duration).timeout.connect(func():
 			if is_instance_valid(stats):
-				stats.speed = original_speed
+				stats.set(stat_name, original_value)
 		)
 
 
@@ -90,7 +91,8 @@ func _on_impact_timer_timeout() -> void:
 		if body.collision_layer in [2, 4]:  # Player or Enemy
 			_hit_bodies.append(body)
 			SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
-			_apply_debuff(body)
+			_apply_debuff(body, &"speed", movement_debuff)
+			_apply_debuff(body, &"defense", defense_debuff)
 
 	crystal_particle.emitting = true
 

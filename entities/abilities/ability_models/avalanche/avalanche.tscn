@@ -39,8 +39,9 @@ color_ramp = SubResource("GradientTexture1D_fffml")
 [node name="Avalanche" instance=ExtResource("1_ubbc7")]
 script = ExtResource("2_30khn")
 movement_debuff = 80.0
+defense_debuff = 50.0
 debuff_duration = 8.0
-damage_scaler = 3.5
+damage_scaler = 4.5
 impact_time = 0.3
 current_ability = ExtResource("3_5ybk7")
 
