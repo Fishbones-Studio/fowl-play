@@ -5,7 +5,7 @@
 [sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_l4qgx"]
 parameter_name = "Speed"
 default_value_enabled = true
-default_value = Vector2(2.5, 0)
+default_value = Vector2(0.5, 0)
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_o4ndu"]
 parameter_name = "Texture"
@@ -24,7 +24,7 @@ texture = ExtResource("1_t8648")
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hkgvc"]
 gradient = SubResource("Gradient_jeajx")
-fill_to = Vector2(0, 0.837607)
+fill_to = Vector2(0, 1)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tgk1e"]
 texture = SubResource("GradientTexture2D_hkgvc")
@@ -51,7 +51,7 @@ code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled;
 
 uniform vec4 Color : source_color = vec4(1.000000, 0.270588, 0.000000, 1.000000);
-uniform vec2 Speed = vec2(2.500000, 0.000000);
+uniform vec2 Speed = vec2(0.500000, 0.000000);
 uniform sampler2D Texture;
 uniform sampler2D tex_frg_4 : source_color;
 
@@ -105,6 +105,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-1502.7, 1909.04)
 modes/cull = 2
 flags/unshaded = true
 flags/shadows_disabled = true
@@ -130,4 +131,4 @@ nodes/fragment/11/node = SubResource("VisualShaderNodeTexture2DParameter_o4ndu")
 nodes/fragment/11/position = Vector2(-1700, 2440)
 nodes/fragment/13/node = SubResource("VisualShaderNodeColorParameter_am8ut")
 nodes/fragment/13/position = Vector2(180, 900)
-nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 4, 0, 5, 1, 5, 0, 6, 0, 6, 0, 0, 1, 9, 0, 7, 2, 8, 0, 9, 0, 7, 0, 3, 0, 10, 0, 9, 1, 11, 0, 3, 2, 13, 0, 0, 0)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 0, 4, 0, 5, 1, 5, 0, 6, 0, 6, 0, 0, 1, 9, 0, 7, 2, 8, 0, 9, 0, 7, 0, 3, 0, 10, 0, 9, 1, 13, 0, 0, 0, 11, 0, 3, 2)

@@ -18,7 +18,7 @@ render_priority = 0
 shader = ExtResource("6_vdo2j")
 shader_parameter/Color = Color(1, 0.415686, 0, 1)
 shader_parameter/Invert = true
-shader_parameter/Power = 5.5
+shader_parameter/Power = 3.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_f5jn2"]
 material = SubResource("ShaderMaterial_onfkr")
@@ -34,7 +34,7 @@ gradient = SubResource("Gradient_onfkr")
 render_priority = 0
 shader = ExtResource("7_onfkr")
 shader_parameter/Color = SubResource("GradientTexture1D_f5jn2")
-shader_parameter/Speed = Vector2(1.5, 0)
+shader_parameter/Speed = Vector2(0.5, 0)
 shader_parameter/Texture = ExtResource("7_f5jn2")
 
 [sub_resource type="QuadMesh" id="QuadMesh_f5jn2"]
@@ -104,7 +104,6 @@ shape = SubResource("CapsuleShape3D_f5jn2")
 
 [node name="FireballMesh" type="Node3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
-visible = false
 
 [node name="HeadMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="0"]
 transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0, 0)

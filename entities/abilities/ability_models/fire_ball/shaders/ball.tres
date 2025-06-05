@@ -1,6 +1,7 @@
 [gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://b6yre2hdopwo2"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_4vq3k"]
+output_port_for_preview = 0
 default_input_values = [2, true, 3, 4.0]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_vltwu"]
@@ -14,6 +15,7 @@ default_value_enabled = true
 default_value = true
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_35hvq"]
+output_port_for_preview = 0
 parameter_name = "Color"
 default_value_enabled = true
 default_value = Color(1, 0.415686, 0, 1)
@@ -52,7 +54,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-359.349, -148.628)
 flags/unshaded = true
 flags/shadows_disabled = true
 flags/ambient_light_disabled = true
@@ -66,4 +67,4 @@ nodes/fragment/7/node = SubResource("VisualShaderNodeBooleanParameter_35hvq")
 nodes/fragment/7/position = Vector2(-1060, 520)
 nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_35hvq")
 nodes/fragment/8/position = Vector2(-320, -140)
-nodes/fragment/connections = PackedInt32Array(3, 0, 0, 1, 4, 0, 3, 3, 7, 0, 3, 2, 8, 0, 0, 0)
+nodes/fragment/connections = PackedInt32Array(4, 0, 3, 3, 7, 0, 3, 2, 8, 0, 0, 0, 3, 0, 0, 1)
