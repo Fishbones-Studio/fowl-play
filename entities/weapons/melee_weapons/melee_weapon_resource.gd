@@ -9,7 +9,7 @@ extends BaseResource
 @export var windup_time: float
 @export var attack_duration: float
 @export var cooldown_time: float
-var stun_time: float
+@export var stun_time: float
 # Animation Variables
 @export_group("Animation")
 @export var loop_animation := false
