@@ -15,16 +15,16 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 		return
 
 	# Calculate knockback direction
-	var knockback_direction: Vector3 = self.global_position.direction_to(body.global_position)
+	var knockback_direction: Vector3 = global_position.direction_to(body.global_position)
 
 	hazard_information = {
-		"knockback": calculate_knockback(knockback_direction)
+		"knockback": calculate_knockback(knockback_direction, body)
 	}
 
-	super._on_hazard_area_body_entered(body)
+	super(body)
 
 
-func calculate_knockback(direction: Vector3) -> Vector3:
+func calculate_knockback(direction: Vector3, body: CharacterBody3D) -> Vector3:
 	var horizontal_component := func(axis: float) -> float:
 		var magnitude: float = abs(axis) * knockback_force
 		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
@@ -36,4 +36,4 @@ func calculate_knockback(direction: Vector3) -> Vector3:
 		horizontal_component.call(direction.z)
 	)
 
-	return knockback
+	return knockback if is_zero_approx(body.velocity.y) else knockback / 2.5
