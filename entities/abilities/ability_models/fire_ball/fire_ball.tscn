@@ -23,7 +23,7 @@ shader_parameter/Power = 5.5
 material = SubResource("ShaderMaterial_onfkr")
 
 [sub_resource type="Gradient" id="Gradient_onfkr"]
-offsets = PackedFloat32Array(0.0110497, 0.11326, 0.237569, 0.508287, 0.870166, 1)
+offsets = PackedFloat32Array(0, 0.118785, 0.430939, 0.627072, 0.845304, 1)
 colors = PackedColorArray(0.2, 0, 0, 0, 0.101961, 0, 0, 1, 0.419608, 0.0588235, 0, 1, 1, 0.45098, 0, 1, 1, 0.270588, 0, 1, 0.2, 0, 0, 0.3125)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_f5jn2"]
@@ -36,12 +36,12 @@ shader_parameter/Color = SubResource("GradientTexture1D_f5jn2")
 shader_parameter/Speed = Vector2(2, 0)
 shader_parameter/Texture = ExtResource("7_f5jn2")
 
-[sub_resource type="QuadMesh" id="QuadMesh_031v6"]
+[sub_resource type="QuadMesh" id="QuadMesh_f5jn2"]
 material = SubResource("ShaderMaterial_f5jn2")
 size = Vector2(5, 1.5)
 orientation = 0
 
-[sub_resource type="QuadMesh" id="QuadMesh_2sl02"]
+[sub_resource type="QuadMesh" id="QuadMesh_031v6"]
 material = SubResource("ShaderMaterial_f5jn2")
 size = Vector2(5, 1.5)
 orientation = 1
@@ -107,16 +107,16 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 mesh = ExtResource("5_isl50")
 
 [node name="BallMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="1"]
-transform = Transform3D(-6.1196e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.1196e-08, -2.18557e-08, 0, -0.5)
+transform = Transform3D(-6.1196e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.1196e-08, 0, 0, -0.4)
 mesh = SubResource("SphereMesh_f5jn2")
 
 [node name="TrailVerticalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.74228e-08, 0, 2)
-mesh = SubResource("QuadMesh_031v6")
+mesh = SubResource("QuadMesh_f5jn2")
 
 [node name="TrailHorizontalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="3"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.74228e-08, 0, 2)
-mesh = SubResource("QuadMesh_2sl02")
+mesh = SubResource("QuadMesh_031v6")
 
 [node name="Spark" type="GPUParticles3D" parent="HitArea" index="2"]
 unique_name_in_owner = true
@@ -125,6 +125,7 @@ emitting = false
 amount = 100
 lifetime = 0.5
 explosiveness = 0.2
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_031v6")
 draw_pass_1 = SubResource("QuadMesh_udvao")
 
