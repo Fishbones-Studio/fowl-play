@@ -11,7 +11,7 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user summons a devastating Ice Crystal directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
+description = "The user summons devastating Ice Crystals directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
 
 The damage scales with [color=yellow]145%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]80%%[/color] and their [color=orange]Defense[/color] lowered by [color=yellow]50%%[/color] for [color=yellow]8 seconds[/color], after which these effects wear off.
 
