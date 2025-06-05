@@ -30,6 +30,7 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _toggle_collision_masks(toggle: bool, hit_area: Area3D, ignore_collision_layer: bool = false) -> void:
 	if not ability_holder:
+		push_warning("Ability holder is missing. Collision masks cannot be toggled.")
 		return
 	if ability_holder.collision_layer == 2 or ignore_collision_layer: # Player
 		hit_area.set_collision_mask_value(3, toggle)
