@@ -90,7 +90,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		if anim and weapon.current_weapon.loop_animation:
 			anim.loop = true
 		weapon.animation_player.play(anim_name)
-		
+
 	# If the next state does not have an animation, play RESET or stop
 	else:
 		if weapon.animation_player.has_animation("RESET"):
@@ -98,12 +98,11 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		else:
 			weapon.animation_player.stop()
 
-
 	print("Transitioning secondary weapon to state: " + WeaponEnums.weapon_state_to_string(current_state.state_type))
 
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.state_type, information)
-	
+
 
 # Gets the initial state when the game starts
 func _get_initial_state() -> BaseRangedCombatState:

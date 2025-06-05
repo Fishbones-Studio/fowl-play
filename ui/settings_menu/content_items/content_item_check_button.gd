@@ -1,5 +1,6 @@
-class_name SettingsCheckButton
+class_name ContentItemCheckButton
 extends ContentItem
+
 
 ## Signal emitted when the checkbox state changes.
 signal toggled(is_pressed: bool)

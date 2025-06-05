@@ -55,6 +55,9 @@ func _process(_delta: float) -> void:
 	stats.regen_stamina(stats.stamina_regen)
 	stats.regen_health(stats.health_regen)
 
+	if stats.current_health <= 0:
+		_die()
+
 
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:
@@ -74,6 +77,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 			# Set immobile time
 			immobile_time = _knockback.length() / knockback_decay
+
 		if "stun_time" in info:
 			var stun_time: float = info["stun_time"]
 
@@ -96,9 +100,6 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 		var damage_percentage: int = round(damage / (stats.max_health * 0.3))
 		blood_splash_handler.splash_blood(damage_percentage)
-
-		if stats.current_health <= 0:
-			_die()
 
 
 func _die() -> void:
