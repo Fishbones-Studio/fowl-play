@@ -16,23 +16,34 @@ func _ready() -> void:
 
 	if not music_player.playing:
 		music_player.play()
+		
+	if SettingsManager.get_setting("graphics", "preload_shaders", true):
 
-	# Hide play button initially
-	if play_button:
-		play_button.visible = false
+		# Hide play button initially
+		if play_button:
+			play_button.visible = false
 
-	# Setup loading UI
-	if loading_label:
-		loading_label.text = "Loading shaders..."
-		loading_label.visible = true
+		# Setup loading UI
+		if loading_label:
+			loading_label.text = "Loading shaders..."
+			loading_label.visible = true
 
-	if loading_progress:
-		loading_progress.visible = true
-		loading_progress.value = 0
+		if loading_progress:
+			loading_progress.visible = true
+			loading_progress.value = 0
 
-	# Defer the setup and start of shader preloading to ensure the menu UI is visible first.
-	call_deferred("_setup_shader_preloading")
-
+		# Defer the setup and start of shader preloading to ensure the menu UI is visible first.
+		call_deferred("_setup_shader_preloading")
+		
+	else:
+		# If shader preloading is disabled, show the play button immediately
+		if play_button:
+			play_button.visible = true
+			play_button.grab_focus()
+		if loading_label:
+			loading_label.visible = false
+		if loading_progress:
+			loading_progress.visible = false
 	super()
 
 

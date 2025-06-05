@@ -68,7 +68,7 @@ func _create_cheat_field(
 func _create_cheat_toggle(
 	cheat: ToggleCheats, initial_state: bool
 ) -> void:
-	var instance: SettingsCheckButton = check_button_scene.instantiate()
+	var instance: ContentItemCheckButton = check_button_scene.instantiate()
 
 	if not instance:
 		push_error("Could not instantiate check_button_scene.")
