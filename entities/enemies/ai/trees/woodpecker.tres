@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="7_ftfet"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="7_h0qwm"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_mxuth"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_gwx8i"]
+[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_gwx8i"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_spagk"]
 
