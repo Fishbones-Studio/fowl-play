@@ -11,14 +11,12 @@ purchasable = true
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user summons a devastating avalanche in a [color=yellow]8 meter[/color] radius, dealing damage to all targets within range.
+description = "The user summons a devastating Ice Crystal directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
 
-The damage scales with [color=yellow]115%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]50%%[/color] for [color=yellow]5 seconds[/color], after which they regain their original Speed.
+The damage scales with [color=yellow]135%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]80%%[/color] for [color=yellow]3 seconds[/color], after which they regain their original [color=orange]Speed[/color].
 
-Can only be used while [color=orange]on the ground[/color] and has a cooldown of %s."
-short_description = "The user summons an avalanche, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]temporarily halving[/color] the movement speed of targets hit.
-
-Can only be used while [color=orange]on the ground[/color]."
+This ability has a cooldown of %s."
+short_description = "The user summons an Ice Crystal, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]significantly reducing[/color] the movement speed of targets hit for a brief duration."
 icon = ExtResource("1_vvsio")
 model_uid = "uid://cjuc63cw3gda1"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

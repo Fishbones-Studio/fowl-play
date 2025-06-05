@@ -40,7 +40,7 @@ color_ramp = SubResource("GradientTexture1D_fffml")
 script = ExtResource("2_30khn")
 movement_debuff = 80.0
 debuff_duration = 3.0
-damage_scaler = 1.5
+damage_scaler = 3.5
 impact_time = 0.3
 current_ability = ExtResource("3_5ybk7")
 
