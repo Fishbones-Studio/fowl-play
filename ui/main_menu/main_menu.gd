@@ -17,7 +17,7 @@ func _ready() -> void:
 	if not music_player.playing:
 		music_player.play()
 		
-	if SettingsManager.get_setting("graphics", "preload_shaders", true):
+	if SettingsManager.get_setting("graphics", "preload_shaders", true) and not is_loading_complete:
 
 		# Hide play button initially
 		if play_button:
@@ -152,3 +152,7 @@ func _on_quit_button_pressed() -> void:
 
 func _on_reset_button_pressed() -> void:
 	SignalManager.add_ui_scene.emit(UIEnums.UI.DELETE_SAVE_POPUP)
+
+	
+func setup(params: Dictionary) -> void:
+	is_loading_complete = params.get("skip_preload", false)
