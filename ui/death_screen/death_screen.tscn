@@ -193,3 +193,4 @@ libraries = {
 
 [node name="DeathMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_lmqk2")
+bus = &"Music"

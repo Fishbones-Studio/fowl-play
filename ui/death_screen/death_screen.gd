@@ -17,8 +17,8 @@ var is_transitioning: bool = false
 
 @onready var title_label: Label = %TitleLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var currency_overview : CurrencyOverview = %CurrencyOverview
-@onready var death_music_player : AudioStreamPlayer = $DeathMusicPlayer
+@onready var currency_overview: CurrencyOverview = %CurrencyOverview
+@onready var death_music_player: AudioStreamPlayer = $DeathMusicPlayer
 
 
 func _ready() -> void:
@@ -32,12 +32,11 @@ func _ready() -> void:
 	var currency_overview_dict : Dictionary[CurrencyEnums.CurrencyTypes, int] = {
 			CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: abs(pe_diff),
 		}
-		
+
 	death_music_player.play()
 	animation_player.play("fade_to_black")
 	currency_overview.update_label_container(currency_overview_dict)
 	currency_overview.label.text = "Forfeited"
-	
 
 
 func _input(event: InputEvent) -> void:
@@ -58,4 +57,4 @@ func _return_to_game_menu() -> void:
 	animation_player.play("fade_to_white")
 
 	get_tree().paused = false
-	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU , UIEnums.UI.NULL)
+	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU, UIEnums.UI.NULL)
