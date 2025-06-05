@@ -1,32 +1,44 @@
 extends Ability
 
-@export_range(1, 100, 0.1) var movement_debuff: float = 50.0
-@export var debuff_duration: float = 5.0
+@export_range(1, 100, 0.1) var movement_debuff: float = 80.0
+@export var debuff_duration: float = 3.0
 @export var damage_scaler: float = 1.5
+@export var impact_time: float = 0.3
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
 		return (damage_scaler * stats.speed) * (1.0 + (stats.attack / 100))
 
-var _attack_duration: float = 0.0
+var _target: Node3D = null
 var _hit_bodies: Array = []
 
+@onready var impact_timer: Timer = $ImpactTimer
+@onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
-@onready var cpu_particles: CPUParticles3D = %CPUParticles3D
+@onready var crystal_particle: GPUParticles3D = %Crystal
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+
+	_toggle_collision_masks(true, detection_area)
+
+	super()
 
 
 func activate() -> void:
-	if not ability_holder.is_on_floor():
-		print("Cannot perform %s while airborne." % name)
+	_target = _get_closest_target(detection_area)
+	if _target == null:
+		print("Cannot perform %s with no target in range." % name)
 		return
 
-	_attack_duration = cpu_particles.lifetime
 	_hit_bodies.clear()
 
-	cpu_particles.emitting = true
-
 	_toggle_collision_masks(true, hit_area)
+
+	impact_timer.wait_time = impact_time
+	impact_timer.start()
 
 	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
@@ -34,21 +46,9 @@ func activate() -> void:
 	cooldown_timer.start()
 
 
-func _physics_process(delta: float) -> void:
-	_attack_duration -= delta
-
-	if _attack_duration <= 0:
-		_toggle_collision_masks(false, hit_area)
-		_attack_duration = 0.0
-
-	for body in hit_area.get_overlapping_bodies():
-		if body in _hit_bodies:
-			continue
-
-		if body.collision_layer == 2 or body.collision_layer == 4:  # Player or Enemy
-			SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
-			_apply_debuff(body)
-			_hit_bodies.append(body)
+func _physics_process(_delta: float) -> void:
+	if _target and not crystal_particle.emitting:
+		global_position = _target.global_position
 
 
 func _apply_debuff(body: Node3D) -> void:
@@ -64,3 +64,36 @@ func _apply_debuff(body: Node3D) -> void:
 			if is_instance_valid(stats):
 				stats.speed = original_speed
 		)
+
+
+func _get_closest_target(area: Area3D) -> Node3D:
+	var target: Node3D = null
+	var min_distance: float = INF
+
+	for body in area.get_overlapping_bodies():
+		if not (body.collision_layer in [2, 4]):
+			continue
+
+		var distance: float = ability_holder.global_position.distance_to(body.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			target = body
+
+	return target
+
+
+func _on_impact_timer_timeout() -> void:
+	for body in hit_area.get_overlapping_bodies():
+		if body in _hit_bodies:
+			continue
+
+		if body.collision_layer in [2, 4]:  # Player or Enemy
+			_hit_bodies.append(body)
+			SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
+			_apply_debuff(body)
+
+	crystal_particle.emitting = true
+
+	_toggle_collision_masks(false, hit_area)
+
+	_hit_bodies.clear()
