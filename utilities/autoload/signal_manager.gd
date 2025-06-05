@@ -42,6 +42,7 @@ signal purchase_completed
 # Round signals
 signal start_next_round # to trigger the next round
 signal game_won
+signal player_died
 
 # Setting signals
 signal controls_settings_changed

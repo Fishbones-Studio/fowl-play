@@ -48,6 +48,13 @@ func _ready() -> void:
 
 	if start_on_ready:
 		call_deferred("play_random_music")
+		
+	SignalManager.game_won.connect(
+		func(): 
+			set_process(false)
+			_is_game_paused = false
+			_update_actual_volume()
+	)
 
 
 func _process(_delta: float) -> void:
