@@ -97,4 +97,4 @@ static func get_setting(section: String, key: String, default : Variant) -> Vari
 		return config.get_value(section, key, default)
 	else:
 		push_warning("Failed to load setting '%s' from section '%s'." % [key, section])
-		return null
+		return default
