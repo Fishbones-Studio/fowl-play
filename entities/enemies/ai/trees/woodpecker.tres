@@ -144,6 +144,7 @@ children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_gwx8i"),
 
 [sub_resource type="BTCooldown" id="BTCooldown_mxuth"]
 duration = 5.0
+start_cooled = true
 children = [SubResource("BTSequence_7lgdv")]
 metadata/_weight_ = 9.0
 
