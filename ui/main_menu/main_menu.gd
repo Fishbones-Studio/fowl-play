@@ -36,6 +36,7 @@ func _ready() -> void:
 		call_deferred("_setup_shader_preloading")
 		
 	else:
+		is_loading_complete = true
 		# If shader preloading is disabled, show the play button immediately
 		if play_button:
 			play_button.visible = true
