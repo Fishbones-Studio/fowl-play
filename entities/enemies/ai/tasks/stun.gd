@@ -2,11 +2,11 @@
 extends BTAction
 
 ## The amount of time to stun the enemy for
-@export_range(0.0, 100.0, 0.01) var stun_time : float = 1.0
+@export_range(0.0, 100.0, 0.01) var stun_time: float = 1.0
 
 
 func _generate_name() -> String:
-	return "Stunned for %2.fs" % stun_time
+	return "Stunned for %.2fs" % stun_time
 
 
 func _enter() -> void:
