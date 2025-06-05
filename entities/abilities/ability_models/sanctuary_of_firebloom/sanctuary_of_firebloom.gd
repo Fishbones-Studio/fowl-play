@@ -1,7 +1,7 @@
 extends Ability
 
 @export var max_blasts: int = 5
-@export var blasts_interval: float = 0.25
+@export var blast_interval: float = 0.25
 @export var stun_time: float = 0.15
 
 var damage: float:
@@ -41,7 +41,7 @@ func activate() -> void:
 
 	_toggle_collision_masks(true, hit_area, true)
 
-	blast_timer.wait_time = blasts_interval
+	blast_timer.wait_time = blast_interval
 	blast_timer.start()
 
 	if ability_holder is ChickenPlayer:

@@ -33,7 +33,7 @@ color_ramp = SubResource("GradientTexture1D_uurjp")
 [node name="SanctuaryOfFirebloom" instance=ExtResource("1_deltf")]
 script = ExtResource("2_hntii")
 max_blasts = 5
-blasts_interval = 0.25
+blast_interval = 0.25
 stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 
