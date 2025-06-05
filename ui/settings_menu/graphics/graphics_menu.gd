@@ -67,7 +67,7 @@ var graphics_settings: Dictionary = {}
 
 @onready var resolution: ContentItemDropdown = %Resolution
 @onready var display_mode: ContentItemDropdown = %DisplayMode
-@onready var borderless: SettingsCheckButton = %Borderless
+@onready var borderless: ContentItemCheckButton = %Borderless
 @onready var v_sync: ContentItemDropdown = %VSync
 @onready var fps: ContentItemDropdown = %FPS
 @onready var msaa: ContentItemDropdown = %MSAA
@@ -76,6 +76,7 @@ var graphics_settings: Dictionary = {}
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
 @onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
+@onready var preload_shaders_materials : ContentItemCheckButton = %PreloadShadersMaterials
 
 
 func _ready() -> void:
@@ -223,6 +224,9 @@ func _on_post_processing_strength_slider_value_changed(value) -> void:
 	graphics_settings["pp_shader"] = value
 	_save_graphics_settings()
 
+func _set_preload_shaders(value: bool) -> void:
+	graphics_settings["preload_shaders"] = value
+	_save_graphics_settings()
 
 func _load_graphics_items() -> void:
 	resolution.options.clear()
@@ -277,6 +281,7 @@ func _set_graphics_values() -> void:
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
 	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", 2)
 	post_processing_strength.set_value(saved_step if saved_step != null else 2)
+	preload_shaders_materials.set_pressed_no_signal(SettingsManager.get_setting("graphics", "preload_shaders", true))
 
 	_update_resolution_visibility()
 

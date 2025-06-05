@@ -23,7 +23,7 @@ const MAX_DB := 0.0
 
 var transitioning: bool = false
 var stopped: bool = false
-var _is_game_paused: bool = false
+var is_game_paused: bool = false
 var _eq_effect_index: int = -1
 var _fading_volume_db: float = MIN_DB ## Internal volume for tweening, before pause adjustment
 
@@ -39,8 +39,8 @@ func _ready() -> void:
 	# To ensure it's silent *before* the first _process, explicitly set it:
 	self.volume_db = MIN_DB
 
-	_is_game_paused = get_tree().paused
-	if _is_game_paused: # Apply initial pause effects if starting paused
+	is_game_paused = get_tree().paused
+	if is_game_paused: # Apply initial pause effects if starting paused
 		_on_pause_state_changed(true)
 		# Update volume immediately based on pause state
 		_update_actual_volume()
@@ -52,16 +52,16 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var current_tree_paused_state := get_tree().paused
-	if current_tree_paused_state != _is_game_paused:
-		_is_game_paused = current_tree_paused_state
-		_on_pause_state_changed(_is_game_paused)
+	if current_tree_paused_state != is_game_paused:
+		is_game_paused = current_tree_paused_state
+		_on_pause_state_changed(is_game_paused)
 
 	_update_actual_volume()
 
 
 func _update_actual_volume() -> void:
 	var final_db: float = _fading_volume_db
-	if _is_game_paused and pause_volume_adjustment_db != 0.0:
+	if is_game_paused and pause_volume_adjustment_db != 0.0:
 		final_db += pause_volume_adjustment_db
 
 	# Clamp to ensure volume_db stays within valid engine limits.

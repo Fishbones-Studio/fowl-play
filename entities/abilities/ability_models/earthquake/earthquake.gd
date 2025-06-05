@@ -32,6 +32,8 @@ func _ready() -> void:
 		if particle is GPUParticles3D:
 			_particles.append(particle)
 
+	super()
+
 
 func activate() -> void:
 	if ability_holder.is_on_floor():

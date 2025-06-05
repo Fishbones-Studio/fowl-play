@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uhj5c")
 handle_focus = true
-focus_node = NodePath("MarginContainer/PlayButton")
+focus_node = NodePath("MarginContainer/VBoxContainer/PlayButton")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -36,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_s4pem")
 expand_mode = 2
 
@@ -46,6 +47,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -88,6 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -101,13 +104,34 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="PlayButton" type="Button" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="LoadingLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loading"
+horizontal_alignment = 1
+
+[node name="LoadingProgress" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(980, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_type_variation = &"LoadingProgressBar"
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
-focus_neighbor_left = NodePath("../ButtonContainer/QuitButton")
-focus_next = NodePath("../ButtonContainer/SettingsButton")
-focus_previous = NodePath("../ButtonContainer/QuitButton")
+focus_neighbor_left = NodePath("../../ButtonContainer/QuitButton")
+focus_next = NodePath("../../ButtonContainer/SettingsButton")
+focus_previous = NodePath("../../ButtonContainer/QuitButton")
 theme_type_variation = &"MainMenuLabelButton"
 text = "Press anywhere to start"
 
@@ -115,12 +139,13 @@ text = "Press anywhere to start"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="ResetButton" type="Button" parent="MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Reset Save"
-focus_neighbor_right = NodePath("../../PlayButton")
+focus_neighbor_right = NodePath("../../VBoxContainer/PlayButton")
 focus_neighbor_bottom = NodePath("../SettingsButton")
 focus_next = NodePath("../SettingsButton")
 theme_type_variation = &"MainMenuIconButton"
@@ -133,7 +158,7 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Settings"
 focus_neighbor_top = NodePath("../ResetButton")
-focus_neighbor_right = NodePath("../../PlayButton")
+focus_neighbor_right = NodePath("../../VBoxContainer/PlayButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../ResetButton")
@@ -147,8 +172,8 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Quit Game"
 focus_neighbor_top = NodePath("../SettingsButton")
-focus_neighbor_right = NodePath("../../PlayButton")
-focus_next = NodePath("../../PlayButton")
+focus_neighbor_right = NodePath("../../VBoxContainer/PlayButton")
+focus_next = NodePath("../../VBoxContainer/PlayButton")
 focus_previous = NodePath(".")
 theme_type_variation = &"MainMenuIconButton"
 icon = ExtResource("4_3c04x")
@@ -159,9 +184,7 @@ expand_icon = true
 stream = ExtResource("2_mu8pm")
 bus = &"Music"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[connection signal="pressed" from="MarginContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]

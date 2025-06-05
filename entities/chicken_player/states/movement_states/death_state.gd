@@ -30,4 +30,5 @@ func physics_process(delta: float) -> void:
 # stops playing, and it also transitions immediately when comparing anim length.
 func _on_death_timer_timeout() -> void:
 	UIManager.game_input_blocked = false
+	SignalManager.player_died.emit()
 	SignalManager.switch_ui_scene.emit(UIEnums.UI.DEATH_SCREEN)
