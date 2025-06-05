@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cu2ima27whcct"]
+[gd_scene load_steps=5 format=3 uid="uid://cu2ima27whcct"]
 
 [ext_resource type="Script" uid="uid://vcte0cqqen55" path="res://ui/loading_screen/loading_screen.gd" id="1_sw7at"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_dyir8"]
-[ext_resource type="StyleBox" uid="uid://ctrq6smv82lw6" path="res://resources/themes/styleboxes/loading_screen_progress_bar.tres" id="3_7w6sp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sw7at"]
 
@@ -67,7 +66,7 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_styles/fill = ExtResource("3_7w6sp")
+theme_type_variation = &"LoadingProgressBar"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ContentContainer"]
 layout_mode = 2

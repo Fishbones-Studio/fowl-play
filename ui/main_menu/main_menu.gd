@@ -1,13 +1,15 @@
 extends UserInterface
 
+var preload_manager: ShaderPreloadManager
+var is_loading_complete: bool = false
+
+var _total_scenes_to_preload: int = 0
+
 @onready var play_button: Button = %PlayButton
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var loading_label: Label = %LoadingLabel
 @onready var loading_progress: ProgressBar = %LoadingProgress
 
-var preload_manager: ShaderPreloadManager
-var is_loading_complete: bool = false
-var _total_scenes_to_preload: int = 0
 
 func _ready() -> void:
 	SettingsManager.load_settings(get_viewport(), get_window())
@@ -15,18 +17,14 @@ func _ready() -> void:
 	if not music_player.playing:
 		music_player.play()
 
-	# Disable lay button initially and show loading
+	# Hide play button initially
 	if play_button:
-		play_button.text = "Loading Shaders, please wait..."
-		play_button.disabled = true
+		play_button.visible = false
 
 	# Setup loading UI
 	if loading_label:
-		if OS.is_debug_build():
-			loading_label.text = "Loading shaders..."
-			loading_label.visible = true
-		else:
-			loading_label.hide()
+		loading_label.text = "Loading shaders..."
+		loading_label.visible = true
 
 	if loading_progress:
 		loading_progress.visible = true
@@ -36,6 +34,7 @@ func _ready() -> void:
 	call_deferred("_setup_shader_preloading")
 
 	super()
+
 
 func _setup_shader_preloading() -> void:
 	preload_manager = ShaderPreloadManager.new()
@@ -53,11 +52,13 @@ func _setup_shader_preloading() -> void:
 	# Start preloading
 	preload_manager.preload_all_shaders()
 
+
 func _on_preloading_started(total_scenes: int) -> void:
 	_total_scenes_to_preload = total_scenes
 	print("Started preloading ", total_scenes, " scenes")
 	if loading_label:
 		loading_label.text = "Loading shaders... (0/" + str(total_scenes) + ")"
+
 
 func _on_preloading_progress(current_scene_index: int, scene_path: String) -> void:
 	if loading_label:
@@ -68,6 +69,7 @@ func _on_preloading_progress(current_scene_index: int, scene_path: String) -> vo
 		loading_progress.value = progress
 	elif loading_progress:
 		loading_progress.value = 0
+
 
 func _on_preloading_completed() -> void:
 	print("Shader preloading completed!")
@@ -81,10 +83,9 @@ func _on_preloading_completed() -> void:
 		loading_progress.value = 100
 
 	if play_button:
-		play_button.text = "Press anywhere to start"
 		play_button.visible = true
-		play_button.disabled = false
 		play_button.grab_focus()
+
 
 func _on_preloading_failed(error_message: String) -> void:
 	print("Shader preloading failed: ", error_message)
@@ -94,14 +95,13 @@ func _on_preloading_failed(error_message: String) -> void:
 		loading_label.text = "Loading shaders failed. Game might have visual issues."
 		loading_label.visible = false
 
-
 	if loading_progress:
 		loading_progress.visible = false
 
 	if play_button:
 		play_button.visible = true
-		play_button.disabled = false
 		play_button.grab_focus()
+
 
 func _gui_input(event: InputEvent) -> void:
 	if not is_loading_complete:
@@ -114,6 +114,7 @@ func _gui_input(event: InputEvent) -> void:
 			_on_play_button_pressed()
 			get_tree().set_input_as_handled()
 
+
 func _on_play_button_pressed() -> void:
 	if not is_loading_complete:
 		print("Cannot play: Loading not complete.")
@@ -124,14 +125,17 @@ func _on_play_button_pressed() -> void:
 	UIManager.remove_ui(self)
 	UIManager.load_game_with_loading_screen(SceneEnums.Scenes.POULTRY_MAN_MENU, UIEnums.UI.NULL)
 
+
 func _on_settings_button_pressed() -> void:
 	if UIEnums.UI.SETTINGS_MENU in UIManager.ui_list:
 		UIManager.toggle_ui(UIEnums.UI.SETTINGS_MENU)
 	else:
 		SignalManager.add_ui_scene.emit(UIEnums.UI.SETTINGS_MENU)
 
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
 
 func _on_reset_button_pressed() -> void:
 	SignalManager.add_ui_scene.emit(UIEnums.UI.DELETE_SAVE_POPUP)
