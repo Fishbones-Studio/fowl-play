@@ -69,7 +69,7 @@ func _load_controls_items() -> void:
 				slider.slider.value = item_values["value"]
 				slider.slider.value_changed.connect(_value_changed.bind(item))
 			"check_button":
-				var check_button: SettingsCheckButton = check_button_resource.instantiate()
+				var check_button: ContentItemCheckButton = check_button_resource.instantiate()
 				content_container.add_child(check_button)
 				check_button.set_pressed_no_signal(item_values["value"])
 				check_button.label.text = item_name.capitalize()

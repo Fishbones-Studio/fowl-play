@@ -194,6 +194,7 @@ metadata/_weight_ = 330.0
 
 [sub_resource type="BTCooldown" id="BTCooldown_t3gyd"]
 duration = 5.0
+start_cooled = true
 children = [SubResource("BTSequence_ulmcl")]
 metadata/_weight_ = 0.999999
 
