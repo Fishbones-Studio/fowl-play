@@ -80,7 +80,7 @@ func _return_to_game_menu() -> void:
 
 func _return_to_main_menu() -> void:
 	SignalManager.remove_all_game_scenes.emit()
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU)
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU, {"skip_preload" : true})
 	UIManager.remove_ui(self)
 	UIManager.paused = false
 
