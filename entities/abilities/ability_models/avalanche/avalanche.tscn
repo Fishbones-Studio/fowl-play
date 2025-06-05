@@ -32,7 +32,7 @@ angle_max = 180.0
 spread = 35.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
-scale_max = 2.0
+scale_max = 2.5
 scale_curve = SubResource("CurveTexture_n884g")
 color_ramp = SubResource("GradientTexture1D_fffml")
 
@@ -63,7 +63,7 @@ shape = SubResource("BoxShape3D_7ele6")
 [node name="Crystal" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
 emitting = false
-amount = 15
+amount = 20
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
