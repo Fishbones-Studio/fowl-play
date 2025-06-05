@@ -4,3 +4,4 @@ extends StaticBody3D
 
 func _ready() -> void:
 	SignalManager.game_won.connect(func(): arena_music_player.stop_playback())
+	SignalManager.player_died.connect(func(): arena_music_player.stop_playback())
