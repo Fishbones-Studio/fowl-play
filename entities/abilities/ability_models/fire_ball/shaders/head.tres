@@ -24,7 +24,7 @@ texture = ExtResource("1_t8648")
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hkgvc"]
 gradient = SubResource("Gradient_jeajx")
-fill_to = Vector2(0, 1)
+fill_to = Vector2(0, 0.837607)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tgk1e"]
 texture = SubResource("GradientTexture2D_hkgvc")
@@ -105,7 +105,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-328.682, 680.742)
+graph_offset = Vector2(-326.215, 348.033)
 modes/cull = 2
 flags/unshaded = true
 flags/shadows_disabled = true

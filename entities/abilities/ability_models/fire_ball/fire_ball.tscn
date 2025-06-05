@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bkq0483m1tcwa" path="res://entities/abilities/ability_models/fire_ball/shaders/spark_texture.png" id="8_f5jn2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5jn2"]
-radius = 0.75
+radius = 0.6
+height = 1.6
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_onfkr"]
 render_priority = 0
@@ -80,14 +81,14 @@ albedo_texture = ExtResource("8_f5jn2")
 
 [sub_resource type="QuadMesh" id="QuadMesh_udvao"]
 material = SubResource("StandardMaterial3D_2sl02")
-size = Vector2(0.2, 1)
+size = Vector2(0.1, 0.5)
 
 [node name="FireBall" instance=ExtResource("1_l7j4w")]
 script = ExtResource("2_ksrmm")
 travel_speed = 5.0
 lifetime = 6.0
 damage_interval = 0.5
-scale_factor = 2.0
+scale_factor = 1.5
 current_ability = ExtResource("3_fmore")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
@@ -106,11 +107,11 @@ unique_name_in_owner = true
 visible = false
 
 [node name="HeadMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="0"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0, 0)
 mesh = ExtResource("5_isl50")
 
 [node name="BallMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="1"]
-transform = Transform3D(-6.1196e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.1196e-08, 0, 0, -0.4)
+transform = Transform3D(-6.1196e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.1196e-08, 0, 0, -0.2)
 mesh = SubResource("SphereMesh_f5jn2")
 
 [node name="TrailVerticalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="2"]
