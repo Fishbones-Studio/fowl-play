@@ -1,7 +1,7 @@
 extends Ability
 
 @export_range(1, 100, 0.1) var movement_debuff: float = 80.0
-@export var debuff_duration: float = 3.0
+@export var debuff_duration: float = 8.0
 @export var damage_scaler: float = 3.5
 @export var impact_time: float = 0.3
 

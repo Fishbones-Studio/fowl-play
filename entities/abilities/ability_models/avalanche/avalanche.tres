@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_bhrhl")
-cooldown = 5.0
+cooldown = 10.0
 name = "Avalanche"
 purchasable = true
 drop_chance = 20
@@ -13,10 +13,10 @@ cost = 150
 currency_type = 0
 description = "The user summons a devastating Ice Crystal directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
 
-The damage scales with [color=yellow]135%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]80%%[/color] for [color=yellow]3 seconds[/color], after which they regain their original [color=orange]Speed[/color].
+The damage scales with [color=yellow]135%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]80%%[/color] for [color=yellow]8 seconds[/color], after which they regain their original [color=orange]Speed[/color].
 
 This ability has a cooldown of %s."
-short_description = "The user summons an Ice Crystal, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]significantly reducing[/color] the movement speed of targets hit for a brief duration."
+short_description = "The user summons an Ice Crystal, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]significantly reducing[/color] the movement speed of targets hit for a long duration."
 icon = ExtResource("1_vvsio")
 model_uid = "uid://cjuc63cw3gda1"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
