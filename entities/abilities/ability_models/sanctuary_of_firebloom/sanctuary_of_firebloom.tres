@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_a2hla")
-cooldown = 10.0
+cooldown = 15.0
 name = "Sanctuary of Firebloom"
 purchasable = true
 drop_chance = 5
