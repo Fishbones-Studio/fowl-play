@@ -88,8 +88,11 @@ func _on_blast_timer_timeout() -> void:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
 		_current_damage *= blast_final_multiplier
+		blast_timer.start()
 	else:
+		gpu_particles.emitting = false
 		_toggle_collision_masks(false, hit_area, true)
+		return
 
 	gpu_particles.emitting = true
 
