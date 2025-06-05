@@ -34,7 +34,7 @@ gradient = SubResource("Gradient_onfkr")
 render_priority = 0
 shader = ExtResource("7_onfkr")
 shader_parameter/Color = SubResource("GradientTexture1D_f5jn2")
-shader_parameter/Speed = Vector2(2, 0)
+shader_parameter/Speed = Vector2(1.5, 0)
 shader_parameter/Texture = ExtResource("7_f5jn2")
 
 [sub_resource type="QuadMesh" id="QuadMesh_f5jn2"]
@@ -111,7 +111,7 @@ transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 
 mesh = ExtResource("5_isl50")
 
 [node name="BallMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="1"]
-transform = Transform3D(-6.1196e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.1196e-08, 0, 0, -0.2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.4)
 mesh = SubResource("SphereMesh_f5jn2")
 
 [node name="TrailVerticalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="2"]
