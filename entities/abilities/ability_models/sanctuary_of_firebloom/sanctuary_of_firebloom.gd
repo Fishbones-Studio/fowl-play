@@ -94,8 +94,6 @@ func _on_blast_timer_timeout() -> void:
 		_toggle_collision_masks(false, hit_area, true)
 		return
 
-	gpu_particles.emitting = true
-
 	for body in hit_area.get_overlapping_bodies():
 		if body in _hit_bodies:
 			continue
