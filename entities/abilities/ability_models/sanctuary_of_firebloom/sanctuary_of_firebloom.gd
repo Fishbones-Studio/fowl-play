@@ -2,12 +2,14 @@ extends Ability
 
 @export var max_blasts: int = 5
 @export var blast_interval: float = 0.25
+@export var blast_increment: float = 0.05
+@export var blast_final_multiplier: float = 1.5
 @export var stun_time: float = 0.15
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return pow(max_blasts, 1.5) * ((1.0 + (stats.attack / 100)))
+		return (max_blasts / blast_interval) * ((1.0 + (stats.attack / 100)))
 
 var _target: Node3D = null
 var _hit_bodies: Array = []
@@ -40,6 +42,10 @@ func activate() -> void:
 	_current_damage = damage
 
 	_toggle_collision_masks(true, hit_area, true)
+
+	# Reset to default settings
+	gpu_particles.explosiveness = 0.0
+	gpu_particles.amount = 1
 
 	blast_timer.wait_time = blast_interval
 	blast_timer.start()
@@ -74,6 +80,19 @@ func _get_closest_target(area: Area3D) -> Node3D:
 func _on_blast_timer_timeout() -> void:
 	gpu_particles.restart()
 
+	_blast_count += 1
+	if _blast_count < max_blasts:
+		_current_damage = damage * (1.0 + (_blast_count * blast_increment))
+		blast_timer.start()
+	elif _blast_count == max_blasts:
+		gpu_particles.explosiveness = 1.0
+		gpu_particles.amount = max_blasts
+		_current_damage *= blast_final_multiplier
+	else:
+		_toggle_collision_masks(false, hit_area, true)
+
+	gpu_particles.emitting = true
+
 	for body in hit_area.get_overlapping_bodies():
 		if body in _hit_bodies:
 			continue
@@ -89,16 +108,7 @@ func _on_blast_timer_timeout() -> void:
 				},
 			)
 
-	gpu_particles.emitting = true
-
 	if camera:
 		camera.apply_shake(1.0 + (_blast_count * 0.1))
-
-	_blast_count += 1
-	if _blast_count < max_blasts:
-		_current_damage = damage * (1.0 + (_blast_count * 0.25))
-		blast_timer.start()
-	else:
-		_toggle_collision_masks(false, hit_area, true)
 
 	_hit_bodies.clear()

@@ -9,7 +9,7 @@
 radius = 100.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dcanr"]
-size = Vector3(9, 4, 9)
+size = Vector3(9, 9, 9)
 
 [sub_resource type="Gradient" id="Gradient_4o270"]
 offsets = PackedFloat32Array(0.224242, 0.7)
@@ -34,6 +34,8 @@ color_ramp = SubResource("GradientTexture1D_uurjp")
 script = ExtResource("2_hntii")
 max_blasts = 5
 blast_interval = 0.25
+blast_increment = 0.05
+blast_final_multiplier = 1.5
 stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 

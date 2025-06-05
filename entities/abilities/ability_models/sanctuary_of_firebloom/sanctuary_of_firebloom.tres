@@ -11,12 +11,12 @@ purchasable = true
 drop_chance = 5
 cost = 200
 currency_type = 0
-description = "The user calls forth the divine powers of ███, unleashing [color=yellow]5 consecutive[/color] devastating AoE blasts that explode in a [color=yellow]4.5 meter[/color] radius around the nearest target within [color=yellow]100 meters[/color]. The blasts deals damage to anyone caught within range.
+description = "The user calls forth the divine powers of ███, unleashing [color=yellow]5 consecutive[/color] devastating AoE blasts that rain down from the sky, exploding in a [color=yellow]4.5 meter[/color] radius around the nearest target within [color=yellow]100 meters[/color]. The blasts deals damage to anyone caught within range.
 
-Each blast strikes every [color=yellow]0.3 seconds[/color], dealing damage that increases by [color=yellow]25%%[/color] with every hit, scaled based on [color=yellow]100%%[/color] of the user's [color=orange]Attack[/color], and briefly stunning the target for [color=yellow]0.15 seconds[/color].
+Each blast strikes every [color=yellow]0.3 seconds[/color], dealing damage that increases by [color=yellow]5%%[/color] with every hit, scaled based on [color=yellow]120%%[/color] of the user's [color=orange]Attack[/color], and briefly stunning the target for [color=yellow]0.15 seconds[/color].
 
 This ability has a cooldown of %s."
-short_description = "The user unleashes [color=yellow]multiple AoE blasts[/color] on the nearest target within range. Each blast strikes at swift intervals, dealing [color=yellow]moderate damage[/color] scaled to the user's [color=orange]Attack[/color], increasing with each hit and briefly stunning the target."
+short_description = "The user unleashes [color=yellow]multiple AoE blasts[/color] from the sky onto onto the nearest target within range. Each blast strikes at swift intervals, dealing [color=yellow]moderate damage[/color] scaled to the user's [color=orange]Attack[/color], increasing with each hit and briefly stunning the target."
 icon = ExtResource("1_st7dl")
 model_uid = "uid://dsvdnoqpn766s"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"
