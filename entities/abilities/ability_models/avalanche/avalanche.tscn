@@ -12,6 +12,7 @@ radius = 50.0
 size = Vector3(8, 8, 8)
 
 [sub_resource type="Gradient" id="Gradient_7ele6"]
+offsets = PackedFloat32Array(0.146429, 0.867857)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fffml"]
 gradient = SubResource("Gradient_7ele6")
@@ -63,7 +64,7 @@ shape = SubResource("BoxShape3D_7ele6")
 [node name="Crystal" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
 emitting = false
-amount = 20
+amount = 15
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
