@@ -100,8 +100,37 @@ movement_mode = 2
 [node name="GroundSaw" parent="NavigationRegion3D/Arena/Path3D2/PathFollow3D" instance=ExtResource("3_rhqlf")]
 transform = Transform3D(0.998365, -0.000165815, 0.056995, 7.45058e-09, 0.999993, 0.00290985, -0.0569951, -0.00290505, 0.998362, 0.0768018, 0.847163, -7.42793)
 
+[node name="Path3D3" type="Path3D" parent="NavigationRegion3D/Arena"]
+transform = Transform3D(-0.799434, 0, -0.600755, 0, 1, 0, 0.600755, 0, -0.799434, -27.1559, -0.487641, 48.5635)
+curve = SubResource("Curve3D_m3nah")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Path3D3"]
+transform = Transform3D(0.34784, 0, 0.937543, 0, 0.999996, 0, -0.937546, 0, 0.347839, -4.99, 5, 6.85)
+script = ExtResource("2_xii2b")
+movement_speed = 5.0
+movement_mode = 2
+
+[node name="GroundSaw" parent="NavigationRegion3D/Arena/Path3D3/PathFollow3D" instance=ExtResource("3_rhqlf")]
+transform = Transform3D(0.998365, -0.000165815, 0.056995, 7.45058e-09, 0.999993, 0.00290985, -0.0569951, -0.00290505, 0.998362, 0.0768018, 0.847163, -7.42793)
+
+[node name="Path3D4" type="Path3D" parent="NavigationRegion3D/Arena"]
+transform = Transform3D(-0.376764, -0.00337939, 0.926304, -0.00179899, 0.999994, 0.00291652, -0.926308, -0.000567588, -0.376768, -68.2551, -0.831296, -12.1422)
+curve = SubResource("Curve3D_m3nah")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Path3D4"]
+transform = Transform3D(0.34784, 0, 0.937543, 0, 0.999996, 0, -0.937546, 0, 0.347839, -4.99, 5, 6.85)
+script = ExtResource("2_xii2b")
+movement_speed = 5.0
+movement_mode = 2
+
+[node name="GroundSaw" parent="NavigationRegion3D/Arena/Path3D4/PathFollow3D" instance=ExtResource("3_rhqlf")]
+transform = Transform3D(0.998365, -0.000165815, 0.056995, 7.45058e-09, 0.999993, 0.00290985, -0.0569951, -0.00290505, 0.998362, 0.0768018, 0.847163, -7.42793)
+
 [node name="SpikeBall" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
 transform = Transform3D(0.370282, 0, -0.928919, 0, 1, 0, 0.928919, 0, 0.370282, -34, 4, 4)
+
+[node name="SpikeBall4" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
+transform = Transform3D(-0.9728, 0, -0.231646, 0, 1, 0, 0.231646, 0, -0.9728, -34, 7.38049, -36.5958)
 
 [node name="SpikeBall2" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
 transform = Transform3D(0.35871, 0, 0.933449, 0, 1, 0, -0.933449, 0, 0.35871, -12.6, 4, -6.3)
@@ -111,12 +140,6 @@ transform = Transform3D(-0.77832, 0, 0.627868, 0, 1, 0, -0.627868, 0, -0.77832, 
 
 [node name="Marker3D" type="Marker3D" parent="NavigationRegion3D/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, 2.5, -3.3)
-script = ExtResource("13_m3nah")
-spawn_chance = 100
-hazard_scene = ExtResource("5_l5lfc")
-
-[node name="Marker3D2" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25, 2.5, -16)
 script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
@@ -140,7 +163,7 @@ spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
 
 [node name="Marker3D7" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5, 2.5, 5.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3888, 2.54654, 5.10467)
 script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
@@ -159,12 +182,6 @@ hazard_scene = ExtResource("5_l5lfc")
 
 [node name="Marker3D12" type="Marker3D" parent="NavigationRegion3D/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.0045, 5.5, -22.5013)
-script = ExtResource("13_m3nah")
-spawn_chance = 100
-hazard_scene = ExtResource("5_l5lfc")
-
-[node name="Marker3D13" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.5372, 5.5, -1.43272)
 script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
