@@ -16,7 +16,7 @@ func _ready() -> void:
 
 	if not music_player.playing:
 		music_player.play()
-		
+
 	if SettingsManager.get_setting("graphics", "preload_shaders", true) and not is_loading_complete:
 
 		# Hide play button initially
@@ -34,7 +34,6 @@ func _ready() -> void:
 
 		# Defer the setup and start of shader preloading to ensure the menu UI is visible first.
 		call_deferred("_setup_shader_preloading")
-		
 	else:
 		is_loading_complete = true
 		# If shader preloading is disabled, show the play button immediately
@@ -119,16 +118,15 @@ func _on_preloading_failed(error_message: String) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not is_loading_complete:
 		return
-		
+
 	# Input handling after loading is complete
 	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or \
-	   (event is InputEventKey and event.pressed and not event.is_echo()):
+		(event is InputEventKey and event.pressed and not event.is_echo()):
 		if play_button.visible and not play_button.disabled:
 			_on_play_button_pressed()
 
 
 func _on_play_button_pressed() -> void:
-	print("play button pressed")
 	if not is_loading_complete:
 		print("Cannot play: Loading not complete.")
 		return
@@ -153,6 +151,6 @@ func _on_quit_button_pressed() -> void:
 func _on_reset_button_pressed() -> void:
 	SignalManager.add_ui_scene.emit(UIEnums.UI.DELETE_SAVE_POPUP)
 
-	
+
 func setup(params: Dictionary) -> void:
 	is_loading_complete = params.get("skip_preload", false)
