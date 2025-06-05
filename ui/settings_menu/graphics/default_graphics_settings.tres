@@ -10,6 +10,8 @@ default_settings = {
 "fps": 0,
 "fxaa": 0,
 "msaa": 0,
+"pp_shader": 2,
+"preload_shaders": true,
 "render_mode": 0,
 "render_scale": 1.0,
 "resolution": Vector2i(1152, 648),

@@ -39,7 +39,7 @@ func _ready() -> void:
 	SignalManager.switch_ui_scene.connect(_on_switch_ui)
 	SignalManager.add_ui_scene.connect(_on_add_ui_scene)
 
-	# Initialize with main menu (or potentially nothing, depending on game start)
+	# Initialize with main menu
 	_on_add_ui_scene(UIEnums.UI.MAIN_MENU)
 	
 	layer = 3
