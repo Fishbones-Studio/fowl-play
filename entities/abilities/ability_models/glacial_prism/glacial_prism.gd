@@ -87,6 +87,8 @@ func _get_closest_target(area: Area3D) -> Node3D:
 func _on_impact_timer_timeout() -> void:
 	crystal_particle.restart()
 
+	await get_tree().create_timer(0.3).timeout
+
 	for body in hit_area.get_overlapping_bodies():
 		if body in _hit_bodies:
 			continue
