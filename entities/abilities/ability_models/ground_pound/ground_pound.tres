@@ -11,7 +11,7 @@ purchasable = true
 drop_chance = 40
 cost = 100
 currency_type = 0
-description = "The user performs a powerful ground pound, dealing damage based on [color=yellow]100%%[/color] of the user's [color=orange]Weight[/color] within a [color=yellow]8 meter[/color] radius and knocking all targets with average force. 
+description = "The user performs a powerful ground pound, dealing [color=yellow]two instances[/color] of damage based on [color=yellow]100%%[/color] of the user's [color=orange]Weight[/color] within a [color=yellow]8 meter[/color] radius and knocking all targets with average force. 
 
 Can only be used while [color=orange]airborne[/color] and has a cooldown of %s."
 short_description = "The user slams the ground, dealing [color=yellow]great[/color] damage that scales based of the user's [color=orange]Weight[/color] and applying [color=yellow]moderate knockback[/color] to all targets hit.
