@@ -66,18 +66,21 @@ func _resolve_dialogue_path() -> void:
 		"No dialogue file or directory has been set for this DialogueBox."
 	)
 
+
 func interact() -> void:
 	if dialogue_resource_path.is_empty():
 		push_warning("Cannot interact: No dialogue resource path is configured.")
 		return
 
-	var resource : Resource = load(dialogue_resource_path)
+	var resource: Resource = load(dialogue_resource_path)
 	if resource is DialogueResource:
-		if not DialogueManager.dialogue_ended.is_connected(dialogue_end):
-				# Bind the specific dialogue resource that triggered this interaction, to properly check if the dialogue has ended
-				DialogueManager.dialogue_ended.connect(
-					dialogue_end.bind(resource)
-				)
+		if DialogueManager.dialogue_ended.is_connected(dialogue_end):
+			DialogueManager.dialogue_ended.disconnect(dialogue_end)
+
+		# Bind the specific dialogue resource that triggered this interaction, so other dialogues wont trigger the next round.
+		DialogueManager.dialogue_ended.connect(
+			dialogue_end.bind(resource)
+		)
 		DialogueManager.show_dialogue_balloon(resource)
 	else:
 		push_warning(
@@ -87,6 +90,6 @@ func interact() -> void:
 
 
 ## Method that runs after dialogue has ended
-func dialogue_end(dialogue_resource: DialogueResource, resource_to_check : DialogueResource) -> void:
+func dialogue_end(dialogue_resource: DialogueResource, resource_to_check: DialogueResource) -> void:
 	if dialogue_resource == resource_to_check:
 		print("Dialogue successfully ended")
