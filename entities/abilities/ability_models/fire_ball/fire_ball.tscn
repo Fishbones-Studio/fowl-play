@@ -1,107 +1,138 @@
-[gd_scene load_steps=14 format=3 uid="uid://r2kfankkht6"]
+[gd_scene load_steps=22 format=3 uid="uid://r2kfankkht6"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_l7j4w"]
 [ext_resource type="Script" uid="uid://5b8scwscjndl" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gd" id="2_ksrmm"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="3_fmore"]
-[ext_resource type="Shader" uid="uid://dlxoddwv36plh" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gdshader" id="4_58kgr"]
+[ext_resource type="ArrayMesh" uid="uid://dmhuj5pudv6v" path="res://entities/abilities/ability_models/fire_ball/fire_ball_mesh.tres" id="5_isl50"]
+[ext_resource type="Shader" uid="uid://b6yre2hdopwo2" path="res://entities/abilities/ability_models/fire_ball/shaders/ball.tres" id="6_vdo2j"]
+[ext_resource type="Texture2D" uid="uid://vij4xk06dtwp" path="res://entities/abilities/ability_models/fire_ball/shaders/trail_texture.png" id="7_f5jn2"]
+[ext_resource type="Shader" uid="uid://d2q53vdjsalkx" path="res://entities/abilities/ability_models/fire_ball/shaders/trail.tres" id="7_onfkr"]
+[ext_resource type="Texture2D" uid="uid://bkq0483m1tcwa" path="res://entities/abilities/ability_models/fire_ball/shaders/spark_texture.png" id="8_f5jn2"]
 
-[sub_resource type="Gradient" id="Gradient_isl50"]
-offsets = PackedFloat32Array(0.155378, 0.330677, 0.51992, 0.770916, 0.906375)
-colors = PackedColorArray(0.637488, 0.0958055, 0.161079, 1, 0.888033, 0.516931, 0.184357, 1, 0.959418, 0.804632, 0.221466, 1, 0.816648, 0.229229, 0.147248, 1, 0.57489, 0.0491875, 0.165912, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5jn2"]
+radius = 0.6
+height = 1.6
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vdo2j"]
-gradient = SubResource("Gradient_isl50")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_isl50"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_onfkr"]
 render_priority = 0
-shader = ExtResource("4_58kgr")
-shader_parameter/_shield_gradient = SubResource("GradientTexture1D_vdo2j")
-shader_parameter/_shield_color_brightness = 1.5
-shader_parameter/_shield_intensity = 0.25
-shader_parameter/_rotation = Vector3(1.5, 0, 0)
-shader_parameter/_shield_size = 0.0
-shader_parameter/_shield_pulse_frequency = 1.0
-shader_parameter/_shield_pulse_density = 1.0
-shader_parameter/_shield_pulse_amplitude = 1.0
-shader_parameter/_shield_pulse_blend = 1.0
-shader_parameter/_shield_pulse_radius = 1.0
-shader_parameter/_impact_origin = Vector3(1, 0, 0)
-shader_parameter/_impact_frequency = 5.0
-shader_parameter/_impact_density = 5.0
-shader_parameter/_impact_amplitude = 6.0
-shader_parameter/_impact_blend = 0.0
-shader_parameter/_impact_radius = 1.1
-shader_parameter/_impact_anim = 0.0
+shader = ExtResource("6_vdo2j")
+shader_parameter/Color = Color(1, 0.415686, 0, 1)
+shader_parameter/Invert = true
+shader_parameter/Power = 3.5
 
-[sub_resource type="SphereMesh" id="SphereMesh_isl50"]
-material = SubResource("ShaderMaterial_isl50")
-radius = 1.0
-height = 2.0
-radial_segments = 10
-rings = 6
+[sub_resource type="SphereMesh" id="SphereMesh_f5jn2"]
+material = SubResource("ShaderMaterial_onfkr")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vdo2j"]
-radius = 1.0
+[sub_resource type="Gradient" id="Gradient_onfkr"]
+offsets = PackedFloat32Array(0, 0.118785, 0.430939, 0.627072, 0.845304, 1)
+colors = PackedColorArray(0.2, 0, 0, 0, 0.101961, 0, 0, 1, 0.419608, 0.0588235, 0, 1, 1, 0.45098, 0, 1, 1, 0.270588, 0, 1, 0.2, 0, 0, 0.3125)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ksrmm"]
-transparency = 1
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f5jn2"]
+gradient = SubResource("Gradient_onfkr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5jn2"]
+render_priority = 0
+shader = ExtResource("7_onfkr")
+shader_parameter/Color = SubResource("GradientTexture1D_f5jn2")
+shader_parameter/Speed = Vector2(0.5, 0)
+shader_parameter/Texture = ExtResource("7_f5jn2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_f5jn2"]
+material = SubResource("ShaderMaterial_f5jn2")
+size = Vector2(5, 1.5)
+orientation = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_031v6"]
+material = SubResource("ShaderMaterial_f5jn2")
+size = Vector2(5, 1.5)
+orientation = 1
+
+[sub_resource type="Curve" id="Curve_f5jn2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_031v6"]
+curve = SubResource("Curve_f5jn2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_031v6"]
+particle_flag_align_y = true
+emission_shape = 2
+emission_sphere_radius = 0.75
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 3.0
+initial_velocity_max = 10.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 1.99998
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_031v6")
+color = Color(0.782522, 0.194185, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sl02"]
+blend_mode = 1
+cull_mode = 2
 shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
 vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("8_f5jn2")
 
-[sub_resource type="SphereMesh" id="SphereMesh_ksrmm"]
-material = SubResource("StandardMaterial3D_ksrmm")
-radius = 0.375
-height = 0.75
-radial_segments = 4
-rings = 2
-
-[sub_resource type="Curve" id="Curve_fmore"]
-_data = [Vector2(0, 0.298966), 0.0, 0.0, 0, 0, Vector2(0.503311, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.703968), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_58kgr"]
-offsets = PackedFloat32Array(0.454545, 0.66, 0.798182, 0.88)
-colors = PackedColorArray(1, 0.960784, 0.419608, 1, 0.932783, 0.325613, 0.328412, 1, 0.43377, 0.100932, 0.130185, 1, 0.540966, 0.149197, 0.172767, 1)
+[sub_resource type="QuadMesh" id="QuadMesh_udvao"]
+material = SubResource("StandardMaterial3D_2sl02")
+size = Vector2(0.1, 0.5)
 
 [node name="FireBall" instance=ExtResource("1_l7j4w")]
 script = ExtResource("2_ksrmm")
 travel_speed = 5.0
 lifetime = 6.0
-damage_interval = 0.4
-scale_factor = 1.75
+damage_interval = 0.5
+scale_factor = 1.5
 current_ability = ExtResource("3_fmore")
 
 [node name="HitArea" type="Area3D" parent="." index="1"]
 unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 0
+monitorable = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HitArea" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_f5jn2")
+
+[node name="FireballMesh" type="Node3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
 visible = false
-mesh = SubResource("SphereMesh_isl50")
-skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="1"]
-unique_name_in_owner = true
-shape = SubResource("SphereShape3D_vdo2j")
+[node name="HeadMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="0"]
+transform = Transform3D(-0.8, 0, -1.20797e-07, 0, 0.8, 0, 1.20797e-07, 0, -0.8, 0, 0, 0)
+mesh = ExtResource("5_isl50")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="2"]
+[node name="BallMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.4)
+mesh = SubResource("SphereMesh_f5jn2")
+
+[node name="TrailVerticalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.74228e-08, 0, 2)
+mesh = SubResource("QuadMesh_f5jn2")
+
+[node name="TrailHorizontalMesh" type="MeshInstance3D" parent="HitArea/FireballMesh" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.74228e-08, 0, 2)
+mesh = SubResource("QuadMesh_031v6")
+
+[node name="Spark" type="GPUParticles3D" parent="HitArea" index="2"]
 unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 emitting = false
-amount = 400
+amount = 100
+lifetime = 0.5
+speed_scale = 0.5
+explosiveness = 0.2
 randomness = 1.0
-lifetime_randomness = 0.3
-mesh = SubResource("SphereMesh_ksrmm")
-emission_shape = 1
-emission_sphere_radius = 1.0
-direction = Vector3(0, 0, 1)
-gravity = Vector3(0, 0, 10)
-initial_velocity_min = 0.5
-initial_velocity_max = 1.5
-scale_amount_min = 0.2
-scale_amount_max = 1.2
-scale_amount_curve = SubResource("Curve_fmore")
-color = Color(0.65033, 0.258093, 0.129011, 1)
-color_ramp = SubResource("Gradient_58kgr")
+process_material = SubResource("ParticleProcessMaterial_031v6")
+draw_pass_1 = SubResource("QuadMesh_udvao")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]

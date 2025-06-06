@@ -37,6 +37,17 @@ func _on_cooldown_timer_timeout() -> void:
 	_particles_emitted = false
 
 
+func _physics_process(_delta: float) -> void:
+	# Handles edge case where character lands without hitting an enemy
+	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
+		await get_tree().create_timer(0.1).timeout
+
+		cpu_particles.emitting = true
+		_particles_emitted = true
+
+		_toggle_collision_masks(false, hit_area)
+
+
 func _on_hit_area_body_entered(body: Node3D) -> void:
 	 # If target body is player or enemy
 	if body.collision_layer in [2, 4]:
@@ -44,7 +55,8 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 			body,
 			damage,
 			DamageEnums.DamageTypes.NORMAL,
-			{"knockback": _calculate_knockback(body)
+			{
+				"knockback": _calculate_knockback(body)
 			},
 		)
 
@@ -55,17 +67,6 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 	ability_holder.velocity.y = 0
 
 	_toggle_collision_masks(false, hit_area)
-
-
-func _physics_process(_delta: float) -> void:
-	# Handles edge case where character lands without hitting an enemy
-	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
-		await get_tree().create_timer(0.2).timeout
-
-		cpu_particles.emitting = true
-		_particles_emitted = true
-
-		_toggle_collision_masks(false, hit_area)
 
 
 func _calculate_knockback(body: Node3D) -> Vector3:
