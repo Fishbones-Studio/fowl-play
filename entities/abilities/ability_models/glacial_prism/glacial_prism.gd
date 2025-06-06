@@ -85,6 +85,8 @@ func _get_closest_target(area: Area3D) -> Node3D:
 
 
 func _on_impact_timer_timeout() -> void:
+	crystal_particle.restart()
+
 	for body in hit_area.get_overlapping_bodies():
 		if body in _hit_bodies:
 			continue
@@ -94,8 +96,6 @@ func _on_impact_timer_timeout() -> void:
 			SignalManager.weapon_hit_target.emit(body, damage, DamageEnums.DamageTypes.NORMAL)
 			_apply_debuff(body, &"speed", movement_debuff)
 			_apply_debuff(body, &"defense", defense_debuff)
-
-	crystal_particle.emitting = true
 
 	_toggle_collision_masks(false, hit_area)
 

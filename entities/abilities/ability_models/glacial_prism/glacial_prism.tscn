@@ -1,15 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjuc63cw3gda1"]
+[gd_scene load_steps=15 format=3 uid="uid://cjuc63cw3gda1"]
 
-[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ubbc7"]
-[ext_resource type="Script" uid="uid://b8rcy5ri3byj5" path="res://entities/abilities/ability_models/avalanche/avalanche.gd" id="2_30khn"]
-[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="3_5ybk7"]
-[ext_resource type="ArrayMesh" uid="uid://dpiv14jwmy654" path="res://entities/abilities/ability_models/avalanche/avalanche_mesh.tres" id="4_7ele6"]
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_gtwud"]
+[ext_resource type="Script" uid="uid://b8rcy5ri3byj5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.gd" id="2_o4wag"]
+[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="3_r8vdb"]
+[ext_resource type="ArrayMesh" uid="uid://dpiv14jwmy654" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism_mesh.tres" id="4_rlecg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7ele6"]
 radius = 50.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ele6"]
 size = Vector3(8, 8, 8)
+
+[sub_resource type="CurveTexture" id="CurveTexture_o4wag"]
 
 [sub_resource type="Gradient" id="Gradient_7ele6"]
 offsets = PackedFloat32Array(0.146429, 0.867857)
@@ -19,23 +21,24 @@ gradient = SubResource("Gradient_7ele6")
 
 [sub_resource type="Curve" id="Curve_ltqon"]
 _limits = [-200.0, 200.0, 0.0, 1.0]
-_data = [Vector2(0, 5.97012), 0.0, 0.0, 0, 0, Vector2(0.115523, 1.13315), 7.56914, 7.56914, 0, 0, Vector2(1, 200), 771.978, 0.0, 0, 0]
+_data = [Vector2(0, 6), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 7.56914, 7.56914, 0, 0, Vector2(1, 200), 771.978, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_7ele6"]
 curve = SubResource("Curve_ltqon")
 
 [sub_resource type="Curve" id="Curve_lx86c"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.200599, 1), 2.84399e-07, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.197605, 1), 2.84399e-07, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_n884g"]
 curve = SubResource("Curve_lx86c")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ltqon"]
+lifetime_randomness = 0.3
 particle_flag_rotate_y = true
 emission_shape = 3
-emission_box_extents = Vector3(2, 0.2, 2)
+emission_box_extents = Vector3(1.5, 0.2, 1.5)
 angle_min = -180.0
 angle_max = 180.0
 spread = 35.0
@@ -43,19 +46,19 @@ gravity = Vector3(0, 0, 0)
 linear_accel_min = -2.23517e-06
 linear_accel_max = 5.0
 linear_accel_curve = SubResource("CurveTexture_7ele6")
-scale_min = 0.5
-scale_max = 2.5
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_n884g")
 color_ramp = SubResource("GradientTexture1D_fffml")
+alpha_curve = SubResource("CurveTexture_o4wag")
 
-[node name="Avalanche" instance=ExtResource("1_ubbc7")]
-script = ExtResource("2_30khn")
+[node name="GlacialPrism" instance=ExtResource("1_gtwud")]
+script = ExtResource("2_o4wag")
 movement_debuff = 80.0
 defense_debuff = 50.0
 debuff_duration = 8.0
 damage_scaler = 4.5
 impact_time = 0.3
-current_ability = ExtResource("3_5ybk7")
+current_ability = ExtResource("3_r8vdb")
 
 [node name="ImpactTimer" type="Timer" parent="." index="1"]
 one_shot = true
@@ -75,12 +78,12 @@ shape = SubResource("BoxShape3D_7ele6")
 [node name="Crystal" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
 emitting = false
-amount = 20
+amount = 25
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ltqon")
-draw_pass_1 = ExtResource("4_7ele6")
+draw_pass_1 = ExtResource("4_rlecg")
 
 [connection signal="timeout" from="ImpactTimer" to="." method="_on_impact_timer_timeout"]

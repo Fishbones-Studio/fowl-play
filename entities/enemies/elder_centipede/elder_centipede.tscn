@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_bv6h5"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_l658y"]
 [ext_resource type="PackedScene" uid="uid://co3ix5krmh3qr" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword.tscn" id="6_b6m30"]
-[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="6_bv6h5"]
+[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="6_bv6h5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67o2n"]
 radius = 1.75
