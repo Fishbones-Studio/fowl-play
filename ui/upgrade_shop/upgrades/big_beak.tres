@@ -1,21 +1,22 @@
 [gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bsa5rpr5w33dp"]
 
-[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_1fl1i"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_7g2vd"]
 
 [resource]
-script = ExtResource("1_1fl1i")
+script = ExtResource("1_7g2vd")
 health_bonus = 0
 stamina_bonus = 0
 attack_bonus = 20
 defense_bonus = 0
 speed_bonus = 0
 weight_bonus = 0.0
-name = "Aerilate"
+name = "Big Beak"
 purchasable = true
+is_free = true
 drop_chance = 10
 cost = 100
 currency_type = 0
-description = "Increases the user's Attack by %s."
+description = "The user’s beak grows stronger and more powerful, increasing [color=orange]Attack[/color] by %s."
 short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

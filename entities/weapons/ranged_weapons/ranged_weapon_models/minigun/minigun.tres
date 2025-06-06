@@ -17,6 +17,7 @@ handle_attack_end_by_state = false
 loop_animation = true
 name = "Minigun"
 purchasable = true
+is_free = false
 drop_chance = 25
 cost = 150
 currency_type = 0

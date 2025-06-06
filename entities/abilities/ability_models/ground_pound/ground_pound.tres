@@ -8,6 +8,7 @@ script = ExtResource("1_ve8n7")
 cooldown = 5.0
 name = "Ground Pound"
 purchasable = true
+is_free = false
 drop_chance = 40
 cost = 100
 currency_type = 0
