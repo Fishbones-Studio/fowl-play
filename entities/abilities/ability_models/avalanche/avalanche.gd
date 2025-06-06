@@ -30,6 +30,7 @@ func _ready() -> void:
 
 func activate() -> void:
 	_target = _get_closest_target(detection_area)
+
 	if _target == null:
 		print("Cannot perform %s with no target in range." % name)
 		return

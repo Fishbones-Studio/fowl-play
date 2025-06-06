@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjuc63cw3gda1"]
+[gd_scene load_steps=14 format=3 uid="uid://cjuc63cw3gda1"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ubbc7"]
 [ext_resource type="Script" uid="uid://b8rcy5ri3byj5" path="res://entities/abilities/ability_models/avalanche/avalanche.gd" id="2_30khn"]
@@ -17,6 +17,14 @@ offsets = PackedFloat32Array(0.146429, 0.867857)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fffml"]
 gradient = SubResource("Gradient_7ele6")
 
+[sub_resource type="Curve" id="Curve_ltqon"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 5.97012), 0.0, 0.0, 0, 0, Vector2(0.115523, 1.13315), 7.56914, 7.56914, 0, 0, Vector2(1, 200), 771.978, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7ele6"]
+curve = SubResource("Curve_ltqon")
+
 [sub_resource type="Curve" id="Curve_lx86c"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.200599, 1), 2.84399e-07, 0.0, 0, 0]
 point_count = 2
@@ -32,6 +40,9 @@ angle_min = -180.0
 angle_max = 180.0
 spread = 35.0
 gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 5.0
+linear_accel_curve = SubResource("CurveTexture_7ele6")
 scale_min = 0.5
 scale_max = 2.5
 scale_curve = SubResource("CurveTexture_n884g")
@@ -65,6 +76,7 @@ shape = SubResource("BoxShape3D_7ele6")
 unique_name_in_owner = true
 emitting = false
 amount = 20
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
