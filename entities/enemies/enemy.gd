@@ -29,6 +29,9 @@ var _knockback: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
+	if not stats:
+		push_error("Enemy stats resource is not assigned! Please assign a LivingEntityStats resource to the enemy.")
+		return
 	stats.init()
 	health_bar.init_health(stats.max_health, stats.current_health)
 	enemy_name_label.text = name_label_template_string % stats.name.capitalize()
@@ -52,6 +55,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(_delta: float) -> void:
+	if not stats:
+		return
 	stats.regen_stamina(stats.stamina_regen)
 	stats.regen_health(stats.health_regen)
 
