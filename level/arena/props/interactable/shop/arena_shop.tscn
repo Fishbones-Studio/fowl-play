@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://fcnahlq4lql5"]
+[gd_scene load_steps=5 format=3 uid="uid://fcnahlq4lql5"]
 
 [ext_resource type="Script" uid="uid://bbthkpmh03j4g" path="res://level/arena/props/interactable/shop/arena_shop.gd" id="1_5pok6"]
 [ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_xq2d5"]
 [ext_resource type="PackedScene" uid="uid://18tmfpnik0vd" path="res://entities/enemies/insighter/art/insighter.glb" id="3_kto4y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kto4y"]
+radius = 1.75
 
 [node name="ArenaShop" instance=ExtResource("1_xq2d5")]
 script = ExtResource("1_5pok6")
@@ -25,7 +28,7 @@ bones/6/rotation = Quaternion(-0.759836, 0.267271, 0.278839, 0.522938)
 bones/7/rotation = Quaternion(-0.0167451, -0.747819, -0.0105161, 0.663608)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.156891, 0.497467, -0.790741)
+shape = SubResource("SphereShape3D_kto4y")
 
 [node name="NameLabel" parent="." index="2"]
 text = "Open Shop"

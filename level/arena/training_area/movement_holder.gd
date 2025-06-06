@@ -7,6 +7,7 @@ extends Node3D
 	"sprint": "Hold to sprint"
 }
 
+
 func _on_player_detector_body_entered(body: Node3D) -> void:
 	if body is ChickenPlayer:
 		var control_overview = UIManager.ui_list.get(UIEnums.UI.CONTROL_OVERVIEW)

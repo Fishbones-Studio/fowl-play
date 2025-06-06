@@ -84,7 +84,8 @@ func interact() -> void:
 			"Failed to load or invalid DialogueResource at path: %s"
 			% dialogue_resource_path
 		)
-		
+
+
 ## Method that runs after dialogue has ended
 func dialogue_end(dialogue_resource: DialogueResource, resource_to_check : DialogueResource) -> void:
 	if dialogue_resource == resource_to_check:
