@@ -13,7 +13,7 @@ var damage: float:
 var _particles_emitted: bool = false
 
 @onready var hit_area: Area3D = $HitArea
-@onready var cpu_particles: CPUParticles3D = %CPUParticles3D
+@onready var gpu_particles: GPUParticles3D = %GPUParticles3D
 
 
 func activate() -> void:
@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
 		await get_tree().create_timer(0.1).timeout
 
-		cpu_particles.emitting = true
+		gpu_particles.emitting = true
 		_particles_emitted = true
 
 		_toggle_collision_masks(false, hit_area)
@@ -60,7 +60,7 @@ func _on_hit_area_body_entered(body: Node3D) -> void:
 			},
 		)
 
-	cpu_particles.emitting = true
+	gpu_particles.emitting = true
 	_particles_emitted = true
 
 	# resetting vertical velocity

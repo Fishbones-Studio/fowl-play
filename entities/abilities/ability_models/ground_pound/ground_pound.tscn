@@ -3,17 +3,14 @@
 [ext_resource type="Script" uid="uid://ddf0inyihgiuq" path="res://entities/abilities/ability_models/ground_pound/ground_pound.gd" id="1_pv44g"]
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_qn7uh"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="2_qn7uh"]
+[ext_resource type="ArrayMesh" uid="uid://jfd7avi3qd32" path="res://entities/abilities/ability_models/ground_pound/ground_pound_mesh.tres" id="4_55xeu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cv686"]
 height = 3.0
 radius = 10.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjuvu"]
-albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_55xeu"]
-material = SubResource("StandardMaterial3D_qjuvu")
-size = Vector2(1, 1)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cv686"]
+lifetime_randomness = 1.0
 
 [node name="GroundPound" instance=ExtResource("1_qn7uh")]
 script = ExtResource("1_pv44g")
@@ -31,21 +28,11 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
 shape = SubResource("CylinderShape3D_cv686")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
-emitting = false
-amount = 250
-one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-lifetime_randomness = 1.0
-mesh = SubResource("PlaneMesh_55xeu")
-emission_shape = 6
-emission_ring_axis = Vector3(0, 33, 1)
-emission_ring_height = 0.0
-emission_ring_radius = 10.0
-emission_ring_inner_radius = 1.0
-emission_ring_cone_angle = 90.0
-gravity = Vector3(0, 0.5, 0)
+process_material = SubResource("ParticleProcessMaterial_cv686")
+draw_pass_1 = ExtResource("4_55xeu")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
