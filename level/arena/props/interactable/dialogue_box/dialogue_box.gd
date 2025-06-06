@@ -45,7 +45,6 @@ func _resolve_dialogue_path() -> void:
 
 		# Use DirAccess.get_files_at() to get a list of files.
 		var files := DirAccess.get_files_at(dialogue_directory)
-		print(files)
 		for file_name in files:
 			# Only care about files ending with the dialogue extension.
 			if file_name.ends_with(".dialogue"):
