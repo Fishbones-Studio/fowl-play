@@ -17,6 +17,7 @@ handle_attack_end_by_state = false
 loop_animation = false
 name = "Slingshot"
 purchasable = true
+is_free = false
 drop_chance = 15
 cost = 100
 currency_type = 0
