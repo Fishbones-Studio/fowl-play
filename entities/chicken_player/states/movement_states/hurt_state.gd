@@ -1,6 +1,6 @@
 extends BasePlayerMovementState
 
-@export var knockback_decay: int = 50 # Rate at which the knockback decays per second
+@export var knockback_decay: int = 100 # Rate at which the knockback decays per second
 
 var _knockback: Vector3
 var _is_immobile: bool

@@ -50,11 +50,13 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 	if body is CharacterBody3D:
 		var dir: Vector3 = self.global_position.direction_to(body.global_position)
 
-		return Vector3(
+		var knockback: Vector3 = Vector3(
 			sign(dir.x) * knockback_force,
 			(sign(dir.y) if dir.y != 0 else 1) * knockback_force,
 			sign(dir.z) * knockback_force,
 		)
+
+		return knockback if is_zero_approx(body.velocity.y) else knockback / 2.5
 
 	return Vector3.ZERO
 

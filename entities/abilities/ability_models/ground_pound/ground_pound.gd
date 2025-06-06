@@ -84,10 +84,11 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 			max(1, sign(dir.y)) * knockback_force_upwards,
 			sign(dir.z) * knockback_force,
 		)
+		var knockback_y: float = knockback.y * max(ability_holder.stats.weight, 7)
 
 		return Vector3(
 				knockback.x,
-				knockback.y * max(ability_holder.stats.weight, 7),
+				knockback_y if is_zero_approx(body.velocity.y) else knockback_y / 2.5,
 				knockback.z,
 				)
 
