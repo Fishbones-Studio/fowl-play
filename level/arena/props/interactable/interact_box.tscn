@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://rou530ix2je3"]
+[gd_scene load_steps=5 format=3 uid="uid://rou530ix2je3"]
 
 [ext_resource type="Script" uid="uid://bhlgtdwbupe1q" path="res://level/arena/props/interactable/interact_box.gd" id="1_fpr1w"]
 [ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="2_bf2km"]
 [ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_pkj54"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xq2d5"]
-size = Vector3(4, 2, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brd77"]
 size = Vector3(6, 4.66492, 8.33762)
@@ -16,7 +13,6 @@ collision_mask = 6
 script = ExtResource("1_fpr1w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_xq2d5")
 
 [node name="NameLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)

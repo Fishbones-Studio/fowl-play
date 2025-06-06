@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=22 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
 [ext_resource type="PackedScene" uid="uid://b4cnrmx3uvron" path="res://entities/enemies/training_dummy/training_dummy.tscn" id="2_mudht"]
 [ext_resource type="PackedScene" uid="uid://c28ev5h14ds8v" path="res://utilities/camera/follow_camera/follow_camera.tscn" id="3_kk74r"]
 [ext_resource type="PackedScene" uid="uid://dxqe8ptih6fxs" path="res://entities/chicken_player/chicken_player.tscn" id="4_gmul1"]
-[ext_resource type="Script" uid="uid://c4b8yxkhx5fq1" path="res://level/arena/training_area/hazard_holder.gd" id="5_urxko"]
 [ext_resource type="PackedScene" uid="uid://bdiosrwi6l87h" path="res://level/arena/props/hazards/saws/ground_saw.tscn" id="6_0n1dd"]
 [ext_resource type="PackedScene" uid="uid://cu6c16s8oochp" path="res://level/arena/props/hazards/balls/spike_ball.tscn" id="7_7e81l"]
 [ext_resource type="Script" uid="uid://bbn0nu0mrkdtr" path="res://utilities/level/path_follow_3d_movement.gd" id="8_wk2id"]
@@ -66,7 +65,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.28956, 3, 17.3493)
 
 [node name="HazardHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2598, 1.38483, 34.572)
-script = ExtResource("5_urxko")
 
 [node name="HazardTitle" parent="HazardHolder" instance=ExtResource("10_wk2id")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.58513, 6, 0)
@@ -146,8 +144,7 @@ cost = 0
 [node name="HazardDialogueBox" parent="HazardHolder" instance=ExtResource("11_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, -9)
 collision_mask = 2
-dialogue_subfolder_path = "training_area"
-dialogue_file_name = "training_dummy_training_area_hazards.dialogue"
+dialogue_file = "uid://bu4l3qdt0753l"
 
 [node name="TrainingDummy" parent="HazardHolder" instance=ExtResource("2_mudht")]
 transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 12, 2, -9)
@@ -157,8 +154,7 @@ script = ExtResource("11_ldbqm")
 
 [node name="AttackDialogueBox" parent="AttackHolder" instance=ExtResource("11_23v1m")]
 collision_mask = 31
-dialogue_subfolder_path = "training_area"
-dialogue_file_name = "training_dummy_training_area_attack.dialogue"
+dialogue_file = "uid://c68txy3lgh2yf"
 
 [node name="TrainingDummy" parent="AttackHolder" instance=ExtResource("2_mudht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -201,8 +197,7 @@ transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788
 [node name="MovementDialogueBox" parent="MovementHolder/MovementTrainingDummy" instance=ExtResource("11_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0106087, 0, -0.056694)
 collision_mask = 2
-dialogue_subfolder_path = "training_area"
-dialogue_file_name = "training_dummy_training_area_movement.dialogue"
+dialogue_file = "uid://dwd2hio7umb2b"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="MovementHolder"]
 transform = Transform3D(-0.999095, 0.00661382, 0.0420179, 0.0257756, -0.691664, 0.721759, 0.0338359, 0.722189, 0.690868, -1.49048, 14.1687, 33.9112)
