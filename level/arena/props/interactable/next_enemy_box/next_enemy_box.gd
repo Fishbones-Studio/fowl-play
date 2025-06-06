@@ -3,16 +3,17 @@ class_name NextEnemyBox
 extends DialogueBox
 
 func interact() -> void:
-	if not dialogue_path.is_empty():
+	_resolve_dialogue_path()
+	if not dialogue_resource_path.is_empty():
 		# If a dialogue path is found, show the dialogue
-		var resource: Resource = load(dialogue_path) # .dialogue files are typically Resources
+		var resource: Resource = load(dialogue_resource_path)
 		if resource && resource is DialogueResource:
 			DialogueManager.show_dialogue_balloon(resource)
 			await DialogueManager.dialogue_ended
 			SignalManager.start_next_round.emit()
 		else:
 			push_error(
-				"Failed to load dialogue resource from path: %s" % dialogue_path
+				"Failed to load dialogue resource from path: %s" % dialogue_resource_path
 			)
 			# Fallback to starting next round immediately if loading fails
 			SignalManager.start_next_round.emit()

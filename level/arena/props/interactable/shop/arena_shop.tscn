@@ -6,8 +6,8 @@
 
 [node name="ArenaShop" instance=ExtResource("1_xq2d5")]
 script = ExtResource("1_5pok6")
-dialogue_subfolder_path = ""
-dialogue_file_name = ""
+dialogue_file = ""
+dialogue_directory = ""
 
 [node name="insighter" parent="." index="0" instance=ExtResource("3_kto4y")]
 transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0.470862, 0)

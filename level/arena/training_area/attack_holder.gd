@@ -8,12 +8,6 @@ extends Node3D
 	"ability_two": "Press for ability two",
 }
 
-@onready var attack_dialogue : DialogueBox = $AttackDialogueBox
-@onready var training_dummy : Enemy = $TrainingDummy
-
-func _ready() -> void:
-	attack_dialogue.dialogue_folder_path = training_dummy.dialogue_path
-	
 
 func _on_player_detector_body_entered(body: Node3D) -> void:
 	if body is ChickenPlayer:
