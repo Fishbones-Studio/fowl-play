@@ -68,15 +68,18 @@ func _refresh_shop() -> void:
 
 	var free_item_applied: bool = false
 	for selected_item in selected_items:
-		shop_items.append(selected_item)
-
-		if first_item_free and selected_item.is_free and not free_item_applied and selected_item.cost > 0:
-			selected_item.cost = 0
+		var item: BaseResource = selected_item
+	
+		if first_item_free and item.is_free and not free_item_applied and item.cost > 0:
+			item = selected_item.duplicate()
+			item.cost = 0
 			free_item_applied = true
 
-		var shop_item: BaseShopItem = create_shop_item(selected_item)
+		shop_items.append(item)
+
+		var shop_item: BaseShopItem = create_shop_item(item)
 		if not shop_item:
-			push_error("Failed to create shop item for: ", selected_item.name)
+			push_error("Failed to create shop item for: ", item.name)
 			continue
 
 		shop_items_container.add_child(shop_item)
