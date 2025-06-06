@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://k14ny7psycd5"]
+
+[ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_bhrhl"]
+[ext_resource type="Texture2D" uid="uid://dong1di5kj534" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.png" id="1_vvsio"]
+
+[resource]
+script = ExtResource("1_bhrhl")
+cooldown = 10.0
+name = "Glacial Prism"
+purchasable = true
+drop_chance = 20
+cost = 150
+currency_type = 0
+description = "The user summons devastating Ice Crystals directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
+
+The damage scales with [color=yellow]145%%[/color] of the user's [color=orange]Attack[/color] and [color=orange]Speed[/color]. Affected targets have their [color=orange]Speed[/color] reduced by [color=yellow]80%%[/color] and their [color=orange]Defense[/color] lowered by [color=yellow]50%%[/color] for [color=yellow]8 seconds[/color], after which these effects wear off.
+
+This ability has a cooldown of %s."
+short_description = "The user summons Ice Crystals, dealing [color=yellow]moderate[/color] damage based on the user's [color=orange]Attack[/color] and [color=orange]Speed[/color], and [color=yellow]significantly reducing[/color] both the Speed and Defense of targets hit for a long duration."
+icon = ExtResource("1_vvsio")
+model_uid = "uid://cjuc63cw3gda1"
+metadata/_custom_type_script = "uid://cqht6vad2p0dc"

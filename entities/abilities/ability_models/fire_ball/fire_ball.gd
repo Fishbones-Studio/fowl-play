@@ -5,9 +5,9 @@ extends Ability
 ## The duration before the fireball is automatically destroyed
 @export var lifetime: float = 6.0
 ## The time interval between each instance of damage while a target remains inside the fireball
-@export var damage_interval: float = 1.0
+@export var damage_interval: float = 0.5
 ## The maximum scale factor the fireball can grow to over its lifetime
-@export_range(1, 2, 0.01) var scale_factor: float = 1.75
+@export_range(1, 2, 0.01) var scale_factor: float = 2.0
 
 var damage: float:
 	get:
@@ -21,9 +21,9 @@ var _remaining_lifetime: float = 0.0
 var _active_bodies: Dictionary[int, int] = {}
 
 @onready var hit_area: Area3D = %HitArea
-@onready var mesh_instance: MeshInstance3D = %MeshInstance3D
+@onready var mesh_instance: Node3D = %FireballMesh
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
-@onready var cpu_particles: CPUParticles3D = %CPUParticles3D
+@onready var spark: GPUParticles3D = %Spark
 
 
 func activate() -> void:
@@ -43,7 +43,7 @@ func activate() -> void:
 	_active_bodies.clear()
 
 	mesh_instance.visible = true
-	cpu_particles.emitting = true
+	spark.emitting = true
 
 	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
@@ -57,6 +57,7 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not _is_active:
+		_reset_ability()
 		return
 
 	if _active_bodies.size() > 0:
@@ -72,12 +73,13 @@ func _physics_process(delta: float) -> void:
 
 	mesh_instance.scale = scale_increment
 	collision_shape.scale = scale_increment
-	cpu_particles.scale = scale_increment
+	spark.scale = scale_increment
 
 	if _remaining_lifetime <= 0:
 		_reset_ability()
 
 	global_position += _travel_direction * travel_speed * delta
+	look_at(global_position + _travel_direction)
 
 
 func _on_hit_area_body_entered(body: Node3D) -> void:
@@ -122,10 +124,10 @@ func _reset_ability() -> void:
 	top_level = false
 	_is_active = false
 	mesh_instance.visible = false
-	cpu_particles.emitting = false
+	spark.emitting = false
 
 	mesh_instance.scale = Vector3.ONE
 	collision_shape.scale = Vector3.ONE
-	cpu_particles.scale = Vector3.ONE
+	spark.scale = Vector3.ONE
 
 	_toggle_collision_masks(false, hit_area)
