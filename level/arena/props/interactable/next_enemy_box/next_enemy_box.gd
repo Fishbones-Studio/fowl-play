@@ -11,7 +11,6 @@ func interact() -> void:
 		if resource && resource is DialogueResource:
 			if DialogueManager.dialogue_ended.is_connected(dialogue_end):
 				DialogueManager.dialogue_ended.disconnect(dialogue_end)
-
 			# Bind the specific dialogue resource that triggered this interaction, so other dialogues wont trigger the next round.
 			DialogueManager.dialogue_ended.connect(
 				dialogue_end.bind(resource)
