@@ -15,6 +15,12 @@ current_weapon = ExtResource("2_2h67y")
 [node name="slingshot" parent="." index="0" instance=ExtResource("3_nqd1d")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.3, 0)
 
+[node name="Skeleton3D" parent="slingshot/Armature" index="0"]
+bones/1/rotation = Quaternion(2.10204e-09, 8.2979e-08, -0.0253241, 0.999679)
+bones/2/rotation = Quaternion(0.0331919, 0.0561537, -0.311866, 0.947884)
+bones/3/rotation = Quaternion(0.0401459, -0.119677, 0.334628, 0.933858)
+bones/4/rotation = Quaternion(0.741069, 0.0145396, 0.0225377, 0.670893)
+
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
 weapon = NodePath("..")
