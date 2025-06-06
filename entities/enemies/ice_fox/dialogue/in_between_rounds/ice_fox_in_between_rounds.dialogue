@@ -5,7 +5,7 @@ if SaveManager.get_enemy_encounter_count("boreass") > 0:
 else:
 	Boreass: [[Hi there!|Hey, friend! Wag wag!|Oh boy, a new friend!]]
 	Boreass: [[You smell nice! Like... chicken! Yum!|Ready to play? I love playing!|Is that a treat you have? Is it?]]
-- Attack => END!
+- Attack => END
 - Talk => standard_dialogue
 	
 ~ standard_dialogue

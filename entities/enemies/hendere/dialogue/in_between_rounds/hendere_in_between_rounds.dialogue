@@ -2,14 +2,14 @@
 if SaveManager.get_enemy_encounter_count("hendere") > 0:
 	Hendere: [[Oh, it’s you again. Couldn’t stay away?|Back for more, are you?|You just keep coming back, don’t you?]]
 	Hendere: You fought so well last time... was it for me?
-	- Attack => END!
+	- Attack => END
 	- Talk
 		Hendere: [[Hmph. Fine. If you insist on wasting my time with idle chatter.|Let's talk then, but don't think I care!|Fine, if you insist on wasting my time talking...]]
 		=> standard_dialogue
 else:
 	Hendere: [[Hello there, my little feathered friend|Fancy seeing you here, dear|Well, look who it is—my favorite fighter]]
 	Hendere: You did so well in that last round... was it just for me?
-	- Attack => END!
+	- Attack => END
 	- Just for you, Hendere.
 		Hendere: [[I knew you’d say that|Of course you did. You always do|That’s what I like to hear]]
 		Hendere: [[About those other chickens...|Did you notice how they watched you?|They seemed a bit too interested, didn’t they?]]
