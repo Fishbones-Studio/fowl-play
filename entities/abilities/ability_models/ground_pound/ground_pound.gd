@@ -3,7 +3,7 @@ extends Ability
 @export var descent_velocity: float = -50.0
 @export var knockback_force: float = 2.0
 @export var knockback_force_upwards: float = 1.5
-@export var damage_scaler: int = 15
+@export var damage_scaler: int = 9
 
 var damage: float:
 	get:
