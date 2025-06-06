@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ddaddpg4ye0q7" path="res://entities/abilities/ability_models/ground_pound/ground_pound_mesh.tres" id="4_55xeu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cv686"]
-height = 4.0
+height = 3.0
 radius = 8.0
 
 [sub_resource type="Curve" id="Curve_55xeu"]
