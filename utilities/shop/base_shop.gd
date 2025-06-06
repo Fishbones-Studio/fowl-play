@@ -8,7 +8,7 @@ extends Control
 ## Database Node extending `BaseDatabase`
 @export var item_database: BaseDatabase
 ## Make the first item free
-@export var first_item_free := false
+@export var first_item_free: bool = false
 
 var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
@@ -66,14 +66,13 @@ func _refresh_shop() -> void:
 		available_items, items_to_show
 	)
 
+	var free_item_applied: bool = false
 	for selected_item in selected_items:
 		shop_items.append(selected_item)
 
-		if selected_item.cost == 0:
-			continue
-
-		if first_item_free and selected_item == selected_items.get(0):
+		if first_item_free and selected_item.is_free and not free_item_applied and selected_item.cost > 0:
 			selected_item.cost = 0
+			free_item_applied = true
 
 		var shop_item: BaseShopItem = create_shop_item(selected_item)
 		if not shop_item:
@@ -94,7 +93,7 @@ func _get_available_items() -> Array[BaseResource]:
 	for item in item_database.items:
 		if _should_skip_item(item):
 			continue
-		valid_items.append(item)
+		valid_items.append(item.duplicate(true))
 
 	return valid_items
 
