@@ -12,10 +12,11 @@ speed_bonus = 0
 weight_bonus = 2.0
 name = "Heavy Feather"
 purchasable = true
+is_free = true
 drop_chance = 30
 cost = 100
 currency_type = 0
-description = "Increases the user's Weight by %s."
+description = "The user’s feathers grow dense and heavy, increasing [color=orange]Weight[/color] by %s."
 short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

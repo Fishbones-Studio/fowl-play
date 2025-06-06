@@ -10,12 +10,13 @@ attack_bonus = 0
 defense_bonus = 60
 speed_bonus = 0
 weight_bonus = 0.0
-name = "Prism Armor"
+name = "Protectors Peck"
 purchasable = true
+is_free = true
 drop_chance = 95
 cost = 150
 currency_type = 0
-description = "Increases the user's Defense by %s."
+description = "The user’s peck is fortified by a guardian force, increasing [color=orange]Defense[/color] by %s."
 short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

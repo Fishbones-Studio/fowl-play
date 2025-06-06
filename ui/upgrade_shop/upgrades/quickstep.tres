@@ -10,12 +10,13 @@ attack_bonus = 0
 defense_bonus = 0
 speed_bonus = 8
 weight_bonus = 0.0
-name = "Tailwind"
+name = "Quickstep"
 purchasable = true
+is_free = true
 drop_chance = 25
 cost = 200
 currency_type = 0
-description = "The wind blows behind the user's back and increases Speed by %s."
+description = "The user moves with greater swiftness, increasing [color=orange]Speed[/color] by %s."
 short_description = ""
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
