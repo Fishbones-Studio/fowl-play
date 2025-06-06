@@ -5,7 +5,7 @@ if SaveManager.get_enemy_encounter_count("insighter") > 0:
 else:
 	Insighter: [[Oh, good! A new fight!|Hehehe! Time to break things—and people!|Hello, little fighter! Ready to meet your end?]]
 	Insighter: [[I just love the sound of cracking shells! And bones!|Dying is just the beginning, you know—the exciting part!|Are you going to die beautifully? I hope so!]]
-- Attack => END!
+- Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue

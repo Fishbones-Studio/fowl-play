@@ -30,7 +30,7 @@ func _on_next_enemy_selected(next_enemy: Enemy) -> void:
 	if next_enemy and next_enemy.model and next_enemy.model.get_child_count():
 		enemy_model = next_enemy.model.get_child(0).duplicate()
 		next_enemy_box.add_child(enemy_model)
-		next_enemy_box.dialogue_folder_path = next_enemy.dialogue_path
+		next_enemy_box.dialogue_directory = next_enemy.dialogue_path.path_join("in_between_rounds")
 		initial_enemy_rotation = enemy_model.basis.orthonormalized()
 		var animation_player: AnimationPlayer = enemy_model.get_node_or_null("AnimationPlayer")
 		if animation_player:
@@ -55,4 +55,4 @@ func _on_body_exited(body: Node) -> void:
 		player_in_area = false
 		enemy_model.visible = false
 		if next_enemy_box:
-			next_enemy_box.dialogue_folder_path = ""
+			next_enemy_box.dialogue_directory = ""

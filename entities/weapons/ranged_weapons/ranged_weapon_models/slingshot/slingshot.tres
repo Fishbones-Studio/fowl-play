@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_g1vt4")
-damage = 25
+damage = 40
 windup_time = 0.5
 attack_duration = 0.0
-cooldown_time = 1.5
+cooldown_time = 2.5
 allow_continuous_fire = true
 allow_early_release = true
 fire_rate_per_second = 0.0
@@ -18,7 +18,7 @@ loop_animation = false
 name = "Slingshot"
 purchasable = true
 drop_chance = 15
-cost = 150
+cost = 100
 currency_type = 0
 description = "Hold the attack button to line up the perfect shot. Take as much time as you need!
 

@@ -64,7 +64,7 @@ quake_interval = 0.5
 quake_damage_increase = 0.2
 quake_radius_increase = 0.5
 max_quakes = 3
-damage_scaler = 3
+damage_scaler = 6
 current_ability = ExtResource("3_bowoe")
 
 [node name="CooldownTimer" parent="." index="0"]
