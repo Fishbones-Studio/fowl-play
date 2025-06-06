@@ -48,6 +48,7 @@ func _physics_process(_delta: float) -> void:
 func _pound() -> void:
 	gpu_particles.emitting = true
 
+	# Make it deal two instances of damage
 	await get_tree().create_timer(0.2).timeout
 
 	for body in hit_area.get_overlapping_bodies():

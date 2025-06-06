@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ddf0inyihgiuq" path="res://entities/abilities/ability_models/ground_pound/ground_pound.gd" id="1_pv44g"]
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_qn7uh"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="2_qn7uh"]
-[ext_resource type="ArrayMesh" uid="uid://jfd7avi3qd32" path="res://entities/abilities/ability_models/ground_pound/ground_pound_mesh.tres" id="4_55xeu"]
+[ext_resource type="ArrayMesh" uid="uid://ddaddpg4ye0q7" path="res://entities/abilities/ability_models/ground_pound/ground_pound_mesh.tres" id="4_55xeu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cv686"]
 height = 4.0
@@ -29,8 +29,8 @@ angle_max = 360.0
 direction = Vector3(0, 1, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.5
+scale_min = 0.1
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_m4r1p")
 
 [node name="GroundPound" instance=ExtResource("1_qn7uh")]
@@ -51,10 +51,10 @@ shape = SubResource("CylinderShape3D_cv686")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 emitting = false
-amount = 250
+amount = 125
 one_shot = true
 explosiveness = 1.0
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_cv686")
 draw_pass_1 = ExtResource("4_55xeu")
