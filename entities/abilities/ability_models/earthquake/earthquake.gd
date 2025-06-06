@@ -7,7 +7,7 @@ extends Ability
 @export var quake_damage_increase: float = 0.5  # Damage multiplier per quake
 @export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
-@export var damage_scaler: int = 3
+@export var damage_scaler: int = 6
 
 var damage: float:
 	get:
