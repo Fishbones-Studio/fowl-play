@@ -93,7 +93,7 @@ func _get_available_items() -> Array[BaseResource]:
 	for item in item_database.items:
 		if _should_skip_item(item):
 			continue
-		valid_items.append(item.duplicate(true))
+		valid_items.append(item)
 
 	return valid_items
 
