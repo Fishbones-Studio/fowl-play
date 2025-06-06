@@ -5,7 +5,7 @@ if SaveManager.get_enemy_encounter_count("woodpecker") > 0:
 else:
 	Woodpecker: [[A new challenger. Or just another specimen?|Greetings. Try not to be distracted by my condition.|Come closer, if you’re curious. I find your kind fascinating.]]
 	Woodpecker: [[My form is... not ideal. The result of failed experiments.|Don’t judge by appearance. My mind is still sharp.|I’m not just a brute, despite what you see.]]
-- Attack => END!
+- Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue

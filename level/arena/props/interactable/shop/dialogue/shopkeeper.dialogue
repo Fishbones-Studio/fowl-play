@@ -1,0 +1,48 @@
+~ start
+Egbert: Aaaah, a customer! Just who I was hoping to see!
+Egbert: [[Welcome, welcome! Take a look around!|Back from another big show, eh? Fantastic!|Heeey there, champ! Ready to get geared up?]]
+
+~ starting_options
+- Shop => END
+- Refresh the shop
+	=> confirm_refresh
+- Talk
+	Egbert: [[Always happy to chat with my favorite customer!|So, what's on your mind?|Ask away!]]
+	=> talk_options
+
+~ confirm_refresh
+Egbert: [[Want to shake things up a bit?|Not seeing anything that tickles your fancy?|Looking for a fresh start?]]
+Egbert: [[For just [color=orange]one Feathers of Rebirth[/color], I can bring out a whole new selection!|I can give the inventory a good scramble for a [color=orange]single Feather of Rebirth![/color]|I can restock everything for the low, low price of [color=orange]one Feathers of Rebirth![/color]]]
+- (Pay 1 Feathers of Rebirth) Yes, let's see some new items!
+	=> do_refresh
+- On second thought, I'll wait.
+	Egbert: [[No problem at all! The current deals are still egg-cellent!|Alrighty! Take another look, maybe something will catch your eye!|Suit yourself! These beauties aren't going anywhere just yet!]]
+	=> starting_options
+
+~ do_refresh
+if GameManager.feathers_of_rebirth >= 1
+	do GameManager.feathers_of_rebirth -= 1
+	do SignalManager.upgrades_shop_refreshed.emit()
+	Egbert: [[And... poof! Fresh as a daisy!|One moment... and voilà! A brand new batch of goodies!|Done and done! Hope you find something you love!]]
+else
+	Egbert: [[Whoops! Looks like you're a little short on feathers!|Oh dear, it seems the coop is empty! You don't have enough Feathers of Rebirth for that.|Aww, just a bit short! No worries, I'm sure you'll earn one soon!]]
+=> starting_options
+
+~ talk_options
+Egbert: [[Anything else you're curious about?|Happy to talk! It gets a little lonely in here between performances.|Spill it! What's cracking?]]
+- What exactly are you?
+	Egbert: [[Me? I'm the proprietor! The merchant! The humble Egbert!|I'm just a simple egg, trying to make my way in this big, exciting world!]]
+	Egbert: [[What's inside is less important than what I can get for *you*!|Don't get too scrambled thinking about it. What matters is the deal!|Let's just say I haven't quite come out of my shell yet!]]
+	=> talk_options
+- You seem very happy for... this place.
+	Egbert: [[Happy? Of course! The energy here is electric!|You have to look on the sunny side of life! And business is always sunny!|Why be glum? Every fight is a new opportunity! For you to win, and for me to sell! It's an egg-cellent system!]]
+	Egbert: [[Besides, all the cheering makes me feel so popular!|A positive attitude is the best accessory. And it's free! My other wares... are not. Hehe.|Can't let the little things get you down. Like the screaming. Or the... stains.]]
+	=> talk_options
+- Where do you get all this stuff?
+	Egbert: [[Oh, here and there! Things just... appear! It's magic!|The walls are surprisingly generous! Sometimes things just fall from the sky! A gift!|A good merchant never reveals his sources! It's bad for business.]]
+	Egbert: [[Let's just say I have a knack for finding things people have... misplaced. Very forcefully.|It's amazing what you can find when you just roll around a bit.|The important thing isn't where it came from, it's where it's going: into your inventory! For a modest fee, of course.]]
+	=> talk_options
+- I should get going.
+	Egbert: [[Right then! Business to attend to, I get it!|Don't be a stranger! The shop's always open for you.|Alrighty! Let me know if you change your mind!]]
+	Egbert: [[Come back soon! I'll be right here!|Good luck out there! Break a leg! ...But not literally!|Remember me when you're famous!]]
+	=> starting_options
