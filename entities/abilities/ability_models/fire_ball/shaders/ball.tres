@@ -1,0 +1,70 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://b6yre2hdopwo2"]
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_4vq3k"]
+output_port_for_preview = 0
+default_input_values = [2, true, 3, 4.0]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_vltwu"]
+parameter_name = "Power"
+default_value_enabled = true
+default_value = 5.5
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_35hvq"]
+parameter_name = "Invert"
+default_value_enabled = true
+default_value = true
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_35hvq"]
+output_port_for_preview = 0
+parameter_name = "Color"
+default_value_enabled = true
+default_value = Color(1, 0.415686, 0, 1)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled, fog_disabled;
+
+uniform vec4 Color : source_color = vec4(1.000000, 0.415686, 0.000000, 1.000000);
+uniform bool Invert = true;
+uniform float Power = 5.5;
+
+
+
+void fragment() {
+// ColorParameter:8
+	vec4 n_out8p0 = Color;
+
+
+// BooleanParameter:7
+	bool n_out7p0 = Invert;
+
+
+// FloatParameter:4
+	float n_out4p0 = Power;
+
+
+// Fresnel:3
+	float n_out3p0 = n_out7p0 ? (pow(clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_out4p0)) : (pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_out4p0));
+
+
+// Output:0
+	ALBEDO = vec3(n_out8p0.xyz);
+	ALPHA = n_out3p0;
+
+
+}
+"
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+flags/fog_disabled = true
+nodes/fragment/0/position = Vector2(500, 0)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFresnel_4vq3k")
+nodes/fragment/3/position = Vector2(-380, 580)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_vltwu")
+nodes/fragment/4/position = Vector2(-880, 1000)
+nodes/fragment/7/node = SubResource("VisualShaderNodeBooleanParameter_35hvq")
+nodes/fragment/7/position = Vector2(-1060, 520)
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_35hvq")
+nodes/fragment/8/position = Vector2(-320, -140)
+nodes/fragment/connections = PackedInt32Array(4, 0, 3, 3, 7, 0, 3, 2, 8, 0, 0, 0, 3, 0, 0, 1)
