@@ -10,6 +10,7 @@ max_level = 3
 current_level = 0
 name = "Defense"
 purchasable = true
+is_free = false
 drop_chance = 0
 cost = 2
 currency_type = 1
