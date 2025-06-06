@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_ak1y5"]
 [ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_wbtjo"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="6_psoce"]
-[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/avalanche/avalanche.tres" id="7_psoce"]
+[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="7_psoce"]
 [ext_resource type="Texture2D" uid="uid://cc1004ge3xhfb" path="res://entities/enemies/ice_fox/art/ice_fox_mugshot.png" id="10_ak1y5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ixwh"]
