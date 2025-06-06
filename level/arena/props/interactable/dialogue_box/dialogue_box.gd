@@ -88,4 +88,4 @@ func interact() -> void:
 ## Method that runs after dialogue has ended
 func dialogue_end(dialogue_resource: DialogueResource, resource_to_check : DialogueResource) -> void:
 	if dialogue_resource == resource_to_check:
-		print("Dialogue sucesfully ended")
+		print("Dialogue successfully ended")
