@@ -1,25 +1,43 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7t7b5rawdkte"]
+[gd_scene load_steps=9 format=3 uid="uid://b7t7b5rawdkte"]
 
 [ext_resource type="Script" uid="uid://ddf0inyihgiuq" path="res://entities/abilities/ability_models/ground_pound/ground_pound.gd" id="1_pv44g"]
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_qn7uh"]
 [ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="2_qn7uh"]
+[ext_resource type="ArrayMesh" uid="uid://ddaddpg4ye0q7" path="res://entities/abilities/ability_models/ground_pound/ground_pound_mesh.tres" id="4_55xeu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cv686"]
 height = 3.0
-radius = 10.0
+radius = 8.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjuvu"]
-albedo_color = Color(0.321728, 0.321728, 0.321728, 1)
+[sub_resource type="Curve" id="Curve_55xeu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.146707, 1), 2.72712e-07, 2.72712e-07, 0, 0, Vector2(0.745509, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_55xeu"]
-material = SubResource("StandardMaterial3D_qjuvu")
-size = Vector2(1, 1)
+[sub_resource type="CurveTexture" id="CurveTexture_m4r1p"]
+curve = SubResource("Curve_55xeu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cv686"]
+particle_flag_rotate_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 50, 1)
+emission_ring_height = 0.1
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -360.0
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_m4r1p")
 
 [node name="GroundPound" instance=ExtResource("1_qn7uh")]
 script = ExtResource("1_pv44g")
 descent_velocity = -50.0
-knockback_force = 1.0
-knockback_force_upwards = 1.0
+knockback_force = 2.0
+knockback_force_upwards = 1.5
 damage_scaler = 9
 current_ability = ExtResource("2_qn7uh")
 
@@ -31,21 +49,13 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
 shape = SubResource("CylinderShape3D_cv686")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="HitArea" index="1"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 emitting = false
-amount = 250
+amount = 125
 one_shot = true
-speed_scale = 2.0
 explosiveness = 1.0
-lifetime_randomness = 1.0
-mesh = SubResource("PlaneMesh_55xeu")
-emission_shape = 6
-emission_ring_axis = Vector3(0, 33, 1)
-emission_ring_height = 0.0
-emission_ring_radius = 10.0
-emission_ring_inner_radius = 1.0
-emission_ring_cone_angle = 90.0
-gravity = Vector3(0, 0.5, 0)
-
-[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cv686")
+draw_pass_1 = ExtResource("4_55xeu")
