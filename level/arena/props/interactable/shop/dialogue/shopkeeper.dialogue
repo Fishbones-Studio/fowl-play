@@ -12,7 +12,7 @@ Egbert: [[Welcome, welcome! Take a look around!|Back from another big show, eh? 
 
 ~ confirm_refresh
 Egbert: [[Want to shake things up a bit?|Not seeing anything that tickles your fancy?|Looking for a fresh start?]]
-Egbert: [[For just [color=orange]one Feathers of Rebirth[/color], I can bring out a whole new selection!|I can give the inventory a good scramble for a [color=orange]single Feather of Rebirth![/color]|I can restock everything for the low, low price of [color=orange]one Feathers of Rebirth![/color]]]
+Egbert: [[For just [color=orange]one Feather of Rebirth[/color], I can bring out a whole new selection!|Hand me [color=orange]one Feather of Rebirth[/color], and I’ll scramble the entire inventory!|For the low, low cost of [color=orange]one Feather of Rebirth[/color], I can refill the entire stock!]]
 - (Pay 1 Feathers of Rebirth) Yes, let's see some new items!
 	=> do_refresh
 - On second thought, I'll wait.
