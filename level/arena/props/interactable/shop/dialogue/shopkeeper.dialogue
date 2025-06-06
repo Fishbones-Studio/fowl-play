@@ -3,13 +3,18 @@ Egbert: Aaaah, a customer! Just who I was hoping to see!
 Egbert: [[Welcome, welcome! Take a look around!|Back from another big show, eh? Fantastic!|Heeey there, champ! Ready to get geared up?]]
 
 ~ starting_options
+- Shop => END
+- Refresh the shop for me
+	if GameManager.feathers_of_rebirth >= 1
+		Egbert: Sure
+		do GameManager.feathers_of_rebirth -= 1
+		do SignalManager.upgrades_shop_refreshed.emit()
+	else
+		Egbert: You dont have enough money
+	=> starting_options
 - Talk
 	Egbert: [[Always happy to chat with my favorite customer!|So, what's on your mind?|Ask away!]]
 	=> talk_options
-- Shop => open_shop
-- Leave
-    Egbert: [[Come back soon! I'll be right here!|Good luck out there! Break a leg! ...But not literally!|Remember me when you're famous!]]
-    => END
 
 ~ talk_options
 Egbert: [[Anything else you're curious about?|Happy to talk! It gets a little lonely in here between performances.|Spill it! What's cracking?]]
@@ -27,11 +32,5 @@ Egbert: [[Anything else you're curious about?|Happy to talk! It gets a little lo
 	=> talk_options
 - I should get going.
 	Egbert: [[Right then! Business to attend to, I get it!|Don't be a stranger! The shop's always open for you.|Alrighty! Let me know if you change your mind!]]
+	Egbert: [[Come back soon! I'll be right here!|Good luck out there! Break a leg! ...But not literally!|Remember me when you're famous!]]
 	=> starting_options
-	
-~ open_shop
-if UIEnums.UI.IN_ARENA_SHOP in UIManager.ui_list 
-	do UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP) 
-else 
-	do SignalManager.add_ui_scene.emit(UIEnums.UI.IN_ARENA_SHOP)
-=> END
