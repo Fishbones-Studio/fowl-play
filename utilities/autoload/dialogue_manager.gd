@@ -61,7 +61,7 @@ func _start_balloon(balloon: Node, resource: DialogueResource, title: String, ex
 func _on_wrapper_dialogue_ended(_resource: DialogueResource) -> void:
 	var balloon_in_list = UIManager.ui_list.get(UIEnums.UI.DIALOGUE_BALLOON)
 	if is_instance_valid(balloon_in_list):
-		UIManager.toggle_ui(UIEnums.UI.DIALOGUE_BALLOON)
+		UIManager.remove_ui_by_enum(UIEnums.UI.DIALOGUE_BALLOON)
 
 # Overridden public methods from DialogueManager 
 

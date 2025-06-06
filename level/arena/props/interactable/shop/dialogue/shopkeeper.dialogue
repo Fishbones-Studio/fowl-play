@@ -1,1 +1,37 @@
-Shopkeeper: Aaa
+~ start
+Egbert: Aaaah, a customer! Just who I was hoping to see!
+Egbert: [[Welcome, welcome! Take a look around!|Back from another big show, eh? Fantastic!|Heeey there, champ! Ready to get geared up?]]
+
+~ starting_options
+- Talk
+	Egbert: [[Always happy to chat with my favorite customer!|So, what's on your mind?|Ask away!]]
+	=> talk_options
+- Shop => open_shop
+- Leave
+    Egbert: [[Come back soon! I'll be right here!|Good luck out there! Break a leg! ...But not literally!|Remember me when you're famous!]]
+    => END
+
+~ talk_options
+Egbert: [[Anything else you're curious about?|Happy to talk! It gets a little lonely in here between performances.|Spill it! What's cracking?]]
+- What exactly are you?
+	Egbert: [[Me? I'm the proprietor! The merchant! The humble Egbert!|I'm just a simple egg, trying to make my way in this big, exciting world!]]
+	Egbert: [[What's inside is less important than what I can get for *you*!|Don't get too scrambled thinking about it. What matters is the deal!|Let's just say I haven't quite come out of my shell yet!]]
+	=> talk_options
+- You seem very happy for... this place.
+	Egbert: [[Happy? Of course! The energy here is electric!|You have to look on the sunny side of life! And business is always sunny!|Why be glum? Every fight is a new opportunity! For you to win, and for me to sell! It's an egg-cellent system!]]
+	Egbert: [[Besides, all the cheering makes me feel so popular!|A positive attitude is the best accessory. And it's free! My other wares... are not. Hehe.|Can't let the little things get you down. Like the screaming. Or the... stains.]]
+	=> talk_options
+- Where do you get all this stuff?
+	Egbert: [[Oh, here and there! Things just... appear! It's magic!|The walls are surprisingly generous! Sometimes things just fall from the sky! A gift!|A good merchant never reveals his sources! It's bad for business.]]
+	Egbert: [[Let's just say I have a knack for finding things people have... misplaced. Very forcefully.|It's amazing what you can find when you just roll around a bit.|The important thing isn't where it came from, it's where it's going: into your inventory! For a modest fee, of course.]]
+	=> talk_options
+- I should get going.
+	Egbert: [[Right then! Business to attend to, I get it!|Don't be a stranger! The shop's always open for you.|Alrighty! Let me know if you change your mind!]]
+	=> starting_options
+	
+~ open_shop
+if UIEnums.UI.IN_ARENA_SHOP in UIManager.ui_list 
+	do UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP) 
+else 
+	do SignalManager.add_ui_scene.emit(UIEnums.UI.IN_ARENA_SHOP)
+=> END
