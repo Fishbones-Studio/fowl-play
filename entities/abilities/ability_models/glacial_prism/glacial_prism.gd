@@ -17,6 +17,7 @@ var _hit_bodies: Array = []
 @onready var impact_timer: Timer = $ImpactTimer
 @onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
+@onready var sound_effect: AudioStreamPlayer3D = $SoundEffect
 @onready var crystal_particle: GPUParticles3D = %Crystal
 
 
@@ -30,6 +31,7 @@ func _ready() -> void:
 
 func activate() -> void:
 	_target = _get_closest_target(detection_area)
+	
 
 	if _target == null:
 		print("Cannot perform %s with no target in range." % name)
@@ -41,6 +43,8 @@ func activate() -> void:
 
 	impact_timer.wait_time = impact_time
 	impact_timer.start()
+	
+	sound_effect.play()
 
 	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bymaeu4dtl7ex"]
+[gd_scene load_steps=14 format=3 uid="uid://bymaeu4dtl7ex"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_e1ngp"]
 [ext_resource type="Script" uid="uid://du7ortc8e7k4y" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.gd" id="2_e1ngp"]
 [ext_resource type="PackedScene" uid="uid://bbnpnhjgrkwt4" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="3_k4qq2"]
 [ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="3_yaitn"]
+[ext_resource type="AudioStream" uid="uid://dijqdrhjmra3u" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek_hit.wav" id="5_k4qq2"]
 
 [sub_resource type="Animation" id="Animation_em7sn"]
 resource_name = "Attack"
@@ -318,3 +319,6 @@ shape = SubResource("BoxShape3D_yaitn")
 
 [node name="leek" parent="WeaponHitBox" index="2" instance=ExtResource("3_k4qq2")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.19, 0)
+
+[node name="WeaponAttackSFX" parent="." index="2"]
+stream = ExtResource("5_k4qq2")
