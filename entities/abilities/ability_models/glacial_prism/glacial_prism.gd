@@ -17,6 +17,7 @@ var _hit_bodies: Array = []
 @onready var impact_timer: Timer = $ImpactTimer
 @onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
+@onready var sound_effect: AudioStreamPlayer = $SoundEffect
 @onready var crystal_particle: GPUParticles3D = %Crystal
 
 
@@ -30,6 +31,8 @@ func _ready() -> void:
 
 func activate() -> void:
 	_target = _get_closest_target(detection_area)
+	
+	sound_effect.play()
 
 	if _target == null:
 		print("Cannot perform %s with no target in range." % name)

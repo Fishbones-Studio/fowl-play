@@ -20,6 +20,7 @@ var _current_damage: float = 0.0
 @onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
 @onready var gpu_particles: GPUParticles3D = %GPUParticles3D
+@onready var sound_effect: AudioStreamPlayer = $SoundEffect
 @onready var camera: FollowCamera = get_tree().get_first_node_in_group("FollowCamera")
 
 
@@ -41,6 +42,8 @@ func activate() -> void:
 	_blast_count = 0
 	_current_damage = damage
 
+	sound_effect.play()
+	
 	_toggle_collision_masks(true, hit_area, true)
 
 	# Reset to default settings
@@ -79,6 +82,9 @@ func _get_closest_target(area: Area3D) -> Node3D:
 
 func _on_blast_timer_timeout() -> void:
 	gpu_particles.restart()
+	
+	sound_effect.stop()
+	sound_effect.play()
 
 	_blast_count += 1
 	if _blast_count < max_blasts:

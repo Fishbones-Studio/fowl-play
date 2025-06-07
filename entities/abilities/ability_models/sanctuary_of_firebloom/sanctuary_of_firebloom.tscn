@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsvdnoqpn766s"]
+[gd_scene load_steps=11 format=3 uid="uid://dsvdnoqpn766s"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_deltf"]
 [ext_resource type="Script" uid="uid://b4qvwmcfsv15w" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.gd" id="2_hntii"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="3_2cn0f"]
+[ext_resource type="AudioStream" uid="uid://ckpgkp43jngyl" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom_sfx.wav" id="4_4o270"]
 [ext_resource type="ArrayMesh" uid="uid://86471nk4jq05" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom_mesh.tres" id="4_dcanr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dcanr"]
@@ -39,10 +40,14 @@ blast_final_multiplier = 1.5
 stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 
-[node name="BlastTimer" type="Timer" parent="." index="1"]
+[node name="SoundEffect" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource("4_4o270")
+bus = &"SFX"
+
+[node name="BlastTimer" type="Timer" parent="." index="2"]
 one_shot = true
 
-[node name="DetectionArea" type="Area3D" parent="." index="2"]
+[node name="DetectionArea" type="Area3D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 0
 monitorable = false
@@ -50,7 +55,7 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
 shape = SubResource("SphereShape3D_dcanr")
 
-[node name="HitArea" type="Area3D" parent="." index="3"]
+[node name="HitArea" type="Area3D" parent="." index="4"]
 collision_layer = 0
 collision_mask = 0
 monitorable = false
