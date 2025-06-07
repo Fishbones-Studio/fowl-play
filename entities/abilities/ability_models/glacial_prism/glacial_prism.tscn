@@ -61,7 +61,7 @@ damage_scaler = 4.5
 impact_time = 0.3
 current_ability = ExtResource("3_r8vdb")
 
-[node name="SoundEffect" type="AudioStreamPlayer" parent="." index="0"]
+[node name="SoundEffect" type="AudioStreamPlayer3D" parent="." index="0"]
 stream = ExtResource("4_o4wag")
 bus = &"SFX"
 
