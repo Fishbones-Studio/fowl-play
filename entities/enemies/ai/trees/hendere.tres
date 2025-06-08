@@ -187,7 +187,6 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_pyqya"]
 script = ExtResource("6_pia2r")
-target_var = &"target"
 ignore_cooldown = false
 start_state = 1
 
@@ -271,7 +270,6 @@ duration = 0.1
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
-target_var = &"target"
 ignore_cooldown = true
 start_state = 1
 
@@ -339,7 +337,6 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_7jrpa"]
 script = ExtResource("6_pia2r")
-target_var = &"target"
 ignore_cooldown = true
 start_state = 1
 
