@@ -23,7 +23,7 @@ dialogue_path = "res://entities/enemies/timmy/dialogue"
 name_label_template_string = "%s, the Goose"
 
 [node name="timmy" parent="Model" index="0" instance=ExtResource("3_ivelv")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.5, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
 
 [node name="Skeleton3D" parent="Model/timmy/Armature" index="0"]
 bones/1/rotation = Quaternion(-0.0432664, 0.892909, 0.446979, 0.0324253)
