@@ -17,7 +17,7 @@ var hurt_ticks: Array = []
 var _knockback: Vector3 = Vector3.ZERO
 
 @onready var health_bar: HealthBar = %EnemyHealthBar
-@onready var enemy_name_label : Label = %EnemyNameLabel
+@onready var enemy_name_label: Label = %EnemyNameLabel
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
