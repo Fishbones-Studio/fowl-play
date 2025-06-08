@@ -1,20 +1,20 @@
 [gd_resource type="BehaviorTree" load_steps=49 format=3 uid="uid://k7wyinj46uqk"]
 
-[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_isvs4"]
-[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_k2yrv"]
-[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="4_h6t4k"]
-[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_q1l3l"]
-[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="5_pd8xg"]
-[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_8uudm"]
-[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_53l80"]
-[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="8_j3vma"]
-[ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="9_53l80"]
-[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_53l80"]
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
+[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yj2r8"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_rm485"]
+[ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="8_gdjfc"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="9_78ech"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
 [sub_resource type="BTAction" id="BTAction_k2yrv"]
-script = ExtResource("1_isvs4")
+script = ExtResource("1_sk4mh")
 target_var = &"target"
 
 [sub_resource type="BBVariant" id="BBVariant_8uudm"]
@@ -27,14 +27,14 @@ variable = &"aggro_distance"
 value = SubResource("BBVariant_8uudm")
 
 [sub_resource type="BTCondition" id="BTCondition_4rvb4"]
-script = ExtResource("4_h6t4k")
+script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
 
 [sub_resource type="BBNode" id="BBNode_53l80"]
-saved_value = NodePath("Model/insighter/AnimationPlayer")
-resource_name = "Model/insighter/AnimationPlayer"
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8uudm"]
 animation_player = SubResource("BBNode_53l80")
@@ -42,7 +42,7 @@ animation_name = &"Idle"
 blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_4rvb4"]
-script = ExtResource("4_q1l3l")
+script = ExtResource("3_lk6lr")
 target_var = &"target"
 rotation_speed = 6.0
 angle_threshold = 25.0
@@ -50,7 +50,7 @@ duration = 0.0
 face_away = false
 
 [sub_resource type="BTAction" id="BTAction_8uudm"]
-script = ExtResource("5_pd8xg")
+script = ExtResource("4_yj2r8")
 target_var = &"target"
 ignore_cooldown = true
 slot = 0
@@ -68,8 +68,8 @@ children = [SubResource("BTCondition_4rvb4"), SubResource("BTPlayAnimation_8uudm
 metadata/_weight_ = 66.0
 
 [sub_resource type="BBNode" id="BBNode_smr14"]
-saved_value = NodePath("Model/insighter/AnimationPlayer")
-resource_name = "Model/insighter/AnimationPlayer"
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_q1l3l"]
 animation_player = SubResource("BBNode_smr14")
@@ -77,7 +77,7 @@ animation_name = &"Idle"
 blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
-script = ExtResource("2_k2yrv")
+script = ExtResource("5_ct4d5")
 min_wait_time = 0.0
 max_wait_time = 0.0
 
@@ -90,8 +90,8 @@ custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg"), SubResource("BTRandomWait_8uudm")]
 
 [sub_resource type="BBNode" id="BBNode_p7jkp"]
-saved_value = NodePath("Model/insighter/AnimationPlayer")
-resource_name = "Model/insighter/AnimationPlayer"
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_7st8f"]
 animation_player = SubResource("BBNode_p7jkp")
@@ -100,7 +100,7 @@ blend = 0.2
 speed = 1.5
 
 [sub_resource type="BTAction" id="BTAction_c7qb4"]
-script = ExtResource("4_q1l3l")
+script = ExtResource("3_lk6lr")
 target_var = &"target"
 rotation_speed = 20.0
 angle_threshold = 2.0
@@ -108,12 +108,12 @@ duration = 0.0
 face_away = false
 
 [sub_resource type="BTCondition" id="BTCondition_w7w8f"]
-script = ExtResource("6_8uudm")
+script = ExtResource("6_sha4y")
 stuck_interval = 1.0
 stuck_threshold = 2.5
 
 [sub_resource type="BTAction" id="BTAction_53a43"]
-script = ExtResource("7_53l80")
+script = ExtResource("7_rm485")
 target_var = &"target"
 tolerance = 15.0
 speed_factor = 0.0
@@ -124,13 +124,13 @@ immediate_response = false
 path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_53l80"]
-script = ExtResource("4_h6t4k")
+script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
 distance_max = 45.0
 
 [sub_resource type="BTAction" id="BTAction_smr14"]
-script = ExtResource("9_53l80")
+script = ExtResource("8_gdjfc")
 target_var = &"target"
 weapon_offset = Vector3(3, 2.5, 0)
 max_down_angle = -45.0
@@ -138,7 +138,7 @@ max_up_angle = 45.0
 rotation_speed = 0.1
 
 [sub_resource type="BTAction" id="BTAction_ien84"]
-script = ExtResource("8_j3vma")
+script = ExtResource("9_78ech")
 target_var = &"target"
 ignore_cooldown = false
 start_state = 1
@@ -171,7 +171,7 @@ metadata/_weight_ = 1.0
 children = [SubResource("BTSequence_ucb6i")]
 
 [sub_resource type="BTCondition" id="BTCondition_smr14"]
-script = ExtResource("10_53l80")
+script = ExtResource("10_n1u5v")
 
 [sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_p7jkp"]
 children = [SubResource("BTCondition_smr14")]
