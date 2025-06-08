@@ -1,10 +1,12 @@
-[gd_resource type="BehaviorTree" load_steps=33 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_rm485"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="9_78ech"]
 [ext_resource type="Script" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
@@ -15,7 +17,7 @@ target_var = &"target"
 
 [sub_resource type="BTCondition" id="BTCondition_w7w8f"]
 script = ExtResource("6_sha4y")
-stuck_interval = 1.0
+stuck_interval = 4.0
 stuck_threshold = 2.5
 
 [sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_sp7rb"]
@@ -35,22 +37,21 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("5_ct4d5")
-min_wait_time = 0.0
-max_wait_time = 0.0
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_8uudm"]
-min_duration = 0.4
-max_duration = 1.1
+min_wait_time = 0.5
+max_wait_time = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_4rvb4"]
 custom_name = "Pause before action"
-children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg"), SubResource("BTRandomWait_8uudm")]
+children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg")]
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
-saved_value = null
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8qtte"]
 animation_player = SubResource("BBNode_wrv8r")
+animation_name = &"Walking"
+blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_c7qb4"]
 script = ExtResource("3_lk6lr")
@@ -63,16 +64,33 @@ face_away = false
 [sub_resource type="BTAction" id="BTAction_53a43"]
 script = ExtResource("7_rm485")
 target_var = &"target"
-tolerance = 50.0
+tolerance = 2.0
 speed_factor = 0.0
-duration = 0.0
+duration = 10.0
 ignore_y = false
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
+[sub_resource type="BTCondition" id="BTCondition_sgv08"]
+script = ExtResource("2_sgv08")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_lk6lr"]
+script = ExtResource("9_78ech")
+ignore_cooldown = true
+start_state = 1
+
+[sub_resource type="BTSequence" id="BTSequence_yj2r8"]
+children = [SubResource("BTCondition_sgv08"), SubResource("BTAction_lk6lr")]
+
 [sub_resource type="BTParallel" id="BTParallel_sgv08"]
-children = [SubResource("BTAction_c7qb4"), SubResource("BTAction_53a43")]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_c7qb4"), SubResource("BTAction_53a43"), SubResource("BTSequence_yj2r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_lk6lr"]
 children = [SubResource("BTSequence_4rvb4"), SubResource("BTPlayAnimation_8qtte"), SubResource("BTParallel_sgv08")]
@@ -81,7 +99,7 @@ children = [SubResource("BTSequence_4rvb4"), SubResource("BTPlayAnimation_8qtte"
 children = [SubResource("BTAlwaysFail_sk4mh"), SubResource("BTSequence_lk6lr")]
 
 [sub_resource type="BTSequence" id="BTSequence_ucb6i"]
-custom_name = "Pursue"
+custom_name = "Act like a filthy bastard!"
 children = [SubResource("BTParallel_cmfip")]
 metadata/_weight_ = 1.0
 
@@ -100,13 +118,11 @@ children = [SubResource("BTRepeatUntilFailure_p7jkp")]
 [sub_resource type="BTParallel" id="BTParallel_7st8f"]
 children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
 
-[sub_resource type="BTSequence" id="BTSequence_j3vma"]
-children = [SubResource("BTParallel_7st8f")]
-
 [sub_resource type="BTParallel" id="BTParallel_8uudm"]
-num_failures_required = 3
+num_successes_required = 2
+num_failures_required = 2
 repeat = true
-children = [SubResource("BTSequence_j3vma")]
+children = [SubResource("BTParallel_7st8f")]
 
 [sub_resource type="BTSequence" id="BTSequence_5rfdf"]
 children = [SubResource("BTAction_k2yrv"), SubResource("BTParallel_8uudm")]

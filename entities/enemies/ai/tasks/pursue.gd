@@ -31,6 +31,8 @@ func _generate_name() -> String:
 
 func _enter() -> void:
 	target = blackboard.get_var(target_var, null)
+	if not is_instance_valid(target):
+		return
 
 	if pathfinding:
 		if not agent.nav.velocity_computed.is_connected(_on_velocity_computed):

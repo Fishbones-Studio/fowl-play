@@ -44,10 +44,9 @@ shape = SubResource("CapsuleShape3D_qatkl")
 behavior_tree = ExtResource("5_ttlev")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_5qjni")]
-visible = false
 
 [node name="RangedWeapon" type="Node3D" parent="EnemyWeaponController" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.962001, 3.65258, 0.850739)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 3.75, -0.3)
 script = ExtResource("7_6lo8p")
 ranged_weapon_scene = ExtResource("8_jsm6r")
 

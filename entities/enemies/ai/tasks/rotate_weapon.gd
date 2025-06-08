@@ -14,7 +14,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Rotate weapon towards ➜ %s" % [LimboUtility.decorate_var(target_var)]
+	return "Rotate Weapon ➜ %s" % [LimboUtility.decorate_var(target_var)]
 
 
 func _tick(delta: float) -> Status:
