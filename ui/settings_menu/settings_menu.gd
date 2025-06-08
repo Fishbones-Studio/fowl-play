@@ -53,7 +53,7 @@ func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	UIManager.remove_ui(self)
+	UIManager.handle_pause()
 	UIManager.get_viewport().set_input_as_handled()
 
 	SignalManager.focus_lost.emit()
