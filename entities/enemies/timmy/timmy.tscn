@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://co473aij70n7k"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_qrjwk"]
-[ext_resource type="Script" uid="uid://belerjqyntxlu" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
+[ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
 [ext_resource type="PackedScene" uid="uid://cc5c5n4tntrob" path="res://entities/enemies/timmy/art/timmy.glb" id="3_ivelv"]
 [ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/timmy/timmy_stats.tres" id="3_v7w0k"]
 [ext_resource type="Texture2D" uid="uid://d3ph6yhrnugg8" path="res://entities/enemies/timmy/art/goose_mugshot.png" id="5_pe8q7"]

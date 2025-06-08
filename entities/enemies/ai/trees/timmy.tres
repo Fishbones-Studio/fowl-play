@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_rm485"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="9_78ech"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
+[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5rfdf"]
 
