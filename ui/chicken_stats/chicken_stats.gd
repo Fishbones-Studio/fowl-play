@@ -7,7 +7,7 @@ func _input(_event: InputEvent) -> void:
 
 
 func _on_close_button_button_up() -> void:
-	UIManager.remove_ui(self)
+	UIManager.handle_pause()
 	UIManager.get_viewport().set_input_as_handled()
 
 	SignalManager.focus_lost.emit()
