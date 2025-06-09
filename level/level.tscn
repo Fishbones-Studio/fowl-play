@@ -42,7 +42,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="." groups=["gameplay_camera"]]
-transform = Transform3D(0.996195, -0.000152115, 0.0871556, 0, 0.999999, 0.00174533, -0.0871557, -0.00173869, 0.996193, 0, 4, 4)
 cull_mask = 1047553
 current = true
 
@@ -52,7 +51,6 @@ camera_reference = NodePath("../PlayerCamera")
 entity_to_follow = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_ivpvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
@@ -132,9 +130,6 @@ transform = Transform3D(0.370282, 0, -0.928919, 0, 1, 0, 0.928919, 0, 0.370282, 
 [node name="SpikeBall4" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
 transform = Transform3D(-0.9728, 0, -0.231646, 0, 1, 0, 0.231646, 0, -0.9728, -34, 7.38049, -36.5958)
 
-[node name="SpikeBall2" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
-transform = Transform3D(0.35871, 0, 0.933449, 0, 1, 0, -0.933449, 0, 0.35871, -12.6, 4, -6.3)
-
 [node name="SpikeBall3" parent="NavigationRegion3D/Arena" instance=ExtResource("5_m3nah")]
 transform = Transform3D(-0.77832, 0, 0.627868, 0, 1, 0, -0.627868, 0, -0.77832, -6.8, 4, 8.2)
 
@@ -145,7 +140,7 @@ spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
 
 [node name="Marker3D3" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2, 2.5, 0.85)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2224, 2.5, -11.1663)
 script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
@@ -162,20 +157,8 @@ script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
 
-[node name="Marker3D7" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3888, 2.54654, 5.10467)
-script = ExtResource("13_m3nah")
-spawn_chance = 100
-hazard_scene = ExtResource("5_l5lfc")
-
 [node name="Marker3D8" type="Marker3D" parent="NavigationRegion3D/Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9, 2.5, -3.35)
-script = ExtResource("13_m3nah")
-spawn_chance = 100
-hazard_scene = ExtResource("5_l5lfc")
-
-[node name="Marker3D10" type="Marker3D" parent="NavigationRegion3D/Arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9, 2.5, -16)
 script = ExtResource("13_m3nah")
 spawn_chance = 100
 hazard_scene = ExtResource("5_l5lfc")
