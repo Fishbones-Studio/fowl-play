@@ -1,13 +1,13 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("boreass") > 0:
-	Boreass: [[Oh! You’re back! Yay!|Back for more playtime?|My favorite friend returns!]]
-	Boreass: [[You still smell like chicken! Even better this time!|Ready to play again?|Did you bring more treats this time?]]
+	Boreass: [[Oh, you’re back! I was hoping you’d come back.|Back for more? I’ve been practicing!|My favorite snack returns!]]
+	Boreass: [[You still smell like chicken... even better than last time.|Ready to play again? I’ve been so lonely.|Did you bring more of that delicious scent with you?]]
 else:
-	Boreass: [[Hi there!|Hey, friend! Wag wag!|Oh boy, a new friend!]]
-	Boreass: [[You smell nice! Like... chicken! Yum!|Ready to play? I love playing!|Is that a treat you have? Is it?]]
+	Boreass: [[Oh! A new friend! Hi there!|Hey, you! You smell... familiar.|Oh boy, a new playmate!]]
+	Boreass: [[You smell... like chicken. Is that... you?|Ready to play? I’ve been waiting for so long.|Is that a treat you have? Or is it... you?]]
 - Attack => END
 - Talk => standard_dialogue
-	
+
 ~ standard_dialogue
 - Hey there, Boreass.
 	Boreass: [[Hehe, you know my name! Smart friend!|Yep, that’s me! Ready for fun?|*Wags tail furiously* You’re the best!]]
@@ -16,7 +16,7 @@ else:
 	Boreass: [[Ice? Yeah, I’m an ice fox! *Shakes* Brrr!|Hehe, that’s just me! Cold and fluffy!|Sometimes I lick myself and get stuck! *Giggles*]]
 	=> friendly_options
 - Stay away from me.
-	Boreass: [[Stay away...? But... I want to play!|Why? Don’t you like me? *Whines*|*Head tilts, eyes narrow* Stay... away...?]]
+	Boreass: [[Stay away...? But... I’m so hungry!|Why? Don’t you like me? *Whines*|*Head tilts, eyes narrow* Stay... away...?]]
 	=> rabid_trigger
 
 ~ friendly_options

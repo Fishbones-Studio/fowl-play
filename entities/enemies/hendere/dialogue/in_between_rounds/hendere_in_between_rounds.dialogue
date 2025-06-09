@@ -1,14 +1,14 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("hendere") > 0:
 	Hendere: [[Oh, it’s you again. Couldn’t stay away?|Back for more, are you?|You just keep coming back, don’t you?]]
-	Hendere: You fought so well last time... was it for me?
+	Hendere: [[You fought so well last time... was it for me?|Or was it just to survive another day?|This place changes you, doesn’t it?]]
 	- Attack => END
 	- Talk
-		Hendere: [[Hmph. Fine. If you insist on wasting my time with idle chatter.|Let's talk then, but don't think I care!|Fine, if you insist on wasting my time talking...]]
+		Hendere: [[Hmph. Fine. If you insist on wasting my time with idle chatter.|Let’s talk then, but don’t think I care!|Fine, if you insist on wasting my time talking...]]
 		=> standard_dialogue
 else:
 	Hendere: [[Hello there, my little feathered friend|Fancy seeing you here, dear|Well, look who it is—my favorite fighter]]
-	Hendere: You did so well in that last round... was it just for me?
+	Hendere: [[You did so well in that last round... was it just for me?|Or were you just trying to survive?|This place has a way of bringing out the best in us, doesn’t it?]]
 	- Attack => END
 	- Just for you, Hendere.
 		Hendere: [[I knew you’d say that|Of course you did. You always do|That’s what I like to hear]]
@@ -31,16 +31,15 @@ else:
 	Hendere: [[Don’t worry about the next round, just think of me|Promise you’ll keep me in mind while you fight|Let’s talk about us instead]]
 	=> continue_or_end
 - Let’s end this conversation. => END
-- Start over. => start
 
 ~ continue_or_end
 Hendere: [[So, what should we talk about now?|Anything else on your mind?|Is there something you want to tell me?]]
 - Tell me about yourself.
 	Hendere: [[About me? There’s not much, except that I love you|What do you want to know? As long as it’s about us|My life only got interesting when I met you]]
 	Hendere: [[I just want to be with you|I think about our future together|We’ll always have each other, right?]]
-	=> continue_or_end
+	=> END!
 - What do you think of the other fighters?
 	Hendere: [[Them? They’re nothing compared to you|They’re just in the way|I don’t like how they look at you]]
-	Hendere: [[Don’t worry, I’ll make sure they don’t bother you|They’ll learn to keep their distance|Just ignore them, alright?]]
-	=> continue_or_end
+	Hendere: [[Don’t worry, I’ll make sure they don’t bother you|They’ll learn to keep their distance]]
+	=> END!
 - Let’s end this conversation. => END

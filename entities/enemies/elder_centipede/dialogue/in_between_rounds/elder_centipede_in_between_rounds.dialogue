@@ -1,26 +1,26 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
-	Elder Centipede: [[Your scent is familiar. |You've fought I, the "Great" Elder Centipede before. |Do you want to get humiliated again?]]
-	Elder Centipede: I will.. ERASE your whole existence!
+	Elder Centipede: [[Your scent is familiar. |You’ve faced the “Great” Elder Centipede before. |Do you really want to be humiliated again?]]
+	Elder Centipede: [[I will... ERASE your existence. |Your bones will join the others beneath my legs. |This time, I’ll make sure you don’t crawl away.]]
 else:
-	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool who dares to challenges me. |Weakling.]]
-	Elder Centipede: [[Consider yourself "Lucky", as I, the "Great" Elder Centipede WILL NOT SHOW MERCY. |You won't make it out intact. Feel honored, weakling. |I WILL GRIND YOUR BONES TO DUST.]]
+	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool dares to challenge me. |Weakling.]]
+	Elder Centipede: [[Consider yourself “lucky,” as I, the “Great” Elder Centipede, WILL NOT SHOW MERCY. |You won’t leave this arena intact. Feel honored, weakling. |I WILL GRIND YOUR BONES TO DUST.]]
 - Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue
 - You think you can beat me?
-	Elder Centipede: [[You? Win? HAHAHA. You don't stand a chance against me.|Confident, aren't you? That's the first thing I will rip from you.|I will make a trophy out of you.]]
-	Elder Centipede: I have buried countless of fools like you in the past. Tremble in fear, your grave wait beneath my legs.
+	Elder Centipede: [[You? Win? HAHAHA. You don’t stand a chance against me. |Confident, aren’t you? That’s the first thing I’ll rip from you. |I’ll make a trophy out of your remains.]]
+	Elder Centipede: [[I’ve buried countless fools like you. Tremble in fear—your grave awaits beneath my legs. |Your arrogance will be your downfall. |You’re just another name on my list of victims.]]
 	=> explore_mutations
 - Why do you keep fighting?
-	Elder Centipede: [[I am the honored one.|Strength is everything. I am the strongest.|Fools keep approaching me.]]
-	Elder Centipede: [[The strongest creature is I. No one is stronger than me. NO ONE.|The weak will bow before my strength.|I simply make an example out of them.]]
+	Elder Centipede: [[I am the honored one. |Strength is everything. I am the strongest. |Fools keep approaching me, and I keep crushing them.]]
+	Elder Centipede: [[The strongest creature is I. No one is stronger than me. NO ONE. |The weak will bow before my strength. |I simply make an example out of them.]]
 	=> explore_mutations
 
 ~ explore_mutations
-Elder Centipede: In the past, I have massacred thousands of challengers, and each of them thought they had a chance against me.
-Elder Centipede: Every single one was torn apart by my strength. I still hear their screams lingering in my mind.
-Elder Centipede: No one escapes my wrath, and no one leaves unscattered.
-Elder Centipede: Got any last words before I completely annihilate you?
-- Fatass. => END
+Elder Centipede: [[In the past, I’ve massacred thousands of challengers, and each of them thought they had a chance against me. |Every fool who’s faced me has been torn apart by my strength. |I’ve left a trail of broken bodies in my wake.]]
+Elder Centipede: [[Every single one was torn apart by my strength. I still hear their screams lingering in my mind. |Their cries echo in this arena, a testament to my power. |The weak perish, and the strong—like me—prevail.]]
+Elder Centipede: [[No one escapes my wrath, and no one leaves unscattered. |You’ll join the others, broken and forgotten. |Your fate is sealed, weakling.]]
+Elder Centipede: [[Got any last words before I completely annihilate you? |Speak now, or forever hold your peace—because you won’t survive this. |Your final words will be your epitaph.]]
+- Fatass. => END!

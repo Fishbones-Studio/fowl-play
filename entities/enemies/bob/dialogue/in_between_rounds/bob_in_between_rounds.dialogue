@@ -1,51 +1,51 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("bob") > 0:
-	Bob: [[You. Back again?|Can’t stay away?|Always come back.]]
-	Bob: [[Still hurts. Never stops.|Twisted inside.|This is me now.]]
+	Bob: [[You. Back again?|Still crawling back for more?|Can’t stay away, can you?]]
+	Bob: [[Still hurts. Still angry.|Twisted inside. Want to break you.|This is me now. You’ll see.]]
 else:
-	Bob: [[You. Here.|Another one comes.|Look at you.]]
-	Bob: [[Always pain.|Everything wrong.|This is me now.]]
+	Bob: [[You. Here.|Another fool walks in.|Look at you. Weak.]]
+	Bob: [[Always pain. Always rage.|Everything wrong. Everything broken.|This is me now. You’ll regret it.]]
 - Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue
 - What happened to you?
-	Bob: [[What... happened?|They did this.|Ones above.]]
-	Bob: [[Changed me.|Made me this.|Spikes hurt.]]
+	Bob: [[What... happened?|They did this. They ruined me.|You think I wanted this?]]
+	Bob: [[Changed me. Broke me.|Made me this. Made me a monster.|Spikes hurt. You’ll feel them too.]]
 	=> explore_mutations
 - You look different.
-	Bob: [[Different?|Not same.|Not what I was.]]
-	Bob: [[See too much.|Spikes everywhere.|Never stops.]]
+	Bob: [[Different?|Not same. Not what I was.|You think I don’t know that?]]
+	Bob: [[See too much. Feel too much.|Spikes everywhere. Pain everywhere.|You’ll feel it soon enough.]]
 	=> explore_mutations
 - Are you in pain?
-	Bob: [[Pain?|Always.|Every second.]]
-	Bob: [[Skin tears.|Bones move.|Want it to stop.]]
+	Bob: [[Pain?|Always. Every second.|You think I’d let you escape it?]]
+	Bob: [[Skin tears. Bones move.|Want it to stop. Want you to stop.|You’ll feel it before I do.]]
 	=> explore_mutations
 
 ~ explore_mutations
-Bob: [[Look. Me.|See what they did.|Is this power?]]
-Bob: [[Too many eyes.|Spikes for them.|Want to rest.]]
+Bob: [[Look. Me.|See what they did.|You think this is power?]]
+Bob: [[Too many eyes. Too many spikes.|Made for them. Made to hurt.|You’ll know what it’s like.]]
 - Who did this to you?
-	Bob: [[Them.|Ones watching.|Up there.]]
-	Bob: [[Wanted monsters.|Made me one.|Hate them.]]
+	Bob: [[Them.|Ones watching. Ones above.|You think they care about you?]]
+	Bob: [[Wanted monsters. Made me one.|Hate them. Hate you.|You’re just another pawn.]]
 	=> continue_or_end
 - Does it hurt all the time?
-	Bob: [[All the time.|Fire under skin.|Torn apart.]]
-	Bob: [[Fighting helps.|Distracts me.|All I have.]]
+	Bob: [[All the time.|Fire under skin. Rage in my bones.|You’ll feel it soon enough.]]
+	Bob: [[Fighting helps. Hurting you helps.|Distracts me. Destroys you.|You’re just a distraction.]]
 	=> continue_or_end
 - Why are you fighting?
-	Bob: [[Why fight?|Nothing else.|They want it.]]
-	Bob: [[Maybe pain stops.|Or someone else feels it.|You will feel it.]]
+	Bob: [[Why fight?|Nothing else. Nothing left.|You think I have a choice?]]
+	Bob: [[Maybe pain stops. Maybe you feel it.|Or maybe I just enjoy it.|You’ll find out soon enough.]]
 	=> continue_or_end
 
 ~ continue_or_end
-Bob: [[No more talk.|Enough.|Your turn.]]
+Bob: [[No more talk.|Enough. Your turn.|Time to end this.]]
 - I'll end your suffering.
-	Bob: [[End? You?|Not strong enough.]]
-	Bob: [[Try. You break first.|I break you.]]
+	Bob: [[End? You?|Not strong enough. Never will be.|You’ll break before I do.]]
+	Bob: [[Try. You’ll fail.|I’ll break you. Like they broke me.|You’re nothing to me.]]
 	=> END
 - You're just a monster.
-	Bob: [[Monster?|Yes. They made me.]]
-	Bob: [[Stronger now.|Stronger than you.|We see.]]
+	Bob: [[Monster?|Yes. They made me.|And I’ll make you one too.]]
+	Bob: [[Stronger now. Stronger than you.|You’ll see. You’ll feel it.|You’re just prey.]]
 	=> END
 - Attack => END
