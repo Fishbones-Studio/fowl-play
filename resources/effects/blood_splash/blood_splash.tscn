@@ -14,11 +14,10 @@ noise = SubResource("FastNoiseLite_1oh5o")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q3yji"]
 render_priority = 0
 shader = ExtResource("2_q3yji")
-shader_parameter/main_color = Color(0.7, 0.02, 0.01, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_nj7ij")
 shader_parameter/distortion_strength = 0.1
 shader_parameter/noise_power = 5.0
-shader_parameter/base_alpha = 0.9
+shader_parameter/base_alpha = 0.8
 shader_parameter/angle_influence = 0.5
 
 [sub_resource type="Curve" id="Curve_bki1m"]
@@ -52,7 +51,6 @@ noise = SubResource("FastNoiseLite_q3yji")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_424jk"]
 render_priority = 0
 shader = ExtResource("3_n76hd")
-shader_parameter/main_color = Color(0.7, 0.02, 0.01, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_n76hd")
 shader_parameter/splatter_scale = 2.0
 shader_parameter/distortion_amount = 0.1
@@ -102,7 +100,7 @@ process_material = SubResource("ParticleProcessMaterial_a2m3c")
 draw_pass_1 = SubResource("QuadMesh_vv82n")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.17474, 0)
-size = Vector3(50, 1, 50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1683, 0)
+size = Vector3(20, 2, 20)
 
 [connection signal="finished" from="Splatter" to="." method="_on_splatter_finished"]
