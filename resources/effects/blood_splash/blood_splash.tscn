@@ -99,8 +99,4 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_a2m3c")
 draw_pass_1 = SubResource("QuadMesh_vv82n")
 
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1683, 0)
-size = Vector3(20, 2, 20)
-
 [connection signal="finished" from="Splatter" to="." method="_on_splatter_finished"]
