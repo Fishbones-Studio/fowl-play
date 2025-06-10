@@ -42,7 +42,7 @@ chicken = NodePath("ChickenContainer/SubViewportContainer/SubViewport/chicken_de
 camera = NodePath("ChickenContainer/SubViewportContainer/SubViewport/Camera3D")
 game_logo_container = NodePath("GameLogoContainer")
 handle_focus = true
-focus_node = NodePath("HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton")
+focus_node = NodePath("HBoxContainer/VBoxContainer/ButtonContainer/ResumeButton")
 
 [node name="BlurRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_jbgdu")
@@ -107,12 +107,13 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="PauseButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="ResumeButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="ResumeButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -121,7 +122,7 @@ text = "Resume"
 alignment = 0
 script = ExtResource("4_c3jo5")
 
-[node name="OverviewButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="OverviewButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -129,7 +130,7 @@ keep_pressed_outside = true
 text = "Overview"
 alignment = 0
 
-[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -137,7 +138,7 @@ keep_pressed_outside = true
 text = "Settings"
 alignment = 0
 
-[node name="PoultryMenuButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="PoultryMenuButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -145,7 +146,7 @@ keep_pressed_outside = true
 text = "Poultry Man Menu"
 alignment = 0
 
-[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -153,7 +154,7 @@ keep_pressed_outside = true
 text = "Main Menu"
 alignment = 0
 
-[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/PauseButtonContainer"]
+[node name="ForfeitButton" type="Button" parent="HBoxContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PauseMenuButton"
@@ -176,12 +177,13 @@ size_flags_vertical = 3
 
 [node name="GameLogoContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 0
 offset_top = 20.0
 offset_right = 256.0
 offset_bottom = 276.0
 rotation = -0.0785398
+pivot_offset = Vector2(128, 128)
 theme_type_variation = &"PauseMenuLogoContainer"
 
 [node name="TextureRect" type="TextureRect" parent="GameLogoContainer"]
@@ -191,9 +193,9 @@ expand_mode = 3
 stretch_mode = 5
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/OverviewButton" to="." method="_on_overview_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/PoultryMenuButton" to="." method="_on_poultry_menu_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/PauseButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/OverviewButton" to="." method="_on_overview_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/PoultryMenuButton" to="." method="_on_poultry_menu_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonContainer/ForfeitButton" to="." method="_on_forfeit_button_pressed"]
