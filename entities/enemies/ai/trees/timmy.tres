@@ -30,7 +30,7 @@ use_percentage = true
 script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
-distance_max = 5.0
+distance_max = 10.0
 
 [sub_resource type="BTParallel" id="BTParallel_yj2r8"]
 num_successes_required = 2
@@ -48,14 +48,14 @@ blend = 0.2
 speed = 3.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_sha4y"]
-min_duration = 1.9
-max_duration = 2.8
+min_duration = 1.1
+max_duration = 1.9
 
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
 target_var = &"target"
-flank_distance = 8.0
-vertical_offset = 2.0
+flank_distance = 5.0
+vertical_offset = 0.0
 clearance_radius = 5.0
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
@@ -72,7 +72,7 @@ speed = 2.5
 script = ExtResource("5_sk4mh")
 target_var = &"target"
 retreat_distance = 50.0
-speed_factor = 5.0
+speed_factor = 3.0
 rotation_speed = 20.0
 duration = 3.0
 pathfinding = false
@@ -215,7 +215,7 @@ face_away = false
 script = ExtResource("7_rm485")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 3.0
+speed_factor = 0.0
 duration = 0.0
 ignore_y = true
 pathfinding = false
