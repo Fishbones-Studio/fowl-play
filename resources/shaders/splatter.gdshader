@@ -1,11 +1,11 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-uniform vec4 main_color : source_color = vec4(0.7, 0.02, 0.01, 1.0);
+instance uniform vec4 main_color : source_color = vec4(0.7, 0.02, 0.01, 1.0);
 uniform sampler2D noise_texture;
 uniform float splatter_scale = 1.0;
 uniform float distortion_amount : hint_range(0.0, 1.0, 0.01) = 0.1;
-uniform float edge_variation : hint_range(0.0, 1.0, 0.01) = 0.2;
+uniform float edge_variation : hint_range(0.0, 1.0, 0.01) = 1.0;
 uniform float noise_contrast : hint_range(1.0, 10.0, 0.1) = 1.0;
 
 void vertex() {

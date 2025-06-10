@@ -6,8 +6,8 @@ extends Node3D
 
 
 func set_color(color: Color) -> void:
-	splash.set_instance_shader_parameter("ColorParameter", color)
-	splatter.set_instance_shader_parameter("ColorParameter", color)
+	splash.set_instance_shader_parameter("main_color", color)
+	splatter.set_instance_shader_parameter("main_color", color)
 
 
 func _on_splatter_finished() -> void:
