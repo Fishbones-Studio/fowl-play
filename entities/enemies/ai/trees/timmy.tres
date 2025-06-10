@@ -1,11 +1,13 @@
-[gd_resource type="BehaviorTree" load_steps=37 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
+[ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="5_sk4mh"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
 [ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="7_sp7rb"]
+[ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="8_sp7rb"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="9_78ech"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
 
@@ -14,6 +16,45 @@
 [sub_resource type="BTAction" id="BTAction_k2yrv"]
 script = ExtResource("1_sk4mh")
 target_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_sp7rb"]
+script = ExtResource("2_sgv08")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_sgv08"]
+script = ExtResource("8_sp7rb")
+target_var = &"target"
+flank_distance = 8.0
+vertical_offset = 5.0
+clearance_radius = 1.0
+
+[sub_resource type="BBNode" id="BBNode_wrv8r"]
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8qtte"]
+animation_player = SubResource("BBNode_wrv8r")
+animation_name = &"Walking"
+blend = 0.2
+speed = 2.5
+
+[sub_resource type="BTAction" id="BTAction_sp7rb"]
+script = ExtResource("5_sk4mh")
+target_var = &"target"
+retreat_distance = 40.0
+speed_factor = 5.0
+rotation_speed = 20.0
+duration = 5.0
+pathfinding = false
+immediate_response = false
+path_update_interval = 0.05
+face_moving_direction = false
+
+[sub_resource type="BTSequence" id="BTSequence_ct4d5"]
+custom_name = "Blink"
+children = [SubResource("BTCondition_sp7rb"), SubResource("BTAction_sgv08"), SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb")]
 
 [sub_resource type="BTCondition" id="BTCondition_w7w8f"]
 script = ExtResource("6_sha4y")
@@ -37,21 +78,12 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("5_ct4d5")
-min_wait_time = 0.5
-max_wait_time = 1.0
+min_wait_time = 1.0
+max_wait_time = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_4rvb4"]
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1l3l"), SubResource("BTAction_pd8xg")]
-
-[sub_resource type="BBNode" id="BBNode_wrv8r"]
-saved_value = NodePath("Model/timmy/AnimationPlayer")
-resource_name = "Model/timmy/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8qtte"]
-animation_player = SubResource("BBNode_wrv8r")
-animation_name = &"Walking"
-blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_c7qb4"]
 script = ExtResource("3_lk6lr")
@@ -70,9 +102,9 @@ distance_max = 45.0
 [sub_resource type="BTAction" id="BTAction_sk4mh"]
 script = ExtResource("7_sp7rb")
 target_var = &"target"
-weapon_offset = Vector3(1.175, -3, 0)
-max_down_angle = -45.0
-max_up_angle = 45.0
+weapon_offset = Vector3(1.175, -1.5, 0)
+max_down_angle = -60.0
+max_up_angle = 60.0
 
 [sub_resource type="BTParallel" id="BTParallel_sp7rb"]
 num_successes_required = 2
@@ -99,7 +131,7 @@ repeat = true
 children = [SubResource("BTAction_c7qb4"), SubResource("BTSequence_yj2r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_lk6lr"]
-children = [SubResource("BTSequence_4rvb4"), SubResource("BTPlayAnimation_8qtte"), SubResource("BTParallel_sgv08")]
+children = [SubResource("BTSequence_4rvb4"), SubResource("BTParallel_sgv08")]
 
 [sub_resource type="BTParallel" id="BTParallel_cmfip"]
 children = [SubResource("BTAlwaysFail_sk4mh"), SubResource("BTSequence_lk6lr")]
@@ -121,11 +153,13 @@ children = [SubResource("BTCondition_smr14")]
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_secwn"]
 children = [SubResource("BTRepeatUntilFailure_p7jkp")]
 
+[sub_resource type="BTParallel" id="BTParallel_sk4mh"]
+children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
+
 [sub_resource type="BTParallel" id="BTParallel_8uudm"]
-num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
+children = [SubResource("BTSequence_ct4d5"), SubResource("BTParallel_sk4mh")]
 
 [sub_resource type="BTSequence" id="BTSequence_5rfdf"]
 children = [SubResource("BTAction_k2yrv"), SubResource("BTParallel_8uudm")]

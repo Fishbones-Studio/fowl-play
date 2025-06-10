@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://co473aij70n7k"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_qrjwk"]
-[ext_resource type="Script" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
+[ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
 [ext_resource type="PackedScene" uid="uid://cc5c5n4tntrob" path="res://entities/enemies/timmy/art/timmy.glb" id="3_ivelv"]
 [ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/timmy/timmy_stats.tres" id="3_v7w0k"]
 [ext_resource type="Texture2D" uid="uid://d3ph6yhrnugg8" path="res://entities/enemies/timmy/art/goose_mugshot.png" id="5_pe8q7"]
@@ -16,12 +16,14 @@ height = 6.0
 
 [node name="Timmy" instance=ExtResource("1_qrjwk")]
 script = ExtResource("2_v7jq4")
+hover_height = 5.0
+hover_speed = 3.1
 stats = ExtResource("3_v7w0k")
 dialogue_path = "res://entities/enemies/timmy/dialogue"
 name_label_template_string = "%s the Goose"
 
 [node name="timmy" parent="Model" index="0" instance=ExtResource("3_ivelv")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Model/timmy/Armature" index="0"]
 bones/1/rotation = Quaternion(-0.0432664, 0.892909, 0.446979, 0.0324253)
@@ -37,7 +39,7 @@ bones/20/rotation = Quaternion(-0.0816602, -0.0283359, -0.142032, 0.986081)
 bones/21/rotation = Quaternion(-0.0432494, 0.285518, 0.95731, 0.0128991)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_qatkl")
 
 [node name="BTPlayer" parent="." index="5"]
@@ -46,7 +48,7 @@ behavior_tree = ExtResource("5_ttlev")
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_5qjni")]
 
 [node name="RangedWeapon" type="Node3D" parent="EnemyWeaponController" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 3, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 1.5, -0.3)
 script = ExtResource("7_6lo8p")
 ranged_weapon_scene = ExtResource("8_jsm6r")
 

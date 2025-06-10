@@ -1,9 +1,21 @@
 extends Enemy
 
+const RAY_LENGTH: float = 100.0
 
-func _physics_process(delta: float) -> void:
-	if is_immobile:
-		velocity += _knockback
-		_knockback = _knockback.move_toward(Vector3.ZERO, knockback_decay * delta)
+@export_group("Hover Settings")
+@export var hover_height: float = 5.0
+@export var hover_speed: float = 3.1
 
-	move_and_slide()
+
+func apply_gravity(delta: float) -> void:
+	var origin: Vector3 = global_transform.origin
+	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
+
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, target)
+	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+	var result: Dictionary = space_state.intersect_ray(query)
+
+	if result:
+		var desired_y: float = result.position.y + hover_height
+		origin.y = lerp(origin.y, desired_y, hover_speed * delta)
+		global_transform.origin = origin
