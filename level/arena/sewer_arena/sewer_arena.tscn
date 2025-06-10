@@ -301,6 +301,12 @@ spot_range = 60.0
 spot_angle = 60.0
 spot_angle_attenuation = 0.5
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.7974, 45, 0)
+light_color = Color(0.392865, 0.728326, 0.642168, 1)
+light_energy = 50.0
+omni_range = 25.0
+
 [node name="sewer_arena" parent="." instance=ExtResource("1_b4aaq")]
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="sewer_arena/Cube_118" index="0"]
