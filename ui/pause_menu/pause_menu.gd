@@ -10,11 +10,16 @@ extends UserInterface
 @onready var quit_button: Button = %QuitButton
 @onready var forfeit_button: Button = %ForfeitButton
 @onready var poultry_menu_button : Button = %PoultryMenuButton
+@onready var button_container: VBoxContainer = %ButtonContainer
 
 
 func setup(_params: Dictionary = {}) -> void:
 	_squish_chicken()
 	_setup_enter_and_exit_transitions()
+
+
+func _ready() -> void:
+	_set_pivot()
 
 
 func _on_resume_button_pressed() -> void:
@@ -80,13 +85,13 @@ func _return_to_game_menu() -> void:
 
 func _return_to_main_menu() -> void:
 	SignalManager.remove_all_game_scenes.emit()
-	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU, {"skip_preload" : true})
+	SignalManager.switch_ui_scene.emit(UIEnums.UI.MAIN_MENU, {"skip_preload": true})
 	UIManager.remove_ui(self)
 	UIManager.paused = false
 
 
 func _on_visibility_changed() -> void:
-	if visible: 
+	if visible:
 		UIManager.paused = true
 		_squish_chicken()
 
@@ -114,13 +119,13 @@ func _setup_enter_and_exit_transitions() -> void:
 		var hover_stylebox: StyleBox = preload("uid://do8svyygf5k1e")
 
 		button.focus_entered.connect(func():
-			TweenManager.create_scale_tween(null, button, Vector2(1.1, 1.1)))
+			TweenManager.create_scale_tween(null, button, Vector2(1.2, 1.2)))
 		button.focus_exited.connect(func():
 			TweenManager.create_scale_tween(null, button, Vector2(1.0, 1.0)))
 
 		button.mouse_entered.connect(func():
 			button.grab_focus()
-			TweenManager.create_scale_tween(null, button, Vector2(1.1, 1.1)))
+			TweenManager.create_scale_tween(null, button, Vector2(1.2, 1.2)))
 		button.mouse_exited.connect(func():
 			if not button.has_focus():
 				TweenManager.create_scale_tween(null, button, Vector2(1.0, 1.0)))
@@ -131,7 +136,7 @@ func _setup_enter_and_exit_transitions() -> void:
 			button.add_theme_stylebox_override('focus', hover_stylebox))
 
 	game_logo_container.mouse_entered.connect(func():
-		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.1, 1.1)))
+		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.2, 1.2)))
 	game_logo_container.mouse_exited.connect(func(): 
 		TweenManager.create_scale_tween(null, game_logo_container, Vector2(1.0, 1.0)))
 
@@ -139,3 +144,8 @@ func _setup_enter_and_exit_transitions() -> void:
 func _on_focus_lost() -> void:
 	_squish_chicken()
 	super()
+
+
+func _set_pivot() -> void:
+	for child in button_container.get_children():
+		child.pivot_offset = child.size / 2
