@@ -1,11 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=36 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=37 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
-[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_rm485"]
+[ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="7_sp7rb"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="9_78ech"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="10_n1u5v"]
 
@@ -56,41 +56,47 @@ blend = 0.2
 [sub_resource type="BTAction" id="BTAction_c7qb4"]
 script = ExtResource("3_lk6lr")
 target_var = &"target"
-rotation_speed = 20.0
+rotation_speed = 25.0
 angle_threshold = 2.0
 duration = 0.0
 face_away = false
-
-[sub_resource type="BTAction" id="BTAction_53a43"]
-script = ExtResource("7_rm485")
-target_var = &"target"
-tolerance = 2.0
-speed_factor = 0.0
-duration = 10.0
-ignore_y = false
-pathfinding = false
-immediate_response = false
-path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_sgv08"]
 script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
-distance_max = 5.0
+distance_max = 45.0
+
+[sub_resource type="BTAction" id="BTAction_sk4mh"]
+script = ExtResource("7_sp7rb")
+target_var = &"target"
+weapon_offset = Vector3(1.175, -3, 0)
+max_down_angle = -45.0
+max_up_angle = 45.0
+
+[sub_resource type="BTParallel" id="BTParallel_sp7rb"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTCondition_sgv08"), SubResource("BTAction_sk4mh")]
 
 [sub_resource type="BTAction" id="BTAction_lk6lr"]
 script = ExtResource("9_78ech")
 ignore_cooldown = true
 start_state = 1
 
+[sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
+duration = 5.0
+children = [SubResource("BTAction_lk6lr")]
+
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]
-children = [SubResource("BTCondition_sgv08"), SubResource("BTAction_lk6lr")]
+custom_name = "Fire the Minigun!"
+children = [SubResource("BTParallel_sp7rb"), SubResource("BTCooldown_sp7rb")]
 
 [sub_resource type="BTParallel" id="BTParallel_sgv08"]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTAction_c7qb4"), SubResource("BTAction_53a43"), SubResource("BTSequence_yj2r8")]
+children = [SubResource("BTAction_c7qb4"), SubResource("BTSequence_yj2r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_lk6lr"]
 children = [SubResource("BTSequence_4rvb4"), SubResource("BTPlayAnimation_8qtte"), SubResource("BTParallel_sgv08")]
@@ -115,14 +121,11 @@ children = [SubResource("BTCondition_smr14")]
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_secwn"]
 children = [SubResource("BTRepeatUntilFailure_p7jkp")]
 
-[sub_resource type="BTParallel" id="BTParallel_7st8f"]
-children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
-
 [sub_resource type="BTParallel" id="BTParallel_8uudm"]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTParallel_7st8f")]
+children = [SubResource("BTProbabilitySelector_q1l3l"), SubResource("BTAlwaysFail_secwn")]
 
 [sub_resource type="BTSequence" id="BTSequence_5rfdf"]
 children = [SubResource("BTAction_k2yrv"), SubResource("BTParallel_8uudm")]

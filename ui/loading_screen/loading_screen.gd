@@ -15,7 +15,7 @@ const CHICKEN_FACTS: Array[String] = [
 	"What came first, the chicken or the egg?",
 ]
 
-@export var path_to_background_art: String = "res://ui/load_screen/art/"
+@export_dir var path_to_background_art: String = "res://ui/load_screen/art/"
 
 var target_progress: float = 0.0
 var current_progress: float = 0.0
