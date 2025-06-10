@@ -48,8 +48,8 @@ blend = 0.2
 speed = 3.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_sha4y"]
-min_duration = 2.4
-max_duration = 3.7
+min_duration = 1.9
+max_duration = 2.8
 
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
