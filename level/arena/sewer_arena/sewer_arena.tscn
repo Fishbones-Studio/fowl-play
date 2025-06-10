@@ -266,7 +266,7 @@ light_energy = 50.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true
-spot_range = 60.0
+spot_range = 80.0
 spot_angle = 60.0
 spot_angle_attenuation = 0.5
 
