@@ -235,6 +235,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5l6g1")
 
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("18_y2fk0")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
 volume_db = 20.0
 unit_size = 50.0
