@@ -112,12 +112,14 @@ theme_override_constants/separation = 15
 
 [node name="LoadingLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Loading"
 horizontal_alignment = 1
 
 [node name="LoadingProgress" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(980, 0)
 layout_mode = 2
 size_flags_horizontal = 4
