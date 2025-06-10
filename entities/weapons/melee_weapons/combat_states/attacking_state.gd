@@ -41,6 +41,8 @@ func _attack() -> void:
 		var targets: Array[Node] = weapon_node.hit_targets_this_swing
 
 		for target in targets:
+			if not is_instance_valid(target):
+				continue
 			if target is Enemy or target is ChickenPlayer:
 				SignalManager.weapon_hit_target.emit(
 					target,
