@@ -99,8 +99,8 @@ light_energy = 50.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true
-spot_range = 85.0
-spot_angle = 35.26
+spot_range = 90.0
+spot_angle = 90.0
 
 [node name="sewer_arena" parent="." instance=ExtResource("1_b4aaq")]
 
@@ -171,7 +171,7 @@ shape = SubResource("CapsuleShape3D_2wgd1")
 shape = SubResource("ConvexPolygonShape3D_b4aaq")
 
 [node name="Cylinder_061" parent="sewer_arena" index="19"]
-transform = Transform3D(4.80129, -4.32215e-07, -2.91303, -8.47974e-07, -1.44984, 1.82989e-06, -2.91303, -2.90336e-07, -4.80129, -22.176, 119.844, -0.700502)
+transform = Transform3D(-5.16875, 1.67633e-08, -2.19594, -8.47974e-07, -1.44984, 1.82989e-06, -2.19594, 5.20407e-07, 5.16875, -22.176, 119.844, -0.700502)
 
 [node name="AnimationPlayer" parent="sewer_arena" index="32"]
 autoplay = "Spin"
