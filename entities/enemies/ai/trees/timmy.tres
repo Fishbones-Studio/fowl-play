@@ -216,7 +216,6 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_yj2r8"]
 script = ExtResource("11_lk6lr")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
 
