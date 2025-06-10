@@ -3,8 +3,8 @@ extends Enemy
 const RAY_LENGTH: float = 100.0
 
 @export_group("Hover Settings")
-@export var hover_height: float = 5.0
-@export var hover_speed: float = 3.1
+@export var hover_height: float = 3.5
+@export var hover_speed: float = 2.1
 
 
 func apply_gravity(delta: float) -> void:

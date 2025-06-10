@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://co473aij70n7k"]
+[gd_scene load_steps=13 format=3 uid="uid://co473aij70n7k"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_qrjwk"]
 [ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_5qjni"]
 [ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="7_6lo8p"]
 [ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="8_jsm6r"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="9_5qjni"]
+[ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="10_6lo8p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qatkl"]
 radius = 1.375
@@ -16,8 +18,8 @@ height = 6.0
 
 [node name="Timmy" instance=ExtResource("1_qrjwk")]
 script = ExtResource("2_v7jq4")
-hover_height = 5.0
-hover_speed = 3.1
+hover_height = 3.5
+hover_speed = 2.1
 stats = ExtResource("3_v7w0k")
 dialogue_path = "res://entities/enemies/timmy/dialogue"
 name_label_template_string = "%s the Goose"
@@ -51,6 +53,12 @@ behavior_tree = ExtResource("5_ttlev")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 1.5, -0.3)
 script = ExtResource("7_6lo8p")
 ranged_weapon_scene = ExtResource("8_jsm6r")
+
+[node name="EnemyAbilityController" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1, 0)
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("9_5qjni")]
+ability_resource = ExtResource("10_6lo8p")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("5_pe8q7")
