@@ -99,8 +99,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("5_ct4d5")
-min_wait_time = 1.0
-max_wait_time = 1.5
+min_wait_time = 1.5
+max_wait_time = 2.2
 
 [sub_resource type="BTSequence" id="BTSequence_4rvb4"]
 custom_name = "Pause before action"
@@ -201,7 +201,7 @@ face_away = false
 script = ExtResource("7_rm485")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 3.0
+speed_factor = 5.0
 duration = 0.0
 ignore_y = true
 pathfinding = false
