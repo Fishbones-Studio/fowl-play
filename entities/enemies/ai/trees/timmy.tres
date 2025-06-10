@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=67 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
@@ -37,6 +37,20 @@ num_successes_required = 2
 repeat = true
 children = [SubResource("BTCondition_yj2r8"), SubResource("BTCondition_sp7rb")]
 
+[sub_resource type="BBNode" id="BBNode_yj2r8"]
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ct4d5"]
+animation_player = SubResource("BBNode_yj2r8")
+animation_name = &"Idle"
+blend = 0.2
+speed = 3.0
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_sha4y"]
+min_duration = 2.4
+max_duration = 3.7
+
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
 target_var = &"target"
@@ -70,7 +84,7 @@ face_moving_direction = false
 children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb")]
 
 [sub_resource type="BTSequence" id="BTSequence_rm485"]
-children = [SubResource("BTParallel_yj2r8"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
+children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTRandomWait_sha4y"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
 
 [sub_resource type="BTSequence" id="BTSequence_ct4d5"]
 custom_name = "Blink"
@@ -99,8 +113,8 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_pd8xg"]
 script = ExtResource("5_ct4d5")
-min_wait_time = 1.5
-max_wait_time = 2.2
+min_wait_time = 0.8
+max_wait_time = 1.3
 
 [sub_resource type="BTSequence" id="BTSequence_4rvb4"]
 custom_name = "Pause before action"
@@ -124,8 +138,8 @@ distance_max = 45.0
 script = ExtResource("7_sp7rb")
 target_var = &"target"
 weapon_offset = Vector3(1.175, -2, 0)
-max_down_angle = -60.0
-max_up_angle = 60.0
+max_down_angle = -45.0
+max_up_angle = 45.0
 
 [sub_resource type="BTParallel" id="BTParallel_sp7rb"]
 num_successes_required = 2
