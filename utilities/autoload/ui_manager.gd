@@ -405,7 +405,6 @@ func _update_game_mouse_mode() -> void:
 	if !current_ui: 
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		return
-	print(current_ui)
 	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
 	if ui_enum == null:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
