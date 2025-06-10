@@ -55,7 +55,7 @@ max_duration = 2.8
 script = ExtResource("8_sp7rb")
 target_var = &"target"
 flank_distance = 8.0
-vertical_offset = 5.0
+vertical_offset = 2.0
 clearance_radius = 5.0
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
@@ -71,10 +71,10 @@ speed = 2.5
 [sub_resource type="BTAction" id="BTAction_sp7rb"]
 script = ExtResource("5_sk4mh")
 target_var = &"target"
-retreat_distance = 40.0
+retreat_distance = 50.0
 speed_factor = 5.0
 rotation_speed = 20.0
-duration = 5.0
+duration = 3.0
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
@@ -152,7 +152,7 @@ ignore_cooldown = true
 start_state = 1
 
 [sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
-duration = 5.0
+duration = 8.0
 children = [SubResource("BTAction_lk6lr")]
 
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]
@@ -215,7 +215,7 @@ face_away = false
 script = ExtResource("7_rm485")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 5.0
+speed_factor = 3.0
 duration = 0.0
 ignore_y = true
 pathfinding = false
