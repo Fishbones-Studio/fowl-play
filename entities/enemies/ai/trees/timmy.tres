@@ -56,7 +56,7 @@ script = ExtResource("8_sp7rb")
 target_var = &"target"
 flank_distance = 8.0
 vertical_offset = 5.0
-clearance_radius = 1.0
+clearance_radius = 5.0
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
@@ -132,7 +132,7 @@ face_away = false
 script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
-distance_max = 45.0
+distance_max = 55.0
 
 [sub_resource type="BTAction" id="BTAction_sk4mh"]
 script = ExtResource("7_sp7rb")
