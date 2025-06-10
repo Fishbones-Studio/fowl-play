@@ -1,9 +1,12 @@
-[gd_scene load_steps=83 format=3 uid="uid://dn4y6rw2w6ydt"]
+[gd_scene load_steps=86 format=3 uid="uid://dn4y6rw2w6ydt"]
 
 [ext_resource type="PackedScene" uid="uid://bwi0t0rjkr75f" path="res://level/arena/sewer_arena/art/sewer_arena.glb" id="1_b4aaq"]
 [ext_resource type="Script" uid="uid://snfhcmfpjpc5" path="res://level/arena/sewer_arena/sewer_arena.gd" id="1_wdiye"]
 [ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="3_b4aaq"]
+[ext_resource type="Texture2D" uid="uid://c8654s5idl77v" path="res://ui/loading_screen/art/chicken_headshot_half.png" id="3_utbri"]
+[ext_resource type="Texture2D" uid="uid://dywqlrmxh3im0" path="res://resources/splashscreen/fishbones-splashscreen-black.png" id="4_pktll"]
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="5_byl6v"]
+[ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="5_xuthj"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b4aaq"]
 seamless = true
@@ -267,8 +270,68 @@ light_energy = 50.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true
+shadow_normal_bias = 4.0
 spot_range = 80.0
 spot_angle = 60.0
+spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -25, 82.0613, 0)
+layers = 3
+light_color = Color(0.85571, 0.998457, 0.851402, 1)
+light_energy = 25.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 200.0
+spot_angle = 60.0
+spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.438371, 0, 0.898794, 0, 1, 0, -0.898794, 0, -0.438371, -45.5014, 19.3096, 22.8764)
+layers = 3
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("3_utbri")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 25.0
+spot_angle = 37.66
+spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.448, 18.3751, -0.226226)
+layers = 3
+light_color = Color(0.33, 0.33, 0.33, 1)
+light_energy = 100.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("4_pktll")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 25.0
+spot_angle = 30.16
+spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(0.747798, 0, 0.663926, 0, 1, 0, -0.663926, 0, 0.747798, -43.7875, 18.713, -22.2085)
+layers = 3
+light_color = Color(1, 1, 0, 1)
+light_energy = 25.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("5_xuthj")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 25.0
+spot_angle = 37.66
 spot_angle_attenuation = 0.5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
