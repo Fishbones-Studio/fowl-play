@@ -1,7 +1,7 @@
 ## Plays a random song from a specified folder at random intervals.
 extends AudioStreamPlayer
 
-@export var music_folder: String = "res://ui/game_menu/art/random_music/" ## Folder containing music files
+@export_dir var music_folder: String = "res://ui/game_menu/art/random_music/" ## Folder containing music files
 @export var file_extensions: Array[String] = ["ogg", "wav", "mp3"] ## Supported audio formats
 @export var min_interval: float = 30.0  ## Minimum time between songs in seconds
 @export var max_interval: float = 60.0 ## Maximum time between songs in seconds

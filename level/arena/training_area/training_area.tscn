@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c3ftt1f5ca2ju"]
+[gd_scene load_steps=23 format=3 uid="uid://c3ftt1f5ca2ju"]
 
 [ext_resource type="Script" uid="uid://cdrbp7ph57lwh" path="res://level/arena/training_area/training_area.gd" id="1_gmul1"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="1_podw5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b8jjidh4p4bg1" path="res://level/arena/training_area/movement_holder.gd" id="15_kbfm1"]
 [ext_resource type="Script" uid="uid://575pjgnos8wx" path="res://level/arena/props/interactable/movement_teleport_box.gd" id="16_580ga"]
 [ext_resource type="Shader" uid="uid://cbg4jd8y4jfsy" path="res://level/arena/training_area/shaders/glass.gdshader" id="16_y2fk0"]
+[ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="18_y2fk0"]
 
 [sub_resource type="Curve3D" id="Curve3D_ldbqm"]
 closed = true
@@ -232,6 +233,13 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovementHolder/PlayerDetector"]
 shape = SubResource("BoxShape3D_5l6g1")
+
+[node name="RandomMusicPlayer" parent="." instance=ExtResource("18_y2fk0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0)
+volume_db = 20.0
+unit_size = 50.0
+audio_folder = "res://level/arena/training_area/art/music"
+avoid_repeats = false
 
 [connection signal="body_entered" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="AttackHolder/PlayerDetector" to="AttackHolder" method="_on_player_detector_body_exited"]

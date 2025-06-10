@@ -2,7 +2,7 @@
 class_name BaseRandomAudioPlayer
 extends AudioStreamPlayer3D
 
-@export var audio_folder: String = "res://sounds/" ## Folder containing audio files
+@export_dir var audio_folder: String = "res://sounds/" ## Folder containing audio files
 @export var file_extensions: Array[String] = ["ogg", "wav", "mp3"] ## Supported audio formats
 @export var avoid_repeats: bool = true ## Avoid playing the same audio consecutively, if possible
 
