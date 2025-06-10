@@ -298,7 +298,7 @@ light_indirect_energy = 2.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true
 spot_range = 90.0
-spot_angle = 85.0
+spot_angle = 22.5
 spot_angle_attenuation = 0.5
 
 [node name="sewer_arena" parent="." instance=ExtResource("1_b4aaq")]
