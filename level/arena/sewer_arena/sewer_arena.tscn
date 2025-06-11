@@ -644,6 +644,6 @@ pause_eq_band_3_db = -30.0
 pause_eq_band_4_db = -30.0
 pause_eq_band_5_db = -30.0
 pause_volume_adjustment_db = -10.0
-audio_folder = "res://level/arena/sewer_arena/music/"
+audio_folder = "res://level/arena/sewer_arena/music"
 
 [editable path="sewer_arena"]
