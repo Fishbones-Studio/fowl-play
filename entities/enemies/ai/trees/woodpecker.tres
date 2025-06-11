@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=77 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=74 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -18,34 +18,6 @@
 [sub_resource type="BTAction" id="BTAction_ta6uh"]
 script = ExtResource("1_qws7o")
 target_var = &"target"
-
-[sub_resource type="BTCondition" id="BTCondition_bs3vf"]
-script = ExtResource("3_nm0l6")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 5.0
-
-[sub_resource type="BTAction" id="BTAction_hu8hp"]
-script = ExtResource("4_h0qwm")
-target_var = &"target"
-rotation_speed = 15.0
-angle_threshold = -1.0
-duration = 0.0
-face_away = false
-
-[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_0txuc"]
-children = [SubResource("BTAction_hu8hp")]
-
-[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_r7h0j"]
-children = [SubResource("BTRepeatUntilSuccess_0txuc")]
-
-[sub_resource type="BTAction" id="BTAction_ii3fn"]
-script = ExtResource("7_ftfet")
-ignore_cooldown = false
-start_state = 1
-
-[sub_resource type="BTSequence" id="BTSequence_gghh5"]
-children = [SubResource("BTCondition_bs3vf"), SubResource("BTAlwaysSucceed_r7h0j"), SubResource("BTAction_ii3fn")]
 
 [sub_resource type="BTCondition" id="BTCondition_gghh5"]
 script = ExtResource("10_gwx8i")
@@ -109,13 +81,27 @@ face_away = false
 [sub_resource type="BTAction" id="BTAction_xl814"]
 script = ExtResource("5_ftfet")
 target_var = &"target"
-tolerance = 0.0
+tolerance = 5.0
 speed_factor = 3.5
 duration = 10.0
 ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
+
+[sub_resource type="BTCondition" id="BTCondition_bs3vf"]
+script = ExtResource("3_nm0l6")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_ii3fn"]
+script = ExtResource("7_ftfet")
+ignore_cooldown = false
+start_state = 1
+
+[sub_resource type="BTSequence" id="BTSequence_gghh5"]
+children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
 
 [sub_resource type="BTCondition" id="BTCondition_f1ys2"]
 script = ExtResource("10_gwx8i")
@@ -170,14 +156,17 @@ children = [SubResource("BTParallel_ii3fn"), SubResource("BTSequence_ii3fn")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_gwx8i"]
 start_cooled = true
-trigger_on_failure = true
 children = [SubResource("BTSequence_xl814")]
+
+[sub_resource type="BTParallel" id="BTParallel_8n2b3"]
+num_failures_required = 2
+children = [SubResource("BTSequence_gghh5"), SubResource("BTCooldown_gwx8i")]
 
 [sub_resource type="BTParallel" id="BTParallel_nupj8"]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTAction_f1ys2"), SubResource("BTAction_xl814"), SubResource("BTCooldown_gwx8i")]
+children = [SubResource("BTAction_f1ys2"), SubResource("BTAction_xl814"), SubResource("BTParallel_8n2b3")]
 
 [sub_resource type="BTSequence" id="BTSequence_8n2b3"]
 children = [SubResource("BTSequence_h0qwm"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
@@ -219,7 +208,7 @@ script = ExtResource("4_h0qwm")
 target_var = &"target"
 rotation_speed = 25.0
 angle_threshold = -1.0
-duration = 1.5
+duration = 0.0
 face_away = false
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
@@ -304,15 +293,12 @@ children = [SubResource("BTCondition_8n2b3")]
 children = [SubResource("BTRepeatUntilFailure_f1ys2")]
 
 [sub_resource type="BTParallel" id="BTParallel_bs3vf"]
-children = [SubResource("BTProbabilitySelector_hnjin"), SubResource("BTAlwaysFail_xl814")]
-
-[sub_resource type="BTParallel" id="BTParallel_mxuth"]
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTSequence_gghh5"), SubResource("BTParallel_bs3vf")]
+children = [SubResource("BTProbabilitySelector_hnjin"), SubResource("BTAlwaysFail_xl814")]
 
 [sub_resource type="BTSequence" id="BTSequence_spagk"]
-children = [SubResource("BTAction_ta6uh"), SubResource("BTParallel_mxuth")]
+children = [SubResource("BTAction_ta6uh"), SubResource("BTParallel_bs3vf")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_spagk")
