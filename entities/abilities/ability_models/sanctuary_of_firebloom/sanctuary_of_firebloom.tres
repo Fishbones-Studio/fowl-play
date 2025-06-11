@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cfpfphesqh6hh"]
 
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_a2hla"]
-[ext_resource type="Texture2D" uid="uid://d4fqdjoos5g2q" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.png" id="1_st7dl"]
+[ext_resource type="Texture2D" uid="uid://d4fqdjoos5g2q" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/art/sanctuary_of_firebloom.png" id="1_st7dl"]
 
 [resource]
 script = ExtResource("1_a2hla")
