@@ -57,6 +57,9 @@ func _tick(delta: float) -> Status:
 	if agent.is_on_floor() and agent.velocity.y < 0:
 		return SUCCESS
 
+	if is_equal_approx(agent.velocity.y, 0.0):
+		return SUCCESS
+
 	if agent.global_position.distance_to(_target_position) < min_distance:
 		return SUCCESS
 
