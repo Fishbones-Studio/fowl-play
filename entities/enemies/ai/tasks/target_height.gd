@@ -24,7 +24,7 @@ func _generate_name() -> String:
 			comp_text = "<="
 		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			comp_text = ">="
-	
+
 	return "Height ➜ %s %s %.1f" % [LimboUtility.decorate_var(target_var), comp_text, height_threshold]
 
 

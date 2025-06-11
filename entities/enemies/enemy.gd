@@ -17,7 +17,7 @@ var hurt_ticks: Array = []
 var _knockback: Vector3 = Vector3.ZERO
 
 @onready var health_bar: HealthBar = %EnemyHealthBar
-@onready var enemy_name_label : Label = %EnemyNameLabel
+@onready var enemy_name_label: Label = %EnemyNameLabel
 @onready var movement_component: EnemyMovementComponent = $MovementComponent
 @onready var enemy_weapon_controller: EnemyWeaponController = $EnemyWeaponController
 @onready var enemy_ability_controller: EnemyAbilityController = $EnemyAbilityController
@@ -54,6 +54,8 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	stats.regen_stamina(stats.stamina_regen)
 	stats.regen_health(stats.health_regen)
+
+	health_bar.set_health(stats.current_health)
 
 	if stats.current_health <= 0:
 		_die()
@@ -96,7 +98,6 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 		on_hurt.play()
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
-		health_bar.set_health(stats.current_health)
 
 		var damage_percentage: int = round(damage / (stats.max_health * 0.3))
 		blood_splash_handler.splash_blood(damage_percentage)

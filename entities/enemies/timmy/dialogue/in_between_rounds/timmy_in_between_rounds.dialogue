@@ -1,0 +1,16 @@
+~ start
+if SaveManager.get_enemy_encounter_count("timmy") > 0:
+	Timmy: We meet again, hello.
+else:
+	Timmy: Hello.
+- Attack => END
+- Talk => standard_dialogue
+
+~ standard_dialogue
+- Why are you gay?
+	Timmy: ..
+	=> proceed_to_fight
+
+~ proceed_to_fight
+Timmy: Time to Goose you up.
+=> END
