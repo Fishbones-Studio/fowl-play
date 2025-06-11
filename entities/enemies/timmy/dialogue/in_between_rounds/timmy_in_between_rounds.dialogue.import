@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cwrmbmlxqbq60"
+path="res://.godot/imported/timmy_in_between_rounds.dialogue-f4f4d2c243e95a475d8144ef909f6d96.tres"
+
+[deps]
+
+source_file="res://entities/enemies/timmy/dialogue/in_between_rounds/timmy_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/timmy_in_between_rounds.dialogue-f4f4d2c243e95a475d8144ef909f6d96.tres"]
+
+[params]
+
+defaults=true
