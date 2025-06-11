@@ -1,8 +1,6 @@
 @tool
 extends BTAction
 
-## Blackboard variable that stores our target.
-@export var target_var: StringName = &"target"
 ## Ignore ability cooldown
 @export var ignore_cooldown: bool = false
 ## Ability slot
@@ -10,7 +8,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Use ability ➜ slot %d" % slot
+	return "Use Ability ➜ slot %d, ignore_cooldown: %s" % [slot, ignore_cooldown]
 
 
 func _tick(_delta: float) -> Status:

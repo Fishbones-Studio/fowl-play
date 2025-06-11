@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3joypn7lbpdu"
-path="res://.godot/imported/insighter_mugshot.png-70c0f265c7a5e63661d3a256c91cc4ba.ctex"
+uid="uid://d3ph6yhrnugg8"
+path="res://.godot/imported/goose_mugshot.png-08d6f2063f907ad9b7a96f5c11f73384.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter_mugshot.png"
-dest_files=["res://.godot/imported/insighter_mugshot.png-70c0f265c7a5e63661d3a256c91cc4ba.ctex"]
+source_file="res://entities/enemies/timmy/art/goose_mugshot.png"
+dest_files=["res://.godot/imported/goose_mugshot.png-08d6f2063f907ad9b7a96f5c11f73384.ctex"]
 
 [params]
 
