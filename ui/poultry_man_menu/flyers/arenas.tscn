@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="6_wcu6n"]
 [ext_resource type="PackedScene" uid="uid://d14bjxvd3x8qf" path="res://ui/poultry_man_menu/flyers/preview/arena_flyer_preview_container.tscn" id="7_x3apk"]
 
-[node name="Arenas" type="Control"]
+[node name="Arena" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

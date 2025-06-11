@@ -8,8 +8,9 @@
 [ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]
 [ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/poultry_man_menu/art/light_switch.ogg" id="9_78wky"]
-[ext_resource type="PackedScene" uid="uid://bvjwwhblk8d0x" path="res://level/arena/props/arena_parts/pillar/pillar.glb" id="10_iajuv"]
 [ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="11_qvty8"]
+[ext_resource type="Shader" uid="uid://c5bs0ajatg6c0" path="res://ui/poultry_man_menu/flyers/art/flyer.gdshader" id="13_x5v8y"]
+[ext_resource type="Texture2D" uid="uid://javeeq4ykkru" path="res://ui/poultry_man_menu/flyers/art/FOWLPLAY_poster_1_vertical.png" id="14_dqtu2"]
 [ext_resource type="PackedScene" uid="uid://dbn8txk00v2gh" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.glb" id="15_qvty8"]
 [ext_resource type="Script" uid="uid://c4vv871ckrkmj" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.gd" id="16_c6cgu"]
 
@@ -48,14 +49,42 @@ data = PackedVector3Array(-1.0001, -1, 0.9997, -1.0001, 1, -1.0003, -1.0001, 1, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c6cgu"]
 points = PackedVector3Array(-0.967689, 0.4143, -1.82565, 0.395357, 0.9859, 0.988379, 0.367832, 0.4143, 0.931552, -0.995214, 0.9859, 0.988379, 0.395357, 0.9859, -1.88248, -0.995214, 0.9859, -1.88248, 0.367832, 0.4143, -1.82565, -0.967689, 0.4143, 0.931552)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dqtu2"]
-size = Vector3(1.12419, 0.3172, 0.424332)
+[sub_resource type="Gradient" id="Gradient_dqtu2"]
+offsets = PackedFloat32Array(0, 0.287313, 0.447761, 0.660448, 0.679105, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.125, 0, 0, 1, 1, 0, 0, 1, 1, 0.0443548, 0.0443548, 1, 1, 0.25, 0.25, 1, 1, 1, 1, 1)
 
-[node name="PoultryManMenu" type="Node3D" node_paths=PackedStringArray("input_handler", "light_handler")]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qvty8"]
+frequency = 0.0075
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c6cgu"]
+seamless = true
+as_normal_map = true
+color_ramp = SubResource("Gradient_dqtu2")
+noise = SubResource("FastNoiseLite_qvty8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqtu2"]
+render_priority = 0
+shader = ExtResource("13_x5v8y")
+shader_parameter/albedo_texture = ExtResource("14_dqtu2")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_c6cgu")
+shader_parameter/paper_wrinkles = 1.0
+shader_parameter/paper_yellowing = 0.025
+shader_parameter/edge_wear = 0.14
+shader_parameter/paper_color = Color(0.95, 0.93, 0.85, 1)
+shader_parameter/edge_dirt_color = Color(0.7, 0.65, 0.6, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qvty8"]
+material = SubResource("ShaderMaterial_dqtu2")
+size = Vector2(2.1, 2.97)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x5v8y"]
+points = PackedVector3Array(-1.07336, -0.0235714, -1.50857, 1.09479, 0.0235714, 1.50857, 1.09479, -0.0235714, 1.50857, 1.09479, 0.0235714, -1.50857, -1.07336, 0.0235714, 1.50857, -1.07336, -0.0235714, 1.50857, 1.09479, -0.0235714, -1.50857, -1.07336, 0.0235714, -1.50857)
+
+[node name="PoultryManMenu" type="Node3D" node_paths=PackedStringArray("input_handler")]
 process_mode = 1
 script = ExtResource("1_jhi5u")
 input_handler = NodePath("InputHandler")
-light_handler = NodePath("")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_78wky")
@@ -201,16 +230,17 @@ shape = SubResource("ConvexPolygonShape3D_q1238")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Tabel/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_c6cgu")
 
-[node name="EquipmentShop" type="StaticBody3D" parent="Model/ShopSign" index="0" node_paths=PackedStringArray("focusable_objects")]
+[node name="EquipmentShop" type="StaticBody3D" parent="Model/ShopSign" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
 focusable_objects = [NodePath("..")]
+label = NodePath("../EquipmentShopLabel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/ShopSign/EquipmentShop"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_c6cgu")
 
-[node name="Label3D" type="Label3D" parent="Model/ShopSign" index="1"]
+[node name="EquipmentShopLabel" type="Label3D" parent="Model/ShopSign" index="1"]
 transform = Transform3D(1, -2.68221e-07, -2.6077e-08, -2.38419e-07, 1, 6.51926e-08, -5.58794e-08, -1.30385e-08, 0.999999, -1.08528, 2.23034, -0.366406)
 visible = false
 billboard = 1
@@ -224,26 +254,29 @@ transform = Transform3D(1.33815, 0.523009, -0.0436005, -0.523977, 1.33815, -0.02
 [node name="Eggs" parent="Model" index="36"]
 transform = Transform3D(0.566507, -0.00335338, 0.091008, 0.0262085, 0.555137, -0.142687, -0.0872171, 0.145036, 0.548253, -2.9636, 4.27409, 1.0585)
 
-[node name="Arenas" type="Area3D" parent="Model" node_paths=PackedStringArray("focusable_objects")]
-transform = Transform3D(1.73689, 1.46703, 3.29105, -0.682134, 3.72127, -1.2988, -3.53806, 0.00273252, 1.86604, 0.547101, 0.549712, -2.28696)
-script = ExtResource("6_dqtu2")
-focusable_objects = [NodePath(".")]
-index = 3
-metadata/_custom_type_script = "uid://c4docd5kunare"
+[node name="Flyer" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(-0.899673, 0.417834, 0.675279, 0.354008, 1.12447, -0.224133, -0.710821, 0.0311728, -0.966314, 2.81235, 1.88347, -2.70725)
+rotation_edit_mode = 1
+mesh = SubResource("PlaneMesh_qvty8")
+skeleton = NodePath("../..")
 
-[node name="ArenasLabel" parent="Model/Arenas" instance=ExtResource("11_qvty8")]
-transform = Transform3D(0.998591, 0.0422598, -0.0320859, -0.0200089, 0.859977, 0.50994, 0.049143, -0.50858, 0.859611, -0.017761, 0.98544, 0.427444)
+[node name="StaticBody3D" type="StaticBody3D" parent="Model/Flyer" node_paths=PackedStringArray("focusable_objects", "label")]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, -1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
+script = ExtResource("6_dqtu2")
+focusable_objects = [NodePath("..")]
+label = NodePath("../FlyerLabel")
+index = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Flyer/StaticBody3D"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_x5v8y")
+
+[node name="FlyerLabel" parent="Model/Flyer" instance=ExtResource("11_qvty8")]
+transform = Transform3D(0.33098, 1.69479, -2.85118, -0.172721, 2.87028, 1.68608, 3.31235, -0.0196831, 0.372816, -0.54099, 1.58722, -0.879036)
 visible = false
 text = "Arenas
 "
 metadata/_custom_type_script = "uid://di546rbu7b42s"
-
-[node name="pillar" parent="Model/Arenas" instance=ExtResource("10_iajuv")]
-transform = Transform3D(-6.55671e-09, -0.15, -7.45058e-09, 0.15, -6.55671e-09, -1.37089e-15, 1.33227e-15, -7.45058e-09, 0.15, 0.486684, 0.61328, 0.430042)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Arenas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0729891, 0.622528, 0.417565)
-shape = SubResource("BoxShape3D_dqtu2")
 
 [node name="Lights" type="Node3D" parent="."]
 
