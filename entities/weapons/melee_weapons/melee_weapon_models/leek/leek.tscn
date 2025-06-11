@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://du7ortc8e7k4y" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.gd" id="2_e1ngp"]
 [ext_resource type="PackedScene" uid="uid://bbnpnhjgrkwt4" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/art/leek.glb" id="3_k4qq2"]
 [ext_resource type="Resource" uid="uid://cybaeim8kc5kk" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tres" id="3_yaitn"]
-[ext_resource type="AudioStream" uid="uid://dijqdrhjmra3u" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek_hit.wav" id="5_k4qq2"]
+[ext_resource type="AudioStream" uid="uid://cq367h81o1y1r" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/sound/leek_hit.ogg" id="5_k4qq2"]
 
 [sub_resource type="Animation" id="Animation_em7sn"]
 resource_name = "Attack"

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_xcyw7"]
 [ext_resource type="Resource" uid="uid://c4dujlqw5d4kl" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword.tres" id="2_2s0e4"]
 [ext_resource type="PackedScene" uid="uid://lbrv8bntcb8m" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword.glb" id="2_vlb0o"]
-[ext_resource type="AudioStream" uid="uid://dmgl2h5qm05es" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword_swing.wav" id="3_4d8fe"]
+[ext_resource type="AudioStream" uid="uid://bml87ovvhbnmp" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/audio/sword_swing.ogg" id="4_4d8fe"]
 
 [sub_resource type="Animation" id="Animation_vlb0o"]
 resource_name = "Attack"
@@ -240,6 +240,6 @@ shape = SubResource("BoxShape3D_vlb0o")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.970147, 0)
 
 [node name="WeaponAttackSFX" parent="." index="2"]
-stream = ExtResource("3_4d8fe")
+stream = ExtResource("4_4d8fe")
 
 [editable path="WeaponHitBox/sword"]

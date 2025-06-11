@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=6 format=4 uid="uid://dpiv14jwmy654"]
 
-[ext_resource type="Shader" uid="uid://dnqssh5qq1fnr" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.gdshader" id="1_ujx1i"]
+[ext_resource type="Shader" uid="uid://dnqssh5qq1fnr" path="res://entities/abilities/ability_models/glacial_prism/shaders/glacial_prism.gdshader" id="1_uxc0o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f5l60"]
 noise_type = 3
@@ -11,7 +11,7 @@ noise = SubResource("FastNoiseLite_f5l60")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ccvw"]
 render_priority = 0
-shader = ExtResource("1_ujx1i")
+shader = ExtResource("1_uxc0o")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/FresnelColor = Color(0.811765, 0.952941, 1, 1)
 shader_parameter/Color = Color(0.74902, 0.901961, 1, 0.8)

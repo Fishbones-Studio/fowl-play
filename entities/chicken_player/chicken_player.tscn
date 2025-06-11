@@ -15,9 +15,9 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="13_vsiul"]
+[ext_resource type="AudioStream" uid="uid://dm21fsdj7ohlr" path="res://resources/sound/on_hurt.ogg" id="13_cx2nh"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
-[ext_resource type="AudioStream" uid="uid://dejxq4gbrbso" path="res://entities/chicken_player/sounds/dash_low.wav" id="15_cx2nh"]
+[ext_resource type="AudioStream" uid="uid://ypc1je2cpl5y" path="res://entities/chicken_player/sound/dash.ogg" id="15_hmi2t"]
 [ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://mgedhih6o02q" path="res://resources/effects/blood_splash/blood_splash_handler.tscn" id="21_1ij6v"]
@@ -40,22 +40,22 @@ script = ExtResource("4_qjuvu")
 layer_to_add = 2
 recursive = true
 
-[node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
+[node name="Skeleton3D" parent="chicken_default/Armature" index="0"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.46415, -0.000217548, 0.000583891, 0.885756)
-bones/3/rotation = Quaternion(-0.509078, 0.0093488, -0.00923343, 0.86062)
-bones/4/rotation = Quaternion(-0.104685, -0.0118116, -0.000559153, 0.994435)
-bones/5/rotation = Quaternion(-0.272755, 0.0557416, -0.609725, 0.742114)
-bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572917)
-bones/7/rotation = Quaternion(-0.291536, -0.0401342, 0.623349, 0.724453)
-bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
+bones/2/rotation = Quaternion(-0.252343, 0.0446668, -0.0279736, 0.966201)
+bones/3/rotation = Quaternion(-0.452036, 0.0724133, 0.0579588, 0.887164)
+bones/4/rotation = Quaternion(0.157054, -0.330203, 0.0323031, 0.930192)
+bones/5/rotation = Quaternion(-0.278146, 0.0589052, -0.612008, 0.737978)
+bones/6/rotation = Quaternion(-0.331921, -0.0632311, -0.744365, 0.575978)
+bones/7/rotation = Quaternion(-0.196007, 0.0391682, 0.571615, 0.795804)
+bones/8/rotation = Quaternion(-0.435419, 0.124942, 0.760344, 0.465485)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.221669, -0.00504714, -0.114318, 0.968385)
-bones/11/rotation = Quaternion(0.236221, 0.0237259, -0.147735, 0.96011)
+bones/10/rotation = Quaternion(0.244405, -0.00902316, -0.0537983, 0.968138)
+bones/11/rotation = Quaternion(0.173107, 0.0216164, -0.141996, 0.974374)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.173032, 0.0388384, 0.0889927, 0.980118)
+bones/13/rotation = Quaternion(-0.174012, -0.011529, 0.0132647, 0.984587)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -111,7 +111,7 @@ wait_time = 0.05
 one_shot = true
 
 [node name="HurtSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Hurt"]
-stream = ExtResource("13_vsiul")
+stream = ExtResource("13_cx2nh")
 bus = &"SFX"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
@@ -127,7 +127,8 @@ wait_time = 2.0
 one_shot = true
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Dash"]
-stream = ExtResource("15_cx2nh")
+stream = ExtResource("15_hmi2t")
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="Fall" type="Node" parent="MovementStateMachine"]
