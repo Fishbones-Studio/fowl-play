@@ -1,26 +1,50 @@
+import "uid://b8js24eelbiop" as snippets
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
-	Elder Centipede: [[Your scent is familiar. |You’ve faced the “Great” Elder Centipede before. |Do you really want to be humiliated again?]]
-	Elder Centipede: [[I will... ERASE your existence. |Your bones will join the others beneath my legs. |This time, I’ll make sure you don’t crawl away.]]
+	Elder Centipede: [[Your scent is familiar. |You’ve faced the [color=red]“Great” Elder Centipede[/color] before. |Do you really want to be humiliated again?]]
+	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake] |Your bones will join the others beneath my legs. |This time, I’ll make sure you don’t crawl away.]]
 else:
 	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool dares to challenge me. |Weakling.]]
-	Elder Centipede: [[Consider yourself “lucky,” as I, the “Great” Elder Centipede, WILL NOT SHOW MERCY. |You won’t leave this arena intact. Feel honored, weakling. |I WILL GRIND YOUR BONES TO DUST.]]
+	Elder Centipede: [[Consider yourself [color=orange]“lucky,”[/color] as I, the [color=red]“Great” Elder Centipede[/color], WILL NOT SHOW MERCY. |You won’t leave this arena intact. Feel honored, weakling. |I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST.[/shake]]]
 - Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue
 - You think you can beat me?
-	Elder Centipede: [[You? Win? HAHAHA. You don’t stand a chance against me. |Confident, aren’t you? That’s the first thing I’ll rip from you. |I’ll make a trophy out of your remains.]]
+	Elder Centipede: [[You? Win? [shake rate=10 level=5]HAHAHA.[/shake] You don’t stand a chance against me. |Confident, aren’t you? That’s the first thing I’ll rip from you. |I’ll make a trophy out of your remains.]]
 	Elder Centipede: [[I’ve buried countless fools like you. Tremble in fear—your grave awaits beneath my legs. |Your arrogance will be your downfall. |You’re just another name on my list of victims.]]
-	=> explore_mutations
+	=> explore_backstory
 - Why do you keep fighting?
-	Elder Centipede: [[I am the honored one. |Strength is everything. I am the strongest. |Fools keep approaching me, and I keep crushing them.]]
+	Elder Centipede: [[I am the [color=red]honored one.[/color] |Strength is everything. I am the strongest. |Fools keep approaching me, and I keep crushing them.]]
 	Elder Centipede: [[The strongest creature is I. No one is stronger than me. NO ONE. |The weak will bow before my strength. |I simply make an example out of them.]]
-	=> explore_mutations
+	=> explore_backstory
 
-~ explore_mutations
-Elder Centipede: [[In the past, I’ve massacred thousands of challengers, and each of them thought they had a chance against me. |Every fool who’s faced me has been torn apart by my strength. |I’ve left a trail of broken bodies in my wake.]]
-Elder Centipede: [[Every single one was torn apart by my strength. I still hear their screams lingering in my mind. |Their cries echo in this arena, a testament to my power. |The weak perish, and the strong—like me—prevail.]]
+~ explore_backstory
+Elder Centipede: [[In the past, I’ve massacred thousands of challengers, and each of them thought they had a chance against me. |Every fool who’s faced me has been [shake rate=15 level=8]torn apart[/shake] by my strength. |I’ve left a trail of broken bodies in my wake.]]
+Elder Centipede: [[Every single one was torn apart by my strength. I still hear their screams lingering in my mind. |Their cries echo in this arena, a testament to my power. |The weak perish, and the strong—like me—[color=red]prevail.[/color]]]
 Elder Centipede: [[No one escapes my wrath, and no one leaves unscattered. |You’ll join the others, broken and forgotten. |Your fate is sealed, weakling.]]
-Elder Centipede: [[Got any last words before I completely annihilate you? |Speak now, or forever hold your peace—because you won’t survive this. |Your final words will be your epitaph.]]
-- Fatass. => END!
+Elder Centipede: [[Got any last words before I [shake rate=20 level=10]completely annihilate you[/shake]? |Speak now, or forever hold your peace—because you won’t survive this. |Your final words will be your epitaph.]]
+- How did you become so strong?
+	Elder Centipede: [[How? I was born strong. The weak are born to serve, and I was born to rule. |The scientists tried to enhance me, but I was already [color=red]perfect.[/color] |They merely unlocked what was already there—my true potential.]]
+	Elder Centipede: [[I was the first. The prototype. The one they feared to touch. |They thought they could control me. [shake rate=10 level=5]Foolish.[/shake] |Now, I control them. The arena is my domain.]]
+	=> continue_or_end
+- What do you think of the other fighters?
+	Elder Centipede: [[Them? [color=red]Worms.[/color] All of them. |They’re nothing but fodder for my strength. |I don’t even see them as worthy opponents—just obstacles to crush.]]
+	Elder Centipede: [[They think they’re strong, but they’re nothing compared to me. |I’ve crushed champions, heroes, and legends. |They’re all the same—weak, pathetic, and destined to die.]]
+	=> continue_or_end
+- Do you ever lose?
+	Elder Centipede: [[Lose? [shake rate=10 level=5]HAHAHA.[/shake] The concept is foreign to me. |I’ve never lost. I’ve never even been challenged. |The idea of losing is as absurd as a worm defeating a god.]]
+	Elder Centipede: [[If I ever lost, the world would end. |But that will never happen. I am [color=red]eternal.[/color] |I am invincible. I am the Elder Centipede.]]
+	=> continue_or_end
+
+~ continue_or_end
+Elder Centipede: [[No more talk.|Enough. Your turn.|Time to end this.]]
+- I'll end your suffering.
+	Elder Centipede: [[End? You?|Not strong enough. Never will be.|You’ll break before I do.]]
+	Elder Centipede: [[Try. You’ll fail.|I’ll [shake rate=15 level=8]break you.[/shake] Like they broke me.|You’re nothing to me.]]
+	=> END
+- You're just a monster.
+	Elder Centipede: [[Monster?|Yes. They made me.|And I’ll make you one too.]]
+	Elder Centipede: [[Stronger now. [color=red]Stronger than you.[/color]|You’ll see. You’ll feel it.|You’re just prey.]]
+	=> END
+- Attack => END
