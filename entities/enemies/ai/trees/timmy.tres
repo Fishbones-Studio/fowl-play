@@ -152,7 +152,7 @@ ignore_cooldown = true
 start_state = 1
 
 [sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
-duration = 8.0
+duration = 12.0
 children = [SubResource("BTAction_lk6lr")]
 
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]
@@ -234,7 +234,7 @@ ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTCooldown" id="BTCooldown_ct4d5"]
-duration = 0.8
+duration = 1.0
 children = [SubResource("BTAction_yj2r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_n1u5v"]
