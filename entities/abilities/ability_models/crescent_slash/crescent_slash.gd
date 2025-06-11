@@ -29,7 +29,8 @@ func activate() -> void:
 
 	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
-
+	
+	sound_effect.play()
 	cooldown_timer.start()
 
 
