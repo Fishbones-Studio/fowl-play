@@ -29,12 +29,12 @@ func activate() -> void:
 
 	if ability_holder is ChickenPlayer:
 		SignalManager.cooldown_item_slot.emit(current_ability, cooldown_timer.wait_time, true)
-	
-	sound_effect.play()
+
 	cooldown_timer.start()
 
 
 func _on_slash_timer_timeout() -> void:
+	sound_effect.play()
 	cpu_particles.restart()
 
 	for body in hit_area.get_overlapping_bodies():

@@ -77,18 +77,18 @@ func _get_closest_target(area: Area3D) -> Node3D:
 	return target
 
 
-func _play_blast_sound_multiple(times: int) -> void:
+func _play_blast_sound_effect(times: int) -> void:
 	for i in range(times):
-		var sfx = sound_effect.duplicate() as AudioStreamPlayer3D
-		add_child(sfx)
-		sfx.pitch_scale = randf_range(0.9, 1.1)  # Add some variation
-		sfx.play()
-		sfx.finished.connect(sfx.queue_free)
+		var blast_sfx: AudioStreamPlayer3D = sound_effect.duplicate() as AudioStreamPlayer3D
+		add_child(blast_sfx)
+
+		blast_sfx.pitch_scale = randf_range(0.9, 1.1)  # Add some variation
+		blast_sfx.finished.connect(_on_blast_sfx_finished.bind(blast_sfx), CONNECT_ONE_SHOT)
+		blast_sfx.play()
 
 
 func _on_blast_timer_timeout() -> void:
 	gpu_particles.restart()
-	
 
 	_blast_count += 1
 	if _blast_count < max_blasts:
@@ -99,7 +99,7 @@ func _on_blast_timer_timeout() -> void:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
 		_current_damage *= blast_final_multiplier
-		_play_blast_sound_multiple(max_blasts)
+		_play_blast_sound_effect(max_blasts)
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false
@@ -125,3 +125,7 @@ func _on_blast_timer_timeout() -> void:
 		camera.apply_shake(1.0 + (_blast_count * 0.1))
 
 	_hit_bodies.clear()
+
+
+func _on_blast_sfx_finished(sfx: AudioStreamPlayer3D) -> void:
+	sfx.queue_free()
