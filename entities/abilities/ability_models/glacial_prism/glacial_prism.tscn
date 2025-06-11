@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_gtwud"]
 [ext_resource type="Script" uid="uid://b8rcy5ri3byj5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.gd" id="2_o4wag"]
 [ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="3_r8vdb"]
-[ext_resource type="AudioStream" uid="uid://d2vjhfyganb0w" path="res://entities/abilities/ability_models/glacial_prism/sound/glacial_prism_sfx.ogg" id="4_o4wag"]
 [ext_resource type="ArrayMesh" uid="uid://dpiv14jwmy654" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism_mesh.tres" id="4_rlecg"]
+[ext_resource type="AudioStream" uid="uid://b1lnln4ov8m1u" path="res://entities/abilities/ability_models/glacial_prism/sound/glaciar_prism.ogg" id="5_o4wag"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7ele6"]
 radius = 50.0
@@ -88,6 +88,6 @@ process_material = SubResource("ParticleProcessMaterial_ltqon")
 draw_pass_1 = ExtResource("4_rlecg")
 
 [node name="SoundEffect" parent="." index="4"]
-stream = ExtResource("4_o4wag")
+stream = ExtResource("5_o4wag")
 
 [connection signal="timeout" from="ImpactTimer" to="." method="_on_impact_timer_timeout"]
