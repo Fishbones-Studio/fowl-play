@@ -285,7 +285,6 @@ animation_name = &"Roll"
 
 [sub_resource type="BTAction" id="BTAction_m26ws"]
 script = ExtResource("8_157vn")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
 
