@@ -22,12 +22,14 @@ func _generate_name() -> String:
 
 func _enter() -> void:
 	_target_wait_time = randf_range(min_wait_time, max_wait_time)
-	agent.velocity = Vector3.ZERO
+	agent.velocity.x = 0.0
+	agent.velocity.z = 0.0
 
 
 func _tick(_delta: float) -> Status:
 	# Keep velocity at zero while waiting
-	agent.velocity = Vector3.ZERO
+	agent.velocity.x = 0.0
+	agent.velocity.z = 0.0
 
 	if elapsed_time >= _target_wait_time:
 		return SUCCESS
