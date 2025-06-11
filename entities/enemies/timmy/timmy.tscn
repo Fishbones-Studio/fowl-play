@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://co473aij70n7k"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_qrjwk"]
+[ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
+[ext_resource type="PackedScene" uid="uid://cc5c5n4tntrob" path="res://entities/enemies/timmy/art/timmy.glb" id="3_ivelv"]
+[ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/timmy/timmy_stats.tres" id="3_v7w0k"]
+[ext_resource type="Texture2D" uid="uid://d3ph6yhrnugg8" path="res://entities/enemies/timmy/art/goose_mugshot.png" id="5_pe8q7"]
+[ext_resource type="BehaviorTree" uid="uid://k7wyinj46uqk" path="res://entities/enemies/ai/trees/timmy.tres" id="5_ttlev"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_5qjni"]
+[ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="7_6lo8p"]
+[ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="8_jsm6r"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="9_5qjni"]
+[ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="10_6lo8p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qatkl"]
+radius = 1.375
+height = 6.0
+
+[node name="Timmy" instance=ExtResource("1_qrjwk")]
+script = ExtResource("2_v7jq4")
+hover_height = 3.5
+hover_speed = 2.1
+stats = ExtResource("3_v7w0k")
+dialogue_path = "res://entities/enemies/timmy/dialogue"
+name_label_template_string = "%s the Goose"
+
+[node name="timmy" parent="Model" index="0" instance=ExtResource("3_ivelv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+
+[node name="Skeleton3D" parent="Model/timmy/Armature" index="0"]
+bones/1/rotation = Quaternion(-0.0432664, 0.892909, 0.446979, 0.0324253)
+bones/2/rotation = Quaternion(-0.180408, -0.698588, 0.198449, 0.663359)
+bones/3/rotation = Quaternion(1.37277e-05, 0.00370759, 0.00370765, 0.999986)
+bones/6/rotation = Quaternion(0.00591486, 0.999964, 0.00160054, 0.005915)
+bones/15/rotation = Quaternion(0.608585, 0.777088, 0.145407, 0.0679336)
+bones/16/rotation = Quaternion(0.0238859, 0.0801693, 0.625259, 0.775921)
+bones/17/rotation = Quaternion(0.603147, 0.562482, -0.423732, -0.374538)
+bones/18/rotation = Quaternion(0.0995124, 0.0257579, -0.142522, 0.98444)
+bones/19/rotation = Quaternion(-0.476393, -0.423732, 0.562481, 0.526417)
+bones/20/rotation = Quaternion(-0.0816602, -0.0283359, -0.142032, 0.986081)
+bones/21/rotation = Quaternion(-0.0432494, 0.285518, 0.95731, 0.0128991)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+shape = SubResource("CapsuleShape3D_qatkl")
+
+[node name="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("5_ttlev")
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_5qjni")]
+
+[node name="RangedWeapon" type="Node3D" parent="EnemyWeaponController" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 1.5, -0.3)
+script = ExtResource("7_6lo8p")
+ranged_weapon_scene = ExtResource("8_jsm6r")
+
+[node name="EnemyAbilityController" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("9_5qjni")]
+ability_resource = ExtResource("10_6lo8p")
+
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("5_pe8q7")
+expand_mode = 3
+
+[editable path="Model/timmy"]

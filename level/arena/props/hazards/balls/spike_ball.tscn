@@ -88,7 +88,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yevts"]
 _data = {
 &"RESET": SubResource("Animation_6w8m6"),
-&"spin": SubResource("Animation_87nxk")
+&"Swing": SubResource("Animation_87nxk")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kxu0f"]
@@ -101,6 +101,9 @@ minimum_horizontal_knockback = 3.0
 minimum_vertical_knockback = 7.0
 maximum_horizontal_knockback = 3.0
 maximum_vertical_knockback = 10.0
+animation_name = &"Swing"
+animation_speed_scale = 1.0
+animation_reverse = false
 damage = 50
 
 [node name="spike_ball" parent="." index="0" instance=ExtResource("2_kxu0f")]
@@ -110,7 +113,6 @@ transform = Transform3D(-1.28136, 0, 0, 0, -1.03523, 0, 0, 0, -1, 0, 9, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_yevts")
 }
-autoplay = "spin"
 
 [node name="NavigationObstacle3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

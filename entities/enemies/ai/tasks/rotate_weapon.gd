@@ -9,12 +9,10 @@ extends BTAction
 @export_range(-90, 0 ) var max_down_angle: float = -45.0
 ## The maximun angle the weapon is allowed to tilt up.
 @export_range(0, 90) var max_up_angle: float = 45.0 
-## The rotation speed.
-@export_range(0.1, 20, 0.1) var rotation_speed: float = 0.1
 
 
 func _generate_name() -> String:
-	return "Rotate weapon towards ➜ %s" % [LimboUtility.decorate_var(target_var)]
+	return "Rotate Weapon ➜ %s" % [LimboUtility.decorate_var(target_var)]
 
 
 func _tick(delta: float) -> Status:
@@ -26,13 +24,8 @@ func _tick(delta: float) -> Status:
 	if not is_instance_valid(weapon_pivot):
 		return FAILURE
 
-	var direction: Vector3 = weapon_pivot.global_transform * weapon_offset
-	var look_transform: Transform3D = Transform3D().looking_at((target.global_position - direction).normalized())
-
-	var target_rotation: Vector3 = (weapon_pivot.global_transform.basis.inverse() * look_transform.basis).get_euler()
-	target_rotation.x = clamp(target_rotation.x, deg_to_rad(max_down_angle), deg_to_rad(max_up_angle))
-
-	weapon_pivot.rotation.x = lerp_angle(weapon_pivot.rotation.x, target_rotation.x, rotation_speed * delta)
-	weapon_pivot.rotation.y = lerp_angle(weapon_pivot.rotation.y, target_rotation.y, rotation_speed * delta)
+	weapon_pivot.look_at(target.global_position + weapon_offset)
+	weapon_pivot.rotation.x = clamp(weapon_pivot.rotation.x, deg_to_rad(max_down_angle), deg_to_rad(max_up_angle))
+	weapon_pivot.rotation.z = 0.0
 
 	return SUCCESS
