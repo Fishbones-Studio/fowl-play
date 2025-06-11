@@ -19,7 +19,7 @@ height = 5.0
 [node name="Woodpecker" instance=ExtResource("1_k6lf6")]
 stats = ExtResource("3_woodpecker_stats")
 dialogue_path = "res://entities/enemies/woodpecker/dialogue"
-name_label_template_string = "%s, The Finality"
+name_label_template_string = "%s the Finality"
 
 [node name="woodpecker" parent="Model" index="0" instance=ExtResource("4_woodpecker_model")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36206, 0.0804582)
 behavior_tree = ExtResource("4_1t2bg")
 
 [node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_vfx5i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751483, 1.60008, -0.692675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.6, -0.5)
 melee_weapon_scene = ExtResource("6_vfx5i")
 weapon_collision_mask = 2
 
