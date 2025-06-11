@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=74 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=71 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ykixg"]
@@ -38,16 +38,12 @@ blend = 0.3
 
 [sub_resource type="BTAction" id="BTAction_157vn"]
 script = ExtResource("2_ykixg")
-min_wait_time = 0.0
-max_wait_time = 0.0
-
-[sub_resource type="BTRandomWait" id="BTRandomWait_e381t"]
-min_duration = 0.7
-max_duration = 1.5
+min_wait_time = 0.7
+max_wait_time = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_0xmxa"]
 custom_name = "Pause before action"
-children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_157vn"), SubResource("BTRandomWait_e381t")]
+children = [SubResource("BTPlayAnimation_sexgk"), SubResource("BTAction_157vn")]
 
 [sub_resource type="BBNode" id="BBNode_m26ws"]
 saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
@@ -211,18 +207,13 @@ animation_player = SubResource("BBNode_arvsx")
 animation_name = &"Idle"
 blend = 0.3
 
-[sub_resource type="BTAction" id="BTAction_e381t"]
-script = ExtResource("2_ykixg")
-min_wait_time = 0.0
-max_wait_time = 0.0
-
 [sub_resource type="BTAction" id="BTAction_ovltl"]
 script = ExtResource("11_m26ws")
 stun_time = 6.0
 
 [sub_resource type="BTSequence" id="BTSequence_b8d52"]
 custom_name = "Charge!"
-children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws"), SubResource("BTPlayAnimation_rme62"), SubResource("BTAction_e381t"), SubResource("BTAction_ovltl")]
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws"), SubResource("BTPlayAnimation_rme62"), SubResource("BTAction_ovltl")]
 
 [sub_resource type="BTSequence" id="BTSequence_yvhtp"]
 custom_name = "Charge attack"
@@ -300,24 +291,19 @@ animation_player = SubResource("BBNode_wg5pp")
 animation_name = &"Idle"
 blend = 0.3
 
-[sub_resource type="BTAction" id="BTAction_wg87q"]
-script = ExtResource("2_ykixg")
-min_wait_time = 0.0
-max_wait_time = 0.0
-
 [sub_resource type="BTAction" id="BTAction_wwppe"]
 script = ExtResource("11_m26ws")
 stun_time = 4.0
 
 [sub_resource type="BTSequence" id="BTSequence_sv4kc"]
 custom_name = "Earthquake"
-children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTParallel_d6hvj"), SubResource("BTSequence_mkwy1"), SubResource("BTPlayAnimation_7icws"), SubResource("BTAction_wg87q"), SubResource("BTAction_wwppe")]
+children = [SubResource("BTPlayAnimation_ykixg"), SubResource("BTParallel_d6hvj"), SubResource("BTSequence_mkwy1"), SubResource("BTPlayAnimation_7icws"), SubResource("BTAction_wwppe")]
 metadata/_weight_ = 0.985075
 
 [sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
 duration = 0.0
 start_cooled = true
-custom_name = "Earthquake  cooldown: 10s"
+custom_name = "Earthquake cooldown: 10s"
 children = [SubResource("BTSequence_sv4kc")]
 metadata/_weight_ = 1.0
 
