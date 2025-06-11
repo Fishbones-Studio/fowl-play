@@ -118,7 +118,7 @@ children = [SubResource("BTAlwaysFail_c8cr3"), SubResource("BTAlwaysFail_gwx8i")
 [sub_resource type="BTSequence" id="BTSequence_c8cr3"]
 custom_name = "Pursue"
 children = [SubResource("BTParallel_f1ys2")]
-metadata/_weight_ = 4.0
+metadata/_weight_ = 5.0
 
 [sub_resource type="BTCondition" id="BTCondition_xl814"]
 script = ExtResource("3_nm0l6")
@@ -228,7 +228,7 @@ children = [SubResource("BTSequence_f1ys2"), SubResource("BTSequence_bs3vf"), Su
 duration = 5.0
 start_cooled = true
 children = [SubResource("BTSequence_7lgdv")]
-metadata/_weight_ = 2.0
+metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_ii3fn"]
 script = ExtResource("10_gwx8i")
