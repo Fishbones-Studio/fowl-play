@@ -42,7 +42,7 @@ bones/15/position = Vector3(-1.34829, 2.09585, 0.251932)
 bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.4)
 shape = SubResource("CapsuleShape3D_vfx5i")
 
 [node name="DamageNumberHandler" parent="." index="3"]
