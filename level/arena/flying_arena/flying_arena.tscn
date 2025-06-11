@@ -27,8 +27,8 @@ sky_material = SubResource("ShaderMaterial_7d67g")
 background_mode = 2
 sky = SubResource("Sky_1quy3")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7d67g"]
-size = Vector3(100, 5.87939, 100)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7d67g"]
+radius = 30.0
 
 [node name="FlyingArena" type="StaticBody3D"]
 
@@ -36,10 +36,10 @@ size = Vector3(100, 5.87939, 100)
 environment = SubResource("Environment_76q8x")
 
 [node name="flying_arena" parent="." instance=ExtResource("2_7d67g")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209718, 0)
-shape = SubResource("BoxShape3D_7d67g")
+[node name="FloorCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_7d67g")
 
 [editable path="flying_arena"]
