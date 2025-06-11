@@ -29,7 +29,7 @@ var _original_volume_db: float
 func _ready() -> void:
 	_original_energy = flicker_light.light_energy
 	_original_volume_db = audio_player.volume_db
-	
+
 	flicker_timer.timeout.connect(_on_flicker_timer_timeout)
 	flicker_timer.wait_time = min_flicker_interval
 	flicker_timer.start()

@@ -54,7 +54,14 @@ func focus() -> void:
 		return
 
 	for item in focusable_objects:
-		item.scale = object_scales[item] * highlight_scale_factor
+		TweenManager.create_scale_tween(
+			null,
+			item,
+			Vector3(object_scales[item] * highlight_scale_factor),
+			0.2,
+			TweenManager.DEFAULT_TRANSITION,
+			Tween.EASE_OUT)
+		#item.scale = object_scales[item] * highlight_scale_factor
 
 	is_focused = true
 
@@ -69,7 +76,13 @@ func unfocus() -> void:
 		return
 
 	for item in focusable_objects:
-		item.scale = object_scales[item]
+		TweenManager.create_scale_tween(null,
+		item,
+		Vector3(object_scales[item]),
+		0.2,
+		TweenManager.DEFAULT_TRANSITION,
+		Tween.EASE_OUT)
+		#item.scale = object_scales[item]
 
 	is_focused = false
 
