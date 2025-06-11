@@ -54,36 +54,44 @@ func swap_weapon() -> void:
 
 func use_weapon(ignore_cooldown: bool = false, start_state: WeaponEnums.WeaponState = WeaponEnums.WeaponState.WINDUP) -> int:
 	if not _weapon_equiped:
-		push_warning(owner.name, " has no weapon equpped.")
+		push_warning("%s has no weapon equipped.", % owner.name)
 		return 0
 
 	var active_weapon: Node3D = get_child(_current_weapon_slot)
 
+	var state_machine
+	var current_state
+	var cooldown_state
+	var attacking_state
+	var windup_state
+
 	if active_weapon is MeleeWeaponNode:
-		var current_state: BaseCombatState = active_weapon.melee_state_machine.current_state
-		var cooldown_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.COOLDOWN]
-		var attacking_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.ATTACKING]
-		var windup_state: BaseCombatState = active_weapon.melee_state_machine.states[WeaponEnums.WeaponState.WINDUP]
-
-		match start_state:
-			WeaponEnums.WeaponState.WINDUP:
-				if current_state == cooldown_state and not ignore_cooldown:
-					return 0
-				if current_state == windup_state:
-					return 2
-				if current_state == attacking_state and not ignore_cooldown:
-					return 2
-				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.WINDUP)
-				return 1
-			WeaponEnums.WeaponState.IDLE:
-				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.IDLE)
-				return 1
-			WeaponEnums.WeaponState.COOLDOWN:
-				active_weapon.melee_state_machine._transition_to_next_state(WeaponEnums.WeaponState.COOLDOWN)
-				return 1
-
+		state_machine = active_weapon.melee_state_machine
 	elif active_weapon is RangedWeaponNode:
-		active_weapon.current_weapon.handler.start_use()
-		return 1
+		state_machine = active_weapon.current_weapon.handler.state_machine
+	else:
+		return 0
+
+	current_state = state_machine.current_state
+	cooldown_state = state_machine.states[WeaponEnums.WeaponState.COOLDOWN]
+	attacking_state = state_machine.states[WeaponEnums.WeaponState.ATTACKING]
+	windup_state = state_machine.states[WeaponEnums.WeaponState.WINDUP]
+
+	match start_state:
+		WeaponEnums.WeaponState.WINDUP:
+			if current_state == cooldown_state and not ignore_cooldown:
+				return 0
+			if current_state == windup_state:
+				return 2
+			if current_state == attacking_state and not ignore_cooldown:
+				return 2
+			state_machine._transition_to_next_state(WeaponEnums.WeaponState.WINDUP)
+			return 1
+		WeaponEnums.WeaponState.IDLE:
+			state_machine._transition_to_next_state(WeaponEnums.WeaponState.IDLE)
+			return 1
+		WeaponEnums.WeaponState.COOLDOWN:
+			state_machine._transition_to_next_state(WeaponEnums.WeaponState.COOLDOWN)
+			return 1
 
 	return 0

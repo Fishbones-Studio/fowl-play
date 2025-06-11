@@ -76,7 +76,6 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
 script = ExtResource("7_ftfet")
-target_var = &"target"
 ignore_cooldown = false
 start_state = 1
 
@@ -134,7 +133,6 @@ face_away = false
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
 
