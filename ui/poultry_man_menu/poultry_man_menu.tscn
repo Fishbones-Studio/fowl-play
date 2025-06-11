@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=31 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bt524x0mvxt0j" path="res://ui/3d_label/custom_layer_label_3d.tscn" id="11_qvty8"]
 [ext_resource type="Shader" uid="uid://c5bs0ajatg6c0" path="res://ui/poultry_man_menu/flyers/art/flyer.gdshader" id="13_x5v8y"]
 [ext_resource type="Texture2D" uid="uid://javeeq4ykkru" path="res://ui/poultry_man_menu/flyers/art/FOWLPLAY_poster_1_vertical.png" id="14_dqtu2"]
+[ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="14_qvty8"]
 [ext_resource type="PackedScene" uid="uid://dbn8txk00v2gh" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.glb" id="15_qvty8"]
 [ext_resource type="Script" uid="uid://c4vv871ckrkmj" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.gd" id="16_c6cgu"]
 
@@ -278,6 +279,21 @@ text = "Arenas
 "
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
+[node name="BallChicken" parent="Model" instance=ExtResource("14_qvty8")]
+transform = Transform3D(0.244264, 0.373275, -0.304304, -0.451853, 0.295684, 0, 0.166626, 0.254631, 0.446093, -1.322, 4.504, -5.453)
+
+[node name="Sphere_001" parent="Model/BallChicken/Sphere" index="2"]
+transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583026, 0.359968, 0.0122451, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+
+[node name="Sphere_002" parent="Model/BallChicken/Sphere" index="3"]
+transform = Transform3D(0.215651, 0.0854378, -0.0245267, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
+
+[node name="Sphere_003" parent="Model/BallChicken/Sphere" index="4"]
+transform = Transform3D(0.0413089, 0.0520154, -0.0812715, 0.022335, 0.0808505, 0.0630985, 0.0938712, -0.0421269, 0.0207511, -0.737007, 0.707179, 0.157209)
+
+[node name="Sphere_004" parent="Model/BallChicken/Sphere" index="5"]
+transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -303,3 +319,4 @@ light_color = Color(0.764706, 0.843137, 0.423529, 1)
 omni_attenuation = 0.7
 
 [editable path="Model"]
+[editable path="Model/BallChicken"]
