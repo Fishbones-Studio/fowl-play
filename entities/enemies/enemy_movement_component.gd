@@ -11,4 +11,4 @@ extends BaseMovementComponent
 
 
 func _ready() -> void:
-	_update_physics_based_on_weight(entity.stats.weight)
+	if entity and entity.stats: _update_physics_based_on_weight(entity.stats.weight)
