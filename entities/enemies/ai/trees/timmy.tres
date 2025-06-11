@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://6qg6t6hlqf8j"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
