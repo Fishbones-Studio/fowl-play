@@ -1,13 +1,24 @@
 class_name KnockHazard
 extends BaseHazard
 
+@export_group("Knockback Settings")
 @export var knockback_force: float = 5.0
 @export var minimum_horizontal_knockback: float = 1.1
 @export var minimum_vertical_knockback: float = 7.0
 @export var maximum_horizontal_knockback: float = 3.0
 @export var maximum_vertical_knockback: float = 10.0
 
+@export_group("Animation Settings")
+@export var animation_name: StringName
+@export var animation_speed_scale: float = 1.0
+@export var animation_reverse: bool = false
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hazard_area: Area3D = $HazardArea
+
+
+func _ready() -> void:
+	animation_player.play(animation_name, -1.0, animation_speed_scale, animation_reverse)
 
 
 func _on_hazard_area_body_entered(body: Node3D) -> void:
