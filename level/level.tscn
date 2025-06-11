@@ -146,7 +146,7 @@ transform = Transform3D(-0.799434, 0, -0.600755, 0, 1, 0, 0.600755, 0, -0.799434
 curve = SubResource("Curve3D_xii2b")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D"]
-transform = Transform3D(0.256272, -0.00548689, -0.966544, 0.000333714, 0.999903, -0.0055882, 0.966569, 0.00110955, 0.256268, -46.6745, 6.72293, -2.37053)
+transform = Transform3D(0.256274, -0.00540174, -0.966544, 0, 0.999903, -0.00558859, 0.966569, 0.0014322, 0.256267, -46.6745, 6.72292, -2.37053)
 progress = 5.09822
 script = ExtResource("2_xii2b")
 movement_speed = 8.0
@@ -160,7 +160,7 @@ transform = Transform3D(-0.376764, -0.00337939, 0.926304, -0.00179899, 0.999994,
 curve = SubResource("Curve3D_rhqlf")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D2"]
-transform = Transform3D(-0.00825827, -0.0115357, -0.999848, -0.00478962, 0.999897, -0.0114961, 0.999934, 0.00469417, -0.00831263, -1.29936, 6.30235, -3.69756)
+transform = Transform3D(-0.0082586, -0.0115357, -0.999848, -0.00479201, 0.999897, -0.0114961, 0.999934, 0.00469656, -0.00831298, -1.29932, 6.30235, -3.69756)
 progress = 31.3245
 script = ExtResource("2_xii2b")
 movement_speed = 8.0
@@ -174,7 +174,7 @@ transform = Transform3D(-0.376764, -0.00337939, 0.926304, -0.00179899, 0.999994,
 curve = SubResource("Curve3D_l5lfc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D3"]
-transform = Transform3D(-0.648609, 0.00985238, -0.761014, 9.31298e-10, 0.999822, 0.0129455, 0.761086, 0.00839635, -0.648548, 7.41118, -2.01893, 0.18521)
+transform = Transform3D(-0.648609, 0.00985244, -0.761015, -1.39695e-09, 0.999822, 0.0129456, 0.761086, 0.00839639, -0.648547, 7.41118, -2.01893, 0.185205)
 progress = 4.17531
 script = ExtResource("2_xii2b")
 movement_speed = 8.0
@@ -188,7 +188,7 @@ transform = Transform3D(-0.376725, -0.0137288, 0.926224, -0.00569826, 0.999905, 
 curve = SubResource("Curve3D_m3nah")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D4"]
-transform = Transform3D(-0.729688, 0.000576592, 0.683716, 0.00351346, 0.99986, 0.00290626, -0.683718, 0.00452269, -0.729672, -5.54445, 6.26881, 3.84211)
+transform = Transform3D(-0.729691, 0.000579952, 0.683713, 0.00351782, 0.99986, 0.00290602, -0.683715, 0.00452549, -0.729674, -5.54441, 6.26881, 3.84209)
 progress = 19.1452
 script = ExtResource("2_xii2b")
 movement_speed = 8.0
@@ -202,7 +202,7 @@ transform = Transform3D(-0.376768, 0.00164715, 0.926307, 9.48468e-05, 0.999998, 
 curve = SubResource("Curve3D_fm1jd")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D5"]
-transform = Transform3D(0.464225, 0.016481, 0.885497, -0.0160456, 0.999635, -0.0101981, -0.885507, -0.00947347, 0.464404, -16.9844, 6.84414, -39.6585)
+transform = Transform3D(0.464226, 0.0162999, 0.8855, -0.0156565, 0.999641, -0.0101977, -0.885513, -0.00912916, 0.464399, -16.9844, 6.84414, -39.6585)
 progress = 77.82
 script = ExtResource("2_xii2b")
 movement_speed = 12.0
@@ -216,7 +216,7 @@ transform = Transform3D(-0.376768, 0.00164715, 0.926307, 9.48468e-05, 0.999998, 
 curve = SubResource("Curve3D_7jqyl")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Arena/Saws/Path3D6"]
-transform = Transform3D(-0.109203, 0.00737008, 0.993907, 5.15089e-06, 0.999777, -0.0074147, -0.993925, -0.000804575, -0.109201, -36.9763, 6.85578, -41.3669)
+transform = Transform3D(-0.109198, 0.00736957, 0.993908, 6.98427e-10, 0.999777, -0.00741474, -0.993926, -0.000809658, -0.109196, -36.9762, 6.85578, -41.367)
 progress = 9.76476
 script = ExtResource("2_xii2b")
 movement_speed = 12.0
