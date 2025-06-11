@@ -96,7 +96,7 @@ func _get_focusable_items() -> Array[Focusable3D]:
 	sorted_values.sort_custom(func(a, b): return a > b)
 
 	for index in sorted_values:
-		sorted_items.append(keys[index])
+		sorted_items.append(items.find_key(index))
 
 	return sorted_items
 
@@ -204,7 +204,7 @@ func _unfocus_all_items() -> void:
 
 func _preload_items() -> void:
 	print("Adding UI menu items in poultry man menu...")
-	# for all menu_actions, call SignalManager.add_ui_scene
+	# For all menu_actions, call SignalManager.add_ui_scene
 	for scene_enum_value in menu_actions.values():
 		SignalManager.add_ui_scene.emit(scene_enum_value, {}, false)
 	print("UI loaded for poultry man menu")
@@ -213,6 +213,7 @@ func _preload_items() -> void:
 func reset_highlights() -> void:
 	if is_updating_focus: # Prevent issues if called during a focus update
 		return
+
 	# Only reset if not hovering (keyboard nav is already false or handled by _on_keyboard_navigation_deactivated)
 	if is_mouse_hovering:
 		return
@@ -225,6 +226,7 @@ func reset_highlights() -> void:
 func highlight_current_item() -> void:
 	if is_updating_focus or focusable_items.is_empty():
 		return
+
 	# Ensure current_index is valid before attempting to access focusable_items
 	if current_index < 0 or current_index >= focusable_items.size():
 		# This might happen if items are removed dynamically, adjust current_index

@@ -1,10 +1,10 @@
 ################################################################################
-# A 3D object that can receive focus and input events from mouse interaction.
-#
-# This class provides visual feedback when hovered (focus) and handles click
-# events. It can optionally affect a target object (focusable_object) and a 
-# Label3D with highlight effects.
-# Very Crack.
+## A 3D object that can receive focus and input events from mouse interaction.
+##
+## This class provides visual feedback when hovered (focus) and handles click
+## events. It can optionally affect a target object (focusable_object) and a 
+## Label3D with highlight effects.
+## Very Crack.
 ################################################################################
 class_name Focusable3D
 extends CollisionObject3D
