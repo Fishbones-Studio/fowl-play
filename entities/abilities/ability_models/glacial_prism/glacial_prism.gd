@@ -17,7 +17,7 @@ var _hit_bodies: Array = []
 @onready var impact_timer: Timer = $ImpactTimer
 @onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
-@onready var sound_effect: AudioStreamPlayer3D = $SoundEffect
+
 @onready var crystal_particle: GPUParticles3D = %Crystal
 
 

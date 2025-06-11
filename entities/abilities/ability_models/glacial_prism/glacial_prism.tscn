@@ -61,20 +61,16 @@ damage_scaler = 4.5
 impact_time = 0.3
 current_ability = ExtResource("3_r8vdb")
 
-[node name="SoundEffect" type="AudioStreamPlayer3D" parent="." index="0"]
-stream = ExtResource("4_o4wag")
-bus = &"SFX"
-
-[node name="ImpactTimer" type="Timer" parent="." index="2"]
+[node name="ImpactTimer" type="Timer" parent="." index="1"]
 one_shot = true
 
-[node name="DetectionArea" type="Area3D" parent="." index="3"]
+[node name="DetectionArea" type="Area3D" parent="." index="2"]
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
 shape = SubResource("SphereShape3D_7ele6")
 
-[node name="HitArea" type="Area3D" parent="." index="4"]
+[node name="HitArea" type="Area3D" parent="." index="3"]
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
@@ -90,5 +86,8 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ltqon")
 draw_pass_1 = ExtResource("4_rlecg")
+
+[node name="SoundEffect" parent="." index="4"]
+stream = ExtResource("4_o4wag")
 
 [connection signal="timeout" from="ImpactTimer" to="." method="_on_impact_timer_timeout"]

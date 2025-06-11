@@ -40,14 +40,10 @@ blast_final_multiplier = 1.5
 stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 
-[node name="SoundEffect" type="AudioStreamPlayer3D" parent="." index="0"]
-stream = ExtResource("4_4o270")
-bus = &"SFX"
-
-[node name="BlastTimer" type="Timer" parent="." index="2"]
+[node name="BlastTimer" type="Timer" parent="." index="1"]
 one_shot = true
 
-[node name="DetectionArea" type="Area3D" parent="." index="3"]
+[node name="DetectionArea" type="Area3D" parent="." index="2"]
 collision_layer = 0
 collision_mask = 0
 monitorable = false
@@ -55,7 +51,7 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
 shape = SubResource("SphereShape3D_dcanr")
 
-[node name="HitArea" type="Area3D" parent="." index="4"]
+[node name="HitArea" type="Area3D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 0
 monitorable = false
@@ -72,5 +68,8 @@ one_shot = true
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_g6q5m")
 draw_pass_1 = ExtResource("4_dcanr")
+
+[node name="SoundEffect" parent="." index="4"]
+stream = ExtResource("4_4o270")
 
 [connection signal="timeout" from="BlastTimer" to="." method="_on_blast_timer_timeout"]

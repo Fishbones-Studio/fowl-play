@@ -20,7 +20,6 @@ var _current_damage: float = 0.0
 @onready var detection_area: Area3D = $DetectionArea
 @onready var hit_area: Area3D = $HitArea
 @onready var gpu_particles: GPUParticles3D = %GPUParticles3D
-@onready var sound_effect: AudioStreamPlayer3D = $SoundEffect
 @onready var camera: FollowCamera = get_tree().get_first_node_in_group("FollowCamera")
 
 
