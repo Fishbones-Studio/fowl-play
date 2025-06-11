@@ -1,12 +1,10 @@
 extends StaticBody3D
 
-@onready var arena_music_player: RandomMusicPlayer = $RandomMusicPlayer
-
+@onready var arena_music_player : RandomMusicPlayer = $RandomMusicPlayer
 
 func _ready() -> void:
 	SignalManager.game_won.connect(_stop_eq_on_game_done)
 	SignalManager.player_died.connect(_stop_eq_on_game_done)
-
 
 func _stop_eq_on_game_done() -> void:
 	arena_music_player.stop_playback()
