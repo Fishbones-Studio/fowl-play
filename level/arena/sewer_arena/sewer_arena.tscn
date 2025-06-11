@@ -259,7 +259,7 @@ size = Vector3(10.5, 50, 16.2129)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pnorv"]
 size = Vector3(15.2188, 50, 15.9202)
 
-[node name="Arena" type="StaticBody3D"]
+[node name="SewerArena" type="StaticBody3D"]
 script = ExtResource("1_wdiye")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

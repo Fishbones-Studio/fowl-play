@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=7 format=3 uid="uid://dfr8ywvkphcjj"]
+
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_hohgc"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_hl4gi"]
+[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="3_asnni"]
+[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="4_s6cqn"]
+[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="5_eesft"]
+[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="6_600lj"]
+
+[resource]
+script = ExtResource("2_hl4gi")
+title = "Skydome"
+description = "The skydome is a .."
+icon = ExtResource("1_hohgc")
+standard_enemy_scenes = Array[PackedScene]([ExtResource("3_asnni"), ExtResource("4_s6cqn"), ExtResource("5_eesft"), ExtResource("6_600lj")])
+boss_enemy_scenes = Array[PackedScene]([])
+include_boss = false
+rounds = 2
+scene_to_load = 1
+metadata/_custom_type_script = "uid://ctoq181od8w0k"
