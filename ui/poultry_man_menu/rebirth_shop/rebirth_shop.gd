@@ -2,6 +2,8 @@ extends Control
 
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
+# TODO: update chicken stats
+
 @export var item_database: PermUpgradeDatabase
 @export var refund_percentage := 0.8 ## For balancing purpouses, might change the refund amount
 

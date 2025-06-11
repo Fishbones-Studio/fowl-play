@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://c35wea4w2a5fh"]
+
+[ext_resource type="Script" uid="uid://dfcc2gwyrgbbt" path="res://ui/chicken_stats/chicken_stats_container/chicken_stats_container.gd" id="1_ha5t3"]
+[ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="1_qnrgu"]
+
+[node name="ChickenStatsContainer" type="VBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_constants/separation = 2
+script = ExtResource("1_ha5t3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(440, 36)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StatTitleLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 36)
+layout_mode = 2
+theme_type_variation = &"ChickenStatLabel"
+text = "Stat"
+horizontal_alignment = 1
+
+[node name="BaseValueTitleLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+theme_type_variation = &"ChickenStatValueLabel"
+text = "Value"
+
+[node name="BonusTitleLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+theme_type_variation = &"ChickenStatValueLabel"
+text = "Bonus"
+
+[node name="MaxHealthStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+
+[node name="MaxStaminaStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 1
+
+[node name="AttackStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 2
+
+[node name="DefenseStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 3
+
+[node name="SpeedStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 4
+
+[node name="WeightStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 5
+
+[node name="HSeparator" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealthRegenStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 6
+
+[node name="StaminaRegenStatContainer" parent="." instance=ExtResource("1_qnrgu")]
+layout_mode = 2
+stat = 7

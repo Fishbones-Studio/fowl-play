@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmgeue4l6fj4f"]
+[gd_scene load_steps=6 format=3 uid="uid://dmgeue4l6fj4f"]
 
 [ext_resource type="Script" uid="uid://c1y2iw2q8ee8l" path="res://ui/poultry_man_menu/rebirth_shop/rebirth_shop.gd" id="1_5h013"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_p65sv"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="3_lq5l4"]
+[ext_resource type="PackedScene" uid="uid://c35wea4w2a5fh" path="res://ui/chicken_stats/chicken_stats_container/chicken_stats_container.tscn" id="4_2dw1y"]
 [ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="30_p65sv"]
 
 [node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database")]
@@ -88,16 +89,30 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="Items" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="Items" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ChickenStatsContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" instance=ExtResource("4_2dw1y")]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

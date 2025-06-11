@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2vh7na31m8hi"]
+[gd_scene load_steps=9 format=3 uid="uid://c2vh7na31m8hi"]
 
 [ext_resource type="Script" uid="uid://c1b516aq1e48v" path="res://ui/chicken_stats/chicken_stats.gd" id="1_5okfq"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_rolus"]
-[ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="2_7na05"]
+[ext_resource type="Script" uid="uid://b7od8kwb6x51h" path="res://ui/chicken_stats/chicken_details_container.gd" id="3_l08ed"]
+[ext_resource type="PackedScene" uid="uid://c35wea4w2a5fh" path="res://ui/chicken_stats/chicken_stats_container/chicken_stats_container.tscn" id="3_yykr0"]
 [ext_resource type="PackedScene" uid="uid://cnj4tl7mxfwi6" path="res://ui/chicken_stats/chicken_equipment_container.tscn" id="5_l08ed"]
 [ext_resource type="PackedScene" uid="uid://d1g14y0hwkvyy" path="res://ui/item_preview_container/item_preview_container.tscn" id="6_l08ed"]
 
@@ -93,48 +94,10 @@ theme_override_constants/margin_bottom = 15
 [node name="ChickenDetailsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
+script = ExtResource("3_l08ed")
 
-[node name="ChickenStatsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer"]
+[node name="ChickenStatsContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" instance=ExtResource("3_yykr0")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-theme_override_constants/separation = 2
-
-[node name="MaxHealthStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-
-[node name="MaxStaminaStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 1
-
-[node name="AttackStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 2
-
-[node name="DefenseStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 3
-
-[node name="SpeedStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 4
-
-[node name="WeightStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 5
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HealthRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 6
-
-[node name="StaminaRegenStatContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer/ChickenStatsContainer" instance=ExtResource("2_7na05")]
-layout_mode = 2
-stat = 7
 
 [node name="ChickenEquipmentContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" node_paths=PackedStringArray("item_preview") instance=ExtResource("5_l08ed")]
 layout_mode = 2
