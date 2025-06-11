@@ -63,7 +63,6 @@ face_away = false
 
 [sub_resource type="BTAction" id="BTAction_jsrsq"]
 script = ExtResource("5_g4wna")
-target_var = &"target"
 ignore_cooldown = true
 start_state = 1
 
@@ -155,7 +154,6 @@ bounce_camera_shake = 1.5
 
 [sub_resource type="BTAction" id="BTAction_q2pti"]
 script = ExtResource("5_gdjx3")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
 

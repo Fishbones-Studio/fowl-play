@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://bc7ucld3pg5s8"]
+[gd_resource type="BehaviorTree" load_steps=69 format=3 uid="uid://bc7ucld3pg5s8"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
@@ -60,7 +60,6 @@ children = [SubResource("BTCondition_t3gyd"), SubResource("BTRepeatUntilSuccess_
 
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("11_ulmcl")
-target_var = &"target"
 ignore_cooldown = true
 start_state = 1
 
@@ -98,7 +97,7 @@ face_away = false
 [sub_resource type="BTAction" id="BTAction_nju8x"]
 script = ExtResource("8_k708t")
 target_var = &"target"
-tolerance = 5.0
+tolerance = 3.0
 speed_factor = 0.0
 duration = 10.0
 ignore_y = true
@@ -179,7 +178,6 @@ children = [SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd")]
 
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
 
@@ -220,11 +218,16 @@ angle_threshold = 25.0
 duration = 0.0
 face_away = false
 
+[sub_resource type="BTAction" id="BTAction_40a5u"]
+script = ExtResource("4_yhbkp")
+ignore_cooldown = true
+slot = 1
+
 [sub_resource type="BTWait" id="BTWait_u4hmx"]
 duration = 2.0
 
 [sub_resource type="BTParallel" id="BTParallel_40a5u"]
-children = [SubResource("BTAction_ca3xq"), SubResource("BTWait_u4hmx")]
+children = [SubResource("BTAction_ca3xq"), SubResource("BTAction_40a5u"), SubResource("BTWait_u4hmx")]
 
 [sub_resource type="BTSequence" id="BTSequence_fhbfq"]
 custom_name = "I venture forth to hunt!"
@@ -236,19 +239,9 @@ target_var = &"target"
 dash_duration = 0.4
 dash_distance = 50.0
 
-[sub_resource type="BTAction" id="BTAction_40a5u"]
-script = ExtResource("4_yhbkp")
-target_var = &"target"
-ignore_cooldown = true
-slot = 1
-
-[sub_resource type="BTParallel" id="BTParallel_t3gyd"]
-num_successes_required = 2
-children = [SubResource("BTAction_u4hmx"), SubResource("BTAction_40a5u")]
-
 [sub_resource type="BTSequence" id="BTSequence_8k4wv"]
 custom_name = "Always soaring, forever triumphant!"
-children = [SubResource("BTParallel_t3gyd")]
+children = [SubResource("BTAction_u4hmx")]
 
 [sub_resource type="BTSequence" id="BTSequence_40a5u"]
 custom_name = "Dash"

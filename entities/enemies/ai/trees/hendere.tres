@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=95 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=90 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -187,7 +187,6 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_pyqya"]
 script = ExtResource("6_pia2r")
-target_var = &"target"
 ignore_cooldown = false
 start_state = 1
 
@@ -271,7 +270,6 @@ duration = 0.1
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
-target_var = &"target"
 ignore_cooldown = true
 start_state = 1
 
@@ -331,29 +329,6 @@ immediate_response = true
 path_update_interval = 0.05
 face_moving_direction = true
 
-[sub_resource type="BTCondition" id="BTCondition_schhj"]
-script = ExtResource("3_fxtff")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 5.0
-
-[sub_resource type="BTAction" id="BTAction_7jrpa"]
-script = ExtResource("6_pia2r")
-target_var = &"target"
-ignore_cooldown = true
-start_state = 1
-
-[sub_resource type="BTDelay" id="BTDelay_pia2r"]
-seconds = 0.3
-children = [SubResource("BTAction_7jrpa")]
-
-[sub_resource type="BTSequence" id="BTSequence_gvblq"]
-children = [SubResource("BTCondition_schhj"), SubResource("BTDelay_pia2r")]
-
-[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_wv527"]
-children = [SubResource("BTSequence_gvblq")]
-_enabled = false
-
 [sub_resource type="BTAction" id="BTAction_504pj"]
 script = ExtResource("14_wv527")
 hazard_resource = ExtResource("13_gvblq")
@@ -364,7 +339,7 @@ children = [SubResource("BTAction_504pj")]
 [sub_resource type="BTParallel" id="BTParallel_5c880"]
 num_successes_required = 2
 repeat = true
-children = [SubResource("BTAction_mnhi0"), SubResource("BTAlwaysSucceed_wv527"), SubResource("BTDelay_viady")]
+children = [SubResource("BTAction_mnhi0"), SubResource("BTDelay_viady")]
 
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"
