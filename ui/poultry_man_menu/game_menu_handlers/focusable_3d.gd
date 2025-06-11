@@ -1,40 +1,39 @@
+################################################################################
+# A 3D object that can receive focus and input events from mouse interaction.
+#
+# This class provides visual feedback when hovered (focus) and handles click
+# events. It can optionally affect a target object (focusable_object) and a 
+# Label3D with highlight effects.
+# Very Crack.
+################################################################################
 class_name Focusable3D
-extends Area3D
+extends CollisionObject3D
 
 signal focused
 signal unfocused
 signal pressed
 
-# Highlight Settings
 @export var highlight_scale_factor: float = 1.1
 @export var highlight_color: Color = Color.YELLOW
+@export var focusable_objects: Array[Node3D] = [] # Crack
+@export var label: Label3D
+@export var index: int = 0
 
-var original_scale: Vector3
+var object_scales: Dictionary[Node3D, Vector3] = {}
 var original_label_color: Color
 var is_focused: bool = false
 
-@onready var label: Label3D = _find_label()
-
 
 func _ready() -> void:
-	original_scale = scale
+	for item in focusable_objects:
+		object_scales[item] = item.scale
+
 	if label:
 		original_label_color = label.modulate
 
-	# Connect Area3D signals
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	input_event.connect(_on_input_event)
-
-
-func _find_label() -> Label3D:
-	for child in get_children():
-		if child is Label3D:
-			return child
-		var found = child._find_label() if child.has_method("_find_label") else null
-		if found:
-			return found
-	return null
 
 
 func _on_mouse_entered() -> void:
@@ -54,23 +53,31 @@ func focus() -> void:
 	if is_focused:
 		return
 
+	for item in focusable_objects:
+		item.scale = object_scales[item] * highlight_scale_factor
+
 	is_focused = true
-	scale = original_scale * highlight_scale_factor
+
 	if label:
 		label.modulate = highlight_color
-	emit_signal("focused")
+
+	focused.emit()
 
 
 func unfocus() -> void:
 	if not is_focused:
 		return
 
+	for item in focusable_objects:
+		item.scale = object_scales[item]
+
 	is_focused = false
-	scale = original_scale
+
 	if label:
 		label.modulate = original_label_color
-	emit_signal("unfocused")
+
+	unfocused.emit()
 
 
 func press() -> void:
-	emit_signal("pressed")
+	pressed.emit()
