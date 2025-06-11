@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=74 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=77 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -25,13 +25,27 @@ target_var = &"target"
 distance_min = 0.0
 distance_max = 5.0
 
+[sub_resource type="BTAction" id="BTAction_hu8hp"]
+script = ExtResource("4_h0qwm")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = -1.0
+duration = 0.0
+face_away = false
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_0txuc"]
+children = [SubResource("BTAction_hu8hp")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_r7h0j"]
+children = [SubResource("BTRepeatUntilSuccess_0txuc")]
+
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
 script = ExtResource("7_ftfet")
 ignore_cooldown = false
 start_state = 1
 
 [sub_resource type="BTSequence" id="BTSequence_gghh5"]
-children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
+children = [SubResource("BTCondition_bs3vf"), SubResource("BTAlwaysSucceed_r7h0j"), SubResource("BTAction_ii3fn")]
 
 [sub_resource type="BTCondition" id="BTCondition_gghh5"]
 script = ExtResource("10_gwx8i")
@@ -47,7 +61,7 @@ children = [SubResource("BTRepeatUntilFailure_nupj8")]
 
 [sub_resource type="BTCondition" id="BTCondition_gwx8i"]
 script = ExtResource("5_7lgdv")
-stuck_interval = 2.0
+stuck_interval = 3.0
 stuck_threshold = 2.5
 
 [sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_mxuth"]
@@ -106,7 +120,7 @@ path_update_interval = 0.05
 [sub_resource type="BTCondition" id="BTCondition_f1ys2"]
 script = ExtResource("10_gwx8i")
 comparison = 4
-threshold = 25.0
+threshold = 50.0
 use_percentage = true
 
 [sub_resource type="BTCondition" id="BTCondition_xl814"]
@@ -145,7 +159,7 @@ children = [SubResource("BTAction_8n2b3"), SubResource("BTAction_bs3vf")]
 
 [sub_resource type="BTAction" id="BTAction_jldam"]
 script = ExtResource("11_8n2b3")
-stun_time = 2.5
+stun_time = 2.0
 
 [sub_resource type="BTSequence" id="BTSequence_ii3fn"]
 children = [SubResource("BTPlayAnimation_ii3fn"), SubResource("BTParallel_gwx8i"), SubResource("BTAction_jldam")]
@@ -156,6 +170,7 @@ children = [SubResource("BTParallel_ii3fn"), SubResource("BTSequence_ii3fn")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_gwx8i"]
 start_cooled = true
+trigger_on_failure = true
 children = [SubResource("BTSequence_xl814")]
 
 [sub_resource type="BTParallel" id="BTParallel_nupj8"]
