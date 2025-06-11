@@ -43,19 +43,19 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="0"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.252343, 0.0446668, -0.0279736, 0.966201)
-bones/3/rotation = Quaternion(-0.452036, 0.0724133, 0.0579588, 0.887164)
-bones/4/rotation = Quaternion(0.157054, -0.330203, 0.0323031, 0.930192)
-bones/5/rotation = Quaternion(-0.278146, 0.0589052, -0.612008, 0.737978)
-bones/6/rotation = Quaternion(-0.331921, -0.0632311, -0.744365, 0.575978)
-bones/7/rotation = Quaternion(-0.196007, 0.0391682, 0.571615, 0.795804)
-bones/8/rotation = Quaternion(-0.435419, 0.124942, 0.760344, 0.465485)
+bones/2/rotation = Quaternion(-0.485264, -0.00137939, 0.00439376, 0.874355)
+bones/3/rotation = Quaternion(-0.530642, -0.0133218, -0.0136548, 0.847381)
+bones/4/rotation = Quaternion(-0.116685, -0.155399, -0.0699816, 0.978437)
+bones/5/rotation = Quaternion(-0.185609, 0.00346044, -0.567881, 0.801903)
+bones/6/rotation = Quaternion(-0.506382, -0.233152, -0.532479, 0.636933)
+bones/7/rotation = Quaternion(-0.229226, 0.01212, 0.590823, 0.773458)
+bones/8/rotation = Quaternion(-0.469833, 0.271983, 0.554361, 0.630845)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.244405, -0.00902316, -0.0537983, 0.968138)
-bones/11/rotation = Quaternion(0.173107, 0.0216164, -0.141996, 0.974374)
+bones/10/rotation = Quaternion(0.310507, -0.0197457, -0.0552112, 0.948761)
+bones/11/rotation = Quaternion(0.181198, 0.0118148, -0.122226, 0.97575)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.174012, -0.011529, 0.0132647, 0.984587)
+bones/13/rotation = Quaternion(-0.17494, 0.0226019, 0.0657307, 0.982123)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -128,7 +128,7 @@ one_shot = true
 
 [node name="DashSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Dash"]
 stream = ExtResource("15_hmi2t")
-volume_db = -15.0
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="Fall" type="Node" parent="MovementStateMachine"]
