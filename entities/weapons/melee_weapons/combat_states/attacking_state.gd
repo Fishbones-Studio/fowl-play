@@ -14,8 +14,6 @@ func enter(_previous_state, _information: Dictionary = {}) -> void:
 	if entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(weapon_node.current_weapon, weapon_node.current_weapon.attack_duration, false)
 
-	weapon_node.weapon_attack_sfx.play()
-
 	attack_timer.wait_time = weapon_node.current_weapon.attack_duration
 	attack_timer.start()
 

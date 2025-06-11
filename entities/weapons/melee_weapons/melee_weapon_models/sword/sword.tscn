@@ -61,6 +61,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(1.2, 1.2, 1.2), Vector3(3, 3, 3), Vector3(1, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwingSoundEffect:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4d8fe"]
 resource_name = "Cooldown"
@@ -167,6 +179,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [-2.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwingSoundEffect:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_6j75l"]
 resource_name = "Windup"
@@ -239,7 +263,8 @@ shape = SubResource("BoxShape3D_vlb0o")
 [node name="sword" parent="WeaponHitBox" index="1" instance=ExtResource("2_vlb0o")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.970147, 0)
 
-[node name="WeaponAttackSFX" parent="." index="2"]
+[node name="SwingSoundEffect" type="AudioStreamPlayer3D" parent="." index="2"]
 stream = ExtResource("4_4d8fe")
+bus = &"SFX"
 
 [editable path="WeaponHitBox/sword"]
