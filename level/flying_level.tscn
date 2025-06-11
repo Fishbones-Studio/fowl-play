@@ -33,11 +33,11 @@ entity_to_follow = NodePath("../Player")
 
 [node name="EnemyPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -20)
 
 [node name="PlayerPosition" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 20)
 
 [node name="RoundHandler" type="Node" parent="." node_paths=PackedStringArray("enemy_spawn_position", "player_spawn_position", "intermission_spawn_position")]
 unique_name_in_owner = true
