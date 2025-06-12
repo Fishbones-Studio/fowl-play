@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c0iufpwqou4uq" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.gd" id="1_abcde"]
 
 [node name="EquippedItemSlot" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
 script = ExtResource("1_abcde")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

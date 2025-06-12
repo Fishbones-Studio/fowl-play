@@ -10,6 +10,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 @onready var reset_label: RichTextLabel = %ResetLabel
 @onready var close_button: Button = %CloseButton
 @onready var reset_button: Button = %ResetButton
+@onready var chicken_stat_container : ChickenStatsContainer
 
 
 func _ready() -> void:

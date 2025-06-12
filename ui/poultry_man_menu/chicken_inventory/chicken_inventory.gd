@@ -17,6 +17,12 @@ var ability_2: AbilityResource = null
 func _ready() -> void:
 	_setup_controller_navigation()
 	_update_equipped_slots()
+	
+	visibility_changed.connect(
+		func():
+			if visible:
+				_update_equipped_slots()
+	)
 
 	SignalManager.preview_shop_item.connect(_on_populate_visual_fields)
 

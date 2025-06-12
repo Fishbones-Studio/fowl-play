@@ -1,6 +1,8 @@
 class_name SkillTreeItem
 extends PanelContainer
 
+signal skill_tree_item_focussed(upgrade_type : StatsEnums.UpgradeTypes, bonus_value : float)
+
 @export var upgrade_type: StatsEnums.UpgradeTypes
 
 var copied_stats: LivingEntityStats
