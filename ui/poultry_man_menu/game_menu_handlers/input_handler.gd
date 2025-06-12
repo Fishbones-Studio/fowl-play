@@ -17,15 +17,15 @@ var controller_was_used: bool = false
 var stick_cooldown_timer: Timer
 
 var directional_actions: Array[StringName] = [
-	&"move_left",
-	&"move_right",
+	&"ui_left",
+	&"ui_right",
 	&"joypad_button_left",
 	&"joypad_button_right"
 ]
 
 var action_directions: Dictionary[StringName, int] = {
-	&"move_left": 1,
-	&"move_right": -1,
+	&"ui_left": 1,
+	&"ui_right": -1,
 	&"joypad_button_left": 1,
 	&"joypad_button_right": -1
 }
