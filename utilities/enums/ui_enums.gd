@@ -24,6 +24,7 @@ enum UI {
 	QUIT_GAME_POPUP,
 	REBIRTH_SHOP_RESET_STATS_POPUP,
 	REBIRTH_SHOP_CONFIRMATION,
+	UPGRADE_SHOP_CONFIRMATION,
 	NULL ## Specific value for when no ui should be loaded
 }
 
@@ -52,6 +53,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.QUIT_GAME_POPUP: "uid://dx5jf0y4udv81",
 	UI.REBIRTH_SHOP_RESET_STATS_POPUP: "uid://brdl7fh3unwoc",
 	UI.REBIRTH_SHOP_CONFIRMATION: "uid://cb46h0sdgyhl5",
+	UI.UPGRADE_SHOP_CONFIRMATION: "uid://cmc2vy88ms25a"
 }
 
 ## List of UI elements that should block game input outside of the UI
