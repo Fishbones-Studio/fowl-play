@@ -22,8 +22,24 @@ var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
+	
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
+	
+	# Making the buy button not focussable, when using controller/keyboad purchases can be made pressing the ui_accept buton
+	if buy_button:
+		buy_button.focus_mode = Control.FOCUS_NONE
+
+
+func _gui_input(event: InputEvent) -> void:
+	if not has_focus():
+		return
+		
+	# Handle purchase with controller/keyboard
+	if event.is_action_pressed("ui_accept"):
+		if can_afford_upgrade() and not buy_button.disabled:
+			_on_buy_button_pressed()
+			get_viewport().set_input_as_handled()
 
 
 func init(
@@ -50,7 +66,8 @@ func _on_buy_button_pressed() -> void:
 		save_upgrades()
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
-		
+
+
 func _on_focus_entered() -> void:
 	if not theme:
 		theme = Theme.new()
@@ -137,6 +154,6 @@ func update_ui_elements() -> void:
 
 
 func save_upgrades() -> void:
-	var upgrades : Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()
+	var upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()
 	upgrades[upgrade_type] = upgrade_resource.current_level
 	SaveManager.save_player_upgrades(upgrades)

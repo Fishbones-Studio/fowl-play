@@ -2,25 +2,27 @@ extends Control
 
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
-# TODO: update chicken stats
-
 @export var item_database: PermUpgradeDatabase
-@export var refund_percentage := 0.8 ## For balancing purpouses, might change the refund amount
+@export var refund_percentage := 0.8
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
-@onready var reset_label : RichTextLabel = %ResetLabel
+@onready var reset_label: RichTextLabel = %ResetLabel
+@onready var close_button: Button = %CloseButton
+@onready var reset_button: Button = %ResetButton
 
 
 func _ready() -> void:
 	shop_title_label.text = "Rebirth Shop"
 	_refresh_shop()
 	_setup_controller_navigation()
+	
 	visibility_changed.connect(
 		func():
 			if visible:
 				_setup_controller_navigation()
 	)
+	
 	reset_label.text = "[center][font_size=25][color=gray][i]Resetting refunds [color=orange]%.f%%[/color] of currency spent.[/i][/color][/font_size][/center]" % (refund_percentage * 100)
 
 
@@ -59,7 +61,9 @@ func _get_available_items_grouped() -> Dictionary:
 func _setup_controller_navigation() -> void:
 	await get_tree().process_frame
 
-	var focusable_items: Array = []
+	var focusable_items: Array[Control] = []
+	
+	# Collect all SkillTreeItems
 	for child in items.get_children():
 		if child is SkillTreeItem:
 			child.focus_mode = Control.FOCUS_ALL
@@ -67,8 +71,44 @@ func _setup_controller_navigation() -> void:
 		elif child is Control:
 			child.focus_mode = Control.FOCUS_NONE
 
+	# Set up close and reset buttons
+	if close_button:
+		close_button.focus_mode = Control.FOCUS_ALL
+	if reset_button:
+		reset_button.focus_mode = Control.FOCUS_ALL
+
+	# Set up vertical navigation between skill tree items
+	for i in range(focusable_items.size()):
+		var current_item: Control = focusable_items[i]
+		
+		# Set up vertical navigation
+		if i > 0:
+			current_item.focus_neighbor_top = focusable_items[i - 1].get_path()
+		if i < focusable_items.size() - 1:
+			current_item.focus_neighbor_bottom = focusable_items[i + 1].get_path()
+		
+		# Connect to buttons at the bottom
+		if i == focusable_items.size() - 1:  # Last item
+			if reset_button:
+				current_item.focus_neighbor_bottom = reset_button.get_path()
+
+	# Set up bottom button navigation
+	if reset_button and close_button:
+		reset_button.focus_neighbor_right = close_button.get_path()
+		reset_button.focus_neighbor_left = close_button.get_path()
+		close_button.focus_neighbor_left = reset_button.get_path()
+		close_button.focus_neighbor_right = reset_button.get_path()
+		
+		# Connect back to items
+		if focusable_items.size() > 0:
+			reset_button.focus_neighbor_top = focusable_items[-1].get_path()
+			close_button.focus_neighbor_top = focusable_items[-1].get_path()
+
+	# Set initial focus
 	if focusable_items.size() > 0:
 		focusable_items[0].grab_focus()
+	elif close_button:
+		close_button.grab_focus()
 
 
 func _on_reset_button_pressed() -> void:

@@ -72,6 +72,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_lq5l4")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
@@ -122,6 +123,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 15
 
 [node name="ResetButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Reset"
