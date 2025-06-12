@@ -175,16 +175,16 @@ static func from_dict(data: Dictionary) -> LivingEntityStats:
 	var new_stats := LivingEntityStats.new()
 
 	# Load Base Stats
-	new_stats.max_health = data.get("max_health", 100.0)
+	new_stats.max_health = data.get("max_health", 300.0)
 	new_stats.max_stamina = data.get("max_stamina", 100.0)
-	new_stats.attack = data.get("attack", 10.0)
+	new_stats.attack = data.get("attack", 0.0)
 	new_stats.defense = data.get("defense", 0)
-	new_stats.speed = data.get("speed", 5.0)
-	new_stats.weight = data.get("weight", 10.0)
+	new_stats.speed = data.get("speed", 15.0)
+	new_stats.weight = data.get("weight", 3.0)
 
 	# Load Factors
-	new_stats.health_regen = data.get("health_regen", 1)
-	new_stats.stamina_regen = data.get("stamina_regen", 5)
+	new_stats.health_regen = data.get("health_regen", 0)
+	new_stats.stamina_regen = data.get("stamina_regen", 15)
 	new_stats.weight_factor = data.get("weight_factor", 0.07)
 
 	# Load Holder
