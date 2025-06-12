@@ -1,21 +1,23 @@
-[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=7 format=3 uid="uid://dfr8ywvkphcjj"]
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=9 format=3 uid="uid://kjvw8w4ooh5v"]
 
-[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="1_ndj5k"]
-[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_03qpr"]
-[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="5_l6qh6"]
-[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="6_pioq0"]
-[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="7_fjf5k"]
-[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="8_eydwq"]
+[ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="1_yuym4"]
+[ext_resource type="PackedScene" uid="uid://c51s5rs0dxnmr" path="res://entities/enemies/elder_centipede/elder_centipede.tscn" id="2_esbhv"]
+[ext_resource type="Texture2D" uid="uid://2ktdp66oojeb" path="res://resources/icons/fishhead.png" id="3_xo6ix"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="4_s18i1"]
+[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="5_od08r"]
+[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="6_eg7qt"]
+[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="7_cjw1q"]
+[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="8_sxu6b"]
 
 [resource]
-script = ExtResource("2_03qpr")
+script = ExtResource("4_s18i1")
 title = "The Sewers"
 description = "The Sewer is a brutal underground pit. Master the unforgiving environment to outwit your opponents and survive each round. 
 Only the most cunning chickens will emerge victorious from this putrid gauntlet."
-icon = ExtResource("1_ndj5k")
-standard_enemy_scenes = Array[PackedScene]([ExtResource("5_l6qh6"), ExtResource("6_pioq0"), ExtResource("7_fjf5k"), ExtResource("8_eydwq")])
-boss_enemy_scenes = Array[PackedScene]([])
-include_boss = false
-rounds = 2
-scene_to_load = 1
+icon = ExtResource("3_xo6ix")
+standard_enemy_scenes = Array[PackedScene]([ExtResource("5_od08r"), ExtResource("6_eg7qt"), ExtResource("7_cjw1q"), ExtResource("8_sxu6b")])
+boss_enemy_scenes = Array[PackedScene]([ExtResource("1_yuym4"), ExtResource("2_esbhv")])
+include_boss = true
+rounds = 3
+scene_to_load = 2
 metadata/_custom_type_script = "uid://ctoq181od8w0k"

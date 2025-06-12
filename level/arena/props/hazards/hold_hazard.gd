@@ -4,6 +4,15 @@ class_name HoldHazard
 extends BaseHazard
 
 @export var damage_interval: float = 2.0  ## Time between damage ticks
+@export var animation_name: StringName
+@export var animation_delay: float = 2.5
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+
+func _ready() -> void:
+	await get_tree().create_timer(randf_range(0.0, animation_delay)).timeout
+	animation_player.play(animation_name)
 
 
 func _process(delta: float) -> void:

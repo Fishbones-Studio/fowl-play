@@ -259,7 +259,7 @@ size = Vector3(10.5, 50, 16.2129)
 [sub_resource type="BoxShape3D" id="BoxShape3D_pnorv"]
 size = Vector3(15.2188, 50, 15.9202)
 
-[node name="Arena" type="StaticBody3D"]
+[node name="SewerArena" type="StaticBody3D"]
 script = ExtResource("1_wdiye")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -645,7 +645,7 @@ shape = SubResource("BoxShape3D_pnorv")
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 40, 0)
 volume_db = 30.0
-unit_size = 100.0
+unit_size = 400.0
 pause_eq_enabled = true
 pause_eq_band_2_db = -20.0
 pause_eq_band_3_db = -30.0
