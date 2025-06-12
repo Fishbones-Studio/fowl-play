@@ -135,29 +135,32 @@ script = ExtResource("16_c6cgu")
 [node name="LampRope" parent="Model" index="3"]
 transform = Transform3D(0.0523055, 0.00014008, -0.00236765, 0.000581342, 0.0499163, 0.0157961, 0.00229944, -0.0158062, 0.0498635, 2.00749, 11.117, 0.96857)
 
-[node name="Sphere" parent="Model/LampRope/Cylinder" index="0" node_paths=PackedStringArray("flicker_light", "flicker_timer", "audio_player")]
+[node name="LampController" type="Node3D" parent="Model/LampRope/Cylinder/Sphere" index="0" node_paths=PackedStringArray("flicker_light", "flicker_timer", "audio_player", "mesh")]
 script = ExtResource("8_c6cgu")
 flicker_light = NodePath("SpotLight3D")
 flicker_timer = NodePath("FlickerTimer")
-audio_player = NodePath("FlickerPlayer")
+audio_player = NodePath("../../../../../Audio/RandomMusicPlayer")
+mesh = NodePath("..")
 min_flicker_interval = 0.8
 max_flicker_interval = 1.2
-long_flicker_pause = 20.0
-flicker_duration_min = 0.08
-flicker_duration_max = 0.15
+flicker_duration_max = 0.08
+emission_flicker_intensity = 0.15
+original_emission_energy = 2.7
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Model/LampRope/Cylinder/Sphere" index="0"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Model/LampRope/Cylinder/Sphere/LampController"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_color = Color(0.764706, 0.843137, 0.423529, 1)
 light_energy = 5.0
 spot_range = 15.0
 
-[node name="FlickerTimer" type="Timer" parent="Model/LampRope/Cylinder/Sphere" index="1"]
+[node name="FlickerTimer" type="Timer" parent="Model/LampRope/Cylinder/Sphere/LampController"]
 
-[node name="FlickerPlayer" type="AudioStreamPlayer" parent="Model/LampRope/Cylinder/Sphere" index="2"]
+[node name="FlickerPlayer" type="AudioStreamPlayer" parent="Model/LampRope/Cylinder/Sphere/LampController"]
 process_mode = 3
 stream = ExtResource("9_78wky")
 bus = &"SFX"
+
+[node name="SwitchTimer" type="Timer" parent="Model/LampRope/Cylinder/Sphere/LampController"]
 
 [node name="Grinder" parent="Model" index="5"]
 transform = Transform3D(0.748354, 0, -1.82267, 0, 1.97032, 0, 1.82267, 0, 0.748354, -3.45688, -0.63457, -13.2331)
@@ -372,6 +375,9 @@ index = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Arenas"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_x5v8y")
+
+[connection signal="timeout" from="Model/LampRope/Cylinder/Sphere/LampController/FlickerTimer" to="Model/LampRope/Cylinder/Sphere/LampController" method="_on_flicker_timer_timeout"]
+[connection signal="timeout" from="Model/LampRope/Cylinder/Sphere/LampController/SwitchTimer" to="Model/LampRope/Cylinder/Sphere/LampController" method="_on_switch_timer_timeout"]
 
 [editable path="Model"]
 [editable path="Model/Cage/chicken_default"]
