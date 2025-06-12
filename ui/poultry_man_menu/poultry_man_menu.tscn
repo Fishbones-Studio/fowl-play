@@ -101,7 +101,7 @@ sky_mode = 2
 script = ExtResource("5_x5v8y")
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["gameplay_camera"]]
-transform = Transform3D(1, 0, 0, 0, 0.865151, 0.501511, 0, -0.501511, 0.865151, 0.2, 9.5, 9.153)
+transform = Transform3D(1, 0, 0, 0, 0.865151, 0.501511, 0, -0.501511, 0.865151, 1, 9.5, 9.263)
 cull_mask = 1047553
 current = true
 
@@ -163,10 +163,9 @@ bus = &"SFX"
 [node name="Grinder" parent="Model" index="5"]
 transform = Transform3D(0.748354, 0, -1.82267, 0, 1.97032, 0, 1.82267, 0, 0.748354, -3.45688, -0.63457, -13.2331)
 
-[node name="Sacrifice" type="StaticBody3D" parent="Model/Grinder" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="Sacrifice" type="StaticBody3D" parent="Model/Grinder" index="0" node_paths=PackedStringArray("focusable_objects")]
 script = ExtResource("6_dqtu2")
 focusable_objects = [NodePath(".."), NodePath("../../GrinderBlade"), NodePath("../../GrinderBlade_001"), NodePath("../../GrinderBlade_002"), NodePath("../../GrinderBlade_003"), NodePath("../../GrinderBlade_004"), NodePath("../../GrinderBlade_005"), NodePath("../../GrinderBlade_006"), NodePath("../../GrinderBlade_007"), NodePath("../../GrinderBlade_008"), NodePath("../../GrinderBlade_009")]
-label = NodePath("")
 index = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Grinder/Sacrifice"]
@@ -174,7 +173,7 @@ transform = Transform3D(1.1, 0, 1.49012e-07, 0, 1.1, 0, -1.49012e-07, 0, 1.1, 0.
 shape = SubResource("ConvexPolygonShape3D_28ypn")
 
 [node name="SacrificeLabel" type="Label3D" parent="Model/Grinder" index="1"]
-transform = Transform3D(0.026177, 0, 0.999657, 0, 1, 0, -0.999657, 0, 0.026177, 1.603, 4.3, -0.533)
+transform = Transform3D(0.0261771, 0, 0.999657, 0, 1, 0, -0.999657, 0, 0.0261771, 2.16045, 4.33971, -0.128592)
 modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Sacrifice"
@@ -220,11 +219,10 @@ index = 2
 [node name="Cage" type="CollisionShape3D" parent="Model/Cage/RebirthShop"]
 shape = SubResource("ConvexPolygonShape3D_foq5l")
 
-[node name="Equipment" type="StaticBody3D" parent="Model/Cleaver" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="Equipment" type="StaticBody3D" parent="Model/Cleaver" index="0" node_paths=PackedStringArray("focusable_objects")]
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
 focusable_objects = [NodePath(".."), NodePath("../../Eggs"), NodePath("../../EggNest")]
-label = NodePath("")
 index = 1
 
 [node name="CleaverShape" type="CollisionShape3D" parent="Model/Cleaver/Equipment"]
@@ -244,11 +242,10 @@ shape = SubResource("ConvexPolygonShape3D_q1238")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Tabel/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_c6cgu")
 
-[node name="EquipmentShop" type="StaticBody3D" parent="Model/ShopSign" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="EquipmentShop" type="StaticBody3D" parent="Model/ShopSign" index="0" node_paths=PackedStringArray("focusable_objects")]
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
 focusable_objects = [NodePath("..")]
-label = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/ShopSign/EquipmentShop"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -285,11 +282,10 @@ rotation_edit_mode = 1
 mesh = SubResource("PlaneMesh_qvty8")
 skeleton = NodePath("../..")
 
-[node name="Arenas" type="StaticBody3D" parent="Model/Flyer" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="Arenas" type="StaticBody3D" parent="Model/Flyer" node_paths=PackedStringArray("focusable_objects")]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, -1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
 script = ExtResource("13_dqtu2")
 focusable_objects = [NodePath("..")]
-label = NodePath("")
 index = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Flyer/Arenas"]
@@ -310,16 +306,19 @@ metadata/_custom_type_script = "uid://di546rbu7b42s"
 transform = Transform3D(0.244264, 0.373275, -0.304304, -0.451853, 0.295684, 0, 0.166626, 0.254631, 0.446093, -1.322, 4.504, -5.453)
 
 [node name="Sphere_001" parent="Model/BallChicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583026, 0.359968, 0.0122451, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
 
 [node name="Sphere_002" parent="Model/BallChicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854378, -0.0245267, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
+transform = Transform3D(0.215651, 0.0854379, -0.0245268, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
 
 [node name="Sphere_003" parent="Model/BallChicken/Sphere" index="4"]
 transform = Transform3D(0.0413089, 0.0520154, -0.0812715, 0.022335, 0.0808505, 0.0630985, 0.0938712, -0.0421269, 0.0207511, -0.737007, 0.707179, 0.157209)
 
 [node name="Sphere_004" parent="Model/BallChicken/Sphere" index="5"]
-transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+
+[node name="AnimationPlayer" parent="Model/BallChicken" index="1"]
+autoplay = "Idle"
 
 [node name="RebirthShoplabel" type="Label3D" parent="Model/BallChicken"]
 transform = Transform3D(-0.0632484, -0.935136, 0.348595, -0.0122221, 0.349994, 0.936671, -0.997923, 0.0549824, -0.0335656, -2.423, 3.151, -0.416)
