@@ -62,8 +62,6 @@ func _start_balloon(balloon: Node, resource: DialogueResource, title: String, ex
 
 
 func _on_wrapper_dialogue_ended(_resource: DialogueResource) -> void:
-	print("aa")
-	print(_resource)
 	var balloon_in_list = UIManager.ui_list.get(UIEnums.UI.DIALOGUE_BALLOON)
 	if is_instance_valid(balloon_in_list):
 		UIManager.toggle_ui(UIEnums.UI.DIALOGUE_BALLOON)
