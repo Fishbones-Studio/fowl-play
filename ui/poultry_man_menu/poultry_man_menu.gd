@@ -2,8 +2,7 @@ extends Node3D
 
 # Exported Variables
 @export var input_handler: Node
-@export var light_handler: Node
-@export var default_focused_item_name: StringName = &"Flyer"
+@export var default_focused_item_name: StringName = &"Arenas"
 
 # Navigation State
 var current_index: int = 0
@@ -13,9 +12,9 @@ var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
 
 var menu_actions: Dictionary[StringName, UIEnums.UI] = {
-	&"Flyer": UIEnums.UI.ARENAS,
-	&"Shop": UIEnums.UI.POULTRYMAN_SHOP,
-	&"Inventory": UIEnums.UI.CHICKEN_INVENTORY,
+	&"Arenas": UIEnums.UI.ARENAS,
+	&"EquipmentShop": UIEnums.UI.POULTRYMAN_SHOP,
+	&"Equipment": UIEnums.UI.CHICKEN_INVENTORY,
 	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
 	&"RebirthShop": UIEnums.UI.REBIRTH_SHOP
 }
@@ -32,6 +31,7 @@ func _ready() -> void:
 func _initialize_focusable_items() -> void:
 	# Get all focusable items
 	focusable_items = _get_focusable_items()
+
 	if focusable_items.is_empty():
 		printerr("No focusable items found. Disabling navigation.")
 		return
@@ -77,20 +77,31 @@ func _find_item_index_by_name(item_name: StringName) -> int:
 
 
 func _get_focusable_items() -> Array[Focusable3D]:
-	var items: Array[Focusable3D] = []
-	# Get all nodes in the "focusable_items" group and filter for Focusable3D
+	var items: Dictionary = {}
 	var group_nodes: Array[Node] = get_tree().get_nodes_in_group("focusable_items")
+
 	for node in group_nodes:
-		if node is Focusable3D and is_ancestor_of(node): # Ensure item is child of this menu
-			items.append(node)
+		if node is Focusable3D and is_ancestor_of(node):
+			items[node] = node.index
+
 	# If no items are found via the group, try finding Focusable3D children
 	if items.is_empty():
 		items = _find_focusable_children()
-	return items
+
+	var sorted_values: Array[int] = items.values()
+	var sorted_items: Array[Focusable3D] = []
+	var keys: Array[Node] = items.keys()
+
+	sorted_values.sort_custom(func(a, b): return a > b)
+
+	for index in sorted_values:
+		sorted_items.append(items.find_key(index))
+
+	return sorted_items
 
 
-func _find_focusable_children() -> Array[Focusable3D]:
-	var result: Array[Focusable3D] = []
+func _find_focusable_children() -> Dictionary:
+	var result: Dictionary[Node, int] = {}
 	var visited: Dictionary = {}
 	var stack: Array[Node] = [self]
 
@@ -102,7 +113,7 @@ func _find_focusable_children() -> Array[Focusable3D]:
 		visited[current_node] = true
 
 		if current_node is Focusable3D and current_node != self:
-			result.append(current_node)
+			result[current_node] = current_node.index
 
 		for child in current_node.get_children():
 			if child not in visited:
@@ -192,7 +203,7 @@ func _unfocus_all_items() -> void:
 
 func _preload_items() -> void:
 	print("Adding UI menu items in poultry man menu...")
-	# for all menu_actions, call SignalManager.add_ui_scene
+	# For all menu_actions, call SignalManager.add_ui_scene
 	for scene_enum_value in menu_actions.values():
 		SignalManager.add_ui_scene.emit(scene_enum_value, {}, false)
 	print("UI loaded for poultry man menu")
@@ -201,6 +212,7 @@ func _preload_items() -> void:
 func reset_highlights() -> void:
 	if is_updating_focus: # Prevent issues if called during a focus update
 		return
+
 	# Only reset if not hovering (keyboard nav is already false or handled by _on_keyboard_navigation_deactivated)
 	if is_mouse_hovering:
 		return
@@ -213,6 +225,7 @@ func reset_highlights() -> void:
 func highlight_current_item() -> void:
 	if is_updating_focus or focusable_items.is_empty():
 		return
+
 	# Ensure current_index is valid before attempting to access focusable_items
 	if current_index < 0 or current_index >= focusable_items.size():
 		# This might happen if items are removed dynamically, adjust current_index

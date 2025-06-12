@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8qivryw6ihb4"]
+[gd_scene load_steps=5 format=3 uid="uid://b8qivryw6ihb4"]
 
 [ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_l8km2"]
 [ext_resource type="Script" uid="uid://5qxt35wq354t" path="res://level/arena/props/interactable/healing_station/healing_station.gd" id="2_i3g3c"]
+[ext_resource type="PackedScene" uid="uid://ew78j14x7qdo" path="res://level/arena/props/interactable/healing_station/art/EggNest.glb" id="3_rcyvk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cpbnj"]
+size = Vector3(4.02777, 2.38867, 3.79367)
 
 [node name="HealingStation" instance=ExtResource("1_l8km2")]
 script = ExtResource("2_i3g3c")
@@ -10,8 +14,12 @@ cost = 10
 currency_type = 0
 interact_label_placeholder_text = "Press          to heal %d (costs %d %s)"
 
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.421539, 0.924072, -0.90184)
+shape = SubResource("BoxShape3D_cpbnj")
+
 [node name="NameLabel" parent="." index="1"]
 text = "Healing "
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="." index="4"]
-outer_radius = 3.956
+[node name="EggNest" parent="." index="4" instance=ExtResource("3_rcyvk")]
+transform = Transform3D(0.898794, -0.438371, 0, 0.438371, 0.898794, 0, 0, 0, 1, 4.44827, -2.48383, -1.33121)
