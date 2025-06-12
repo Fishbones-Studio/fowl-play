@@ -1,7 +1,9 @@
 class_name SkillTreeItem
 extends PanelContainer
 
-signal skill_tree_item_focussed(upgrade_type : StatsEnums.UpgradeTypes, bonus_value : float)
+signal skill_tree_item_focussed(upgrade_type: StatsEnums.UpgradeTypes, bonus_value: float)
+signal skill_tree_item_unfocussed(upgrade_type: StatsEnums.UpgradeTypes)
+signal upgrade_bought()
 
 @export var upgrade_type: StatsEnums.UpgradeTypes
 
@@ -28,7 +30,7 @@ func _ready() -> void:
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
 	
-	# Making the buy button not focussable, when using controller/keyboad purchases can be made pressing the ui_accept buton
+	# Making the buy button not focussable
 	if buy_button:
 		buy_button.focus_mode = Control.FOCUS_NONE
 
@@ -49,7 +51,6 @@ func init(
 	_upgrade: PermUpgradesResource,
 	_copied_stats: LivingEntityStats
 ) -> void:
-	print(_upgrade)
 	upgrade_type = _upgrade_type
 	upgrade_resource = _upgrade
 	upgrade_resource.current_level = SaveManager.get_loaded_player_upgrades().get(upgrade_type, 0)
@@ -66,6 +67,11 @@ func _on_buy_button_pressed() -> void:
 		update_ui_elements()
 		apply_upgrade()
 		save_upgrades()
+		upgrade_bought.emit()
+		
+		# Re-emit focus signal with updated bonus value
+		if has_focus():
+			_emit_focus_signal()
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
 
@@ -74,13 +80,44 @@ func _on_focus_entered() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
-	# TODO: preview
+	_emit_focus_signal()
 
 
 func _on_focus_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
+	skill_tree_item_unfocussed.emit(upgrade_type)
+
+
+func _emit_focus_signal() -> void:
+	var bonus_value: float = _get_next_level_bonus()
+	skill_tree_item_focussed.emit(upgrade_type, bonus_value)
+
+
+func _get_next_level_bonus() -> float:
+	if not upgrade_resource or upgrade_resource.current_level >= upgrade_resource.max_level:
+		return 0.0
+	
+	var upgrade_bonus = upgrade_resource.get_upgrade_resource()
+	if not upgrade_bonus:
+		return 0.0
+	
+	match upgrade_type:
+		StatsEnums.UpgradeTypes.MAX_HEALTH:
+			return upgrade_bonus.health_bonus
+		StatsEnums.UpgradeTypes.STAMINA:
+			return upgrade_bonus.stamina_bonus
+		StatsEnums.UpgradeTypes.DAMAGE:
+			return upgrade_bonus.attack_bonus
+		StatsEnums.UpgradeTypes.DEFENSE:
+			return upgrade_bonus.defense_bonus
+		StatsEnums.UpgradeTypes.SPEED:
+			return upgrade_bonus.speed_bonus
+		StatsEnums.UpgradeTypes.WEIGHT:
+			return upgrade_bonus.weight_bonus
+		_:
+			return 0.0
 
 
 func can_afford_upgrade() -> bool:

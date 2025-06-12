@@ -6,9 +6,10 @@ extends HBoxContainer
 
 @onready var stat_label: Label = $StatLabel
 @onready var base_stat_value_label: Label = $BaseStatValueLabel
-@onready var change_stat_value_label: Label = $ChangeStatValueLabel
+@onready var change_stat_value_label: RichTextLabel = $ChangeStatValueLabel
 
 var _base_value: float = 0.0
+var _preview_bonus: float = 0.0
 
 func _ready() -> void:
 	if not _is_stat_valid():
@@ -41,9 +42,41 @@ func update_change_value(current_value: float) -> void:
 	if not _is_stat_valid():
 		return
 	
-	var change: float = current_value - _base_value
+	var change: float = current_value - _base_value + _preview_bonus
+	_update_display(change)
+
+
+## Show a preview bonus (highlighting potential upgrade)
+func show_preview_bonus(bonus: float) -> void:
+	if not _is_stat_valid():
+		return
 	
-	change_stat_value_label.text = "%.1f" % change if change != 0 else ""
+	_preview_bonus = bonus
+	var change: float = _preview_bonus
+	_update_display(change, true)
+
+
+## Clear the preview bonus
+func clear_preview_bonus() -> void:
+	if not _is_stat_valid():
+		return
+	
+	_preview_bonus = 0.0
+	_update_display(0.0)
+
+
+func _update_display(change: float, is_preview: bool = false) -> void:
+	if change == 0:
+		change_stat_value_label.text = ""
+		return
+	
+	var text: String = "%s %.1f" % ["" if (change < 0) else "+", change]
+	if is_preview:
+		# Add visual indication that this is a preview
+		change_stat_value_label.text = "[color=yellow]%s[/color]" % text
+	else:
+		change_stat_value_label.text = text
+
 
 func _is_stat_valid() -> bool:
 	if stat == null:

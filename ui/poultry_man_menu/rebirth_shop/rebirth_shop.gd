@@ -10,7 +10,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 @onready var reset_label: RichTextLabel = %ResetLabel
 @onready var close_button: Button = %CloseButton
 @onready var reset_button: Button = %ResetButton
-@onready var chicken_stat_container : ChickenStatsContainer
+@onready var chicken_stat_container: ChickenStatsContainer = %ChickenStatsContainer
 
 
 func _ready() -> void:
@@ -31,7 +31,7 @@ func _on_close_button_pressed() -> void:
 
 
 func _refresh_shop() -> void:
-	# Immediately remove and free old children, This prevents race conditions with queue_free()
+	# Immediately remove and free old children
 	for child in items.get_children():
 		items.remove_child(child)
 		child.free()
@@ -48,13 +48,29 @@ func _refresh_shop() -> void:
 				var skill_tree_item: SkillTreeItem = SKILL_TREE_ITEM.instantiate()
 				items.add_child(skill_tree_item)
 				skill_tree_item.init(upgrade_type, upgrade_resource, copied_stats)
+				
+				# Connect the skill tree item signals
+				skill_tree_item.skill_tree_item_focussed.connect(_on_skill_tree_item_focussed)
+				skill_tree_item.skill_tree_item_unfocussed.connect(_on_skill_tree_item_unfocussed)
+				skill_tree_item.upgrade_bought.connect(chicken_stat_container.update_base_values)
+				
 		if i < upgrade_types.size() - 1:
 			var separator = HSeparator.new()
 			separator.add_theme_constant_override("separation", 25)
 			items.add_child(separator)
 	
-	# --- FIX: Re-run navigation setup after creating new items ---
+	# Re-run navigation setup after creating new items
 	_setup_controller_navigation()
+
+
+func _on_skill_tree_item_focussed(upgrade_type: StatsEnums.UpgradeTypes, bonus_value: float) -> void:
+	if chicken_stat_container:
+		chicken_stat_container.preview_stat_change(upgrade_type, bonus_value)
+
+
+func _on_skill_tree_item_unfocussed(upgrade_type: StatsEnums.UpgradeTypes) -> void:
+	if chicken_stat_container:
+		chicken_stat_container.clear_stat_preview(upgrade_type)
 
 
 func _get_available_items_grouped() -> Dictionary:
@@ -163,24 +179,8 @@ func _on_reset_button_pressed() -> void:
 				CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
 					total_eggs_refund += refund
 
-			# Debug print for verification
-			print(
-				"Refunding ", upgrade_type, 
-				" (Level ", current_level, 
-				"): Cost=", total_cost, 
-				" Refund=", refund
-			)
-
-	# Apply the calculated refunds
 	GameManager.feathers_of_rebirth += total_feathers_refund
 	GameManager.prosperity_eggs += total_eggs_refund
-	print(
-		"Total Refunded: ",
-		total_feathers_refund,
-		" Feathers, ",
-		total_eggs_refund,
-		" Eggs."
-	)
 
 	# Reset the player's upgrades and player's stats to default
 	SaveManager.save_player_upgrades({})

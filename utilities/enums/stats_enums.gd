@@ -8,7 +8,8 @@ enum Stats {
 	SPEED,
 	WEIGHT,
 	HEALTH_REGEN,
-	STAMINA_REGEN
+	STAMINA_REGEN,
+	NONE
 }
 
 enum UpgradeTypes {

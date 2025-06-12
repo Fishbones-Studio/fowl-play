@@ -29,11 +29,12 @@ theme_type_variation = &"ChickenStatValueLabel"
 text = "Stat Value"
 vertical_alignment = 1
 
-[node name="ChangeStatValueLabel" type="Label" parent="."]
+[node name="ChangeStatValueLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(120, 36)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_type_variation = &"ChickenStatValueLabel"
+bbcode_enabled = true
 text = "Update"
 vertical_alignment = 1
