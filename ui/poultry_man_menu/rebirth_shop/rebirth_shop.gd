@@ -15,7 +15,6 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 func _ready() -> void:
 	shop_title_label.text = "Rebirth Shop"
 	_refresh_shop()
-	_setup_controller_navigation()
 	
 	visibility_changed.connect(
 		func():
@@ -31,8 +30,10 @@ func _on_close_button_pressed() -> void:
 
 
 func _refresh_shop() -> void:
+	# Immediately remove and free old children, This prevents race conditions with queue_free()
 	for child in items.get_children():
-		child.queue_free()
+		items.remove_child(child)
+		child.free()
 
 	var copied_stats = SaveManager.get_loaded_player_stats()
 	var available_upgrades: Dictionary = _get_available_items_grouped()
@@ -50,6 +51,9 @@ func _refresh_shop() -> void:
 			var separator = HSeparator.new()
 			separator.add_theme_constant_override("separation", 25)
 			items.add_child(separator)
+	
+	# --- FIX: Re-run navigation setup after creating new items ---
+	_setup_controller_navigation()
 
 
 func _get_available_items_grouped() -> Dictionary:
@@ -59,6 +63,7 @@ func _get_available_items_grouped() -> Dictionary:
 
 
 func _setup_controller_navigation() -> void:
+	# Wait for the engine to process the newly added children
 	await get_tree().process_frame
 
 	var focusable_items: Array[Control] = []
@@ -69,6 +74,7 @@ func _setup_controller_navigation() -> void:
 			child.focus_mode = Control.FOCUS_ALL
 			focusable_items.append(child)
 		elif child is Control:
+			# Ensure separators are not focusable
 			child.focus_mode = Control.FOCUS_NONE
 
 	# Set up close and reset buttons
@@ -84,11 +90,13 @@ func _setup_controller_navigation() -> void:
 		# Set up vertical navigation
 		if i > 0:
 			current_item.focus_neighbor_top = focusable_items[i - 1].get_path()
+		else:
+			# Prevent navigating up from the first item
+			current_item.focus_neighbor_top = current_item.get_path()
+			
 		if i < focusable_items.size() - 1:
 			current_item.focus_neighbor_bottom = focusable_items[i + 1].get_path()
-		
-		# Connect to buttons at the bottom
-		if i == focusable_items.size() - 1:  # Last item
+		else:  # Last item connects to the reset button
 			if reset_button:
 				current_item.focus_neighbor_bottom = reset_button.get_path()
 
@@ -99,15 +107,16 @@ func _setup_controller_navigation() -> void:
 		close_button.focus_neighbor_left = reset_button.get_path()
 		close_button.focus_neighbor_right = reset_button.get_path()
 		
-		# Connect back to items
+		# Connect back to the last item
 		if focusable_items.size() > 0:
-			reset_button.focus_neighbor_top = focusable_items[-1].get_path()
-			close_button.focus_neighbor_top = focusable_items[-1].get_path()
+			var last_item_path: NodePath = focusable_items[-1].get_path()
+			reset_button.focus_neighbor_top = last_item_path
+			close_button.focus_neighbor_top = last_item_path
 
 	# Set initial focus
 	if focusable_items.size() > 0:
 		focusable_items[0].grab_focus()
-	elif close_button:
+	elif close_button: # Fallback if there are no items
 		close_button.grab_focus()
 
 
@@ -176,5 +185,5 @@ func _on_reset_button_pressed() -> void:
 	SaveManager.save_player_upgrades({})
 	SaveManager.save_player_stats(SaveManager.get_default_player_stats())
 
-	# Refresh the UI to show 0 levels and updated currency
+	# Rebuild the UI and the controller navigation
 	_refresh_shop()
