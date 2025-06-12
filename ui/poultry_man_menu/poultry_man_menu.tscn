@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://bf0qc1ltknd4p" path="res://ui/poultry_man_menu/flyers/art/flyer.gd" id="13_dqtu2"]
 [ext_resource type="Shader" uid="uid://c5bs0ajatg6c0" path="res://ui/poultry_man_menu/flyers/art/flyer.gdshader" id="13_x5v8y"]
 [ext_resource type="Texture2D" uid="uid://javeeq4ykkru" path="res://ui/poultry_man_menu/flyers/art/FOWLPLAY_poster_1_vertical.png" id="14_dqtu2"]
-[ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="14_qvty8"]
+[ext_resource type="PackedScene" uid="uid://2h3lj68s6hik" path="res://entities/chicken_player/art/chicken_default.glb" id="15_c6cgu"]
 [ext_resource type="PackedScene" uid="uid://dbn8txk00v2gh" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.glb" id="15_qvty8"]
 [ext_resource type="Script" uid="uid://c4vv871ckrkmj" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.gd" id="16_c6cgu"]
 
@@ -213,7 +213,7 @@ transform = Transform3D(0.742387, 1.87538, -0.803886, 1.61127, -0.0139975, 1.455
 
 [node name="RebirthShop" type="StaticBody3D" parent="Model/Cage" index="0" node_paths=PackedStringArray("focusable_objects")]
 script = ExtResource("6_dqtu2")
-focusable_objects = [NodePath(".."), NodePath("../../CageOuter"), NodePath("../../BallChicken/Sphere"), NodePath("../../Eggshell")]
+focusable_objects = [NodePath(".."), NodePath("../../CageOuter"), NodePath(""), NodePath("../../Eggshell")]
 index = 2
 
 [node name="Cage" type="CollisionShape3D" parent="Model/Cage/RebirthShop"]
@@ -302,32 +302,28 @@ font_size = 125
 script = ExtResource("11_qvty8")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
-[node name="BallChicken" parent="Model" instance=ExtResource("14_qvty8")]
-transform = Transform3D(0.244264, 0.373275, -0.304304, -0.451853, 0.295684, 0, 0.166626, 0.254631, 0.446093, -1.322, 4.504, -5.453)
+[node name="chicken_default" parent="Model" instance=ExtResource("15_c6cgu")]
+transform = Transform3D(-3.49691e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.49691e-08, -1.322, 5.0736, -5.453)
 
-[node name="Sphere_001" parent="Model/BallChicken/Sphere" index="2"]
-transform = Transform3D(0.341492, 0.0513028, 0.117803, -0.0583027, 0.359968, 0.0122452, -0.1145, -0.0302847, 0.345107, 0.186526, 0.724427, 0.0605452)
+[node name="Skeleton3D" parent="Model/chicken_default/Armature" index="0"]
+bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
+bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
+bones/3/rotation = Quaternion(-0.514094, 0.00303936, -0.0152266, 0.857593)
+bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
+bones/5/rotation = Quaternion(-0.269247, 0.0536865, -0.608223, 0.744774)
+bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572917)
+bones/7/rotation = Quaternion(-0.298197, -0.0458455, 0.626537, 0.718629)
+bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
+bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
+bones/10/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
+bones/11/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
+bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
+bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
+bones/13/rotation = Quaternion(-0.225762, -8.30913e-17, -8.30913e-17, 0.974182)
 
-[node name="Sphere_002" parent="Model/BallChicken/Sphere" index="3"]
-transform = Transform3D(0.215651, 0.0854379, -0.0245268, -0.0878413, 0.214688, -0.0244904, 0.0136041, 0.031879, 0.230663, -0.219024, -0.459037, 0.689051)
-
-[node name="Sphere_003" parent="Model/BallChicken/Sphere" index="4"]
-transform = Transform3D(0.0413089, 0.0520154, -0.0812715, 0.022335, 0.0808505, 0.0630985, 0.0938712, -0.0421269, 0.0207511, -0.737007, 0.707179, 0.157209)
-
-[node name="Sphere_004" parent="Model/BallChicken/Sphere" index="5"]
-transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
-
-[node name="AnimationPlayer" parent="Model/BallChicken" index="1"]
+[node name="AnimationPlayer" parent="Model/chicken_default" index="1"]
 autoplay = "Idle"
-
-[node name="RebirthShoplabel" type="Label3D" parent="Model/BallChicken"]
-transform = Transform3D(-0.0632484, -0.935136, 0.348595, -0.0122221, 0.349994, 0.936671, -0.997923, 0.0549824, -0.0335656, -2.423, 3.151, -0.416)
-modulate = Color(0.764706, 0.843137, 0.423529, 1)
-outline_modulate = Color(0, 0, 0, 0)
-text = "Rebirth Shop"
-font_size = 200
-script = ExtResource("11_qvty8")
-metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -354,4 +350,4 @@ light_color = Color(0.764706, 0.843137, 0.423529, 1)
 omni_attenuation = 0.7
 
 [editable path="Model"]
-[editable path="Model/BallChicken"]
+[editable path="Model/chicken_default"]
