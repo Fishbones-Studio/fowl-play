@@ -3,15 +3,15 @@ extends Label3D
 
 @export_range(1, 20) var visual_layer: int = 3
 ## When true, makes the label rotate towards the player
-@export var label_lookat_player := false :
+@export var label_look_at_player := false :
 	set(value):
-		label_lookat_player = value
+		label_look_at_player = value
 		set_process(value)
 
 
 func _ready() -> void:
 	layers = 1 << (visual_layer - 1)
-	set_process(label_lookat_player)
+	set_process(label_look_at_player)
 
 
 func _process(_delta: float) -> void:

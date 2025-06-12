@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=32 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c4docd5kunare" path="res://ui/poultry_man_menu/game_menu_handlers/focusable_3d.gd" id="6_dqtu2"]
 [ext_resource type="Script" uid="uid://bj8475cy5gkhs" path="res://ui/poultry_man_menu/game_menu_handlers/lamp_controller.gd" id="8_c6cgu"]
 [ext_resource type="AudioStream" uid="uid://bim16r728grd7" path="res://ui/poultry_man_menu/art/light_switch.ogg" id="9_78wky"]
+[ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="11_qvty8"]
 [ext_resource type="Script" uid="uid://bf0qc1ltknd4p" path="res://ui/poultry_man_menu/flyers/art/flyer.gd" id="13_dqtu2"]
 [ext_resource type="Shader" uid="uid://c5bs0ajatg6c0" path="res://ui/poultry_man_menu/flyers/art/flyer.gdshader" id="13_x5v8y"]
 [ext_resource type="Texture2D" uid="uid://javeeq4ykkru" path="res://ui/poultry_man_menu/flyers/art/FOWLPLAY_poster_1_vertical.png" id="14_dqtu2"]
@@ -165,7 +166,7 @@ transform = Transform3D(0.748354, 0, -1.82267, 0, 1.97032, 0, 1.82267, 0, 0.7483
 [node name="Sacrifice" type="StaticBody3D" parent="Model/Grinder" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
 script = ExtResource("6_dqtu2")
 focusable_objects = [NodePath(".."), NodePath("../../GrinderBlade"), NodePath("../../GrinderBlade_001"), NodePath("../../GrinderBlade_002"), NodePath("../../GrinderBlade_003"), NodePath("../../GrinderBlade_004"), NodePath("../../GrinderBlade_005"), NodePath("../../GrinderBlade_006"), NodePath("../../GrinderBlade_007"), NodePath("../../GrinderBlade_008"), NodePath("../../GrinderBlade_009")]
-label = NodePath("../SacrificeLabel")
+label = NodePath("")
 index = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Grinder/Sacrifice"]
@@ -178,6 +179,8 @@ modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Sacrifice"
 font_size = 75
+script = ExtResource("11_qvty8")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="GrinderBlade" parent="Model" index="6"]
 transform = Transform3D(-0.149355, 1.89458, -1.05009, 2.1493, -0.00135445, -0.30814, -0.269527, -1.06065, -1.87531, -1.7511, 5.19631, -13.8945)
@@ -209,10 +212,9 @@ transform = Transform3D(-0.159853, 1.85631, -1.11488, 2.14929, -9.39485e-08, -0.
 [node name="GrinderBlade_009" parent="Model" index="15"]
 transform = Transform3D(0.742387, 1.87538, -0.803886, 1.61127, -0.0139975, 1.45535, 1.25184, -1.09415, -1.39648, -5.16014, 5.35999, -12.3622)
 
-[node name="RebirthShop" type="StaticBody3D" parent="Model/Cage" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="RebirthShop" type="StaticBody3D" parent="Model/Cage" index="0" node_paths=PackedStringArray("focusable_objects")]
 script = ExtResource("6_dqtu2")
 focusable_objects = [NodePath(".."), NodePath("../../CageOuter"), NodePath("../../BallChicken/Sphere"), NodePath("../../Eggshell")]
-label = NodePath("")
 index = 2
 
 [node name="Cage" type="CollisionShape3D" parent="Model/Cage/RebirthShop"]
@@ -222,7 +224,7 @@ shape = SubResource("ConvexPolygonShape3D_foq5l")
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
 focusable_objects = [NodePath(".."), NodePath("../../Eggs"), NodePath("../../EggNest")]
-label = NodePath("../../Eggs/EquipmentLabel")
+label = NodePath("")
 index = 1
 
 [node name="CleaverShape" type="CollisionShape3D" parent="Model/Cleaver/Equipment"]
@@ -246,7 +248,7 @@ shape = SubResource("ConcavePolygonShape3D_c6cgu")
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
 focusable_objects = [NodePath("..")]
-label = NodePath("../EquipmentShopLabel")
+label = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/ShopSign/EquipmentShop"]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -258,6 +260,8 @@ modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Equipment Shop"
 font_size = 125
+script = ExtResource("11_qvty8")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="EggNest" parent="Model" index="35"]
 transform = Transform3D(1.33815, 0.523009, -0.0436005, -0.523977, 1.33815, -0.029684, 0.0297895, 0.0435285, 1.43642, -2.63003, 4.08248, 0.481946)
@@ -272,6 +276,8 @@ modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Equipment"
 font_size = 200
+script = ExtResource("11_qvty8")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Flyer" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-0.899673, 0.417834, 0.675279, 0.354008, 1.12447, -0.224133, -0.710821, 0.0311728, -0.966314, 2.81235, 1.88347, -2.70725)
@@ -283,7 +289,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, -1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
 script = ExtResource("13_dqtu2")
 focusable_objects = [NodePath("..")]
-label = NodePath("../ArenasLabel")
+label = NodePath("")
 index = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Flyer/Arenas"]
@@ -297,6 +303,8 @@ modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Arenas"
 font_size = 125
+script = ExtResource("11_qvty8")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="BallChicken" parent="Model" instance=ExtResource("14_qvty8")]
 transform = Transform3D(0.244264, 0.373275, -0.304304, -0.451853, 0.295684, 0, 0.166626, 0.254631, 0.446093, -1.322, 4.504, -5.453)
@@ -319,6 +327,8 @@ modulate = Color(0.764706, 0.843137, 0.423529, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Rebirth Shop"
 font_size = 200
+script = ExtResource("11_qvty8")
+metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Lights" type="Node3D" parent="."]
 
