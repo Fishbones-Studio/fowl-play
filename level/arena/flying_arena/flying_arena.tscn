@@ -181,7 +181,7 @@ spot_angle = 40.0
 spot_angle_attenuation = 0.5
 
 [node name="SpotLight3D6" type="SpotLight3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 9.90938, 37.3521)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 9.5, 37.352)
 light_color = Color(0.551522, 0.437241, 0.176082, 1)
 light_energy = 30.0
 light_indirect_energy = 2.0
@@ -191,7 +191,6 @@ shadow_enabled = true
 shadow_bias = 3.0
 shadow_normal_bias = 4.0
 spot_range = 15.0
-spot_attenuation = -0.5
 spot_angle = 25.0
 spot_angle_attenuation = 0.15
 
@@ -206,7 +205,6 @@ shadow_enabled = true
 shadow_bias = 3.0
 shadow_normal_bias = 4.0
 spot_range = 10.0
-spot_attenuation = -0.5
 spot_angle = 35.52
 spot_angle_attenuation = 0.2
 
@@ -221,7 +219,6 @@ shadow_enabled = true
 shadow_bias = 3.0
 shadow_normal_bias = 4.0
 spot_range = 10.0
-spot_attenuation = -0.5
 spot_angle = 22.58
 spot_angle_attenuation = 0.2
 
