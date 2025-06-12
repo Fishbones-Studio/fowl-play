@@ -62,7 +62,7 @@ point_count = 7
 script = ExtResource("1_xii2b")
 
 [node name="IntermissionArea" parent="." node_paths=PackedStringArray("round_handler") instance=ExtResource("2_6gtgk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 200, 0)
 round_handler = NodePath("../RoundHandler")
 
 [node name="IntermissionPosition" type="Marker3D" parent="IntermissionArea"]
@@ -160,7 +160,7 @@ transform = Transform3D(-0.376764, -0.00337939, 0.926304, -0.00179899, 0.999994,
 curve = SubResource("Curve3D_rhqlf")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/SewerArena/Saws/Path3D2"]
-transform = Transform3D(-0.0082586, -0.0115357, -0.999847, -0.00479201, 0.999896, -0.0114961, 0.999934, 0.00469656, -0.00831298, -1.29932, 6.30235, -3.69756)
+transform = Transform3D(-0.0082586, -0.0115357, -0.999847, -0.00479201, 0.999896, -0.0114961, 0.999934, 0.00469655, -0.00831297, -1.29932, 6.30235, -3.69756)
 progress = 31.3245
 script = ExtResource("2_xii2b")
 movement_speed = 8.0
@@ -216,7 +216,7 @@ transform = Transform3D(-0.376768, 0.00164715, 0.926307, 9.48468e-05, 0.999998, 
 curve = SubResource("Curve3D_7jqyl")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/SewerArena/Saws/Path3D6"]
-transform = Transform3D(-0.109198, 0.00736957, 0.993908, 6.98427e-10, 0.999777, -0.00741474, -0.993926, -0.000809658, -0.109196, -36.9762, 6.85578, -41.367)
+transform = Transform3D(-0.109198, 0.00736957, 0.993908, 6.98426e-10, 0.999777, -0.00741474, -0.993926, -0.000809658, -0.109196, -36.9762, 6.85578, -41.367)
 progress = 9.76476
 script = ExtResource("2_xii2b")
 movement_speed = 12.0

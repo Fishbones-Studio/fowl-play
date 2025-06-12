@@ -16,7 +16,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 script = ExtResource("1_phpba")
 
 [node name="IntermissionArea" parent="." node_paths=PackedStringArray("round_handler") instance=ExtResource("1_76651")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 600, 10000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 600, 1000)
 round_handler = NodePath("../RoundHandler")
 
 [node name="IntermissionPosition" type="Marker3D" parent="IntermissionArea"]

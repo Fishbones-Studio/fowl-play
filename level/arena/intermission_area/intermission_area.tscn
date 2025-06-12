@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b37klg6och4oh"]
+[gd_scene load_steps=7 format=3 uid="uid://b37klg6och4oh"]
 
 [ext_resource type="Script" uid="uid://bbhxd7v2h2bfi" path="res://level/arena/intermission_area/intermission_area.gd" id="1_4kspm"]
 [ext_resource type="PackedScene" uid="uid://2v8et56yr3uy" path="res://level/arena/basic_arena/basic_arena.tscn" id="2_7jv1b"]
 [ext_resource type="PackedScene" uid="uid://b8qivryw6ihb4" path="res://level/arena/props/interactable/healing_station/healing_station.tscn" id="5_03kqc"]
 [ext_resource type="PackedScene" uid="uid://fcnahlq4lql5" path="res://level/arena/props/interactable/shop/arena_shop.tscn" id="6_4kspm"]
-[ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="6_fgbni"]
 [ext_resource type="PackedScene" uid="uid://df0wct2jxwjf1" path="res://level/arena/props/interactable/next_enemy_box/next_enemy_box.tscn" id="6_ydxl2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qo3bk"]
@@ -37,10 +36,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8425, 2.03963, -4.88743)
 collision_mask = 31
 health = 25
 cost = 30
-
-[node name="RandomMusicPlayer" parent="." instance=ExtResource("6_fgbni")]
-process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
-volume_db = 30.0
-unit_size = 100.0
-audio_folder = "res://level/arena/training_area/art/music"
