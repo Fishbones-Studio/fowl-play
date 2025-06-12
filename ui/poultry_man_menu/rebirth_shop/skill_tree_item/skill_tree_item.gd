@@ -16,7 +16,6 @@ var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 @onready var kind_indicator_label: Label = %KindIndicatorLabel
-@onready var buy_button: Button = %BuyButton
 @onready var level_progress_bar: ProgressBar = %LevelProgressBar
 @onready var level_label: Label = %LevelLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
@@ -29,19 +28,22 @@ func _ready() -> void:
 	
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
-	
-	# Making the buy button not focussable
-	if buy_button:
-		buy_button.focus_mode = Control.FOCUS_NONE
+	mouse_entered.connect(_on_focus_entered)
+	mouse_exited.connect(_on_focus_exited)
 
 
 func _gui_input(event: InputEvent) -> void:
 	if not has_focus():
 		return
 		
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if can_afford_upgrade():
+				_on_buy_button_pressed()
+				get_viewport().set_input_as_handled()
 	# Handle purchase with controller/keyboard
-	if event.is_action_pressed("ui_accept"):
-		if can_afford_upgrade() and not buy_button.disabled:
+	elif event.is_action_pressed("ui_accept"):
+		if can_afford_upgrade():
 			_on_buy_button_pressed()
 			get_viewport().set_input_as_handled()
 
@@ -169,7 +171,6 @@ func apply_upgrade() -> void:
 func update_ui_elements() -> void:
 	level_progress_bar.max_value = upgrade_resource.max_level
 	level_progress_bar.value = upgrade_resource.current_level
-	buy_button.disabled = upgrade_resource.current_level >= upgrade_resource.max_level
 
 	if upgrade_resource.current_level < upgrade_resource.max_level:
 		item_cost_label.text = str(upgrade_resource.get_level_cost(upgrade_resource.current_level + 1))
@@ -180,11 +181,9 @@ func update_ui_elements() -> void:
 				item_currency_icon.texture = feathers_of_rebirth_icon
 		item_cost_label.show()
 		item_currency_icon.show()
-		buy_button.disabled = false
 	else:
 		item_cost_label.hide()
 		item_currency_icon.hide()
-		buy_button.disabled = true
 
 	if upgrade_resource.current_level < upgrade_resource.max_level:
 		level_label.text = str(upgrade_resource.current_level)

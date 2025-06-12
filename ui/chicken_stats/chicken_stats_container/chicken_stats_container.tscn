@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c5asg38flourg" path="res://ui/chicken_stats/stat_container.tscn" id="1_qnrgu"]
 
 [node name="ChickenStatsContainer" type="VBoxContainer"]
-size_flags_horizontal = 0
-size_flags_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 2
 script = ExtResource("1_ha5t3")
 

@@ -98,6 +98,7 @@ script = ExtResource("3_l08ed")
 
 [node name="ChickenStatsContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" instance=ExtResource("3_yykr0")]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="ChickenEquipmentContainer" parent="VBoxContainer/MarginContainer/ChickenDetailsContainer" node_paths=PackedStringArray("item_preview") instance=ExtResource("5_l08ed")]
 layout_mode = 2
