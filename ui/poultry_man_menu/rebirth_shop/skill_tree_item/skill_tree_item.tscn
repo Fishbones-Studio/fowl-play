@@ -3,33 +3,43 @@
 [ext_resource type="Script" uid="uid://pgxmcbp5b34c" path="res://ui/poultry_man_menu/rebirth_shop/skill_tree_item/skill_tree_item.gd" id="1_7dkd8"]
 [ext_resource type="Texture2D" uid="uid://be0yl1q0uryjp" path="res://utilities/shop/art/prosperity_egg_icon.png" id="2_1mcw8"]
 
-[node name="SkillTreeItem" type="VBoxContainer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 38.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="SkillTreeItem" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 65)
+offset_right = 1152.0
+offset_bottom = 50.0
 script = ExtResource("1_7dkd8")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VboxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VboxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VboxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="ItemCurrencyIcon" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
+[node name="ItemCurrencyIcon" type="TextureRect" parent="MarginContainer/VboxContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_1mcw8")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ItemCostLabel" type="Label" parent="HBoxContainer/HBoxContainer"]
+[node name="ItemCostLabel" type="Label" parent="MarginContainer/VboxContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -37,34 +47,36 @@ size_flags_vertical = 8
 theme_type_variation = &"ItemCost"
 text = "200"
 
-[node name="BuyButton" type="Button" parent="HBoxContainer"]
+[node name="BuyButton" type="Button" parent="MarginContainer/VboxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "BUY"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VboxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="KindIndicatorLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="KindIndicatorLabel" type="Label" parent="MarginContainer/VboxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Label"
 
-[node name="LevelProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer"]
+[node name="LevelProgressBar" type="ProgressBar" parent="MarginContainer/VboxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"LoadingProgressBar"
 show_percentage = false
 
-[node name="LevelLabel" type="Label" parent="HBoxContainer"]
+[node name="LevelLabel" type="Label" parent="MarginContainer/VboxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "MAX"
 
-[connection signal="pressed" from="HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VboxContainer/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

@@ -1,5 +1,5 @@
 class_name SkillTreeItem
-extends VBoxContainer
+extends PanelContainer
 
 @export var upgrade_type: StatsEnums.UpgradeTypes
 
@@ -7,6 +7,9 @@ var copied_stats: LivingEntityStats
 var upgrade_resource: PermUpgradesResource
 var prosperity_egg_icon: CompressedTexture2D = preload("uid://be0yl1q0uryjp")
 var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu")
+
+var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 @onready var kind_indicator_label: Label = %KindIndicatorLabel
 @onready var buy_button: Button = %BuyButton
@@ -19,6 +22,8 @@ var feathers_of_rebirth_icon: CompressedTexture2D = preload("uid://brgdaqksfgmqu
 func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
+	focus_entered.connect(_on_focus_entered)
+	focus_exited.connect(_on_focus_exited)
 
 
 func init(
@@ -45,6 +50,18 @@ func _on_buy_button_pressed() -> void:
 		save_upgrades()
 	else:
 		print("Cannot purchase upgrade. Either max level reached or not enough currency.")
+		
+func _on_focus_entered() -> void:
+	if not theme:
+		theme = Theme.new()
+	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
+	# TODO: preview
+
+
+func _on_focus_exited() -> void:
+	if not theme:
+		theme = Theme.new()
+	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
 
 
 func can_afford_upgrade() -> bool:
