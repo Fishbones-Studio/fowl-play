@@ -11,8 +11,9 @@
 [ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="7_psoce"]
 [ext_resource type="Texture2D" uid="uid://cc1004ge3xhfb" path="res://entities/enemies/ice_fox/art/ice_fox_mugshot.png" id="10_ak1y5"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8ixwh"]
-size = Vector3(1.5, 4, 3.5)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ak1y5"]
+radius = 1.5
+height = 5.5
 
 [node name="IceFox" instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
@@ -69,8 +70,8 @@ bones/32/rotation = Quaternion(0.925157, -0.0550348, -0.125441, -0.354005)
 bones/33/rotation = Quaternion(0.995026, 5.29396e-23, -0.0996115, -6.28657e-23)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-shape = SubResource("BoxShape3D_8ixwh")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ak1y5")
 
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15096, -1.68246)
