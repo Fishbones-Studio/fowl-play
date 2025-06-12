@@ -26,6 +26,7 @@ var is_focused: bool = false
 
 func _ready() -> void:
 	for item in focusable_objects:
+		if item == null: continue
 		object_scales[item] = item.scale
 
 	if label:
