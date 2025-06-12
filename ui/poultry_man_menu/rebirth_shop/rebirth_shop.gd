@@ -16,13 +16,13 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 func _ready() -> void:
 	shop_title_label.text = "Rebirth Shop"
 	_refresh_shop()
-	
+
 	visibility_changed.connect(
 		func():
 			if visible:
 				_setup_controller_navigation()
 	)
-	
+
 	reset_label.text = "[center][font_size=25][color=gray][i]Resetting refunds [color=orange]%.f%%[/color] of currency spent.[/i][/color][/font_size][/center]" % (refund_percentage * 100)
 
 
@@ -40,6 +40,7 @@ func _refresh_shop() -> void:
 	var available_upgrades: Dictionary = _get_available_items_grouped()
 	var upgrade_types: Array = StatsEnums.UpgradeTypes.values()
 
+	print(available_upgrades)
 	for i in range(upgrade_types.size()):
 		var upgrade_type = upgrade_types[i]
 		var upgrades_raw: Array = available_upgrades.get(upgrade_type, [])
@@ -48,17 +49,17 @@ func _refresh_shop() -> void:
 				var skill_tree_item: SkillTreeItem = SKILL_TREE_ITEM.instantiate()
 				items.add_child(skill_tree_item)
 				skill_tree_item.init(upgrade_type, upgrade_resource, copied_stats)
-				
+
 				# Connect the skill tree item signals
 				skill_tree_item.skill_tree_item_focussed.connect(_on_skill_tree_item_focussed)
 				skill_tree_item.skill_tree_item_unfocussed.connect(_on_skill_tree_item_unfocussed)
 				skill_tree_item.upgrade_bought.connect(chicken_stat_container.update_base_values)
-				
+	
 		if i < upgrade_types.size() - 1:
 			var separator = HSeparator.new()
 			separator.add_theme_constant_override("separation", 25)
 			items.add_child(separator)
-	
+
 	# Re-run navigation setup after creating new items
 	_setup_controller_navigation()
 
@@ -185,6 +186,9 @@ func _on_reset_button_pressed() -> void:
 	# Reset the player's upgrades and player's stats to default
 	SaveManager.save_player_upgrades({})
 	SaveManager.save_player_stats(SaveManager.get_default_player_stats())
+
+	# Refresh the stats screen
+	chicken_stat_container.update_base_values()
 
 	# Rebuild the UI and the controller navigation
 	_refresh_shop()

@@ -13,11 +13,11 @@ enum Stats {
 }
 
 enum UpgradeTypes {
-	DAMAGE,
-	MAX_HEALTH,
-	SPEED,
-	DEFENSE,
+	HEALTH,
 	STAMINA,
+	ATTACK,
+	DEFENSE,
+	SPEED,
 	WEIGHT
 }
 

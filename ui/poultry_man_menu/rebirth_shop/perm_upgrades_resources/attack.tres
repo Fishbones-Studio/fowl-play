@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PermUpgradesResource" load_steps=2 format=3 uid="uid://dythumbdcf58v"]
 
-[ext_resource type="Script" uid="uid://ibkbkdkgs0yt" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resource.gd" id="1_s7mu1"]
+[ext_resource type="Script" uid="uid://ibkbkdkgs0yt" path="res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resource.gd" id="1_sng26"]
 
 [resource]
-script = ExtResource("1_s7mu1")
-upgrade_type = 0
+script = ExtResource("1_sng26")
+upgrade_type = 2
 bonus = 10
 max_level = 5
 current_level = 0

@@ -20,7 +20,7 @@ func get_upgrade_resource() -> UpgradeResource:
 	var upgrade_resource: UpgradeResource = UpgradeResource.new()
 
 	match upgrade_type:
-		StatsEnums.UpgradeTypes.MAX_HEALTH:
+		StatsEnums.UpgradeTypes.HEALTH:
 			upgrade_resource.health_bonus = bonus
 		StatsEnums.UpgradeTypes.DEFENSE:
 			upgrade_resource.defense_bonus = bonus
@@ -28,7 +28,7 @@ func get_upgrade_resource() -> UpgradeResource:
 			upgrade_resource.stamina_bonus = bonus
 		StatsEnums.UpgradeTypes.WEIGHT:
 			upgrade_resource.weight_bonus = bonus
-		StatsEnums.UpgradeTypes.DAMAGE:
+		StatsEnums.UpgradeTypes.ATTACK:
 			upgrade_resource.attack_bonus = bonus
 		StatsEnums.UpgradeTypes.SPEED:
 			upgrade_resource.speed_bonus = bonus

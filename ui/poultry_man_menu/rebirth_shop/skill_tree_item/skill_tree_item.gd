@@ -25,7 +25,7 @@ var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
-	
+
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
 	mouse_entered.connect(_on_focus_entered)
@@ -35,7 +35,7 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not has_focus():
 		return
-		
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if can_afford_upgrade():
@@ -70,7 +70,6 @@ func _on_buy_button_pressed() -> void:
 		apply_upgrade()
 		save_upgrades()
 		upgrade_bought.emit()
-		
 		# Re-emit focus signal with updated bonus value
 		if has_focus():
 			_emit_focus_signal()
@@ -100,17 +99,17 @@ func _emit_focus_signal() -> void:
 func _get_next_level_bonus() -> float:
 	if not upgrade_resource or upgrade_resource.current_level >= upgrade_resource.max_level:
 		return 0.0
-	
+
 	var upgrade_bonus = upgrade_resource.get_upgrade_resource()
 	if not upgrade_bonus:
 		return 0.0
-	
+
 	match upgrade_type:
-		StatsEnums.UpgradeTypes.MAX_HEALTH:
+		StatsEnums.UpgradeTypes.HEALTH:
 			return upgrade_bonus.health_bonus
 		StatsEnums.UpgradeTypes.STAMINA:
 			return upgrade_bonus.stamina_bonus
-		StatsEnums.UpgradeTypes.DAMAGE:
+		StatsEnums.UpgradeTypes.ATTACK:
 			return upgrade_bonus.attack_bonus
 		StatsEnums.UpgradeTypes.DEFENSE:
 			return upgrade_bonus.defense_bonus
@@ -153,11 +152,11 @@ func apply_upgrade() -> void:
 		push_error("Upgrade resource is not a PermUpgradeResource!")
 		return
 	match upgrade_type:
-		StatsEnums.UpgradeTypes.MAX_HEALTH:
+		StatsEnums.UpgradeTypes.HEALTH:
 			copied_stats.max_health += upgrade_resource.get_upgrade_resource().health_bonus
 		StatsEnums.UpgradeTypes.STAMINA:
 			copied_stats.max_stamina += upgrade_resource.get_upgrade_resource().stamina_bonus
-		StatsEnums.UpgradeTypes.DAMAGE:
+		StatsEnums.UpgradeTypes.ATTACK:
 			copied_stats.attack += upgrade_resource.get_upgrade_resource().attack_bonus
 		StatsEnums.UpgradeTypes.DEFENSE:
 			copied_stats.defense += upgrade_resource.get_upgrade_resource().defense_bonus
