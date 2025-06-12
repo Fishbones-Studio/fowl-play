@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://4m773iwjblxb"
+path.s3tc="res://.godot/imported/poultry_man_menu_birdnest.png-da8e81927a36182f46b439629bf27dae.s3tc.ctex"
+path.etc2="res://.godot/imported/poultry_man_menu_birdnest.png-da8e81927a36182f46b439629bf27dae.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "227bc16b627f30088620b3ce5e44533b"
+}
+
+[deps]
+
+source_file="res://ui/poultry_man_menu/art/model/poultry_man_menu_birdnest.png"
+dest_files=["res://.godot/imported/poultry_man_menu_birdnest.png-da8e81927a36182f46b439629bf27dae.s3tc.ctex", "res://.godot/imported/poultry_man_menu_birdnest.png-da8e81927a36182f46b439629bf27dae.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

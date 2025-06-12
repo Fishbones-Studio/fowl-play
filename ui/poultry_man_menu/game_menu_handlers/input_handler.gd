@@ -1,7 +1,6 @@
 # Handles UI input (mouse, keyboard, controller) and emits navigation signals.
 extends Node
 
-# signals
 signal selection_moved(direction: int)
 signal current_item_selected()
 signal keyboard_navigation_activated()
