@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dd1h4kjc6mdxx" path="res://ui/poultry_man_menu/flyers/arenas.gd" id="1_asbvh"]
 [ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_arap8"]
 [ext_resource type="Resource" uid="uid://b0yajffbj51o8" path="res://ui/poultry_man_menu/flyers/flyer_resources/training_arena.tres" id="3_wxo2h"]
-[ext_resource type="Resource" uid="uid://dfr8ywvkphcjj" path="res://ui/poultry_man_menu/flyers/flyer_resources/sewer_arena.tres" id="4_x27oh"]
-[ext_resource type="Resource" uid="uid://kjvw8w4ooh5v" path="res://ui/poultry_man_menu/flyers/flyer_resources/sewer_arena_boss.tres" id="5_8iumh"]
+[ext_resource type="Resource" uid="uid://dlcv842gq6jcg" path="res://ui/poultry_man_menu/flyers/flyer_resources/flying_arena.tres" id="4_asbvh"]
+[ext_resource type="Resource" uid="uid://2wc7dt0too40" path="res://ui/poultry_man_menu/flyers/flyer_resources/sewer_arena.tres" id="5_8iumh"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="6_wcu6n"]
 [ext_resource type="PackedScene" uid="uid://d14bjxvd3x8qf" path="res://ui/poultry_man_menu/flyers/preview/arena_flyer_preview_container.tscn" id="7_x3apk"]
 
@@ -16,7 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_asbvh")
-flyers_to_setup = Array[ExtResource("2_arap8")]([ExtResource("3_wxo2h"), ExtResource("4_x27oh"), ExtResource("5_8iumh")])
+flyers_to_setup = Array[ExtResource("2_arap8")]([ExtResource("3_wxo2h"), ExtResource("4_asbvh"), ExtResource("5_8iumh")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
