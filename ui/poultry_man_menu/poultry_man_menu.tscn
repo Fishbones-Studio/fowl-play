@@ -136,6 +136,7 @@ script = ExtResource("16_c6cgu")
 transform = Transform3D(0.0523055, 0.00014008, -0.00236765, 0.000581342, 0.0499163, 0.0157961, 0.00229944, -0.0158062, 0.0498635, 2.00749, 11.117, 0.96857)
 
 [node name="Sphere" parent="Model/LampRope/Cylinder" index="0" node_paths=PackedStringArray("flicker_light", "flicker_timer", "audio_player")]
+mesh = null
 script = ExtResource("8_c6cgu")
 flicker_light = NodePath("SpotLight3D")
 flicker_timer = NodePath("FlickerTimer")
