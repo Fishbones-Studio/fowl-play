@@ -12,6 +12,17 @@ func _ready() -> void:
 	description.text = DESCRIPTION_TEXT % [upgrade_resource.name, upgrade_resource.bonus, upgrade_resource.get_level_cost(upgrade_resource.current_level + 1)]
 
 
+func _input(_event: InputEvent) -> void:
+	if (Input.is_action_just_pressed("pause") \
+	or Input.is_action_just_pressed("ui_cancel") ) \
+	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.REBIRTH_SHOP):
+		on_cancel_button_pressed()
+		# Whack
+		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
+		UIManager.get_viewport().set_input_as_handled()
+
+
 func setup(params: Dictionary) -> void:
 	if "purchased_signal" in params:
 		purchased_signal = params["purchased_signal"]
