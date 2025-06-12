@@ -12,7 +12,7 @@ var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
 
 var menu_actions: Dictionary[StringName, UIEnums.UI] = {
-	&"Flyers": UIEnums.UI.ARENAS,
+	&"Arenas": UIEnums.UI.ARENAS,
 	&"EquipmentShop": UIEnums.UI.POULTRYMAN_SHOP,
 	&"Equipment": UIEnums.UI.CHICKEN_INVENTORY,
 	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,

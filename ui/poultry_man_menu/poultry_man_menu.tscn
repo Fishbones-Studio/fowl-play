@@ -218,14 +218,6 @@ index = 2
 [node name="Cage" type="CollisionShape3D" parent="Model/Cage/RebirthShop"]
 shape = SubResource("ConvexPolygonShape3D_foq5l")
 
-[node name="RebirthShoplabel" type="Label3D" parent="Model"]
-transform = Transform3D(1, 0, -2.98023e-08, 2.98023e-08, 1, -7.45058e-08, 2.98023e-08, 0, 1, -1.01061, 6.81919, -5.41986)
-billboard = 1
-modulate = Color(0.764706, 0.843137, 0.423529, 1)
-outline_modulate = Color(0, 0, 0, 0)
-text = "Rebirth Shop"
-font_size = 125
-
 [node name="Equipment" type="StaticBody3D" parent="Model/Cleaver" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
 script = ExtResource("6_dqtu2")
 highlight_scale_factor = 1.3
@@ -267,10 +259,10 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Equipment Shop"
 font_size = 125
 
-[node name="EggNest" parent="Model" index="36"]
+[node name="EggNest" parent="Model" index="35"]
 transform = Transform3D(1.33815, 0.523009, -0.0436005, -0.523977, 1.33815, -0.029684, 0.0297895, 0.0435285, 1.43642, -2.63003, 4.08248, 0.481946)
 
-[node name="Eggs" parent="Model" index="37"]
+[node name="Eggs" parent="Model" index="36"]
 transform = Transform3D(0.566507, -0.00335338, 0.091008, 0.0262085, 0.555137, -0.142687, -0.0872171, 0.145036, 0.548253, -2.9636, 4.27409, 1.0585)
 
 [node name="EquipmentLabel" type="Label3D" parent="Model/Eggs" index="0"]
@@ -281,19 +273,28 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Equipment"
 font_size = 200
 
+[node name="RebirthShoplabel" type="Label3D" parent="Model"]
+transform = Transform3D(1, 0, -2.98023e-08, 2.98023e-08, 1, -7.45058e-08, 2.98023e-08, 0, 1, -1.01061, 6.81919, -5.41986)
+billboard = 1
+modulate = Color(0.764706, 0.843137, 0.423529, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Rebirth Shop"
+font_size = 125
+
 [node name="Flyer" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-0.899673, 0.417834, 0.675279, 0.354008, 1.12447, -0.224133, -0.710821, 0.0311728, -0.966314, 2.81235, 1.88347, -2.70725)
 rotation_edit_mode = 1
 mesh = SubResource("PlaneMesh_qvty8")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Model/Flyer" node_paths=PackedStringArray("focusable_objects", "label")]
+[node name="Arenas" type="StaticBody3D" parent="Model/Flyer" node_paths=PackedStringArray("focusable_objects", "label")]
 transform = Transform3D(1, 0, -5.96046e-08, 0, 1, -1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
 script = ExtResource("13_dqtu2")
 focusable_objects = [NodePath("..")]
 label = NodePath("../ArenasLabel")
+index = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Flyer/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Flyer/Arenas"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_x5v8y")
 
