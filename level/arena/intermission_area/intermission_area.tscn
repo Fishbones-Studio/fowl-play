@@ -39,5 +39,8 @@ health = 25
 cost = 30
 
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("6_fgbni")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
+volume_db = 30.0
+unit_size = 100.0
 audio_folder = "res://level/arena/training_area/art/music"

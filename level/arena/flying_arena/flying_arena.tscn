@@ -336,6 +336,8 @@ shape = SubResource("BoxShape3D_ixv8t")
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("3_1quy3")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45, 0)
+volume_db = 30.0
+unit_size = 100.0
 audio_folder = "res://level/arena/sewer_arena/music"
 
 [editable path="flying_arena"]
