@@ -72,7 +72,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.5851
 modulate = Color(0, 1, 0.188235, 1)
 text = "Hazards"
 font_size = 200
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="RegularSpike" parent="HazardHolder" instance=ExtResource("9_23v1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4545, 0, 0)
@@ -82,13 +82,13 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 
 modulate = Color(1, 0.647059, 0, 1)
 text = "Spikes"
 font_size = 72
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="SpikeExplainText" parent="HazardHolder/RegularSpike" instance=ExtResource("10_wk2id")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 0)
 text = "Applies damage while standing on"
 font_size = 48
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="SpikeBall" parent="HazardHolder" instance=ExtResource("7_7e81l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.29767, 0, 0)
@@ -98,26 +98,26 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 
 modulate = Color(1, 0.647059, 0, 1)
 text = "Spike Ball"
 font_size = 72
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="SpikeBallExplainText" parent="HazardHolder/SpikeBall" instance=ExtResource("10_wk2id")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 0)
 text = "Applies damage once and knocks you back"
 font_size = 48
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="GroundSawTitle" parent="HazardHolder" instance=ExtResource("10_wk2id")]
 transform = Transform3D(-0.999996, 0, -8.74225e-08, 0, 1, 0, 8.74225e-08, 0, -0.999996, -7.23, 4, -12.692)
 modulate = Color(1, 0.647059, 0, 1)
 text = "Ground Saw"
 font_size = 72
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="GroundSawExplainLabel" parent="HazardHolder" instance=ExtResource("10_wk2id")]
 transform = Transform3D(-0.999996, 0, -8.74225e-08, 0, 1, 0, 8.74225e-08, 0, -0.999996, -7.23, 3, -12.692)
 text = "Makes you bleed and take damage for a while"
 font_size = 48
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="Path3D" type="Path3D" parent="HazardHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.23789, 0.3, -4.08034)
@@ -165,12 +165,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 modulate = Color(0, 1, 0.188235, 1)
 text = "Attack"
 font_size = 200
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="AtackText" parent="AttackHolder" instance=ExtResource("10_wk2id")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 text = "Test your Equipment"
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="PlayerDetector" type="Area3D" parent="AttackHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.9101, 0)
@@ -213,7 +213,7 @@ script = ExtResource("16_580ga")
 
 [node name="NameLabel" parent="MovementHolder/MovementTeleportBox" index="1"]
 text = "Movement"
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="InteractLabel" parent="MovementHolder/MovementTeleportBox/CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
 text = "Press          to teleport up"
@@ -224,7 +224,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13.398, 3.99383)
 [node name="MovementText" parent="MovementHolder/MovementTeleportBox" instance=ExtResource("10_wk2id")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 text = "See what you can do"
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="PlayerDetector" type="Area3D" parent="MovementHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.85535)
