@@ -1,25 +1,23 @@
 # Handles randomized flickering effects for lights with synchronized audio distortion
 extends Node
 
-# Exported Variables
-@export_category("connections")
+@export_category("Connections")
 @export var flicker_light: SpotLight3D
 @export var flicker_timer: Timer
 @export var audio_player: AudioStreamPlayer
+@export var mesh: MeshInstance3D
 
-@export_category("flicker timings")
-@export var min_flicker_interval := 1.5
-@export var max_flicker_interval := 6.0
-@export var long_flicker_pause := 10.0
-@export var max_flicker_count := 5
-@export var min_pitch := 0.7
-@export var max_pitch := 1.3
-@export var flicker_duration_min := 0.2
-@export var flicker_duration_max := 0.5
+@export_category("Flicker Timings")
+@export var min_flicker_interval: float = 1.5
+@export var max_flicker_interval: float = 6.0
+@export var long_flicker_pause: float = 10.0
+@export var max_flicker_count: int = 5
+@export var min_pitch: float = 0.7
+@export var max_pitch: float = 1.3
+@export var flicker_duration_min: float = 0.2
+@export var flicker_duration_max: float = 0.5
 
-
-# Private Variables
-var _is_flickering := false
+var _is_flickering: bool = false
 var _original_energy: float
 var _original_volume_db: float
 
@@ -47,11 +45,10 @@ func _start_flicker_effect() -> void:
 	flicker_player.play()
 	if _is_flickering: 
 		return
-	
+
 	_is_flickering = true
-	
-	# Explicit self.create_tween() is clearer
-	var tween: Tween       = self.create_tween()  # Now using self.create_tween() explicitly
+
+	var tween: Tween = create_tween()
 	var flicker_count: int = randi_range(3, max_flicker_count)
 
 	for i in flicker_count:
@@ -62,7 +59,7 @@ func _start_flicker_effect() -> void:
 		tween.tween_property(flicker_light, "light_energy", _original_energy, flicker_duration/2)
 		tween.tween_property(audio_player, "volume_db", _original_volume_db, flicker_duration/4)
 		tween.tween_interval(randf_range(0.05, 0.15))
-	
+
 	tween.tween_callback(func(): 
 		flicker_light.light_energy = _original_energy
 		audio_player.volume_db = _original_volume_db

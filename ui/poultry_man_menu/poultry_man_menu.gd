@@ -2,7 +2,7 @@ extends Node3D
 
 # Exported Variables
 @export var input_handler: Node
-@export var default_focused_item_name: StringName = &"Equipment"
+@export var default_focused_item_name: StringName = &"Arenas"
 
 # Navigation State
 var current_index: int = 0

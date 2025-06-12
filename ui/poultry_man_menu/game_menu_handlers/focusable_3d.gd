@@ -13,14 +13,18 @@ signal focused
 signal unfocused
 signal pressed
 
-@export var highlight_scale_factor: float = 1.1
-@export var highlight_color: Color = Color("c3d76c")
 @export var focusable_objects: Array[Node3D] = [] # Crack
 @export var label: Label3D
+@export var highlight_scale_factor: float = 1.1
+@export var highlight_color: Color = Color("c3d76c")
+@export var outline_color: Color = Color.BLACK
+@export var outline_size: float = 50
 @export var index: int = 0
 
 var object_scales: Dictionary[Node3D, Vector3] = {}
-var original_label_color: Color
+var prev_label_color: Color = Color("c3d76c")
+var prev_label_outline_color: Color = Color("282b38")
+var prev_label_outline_size: float = 12
 var is_focused: bool = false
 
 
@@ -30,7 +34,8 @@ func _ready() -> void:
 		object_scales[item] = item.scale
 
 	if label:
-		original_label_color = label.modulate
+		prev_label_color = label.modulate
+		prev_label_outline_size = label.outline_size
 
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
@@ -55,18 +60,39 @@ func focus() -> void:
 		return
 
 	for item in focusable_objects:
-		TweenManager.create_scale_tween(
-			null,
-			item,
-			Vector3(object_scales[item] * highlight_scale_factor),
-			0.2,
-			TweenManager.DEFAULT_TRANSITION,
-			Tween.EASE_OUT)
+		var tween: Tween = TweenManager.create_scale_tween(
+				null,
+				item,
+				Vector3(object_scales[item] * highlight_scale_factor),
+				0.2,
+				TweenManager.DEFAULT_TRANSITION,
+				Tween.EASE_OUT
+			)
+		tween.finished.connect(tween.kill)
 
 	is_focused = true
 
 	if label:
-		label.modulate = highlight_color
+		var tween: Tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(
+			func(arr: Array):
+				label.modulate = arr[0] # dunno if this works, since it's color but meh
+				label.outline_modulate = arr[1] # ditto
+				label.outline_size = arr[2],
+				[
+					prev_label_color,
+					prev_label_outline_color,
+					prev_label_outline_size,
+				],
+				[
+					highlight_color,
+					outline_color,
+					outline_size,
+				],
+				0.1
+		)
+		tween.finished.connect(tween.kill)
 
 	focused.emit()
 
@@ -76,17 +102,38 @@ func unfocus() -> void:
 		return
 
 	for item in focusable_objects:
-		TweenManager.create_scale_tween(null,
-		item,
-		Vector3(object_scales[item]),
-		0.2,
-		TweenManager.DEFAULT_TRANSITION,
-		Tween.EASE_OUT)
+		var tween: Tween = TweenManager.create_scale_tween(null,
+			item,
+			Vector3(object_scales[item]),
+			0.2,
+			TweenManager.DEFAULT_TRANSITION,
+			Tween.EASE_OUT
+		)
+		tween.finished.connect(tween.kill)
 
 	is_focused = false
 
 	if label:
-		label.modulate = original_label_color
+		var tween: Tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(
+			func(arr: Array):
+				label.modulate = arr[0]
+				label.outline_modulate = arr[1]
+				label.outline_size = arr[2],
+				[
+					highlight_color,
+					outline_color,
+					outline_size,
+				],
+				[
+					prev_label_color,
+					prev_label_outline_color,
+					prev_label_outline_size,
+				],
+				0.1
+		)
+		tween.finished.connect(tween.kill)
 
 	unfocused.emit()
 
