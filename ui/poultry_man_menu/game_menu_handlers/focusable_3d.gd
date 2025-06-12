@@ -14,7 +14,7 @@ signal unfocused
 signal pressed
 
 @export var highlight_scale_factor: float = 1.1
-@export var highlight_color: Color = Color.YELLOW
+@export var highlight_color: Color = Color("c3d76c")
 @export var focusable_objects: Array[Node3D] = [] # Crack
 @export var label: Label3D
 @export var index: int = 0
@@ -61,7 +61,6 @@ func focus() -> void:
 			0.2,
 			TweenManager.DEFAULT_TRANSITION,
 			Tween.EASE_OUT)
-		#item.scale = object_scales[item] * highlight_scale_factor
 
 	is_focused = true
 
@@ -82,7 +81,6 @@ func unfocus() -> void:
 		0.2,
 		TweenManager.DEFAULT_TRANSITION,
 		Tween.EASE_OUT)
-		#item.scale = object_scales[item]
 
 	is_focused = false
 
