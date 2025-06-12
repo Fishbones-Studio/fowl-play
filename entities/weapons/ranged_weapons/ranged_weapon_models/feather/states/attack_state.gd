@@ -11,9 +11,9 @@ var _feather_start_pos: Vector3
 var _feather_end_pos: Vector3
 var _attack_elapsed: float = 0.0
 
-@onready var feather_model : Node3D = $"../../feather"
-@onready var wind_effect : GPUParticles3D = $"../../WindEffect"
-@onready var launch_effect : GPUParticles3D = $"../../LaunchEffect"
+@onready var feather_model: Node3D = $"../../feather"
+@onready var wind_effect: GPUParticles3D = $"../../WindEffect"
+@onready var launch_effect: GPUParticles3D = $"../../LaunchEffect"
 
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
@@ -37,7 +37,7 @@ func physics_process(delta: float) -> void:
 		if _pending_raycast.is_colliding():
 			process_raycast_hit(_pending_raycast, DamageEnums.DamageTypes.TRUE)
 			_pending_raycast = null
-			_start_visualization_timer()
+		_start_visualization_timer()
 	if feather_model.visible:
 		# Update the feather model position based on the attack duration
 		_attack_elapsed += delta
