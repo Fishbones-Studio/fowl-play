@@ -211,8 +211,8 @@ transform = Transform3D(0.742387, 1.87538, -0.803886, 1.61127, -0.0139975, 1.455
 
 [node name="RebirthShop" type="StaticBody3D" parent="Model/Cage" index="0" node_paths=PackedStringArray("focusable_objects", "label")]
 script = ExtResource("6_dqtu2")
-focusable_objects = [NodePath(".."), NodePath("../../CageOuter"), NodePath("../../BallChicken/Sphere")]
-label = NodePath("../../RebirthShoplabel")
+focusable_objects = [NodePath(".."), NodePath("../../CageOuter"), NodePath("../../BallChicken/Sphere"), NodePath("../../Eggshell")]
+label = NodePath("")
 index = 2
 
 [node name="Cage" type="CollisionShape3D" parent="Model/Cage/RebirthShop"]
@@ -273,14 +273,6 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "Equipment"
 font_size = 200
 
-[node name="RebirthShoplabel" type="Label3D" parent="Model"]
-transform = Transform3D(1, 0, -2.98023e-08, 2.98023e-08, 1, -7.45058e-08, 2.98023e-08, 0, 1, -1.01061, 6.81919, -5.41986)
-billboard = 1
-modulate = Color(0.764706, 0.843137, 0.423529, 1)
-outline_modulate = Color(0, 0, 0, 0)
-text = "Rebirth Shop"
-font_size = 125
-
 [node name="Flyer" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(-0.899673, 0.417834, 0.675279, 0.354008, 1.12447, -0.224133, -0.710821, 0.0311728, -0.966314, 2.81235, 1.88347, -2.70725)
 rotation_edit_mode = 1
@@ -320,6 +312,13 @@ transform = Transform3D(0.0413089, 0.0520154, -0.0812715, 0.022335, 0.0808505, 0
 
 [node name="Sphere_004" parent="Model/BallChicken/Sphere" index="5"]
 transform = Transform3D(0.2002, -0.0265392, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
+
+[node name="RebirthShoplabel" type="Label3D" parent="Model/BallChicken"]
+transform = Transform3D(-0.0632484, -0.935136, 0.348595, -0.0122221, 0.349994, 0.936671, -0.997923, 0.0549824, -0.0335656, -2.423, 3.151, -0.416)
+modulate = Color(0.764706, 0.843137, 0.423529, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Rebirth Shop"
+font_size = 200
 
 [node name="Lights" type="Node3D" parent="."]
 
