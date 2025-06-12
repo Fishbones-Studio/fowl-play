@@ -5,6 +5,3 @@
 
 [node name="ConfirmationPopup" instance=ExtResource("1_ndt5t")]
 script = ExtResource("1_wha5l")
-
-[node name="DescriptionLabel" parent="CenterContainer/PanelContainer/VBoxContainer/ConfirmationContentItem/MarginContainer" index="0"]
-text = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color] Prosperity Eggs?"

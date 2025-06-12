@@ -3,7 +3,8 @@ extends PanelContainer
 
 signal skill_tree_item_focussed(upgrade_type: StatsEnums.UpgradeTypes, bonus_value: float)
 signal skill_tree_item_unfocussed(upgrade_type: StatsEnums.UpgradeTypes)
-signal upgrade_bought()
+signal upgrade_bought
+signal purchased
 
 @export var upgrade_type: StatsEnums.UpgradeTypes
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 	if not copied_stats:
 		copied_stats = SaveManager.get_loaded_player_stats()
 
+	purchased.connect(_on_purchase_completed)
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
 	mouse_entered.connect(_on_focus_entered)
@@ -62,6 +64,13 @@ func init(
 
 
 func _on_buy_button_pressed() -> void:
+	SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP_CONFIRMATION, {
+		"purchased_signal": purchased,
+		"upgrade_resource": upgrade_resource
+	})
+
+
+func _on_purchase_completed() -> void:
 	if not upgrade_resource:
 		return
 	if upgrade_resource.current_level < upgrade_resource.max_level and can_afford_upgrade():

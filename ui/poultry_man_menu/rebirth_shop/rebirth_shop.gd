@@ -1,5 +1,7 @@
 extends Control
 
+signal stats_reset
+
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 @export var item_database: PermUpgradeDatabase
@@ -15,6 +17,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 func _ready() -> void:
 	shop_title_label.text = "Rebirth Shop"
+	stats_reset.connect(_on_stats_reset)
 	_refresh_shop()
 
 	visibility_changed.connect(
@@ -40,7 +43,6 @@ func _refresh_shop() -> void:
 	var available_upgrades: Dictionary = _get_available_items_grouped()
 	var upgrade_types: Array = StatsEnums.UpgradeTypes.values()
 
-	print(available_upgrades)
 	for i in range(upgrade_types.size()):
 		var upgrade_type = upgrade_types[i]
 		var upgrades_raw: Array = available_upgrades.get(upgrade_type, [])
@@ -139,6 +141,12 @@ func _setup_controller_navigation() -> void:
 
 
 func _on_reset_button_pressed() -> void:
+	SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP_RESET_STATS_POPUP, {
+		"stats_reset_signal": stats_reset
+	})
+
+
+func _on_stats_reset() -> void:
 	var upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()
 	var total_feathers_refund := 0
 	var total_eggs_refund := 0

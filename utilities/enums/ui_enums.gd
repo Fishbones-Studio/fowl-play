@@ -21,6 +21,9 @@ enum UI {
 	DIALOGUE_BALLOON,
 	DELETE_SAVE_POPUP,
 	CONTROL_OVERVIEW,
+	QUIT_GAME_POPUP,
+	REBIRTH_SHOP_RESET_STATS_POPUP,
+	REBIRTH_SHOP_CONFIRMATION,
 	NULL ## Specific value for when no ui should be loaded
 }
 
@@ -44,8 +47,11 @@ const PATHS: Dictionary[UI, String] = {
 	UI.FORFEIT_POPUP: "uid://f7nhygrw6kbd",
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
-	UI.DELETE_SAVE_POPUP : "uid://d1gtrx56xraue",
+	UI.DELETE_SAVE_POPUP: "uid://d1gtrx56xraue",
 	UI.CONTROL_OVERVIEW: "uid://by11faodnc0sv",
+	UI.QUIT_GAME_POPUP: "uid://dx5jf0y4udv81",
+	UI.REBIRTH_SHOP_RESET_STATS_POPUP: "uid://brdl7fh3unwoc",
+	UI.REBIRTH_SHOP_CONFIRMATION: "uid://cb46h0sdgyhl5",
 }
 
 ## List of UI elements that should block game input outside of the UI
@@ -67,7 +73,7 @@ const UI_BLOCK_GAME_INPUT: Array[UI] = [
 ]
 
 ## List of UI elements that should have mouse captured when active
-const UI_MOUSE_CAPTURED : Array[UI] = [
+const UI_MOUSE_CAPTURED: Array[UI] = [
 	UI.PLAYER_HUD,
 	UI.CONTROL_OVERVIEW,
 	UI.ROUND_SCREEN,
@@ -75,7 +81,7 @@ const UI_MOUSE_CAPTURED : Array[UI] = [
 	UI.VICTORY_SCREEN
 ]
 
-const UI_EXCEMPT_VISIBLE_CHECK : Array[UI] =  [
+const UI_EXCEMPT_VISIBLE_CHECK: Array[UI] =  [
   UI.PLAYER_HUD,
   UI.CONTROL_OVERVIEW,
   UI.PAUSE_MENU
