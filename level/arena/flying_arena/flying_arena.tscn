@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://tfr50ri7cvi"]
+[gd_scene load_steps=35 format=3 uid="uid://tfr50ri7cvi"]
 
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="1_ox5v5"]
 [ext_resource type="PackedScene" uid="uid://dgpo7ha0og7cn" path="res://level/arena/flying_arena/art/flying_arena.glb" id="2_7d67g"]
+[ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="3_1quy3"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ox5v5"]
 seamless = true
@@ -331,5 +332,10 @@ shape = SubResource("BoxShape3D_ixv8t")
 [node name="CollisionShape3D16" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.813091, 0, 0.582137, 0, 1, 0, -0.582137, 0, 0.813091, -38.7372, 30, -56.7005)
 shape = SubResource("BoxShape3D_ixv8t")
+
+[node name="RandomMusicPlayer" parent="." instance=ExtResource("3_1quy3")]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45, 0)
+audio_folder = "res://level/arena/sewer_arena/music"
 
 [editable path="flying_arena"]

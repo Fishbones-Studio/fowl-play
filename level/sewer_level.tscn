@@ -62,7 +62,7 @@ point_count = 7
 script = ExtResource("1_xii2b")
 
 [node name="IntermissionArea" parent="." node_paths=PackedStringArray("round_handler") instance=ExtResource("2_6gtgk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0)
 round_handler = NodePath("../RoundHandler")
 
 [node name="IntermissionPosition" type="Marker3D" parent="IntermissionArea"]
