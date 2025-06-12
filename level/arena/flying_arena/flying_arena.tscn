@@ -1,8 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://tfr50ri7cvi"]
+[gd_scene load_steps=38 format=3 uid="uid://tfr50ri7cvi"]
 
 [ext_resource type="Shader" uid="uid://x7bpp8pn84ps" path="res://level/arena/shaders/sky.gdshader" id="1_ox5v5"]
 [ext_resource type="PackedScene" uid="uid://dgpo7ha0og7cn" path="res://level/arena/flying_arena/art/flying_arena.glb" id="2_7d67g"]
+[ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="2_76q8x"]
 [ext_resource type="PackedScene" uid="uid://d0gh22d2ulece" path="res://utilities/sound/random_music_player/random_music_player.tscn" id="3_1quy3"]
+[ext_resource type="Texture2D" uid="uid://dywqlrmxh3im0" path="res://resources/splashscreen/fishbones-splashscreen-black.png" id="3_c5q5f"]
+[ext_resource type="Texture2D" uid="uid://ck0a0w25e5vm3" path="res://ui/loading_screen/art/hennifer_headshot_half.png" id="4_1eof4"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ox5v5"]
 seamless = true
@@ -176,6 +179,51 @@ shadow_normal_bias = 4.0
 spot_range = 120.0
 spot_angle = 40.0
 spot_angle_attenuation = 0.5
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 9.90938, 37.3521)
+light_color = Color(0.551522, 0.437241, 0.176082, 1)
+light_energy = 30.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("2_76q8x")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 15.0
+spot_attenuation = -0.5
+spot_angle = 25.0
+spot_angle_attenuation = 0.15
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="."]
+transform = Transform3D(0.555614, 0, -0.831441, 0, 1, 0, 0.831441, 0, 0.555614, 30.9855, 10.0326, -23.149)
+light_color = Color(0.116528, 0.464135, 0.615265, 1)
+light_energy = 15.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("3_c5q5f")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 10.0
+spot_attenuation = -0.5
+spot_angle = 35.52
+spot_angle_attenuation = 0.2
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="."]
+transform = Transform3D(0.661626, 0, 0.749834, 0, 1, 0, -0.749834, 0, 0.661626, -33.2618, 9.56808, -17.3942)
+light_color = Color(0.593454, 0.260784, 0.436639, 1)
+light_energy = 50.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 5.0
+light_projector = ExtResource("4_1eof4")
+shadow_enabled = true
+shadow_bias = 3.0
+shadow_normal_bias = 4.0
+spot_range = 10.0
+spot_attenuation = -0.5
+spot_angle = 22.58
+spot_angle_attenuation = 0.2
 
 [node name="flying_arena" parent="." instance=ExtResource("2_7d67g")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
