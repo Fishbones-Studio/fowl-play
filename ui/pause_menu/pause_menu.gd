@@ -60,8 +60,8 @@ func _set_button_visibility() -> void:
 
 	quit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.POULTRY_MAN_MENU)
 	poultry_menu_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.TRAINING_AREA)
-	forfeit_button.visible = (SceneLoader.current_scene == SceneEnums.Scenes.SEWER_LEVEL)
-	overview_button.visible = (SceneLoader.current_scene in [SceneEnums.Scenes.SEWER_LEVEL, SceneEnums.Scenes.TRAINING_AREA])
+	forfeit_button.visible = (SceneLoader.current_scene in [SceneEnums.Scenes.SEWER_ARENA, SceneEnums.Scenes.FLYING_ARENA])
+	overview_button.visible = (SceneLoader.current_scene in [SceneEnums.Scenes.SEWER_ARENA, SceneEnums.Scenes.FLYING_ARENA, SceneEnums.Scenes.TRAINING_AREA])
 
 
 func _get_scene_loader_children() -> Array:

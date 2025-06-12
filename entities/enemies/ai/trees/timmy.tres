@@ -1,10 +1,11 @@
-[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=72 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="5_sk4mh"]
+[ext_resource type="Script" uid="uid://bddir0kb35n5d" path="res://entities/enemies/ai/tasks/stun.gd" id="6_ct4d5"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="6_sha4y"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="7_rm485"]
 [ext_resource type="Script" uid="uid://bnr4dcrmrlapq" path="res://entities/enemies/ai/tasks/rotate_weapon.gd" id="7_sp7rb"]
@@ -72,16 +73,20 @@ speed = 2.5
 script = ExtResource("5_sk4mh")
 target_var = &"target"
 retreat_distance = 50.0
-speed_factor = 3.0
+speed_factor = 5.0
 rotation_speed = 20.0
-duration = 3.0
+duration = 2.0
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 face_moving_direction = false
 
+[sub_resource type="BTAction" id="BTAction_rm485"]
+script = ExtResource("6_ct4d5")
+stun_time = 1.0
+
 [sub_resource type="BTSequence" id="BTSequence_sgv08"]
-children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb")]
+children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb"), SubResource("BTAction_rm485")]
 
 [sub_resource type="BTSequence" id="BTSequence_rm485"]
 children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTRandomWait_sha4y"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
@@ -93,7 +98,7 @@ children = [SubResource("BTSequence_rm485")]
 [sub_resource type="BTCondition" id="BTCondition_ct4d5"]
 script = ExtResource("10_sgv08")
 comparison = 4
-threshold = 15.0
+threshold = 20.0
 use_percentage = true
 
 [sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_rm485"]
@@ -179,7 +184,7 @@ metadata/_weight_ = 3.0
 [sub_resource type="BTCondition" id="BTCondition_lk6lr"]
 script = ExtResource("10_sgv08")
 comparison = 3
-threshold = 15.0
+threshold = 20.0
 use_percentage = true
 
 [sub_resource type="BTCondition" id="BTCondition_w7w8f"]
@@ -234,7 +239,7 @@ ignore_cooldown = true
 slot = 0
 
 [sub_resource type="BTCooldown" id="BTCooldown_ct4d5"]
-duration = 1.0
+duration = 0.8
 children = [SubResource("BTAction_yj2r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_n1u5v"]

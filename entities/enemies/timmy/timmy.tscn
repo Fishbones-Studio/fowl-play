@@ -18,8 +18,9 @@ height = 6.0
 
 [node name="Timmy" instance=ExtResource("1_qrjwk")]
 script = ExtResource("2_v7jq4")
-hover_height = 3.5
-hover_speed = 2.1
+min_hover_height = 2.4
+max_hover_height = 6.6
+hover_speed = 3.3
 stats = ExtResource("3_v7w0k")
 dialogue_path = "res://entities/enemies/timmy/dialogue"
 name_label_template_string = "%s the Goose"
