@@ -9,8 +9,8 @@
 
 [resource]
 script = ExtResource("2_hl4gi")
-title = "Skydome"
-description = "The skydome is a .."
+title = "The Skydome"
+description = "The Skydome, also known as the Cage in the Clouds, is a suspended battleground where the sky becomes the prison. Fight against powerful enemies, until you are the last one remaining."
 icon = ExtResource("1_hohgc")
 standard_enemy_scenes = Array[PackedScene]([ExtResource("3_asnni"), ExtResource("4_s6cqn"), ExtResource("5_eesft"), ExtResource("6_600lj")])
 boss_enemy_scenes = Array[PackedScene]([])
