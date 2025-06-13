@@ -13,7 +13,7 @@ dialogue_file = "uid://djkgsd2n3tf0m"
 dialogue_directory = ""
 
 [node name="insighter" parent="." index="0" instance=ExtResource("3_kto4y")]
-transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0.470862, 0)
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0.5, 0)
 
 [node name="Skeleton3D" parent="insighter/Armature" index="0"]
 bones/0/rotation = Quaternion(0.707107, 0.000393661, 0.707107, -0.000393594)
@@ -32,5 +32,6 @@ shape = SubResource("SphereShape3D_kto4y")
 
 [node name="NameLabel" parent="." index="2"]
 text = "Open Shop"
+label_look_at_player = true
 
 [editable path="insighter"]

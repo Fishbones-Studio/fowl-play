@@ -9,9 +9,9 @@ dialogue_file = ""
 dialogue_directory = ""
 
 [node name="NameLabel" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 6, 0)
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 7, 0)
 text = "Enter Fight"
-label_lookat_player = true
+label_look_at_player = true
 
 [node name="DetectionArea" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.94979)
