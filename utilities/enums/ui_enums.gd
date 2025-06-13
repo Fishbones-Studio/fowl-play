@@ -20,6 +20,7 @@ enum UI {
 	REBIRTH_SHOP,
 	DIALOGUE_BALLOON,
 	DELETE_SAVE_POPUP,
+	HEALING_CONFIRMATION,
 	CONTROL_OVERVIEW,
 	QUIT_GAME_POPUP,
 	REBIRTH_SHOP_RESET_STATS_POPUP,
@@ -49,6 +50,7 @@ const PATHS: Dictionary[UI, String] = {
 	UI.REBIRTH_SHOP: "uid://dmgeue4l6fj4f",
 	UI.DIALOGUE_BALLOON: "uid://cfg06xxv1turn",
 	UI.DELETE_SAVE_POPUP: "uid://d1gtrx56xraue",
+	UI.HEALING_CONFIRMATION: "uid://dyo6lpkud0joq",
 	UI.CONTROL_OVERVIEW: "uid://by11faodnc0sv",
 	UI.QUIT_GAME_POPUP: "uid://dx5jf0y4udv81",
 	UI.REBIRTH_SHOP_RESET_STATS_POPUP: "uid://brdl7fh3unwoc",
@@ -71,7 +73,8 @@ const UI_BLOCK_GAME_INPUT: Array[UI] = [
 	UI.REBIRTH_SHOP,
 	UI.DEATH_SCREEN,
 	UI.CHICKEN_STATS,
-	UI.FORFEIT_POPUP
+	UI.FORFEIT_POPUP,
+	UI.HEALING_CONFIRMATION
 ]
 
 ## List of UI elements that should have mouse captured when active
