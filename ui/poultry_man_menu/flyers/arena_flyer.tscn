@@ -19,7 +19,6 @@ texture = ExtResource("2_uguq6")
 expand_mode = 4
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="."]
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 0
