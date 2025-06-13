@@ -54,19 +54,15 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_focus_entered() -> void:
 	add_theme_stylebox_override("panel", hover_stylebox)
-	focused.emit(flyer_resource)
 
 
 func _on_focus_exited() -> void:
 	add_theme_stylebox_override("panel", normal_stylebox)
-	unhovered.emit(flyer_resource)
 
 
 func _on_mouse_entered() -> void:
 	grab_focus()
-	hovered.emit(flyer_resource)
 
 
 func _on_mouse_exited() -> void:
 	_on_focus_exited()
-	unhovered.emit(flyer_resource)

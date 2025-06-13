@@ -30,11 +30,6 @@ func _add_arena_flyers() -> void:
 		# Add to group for easier identification
 		flyer.add_to_group("flyer_item")
 
-		# Connect signals
-		flyer.focused.connect(_on_flyer_focused)
-		flyer.hovered.connect(_on_flyer_focused) # Show preview on hover too
-		flyer.unhovered.connect(_on_flyer_unhovered)
-
 
 func _setup_controller_navigation() -> void:
 	await get_tree().process_frame
@@ -69,19 +64,6 @@ func _setup_focus_neighbors(flyers: Array) -> void:
 		# Down neighbor
 		if i + columns < flyers.size():
 			current_flyer.focus_neighbor_bottom = flyers[i + columns].get_path()
-
-
-func _on_flyer_focused(flyer_resource: ArenaFlyerResource) -> void:
-	pass
-
-
-func _on_flyer_unhovered(_flyer_resource: ArenaFlyerResource) -> void:
-	# Hide preview only if no flyer is focused
-	await get_tree().process_frame
-
-	var focused: Control = get_viewport().gui_get_focus_owner()
-	if not (focused and focused.is_in_group("flyer_item")):
-		pass
 
 
 func _on_close_button_pressed() -> void:
