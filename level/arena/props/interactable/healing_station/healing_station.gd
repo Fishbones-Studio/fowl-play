@@ -21,6 +21,8 @@ func interact() -> void:
 
 
 func _on_heal_purchased() -> void:
+	if GameManager.chicken_player.stats.current_health >= GameManager.chicken_player.stats.max_health:
+		return
 	if currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
 		if GameManager.prosperity_eggs < cost:
 			return
