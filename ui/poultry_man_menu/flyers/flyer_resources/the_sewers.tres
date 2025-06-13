@@ -12,7 +12,7 @@
 [resource]
 script = ExtResource("4_inopy")
 title = "The Sewers"
-description = "A brutal underground pit where only the cunning emerge victorious. Master the terrain, outsmart foes, and endure chaos—then face a fierce boss."
+description = "A brutal underground pit where only the cunning emerge victorious. Master the terrain, outsmart foes, and endure the chaos—then face a fierce boss."
 icon = ExtResource("3_wrqlk")
 standard_enemy_scenes = Array[PackedScene]([ExtResource("5_xc304"), ExtResource("6_7dqfk"), ExtResource("7_f2hbq"), ExtResource("8_txhf1")])
 boss_enemy_scenes = Array[PackedScene]([ExtResource("1_hxwsq"), ExtResource("2_msit1")])
