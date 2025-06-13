@@ -63,7 +63,7 @@ func _handle_input_event(event: InputEvent) -> void:
 	elif _is_directional_action_pressed(event):
 		var direction: int = _get_direction_from_event(event)
 		_handle_directional_input(direction)
-	elif event.is_action_pressed(&"accept"):
+	elif event.is_action_pressed(&"ui_accept"):
 		_handle_accept_input()
 
 

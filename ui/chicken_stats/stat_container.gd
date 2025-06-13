@@ -77,7 +77,7 @@ func _update_display(change: float, is_preview: bool = false) -> void:
 	var text: String = "%s %.1f" % ["-" if (change < 0) else "+", abs(change)]
 	if is_preview:
 		# Add visual indication that this is a preview
-		change_stat_value_label.text = "[color=yellow]%s[/color]" % text
+		change_stat_value_label.text = "[color=orange]%s[/color]" % text
 	else:
 		change_stat_value_label.text = text
 

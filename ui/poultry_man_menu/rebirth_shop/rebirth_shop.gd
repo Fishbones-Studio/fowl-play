@@ -1,4 +1,4 @@
-extends Control
+extends UserInterface
 
 signal stats_reset
 
@@ -16,6 +16,7 @@ const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 
 func _ready() -> void:
+	super()
 	shop_title_label.text = "Rebirth Shop"
 	stats_reset.connect(_on_stats_reset)
 	_refresh_shop()

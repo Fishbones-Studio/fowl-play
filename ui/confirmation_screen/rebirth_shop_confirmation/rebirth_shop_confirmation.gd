@@ -21,6 +21,7 @@ func _input(_event: InputEvent) -> void:
 		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
 		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
 		UIManager.get_viewport().set_input_as_handled()
+		
 
 
 func setup(params: Dictionary) -> void:

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c35wea4w2a5fh" path="res://ui/chicken_stats/chicken_stats_container/chicken_stats_container.tscn" id="4_2dw1y"]
 [ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="30_p65sv"]
 
-[node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database")]
+[node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database", "focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5h013")
 item_database = NodePath("PermUpgradeDatabase")
+handle_focus = true
+focus_node = NodePath("Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
