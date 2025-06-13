@@ -11,8 +11,8 @@ var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 var hover_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
 var flyer_resource: ArenaFlyerResource
 
-@onready var arena_tag: Label = %ArenaFlyerTag
 @onready var arena_icon: TextureRect = %ArenaFlyerIcon
+@onready var arena_round_label: Label = %ArenaFlyerRoundLabel
 @onready var arena_label: Label = %ArenaFlyerLabel
 @onready var arena_description: RichTextLabel = %ArenaFlyerDescription
 
@@ -25,6 +25,7 @@ func setup(_flyer_resource: ArenaFlyerResource) -> void:
 	flyer_resource = _flyer_resource
 	scene_to_load = flyer_resource.scene_to_load
 	arena_icon.texture = flyer_resource.icon
+	arena_round_label.text = "" if flyer_resource.rounds <= 1 else "%d rounds" % flyer_resource.rounds
 	arena_label.text = flyer_resource.title
 	arena_description.text = flyer_resource.description
 
