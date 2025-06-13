@@ -11,10 +11,12 @@ func _ready() -> void:
 	description.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
 
 
+func on_cancel_button_pressed() -> void:
+	UIManager.toggle_ui(UIEnums.UI.CHICKEN_SACRIFICE)
+
+
 func on_confirm_button_pressed() -> void:
 	if _rounds_won_this_run > 0:
 		GameManager.feathers_of_rebirth += _rounds_won_this_run
-	if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
-		UIManager.remove_ui_by_enum(UIEnums.UI.POULTRYMAN_SHOP)
 	GameManager.reset_game()
-	close_ui()
+	UIManager.toggle_ui(UIEnums.UI.CHICKEN_SACRIFICE)
