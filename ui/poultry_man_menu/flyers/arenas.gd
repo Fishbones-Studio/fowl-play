@@ -3,16 +3,13 @@ extends Control
 
 @export var flyers_to_setup: Array[ArenaFlyerResource]
 
-@onready var fights_container: GridContainer = %FightsContainer
+@onready var flyers_container: GridContainer = %FlyersContainer
 @onready var arena_flyer_resource: PackedScene = preload("uid://b68pl3dx4qrx7")
-@onready var flyer_preview_container: ArenaFlyerPreviewContainer = %ArenaFlyerPreviewContainer
 
 
 func _ready() -> void:
 	_add_arena_flyers()
 	_setup_controller_navigation()
-	# Hide preview initially
-	flyer_preview_container.hide()
 
 
 func _input(event: InputEvent) -> void:
@@ -27,7 +24,7 @@ func _input(event: InputEvent) -> void:
 func _add_arena_flyers() -> void:
 	for flyer_resource in flyers_to_setup:
 		var flyer: PanelContainer = arena_flyer_resource.instantiate()
-		fights_container.add_child(flyer)
+		flyers_container.add_child(flyer)
 		flyer.setup(flyer_resource)
 
 		# Add to group for easier identification
@@ -42,7 +39,7 @@ func _add_arena_flyers() -> void:
 func _setup_controller_navigation() -> void:
 	await get_tree().process_frame
 
-	var focusable_flyers: Array = fights_container.get_children()
+	var focusable_flyers: Array = flyers_container.get_children()
 
 	# Set up focus neighbors for better controller navigation
 	_setup_focus_neighbors(focusable_flyers)
@@ -52,7 +49,7 @@ func _setup_focus_neighbors(flyers: Array) -> void:
 	if flyers.size() <= 1:
 		return
 
-	var columns = fights_container.columns if fights_container.columns > 0 else 3
+	var columns = flyers_container.columns if flyers_container.columns > 0 else 3
 
 	for i in range(flyers.size()):
 		var current_flyer = flyers[i]
@@ -75,8 +72,7 @@ func _setup_focus_neighbors(flyers: Array) -> void:
 
 
 func _on_flyer_focused(flyer_resource: ArenaFlyerResource) -> void:
-	flyer_preview_container.show()
-	flyer_preview_container.setup(flyer_resource)
+	pass
 
 
 func _on_flyer_unhovered(_flyer_resource: ArenaFlyerResource) -> void:
@@ -85,7 +81,7 @@ func _on_flyer_unhovered(_flyer_resource: ArenaFlyerResource) -> void:
 
 	var focused: Control = get_viewport().gui_get_focus_owner()
 	if not (focused and focused.is_in_group("flyer_item")):
-		flyer_preview_container.hide()
+		pass
 
 
 func _on_close_button_pressed() -> void:
@@ -94,8 +90,8 @@ func _on_close_button_pressed() -> void:
 
 func _on_visibility_changed() -> void:
 	if not visible: return
-	if not fights_container: return
+	if not flyers_container: return
 
-	var children: Array = fights_container.get_children()
+	var children: Array = flyers_container.get_children()
 	if children.is_empty(): return
 	children[0].grab_focus()

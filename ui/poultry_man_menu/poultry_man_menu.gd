@@ -90,7 +90,6 @@ func _get_focusable_items() -> Array[Focusable3D]:
 
 	var sorted_values: Array[int] = items.values()
 	var sorted_items: Array[Focusable3D] = []
-	var keys: Array[Node] = items.keys()
 
 	sorted_values.sort_custom(func(a, b): return a > b)
 
