@@ -3,6 +3,7 @@ extends BaseDatabase
 
 const UPGRADE_PATH: String = "res://ui/poultry_man_menu/rebirth_shop/perm_upgrades_resources/"
 
+
 static func _load_resources() -> Array[BaseResource]:
 	var all_items: Array[BaseResource] = []
 	var files: PackedStringArray = _get_tres_files_from_path(UPGRADE_PATH)
@@ -15,6 +16,7 @@ static func _load_resources() -> Array[BaseResource]:
 					all_items.append(resource)
 	return all_items
 
+
 func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 	var upgrades: Array[BaseResource] = []
 	var upgrade_type_string: String = StatsEnums.upgrade_type_to_string(upgrade_type).to_lower()
@@ -25,6 +27,7 @@ func get_upgrades_by_type(upgrade_type) -> Array[BaseResource]:
 			if resource is BaseResource:
 				upgrades.append(resource)
 	return upgrades
+
 
 func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
 	var grouped: Dictionary[StatsEnums.UpgradeTypes, Array] = {}
@@ -38,6 +41,7 @@ func get_all_upgrades_grouped() -> Dictionary[StatsEnums.UpgradeTypes, Array]:
 				if resource is BaseResource:
 					grouped[upgrade_type].append(resource)
 	return grouped
+
 
 static func _get_tres_files_from_path(path: String) -> PackedStringArray:
 	var files: PackedStringArray = []

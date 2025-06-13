@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb46h0sdgyhl5"]
+
+[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_fnq5x"]
+[ext_resource type="Script" uid="uid://cl2g7a8bwijvt" path="res://ui/confirmation_screen/rebirth_shop_confirmation/rebirth_shop_confirmation.gd" id="2_h5jul"]
+
+[node name="RebirthShopConfirmation" instance=ExtResource("1_fnq5x")]
+script = ExtResource("2_h5jul")
