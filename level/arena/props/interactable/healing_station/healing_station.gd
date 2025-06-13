@@ -1,19 +1,26 @@
 extends InteractBox
 
-@export var health := 10
-@export var cost := 10
-@export var currency_type : CurrencyEnums.CurrencyTypes = CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS
-@export var interact_label_placeholder_text : String = "Press          to heal %d (costs %d %s)"
+signal heal_purchased
 
-@onready var interact_label : Label = %InteractLabel
+@export_range(0, 100, 1) var health: int = 25 ## In percentage
+@export var cost: int = 10
+@export var currency_type: CurrencyEnums.CurrencyTypes = CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS
 
 
 func _ready() -> void:
+	heal_purchased.connect(_on_heal_purchased)
 	super()
-	interact_label.text = interact_label_placeholder_text % [health, cost, CurrencyEnums.type_to_string(currency_type, true)]
 
 
 func interact() -> void:
+	SignalManager.add_ui_scene.emit(UIEnums.UI.HEALING_CONFIRMATION, {
+		"heal_purchased_signal": heal_purchased,
+		"health": health,
+		"cost": cost
+	})
+
+
+func _on_heal_purchased() -> void:
 	if currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
 		if GameManager.prosperity_eggs < cost:
 			return
@@ -22,4 +29,4 @@ func interact() -> void:
 		if GameManager.feathers_of_rebirth < cost:
 			return
 		GameManager.feathers_of_rebirth -= cost
-	GameManager.chicken_player.stats.restore_health(health)
+	GameManager.chicken_player.stats.restore_health(GameManager.chicken_player.stats.max_health * health / 100.0)

@@ -4,22 +4,29 @@
 [ext_resource type="Script" uid="uid://5qxt35wq354t" path="res://level/arena/props/interactable/healing_station/healing_station.gd" id="2_i3g3c"]
 [ext_resource type="PackedScene" uid="uid://ew78j14x7qdo" path="res://level/arena/props/interactable/healing_station/art/EggNest.glb" id="3_rcyvk"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cpbnj"]
-size = Vector3(4.02777, 2.38867, 3.79367)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rcyvk"]
+height = 2.0083
+radius = 2.31104
 
 [node name="HealingStation" instance=ExtResource("1_l8km2")]
 script = ExtResource("2_i3g3c")
-health = 10
+health = 25
 cost = 10
 currency_type = 0
-interact_label_placeholder_text = "Press          to heal %d (costs %d %s)"
 
-[node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.421539, 0.924072, -0.90184)
-shape = SubResource("BoxShape3D_cpbnj")
+[node name="EggNest" parent="." index="0" instance=ExtResource("3_rcyvk")]
+transform = Transform3D(0.927184, -0.374607, 0, 0.374607, 0.927184, 0, 0, 0, 1, 4, -2.75, 0)
 
-[node name="NameLabel" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.453115, 0.396905, 0.852817)
+shape = SubResource("CylinderShape3D_rcyvk")
+debug_color = Color(0.953911, 0.168882, 0.346439, 0.42)
+
+[node name="NameLabel" parent="." index="2"]
 text = "Healing "
+label_look_at_player = true
 
-[node name="EggNest" parent="." index="4" instance=ExtResource("3_rcyvk")]
-transform = Transform3D(0.898794, -0.438371, 0, 0.438371, 0.898794, 0, 0, 0, 1, 4.44827, -2.48383, -1.33121)
+[node name="InteractLabel" parent="CanvasLayer/InteractUi/VBoxContainer/HBoxContainer" index="0"]
+text = "Press          to heal"
+
+[editable path="EggNest"]
