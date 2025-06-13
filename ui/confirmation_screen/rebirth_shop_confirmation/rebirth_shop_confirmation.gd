@@ -7,7 +7,6 @@ var upgrade_resource: PermUpgradesResource
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	title.text = "Buy rebirth upgrade"
 	description.text = DESCRIPTION_TEXT % [upgrade_resource.name, upgrade_resource.bonus, upgrade_resource.get_level_cost(upgrade_resource.current_level + 1)]
 

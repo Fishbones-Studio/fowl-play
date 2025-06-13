@@ -9,7 +9,7 @@ shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.8
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="ConfirmationScreen" type="Control"]
+[node name="ConfirmationScreen" type="Control" node_paths=PackedStringArray("focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aev1a")
+handle_focus = true
+focus_node = NodePath("CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_aev1a")
@@ -113,5 +115,6 @@ theme_type_variation = &"ConfirmationButton"
 text = "Confirm
 "
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton" to="." method="on_cancel_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm_button_pressed"]

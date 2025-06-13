@@ -8,7 +8,6 @@ var cost: int
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	title.text = "Heal Chicken"
 	description.text = DESCRIPTION_LABEL % [health, cost, GameManager.prosperity_eggs]
 

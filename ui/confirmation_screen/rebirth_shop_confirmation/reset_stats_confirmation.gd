@@ -4,7 +4,6 @@ var stats_reset_signal: Signal
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	title.text = "Reset stats"
 	description.text = "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]80%[/color] of the currency you’ve spent."
 
