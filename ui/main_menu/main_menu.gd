@@ -145,7 +145,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().quit()
+	SignalManager.add_ui_scene.emit(UIEnums.UI.QUIT_GAME_POPUP)
 
 
 func _on_reset_button_pressed() -> void:

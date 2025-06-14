@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_2w7im")
-upgrade_type = 4
+upgrade_type = 1
 bonus = 50
 max_level = 4
 current_level = 0

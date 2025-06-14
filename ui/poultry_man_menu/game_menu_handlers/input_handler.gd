@@ -17,15 +17,15 @@ var controller_was_used: bool = false
 var stick_cooldown_timer: Timer
 
 var directional_actions: Array[StringName] = [
-	&"move_left",
-	&"move_right",
+	&"ui_left",
+	&"ui_right",
 	&"joypad_button_left",
 	&"joypad_button_right"
 ]
 
 var action_directions: Dictionary[StringName, int] = {
-	&"move_left": 1,
-	&"move_right": -1,
+	&"ui_left": 1,
+	&"ui_right": -1,
 	&"joypad_button_left": 1,
 	&"joypad_button_right": -1
 }
@@ -63,7 +63,7 @@ func _handle_input_event(event: InputEvent) -> void:
 	elif _is_directional_action_pressed(event):
 		var direction: int = _get_direction_from_event(event)
 		_handle_directional_input(direction)
-	elif event.is_action_pressed(&"accept"):
+	elif event.is_action_pressed(&"ui_accept"):
 		_handle_accept_input()
 
 

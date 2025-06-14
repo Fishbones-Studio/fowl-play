@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmc2vy88ms25a"]
+
+[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_m02jk"]
+[ext_resource type="Script" uid="uid://by2eya5a0ksvd" path="res://ui/confirmation_screen/upgrade_shop_confirmation/upgrade_shop_confirmation.gd" id="2_2kbs4"]
+
+[node name="UpgradeShopConfirmation" instance=ExtResource("1_m02jk")]
+script = ExtResource("2_2kbs4")

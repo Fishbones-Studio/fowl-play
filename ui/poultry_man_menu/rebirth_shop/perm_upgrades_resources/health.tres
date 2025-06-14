@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_q8bbj")
-upgrade_type = 1
+upgrade_type = 0
 bonus = 50
 max_level = 4
 current_level = 0
-name = "Max Health"
+name = "Health"
 purchasable = true
 is_free = false
 drop_chance = 0

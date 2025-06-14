@@ -51,11 +51,11 @@ func get_default_player_stats() -> LivingEntityStats:
 
 func get_default_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 	return {
-		StatsEnums.UpgradeTypes.MAX_HEALTH: 0,
+		StatsEnums.UpgradeTypes.HEALTH: 0,
 		StatsEnums.UpgradeTypes.DEFENSE: 0,
 		StatsEnums.UpgradeTypes.STAMINA: 0,
 		StatsEnums.UpgradeTypes.WEIGHT: 0,
-		StatsEnums.UpgradeTypes.DAMAGE: 0,
+		StatsEnums.UpgradeTypes.ATTACK: 0,
 		StatsEnums.UpgradeTypes.SPEED: 0
 	}
 

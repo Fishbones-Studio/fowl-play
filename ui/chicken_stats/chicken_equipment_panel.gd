@@ -16,3 +16,14 @@ var active: bool = false:
 
 @onready var active_stylebox_dark: StyleBoxFlat = preload("uid://cetchnns5h8tx")
 @onready var inactive_stylebox_dark: StyleBoxFlat = preload("uid://cng68uuqfw6hb")
+
+
+func _ready() -> void:
+	mouse_entered.connect(
+		func():
+			focus_entered.emit()
+	)
+	mouse_exited.connect(
+		func():
+			focus_exited.emit()
+	)

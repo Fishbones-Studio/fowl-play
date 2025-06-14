@@ -6,7 +6,7 @@ const SHOP_ITEM_SCENE: PackedScene = preload("uid://cc5vmtbby4xy0")
 func _ready() -> void:
 	check_inventory = true
 	prevent_duplicates = true
-	shop_title_label.text = "Poultry Man Shop"
+	shop_title_label.text = "Equipment Shop"
 	super()
 
 

@@ -7,9 +7,9 @@ extends Control
 @onready var cancel_button: Button = %CancelButton
 @onready var confirm_button: Button = %ConfirmButton
 
-
 func close_ui() -> void:
 	UIManager.remove_ui(self)
+	print("emitting focus lost")
 	SignalManager.focus_lost.emit()
 
 
