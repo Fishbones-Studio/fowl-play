@@ -15,7 +15,7 @@ var menu_actions: Dictionary[StringName, UIEnums.UI] = {
 	&"Arenas": UIEnums.UI.ARENAS,
 	&"EquipmentShop": UIEnums.UI.POULTRYMAN_SHOP,
 	&"Equipment": UIEnums.UI.CHICKEN_INVENTORY,
-	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
+	&"Sacrifice": UIEnums.UI.CHICKEN_SACRIFICE,
 	&"RebirthShop": UIEnums.UI.REBIRTH_SHOP
 }
 
@@ -90,7 +90,6 @@ func _get_focusable_items() -> Array[Focusable3D]:
 
 	var sorted_values: Array[int] = items.values()
 	var sorted_items: Array[Focusable3D] = []
-	var keys: Array[Node] = items.keys()
 
 	sorted_values.sort_custom(func(a, b): return a > b)
 

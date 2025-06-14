@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=3 format=3 uid="uid://b0yajffbj51o8"]
+
+[ext_resource type="Texture2D" uid="uid://bu0qq55s0h85p" path="res://ui/poultry_man_menu/flyers/art/the_coop_icon.png" id="1_gtvp4"]
+[ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_gtvp4"]
+
+[resource]
+script = ExtResource("2_gtvp4")
+title = "The Coop"
+description = "A safe training lab where your chicken can test attacks, abilities, and movement without risk or pressure."
+icon = ExtResource("1_gtvp4")
+standard_enemy_scenes = Array[PackedScene]([])
+boss_enemy_scenes = Array[PackedScene]([])
+include_boss = false
+rounds = 1
+scene_to_load = 0
+metadata/_custom_type_script = "uid://ctoq181od8w0k"

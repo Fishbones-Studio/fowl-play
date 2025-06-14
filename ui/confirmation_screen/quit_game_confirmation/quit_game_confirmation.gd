@@ -2,9 +2,9 @@ extends ConfirmationScreen
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
-	title.text = "Tip"
+	title.text = "Quit Game"
 	description.text = "Are you sure you want to quit the game?"
+	super()
 
 
 func on_confirm_button_pressed() -> void:
