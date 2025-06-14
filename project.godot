@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="Fowl Play"
-config/version="0.0.2"
+config/version="0.0.3"
 run/main_scene="uid://bu4jhshnfcfa8"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://dywqlrmxh3im0"
-config/icon="res://icon.svg"
+config/icon="uid://btjflmm1vei0y"
 boot_splash/minimum_display_time=2500
 
 [autoload]
