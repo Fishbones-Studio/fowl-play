@@ -25,3 +25,7 @@ func setup(params: Dictionary) -> void:
 func on_confirm_button_pressed() -> void:
 	heal_purchased_signal.emit()
 	super()
+
+func close_ui() -> void:
+	UIManager.toggle_ui(UIEnums.UI.HEALING_CONFIRMATION)
+	super()
