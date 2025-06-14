@@ -29,6 +29,10 @@ func setup(_flyer_resource: ArenaFlyerResource) -> void:
 	arena_label.text = flyer_resource.title
 	arena_description.text = flyer_resource.description
 
+	if flyer_resource.include_boss:
+		arena_label.set("theme_override_colors/font_color", Color.RED)
+		arena_round_label.set("theme_override_colors/font_color", Color.RED)
+
 
 func _trigger_scene_load() -> void:
 	await get_tree().process_frame
