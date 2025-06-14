@@ -10,6 +10,7 @@ var on_cooldown: bool:
 		return not cooldown_timer.is_stopped()
 
 @onready var cooldown_timer: Timer = $CooldownTimer
+@onready var sound_effect: AudioStreamPlayer3D = $SoundEffect
 
 
 func _ready() -> void:

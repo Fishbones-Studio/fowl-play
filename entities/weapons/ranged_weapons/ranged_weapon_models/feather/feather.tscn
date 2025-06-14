@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="5_ef5ly"]
 [ext_resource type="Script" uid="uid://cnuya14h82qcq" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/states/attack_state.gd" id="5_umcfy"]
 [ext_resource type="ArrayMesh" uid="uid://c73bifo2ruift" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather_mesh.res" id="8_c1ggn"]
-[ext_resource type="AudioStream" uid="uid://dxl0kmu5cbpeb" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/art/feather_launch.wav" id="9_c1ggn"]
+[ext_resource type="AudioStream" uid="uid://iwpmoydnu5he" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/feather/sound/feather.ogg" id="9_c1ggn"]
 
 [sub_resource type="Gradient" id="Gradient_ef5ly"]
 offsets = PackedFloat32Array(0, 0.448485, 0.763636)

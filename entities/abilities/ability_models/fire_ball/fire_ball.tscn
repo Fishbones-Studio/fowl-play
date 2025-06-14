@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://r2kfankkht6"]
+[gd_scene load_steps=23 format=3 uid="uid://r2kfankkht6"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_l7j4w"]
 [ext_resource type="Script" uid="uid://5b8scwscjndl" path="res://entities/abilities/ability_models/fire_ball/fire_ball.gd" id="2_ksrmm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://vij4xk06dtwp" path="res://entities/abilities/ability_models/fire_ball/shaders/trail_texture.png" id="7_f5jn2"]
 [ext_resource type="Shader" uid="uid://d2q53vdjsalkx" path="res://entities/abilities/ability_models/fire_ball/shaders/trail.tres" id="7_onfkr"]
 [ext_resource type="Texture2D" uid="uid://bkq0483m1tcwa" path="res://entities/abilities/ability_models/fire_ball/shaders/spark_texture.png" id="8_f5jn2"]
+[ext_resource type="AudioStream" uid="uid://ckvjqiai6y0vj" path="res://entities/abilities/ability_models/fire_ball/sound/fireball.ogg" id="9_031v6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5jn2"]
 radius = 0.6
@@ -133,6 +134,9 @@ explosiveness = 0.2
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_031v6")
 draw_pass_1 = SubResource("QuadMesh_udvao")
+
+[node name="SoundEffect" parent="." index="2"]
+stream = ExtResource("9_031v6")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]

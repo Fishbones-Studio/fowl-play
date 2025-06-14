@@ -8,4 +8,7 @@ script = ExtResource("1_tf6v8")
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="SoundEffect" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
