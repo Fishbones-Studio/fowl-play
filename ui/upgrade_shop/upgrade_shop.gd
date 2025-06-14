@@ -8,7 +8,7 @@ const UPGRADE_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
 func _ready() -> void:
 	check_inventory = false
 	prevent_duplicates = false
-	shop_title_label.text = "Upgrades Shop"
+	shop_title_label.text = "Upgrade Shop"
 
 	SignalManager.upgrades_shop_refreshed.connect(_refresh_shop)
 

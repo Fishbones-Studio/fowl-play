@@ -5,7 +5,7 @@
 [resource]
 resource_name = "30"
 script = ExtResource("1_c35mu")
-upgrade_type = 2
+upgrade_type = 4
 bonus = 1
 max_level = 5
 current_level = 0

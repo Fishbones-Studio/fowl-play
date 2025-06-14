@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx5jf0y4udv81"]
+
+[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_qqtbx"]
+[ext_resource type="Script" uid="uid://06p3ahvypxy7" path="res://ui/confirmation_screen/quit_game_confirmation/quit_game_confirmation.gd" id="2_bthd6"]
+
+[node name="QuitGameConfirmation" instance=ExtResource("1_qqtbx")]
+script = ExtResource("2_bthd6")

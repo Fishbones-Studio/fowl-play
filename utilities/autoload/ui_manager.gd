@@ -402,10 +402,10 @@ func _update_game_input_blocked() -> void:
 
 ## Sets the mouse mode based on the UI
 func _update_game_mouse_mode() -> void:
-	if !current_ui: 
+	if !current_ui:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		return
-	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
+	var ui_enum: UIEnums.UI = ui_list.find_key(current_ui)
 	if ui_enum == null:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		return

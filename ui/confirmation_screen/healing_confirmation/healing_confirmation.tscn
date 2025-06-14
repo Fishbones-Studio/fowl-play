@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyo6lpkud0joq"]
+
+[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_14mkp"]
+[ext_resource type="Script" uid="uid://bisgydgqfyvi0" path="res://ui/confirmation_screen/healing_confirmation/healing_confirmation.gd" id="2_t08e5"]
+
+[node name="HealingConfirmation" instance=ExtResource("1_14mkp")]
+script = ExtResource("2_t08e5")

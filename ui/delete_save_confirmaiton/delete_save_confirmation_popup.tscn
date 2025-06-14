@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1gtrx56xraue"]
-
-[ext_resource type="Script" uid="uid://dtoj7aj6q2ce8" path="res://ui/delete_save_confirmaiton/delete_save_confirmation_popup.gd" id="1_6sbdx"]
-[ext_resource type="PackedScene" uid="uid://7atjxrx8a47x" path="res://ui/confirmation_screen/confirmation_screen.tscn" id="1_x3tba"]
-
-[node name="DeleteSaveConfirmationPopup" instance=ExtResource("1_x3tba")]
-script = ExtResource("1_6sbdx")

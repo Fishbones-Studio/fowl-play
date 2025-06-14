@@ -17,6 +17,12 @@ var ability_2: AbilityResource = null
 func _ready() -> void:
 	_setup_controller_navigation()
 	_update_equipped_slots()
+	
+	visibility_changed.connect(
+		func():
+			if visible:
+				_update_equipped_slots()
+	)
 
 	SignalManager.preview_shop_item.connect(_on_populate_visual_fields)
 
@@ -102,7 +108,6 @@ func _on_visibility_changed() -> void:
 		# Set initial focus when the inventory appears
 		await get_tree().process_frame # Wait a frame for UI to update
 		if melee_slot and melee_slot.focus_mode != Control.FOCUS_NONE:
-			print("grabbing focus on melee slot")
 			melee_slot.grab_focus()
 		elif close_button and close_button.focus_mode != Control.FOCUS_NONE:
 			# Fallback to close button if melee slot isn't available/focusable
