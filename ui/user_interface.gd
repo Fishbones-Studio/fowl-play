@@ -11,7 +11,5 @@ func _ready() -> void:
 
 
 func _on_focus_lost() -> void:
-	print("connecting focus lost")
 	if focus_node and UIManager.current_ui == self:
-		print("grabbing focus")
 		focus_node.grab_focus()

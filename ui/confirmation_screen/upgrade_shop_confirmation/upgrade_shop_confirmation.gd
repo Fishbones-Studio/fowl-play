@@ -10,6 +10,7 @@ func _ready() -> void:
 	cancel_button.grab_focus()
 	title.text = "Buy Upgrade"
 	description.text = DESCRIPTION_LABEL % [shop_item.name, shop_item.cost]
+	super()
 
 
 func _input(_event: InputEvent) -> void:
@@ -32,4 +33,4 @@ func setup(params: Dictionary) -> void:
 
 func on_confirm_button_pressed() -> void:
 	purchased_signal.emit()
-	close_ui()
+	super()

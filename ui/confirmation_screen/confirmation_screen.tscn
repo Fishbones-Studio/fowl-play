@@ -110,8 +110,8 @@ custom_minimum_size = Vector2(140, 40)
 layout_mode = 2
 focus_neighbor_left = NodePath("../CancelButton")
 theme_type_variation = &"ConfirmationButton"
-text = "Confirm
-"
+text = "Confirm"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton" to="." method="on_cancel_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm_button_pressed"]
