@@ -1,5 +1,5 @@
 class_name ConfirmationScreen
-extends UserInterface
+extends Control
 
 @onready var title: Label = %TitleLabel
 @onready var container: HBoxContainer = %ConfirmationContentItem
@@ -23,5 +23,4 @@ func on_confirm_button_pressed() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		await get_tree().process_frame
 		cancel_button.grab_focus()
