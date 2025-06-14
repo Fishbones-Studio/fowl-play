@@ -48,6 +48,17 @@ void fragment() {
 	ROUGHNESS = 0.5;
 	METALLIC = 0.0;
 
+	if (highlight) {
+		float rim = 1.0 - dot(NORMAL, VIEW);
+		rim = pow(rim, rim_power);
+
+		vec4 final_color = tex_color;
+		final_color.rgb = mix(final_color.rgb, highlight_color.rgb, rim * highlight_intensity);
+
+		ALBEDO = final_color.rgb;
+		EMISSION = highlight_color.rgb * rim * highlight_intensity * highlight_power;
+	}
+
 	float h_right = texture(noise_texture, UV + vec2(0.001, 0.0) * 10.0).r;
 	float h_up = texture(noise_texture, UV + vec2(0.0, 0.001) * 10.0).r;
 
