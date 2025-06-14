@@ -8,9 +8,9 @@ var cost: int
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	title.text = "Heal Chicken"
 	description.text = DESCRIPTION_LABEL % [health, cost, GameManager.prosperity_eggs]
+	super()
 
 
 func setup(params: Dictionary) -> void:
@@ -24,4 +24,9 @@ func setup(params: Dictionary) -> void:
 
 func on_confirm_button_pressed() -> void:
 	heal_purchased_signal.emit()
-	close_ui()
+	super()
+
+
+func close_ui() -> void:
+	UIManager.toggle_ui(UIEnums.UI.HEALING_CONFIRMATION)
+	super()

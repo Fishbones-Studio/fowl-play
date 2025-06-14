@@ -7,9 +7,9 @@ var upgrade_resource: PermUpgradesResource
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	title.text = "Buy rebirth upgrade"
 	description.text = DESCRIPTION_TEXT % [upgrade_resource.name, upgrade_resource.bonus, upgrade_resource.get_level_cost(upgrade_resource.current_level + 1)]
+	super()
 
 
 func _input(_event: InputEvent) -> void:
@@ -21,7 +21,6 @@ func _input(_event: InputEvent) -> void:
 		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
 		UIManager.toggle_ui(UIEnums.UI.REBIRTH_SHOP)
 		UIManager.get_viewport().set_input_as_handled()
-		
 
 
 func setup(params: Dictionary) -> void:
@@ -33,4 +32,4 @@ func setup(params: Dictionary) -> void:
 
 func on_confirm_button_pressed() -> void:
 	purchased_signal.emit()
-	close_ui()
+	super()

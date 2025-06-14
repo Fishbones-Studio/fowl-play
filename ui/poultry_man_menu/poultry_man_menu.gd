@@ -15,7 +15,7 @@ var menu_actions: Dictionary[StringName, UIEnums.UI] = {
 	&"Arenas": UIEnums.UI.ARENAS,
 	&"EquipmentShop": UIEnums.UI.POULTRYMAN_SHOP,
 	&"Equipment": UIEnums.UI.CHICKEN_INVENTORY,
-	&"Sacrifice": UIEnums.UI.FORFEIT_POPUP,
+	&"Sacrifice": UIEnums.UI.CHICKEN_SACRIFICE,
 	&"RebirthShop": UIEnums.UI.REBIRTH_SHOP
 }
 
