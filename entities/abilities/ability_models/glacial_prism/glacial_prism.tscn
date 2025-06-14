@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b8rcy5ri3byj5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.gd" id="2_o4wag"]
 [ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="3_r8vdb"]
 [ext_resource type="ArrayMesh" uid="uid://dpiv14jwmy654" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism_mesh.tres" id="4_rlecg"]
-[ext_resource type="AudioStream" uid="uid://b1lnln4ov8m1u" path="res://entities/abilities/ability_models/glacial_prism/sound/glaciar_prism.ogg" id="5_o4wag"]
+[ext_resource type="AudioStream" uid="uid://cpm1mxmw0ao1q" path="res://entities/abilities/ability_models/glacial_prism/sound/glacial_prism_sfx.ogg" id="5_o4wag"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7ele6"]
 radius = 50.0

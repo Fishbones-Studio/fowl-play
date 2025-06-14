@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b4qvwmcfsv15w" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.gd" id="2_hntii"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="3_2cn0f"]
 [ext_resource type="ArrayMesh" uid="uid://86471nk4jq05" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom_mesh.tres" id="4_dcanr"]
-[ext_resource type="AudioStream" uid="uid://cdnjr14pbuyrl" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sound/firebloom.ogg" id="5_4o270"]
+[ext_resource type="AudioStream" uid="uid://b3qo753ipatxr" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sound/sanctuary_of_firebloom_sfx.ogg" id="5_4o270"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dcanr"]
 radius = 100.0
