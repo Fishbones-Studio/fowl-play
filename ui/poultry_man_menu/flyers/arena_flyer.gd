@@ -1,10 +1,6 @@
 class_name ArenaFlyer
 extends PanelContainer
 
-signal hovered(item: ArenaFlyerResource)
-signal unhovered(item: ArenaFlyerResource)
-signal focused(item: ArenaFlyerResource)
-
 @export var scene_to_load: SceneEnums.Scenes
 
 var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
