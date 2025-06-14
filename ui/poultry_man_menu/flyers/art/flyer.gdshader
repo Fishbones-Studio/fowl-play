@@ -7,6 +7,10 @@ uniform float paper_wrinkles : hint_range(0, 1) = 0.3;
 uniform float paper_yellowing : hint_range(0, 1) = 0.2;
 uniform float edge_wear : hint_range(0, 1) = 0.15;
 uniform bool highlight = false;
+uniform vec4 highlight_color : source_color = vec4(1.0, 1.0, 0.0, 1.0);
+uniform float highlight_power : hint_range(0.0, 10.0) = 3.0;
+uniform float highlight_intensity : hint_range(0.0, 1.0) = 0.0;
+uniform float rim_power : hint_range(1.0, 10.0) = 3.0;
 
 uniform vec4 paper_color: source_color = vec4(0.95, 0.93, 0.85, 1.0);
 uniform vec4 edge_dirt_color: source_color = vec4(0.7, 0.65, 0.6, 1.0);
@@ -41,7 +45,7 @@ void fragment() {
 	ALBEDO = tex_color.rgb;
 
 	// Make it more matte
-	ROUGHNESS = 1.0;
+	ROUGHNESS = 0.5;
 	METALLIC = 0.0;
 
 	float h_right = texture(noise_texture, UV + vec2(0.001, 0.0) * 10.0).r;
@@ -59,11 +63,4 @@ void fragment() {
 	    (texture(noise_texture, UV * 10.0 + vec2(0.0, 0.01)).r - normal_noise_val) * paper_wrinkles,
 	    0.8 // Z-component pointing out
 	));
-}
-
-void light() {
-	if (highlight) {
-		float light_intensity = max(0.0, dot(NORMAL, LIGHT));
-		DIFFUSE_LIGHT = ALBEDO * LIGHT_COLOR * light_intensity;
-	}
 }
