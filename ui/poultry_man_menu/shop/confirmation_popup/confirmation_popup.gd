@@ -27,7 +27,6 @@ func setup(params: Dictionary) -> void:
 
 
 func _ready() -> void:
-	cancel_button.grab_focus()
 	if existing_item_resource.is_empty():
 		title.text = "Buy Item"
 		_update_confirmation_text()
@@ -35,6 +34,7 @@ func _ready() -> void:
 		title.text = "Swap Item"
 		_is_swapping = true
 		_load_items()
+	super()
 
 
 func _input(_event: InputEvent) -> void:
@@ -109,11 +109,11 @@ func _update_confirmation_text() -> void:
 
 func on_cancel_button_pressed() -> void:
 	purchase_cancelled_signal.emit()
-	super.on_cancel_button_pressed()
+	super()
 
 
 func on_confirm_button_pressed() -> void:
 	if _is_swapping and _selected_item_resource: 
 		Inventory.remove_item(_selected_item_resource)
 	purchased_signal.emit()
-	close_ui()
+	super()

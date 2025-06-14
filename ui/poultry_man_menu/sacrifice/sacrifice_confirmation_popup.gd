@@ -6,12 +6,10 @@ var _rounds_won_this_run: int
 
 
 func _ready() -> void:
-	await get_tree().process_frame
-
-	cancel_button.grab_focus()
 	_rounds_won_this_run = SaveManager.get_loaded_rounds_won()
 	title.text = "Sacrifice Chicken"
 	description.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
+	super()
 
 
 func on_confirm_button_pressed() -> void:
@@ -20,4 +18,4 @@ func on_confirm_button_pressed() -> void:
 	if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
 		UIManager.remove_ui_by_enum(UIEnums.UI.POULTRYMAN_SHOP)
 	GameManager.reset_game()
-	close_ui()
+	super()
