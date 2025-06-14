@@ -15,6 +15,7 @@ func _input(event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ):
 		on_cancel_button_pressed()
+		UIManager.get_viewport().set_input_as_handled()
 
 func close_ui() -> void:
 	UIManager.remove_ui(self)
