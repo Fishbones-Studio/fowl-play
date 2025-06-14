@@ -8,6 +8,7 @@ func _ready() -> void:
 	description.text = "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]80%[/color] of the currency you’ve spent."
 	super()
 
+
 func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ) \
