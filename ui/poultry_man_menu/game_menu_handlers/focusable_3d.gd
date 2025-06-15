@@ -17,6 +17,7 @@ signal pressed
 @export var label: Label3D
 @export var highlight_scale_factor: float = 1.1
 @export var highlight_color: Color = Color("c3d76c")
+@export var emission_energy: float = 0.02 # For shader material, adjust shader parameters in editor
 @export var outline_color: Color = Color.BLACK
 @export var outline_size: float = 50
 @export var index: int = 0
@@ -60,6 +61,17 @@ func focus() -> void:
 		return
 
 	for item in focusable_objects:
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
+
+			if material is BaseMaterial3D:
+				material.emission_enabled = true
+				material.emission = highlight_color
+				material.emission_energy_multiplier = emission_energy
+
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", true)
+
 		var tween: Tween = TweenManager.create_scale_tween(
 				null,
 				item,
@@ -102,6 +114,14 @@ func unfocus() -> void:
 		return
 
 	for item in focusable_objects:
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
+
+			if material is BaseMaterial3D:
+				material.emission_enabled = false
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", false)
+
 		var tween: Tween = TweenManager.create_scale_tween(null,
 			item,
 			Vector3(object_scales[item]),
