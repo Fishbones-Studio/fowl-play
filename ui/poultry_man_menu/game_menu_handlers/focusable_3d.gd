@@ -60,15 +60,17 @@ func focus() -> void:
 	if is_focused:
 		return
 
-	for item: MeshInstance3D in focusable_objects:
-		var material: Material = item.get_active_material(0)
+	for item in focusable_objects:
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
 
-		if material is BaseMaterial3D:
-			material.emission_enabled = true
-			material.emission = highlight_color
-			material.emission_energy_multiplier = emission_energy
-		elif material is ShaderMaterial:
-			material.set("shader_parameter/highlight", true)
+			if material is BaseMaterial3D:
+				material.emission_enabled = true
+				material.emission = highlight_color
+				material.emission_energy_multiplier = emission_energy
+
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", true)
 
 		var tween: Tween = TweenManager.create_scale_tween(
 				null,
@@ -112,12 +114,13 @@ func unfocus() -> void:
 		return
 
 	for item in focusable_objects:
-		var material: Material = item.get_active_material(0)
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
 
-		if material is BaseMaterial3D:
-			material.emission_enabled = false
-		elif material is ShaderMaterial:
-			material.set("shader_parameter/highlight", false)
+			if material is BaseMaterial3D:
+				material.emission_enabled = false
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", false)
 
 		var tween: Tween = TweenManager.create_scale_tween(null,
 			item,
