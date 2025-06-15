@@ -16,9 +16,9 @@ void vertex() {
 	billboard_matrix[2] = VIEW_MATRIX * INV_VIEW_MATRIX[2];
 	billboard_matrix[3] = VIEW_MATRIX * MODEL_MATRIX[3];
 
-	billboard_matrix[0][0] = length(MODEL_MATRIX[0].xyz);
-	billboard_matrix[1][1] = length(MODEL_MATRIX[1].xyz);
-	billboard_matrix[2][2] = length(MODEL_MATRIX[2].xyz);
+	billboard_matrix[0][0] *= length(MODEL_MATRIX[0].xyz);
+	billboard_matrix[1][1] *= length(MODEL_MATRIX[1].xyz);
+	billboard_matrix[2][2] *= length(MODEL_MATRIX[2].xyz);
 
 	MODELVIEW_MATRIX = billboard_matrix;
 	COLOR.r = float(INSTANCE_ID);
