@@ -37,10 +37,12 @@ func activate() -> void:
 	_toggle_collision_masks(true, hit_area)
 
 	_is_active = true
+	sound_effect.play()
 	_travel_direction = -ability_holder.global_basis.z.normalized()
 	_current_damage = damage
 	_remaining_lifetime = lifetime
 	_active_bodies.clear()
+	
 
 	mesh_instance.visible = true
 	spark.emitting = true

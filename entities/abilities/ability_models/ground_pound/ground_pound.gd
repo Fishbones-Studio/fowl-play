@@ -46,6 +46,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _pound() -> void:
+	sound_effect.play()
 	gpu_particles.emitting = true
 
 	# Make it deal two instances of damage

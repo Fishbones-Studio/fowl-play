@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
-[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="9_56i32"]
+[ext_resource type="AudioStream" uid="uid://dm21fsdj7ohlr" path="res://resources/sound/on_hurt.ogg" id="9_56i32"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
 

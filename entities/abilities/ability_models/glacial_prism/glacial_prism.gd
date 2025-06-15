@@ -86,6 +86,7 @@ func _get_closest_target(area: Area3D) -> Node3D:
 
 func _on_impact_timer_timeout() -> void:
 	crystal_particle.restart()
+	sound_effect.play()
 
 	await get_tree().create_timer(0.3).timeout
 

@@ -1,7 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dab0i61vj1n23"]
 
 [ext_resource type="Script" uid="uid://dsfql0713srp2" path="res://ui/main_menu/main_menu.gd" id="1_uhj5c"]
-[ext_resource type="AudioStream" uid="uid://wnqtkl4c2rw4" path="res://ui/main_menu/art/song_1.wav" id="2_mu8pm"]
 [ext_resource type="Texture2D" uid="uid://yleov0pgrsrq" path="res://ui/main_menu/art/background_art.png" id="2_s4pem"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="3_3c04x"]
 [ext_resource type="Script" uid="uid://dwlls26p258s6" path="res://ui/main_menu/parallax_background.gd" id="3_xio0d"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbevnes47ws5i" path="res://ui/main_menu/art/background_enemy_layer.png" id="4_xio0d"]
 [ext_resource type="Texture2D" uid="uid://cbcgvhyecft5v" path="res://ui/main_menu/art/background_logo_layer.png" id="5_tf5ef"]
 [ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="6_s4pem"]
+[ext_resource type="AudioStream" uid="uid://01te07ee2r8l" path="res://ui/main_menu/art/song_1.mp3" id="11_s4pem"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("3_3c04x")
@@ -183,7 +183,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_mu8pm")
+stream = ExtResource("11_s4pem")
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
