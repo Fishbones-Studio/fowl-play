@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bi7ih1it2v747"]
 
-[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="1_q7dx8"]
+[ext_resource type="Shader" uid="uid://us07junk5g5l" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="1_gokyp"]
 
 [sub_resource type="Curve" id="Curve_aocq0"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -22,6 +22,8 @@ angle_min = 1.07288e-05
 angle_max = 180.0
 angle_curve = SubResource("CurveTexture_ia706")
 gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
 scale_curve = SubResource("CurveTexture_gcivq")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_57nyx"]
@@ -37,11 +39,11 @@ noise = SubResource("FastNoiseLite_57nyx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uv5h5"]
 render_priority = 0
-shader = ExtResource("1_q7dx8")
+shader = ExtResource("1_gokyp")
 shader_parameter/distortionView = 0.3
-shader_parameter/tintColor = Color(1, 0, 0, 1)
-shader_parameter/fesnelAmount = 1.1
-shader_parameter/fesnelViewEffectAmount = 0.463
+shader_parameter/tintColor = Color(1, 1, 1, 1)
+shader_parameter/fesnelAmount = 1.4
+shader_parameter/fesnelViewEffectAmount = 0.774
 shader_parameter/DisplacementScale = 0.3
 shader_parameter/speedVertex = 1.0
 shader_parameter/NoiseScale = 0.2
@@ -52,7 +54,7 @@ material = SubResource("ShaderMaterial_uv5h5")
 radial_segments = 8
 rings = 4
 
-[node name="FlankTelegraphing" type="GPUParticles3D"]
+[node name="TeleportBubble" type="GPUParticles3D"]
 emitting = false
 amount = 5
 lifetime = 2.0

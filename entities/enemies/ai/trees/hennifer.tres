@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=93 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=91 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -11,9 +11,8 @@
 [ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
-[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="10_mnhi0"]
 [ext_resource type="Script" uid="uid://c0y08orvf36q3" path="res://entities/enemies/ai/tasks/current_health.gd" id="11_pia2r"]
-[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="13_504pj"]
+[ext_resource type="Script" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="13_504pj"]
 [ext_resource type="PackedScene" uid="uid://c1kqvn5lvj320" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.tscn" id="13_gvblq"]
 [ext_resource type="Script" uid="uid://ddx836816k8ju" path="res://entities/enemies/ai/tasks/spawn_hazard.gd" id="14_wv527"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="16_5c880"]
@@ -49,20 +48,24 @@ target_on_floor = true
 num_failures_required = 3
 children = [SubResource("BTCondition_mnhi0"), SubResource("BTCondition_wv527"), SubResource("BTCondition_viady")]
 
+[sub_resource type="BTAction" id="BTAction_8in54"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://cwvc4m1d624dm"
+
 [sub_resource type="BTAction" id="BTAction_sxcr3"]
-script = ExtResource("8_ba5to")
+script = ExtResource("7_7jrpa")
 target_var = &"target"
-retreat_distance = 5.0
-speed_factor = 20.0
-rotation_speed = 6.0
-duration = 0.0
-pathfinding = false
-immediate_response = false
-path_update_interval = 0.05
-face_moving_direction = false
+flank_distance = 2.0
+vertical_offset = 0.0
+clearance_radius = 0.5
+telegraph_start_timer = 0.5
+telegraph_end_timer = 1.0
+invisible_flank = true
+immediate_flank = true
+first_telegraph = false
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
-children = [SubResource("BTParallel_504pj"), SubResource("BTAction_sxcr3")]
+children = [SubResource("BTParallel_504pj"), SubResource("BTAction_8in54"), SubResource("BTAction_sxcr3")]
 
 [sub_resource type="BTCondition" id="BTCondition_k7lfl"]
 script = ExtResource("6_wv527")
@@ -239,18 +242,6 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_a51uw"), SubResource("BTAction_dbsnm"), SubResource("BTRandomWait_cgerr")]
 
-[sub_resource type="BTAction" id="BTAction_gvblq"]
-script = ExtResource("10_mnhi0")
-jump_factor = 1.0
-duration = 0.0
-is_falling = false
-has_landed = false
-reached_peak = true
-
-[sub_resource type="BTSequence" id="BTSequence_wv527"]
-custom_name = "Anticipation"
-children = [SubResource("BTAction_gvblq")]
-
 [sub_resource type="BTAction" id="BTAction_k7lfl"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://cwvc4m1d624dm"
@@ -270,10 +261,12 @@ script = ExtResource("7_7jrpa")
 target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
-clearance_radius = 1.0
-telegraph_timer = 1.0
+clearance_radius = 0.5
+telegraph_start_timer = 0.5
+telegraph_end_timer = 1.0
 invisible_flank = true
 immediate_flank = false
+first_telegraph = true
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
@@ -312,7 +305,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
-children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_wv527"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_f2bow"]

@@ -58,8 +58,11 @@ target_var = &"target"
 flank_distance = 5.0
 vertical_offset = 0.0
 clearance_radius = 5.0
-telegraph_timer = 1.0
+telegraph_start_timer = 0.5
+telegraph_end_timer = 1.0
 invisible_flank = true
+immediate_flank = false
+first_telegraph = true
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
