@@ -20,6 +20,7 @@ func setup(_params: Dictionary = {}) -> void:
 
 func _ready() -> void:
 	_set_pivot()
+	super()
 
 
 func _on_resume_button_pressed() -> void:
