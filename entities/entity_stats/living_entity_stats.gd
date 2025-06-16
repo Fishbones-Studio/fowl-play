@@ -121,10 +121,10 @@ func calc_scaled_damage(damage: float) -> float:
 	return actual_damage
 
 
-## Applies a temporary status effect (buff or debuff) to a given stat by modifying it by a percentage.
+## Applies a temporary status effect (buff + or debuff -) to a given stat by modifying it by a percentage.
 func apply_stat_effect(stat_name: StringName, percent: float) -> float:
 	var original_value: float = get(stat_name)
-	var new_value: float = original_value * (1.0 - percent / 100.0)
+	var new_value: float = original_value * (1.0 + percent / 100.0)
 	set(stat_name, new_value)
 
 	return original_value

@@ -20,7 +20,6 @@ signal next_enemy_selected(enemy: Enemy)
 	StatsEnums.Stats.MAX_STAMINA: 10.0,
 	StatsEnums.Stats.ATTACK: 5.0,
 	StatsEnums.Stats.DEFENSE: 5.0,
-	StatsEnums.Stats.SPEED: 2.0,
 	StatsEnums.Stats.HEALTH_REGEN: 5.0,
 	StatsEnums.Stats.STAMINA_REGEN: 5.0
 }
@@ -283,8 +282,7 @@ func _spawn_enemy() -> void:
 	# Apply the increment in stats
 	for stat: StatsEnums.Stats in stat_increment_per_round.keys():
 		var stat_name: StringName = StatsEnums.stat_to_string(stat) as StringName
-		print(stat_increment_per_round[stat])
-		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, -SaveManager.get_loaded_rounds_won() * stat_increment_per_round[stat])
+		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, SaveManager.get_loaded_rounds_won() * stat_increment_per_round[stat])
 		original_enemy_stats[stat_name] = original_value
 
 	add_child(_current_enemy)
