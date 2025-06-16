@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const FOR_LABEL_TEMPLATE_TEXT: String = "Sacrificing your chicken will grant you [color=yellow]%d[/color] Feathers of Rebirth in recognition of its battles fought.\n\n[color=yellow]Note: This action will remove all equipped items and any Prosperity Eggs, but rebirth upgrades will be preserved.[/color]"
+const FOR_LABEL_TEMPLATE_TEXT: String = "Sacrificing your chicken will grant you [color=yellow]%d[/color] Feathers of Rebirth in recognition of its battles fought.\n\n[color=yellow]Note: This action will remove all equipped items and any Prosperity Eggs, but rebirth upgrades and Feathers of Rebirth will be preserved.[/color]"
 
 var _rounds_won_this_run: int
 
