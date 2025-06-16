@@ -60,4 +60,11 @@ weapon_collision_mask = 2
 custom_minimum_size = Vector2(50, 50)
 texture = ExtResource("7_dpmrq")
 
+[node name="StateAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
+
+[node name="IntervalAudioPlayer" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
+sounds_folder = "res://entities/enemies/hennifer/sounds/random"
+
 [editable path="Model/chicken_hennifer"]
