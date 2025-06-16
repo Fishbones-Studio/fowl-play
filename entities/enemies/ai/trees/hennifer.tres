@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=90 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=87 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_8in54"]
 [ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="2_sxcr3"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="9_4he0i"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="10_ikecd"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="11_augj3"]
-[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="12_bwioj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="13_l7wqg"]
 [ext_resource type="PackedScene" uid="uid://c1kqvn5lvj320" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.tscn" id="14_t8vjl"]
 [ext_resource type="Script" uid="uid://ddx836816k8ju" path="res://entities/enemies/ai/tasks/spawn_hazard.gd" id="15_shlr8"]
@@ -40,7 +39,7 @@ target_on_floor = true
 script = ExtResource("3_v6hs5")
 target_var = &"target"
 comparison = 3
-height_threshold = 4.5
+height_threshold = -4.5
 use_relative = true
 target_on_floor = true
 
@@ -54,21 +53,11 @@ target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 0.5
-telegraph_timer = null
+telegraph_timer = 1.0
+invisible_flank = null
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_fxtff")]
-
-[sub_resource type="BTCondition" id="BTCondition_504pj"]
-script = ExtResource("3_v6hs5")
-target_var = &"target"
-comparison = 3
-height_threshold = 4.5
-use_relative = true
-target_on_floor = true
-
-[sub_resource type="BTInvert" id="BTInvert_wv527"]
-children = [SubResource("BTCondition_504pj")]
 
 [sub_resource type="BTCondition" id="BTCondition_k7lfl"]
 script = ExtResource("3_v6hs5")
@@ -80,6 +69,17 @@ target_on_floor = true
 
 [sub_resource type="BTInvert" id="BTInvert_a51uw"]
 children = [SubResource("BTCondition_k7lfl")]
+
+[sub_resource type="BTCondition" id="BTCondition_504pj"]
+script = ExtResource("3_v6hs5")
+target_var = &"target"
+comparison = 3
+height_threshold = -4.5
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTInvert" id="BTInvert_wv527"]
+children = [SubResource("BTCondition_504pj")]
 
 [sub_resource type="BTCondition" id="BTCondition_gvblq"]
 script = ExtResource("5_hvnwj")
@@ -122,7 +122,7 @@ children = [SubResource("BTRepeatUntilSuccess_viady")]
 script = ExtResource("3_v6hs5")
 target_var = &"target"
 comparison = 3
-height_threshold = 4.5
+height_threshold = -4.5
 use_relative = true
 target_on_floor = true
 
@@ -208,7 +208,8 @@ children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880")
 
 [sub_resource type="BTSequence" id="BTSequence_lsbnu"]
 custom_name = "Pursue"
-children = [SubResource("BTInvert_wv527"), SubResource("BTInvert_a51uw"), SubResource("BTParallel_viady")]
+children = [SubResource("BTInvert_a51uw"), SubResource("BTInvert_wv527"), SubResource("BTParallel_viady")]
+_enabled = false
 metadata/_weight_ = 5.0
 
 [sub_resource type="BBNode" id="BBNode_viady"]
@@ -233,18 +234,6 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_a51uw"), SubResource("BTAction_dbsnm"), SubResource("BTRandomWait_cgerr")]
 
-[sub_resource type="BTAction" id="BTAction_gvblq"]
-script = ExtResource("12_bwioj")
-jump_factor = 1.0
-duration = 0.0
-is_falling = false
-has_landed = false
-reached_peak = true
-
-[sub_resource type="BTSequence" id="BTSequence_wv527"]
-custom_name = "Anticipation"
-children = [SubResource("BTAction_gvblq")]
-
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
 resource_name = "Model/chicken_hennifer/AnimationPlayer"
@@ -261,7 +250,8 @@ target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 1.0
-telegraph_timer = null
+telegraph_timer = 1.0
+invisible_flank = null
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
@@ -300,7 +290,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
-children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_wv527"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_f2bow"]

@@ -9,7 +9,15 @@ extends BTAction
 @export var vertical_offset: float = 0.0
 ## Radius to check for clear space
 @export_range(0.1, 5.0, 0.1) var clearance_radius: float = 1.0
+## Time to wait before executing action
+@export var telegraph_timer: float = 1.0
+## Make enemy invisible while flanking
+@export var invisible_flank: bool = true
 
+
+var _telegraph_instance: Variant
+var _flank_position: Vector3
+var _area: Area3D = null
 
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
@@ -35,14 +43,32 @@ func _tick(_delta: float) -> Status:
 	if not is_instance_valid(target):
 		return FAILURE
 
-	var flank_position: Vector3 = _get_safe_flank_position(target)
-	if flank_position == Vector3.INF:
-		return FAILURE
+	if not _flank_position:
+		_flank_position = _get_safe_flank_position(target)
+
+		if _flank_position == Vector3.INF:
+			return FAILURE
+
+	if not _telegraph_instance: 
+		_telegraph_instance = _create_telegraph(_flank_position)
+
+	while elapsed_time < telegraph_timer:
+		return RUNNING
 
 	# Omae wa mou shindeiru
-	agent.global_position = flank_position
+	agent.global_position = _flank_position
 	agent.velocity = Vector3.ZERO
 	agent.look_at(target.global_position)
+
+	_flank_position = Vector3.ZERO
+
+	agent.remove_child(_telegraph_instance)
+	_telegraph_instance.queue_free()
+	_telegraph_instance = null
+
+	agent.remove_child(_area)
+	_area.queue_free()
+	_area = null
 
 	return SUCCESS
 
@@ -72,13 +98,45 @@ func _is_position_clear(position: Vector3) -> bool:
 	var shape: SphereShape3D = SphereShape3D.new()
 	shape.radius = clearance_radius
 
-	# Configure query parameters
-	var params: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
-	params.transform = Transform3D(Basis(), position)
-	params.shape = shape
-	params.collision_mask = agent.collision_mask
+	var collission_shape: CollisionShape3D = CollisionShape3D.new()
+	collission_shape.shape = shape
 
-	# Perform query
-	var space_state: PhysicsDirectSpaceState3D = agent.get_world_3d().direct_space_state
+	_area = Area3D.new()
+	_area.add_child(collission_shape)
+	_area.collision_mask = agent.collision_mask
 
-	return space_state.intersect_shape(params).is_empty()
+	agent.add_child(_area)
+	_area.global_position = position
+
+	return _area.get_overlapping_bodies().is_empty()
+
+
+# Whack
+func _create_telegraph(telegraph_position: Vector3) -> Variant:
+	var resource: PackedScene = preload("uid://bi7ih1it2v747")
+	var instance: GPUParticles3D = resource.instantiate()
+	var mesh: Mesh = instance.draw_pass_1
+
+	if mesh is SphereMesh:
+		var shape: Shape3D = agent.shape.shape
+		if shape is SphereShape3D:
+			mesh.radius = shape.radius
+			mesh.height = shape.height
+		if shape is CapsuleShape3D:
+			mesh.radius = shape.radius
+			mesh.height = shape.radius * 2
+		if shape is BoxShape3D:
+			mesh.radius = shape.size.x / 2
+			mesh.height = shape.size.y
+
+	instance.lifetime = telegraph_timer
+	agent.add_child(instance)
+	instance.global_position = Vector3(
+		telegraph_position.x,
+		telegraph_position.y,
+		telegraph_position.z,
+	)
+	printerr(instance.global_position)
+	instance.emitting = true
+
+	return instance
