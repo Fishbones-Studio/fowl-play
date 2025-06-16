@@ -26,15 +26,15 @@ func set_text(text: String) -> void:
 
 ## Sets the current state of the checkbox without emitting the toggled signal.
 ## Useful for initializing the value.
-func set_pressed_no_signal(is_pressed: bool) -> void:
+func set_pressed_no_signal(value: bool) -> void:
 	if checkbutton:
-		checkbutton.set_pressed_no_signal(is_pressed)
+		checkbutton.set_pressed_no_signal(value)
 
 
 ## Sets the current state of the checkbox and emits the toggled signal.
-func set_pressed(is_pressed: bool) -> void:
+func set_pressed(value: bool) -> void:
 	if checkbutton:
-		checkbutton.button_pressed = is_pressed
+		checkbutton.button_pressed = value
 
 
 ## Returns the current state of the checkbox.
@@ -45,9 +45,9 @@ func is_pressed() -> bool:
 
 
 ## Internal handler for when the CheckButton's state changes.
-func _on_checkbutton_toggled(is_pressed: bool) -> void:
+func _on_checkbutton_toggled(value: bool) -> void:
 	# Emit our custom signal
-	toggled.emit(is_pressed)
+	toggled.emit(value)
 
 
 func _on_focus_entered() -> void:

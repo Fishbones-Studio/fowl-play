@@ -204,6 +204,7 @@ func _preload_items() -> void:
 	print("Adding UI menu items in poultry man menu...")
 	# For all menu_actions, call SignalManager.add_ui_scene
 	for scene_enum_value in menu_actions.values():
+		if scene_enum_value == UIEnums.UI.CHICKEN_SACRIFICE: continue # TODO: Crack
 		SignalManager.add_ui_scene.emit(scene_enum_value, {}, false)
 	print("UI loaded for poultry man menu")
 

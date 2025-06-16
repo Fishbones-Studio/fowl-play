@@ -13,6 +13,14 @@ var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
+	mouse_entered.connect(
+		func():
+			focus_entered.emit()
+	)
+	mouse_exited.connect(
+		func():
+			focus_exited.emit()
+	)
 
 
 func display_item(_item: BaseResource) -> void:
