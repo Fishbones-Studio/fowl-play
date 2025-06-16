@@ -65,6 +65,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _start_quake_sequence() -> void:
+	sound_effect.play()
 	quake_timer.wait_time = quake_interval
 
 	_pulse_quake()
