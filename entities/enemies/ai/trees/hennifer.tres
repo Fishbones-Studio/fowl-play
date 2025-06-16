@@ -49,26 +49,20 @@ target_on_floor = true
 num_failures_required = 3
 children = [SubResource("BTCondition_mnhi0"), SubResource("BTCondition_wv527"), SubResource("BTCondition_viady")]
 
-[sub_resource type="BTAction" id="BTAction_fxtff"]
-script = ExtResource("7_7jrpa")
+[sub_resource type="BTAction" id="BTAction_sxcr3"]
+script = ExtResource("8_ba5to")
 target_var = &"target"
-flank_distance = 2.0
-vertical_offset = 0.0
-clearance_radius = 0.5
+retreat_distance = 5.0
+speed_factor = 20.0
+rotation_speed = 6.0
+duration = 0.0
+pathfinding = false
+immediate_response = false
+path_update_interval = 0.05
+face_moving_direction = false
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
-children = [SubResource("BTParallel_504pj"), SubResource("BTAction_fxtff")]
-
-[sub_resource type="BTCondition" id="BTCondition_504pj"]
-script = ExtResource("6_wv527")
-target_var = &"target"
-comparison = 3
-height_threshold = -4.5
-use_relative = true
-target_on_floor = true
-
-[sub_resource type="BTInvert" id="BTInvert_wv527"]
-children = [SubResource("BTCondition_504pj")]
+children = [SubResource("BTParallel_504pj"), SubResource("BTAction_sxcr3")]
 
 [sub_resource type="BTCondition" id="BTCondition_k7lfl"]
 script = ExtResource("6_wv527")
@@ -80,6 +74,17 @@ target_on_floor = true
 
 [sub_resource type="BTInvert" id="BTInvert_a51uw"]
 children = [SubResource("BTCondition_k7lfl")]
+
+[sub_resource type="BTCondition" id="BTCondition_504pj"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 3
+height_threshold = -4.5
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTInvert" id="BTInvert_wv527"]
+children = [SubResource("BTCondition_504pj")]
 
 [sub_resource type="BTCondition" id="BTCondition_gvblq"]
 script = ExtResource("11_pia2r")
@@ -208,7 +213,8 @@ children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880")
 
 [sub_resource type="BTSequence" id="BTSequence_lsbnu"]
 custom_name = "Pursue"
-children = [SubResource("BTInvert_wv527"), SubResource("BTInvert_a51uw"), SubResource("BTParallel_viady")]
+children = [SubResource("BTInvert_a51uw"), SubResource("BTInvert_wv527"), SubResource("BTParallel_viady")]
+_enabled = false
 metadata/_weight_ = 5.0
 
 [sub_resource type="BBNode" id="BBNode_viady"]
@@ -265,6 +271,9 @@ target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 1.0
+telegraph_timer = 1.0
+invisible_flank = true
+immediate_flank = false
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"

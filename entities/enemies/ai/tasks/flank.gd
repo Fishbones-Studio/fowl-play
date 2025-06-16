@@ -13,11 +13,14 @@ extends BTAction
 @export var telegraph_timer: float = 1.0
 ## Make enemy invisible while flanking
 @export var invisible_flank: bool = true
+## Flank immediately, telegraph timer is negated
+@export var immediate_flank: bool = false
 
-var _started: bool = false
+
 var _telegraph_instance: Variant
 var _flank_position: Vector3
 var _area: Area3D = null
+var _flank_started: bool = false
 
 
 # Display a customized name (requires @tool).
@@ -40,11 +43,14 @@ func _generate_name() -> String:
 
 
 func _enter() -> void:
+	if _flank_started:
+		return
+
 	agent.visible = not invisible_flank
 
 
 func _tick(_delta: float) -> Status:
-	if not agent.visible:
+	if _flank_started:
 		return RUNNING
 
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
@@ -57,11 +63,12 @@ func _tick(_delta: float) -> Status:
 		if _flank_position == Vector3.INF:
 			return FAILURE
 
-	if not _telegraph_instance: 
-		_telegraph_instance = _create_telegraph(_flank_position)
+	if not immediate_flank:
+		if not _telegraph_instance: 
+			_telegraph_instance = _create_telegraph(_flank_position)
 
-	while elapsed_time < telegraph_timer:
-		return RUNNING
+		while elapsed_time < telegraph_timer:
+			return RUNNING
 
 	# Omae wa mou shindeiru
 	agent.visible = true
@@ -70,13 +77,17 @@ func _tick(_delta: float) -> Status:
 
 	_flank_position = Vector3.ZERO
 
-	agent.get_parent().remove_child(_telegraph_instance)
-	_telegraph_instance.queue_free()
-	_telegraph_instance = null
+	if _telegraph_instance:
+		agent.get_parent().remove_child(_telegraph_instance)
+		_telegraph_instance.queue_free()
+		_telegraph_instance = null
 
-	agent.remove_child(_area)
-	_area.queue_free()
-	_area = null
+	if _area:
+		agent.remove_child(_area)
+		_area.queue_free()
+		_area = null
+
+	_flank_started = false
 
 	return SUCCESS
 
