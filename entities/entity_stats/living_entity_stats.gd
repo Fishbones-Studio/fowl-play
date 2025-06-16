@@ -32,7 +32,7 @@ extends Resource
 @export_group("Holder")
 @export var is_player: bool = false
 ## All names are stored lowercase and must be unique. Use snake_case
-@export var name: StringName = "" :
+@export var name: StringName = "":
 	set(value):
 		name = value.to_lower()
 

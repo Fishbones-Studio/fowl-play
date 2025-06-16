@@ -97,8 +97,8 @@ func _on_blast_timer_timeout() -> void:
 	elif _blast_count == max_blasts:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
-		_current_damage = base_damage * ((1.0 + 2*(_blast_count * blast_increment)))
 		_play_blast_sound_effect(max_blasts)
+		_current_damage = base_damage * ((1.0 + 2 * (_blast_count * blast_increment)))
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false

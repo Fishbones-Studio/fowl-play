@@ -81,15 +81,6 @@ func apply_gravity(delta: float) -> void:
 	velocity.y += movement_component.get_gravity(velocity) * delta
 
 
-func scale_stats(rounds :int) -> void:
-	var caculation = 1+rounds/20 #5% increase to stats per round for enemies
-	stats.attack *= caculation
-	stats.defense *= caculation
-	stats.max_health *= caculation
-	stats.max_stamina *= caculation
-	stats.speed *= caculation
-
-
 func play_state_audio(audio_stream: AudioStream) -> void:
 	# Stop the audio and timer
 	interval_audio_player.stop()

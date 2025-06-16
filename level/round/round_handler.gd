@@ -14,6 +14,18 @@ signal next_enemy_selected(enemy: Enemy)
 @export var intermission_enabled: bool = true
 ## Time between round transitions
 @export var transition_delay: float = 2.0
+## The increment of stats per round
+@export var stat_increment_per_round: float = 5.0
+## The stats to increase
+@export var stats_to_increment: Array[StatsEnums.Stats] = [
+	StatsEnums.Stats.MAX_HEALTH,
+	StatsEnums.Stats.MAX_STAMINA,
+	StatsEnums.Stats.ATTACK,
+	StatsEnums.Stats.DEFENSE,
+	StatsEnums.Stats.SPEED,
+	StatsEnums.Stats.HEALTH_REGEN,
+	StatsEnums.Stats.STAMINA_REGEN
+]
 @export_category("Spawn")
 @export var enemy_spawn_position: Marker3D
 @export var player_spawn_position: Marker3D
@@ -85,7 +97,9 @@ func _enter_waiting() -> void:
 		current_round_string = "Final Round"
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": current_round_string}
+		{
+			"display_text": current_round_string
+		}
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
@@ -148,7 +162,10 @@ func _enter_concluding() -> void:
 	# Show the round screen
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Enemy Defeated!", "currency_dict": currency_dict}
+		{
+			"display_text": "Enemy Defeated!", 
+			"currency_dict": currency_dict
+		}
 	)
 
 	# Decide and store the next enemy *before* the wait time
@@ -263,14 +280,23 @@ func _spawn_enemy() -> void:
 	if _current_enemy.get_parent():
 		_current_enemy.get_parent().remove_child(_current_enemy)
 
+	var original_enemy_stats: Dictionary[StringName, float] = {}
+
+	# Apply the increment in stats
+	for stats: StatsEnums.Stats in stats_to_increment:
+		var stat_name: StringName = StatsEnums.stat_to_string(stats) as StringName
+		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, -SaveManager.get_loaded_rounds_won() * stat_increment_per_round)
+		original_enemy_stats[stat_name] = original_value
+
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_spawn_position.global_position
 	_current_enemy.look_at(player_spawn_position.global_position)
-	_current_enemy.scale_stats(GameManager.current_round)
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	var death_callback = func():
 		if is_instance_valid(_current_enemy):
+			for stat_name in original_enemy_stats.keys():
+				_current_enemy.stats.set(stat_name, original_enemy_stats[stat_name])
 			_current_enemy.queue_free()
 		_current_enemy = null
 
