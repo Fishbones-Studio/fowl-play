@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dxqe8ptih6fxs"]
+[gd_scene load_steps=25 format=3 uid="uid://dxqe8ptih6fxs"]
 
 [ext_resource type="Script" uid="uid://c7adxnpiglbtx" path="res://entities/chicken_player/chicken_player.gd" id="1_abrql"]
 [ext_resource type="Resource" uid="uid://bwhuhbesdlyu5" path="res://entities/chicken_player/player_stats.tres" id="2_6mkbl"]
@@ -15,8 +15,9 @@
 [ext_resource type="Script" uid="uid://dd6a6ofedv55p" path="res://entities/chicken_player/states/movement_states/walk_state.gd" id="10_3wlsy"]
 [ext_resource type="Script" uid="uid://b8rv730avcti2" path="res://entities/chicken_player/states/movement_states/fall_state.gd" id="11_jgbvq"]
 [ext_resource type="Script" uid="uid://h2gpvk5xoyvp" path="res://entities/chicken_player/player_movement_component.gd" id="12_5aj8x"]
-[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="13_vsiul"]
+[ext_resource type="AudioStream" uid="uid://do74m8dmtyud7" path="res://entities/chicken_player/sound/player_hurt.ogg" id="13_cx2nh"]
 [ext_resource type="Script" uid="uid://dds2rv6cxqnqs" path="res://entities/chicken_player/states/movement_states/death_state.gd" id="14_pq2r3"]
+[ext_resource type="AudioStream" uid="uid://ypc1je2cpl5y" path="res://entities/chicken_player/sound/dash.ogg" id="15_hmi2t"]
 [ext_resource type="Script" uid="uid://dwtwjm1gso3bs" path="res://entities/chicken_player/player_weapon_pivot.gd" id="16_8i8jv"]
 [ext_resource type="PackedScene" uid="uid://rvl463trs4qd" path="res://entities/chicken_player/abilities/handlers/player_ability_controller.tscn" id="17_pq2r3"]
 [ext_resource type="PackedScene" uid="uid://mgedhih6o02q" path="res://resources/effects/blood_splash/blood_splash_handler.tscn" id="21_1ij6v"]
@@ -39,22 +40,22 @@ script = ExtResource("4_qjuvu")
 layer_to_add = 2
 recursive = true
 
-[node name="Skeleton3D" parent="chicken_default/Armature" index="1"]
+[node name="Skeleton3D" parent="chicken_default/Armature" index="0"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.506503, -0.00417104, 0.00533034, 0.862212)
-bones/3/rotation = Quaternion(-0.51588, -0.00741026, -0.00746328, 0.856596)
-bones/4/rotation = Quaternion(-0.116023, -0.334937, -0.077129, 0.931883)
-bones/5/rotation = Quaternion(-0.18805, 0.0068383, -0.570042, 0.799777)
-bones/6/rotation = Quaternion(-0.444938, -0.0647739, -0.667092, 0.593988)
-bones/7/rotation = Quaternion(-0.245084, -0.000984854, 0.599547, 0.76189)
-bones/8/rotation = Quaternion(-0.422578, 0.00197583, 0.740568, 0.522478)
+bones/2/rotation = Quaternion(-0.463838, -0.000200484, 0.000527934, 0.88592)
+bones/3/rotation = Quaternion(-0.508965, 0.00949052, -0.0090988, 0.860687)
+bones/4/rotation = Quaternion(-0.104685, -0.0120686, -0.00042919, 0.994432)
+bones/5/rotation = Quaternion(-0.272833, 0.0557877, -0.609759, 0.742054)
+bones/6/rotation = Quaternion(-0.317168, -0.0629499, -0.753132, 0.572917)
+bones/7/rotation = Quaternion(-0.291386, -0.0400058, 0.623276, 0.724583)
+bones/8/rotation = Quaternion(-0.436457, 0.140333, 0.761821, 0.457646)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.288642, -0.0146868, -0.0505766, 0.955987)
-bones/11/rotation = Quaternion(0.18028, 0.00940391, -0.11696, 0.976591)
+bones/10/rotation = Quaternion(0.221665, -0.00504495, -0.114274, 0.968391)
+bones/11/rotation = Quaternion(0.23614, 0.0237407, -0.147747, 0.960128)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.172837, 0.045235, 0.0985724, 0.978961)
+bones/13/rotation = Quaternion(-0.173035, 0.0387613, 0.0888769, 0.980131)
 
 [node name="AnimationTree" type="AnimationTree" parent="chicken_default"]
 unique_name_in_owner = true
@@ -109,8 +110,8 @@ state_type = 6
 wait_time = 0.05
 one_shot = true
 
-[node name="HurtSFX" type="AudioStreamPlayer" parent="MovementStateMachine/Hurt"]
-stream = ExtResource("13_vsiul")
+[node name="HurtSFX" type="AudioStreamPlayer3D" parent="MovementStateMachine/Hurt"]
+stream = ExtResource("13_cx2nh")
 bus = &"SFX"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
@@ -124,6 +125,11 @@ one_shot = true
 [node name="DashCooldownTimer" type="Timer" parent="MovementStateMachine/Dash"]
 wait_time = 2.0
 one_shot = true
+
+[node name="DashSFX" type="AudioStreamPlayer3D" parent="MovementStateMachine/Dash"]
+stream = ExtResource("15_hmi2t")
+volume_db = -20.0
+bus = &"SFX"
 
 [node name="Fall" type="Node" parent="MovementStateMachine"]
 script = ExtResource("11_jgbvq")

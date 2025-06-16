@@ -8,7 +8,8 @@ signal damage_taken
 @export var knockback_decay: int = 50 ## Rate at which the knockback decays per second
 @export_dir var dialogue_path: String
 @export var name_label_template_string: String ## String template, requires 1 %s which will be replaced with the name specified in the associated stats
-@export var model: Node3D # bc onready doesn't work with intermission and I dunno why
+@export var model: Node3D 
+@export var hurt_sound : AudioStream
 
 var is_immobile: bool = false
 var is_stunned: bool = false
@@ -24,7 +25,6 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
-@onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
 @onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
 @onready var state_audio_player : AudioStreamPlayer3D = %StateAudioPlayer
 @onready var interval_audio_player : IntervalSFXPlayer3D = %IntervalAudioPlayer
@@ -122,7 +122,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 		hurt_ticks.append(Time.get_ticks_msec())
 		# Play hurt sound
-		on_hurt.play()
+		play_state_audio(hurt_sound)
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 
