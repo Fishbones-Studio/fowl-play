@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dx5yip7f241bh"
+path="res://.godot/imported/hennifer_in_between_rounds.dialogue-7d8e935011e42939a151a63d11f6ed54.tres"
+
+[deps]
+
+source_file="res://entities/enemies/hennifer/dialogue/in_between_rounds/hennifer_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/hennifer_in_between_rounds.dialogue-7d8e935011e42939a151a63d11f6ed54.tres"]
+
+[params]
+
+defaults=true

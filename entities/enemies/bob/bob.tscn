@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_8cml0"]
 [ext_resource type="Script" uid="uid://dltdrhrtk0btl" path="res://entities/enemies/bob/spike_hitbox.gd" id="5_fjbia"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="6_e381t"]
-[ext_resource type="Texture2D" uid="uid://jqwcldieg7q3" path="res://entities/enemies/bob/art/bob_mugshot.png" id="7_sexgk"]
+[ext_resource type="Texture2D" uid="uid://t1q6ckoip751" path="res://entities/enemies/bob/art/icon/bob_icon.png" id="8_sexgk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 4.25
@@ -68,7 +68,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
-texture = ExtResource("7_sexgk")
+texture = ExtResource("8_sexgk")
 
 [connection signal="body_entered" from="SpikeHitbox" to="SpikeHitbox" method="_on_body_entered"]
 [connection signal="timeout" from="SpikeHitbox/HurtTimer" to="SpikeHitbox" method="_on_hurt_timer_timeout"]
