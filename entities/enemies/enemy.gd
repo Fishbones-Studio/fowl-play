@@ -28,6 +28,7 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
 @onready var state_audio_player : AudioStreamPlayer3D = %StateAudioPlayer
 @onready var interval_audio_player : IntervalSFXPlayer3D = %IntervalAudioPlayer
+@onready var bt_player : BTPlayer = %BTPlayer
 
 
 func _ready() -> void:
@@ -65,6 +66,8 @@ func _process(_delta: float) -> void:
 
 	if stats.current_health <= 0:
 		_die()
+		bt_player.active = false
+		set_process(false)
 
 
 func get_stats_resource() -> LivingEntityStats:

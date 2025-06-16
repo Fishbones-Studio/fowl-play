@@ -40,6 +40,7 @@ unique_name_in_owner = true
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_ipr6v")
+unique_name_in_owner = true
 
 [node name="EnemyWeaponController" type="Node3D" parent="."]
 script = ExtResource("5_twyc1")
