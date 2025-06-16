@@ -12,10 +12,10 @@
 radius = 1.0
 height = 2.4
 
-[node name="Hendere" instance=ExtResource("1_legca")]
+[node name="Hennifer" instance=ExtResource("1_legca")]
 collision_mask = 25
 stats = ExtResource("2_n7fk8")
-dialogue_path = "res://entities/enemies/hendere/dialogue"
+dialogue_path = "res://entities/enemies/hennifer/dialogue"
 name_label_template_string = "%s"
 
 [node name="chicken_hennifer" parent="Model" index="0" instance=ExtResource("3_i6i68")]
