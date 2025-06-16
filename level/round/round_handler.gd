@@ -14,18 +14,16 @@ signal next_enemy_selected(enemy: Enemy)
 @export var intermission_enabled: bool = true
 ## Time between round transitions
 @export var transition_delay: float = 2.0
-## The increment of stats per round
-@export var stat_increment_per_round: float = 5.0
-## The stats to increase
-@export var stats_to_increment: Array[StatsEnums.Stats] = [
-	StatsEnums.Stats.MAX_HEALTH,
-	StatsEnums.Stats.MAX_STAMINA,
-	StatsEnums.Stats.ATTACK,
-	StatsEnums.Stats.DEFENSE,
-	StatsEnums.Stats.SPEED,
-	StatsEnums.Stats.HEALTH_REGEN,
-	StatsEnums.Stats.STAMINA_REGEN
-]
+## Which stat type to increment per round and their respective value
+@export var stat_increment_per_round: Dictionary[StatsEnums.Stats, float] = {
+	StatsEnums.Stats.MAX_HEALTH: 10.0,
+	StatsEnums.Stats.MAX_STAMINA: 10.0,
+	StatsEnums.Stats.ATTACK: 5.0,
+	StatsEnums.Stats.DEFENSE: 5.0,
+	StatsEnums.Stats.SPEED: 2.0,
+	StatsEnums.Stats.HEALTH_REGEN: 5.0,
+	StatsEnums.Stats.STAMINA_REGEN: 5.0
+}
 @export_category("Spawn")
 @export var enemy_spawn_position: Marker3D
 @export var player_spawn_position: Marker3D
@@ -283,9 +281,10 @@ func _spawn_enemy() -> void:
 	var original_enemy_stats: Dictionary[StringName, float] = {}
 
 	# Apply the increment in stats
-	for stats: StatsEnums.Stats in stats_to_increment:
-		var stat_name: StringName = StatsEnums.stat_to_string(stats) as StringName
-		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, -SaveManager.get_loaded_rounds_won() * stat_increment_per_round)
+	for stat: StatsEnums.Stats in stat_increment_per_round.keys():
+		var stat_name: StringName = StatsEnums.stat_to_string(stat) as StringName
+		print(stat_increment_per_round[stat])
+		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, -SaveManager.get_loaded_rounds_won() * stat_increment_per_round[stat])
 		original_enemy_stats[stat_name] = original_value
 
 	add_child(_current_enemy)
