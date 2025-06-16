@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=13 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
+[ext_resource type="Script" uid="uid://4nj14wvdqsae" path="res://entities/enemies/boss.gd" id="2_l658y"]
+[ext_resource type="AudioStream" uid="uid://bxssmk8w3kohp" path="res://entities/enemies/elder_centipede/sound/centipede_death.ogg" id="3_b6m30"]
 [ext_resource type="PackedScene" uid="uid://d4ayhkovgvwtn" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="3_djom0"]
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_bv6h5"]
@@ -15,6 +17,8 @@ radius = 1.75
 height = 25.0
 
 [node name="ElderCentipede" instance=ExtResource("1_urhlp")]
+script = ExtResource("2_l658y")
+death_audio = ExtResource("3_b6m30")
 stats = ExtResource("2_5cdes")
 type = 1
 knockback_decay = 10000

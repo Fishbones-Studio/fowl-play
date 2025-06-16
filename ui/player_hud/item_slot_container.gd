@@ -13,7 +13,7 @@ func _ready() -> void:
 			
 			print("Activating item slot at index: ", index)
 			# Validate index
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				push_warning("Invalid item slot index: ", index)
 				return
 				
@@ -36,7 +36,7 @@ func _ready() -> void:
 	SignalManager.deactivate_item_slot.connect(
 		func(item: BaseResource):
 			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				return
 				
 			var item_slot: UiItemSlot = get_child(index * 2) as UiItemSlot
@@ -51,13 +51,13 @@ func _ready() -> void:
 
 	# Connect to signal that starts cooldown on an item slot
 	SignalManager.cooldown_item_slot.connect(
-		func(item: BaseResource, cd: float, create_tween : bool):
+		func(item: BaseResource, cd: float, should_create_tween : bool):
 			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				return
 			var item_slot: UiItemSlot = get_child(index * 2) as UiItemSlot
 			if item_slot:
-				item_slot.start_cooldown(cd, create_tween)
+				item_slot.start_cooldown(cd, should_create_tween)
 	)
 
 	# Initialize all item slots

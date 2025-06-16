@@ -35,7 +35,7 @@ func _enter() -> void:
 	agent.play_state_audio(audio_stream)
 
 
-func _tick(delta):
+func _tick(_delta):
 	if agent is Enemy:
 		if agent.state_audio_player.playing:
 			return SUCCESS
