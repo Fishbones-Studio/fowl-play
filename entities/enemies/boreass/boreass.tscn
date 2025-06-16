@@ -17,7 +17,7 @@ height = 5.5
 
 [node name="IceFox" instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
-dialogue_path = "res://entities/enemies/ice_fox/dialogue"
+dialogue_path = "res://entities/enemies/boreass/dialogue"
 name_label_template_string = "%s, Detonator of Foxes"
 
 [node name="ice_fox" parent="Model" index="0" instance=ExtResource("4_qhcpj")]
