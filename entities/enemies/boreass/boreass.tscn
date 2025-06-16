@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
 [ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/boreass/boreass_stats.tres" id="3_7ghaq"]
-[ext_resource type="BehaviorTree" uid="uid://bc7ucld3pg5s8" path="res://entities/enemies/ai/trees/ice_fox.tres" id="4_0uh03"]
+[ext_resource type="BehaviorTree" uid="uid://bc7ucld3pg5s8" path="res://entities/enemies/ai/trees/boreass.tres" id="4_0uh03"]
 [ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/boreass/art/ice_fox.glb" id="4_qhcpj"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_72x12"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_ak1y5"]

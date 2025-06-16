@@ -4,6 +4,7 @@ extends BTAction
 ## The audio file to play.
 @export_file("*.ogg", "*.wav", "*.mp3") var file_to_play: String
 
+
 func _generate_name() -> String:
 	if file_to_play.is_empty():
 		return "PlayEnemyAudio (No file)"
@@ -32,6 +33,7 @@ func _enter() -> void:
 
 	# Play the sound file
 	agent.play_state_audio(audio_stream)
+
 
 func _tick(delta):
 	if agent is Enemy:
