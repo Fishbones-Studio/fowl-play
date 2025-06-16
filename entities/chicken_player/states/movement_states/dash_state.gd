@@ -11,7 +11,7 @@ var _dash_direction: Vector3
 
 @onready var dash_duration_timer: Timer = $DashDurationTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
-@onready var dash_sfx: AudioStreamPlayer = $DashSFX
+@onready var dash_sfx: AudioStreamPlayer3D = $DashSFX
 
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
