@@ -400,16 +400,38 @@ func _update_game_input_blocked() -> void:
 	game_input_blocked = UIEnums.UI_BLOCK_GAME_INPUT.has(ui_enum)
 
 
-## Sets the mouse mode based on the UI
+## Sets the mouse mode based on the currently active UI.
+## If no UI is active, it checks for visible background UIs (like a HUD) to determine the mouse state.
 func _update_game_mouse_mode() -> void:
-	if !current_ui:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		return
-	var ui_enum: UIEnums.UI = ui_list.find_key(current_ui)
-	if ui_enum == null:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		return
-	elif ui_enum in UIEnums.UI_MOUSE_CAPTURED:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var desired_mode: Input.MouseMode
+
+	if is_instance_valid(current_ui):
+		# A primary UI (like a menu) is active.
+		# Base the mouse mode on this specific UI.
+		var ui_enum: UIEnums.UI = ui_list.find_key(current_ui)
+
+		if ui_enum in UIEnums.UI_MOUSE_CAPTURED:
+			desired_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			# Any other active UI (pause menu, inventory) makes mouse visible.
+			desired_mode = Input.MOUSE_MODE_VISIBLE
 	else:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		# No primary UI is active
+		# Default to visible unless a "captured" UI (like a HUD) is visible.
+		desired_mode = Input.MOUSE_MODE_VISIBLE
+		for ui_enum in UIEnums.UI_MOUSE_CAPTURED:
+			var ui_node: Control = ui_list.get(ui_enum)
+			if is_instance_valid(ui_node) and ui_node.visible:
+				# Found a visible HUD or other capture-type UI.
+				desired_mode = Input.MOUSE_MODE_CAPTURED
+				break # Found one, no need to check others.
+
+	# Apply the determined mouse mode only if it has changed.
+	if Input.mouse_mode != desired_mode:
+		Input.mouse_mode = desired_mode
+		print(
+			"Mouse mode set to: ",
+			"CAPTURED"
+			if desired_mode == Input.MOUSE_MODE_CAPTURED
+			else "VISIBLE"
+		)
