@@ -76,6 +76,24 @@ func get_stats_resource() -> LivingEntityStats:
 	return stats
 
 
+## Applies jump or fall gravity based on velocity
+func apply_gravity(delta: float) -> void:
+	velocity.y += movement_component.get_gravity(velocity) * delta
+
+
+func play_state_audio(audio_stream: AudioStream) -> void:
+	# Stop the audio and timer
+	interval_audio_player.stop()
+	interval_audio_player.random_player.timer.stop()
+
+	# Connect to finished signal and play state audio
+	if not state_audio_player.finished.is_connected(_on_state_audio_finished):
+		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
+
+	state_audio_player.stream = audio_stream
+	state_audio_player.play()
+
+
 func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums.DamageTypes, info: Dictionary = {}) -> void:
 	if target == self:
 		var immobile_time: float = 0.0
@@ -118,27 +136,11 @@ func _die() -> void:
 	queue_free()
 
 
-## Applies jump or fall gravity based on velocity
-func apply_gravity(delta: float) -> void:
-	velocity.y += movement_component.get_gravity(velocity) * delta
-
-
 func _on_immobile_timer_timeout() -> void:
 	is_immobile = false
 	is_stunned = false
-	
-func play_state_audio(audio_stream: AudioStream) -> void:
-	# Stop the audio and timer
-	interval_audio_player.stop()
-	interval_audio_player.random_player._timer.stop()
-	
-	# Connect to finished signal and play state audio
-	if not state_audio_player.is_connected("finished", _on_state_audio_finished):
-		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
-	
-	state_audio_player.stream = audio_stream
-	state_audio_player.play()
+
 
 func _on_state_audio_finished() -> void:
 	# Resume interval timer
-	interval_audio_player.random_player._timer.start()
+	interval_audio_player.random_player.timer.start()
