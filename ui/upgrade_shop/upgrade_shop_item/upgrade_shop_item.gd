@@ -36,6 +36,9 @@ func populate_visual_fields() -> void:
 func attempt_purchase() -> void:
 	if purchase_in_progress or not can_afford():
 		return
+
+	purchase_in_progress = true
+
 	SignalManager.add_ui_scene.emit(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION, {
 		"purchased_signal": purchased,
 		"shop_item": shop_item
@@ -43,8 +46,6 @@ func attempt_purchase() -> void:
 
 
 func _on_purchase_completed() -> void:
-	purchase_in_progress = true
-
 	GameManager.chicken_player.stats.apply_upgrade(shop_item)
 
 	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
@@ -52,5 +53,5 @@ func _on_purchase_completed() -> void:
 	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
 		GameManager.feathers_of_rebirth -= shop_item.cost
 
-	self.visible = false
 	super.attempt_purchase()
+	queue_free()

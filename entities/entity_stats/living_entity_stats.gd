@@ -145,7 +145,7 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	speed += upgrade.speed_bonus
 
 	weight += upgrade.weight_bonus
-	
+
 	# Ensure current values are clamped after potential changes
 	current_health = clamp(current_health, 0, max_health)
 	current_stamina = clamp(current_stamina, 0, max_stamina)
