@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu6c16s8oochp"]
+[gd_scene load_steps=9 format=3 uid="uid://cu6c16s8oochp"]
 
 [ext_resource type="PackedScene" uid="uid://0lfmlgpr5q4l" path="res://level/arena/props/hazards/base_hazard.tscn" id="1_34esa"]
 [ext_resource type="PackedScene" uid="uid://b7w0gamflf5pk" path="res://level/arena/props/hazards/balls/art/spike_ball.glb" id="2_kxu0f"]
 [ext_resource type="Script" uid="uid://bmqo6sk52fa4n" path="res://level/arena/props/hazards/knock_hazard.gd" id="2_p5xf8"]
+[ext_resource type="AudioStream" uid="uid://d2w54te8f0e3n" path="res://level/arena/props/hazards/balls/sound/spike_swing.ogg" id="4_tfv5j"]
 
 [sub_resource type="Animation" id="Animation_6w8m6"]
 length = 2.0
@@ -123,3 +124,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" parent="HazardArea" index="0"]
 shape = SubResource("SphereShape3D_kxu0f")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9525, 0)
+stream = ExtResource("4_tfv5j")
+autoplay = true
+bus = &"SFX"

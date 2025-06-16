@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="6_vfx5i"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="6_x6gfb"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
-[ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="9_ioi28"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="10_cx7ru"]
+[ext_resource type="Texture2D" uid="uid://cus8qvfc2ebc7" path="res://entities/enemies/woodpecker/art/icon/woodpecker_icon.png" id="11_cx7ru"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vfx5i"]
 radius = 1.5
@@ -69,8 +69,6 @@ ability_resource = ExtResource("9_ioi28")
 ability_resource = ExtResource("10_cx7ru")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
-texture = ExtResource("8_p6jwh")
-expand_mode = 3
-stretch_mode = 5
+texture = ExtResource("11_cx7ru")
 
 [editable path="Model/woodpecker"]

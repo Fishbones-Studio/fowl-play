@@ -1,4 +1,5 @@
 ## Plays a random sound effect from a specified folder at random intervals.
+class_name IntervalSFXPlayer3D
 extends AudioStreamPlayer3D
 
 @export_dir var sounds_folder: String = "res://ui/game_menu/art/random_sounds/" ## Folder containing sound effect files
@@ -9,11 +10,13 @@ extends AudioStreamPlayer3D
 @export var max_interval: float = 15.0 ## Maximum time between sound effects in seconds
 @export var avoid_repeats: bool = true ## Avoid playing the same sound consecutively
 
+var random_player: IntervalAudioPlayer
+
 
 func _ready() -> void:
-	var _random_player := IntervalAudioPlayer.new(sounds_folder, file_extensions, min_interval, max_interval, true, avoid_repeats)
-	_random_player.play_audio.connect(_on_play_sound)
-	add_child(_random_player)
+	random_player = IntervalAudioPlayer.new(sounds_folder, file_extensions, min_interval, max_interval, true, avoid_repeats)
+	random_player.play_audio.connect(_on_play_sound)
+	add_child(random_player)
 
 
 func _on_play_sound(sound: AudioStream, _sound_name: String) -> void:

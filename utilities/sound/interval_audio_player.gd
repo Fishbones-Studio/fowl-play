@@ -15,7 +15,7 @@ var start_playing: bool
 var available_audio: Array[AudioStream] = []
 var current_index: int = -1
 
-var _timer: Timer
+var timer: Timer
 
 
 func _init(
@@ -44,7 +44,7 @@ func _ready() -> void:
 			_play_random_audio()
 		else:
 			# Start the timer without playing immediately
-			_timer.start(randf_range(min_interval, max_interval))
+			timer.start(randf_range(min_interval, max_interval))
 	else:
 		push_warning("No audio files found in: %s" % audio_folder)
 
@@ -103,9 +103,9 @@ func _load_audio_files() -> void:
 
 
 func _setup_timer() -> void:
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.timeout.connect(_play_random_audio)
+	timer = Timer.new()
+	add_child(timer)
+	timer.timeout.connect(_play_random_audio)
 
 
 func _play_random_audio() -> void:
@@ -135,7 +135,7 @@ func _play_random_audio() -> void:
 func _schedule_next_playback(audio: AudioStream) -> void:
 	var interval := randf_range(min_interval, max_interval)
 	if audio != null: # Ensure audio is valid before getting length
-		_timer.start(interval + audio.get_length()) # Wait until current audio ends + random interval
+		timer.start(interval + audio.get_length()) # Wait until current audio ends + random interval
 	else:
-		_timer.start(interval) # Fallback if audio is somehow null
+		timer.start(interval) # Fallback if audio is somehow null
 		push_warning("Attempted to schedule playback with a null AudioStream.")

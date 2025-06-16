@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2n75tu7hm7w0"]
+[gd_scene load_steps=13 format=3 uid="uid://d2n75tu7hm7w0"]
 
 [ext_resource type="Script" uid="uid://ebkmo4g3q03n" path="res://entities/enemies/enemy.gd" id="1_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://cli710xrcmslv" path="res://ui/player_hud/health_bar/health_bar.tscn" id="2_gj3y3"]
@@ -8,7 +8,12 @@
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
+<<<<<<< feature/sound-effects -- Incoming Change
 [ext_resource type="AudioStream" uid="uid://dm21fsdj7ohlr" path="res://resources/sound/on_hurt.ogg" id="9_56i32"]
+=======
+[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="9_56i32"]
+[ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="10_sb13e"]
+>>>>>>> dev -- Current Change
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
 
@@ -39,6 +44,7 @@ unique_name_in_owner = true
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_ipr6v")
+unique_name_in_owner = true
 
 [node name="EnemyWeaponController" type="Node3D" parent="."]
 script = ExtResource("5_twyc1")
@@ -73,7 +79,7 @@ theme_override_constants/separation = 10
 material = SubResource("ShaderMaterial_56i32")
 layout_mode = 2
 mouse_filter = 2
-expand_mode = 2
+expand_mode = 3
 stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HealthBarContainer/HBoxContainer"]
@@ -105,6 +111,17 @@ one_shot = true
 [node name="OnHurtAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_56i32")
 bus = &"SFX"
+
+[node name="StateAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="IntervalAudioPlayer" parent="." instance=ExtResource("10_sb13e")]
+unique_name_in_owner = true
+bus = &"SFX"
+sounds_folder = ""
+min_random_distance = 0.0
+max_random_distance = 0.0
 
 [connection signal="damage_taken" from="." to="DamageNumberHandler" method="display_damage"]
 [connection signal="timeout" from="ImmobileTimer" to="." method="_on_immobile_timer_timeout"]
