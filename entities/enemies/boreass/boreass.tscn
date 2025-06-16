@@ -15,7 +15,7 @@
 radius = 1.5
 height = 5.5
 
-[node name="IceFox" instance=ExtResource("1_cemmm")]
+[node name="Boreass" instance=ExtResource("1_cemmm")]
 stats = ExtResource("3_7ghaq")
 dialogue_path = "res://entities/enemies/boreass/dialogue"
 name_label_template_string = "%s, Detonator of Foxes"
