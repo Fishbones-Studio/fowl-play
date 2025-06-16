@@ -62,4 +62,11 @@ texture = ExtResource("6_uw30w")
 expand_mode = 3
 stretch_mode = 5
 
+[node name="StateAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
+
+[node name="IntervalAudioPlayer" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
+sounds_folder = "res://entities/enemies/hendere/sounds/random"
+
 [editable path="Model/chicken_hennifer"]

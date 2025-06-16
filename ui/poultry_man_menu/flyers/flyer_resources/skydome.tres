@@ -1,18 +1,15 @@
-[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=7 format=3 uid="uid://dlcv842gq6jcg"]
+[gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=4 format=3 uid="uid://dlcv842gq6jcg"]
 
 [ext_resource type="Texture2D" uid="uid://b6aw73den515a" path="res://ui/poultry_man_menu/flyers/art/skydome_icon.png" id="1_hohgc"]
 [ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="2_57gxw"]
 [ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="3_u44cs"]
-[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="4_aa7cy"]
-[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_sdvqv"]
-[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="6_oiy1c"]
 
 [resource]
 script = ExtResource("2_57gxw")
 title = "Skydome"
 description = "A floating cage high in the clouds. Fight against powerful enemies until you are the last one remaining."
 icon = ExtResource("1_hohgc")
-standard_enemy_scenes = Array[PackedScene]([ExtResource("3_u44cs"), ExtResource("4_aa7cy"), ExtResource("5_sdvqv"), ExtResource("6_oiy1c")])
+standard_enemy_scenes = Array[PackedScene]([ExtResource("3_u44cs")])
 boss_enemy_scenes = Array[PackedScene]([])
 include_boss = false
 rounds = 2
