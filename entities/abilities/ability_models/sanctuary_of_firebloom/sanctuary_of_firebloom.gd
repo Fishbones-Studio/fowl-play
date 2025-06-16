@@ -8,7 +8,7 @@ extends Ability
 var base_damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (max_blasts / blast_interval) * ((1.0 + (stats.attack / 100)))
+		return (max_blasts / blast_interval) * (1.0 + (stats.attack / 100))
 
 var _target: Node3D = null
 var _hit_bodies: Array = []
@@ -86,7 +86,7 @@ func _on_blast_timer_timeout() -> void:
 	elif _blast_count == max_blasts:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
-		_current_damage *= base_damage * (2*(1.0 + (_blast_count * blast_increment)))
+		_current_damage = base_damage * ((1.0 + 2*(_blast_count * blast_increment)))
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false

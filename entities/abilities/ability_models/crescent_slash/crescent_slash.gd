@@ -8,7 +8,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return base_damage * ((1.0 + (stats.attack / 100)))
+		return base_damage * (1.0 + (stats.attack / 100))
 
 var _hit_bodies: Array = []
 var _current_slash_count: int = 0 
