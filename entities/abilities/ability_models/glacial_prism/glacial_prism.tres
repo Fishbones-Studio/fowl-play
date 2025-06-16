@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://k14ny7psycd5"]
 
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_bhrhl"]
-[ext_resource type="Texture2D" uid="uid://dong1di5kj534" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.png" id="1_vvsio"]
+[ext_resource type="Texture2D" uid="uid://dong1di5kj534" path="res://entities/abilities/ability_models/glacial_prism/art/glacial_prism.png" id="1_vvsio"]
 
 [resource]
 script = ExtResource("1_bhrhl")

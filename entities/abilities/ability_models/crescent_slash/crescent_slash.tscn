@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2apjxceqsopi"]
+[gd_scene load_steps=19 format=3 uid="uid://b2apjxceqsopi"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ybpx1"]
 [ext_resource type="Script" uid="uid://cq5rcn2ai5sxs" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gd" id="2_jgw1e"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="3_y7jyb"]
-[ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gdshader" id="4_wydpc"]
+[ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/shaders/crescent_slash.gdshader" id="4_wydpc"]
+[ext_resource type="AudioStream" uid="uid://b25cu4wf3bs38" path="res://entities/abilities/ability_models/crescent_slash/sound/crescent_slash.ogg" id="5_ybpx1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xibu5"]
 height = 2.5
@@ -96,5 +97,8 @@ one_shot = true
 speed_scale = 1.1
 mesh = SubResource("QuadMesh_ifr7y")
 gravity = Vector3(0, 0, 0)
+
+[node name="SoundEffect" parent="." index="3"]
+stream = ExtResource("5_ybpx1")
 
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]

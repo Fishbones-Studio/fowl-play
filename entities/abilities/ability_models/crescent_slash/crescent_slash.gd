@@ -34,6 +34,7 @@ func activate() -> void:
 
 
 func _on_slash_timer_timeout() -> void:
+	sound_effect.play()
 	cpu_particles.restart()
 
 	for body in hit_area.get_overlapping_bodies():

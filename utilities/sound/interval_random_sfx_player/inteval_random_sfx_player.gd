@@ -10,7 +10,7 @@ extends AudioStreamPlayer3D
 @export var max_interval: float = 15.0 ## Maximum time between sound effects in seconds
 @export var avoid_repeats: bool = true ## Avoid playing the same sound consecutively
 
-var random_player : IntervalAudioPlayer
+var random_player: IntervalAudioPlayer
 
 
 func _ready() -> void:

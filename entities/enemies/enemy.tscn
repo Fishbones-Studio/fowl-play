@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://dln8stpjbemik" path="res://resources/shaders/rounded_rect.gdshader" id="7_56i32"]
 [ext_resource type="Script" uid="uid://b4agifrlvcnfd" path="res://entities/enemies/enemy_ability_controller.gd" id="7_ipr6v"]
 [ext_resource type="PackedScene" uid="uid://b6cnb1t5cixqj" path="res://ui/damage_number/damage_number_handler.tscn" id="7_nrfwl"]
-[ext_resource type="AudioStream" uid="uid://fpm8x7c25jnc" path="res://entities/enemies/on_hurt.wav" id="9_56i32"]
+[ext_resource type="AudioStream" uid="uid://dm21fsdj7ohlr" path="res://entities/enemies/sound/enemy_hurt.ogg" id="9_56i32"]
 [ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="10_sb13e"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
@@ -24,6 +24,7 @@ collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_ipr6v")
 model = NodePath("Model")
+hurt_sound = ExtResource("9_56i32")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -40,6 +41,7 @@ unique_name_in_owner = true
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 blackboard_plan = SubResource("BlackboardPlan_ipr6v")
+unique_name_in_owner = true
 
 [node name="EnemyWeaponController" type="Node3D" parent="."]
 script = ExtResource("5_twyc1")
@@ -102,10 +104,6 @@ medium_health_color = Color(1, 0, 0, 1)
 
 [node name="ImmobileTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="OnHurtAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_56i32")
-bus = &"SFX"
 
 [node name="StateAudioPlayer" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true

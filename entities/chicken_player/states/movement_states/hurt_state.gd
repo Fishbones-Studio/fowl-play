@@ -7,7 +7,7 @@ var _is_immobile: bool
 var _is_stunned: bool
 
 @onready var immobile_timer: Timer = $ImmobileTimer
-@onready var on_hurt: AudioStreamPlayer = $HurtSFX
+@onready var on_hurt: AudioStreamPlayer3D = $HurtSFX
 
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:

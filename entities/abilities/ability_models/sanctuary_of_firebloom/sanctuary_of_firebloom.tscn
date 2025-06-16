@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsvdnoqpn766s"]
+[gd_scene load_steps=11 format=3 uid="uid://dsvdnoqpn766s"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_deltf"]
 [ext_resource type="Script" uid="uid://b4qvwmcfsv15w" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.gd" id="2_hntii"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="3_2cn0f"]
 [ext_resource type="ArrayMesh" uid="uid://86471nk4jq05" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom_mesh.tres" id="4_dcanr"]
+[ext_resource type="AudioStream" uid="uid://b3qo753ipatxr" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sound/sanctuary_of_firebloom_sfx.ogg" id="5_4o270"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dcanr"]
 radius = 100.0
@@ -66,5 +67,8 @@ one_shot = true
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_g6q5m")
 draw_pass_1 = ExtResource("4_dcanr")
+
+[node name="SoundEffect" parent="." index="4"]
+stream = ExtResource("5_4o270")
 
 [connection signal="timeout" from="BlastTimer" to="." method="_on_blast_timer_timeout"]

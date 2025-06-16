@@ -13,7 +13,7 @@ static func to_words(number: int) -> String:
 	if number < 20:
 		return TEENS[number - 10]
 	if number < 100:
-		return TENS[number / 10] + ("-" + UNITS[number % 10] if number % 10 != 0 else "")
+		return TENS[int(number / 10.0)] + ("-" + UNITS[number % 10] if number % 10 != 0 else "")
 	if number < 1000:
-		return UNITS[number / 100] + " Hundred" + (" and " + to_words(number % 100)) if number % 100 != 0 else ""
+		return UNITS[int(number / 100.0)] + " Hundred" + (" and " + to_words(number % 100)) if number % 100 != 0 else ""
 	return "Number too large"
