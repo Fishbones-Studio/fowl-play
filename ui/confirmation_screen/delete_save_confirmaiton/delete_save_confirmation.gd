@@ -3,7 +3,7 @@ extends ConfirmationScreen
 
 func _ready() -> void:
 	title.text = "Delete save file"
-	description.text = "This will [color=yellow]permanently delete[/color] your save file, including all your progress, items, equipment, unlocked abilities, and any other data associated with your game. This action cannot be undone."
+	description.text = "This will [color=yellow]reset the game to its original state[/color], permanently deleting your save file. All progress, equipments, rebirth upgrades, unlocked abilities, and other game data will be lost. This action [color=yellow]cannot be undone[/color]."
 	super()
 
 
