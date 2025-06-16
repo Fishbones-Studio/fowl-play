@@ -389,7 +389,7 @@ func _on_add_ui_scene(new_ui_enum: UIEnums.UI, params: Dictionary = {}, make_vis
 ## Updates the game_input_blocked state based on the current UI
 ## This function checks if any UI that blocks game input is currently active.
 func _update_game_input_blocked() -> void:
-	if !current_ui: 
+	if not current_ui: 
 		game_input_blocked = false
 		return
 	var ui_enum : UIEnums.UI = ui_list.find_key(current_ui)
