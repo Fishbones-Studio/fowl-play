@@ -26,6 +26,8 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var immobile_timer: Timer = $ImmobileTimer
 @onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
 @onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
+@onready var state_audio_player : AudioStreamPlayer3D = %StateAudioPlayer
+@onready var interval_audio_player : IntervalSFXPlayer3D = %IntervalAudioPlayer
 
 
 func _ready() -> void:
@@ -121,3 +123,21 @@ func apply_gravity(delta: float) -> void:
 func _on_immobile_timer_timeout() -> void:
 	is_immobile = false
 	is_stunned = false
+
+
+func play_state_audio(audio_stream: AudioStream) -> void:
+	# Stop the audio and timer
+	interval_audio_player.stop()
+	interval_audio_player.random_player._timer.stop()
+
+	# Connect to finished signal and play state audio
+	if not state_audio_player.is_connected("finished", _on_state_audio_finished):
+		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
+
+	state_audio_player.stream = audio_stream
+	state_audio_player.play()
+
+
+func _on_state_audio_finished() -> void:
+	# Resume interval timer
+	interval_audio_player.random_player._timer.start()
