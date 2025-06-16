@@ -35,7 +35,6 @@ script = ExtResource("2_hntii")
 max_blasts = 5
 blast_interval = 0.25
 blast_increment = 0.05
-blast_final_multiplier = 1.5
 stun_time = 0.15
 current_ability = ExtResource("3_2cn0f")
 

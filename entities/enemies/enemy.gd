@@ -121,3 +121,12 @@ func apply_gravity(delta: float) -> void:
 func _on_immobile_timer_timeout() -> void:
 	is_immobile = false
 	is_stunned = false
+
+
+func scale_stats(rounds :int) -> void:
+	var caculation = 1+rounds/20 #5% increase to stats per round for enemies
+	stats.attack *= caculation
+	stats.defense *= caculation
+	stats.max_health *= caculation
+	stats.max_stamina *= caculation
+	stats.speed *= caculation
