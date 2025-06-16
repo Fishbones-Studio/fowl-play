@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ci2rkepog5ju5"
+path="res://.godot/imported/boreass_in_between_rounds.dialogue-5b0433b69840745f689407dfc605638a.tres"
+
+[deps]
+
+source_file="res://entities/enemies/boreass/dialogue/in_between_rounds/boreass_in_between_rounds.dialogue"
+dest_files=["res://.godot/imported/boreass_in_between_rounds.dialogue-5b0433b69840745f689407dfc605638a.tres"]
+
+[params]
+
+defaults=true

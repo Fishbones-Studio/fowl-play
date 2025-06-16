@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LivingEntityStats" load_steps=2 format=3 uid="uid://bd2xkljpgossi"]
+
+[ext_resource type="Script" uid="uid://up7hh823h5kw" path="res://entities/entity_stats/living_entity_stats.gd" id="1_jfner"]
+
+[resource]
+script = ExtResource("1_jfner")
+max_health = 450.0
+max_stamina = 50.0
+attack = 40.0
+defense = 20
+speed = 8.0
+weight = 3.0
+health_regen = 0
+stamina_regen = 5
+weight_factor = 0.07
+defense_multiplier = 0.05
+defense_decelerator = 9.0
+is_player = false
+name = &"Hennifer"
+metadata/_custom_type_script = "uid://up7hh823h5kw"

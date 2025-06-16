@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LivingEntityStats" load_steps=2 format=3 uid="uid://ctwi8uky13t5i"]
+
+[ext_resource type="Script" uid="uid://up7hh823h5kw" path="res://entities/entity_stats/living_entity_stats.gd" id="1_qvom4"]
+
+[resource]
+script = ExtResource("1_qvom4")
+max_health = 300.0
+max_stamina = 50.0
+attack = 50.0
+defense = 0
+speed = 10.0
+weight = 5.0
+health_regen = 0
+stamina_regen = 5
+weight_factor = 0.07
+defense_multiplier = 0.05
+defense_decelerator = 9.0
+is_player = false
+name = &"Boreass"
+metadata/_custom_type_script = "uid://up7hh823h5kw"

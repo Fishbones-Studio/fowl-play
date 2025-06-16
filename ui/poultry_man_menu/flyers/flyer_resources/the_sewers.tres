@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="4_inopy"]
 [ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_xc304"]
 [ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="6_7dqfk"]
-[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/ice_fox/ice_fox.tscn" id="7_f2hbq"]
-[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hendere/hendere.tscn" id="8_txhf1"]
+[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/boreass/boreass.tscn" id="7_f2hbq"]
+[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hennifer/hennifer.tscn" id="8_txhf1"]
 
 [resource]
 script = ExtResource("4_inopy")
