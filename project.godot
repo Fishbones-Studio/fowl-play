@@ -18,7 +18,7 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://dywqlrmxh3im0"
 config/icon="uid://btjflmm1vei0y"
 config/macos_native_icon="res://resources/logo/fowlplay_logo_512.icns"
-config/windows_native_icon="uid://btjflmm1vei0y"
+config/windows_native_icon="res://resources/logo/fowlplay_logo.ico"
 boot_splash/minimum_display_time=2500
 
 [autoload]
