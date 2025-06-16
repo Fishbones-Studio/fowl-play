@@ -34,6 +34,9 @@ func _enter() -> void:
 
 
 func _tick(_delta: float) -> Status:
+	if not agent.visible:
+		return FAILURE
+
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
 		return FAILURE

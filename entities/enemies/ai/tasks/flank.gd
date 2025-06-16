@@ -14,10 +14,11 @@ extends BTAction
 ## Make enemy invisible while flanking
 @export var invisible_flank: bool = true
 
-
+var _started: bool = false
 var _telegraph_instance: Variant
 var _flank_position: Vector3
 var _area: Area3D = null
+
 
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
@@ -38,7 +39,14 @@ func _generate_name() -> String:
 	return name if name != "Flank ➜ " else "Flank"
 
 
+func _enter() -> void:
+	agent.visible = not invisible_flank
+
+
 func _tick(_delta: float) -> Status:
+	if not agent.visible:
+		return RUNNING
+
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
 		return FAILURE
@@ -56,13 +64,13 @@ func _tick(_delta: float) -> Status:
 		return RUNNING
 
 	# Omae wa mou shindeiru
+	agent.visible = true
 	agent.global_position = _flank_position
 	agent.velocity = Vector3.ZERO
-	agent.look_at(target.global_position)
 
 	_flank_position = Vector3.ZERO
 
-	agent.remove_child(_telegraph_instance)
+	agent.get_parent().remove_child(_telegraph_instance)
 	_telegraph_instance.queue_free()
 	_telegraph_instance = null
 
@@ -130,13 +138,12 @@ func _create_telegraph(telegraph_position: Vector3) -> Variant:
 			mesh.height = shape.size.y
 
 	instance.lifetime = telegraph_timer
-	agent.add_child(instance)
+	agent.get_parent().add_child(instance)
 	instance.global_position = Vector3(
 		telegraph_position.x,
 		telegraph_position.y,
 		telegraph_position.z,
 	)
-	printerr(instance.global_position)
 	instance.emitting = true
 
 	return instance

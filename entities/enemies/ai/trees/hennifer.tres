@@ -209,7 +209,6 @@ children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880")
 [sub_resource type="BTSequence" id="BTSequence_lsbnu"]
 custom_name = "Pursue"
 children = [SubResource("BTInvert_a51uw"), SubResource("BTInvert_wv527"), SubResource("BTParallel_viady")]
-_enabled = false
 metadata/_weight_ = 5.0
 
 [sub_resource type="BBNode" id="BBNode_viady"]
