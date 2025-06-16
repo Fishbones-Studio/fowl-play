@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://cm3hcx1pvcnnd"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_legca"]
+[ext_resource type="Resource" uid="uid://bd2xkljpgossi" path="res://entities/enemies/hennifer/hennifer_stats.tres" id="2_n7fk8"]
+[ext_resource type="PackedScene" uid="uid://cdhugp3scnr5p" path="res://entities/enemies/hennifer/art/chicken_hennifer.glb" id="3_i6i68"]
+[ext_resource type="BehaviorTree" uid="uid://cjwfnys8g6i4y" path="res://entities/enemies/ai/trees/hendere.tres" id="4_7al0x"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_uw30w"]
+[ext_resource type="Texture2D" uid="uid://dyc8jf5vygrar" path="res://entities/enemies/hennifer/art/icon/hennifer.png" id="7_dpmrq"]
+[ext_resource type="PackedScene" uid="uid://db68ojqri7xqs" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tscn" id="10_f4t48"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pg7ui"]
+radius = 1.0
+height = 2.4
+
+[node name="Hendere" instance=ExtResource("1_legca")]
+collision_mask = 25
+stats = ExtResource("2_n7fk8")
+dialogue_path = "res://entities/enemies/hendere/dialogue"
+name_label_template_string = "%s"
+
+[node name="chicken_hennifer" parent="Model" index="0" instance=ExtResource("3_i6i68")]
+transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 0, 1.13557, 0)
+
+[node name="Skeleton3D" parent="Model/chicken_hennifer/Armature_002" index="1"]
+bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
+bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
+bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
+bones/3/rotation = Quaternion(-0.514094, 0.00303936, -0.0152266, 0.857593)
+bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
+bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
+bones/6/rotation = Quaternion(-0.268938, 0.0361643, 0.74135, 0.613812)
+bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
+bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
+bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
+bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
+bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
+bones/11/rotation = Quaternion(-0.225762, -8.30913e-17, -8.30913e-17, 0.974182)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17727, -0.0127716)
+shape = SubResource("CapsuleShape3D_pg7ui")
+
+[node name="DamageNumberHandler" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33002, 0)
+
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28003, -0.131363)
+
+[node name="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("4_7al0x")
+
+[node name="EnemyWeaponController" parent="." index="6"]
+transform = Transform3D(0.958023, 0, 0.286692, 0, 1, 0, -0.286692, 0, 0.958023, 1.01467, 1.12672, -0.399625)
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_uw30w")]
+melee_weapon_scene = ExtResource("10_f4t48")
+weapon_collision_mask = 2
+
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(50, 50)
+texture = ExtResource("7_dpmrq")
+
+[editable path="Model/chicken_hennifer"]
