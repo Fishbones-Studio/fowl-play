@@ -1,3 +1,5 @@
+## Enemy, but it plays audio on death
+class_name Boss
 extends Enemy
 
 @export var death_audio : AudioStream
