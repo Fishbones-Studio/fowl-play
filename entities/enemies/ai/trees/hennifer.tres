@@ -54,7 +54,7 @@ flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 0.5
 telegraph_timer = 1.0
-invisible_flank = null
+invisible_flank = true
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_fxtff")]
@@ -250,7 +250,7 @@ flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 1.0
 telegraph_timer = 1.0
-invisible_flank = null
+invisible_flank = true
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
