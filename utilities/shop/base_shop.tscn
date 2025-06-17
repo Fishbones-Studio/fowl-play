@@ -89,6 +89,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_5kcef")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
