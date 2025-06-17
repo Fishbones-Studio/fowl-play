@@ -27,6 +27,7 @@ var _flank_started: bool = false
 var _reappear_time: float = 1048576
 var _final_telegraphinc_finished: bool = false
 
+
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
 	var name: String = "Flank ➜ "
@@ -107,6 +108,7 @@ func _exit() -> void:
 	_reappear_time = 1048576
 	_final_telegraphinc_finished = false
 	_flank_started = false
+
 
 func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 	var base_dir: Vector3 = -target.global_transform.basis.z.normalized()
