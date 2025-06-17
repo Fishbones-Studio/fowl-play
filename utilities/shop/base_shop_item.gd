@@ -6,7 +6,7 @@ signal unhovered(item)
 signal focused(item)
 
 # Common properties
-static var purchase_in_progress: bool = false :
+static var purchase_in_progress: bool = false:
 	set(value):
 		purchase_in_progress = value
 		if !value:

@@ -26,6 +26,6 @@ func get_combined_enemy_scenes() -> Array[PackedScene]:
 	## Returns a combined array of standard and boss enemy scenes
 	var combined_scenes: Array[PackedScene] = standard_enemy_scenes.duplicate()
 	if include_boss:
-		combined_scenes.append_array(boss_enemy_scenes)
+		combined_scenes.append_array(boss_enemy_scenes.duplicate())
 
 	return combined_scenes
