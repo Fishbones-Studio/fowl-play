@@ -7,7 +7,6 @@
 load_path = "res://.godot/imported/prosperity_egg_icon.png-364a70c39e0b598fd490a1a5f7f25042.ctex"
 
 [node name="UpgradeShopItem" type="PanelContainer"]
-process_mode = 3
 offset_right = 175.0
 offset_bottom = 250.0
 script = ExtResource("1_p4fgh")
