@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://dxril0olml25y" path="res://entities/enemies/bob/bob_stats.tres" id="2_fjbia"]
-[ext_resource type="Script" path="res://entities/enemies/boss.gd" id="2_sexgk"]
+[ext_resource type="Script" uid="uid://4nj14wvdqsae" path="res://entities/enemies/boss.gd" id="2_sexgk"]
 [ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="3_0xmxa"]
 [ext_resource type="AudioStream" uid="uid://cx3xk60k35u6i" path="res://entities/enemies/bob/sound/bob_death.ogg" id="3_yvhtp"]
 [ext_resource type="BehaviorTree" uid="uid://g7414dn5u4kw" path="res://entities/enemies/ai/trees/bob.tres" id="4_m0aa4"]

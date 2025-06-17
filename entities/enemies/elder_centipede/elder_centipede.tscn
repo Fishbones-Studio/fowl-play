@@ -1,17 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=11 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
-[ext_resource type="Script" path="res://entities/enemies/boss.gd" id="2_l658y"]
+[ext_resource type="Script" uid="uid://4nj14wvdqsae" path="res://entities/enemies/boss.gd" id="2_l658y"]
 [ext_resource type="AudioStream" uid="uid://bxssmk8w3kohp" path="res://entities/enemies/elder_centipede/sound/centipede_death.ogg" id="3_b6m30"]
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
-[ext_resource type="PackedScene" uid="uid://bljdj0banfxp1" path="res://entities/enemies/elder_centipede/art/head.glb" id="5_bv6h5"]
-[ext_resource type="PackedScene" uid="uid://bqvi4tncljiu0" path="res://entities/enemies/elder_centipede/art/body.glb" id="6_r8ukm"]
-[ext_resource type="PackedScene" uid="uid://dr6w3kht1sgn7" path="res://entities/enemies/elder_centipede/art/butt.glb" id="7_l658y"]
+[ext_resource type="PackedScene" uid="uid://dofck8yvlnbl7" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="5_bv6h5"]
 [ext_resource type="Texture2D" uid="uid://go8x13xk145a" path="res://entities/enemies/elder_centipede/art/icon/elder_centipede_icon.png" id="9_l658y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6m30"]
 radius = 2.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r8ukm"]
+radius = 3.0
+height = 7.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l658y"]
 radius = 3.0
@@ -29,36 +31,33 @@ name_label_template_string = "%s \"Evolved\""
 [node name="Model" parent="." index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="head" parent="Model" index="0" instance=ExtResource("5_bv6h5")]
-
-[node name="body" parent="Model" index="1" instance=ExtResource("6_r8ukm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8744e-07, 0, -4.43179)
-
-[node name="butt" parent="Model" index="2" instance=ExtResource("7_l658y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.09405e-07, 0, -8.11465)
+[node name="chicken_centipede" parent="Model" index="0" instance=ExtResource("5_bv6h5")]
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, -4.2)
 shape = SubResource("SphereShape3D_b6m30")
 debug_color = Color(0.874254, 0.0741591, 0.814007, 0.42)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, 0.5)
-shape = SubResource("CapsuleShape3D_l658y")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+shape = SubResource("CapsuleShape3D_r8ukm")
 debug_color = Color(0.87451, 0.0745098, 0.815686, 0.419608)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
+shape = SubResource("CapsuleShape3D_l658y")
+debug_color = Color(0.87451, 0.0745098, 0.815686, 0.419608)
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="4"]
-
-[node name="BloodSplashHandler" parent="." index="7"]
+[node name="BloodSplashHandler" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97034, -7.96051)
 
-[node name="BTPlayer" parent="." index="8"]
+[node name="BTPlayer" parent="." index="7"]
 behavior_tree = ExtResource("4_y8gm0")
 
-[node name="EnemyAbilityController" parent="." index="10"]
+[node name="EnemyAbilityController" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("9_l658y")
+
+[editable path="Model/chicken_centipede"]
