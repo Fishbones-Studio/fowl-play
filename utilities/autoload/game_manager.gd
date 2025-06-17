@@ -14,7 +14,7 @@ var chicken_player: ChickenPlayer = null:
 		print("GameManager.chicken_player set to:", value)
 		if value != null:
 			chicken_player_set.emit()
-		
+
 var current_enemy: Enemy
 
 var prosperity_eggs: int:

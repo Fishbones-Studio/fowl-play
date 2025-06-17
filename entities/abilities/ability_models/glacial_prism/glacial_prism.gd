@@ -60,7 +60,7 @@ func _apply_debuff(body: Node3D, stat_name: StringName, amount: float) -> void:
 
 		var stats: LivingEntityStats = body.get_stats_resource()
 
-		var original_value: float = stats.apply_stat_effect(stat_name, amount)
+		var original_value: float = stats.apply_stat_effect(stat_name, -amount)
 
 		get_tree().create_timer(debuff_duration).timeout.connect(func():
 			if is_instance_valid(stats):
