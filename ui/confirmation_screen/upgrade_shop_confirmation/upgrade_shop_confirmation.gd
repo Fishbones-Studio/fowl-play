@@ -35,10 +35,16 @@ func setup(params: Dictionary) -> void:
 
 
 func on_cancel_button_pressed() -> void:
-	purchase_cancelled_signal.emit()
+	if purchase_cancelled_signal:
+		purchase_cancelled_signal.emit()
+	else:
+		push_warning("'purchase_cancelled_signal' is missing and cannot be emitted.")
 	super()
 
 
 func on_confirm_button_pressed() -> void:
-	purchased_signal.emit()
+	if purchased_signal:
+		purchased_signal.emit()
+	else:
+		push_warning("'purchased_signal' is missing and cannot be emitted.")
 	super()
