@@ -13,30 +13,37 @@ else:
 - What happened to you?
 	Bob: [[What... happened?|They did.|Ones above.]]
 	Bob: [[Changed me.|Made this.|[shake rate=10 level=5]Spikes hurt.[/shake]]]
+	Bob: [[Wasn’t always... this.|Once... normal.|Now... monster.]]
 	=> explore_mutations
 - You look different.
 	Bob: [[Different?|Not same.|Not me.]]
 	Bob: [[See too much.|[color=red]Spikes.[/color]|Never stops.]]
+	Bob: [[Wasn’t... like this.|Before... clean.|Now... broken.]]
 	=> explore_mutations
 - Are you in pain?
 	Bob: [[Pain?|Always.|Every second.]]
 	Bob: [[[shake rate=15 level=8]Skin tears.[/shake]|[color=red]Bones move.[/color]|Want stop.]]
+	Bob: [[Can’t... escape.|Hurts... always.|Never... ends.]]
 	=> explore_mutations
 
 ~ explore_mutations
 Bob: [[Look. Me.|See what they did.|Power?]]
 Bob: [[Too many eyes.|[color=red]Spikes for them.[/color]|Want rest.]]
+Bob: [[Was... experiment.|Now... weapon.|Hate... them.]]
 - Who did this to you?
 	Bob: [[Them.|Ones watching.|Up there.]]
 	Bob: [[Wanted monsters.|Made me.|[shake rate=12 level=6]Hate them.[/shake]]]
+	Bob: [[Scientists... cruel.|No mercy.|Just... tools.]]
 	=> continue_or_end
 - Does it hurt all the time?
 	Bob: [[All the time.|[color=red]Fire under skin.[/color]|Torn apart.]]
 	Bob: [[Fighting helps.|[shake rate=10 level=5]Distracts me.[/shake]|All I have.]]
+	Bob: [[Pain... constant.|Never... stops.|Only... distraction.]]
 	=> continue_or_end
 - Why are you fighting?
 	Bob: [[Why fight?|Nothing else.|They want it.]]
 	Bob: [[Maybe pain stops.|Or you feel it.|[color=red]You will feel it.[/color]]]
+	Bob: [[Fight... survive.|No choice.|Only... way.]]
 	=> continue_or_end
 
 ~ continue_or_end
@@ -44,9 +51,11 @@ Bob: [[No more talk.|Enough.|Your turn.]]
 - I'll end your suffering.
 	Bob: [[End? You?|Not strong enough.]]
 	Bob: [[Try. You break first.|[shake rate=15 level=8]I break you.[/shake]]]
+	Bob: [[Pain... never ends.|Even... in death.|Only... more pain.]]
 	=> END
 - You're just a monster.
 	Bob: [[Monster?|Yes. They made me.]]
 	Bob: [[[color=red]Stronger now.[/color]|Stronger than you.|We see.]]
+	Bob: [[Monster... by choice.|Theirs... not mine.|Hate... them.]]
 	=> END
 - Attack => END

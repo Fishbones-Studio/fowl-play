@@ -8,7 +8,7 @@ else:
 	Boreass: [[You smell nice! Like... chicken! [color=red]Yum![/color]|Ready to play? I love playing!|Is that a treat you have? Is it?]]
 - Attack => END
 - Talk => standard_dialogue
-	
+
 ~ standard_dialogue
 - Hey there, Boreass.
 	Boreass: [[Hehe, you know my name! [color=orange]Smart friend![/color]|Yep, that’s me! Ready for fun?|*Wags tail furiously* You’re the best!]]
@@ -67,4 +67,4 @@ Boreass: [[*Suddenly snaps back to friendly* Hehe! That was fun! Right?!|*Wags t
 
 ~ end_options
 Boreass: [[Okay, bye-bye! Hope we can play again soon!|See you later, friend! Don’t forget me!|*Stares as you leave* ...[color=red]Mine...[/color]]]
-=> END
+=> EN

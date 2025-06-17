@@ -27,14 +27,22 @@ Elder Centipede: [[Got any last words before I [shake rate=20 level=10]completel
 - How did you become so strong?
 	Elder Centipede: [[How? I was born strong. The weak are born to serve, and I was born to rule. |The scientists tried to enhance me, but I was already [color=red]perfect.[/color] |They merely unlocked what was already there—my true potential.]]
 	Elder Centipede: [[I was the first. The prototype. The one they feared to touch. |They thought they could control me. [shake rate=10 level=5]Foolish.[/shake] |Now, I control them. The arena is my domain.]]
+	Elder Centipede: [[They wanted a weapon. They got a god. |I am their creation. Their masterpiece. |But I am no slave. I am the master.]]
 	=> continue_or_end
 - What do you think of the other fighters?
 	Elder Centipede: [[Them? [color=red]Worms.[/color] All of them. |They’re nothing but fodder for my strength. |I don’t even see them as worthy opponents—just obstacles to crush.]]
 	Elder Centipede: [[They think they’re strong, but they’re nothing compared to me. |I’ve crushed champions, heroes, and legends. |They’re all the same—weak, pathetic, and destined to die.]]
+	Elder Centipede: [[They fight for survival. I fight for dominance. |They are insects. I am the apex. |They will fall. I will rise.]]
 	=> continue_or_end
 - Do you ever lose?
 	Elder Centipede: [[Lose? [shake rate=10 level=5]HAHAHA.[/shake] The concept is foreign to me. |I’ve never lost. I’ve never even been challenged. |The idea of losing is as absurd as a worm defeating a god.]]
 	Elder Centipede: [[If I ever lost, the world would end. |But that will never happen. I am [color=red]eternal.[/color] |I am invincible. I am the Elder Centipede.]]
+	Elder Centipede: [[The arena is my kingdom. The weak are my subjects. |I rule here. I always have. |And I always will.]]
+	=> continue_or_end
+- What’s your goal?
+	Elder Centipede: [[Goal? To dominate. |To crush. To destroy. |To prove my supremacy.]]
+	Elder Centipede: [[I am the apex predator. The strongest. |The weak exist to serve me. |The strong exist to fall before me.]]
+	Elder Centipede: [[I will rule this arena. I will rule the world. |All will bow before the Elder Centipede. |All will know my name.]]
 	=> continue_or_end
 
 ~ continue_or_end

@@ -2,15 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn2wbpuue5rc8"
+uid="uid://chvy2d2cao3wn"
 path.s3tc="res://.godot/imported/chicken_hennifer_hennifer leg 1 Base Color.png-8acaabdc12a759df92c1e917d29063e6.s3tc.ctex"
 path.etc2="res://.godot/imported/chicken_hennifer_hennifer leg 1 Base Color.png-8acaabdc12a759df92c1e917d29063e6.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "c56956fbab1cc32092355d3658aabc7f"
 }
 
 [deps]
