@@ -2,9 +2,10 @@ class_name BaseCombatState
 extends BaseState
 
 @export var animation_name: String
+@export var state_type: WeaponEnums.WeaponState
 
 var melee_combat_transition_state: Signal
-var state_type: int
+
 var weapon_node: MeleeWeapon
 var entity_stats: LivingEntityStats
 

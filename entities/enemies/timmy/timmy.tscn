@@ -64,4 +64,7 @@ ability_resource = ExtResource("10_6lo8p")
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("11_5qjni")
 
+[node name="IntervalAudioPlayer" parent="." index="12"]
+sounds_folder = "res://entities/enemies/timmy/sound/random"
+
 [editable path="Model/timmy"]

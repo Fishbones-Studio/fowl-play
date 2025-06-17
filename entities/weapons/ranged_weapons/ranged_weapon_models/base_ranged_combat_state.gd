@@ -7,7 +7,6 @@ extends BaseState
 var weapon: RangedWeapon
 var transition_signal: Signal
 
-
 func setup(_weapon_node: RangedWeapon, _transition_signal : Signal) -> void:
 	if not _weapon_node:
 		push_error("Weapon does not exist! Please provide a valid weapon node.")

@@ -74,7 +74,7 @@ one_shot = true
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("8_sexgk")
 
-[node name="StateAudioPlayer" parent="." index="13"]
+[node name="StateAudioPlayer" parent="." index="12"]
 unit_size = 25.0
 max_db = 6.0
 

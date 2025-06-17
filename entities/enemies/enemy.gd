@@ -81,17 +81,24 @@ func apply_gravity(delta: float) -> void:
 	velocity.y += movement_component.get_gravity(velocity) * delta
 
 
-func play_state_audio(audio_stream: AudioStream) -> void:
-	# Stop the audio and timer
-	interval_audio_player.stop()
-	interval_audio_player.random_player.timer.stop()
+func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:
+	if stop_interval:
+		# Stop the interval audio and timer
+		interval_audio_player.stop()
+		interval_audio_player.random_player.timer.stop()
 
-	# Connect to finished signal and play state audio
-	if not state_audio_player.finished.is_connected(_on_state_audio_finished):
-		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
-
+	# Set up the state audio player
 	state_audio_player.stream = audio_stream
 	state_audio_player.play()
+
+	# Connect to finished signal and play state audio
+	if not state_audio_player.finished.is_connected(_on_state_audio_finished.bind(stop_interval)):
+		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
+	
+func _on_state_audio_finished(resume_interval := true) -> void:
+	if resume_interval:
+		# Resume interval timer
+		interval_audio_player.random_player.timer.start()
 
 
 func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums.DamageTypes, info: Dictionary = {}) -> void:
@@ -139,8 +146,3 @@ func _die() -> void:
 func _on_immobile_timer_timeout() -> void:
 	is_immobile = false
 	is_stunned = false
-
-
-func _on_state_audio_finished() -> void:
-	# Resume interval timer
-	interval_audio_player.random_player.timer.start()

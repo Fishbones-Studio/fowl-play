@@ -248,6 +248,9 @@ children = [SubResource("BTAction_gvblq")]
 [sub_resource type="BTAction" id="BTAction_k7lfl"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://cwvc4m1d624dm"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
@@ -315,6 +318,9 @@ use_percentage = true
 [sub_resource type="BTAction" id="BTAction_viady"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://bjlpjdg6s3w6c"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BBNode" id="BBNode_a51uw"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")

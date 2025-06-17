@@ -16,6 +16,8 @@ const TRAJECTORY_TIME_STEP: float = 0.05
 var _trajectory_preview_mesh_instance: MeshInstance3D
 var _trajectory_preview_mesh: ArrayMesh
 
+func _init():
+	state_type = WeaponEnums.WeaponState.ATTACKING
 
 func _ready() -> void:
 	# Initialize the trajectory preview objects once

@@ -15,7 +15,6 @@ var _attack_elapsed: float = 0.0
 @onready var wind_effect: GPUParticles3D = $"../../WindEffect"
 @onready var launch_effect: GPUParticles3D = $"../../LaunchEffect"
 
-
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	if weapon.entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(

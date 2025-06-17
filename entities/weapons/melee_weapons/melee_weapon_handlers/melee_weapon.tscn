@@ -17,10 +17,12 @@ starting_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("5_l7vwy")
 animation_name = "Idle"
+state_type = 1
 
 [node name="Attacking" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("6_hs04l")
 animation_name = "Attack"
+state_type = 3
 
 [node name="AttackTimer" type="Timer" parent="MeleeStateMachine/Attacking"]
 unique_name_in_owner = true
@@ -28,6 +30,7 @@ unique_name_in_owner = true
 [node name="Cooldown" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("7_mq8tj")
 animation_name = "Cooldown"
+state_type = 4
 
 [node name="CooldownTimer" type="Timer" parent="MeleeStateMachine/Cooldown"]
 unique_name_in_owner = true
@@ -36,6 +39,7 @@ wait_time = 0.499
 [node name="Windup" type="Node" parent="MeleeStateMachine"]
 script = ExtResource("8_6pe85")
 animation_name = "Windup"
+state_type = 2
 
 [node name="WindupTimer" type="Timer" parent="MeleeStateMachine/Windup"]
 unique_name_in_owner = true
