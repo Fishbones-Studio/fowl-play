@@ -19,10 +19,10 @@ func preview_stat_change(upgrade_type: StatsEnums.UpgradeTypes, bonus_value: flo
 	var target_stat: StatsEnums.Stats = _upgrade_type_to_stat(upgrade_type)
 	if target_stat == null:
 		return
-	
+
 	# Store the preview value
 	_preview_values[target_stat] = bonus_value
-	
+
 	# Find the corresponding stat container and update it
 	for container in stat_containers:
 		if container.stat == target_stat:
@@ -56,8 +56,8 @@ func clear_all_previews() -> void:
 ## Update the base value for all stat containers
 func update_base_values() -> void:
 	for stat_container in stat_containers:
-			var stat_name: String = StatsEnums.stat_to_string(stat_container.stat)
-			stat_container.setup(SaveManager.get_loaded_player_stats().get(stat_name))
+		var stat_name: String = StatsEnums.stat_to_string(stat_container.stat)
+		stat_container.setup(SaveManager.get_loaded_player_stats().get(stat_name))
 
 
 ## Map upgrade types to stats

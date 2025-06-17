@@ -1,5 +1,5 @@
 ~ start
-if SaveManager.get_enemy_encounter_count("hendere") > 0:
+if SaveManager.get_enemy_encounter_count("hennifer") > 0:
 	Hendere: [[Oh, it’s you again. Couldn’t stay away?|Back for more, are you?|You just keep coming back, don’t you?]]
 	Hendere: You fought so well last time... was it for me?
 	- Attack => END
