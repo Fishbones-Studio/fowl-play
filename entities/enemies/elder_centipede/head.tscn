@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp6f44inuqdyh"]
+
+[ext_resource type="PackedScene" uid="uid://bljdj0banfxp1" path="res://entities/enemies/elder_centipede/art/head.glb" id="1_iki2r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iki2r"]
+radius = 3.0
+height = 7.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tyqaw"]
+radius = 2.4
+
+[node name="Head" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 9
+
+[node name="head" parent="." instance=ExtResource("1_iki2r")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, -0.5)
+shape = SubResource("CapsuleShape3D_iki2r")
+debug_color = Color(0.981867, 0, 0.367278, 0.42)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 2.5)
+shape = SubResource("SphereShape3D_tyqaw")
+debug_color = Color(0.980392, 0, 0.368627, 0.419608)
+
+[editable path="head"]
