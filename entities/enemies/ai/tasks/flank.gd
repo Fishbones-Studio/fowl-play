@@ -1,6 +1,20 @@
 @tool
 extends BTAction
 
+enum Type {
+	DEPARTURE,
+	ARRIVAL,
+}
+
+enum State {
+	IDLE,
+	DEPARTURE_TELEGRAPHING,
+	FINDING_POSITION,
+	ARRIVAL_TELEGRAPHING,
+	PERFORMING_FLANK,
+	FINISHED
+}
+
 ## Blackboard variable that stores our target
 @export var target_var: StringName = &"target"
 ## Distance behind target to teleport
@@ -9,110 +23,139 @@ extends BTAction
 @export var vertical_offset: float = 0.0
 ## Radius to check for clear space
 @export_range(0.1, 5.0, 0.1) var clearance_radius: float = 1.0
-## Time to wait before executing action
-@export var telegraph_start_timer: float = 0.5
-## Time to wait before executing action
-@export var telegraph_end_timer: float = 1.0
-## Make enemy invisible while flanking
-@export var invisible_flank: bool = true
-## Flank immediately, telegraph timer is negated
-@export var immediate_flank: bool = false
 ## Telegraph that appears before agent disappears
-@export var first_telegraph: bool = true
+@export var departure_telegraph: bool = true
+## Telegraph that appears before agent appears
+@export var arrival_telegraph: bool = true
+## Time to wait during departure
+@export var telegraph_departure_time: float = 0.5
+## Time to wait during arrival
+@export var telegraph_arrival_time: float = 1.0
 
-var _telegraph_instance: Variant
-var _flank_position: Vector3
-var _area: Area3D = null
-var _flank_started: bool = false
-var _reappear_time: float = 1048576
-var _final_telegraphinc_finished: bool = false
+
+
+var _current_state: State = State.IDLE
+var _flank_position: Vector3 = Vector3.ZERO
+var _current_telegraph_instance: GPUParticles3D = null
+var _space_state: PhysicsDirectSpaceState3D = null
+var _telegraph_resource: PackedScene = preload("uid://bi7ih1it2v747")
 
 
 # Display a customized name (requires @tool).
 func _generate_name() -> String:
-	var name: String = "Flank ➜ "
+	var name_parts: Array[String] = ["Flank"]
 
 	if target_var:
-		name += LimboUtility.decorate_var(target_var) + "  "
+		name_parts.append(LimboUtility.decorate_var(target_var))
 
 	if flank_distance != 2.0:
-		name += "flank_distance: %.1f  " % flank_distance
+		name_parts.append("flank_distance: %.1f" % flank_distance)
 
 	if vertical_offset > 0:
-		name += "vertical_offset: %.1f  " % vertical_offset
+		name_parts.append("vertical_offset: %.1f" % vertical_offset)
 
 	if clearance_radius != 1.0:
-		name += "clearance_radius: %.1f" % clearance_radius
+		name_parts.append("clearance_radius: %.1f" % clearance_radius)
 
-	return name if name != "Flank ➜ " else "Flank"
+	return " ➜ ".join(name_parts) if name_parts.size() > 1 else "Flank"
 
 
 func _enter() -> void:
-	if _flank_started:
+	# Initialize state variables
+	_current_state = State.IDLE
+	_flank_position = Vector3.ZERO
+	_cleanup_telegraph() # Ensure no lingering telegraph from previous runs
+
+	_space_state = agent.get_world_3d().direct_space_state
+	if not _space_state:
+		_log_error("PhysicsDirectSpaceState3D not available!")
+		_current_state = State.FINISHED # Force failure state
 		return
 
-	if immediate_flank:
-		_flank_started = true
-		return
-
-	if first_telegraph:
-		_create_telegraph(agent.global_position, true)
+	if departure_telegraph:
+		_current_state = State.DEPARTURE_TELEGRAPHING
+		_create_telegraph_effect(Type.DEPARTURE, agent.global_position)
+		# Agent visibility handled in _on_telegraph_halfway
+	else:
+		# If no departure telegraph, go straight to finding position
+		_current_state = State.FINDING_POSITION
+		agent.visible = false # Agent becomes invisible immediately if no telegraph
 
 
 func _tick(_delta: float) -> Status:
-	var target: ChickenPlayer = blackboard.get_var(target_var, null)
-	if not is_instance_valid(target):
-		return FAILURE
-
-	if not _flank_started and not immediate_flank:
-		if first_telegraph:
-			# Only disappear after first telegraph finishes. Sync with telegraph bubble scale.
-			if elapsed_time > telegraph_start_timer * 0.4:
-				if agent.visible: agent.visible = false
-			return RUNNING
-		else:
-			# Immediate disappear if no first telegraph
-			if agent.visible: agent.visible = false
-			_flank_started = true
+	match _current_state:
+		State.IDLE:
+			# Should not happen often, but acts as a safeguard.
+			# _enter() transitions from IDLE.
 			return RUNNING
 
-	if not _flank_position:
-		_flank_position = _get_safe_flank_position(target)
-		if _flank_position == Vector3.INF:
-			return FAILURE
+		State.DEPARTURE_TELEGRAPHING:
+			# We are waiting for the departure telegraph timer.
+			# The _on_telegraph_finished signal or _on_telegraph_halfway handles state transition.
+			return RUNNING
 
-	if immediate_flank:
-		return SUCCESS
+		State.FINDING_POSITION:
+			var target: ChickenPlayer = blackboard.get_var(target_var, null)
+			if not is_instance_valid(target):
+				_log_error("Target not found or invalid during FINDING_POSITION.")
+				return FAILURE
 
-	if not _telegraph_instance: 
-		_create_telegraph(_flank_position)
+			_flank_position = _get_safe_flank_position(target)
+			if _flank_position == Vector3.INF:
+				_log_error("Failed to find a safe flank position.")
+				return FAILURE
 
-	if elapsed_time > _reappear_time and not agent.visible:
-		agent.visible = true
+			if arrival_telegraph:
+				_current_state = State.ARRIVAL_TELEGRAPHING
+				_create_telegraph_effect(Type.ARRIVAL, _flank_position)
+				agent.apply_gravity = false # Disable gravity while waiting for arrival
+			else:
+				_current_state = State.PERFORMING_FLANK
+				# Agent becomes visible and teleports immediately
+				agent.global_position = _flank_position
+				agent.velocity = Vector3.ZERO
+				agent.visible = true
+				agent.apply_gravity = true
+				_current_state = State.FINISHED # Move to finished after immediate flank
 
-	if elapsed_time >= telegraph_end_timer + telegraph_start_timer:
-		if _final_telegraphinc_finished:
+			return RUNNING # Continue processing in next tick for state change
+
+		State.ARRIVAL_TELEGRAPHING:
+			# We are waiting for the arrival telegraph timer.
+			# The _on_telegraph_finished signal or _on_telegraph_halfway handles state transition.
+			return RUNNING
+
+		State.PERFORMING_FLANK:
+			# This state is used for the instant teleport part if no arrival telegraph.
+			# It transitions to FINISHED directly.
+			_current_state = State.FINISHED
+			return RUNNING # Will transition to SUCCESS in the very next tick
+
+		State.FINISHED:
+			# Action is complete, return SUCCESS
 			return SUCCESS
 
-	agent.global_position = _flank_position
-	agent.velocity = Vector3.ZERO
-	return RUNNING
+	return RUNNING # Default return for safety, though states should cover all cases
 
 
 func _exit() -> void:
-	agent.visible = true
-	agent.global_position = _flank_position
-	agent.velocity = Vector3.ZERO
+	# Always clean up any active timers or instances when the action exits
+	_cleanup_telegraph()
 
+	# Ensure agent state is reset
+	if not agent.visible: # If agent was invisible, make it visible
+		agent.visible = true
+	agent.apply_gravity = true # Ensure gravity is re-enabled
+	agent.velocity = Vector3.ZERO # Stop any lingering velocity
+
+	# Reset internal state to be ready for next _enter
+	_current_state = State.IDLE
 	_flank_position = Vector3.ZERO
-	_reappear_time = 1048576
-	_final_telegraphinc_finished = false
-	_flank_started = false
 
 
 func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 	var base_dir: Vector3 = -target.global_transform.basis.z.normalized()
-	var test_angles: Array[float] = [180, 90, -90, 45, -45, 0]  # Test multiple approach angles
+	var test_angles: Array[float] = [180.0, 90.0, -90.0, 45.0, -45.0, 0.0]
 
 	test_angles.shuffle()
 
@@ -124,7 +167,7 @@ func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
 		if _is_position_clear(test_pos):
 			return test_pos
 
-	return Vector3.INF
+	return Vector3.INF # Indicates no safe position found
 
 
 func _is_position_clear(position: Vector3) -> bool:
@@ -133,79 +176,114 @@ func _is_position_clear(position: Vector3) -> bool:
 		return false
 
 	var shape: SphereShape3D = SphereShape3D.new()
-	shape.radius = clearance_radius
+	shape.radius = max(clearance_radius, 0.1) # Ensure radius is never zero
 
-	var collission_shape: CollisionShape3D = CollisionShape3D.new()
-	collission_shape.shape = shape
+	var params: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
+	params.transform = Transform3D(Basis(), position)
+	params.shape_rid = shape.get_rid() # Use RID for direct queries
+	params.collision_mask = agent.collision_mask
+	params.exclude = [agent.get_rid()]
 
-	_area = Area3D.new()
-	_area.add_child(collission_shape)
-	_area.collision_mask = agent.collision_mask
+	var results: Array[Dictionary] = _space_state.intersect_shape(params)
 
-	agent.add_child(_area)
-	_area.global_position = position
-
-	return _area.get_overlapping_bodies().is_empty()
+	return results.is_empty()
 
 
-# Abosolute Cine- Whack
-func _create_telegraph(telegraph_position: Vector3, reverse: bool = false) -> void:
-	var resource: PackedScene = preload("uid://bi7ih1it2v747")
-	var instance: GPUParticles3D = resource.instantiate().duplicate()
-	var mesh: Mesh = instance.draw_pass_1
-	var material: ParticleProcessMaterial = instance.process_material.duplicate()
-	var original_scale_min: float = material.scale_min
-
-	if mesh is SphereMesh:
-		var shape: Shape3D = agent.shape.shape
-		if shape is SphereShape3D:
-			mesh.radius = shape.radius 
-			mesh.height = shape.height
-		if shape is CapsuleShape3D:
-			mesh.radius = shape.radius
-			mesh.height = shape.radius * 2
-		if shape is BoxShape3D:
-			mesh.radius = shape.size.x / 2
-			mesh.height = shape.size.y
-
-	material.scale_min = original_scale_min * 2.0
-	instance.process_material = material
-
-	agent.get_parent().add_child(instance)
-	instance.global_position = Vector3(
-		telegraph_position.x,
-		telegraph_position.y + vertical_offset if not reverse else \
-		telegraph_position.y + telegraph_position.y / 2,
-		telegraph_position.z,
-	)
-
-	if reverse:
-		instance.amount = 1
-		instance.lifetime = telegraph_start_timer
-	else:
-		instance.lifetime = telegraph_end_timer
-		_reappear_time = instance.lifetime + telegraph_start_timer
-		agent.global_position = telegraph_position
-
-	instance.finished.connect(_on_telegraphing_finished.bind(reverse))
-	instance.emitting = true
-
-	_telegraph_instance = instance
-
-
-func _on_telegraphing_finished(reverse: bool = false) -> void:
-	if _telegraph_instance:
-		agent.get_parent().remove_child(_telegraph_instance)
-		_telegraph_instance.queue_free()
-		_telegraph_instance = null
-
-	if _area:
-		agent.remove_child(_area)
-		_area.queue_free()
-		_area = null
-
-	if reverse:
-		_flank_started = true
+func _create_telegraph_effect(telegraph_type: Type, telegraph_position: Vector3) -> void:
+	if not _telegraph_resource:
+		_log_error("Telegraph resource is not assigned.")
+		_current_state = State.FINISHED # Force failure state
 		return
 
-	_final_telegraphinc_finished = true
+	# Instantiate and assign
+	_current_telegraph_instance = _telegraph_resource.instantiate()
+
+	# Handle mesh scaling based on agent's collision shape
+	var mesh: Mesh = _current_telegraph_instance.draw_pass_1
+	if mesh is SphereMesh:
+		var agent_shape_node: CollisionShape3D = agent.shape
+		if agent_shape_node and agent_shape_node.shape:
+			var agent_shape: Shape3D = agent_shape_node.shape
+			if agent_shape is SphereShape3D:
+				mesh.radius = agent_shape.radius
+				mesh.height = agent_shape.height
+			elif agent_shape is CapsuleShape3D:
+				mesh.radius = agent_shape.radius
+				mesh.height = agent_shape.radius * 2.0
+			elif agent_shape is BoxShape3D:
+				mesh.radius = agent_shape.size.x / 2.0
+				mesh.height = agent_shape.size.y
+			else:
+				_log_warning("Agent's shape is not Sphere/Capsule/Box for telegraph scaling.")
+		else:
+			_log_warning("Agent's CollisionShape3D or its shape not found for telegraph scaling.")
+
+	# Duplicate and modify process material for instance-specific changes
+	var material: ParticleProcessMaterial = _current_telegraph_instance.process_material.duplicate()
+	var original_scale_min: float = material.scale_min
+	material.scale_min = original_scale_min * 1.5 # Adjust scale, so it's bigger than enemy model
+	_current_telegraph_instance.process_material = material
+
+	# Add to scene tree
+	agent.get_parent().add_child(_current_telegraph_instance)
+	_current_telegraph_instance.global_position = telegraph_position
+
+	# Configure lifetime and connections
+	var total_telegraph_time: float = 0.0
+	if telegraph_type == Type.ARRIVAL:
+		_current_telegraph_instance.lifetime = telegraph_arrival_time
+		total_telegraph_time = telegraph_arrival_time
+	elif telegraph_type == Type.DEPARTURE:
+		_current_telegraph_instance.lifetime = telegraph_departure_time
+		total_telegraph_time = telegraph_departure_time
+	_current_telegraph_instance.emitting = true
+
+	# Create a separate timer for the halfway point visibility change
+	var half_timer: SceneTreeTimer = agent.get_tree().create_timer(_current_telegraph_instance.lifetime * 0.5)
+	half_timer.timeout.connect(_on_telegraph_halfway.bind(telegraph_type))
+
+	# Create a separate timer for the end of the telegraph
+	var end_timer: SceneTreeTimer = agent.get_tree().create_timer(total_telegraph_time)
+	end_timer.timeout.connect(_on_telegraph_finished.bind(_current_telegraph_instance, telegraph_type))
+
+
+func _on_telegraph_finished(instance: GPUParticles3D, telegraph_type: Type) -> void:
+	# Ensure this signal handler doesn't get called multiple times on the same instance
+	if _current_telegraph_instance != instance:
+		return # This instance is not the currently managed one, ignore.
+
+	_cleanup_telegraph() # Clean up the instance after it finishes
+
+	if telegraph_type == Type.DEPARTURE:
+		_current_state = State.FINDING_POSITION
+		# Visibility handled by _on_telegraph_halfway. If it wasn't, ensure it's hidden now.
+		if agent.visible: agent.visible = false
+	elif telegraph_type == Type.ARRIVAL:
+		_current_state = State.FINISHED # Action completes here
+
+
+
+func _on_telegraph_halfway(telegraph_type: Type) -> void:
+	# This signal handler for the halfway point
+	if telegraph_type == Type.DEPARTURE:
+		agent.visible = false
+		agent.apply_gravity = false # Disable gravity after agent disappears
+	elif telegraph_type == Type.ARRIVAL:
+		agent.visible = true
+		agent.global_position = _flank_position
+		agent.velocity = Vector3.ZERO
+		agent.apply_gravity = true # Re-enable gravity after teleport
+
+
+func _cleanup_telegraph() -> void:
+	if _current_telegraph_instance and is_instance_valid(_current_telegraph_instance):
+		_current_telegraph_instance.queue_free()
+	_current_telegraph_instance = null
+
+
+func _log_error(message: String) -> void:
+	push_error("Flank Action Error: %s" % message)
+
+
+func _log_warning(message: String) -> void:
+	push_warning("Flank Action Warning: %s" % message)
