@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=18 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="8_b6m30"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="9_b6m30"]
 [ext_resource type="Texture2D" uid="uid://go8x13xk145a" path="res://entities/enemies/elder_centipede/art/icon/elder_centipede_icon.png" id="9_l658y"]
+[ext_resource type="Script" uid="uid://dltdrhrtk0btl" path="res://entities/enemies/bob/spike_hitbox.gd" id="10_os3r7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6m30"]
 radius = 2.4
@@ -19,6 +20,17 @@ radius = 3.0
 height = 7.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l658y"]
+radius = 3.0
+height = 7.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vd57r"]
+radius = 2.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqrkf"]
+radius = 3.0
+height = 7.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7aa0x"]
 radius = 3.0
 height = 7.4
 
@@ -32,7 +44,7 @@ dialogue_path = "res://entities/enemies/elder_centipede/dialogue"
 name_label_template_string = "%s \"Evolved\""
 
 [node name="chicken_centipede" parent="Model" index="0" instance=ExtResource("5_bv6h5")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.25, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.1, 0)
 
 [node name="Skeleton3D" parent="Model/chicken_centipede/Armature" index="0"]
 bones/1/position = Vector3(-0.0176469, -0.528933, 0.00256182)
@@ -83,19 +95,16 @@ bones/50/rotation = Quaternion(-0.378072, 0.619641, 0.649457, -0.226524)
 bones/51/position = Vector3(-1.51016, -1.99298, -2.45494)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.65, -4.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, -4.2)
 shape = SubResource("SphereShape3D_b6m30")
-debug_color = Color(0.874254, 0.0741591, 0.814007, 0.42)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, -1)
 shape = SubResource("CapsuleShape3D_r8ukm")
-debug_color = Color(0.87451, 0.0745098, 0.815686, 0.419608)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, 3)
 shape = SubResource("CapsuleShape3D_l658y")
-debug_color = Color(0.87451, 0.0745098, 0.815686, 0.419608)
 
 [node name="DamageNumberHandler" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
@@ -112,7 +121,31 @@ ability_resource = ExtResource("8_b6m30")
 [node name="AbilitySlot2" parent="EnemyAbilityController" index="1" instance=ExtResource("7_l658y")]
 ability_resource = ExtResource("9_b6m30")
 
+[node name="Area3D" type="Area3D" parent="." index="10"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("10_os3r7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, -4.2)
+shape = SubResource("SphereShape3D_vd57r")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, -1)
+shape = SubResource("CapsuleShape3D_pqrkf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7, 3)
+shape = SubResource("CapsuleShape3D_7aa0x")
+
+[node name="HurtTimer" type="Timer" parent="Area3D" index="3"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("9_l658y")
+
+[connection signal="timeout" from="Area3D/HurtTimer" to="Area3D" method="_on_hurt_timer_timeout"]
 
 [editable path="Model/chicken_centipede"]
