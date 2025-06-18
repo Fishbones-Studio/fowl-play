@@ -11,7 +11,7 @@ var _current_hover_height: float = min_hover_height
 var _ascending: bool = true
 
 
-func apply_gravity(delta: float) -> void:
+func _apply_gravity(delta: float) -> void:
 	var origin: Vector3 = global_transform.origin
 	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
 

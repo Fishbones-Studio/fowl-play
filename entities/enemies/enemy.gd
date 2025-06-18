@@ -10,6 +10,7 @@ signal damage_taken
 @export var name_label_template_string: String ## String template, requires 1 %s which will be replaced with the name specified in the associated stats
 @export var model: Node3D 
 @export var hurt_sound : AudioStream
+@export var apply_gravity: bool = true
 
 var is_immobile: bool = false
 var is_stunned: bool = false
@@ -46,7 +47,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	apply_gravity(delta)
+	if apply_gravity: 
+		_apply_gravity(delta)
 
 	if is_immobile:
 		velocity += _knockback
@@ -71,13 +73,13 @@ func _process(_delta: float) -> void:
 
 
 func get_stats_resource() -> LivingEntityStats:
-	if stats == null:
+	if not stats:
 		push_warning("Attempted to get stats resource before it was assigned!")
 	return stats
 
 
 ## Applies jump or fall gravity based on velocity
-func apply_gravity(delta: float) -> void:
+func _apply_gravity(delta: float) -> void:
 	velocity.y += movement_component.get_gravity(velocity) * delta
 
 

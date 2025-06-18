@@ -6,8 +6,6 @@
 
 [sub_resource type="BTCondition" id="BTCondition_atvp0"]
 script = ExtResource("1_atvp0")
-amount = 0.0
-damage_type = 1
 
 [sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_mvev2"]
 children = [SubResource("BTCondition_atvp0")]

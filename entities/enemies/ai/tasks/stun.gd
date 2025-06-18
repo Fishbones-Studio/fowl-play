@@ -6,7 +6,7 @@ extends BTAction
 
 
 func _generate_name() -> String:
-	return "Stunned for %.2fs" % stun_time
+	return "Stunned for %.1fs" % stun_time
 
 
 func _enter() -> void:

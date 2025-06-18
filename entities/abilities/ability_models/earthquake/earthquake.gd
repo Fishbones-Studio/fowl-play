@@ -35,8 +35,8 @@ func _ready() -> void:
 	super()
 
 
-func activate() -> void:
-	if ability_holder.is_on_floor():
+func activate(force_activate: bool = false) -> void:
+	if ability_holder.is_on_floor() and not force_activate:
 		print("%s: cannot perform %s while on the ground." % [ability_holder.name, name])
 		return
 

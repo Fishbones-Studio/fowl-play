@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=93 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=105 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="3_schhj"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_schhj"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_mnhi0"]
+[ext_resource type="Script" uid="uid://b4f0ki5tf8hpu" path="res://entities/enemies/ai/tasks/set_layer.gd" id="5_sxcr3"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="6_pia2r"]
 [ext_resource type="Script" uid="uid://cgid2hgg4itoh" path="res://entities/enemies/ai/tasks/target_height.gd" id="6_wv527"]
 [ext_resource type="Script" uid="uid://cfp1o30pt8yx7" path="res://entities/enemies/ai/tasks/flank.gd" id="7_7jrpa"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
-[ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="10_mnhi0"]
 [ext_resource type="Script" uid="uid://c0y08orvf36q3" path="res://entities/enemies/ai/tasks/current_health.gd" id="11_pia2r"]
 [ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="13_504pj"]
 [ext_resource type="PackedScene" uid="uid://c1kqvn5lvj320" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.tscn" id="13_gvblq"]
@@ -29,11 +29,34 @@ script = ExtResource("3_schhj")
 check_distance = 7.0
 player_layer = 2
 
+[sub_resource type="BTAction" id="BTAction_v6hs5"]
+script = ExtResource("5_sxcr3")
+layer = 0
+
+[sub_resource type="BTAction" id="BTAction_sxcr3"]
+script = ExtResource("7_7jrpa")
+target_var = &"target"
+flank_distance = 10.0
+vertical_offset = 0.0
+clearance_radius = 1.0
+departure_telegraph = false
+arrival_telegraph = false
+telegraph_departure_time = 0.0
+telegraph_arrival_time = 0.0
+telegraph_scale = 1.5
+
+[sub_resource type="BTAction" id="BTAction_kpifs"]
+script = ExtResource("5_sxcr3")
+layer = 4
+
+[sub_resource type="BTSequence" id="BTSequence_sxcr3"]
+children = [SubResource("BTCondition_mnhi0"), SubResource("BTAction_v6hs5"), SubResource("BTAction_sxcr3"), SubResource("BTAction_kpifs")]
+
 [sub_resource type="BTCondition" id="BTCondition_wv527"]
 script = ExtResource("6_wv527")
 target_var = &"target"
 comparison = 4
-height_threshold = 3.0
+height_threshold = 4.5
 use_relative = true
 target_on_floor = true
 
@@ -41,45 +64,64 @@ target_on_floor = true
 script = ExtResource("6_wv527")
 target_var = &"target"
 comparison = 3
-height_threshold = -3.0
+height_threshold = -4.5
 use_relative = true
 target_on_floor = true
 
-[sub_resource type="BTParallel" id="BTParallel_504pj"]
-num_failures_required = 3
-children = [SubResource("BTCondition_mnhi0"), SubResource("BTCondition_wv527"), SubResource("BTCondition_viady")]
+[sub_resource type="BTParallel" id="BTParallel_v6hs5"]
+num_failures_required = 2
+children = [SubResource("BTCondition_wv527"), SubResource("BTCondition_viady")]
 
-[sub_resource type="BTAction" id="BTAction_fxtff"]
+[sub_resource type="BTAction" id="BTAction_hvnwj"]
 script = ExtResource("7_7jrpa")
 target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
-clearance_radius = 0.5
+clearance_radius = 1.0
+departure_telegraph = true
+arrival_telegraph = true
+telegraph_departure_time = 0.5
+telegraph_arrival_time = 1.0
+telegraph_scale = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_7xuyr"]
+children = [SubResource("BTParallel_v6hs5"), SubResource("BTAction_hvnwj")]
+
+[sub_resource type="BTParallel" id="BTParallel_504pj"]
+num_failures_required = 2
+children = [SubResource("BTSequence_sxcr3"), SubResource("BTSequence_7xuyr")]
+
+[sub_resource type="BTAction" id="BTAction_8in54"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://cwvc4m1d624dm"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
-children = [SubResource("BTParallel_504pj"), SubResource("BTAction_fxtff")]
-
-[sub_resource type="BTCondition" id="BTCondition_504pj"]
-script = ExtResource("6_wv527")
-target_var = &"target"
-comparison = 3
-height_threshold = -3.0
-use_relative = true
-target_on_floor = true
-
-[sub_resource type="BTInvert" id="BTInvert_wv527"]
-children = [SubResource("BTCondition_504pj")]
+children = [SubResource("BTParallel_504pj"), SubResource("BTAction_8in54")]
 
 [sub_resource type="BTCondition" id="BTCondition_k7lfl"]
 script = ExtResource("6_wv527")
 target_var = &"target"
 comparison = 4
-height_threshold = 3.0
+height_threshold = 4.5
 use_relative = true
 target_on_floor = true
 
 [sub_resource type="BTInvert" id="BTInvert_a51uw"]
 children = [SubResource("BTCondition_k7lfl")]
+
+[sub_resource type="BTCondition" id="BTCondition_504pj"]
+script = ExtResource("6_wv527")
+target_var = &"target"
+comparison = 3
+height_threshold = -4.5
+use_relative = true
+target_on_floor = true
+
+[sub_resource type="BTInvert" id="BTInvert_wv527"]
+children = [SubResource("BTCondition_504pj")]
 
 [sub_resource type="BTCondition" id="BTCondition_gvblq"]
 script = ExtResource("11_pia2r")
@@ -108,7 +150,7 @@ children = [SubResource("BTRepeatUntilFailure_wv527")]
 script = ExtResource("6_wv527")
 target_var = &"target"
 comparison = 4
-height_threshold = 3.0
+height_threshold = 4.5
 use_relative = true
 target_on_floor = true
 
@@ -122,7 +164,7 @@ children = [SubResource("BTRepeatUntilSuccess_viady")]
 script = ExtResource("6_wv527")
 target_var = &"target"
 comparison = 3
-height_threshold = -3.0
+height_threshold = -4.5
 use_relative = true
 target_on_floor = true
 
@@ -208,7 +250,7 @@ children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880")
 
 [sub_resource type="BTSequence" id="BTSequence_lsbnu"]
 custom_name = "Pursue"
-children = [SubResource("BTInvert_wv527"), SubResource("BTInvert_a51uw"), SubResource("BTParallel_viady")]
+children = [SubResource("BTInvert_a51uw"), SubResource("BTInvert_wv527"), SubResource("BTParallel_viady")]
 metadata/_weight_ = 5.0
 
 [sub_resource type="BBNode" id="BBNode_viady"]
@@ -233,18 +275,6 @@ max_duration = 1.5
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_a51uw"), SubResource("BTAction_dbsnm"), SubResource("BTRandomWait_cgerr")]
 
-[sub_resource type="BTAction" id="BTAction_gvblq"]
-script = ExtResource("10_mnhi0")
-jump_factor = 1.0
-duration = 0.0
-is_falling = false
-has_landed = false
-reached_peak = true
-
-[sub_resource type="BTSequence" id="BTSequence_wv527"]
-custom_name = "Anticipation"
-children = [SubResource("BTAction_gvblq")]
-
 [sub_resource type="BTAction" id="BTAction_k7lfl"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://cwvc4m1d624dm"
@@ -268,6 +298,11 @@ target_var = &"target"
 flank_distance = 2.0
 vertical_offset = 0.0
 clearance_radius = 1.0
+departure_telegraph = true
+arrival_telegraph = true
+telegraph_departure_time = 0.5
+telegraph_arrival_time = 1.0
+telegraph_scale = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_6e6ua"]
 custom_name = "Flank"
@@ -275,6 +310,13 @@ children = [SubResource("BTAction_k7lfl"), SubResource("BTPlayAnimation_l0rnk"),
 
 [sub_resource type="BTWait" id="BTWait_i6i68"]
 duration = 0.1
+
+[sub_resource type="BTAction" id="BTAction_b566n"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://bf5lhyfrveakg"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
@@ -286,19 +328,37 @@ seconds = 0.1
 children = [SubResource("BTAction_hcbj7")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_vidql"]
-times = 5
+times = 15
 children = [SubResource("BTDelay_n7fk8")]
 
 [sub_resource type="BTAction" id="BTAction_qjixf"]
 script = ExtResource("4_schhj")
 target_var = &"target"
-rotation_speed = 2.0
+rotation_speed = 4.0
 angle_threshold = 2.0
 duration = 0.0
 face_away = false
 
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_sxcr3"]
+children = [SubResource("BTAction_qjixf")]
+
+[sub_resource type="BTAction" id="BTAction_7xuyr"]
+script = ExtResource("5_mnhi0")
+target_var = &"target"
+tolerance = 5.0
+speed_factor = 1.0
+duration = 10.0
+ignore_y = true
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_b566n"]
+children = [SubResource("BTAction_7xuyr")]
+
 [sub_resource type="BTParallel" id="BTParallel_hcbj7"]
-children = [SubResource("BTRepeat_vidql"), SubResource("BTAction_qjixf")]
+num_failures_required = 3
+children = [SubResource("BTAction_b566n"), SubResource("BTRepeat_vidql"), SubResource("BTAlwaysFail_sxcr3"), SubResource("BTAlwaysFail_b566n")]
 
 [sub_resource type="BTSequence" id="BTSequence_qjixf"]
 custom_name = "Shank"
@@ -306,7 +366,7 @@ children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
-children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_wv527"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
+children = [SubResource("BTSequence_cofkk"), SubResource("BTSequence_6e6ua"), SubResource("BTSequence_qjixf")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCondition" id="BTCondition_f2bow"]
@@ -332,6 +392,17 @@ animation_name = &"Walking"
 blend = 0.2
 speed = 2.0
 
+[sub_resource type="BTCondition" id="BTCondition_sxcr3"]
+script = ExtResource("7_schhj")
+stuck_interval = 1.0
+stuck_threshold = 2.5
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_v6hs5"]
+children = [SubResource("BTCondition_sxcr3")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_kpifs"]
+children = [SubResource("BTRepeatUntilFailure_v6hs5")]
+
 [sub_resource type="BTAction" id="BTAction_mnhi0"]
 script = ExtResource("8_ba5to")
 target_var = &"target"
@@ -354,7 +425,7 @@ children = [SubResource("BTAction_504pj")]
 [sub_resource type="BTParallel" id="BTParallel_5c880"]
 num_successes_required = 2
 repeat = true
-children = [SubResource("BTAction_mnhi0"), SubResource("BTDelay_viady")]
+children = [SubResource("BTAlwaysFail_kpifs"), SubResource("BTAction_mnhi0"), SubResource("BTDelay_viady")]
 
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"

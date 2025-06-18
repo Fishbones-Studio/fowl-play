@@ -22,8 +22,8 @@ var _hit_bodies: Array = []
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 
 
-func activate() -> void:
-	if not ability_holder.is_on_floor():
+func activate(force_activate: bool = false) -> void:
+	if not ability_holder.is_on_floor() and not force_activate:
 		return
 
 	_attack_duration = cpu_particles.lifetime
