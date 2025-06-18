@@ -189,7 +189,7 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_pyqya"]
 script = ExtResource("6_pia2r")
 ignore_cooldown = false
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTSequence" id="BTSequence_xlk6v"]
 children = [SubResource("BTCondition_yoxl1"), SubResource("BTAction_pyqya")]
@@ -279,7 +279,7 @@ duration = 0.1
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
 ignore_cooldown = true
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTDelay" id="BTDelay_n7fk8"]
 seconds = 0.1

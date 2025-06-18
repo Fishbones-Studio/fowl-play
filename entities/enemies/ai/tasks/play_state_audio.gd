@@ -93,7 +93,7 @@ func _tick(_delta: float) -> int:
 
 func _exit() -> void:
 	# Stop repeating audio when exiting
-	if is_repeating and agent is Enemy:
+	if agent is Enemy:
 		agent.state_audio_player.stop()
 	
 	# Disconnect signal if connected

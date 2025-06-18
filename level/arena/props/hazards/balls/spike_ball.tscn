@@ -128,5 +128,7 @@ shape = SubResource("SphereShape3D_kxu0f")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9525, 0)
 stream = ExtResource("4_tfv5j")
+volume_db = -4.0
+unit_size = 4.0
 autoplay = true
 bus = &"SFX"

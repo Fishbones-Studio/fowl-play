@@ -84,7 +84,7 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_uxecv"]
 script = ExtResource("11_ulmcl")
 ignore_cooldown = false
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTSequence" id="BTSequence_4fcdy"]
 children = [SubResource("BTCondition_t3gyd"), SubResource("BTAction_uxecv")]

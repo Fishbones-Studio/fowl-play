@@ -64,7 +64,7 @@ face_away = false
 [sub_resource type="BTAction" id="BTAction_jsrsq"]
 script = ExtResource("5_g4wna")
 ignore_cooldown = true
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTCooldown" id="BTCooldown_otwd7"]
 duration = 2.0
