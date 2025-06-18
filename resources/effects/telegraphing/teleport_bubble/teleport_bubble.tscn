@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bi7ih1it2v747"]
 
 [ext_resource type="Curve" uid="uid://b6p4gfokqxcgs" path="res://resources/effects/telegraphing/teleport_bubble/departure_curve.tres" id="1_pv5ad"]
-[ext_resource type="Shader" uid="uid://us07junk5g5l" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="2_eufda"]
+[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/shaders/earthquake.gdshader" id="2_eufda"]
 
 [sub_resource type="CurveTexture" id="CurveTexture_gpdox"]
 curve = ExtResource("1_pv5ad")
