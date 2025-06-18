@@ -31,13 +31,13 @@ enum State {
 @export var telegraph_departure_time: float = 0.5
 ## Time to wait during arrival
 @export var telegraph_arrival_time: float = 1.0
-
-
+@export_range(0.1, 10.0, 0.1) var telegraph_scale: float = 1.5
 
 var _current_state: State = State.IDLE
 var _flank_position: Vector3 = Vector3.ZERO
 var _current_telegraph_instance: GPUParticles3D = null
 var _space_state: PhysicsDirectSpaceState3D = null
+var _clearance_shape: Shape3D = null
 var _telegraph_resource: PackedScene = preload("uid://bi7ih1it2v747")
 
 
@@ -72,10 +72,36 @@ func _enter() -> void:
 		_current_state = State.FINISHED # Force failure state
 		return
 
+	_clearance_shape = SphereShape3D.new()
+	_clearance_shape.radius = clearance_radius
+	if not _clearance_shape:
+		_log_error("Failed to create clearance shape!")
+		_current_state = State.FINISHED # Force failure state
+		return
+	
+
 	if departure_telegraph:
-		_current_state = State.DEPARTURE_TELEGRAPHING
-		_create_telegraph_effect(Type.DEPARTURE, agent.global_position)
+		var offset: float = 0.0
+		var agent_shape_node: CollisionShape3D = agent.shape
+
+		if agent_shape_node and agent_shape_node.shape:
+			var agent_shape: Shape3D = agent_shape_node.shape
+			if agent_shape is SphereShape3D or agent_shape is CapsuleShape3D:
+				offset = agent_shape.height / 2.0
+			elif agent_shape is BoxShape3D:
+				offset = agent_shape.size.y / 2.0
+			else:
+				_log_warning("Agent's shape is not Sphere/Capsule/Box.")
+		else:
+			_log_warning("Agent's CollisionShape3D or its shape not found")
+
 		# Agent visibility handled in _on_telegraph_halfway
+		_current_state = State.DEPARTURE_TELEGRAPHING
+		_create_telegraph_effect(Type.DEPARTURE, Vector3(
+				agent.global_position.x,
+				agent.global_position.y + offset,
+				agent.global_position.z,
+			))
 	else:
 		# If no departure telegraph, go straight to finding position
 		_current_state = State.FINDING_POSITION
@@ -83,6 +109,11 @@ func _enter() -> void:
 
 
 func _tick(_delta: float) -> Status:
+	var target: ChickenPlayer = blackboard.get_var(target_var, null)
+	if not is_instance_valid(target):
+		_log_error("Target not found or invalid during FINDING_POSITION.")
+		return FAILURE
+
 	match _current_state:
 		State.IDLE:
 			# Should not happen often, but acts as a safeguard.
@@ -95,11 +126,6 @@ func _tick(_delta: float) -> Status:
 			return RUNNING
 
 		State.FINDING_POSITION:
-			var target: ChickenPlayer = blackboard.get_var(target_var, null)
-			if not is_instance_valid(target):
-				_log_error("Target not found or invalid during FINDING_POSITION.")
-				return FAILURE
-
 			_flank_position = _get_safe_flank_position(target)
 			if _flank_position == Vector3.INF:
 				_log_error("Failed to find a safe flank position.")
@@ -132,6 +158,7 @@ func _tick(_delta: float) -> Status:
 			return RUNNING # Will transition to SUCCESS in the very next tick
 
 		State.FINISHED:
+			agent.look_at(target.global_position)
 			# Action is complete, return SUCCESS
 			return SUCCESS
 
@@ -175,12 +202,9 @@ func _is_position_clear(position: Vector3) -> bool:
 		push_error("clearance_radius must be > 0 (current: %f)" % clearance_radius)
 		return false
 
-	var shape: SphereShape3D = SphereShape3D.new()
-	shape.radius = max(clearance_radius, 0.1) # Ensure radius is never zero
-
 	var params: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
 	params.transform = Transform3D(Basis(), position)
-	params.shape_rid = shape.get_rid() # Use RID for direct queries
+	params.shape_rid = _clearance_shape.get_rid() # Use RID for direct queries
 	params.collision_mask = agent.collision_mask
 	params.exclude = [agent.get_rid()]
 
@@ -206,7 +230,7 @@ func _create_telegraph_effect(telegraph_type: Type, telegraph_position: Vector3)
 			var agent_shape: Shape3D = agent_shape_node.shape
 			if agent_shape is SphereShape3D:
 				mesh.radius = agent_shape.radius
-				mesh.height = agent_shape.height
+				mesh.height = agent_shape.radius
 			elif agent_shape is CapsuleShape3D:
 				mesh.radius = agent_shape.radius
 				mesh.height = agent_shape.radius * 2.0
@@ -221,7 +245,7 @@ func _create_telegraph_effect(telegraph_type: Type, telegraph_position: Vector3)
 	# Duplicate and modify process material for instance-specific changes
 	var material: ParticleProcessMaterial = _current_telegraph_instance.process_material.duplicate()
 	var original_scale_min: float = material.scale_min
-	material.scale_min = original_scale_min * 1.5 # Adjust scale, so it's bigger than enemy model
+	material.scale_min = original_scale_min * telegraph_scale # Adjust scale, so it's bigger than enemy model
 	_current_telegraph_instance.process_material = material
 
 	# Add to scene tree
@@ -247,7 +271,7 @@ func _create_telegraph_effect(telegraph_type: Type, telegraph_position: Vector3)
 	end_timer.timeout.connect(_on_telegraph_finished.bind(_current_telegraph_instance, telegraph_type))
 
 
-func _on_telegraph_finished(instance: GPUParticles3D, telegraph_type: Type) -> void:
+func _on_telegraph_finished(instance: Variant, telegraph_type: Type) -> void:
 	# Ensure this signal handler doesn't get called multiple times on the same instance
 	if _current_telegraph_instance != instance:
 		return # This instance is not the currently managed one, ignore.
