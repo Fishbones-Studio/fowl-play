@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=13 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://bxssmk8w3kohp" path="res://entities/enemies/elder_centipede/sound/centipede_death.ogg" id="3_b6m30"]
 [ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="PackedScene" uid="uid://dofck8yvlnbl7" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="5_bv6h5"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="7_l658y"]
+[ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="8_b6m30"]
 [ext_resource type="Texture2D" uid="uid://go8x13xk145a" path="res://entities/enemies/elder_centipede/art/icon/elder_centipede_icon.png" id="9_l658y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6m30"]
@@ -31,6 +33,54 @@ name_label_template_string = "%s \"Evolved\""
 [node name="chicken_centipede" parent="Model" index="0" instance=ExtResource("5_bv6h5")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.25, 0)
 
+[node name="Skeleton3D" parent="Model/chicken_centipede/Armature" index="0"]
+bones/1/position = Vector3(-0.0176469, -0.528933, 0.00256182)
+bones/1/rotation = Quaternion(-0.00242065, 2.98066e-07, -0.0166746, 0.999858)
+bones/2/position = Vector3(4.22398e-07, -1.43361, -6.13151e-08)
+bones/3/rotation = Quaternion(0.0029502, 0.188449, -0.77218, 0.606809)
+bones/4/rotation = Quaternion(0.0553284, 0.0089587, 0.434061, 0.899138)
+bones/5/rotation = Quaternion(0.137569, -0.175184, -0.144787, 0.964065)
+bones/6/rotation = Quaternion(-0.0966199, 0.00279818, -0.821679, 0.561695)
+bones/7/rotation = Quaternion(-0.0909334, -0.0506987, 0.473528, 0.874604)
+bones/8/rotation = Quaternion(0.0454634, 0.0685914, -0.050389, 0.995334)
+bones/9/rotation = Quaternion(0.951933, -0.208501, -0.22366, -0.0181027)
+bones/10/rotation = Quaternion(0.0640339, 0.985357, -0.0102475, -0.157689)
+bones/16/rotation = Quaternion(-0.229359, 0.947342, -0.0199133, -0.222581)
+bones/17/rotation = Quaternion(0.0337964, 9.2433e-07, -0.102889, 0.994119)
+bones/18/rotation = Quaternion(-0.0980967, 0.211256, -0.740059, 0.630921)
+bones/19/rotation = Quaternion(0.246906, 0.0214628, 0.336636, 0.908434)
+bones/20/rotation = Quaternion(0.0548679, 0.0228257, -0.129626, 0.989781)
+bones/21/rotation = Quaternion(-0.117559, -0.00942318, -0.795082, 0.594925)
+bones/22/rotation = Quaternion(0.0557745, -0.218163, 0.37843, 0.897822)
+bones/23/rotation = Quaternion(-0.10139, 0.0251128, 0.000634068, 0.99453)
+bones/25/position = Vector3(-1.03657e-07, -1.41326e-07, -5.76767e-08)
+bones/26/position = Vector3(-0.286279, -0.890716, 0.660814)
+bones/26/rotation = Quaternion(0.720466, 5.43022e-07, 0.69349, 2.85801e-07)
+bones/27/position = Vector3(1.60568, -1.88651, 1.60986)
+bones/28/position = Vector3(1.60568, -1.88651, 1.60986)
+bones/29/position = Vector3(1.60568, -1.88651, 1.60986)
+bones/30/position = Vector3(1.60568, -1.88651, 1.60986)
+bones/30/rotation = Quaternion(0.652188, -0.391873, 0.552803, -0.339847)
+bones/32/position = Vector3(-2.73227e-07, -6.31772e-07, 7.27904e-07)
+bones/32/rotation = Quaternion(0.68725, -0.42197, 0.497001, -0.320341)
+bones/34/position = Vector3(-1.54586, -1.93491, 1.66173)
+bones/35/position = Vector3(-1.54586, -1.93491, 1.66173)
+bones/36/position = Vector3(-1.54586, -1.93491, 1.66173)
+bones/37/position = Vector3(-1.54586, -1.93491, 1.66173)
+bones/39/position = Vector3(4.61417e-07, 7.73999e-07, -1.07002e-06)
+bones/39/rotation = Quaternion(0.53401, -0.312271, 0.634208, -0.463789)
+bones/41/position = Vector3(1.53484, -1.95308, -2.6027)
+bones/42/position = Vector3(1.53484, -1.95308, -2.6027)
+bones/43/position = Vector3(1.53484, -1.95308, -2.6027)
+bones/44/position = Vector3(1.53484, -1.95308, -2.6027)
+bones/45/position = Vector3(-1.28032, -0.799493, -3.11796)
+bones/46/position = Vector3(-2.84838e-07, 1.1964e-06, -1.07975e-06)
+bones/48/position = Vector3(-1.51016, -1.99298, -2.45494)
+bones/49/position = Vector3(-1.51016, -1.99298, -2.45494)
+bones/50/position = Vector3(-1.51016, -1.99298, -2.45494)
+bones/50/rotation = Quaternion(-0.378072, 0.619641, 0.649457, -0.226524)
+bones/51/position = Vector3(-1.51016, -1.99298, -2.45494)
+
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.65, -4.2)
 shape = SubResource("SphereShape3D_b6m30")
@@ -46,14 +96,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 3)
 shape = SubResource("CapsuleShape3D_l658y")
 debug_color = Color(0.87451, 0.0745098, 0.815686, 0.419608)
 
+[node name="DamageNumberHandler" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+
 [node name="BloodSplashHandler" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97034, -7.96051)
 
 [node name="BTPlayer" parent="." index="7"]
 behavior_tree = ExtResource("4_y8gm0")
 
-[node name="EnemyAbilityController" parent="." index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("7_l658y")]
+ability_resource = ExtResource("8_b6m30")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("9_l658y")
