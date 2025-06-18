@@ -12,7 +12,7 @@ func _generate_name() -> String:
 
 
 func _enter() -> void:
-	if not amount <= 0.0:
+	if amount > 0.0:
 		agent.stats.drain_health(agent.stats.max_health * (amount / 100.0), damage_type)
 
 
