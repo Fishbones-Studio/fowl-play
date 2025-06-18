@@ -27,9 +27,9 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
 @onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
-@onready var state_audio_player : AudioStreamPlayer3D = %StateAudioPlayer
-@onready var interval_audio_player : IntervalSFXPlayer3D = %IntervalAudioPlayer
-@onready var bt_player : BTPlayer = %BTPlayer
+@onready var state_audio_player: AudioStreamPlayer3D = %StateAudioPlayer
+@onready var interval_audio_player: IntervalSFXPlayer3D = %IntervalAudioPlayer
+@onready var bt_player: BTPlayer = %BTPlayer
 
 
 func _ready() -> void:
