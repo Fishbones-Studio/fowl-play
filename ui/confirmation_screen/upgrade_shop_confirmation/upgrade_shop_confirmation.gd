@@ -3,6 +3,7 @@ extends ConfirmationScreen
 const DESCRIPTION_LABEL: String = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color] Prosperity Eggs?"
 
 var purchased_signal: Signal
+var purchase_cancelled_signal: Signal
 var shop_item: BaseResource
 
 
@@ -27,10 +28,23 @@ func _input(_event: InputEvent) -> void:
 func setup(params: Dictionary) -> void:
 	if "purchased_signal" in params:
 		purchased_signal = params["purchased_signal"]
+	if "purchase_cancelled" in params:
+		purchase_cancelled_signal = params["purchase_cancelled"]
 	if "shop_item" in params:
 		shop_item = params["shop_item"]
 
 
+func on_cancel_button_pressed() -> void:
+	if purchase_cancelled_signal:
+		purchase_cancelled_signal.emit()
+	else:
+		push_warning("'purchase_cancelled_signal' is missing and cannot be emitted.")
+	super()
+
+
 func on_confirm_button_pressed() -> void:
-	purchased_signal.emit()
+	if purchased_signal:
+		purchased_signal.emit()
+	else:
+		push_warning("'purchased_signal' is missing and cannot be emitted.")
 	super()

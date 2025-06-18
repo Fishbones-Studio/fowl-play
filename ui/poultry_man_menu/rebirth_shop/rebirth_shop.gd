@@ -193,7 +193,7 @@ func _on_stats_reset() -> void:
 	GameManager.prosperity_eggs += total_eggs_refund
 
 	# Reset the player's upgrades and player's stats to default
-	SaveManager.save_player_upgrades({})
+	SaveManager.save_player_upgrades(SaveManager.get_default_upgrades())
 	SaveManager.save_player_stats(SaveManager.get_default_player_stats())
 
 	# Refresh the stats screen
