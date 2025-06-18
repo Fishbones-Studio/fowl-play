@@ -94,7 +94,8 @@ func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:
 	# Connect to finished signal and play state audio
 	if not state_audio_player.finished.is_connected(_on_state_audio_finished.bind(stop_interval)):
 		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
-	
+
+
 func _on_state_audio_finished(resume_interval := true) -> void:
 	if resume_interval:
 		# Resume interval timer

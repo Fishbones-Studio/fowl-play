@@ -12,8 +12,10 @@ var _target_position: Vector3
 var _initial_jump_velocity: Vector3
 var _was_airborne: bool = false
 
+
 func _generate_name() -> String:
 	return "Pounce ➜ %s" % [LimboUtility.decorate_var(target_var)]
+
 
 func _enter() -> void:
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
@@ -38,6 +40,7 @@ func _enter() -> void:
 
 	agent.velocity = _initial_jump_velocity
 
+
 func _tick(delta: float) -> Status:
 	if not _is_jumping:
 		return FAILURE
@@ -49,7 +52,7 @@ func _tick(delta: float) -> Status:
 	agent.velocity.z += (horizontal_dir.z * horizontal_speed - agent.velocity.z) * delta
 
 	# Track if the agent has left the ground
-	if not _was_airborne && not agent.is_on_floor():
+	if not _was_airborne and not agent.is_on_floor():
 		_was_airborne = true
 
 	# Only succeed if the agent has been airborne and is now on the floor
@@ -66,6 +69,7 @@ func _tick(delta: float) -> Status:
 		return SUCCESS
 
 	return RUNNING
+
 
 func _exit() -> void:
 	_is_jumping = false

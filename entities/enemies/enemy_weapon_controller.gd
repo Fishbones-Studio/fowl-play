@@ -8,8 +8,10 @@ enum WeaponSlot { MELEE = 0, RANGED = 1 }
 var _current_weapon_slot: WeaponSlot = WeaponSlot.MELEE
 var _equipped_weapons: Array[bool] = [false, false] # Track which slots have weapons
 
+
 func _ready() -> void:
 	_equip_weapons()
+
 
 func _equip_weapons() -> void:
 	# Equip ALL available weapons
@@ -33,16 +35,19 @@ func _equip_weapons() -> void:
 
 	_update_weapon_visibility()
 
+
 func _equip_weapon(weapon_handler: Node3D, slot: WeaponSlot) -> void:
 	if weapon_handler is MeleeWeaponNode:
 		weapon_handler.current_weapon.enable_stun = enable_stun
 	_equipped_weapons[slot] = true
+
 
 func _update_weapon_visibility() -> void:
 	for i in range(get_child_count()):
 		get_child(i).visible = (
 		i == _current_weapon_slot and _equipped_weapons[i]
 		)
+
 
 func swap_weapon() -> bool:
 	if not (
@@ -62,6 +67,7 @@ func swap_weapon() -> bool:
 	)
 	_update_weapon_visibility()
 	return true
+
 
 func use_weapon(
 	ignore_cooldown: bool = false,
@@ -88,6 +94,7 @@ func use_weapon(
 	state_machine._transition_to_next_state(start_state)
 	return start_state
 
+
 func _get_current_state_machine() -> Node:
 	var active_weapon: Node = get_child(_current_weapon_slot)
 
@@ -97,6 +104,7 @@ func _get_current_state_machine() -> Node:
 		return active_weapon.current_weapon.handler.state_machine
 
 	return null
+
 
 func _handle_windup_request(
 	state_machine, ignore_cooldown: bool
@@ -124,8 +132,10 @@ func _handle_windup_request(
 	state_machine._transition_to_next_state(WeaponEnums.WeaponState.WINDUP)
 	return WeaponEnums.WeaponState.WINDUP
 
+
 func has_weapon_equipped() -> bool:
 	return _equipped_weapons[_current_weapon_slot]
+
 
 func get_current_weapon_state() -> WeaponEnums.WeaponState:
 	if not has_weapon_equipped():

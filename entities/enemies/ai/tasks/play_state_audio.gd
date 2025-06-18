@@ -6,24 +6,25 @@ extends BTAction
 
 ## Whether this audio should loop while the action is active
 ## NOTE: this means this action will always be running, and has to be terminated by the BT tree in another way
-@export var is_repeating := false :
+@export var is_repeating: bool = false:
 	set(value):
 		if value:
 			wait_for_completion = false
 		is_repeating = value
 
 ## For one-time audio: whether to wait for completion before succeeding
-@export var wait_for_completion := true :
+@export var wait_for_completion: bool = true:
 	set(value):
 		if value:
 			is_repeating = false
 		wait_for_completion = value
 
 ## Wheter this audio should pause the enemies interval player
-@export var pause_interval_player := true
+@export var pause_interval_player: bool = true
 
 var audio_started: bool = false
 var audio_completed: bool = false
+
 
 func _generate_name() -> String:
 	if file_to_play.is_empty():
@@ -35,16 +36,16 @@ func _generate_name() -> String:
 	# Format the final string for the Behavior Tree editor.
 	return "PlayEnemyAudio: %s%s" % [file_name, type_suffix]
 
+
 func _enter() -> void:
 	# Reset state
 	audio_started = false
 	audio_completed = false
-	
+
 	# Ensure this is only used with Enemy agents
 	if not agent is Enemy:
 		push_error("BTAction 'PlayEnemyAudio': This action can only be used with Enemy agents.")
 		return
-
 	if file_to_play.is_empty():
 		push_error("BTAction 'PlayEnemyAudio': No audio file specified.")
 		return
@@ -70,6 +71,7 @@ func _enter() -> void:
 	agent.play_state_audio(audio_stream)
 	audio_started = true
 
+
 func _tick(_delta: float) -> int:
 	if not agent is Enemy or not audio_started:
 		return FAILURE
@@ -91,6 +93,7 @@ func _tick(_delta: float) -> int:
 			# Succeed immediately once started
 			return SUCCESS
 
+
 func _exit() -> void:
 	# Stop repeating audio when exiting
 	if agent is Enemy:
@@ -99,6 +102,7 @@ func _exit() -> void:
 	# Disconnect signal if connected
 	if agent is Enemy and agent.state_audio_player.finished.is_connected(_on_audio_finished):
 		agent.state_audio_player.finished.disconnect(_on_audio_finished)
+
 
 func _on_audio_finished() -> void:
 	audio_completed = true

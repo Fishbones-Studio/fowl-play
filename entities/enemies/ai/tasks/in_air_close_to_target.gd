@@ -17,12 +17,12 @@ func _tick(_delta: float) -> Status:
 		return FAILURE
 
 	# Must be in the air (and optionally descending)
-	var in_air = not agent.is_on_floor()
+	var in_air: bool = not agent.is_on_floor()
 	if require_descent and agent.velocity.y >= 0.0:
 		in_air = false
 
 	# Compute offset
-	var offset = target.global_position - agent.global_position
+	var offset: Vector3 = target.global_position - agent.global_position
 
 	# Horizontal distance = sqrt(dx^2 + dz^2)
 	var horizontal_dist = Vector3(offset.x, 0.0, offset.z).length()

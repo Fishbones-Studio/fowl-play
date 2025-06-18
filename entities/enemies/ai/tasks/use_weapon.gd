@@ -9,20 +9,23 @@ extends BTAction
 
 func _generate_name() -> String:
 	var cooldown_str: String = " (Ignoring Cooldown)" if ignore_cooldown else ""
+
 	return "Use Weapon: %s%s" % [
 		WeaponEnums.weapon_state_to_string(start_state),
-		cooldown_str
+		cooldown_str,
 	]
+
 
 func _enter():
 	agent.enemy_weapon_controller.use_weapon(
 		ignore_cooldown,
-		start_state
+		start_state,
 	)
+
 
 func _tick(_delta: float) -> Status:
 	var result: WeaponEnums.WeaponState = agent.enemy_weapon_controller.get_current_weapon_state()
-	
+
 	if start_state == result:
 		# If the weapon is already in the desired state, we can return immediately.
 		return RUNNING
