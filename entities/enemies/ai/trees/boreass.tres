@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=70 format=3 uid="uid://bc7ucld3pg5s8"]
+[gd_resource type="BehaviorTree" load_steps=84 format=3 uid="uid://bc7ucld3pg5s8"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yhbkp"]
 [ext_resource type="Script" uid="uid://wrawtm8at4do" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="8_k708t"]
+[ext_resource type="Script" uid="uid://bik73ykxdltxk" path="res://entities/enemies/ai/tasks/in_air_close_to_target.gd" id="9_n3rxy"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="10_5x7em"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_40a5u"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="11_ulmcl"]
 
@@ -111,6 +113,13 @@ script = ExtResource("2_6nkjl")
 min_wait_time = 0.4
 max_wait_time = 1.1
 
+[sub_resource type="BTAction" id="BTAction_tt3xs"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://bxqaj5216nwbt"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
 [sub_resource type="BBNode" id="BBNode_4fcdy"]
 saved_value = NodePath("Model/ice_fox/AnimationPlayer")
 resource_name = "Model/ice_fox/AnimationPlayer"
@@ -135,8 +144,8 @@ children = [SubResource("BTAction_4fcdy")]
 children = [SubResource("BTRepeatUntilSuccess_40a5u")]
 
 [sub_resource type="BTParallel" id="BTParallel_8831e"]
-num_successes_required = 2
-children = [SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAlwaysSucceed_4fcdy")]
+num_successes_required = 3
+children = [SubResource("BTAction_tt3xs"), SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAlwaysSucceed_4fcdy")]
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_y7cob"]
 min_duration = 0.8
@@ -146,13 +155,36 @@ max_duration = 1.6
 custom_name = "Get ready.."
 children = [SubResource("BTAction_ocp3w"), SubResource("BTParallel_8831e"), SubResource("BTRandomWait_y7cob")]
 
-[sub_resource type="BTAction" id="BTAction_t3gyd"]
-script = ExtResource("3_b2ogj")
+[sub_resource type="BTCondition" id="BTCondition_aat0e"]
+script = ExtResource("9_n3rxy")
 target_var = &"target"
-jump_factor = 2.0
-horizontal_speed = 60.0
-min_distance = 10.0
-duration = 2.0
+horizontal_threshold = 10.0
+vertical_threshold = 10.0
+require_descent = false
+
+[sub_resource type="BTAction" id="BTAction_qwt3u"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://di47v64gid1nf"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
+[sub_resource type="BTAction" id="BTAction_ulmcl"]
+script = ExtResource("4_yhbkp")
+ignore_cooldown = true
+slot = 0
+
+[sub_resource type="BTParallel" id="BTParallel_5x7em"]
+num_successes_required = 2
+custom_name = "Ground Pound!"
+children = [SubResource("BTAction_qwt3u"), SubResource("BTAction_ulmcl")]
+
+[sub_resource type="BTSequence" id="BTSequence_tt3xs"]
+custom_name = "Ground Pound"
+children = [SubResource("BTCondition_aat0e"), SubResource("BTParallel_5x7em")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_aat0e"]
+children = [SubResource("BTSequence_tt3xs")]
 
 [sub_resource type="BBNode" id="BBNode_fhbfq"]
 saved_value = NodePath("Model/ice_fox/AnimationPlayer")
@@ -163,30 +195,34 @@ animation_player = SubResource("BBNode_fhbfq")
 animation_name = &"Fall"
 blend = 0.2
 
-[sub_resource type="BTSequence" id="BTSequence_pbs4t"]
+[sub_resource type="BTAction" id="BTAction_t3gyd"]
+script = ExtResource("3_b2ogj")
+target_var = &"target"
+jump_factor = 2.0
+horizontal_speed = 60.0
+min_distance = 10.0
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_uqbg5"]
+custom_name = "Pounce"
+children = [SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd")]
+
+[sub_resource type="BTParallel" id="BTParallel_aat0e"]
 custom_name = "Go!"
-children = [SubResource("BTAction_t3gyd"), SubResource("BTPlayAnimation_u4hmx")]
+children = [SubResource("BTRepeatUntilSuccess_aat0e"), SubResource("BTSequence_uqbg5")]
 
-[sub_resource type="BTAction" id="BTAction_ulmcl"]
-script = ExtResource("4_yhbkp")
-ignore_cooldown = true
-slot = 0
-
-[sub_resource type="BTDelay" id="BTDelay_ulmcl"]
-seconds = 0.1
-children = [SubResource("BTAction_ulmcl")]
-
-[sub_resource type="BTSequence" id="BTSequence_ca3xq"]
-custom_name = "Ground Pound!"
-children = [SubResource("BTDelay_ulmcl")]
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_n3rxy"]
+time_limit = 8.0
+children = [SubResource("BTParallel_aat0e")]
 
 [sub_resource type="BTSequence" id="BTSequence_ulmcl"]
 custom_name = "Pounce"
-children = [SubResource("BTSequence_t3gyd"), SubResource("BTSequence_pbs4t"), SubResource("BTSequence_ca3xq")]
+children = [SubResource("BTSequence_t3gyd"), SubResource("BTTimeLimit_n3rxy")]
 metadata/_weight_ = 330.0
 
 [sub_resource type="BTCooldown" id="BTCooldown_t3gyd"]
 duration = 5.0
+start_cooled = true
 children = [SubResource("BTSequence_ulmcl")]
 metadata/_weight_ = 1.0
 
@@ -226,9 +262,16 @@ children = [SubResource("BTRepeatUntilSuccess_ulmcl")]
 [sub_resource type="BTWait" id="BTWait_u4hmx"]
 duration = 2.0
 
+[sub_resource type="BTAction" id="BTAction_n3rxy"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://ccvxuafdgau63"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
 [sub_resource type="BTParallel" id="BTParallel_40a5u"]
-num_successes_required = 2
-children = [SubResource("BTAlwaysSucceed_40a5u"), SubResource("BTWait_u4hmx")]
+num_successes_required = 3
+children = [SubResource("BTAlwaysSucceed_40a5u"), SubResource("BTWait_u4hmx"), SubResource("BTAction_n3rxy")]
 
 [sub_resource type="BTSequence" id="BTSequence_fhbfq"]
 custom_name = "I venture forth to hunt!"
@@ -240,9 +283,33 @@ target_var = &"target"
 dash_duration = 0.4
 dash_distance = 50.0
 
+[sub_resource type="BTAction" id="BTAction_5x7em"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://cdenyoraekjmh"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
+[sub_resource type="BTAction" id="BTAction_aat0e"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://c71er3uggs25u"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = true
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_tt3xs"]
+children = [SubResource("BTAction_aat0e")]
+
+[sub_resource type="BTSequence" id="BTSequence_qwt3u"]
+children = [SubResource("BTAction_5x7em"), SubResource("BTAlwaysFail_tt3xs")]
+
+[sub_resource type="BTParallel" id="BTParallel_uqbg5"]
+num_failures_required = 2
+children = [SubResource("BTAction_u4hmx"), SubResource("BTSequence_qwt3u")]
+
 [sub_resource type="BTSequence" id="BTSequence_8k4wv"]
 custom_name = "Always soaring, forever triumphant!"
-children = [SubResource("BTAction_u4hmx")]
+children = [SubResource("BTParallel_uqbg5")]
 
 [sub_resource type="BTSequence" id="BTSequence_40a5u"]
 custom_name = "Dash"
@@ -250,6 +317,7 @@ children = [SubResource("BTSequence_fhbfq"), SubResource("BTSequence_8k4wv")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCooldown" id="BTCooldown_ulmcl"]
+start_cooled = true
 children = [SubResource("BTSequence_40a5u")]
 metadata/_weight_ = 1.0
 
