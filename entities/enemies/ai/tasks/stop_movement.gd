@@ -2,9 +2,9 @@
 extends BTAction
 
 ## The minimum wait time in seconds
-@export_range(0.0, 5.0, 0.1) var min_wait_time: float = 0.0
+@export_range(0.0, 50.0, 0.1) var min_wait_time: float = 0.0
 ## The maximum wait time in seconds
-@export_range(0.0, 5.0, 0.1) var max_wait_time: float = 0.0
+@export_range(0.0, 50.0, 0.1) var max_wait_time: float = 0.0
 
 var _target_wait_time: float = 0.0
 

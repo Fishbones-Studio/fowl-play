@@ -57,6 +57,7 @@ func _tick(_delta: float) -> Status:
 			_bounce()
 			return RUNNING
 		else:
+			_bounce_camera_shake()
 			return SUCCESS
 
 	if not _timed_out:
