@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=102 format=3 uid="uid://i5wmmsqipq8o"]
+[gd_resource type="BehaviorTree" load_steps=64 format=3 uid="uid://i5wmmsqipq8o"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_85ywm"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_kcuvh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_0skmy"]
 [ext_resource type="Script" uid="uid://be6ck8w34nf3g" path="res://entities/enemies/ai/tasks/jump.gd" id="6_0skmy"]
 [ext_resource type="Script" uid="uid://bddir0kb35n5d" path="res://entities/enemies/ai/tasks/stun.gd" id="6_0t4uy"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="6_g4wna"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="6_gdjx3"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="7_gdjx3"]
 [ext_resource type="Script" uid="uid://vcadxgfxickc" path="res://entities/enemies/ai/tasks/hurt.gd" id="9_gdjx3"]
@@ -110,10 +111,17 @@ pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
+[sub_resource type="BTAction" id="BTAction_otwd7"]
+script = ExtResource("6_g4wna")
+file_to_play = "uid://cx7uvrvtsbbx0"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = true
+
 [sub_resource type="BTParallel" id="BTParallel_jsrsq"]
 num_successes_required = 2
 repeat = true
-children = [SubResource("BTAlwaysFail_xatg1"), SubResource("BTAction_pnqqn"), SubResource("BTAction_evasg")]
+children = [SubResource("BTAlwaysFail_xatg1"), SubResource("BTAction_pnqqn"), SubResource("BTAction_evasg"), SubResource("BTAction_otwd7")]
 
 [sub_resource type="BTSequence" id="BTSequence_otwd7"]
 custom_name = "Pursue target"
@@ -136,6 +144,13 @@ duration = 0.0
 is_falling = true
 has_landed = false
 reached_peak = false
+
+[sub_resource type="BTAction" id="BTAction_wmqqf"]
+script = ExtResource("6_g4wna")
+file_to_play = "uid://smtvmejkv4q1"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_eto2h"]
 script = ExtResource("6_gdjx3")
@@ -171,16 +186,25 @@ children = [SubResource("BTAction_0skmy")]
 children = [SubResource("BTRepeat_gdjx3")]
 
 [sub_resource type="BTParallel" id="BTParallel_otwd7"]
+num_successes_required = 2
 num_failures_required = 3
-children = [SubResource("BTAction_w55nl"), SubResource("BTAlwaysFail_jsrsq"), SubResource("BTAlwaysFail_g4wna")]
+children = [SubResource("BTAction_w55nl"), SubResource("BTAction_wmqqf"), SubResource("BTAlwaysFail_jsrsq"), SubResource("BTAlwaysFail_g4wna")]
+
+[sub_resource type="BTAction" id="BTAction_6yk22"]
+script = ExtResource("6_g4wna")
+file_to_play = "uid://dw6qjrlb55obm"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_xmi3u"]
 script = ExtResource("7_gdjx3")
 ignore_cooldown = true
 slot = 0
 
-[sub_resource type="BTSequence" id="BTSequence_7ykgv"]
-children = [SubResource("BTAction_xmi3u")]
+[sub_resource type="BTParallel" id="BTParallel_g4wna"]
+num_successes_required = 2
+children = [SubResource("BTAction_6yk22"), SubResource("BTAction_xmi3u")]
 
 [sub_resource type="BBNode" id="BBNode_s8ton"]
 saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
@@ -205,7 +229,7 @@ children = [SubResource("BTAction_2rtxu"), SubResource("BTAction_3wgmy")]
 
 [sub_resource type="BTSequence" id="BTSequence_3wgmy"]
 custom_name = "Stomp the insects"
-children = [SubResource("BTPlayAnimation_q2pti"), SubResource("BTParallel_otwd7"), SubResource("BTSequence_7ykgv"), SubResource("BTPlayAnimation_o8to3"), SubResource("BTParallel_7hjek")]
+children = [SubResource("BTPlayAnimation_q2pti"), SubResource("BTParallel_otwd7"), SubResource("BTParallel_g4wna"), SubResource("BTPlayAnimation_o8to3"), SubResource("BTAction_2rtxu")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCooldown" id="BTCooldown_0skmy"]
@@ -221,6 +245,17 @@ resource_name = "Model/chicken_centipede/AnimationPlayer"
 animation_player = SubResource("BBNode_0skmy")
 animation_name = &"Stomp"
 blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_7ykgv"]
+script = ExtResource("6_g4wna")
+file_to_play = "uid://cx0frfinvkh52"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
+[sub_resource type="BTParallel" id="BTParallel_s8ton"]
+num_successes_required = 2
+children = [SubResource("BTPlayAnimation_gdjx3"), SubResource("BTAction_7ykgv")]
 
 [sub_resource type="BTAction" id="BTAction_jsrsq"]
 script = ExtResource("2_kcuvh")
@@ -274,7 +309,7 @@ children = [SubResource("BTAction_6pd5a"), SubResource("BTAction_4qy8p")]
 
 [sub_resource type="BTSequence" id="BTSequence_0skmy"]
 custom_name = "Judgement "
-children = [SubResource("BTPlayAnimation_gdjx3"), SubResource("BTAction_jsrsq"), SubResource("BTRepeat_g4wna"), SubResource("BTSequence_q2pti"), SubResource("BTPlayAnimation_pnqqn"), SubResource("BTParallel_iw5r8")]
+children = [SubResource("BTParallel_s8ton"), SubResource("BTAction_jsrsq"), SubResource("BTRepeat_g4wna"), SubResource("BTSequence_q2pti"), SubResource("BTPlayAnimation_pnqqn"), SubResource("BTAction_q2pti")]
 metadata/_weight_ = 15.8
 
 [sub_resource type="BTCooldown" id="BTCooldown_gdjx3"]

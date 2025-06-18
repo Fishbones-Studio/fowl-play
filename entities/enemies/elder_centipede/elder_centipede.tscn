@@ -146,6 +146,9 @@ one_shot = true
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("9_l658y")
 
+[node name="IntervalAudioPlayer" parent="." index="15"]
+sounds_folder = "res://entities/enemies/elder_centipede/sound/random"
+
 [connection signal="timeout" from="Area3D/HurtTimer" to="Area3D" method="_on_hurt_timer_timeout"]
 
 [editable path="Model/chicken_centipede"]

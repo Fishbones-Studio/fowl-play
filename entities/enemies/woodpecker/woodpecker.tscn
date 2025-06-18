@@ -67,4 +67,11 @@ ability_resource = ExtResource("9_ioi28")
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("11_cx7ru")
 
+[node name="StateAudioPlayer" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, -2.2)
+
+[node name="IntervalAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, -2.2)
+sounds_folder = "res://entities/enemies/woodpecker/sound/random"
+
 [editable path="Model/woodpecker"]

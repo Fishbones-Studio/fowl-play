@@ -1,8 +1,9 @@
-[gd_resource type="BehaviorTree" load_steps=72 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=79 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_lk6lr"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="4_sha4y"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="5_ct4d5"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="5_sk4mh"]
 [ext_resource type="Script" uid="uid://bddir0kb35n5d" path="res://entities/enemies/ai/tasks/stun.gd" id="6_ct4d5"]
@@ -48,9 +49,20 @@ animation_name = &"Idle"
 blend = 0.2
 speed = 3.0
 
+[sub_resource type="BTAction" id="BTAction_gdjfc"]
+script = ExtResource("4_sha4y")
+file_to_play = "uid://bvkbwnxsjafmw"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
 [sub_resource type="BTRandomWait" id="BTRandomWait_sha4y"]
 min_duration = 1.1
 max_duration = 1.9
+
+[sub_resource type="BTParallel" id="BTParallel_78ech"]
+num_successes_required = 2
+children = [SubResource("BTAction_gdjfc"), SubResource("BTRandomWait_sha4y")]
 
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
@@ -94,7 +106,7 @@ stun_time = 1.0
 children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb"), SubResource("BTAction_rm485")]
 
 [sub_resource type="BTSequence" id="BTSequence_rm485"]
-children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTRandomWait_sha4y"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
+children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTParallel_78ech"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
 
 [sub_resource type="BTSequence" id="BTSequence_ct4d5"]
 custom_name = "Blink"
@@ -156,14 +168,24 @@ num_successes_required = 2
 repeat = true
 children = [SubResource("BTCondition_sgv08"), SubResource("BTAction_sk4mh")]
 
+[sub_resource type="BTAction" id="BTAction_78ech"]
+script = ExtResource("4_sha4y")
+file_to_play = "uid://dcj3362ggen1f"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = true
+
 [sub_resource type="BTAction" id="BTAction_lk6lr"]
 script = ExtResource("9_78ech")
-ignore_cooldown = true
-start_state = 1
+ignore_cooldown = false
+start_state = 2
+
+[sub_resource type="BTParallel" id="BTParallel_sha4y"]
+children = [SubResource("BTAction_78ech"), SubResource("BTAction_lk6lr")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
 duration = 12.0
-children = [SubResource("BTAction_lk6lr")]
+children = [SubResource("BTParallel_sha4y")]
 
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]
 custom_name = "Fire the Minigun!"
@@ -213,6 +235,17 @@ animation_name = &"Walking"
 blend = 0.2
 speed = 2.5
 
+[sub_resource type="BTAction" id="BTAction_n1u5v"]
+script = ExtResource("4_sha4y")
+file_to_play = "uid://cngwduu1ejqiv"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+
+[sub_resource type="BTParallel" id="BTParallel_bexc2"]
+num_successes_required = 2
+children = [SubResource("BTPlayAnimation_gdjfc"), SubResource("BTAction_n1u5v")]
+
 [sub_resource type="BTAction" id="BTAction_ct4d5"]
 script = ExtResource("3_lk6lr")
 target_var = &"target"
@@ -257,7 +290,7 @@ repeat = true
 children = [SubResource("BTAction_ct4d5"), SubResource("BTAction_sha4y"), SubResource("BTSequence_n1u5v")]
 
 [sub_resource type="BTSequence" id="BTSequence_bexc2"]
-children = [SubResource("BTPlayAnimation_gdjfc"), SubResource("BTParallel_jkeyo")]
+children = [SubResource("BTParallel_bexc2"), SubResource("BTParallel_jkeyo")]
 
 [sub_resource type="BTParallel" id="BTParallel_cmfip"]
 children = [SubResource("BTAlwaysFail_sk4mh"), SubResource("BTSequence_bexc2")]

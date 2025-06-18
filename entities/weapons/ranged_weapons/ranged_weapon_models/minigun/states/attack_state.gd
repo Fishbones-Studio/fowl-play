@@ -13,7 +13,6 @@ var _ray_queue: Array[RayRequest] = []
 
 @onready var attack_duration_timer : Timer = $AttackDurationTimer
 
-
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	if weapon.entity_stats.is_player:
 		SignalManager.cooldown_item_slot.emit(weapon.current_weapon, weapon.current_weapon.attack_duration, false)

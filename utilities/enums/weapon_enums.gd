@@ -7,6 +7,7 @@ enum WeaponType {
 }
 
 enum WeaponState {
+	ERROR,
 	IDLE,
 	WINDUP,
 	ATTACKING,

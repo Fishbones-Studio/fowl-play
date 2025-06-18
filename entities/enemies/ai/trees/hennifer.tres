@@ -228,7 +228,7 @@ distance_max = 5.0
 [sub_resource type="BTAction" id="BTAction_pyqya"]
 script = ExtResource("6_pia2r")
 ignore_cooldown = false
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTSequence" id="BTSequence_xlk6v"]
 children = [SubResource("BTCondition_yoxl1"), SubResource("BTAction_pyqya")]
@@ -275,6 +275,9 @@ children = [SubResource("BTPlayAnimation_a51uw"), SubResource("BTAction_dbsnm"),
 [sub_resource type="BTAction" id="BTAction_k7lfl"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://cwvc4m1d624dm"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
@@ -312,7 +315,7 @@ file_to_play = "uid://bf5lhyfrveakg"
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
 ignore_cooldown = true
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTDelay" id="BTDelay_n7fk8"]
 seconds = 0.1
@@ -369,6 +372,9 @@ use_percentage = true
 [sub_resource type="BTAction" id="BTAction_viady"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://bjlpjdg6s3w6c"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BBNode" id="BBNode_a51uw"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
