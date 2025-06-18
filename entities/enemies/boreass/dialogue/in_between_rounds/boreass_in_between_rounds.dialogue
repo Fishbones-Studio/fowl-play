@@ -63,7 +63,7 @@ Boreass: [[*Suddenly snaps back to friendly* Hehe! That was fun! Right?!|*Wags t
 	Boreass: [[Scary? Me? Nah! I’m just a [color=blue]fluffy fox[/color]!|*Looks concerned* Oh no! Did I scare you? I didn’t mean to!|*Eyes flash* Good. You should be scared.]]
 	=> end_options
 - Let’s end this.
-	=> D
+	=> END
 
 ~ end_options
 Boreass: [[Okay, bye-bye! Hope we can play again soon!|See you later, friend! Don’t forget me!|*Stares as you leave* ...[color=red]Mine...[/color]]]
