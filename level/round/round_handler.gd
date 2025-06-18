@@ -154,14 +154,12 @@ func _enter_concluding() -> void:
 		_handle_victory()
 		return
 
-	var currency_dict := _handle_round_reward()
-
 	# Show the round screen
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
 		{
 			"display_text": "Enemy Defeated!", 
-			"currency_dict": currency_dict
+			"currency_dict": _handle_round_reward()
 		}
 	)
 
@@ -305,6 +303,7 @@ func _spawn_enemy() -> void:
 
 ## Handles the end-of-game victory logic and reward distribution.
 func _handle_victory() -> void:
+	GameManager.current_round += 1 # bc winning also counts as round won
 	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {}
 	if _current_enemy.type ==  EnemyEnums.EnemyTypes.BOSS:
 		for currency_type in GameManager.arena_completion_reward:
