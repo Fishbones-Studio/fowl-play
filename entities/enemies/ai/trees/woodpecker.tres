@@ -126,6 +126,7 @@ max_wait_time = 0.0
 script = ExtResource("7_h0qwm")
 ignore_cooldown = true
 slot = 1
+force_activate = false
 
 [sub_resource type="BTDelay" id="BTDelay_gwx8i"]
 seconds = 3.0
@@ -189,6 +190,7 @@ face_away = false
 script = ExtResource("7_h0qwm")
 ignore_cooldown = true
 slot = 0
+force_activate = false
 
 [sub_resource type="BTSequence" id="BTSequence_bs3vf"]
 children = [SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]

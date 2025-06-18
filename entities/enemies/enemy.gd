@@ -80,7 +80,7 @@ func get_stats_resource() -> LivingEntityStats:
 
 ## Applies jump or fall gravity based on velocity
 func _apply_gravity(delta: float) -> void:
-  velocity.y += movement_component.get_gravity(velocity) * delta
+	velocity.y += movement_component.get_gravity(velocity) * delta
 
 
 func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:

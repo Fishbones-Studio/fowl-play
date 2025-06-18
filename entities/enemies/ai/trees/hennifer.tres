@@ -94,6 +94,9 @@ children = [SubResource("BTSequence_sxcr3"), SubResource("BTSequence_7xuyr")]
 [sub_resource type="BTAction" id="BTAction_8in54"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://cwvc4m1d624dm"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_8in54")]
@@ -311,6 +314,9 @@ duration = 0.1
 [sub_resource type="BTAction" id="BTAction_b566n"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://bf5lhyfrveakg"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
