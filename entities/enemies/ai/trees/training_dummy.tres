@@ -1,6 +1,6 @@
 [gd_resource type="BehaviorTree" load_steps=10 format=3 uid="uid://bji8hyd1lawvy"]
 
-[ext_resource type="Script" uid="uid://vcadxgfxickc" path="res://entities/enemies/ai/tasks/hurt.gd" id="1_atvp0"]
+[ext_resource type="Script" uid="uid://ddu55h2luwrgv" path="res://entities/enemies/ai/tasks/is_hurt.gd" id="1_atvp0"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_r0jxf"]
 
