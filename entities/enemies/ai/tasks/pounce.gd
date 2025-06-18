@@ -1,20 +1,16 @@
 @tool
 extends BTAction
 
-## Blackboard variable that stores our target.
 @export var target_var: StringName = &"target"
-## Controls the height of the pounce.
 @export_range(1.0, 100.0, 0.1) var jump_factor: float = 1.0
-## Movement speed during the pounce sequence.
 @export var horizontal_speed: float = 40.0
-## Minimum distance to target before returning SUCCESS.
 @export var min_distance: float = 10.0
-## The maximun duration of the pounce task.
 @export var duration: float = 2.0
 
 var _is_jumping: bool = false
 var _target_position: Vector3
 var _initial_jump_velocity: Vector3
+var _was_airborne: bool = false
 
 
 func _generate_name() -> String:
@@ -31,6 +27,7 @@ func _enter() -> void:
 
 	_is_jumping = true
 	_target_position = target.global_position
+	_was_airborne = false
 
 	var jump_height: float = agent.movement_component.get_jump_velocity()
 	var direction: Vector3 = (_target_position - agent.global_position).normalized()
@@ -54,7 +51,12 @@ func _tick(delta: float) -> Status:
 	agent.velocity.x += (horizontal_dir.x * horizontal_speed - agent.velocity.x) * delta
 	agent.velocity.z += (horizontal_dir.z * horizontal_speed - agent.velocity.z) * delta
 
-	if agent.is_on_floor() and agent.velocity.y < 0:
+	# Track if the agent has left the ground
+	if not _was_airborne and not agent.is_on_floor():
+		_was_airborne = true
+
+	# Only succeed if the agent has been airborne and is now on the floor
+	if _was_airborne and agent.is_on_floor():
 		return SUCCESS
 
 	if is_equal_approx(agent.velocity.y, 0.0):

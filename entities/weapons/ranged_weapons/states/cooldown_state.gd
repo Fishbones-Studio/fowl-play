@@ -7,7 +7,6 @@ var _cooldown_timer: float = 0.0
 
 
 func _init()-> void:
-	state_type = WeaponEnums.WeaponState.COOLDOWN
 	if animation_name.is_empty():
 		animation_name = "Cooldown"
 
