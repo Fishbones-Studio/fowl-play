@@ -1,21 +1,21 @@
 [gd_resource type="Resource" script_class="ArenaFlyerResource" load_steps=9 format=3 uid="uid://2wc7dt0too40"]
 
-[ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="1_hxwsq"]
+[ext_resource type="PackedScene" uid="uid://0vmeubjcsxig" path="res://entities/enemies/bob/bob.tscn" id="2_hxwsq"]
 [ext_resource type="PackedScene" uid="uid://c51s5rs0dxnmr" path="res://entities/enemies/elder_centipede/elder_centipede.tscn" id="2_msit1"]
 [ext_resource type="Texture2D" uid="uid://caygnnasf5bhw" path="res://ui/poultry_man_menu/flyers/art/the_sewers_icon.png" id="3_wrqlk"]
 [ext_resource type="Script" uid="uid://ctoq181od8w0k" path="res://ui/poultry_man_menu/flyers/flyer_resources/arena_flyer_resource.gd" id="4_inopy"]
-[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="5_xc304"]
-[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="6_7dqfk"]
-[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/boreass/boreass.tscn" id="7_f2hbq"]
-[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hennifer/hennifer.tscn" id="8_txhf1"]
+[ext_resource type="PackedScene" uid="uid://co473aij70n7k" path="res://entities/enemies/timmy/timmy.tscn" id="5_msit1"]
+[ext_resource type="PackedScene" uid="uid://cm3hcx1pvcnnd" path="res://entities/enemies/hennifer/hennifer.tscn" id="6_wrqlk"]
+[ext_resource type="PackedScene" uid="uid://towsqhy2adj7" path="res://entities/enemies/woodpecker/woodpecker.tscn" id="7_inopy"]
+[ext_resource type="PackedScene" uid="uid://d3vj6us77coyt" path="res://entities/enemies/boreass/boreass.tscn" id="8_xc304"]
 
 [resource]
 script = ExtResource("4_inopy")
 title = "The Sewers"
 description = "A brutal underground pit where only the cunning emerge victorious. Master the terrain, outsmart foes, and endure the chaos, after which you have to face a fierce boss."
 icon = ExtResource("3_wrqlk")
-standard_enemy_scenes = Array[PackedScene]([ExtResource("5_xc304"), ExtResource("6_7dqfk"), ExtResource("7_f2hbq"), ExtResource("8_txhf1")])
-boss_enemy_scenes = Array[PackedScene]([ExtResource("1_hxwsq"), ExtResource("2_msit1")])
+standard_enemy_scenes = Array[PackedScene]([ExtResource("5_msit1"), ExtResource("6_wrqlk"), ExtResource("7_inopy"), ExtResource("8_xc304")])
+boss_enemy_scenes = Array[PackedScene]([ExtResource("2_msit1"), ExtResource("2_hxwsq")])
 include_boss = true
 rounds = 3
 scene_to_load = 2
