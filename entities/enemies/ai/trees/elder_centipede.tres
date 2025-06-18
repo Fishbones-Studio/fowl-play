@@ -95,7 +95,7 @@ blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_w55nl"]
 script = ExtResource("6_0skmy")
-jump_factor = 6.0
+jump_factor = 7.0
 duration = 0.0
 is_falling = true
 has_landed = false
@@ -122,7 +122,7 @@ children = [SubResource("BTRepeat_evasg")]
 [sub_resource type="BTAction" id="BTAction_0skmy"]
 script = ExtResource("4_xatg1")
 target_var = &"target"
-rotation_speed = 20.0
+rotation_speed = 30.0
 angle_threshold = 25.0
 duration = 0.0
 face_away = false
@@ -165,6 +165,7 @@ children = [SubResource("BTPlayAnimation_q2pti"), SubResource("BTParallel_otwd7"
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTCooldown" id="BTCooldown_0skmy"]
+duration = 8.0
 start_cooled = true
 children = [SubResource("BTSequence_3wgmy")]
 
@@ -197,6 +198,7 @@ times = 2
 children = [SubResource("BTDelay_g4wna")]
 
 [sub_resource type="BTWait" id="BTWait_gdjx3"]
+duration = 1.5
 
 [sub_resource type="BTAction" id="BTAction_g4wna"]
 script = ExtResource("9_gdjx3")
@@ -225,7 +227,7 @@ children = [SubResource("BTPlayAnimation_gdjx3"), SubResource("BTAction_jsrsq"),
 metadata/_weight_ = 15.8
 
 [sub_resource type="BTCooldown" id="BTCooldown_gdjx3"]
-duration = 15.0
+duration = 12.0
 start_cooled = true
 children = [SubResource("BTSequence_0skmy")]
 metadata/_weight_ = 1.0
