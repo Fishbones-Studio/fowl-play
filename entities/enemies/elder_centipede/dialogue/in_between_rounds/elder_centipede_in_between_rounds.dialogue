@@ -12,7 +12,7 @@ else:
 ~ standard_dialogue
 - You think you can beat me?
 	Elder Centipede: [[You? Win? [shake rate=10 level=5]HAHAHA.[/shake] You don’t stand a chance against me. |Confident, aren’t you? That’s the first thing I’ll rip from you. |I’ll make a trophy out of your remains.]]
-	Elder Centipede: [[I’ve buried countless fools like you. Tremble in fear—your grave awaits beneath my legs. |Your arrogance will be your downfall. |You’re just another name on my list of victims.]]
+	Elder Centipede: [[I’ve buried countless fools like you.|You should be trembling in fear from just the sight of me.|Your grave awaits beneath my legs.|Your arrogance will be your downfall.|You’re just another name on my list of victims.]]
 	=> explore_backstory
 - Why do you keep fighting?
 	Elder Centipede: [[I am the [color=red]honored one.[/color] |Strength is everything. I am the strongest. |Fools keep approaching me, and I keep crushing them.]]
