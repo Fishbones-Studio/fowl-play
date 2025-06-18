@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bi7ih1it2v747"]
+
+[ext_resource type="Curve" uid="uid://b6p4gfokqxcgs" path="res://resources/effects/telegraphing/teleport_bubble/departure_curve.tres" id="1_pv5ad"]
+[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/shaders/earthquake.gdshader" id="2_eufda"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_gpdox"]
+curve = ExtResource("1_pv5ad")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2ioo1"]
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_gpdox")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_57nyx"]
+noise_type = 4
+frequency = 0.079
+fractal_octaves = 1
+domain_warp_frequency = 5.0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bowoe"]
+seamless = true
+seamless_blend_skirt = 0.28
+noise = SubResource("FastNoiseLite_57nyx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uv5h5"]
+render_priority = 0
+shader = ExtResource("2_eufda")
+shader_parameter/distortionView = 0.3
+shader_parameter/tintColor = Color(1, 1, 1, 1)
+shader_parameter/fesnelAmount = 1.4
+shader_parameter/fesnelViewEffectAmount = 0.774
+shader_parameter/DisplacementScale = 0.3
+shader_parameter/speedVertex = 1.0
+shader_parameter/NoiseScale = 0.2
+shader_parameter/NoiseTexture = SubResource("NoiseTexture3D_bowoe")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wfkp7"]
+material = SubResource("ShaderMaterial_uv5h5")
+radial_segments = 8
+rings = 4
+
+[node name="TeleportBubble" type="GPUParticles3D"]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2ioo1")
+draw_pass_1 = SubResource("SphereMesh_wfkp7")

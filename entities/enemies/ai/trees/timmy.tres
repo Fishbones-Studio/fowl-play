@@ -67,9 +67,14 @@ children = [SubResource("BTAction_gdjfc"), SubResource("BTRandomWait_sha4y")]
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
 target_var = &"target"
-flank_distance = 5.0
-vertical_offset = 0.0
+flank_distance = 10.0
+vertical_offset = 5.0
 clearance_radius = 5.0
+departure_telegraph = false
+arrival_telegraph = false
+telegraph_departure_time = 0.0
+telegraph_arrival_time = 2.0
+telegraph_scale = 1.5
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
@@ -270,6 +275,7 @@ distance_max = 5.0
 script = ExtResource("11_lk6lr")
 ignore_cooldown = true
 slot = 0
+force_activate = false
 
 [sub_resource type="BTCooldown" id="BTCooldown_ct4d5"]
 duration = 0.8

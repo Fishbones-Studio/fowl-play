@@ -17,22 +17,29 @@ func _ready() -> void:
 		abilities[child] = child.ability
 
 
-func try_activate_ability(ability_slot: AbilitySlot = abilities.keys()[0], ignore_cooldown: bool = false) -> void:
+func try_activate_ability(ability_slot: AbilitySlot = abilities.keys()[0], 
+		ignore_cooldown: bool = false,
+		force_activate: bool = false,
+	) -> bool:
 	var ability = abilities[ability_slot]
 
 	if not ability:
 		push_error("Ability not set for slot: ", ability_slot)
-		return
+		return false
+
+	if force_activate:
+		ability.activate(force_activate)
 
 	if ignore_cooldown:
 		ability.cooldown_timer.stop()
 
 	if ability.on_cooldown:
 		print("Ability is on cooldown: ", ability.name)
-		return
+		return false
 
 	if not ability.has_method("activate"):
 		push_error("Ability missing 'activate' method: ", ability.name)
-		return
+		return false
 
 	ability.activate()
+	return true

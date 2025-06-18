@@ -21,7 +21,7 @@ func _ready() -> void:
 	cooldown_timer.wait_time = current_ability.cooldown
 
 
-func activate() -> void:
+func activate(force_activate: bool = false) -> void:
 	pass
 
 

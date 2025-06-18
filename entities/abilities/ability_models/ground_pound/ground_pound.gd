@@ -17,8 +17,8 @@ var _particles_emitted: bool = false
 @onready var gpu_particles: GPUParticles3D = %GPUParticles3D
 
 
-func activate() -> void:
-	if ability_holder.is_on_floor():
+func activate(force_activate: bool = false) -> void:
+	if ability_holder.is_on_floor() and not force_activate:
 		print("Cannot perform %s while on the ground." % name)
 		return
 
