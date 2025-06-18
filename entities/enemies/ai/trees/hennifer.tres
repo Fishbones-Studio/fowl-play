@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="7_schhj"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_ba5to"]
 [ext_resource type="Script" uid="uid://c0y08orvf36q3" path="res://entities/enemies/ai/tasks/current_health.gd" id="11_pia2r"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="13_504pj"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="13_504pj"]
 [ext_resource type="PackedScene" uid="uid://c1kqvn5lvj320" path="res://level/arena/props/hazards/egg_bomb/egg_bomb.tscn" id="13_gvblq"]
 [ext_resource type="Script" uid="uid://ddx836816k8ju" path="res://entities/enemies/ai/tasks/spawn_hazard.gd" id="14_wv527"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="16_5c880"]

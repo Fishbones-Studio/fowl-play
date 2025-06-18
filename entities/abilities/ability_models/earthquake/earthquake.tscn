@@ -1,36 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxc3j6moweqeh"]
+[gd_scene load_steps=13 format=3 uid="uid://bxc3j6moweqeh"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_57nyx"]
 [ext_resource type="Script" uid="uid://cbbjybahmxy5y" path="res://entities/abilities/ability_models/earthquake/earthquake.gd" id="2_1j166"]
-[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/shaders/earthquake.gdshader" id="3_57nyx"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="3_bowoe"]
+[ext_resource type="Material" uid="uid://dmbfmg3lw3h3r" path="res://entities/abilities/ability_models/earthquake/art/earthquake_material.tres" id="4_si343"]
 [ext_resource type="AudioStream" uid="uid://msjdk0lt1b0h" path="res://entities/abilities/ability_models/earthquake/sound/earth_quake.ogg" id="5_mqfc4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_57nyx"]
 radius = 10.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_57nyx"]
-noise_type = 4
-frequency = 0.129
-fractal_octaves = 1
-domain_warp_frequency = 5.0
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bowoe"]
-seamless = true
-seamless_blend_skirt = 0.28
-noise = SubResource("FastNoiseLite_57nyx")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_57nyx"]
-render_priority = 0
-shader = ExtResource("3_57nyx")
-shader_parameter/distortionView = 0.15
-shader_parameter/tintColor = Color(0.141176, 0.184314, 0.231373, 1)
-shader_parameter/fesnelAmount = 1.8
-shader_parameter/fesnelViewEffectAmount = 0.064
-shader_parameter/DisplacementScale = 0.065
-shader_parameter/speedVertex = 0.13
-shader_parameter/NoiseScale = 0.2
-shader_parameter/NoiseTexture = SubResource("NoiseTexture3D_bowoe")
 
 [sub_resource type="Gradient" id="Gradient_mqfc4"]
 offsets = PackedFloat32Array(0, 0.547619, 1)
@@ -86,7 +63,7 @@ shape = SubResource("SphereShape3D_57nyx")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
-material_override = SubResource("ShaderMaterial_57nyx")
+material_override = ExtResource("4_si343")
 cast_shadow = 0
 gi_mode = 0
 emitting = false
@@ -98,7 +75,7 @@ draw_pass_1 = SubResource("SphereMesh_mqfc4")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="HitArea" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
-material_override = SubResource("ShaderMaterial_57nyx")
+material_override = ExtResource("4_si343")
 cast_shadow = 0
 gi_mode = 0
 emitting = false
@@ -110,7 +87,7 @@ draw_pass_1 = SubResource("SphereMesh_mqfc4")
 
 [node name="GPUParticles3D3" type="GPUParticles3D" parent="HitArea" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0075, 0)
-material_override = SubResource("ShaderMaterial_57nyx")
+material_override = ExtResource("4_si343")
 cast_shadow = 0
 gi_mode = 0
 emitting = false

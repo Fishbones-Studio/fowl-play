@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dmbfmg3lw3h3r"]
 
-[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/earthquake.gdshader" id="1_8gueg"]
+[ext_resource type="Shader" uid="uid://dis00rkaygmva" path="res://entities/abilities/ability_models/earthquake/shaders/earthquake.gdshader" id="1_8gueg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_57nyx"]
 noise_type = 4
