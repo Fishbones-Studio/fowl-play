@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c51s5rs0dxnmr"]
+[gd_scene load_steps=14 format=3 uid="uid://c51s5rs0dxnmr"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_urhlp"]
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dofck8yvlnbl7" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="5_bv6h5"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="7_l658y"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="8_b6m30"]
+[ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="9_b6m30"]
 [ext_resource type="Texture2D" uid="uid://go8x13xk145a" path="res://entities/enemies/elder_centipede/art/icon/elder_centipede_icon.png" id="9_l658y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b6m30"]
@@ -107,6 +108,9 @@ behavior_tree = ExtResource("4_y8gm0")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("7_l658y")]
 ability_resource = ExtResource("8_b6m30")
+
+[node name="AbilitySlot2" parent="EnemyAbilityController" index="1" instance=ExtResource("7_l658y")]
+ability_resource = ExtResource("9_b6m30")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
 texture = ExtResource("9_l658y")

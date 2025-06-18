@@ -29,7 +29,6 @@ signal loading_screen_started(next_ui: UIEnums.UI, params: Dictionary)
 signal loading_screen_finished
 
 # Enemy signals
-signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 signal enemy_died
 
 # Weapon signals
