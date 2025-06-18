@@ -1,18 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://0vmeubjcsxig"]
+[gd_scene load_steps=12 format=3 uid="uid://0vmeubjcsxig"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_i06h6"]
 [ext_resource type="Resource" uid="uid://dxril0olml25y" path="res://entities/enemies/bob/bob_stats.tres" id="2_fjbia"]
+[ext_resource type="Script" uid="uid://4nj14wvdqsae" path="res://entities/enemies/boss.gd" id="2_sexgk"]
 [ext_resource type="PackedScene" uid="uid://c8vfuyjik63dg" path="res://entities/enemies/bob/art/ball_chicken.glb" id="3_0xmxa"]
+[ext_resource type="AudioStream" uid="uid://cx3xk60k35u6i" path="res://entities/enemies/bob/sound/bob_death.ogg" id="3_yvhtp"]
 [ext_resource type="BehaviorTree" uid="uid://g7414dn5u4kw" path="res://entities/enemies/ai/trees/bob.tres" id="4_m0aa4"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_8cml0"]
 [ext_resource type="Script" uid="uid://dltdrhrtk0btl" path="res://entities/enemies/bob/spike_hitbox.gd" id="5_fjbia"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="6_e381t"]
-[ext_resource type="Texture2D" uid="uid://jqwcldieg7q3" path="res://entities/enemies/bob/art/bob_mugshot.png" id="7_sexgk"]
+[ext_resource type="Texture2D" uid="uid://t1q6ckoip751" path="res://entities/enemies/bob/art/icon/bob_icon.png" id="8_sexgk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjbia"]
 radius = 4.25
 
 [node name="Bob" instance=ExtResource("1_i06h6")]
+script = ExtResource("2_sexgk")
+death_audio = ExtResource("3_yvhtp")
 stats = ExtResource("2_fjbia")
 type = 1
 knockback_decay = 10000
@@ -20,7 +24,7 @@ dialogue_path = "res://entities/enemies/bob/dialogue"
 name_label_template_string = "\"All-Devouring\" %s"
 
 [node name="ball_chicken" parent="Model" index="0" instance=ExtResource("3_0xmxa")]
-transform = Transform3D(-6.55671e-08, 1.31134e-07, 1.5, 0, -1.5, 1.31134e-07, 1.5, 5.73206e-15, 6.55671e-08, 0, 2.87023, 0)
+transform = Transform3D(-1.13247e-07, 1.31134e-07, 1.5, 2.26494e-07, -1.5, 1.31134e-07, 1.5, 2.26494e-07, 1.13247e-07, 0, 3.85, 0)
 
 [node name="Sphere" parent="Model/ball_chicken" index="0"]
 transform = Transform3D(2.26917, 0, 0, 0, 2.26917, 0, 0, 0, 2.26917, 0, 0, 0)
@@ -38,7 +42,7 @@ transform = Transform3D(0.0413089, 0.0520154, -0.0812714, 0.022335, 0.0808505, 0
 transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85, 0)
 shape = SubResource("SphereShape3D_fjbia")
 
 [node name="DamageNumberHandler" parent="." index="3"]
@@ -54,7 +58,7 @@ behavior_tree = ExtResource("4_m0aa4")
 ability_resource = ExtResource("6_e381t")
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85, 0)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
@@ -68,7 +72,16 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
-texture = ExtResource("7_sexgk")
+texture = ExtResource("8_sexgk")
+
+[node name="StateAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+unit_size = 25.0
+max_db = 6.0
+
+[node name="IntervalAudioPlayer" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sounds_folder = "res://entities/enemies/bob/sound/random"
 
 [connection signal="body_entered" from="SpikeHitbox" to="SpikeHitbox" method="_on_body_entered"]
 [connection signal="timeout" from="SpikeHitbox/HurtTimer" to="SpikeHitbox" method="_on_hurt_timer_timeout"]

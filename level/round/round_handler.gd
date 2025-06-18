@@ -14,6 +14,15 @@ signal next_enemy_selected(enemy: Enemy)
 @export var intermission_enabled: bool = true
 ## Time between round transitions
 @export var transition_delay: float = 2.0
+## Which stat type to increment per round and their respective value
+@export var stat_increment_per_round: Dictionary[StatsEnums.Stats, float] = {
+	StatsEnums.Stats.MAX_HEALTH: 10.0,
+	StatsEnums.Stats.MAX_STAMINA: 10.0,
+	StatsEnums.Stats.ATTACK: 5.0,
+	StatsEnums.Stats.DEFENSE: 5.0,
+	StatsEnums.Stats.HEALTH_REGEN: 5.0,
+	StatsEnums.Stats.STAMINA_REGEN: 5.0
+}
 @export_category("Spawn")
 @export var enemy_spawn_position: Marker3D
 @export var player_spawn_position: Marker3D
@@ -85,7 +94,9 @@ func _enter_waiting() -> void:
 		current_round_string = "Final Round"
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": current_round_string}
+		{
+			"display_text": current_round_string
+		}
 	)
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
@@ -143,12 +154,13 @@ func _enter_concluding() -> void:
 		_handle_victory()
 		return
 
-	var currency_dict := _handle_round_reward()
-
 	# Show the round screen
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Enemy Defeated!", "currency_dict": currency_dict}
+		{
+			"display_text": "Enemy Defeated!", 
+			"currency_dict": _handle_round_reward()
+		}
 	)
 
 	# Decide and store the next enemy *before* the wait time
@@ -263,6 +275,14 @@ func _spawn_enemy() -> void:
 	if _current_enemy.get_parent():
 		_current_enemy.get_parent().remove_child(_current_enemy)
 
+	var original_enemy_stats: Dictionary[StringName, float] = {}
+
+	# Apply the increment in stats
+	for stat: StatsEnums.Stats in stat_increment_per_round.keys():
+		var stat_name: StringName = StatsEnums.stat_to_string(stat) as StringName
+		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, SaveManager.get_loaded_rounds_won() * stat_increment_per_round[stat])
+		original_enemy_stats[stat_name] = original_value
+
 	add_child(_current_enemy)
 	_current_enemy.global_position = enemy_spawn_position.global_position
 	_current_enemy.look_at(player_spawn_position.global_position)
@@ -270,6 +290,8 @@ func _spawn_enemy() -> void:
 	# Connect death signal (one-shot ensures it disconnects after firing)
 	var death_callback = func():
 		if is_instance_valid(_current_enemy):
+			for stat_name in original_enemy_stats.keys():
+				_current_enemy.stats.set(stat_name, original_enemy_stats[stat_name])
 			_current_enemy.queue_free()
 		_current_enemy = null
 
@@ -281,6 +303,7 @@ func _spawn_enemy() -> void:
 
 ## Handles the end-of-game victory logic and reward distribution.
 func _handle_victory() -> void:
+	GameManager.current_round += 1 # bc winning also counts as round won
 	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {}
 	if _current_enemy.type ==  EnemyEnums.EnemyTypes.BOSS:
 		for currency_type in GameManager.arena_completion_reward:

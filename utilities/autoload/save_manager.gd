@@ -312,7 +312,7 @@ func _create_default_save_file(
 
 
 func reset_game_data() -> void:
-	var default_stats: LivingEntityStats = get_default_player_stats()
+	var default_stats: LivingEntityStats = get_loaded_player_stats()
 	var upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = get_loaded_player_upgrades()
 	var default_rounds_won: int = 0
 	var default_enemy_encounters: Dictionary[String, int] = (
@@ -497,7 +497,6 @@ func get_loaded_enemy_encounters() -> Dictionary[String, int]:
 		elif not all_valid_entries:
 			push_warning("Some entries in cached enemy encounters were invalid but others were loaded.")
 		return dict_form.duplicate()
-
 
 	push_error(
 		"Cached enemy encounters are not of type Dictionary[String, int] or missing. Returning empty."

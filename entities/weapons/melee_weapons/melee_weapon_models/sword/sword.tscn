@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_xcyw7"]
 [ext_resource type="Resource" uid="uid://c4dujlqw5d4kl" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword.tres" id="2_2s0e4"]
 [ext_resource type="PackedScene" uid="uid://lbrv8bntcb8m" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/art/sword.glb" id="2_vlb0o"]
-[ext_resource type="AudioStream" uid="uid://dmgl2h5qm05es" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword_swing.wav" id="3_4d8fe"]
+[ext_resource type="AudioStream" uid="uid://bml87ovvhbnmp" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sound/sword_swing.ogg" id="4_4d8fe"]
 
 [sub_resource type="Animation" id="Animation_vlb0o"]
 resource_name = "Attack"
@@ -60,6 +60,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(10, 0.05, 1),
 "update": 0,
 "values": [Vector3(1.2, 1.2, 1.2), Vector3(3, 3, 3), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwingSoundEffect:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_4d8fe"]
@@ -167,6 +179,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [-2.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SwingSoundEffect:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_6j75l"]
 resource_name = "Windup"
@@ -239,7 +263,8 @@ shape = SubResource("BoxShape3D_vlb0o")
 [node name="sword" parent="WeaponHitBox" index="1" instance=ExtResource("2_vlb0o")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.970147, 0)
 
-[node name="WeaponAttackSFX" parent="." index="2"]
-stream = ExtResource("3_4d8fe")
+[node name="SwingSoundEffect" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("4_4d8fe")
+bus = &"SFX"
 
 [editable path="WeaponHitBox/sword"]

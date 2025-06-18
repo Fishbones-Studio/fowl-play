@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
 [ext_resource type="PackedScene" uid="uid://cc5c5n4tntrob" path="res://entities/enemies/timmy/art/timmy.glb" id="3_ivelv"]
 [ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/timmy/timmy_stats.tres" id="3_v7w0k"]
-[ext_resource type="Texture2D" uid="uid://d3ph6yhrnugg8" path="res://entities/enemies/timmy/art/goose_mugshot.png" id="5_pe8q7"]
 [ext_resource type="BehaviorTree" uid="uid://k7wyinj46uqk" path="res://entities/enemies/ai/trees/timmy.tres" id="5_ttlev"]
 [ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_5qjni"]
 [ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="7_6lo8p"]
 [ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="8_jsm6r"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="9_5qjni"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="10_6lo8p"]
+[ext_resource type="Texture2D" uid="uid://cbn5erf1c6dx5" path="res://entities/enemies/timmy/art/icon/timmy_icon.png" id="11_5qjni"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qatkl"]
 radius = 1.375
@@ -62,7 +62,13 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
 ability_resource = ExtResource("10_6lo8p")
 
 [node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
-texture = ExtResource("5_pe8q7")
-expand_mode = 3
+texture = ExtResource("11_5qjni")
+
+[node name="StateAudioPlayer" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1)
+
+[node name="IntervalAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1)
+sounds_folder = "res://entities/enemies/timmy/sound/random"
 
 [editable path="Model/timmy"]

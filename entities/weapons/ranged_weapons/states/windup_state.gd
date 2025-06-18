@@ -7,7 +7,6 @@ var _windup_timer: float = 0.0
 
 
 func _init()-> void:
-	state_type = WeaponEnums.WeaponState.WINDUP
 	if animation_name.is_empty():
 		animation_name = "Windup"
 

@@ -8,7 +8,8 @@ signal damage_taken
 @export var knockback_decay: int = 50 ## Rate at which the knockback decays per second
 @export_dir var dialogue_path: String
 @export var name_label_template_string: String ## String template, requires 1 %s which will be replaced with the name specified in the associated stats
-@export var model: Node3D # bc onready doesn't work with intermission and I dunno why
+@export var model: Node3D 
+@export var hurt_sound : AudioStream
 
 var is_immobile: bool = false
 var is_stunned: bool = false
@@ -24,8 +25,10 @@ var _knockback: Vector3 = Vector3.ZERO
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 @onready var shape: CollisionShape3D = $CollisionShape3D
 @onready var immobile_timer: Timer = $ImmobileTimer
-@onready var on_hurt: AudioStreamPlayer = $OnHurtAudio
 @onready var blood_splash_handler: BloodSplashHandler = %BloodSplashHandler
+@onready var state_audio_player: AudioStreamPlayer3D = %StateAudioPlayer
+@onready var interval_audio_player: IntervalSFXPlayer3D = %IntervalAudioPlayer
+@onready var bt_player: BTPlayer = %BTPlayer
 
 
 func _ready() -> void:
@@ -63,12 +66,40 @@ func _process(_delta: float) -> void:
 
 	if stats.current_health <= 0:
 		_die()
+		bt_player.active = false
+		set_process(false)
 
 
 func get_stats_resource() -> LivingEntityStats:
 	if stats == null:
 		push_warning("Attempted to get stats resource before it was assigned!")
 	return stats
+
+
+## Applies jump or fall gravity based on velocity
+func apply_gravity(delta: float) -> void:
+	velocity.y += movement_component.get_gravity(velocity) * delta
+
+
+func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:
+	if stop_interval:
+		# Stop the interval audio and timer
+		interval_audio_player.stop()
+		interval_audio_player.random_player.timer.stop()
+
+	# Set up the state audio player
+	state_audio_player.stream = audio_stream
+	state_audio_player.play()
+
+	# Connect to finished signal and play state audio
+	if not state_audio_player.finished.is_connected(_on_state_audio_finished.bind(stop_interval)):
+		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
+
+
+func _on_state_audio_finished(resume_interval := true) -> void:
+	if resume_interval:
+		# Resume interval timer
+		interval_audio_player.random_player.timer.start()
 
 
 func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums.DamageTypes, info: Dictionary = {}) -> void:
@@ -99,7 +130,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 
 		hurt_ticks.append(Time.get_ticks_msec())
 		# Play hurt sound
-		on_hurt.play()
+		play_state_audio(hurt_sound)
 
 		damage_taken.emit(stats.drain_health(damage, damage_type))
 
@@ -111,11 +142,6 @@ func _die() -> void:
 	SignalManager.enemy_died.emit()
 	print(name, " has died!")
 	queue_free()
-
-
-## Applies jump or fall gravity based on velocity
-func apply_gravity(delta: float) -> void:
-	velocity.y += movement_component.get_gravity(velocity) * delta
 
 
 func _on_immobile_timer_timeout() -> void:

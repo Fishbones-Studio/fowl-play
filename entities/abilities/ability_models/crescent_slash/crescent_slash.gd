@@ -8,7 +8,7 @@ extends Ability
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return base_damage * ((1.0 + (stats.attack / 100)))
+		return base_damage * (1.0 + (stats.attack / 100))
 
 var _hit_bodies: Array = []
 var _current_slash_count: int = 0 
@@ -34,6 +34,7 @@ func activate() -> void:
 
 
 func _on_slash_timer_timeout() -> void:
+	sound_effect.play()
 	cpu_particles.restart()
 
 	for body in hit_area.get_overlapping_bodies():

@@ -1,4 +1,4 @@
-class_name SettingsMenu 
+class_name SettingsMenu
 extends UserInterface
 
 var focused_sidebar_item: SiderBarItem = null

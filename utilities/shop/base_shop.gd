@@ -23,6 +23,7 @@ var current_previewed_item: BaseResource = null
 @onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
 @onready var shop_preview_size_placeholder: Control = %SizePlaceholder
 @onready var cheat_button_container: HBoxContainer = %CheatButtonsContainer
+@onready var close_button: Button = %CloseButton
 
 
 func _ready() -> void:
@@ -200,10 +201,11 @@ func _setup_controller_navigation() -> void:
 
 	# Set initial focus to the first shop item, or exit button if no items
 	await get_tree().process_frame
+	await get_tree().process_frame # Dunno, but waiting another frame fixes it grabbing focus, whack
 
-	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else null
+	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else close_button
 	if first_item and first_item is Control:
-		first_item.grab_focus()
+		first_item.call_deferred("grab_focus")
 
 
 func _on_populate_visual_fields(item: BaseResource) -> void:

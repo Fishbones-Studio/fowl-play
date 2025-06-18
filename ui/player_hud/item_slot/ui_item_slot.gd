@@ -50,14 +50,14 @@ func _update_item_visuals() -> void:
 
 
 ## Starting the visualization of the slot cooldown state
-func start_cooldown(duration: float, create_tween := true) -> void:
+func start_cooldown(duration: float, should_create_tween: bool = true) -> void:
 	cooldown.visible = true
 
 	# Set max_value to the cooldown duration
 	cooldown.max_value = duration
 	cooldown.value = duration
 
-	if create_tween:
+	if should_create_tween:
 		# Stop and discard any existing tween
 		if cooldown_tween and cooldown_tween.is_valid():
 			cooldown_tween.kill()

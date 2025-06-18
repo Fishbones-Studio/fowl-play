@@ -32,7 +32,7 @@ extends Resource
 @export_group("Holder")
 @export var is_player: bool = false
 ## All names are stored lowercase and must be unique. Use snake_case
-@export var name: StringName = "" :
+@export var name: StringName = "":
 	set(value):
 		name = value.to_lower()
 
@@ -121,10 +121,10 @@ func calc_scaled_damage(damage: float) -> float:
 	return actual_damage
 
 
-## Applies a temporary status effect (buff or debuff) to a given stat by modifying it by a percentage.
+## Applies a temporary status effect (buff + or debuff -) to a given stat by modifying it by a percentage.
 func apply_stat_effect(stat_name: StringName, percent: float) -> float:
 	var original_value: float = get(stat_name)
-	var new_value: float = original_value * (1.0 - percent / 100.0)
+	var new_value: float = original_value * (1.0 + percent / 100.0)
 	set(stat_name, new_value)
 
 	return original_value
@@ -145,7 +145,7 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	speed += upgrade.speed_bonus
 
 	weight += upgrade.weight_bonus
-	
+
 	# Ensure current values are clamped after potential changes
 	current_health = clamp(current_health, 0, max_health)
 	current_stamina = clamp(current_stamina, 0, max_stamina)

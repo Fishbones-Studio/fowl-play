@@ -4,6 +4,7 @@
 ## It is an autoload script, meaning it is loaded automatically when the game starts and is accessible from anywhere.
 extends Node
 
+@warning_ignore_start("unused_signal")
 # Player signals
 signal player_transition_state(target_state: PlayerEnums.PlayerStates, information: Dictionary)
 signal init_health(max_health: int, health: int)
@@ -28,7 +29,6 @@ signal loading_screen_started(next_ui: UIEnums.UI, params: Dictionary)
 signal loading_screen_finished
 
 # Enemy signals
-signal enemy_transition_state(target_state: EnemyEnums.EnemyStates, information: Dictionary)
 signal enemy_died
 
 # Weapon signals
@@ -49,7 +49,7 @@ signal controls_settings_changed
 signal graphics_settings_changed
 signal keybind_changed(action_name: String)
 signal focus_lost
-
+@warning_ignore_restore("unused_signal")
 
 ## Dictionary to store cooldowns for signals
 var _cooldowns: Dictionary[StringName, int] = {}

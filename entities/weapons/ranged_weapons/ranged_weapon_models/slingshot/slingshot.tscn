@@ -28,22 +28,23 @@ weapon = NodePath("..")
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("4_bkwn1")
 animation_name = "Idle"
+state_type = 1
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
 script = ExtResource("5_adhto")
 animation_name = "Windup"
-state_type = 1
+state_type = 2
 
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="2"]
 script = ExtResource("6_bnim2")
 animation_name = "Cooldown"
-state_type = 3
+state_type = 4
 
 [node name="HoldingState" type="Node" parent="RangedWeaponStateMachine" index="3" node_paths=PackedStringArray("attack_origin")]
 script = ExtResource("7_2h67y")
 attack_origin = NodePath("../../AttackOrigin")
 animation_name = "Holding"
-state_type = 2
+state_type = 3
 
 [node name="AttackOrigin" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.1)

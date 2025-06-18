@@ -3,13 +3,12 @@ extends Ability
 @export var max_blasts: int = 5
 @export var blast_interval: float = 0.25
 @export var blast_increment: float = 0.05
-@export var blast_final_multiplier: float = 1.5
 @export var stun_time: float = 0.15
 
-var damage: float:
+var base_damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (max_blasts / blast_interval) * ((1.0 + (stats.attack / 100)))
+		return (max_blasts / blast_interval) * (1.0 + (stats.attack / 100))
 
 var _target: Node3D = null
 var _hit_bodies: Array = []
@@ -39,7 +38,7 @@ func activate() -> void:
 
 	_hit_bodies.clear()
 	_blast_count = 0
-	_current_damage = damage
+	_current_damage = base_damage
 
 	_toggle_collision_masks(true, hit_area, true)
 
@@ -77,17 +76,29 @@ func _get_closest_target(area: Area3D) -> Node3D:
 	return target
 
 
+func _play_blast_sound_effect(times: int) -> void:
+	for i in range(times):
+		var blast_sfx: AudioStreamPlayer3D = sound_effect.duplicate() as AudioStreamPlayer3D
+		add_child(blast_sfx)
+
+		blast_sfx.pitch_scale = randf_range(0.9, 1.1)  # Add some variation
+		blast_sfx.finished.connect(_on_blast_sfx_finished.bind(blast_sfx), CONNECT_ONE_SHOT)
+		blast_sfx.play()
+
+
 func _on_blast_timer_timeout() -> void:
 	gpu_particles.restart()
 
 	_blast_count += 1
 	if _blast_count < max_blasts:
-		_current_damage = damage * (1.0 + (_blast_count * blast_increment))
+		_current_damage = base_damage * (1.0 + (_blast_count * blast_increment))
 		blast_timer.start()
+		sound_effect.play()
 	elif _blast_count == max_blasts:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
-		_current_damage *= blast_final_multiplier
+		_play_blast_sound_effect(max_blasts)
+		_current_damage = base_damage * ((1.0 + 2 * (_blast_count * blast_increment)))
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false
@@ -113,3 +124,7 @@ func _on_blast_timer_timeout() -> void:
 		camera.apply_shake(1.0 + (_blast_count * 0.1))
 
 	_hit_bodies.clear()
+
+
+func _on_blast_sfx_finished(sfx: AudioStreamPlayer3D) -> void:
+	sfx.queue_free()
