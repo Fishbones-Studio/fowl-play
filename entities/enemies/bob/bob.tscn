@@ -24,6 +24,7 @@ dialogue_path = "res://entities/enemies/bob/dialogue"
 name_label_template_string = "\"All-Devouring\" %s"
 
 [node name="ball_chicken" parent="Model" index="0" instance=ExtResource("3_0xmxa")]
+transform = Transform3D(-1.13247e-07, 1.31134e-07, 1.5, 2.26494e-07, -1.5, 1.31134e-07, 1.5, 2.26494e-07, 1.13247e-07, 0, 3.85, 0)
 
 [node name="Sphere" parent="Model/ball_chicken" index="0"]
 transform = Transform3D(2.26917, 0, 0, 0, 2.26917, 0, 0, 0, 2.26917, 0, 0, 0)
@@ -41,6 +42,7 @@ transform = Transform3D(0.0413089, 0.0520154, -0.0812714, 0.022335, 0.0808505, 0
 transform = Transform3D(0.2002, -0.0265393, -0.112983, 0.0267736, 0.229761, -0.00652854, 0.112928, -0.00742393, 0.201846, -0.107802, 0.155865, 1.03601)
 
 [node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85, 0)
 shape = SubResource("SphereShape3D_fjbia")
 
 [node name="DamageNumberHandler" parent="." index="3"]
@@ -56,6 +58,7 @@ behavior_tree = ExtResource("4_m0aa4")
 ability_resource = ExtResource("6_e381t")
 
 [node name="SpikeHitbox" type="Area3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.85, 0)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
