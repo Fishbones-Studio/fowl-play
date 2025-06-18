@@ -14,7 +14,7 @@ func _enter() -> void:
 		agent.collision_layer = layer
 
 
-func _tick(delta: float) -> Status:
+func _tick(_delta: float) -> Status:
 	if not agent is CharacterBody3D:
 		return FAILURE
 	if agent.collision_layer != layer:

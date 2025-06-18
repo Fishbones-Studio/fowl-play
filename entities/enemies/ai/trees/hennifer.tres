@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=104 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=105 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -305,6 +305,10 @@ children = [SubResource("BTAction_k7lfl"), SubResource("BTPlayAnimation_l0rnk"),
 [sub_resource type="BTWait" id="BTWait_i6i68"]
 duration = 0.1
 
+[sub_resource type="BTAction" id="BTAction_b566n"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://bf5lhyfrveakg"
+
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
 ignore_cooldown = true
@@ -333,7 +337,7 @@ children = [SubResource("BTAction_qjixf")]
 script = ExtResource("5_mnhi0")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 0.5
+speed_factor = 1.0
 duration = 10.0
 ignore_y = true
 pathfinding = true
@@ -344,7 +348,8 @@ path_update_interval = 0.05
 children = [SubResource("BTAction_7xuyr")]
 
 [sub_resource type="BTParallel" id="BTParallel_hcbj7"]
-children = [SubResource("BTRepeat_vidql"), SubResource("BTAlwaysFail_sxcr3"), SubResource("BTAlwaysFail_b566n")]
+num_failures_required = 3
+children = [SubResource("BTAction_b566n"), SubResource("BTRepeat_vidql"), SubResource("BTAlwaysFail_sxcr3"), SubResource("BTAlwaysFail_b566n")]
 
 [sub_resource type="BTSequence" id="BTSequence_qjixf"]
 custom_name = "Shank"
