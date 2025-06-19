@@ -12,6 +12,7 @@ var config_path: String = "user://settings.cfg" ## path to the config file, on w
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
 var _input_counter: int = 0
+var _controller_connected: bool = false
 
 @onready var input_button_resource: PackedScene = preload("uid://bpba8wvtfww4x")
 @onready var content_item_icon_resource: PackedScene = preload("uid://dewuhjp8gx8cw")
@@ -23,6 +24,10 @@ var _input_counter: int = 0
 func _ready() -> void:
 	# Make this block input to lower layers
 	mouse_filter = Control.MOUSE_FILTER_STOP
+
+	var joypads: Array[int] = Input.get_connected_joypads()
+	_controller_connected = not joypads.is_empty()
+
 	Input.joy_connection_changed.connect(_on_controller_changed)
 
 	# Initial load of saved settings when scene enters tree
@@ -221,6 +226,10 @@ func _set_controller_icons(row: Node, container_name: String,
 	) -> void:
 	# Helper to safely set text on labels with fallback
 	var panel: RemapPanel = row.find_child(container_name)
+	if not _controller_connected:
+		panel.visible = false
+		return
+
 	if event:
 		panel.container.visible = true
 
@@ -265,12 +274,16 @@ func _activate_focused_button() -> void:
 
 
 func _on_controller_changed(device_id: int, connected: bool) -> void:
+	_controller_connected = connected
+
 	if connected:
-		var controller_name = Input.get_joy_name(device_id)
-		if SettingsManager.is_remapping:
-			SettingsManager.is_remapping = false
-			SettingsManager.action_to_remap = ""
-		_create_action_list()
+		var controller_name: String = Input.get_joy_name(device_id)
 		push_warning("Controller connected: " + controller_name)
 	else:
 		push_warning("Controller disconnected")
+
+	if SettingsManager.is_remapping:
+		SettingsManager.is_remapping = false
+		SettingsManager.action_to_remap = ""
+
+	_create_action_list()

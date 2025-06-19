@@ -2,7 +2,6 @@ class_name ControllerMappings
 
 const ASSETS_PATH: String = "res://addons/controller_icons/assets/"
 
-
 const JOYPAD_MAPPINGS: Dictionary[String, Dictionary] = {
 	"buttons": {
 		0: {"xboxseries": "a", "ps5": "cross", "switch": "b"},
