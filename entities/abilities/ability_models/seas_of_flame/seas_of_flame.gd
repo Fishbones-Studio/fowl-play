@@ -30,6 +30,7 @@ func activate(force_activate: bool = false) -> void:
 	_hit_bodies.clear()
 
 	cpu_particles.emitting = true
+	sound_effect.play()
 
 	_toggle_collision_masks(true, hit_area)
 
