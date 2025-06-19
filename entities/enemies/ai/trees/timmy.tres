@@ -183,7 +183,7 @@ pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_lk6lr"]
 script = ExtResource("9_78ech")
-ignore_cooldown = true
+ignore_cooldown = false
 start_state = 2
 
 [sub_resource type="BTParallel" id="BTParallel_sha4y"]
