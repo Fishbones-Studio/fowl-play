@@ -1,11 +1,14 @@
 extends ConfirmationScreen
 
-var stats_reset_signal: Signal
+const DESCRIPTION_LABEL: String =  "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]%d%%[/color] of the currency you’ve spent.\n\n[color=yellow]This action will refund you %d Feathers of Rebirth.[/color]"
 
+var stats_reset_signal: Signal
+var refund_percentage: int
+var refund_amount: Dictionary
 
 func _ready() -> void:
 	title.text = "Reset stats"
-	description.text = "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]80%[/color] of the currency you’ve spent."
+	description.text = DESCRIPTION_LABEL % [refund_percentage, refund_amount.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0)]
 	super()
 
 
@@ -23,6 +26,10 @@ func _input(_event: InputEvent) -> void:
 func setup(params: Dictionary) -> void:
 	if "stats_reset_signal" in params:
 		stats_reset_signal = params["stats_reset_signal"]
+	if "refund_percentage" in params:
+		refund_percentage = params["refund_percentage"]
+	if "refund_amount" in params:
+		refund_amount = params["refund_amount"]
 
 
 func on_confirm_button_pressed() -> void:
