@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://wveh2ajtskfi" path="res://entities/enemies/elder_centipede/elder_centipede_stats.tres" id="2_5cdes"]
 [ext_resource type="Script" uid="uid://4nj14wvdqsae" path="res://entities/enemies/boss.gd" id="2_l658y"]
 [ext_resource type="AudioStream" uid="uid://bxssmk8w3kohp" path="res://entities/enemies/elder_centipede/sound/centipede_death.ogg" id="3_b6m30"]
-[ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="4_y8gm0"]
 [ext_resource type="PackedScene" uid="uid://dofck8yvlnbl7" path="res://entities/enemies/elder_centipede/art/chicken_centipede.glb" id="5_bv6h5"]
+[ext_resource type="BehaviorTree" uid="uid://i5wmmsqipq8o" path="res://entities/enemies/ai/trees/elder_centipede.tres" id="6_os3r7"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="7_l658y"]
 [ext_resource type="Resource" uid="uid://cot4w1aawwija" path="res://entities/abilities/ability_models/earthquake/earthquake.tres" id="8_b6m30"]
 [ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="9_b6m30"]
@@ -113,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97034, -7.96051)
 
 [node name="BTPlayer" parent="." index="7"]
-behavior_tree = ExtResource("4_y8gm0")
+behavior_tree = ExtResource("6_os3r7")
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("7_l658y")]
 ability_resource = ExtResource("8_b6m30")
