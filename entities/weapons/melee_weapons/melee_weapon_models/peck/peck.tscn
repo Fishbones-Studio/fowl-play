@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_mc8bi"]
 [ext_resource type="Script" uid="uid://diutjtbki3ste" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.gd" id="2_1cyw5"]
 [ext_resource type="Resource" uid="uid://c6srj1sb1gdhm" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/peck.tres" id="3_fn1cq"]
-[ext_resource type="AudioStream" uid="uid://bwv5rjp8jbg1h" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/sounds/peck.ogg" id="4_wyl0x"]
+[ext_resource type="AudioStream" uid="uid://bwv5rjp8jbg1h" path="res://entities/weapons/melee_weapons/melee_weapon_models/peck/sound/peck.ogg" id="4_wyl0x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fn1cq"]
 size = Vector3(1, 1.5, 1.6)
