@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const DESCRIPTION_LABEL: String = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color][img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img]?"
+const DESCRIPTION_LABEL: String = "Are you sure you want to purchase [color=yellow]%s[/color] for [img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img][color=yellow]%d[/color]?"
 
 var purchased_signal: Signal
 var purchase_cancelled_signal: Signal
