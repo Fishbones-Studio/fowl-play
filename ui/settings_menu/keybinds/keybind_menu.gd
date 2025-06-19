@@ -23,6 +23,7 @@ var _input_counter: int = 0
 func _ready() -> void:
 	# Make this block input to lower layers
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	Input.joy_connection_changed.connect(_on_controller_changed)
 
 	# Initial load of saved settings when scene enters tree
 	_load_input_settings()
@@ -261,3 +262,15 @@ func _on_restore_defaults_button_up() -> void:
 func _activate_focused_button() -> void:
 	var focused: Button = get_viewport().gui_get_focus_owner()
 	if focused: focused.pressed.emit()
+
+
+func _on_controller_changed(device_id: int, connected: bool) -> void:
+	if connected:
+		var controller_name = Input.get_joy_name(device_id)
+		if SettingsManager.is_remapping:
+			SettingsManager.is_remapping = false
+			SettingsManager.action_to_remap = ""
+		_create_action_list()
+		push_warning("Controller connected: " + controller_name)
+	else:
+		push_warning("Controller disconnected")
