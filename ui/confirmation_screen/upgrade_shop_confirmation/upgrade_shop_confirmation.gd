@@ -39,6 +39,7 @@ func on_cancel_button_pressed() -> void:
 		purchase_cancelled_signal.emit()
 	else:
 		push_warning("'purchase_cancelled_signal' is missing and cannot be emitted.")
+	UIManager.toggle_ui(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION)
 	super()
 
 
@@ -47,4 +48,5 @@ func on_confirm_button_pressed() -> void:
 		purchased_signal.emit()
 	else:
 		push_warning("'purchased_signal' is missing and cannot be emitted.")
+	UIManager.toggle_ui(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION)
 	super()
