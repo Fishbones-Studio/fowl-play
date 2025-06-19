@@ -100,7 +100,7 @@ func _create_action_list() -> void:
 		var action_row: Node = input_button_scene.instantiate()
 		var split_events: Dictionary = _split_events_by_type(InputMap.action_get_events(action))
 
-		action_row.find_child("Label").text = action
+		action_row.find_child("Label").text = action.capitalize()
 		_set_label_text(action_row, "PrimaryPanel", split_events.primary, action)
 		_set_label_text(action_row, "SecondaryPanel", split_events.secondary, action)
 		_set_label_text(action_row, "ControllerPanel", split_events.controller, action)
@@ -125,7 +125,7 @@ func _trim_mapping_suffix(mapping: String) -> String:
 			# Fallback to first word before space
 			cleaned = cleaned.substr(0, cleaned.find(" "))
 
-	return cleaned.strip_edges()
+	return cleaned.strip_edges().capitalize()
 
 
 func _is_valid_event_for_input_type(event: InputEvent, input_type: int) -> bool:

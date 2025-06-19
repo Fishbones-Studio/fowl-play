@@ -1,5 +1,4 @@
 class_name CurrencyEnums
-extends Node
 
 enum CurrencyTypes {
 	PROSPERITY_EGGS,
