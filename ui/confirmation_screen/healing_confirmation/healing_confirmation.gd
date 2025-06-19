@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const DESCRIPTION_LABEL: String = "Are you sure you want to heal your chicken for [color=yellow]%d%%[/color] of their [color=orange]Max Health[/color] for [color=yellow]%d[/color] Prosperity Eggs?\n\nYou currently have [color=yellow]%d[/color] Prosperity Eggs."
+const DESCRIPTION_LABEL: String = "Are you sure you want to heal your chicken for [color=yellow]%d%%[/color] of their [color=orange]Max Health[/color] for [color=yellow]%d[/color][img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img]?\n\nYou currently have [color=yellow]%d[/color][img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img]."
 
 var heal_purchased_signal: Signal
 var health: int

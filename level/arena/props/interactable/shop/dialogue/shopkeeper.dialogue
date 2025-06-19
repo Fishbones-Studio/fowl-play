@@ -12,8 +12,8 @@ Egbert: [[Welcome, welcome! Take a look around!|Back from another big show, eh? 
 
 ~ confirm_refresh
 Egbert: [[Want to shake things up a bit?|Not seeing anything that tickles your fancy?|Looking for a fresh start?]]
-Egbert: [[For just [color=orange]one Feather of Rebirth[/color], I can bring out a whole new selection!|Hand me [color=orange]one Feather of Rebirth[/color], and I’ll scramble the entire inventory!|For the low, low cost of [color=orange]one Feather of Rebirth[/color], I can refill the entire stock!]]
-- (Pay 1 Feathers of Rebirth) Yes, let's see some new items!
+Egbert: [[For just [color=orange]1[/color][img=32x32]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img], I can bring out a whole new selection!|Hand me [color=orange]1[/color][img=32x32]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img], and I’ll scramble the entire inventory!|For the low, low cost of [color=orange]one Feather of Rebirth[/color], I can refill the entire stock!]]
+- (Pay up) Yes, let's see some new items!
 	=> do_refresh
 - On second thought, I'll wait.
 	Egbert: [[No problem at all! The current deals are still egg-cellent!|Alrighty! Take another look, maybe something will catch your eye!|Suit yourself! These beauties aren't going anywhere just yet!]]

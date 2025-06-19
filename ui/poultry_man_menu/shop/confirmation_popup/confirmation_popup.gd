@@ -104,7 +104,7 @@ func _select_item(item: BaseResource) -> void:
 
 
 func _update_confirmation_text() -> void:
-	description.text = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color] Prosperity Eggs?" % [new_item_resource.name, new_item_resource.cost]
+	description.text = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color][img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img]?" % [new_item_resource.name, new_item_resource.cost]
 
 
 func on_cancel_button_pressed() -> void:
