@@ -64,7 +64,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qeog0"]
 _data = {
 &"RESET": SubResource("Animation_w4h7w"),
-&"rotation": SubResource("Animation_fdjq5")
+&"Rotation": SubResource("Animation_fdjq5")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fdjq5"]
@@ -81,7 +81,7 @@ damage_duration = 5.0
 libraries = {
 &"": SubResource("AnimationLibrary_qeog0")
 }
-autoplay = "rotation"
+autoplay = "Rotation"
 
 [node name="NavigationObstacle3D" parent="." index="2"]
 radius = 1.75
@@ -92,5 +92,5 @@ shape = SubResource("BoxShape3D_fdjq5")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
 stream = ExtResource("4_w4h7w")
-volume_db = -10.566
+volume_db = -10.0
 bus = &"SFX"
