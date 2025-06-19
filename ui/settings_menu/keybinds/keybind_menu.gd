@@ -6,10 +6,16 @@
 ################################################################################
 extends Control
 
+const MAX_INPUT_COUNT: int = 5
+
 var config_path: String = "user://settings.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
 
-@onready var input_button_scene: PackedScene = preload("uid://bpba8wvtfww4x")
+var _input_counter: int = 0
+var _controller_connected: bool = false
+
+@onready var input_button_resource: PackedScene = preload("uid://bpba8wvtfww4x")
+@onready var content_item_icon_resource: PackedScene = preload("uid://dewuhjp8gx8cw")
 @onready var error_text_label: Label = %ErrorTextLabel
 @onready var restore_defaults_button: Button = %RestoreDefaultsButton
 @onready var content_container: VBoxContainer = %ContentContainer
@@ -17,7 +23,12 @@ var config_name: String = "keybinds" ## name of the config section, mostly usefu
 
 func _ready() -> void:
 	# Make this block input to lower layers
-	self.mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
+	var joypads: Array[int] = Input.get_connected_joypads()
+	_controller_connected = not joypads.is_empty()
+
+	Input.joy_connection_changed.connect(_on_controller_changed)
 
 	# Initial load of saved settings when scene enters tree
 	_load_input_settings()
@@ -29,6 +40,21 @@ func _input(event: InputEvent) -> void:
 			return
 
 		get_viewport().set_input_as_handled()
+
+		_input_counter += 1
+		if _input_counter >= MAX_INPUT_COUNT:
+			SettingsManager.is_remapping = false
+			SettingsManager.action_to_remap = ""
+			_create_action_list()
+
+		# TODO: Improve for performance
+		if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+			var event_type: Dictionary = ControllerMappings.extract_joypad_from_action(event.as_text())
+			var asset_paths: Array[String] = ControllerMappings.get_asset(event_type["type"], event_type["index"])
+
+			if asset_paths.is_empty():
+				error_text_label.text = "Controller action not supported"
+				return
 
 		# Validate event type matches input mode
 		if not _is_valid_event_for_input_type(event, SettingsManager.input_type):
@@ -97,13 +123,13 @@ func _create_action_list() -> void:
 		if action.begins_with("ui_") or action in ["cycle_debug_menu", "toggle_console"]:
 			continue
 
-		var action_row: Node = input_button_scene.instantiate()
+		var action_row: Node = input_button_resource.instantiate()
 		var split_events: Dictionary = _split_events_by_type(InputMap.action_get_events(action))
 
-		action_row.find_child("Label").text = action
+		action_row.find_child("Label").text = action.capitalize()
 		_set_label_text(action_row, "PrimaryPanel", split_events.primary, action)
 		_set_label_text(action_row, "SecondaryPanel", split_events.secondary, action)
-		_set_label_text(action_row, "ControllerPanel", split_events.controller, action)
+		_set_controller_icons(action_row, "ControllerPanel", split_events.controller)
 
 		content_container.add_child(action_row)
 
@@ -114,18 +140,7 @@ func _trim_mapping_suffix(mapping: String) -> String:
 	# Clean up display text by removing technical suffixes
 	var cleaned: String = mapping.replace(" (Physical)", "")
 
-	# Simplify controller input formatting
-	if cleaned.begins_with("Joypad"):
-		var start: int = cleaned.find("(")
-		var end: int = cleaned.find(")")
-		if start != -1 and end != -1:
-			# Extract button name from parentheses
-			cleaned = cleaned.substr(start + 1, end - start - 1)
-		else:
-			# Fallback to first word before space
-			cleaned = cleaned.substr(0, cleaned.find(" "))
-
-	return cleaned.strip_edges()
+	return cleaned.strip_edges().capitalize()
 
 
 func _is_valid_event_for_input_type(event: InputEvent, input_type: int) -> bool:
@@ -192,13 +207,49 @@ func _finalize_remapping() -> void:
 	_create_action_list()
 
 
-func _set_label_text(row: Node, container_name: String, event: InputEvent, action_to_remap: String = "") -> void:
+func _set_label_text(row: Node, container_name: String,
+		event: InputEvent,
+		action_to_remap: String = ""
+	) -> void:
 	# Helper to safely set text on labels with fallback
 	var panel: RemapPanel = row.find_child(container_name)
 	if event:
 		panel.button.text = _trim_mapping_suffix(event.as_text())
 	else:
 		panel.button.text = "Unassigned"
+	panel.action_to_remap = action_to_remap
+
+
+func _set_controller_icons(row: Node, container_name: String,
+		event: InputEvent,
+		action_to_remap: String = ""
+	) -> void:
+	# Helper to safely set text on labels with fallback
+	var panel: RemapPanel = row.find_child(container_name)
+	if not _controller_connected:
+		panel.visible = false
+		return
+
+	if event:
+		panel.container.visible = true
+
+		# Get and display controller icons
+		var event_type: Dictionary = ControllerMappings.extract_joypad_from_action(event.as_text())
+		var asset_paths: Array[String] = ControllerMappings.get_asset(event_type["type"], event_type["index"])
+		# TODO: Handle empty asset_paths
+		for path in asset_paths:
+			if ResourceLoader.exists(path):  # Check if the texture exists
+				var controller_icon: TextureRect = content_item_icon_resource.instantiate()
+				controller_icon.texture = load(path)
+				panel.container.add_child(controller_icon)
+			else:
+				push_error("Controller icon not found: ", path)
+	else:
+		panel.button.text = "Unassigned"
+		panel.button.visible = true
+		panel.container.visible = false
+		panel.button.theme_type_variation = "SettingsKeybindButton"
+
 	panel.action_to_remap = action_to_remap
 
 
@@ -219,4 +270,20 @@ func _on_restore_defaults_button_up() -> void:
 
 func _activate_focused_button() -> void:
 	var focused: Button = get_viewport().gui_get_focus_owner()
-	if focused: focused.emit_signal("pressed")
+	if focused: focused.pressed.emit()
+
+
+func _on_controller_changed(device_id: int, connected: bool) -> void:
+	_controller_connected = connected
+
+	if connected:
+		var controller_name: String = Input.get_joy_name(device_id)
+		push_warning("Controller connected: " + controller_name)
+	else:
+		push_warning("Controller disconnected")
+
+	if SettingsManager.is_remapping:
+		SettingsManager.is_remapping = false
+		SettingsManager.action_to_remap = ""
+
+	_create_action_list()

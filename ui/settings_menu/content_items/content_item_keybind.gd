@@ -3,6 +3,7 @@ extends ContentItem
 @onready var primary_button: Button = %PrimaryButton
 @onready var secondary_button: Button = %SecondaryButton
 @onready var controller_button: Button = %ControllerButton
+
 @onready var panel: Panel = %Panel
 
 

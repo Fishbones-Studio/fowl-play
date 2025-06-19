@@ -26,7 +26,7 @@ var _active_bodies: Dictionary[int, int] = {}
 @onready var spark: GPUParticles3D = %Spark
 
 
-func activate(force_activate: bool = false) -> void:
+func activate(_force_activate: bool = false) -> void:
 	# Ignore the parent's transform
 	# This ensures the fireball moves independently, without being affected by the player's movement
 	top_level = true

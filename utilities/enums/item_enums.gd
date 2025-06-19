@@ -1,5 +1,4 @@
 class_name ItemEnums
-extends Node
 
 enum ItemTypes {
 	MELEE_WEAPON,
@@ -8,6 +7,7 @@ enum ItemTypes {
 	UPGRADE,
 	PERM_UPGRADE,
 }
+
 
 ## Helper function to convert the enum to a readable string
 static func item_type_to_string(item_type: ItemTypes) -> String:

@@ -1,4 +1,3 @@
-extends Node
 class_name SaveEnums
 
 enum InputType {
