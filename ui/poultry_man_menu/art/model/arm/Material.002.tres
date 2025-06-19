@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://pb1dmcwty8jt"]
+
+[ext_resource type="Texture2D" uid="uid://vnxvh6drg585" path="res://ui/poultry_man_menu/art/model/arm/arm_texture.png" id="1_q11un"]
+
+[resource]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_q11un")
+roughness = 0.5

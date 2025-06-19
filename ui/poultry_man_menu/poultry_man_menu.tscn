@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=39 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -17,6 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://2h3lj68s6hik" path="res://entities/chicken_player/art/chicken_default.glb" id="15_c6cgu"]
 [ext_resource type="PackedScene" uid="uid://dbn8txk00v2gh" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.glb" id="15_qvty8"]
 [ext_resource type="Script" uid="uid://c4vv871ckrkmj" path="res://ui/poultry_man_menu/art/model/poultry_man_menu.gd" id="16_c6cgu"]
+[ext_resource type="PackedScene" uid="uid://ce4sqpws1bh2o" path="res://ui/poultry_man_menu/art/model/arm/poultry_man_arm_left.glb" id="16_foq5l"]
+[ext_resource type="Material" uid="uid://pb1dmcwty8jt" path="res://ui/poultry_man_menu/art/model/arm/Material.002.tres" id="17_3pnaw"]
+[ext_resource type="Material" uid="uid://bxovlkwtmt18f" path="res://ui/poultry_man_menu/art/model/arm/Material.001.tres" id="18_n3git"]
+[ext_resource type="PackedScene" uid="uid://dmviygh54a6ly" path="res://ui/poultry_man_menu/art/model/arm/poultry_man_arm_right.glb" id="19_7e3wk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qvty8"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -189,23 +193,6 @@ transform = Transform3D(-0.718156, 2.04904, -0.00900463, 1.95494e-07, -0.0095415
 [node name="chicken_default" parent="Model/Cage" index="0" instance=ExtResource("15_c6cgu")]
 transform = Transform3D(0.00326291, -0.144718, 0.397023, -0.0990172, 4.25722, 1.55261, -0.422475, -0.00979091, -9.6777e-05, -0.0996747, 8.56139, -0.0486827)
 
-[node name="Skeleton3D" parent="Model/Cage/chicken_default/Armature" index="0"]
-bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
-bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
-bones/3/rotation = Quaternion(-0.514094, 0.00303936, -0.0152266, 0.857593)
-bones/4/rotation = Quaternion(-0.106227, 0.0108954, 0.111927, 0.987962)
-bones/5/rotation = Quaternion(-0.269247, 0.0536865, -0.608223, 0.744774)
-bones/6/rotation = Quaternion(-0.156211, 0.014137, -0.791695, 0.590438)
-bones/7/rotation = Quaternion(-0.243803, -0.00629045, 0.613876, 0.750784)
-bones/8/rotation = Quaternion(-0.265572, -0.0280045, 0.78333, 0.561321)
-bones/9/rotation = Quaternion(0.225185, -0.0528922, 0.214679, 0.948898)
-bones/10/rotation = Quaternion(0.228482, 0.00437219, -0.176978, 0.957317)
-bones/11/rotation = Quaternion(0.230702, 0.071894, -0.215618, 0.946106)
-bones/12/rotation = Quaternion(0.201549, 0.029937, 0.203109, 0.957721)
-bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.225762, -8.30913e-17, -8.30913e-17, 0.974182)
-
 [node name="AnimationPlayer" parent="Model/Cage/chicken_default" index="1"]
 autoplay = "Idle"
 
@@ -272,6 +259,46 @@ text = "Arenas"
 font_size = 125
 script = ExtResource("11_qvty8")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
+
+[node name="Arms" type="Node3D" parent="."]
+
+[node name="poultry_man_arm_left" parent="Arms" instance=ExtResource("16_foq5l")]
+transform = Transform3D(0.103792, -0.00908066, -0.590885, -0.0523195, 0.597432, -0.0183715, 0.588634, 0.0547027, 0.102556, -3, 1.7, 9)
+
+[node name="Skeleton3D" parent="Arms/poultry_man_arm_left/Armature" index="0"]
+bones/8/rotation = Quaternion(-0.0637434, 0.0857927, 0.11109, 0.988046)
+bones/13/rotation = Quaternion(-0.0390828, -0.0272819, -0.184846, 0.981611)
+bones/14/rotation = Quaternion(-0.00334027, 0.0521692, -0.313651, 0.948098)
+bones/18/rotation = Quaternion(0.022146, 0.0218885, -0.155748, 0.987306)
+bones/23/rotation = Quaternion(0.0593778, 0.00463817, -0.078573, 0.995128)
+
+[node name="Arm" parent="Arms/poultry_man_arm_left/Armature/Skeleton3D" index="0"]
+material_override = ExtResource("17_3pnaw")
+
+[node name="Sleeve" parent="Arms/poultry_man_arm_left/Armature/Skeleton3D" index="1"]
+material_override = ExtResource("18_n3git")
+
+[node name="AnimationPlayer" parent="Arms/poultry_man_arm_left" index="1"]
+autoplay = "Idle_2"
+
+[node name="poultry_man_arm_right" parent="Arms" instance=ExtResource("19_7e3wk")]
+transform = Transform3D(0.103792, 0.00908066, -0.590885, -0.0522934, 0.597717, 0, 0.588636, 0.051499, 0.104189, 7, 1.7, 9)
+
+[node name="Skeleton3D" parent="Arms/poultry_man_arm_right/Armature" index="0"]
+bones/8/rotation = Quaternion(-0.0923746, 0.101299, 0.192764, 0.971621)
+bones/13/rotation = Quaternion(-0.0179537, -0.0289021, 0.188078, 0.981565)
+bones/14/rotation = Quaternion(0.00932692, 0.0571718, 0.125163, 0.990444)
+bones/18/rotation = Quaternion(0.00902826, -0.00369426, 0.0998391, 0.994956)
+bones/23/rotation = Quaternion(0.0435395, -0.00134621, 0.0883388, 0.995138)
+
+[node name="Arm" parent="Arms/poultry_man_arm_right/Armature/Skeleton3D" index="0"]
+material_override = ExtResource("17_3pnaw")
+
+[node name="Sleeve" parent="Arms/poultry_man_arm_right/Armature/Skeleton3D" index="1"]
+material_override = ExtResource("18_n3git")
+
+[node name="AnimationPlayer" parent="Arms/poultry_man_arm_right" index="1"]
+autoplay = "Idle_1"
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -375,3 +402,5 @@ shape = SubResource("ConvexPolygonShape3D_x5v8y")
 
 [editable path="Model"]
 [editable path="Model/Cage/chicken_default"]
+[editable path="Arms/poultry_man_arm_left"]
+[editable path="Arms/poultry_man_arm_right"]
