@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=79 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=80 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
@@ -67,14 +67,14 @@ children = [SubResource("BTAction_gdjfc"), SubResource("BTRandomWait_sha4y")]
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
 target_var = &"target"
-flank_distance = 10.0
+flank_distance = 25.0
 vertical_offset = 5.0
-clearance_radius = 5.0
-departure_telegraph = false
-arrival_telegraph = false
-telegraph_departure_time = 0.0
-telegraph_arrival_time = 2.0
-telegraph_scale = 1.5
+clearance_radius = 1.0
+departure_telegraph = true
+arrival_telegraph = true
+telegraph_departure_time = 0.5
+telegraph_arrival_time = 1.0
+telegraph_scale = 2.0
 
 [sub_resource type="BBNode" id="BBNode_wrv8r"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
@@ -100,13 +100,19 @@ face_moving_direction = false
 
 [sub_resource type="BTAction" id="BTAction_rm485"]
 script = ExtResource("6_ct4d5")
-stun_time = 1.0
+stun_time = 2.0
 
-[sub_resource type="BTSequence" id="BTSequence_sgv08"]
-children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb"), SubResource("BTAction_rm485")]
+[sub_resource type="BTAction" id="BTAction_jkeyo"]
+script = ExtResource("5_ct4d5")
+min_wait_time = 2.0
+max_wait_time = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_bh04r"]
+num_successes_required = 2
+children = [SubResource("BTAction_rm485"), SubResource("BTAction_jkeyo")]
 
 [sub_resource type="BTSequence" id="BTSequence_rm485"]
-children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTParallel_78ech"), SubResource("BTAction_sgv08"), SubResource("BTSequence_sgv08")]
+children = [SubResource("BTParallel_yj2r8"), SubResource("BTPlayAnimation_ct4d5"), SubResource("BTParallel_78ech"), SubResource("BTAction_sgv08"), SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_sp7rb"), SubResource("BTParallel_bh04r")]
 
 [sub_resource type="BTSequence" id="BTSequence_ct4d5"]
 custom_name = "Blink"
@@ -177,14 +183,14 @@ pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_lk6lr"]
 script = ExtResource("9_78ech")
-ignore_cooldown = false
+ignore_cooldown = true
 start_state = 2
 
 [sub_resource type="BTParallel" id="BTParallel_sha4y"]
 children = [SubResource("BTAction_78ech"), SubResource("BTAction_lk6lr")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
-duration = 12.0
+duration = 8.0
 children = [SubResource("BTParallel_sha4y")]
 
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]

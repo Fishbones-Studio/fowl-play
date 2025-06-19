@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=119 format=3 uid="uid://i5wmmsqipq8o"]
+[gd_resource type="BehaviorTree" load_steps=120 format=3 uid="uid://i5wmmsqipq8o"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_85ywm"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_kcuvh"]
@@ -147,8 +147,7 @@ children = [SubResource("BTAction_iw5r8"), SubResource("BTAlwaysFail_xatg1"), Su
 [sub_resource type="BTSequence" id="BTSequence_otwd7"]
 custom_name = "Pursue target"
 children = [SubResource("BTPlayAnimation_w55nl"), SubResource("BTParallel_jsrsq")]
-_enabled = false
-metadata/_weight_ = 1.0
+metadata/_weight_ = 2.5
 
 [sub_resource type="BTAction" id="BTAction_blt7q"]
 script = ExtResource("6_eto2h")
@@ -262,6 +261,7 @@ metadata/_weight_ = 1.0
 duration = 8.0
 start_cooled = true
 children = [SubResource("BTSequence_3wgmy")]
+metadata/_weight_ = 2.0
 
 [sub_resource type="BTAction" id="BTAction_jsrsq"]
 script = ExtResource("2_kcuvh")
@@ -281,9 +281,9 @@ resource_name = "Model/chicken_centipede/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_mqa1q"]
 animation_player = SubResource("BBNode_x3x70")
-animation_name = &"Stomp"
+animation_name = &"Idle"
 blend = 0.2
-speed = 0.5
+speed = 3.0
 
 [sub_resource type="BTParallel" id="BTParallel_xubca"]
 children = [SubResource("BTAction_yp7y7"), SubResource("BTPlayAnimation_mqa1q")]
@@ -296,6 +296,7 @@ resource_name = "Model/chicken_centipede/AnimationPlayer"
 animation_player = SubResource("BBNode_jsrsq")
 animation_name = &"Stomp"
 blend = 0.2
+speed = 0.5
 
 [sub_resource type="BTAction" id="BTAction_gdjx3"]
 script = ExtResource("7_gdjx3")
@@ -356,7 +357,6 @@ metadata/_weight_ = 15.8
 duration = 12.0
 start_cooled = true
 children = [SubResource("BTSequence_0skmy")]
-_enabled = false
 metadata/_weight_ = 1.0
 
 [sub_resource type="BBNode" id="BBNode_eto2h"]
@@ -398,7 +398,7 @@ children = [SubResource("BTAction_7ykgv")]
 [sub_resource type="BTAction" id="BTAction_6yk22"]
 script = ExtResource("4_xatg1")
 target_var = &"target"
-rotation_speed = 6.0
+rotation_speed = 20.0
 angle_threshold = 2.0
 duration = 0.0
 face_away = false
@@ -412,6 +412,11 @@ duration = 2.0
 [sub_resource type="BTParallel" id="BTParallel_o8to3"]
 num_failures_required = 3
 children = [SubResource("BTAlwaysFail_pnqqn"), SubResource("BTAlwaysFail_eto2h"), SubResource("BTWait_evasg")]
+
+[sub_resource type="BTAction" id="BTAction_vq4c8"]
+script = ExtResource("2_kcuvh")
+min_wait_time = 0.0
+max_wait_time = 0.0
 
 [sub_resource type="BBNode" id="BBNode_evasg"]
 saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
@@ -427,7 +432,7 @@ speed = 6.0
 script = ExtResource("6_eto2h")
 file_to_play = "uid://dw6qjrlb55obm"
 is_repeating = false
-wait_for_completion = true
+wait_for_completion = false
 pause_interval_player = true
 
 [sub_resource type="BTAction" id="BTAction_7hjek"]
@@ -451,12 +456,14 @@ children = [SubResource("BTCondition_6pd5a")]
 children = [SubResource("BTRepeatUntilFailure_4qy8p")]
 
 [sub_resource type="BTParallel" id="BTParallel_hct3o"]
+num_successes_required = 2
 children = [SubResource("BTAction_og5k8"), SubResource("BTAction_7hjek"), SubResource("BTAlwaysFail_iw5r8")]
 
 [sub_resource type="BTSequence" id="BTSequence_pnqqn"]
-children = [SubResource("BTParallel_mfr31"), SubResource("BTParallel_o8to3"), SubResource("BTPlayAnimation_3wgmy"), SubResource("BTParallel_hct3o")]
+children = [SubResource("BTParallel_mfr31"), SubResource("BTParallel_o8to3"), SubResource("BTAction_vq4c8"), SubResource("BTPlayAnimation_3wgmy"), SubResource("BTParallel_hct3o")]
 
 [sub_resource type="BTDelay" id="BTDelay_eto2h"]
+seconds = 2.0
 children = [SubResource("BTSequence_pnqqn")]
 
 [sub_resource type="BTRepeat" id="BTRepeat_jsrsq"]
@@ -492,7 +499,7 @@ children = [SubResource("BTRepeat_jsrsq"), SubResource("BTPlayAnimation_x3x70"),
 [sub_resource type="BTCooldown" id="BTCooldown_t5mjw"]
 start_cooled = true
 children = [SubResource("BTSequence_blt7q")]
-_enabled = false
+metadata/_weight_ = 2.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_wmqqf"]
 children = [SubResource("BTSequence_otwd7"), SubResource("BTCooldown_0skmy"), SubResource("BTCooldown_gdjx3"), SubResource("BTCooldown_t5mjw")]

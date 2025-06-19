@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yhbkp"]
 [ext_resource type="Script" uid="uid://wrawtm8at4do" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="8_k708t"]
-[ext_resource type="Script" path="res://entities/enemies/ai/tasks/in_air_close_to_target.gd" id="9_n3rxy"]
+[ext_resource type="Script" uid="uid://bik73ykxdltxk" path="res://entities/enemies/ai/tasks/in_air_close_to_target.gd" id="9_n3rxy"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
 [ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="10_5x7em"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_40a5u"]
@@ -237,7 +237,7 @@ metadata/_weight_ = 330.0
 duration = 5.0
 start_cooled = true
 children = [SubResource("BTSequence_ulmcl")]
-metadata/_weight_ = 1.0
+metadata/_weight_ = 2.0
 
 [sub_resource type="BBNode" id="BBNode_nju8x"]
 saved_value = NodePath("Model/ice_fox/AnimationPlayer")
