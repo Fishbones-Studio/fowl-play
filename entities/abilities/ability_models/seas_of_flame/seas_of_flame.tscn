@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://df1clah7xvv32"]
+[gd_scene load_steps=12 format=3 uid="uid://df1clah7xvv32"]
 
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_vfv0y"]
 [ext_resource type="Script" uid="uid://c1esqie0rd4t3" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.gd" id="2_7fey8"]
 [ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="3_nqrm3"]
 [ext_resource type="Shader" uid="uid://doc3hxpx75yxm" path="res://entities/abilities/ability_models/seas_of_flame/shaders/ember.tres" id="4_7fey8"]
 [ext_resource type="Texture2D" uid="uid://c26q8cmcvnc83" path="res://entities/abilities/ability_models/seas_of_flame/shaders/ember_texture.png" id="5_nqrm3"]
+[ext_resource type="AudioStream" uid="uid://dluqt85odbglf" path="res://entities/abilities/ability_models/seas_of_flame/sounds/sea_of_flames.ogg" id="6_ecckb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gdliy"]
 height = 9.0
@@ -77,3 +78,6 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_gdliy")
 color = Color(0.83096, 0.225515, 0.201298, 1)
 color_ramp = SubResource("Gradient_7fey8")
+
+[node name="SoundEffect" parent="." index="2"]
+stream = ExtResource("6_ecckb")
