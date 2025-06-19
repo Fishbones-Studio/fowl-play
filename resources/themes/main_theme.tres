@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=58 format=3 uid="uid://besvom3pq3s63"]
+[gd_resource type="Theme" load_steps=69 format=3 uid="uid://besvom3pq3s63"]
 
 [ext_resource type="StyleBox" uid="uid://cce782xwlhbv5" path="res://resources/themes/styleboxes/button_hover.tres" id="1_yjg5f"]
 [ext_resource type="StyleBox" uid="uid://repoerm7btwr" path="res://resources/themes/styleboxes/button_normal.tres" id="2_0wthw"]
@@ -90,6 +90,28 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vd745"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty61q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ev7v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iou37"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sgkbt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85ihc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwvtc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_edmce"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84v7d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5cmy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m1c0j"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtbu8"]
 content_margin_left = 2.0
 content_margin_top = 2.0
@@ -171,7 +193,7 @@ corner_radius_bottom_left = 2
 bg_color = Color(0, 0, 0, 0.784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20od3"]
-bg_color = Color(0.772549, 0.737255, 0.670588, 1)
+bg_color = Color(0.905882, 0.843137, 0.678431, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kiug"]
 bg_color = Color(0.8, 0.796078, 0.780392, 1)
@@ -264,6 +286,32 @@ HeaderLarge/font_sizes/font_size = 75
 HeaderMedium/colors/font_color = Color(0.819608, 0.72549, 0.568627, 1)
 HeaderMedium/font_sizes/font_size = 50
 HeaderSmall/font_sizes/font_size = 30
+InvisibleButton/base_type = &"Button"
+InvisibleButton/colors/font_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_disabled_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_focus_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_hover_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_outline_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/font_pressed_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_disabled_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_focus_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_hover_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_normal_color = Color(0, 0, 0, 0)
+InvisibleButton/colors/icon_pressed_color = Color(0, 0, 0, 0)
+InvisibleButton/constants/outline_size = 0
+InvisibleButton/styles/disabled = SubResource("StyleBoxEmpty_vd745")
+InvisibleButton/styles/disabled_mirrored = SubResource("StyleBoxEmpty_ty61q")
+InvisibleButton/styles/focus = SubResource("StyleBoxEmpty_1ev7v")
+InvisibleButton/styles/hover = SubResource("StyleBoxEmpty_iou37")
+InvisibleButton/styles/hover_mirrored = SubResource("StyleBoxEmpty_sgkbt")
+InvisibleButton/styles/hover_pressed = SubResource("StyleBoxEmpty_85ihc")
+InvisibleButton/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_xwvtc")
+InvisibleButton/styles/normal = SubResource("StyleBoxEmpty_edmce")
+InvisibleButton/styles/normal_mirrored = SubResource("StyleBoxEmpty_84v7d")
+InvisibleButton/styles/pressed = SubResource("StyleBoxEmpty_h5cmy")
+InvisibleButton/styles/pressed_mirrored = SubResource("StyleBoxEmpty_m1c0j")
 ItemCost/base_type = &"Label"
 ItemCost/colors/font_color = Color(0.309804, 0.352941, 0.388235, 1)
 ItemCost/font_sizes/font_size = 24

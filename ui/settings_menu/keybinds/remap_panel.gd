@@ -12,8 +12,8 @@ func _ready():
 	button.pivot_offset = button.size / 2.0
 	if container: 
 		container.pivot_offset = container.size / 2.0
-		if button.visible: button.visible = false
 		if not container.visible: container.visible = true
+		button.theme_type_variation = "InvisibleButton"
 
 	button.button_up.connect(_on_input_button_up)
 	button.focus_entered.connect(_on_button_focus_entered)
@@ -29,8 +29,9 @@ func _on_input_button_up() -> void:
 	SettingsManager.action_to_remap = action_to_remap
 	SettingsManager.input_type = input_type
 	SettingsManager.is_remapping = true
-	if container: container.visible = false
-	if not button.visible: button.visible = true
+	if container: 
+		container.visible = false
+		button.theme_type_variation = "SettingsKeybindButton"
 	button.text = "Press any key..."
 
 

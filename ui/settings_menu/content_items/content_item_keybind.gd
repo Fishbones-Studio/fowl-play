@@ -7,7 +7,6 @@ extends ContentItem
 @onready var panel: Panel = %Panel
 
 
-
 func _on_focus_entered() -> void:
 	primary_button.grab_focus()
 

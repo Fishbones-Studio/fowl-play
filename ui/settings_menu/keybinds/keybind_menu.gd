@@ -6,8 +6,12 @@
 ################################################################################
 extends Control
 
+const MAX_INPUT_COUNT: int = 5
+
 var config_path: String = "user://settings.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
 var config_name: String = "keybinds" ## name of the config section, mostly useful when multiple segments are used in the same file
+
+var _input_counter: int = 0
 
 @onready var input_button_resource: PackedScene = preload("uid://bpba8wvtfww4x")
 @onready var content_item_icon_resource: PackedScene = preload("uid://dewuhjp8gx8cw")
@@ -29,7 +33,15 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			return
 
-		# TODO: Improve foor performance
+		get_viewport().set_input_as_handled()
+
+		_input_counter += 1
+		if _input_counter >= MAX_INPUT_COUNT:
+			SettingsManager.is_remapping = false
+			SettingsManager.action_to_remap = ""
+			_create_action_list()
+
+		# TODO: Improve for performance
 		if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 			var event_type: Dictionary = ControllerMappings.extract_joypad_from_action(event.as_text())
 			var asset_paths: Array[String] = ControllerMappings.get_asset(event_type["type"], event_type["index"])
@@ -37,8 +49,6 @@ func _input(event: InputEvent) -> void:
 			if asset_paths.is_empty():
 				error_text_label.text = "Controller action not supported"
 				return
-
-		get_viewport().set_input_as_handled()
 
 		# Validate event type matches input mode
 		if not _is_valid_event_for_input_type(event, SettingsManager.input_type):
@@ -211,7 +221,6 @@ func _set_controller_icons(row: Node, container_name: String,
 	# Helper to safely set text on labels with fallback
 	var panel: RemapPanel = row.find_child(container_name)
 	if event:
-		panel.button.visible = false
 		panel.container.visible = true
 
 		# Get and display controller icons
@@ -229,6 +238,7 @@ func _set_controller_icons(row: Node, container_name: String,
 		panel.button.text = "Unassigned"
 		panel.button.visible = true
 		panel.container.visible = false
+		panel.button.theme_type_variation = "SettingsKeybindButton"
 
 	panel.action_to_remap = action_to_remap
 
