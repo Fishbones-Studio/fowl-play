@@ -1,5 +1,7 @@
 class_name ControllerMappings
 
+const ASSETS_PATH: String = "res://addons/controller_icons/assets/"
+
 
 const JOYPAD_MAPPINGS: Dictionary[String, Dictionary] = {
 	"buttons": {
@@ -29,3 +31,40 @@ const JOYPAD_MAPPINGS: Dictionary[String, Dictionary] = {
 		5: {"xboxseries": "rt", "ps5": "r2", "switch": "zr"},
 	}
 }
+
+
+static func get_asset(type: String, index: int) -> Array[String]:
+	# Validate input type
+	if type not in ["buttons", "axes"] or index not in JOYPAD_MAPPINGS[type]:
+		return []
+
+	# Get the mapping for this input
+	var mapping: Dictionary = JOYPAD_MAPPINGS[type][index]
+
+	# Build paths for all platforms
+	var paths: Array[String] = []
+	for platform in ["xboxseries", "ps5", "switch"]:
+		if platform in mapping:  # Check if platform exists in mapping
+			var asset_name: String = mapping[platform]
+			if asset_name != "NA":  # Skip unavailable mappings
+				paths.append(ASSETS_PATH + platform + "/" + asset_name + ".png")
+
+	return paths
+
+
+static func extract_joypad_from_action(action: String) -> Dictionary:
+	var result: Dictionary = {"type": "", "index": -1}
+
+	if "Button" in action:
+		result["type"] = "buttons"
+
+	elif "Axis" in action:
+		result["type"] = "axes"
+
+	var regex: RegEx = RegEx.new()
+	regex.compile("\\d+")
+	var regex_result: RegExMatch = regex.search(action)
+	if regex_result:
+		result["index"] = regex_result.get_string().to_int()
+
+	return result
