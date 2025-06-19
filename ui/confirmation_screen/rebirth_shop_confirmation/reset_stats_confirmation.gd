@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const DESCRIPTION_LABEL: String =  "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]%d%%[/color] of the currency you’ve spent.\n\n[color=yellow]This action will refund you %d Feathers of Rebirth.[/color]"
+const DESCRIPTION_LABEL: String =  "Are you sure you want to reset your stats? This will [color=yellow]reset your current stats to their default values[/color] and refund [color=yellow]%d%%[/color] of the currency you’ve spent.\n\n[color=yellow]This action will refund you [img=24x24]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img] %d.[/color]"
 
 var stats_reset_signal: Signal
 var refund_percentage: int
