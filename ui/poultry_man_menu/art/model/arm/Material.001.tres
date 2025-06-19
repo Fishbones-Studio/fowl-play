@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bxovlkwtmt18f"]
+
+[ext_resource type="Texture2D" uid="uid://bi3cn0no71yi7" path="res://ui/poultry_man_menu/art/model/arm/sleeve_texture.png" id="1_biprx"]
+
+[resource]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_biprx")
+roughness = 0.5
