@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const DESCRIPTION_TEXT: String = "Are you sure you want to purchase [color=yellow]%s (+%d)[/color] for [img=24x24]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img][color=yellow]%d[/color]"
+const DESCRIPTION_TEXT: String = "Are you sure you want to purchase [color=yellow]%s (+%d)[/color] for [img=24x24]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img][color=yellow]%d[/color]?"
 
 var purchased_signal: Signal
 var upgrade_resource: PermUpgradesResource
