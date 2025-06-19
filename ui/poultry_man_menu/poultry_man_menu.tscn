@@ -266,11 +266,11 @@ metadata/_custom_type_script = "uid://di546rbu7b42s"
 transform = Transform3D(0.103792, -0.00908066, -0.590885, -0.0523195, 0.597432, -0.0183715, 0.588634, 0.0547027, 0.102556, -3, 1.7, 9)
 
 [node name="Skeleton3D" parent="Arms/poultry_man_arm_left/Armature" index="0"]
-bones/8/rotation = Quaternion(-0.0864136, 0.0983212, 0.377383, 0.916759)
-bones/13/rotation = Quaternion(-0.0390829, -0.0272819, -0.184846, 0.981611)
-bones/14/rotation = Quaternion(-0.00334025, 0.0521692, -0.313651, 0.948098)
-bones/18/rotation = Quaternion(0.0148502, -0.00374196, -0.00273401, 0.999879)
-bones/23/rotation = Quaternion(0.0593776, 0.00463814, -0.0785731, 0.995128)
+bones/8/rotation = Quaternion(-0.0655206, 0.0750626, -0.110052, 0.988919)
+bones/13/rotation = Quaternion(-0.0179537, -0.0289021, 0.188078, 0.981565)
+bones/14/rotation = Quaternion(0.00932692, 0.0571718, 0.125163, 0.990444)
+bones/18/rotation = Quaternion(0.00902826, -0.00369426, 0.0998391, 0.994956)
+bones/23/rotation = Quaternion(0.0435395, -0.00134621, 0.0883388, 0.995138)
 
 [node name="Arm" parent="Arms/poultry_man_arm_left/Armature/Skeleton3D" index="0"]
 material_override = ExtResource("17_3pnaw")
