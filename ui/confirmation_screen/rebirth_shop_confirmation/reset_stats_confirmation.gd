@@ -6,6 +6,7 @@ var stats_reset_signal: Signal
 var refund_percentage: int
 var refund_amount: Dictionary
 
+
 func _ready() -> void:
 	title.text = "Reset stats"
 	description.text = DESCRIPTION_LABEL % [refund_percentage, refund_amount.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0)]

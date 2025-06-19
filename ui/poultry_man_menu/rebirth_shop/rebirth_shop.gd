@@ -5,7 +5,7 @@ signal stats_reset
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 @export var item_database: PermUpgradeDatabase
-@export var refund_percentage: float = 0.5
+@export var refund_percentage: float = 0.8
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
@@ -153,7 +153,6 @@ func _get_refund_amount() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 	# Iterate through the types of upgrades the player currently has
 	for upgrade_type in upgrades.keys():
 		var current_level: int = upgrades[upgrade_type]
-		print("Current level %d" % current_level)
 
 		if current_level > 0:
 			# Get the array of defined upgrade resources (levels) for this type
@@ -181,7 +180,6 @@ func _get_refund_amount() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
 			for level in range(current_level, 0, -1):
 				total_cost += base_upgrade.get_level_cost(level)
 			var refund: int = int(total_cost * refund_percentage)
-			print(refund)
 
 			if refund_totals.has(base_upgrade.currency_type):
 				refund_totals[base_upgrade.currency_type] += refund
@@ -201,8 +199,6 @@ func _on_reset_button_pressed() -> void:
 
 func _on_stats_reset() -> void:
 	var refund_amount: Dictionary[CurrencyEnums.CurrencyTypes, int] = _get_refund_amount()
-	print("aaaaaaa")
-	print(refund_amount)
 	GameManager.feathers_of_rebirth += refund_amount.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0)
 	GameManager.prosperity_eggs += refund_amount.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0)
 
