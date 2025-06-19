@@ -93,8 +93,8 @@ func update_parallax_offset(delta: float) -> void:
 
 func _get_controller_stick_input() -> Vector2:
 	# Get right stick input (following your 3D camera pattern)
-	var x_axis: float = Input.get_action_strength("right_stick_right") - Input.get_action_strength("right_stick_left")
-	var y_axis: float = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up")
+	var x_axis: float = Input.get_action_strength("look_right") - Input.get_action_strength("look_left")
+	var y_axis: float = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 
 	if invert_controller_x:
 		x_axis *= -1.0

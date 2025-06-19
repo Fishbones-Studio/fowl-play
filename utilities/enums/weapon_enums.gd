@@ -1,5 +1,4 @@
 class_name WeaponEnums
-extends Node
 
 enum WeaponType {
 	MELEE,

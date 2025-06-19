@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dewuhjp8gx8cw"]
+
+[ext_resource type="Texture2D" uid="uid://dwwgf5g11galy" path="res://addons/controller_icons/assets/xboxone/a.png" id="1_872le"]
+
+[node name="ContentItemIcon" type="TextureRect"]
+custom_minimum_size = Vector2(27, 27)
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("1_872le")
+expand_mode = 4

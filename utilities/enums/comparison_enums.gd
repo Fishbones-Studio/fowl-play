@@ -1,5 +1,4 @@
 class_name ComparisonEnums
-extends Node
 
 enum ComparisonType {
 	LESS_THAN,

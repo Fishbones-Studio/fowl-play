@@ -18,7 +18,7 @@ var _current_slash_count: int = 0
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 
 
-func activate(force_activate: bool = false) -> void:
+func activate(_force_activate: bool = false) -> void:
 	_toggle_collision_masks(true, hit_area)
 
 	_hit_bodies.clear()

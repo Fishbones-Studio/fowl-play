@@ -1,7 +1,7 @@
 class_name SettingsMenu
 extends UserInterface
 
-var focused_sidebar_item: SiderBarItem = null
+var focused_sidebar_item: SideBarItem = null
 
 @onready var settings_label: Label = %SettingsLabel
 @onready var content: Control = %Content
@@ -23,7 +23,7 @@ var focused_sidebar_item: SiderBarItem = null
 
 
 func _ready() -> void:
-	for item: SiderBarItem in sidebar_container.get_children():
+	for item: SideBarItem in sidebar_container.get_children():
 		item.focus_entered.connect(_on_sidebar_focus_entered.bind(item))
 
 	# Remove cheat menu if not in debug
@@ -44,8 +44,8 @@ func _input(_event: InputEvent) -> void:
 		_on_close_button_pressed()
 
 
-func _on_sidebar_focus_entered(sidebar_item: SiderBarItem) -> void:
-	for item: SiderBarItem in sidebar_container.get_children():
+func _on_sidebar_focus_entered(sidebar_item: SideBarItem) -> void:
+	for item: SideBarItem in sidebar_container.get_children():
 		item.active = item == sidebar_item
 		if item.active: focused_sidebar_item = item
 
@@ -61,7 +61,7 @@ func _on_close_button_pressed() -> void:
 	SignalManager.focus_lost.emit()
 
 
-func _update_content(sidebar_item: SiderBarItem) -> void:
+func _update_content(sidebar_item: SideBarItem) -> void:
 	for child in content.get_children():
 		content.remove_child(child)
 
