@@ -1,5 +1,4 @@
 class_name RoundEnums
-extends Node
 
 enum RoundTypes {
 	WAITING,
