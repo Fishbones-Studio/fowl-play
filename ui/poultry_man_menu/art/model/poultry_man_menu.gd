@@ -5,3 +5,4 @@ extends Node3D
 
 func _ready() -> void:
 	animation_player.play("Swing")
+	animation_player.play("Grind")
