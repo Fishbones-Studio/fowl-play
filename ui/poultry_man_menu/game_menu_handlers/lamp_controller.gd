@@ -27,15 +27,17 @@ extends Node
 @export var max_turn_off_duration: float = 5.0
 @export var min_turn_on_duration: float = 5.0
 @export var max_turn_on_duration: float = 30.0
+@export_category("Sound")
+@export var light_switch_on : AudioStream
+@export var light_switch_off : AudioStream
 
 var _is_flickering: bool = false
 var _original_energy: float
 var _original_volume_db: float
 var _material: BaseMaterial3D
 
-@onready var flicker_player: AudioStreamPlayer = $FlickerPlayer
+@onready var flicker_player: AudioStreamPlayer3D = $FlickerPlayer
 @onready var switch_timer: Timer = $SwitchTimer
-
 
 func _ready() -> void:
 	_original_energy = flicker_light.light_energy
@@ -54,13 +56,11 @@ func _ready() -> void:
 		switch_timer.start()
 		audio_player.play()
 
-
 func _on_flicker_timer_timeout() -> void:
 	if not _is_flickering and flicker_light and switch:
 		_start_flicker_effect()
 		flicker_timer.wait_time = randf_range(min_flicker_interval, max_flicker_interval)
 		flicker_timer.start()
-
 
 func _on_switch_timer_timeout() -> void:
 	if not _is_flickering and flicker_light:
@@ -73,11 +73,12 @@ func _on_switch_timer_timeout() -> void:
 
 		switch_timer.start()
 
-
 func _start_flicker_effect() -> void:
 	if _is_flickering: 
 		return
 
+	# Play switch off sound when flicker starts (light goes out)
+	flicker_player.stream = light_switch_off
 	flicker_player.play()
 	_is_flickering = true
 
@@ -127,10 +128,13 @@ func _start_flicker_effect() -> void:
 			_material.emission_energy_multiplier = original_emission_energy
 		_is_flickering = false
 
+		# Play switch on sound when flicker ends (light fully on)
+		flicker_player.stream = light_switch_on
+		flicker_player.play()
+
 		# Pause after flicker sequence
 		flicker_timer.start(randf_range(long_flicker_pause - 2, long_flicker_pause + 2))
 	)
-
 
 func _set_switch(state: bool) -> void:
 	if switch == state:
@@ -138,16 +142,28 @@ func _set_switch(state: bool) -> void:
 
 	switch = state
 
-	var tween = create_tween()
-	tween.tween_property(flicker_light, "light_energy", 0.0 if not switch else _original_energy, 0.5)
+	var tween: Tween = create_tween()
+	tween.tween_property(
+		flicker_light, 
+		"light_energy", 
+		0.0 if not switch else _original_energy, 
+		0.5
+	)
 	if _material:
-		tween.parallel().tween_property(_material, "emission_energy_multiplier", 0.1 if not switch else original_emission_energy, 0.5)
+		tween.parallel().tween_property(
+			_material, 
+			"emission_energy_multiplier", 
+			0.1 if not switch else original_emission_energy, 
+			0.5
+		)
 
-		if not switch:
-			switch_timer.wait_time = randf_range(min_turn_off_duration, max_turn_off_duration)
-		else:
-			switch_timer.wait_time = randf_range(min_turn_on_duration, max_turn_on_duration)
-
+	# Play the correct switch sound
+	if not switch:
+		flicker_player.stream = light_switch_off
+		switch_timer.wait_time = randf_range(min_turn_off_duration, max_turn_off_duration)
+	else:
+		flicker_player.stream = light_switch_on
+		switch_timer.wait_time = randf_range(min_turn_on_duration, max_turn_on_duration)
 	flicker_player.play()
 
 	if not switch and not periodical_switch:
