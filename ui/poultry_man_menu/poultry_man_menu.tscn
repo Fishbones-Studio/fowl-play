@@ -455,6 +455,7 @@ metadata/_custom_type_script = "uid://di546rbu7b42s"
 transform = Transform3D(0.103792, -0.00908066, -0.590885, -0.0523195, 0.597432, -0.0183715, 0.588634, 0.0547027, 0.102556, -3, 1.7, 9)
 
 [node name="Skeleton3D" parent="Arms/poultry_man_arm_left/Armature" index="0"]
+bones/0/rotation = Quaternion(0.713197, -0.700964, -8.03093e-08, -7.76976e-08)
 bones/8/rotation = Quaternion(-0.0637434, 0.0857927, 0.11109, 0.988046)
 bones/13/rotation = Quaternion(-0.0390828, -0.0272819, -0.184846, 0.981611)
 bones/14/rotation = Quaternion(-0.00334027, 0.0521692, -0.313651, 0.948098)
@@ -474,7 +475,8 @@ libraries = {
 autoplay = "Idle_2"
 
 [node name="FingerTapLeft" type="AudioStreamPlayer3D" parent="Arms/poultry_man_arm_left"]
-transform = Transform3D(1.66667, -1.04308e-07, -2.98023e-08, 0, 1.66667, 2.42144e-08, 0, -9.31323e-09, 1.66667, 0.179526, -0.207233, 0.0912666)
+transform = Transform3D(1.66667, -1.04308e-07, -5.96046e-08, 1.49012e-08, 1.66667, 4.84288e-08, 2.98023e-08, -2.23517e-08, 1.66667, -9.524, -0.146149, 0.805871)
+stream = ExtResource("19_n3git")
 volume_db = -15.0
 bus = &"SFX"
 
@@ -487,6 +489,12 @@ bones/13/rotation = Quaternion(-0.0179537, -0.0289021, 0.188078, 0.981565)
 bones/14/rotation = Quaternion(0.00932692, 0.0571718, 0.125163, 0.990444)
 bones/18/rotation = Quaternion(0.00902826, -0.00369426, 0.0998391, 0.994956)
 bones/23/rotation = Quaternion(0.0435395, -0.00134621, 0.0883388, 0.995138)
+
+[node name="Arm" parent="Arms/poultry_man_arm_right/Armature/Skeleton3D" index="0"]
+material_override = ExtResource("17_3pnaw")
+
+[node name="Sleeve" parent="Arms/poultry_man_arm_right/Armature/Skeleton3D" index="1"]
+material_override = ExtResource("18_n3git")
 
 [node name="AnimationPlayer" parent="Arms/poultry_man_arm_right" index="1"]
 libraries = {
