@@ -28,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			scroll_container.scroll_vertical += scroll_speed
 	if event is InputEventJoypadMotion:
-		var scroll_direction: float = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up")
+		var scroll_direction: float = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 		if sign(scroll_direction): # Down
 			scroll_container.scroll_vertical -= scroll_speed
 		if not sign(scroll_direction): # Up

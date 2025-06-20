@@ -125,18 +125,18 @@ func _process(delta) -> void:
 
 	# Controller input
 	var x_axis: float = (
-		Input.get_action_strength("right_stick_right")
-		- Input.get_action_strength("right_stick_left")
+		Input.get_action_strength("look_right")
+		- Input.get_action_strength("look_left")
 		if invert_x_axis
-		else Input.get_action_strength("right_stick_left")
-			- Input.get_action_strength("right_stick_right")
+		else Input.get_action_strength("look_left")
+			- Input.get_action_strength("look_right")
 	)
 	var y_axis: float = (
-		Input.get_action_strength("right_stick_down")
-		- Input.get_action_strength("right_stick_up")
+		Input.get_action_strength("look_down")
+		- Input.get_action_strength("look_up")
 		if invert_y_axis
-		else Input.get_action_strength("right_stick_up")
-			- Input.get_action_strength("right_stick_down")
+		else Input.get_action_strength("look_up")
+			- Input.get_action_strength("look_down")
 	)
 
 	# Apply controller input with sensitivity
