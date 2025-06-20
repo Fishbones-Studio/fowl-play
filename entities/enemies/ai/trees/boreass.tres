@@ -131,6 +131,7 @@ file_to_play = "uid://bxqaj5216nwbt"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BBNode" id="BBNode_4fcdy"]
 saved_value = NodePath("Model/ice_fox/AnimationPlayer")
@@ -180,6 +181,7 @@ file_to_play = "uid://di47v64gid1nf"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
@@ -269,6 +271,7 @@ file_to_play = "uid://ccvxuafdgau63"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTParallel" id="BTParallel_40a5u"]
 num_successes_required = 2
@@ -308,6 +311,7 @@ file_to_play = "uid://cdenyoraekjmh"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTAction" id="BTAction_aat0e"]
 script = ExtResource("10_5x7em")
@@ -315,6 +319,7 @@ file_to_play = "uid://c71er3uggs25u"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_tt3xs"]
 children = [SubResource("BTAction_aat0e")]

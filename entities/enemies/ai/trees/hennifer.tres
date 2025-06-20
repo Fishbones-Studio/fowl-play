@@ -97,6 +97,7 @@ file_to_play = "uid://cwvc4m1d624dm"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_8in54")]
@@ -281,6 +282,7 @@ file_to_play = "uid://cwvc4m1d624dm"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
@@ -317,6 +319,7 @@ file_to_play = "uid://bf5lhyfrveakg"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
@@ -381,6 +384,7 @@ file_to_play = "uid://bjlpjdg6s3w6c"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = null
 
 [sub_resource type="BBNode" id="BBNode_a51uw"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
