@@ -30,6 +30,7 @@ func activate(force_activate: bool = false) -> void:
 	_hit_bodies.clear()
 
 	cpu_particles.emitting = true
+	sound_effect.play()
 
 	_toggle_collision_masks(true, hit_area)
 
@@ -47,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	_attack_duration -= delta
 
 	if _attack_duration <= 0:
+		sound_effect.stop()
 		_attack_duration = 0.0
 		_toggle_collision_masks(false, hit_area)
 
