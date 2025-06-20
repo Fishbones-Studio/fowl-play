@@ -7,17 +7,12 @@ var _is_immobile: bool
 var _is_stunned: bool
 
 @onready var immobile_timer: Timer = $ImmobileTimer
-@onready var on_hurt: AudioStreamPlayer3D = $HurtSFX
-
 
 func enter(prev_state: BasePlayerMovementState, info: Dictionary = {}) -> void:
 	if player.stats.current_health <= 0 and player.killable:
 		return
 
 	super(prev_state)
-
-	# Play hurt sound
-	on_hurt.play()
 
 	# Fire the OneShot request
 	animation_tree.set("parameters/HurtOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

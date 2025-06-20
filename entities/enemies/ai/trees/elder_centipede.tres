@@ -84,7 +84,7 @@ file_to_play = "uid://cx7uvrvtsbbx0"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTCondition" id="BTCondition_vunty"]
 script = ExtResource("5_0skmy")
@@ -131,7 +131,7 @@ file_to_play = "uid://cx0frfinvkh52"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTDelay" id="BTDelay_vq4c8"]
 seconds = 5.0
@@ -157,7 +157,7 @@ file_to_play = "uid://smtvmejkv4q1"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BBNode" id="BBNode_g4wna"]
 saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
@@ -185,7 +185,7 @@ file_to_play = "uid://dw6qjrlb55obm"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_0skmy"]
 script = ExtResource("4_xatg1")
@@ -230,7 +230,7 @@ file_to_play = "uid://smtvmejkv4q1"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTParallel" id="BTParallel_jcuhm"]
 children = [SubResource("BTAction_xmi3u"), SubResource("BTAction_3xjo1")]
@@ -279,7 +279,7 @@ file_to_play = "uid://cx0frfinvkh52"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BBNode" id="BBNode_x3x70"]
 saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
@@ -382,7 +382,7 @@ file_to_play = "uid://cx0frfinvkh52"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTParallel" id="BTParallel_mfr31"]
 children = [SubResource("BTPlayAnimation_jsrsq"), SubResource("BTAction_1n68l")]
@@ -441,7 +441,7 @@ file_to_play = "uid://dw6qjrlb55obm"
 is_repeating = false
 wait_for_completion = false
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_7hjek"]
 script = ExtResource("13_eto2h")

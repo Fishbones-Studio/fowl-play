@@ -13,7 +13,6 @@ var _has_initial_velocity: bool
 # player can jump when just barely off the platform.
 @onready var coyote_timer: Timer = $CoyoteTimer
 
-
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
@@ -32,6 +31,7 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	if active_coyote_time:
 		_has_coyote = true
 		coyote_timer.start(active_coyote_time)
+		
 
 
 func process(delta: float) -> void:

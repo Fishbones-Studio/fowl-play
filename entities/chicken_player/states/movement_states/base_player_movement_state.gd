@@ -2,6 +2,10 @@ class_name BasePlayerMovementState
 extends BaseState
 
 @export var state_type: PlayerEnums.PlayerStates
+@export_group("Audio")
+@export var state_audio_file : AudioStream
+@export var state_audio_player : AudioStreamPlayer3D
+@export var loop_audio := false
 
 var player: ChickenPlayer
 var previous_state: BasePlayerMovementState
@@ -15,6 +19,22 @@ var animation_tree: AnimationTree
 ## prev_state: The state that was active before this one.
 func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 	previous_state = prev_state
+	if state_audio_player and state_audio_file:
+		# Set looping based on the variable
+		if state_audio_file is AudioStreamWAV:
+			state_audio_file.loop = loop_audio
+		elif state_audio_file is AudioStreamMP3:
+			state_audio_file.loop = loop_audio
+		elif state_audio_file is AudioStreamOggVorbis:
+			state_audio_file.loop = loop_audio
+		# Assign and play
+		state_audio_player.stream = state_audio_file
+		state_audio_player.play()
+		
+func exit() -> void:
+	# Stop if the audio is looping. If the audio is just a one time play, let it finish
+	if state_audio_player and state_audio_player.stream && loop_audio:
+		state_audio_player.stop()
 
 
 ################################################################################

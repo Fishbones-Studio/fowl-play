@@ -4,7 +4,6 @@ extends BasePlayerMovementState
 
 var _air_jumps_used: int = 0
 
-
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
