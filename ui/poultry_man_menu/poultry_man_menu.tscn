@@ -316,7 +316,7 @@ music_folder = "res://ui/poultry_man_menu/art/random_music/"
 
 [node name="RandomSFXPlayer" parent="Audio" instance=ExtResource("4_iajuv")]
 process_mode = 3
-volume_db = 2.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, -15)
 sounds_folder = "res://ui/poultry_man_menu/sound/random_sounds"
 max_random_distance = 20.0
 
@@ -386,13 +386,13 @@ font_size = 100
 script = ExtResource("11_qvty8")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
-[node name="IntervalRandomSFXPlayer" parent="Model/Cage" index="2" instance=ExtResource("4_iajuv")]
-transform = Transform3D(0.528236, 0, 1.74623e-10, 0, 5.66573, 1.86556e-08, -8.00355e-11, -6.91216e-10, 0.528236, 0.202724, 16.6043, -0.0322621)
+[node name="ChickenSoundPlayer" parent="Model/Cage" index="2" instance=ExtResource("4_iajuv")]
+transform = Transform3D(0.528236, 1.49012e-08, -5.60249e-10, -2.38419e-07, 5.66573, 5.84987e-08, 8.51287e-10, -4.42014e-09, 0.528236, 0.2, 14, 0)
+volume_db = -10.0
 sounds_folder = "res://entities/enemies/hennifer/sounds/random"
 min_random_distance = 0.0
 max_random_distance = 0.0
-min_interval = 10.0
-max_interval = 20.0
+max_interval = 10.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Model/Tabel" index="0"]
 
@@ -473,7 +473,9 @@ libraries = {
 autoplay = "Idle_2"
 
 [node name="FingerTapLeft" type="AudioStreamPlayer3D" parent="Arms/poultry_man_arm_left"]
-volume_db = -15.0
+transform = Transform3D(1.66667, -1.04308e-07, -2.98023e-08, 0, 1.66667, 2.42144e-08, 0, -9.31323e-09, 1.66667, 0.179526, -0.207233, 0.0912666)
+volume_db = -5.0
+bus = &"SFX"
 
 [node name="poultry_man_arm_right" parent="Arms" instance=ExtResource("19_7e3wk")]
 transform = Transform3D(0.103792, 0.00908066, -0.590885, -0.0522934, 0.597717, 0, 0.588636, 0.051499, 0.104189, 7, 1.7, 9)
@@ -495,6 +497,7 @@ autoplay = "Idle_1"
 transform = Transform3D(1.66667, -4.47035e-08, -1.3113e-06, -1.49012e-08, 1.66667, -2.42144e-08, 1.19209e-07, 3.72529e-09, 1.66667, -11, 0, 0.499999)
 stream = ExtResource("20_3pnaw")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="Lights" type="Node3D" parent="."]
 

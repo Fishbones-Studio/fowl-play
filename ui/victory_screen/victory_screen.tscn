@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bog7cr78ndrmh" path="res://ui/victory_screen/victory_screen.gd" id="1_w5gup"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="2_pobfu"]
 [ext_resource type="PackedScene" uid="uid://duekqgk1cks1n" path="res://ui/currency_overview/currency_overview.tscn" id="3_6h7er"]
-[ext_resource type="AudioStream" uid="uid://kwodeio65r2c" path="res://ui/victory_screen/art/music/song_3_no_dist.mp3" id="3_pobfu"]
+[ext_resource type="AudioStream" uid="uid://kwodeio65r2c" path="res://ui/victory_screen/art/music/victory_theme.mp3" id="3_pobfu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l05"]
 shader = ExtResource("2_pobfu")
