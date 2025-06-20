@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=87 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=88 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
@@ -55,7 +55,7 @@ file_to_play = "uid://1o8urvftqxb3"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 4.0
+audio_volume = 6.0
 
 [sub_resource type="BTParallel" id="BTParallel_bygkv"]
 children = [SubResource("BTPlayAnimation_ct4d5"), SubResource("BTAction_bh04r")]
@@ -66,7 +66,7 @@ file_to_play = "uid://bvkbwnxsjafmw"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_sha4y"]
 min_duration = 1.1
@@ -104,7 +104,7 @@ file_to_play = "uid://bhdsnw4rvgv8d"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 4.0
+audio_volume = 6.0
 
 [sub_resource type="BTParallel" id="BTParallel_rdov3"]
 children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_bexc2")]
@@ -159,7 +159,7 @@ file_to_play = "uid://1o8urvftqxb3"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 4.0
+audio_volume = 6.0
 
 [sub_resource type="BBNode" id="BBNode_smr14"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
@@ -282,7 +282,7 @@ file_to_play = "uid://cngwduu1ejqiv"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_bygkv"]
 script = ExtResource("4_sha4y")
@@ -290,11 +290,13 @@ file_to_play = "uid://bhdsnw4rvgv8d"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 4.0
+audio_volume = 6.0
+
+[sub_resource type="BTSequence" id="BTSequence_78ech"]
+children = [SubResource("BTAction_n1u5v"), SubResource("BTAction_bygkv")]
 
 [sub_resource type="BTParallel" id="BTParallel_bexc2"]
-num_successes_required = 2
-children = [SubResource("BTPlayAnimation_gdjfc"), SubResource("BTAction_n1u5v"), SubResource("BTAction_bygkv")]
+children = [SubResource("BTPlayAnimation_gdjfc"), SubResource("BTSequence_78ech")]
 
 [sub_resource type="BTAction" id="BTAction_ct4d5"]
 script = ExtResource("3_lk6lr")

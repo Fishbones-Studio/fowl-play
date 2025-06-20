@@ -184,7 +184,7 @@ expand_icon = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_s4pem")
-volume_db = -10.0
+volume_db = -8.0
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

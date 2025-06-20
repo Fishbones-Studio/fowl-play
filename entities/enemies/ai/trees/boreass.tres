@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=89 format=3 uid="uid://bc7ucld3pg5s8"]
+[gd_resource type="BehaviorTree" load_steps=91 format=3 uid="uid://bc7ucld3pg5s8"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
@@ -70,6 +70,17 @@ animation_player = SubResource("BBNode_40a5u")
 animation_name = &"Sprint"
 blend = 0.2
 
+[sub_resource type="BTAction" id="BTAction_mjbxb"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://ec8u4kiec2x8"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = -8.0
+
+[sub_resource type="BTParallel" id="BTParallel_vs2s8"]
+children = [SubResource("BTPlayAnimation_wrjj1"), SubResource("BTAction_mjbxb")]
+
 [sub_resource type="BTAction" id="BTAction_fhbfq"]
 script = ExtResource("3_yhbkp")
 target_var = &"target"
@@ -110,7 +121,7 @@ repeat = true
 children = [SubResource("BTAction_fhbfq"), SubResource("BTAction_nju8x"), SubResource("BTSequence_4fcdy")]
 
 [sub_resource type="BTSequence" id="BTSequence_nju8x"]
-children = [SubResource("BTSequence_qmoh7"), SubResource("BTPlayAnimation_wrjj1"), SubResource("BTParallel_fhbfq")]
+children = [SubResource("BTSequence_qmoh7"), SubResource("BTParallel_vs2s8"), SubResource("BTParallel_fhbfq")]
 
 [sub_resource type="BTParallel" id="BTParallel_yhbkp"]
 children = [SubResource("BTAlwaysFail_uqbg5"), SubResource("BTAlwaysFail_4fcdy"), SubResource("BTSequence_nju8x")]
@@ -131,7 +142,7 @@ file_to_play = "uid://bxqaj5216nwbt"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BBNode" id="BBNode_4fcdy"]
 saved_value = NodePath("Model/ice_fox/AnimationPlayer")
@@ -181,7 +192,7 @@ file_to_play = "uid://di47v64gid1nf"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_ulmcl"]
 script = ExtResource("4_yhbkp")
@@ -271,7 +282,7 @@ file_to_play = "uid://ccvxuafdgau63"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTParallel" id="BTParallel_40a5u"]
 num_successes_required = 2
@@ -311,7 +322,7 @@ file_to_play = "uid://cdenyoraekjmh"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_aat0e"]
 script = ExtResource("10_5x7em")
@@ -319,7 +330,7 @@ file_to_play = "uid://c71er3uggs25u"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = true
-audio_volume = null
+audio_volume = 0.0
 
 [sub_resource type="BTAlwaysFail" id="BTAlwaysFail_tt3xs"]
 children = [SubResource("BTAction_aat0e")]

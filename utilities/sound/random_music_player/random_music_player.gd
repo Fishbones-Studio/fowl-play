@@ -3,7 +3,6 @@ class_name RandomMusicPlayer
 extends BaseRandomAudioPlayer
 
 const MIN_DB := -80.0 ## Minimum volume in decibels, used for fade out and hacky way to 'silence' the player
-const MAX_DB := 0.0
 
 @export var fade_duration: float = 1.0
 @export var playback_delay: float = 0.5 ## Delay before starting the next track fade
@@ -26,6 +25,7 @@ var stopped: bool = false
 var is_game_paused: bool = false
 var _eq_effect_index: int = -1
 var _fading_volume_db: float = MIN_DB ## Internal volume for tweening, before pause adjustment
+var _max_db : float
 
 var tween: Tween
 
@@ -37,7 +37,8 @@ func _ready() -> void:
 	_fading_volume_db = MIN_DB # Initialize base volume
 	# Actual self.volume_db will be set by the first _process call.
 	# To ensure it's silent *before* the first _process, explicitly set it:
-	self.volume_db = MIN_DB
+	_max_db = volume_db
+	volume_db = MIN_DB
 
 	is_game_paused = get_tree().paused
 	if is_game_paused: # Apply initial pause effects if starting paused
@@ -66,7 +67,7 @@ func _update_actual_volume() -> void:
 
 	# Clamp to ensure volume_db stays within valid engine limits.
 	# MAX_DB is the normal ceiling; adjustments typically lower it.
-	self.volume_db = clamp(final_db, MIN_DB, MAX_DB)
+	self.volume_db = clamp(final_db, MIN_DB, _max_db)
 
 
 func _on_pause_state_changed(paused: bool) -> void:
@@ -157,7 +158,7 @@ func fade_in() -> void:
 	# _fading_volume_db is set to MIN_DB in _play_next_track_with_fade or _on_fade_out_finished
 	# before this is called for a new track.
 	tween = create_tween().set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "_fading_volume_db", MAX_DB, fade_duration)
+	tween.tween_property(self, "_fading_volume_db", _max_db, fade_duration)
 	tween.tween_callback(_on_fade_in_finished)
 
 

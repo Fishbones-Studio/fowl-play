@@ -23,7 +23,11 @@ extends BTAction
 @export var pause_interval_player: bool = true
 
 ## The volume in decibels for the audio (-80 = silent, 0 = normal, +6 = louder)
-@export var audio_volume: float = 0.0
+@export var audio_volume: float = 0.0 :
+	set(value):
+		audio_volume = value
+		if agent && agent.state_audio_player:
+			agent.state_audio_player.volume_db = value
 
 var audio_started: bool = false
 var audio_completed: bool = false
