@@ -1,10 +1,8 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("timmy") > 0:
-	Timmy: We meet again, hello.
 	Timmy: [[Hi again! Did you miss me?|You’re back! Let’s play some more!|Yay, you’re here! I knew you’d come back!]]
 	Timmy: [[My propeller’s been spinning [shake rate=10 level=5]super fast[/shake]! Wanna see?|I’ve been practicing my flying! Watch this!|I’m getting better at flying every day!]]
 else:
-	Timmy: Hello.
 	Timmy: [[Hi there! I’m Timmy!|Oh, hello! Are you here to play with me?|Wow, a new friend! This is so exciting!]]
 	Timmy: [[Look at my propeller! Isn’t it [color=blue]cool[/color]?|I can fly with this thing! Watch me!|I’m still learning, but it’s so much fun!]]
 - Attack => END
