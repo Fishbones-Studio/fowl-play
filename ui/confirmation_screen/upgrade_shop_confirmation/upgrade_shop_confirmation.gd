@@ -1,6 +1,6 @@
 extends ConfirmationScreen
 
-const DESCRIPTION_LABEL: String = "Are you sure you want to purchase [color=yellow]%s[/color] for [color=yellow]%d[/color] Prosperity Eggs?"
+const DESCRIPTION_LABEL: String = "Are you sure you want to purchase [color=yellow]%s[/color] for [img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img][color=yellow]%d[/color]?"
 
 var purchased_signal: Signal
 var purchase_cancelled_signal: Signal
@@ -39,6 +39,7 @@ func on_cancel_button_pressed() -> void:
 		purchase_cancelled_signal.emit()
 	else:
 		push_warning("'purchase_cancelled_signal' is missing and cannot be emitted.")
+	UIManager.toggle_ui(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION)
 	super()
 
 
@@ -47,4 +48,5 @@ func on_confirm_button_pressed() -> void:
 		purchased_signal.emit()
 	else:
 		push_warning("'purchased_signal' is missing and cannot be emitted.")
+	UIManager.toggle_ui(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION)
 	super()

@@ -5,7 +5,7 @@ signal stats_reset
 const SKILL_TREE_ITEM = preload("uid://cdudy6ia0qr8w")
 
 @export var item_database: PermUpgradeDatabase
-@export var refund_percentage := 0.8
+@export var refund_percentage: float = 0.8
 
 @onready var shop_title_label: Label = %ShopLabel
 @onready var items: VBoxContainer = %Items
@@ -141,17 +141,13 @@ func _setup_controller_navigation() -> void:
 		close_button.grab_focus()
 
 
-func _on_reset_button_pressed() -> void:
-	SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP_RESET_STATS_POPUP, {
-		"stats_reset_signal": stats_reset
-	})
+func _get_refund_amount() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
+	var refund_totals: Dictionary[CurrencyEnums.CurrencyTypes, int] = {
+		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH: 0,
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: 0
+	}
 
-
-func _on_stats_reset() -> void:
 	var upgrades: Dictionary[StatsEnums.UpgradeTypes, int] = SaveManager.get_loaded_player_upgrades()
-	var total_feathers_refund := 0
-	var total_eggs_refund := 0
-
 	var available_upgrades: Dictionary = _get_available_items_grouped()
 
 	# Iterate through the types of upgrades the player currently has
@@ -171,7 +167,7 @@ func _on_stats_reset() -> void:
 				continue # Skip to the next upgrade type
 
 			# Get the base upgrade resource (level 1)
-			var base_upgrade = upgrade_levels_data[0] if upgrade_levels_data.size() > 0 else null
+			var base_upgrade: PermUpgradesResource = upgrade_levels_data[0] if upgrade_levels_data.size() > 0 else null
 			if not base_upgrade is PermUpgradesResource:
 				printerr(
 					"Warning: Invalid base upgrade resource for type: ",
@@ -180,17 +176,31 @@ func _on_stats_reset() -> void:
 				continue
 
 			# Calculate total cost paid for all levels using the new cost calculation
-			var total_cost = base_upgrade.get_level_cost(current_level)
+			var total_cost: int = 0
+			for level in range(current_level, 0, -1):
+				total_cost += base_upgrade.get_level_cost(level)
 			var refund: int = int(total_cost * refund_percentage)
-			
-			match base_upgrade.currency_type:
-				CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
-					total_feathers_refund += refund
-				CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
-					total_eggs_refund += refund
 
-	GameManager.feathers_of_rebirth += total_feathers_refund
-	GameManager.prosperity_eggs += total_eggs_refund
+			if refund_totals.has(base_upgrade.currency_type):
+				refund_totals[base_upgrade.currency_type] += refund
+			else:
+				refund_totals[base_upgrade.currency_type] = refund
+
+	return refund_totals
+
+
+func _on_reset_button_pressed() -> void:
+	SignalManager.add_ui_scene.emit(UIEnums.UI.REBIRTH_SHOP_RESET_STATS_POPUP, {
+		"stats_reset_signal": stats_reset,
+		"refund_percentage": refund_percentage * 100,
+		"refund_amount": _get_refund_amount()
+	})
+
+
+func _on_stats_reset() -> void:
+	var refund_amount: Dictionary[CurrencyEnums.CurrencyTypes, int] = _get_refund_amount()
+	GameManager.feathers_of_rebirth += refund_amount.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0)
+	GameManager.prosperity_eggs += refund_amount.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0)
 
 	# Reset the player's upgrades and player's stats to default
 	SaveManager.save_player_upgrades(SaveManager.get_default_upgrades())
