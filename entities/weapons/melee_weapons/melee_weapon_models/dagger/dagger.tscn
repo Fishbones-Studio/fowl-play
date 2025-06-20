@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dldj0suybdnhl"]
+[gd_scene load_steps=13 format=3 uid="uid://dldj0suybdnhl"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_8ap45"]
 [ext_resource type="Resource" uid="uid://blv5macbefk8v" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tres" id="2_6a4qq"]
 [ext_resource type="PackedScene" uid="uid://bkgd1wxb8r3im" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/art/dagger.glb" id="2_8qojw"]
+[ext_resource type="AudioStream" uid="uid://qumfqu7terk6" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/sound/dagger_swing.ogg" id="4_666u7"]
+[ext_resource type="AudioStream" uid="uid://cj8ykyyt12e40" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/sound/dagger_slash.ogg" id="4_fr5cn"]
 
 [sub_resource type="Animation" id="Animation_6a4qq"]
 resource_name = "Attack"
@@ -122,6 +124,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0.699999, 0.699999, 0.7)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SlashSoundEffect:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SwingSoundEffect:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.00004),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_fr5cn"]
@@ -278,6 +304,30 @@ tracks/7/keys = {
 "update": 0,
 "values": [-2.0]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SlashSoundEffect:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SwingSoundEffect:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7m64e"]
 resource_name = "Windup"
@@ -373,5 +423,13 @@ shape = SubResource("BoxShape3D_6a4qq")
 
 [node name="dagger" parent="WeaponHitBox" index="1" instance=ExtResource("2_8qojw")]
 transform = Transform3D(-0.699999, 0, 1.77463e-06, 0, 0.699999, 0, -1.77462e-06, 0, -0.7, 0, 0.391005, 0)
+
+[node name="SlashSoundEffect" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("4_fr5cn")
+bus = &"SFX"
+
+[node name="SwingSoundEffect" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("4_666u7")
+bus = &"SFX"
 
 [editable path="WeaponHitBox/dagger"]

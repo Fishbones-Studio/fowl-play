@@ -18,7 +18,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if active_bodies.size() > 0:
 		_apply_continuous_damage()
-
 	super(delta)
 
 
