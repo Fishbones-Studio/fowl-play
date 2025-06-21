@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbevnes47ws5i" path="res://ui/main_menu/art/background_enemy_layer.png" id="4_xio0d"]
 [ext_resource type="Texture2D" uid="uid://cbcgvhyecft5v" path="res://ui/main_menu/art/background_logo_layer.png" id="5_tf5ef"]
 [ext_resource type="Texture2D" uid="uid://btjflmm1vei0y" path="res://resources/logo/fowlplay_logo.png" id="6_s4pem"]
-[ext_resource type="AudioStream" uid="uid://01te07ee2r8l" path="res://ui/main_menu/art/song_1.mp3" id="11_s4pem"]
+[ext_resource type="AudioStream" uid="uid://01te07ee2r8l" path="res://ui/main_menu/art/main_menu.mp3" id="11_s4pem"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joh67"]
 shader = ExtResource("3_3c04x")
@@ -184,6 +184,7 @@ expand_icon = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_s4pem")
+volume_db = -8.0
 bus = &"Music"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

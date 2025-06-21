@@ -19,12 +19,18 @@ extends BTAction
 			is_repeating = false
 		wait_for_completion = value
 
-## Wheter this audio should pause the enemies interval player
+## Whether this audio should pause the enemies interval player
 @export var pause_interval_player: bool = true
+
+## The volume in decibels for the audio (-80 = silent, 0 = normal, +6 = louder)
+@export var audio_volume: float = 0.0 :
+	set(value):
+		audio_volume = value
+		if agent && agent.state_audio_player:
+			agent.state_audio_player.volume_db = value
 
 var audio_started: bool = false
 var audio_completed: bool = false
-
 
 func _generate_name() -> String:
 	if file_to_play.is_empty():
@@ -35,7 +41,6 @@ func _generate_name() -> String:
 
 	# Format the final string for the Behavior Tree editor.
 	return "PlayEnemyAudio: %s%s" % [file_name, type_suffix]
-
 
 func _enter() -> void:
 	# Reset state
@@ -67,10 +72,12 @@ func _enter() -> void:
 		if not agent.state_audio_player.finished.is_connected(_on_audio_finished):
 			agent.state_audio_player.finished.connect(_on_audio_finished, CONNECT_ONE_SHOT)
 
+	# Set the audio volume
+	agent.state_audio_player.volume_db = audio_volume
+
 	# Play the sound file
 	agent.play_state_audio(audio_stream)
 	audio_started = true
-
 
 func _tick(_delta: float) -> int:
 	if not agent is Enemy or not audio_started:
@@ -93,7 +100,6 @@ func _tick(_delta: float) -> int:
 			# Succeed immediately once started
 			return SUCCESS
 
-
 func _exit() -> void:
 	# Stop repeating audio when exiting
 	if agent is Enemy:
@@ -102,7 +108,6 @@ func _exit() -> void:
 	# Disconnect signal if connected
 	if agent is Enemy and agent.state_audio_player.finished.is_connected(_on_audio_finished):
 		agent.state_audio_player.finished.disconnect(_on_audio_finished)
-
 
 func _on_audio_finished() -> void:
 	audio_completed = true

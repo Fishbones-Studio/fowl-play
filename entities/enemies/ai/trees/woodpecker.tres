@@ -1,8 +1,9 @@
-[gd_resource type="BehaviorTree" load_steps=60 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_nm0l6"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="4_8n2b3"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_h0qwm"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_7lgdv"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_ftfet"]
@@ -57,6 +58,17 @@ animation_name = &"Sprint"
 blend = 0.2
 speed = 2.0
 
+[sub_resource type="BTAction" id="BTAction_gghh5"]
+script = ExtResource("4_8n2b3")
+file_to_play = "uid://bp8073kq2s7ck"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_c8cr3"]
+children = [SubResource("BTPlayAnimation_8n2b3"), SubResource("BTAction_gghh5")]
+
 [sub_resource type="BTAction" id="BTAction_f1ys2"]
 script = ExtResource("4_h0qwm")
 target_var = &"target"
@@ -97,7 +109,7 @@ repeat = true
 children = [SubResource("BTAction_f1ys2"), SubResource("BTAction_xl814"), SubResource("BTSequence_gghh5")]
 
 [sub_resource type="BTSequence" id="BTSequence_8n2b3"]
-children = [SubResource("BTSequence_h0qwm"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
+children = [SubResource("BTSequence_h0qwm"), SubResource("BTParallel_c8cr3"), SubResource("BTParallel_nupj8")]
 
 [sub_resource type="BTParallel" id="BTParallel_f1ys2"]
 children = [SubResource("BTAlwaysFail_gwx8i"), SubResource("BTSequence_8n2b3")]
@@ -163,6 +175,17 @@ animation_player = SubResource("BBNode_f1ys2")
 animation_name = &"Sprint"
 blend = 0.2
 
+[sub_resource type="BTAction" id="BTAction_hnjin"]
+script = ExtResource("4_8n2b3")
+file_to_play = "uid://bp8073kq2s7ck"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_jldam"]
+children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_hnjin")]
+
 [sub_resource type="BTAction" id="BTAction_gwx8i"]
 script = ExtResource("8_mxuth")
 target_var = &"target"
@@ -176,7 +199,7 @@ path_update_interval = 0.05
 face_moving_direction = true
 
 [sub_resource type="BTSequence" id="BTSequence_f1ys2"]
-children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_gwx8i")]
+children = [SubResource("BTParallel_jldam"), SubResource("BTAction_gwx8i")]
 
 [sub_resource type="BTAction" id="BTAction_h0qwm"]
 script = ExtResource("4_h0qwm")

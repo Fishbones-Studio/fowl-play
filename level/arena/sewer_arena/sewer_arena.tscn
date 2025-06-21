@@ -647,8 +647,9 @@ shape = SubResource("BoxShape3D_pnorv")
 [node name="RandomMusicPlayer" parent="." instance=ExtResource("3_b4aaq")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 40, 0)
-volume_db = 30.0
+volume_db = -12.0
 unit_size = 400.0
+max_db = 2.0
 pause_eq_enabled = true
 pause_eq_band_2_db = -20.0
 pause_eq_band_3_db = -30.0
