@@ -141,6 +141,6 @@ shape = SubResource("SphereShape3D_kxu0f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.714533, 1, 0)
 stream = ExtResource("4_tfv5j")
 volume_db = -4.0
-unit_size = 4.0
+unit_size = 5.0
 autoplay = true
 bus = &"SFX"
