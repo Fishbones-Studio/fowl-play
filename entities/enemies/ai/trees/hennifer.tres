@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=105 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=109 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -97,6 +97,7 @@ file_to_play = "uid://cwvc4m1d624dm"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTSequence" id="BTSequence_k4t8y"]
 children = [SubResource("BTParallel_504pj"), SubResource("BTAction_8in54")]
@@ -203,6 +204,17 @@ blend = 0.2
 speed = 2.0
 from_end = true
 
+[sub_resource type="BTAction" id="BTAction_g1hyr"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://mgtn4ew61oyf"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_4he0i"]
+children = [SubResource("BTPlayAnimation_dbsnm"), SubResource("BTAction_g1hyr")]
+
 [sub_resource type="BTAction" id="BTAction_cgerr"]
 script = ExtResource("4_schhj")
 target_var = &"target"
@@ -243,7 +255,7 @@ repeat = true
 children = [SubResource("BTAction_cgerr"), SubResource("BTAction_f2bow"), SubResource("BTSequence_xlk6v")]
 
 [sub_resource type="BTSequence" id="BTSequence_504pj"]
-children = [SubResource("BTSequence_k7lfl"), SubResource("BTPlayAnimation_dbsnm"), SubResource("BTParallel_qjxos")]
+children = [SubResource("BTSequence_k7lfl"), SubResource("BTParallel_4he0i"), SubResource("BTParallel_qjxos")]
 
 [sub_resource type="BTParallel" id="BTParallel_viady"]
 children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880"), SubResource("BTAlwaysFail_k7lfl"), SubResource("BTAlwaysFail_cofkk"), SubResource("BTSequence_504pj")]
@@ -281,6 +293,7 @@ file_to_play = "uid://cwvc4m1d624dm"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BBNode" id="BBNode_k7lfl"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
@@ -317,6 +330,7 @@ file_to_play = "uid://bf5lhyfrveakg"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_hcbj7"]
 script = ExtResource("6_pia2r")
@@ -381,6 +395,15 @@ file_to_play = "uid://bjlpjdg6s3w6c"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BTAction" id="BTAction_ikecd"]
+script = ExtResource("13_504pj")
+file_to_play = "uid://mgtn4ew61oyf"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
 
 [sub_resource type="BBNode" id="BBNode_a51uw"]
 saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
@@ -391,6 +414,9 @@ animation_player = SubResource("BBNode_a51uw")
 animation_name = &"Walking"
 blend = 0.2
 speed = 2.0
+
+[sub_resource type="BTParallel" id="BTParallel_augj3"]
+children = [SubResource("BTAction_ikecd"), SubResource("BTPlayAnimation_schhj")]
 
 [sub_resource type="BTCondition" id="BTCondition_sxcr3"]
 script = ExtResource("7_schhj")
@@ -429,7 +455,7 @@ children = [SubResource("BTAlwaysFail_kpifs"), SubResource("BTAction_mnhi0"), Su
 
 [sub_resource type="BTSequence" id="BTSequence_pia2r"]
 custom_name = "Retreat"
-children = [SubResource("BTCondition_f2bow"), SubResource("BTAction_viady"), SubResource("BTPlayAnimation_schhj"), SubResource("BTParallel_5c880")]
+children = [SubResource("BTCondition_f2bow"), SubResource("BTAction_viady"), SubResource("BTParallel_augj3"), SubResource("BTParallel_5c880")]
 metadata/_weight_ = 1.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ptrup"]

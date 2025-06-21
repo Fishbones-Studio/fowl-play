@@ -24,17 +24,17 @@ transform = Transform3D(-0.6, 0, 9.05975e-08, 0, 0.6, 0, -9.05975e-08, 0, -0.6, 
 [node name="Skeleton3D" parent="Model/chicken_hennifer/Armature_002" index="1"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62968e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.478932, -0.00102937, 0.00324597, 0.877846)
-bones/3/rotation = Quaternion(-0.514094, 0.00303936, -0.0152266, 0.857593)
-bones/4/rotation = Quaternion(-0.104649, -0.000459341, -0.00633923, 0.994489)
+bones/2/rotation = Quaternion(-0.434138, -0.00257234, 0.0106214, 0.90078)
+bones/3/rotation = Quaternion(-0.685707, -0.0919002, 0.00572196, 0.72203)
+bones/4/rotation = Quaternion(-0.109824, 0.0204284, 0.0224777, 0.993487)
 bones/5/rotation = Quaternion(-0.240422, -0.0521261, -0.745972, 0.618874)
 bones/6/rotation = Quaternion(-0.268938, 0.0361643, 0.74135, 0.613812)
-bones/7/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/8/rotation = Quaternion(0.221853, -0.00514692, -0.116275, 0.968109)
-bones/9/rotation = Quaternion(0.239825, 0.0230637, -0.147195, 0.959315)
-bones/10/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
+bones/7/rotation = Quaternion(0.150566, 0.0307317, 0.238495, 0.958909)
+bones/8/rotation = Quaternion(0.588505, -0.129407, -0.14376, 0.785015)
+bones/9/rotation = Quaternion(0.0662418, 0.151163, -0.146547, 0.975339)
+bones/10/rotation = Quaternion(0.308751, 0.0791932, 0.198242, 0.926877)
 bones/11/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/11/rotation = Quaternion(-0.225762, -8.30913e-17, -8.30913e-17, 0.974182)
+bones/11/rotation = Quaternion(-0.23933, 0.0450574, 0.053253, 0.968429)
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17727, -0.0127716)
@@ -60,10 +60,10 @@ weapon_collision_mask = 2
 custom_minimum_size = Vector2(50, 50)
 texture = ExtResource("7_dpmrq")
 
-[node name="StateAudioPlayer" parent="." index="12"]
+[node name="StateAudioPlayer" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
 
-[node name="IntervalAudioPlayer" parent="." index="13"]
+[node name="IntervalAudioPlayer" parent="." index="12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.9)
 sounds_folder = "res://entities/enemies/hennifer/sounds/random"
 

@@ -2,22 +2,20 @@ extends BasePlayerMovementState
 
 var _stamina_cost: int
 
-
 func enter(prev_state: BasePlayerMovementState, _information: Dictionary = {}) -> void:
+	# Handle state transitions
+	if player.stats.current_stamina < _stamina_cost:
+		print("Not enough stamina to glide")
+		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
+		return
+		
 	super(prev_state)
 
 	player.velocity.y = 0
 
 	_stamina_cost = movement_component.glide_stamina_cost
 
-	# Handle state transitions
-	if player.stats.current_stamina < _stamina_cost:
-		print("Not enough stamina to glide")
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.FALL_STATE, {})
-		return
-
 	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
-
 
 func process(delta: float) -> void:
 	# Drain stamina and updates the stamina bar in the HUD

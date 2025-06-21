@@ -92,6 +92,7 @@ file_to_play = "uid://4m2cpetrip3j"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_yvhtp"]
 script = ExtResource("4_m26ws")
@@ -181,6 +182,7 @@ file_to_play = "uid://b28qpi4ryjwu5"
 is_repeating = false
 wait_for_completion = true
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_wg5pp"]
 script = ExtResource("9_mkwy1")
@@ -188,6 +190,7 @@ file_to_play = "uid://bc3fhvn1om63"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTSequence" id="BTSequence_7icws"]
 children = [SubResource("BTAction_rme62"), SubResource("BTAction_wg5pp")]
