@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cwwmblkt7dr02"]
 
-[ext_resource type="Texture2D" uid="uid://3rpjm7rltqlk" path="res://entities/abilities/ability_models/fire_ball/fire_ball.png" id="1_aief6"]
+[ext_resource type="Texture2D" uid="uid://3rpjm7rltqlk" path="res://entities/abilities/ability_models/fire_ball/art/fire_ball.png" id="1_aief6"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_dllc3"]
 
 [resource]
@@ -8,10 +8,18 @@ script = ExtResource("1_dllc3")
 cooldown = 10.0
 name = "Fire Ball"
 purchasable = true
+is_free = false
 drop_chance = 20
 cost = 150
 currency_type = 0
-description = "The user launches a fiery projectile straight ahead, dealing damage to targets in its path. The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], growing in size and intensity—the longer it remains on the arena, the more powerful its damage becomes. Targets caught within the fireball take damage every [color=\"yellow\"]0.2 seconds[/color]. This ability has a cooldown of %s."
+description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path.
+
+The fireball travels at [color=\"yellow\"]5 m/s[/color] for up to [color=\"yellow\"]6 seconds[/color], gradually growing in size and intensity—the longer it remains on the field, the more damage it deals.
+
+Targets caught within the fireball take damage instantly, with damage scaling based on [color=yellow]100%%[/color] of the user's [color=orange]Stamina[/color], then again every [color=\"yellow\"]0.5 seconds[/color] while inside.
+
+This ability consumes [color=yellow]50%%[/color] of the user's [color=orange]Max Stamina[/color] and has a cooldown of %s."
+short_description = "The user launches a fireball that [color=yellow]expands over time[/color], dealing [color=yellow]strong continuous[/color] damage to targets within, with damage scaling based on the user's [color=orange]Stamina[/color], before fading after a [color=yellow]moderate duration[/color]."
 icon = ExtResource("1_aief6")
 model_uid = "uid://r2kfankkht6"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

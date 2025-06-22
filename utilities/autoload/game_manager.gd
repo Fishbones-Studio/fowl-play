@@ -14,15 +14,18 @@ var chicken_player: ChickenPlayer = null:
 		print("GameManager.chicken_player set to:", value)
 		if value != null:
 			chicken_player_set.emit()
-		
+
 var current_enemy: Enemy
 
 var prosperity_eggs: int:
 	set(value):
 		if prosperity_eggs == value:
 			return
+		elif value < 0:
+			push_error("Prosperity Eggs cannot be negative, setting to 0 instead.")
+			value = 0
 		prosperity_eggs = value
-		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
+		SaveManager.save_currency(prosperity_eggs, CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS)
 		prosperity_eggs_changed.emit(value)
 
 
@@ -30,8 +33,11 @@ var feathers_of_rebirth: int:
 	set(value):
 		if feathers_of_rebirth == value:
 			return
+		elif value < 0:
+			push_error("Feathers of Rebirth cannot be negative, setting to 0 instead.")
+			value = 0
 		feathers_of_rebirth = value
-		SaveManager.save_currency(feathers_of_rebirth, prosperity_eggs)
+		SaveManager.save_currency(feathers_of_rebirth, CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH)
 		feathers_of_rebirth_changed.emit(value)
 
 
@@ -112,21 +118,23 @@ func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntit
 		print("Restoring damage stats from default resource for damage")
 		# Restore damage stats from the loaded default resource
 		stats.attack = default_stats.attack
-		
+
 	player_stats_updated.emit(stats) # Emit signal to update player stats in the game
 	return stats
+
 
 ## Game reset to be used in game, with persisting upgrades, f.o.r. and encounters 
 func reset_game() -> void:
 	# Use the setter for prosperity_eggs to ensure signals/updates happen
 	prosperity_eggs = clamp(
-		(100 + current_round * int(arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 50) / 2.0)), 300, 300
+		(100 + current_round * int(arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 50) / 2.0)), 200, 200
 	)
 	SaveManager.reset_game_data()
 	if Inventory:
 		Inventory.reset_inventory()
 	else:
 		push_warning("Inventory not available for reset.")
+
 
 ## Deletes the save files
 func hard_reset_game() -> void:

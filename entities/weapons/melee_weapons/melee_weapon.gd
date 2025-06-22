@@ -13,9 +13,9 @@ var attacking: bool = false:
 
 var hit_targets_this_swing: Array[Node] = []
 var entity_stats: LivingEntityStats
+var enable_stun: bool = true
 
 @onready var weapon_hit_box: Area3D = $WeaponHitBox
-@onready var weapon_attack_sfx: AudioStreamPlayer = $WeaponAttackSFX
 
 
 func _physics_process(_delta: float) -> void:
@@ -41,3 +41,7 @@ func _check_for_hit() -> void:
 ## Funtion to call from animation tracks
 func set_attacking(attacking_value: bool) -> void:
 	attacking = attacking_value
+
+
+func weapon_hit_effect(_body: CharacterBody3D) -> void:
+	pass

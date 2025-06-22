@@ -1,66 +1,77 @@
-[gd_scene load_steps=10 format=3 uid="uid://towsqhy2adj7"]
+[gd_scene load_steps=12 format=3 uid="uid://towsqhy2adj7"]
 
 [ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_k6lf6"]
 [ext_resource type="Resource" uid="uid://d2pw0mto5qqma" path="res://entities/enemies/woodpecker/woodpecker_stats.tres" id="3_woodpecker_stats"]
 [ext_resource type="BehaviorTree" uid="uid://dn83muanle5ic" path="res://entities/enemies/ai/trees/woodpecker.tres" id="4_1t2bg"]
 [ext_resource type="PackedScene" uid="uid://bcy114uphsh2s" path="res://entities/enemies/woodpecker/art/woodpecker.glb" id="4_woodpecker_model"]
-[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="5_p6jwh"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_vfx5i"]
+[ext_resource type="PackedScene" uid="uid://bymaeu4dtl7ex" path="res://entities/weapons/melee_weapons/melee_weapon_models/leek/leek.tscn" id="6_vfx5i"]
 [ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="6_x6gfb"]
 [ext_resource type="Resource" uid="uid://cwwmblkt7dr02" path="res://entities/abilities/ability_models/fire_ball/fire_ball.tres" id="7_p6jwh"]
-[ext_resource type="Texture2D" uid="uid://bqvvdvkbjcu8y" path="res://entities/enemies/woodpecker/art/woodpecker_mugshot.png" id="8_p6jwh"]
+[ext_resource type="Resource" uid="uid://blc88hxvg3otq" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.tres" id="9_ioi28"]
+[ext_resource type="Texture2D" uid="uid://cus8qvfc2ebc7" path="res://entities/enemies/woodpecker/art/icon/woodpecker_icon.png" id="11_cx7ru"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kh81q"]
-size = Vector3(1.5, 5, 2)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vfx5i"]
+radius = 1.5
+height = 5.0
 
-[node name="Woodpecker" node_paths=PackedStringArray("enemy_model") instance=ExtResource("1_k6lf6")]
+[node name="Woodpecker" instance=ExtResource("1_k6lf6")]
 stats = ExtResource("3_woodpecker_stats")
-enemy_model = NodePath("woodpecker")
 dialogue_path = "res://entities/enemies/woodpecker/dialogue"
-name_label_template_string = "%s"
+name_label_template_string = "%s the Finality"
 
-[node name="woodpecker" parent="." index="0" instance=ExtResource("4_woodpecker_model")]
+[node name="woodpecker" parent="Model" index="0" instance=ExtResource("4_woodpecker_model")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Skeleton3D" parent="woodpecker/Armature" index="0"]
+[node name="Skeleton3D" parent="Model/woodpecker/Armature" index="0"]
 bones/1/position = Vector3(-0.534314, -0.211753, 0.385049)
-bones/1/rotation = Quaternion(0.40911, 0.13115, 0.90136, 0.0545716)
-bones/2/rotation = Quaternion(-0.0899622, -0.0191105, 0.0018193, 0.99576)
-bones/3/rotation = Quaternion(0.696552, 0.0502804, 0.0965054, 0.709206)
-bones/6/rotation = Quaternion(0.0921738, -2.5427e-08, -0.109848, 0.989665)
-bones/7/rotation = Quaternion(0.372215, 1.9392e-07, -0.443588, 0.815283)
-bones/8/rotation = Quaternion(-0.254674, -5.70863e-08, 0.303508, 0.918163)
-bones/9/rotation = Quaternion(-0.0929396, -1.66711e-08, 0.110761, 0.989492)
-bones/10/rotation = Quaternion(-0.0114476, 2.59861e-08, 0.0136427, 0.999841)
-bones/11/rotation = Quaternion(0.428146, 0.0317808, 0.888001, -0.164725)
-bones/12/rotation = Quaternion(-0.0928503, 0.0199919, -0.0528651, 0.994075)
-bones/14/position = Vector3(0.0982326, 2.09585, -1.47197)
-bones/14/rotation = Quaternion(0.556543, -6.54378e-08, -0.663262, 0.500343)
-bones/15/position = Vector3(-1.34829, 2.09585, 0.251932)
-bones/15/rotation = Quaternion(0.556543, -1.05742e-07, -0.663262, 0.500343)
+bones/1/rotation = Quaternion(0.429745, -0.088617, 0.884889, 0.156325)
+bones/2/rotation = Quaternion(-0.108175, -0.0229793, 0.00181586, 0.993865)
+bones/3/rotation = Quaternion(0.719049, 0.0519085, 0.0934374, 0.686691)
+bones/6/rotation = Quaternion(0.121818, -0.102718, 0.0158911, 0.987095)
+bones/7/rotation = Quaternion(0.368966, 2.08267e-07, -0.439716, 0.818849)
+bones/8/rotation = Quaternion(-0.141068, -0.0383007, 0.215315, 0.965543)
+bones/9/rotation = Quaternion(-0.0118474, 0.0384793, -0.0968876, 0.994481)
+bones/10/rotation = Quaternion(-0.175536, -0.028008, 0.215999, 0.960077)
+bones/11/rotation = Quaternion(0.428773, 0.316828, 0.796762, -0.284508)
+bones/12/rotation = Quaternion(-0.29924, 0.0681507, -0.0491138, 0.950473)
+bones/14/position = Vector3(-0.00794601, 2.09585, -1.34543)
+bones/14/rotation = Quaternion(0.84576, 0.424655, -0.17469, 0.271738)
+bones/15/position = Vector3(-1.18532, 2.09585, 0.0577129)
+bones/15/rotation = Quaternion(-0.109285, -0.412461, -0.875915, 0.225179)
 
 [node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-shape = SubResource("BoxShape3D_kh81q")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.4)
+shape = SubResource("CapsuleShape3D_vfx5i")
 
 [node name="DamageNumberHandler" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.75)
 
-[node name="BTPlayer" parent="." index="4"]
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36206, 0.0804582)
+
+[node name="BTPlayer" parent="." index="5"]
 behavior_tree = ExtResource("4_1t2bg")
 
-[node name="EnemyWeaponController" parent="." index="5"]
-transform = Transform3D(1.26061, 0.223603, 0.22551, -0.216576, 1.28047, -0.0589719, -0.232267, 0.0196159, 1.27893, 0.866819, 2.05749, -0.270321)
-
-[node name="MeleeWeapon" parent="EnemyWeaponController" index="0"]
-melee_weapon_scene = ExtResource("5_p6jwh")
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_vfx5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.6, -0.5)
+melee_weapon_scene = ExtResource("6_vfx5i")
 weapon_collision_mask = 2
 
 [node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("6_x6gfb")]
 ability_resource = ExtResource("7_p6jwh")
 
-[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
-texture = ExtResource("8_p6jwh")
-expand_mode = 3
-stretch_mode = 5
+[node name="AbilitySlot2" parent="EnemyAbilityController" index="1" instance=ExtResource("6_x6gfb")]
+ability_resource = ExtResource("9_ioi28")
 
-[editable path="woodpecker"]
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("11_cx7ru")
+
+[node name="StateAudioPlayer" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, -2.2)
+
+[node name="IntervalAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, -2.2)
+sounds_folder = "res://entities/enemies/woodpecker/sound/random"
+
+[editable path="Model/woodpecker"]

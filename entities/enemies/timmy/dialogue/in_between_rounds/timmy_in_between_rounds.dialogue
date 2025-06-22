@@ -1,0 +1,92 @@
+~ start
+if SaveManager.get_enemy_encounter_count("timmy") > 0:
+	Timmy: [[Hi again! Did you miss me?|You’re back! Let’s play some more!|Yay, you’re here! I knew you’d come back!]]
+	Timmy: [[My propeller’s been spinning [shake rate=10 level=5]super fast[/shake]! Wanna see?|I’ve been practicing my flying! Watch this!|I’m getting better at flying every day!]]
+else:
+	Timmy: [[Hi there! I’m Timmy!|Oh, hello! Are you here to play with me?|Wow, a new friend! This is so exciting!]]
+	Timmy: [[Look at my propeller! Isn’t it [color=blue]cool[/color]?|I can fly with this thing! Watch me!|I’m still learning, but it’s so much fun!]]
+- Attack => END
+- Talk => standard_dialogue
+
+~ standard_dialogue
+	=> proceed_to_fight
+- What’s with the propeller?
+	Timmy: [[Oh, this? It’s my [color=blue]super special propeller[/color]!|It helps me fly! Like this! *Spins propeller*|I don’t know where it came from, but it’s [shake rate=10 level=5]awesome[/shake]!]]
+	Timmy: [[I can go really high with it!|Sometimes I get dizzy though... *Giggles*|Do you want to try it?]]
+	=> propeller_options
+- How did you end up here?
+	Timmy: [[I’m not really sure...|I was just flying around, and then I ended up here!|I think someone brought me here, but I don’t know who.]]
+	Timmy: [[It’s kind of scary, but I’m trying to make the best of it!|I’ve met some nice chickens here... and some not-so-nice ones.|I just want to have fun and [shake rate=10 level=5]fly around[/shake]!]]
+	=> arena_options
+- You’re just a kid...
+	Timmy: [[Hey! I’m not just a kid! I’m a [color=orange]big kid[/color]!|I might be small, but I’m tough!|I’m stronger than I look, you know!]]
+	Timmy: [[I can still fight if I have to!|I’m not scared... well, maybe a little.|But I’ll do my best!]]
+	=> fight_options
+- What’s with the minigun?
+	Timmy: [[Oh, this? It’s my [color=red]super special minigun[/color]!|It’s really fun to shoot! Like this! *Spins minigun*|I don’t know where it came from, but it’s [shake rate=10 level=5]awesome[/shake]!]]
+	Timmy: [[I can shoot really fast with it!|Sometimes I hit things I don’t mean to... *Giggles*|Do you want to try it?]]
+	=> minigun_options
+
+~ proceed_to_fight
+Timmy: Time to Goose you up.
+=> END
+
+~ propeller_options
+Timmy: [[I love my propeller! It’s the [shake rate=10 level=5]best thing ever[/shake]!|I can fly higher than anyone else!|Sometimes I even race the birds!]]
+- Can you teach me to fly?
+	Timmy: [[Sure! Just spin really fast and... uh... jump!|It’s easy once you get the hang of it!|But you need a propeller like mine!]]
+	Timmy: [[Maybe I can make one for you!|But first, you have to promise to be careful!|Flying is fun, but it’s also a [color=blue]big responsibility[/color]!]]
+	=> continue_or_end
+- Do you ever crash?
+	Timmy: [[Oh, yeah... sometimes.|I’ve crashed into trees, fences, even a few chickens!|But I always get back up!|That’s what makes me a [color=blue]tough kid[/color]!]]
+	Timmy: [[Crashing is just part of learning, right?|You gotta fall a few times before you can fly!|But I’m getting better every day!]]
+	=> continue_or_end
+
+~ minigun_options
+Timmy: [[I love my minigun! It’s the [shake rate=10 level=5]best thing ever[/shake]!|I can shoot really fast with it!|Sometimes I hit things I don’t mean to... *Giggles*]]
+- Can you teach me to shoot?
+	Timmy: [[Sure! Just aim and... uh... pull the trigger!|It’s easy once you get the hang of it!|But you need a minigun like mine!]]
+	Timmy: [[Maybe I can make one for you!|But first, you have to promise to be careful!|Shooting is fun, but it’s also a [color=red]big responsibility[/color]!]]
+	=> continue_or_end
+- Do you ever miss?
+	Timmy: [[Oh, yeah... sometimes.|I’ve missed targets and hit trees, fences, even a few chickens!|But I always get better!|That’s what makes me a [color=blue]tough kid[/color]!]]
+	Timmy: [[Missing is just part of learning, right?|You gotta miss a few times before you can hit!|But I’m getting better every day!]]
+	=> continue_or_end
+- How did you get the minigun?
+	Timmy: [[Ì got it as a present from the scary scientists that took me in!|They wanted me to use it on my parents as a tickeling machine!]]
+	Timmy: [[I didn’t know what it was at first, but then I figured it out!|It’s really fun to shoot!|Sometimes I hit things I don’t mean to... *Giggles*]]
+	=> continue_or_end
+
+~ arena_options
+Timmy: [[This place is kinda weird, isn’t it?|I mean, it’s fun to fly around, but some of the other chickens are scary.|I try to stay out of trouble, but it’s hard!]]
+- Are you scared of the other fighters?
+	Timmy: [[A little... some of them are really big and mean.|But I’m not gonna let them push me around!|I’ve got my propeller, and I’m not afraid to use it!]]
+	Timmy: [[I’m a [color=orange]brave kid[/color], you know!|I might be small, but I’ve got a big heart!|And I’m not gonna let anyone stop me from having fun!]]
+	=> continue_or_end
+- Do you ever fight?
+	Timmy: [[Only if I have to!|I don’t like fighting, but sometimes it’s the only way.|I’d rather just fly away, but I’ll stand my ground if I need to!]]
+	Timmy: [[I’m not the strongest, but I’m fast!|And my propeller gives me an edge!|I’ll do whatever it takes to survive!]]
+	=> continue_or_end
+
+~ fight_options
+Timmy: [[I’m not afraid to fight if I have to!|I might be a kid, but I’m tough!|I’ll do my best, no matter what!]]
+- You’re just a kid... can you really fight?
+	Timmy: [[Hey! I’m stronger than I look!|I’ve got my propeller, and I’m not afraid to use it!|I might be small, but I’m a [color=orange]tough kid[/color]!]]
+	Timmy: [[I’ve fought before, and I’ve won!|I’m not gonna let anyone push me around!|I’ll fight if I have to, but I’d rather just fly away!]]
+	=> continue_or_end
+- What’s your fighting style?
+	Timmy: [[I’m fast! I use my propeller to [shake rate=15 level=8]zip around[/shake] and dodge attacks!|I’m not the strongest, but I’m quick!|And I’ve got a few tricks up my sleeve!]]
+	Timmy: [[I like to surprise my opponents!|They don’t expect a kid like me to be so fast!|I’ll do whatever it takes to win!]]
+	=> continue_or_end
+
+~ continue_or_end
+Timmy: [[So, what do you wanna do now?|Wanna play some more?|Or are you ready to fight?]]
+- Let’s play!
+	Timmy: [[Yay! Let’s go!|I’ll race you to the other side of the arena!|Ready, set, go!]]
+	=> END
+- I’m ready to fight.
+	Timmy: [[Okay... I’ll do my best!|I’m not gonna go easy on you!|Let’s see who’s the fastest!]]
+	=> END
+- I need to go.
+	Timmy: [[Aww, okay...|Come back soon, okay?|I’ll be here, spinning my propeller!]]
+	=> END

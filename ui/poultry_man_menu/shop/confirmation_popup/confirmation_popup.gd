@@ -1,13 +1,18 @@
-extends Control
+extends ConfirmationScreen
 
-const CONFIRMATION_ITEM_SCENE = preload("uid://bsstdeorrjt66")
-var existing_item_resource: BaseResource
+const CONFIRMATION_ITEM_SCENE: PackedScene = preload("uid://bsstdeorrjt66")
+
+var existing_item_resource: Array[BaseResource]
 var new_item_resource: BaseResource
 var purchased_signal: Signal
 var purchase_cancelled_signal: Signal
 
-@onready var owned_items_container: CenterContainer = %OwnedItemsContainer
-@onready var new_item_container: CenterContainer = %NewItemContainer
+var highlight_stylebox: StyleBoxFlat = preload("uid://c80bewaohqml0")
+var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
+
+var _selected_item_resource: BaseResource # Item to remove at the end
+var _selected_item_node: ConfirmationItem # Node to highlight
+var _is_swapping: bool = false
 
 
 func setup(params: Dictionary) -> void:
@@ -22,14 +27,21 @@ func setup(params: Dictionary) -> void:
 
 
 func _ready() -> void:
-	_load_items()
+	if existing_item_resource.is_empty():
+		title.text = "Buy Item"
+		_update_confirmation_text()
+	else:
+		title.text = "Swap Item"
+		_is_swapping = true
+		_load_items()
+	super()
 
 
 func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
 	or Input.is_action_just_pressed("ui_cancel") ) \
 	and UIManager.previous_ui == UIManager.ui_list.get(UIEnums.UI.POULTRYMAN_SHOP):
-		_cancel_purchase()
+		on_cancel_button_pressed()
 		# To gain focus again, toggling twice is a bit stupid though, maybe a bool
 		# parameter would be more intuitive
 		UIManager.toggle_ui(UIEnums.UI.POULTRYMAN_SHOP) # Close UI
@@ -38,27 +50,19 @@ func _input(_event: InputEvent) -> void:
 
 
 func _load_items() -> void:
-	if new_item_resource == null:
-		printerr("Item is null")
-		return
+	for child in container.get_children():
+		container.remove_child(child)
+		child.queue_free()
 
-	# Safely instantiate and setup items
-	var current_item: ConfirmationItem = _create_confirmation_item(existing_item_resource)
-	var new_item: ConfirmationItem = _create_confirmation_item(new_item_resource, existing_item_resource)
+	var item_highlighted: bool = false
 
-	# Verify successful creation
-	if not current_item or not new_item:
-		printerr("Failed to create one or more confirmation items")
-		# Clean up any partially created items
-		if current_item: current_item.queue_free()
-		if new_item: new_item.queue_free()
-		return
+	for item in existing_item_resource:
+		var confirmation_item: ConfirmationItem = _create_confirmation_item(item)
+		container.add_child(confirmation_item)
 
-	# Add to containers
-	owned_items_container.add_child(current_item)
-	new_item_container.add_child(new_item)
-
-	current_item.grab_focus()
+		if not item_highlighted:
+			_select_item(item)
+			item_highlighted = true
 
 
 # Helper function for safe instantiation
@@ -74,33 +78,42 @@ func _create_confirmation_item(display_resource: Resource, compare_resource: Bas
 		return null
 
 	item.set_item_data(display_resource, compare_resource)
-	item.gui_input.connect(_on_item_selected.bind(item, display_resource))
+	item.gui_input.connect(_on_item_selected.bind(display_resource))
+	item.focused.connect(_select_item)
 
 	return item
 
 
-func _on_item_selected(event: InputEvent, item: ConfirmationItem, resource: BaseResource) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			_cancel_purchase() if resource == existing_item_resource else _proceed_with_purchase()
-			UIManager.get_viewport().set_input_as_handled()
-
-	if event.is_action_pressed("ui_accept") and item.has_focus():
-		_cancel_purchase() if resource == existing_item_resource else _proceed_with_purchase()
+func _on_item_selected(event: InputEvent, item: BaseResource) -> void:
+	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) \
+	or (event.is_action_pressed("ui_accept")):
+		_select_item(item)
 
 
-func _proceed_with_purchase() -> void:
-	Inventory.remove_item(existing_item_resource)
-	print("Item ", existing_item_resource, " replaced with ", new_item_resource)
+func _select_item(item: BaseResource) -> void:
+	_selected_item_resource = item
+
+	if _selected_item_node:
+		_selected_item_node.add_theme_stylebox_override("panel", normal_stylebox)
+
+	for child in container.get_children():
+		if child is ConfirmationItem and child.shop_item == item:
+			_selected_item_node = child
+			child.add_theme_stylebox_override("panel", highlight_stylebox)
+			break
+
+
+func _update_confirmation_text() -> void:
+	description.text = "Are you sure you want to purchase [color=yellow]%s[/color] for [img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img][color=yellow]%d[/color]?" % [new_item_resource.name, new_item_resource.cost]
+
+
+func on_cancel_button_pressed() -> void:
+	purchase_cancelled_signal.emit()
+	super()
+
+
+func on_confirm_button_pressed() -> void:
+	if _is_swapping and _selected_item_resource: 
+		Inventory.remove_item(_selected_item_resource)
 	purchased_signal.emit()
-	UIManager.remove_ui(self)
-
-
-func _cancel_purchase() -> void:
-	purchase_cancelled_signal.emit()
-	UIManager.remove_ui(self)
-
-
-func _on_close_button_pressed():
-	purchase_cancelled_signal.emit()
-	UIManager.remove_ui(self)
+	super()

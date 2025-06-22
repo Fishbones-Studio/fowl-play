@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://db68ojqri7xqs"]
+[gd_scene load_steps=12 format=3 uid="uid://db68ojqri7xqs"]
 
 [ext_resource type="PackedScene" uid="uid://bopxj7p74h8p1" path="res://entities/weapons/melee_weapons/melee_weapon_models/base_melee_weapon_model.tscn" id="1_rk4tr"]
 [ext_resource type="PackedScene" uid="uid://cwgmtrf1rjw48" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/art/butter_knife.glb" id="2_aea71"]
 [ext_resource type="Resource" uid="uid://b8aw1r4xls2u4" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/butter_knife.tres" id="2_vmu4i"]
+[ext_resource type="AudioStream" uid="uid://dojobq7honyos" path="res://entities/weapons/melee_weapons/melee_weapon_models/butter_knife/sound/knife_stab.ogg" id="4_ggphi"]
 
 [sub_resource type="Animation" id="Animation_bax8f"]
 resource_name = "Attack"
@@ -47,6 +48,18 @@ tracks/2/keys = {
 "args": [false],
 "method": &"set_attacking"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StabSoundEffect:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ggphi"]
@@ -250,6 +263,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [0.1]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("StabSoundEffect:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_bpbh2"]
 resource_name = "Windup"
@@ -290,7 +315,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vmu4i"]
 radius = 0.8
-height = 2.4
+height = 3.0
 
 [node name="ButterKnife" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_rk4tr")]
 animation_player = NodePath("AnimationPlayer")
@@ -305,7 +330,11 @@ libraries = {
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponHitBox" index="1"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.6)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.06305)
 shape = SubResource("CapsuleShape3D_vmu4i")
+
+[node name="StabSoundEffect" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("4_ggphi")
+bus = &"SFX"
 
 [editable path="WeaponHitBox/butter_knife"]

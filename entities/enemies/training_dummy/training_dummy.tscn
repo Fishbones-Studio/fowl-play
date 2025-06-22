@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4cnrmx3uvron"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_4x0ml"]
+[ext_resource type="Resource" uid="uid://by6vg1q7litie" path="res://entities/enemies/training_dummy/training_dummy_stats.tres" id="2_r0jxf"]
+[ext_resource type="PackedScene" uid="uid://52ry86udxsho" path="res://entities/enemies/training_dummy/art/trainingdummy.glb" id="3_cofm2"]
+[ext_resource type="BehaviorTree" uid="uid://bji8hyd1lawvy" path="res://entities/enemies/ai/trees/training_dummy.tres" id="3_qjdjk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0jxf"]
+size = Vector3(3, 3.2, 1.5)
+
+[node name="TrainingDummy" instance=ExtResource("1_4x0ml")]
+stats = ExtResource("2_r0jxf")
+knockback_decay = 9999999999
+dialogue_path = "res://entities/enemies/training_dummy/dialogue"
+name_label_template_string = "Training %s"
+
+[node name="trainingdummy" parent="Model" index="0" instance=ExtResource("3_cofm2")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 0, -0.4, 0)
+
+[node name="Skeleton3D" parent="Model/trainingdummy/Armature" index="0"]
+bones/2/rotation = Quaternion(-0.0104593, -7.12317e-15, -2.49369e-09, 0.999945)
+bones/3/rotation = Quaternion(-0.782724, 0.0668859, 0.0662638, 0.615206)
+bones/4/rotation = Quaternion(0.639885, -0.447955, -0.44379, 0.439242)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.17)
+shape = SubResource("BoxShape3D_r0jxf")
+
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0519731, 1.52441, 0)
+color = Color(1, 1, 1, 1)
+
+[node name="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("3_qjdjk")
+
+[node name="NavigationAgent3D" parent="." index="8"]
+avoidance_enabled = false
+keep_y_velocity = false
+
+[node name="CanvasLayer" parent="." index="9"]
+visible = false
+
+[editable path="Model/trainingdummy"]

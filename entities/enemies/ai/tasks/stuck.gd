@@ -23,7 +23,7 @@ func _tick(_delta: float) -> Status:
 	if elapsed_time < stuck_interval:
 		return RUNNING
 
-	if _is_stuck():
+	if _is_stuck() and not agent.is_stunned:
 		return FAILURE
 
 	return SUCCESS

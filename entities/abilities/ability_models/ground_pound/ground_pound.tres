@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://dx4h8wfqycags"]
 
-[ext_resource type="Texture2D" uid="uid://boc7tdwqd2kg1" path="res://entities/abilities/ability_models/ground_pound/ground_pound.png" id="1_7nl1e"]
+[ext_resource type="Texture2D" uid="uid://boc7tdwqd2kg1" path="res://entities/abilities/ability_models/ground_pound/art/ground_pound.png" id="1_7nl1e"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_ve8n7"]
 
 [resource]
@@ -8,10 +8,16 @@ script = ExtResource("1_ve8n7")
 cooldown = 5.0
 name = "Ground Pound"
 purchasable = true
+is_free = false
 drop_chance = 40
-cost = 150
+cost = 100
 currency_type = 0
-description = "The user performs a powerful ground pound, dealing damage based on Weight and Defense within a [color=yellow]10 meter[/color] radius and knocking targets back. Can only be used while airborne and has a cooldown of %s."
+description = "The user performs a powerful ground pound, dealing [color=yellow]two instances[/color] of damage based on [color=yellow]100%%[/color] of the user's [color=orange]Weight[/color] within a [color=yellow]8 meter[/color] radius and knocking all targets with average force. 
+
+Can only be used while [color=orange]airborne[/color] and has a cooldown of %s."
+short_description = "The user slams the ground, dealing [color=yellow]great[/color] damage that scales based of the user's [color=orange]Weight[/color] and applying [color=yellow]moderate knockback[/color] to all targets hit.
+
+Can only be used while [color=orange]airborne[/color]."
 icon = ExtResource("1_7nl1e")
 model_uid = "uid://b7t7b5rawdkte"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

@@ -11,6 +11,9 @@ func _generate_name() -> String:
 
 
 func _tick(_delta: float) -> Status:
+	if not agent.visible:
+		return FAILURE
+
 	var result: bool = _is_player_on_top()
 	return SUCCESS if result else FAILURE 
 

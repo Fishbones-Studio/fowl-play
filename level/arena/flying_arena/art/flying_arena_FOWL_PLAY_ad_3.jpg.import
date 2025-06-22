@@ -1,0 +1,39 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bb7fachofgby5"
+path.s3tc="res://.godot/imported/flying_arena_FOWL_PLAY_ad_3.jpg-d8ce7e6249ff626baccf5e0b81f8f139.s3tc.ctex"
+path.etc2="res://.godot/imported/flying_arena_FOWL_PLAY_ad_3.jpg-d8ce7e6249ff626baccf5e0b81f8f139.etc2.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "28d80c9746f6e698e9dc431ef0495228"
+}
+
+[deps]
+
+source_file="res://level/arena/flying_arena/art/flying_arena_FOWL_PLAY_ad_3.jpg"
+dest_files=["res://.godot/imported/flying_arena_FOWL_PLAY_ad_3.jpg-d8ce7e6249ff626baccf5e0b81f8f139.s3tc.ctex", "res://.godot/imported/flying_arena_FOWL_PLAY_ad_3.jpg-d8ce7e6249ff626baccf5e0b81f8f139.etc2.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

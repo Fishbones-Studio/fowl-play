@@ -4,7 +4,6 @@ extends BasePlayerMovementState
 
 var _air_jumps_used: int = 0
 
-
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
 
@@ -34,10 +33,6 @@ func process(delta: float) -> void:
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
 	else:
 		player.stats.regen_stamina(delta)
-
-	if player.stats.current_health <= 0:
-		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DEATH_STATE, {})
-		return
 
 
 func physics_process(delta: float) -> void:

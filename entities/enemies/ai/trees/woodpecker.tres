@@ -1,15 +1,17 @@
-[gd_resource type="BehaviorTree" load_steps=44 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="3_nm0l6"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="4_8n2b3"]
 [ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="4_h0qwm"]
 [ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="5_7lgdv"]
 [ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="5_ftfet"]
 [ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="7_ftfet"]
 [ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="7_h0qwm"]
 [ext_resource type="Script" uid="uid://b6rfb6o4174xn" path="res://entities/enemies/ai/tasks/retreat.gd" id="8_mxuth"]
-[ext_resource type="Script" uid="uid://cnafxaxl4fat8" path="res://entities/enemies/ai/tasks/patrol.gd" id="9_7lgdv"]
+[ext_resource type="Script" uid="uid://bddir0kb35n5d" path="res://entities/enemies/ai/tasks/stun.gd" id="11_8n2b3"]
+[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_gwx8i"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_spagk"]
 
@@ -17,51 +19,69 @@
 script = ExtResource("1_qws7o")
 target_var = &"target"
 
-[sub_resource type="BBNode" id="BBNode_d51mb"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BTCondition" id="BTCondition_gwx8i"]
+script = ExtResource("5_7lgdv")
+stuck_interval = 3.0
+stuck_threshold = 2.5
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_mxuth"]
+children = [SubResource("BTCondition_gwx8i")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_gwx8i"]
+children = [SubResource("BTRepeatUntilFailure_mxuth")]
+
+[sub_resource type="BBNode" id="BBNode_gwx8i"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_q1gun"]
-animation_player = SubResource("BBNode_d51mb")
+animation_player = SubResource("BBNode_gwx8i")
 animation_name = &"Idle"
 blend = 0.2
 
 [sub_resource type="BTAction" id="BTAction_ppkk3"]
 script = ExtResource("2_ta6uh")
-min_wait_time = 0.1
-max_wait_time = 0.5
+min_wait_time = 0.3
+max_wait_time = 0.7
 
 [sub_resource type="BTSequence" id="BTSequence_h0qwm"]
 custom_name = "Pause before action"
 children = [SubResource("BTPlayAnimation_q1gun"), SubResource("BTAction_ppkk3")]
 
-[sub_resource type="BBNode" id="BBNode_gwx8i"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_8n2b3"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8n2b3"]
-animation_player = SubResource("BBNode_gwx8i")
+animation_player = SubResource("BBNode_8n2b3")
 animation_name = &"Sprint"
 blend = 0.2
+speed = 2.0
+
+[sub_resource type="BTAction" id="BTAction_gghh5"]
+script = ExtResource("4_8n2b3")
+file_to_play = "uid://bp8073kq2s7ck"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_c8cr3"]
+children = [SubResource("BTPlayAnimation_8n2b3"), SubResource("BTAction_gghh5")]
 
 [sub_resource type="BTAction" id="BTAction_f1ys2"]
 script = ExtResource("4_h0qwm")
 target_var = &"target"
-rotation_speed = 10.0
+rotation_speed = 15.0
 angle_threshold = 5.0
 duration = 0.0
 face_away = false
-
-[sub_resource type="BTCondition" id="BTCondition_gwx8i"]
-script = ExtResource("5_7lgdv")
-stuck_interval = 1.0
-stuck_threshold = 2.5
 
 [sub_resource type="BTAction" id="BTAction_xl814"]
 script = ExtResource("5_ftfet")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 3.0
+speed_factor = 4.0
 duration = 10.0
 ignore_y = true
 pathfinding = true
@@ -76,9 +96,8 @@ distance_max = 5.0
 
 [sub_resource type="BTAction" id="BTAction_ii3fn"]
 script = ExtResource("7_ftfet")
-target_var = &"target"
 ignore_cooldown = false
-start_state = 1
+start_state = 2
 
 [sub_resource type="BTSequence" id="BTSequence_gghh5"]
 children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
@@ -87,106 +106,160 @@ children = [SubResource("BTCondition_bs3vf"), SubResource("BTAction_ii3fn")]
 num_successes_required = 2
 num_failures_required = 2
 repeat = true
-children = [SubResource("BTAction_f1ys2"), SubResource("BTCondition_gwx8i"), SubResource("BTAction_xl814"), SubResource("BTSequence_gghh5")]
+children = [SubResource("BTAction_f1ys2"), SubResource("BTAction_xl814"), SubResource("BTSequence_gghh5")]
+
+[sub_resource type="BTSequence" id="BTSequence_8n2b3"]
+children = [SubResource("BTSequence_h0qwm"), SubResource("BTParallel_c8cr3"), SubResource("BTParallel_nupj8")]
+
+[sub_resource type="BTParallel" id="BTParallel_f1ys2"]
+children = [SubResource("BTAlwaysFail_gwx8i"), SubResource("BTSequence_8n2b3")]
 
 [sub_resource type="BTSequence" id="BTSequence_c8cr3"]
 custom_name = "Pursue"
-children = [SubResource("BTSequence_h0qwm"), SubResource("BTPlayAnimation_8n2b3"), SubResource("BTParallel_nupj8")]
-metadata/_weight_ = 2.49943
+children = [SubResource("BTParallel_f1ys2")]
+metadata/_weight_ = 5.0
 
-[sub_resource type="BBNode" id="BBNode_mxuth"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
+[sub_resource type="BBNode" id="BBNode_bs3vf"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ii3fn"]
+animation_player = SubResource("BBNode_bs3vf")
+animation_name = &"Idle"
+blend = 0.2
+speed = 6.0
+
+[sub_resource type="BTAction" id="BTAction_8n2b3"]
+script = ExtResource("2_ta6uh")
+min_wait_time = 0.0
+max_wait_time = 0.0
+
+[sub_resource type="BTAction" id="BTAction_bs3vf"]
+script = ExtResource("7_h0qwm")
+ignore_cooldown = true
+slot = 1
+force_activate = false
+
+[sub_resource type="BTDelay" id="BTDelay_gwx8i"]
+seconds = 3.0
+children = [SubResource("BTAction_bs3vf")]
+
+[sub_resource type="BBNode" id="BBNode_xl814"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_bs3vf"]
+animation_player = SubResource("BBNode_xl814")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_jldam"]
+script = ExtResource("11_8n2b3")
+stun_time = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_nupj8"]
+custom_name = "Set the seas ablaze!"
+children = [SubResource("BTPlayAnimation_ii3fn"), SubResource("BTAction_8n2b3"), SubResource("BTDelay_gwx8i"), SubResource("BTPlayAnimation_bs3vf"), SubResource("BTAction_jldam")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_f1ys2"]
+start_cooled = true
+children = [SubResource("BTSequence_nupj8")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BBNode" id="BBNode_f1ys2"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_gwx8i"]
-animation_player = SubResource("BBNode_mxuth")
+animation_player = SubResource("BBNode_f1ys2")
 animation_name = &"Sprint"
 blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_hnjin"]
+script = ExtResource("4_8n2b3")
+file_to_play = "uid://bp8073kq2s7ck"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_jldam"]
+children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_hnjin")]
 
 [sub_resource type="BTAction" id="BTAction_gwx8i"]
 script = ExtResource("8_mxuth")
 target_var = &"target"
 retreat_distance = 10.0
-speed_factor = 15.0
-rotation_speed = 6.0
+speed_factor = 30.0
+rotation_speed = 15.0
 duration = 2.0
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
 face_moving_direction = true
 
-[sub_resource type="BBNode" id="BBNode_h0qwm"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ftfet"]
-animation_player = SubResource("BBNode_h0qwm")
-animation_name = &"Attack"
-blend = 0.2
+[sub_resource type="BTSequence" id="BTSequence_f1ys2"]
+children = [SubResource("BTParallel_jldam"), SubResource("BTAction_gwx8i")]
 
 [sub_resource type="BTAction" id="BTAction_h0qwm"]
 script = ExtResource("4_h0qwm")
 target_var = &"target"
-rotation_speed = 15.0
-angle_threshold = 5.0
+rotation_speed = 25.0
+angle_threshold = 0.0
 duration = 1.0
 face_away = false
 
 [sub_resource type="BTAction" id="BTAction_ftfet"]
 script = ExtResource("7_h0qwm")
-target_var = &"target"
 ignore_cooldown = true
 slot = 0
+force_activate = false
+
+[sub_resource type="BTSequence" id="BTSequence_bs3vf"]
+children = [SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]
+
+[sub_resource type="BBNode" id="BBNode_ii3fn"]
+saved_value = NodePath("Model/woodpecker/AnimationPlayer")
+resource_name = "Model/woodpecker/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_gghh5"]
+animation_player = SubResource("BBNode_ii3fn")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_0txuc"]
+script = ExtResource("11_8n2b3")
+stun_time = 1.5
 
 [sub_resource type="BTSequence" id="BTSequence_7lgdv"]
 custom_name = "Fireball!"
-children = [SubResource("BTPlayAnimation_gwx8i"), SubResource("BTAction_gwx8i"), SubResource("BTPlayAnimation_ftfet"), SubResource("BTAction_h0qwm"), SubResource("BTAction_ftfet")]
+children = [SubResource("BTSequence_f1ys2"), SubResource("BTSequence_bs3vf"), SubResource("BTPlayAnimation_gghh5"), SubResource("BTAction_0txuc")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_mxuth"]
 duration = 5.0
+start_cooled = true
 children = [SubResource("BTSequence_7lgdv")]
-metadata/_weight_ = 1.0
-
-[sub_resource type="BBNode" id="BBNode_7lgdv"]
-saved_value = NodePath("woodpecker/AnimationPlayer")
-resource_name = "woodpecker/AnimationPlayer"
-
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_mxuth"]
-animation_player = SubResource("BBNode_7lgdv")
-animation_name = &"Walk"
-
-[sub_resource type="BTAction" id="BTAction_mxuth"]
-script = ExtResource("9_7lgdv")
-patrol_radius = 8.0
-patrol_interval = 2.0
-min_distance = 0.5
-chaotic = true
-wave_frequency = 2.0
-wave_amplitude = 15.0
-duration = 5.0
-
-[sub_resource type="BTCondition" id="BTCondition_7lgdv"]
-script = ExtResource("3_nm0l6")
-target_var = &"target"
-distance_min = 0.0
-distance_max = 10.0
-
-[sub_resource type="BTParallel" id="BTParallel_mxuth"]
-num_failures_required = 2
-repeat = true
-children = [SubResource("BTAction_mxuth"), SubResource("BTCondition_7lgdv")]
-
-[sub_resource type="BTSequence" id="BTSequence_gwx8i"]
-custom_name = "Wander around"
-children = [SubResource("BTPlayAnimation_mxuth"), SubResource("BTParallel_mxuth")]
-_enabled = false
-metadata/_weight_ = 1.49943
+metadata/_weight_ = 3.0
 
 [sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_hnjin"]
-children = [SubResource("BTSequence_c8cr3"), SubResource("BTCooldown_mxuth"), SubResource("BTSequence_gwx8i")]
+children = [SubResource("BTSequence_c8cr3"), SubResource("BTCooldown_f1ys2"), SubResource("BTCooldown_mxuth")]
+
+[sub_resource type="BTCondition" id="BTCondition_8n2b3"]
+script = ExtResource("11_gwx8i")
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_f1ys2"]
+children = [SubResource("BTCondition_8n2b3")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_xl814"]
+children = [SubResource("BTRepeatUntilFailure_f1ys2")]
+
+[sub_resource type="BTParallel" id="BTParallel_bs3vf"]
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTProbabilitySelector_hnjin"), SubResource("BTAlwaysFail_xl814")]
 
 [sub_resource type="BTSequence" id="BTSequence_spagk"]
-children = [SubResource("BTAction_ta6uh"), SubResource("BTProbabilitySelector_hnjin")]
+children = [SubResource("BTAction_ta6uh"), SubResource("BTParallel_bs3vf")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_spagk")

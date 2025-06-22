@@ -1,13 +1,19 @@
 extends Ability
 
-@export_range(0, 100, 1) var health_consumption: float = 25.0
+## The percentage of health the user loses upon activating Seas of Flame
+@export_range(0, 100, 1) var health_consumption: int = 20
+## The total duration over which the damage is applied
 @export var damage_duration: float = 2.0
-@export var damage_interval: float = 0.4
+## The interval between each instance of damage applied
+@export var damage_interval: float = 0.2
+## The maximum damage multiplier applied at the start of the burn effect
+@export var peak_burn_modifier: int = 175
+@export var max_multiplier: float = 10
 
 var damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
-		return (stats.max_health / stats.current_health) * (1.0 + (stats.attack / 100))
+		return (stats.max_health / max_multiplier) * min(max_multiplier, (stats.max_health / stats.current_health))
 
 var _attack_duration: float = 0.0
 var _hit_bodies: Array = []
@@ -16,13 +22,15 @@ var _hit_bodies: Array = []
 @onready var cpu_particles: CPUParticles3D = %CPUParticles3D
 
 
-func activate() -> void:
-	if not ability_holder.is_on_floor():
+func activate(force_activate: bool = false) -> void:
+	if not ability_holder.is_on_floor() and not force_activate:
 		return
+
 	_attack_duration = cpu_particles.lifetime
 	_hit_bodies.clear()
 
 	cpu_particles.emitting = true
+	sound_effect.play()
 
 	_toggle_collision_masks(true, hit_area)
 
@@ -40,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	_attack_duration -= delta
 
 	if _attack_duration <= 0:
+		sound_effect.stop()
 		_attack_duration = 0.0
 		_toggle_collision_masks(false, hit_area)
 
@@ -54,15 +63,19 @@ func _physics_process(delta: float) -> void:
 
 func _apply_burn(body: Node3D) -> void:
 	if body is CharacterBody3D:
-		# Get the amount of ticks the burn applies, rounded down
-		var burn_tick_count: int = floor(damage_duration / damage_interval)
-		var burn_damage: float = damage / burn_tick_count
+		# Get the amount of ticks the burn applies, rounded down and make sure the count isn't below 1
+		var burn_tick_count: int = max(1, floor(damage_duration / damage_interval))
+
 		for i in range(burn_tick_count):
 			await get_tree().create_timer(damage_interval).timeout
 
 			# If body doesn't exist, don't apply damage
 			if not is_instance_valid(body):
 				break
+
+			# Gradually decreasing the burn damage from peak to default across the damage tick count
+			var weight: float = i as float / (burn_tick_count - 1)
+			var burn_damage: float = lerp(peak_burn_modifier / 100.0, 1.0, weight) * (damage / burn_tick_count)
 
 			if body.collision_layer == 2: # Player
 				SignalManager.weapon_hit_target.emit(body, burn_damage, DamageEnums.DamageTypes.NORMAL)

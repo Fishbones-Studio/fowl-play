@@ -1,0 +1,380 @@
+[gd_resource type="BehaviorTree" load_steps=91 format=3 uid="uid://bc7ucld3pg5s8"]
+
+[ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_yhbkp"]
+[ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_6nkjl"]
+[ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_wrjj1"]
+[ext_resource type="Script" uid="uid://h0nq32ajrxy5" path="res://entities/enemies/ai/tasks/player_on_top.gd" id="3_aat0e"]
+[ext_resource type="Script" uid="uid://b4c1y5nqjinua" path="res://entities/enemies/ai/tasks/pounce.gd" id="3_b2ogj"]
+[ext_resource type="Script" uid="uid://cb0vv4mt50hth" path="res://entities/enemies/ai/tasks/face.gd" id="3_yhbkp"]
+[ext_resource type="Script" uid="uid://bhofui8vv8ddv" path="res://entities/enemies/ai/tasks/use_ability.gd" id="4_yhbkp"]
+[ext_resource type="Script" uid="uid://wrawtm8at4do" path="res://entities/enemies/ai/tasks/dash.gd" id="6_k708t"]
+[ext_resource type="Script" uid="uid://c45pbn6cvkrga" path="res://entities/enemies/ai/tasks/pursue.gd" id="8_k708t"]
+[ext_resource type="Script" uid="uid://bik73ykxdltxk" path="res://entities/enemies/ai/tasks/in_air_close_to_target.gd" id="9_n3rxy"]
+[ext_resource type="Script" uid="uid://v88ofxynokd3" path="res://entities/enemies/ai/tasks/stuck.gd" id="9_ulmcl"]
+[ext_resource type="Script" uid="uid://c6sfq5dwherfb" path="res://entities/enemies/ai/tasks/play_state_audio.gd" id="10_5x7em"]
+[ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="11_40a5u"]
+[ext_resource type="Script" uid="uid://cij6ujjfigpjc" path="res://entities/enemies/ai/tasks/use_weapon.gd" id="11_ulmcl"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_sfte8"]
+
+[sub_resource type="BTAction" id="BTAction_wrjj1"]
+script = ExtResource("1_yhbkp")
+target_var = &"target"
+
+[sub_resource type="BTCondition" id="BTCondition_qwt3u"]
+script = ExtResource("3_aat0e")
+check_distance = 4.0
+player_layer = 2
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_tt3xs"]
+children = [SubResource("BTCondition_qwt3u")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_uqbg5"]
+children = [SubResource("BTRepeatUntilSuccess_tt3xs")]
+
+[sub_resource type="BTCondition" id="BTCondition_ulmcl"]
+script = ExtResource("9_ulmcl")
+stuck_interval = 2.0
+stuck_threshold = 2.5
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_40a5u"]
+children = [SubResource("BTCondition_ulmcl")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_4fcdy"]
+children = [SubResource("BTRepeatUntilFailure_40a5u")]
+
+[sub_resource type="BBNode" id="BBNode_ulmcl"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qmoh7"]
+animation_player = SubResource("BBNode_ulmcl")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_k708t"]
+script = ExtResource("2_6nkjl")
+min_wait_time = 0.4
+max_wait_time = 0.8
+
+[sub_resource type="BTSequence" id="BTSequence_qmoh7"]
+custom_name = "Pause before action"
+children = [SubResource("BTPlayAnimation_qmoh7"), SubResource("BTAction_k708t")]
+
+[sub_resource type="BBNode" id="BBNode_40a5u"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wrjj1"]
+animation_player = SubResource("BBNode_40a5u")
+animation_name = &"Sprint"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_mjbxb"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://ec8u4kiec2x8"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = false
+audio_volume = -8.0
+
+[sub_resource type="BTParallel" id="BTParallel_vs2s8"]
+children = [SubResource("BTPlayAnimation_wrjj1"), SubResource("BTAction_mjbxb")]
+
+[sub_resource type="BTAction" id="BTAction_fhbfq"]
+script = ExtResource("3_yhbkp")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = 10.0
+duration = 0.0
+face_away = false
+
+[sub_resource type="BTAction" id="BTAction_nju8x"]
+script = ExtResource("8_k708t")
+target_var = &"target"
+tolerance = 3.0
+speed_factor = 0.0
+duration = 10.0
+ignore_y = true
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
+
+[sub_resource type="BTCondition" id="BTCondition_t3gyd"]
+script = ExtResource("2_wrjj1")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_uxecv"]
+script = ExtResource("11_ulmcl")
+ignore_cooldown = false
+start_state = 2
+
+[sub_resource type="BTSequence" id="BTSequence_4fcdy"]
+children = [SubResource("BTCondition_t3gyd"), SubResource("BTAction_uxecv")]
+
+[sub_resource type="BTParallel" id="BTParallel_fhbfq"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_fhbfq"), SubResource("BTAction_nju8x"), SubResource("BTSequence_4fcdy")]
+
+[sub_resource type="BTSequence" id="BTSequence_nju8x"]
+children = [SubResource("BTSequence_qmoh7"), SubResource("BTParallel_vs2s8"), SubResource("BTParallel_fhbfq")]
+
+[sub_resource type="BTParallel" id="BTParallel_yhbkp"]
+children = [SubResource("BTAlwaysFail_uqbg5"), SubResource("BTAlwaysFail_4fcdy"), SubResource("BTSequence_nju8x")]
+
+[sub_resource type="BTSequence" id="BTSequence_wrjj1"]
+custom_name = "Pursue"
+children = [SubResource("BTParallel_yhbkp")]
+metadata/_weight_ = 4.0
+
+[sub_resource type="BTAction" id="BTAction_ocp3w"]
+script = ExtResource("2_6nkjl")
+min_wait_time = 0.4
+max_wait_time = 1.1
+
+[sub_resource type="BTAction" id="BTAction_tt3xs"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://bxqaj5216nwbt"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BBNode" id="BBNode_4fcdy"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_yhbkp"]
+animation_player = SubResource("BBNode_4fcdy")
+animation_name = &"Jump"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_4fcdy"]
+script = ExtResource("3_yhbkp")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = 25.0
+duration = 1.0
+face_away = false
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_40a5u"]
+children = [SubResource("BTAction_4fcdy")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_4fcdy"]
+children = [SubResource("BTRepeatUntilSuccess_40a5u")]
+
+[sub_resource type="BTParallel" id="BTParallel_8831e"]
+num_successes_required = 3
+children = [SubResource("BTAction_tt3xs"), SubResource("BTPlayAnimation_yhbkp"), SubResource("BTAlwaysSucceed_4fcdy")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_y7cob"]
+min_duration = 0.8
+max_duration = 1.6
+
+[sub_resource type="BTSequence" id="BTSequence_t3gyd"]
+custom_name = "Get ready.."
+children = [SubResource("BTAction_ocp3w"), SubResource("BTParallel_8831e"), SubResource("BTRandomWait_y7cob")]
+
+[sub_resource type="BTCondition" id="BTCondition_aat0e"]
+script = ExtResource("9_n3rxy")
+target_var = &"target"
+horizontal_threshold = 10.0
+vertical_threshold = 10.0
+require_descent = false
+
+[sub_resource type="BTAction" id="BTAction_qwt3u"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://di47v64gid1nf"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BTAction" id="BTAction_ulmcl"]
+script = ExtResource("4_yhbkp")
+ignore_cooldown = true
+slot = 0
+force_activate = true
+
+[sub_resource type="BTParallel" id="BTParallel_5x7em"]
+num_successes_required = 2
+custom_name = "Ground Pound!"
+children = [SubResource("BTAction_qwt3u"), SubResource("BTAction_ulmcl")]
+
+[sub_resource type="BTSequence" id="BTSequence_tt3xs"]
+custom_name = "Ground Pound"
+children = [SubResource("BTCondition_aat0e"), SubResource("BTParallel_5x7em")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_aat0e"]
+children = [SubResource("BTSequence_tt3xs")]
+
+[sub_resource type="BBNode" id="BBNode_fhbfq"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_u4hmx"]
+animation_player = SubResource("BBNode_fhbfq")
+animation_name = &"Fall"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_t3gyd"]
+script = ExtResource("3_b2ogj")
+target_var = &"target"
+jump_factor = 2.0
+horizontal_speed = 60.0
+min_distance = 10.0
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_uqbg5"]
+custom_name = "Pounce"
+children = [SubResource("BTPlayAnimation_u4hmx"), SubResource("BTAction_t3gyd")]
+
+[sub_resource type="BTParallel" id="BTParallel_aat0e"]
+custom_name = "Go!"
+children = [SubResource("BTRepeatUntilSuccess_aat0e"), SubResource("BTSequence_uqbg5")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_n3rxy"]
+time_limit = 8.0
+children = [SubResource("BTParallel_aat0e")]
+
+[sub_resource type="BTSequence" id="BTSequence_ulmcl"]
+custom_name = "Pounce"
+children = [SubResource("BTSequence_t3gyd"), SubResource("BTTimeLimit_n3rxy")]
+metadata/_weight_ = 330.0
+
+[sub_resource type="BTCooldown" id="BTCooldown_t3gyd"]
+duration = 5.0
+start_cooled = true
+children = [SubResource("BTSequence_ulmcl")]
+metadata/_weight_ = 2.0
+
+[sub_resource type="BBNode" id="BBNode_nju8x"]
+saved_value = NodePath("Model/ice_fox/AnimationPlayer")
+resource_name = "Model/ice_fox/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_ulmcl"]
+animation_player = SubResource("BBNode_nju8x")
+animation_name = &"Dash"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_ca3xq"]
+script = ExtResource("3_yhbkp")
+target_var = &"target"
+rotation_speed = 15.0
+angle_threshold = 0.0
+duration = 1.0
+face_away = false
+
+[sub_resource type="BTRepeat" id="BTRepeat_aat0e"]
+forever = true
+children = [SubResource("BTAction_ca3xq")]
+
+[sub_resource type="BTWait" id="BTWait_u4hmx"]
+duration = 3.0
+
+[sub_resource type="BTAction" id="BTAction_n3rxy"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://ccvxuafdgau63"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BTParallel" id="BTParallel_40a5u"]
+num_successes_required = 2
+children = [SubResource("BTRepeat_aat0e"), SubResource("BTWait_u4hmx"), SubResource("BTAction_n3rxy")]
+
+[sub_resource type="BTSequence" id="BTSequence_fhbfq"]
+custom_name = "I venture forth to hunt!"
+children = [SubResource("BTPlayAnimation_ulmcl"), SubResource("BTParallel_40a5u")]
+
+[sub_resource type="BTAction" id="BTAction_u4hmx"]
+script = ExtResource("6_k708t")
+target_var = &"target"
+dash_duration = 0.4
+dash_distance = 50.0
+
+[sub_resource type="BTCondition" id="BTCondition_tt3xs"]
+script = ExtResource("2_wrjj1")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 5.0
+
+[sub_resource type="BTAction" id="BTAction_uqbg5"]
+script = ExtResource("4_yhbkp")
+ignore_cooldown = false
+slot = 1
+force_activate = false
+
+[sub_resource type="BTSequence" id="BTSequence_mjbxb"]
+children = [SubResource("BTCondition_tt3xs"), SubResource("BTAction_uqbg5")]
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_qwt3u"]
+children = [SubResource("BTSequence_mjbxb")]
+
+[sub_resource type="BTAction" id="BTAction_5x7em"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://cdenyoraekjmh"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BTAction" id="BTAction_aat0e"]
+script = ExtResource("10_5x7em")
+file_to_play = "uid://c71er3uggs25u"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = true
+audio_volume = 0.0
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_tt3xs"]
+children = [SubResource("BTAction_aat0e")]
+
+[sub_resource type="BTSequence" id="BTSequence_qwt3u"]
+children = [SubResource("BTAction_5x7em"), SubResource("BTAlwaysFail_tt3xs")]
+
+[sub_resource type="BTParallel" id="BTParallel_uqbg5"]
+children = [SubResource("BTAction_u4hmx"), SubResource("BTRepeatUntilSuccess_qwt3u"), SubResource("BTSequence_qwt3u")]
+
+[sub_resource type="BTSequence" id="BTSequence_8k4wv"]
+custom_name = "Always soaring, forever triumphant!"
+children = [SubResource("BTParallel_uqbg5")]
+
+[sub_resource type="BTSequence" id="BTSequence_40a5u"]
+custom_name = "Dash"
+children = [SubResource("BTSequence_fhbfq"), SubResource("BTSequence_8k4wv")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTCooldown" id="BTCooldown_ulmcl"]
+start_cooled = true
+children = [SubResource("BTSequence_40a5u")]
+metadata/_weight_ = 1.0
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_b2ogj"]
+children = [SubResource("BTSequence_wrjj1"), SubResource("BTCooldown_t3gyd"), SubResource("BTCooldown_ulmcl")]
+
+[sub_resource type="BTCondition" id="BTCondition_4fcdy"]
+script = ExtResource("11_40a5u")
+
+[sub_resource type="BTRepeatUntilFailure" id="BTRepeatUntilFailure_fhbfq"]
+children = [SubResource("BTCondition_4fcdy")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_nju8x"]
+children = [SubResource("BTRepeatUntilFailure_fhbfq")]
+
+[sub_resource type="BTParallel" id="BTParallel_ca3xq"]
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTProbabilitySelector_b2ogj"), SubResource("BTAlwaysFail_nju8x")]
+
+[sub_resource type="BTSequence" id="BTSequence_sq422"]
+children = [SubResource("BTAction_wrjj1"), SubResource("BTParallel_ca3xq")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_sfte8")
+root_task = SubResource("BTSequence_sq422")

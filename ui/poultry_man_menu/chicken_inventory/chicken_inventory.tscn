@@ -23,9 +23,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
@@ -33,7 +34,6 @@ theme_override_constants/separation = 25
 [node name="Panel" type="Panel" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 85)
 layout_mode = 2
-size_flags_vertical = 0
 theme_type_variation = &"SettingsHeaderContainer"
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/Panel"]
@@ -134,7 +134,7 @@ size_flags_horizontal = 3
 
 [node name="InvisibleArea" type="Control" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 
 [node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_x0uxr")]
@@ -144,6 +144,7 @@ size_flags_horizontal = 8
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="SwapAbilitiesButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
@@ -153,7 +154,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Swap Abilities"
 
-[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

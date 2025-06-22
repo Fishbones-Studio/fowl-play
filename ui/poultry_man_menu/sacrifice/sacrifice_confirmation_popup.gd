@@ -1,30 +1,21 @@
-extends Control
+extends ConfirmationScreen
 
-const FOR_LABEL_TEMPLATE_TEXT : String = "This will award %d Feathers Of Rebirth"
+const FOR_LABEL_TEMPLATE_TEXT: String = "Sacrificing your chicken will grant you [img=24x24]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img][color=yellow]%d[/color] in recognition of its battles fought.\n\n[color=yellow]This action will remove all equipped items and [img=24x24]res://utilities/shop/art/prosperity_egg_icon.png[/img], but rebirth upgrades and [img=24x24]res://utilities/shop/art/feathers_of_rebirth_icon.png[/img] will be preserved.[/color]"
 
 var _rounds_won_this_run: int
 
-@onready var for_label : Label = %FORLabel
 
 func _ready() -> void:
 	_rounds_won_this_run = SaveManager.get_loaded_rounds_won()
-	for_label.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
-
-func _cancel() -> void:
-	UIManager.remove_ui(self)
-
-
-func _on_close_button_pressed() -> void:
-	_cancel()
+	title.text = "Sacrifice Chicken"
+	description.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
+	super()
 
 
-func _on_confirm_pressed() -> void:
+func on_confirm_button_pressed() -> void:
 	if _rounds_won_this_run > 0:
 		GameManager.feathers_of_rebirth += _rounds_won_this_run
-
+	if UIEnums.UI.POULTRYMAN_SHOP in UIManager.ui_list:
+		UIManager.remove_ui_by_enum(UIEnums.UI.POULTRYMAN_SHOP)
 	GameManager.reset_game()
-	_cancel()
-
-
-func _on_cancel_pressed() -> void:
-	_cancel()
+	super()

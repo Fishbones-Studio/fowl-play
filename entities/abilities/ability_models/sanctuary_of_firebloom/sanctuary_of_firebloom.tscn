@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsvdnoqpn766s"]
+
+[ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_deltf"]
+[ext_resource type="Script" uid="uid://b4qvwmcfsv15w" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.gd" id="2_hntii"]
+[ext_resource type="Resource" uid="uid://cfpfphesqh6hh" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom.tres" id="3_2cn0f"]
+[ext_resource type="ArrayMesh" uid="uid://86471nk4jq05" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sanctuary_of_firebloom_mesh.tres" id="4_dcanr"]
+[ext_resource type="AudioStream" uid="uid://b3qo753ipatxr" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/sound/sanctuary_of_firebloom_sfx.ogg" id="5_4o270"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dcanr"]
+radius = 100.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcanr"]
+size = Vector3(9, 9, 9)
+
+[sub_resource type="Gradient" id="Gradient_4o270"]
+offsets = PackedFloat32Array(0.224242, 0.7)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uurjp"]
+gradient = SubResource("Gradient_4o270")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6q5m"]
+lifetime_randomness = 0.2
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(3.5, 0.5, 3.5)
+angle_min = -180.0
+angle_max = 180.0
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_uurjp")
+
+[node name="SanctuaryOfFirebloom" instance=ExtResource("1_deltf")]
+script = ExtResource("2_hntii")
+max_blasts = 5
+blast_interval = 0.25
+blast_increment = 0.05
+stun_time = 0.15
+current_ability = ExtResource("3_2cn0f")
+
+[node name="BlastTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="DetectionArea" type="Area3D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
+shape = SubResource("SphereShape3D_dcanr")
+
+[node name="HitArea" type="Area3D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea" index="0"]
+shape = SubResource("BoxShape3D_dcanr")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HitArea" index="1"]
+unique_name_in_owner = true
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_g6q5m")
+draw_pass_1 = ExtResource("4_dcanr")
+
+[node name="SoundEffect" parent="." index="4"]
+stream = ExtResource("5_4o270")
+
+[connection signal="timeout" from="BlastTimer" to="." method="_on_blast_timer_timeout"]

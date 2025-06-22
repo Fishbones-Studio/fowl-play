@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cot4w1aawwija"]
 
-[ext_resource type="Texture2D" uid="uid://djbfno2hluufe" path="res://entities/abilities/ability_models/earthquake/earthquake.png" id="1_uetiq"]
+[ext_resource type="Texture2D" uid="uid://djbfno2hluufe" path="res://entities/abilities/ability_models/earthquake/art/earthquake.png" id="1_uetiq"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="1_uhva3"]
 
 [resource]
@@ -8,12 +8,20 @@ script = ExtResource("1_uhva3")
 cooldown = 5.0
 name = "Earthquake"
 purchasable = true
+is_free = false
 drop_chance = 10
-cost = 150
+cost = 125
 currency_type = 0
-description = "Channeling immense weight into the earth, the user crashes down with tectonic force, triggering a series of devastating quakes. Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per quake[/color], launching targets with escalating force. 
+description = "Channeling immense weight into the earth, the user crashes down with tectonic force, triggering a series of devastating quakes.
 
-Deals more damage the greater the user's [color=orange]Weight[/color] and [color=orange]Defense[/color]. Can only be used while airborne and has a cooldown of %s."
+Each successive tremor expands the radius by [color=yellow]20%%[/color] and intensifies damage by [color=yellow]20%% per quake[/color], launching targets with escalating force.
+
+Damage scales with [color=yellow]100%%[/color] of the user's [color=yellow]Weight[/color]. 
+
+Can only be used while [color=orange]airborne[/color] and has a cooldown of %s."
+short_description = "The user crashes down, dealing [color=yellow]significant knockback[/color] to targets hit and triggering quakes that expand [color=yellow]thrice[/color], dealing [color=yellow]greatly increased[/color] damage based on the user's [color=orange]Weight[/color].
+
+Can only be used while [color=orange]airborne[/color]."
 icon = ExtResource("1_uetiq")
 model_uid = "uid://bxc3j6moweqeh"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

@@ -16,7 +16,7 @@ var states: Dictionary[WeaponEnums.WeaponState, BaseRangedCombatState] = {}
 
 
 func _ready() -> void:
-	if weapon == null:
+	if not weapon:
 		push_error(owner.name + ": No weapon reference set")
 
 	# Listen for state transition signals
@@ -38,7 +38,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if current_state == null:
+	if not current_state:
 		push_error(owner.name + ": No state set.")
 		return
 	# Run the active state's process function
@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if current_state == null:
+	if not current_state:
 		push_error(owner.name + ": No state set.")
 		return
 	# Run the active state's physics process
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if current_state == null:
+	if not current_state:
 		push_error(owner.name + ": No state set.")
 		return
 	# Pass input events to the current state
@@ -69,28 +69,28 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		target_state = WeaponEnums.WeaponState.IDLE
 
 	# Exit the current state before switching
-	var previous_state := current_state
+	var previous_state: BaseRangedCombatState = current_state
 	previous_state.exit()
 
 	# Switch to the new state
 	current_state = states.get(target_state)
-	if current_state == null:
+	if not current_state:
 		push_error(owner.name + ": Trying to transition to state " + str(target_state) + " but it does not exist. Falling back to: " + str(previous_state))
 		current_state = previous_state
 
 	# Animation handling
-	var has_current_anim := current_state.ANIMATION_NAME != null \
-		and not current_state.ANIMATION_NAME.is_empty() \
+	var has_current_anim: bool = current_state.animation_name != null \
+		and not current_state.animation_name.is_empty() \
 		and weapon \
-		and weapon.animation_player.has_animation(current_state.ANIMATION_NAME)
+		and weapon.animation_player.has_animation(current_state.animation_name)
 
 	if has_current_anim:
-		var anim_name: String = current_state.ANIMATION_NAME
+		var anim_name: String = current_state.animation_name
 		var anim: Animation   = weapon.animation_player.get_animation(anim_name)
 		if anim and weapon.current_weapon.loop_animation:
 			anim.loop = true
 		weapon.animation_player.play(anim_name)
-		
+
 	# If the next state does not have an animation, play RESET or stop
 	else:
 		if weapon.animation_player.has_animation("RESET"):
@@ -98,12 +98,11 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 		else:
 			weapon.animation_player.stop()
 
-
 	print("Transitioning secondary weapon to state: " + WeaponEnums.weapon_state_to_string(current_state.state_type))
 
 	# Enter the new state and carry over any necessary information
 	current_state.enter(previous_state.state_type, information)
-	
+
 
 # Gets the initial state when the game starts
 func _get_initial_state() -> BaseRangedCombatState:

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mgedhih6o02q"]
+
+[ext_resource type="Script" uid="uid://duprpetkecdtb" path="res://resources/effects/blood_splash/blood_splash_handler.gd" id="1_ohu42"]
+
+[node name="BloodSplashHandler" type="Node3D"]
+script = ExtResource("1_ohu42")

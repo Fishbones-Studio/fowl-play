@@ -1,5 +1,4 @@
 class_name WeaponEnums
-extends Node
 
 enum WeaponType {
 	MELEE,
@@ -7,6 +6,7 @@ enum WeaponType {
 }
 
 enum WeaponState {
+	ERROR,
 	IDLE,
 	WINDUP,
 	ATTACKING,

@@ -8,7 +8,7 @@ const UPGRADE_SHOP_ITEM_SCENE: PackedScene = preload("uid://b1xvduw1f032y")
 func _ready() -> void:
 	check_inventory = false
 	prevent_duplicates = false
-	shop_title_label.text = "Upgrades Shop"
+	shop_title_label.text = "Upgrade Shop"
 
 	SignalManager.upgrades_shop_refreshed.connect(_refresh_shop)
 
@@ -31,10 +31,6 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 	shop_item_script_node.set_item_data(selected_item)
 
 	return shop_item_script_node
-
-
-func _on_visibility_changed() -> void:
-	if visible: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _on_close_button_pressed()-> void:

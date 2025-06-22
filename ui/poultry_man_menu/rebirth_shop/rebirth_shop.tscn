@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmgeue4l6fj4f"]
+[gd_scene load_steps=6 format=3 uid="uid://dmgeue4l6fj4f"]
 
 [ext_resource type="Script" uid="uid://c1y2iw2q8ee8l" path="res://ui/poultry_man_menu/rebirth_shop/rebirth_shop.gd" id="1_5h013"]
 [ext_resource type="PackedScene" uid="uid://b2jrp810g6g7e" path="res://utilities/shop/currency_display/currency_display.tscn" id="2_p65sv"]
 [ext_resource type="PackedScene" uid="uid://bdm28vmjyejeo" path="res://ui/buttons/close_button.tscn" id="3_lq5l4"]
+[ext_resource type="PackedScene" uid="uid://c35wea4w2a5fh" path="res://ui/chicken_stats/chicken_stats_container/chicken_stats_container.tscn" id="4_2dw1y"]
 [ext_resource type="Script" uid="uid://bqo3jsn8ydal3" path="res://utilities/database/perm_upgrade_database/perm_upgrade_database.gd" id="30_p65sv"]
 
-[node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database")]
+[node name="RebirthShop" type="Control" node_paths=PackedStringArray("item_database", "focus_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5h013")
 item_database = NodePath("PermUpgradeDatabase")
+handle_focus = true
+focus_node = NodePath("Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer/CloseButton")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -71,6 +74,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_lq5l4")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
@@ -88,16 +92,44 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 
-[node name="Items" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Items" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ChickenStatsContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" instance=ExtResource("4_2dw1y")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -105,6 +137,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 15
 
 [node name="ResetButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Reset"

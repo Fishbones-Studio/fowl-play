@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://yqirlsfgrlxw"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_21eea"]
+
+[resource]
+script = ExtResource("1_21eea")
+health_bonus = 0
+stamina_bonus = 0
+attack_bonus = 20
+defense_bonus = 40
+speed_bonus = 0
+weight_bonus = 0.0
+name = "Fowl Fortify"
+purchasable = true
+is_free = true
+drop_chance = 85
+cost = 200
+currency_type = 0
+description = "The user’s fighting spirit strengthens their body and claws, increasing [color=orange]Attack[/color] by %s and [color=orange]Defense[/color] by %s."
+short_description = ""
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

@@ -1,61 +1,159 @@
-[gd_scene load_steps=13 format=3 uid="uid://8owdwg4pu4ht"]
+[gd_scene load_steps=17 format=3 uid="uid://8owdwg4pu4ht"]
 
 [ext_resource type="PackedScene" uid="uid://bnadoylbmugpd" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/base_ranged_weapon_model.tscn" id="1_tnyru"]
 [ext_resource type="PackedScene" uid="uid://c5mcjaolv025f" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/minigun.glb" id="2_0tyc1"]
 [ext_resource type="Resource" uid="uid://csmfpbrekf78u" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tres" id="2_h8kbp"]
 [ext_resource type="Script" uid="uid://bnc2f7u206hbt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/states/attack_state.gd" id="3_uw0c0"]
 [ext_resource type="Script" uid="uid://l57w6u32gyv7" path="res://entities/weapons/ranged_weapons/states/idle_state.gd" id="3_vnsd5"]
-[ext_resource type="Animation" uid="uid://b02j3071rp3t0" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Attack.res" id="4_dbekv"]
 [ext_resource type="Script" uid="uid://cdyq7kqxxmjw8" path="res://entities/weapons/ranged_weapons/states/windup_state.gd" id="4_w5bhe"]
-[ext_resource type="Animation" uid="uid://ytpkchyucjoj" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Windup.res" id="5_i5s7k"]
 [ext_resource type="Script" uid="uid://d4bnb7xuiukb4" path="res://entities/weapons/ranged_weapons/states/cooldown_state.gd" id="6_04ypb"]
-[ext_resource type="Animation" uid="uid://db2uvllkg5ui1" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/art/Cooldown.res" id="6_i5s7k"]
+[ext_resource type="AudioStream" uid="uid://hj4jse1o5prp" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/sound/minigun_windup.ogg" id="8_i5s7k"]
+[ext_resource type="AudioStream" uid="uid://inscsajh82uv" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/sound/minigun_shooting.ogg" id="9_mudr6"]
+[ext_resource type="AudioStream" uid="uid://ctjhsjoaipd5x" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/sound/minigun_cooldown.ogg" id="10_1wy5a"]
 
 [sub_resource type="Animation" id="Animation_i5s7k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
+resource_name = "Attack"
+length = 1.25
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
 tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder_005:rotation")
+tracks/0/path = NodePath("Armature/Skeleton3D:Front")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.56554, 8.30515e-06, 3.14158)]
-}
+tracks/0/keys = PackedFloat32Array(0, 1, 1.77636e-15, -1, -7.13678e-24, 4.37114e-08, 0.3, 1, 1.11539e-16, -0.0627907, 1.77285e-15, 0.998027, 0.6, 1, -1.76235e-15, 0.992115, 2.22636e-16, 0.125333, 0.633333, 1, 1.7748e-15, -0.999123, 7.43862e-17, 0.0418757, 0.933333, 1, -9.73894e-17, -0.0209422, 1.77597e-15, 0.999781, 1.23333, 1, -1.77013e-15, 0.996493, 1.48642e-16, 0.0836781, 1.25, 1, -1.77636e-15, 1, 1.20065e-22, 1.39071e-07)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Cylinder_007:rotation")
+tracks/1/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/progress")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.75, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-1.56554, 7.89566e-06, 3.14158)]
+"values": [-2.0, 2.0, -2.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Cylinder_008:rotation")
+tracks/2/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/shine_color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1.55555, -3.14159, 2.65796e-06)]
+"values": [Color(1, 0, 0, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mudr6"]
+[sub_resource type="Animation" id="Animation_mudr6"]
+resource_name = "Cooldown"
+length = 2.5
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Front")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.77636e-15, 1, 1.20065e-22, 1.39071e-07, 0.0333333, 1, -1.77548e-15, 0.999507, -1.13493e-17, -0.0314106, 0.0666667, 1, 1.77285e-15, -0.998027, 8.93119e-17, 0.0627904, 1.63333, 1, 1.135e-17, -0.0314111, 1.77548e-15, 0.999507, 1.66667, 1, -1.6934e-22, 2.38498e-08, 1.77636e-15, 1, 2.5, 1, -1.25607e-15, 0.707107, 1.25607e-15, 0.707106)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/shine_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1wy5a"]
+resource_name = "Idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [-2.0, 2.5, -2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/shine_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2ydk5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/shine_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ja327"]
+resource_name = "Windup"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Front")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.26974e-22, -1.57772e-30, 1.77636e-15, 1, 0.966667, 1, -1.77392e-15, 0.99863, 3.93585e-18, 0.0523359, 1, 1, 1.77636e-15, -1, -7.13678e-24, 4.37114e-08)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Cylinder_005:mesh:surface_0/material:next_pass:shader_parameter/shine_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ydk5"]
 _data = {
-&"Attack": ExtResource("4_dbekv"),
-&"Cooldown": ExtResource("6_i5s7k"),
-&"RESET": SubResource("Animation_i5s7k"),
-&"Windup": ExtResource("5_i5s7k")
+&"Attack": SubResource("Animation_i5s7k"),
+&"Cooldown": SubResource("Animation_mudr6"),
+&"Idle": SubResource("Animation_1wy5a"),
+&"RESET": SubResource("Animation_2ydk5"),
+&"Windup": SubResource("Animation_ja327")
 }
 
 [node name="Minigun" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tnyru")]
@@ -65,23 +163,13 @@ current_weapon = ExtResource("2_h8kbp")
 
 [node name="minigun" parent="." index="0" instance=ExtResource("2_0tyc1")]
 
-[node name="Cylinder_002" parent="minigun" index="0"]
-transform = Transform3D(0.162841, -0.00196993, 0.0262142, -0.0261632, -0.0122609, 0.163159, 2.45764e-09, 0.814469, 0.00251957, 2.23039e-05, 0.0256338, 1.11999)
+[node name="Skeleton3D" parent="minigun/Armature" index="0"]
+bones/2/rotation = Quaternion(-1.26974e-22, -1.57772e-30, 1.77636e-15, 1)
 
-[node name="Cylinder_005" parent="minigun" index="2"]
-transform = Transform3D(-0.108011, -4.4104e-06, 4.71853e-09, 7.12447e-09, -0.00546279, 0.108086, -4.58338e-07, 1.03926, 0.000568145, 0.000350159, 0.017893, 1.1732)
-
-[node name="Cylinder_007" parent="minigun" index="4"]
-transform = Transform3D(-0.108011, -2.26396e-07, 4.48584e-09, 7.12447e-09, -0.000255741, 0.108085, -5.02567e-07, 0.0486531, 0.00056814, -5.55411e-05, 0.0315108, 2.06677)
-
-[node name="Cylinder_008" parent="minigun" index="5"]
-transform = Transform3D(0.423536, -9.46284e-09, 1.64002e-08, -1.71628e-08, -0.00117222, 0.424269, 5.18702e-08, 0.0768791, 0.00646905, 0.000575338, 0.0112242, 1.96039)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="minigun" index="7"]
+[node name="AnimationPlayer" parent="minigun" index="1"]
 libraries = {
-&"": SubResource("AnimationLibrary_mudr6")
+&"": SubResource("AnimationLibrary_2ydk5")
 }
-blend_times = [&"Attack", &"Attack", 0.3, &"Attack", &"Cooldown", 0.05, &"Attack", &"Windup", 0.3, &"Cooldown", &"Attack", 0.3, &"Cooldown", &"Cooldown", 0.3, &"Cooldown", &"Windup", 0.1]
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
@@ -89,29 +177,42 @@ weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("3_vnsd5")
-ANIMATION_NAME = "Idle"
-
-[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
-script = ExtResource("4_w5bhe")
-ANIMATION_NAME = "Windup"
+animation_name = "Idle"
 state_type = 1
 
-[node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin")]
+[node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1" node_paths=PackedStringArray("windup_sound")]
+script = ExtResource("4_w5bhe")
+windup_sound = NodePath("../../WindupSound")
+animation_name = "Windup"
+state_type = 2
+
+[node name="AttackState" type="Node" parent="RangedWeaponStateMachine" index="2" node_paths=PackedStringArray("attack_origin", "shooting_sound")]
 script = ExtResource("3_uw0c0")
 attack_origin = NodePath("../../AttackOrigin")
-ANIMATION_NAME = "Attack"
-state_type = 2
+shooting_sound = NodePath("../../AttackingSound")
+animation_name = "Attack"
+state_type = 3
 
 [node name="AttackDurationTimer" type="Timer" parent="RangedWeaponStateMachine/AttackState" index="0"]
 one_shot = true
 
-[node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3"]
+[node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="3" node_paths=PackedStringArray("cooldown_sound")]
 script = ExtResource("6_04ypb")
-ANIMATION_NAME = "Cooldown"
-state_type = 3
+cooldown_sound = NodePath("../../CooldownSound")
+animation_name = "Cooldown"
+state_type = 4
 
 [node name="AttackOrigin" parent="." index="3"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 2.1)
+
+[node name="WindupSound" parent="." index="4"]
+stream = ExtResource("8_i5s7k")
+
+[node name="AttackingSound" parent="." index="5"]
+stream = ExtResource("9_mudr6")
+
+[node name="CooldownSound" parent="." index="6"]
+stream = ExtResource("10_1wy5a")
 
 [connection signal="timeout" from="RangedWeaponStateMachine/AttackState/AttackDurationTimer" to="RangedWeaponStateMachine/AttackState" method="_on_attack_duration_timer_timeout"]
 

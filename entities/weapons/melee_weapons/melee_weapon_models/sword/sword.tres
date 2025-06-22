@@ -5,16 +5,19 @@
 
 [resource]
 script = ExtResource("1_tqsw4")
-damage = 40
-windup_time = 1.0
-attack_duration = 0.75
-cooldown_time = 0.5
+damage = 50
+windup_time = 0.3
+attack_duration = 0.5
+cooldown_time = 0.4
+stun_time = 1.5
 loop_animation = false
 name = "Sword"
 purchasable = true
+is_free = false
 drop_chance = 50
 cost = 150
 currency_type = 0
-description = "Deals %s Base Damage with a broad slash after winding up for %s. The attack lasts %s, then enters a cooldown state for %s."
+description = "Deals %s Base Damage with a broad slash after winding up for %s. The attack lasts %s, then enters a cooldown state for %s, and stuns targets hit for %s."
+short_description = "The user [color=yellow]winds up briefly[/color], then delivers a broad slash dealing [color=yellow]great[/color] damage and stunning targets [color=yellow]significantly[/color]."
 icon = ExtResource("1_djghw")
 model_uid = "uid://co3ix5krmh3qr"

@@ -2,15 +2,17 @@
 class_name BaseRandomAudioPlayer
 extends AudioStreamPlayer3D
 
-@export var audio_folder: String = "res://sounds/" ## Folder containing audio files
+@export_dir var audio_folder: String = "res://sounds/" ## Folder containing audio files
 @export var file_extensions: Array[String] = ["ogg", "wav", "mp3"] ## Supported audio formats
 @export var avoid_repeats: bool = true ## Avoid playing the same audio consecutively, if possible
 
 var _available_streams: Array[AudioStream] = []
 var _current_stream_index: int = -1
 
+
 func _ready() -> void:
 	_load_audio_streams()
+
 
 func _load_audio_streams() -> void:
 	_available_streams.clear()
@@ -78,7 +80,6 @@ func _get_next_random_stream() -> AudioStream:
 		next_index = randi() % _available_streams.size()
 	else: # Should not happen if initial check passes, but as a fallback
 		return null
-
 
 	_current_stream_index = next_index
 	return _available_streams[_current_stream_index]

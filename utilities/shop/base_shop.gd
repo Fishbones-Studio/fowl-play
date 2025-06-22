@@ -3,8 +3,12 @@
 class_name BaseShop
 extends Control
 
+## Amount of items to show in the shop
 @export_range(4, 8) var max_items: int
+## Database Node extending `BaseDatabase`
 @export var item_database: BaseDatabase
+## Make the first item free
+@export var first_item_free: bool = false
 
 var shop_items: Array[BaseResource]
 var available_items: Array[BaseResource] = []
@@ -19,6 +23,8 @@ var current_previewed_item: BaseResource = null
 @onready var shop_preview_container: ItemPreviewContainer = %ItemPreviewContainer
 @onready var shop_preview_size_placeholder: Control = %SizePlaceholder
 @onready var cheat_button_container: HBoxContainer = %CheatButtonsContainer
+@onready var close_button: Button = %CloseButton
+
 
 func _ready() -> void:
 	if not OS.has_feature("debug") and cheat_button_container:
@@ -61,12 +67,20 @@ func _refresh_shop() -> void:
 		available_items, items_to_show
 	)
 
+	var free_item_applied: bool = false
 	for selected_item in selected_items:
-		shop_items.append(selected_item)
+		var item: BaseResource = selected_item
+	
+		if first_item_free and item.is_free and not free_item_applied and item.cost > 0:
+			item = selected_item.duplicate()
+			item.cost = 0
+			free_item_applied = true
 
-		var shop_item: BaseShopItem = create_shop_item(selected_item)
+		shop_items.append(item)
+
+		var shop_item: BaseShopItem = create_shop_item(item)
 		if not shop_item:
-			push_error("Failed to create shop item for: ", selected_item.name)
+			push_error("Failed to create shop item for: ", item.name)
 			continue
 
 		shop_items_container.add_child(shop_item)
@@ -102,6 +116,7 @@ func _should_skip_item(item: BaseResource) -> bool:
 		return true
 	return false
 
+
 func _get_weighted_random_items(
 	items: Array[BaseResource], count: int
 ) -> Array[BaseResource]:
@@ -126,6 +141,7 @@ func _get_weighted_random_items(
 			pool.remove_at(chosen_index)
 	return selected
 
+
 func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
 	var items_by_type : Dictionary[ItemEnums.ItemTypes, Array]= {}
 	for item in items:
@@ -148,6 +164,7 @@ func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
 		if chosen.size() > 0:
 			selected.append(chosen[0])
 	return selected
+
 
 # Fill the remaining slots with random items from the pool
 func _fill_remaining(
@@ -184,10 +201,11 @@ func _setup_controller_navigation() -> void:
 
 	# Set initial focus to the first shop item, or exit button if no items
 	await get_tree().process_frame
+	await get_tree().process_frame # Dunno, but waiting another frame fixes it grabbing focus, whack
 
-	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else null
+	var first_item: Node = shop_items_container.get_child(0) if shop_items_container.get_child_count() > 0 else close_button
 	if first_item and first_item is Control:
-		first_item.grab_focus()
+		first_item.call_deferred("grab_focus")
 
 
 func _on_populate_visual_fields(item: BaseResource) -> void:

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://dnk2viagjwrog"]
+
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_8hi1c"]
+
+[resource]
+script = ExtResource("1_8hi1c")
+health_bonus = 0
+stamina_bonus = 0
+attack_bonus = 0
+defense_bonus = 60
+speed_bonus = 0
+weight_bonus = 0.0
+name = "Protectors Peck"
+purchasable = true
+is_free = true
+drop_chance = 95
+cost = 150
+currency_type = 0
+description = "The user’s peck is fortified by a guardian force, increasing [color=orange]Defense[/color] by %s."
+short_description = ""
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"

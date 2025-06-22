@@ -1,229 +1,324 @@
 ################################################################################
-## Manages round transitions, including enemy spawning, max rounds, and intermissions.
-## Controls the battle timer and intermission duration, ensuring smooth round flow.
-## Handles the random selection of enemies based on the current round.
-###################################################################
-class_name RoundHandler 
+## Manages round transitions, enemy spawning, and battle flow.
+## Handles enemy selection, round progression, and intermission logic.
+################################################################################
+class_name RoundHandler
 extends Node
 
 signal next_enemy_selected(enemy: Enemy)
 
-@export_category("Enemies")
-@export var enemy_scenes: Array[PackedScene]
-
 @export_category("Round Settings")
+## Default max rounds (overridden by round_setup)
 @export var max_rounds: int = 3
-@export var round_intermission: bool = true
-@export var waiting_time: float
+## Enable/disable intermission between rounds
+@export var intermission_enabled: bool = true
+## Time between round transitions
+@export var transition_delay: float = 2.0
+## Which stat type to increment per round and their respective value
+@export var stat_increment_per_round: Dictionary[StatsEnums.Stats, float] = {
+	StatsEnums.Stats.MAX_HEALTH: 10.0,
+	StatsEnums.Stats.MAX_STAMINA: 10.0,
+	StatsEnums.Stats.ATTACK: 5.0,
+	StatsEnums.Stats.DEFENSE: 5.0,
+	StatsEnums.Stats.HEALTH_REGEN: 5.0,
+	StatsEnums.Stats.STAMINA_REGEN: 5.0
+}
+@export_category("Spawn")
+@export var enemy_spawn_position: Marker3D
+@export var player_spawn_position: Marker3D
+@export var intermission_spawn_position: Marker3D
 
 var round_state: RoundEnums.RoundTypes = RoundEnums.RoundTypes.WAITING
-var available_enemies: Dictionary[EnemyEnums.EnemyTypes, Array] = {}
 
 var _next_enemy: Enemy = null # The next enemy to fight, decided after the previous round
 var _current_enemy: Enemy = null # The one currently in the arena fighting
-
-@onready var enemy_default_position: Marker3D = %EnemyPosition # Position where to spawn the enemy at
-@onready var player_default_position: Marker3D = %PlayerPosition
-
-
-func _ready() -> void:
-	GameManager.current_round = 1
-	_init_enemies()
-	_start_round()
-	SignalManager.start_next_round.connect(_proceed_to_next_round)
+var _enemy_scenes_by_type: Dictionary = {} # Categorized enemy scenes by type
+var _used_enemies: Array[PackedScene] = [] # Tracks enemies already spawned in the current run
 
 
-func _proceed_to_next_round() -> void:
-	# Ensure we are actually in the intermission state before proceeding
-	if round_state != RoundEnums.RoundTypes.INTERMISSION:
-		printerr("Tried to proceed from intermission, but not in intermission state!")
+## Sets up the round system with the provided enemies and max rounds.
+func setup_rounds(enemies: Array[PackedScene], _max_rounds: int) -> void:
+	if enemies.is_empty():
+		push_error("RoundHandler: No enemies provided for setup!")
 		return
 
-	# Set the state to WAITING for the next round
-	round_state = RoundEnums.RoundTypes.WAITING
-	# Trigger the state machine to enter the WAITING state (_enter_waiting)
+	if _max_rounds > 0:
+		max_rounds = _max_rounds
+
+	_categorize_enemies(enemies)
+	_used_enemies.clear() # Reset the used enemies list at the start of a new run
+	GameManager.current_round = 1
+	SignalManager.start_next_round.connect(_proceed_to_next_round)
 	_start_round()
 
 
-func _init_enemies() -> void:
-	available_enemies.clear()
+## Categorizes enemy scenes by their type for efficient selection.
+func _categorize_enemies(enemies: Array[PackedScene]) -> void:
+	_enemy_scenes_by_type.clear()
 
-	for scene in enemy_scenes:
-		var enemy_instance: Enemy = scene.instantiate()
-		assert(enemy_instance != null, "Failed to instantiate enemy scene")
+	for scene in enemies:
+		var temp_enemy: Enemy = scene.instantiate() as Enemy
+		if not temp_enemy:
+			push_error(
+				"RoundHandler: Invalid enemy scene: %s" % scene.resource_path
+			)
+			continue
 
-		var enemy_type: EnemyEnums.EnemyTypes = enemy_instance.type
+		var enemy_type: EnemyEnums.EnemyTypes = temp_enemy.type
+		if not _enemy_scenes_by_type.has(enemy_type):
+			_enemy_scenes_by_type[enemy_type] = []
 
-		if not available_enemies.has(enemy_type):
-			available_enemies[enemy_type] = []
-		available_enemies[enemy_type].append(enemy_instance)
+		_enemy_scenes_by_type[enemy_type].append(scene)
+		temp_enemy.queue_free()
 
 
+## Main round state machine entry point.
 func _start_round() -> void:
 	match round_state:
 		RoundEnums.RoundTypes.WAITING:
-			_enter_waiting()
-			round_state = RoundEnums.RoundTypes.IN_PROGRESS
+			await _enter_waiting()
 		RoundEnums.RoundTypes.IN_PROGRESS:
-			_enter_in_progress()
-			round_state = RoundEnums.RoundTypes.CONCLUDING
+			await _enter_in_progress()
 		RoundEnums.RoundTypes.CONCLUDING:
-			_enter_concluding()
+			await _enter_concluding()
 		RoundEnums.RoundTypes.INTERMISSION:
 			_enter_intermission()
 		_:
-			assert(false, "Invalid RoundState: %s" % str(round_state))
+			push_error("RoundHandler: Invalid state: %s" % round_state)
 
 
+## Handles the waiting period before a round starts.
 func _enter_waiting() -> void:
+	var current_round_string: String = "Round " + NumberUtils.to_words(GameManager.current_round)
+	if GameManager.current_round == max_rounds:
+		current_round_string = "Final Round"
 	SignalManager.add_ui_scene.emit(
 		UIEnums.UI.ROUND_SCREEN,
-		{"display_text": "Round %d" % GameManager.current_round}
+		{
+			"display_text": current_round_string
+		}
 	)
-	GameManager.chicken_player.global_position = player_default_position.global_position
 
-	await get_tree().create_timer(waiting_time).timeout
+	GameManager.chicken_player.global_position = player_spawn_position.global_position
+	GameManager.chicken_player.look_at(enemy_spawn_position.global_position)
+	await get_tree().create_timer(transition_delay).timeout
 
+	round_state = RoundEnums.RoundTypes.IN_PROGRESS
 	_start_round()
 
 
+## Handles the round in-progress state, including enemy selection and spawning.
 func _enter_in_progress() -> void:
 	# Use the pre-selected next_enemy if available, otherwise pick one (for the first round)
-	if _current_enemy == null:
-		if _next_enemy != null:
+	if not _current_enemy:
+		if _next_enemy:
 			_current_enemy = _next_enemy
-			_next_enemy = null # Clear the stored next enemy
+			_next_enemy = null
 		else:
 			# This case should only happen for the very first round
-			var first_enemy_type: EnemyEnums.EnemyTypes = (
-				EnemyEnums.EnemyTypes.BOSS
-				if GameManager.current_round == max_rounds
-				else EnemyEnums.EnemyTypes.REGULAR
-			)
-			_current_enemy = _pick_random_enemy(first_enemy_type)
+			if GameManager.current_round == max_rounds:
+				_current_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
+				if not _current_enemy: # No boss enemies available
+					printerr(
+						"RoundHandler: No boss enemies available for the final round. Spawning a regular enemy instead."
+					)
+					_current_enemy = _create_enemy(EnemyEnums.EnemyTypes.REGULAR)
+			else:
+				_current_enemy = _create_enemy(EnemyEnums.EnemyTypes.REGULAR)
 
-	_spawn_enemy_in_level()
-	
+			if not _current_enemy:
+				push_error(
+					"RoundHandler: Critical - Failed to create any enemy for the current round."
+				)
+				return
+
+	if not _current_enemy:
+		push_error(
+			"RoundHandler: _current_enemy is null before spawning. This should not happen."
+		)
+		return
+
+	_spawn_enemy()
 	SaveManager.save_enemy_encounter(_current_enemy.stats.name)
 
+	# Wait for enemy defeat
 	await SignalManager.enemy_died
-
+	round_state = RoundEnums.RoundTypes.CONCLUDING
 	_start_round()
 
 
+## Handles the end of a round, including rewards and next enemy selection.
 func _enter_concluding() -> void:
 	# Check if all rounds are completed (boss defeated)
-	if (GameManager.current_round == max_rounds	and _current_enemy == null):
-		print("all rounds completed, back to poultry man menu")
-		var feathers_of_rebirth := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH, 0))
-		var prosperity_eggs := int(GameManager.arena_completion_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0))
-		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({
-			"Feathers of Rebirth": feathers_of_rebirth,
-			"Prosperity Eggs": prosperity_eggs
-		})
-		GameManager.prosperity_eggs += prosperity_eggs
-		GameManager.feathers_of_rebirth += feathers_of_rebirth
-		SignalManager.game_won.emit()
-		SignalManager.add_ui_scene.emit(UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_overview_dict})
-		# Don't proceed further in this function if game is ending
+	if GameManager.current_round == max_rounds:
+		_handle_victory()
 		return
 
-
-	# Display enemy defeated message and add currency
-	if _current_enemy == null:
-		var prosperity_eggs : int = int(GameManager.arena_round_reward.get(CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0)) * GameManager.current_round
-		GameManager.prosperity_eggs += prosperity_eggs
-		var currency_overview_dict : CurrencyOverviewDict = CurrencyOverviewDict.new({"Prosperity Eggs" : prosperity_eggs})
-		SignalManager.add_ui_scene.emit(
-			UIEnums.UI.ROUND_SCREEN, {"display_text": "Enemy defeated!", "currency_dict": currency_overview_dict}
-		)
+	# Show the round screen
+	SignalManager.add_ui_scene.emit(
+		UIEnums.UI.ROUND_SCREEN,
+		{
+			"display_text": "Enemy Defeated!", 
+			"currency_dict": _handle_round_reward()
+		}
+	)
 
 	# Decide and store the next enemy *before* the wait time
-	# Ensure we don't try to pick an enemy after the last round, kind of redundant check
-	if GameManager.current_round < max_rounds:
-		var next_round_number: int = GameManager.current_round + 1
-		var next_enemy_type: EnemyEnums.EnemyTypes = (
-			EnemyEnums.EnemyTypes.BOSS
-			if next_round_number == max_rounds
-			else EnemyEnums.EnemyTypes.REGULAR
-		)
-		# Check if there are available enemies of the required type
-		if (
-			available_enemies.has(next_enemy_type)
-			and not available_enemies[next_enemy_type].is_empty()
-		):
-			_next_enemy = _pick_random_enemy(next_enemy_type)
-			next_enemy_selected.emit(_next_enemy) # Emit signal for UI/intermission
-		else:
+	if GameManager.current_round + 1 == max_rounds:
+		_next_enemy = _create_enemy(EnemyEnums.EnemyTypes.BOSS)
+		if not _next_enemy: # No boss enemies available
 			printerr(
-				"No available enemies of type %s for round %d!"
-				% [EnemyEnums.EnemyTypes.keys()[next_enemy_type], next_round_number]
+				"RoundHandler: No boss enemies available for the upcoming final round. Preparing a regular enemy instead."
 			)
-			# TODO: maybe end game or spawn a default?
+			_next_enemy = _create_enemy(EnemyEnums.EnemyTypes.REGULAR)
+	else:
+		_next_enemy = _create_enemy(EnemyEnums.EnemyTypes.REGULAR)
 
-	# Wait before proceeding
-	await get_tree().create_timer(waiting_time).timeout
+	if _next_enemy:
+		next_enemy_selected.emit(_next_enemy)
+	else:
+		push_error("RoundHandler: Critical - Failed to prepare any next enemy.")
+
+	await get_tree().create_timer(transition_delay).timeout
 
 	# Increment round *after* picking the next enemy and waiting
 	GameManager.current_round += 1
-
-	# Set next state and start it
 	round_state = (
 		RoundEnums.RoundTypes.INTERMISSION
-		if round_intermission
+		if intermission_enabled
 		else RoundEnums.RoundTypes.WAITING
 	)
 	_start_round()
 
 
+## Handles the intermission state, including player teleport and shop refresh.
 func _enter_intermission() -> void:
-	GameManager.chicken_player.global_position = Vector3(
-		-400, 2.5, 0
-	) # teleport player to the intermission area
+	GameManager.chicken_player.global_position = intermission_spawn_position.global_position
 	SignalManager.upgrades_shop_refreshed.emit()
 
 
-func _pick_random_enemy(enemy_type: EnemyEnums.EnemyTypes) -> Enemy:
-	if not available_enemies.has(enemy_type):
-		printerr(
-			"Attempted to pick an enemy of type %s, but none are available!"
-			% EnemyEnums.EnemyTypes.keys()[enemy_type]
+## Method for handling normal round rewards
+func _handle_round_reward() -> Dictionary[CurrencyEnums.CurrencyTypes, int]:
+	# Add currency
+	var prosperity_eggs: int = GameManager.arena_round_reward.get(
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS, 0
+	) * GameManager.current_round
+
+	GameManager.prosperity_eggs += prosperity_eggs
+	return {
+		CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS: prosperity_eggs
+	} as Dictionary[CurrencyEnums.CurrencyTypes, int]
+
+
+## Proceeds to the next round from intermission.
+func _proceed_to_next_round() -> void:
+	if round_state != RoundEnums.RoundTypes.INTERMISSION:
+		push_error("Proceed called outside intermission state!")
+		return
+
+	round_state = RoundEnums.RoundTypes.WAITING
+	_start_round()
+
+
+## Instantiates a random enemy of the given type, avoiding repeats if possible.
+func _create_enemy(type: EnemyEnums.EnemyTypes) -> Enemy:
+	var all_scenes_for_type: Array = _enemy_scenes_by_type.get(
+		type, []
+	)
+
+	if all_scenes_for_type.is_empty():
+		push_warning(
+			"RoundHandler: No enemy scenes available for type: %s" % str(type)
 		)
 		return null
 
-	# If the pool is empty but there was only one enemy in enemy_scenes, re-instantiate it
-	if available_enemies[enemy_type].is_empty():
-		# Find the original scene for this type
-		for scene in enemy_scenes:
-			var temp_enemy: Enemy = scene.instantiate()
-			if temp_enemy.type == enemy_type:
-				available_enemies[enemy_type].append(scene.instantiate())
-				break
+	var available_unique_scenes: Array[PackedScene] = []
+	for scene in all_scenes_for_type:
+		if not _used_enemies.has(scene):
+			available_unique_scenes.append(scene)
 
-	# If still empty, error out
-	if available_enemies[enemy_type].is_empty():
-		printerr(
-			"Attempted to pick an enemy of type %s, but none are available after refill!"
-			% EnemyEnums.EnemyTypes.keys()[enemy_type]
+	var scene_to_instantiate: PackedScene = null
+
+	if not available_unique_scenes.is_empty():
+		# Prefer to pick an enemy that hasn't been used yet in this run
+		scene_to_instantiate = available_unique_scenes.pick_random()
+		if scene_to_instantiate:
+			_used_enemies.append(scene_to_instantiate)
+	else:
+		# All unique enemies of this type have been used in this run.
+		# Allow re-picking from the full list for this type.
+		push_warning(
+			(
+				"RoundHandler: All unique enemies of type '%s' have been used in this run. "
+				+ "Re-picking from the full list for this type."
+			)
+			% str(type)
+		)
+		scene_to_instantiate = all_scenes_for_type.pick_random()
+
+	if not scene_to_instantiate:
+		# This should ideally not happen if all_scenes_for_type was not empty
+		push_error(
+			"RoundHandler: Failed to select an enemy scene for type: %s"
+			% str(type)
 		)
 		return null
 
-	var index: int = randi_range(0, available_enemies[enemy_type].size() - 1)
-	var picked_enemy: Enemy = available_enemies[enemy_type].pop_at(index)
-	return picked_enemy
+	return scene_to_instantiate.instantiate() as Enemy
 
 
-func _spawn_enemy_in_level() -> void:
-	assert(_current_enemy != null, "Missing current enemy for spawning")
+## Spawns the current enemy in the arena and connects its death signal.
+func _spawn_enemy() -> void:
+	assert(_current_enemy, "Attempted to spawn null enemy!")
 
 	# Ensure the enemy node is not already in the tree if reusing instances
-	if _current_enemy.get_parent() != null:
+	if _current_enemy.get_parent():
 		_current_enemy.get_parent().remove_child(_current_enemy)
 
+	var original_enemy_stats: Dictionary[StringName, float] = {}
+
+	# Apply the increment in stats
+	for stat: StatsEnums.Stats in stat_increment_per_round.keys():
+		var stat_name: StringName = StatsEnums.stat_to_string(stat) as StringName
+		var original_value: float = _current_enemy.stats.apply_stat_effect(stat_name, SaveManager.get_loaded_rounds_won() * stat_increment_per_round[stat])
+		original_enemy_stats[stat_name] = original_value
+
 	add_child(_current_enemy)
-	_current_enemy.global_position = enemy_default_position.global_position
+	_current_enemy.global_position = enemy_spawn_position.global_position
+	_current_enemy.look_at(player_spawn_position.global_position)
 
 	# Connect death signal (one-shot ensures it disconnects after firing)
-	SignalManager.enemy_died.connect(
-		func(): _current_enemy = null, CONNECT_ONE_SHOT
+	var death_callback = func():
+		if is_instance_valid(_current_enemy):
+			for stat_name in original_enemy_stats.keys():
+				_current_enemy.stats.set(stat_name, original_enemy_stats[stat_name])
+			_current_enemy.queue_free()
+		_current_enemy = null
+
+	if is_instance_valid(_current_enemy):
+		_current_enemy.tree_exiting.connect(death_callback, CONNECT_ONE_SHOT)
+	else:
+		push_error("RoundHandler: _current_enemy became invalid before connecting death_callback.")
+
+
+## Handles the end-of-game victory logic and reward distribution.
+func _handle_victory() -> void:
+	GameManager.current_round += 1 # bc winning also counts as round won
+	var currency_dict: Dictionary[CurrencyEnums.CurrencyTypes, int] = {}
+	if _current_enemy.type ==  EnemyEnums.EnemyTypes.BOSS:
+		for currency_type in GameManager.arena_completion_reward:
+			var amount = GameManager.arena_completion_reward[currency_type]
+			currency_dict[currency_type] = amount
+	
+			match currency_type:
+				CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
+					GameManager.feathers_of_rebirth += amount
+				CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
+					GameManager.prosperity_eggs += amount
+	else:
+		currency_dict = _handle_round_reward()
+
+	SignalManager.game_won.emit()
+	SignalManager.add_ui_scene.emit(
+		UIEnums.UI.VICTORY_SCREEN, {"currency_dict": currency_dict}
 	)

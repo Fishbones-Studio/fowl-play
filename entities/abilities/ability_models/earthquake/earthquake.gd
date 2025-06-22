@@ -7,7 +7,7 @@ extends Ability
 @export var quake_damage_increase: float = 0.5  # Damage multiplier per quake
 @export var quake_radius_increase: float = 0.5  # Radius multiplier per quake
 @export var max_quakes: int = 3  # Maximum number of quake pulses
-@export var damage_scaler: int = 3
+@export var damage_scaler: int = 6
 
 var damage: float:
 	get:
@@ -27,16 +27,17 @@ var _particles: Array[GPUParticles3D] = []
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
 
 
-
 func _ready() -> void:
 	for particle in hit_area.get_children():
 		if particle is GPUParticles3D:
 			_particles.append(particle)
 
+	super()
 
-func activate() -> void:
-	if ability_holder.is_on_floor():
-		print("Cannot perform %s while on the ground." % name)
+
+func activate(force_activate: bool = false) -> void:
+	if ability_holder.is_on_floor() and not force_activate:
+		print("%s: cannot perform %s while on the ground." % [ability_holder.name, name])
 		return
 
 	# Initialize quake properties
@@ -64,6 +65,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _start_quake_sequence() -> void:
+	sound_effect.play()
 	quake_timer.wait_time = quake_interval
 
 	_pulse_quake()
@@ -129,7 +131,8 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 			sign(dir.y) * knockback_force_upwards,
 			sign(dir.z) * _current_knockback,
 		)
-
-		return knockback * max(ability_holder.stats.weight, 7)
+		var final_knockback: Vector3 = knockback * max(ability_holder.stats.weight, 9)
+		
+		return final_knockback if body.velocity.is_zero_approx() else final_knockback / 2.5
 
 	return Vector3.ZERO

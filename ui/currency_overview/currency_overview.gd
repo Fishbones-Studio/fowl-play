@@ -1,43 +1,22 @@
-class_name CurrencyOverview extends CenterContainer
+class_name CurrencyOverview
+extends CenterContainer
 
-@export var column_one_title: String = "Currency"
-@export var column_two_title: String = "Amount"
-## Int should be the change. So if the user lost 300, int will be -300
-@export var label_amount_dictionary: CurrencyOverviewDict = CurrencyOverviewDict.new({})
-
-@onready var label_container: GridContainer = %LabelContainer
-
-
-func _ready() -> void:
-	if !label_amount_dictionary.currency_dict.is_empty():
-		update_label_container()
-	
-
-func _add_labels_to_container() -> void:
-	var column_one_label: Label = Label.new()
-	var column_two_label: Label = Label.new()
-	column_one_label.text = column_one_title
-	column_one_label.add_theme_font_size_override("font_size", 24)
-	column_two_label.text = column_two_title
-	column_two_label.add_theme_font_size_override("font_size", 24)
-	label_container.add_child(column_one_label)
-	label_container.add_child(column_two_label)
+@onready var label_container: HBoxContainer = %LabelContainer
+@onready var currency_overview_item_resource: PackedScene = preload("uid://chcpdmtyutre6")
+@onready var label: Label = $VBoxContainer/Label
+@onready var click_label: Label = $VBoxContainer/Label2
 
 
-	for key in label_amount_dictionary.currency_dict.keys():
-		var label: Label = Label.new()
-		var amount: Label = Label.new()
-		label.text = str(key)
-		amount.text = str(label_amount_dictionary.currency_dict[key])
-		label_container.add_child(label)
-		label_container.add_child(amount)
-
-
-func update_label_container() -> void:
+func update_label_container(currency_dict: Dictionary) -> void:
 	for child in label_container.get_children():
+		label_container.remove_child(child)
 		child.queue_free()
-	if label_amount_dictionary.currency_dict.is_empty():
-		push_warning("No currency dict")
-		return
 
-	_add_labels_to_container()
+	visible = not currency_dict.is_empty()
+
+	for key in currency_dict:
+		var currency_overview_item: CurrencyOverviewItem = currency_overview_item_resource.instantiate()
+		label_container.add_child(currency_overview_item)
+		currency_overview_item.icon.texture = currency_overview_item.icons[key]
+		currency_overview_item.amount.text = str(currency_dict[key])
+		currency_overview_item.label.text = CurrencyEnums.type_to_string(key)

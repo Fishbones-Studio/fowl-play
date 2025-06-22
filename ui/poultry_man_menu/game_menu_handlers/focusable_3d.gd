@@ -1,40 +1,46 @@
+################################################################################
+## A 3D object that can receive focus and input events from mouse interaction.
+##
+## This class provides visual feedback when hovered (focus) and handles click
+## events. It can optionally affect a target object (focusable_object) and a 
+## Label3D with highlight effects.
+## Very Crack.
+################################################################################
 class_name Focusable3D
-extends Area3D
+extends CollisionObject3D
 
 signal focused
 signal unfocused
 signal pressed
 
-# Highlight Settings
+@export var focusable_objects: Array[Node3D] = [] # Crack
+@export var label: Label3D
 @export var highlight_scale_factor: float = 1.1
-@export var highlight_color: Color = Color.YELLOW
+@export var highlight_color: Color = Color("c3d76c")
+@export var emission_energy: float = 0.02 # For shader material, adjust shader parameters in editor
+@export var outline_color: Color = Color.BLACK
+@export var outline_size: float = 50
+@export var index: int = 0
 
-var original_scale: Vector3
-var original_label_color: Color
+var object_scales: Dictionary[Node3D, Vector3] = {}
+var prev_label_color: Color = Color("c3d76c")
+var prev_label_outline_color: Color = Color("282b38")
+var prev_label_outline_size: float = 12
 var is_focused: bool = false
-
-@onready var label: Label3D = _find_label()
 
 
 func _ready() -> void:
-	original_scale = scale
+	for item in focusable_objects:
+		if item == null: continue
+		object_scales[item] = item.scale
+
 	if label:
-		original_label_color = label.modulate
-	
-	# Connect Area3D signals
+		prev_label_color = label.modulate
+		prev_label_outline_size = label.outline_size
+
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	input_event.connect(_on_input_event)
-
-
-func _find_label() -> Label3D:
-	for child in get_children():
-		if child is Label3D:
-			return child
-		var found = child._find_label() if child.has_method("_find_label") else null
-		if found:
-			return found
-	return null
 
 
 func _on_mouse_entered() -> void:
@@ -54,23 +60,103 @@ func focus() -> void:
 	if is_focused:
 		return
 
+	for item in focusable_objects:
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
+
+			if material is BaseMaterial3D:
+				material.emission_enabled = true
+				material.emission = highlight_color
+				material.emission_energy_multiplier = emission_energy
+
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", true)
+
+		var tween: Tween = TweenManager.create_scale_tween(
+				null,
+				item,
+				Vector3(object_scales[item] * highlight_scale_factor),
+				0.2,
+				TweenManager.DEFAULT_TRANSITION,
+				Tween.EASE_OUT
+			)
+		tween.finished.connect(tween.kill)
+
 	is_focused = true
-	scale = original_scale * highlight_scale_factor
+
 	if label:
-		label.modulate = highlight_color
-	emit_signal("focused")
+		var tween: Tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(
+			func(arr: Array):
+				label.modulate = arr[0] # dunno if this works, since it's color but meh
+				label.outline_modulate = arr[1] # ditto
+				label.outline_size = arr[2],
+				[
+					prev_label_color,
+					prev_label_outline_color,
+					prev_label_outline_size,
+				],
+				[
+					highlight_color,
+					outline_color,
+					outline_size,
+				],
+				0.1
+		)
+		tween.finished.connect(tween.kill)
+
+	focused.emit()
 
 
 func unfocus() -> void:
 	if not is_focused:
 		return
 
+	for item in focusable_objects:
+		if item is MeshInstance3D:
+			var material: Material = item.get_active_material(0)
+
+			if material is BaseMaterial3D:
+				material.emission_enabled = false
+			elif material is ShaderMaterial:
+				material.set("shader_parameter/highlight", false)
+
+		var tween: Tween = TweenManager.create_scale_tween(null,
+			item,
+			Vector3(object_scales[item]),
+			0.2,
+			TweenManager.DEFAULT_TRANSITION,
+			Tween.EASE_OUT
+		)
+		tween.finished.connect(tween.kill)
+
 	is_focused = false
-	scale = original_scale
+
 	if label:
-		label.modulate = original_label_color
-	emit_signal("unfocused")
+		var tween: Tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_method(
+			func(arr: Array):
+				label.modulate = arr[0]
+				label.outline_modulate = arr[1]
+				label.outline_size = arr[2],
+				[
+					highlight_color,
+					outline_color,
+					outline_size,
+				],
+				[
+					prev_label_color,
+					prev_label_outline_color,
+					prev_label_outline_size,
+				],
+				0.1
+		)
+		tween.finished.connect(tween.kill)
+
+	unfocused.emit()
 
 
 func press() -> void:
-	emit_signal("pressed")
+	pressed.emit()

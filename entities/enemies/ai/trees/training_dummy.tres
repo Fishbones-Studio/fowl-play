@@ -1,0 +1,35 @@
+[gd_resource type="BehaviorTree" load_steps=10 format=3 uid="uid://bji8hyd1lawvy"]
+
+[ext_resource type="Script" uid="uid://ddu55h2luwrgv" path="res://entities/enemies/ai/tasks/is_hurt.gd" id="1_atvp0"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_r0jxf"]
+
+[sub_resource type="BTCondition" id="BTCondition_atvp0"]
+script = ExtResource("1_atvp0")
+
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_mvev2"]
+children = [SubResource("BTCondition_atvp0")]
+
+[sub_resource type="BBNode" id="BBNode_atvp0"]
+saved_value = NodePath("Model/trainingdummy/AnimationPlayer")
+resource_name = "Model/trainingdummy/AnimationPlayer"
+
+[sub_resource type="BTStopAnimation" id="BTStopAnimation_mvev2"]
+animation_player = SubResource("BBNode_atvp0")
+animation_name = &"Hurt"
+
+[sub_resource type="BBNode" id="BBNode_g40jy"]
+saved_value = NodePath("Model/trainingdummy/AnimationPlayer")
+resource_name = "Model/trainingdummy/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_xn408"]
+animation_player = SubResource("BBNode_g40jy")
+animation_name = &"Hurt"
+blend = 0.2
+
+[sub_resource type="BTSequence" id="BTSequence_mvev2"]
+children = [SubResource("BTRepeatUntilSuccess_mvev2"), SubResource("BTStopAnimation_mvev2"), SubResource("BTPlayAnimation_xn408")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_r0jxf")
+root_task = SubResource("BTSequence_mvev2")

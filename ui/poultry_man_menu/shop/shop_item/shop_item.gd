@@ -5,7 +5,7 @@ signal purchased
 signal purchase_cancelled
 
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var item_label: Label = %ItemLabel
+@onready var item_label: RichTextLabel = %ItemLabel
 @onready var item_currency_icon: TextureRect = %ItemCurrencyIcon
 @onready var item_cost_label: Label = %ItemCostLabel
 
@@ -13,6 +13,8 @@ signal purchase_cancelled
 func _ready() -> void:
 	purchased.connect(_on_purchase_complete)
 	purchase_cancelled.connect(func(): purchase_in_progress = false)
+	GameManager.prosperity_eggs_changed.connect(func(_new_value: int): _update_name_label(item_label))
+
 	super()
 
 
@@ -29,7 +31,7 @@ func set_item_data(item: Resource) -> void:
 
 func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	item_label.text = shop_item.name
+	_update_name_label(item_label)
 	item_currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	item_cost_label.text = str(shop_item.cost)
 
@@ -49,19 +51,17 @@ func attempt_purchase() -> void:
 		super()
 		return
 
+	var params: Dictionary = {
+		"new_item": shop_item,
+		"purchased_signal": purchased,
+		"purchase_cancelled": purchase_cancelled
+	}
+
 	# If player already has items of this type, show selection UI to replace
-	if existing_items.is_empty() or existing_items.size() < shop_item.type_max_owned_amount:
-		#TODO: add a confirmation popup
-		_on_purchase_complete()
-	else:
-		# TODO: add the just replaced item back to the shop?
-		# TODO: for abilities, somehow show both possible abilites to replace
-		SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP_CONFIRMATION, {
-			"existing_item": existing_items[0],
-			"new_item": shop_item,
-			"purchased_signal": purchased,
-			"purchase_cancelled": purchase_cancelled
-		})
+	if not existing_items.is_empty() and existing_items.size() >= shop_item.type_max_owned_amount:
+		params["existing_item"] = existing_items
+
+	SignalManager.add_ui_scene.emit(UIEnums.UI.POULTRYMAN_SHOP_CONFIRMATION, params)
 
 
 func _on_purchase_complete() -> void:

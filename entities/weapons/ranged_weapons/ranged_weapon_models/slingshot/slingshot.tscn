@@ -9,11 +9,17 @@
 [ext_resource type="Script" uid="uid://c2ufmouxg5vt" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/slingshot/states/attack_state.gd" id="7_2h67y"]
 
 [node name="SlingShot" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_31fjd")]
-animation_player = NodePath("AnimationPlayer")
+animation_player = NodePath("slingshot/AnimationPlayer")
 current_weapon = ExtResource("2_2h67y")
 
 [node name="slingshot" parent="." index="0" instance=ExtResource("3_nqd1d")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.3, 0)
+
+[node name="Skeleton3D" parent="slingshot/Armature" index="0"]
+bones/1/rotation = Quaternion(2.10204e-09, 8.2979e-08, -0.0253241, 0.999679)
+bones/2/rotation = Quaternion(0.0331919, 0.0561537, -0.311866, 0.947884)
+bones/3/rotation = Quaternion(0.0401459, -0.119677, 0.334628, 0.933858)
+bones/4/rotation = Quaternion(0.741069, 0.0145396, 0.0225377, 0.670893)
 
 [node name="RangedWeaponStateMachine" parent="." index="1" node_paths=PackedStringArray("starting_state", "weapon")]
 starting_state = NodePath("IdleState")
@@ -21,21 +27,26 @@ weapon = NodePath("..")
 
 [node name="IdleState" type="Node" parent="RangedWeaponStateMachine" index="0"]
 script = ExtResource("4_bkwn1")
+animation_name = "Idle"
+state_type = 1
 
 [node name="WindupState" type="Node" parent="RangedWeaponStateMachine" index="1"]
 script = ExtResource("5_adhto")
-state_type = 1
+animation_name = "Windup"
+state_type = 2
 
 [node name="CooldownState" type="Node" parent="RangedWeaponStateMachine" index="2"]
 script = ExtResource("6_bnim2")
-state_type = 3
+animation_name = "Cooldown"
+state_type = 4
 
 [node name="HoldingState" type="Node" parent="RangedWeaponStateMachine" index="3" node_paths=PackedStringArray("attack_origin")]
 script = ExtResource("7_2h67y")
 attack_origin = NodePath("../../AttackOrigin")
-state_type = 2
+animation_name = "Holding"
+state_type = 3
 
 [node name="AttackOrigin" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[editable path="slingshot"]

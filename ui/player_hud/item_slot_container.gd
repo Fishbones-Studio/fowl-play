@@ -13,7 +13,7 @@ func _ready() -> void:
 			
 			print("Activating item slot at index: ", index)
 			# Validate index
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				push_warning("Invalid item slot index: ", index)
 				return
 				
@@ -36,7 +36,7 @@ func _ready() -> void:
 	SignalManager.deactivate_item_slot.connect(
 		func(item: BaseResource):
 			var index : int = Inventory.inventory_data.items_sorted_flattened.find(item)
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				return
 				
 			var item_slot: UiItemSlot = get_child(index * 2) as UiItemSlot
@@ -51,17 +51,18 @@ func _ready() -> void:
 
 	# Connect to signal that starts cooldown on an item slot
 	SignalManager.cooldown_item_slot.connect(
-		func(item: BaseResource, cd: float, create_tween : bool):
+		func(item: BaseResource, cd: float, should_create_tween : bool):
 			var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
-			if index < 0 or index >= get_child_count() / 2:
+			if index < 0 or index >= int(get_child_count() / 2.0):
 				return
 			var item_slot: UiItemSlot = get_child(index * 2) as UiItemSlot
 			if item_slot:
-				item_slot.start_cooldown(cd, create_tween)
+				item_slot.start_cooldown(cd, should_create_tween)
 	)
 
 	# Initialize all item slots
 	_init_item_slots(Inventory.inventory_data.items_sorted_flattened)
+
 
 # Returns the appropriate input action for the given item
 func _get_input_action_for_item(item: BaseResource) -> String:    
@@ -84,12 +85,14 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 		return "ability_two"
 	return ""
 
+
 # Finds and returns the item slot UI element for a given item
 func _get_item_slot_for_item(item: BaseResource) -> UiItemSlot:
 	var index := Inventory.inventory_data.items_sorted_flattened.find(item)
 	if index >= 0 and index * 2 < get_child_count():
 		return get_child(index * 2) as UiItemSlot
 	return null
+
 
 # Determines whether to show "hold" label for an item
 func _should_show_hold_label(item: BaseResource) -> bool:
@@ -98,10 +101,12 @@ func _should_show_hold_label(item: BaseResource) -> bool:
 	var ranged_items = Inventory.get_equipped_items(ItemEnums.ItemTypes.RANGED_WEAPON)
 	return item in ranged_items and item.allow_continuous_fire
 
+
 func _should_show_switch_icon(item: BaseResource) -> bool:
 	if item == null:
 		return false
 	return _get_input_action_for_item(item) == "switch_weapon"
+
 
 # Initializes all item slots in the UI
 func _init_item_slots(items: Array) -> void:
@@ -109,13 +114,13 @@ func _init_item_slots(items: Array) -> void:
 		var item = items[i]
 		if not item is BaseResource:
 			continue
-		
+
 		# Create new item slot and controller icon
 		var item_slot := ITEM_SLOT.instantiate() as UiItemSlot
 		var controller_slot := ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
 		if not item_slot or not controller_slot:
 			continue
-			
+
 		# Add to scene and configure
 		add_child(item_slot)
 		add_child(controller_slot)

@@ -1,5 +1,10 @@
 extends BaseRangedCombatState
 
+# Number of points in the trajectory line
+const MAX_TRAJECTORY_POINTS: int = 50
+# Time step between trajectory points
+const TRAJECTORY_TIME_STEP: float = 0.05
+
 @export var projectile_scene: PackedScene = preload("uid://d1jf4shjaqq4n")
 @export var attack_origin: Node3D
 @export var launch_speed: float = 20.0
@@ -7,16 +12,12 @@ extends BaseRangedCombatState
 @export var trajectory_line_color: Color = Color(1.0, 1.0, 0.0, 0.21568628)
 @export var trajectory_line_width: float = 0.2 # Width of the trajectory visualization
 
-# Number of points in the trajectory line
-const MAX_TRAJECTORY_POINTS: int = 50
-# Time step between trajectory points
-const TRAJECTORY_TIME_STEP: float = 0.05
-
 # Trajectory Preview Variables
 var _trajectory_preview_mesh_instance: MeshInstance3D
 var _trajectory_preview_mesh: ArrayMesh
 
-
+func _init():
+	state_type = WeaponEnums.WeaponState.ATTACKING
 
 func _ready() -> void:
 	# Initialize the trajectory preview objects once
@@ -30,6 +31,7 @@ func _ready() -> void:
 	material.shading_mode = StandardMaterial3D.SHADING_MODE_UNSHADED
 	material.flags_transparent = trajectory_line_color.a < 1.0
 	_trajectory_preview_mesh_instance.material_override = material
+
 
 func enter(_previous_state, _info: Dictionary = {}) -> void:
 	if not weapon or not weapon.current_weapon or not weapon.entity_stats:
@@ -55,6 +57,7 @@ func enter(_previous_state, _info: Dictionary = {}) -> void:
 	set_physics_process(true)
 	_update_trajectory_preview()
 
+
 func exit() -> void:
 	set_physics_process(false)
 	_fire_projectile()
@@ -62,6 +65,7 @@ func exit() -> void:
 	# Remove preview
 	if _trajectory_preview_mesh_instance and _trajectory_preview_mesh_instance.is_inside_tree():
 		_trajectory_preview_mesh_instance.get_parent().remove_child(_trajectory_preview_mesh_instance)
+
 
 func _physics_process(_delta: float) -> void:
 	if _trajectory_preview_mesh_instance and _trajectory_preview_mesh_instance.visible:

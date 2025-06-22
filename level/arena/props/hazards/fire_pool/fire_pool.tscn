@@ -59,6 +59,7 @@ mesh = SubResource("BoxMesh_ysydq")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
 stream = ExtResource("4_khrxl")
+unit_size = 5.0
 bus = &"SFX"
 
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_remove_timer_timeout"]

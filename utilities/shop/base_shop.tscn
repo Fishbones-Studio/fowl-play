@@ -89,6 +89,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="CloseButton" parent="Panel/VBoxContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_5kcef")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
@@ -108,10 +109,19 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 9999.0
+size_flags_stretch_ratio = 5.0
 follow_focus = true
 
-[node name="ShopItemsContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ShopItemsContainer" type="GridContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -126,6 +136,7 @@ layout_mode = 2
 
 [node name="ItemPreviewContainer" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_1w0y0")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="SizePlaceholder" type="Control" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]

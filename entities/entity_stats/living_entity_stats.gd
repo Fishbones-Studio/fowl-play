@@ -14,7 +14,8 @@ extends Resource
 ## Sets base speed of the character, deciding how fast the move and how far they dash. Is also used to calulate damage for certain abilities.
 @export var speed: float = 5.0
 ## Sets base weight of the character. If this stat is higher the jump height and speed of the character are lowered.
-@export var weight: float = 10.0
+# Will throw an error if set to 0 or negative. Weight must be possitive
+@export_range (0.1, 9999, 0.1) var weight: float = 10.0
 
 @export_category("Factors")
 ## Sets base health regeneration for the character. This makes the character regain health over time.
@@ -31,7 +32,7 @@ extends Resource
 @export_group("Holder")
 @export var is_player: bool = false
 ## All names are stored lowercase and must be unique. Use snake_case
-@export var name: StringName = "" :
+@export var name: StringName = "":
 	set(value):
 		name = value.to_lower()
 
@@ -50,10 +51,8 @@ var current_stamina: float:
 func init() -> void:
 	if max_health <= 0: push_error("Max health must be positive.")
 	if max_stamina <= 0: push_error("Max stamina must be positive.")
-	if current_health == 0:
-		current_health = max_health
-	if current_stamina == 0:
-		current_stamina = max_stamina
+	current_health = max_health
+	current_stamina = max_stamina
 
 
 ## Calculate the speed based on weight and speed factor
@@ -99,7 +98,7 @@ func drain_stamina(amount: float) -> float:
 
 ## Regenerate health over delta time
 func regen_health(delta: float) -> float:
-	current_health = clamp(current_health + (current_health * delta), 0, max_health)
+	current_health = clamp(current_health + (health_regen * delta), 0, max_health)
 	return current_health
 
 
@@ -116,16 +115,16 @@ func calc_scaled_damage(damage: float) -> float:
 		return INF
 	else:
 		actual_damage = floor(damage * (1.0 + (attack / 100)))
-	
+
 	print("Damage: " + str(damage) + " Attack: " + str(attack) + " Scaled Damage: " + str(actual_damage))
-	
+
 	return actual_damage
 
 
-## Applies a temporary status effect (buff or debuff) to a given stat by modifying it by a percentage.
+## Applies a temporary status effect (buff + or debuff -) to a given stat by modifying it by a percentage.
 func apply_stat_effect(stat_name: StringName, percent: float) -> float:
 	var original_value: float = get(stat_name)
-	var new_value: float = original_value * (1.0 - percent / 100.0)
+	var new_value: float = original_value * (1.0 + percent / 100.0)
 	set(stat_name, new_value)
 
 	return original_value
@@ -146,7 +145,7 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	speed += upgrade.speed_bonus
 
 	weight += upgrade.weight_bonus
-	
+
 	# Ensure current values are clamped after potential changes
 	current_health = clamp(current_health, 0, max_health)
 	current_stamina = clamp(current_stamina, 0, max_stamina)
@@ -176,16 +175,16 @@ static func from_dict(data: Dictionary) -> LivingEntityStats:
 	var new_stats := LivingEntityStats.new()
 
 	# Load Base Stats
-	new_stats.max_health = data.get("max_health", 100.0)
+	new_stats.max_health = data.get("max_health", 300.0)
 	new_stats.max_stamina = data.get("max_stamina", 100.0)
-	new_stats.attack = data.get("attack", 10.0)
+	new_stats.attack = data.get("attack", 0.0)
 	new_stats.defense = data.get("defense", 0)
-	new_stats.speed = data.get("speed", 5.0)
-	new_stats.weight = data.get("weight", 10.0)
+	new_stats.speed = data.get("speed", 15.0)
+	new_stats.weight = data.get("weight", 3.0)
 
 	# Load Factors
-	new_stats.health_regen = data.get("health_regen", 1)
-	new_stats.stamina_regen = data.get("stamina_regen", 5)
+	new_stats.health_regen = data.get("health_regen", 0)
+	new_stats.stamina_regen = data.get("stamina_regen", 15)
 	new_stats.weight_factor = data.get("weight_factor", 0.07)
 
 	# Load Holder

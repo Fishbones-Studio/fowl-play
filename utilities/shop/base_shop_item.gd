@@ -6,7 +6,7 @@ signal unhovered(item)
 signal focused(item)
 
 # Common properties
-static var purchase_in_progress: bool = false :
+static var purchase_in_progress: bool = false:
 	set(value):
 		purchase_in_progress = value
 		if !value:
@@ -43,6 +43,10 @@ func _on_gui_input(event: InputEvent) -> void:
 			attempt_purchase()
 	elif event.is_action_pressed("ui_accept") and has_focus():
 		attempt_purchase()
+
+	if (event is InputEventMouseButton and event.is_pressed()) or \
+	(event is InputEventJoypadMotion and event.axis in [JOY_AXIS_RIGHT_X, JOY_AXIS_RIGHT_Y]):
+		get_viewport().set_input_as_handled()
 
 
 func _on_focus_entered() -> void:
@@ -92,3 +96,10 @@ func attempt_purchase() -> void:
 func populate_visual_fields() -> void:
 	push_error("populate_visual_fields() must be implemented by child class")
 	return
+
+
+func _update_name_label(label: RichTextLabel) -> void:
+	var name_string : String = "[color=yellow]%s[/color]"
+	if shop_item.cost == 0: name_string = "[color=orange]%s[/color]"
+	if shop_item.cost > GameManager.prosperity_eggs : name_string = "[color=red]%s[/color]"
+	label.text = name_string % shop_item.name

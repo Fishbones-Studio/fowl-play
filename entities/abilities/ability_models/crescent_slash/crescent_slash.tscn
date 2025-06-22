@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bon7ywv24hl73" path="res://entities/abilities/ability.tscn" id="1_ybpx1"]
 [ext_resource type="Script" uid="uid://cq5rcn2ai5sxs" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gd" id="2_jgw1e"]
 [ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="3_y7jyb"]
-[ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.gdshader" id="4_wydpc"]
-[ext_resource type="AudioStream" uid="uid://dmgl2h5qm05es" path="res://entities/weapons/melee_weapons/melee_weapon_models/sword/sword_swing.wav" id="5_7785h"]
+[ext_resource type="Shader" uid="uid://dffhwn35pd486" path="res://entities/abilities/ability_models/crescent_slash/shaders/crescent_slash.gdshader" id="4_wydpc"]
+[ext_resource type="AudioStream" uid="uid://b25cu4wf3bs38" path="res://entities/abilities/ability_models/crescent_slash/sound/crescent_slash.ogg" id="5_ybpx1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xibu5"]
-height = 1.0
-radius = 5.0
+height = 2.5
+radius = 7.5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8hs8v"]
 noise_type = 2
@@ -67,12 +67,14 @@ shader_parameter/mix_strength = 1.0
 shader_parameter/color_lookup = SubResource("GradientTexture1D_f65cc")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ifr7y"]
-size = Vector2(10, 10)
+size = Vector2(15, 15)
 
 [node name="CrescentSlash" instance=ExtResource("1_ybpx1")]
 script = ExtResource("2_jgw1e")
-strike_amount = 2
+max_slashes = 2
+slash_interval = 0.2
 ignore_defense = true
+base_damage = 25.0
 current_ability = ExtResource("3_y7jyb")
 
 [node name="SlashTimer" type="Timer" parent="." index="1"]
@@ -90,15 +92,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 material_override = SubResource("ShaderMaterial_7785h")
 emitting = false
 amount = 1
-lifetime = 0.5
+lifetime = 0.3
 one_shot = true
-preprocess = 0.1
-speed_scale = 0.75
+speed_scale = 1.1
 mesh = SubResource("QuadMesh_ifr7y")
 gravity = Vector3(0, 0, 0)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
-stream = ExtResource("5_7785h")
-bus = &"SFX"
+[node name="SoundEffect" parent="." index="3"]
+stream = ExtResource("5_ybpx1")
 
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]

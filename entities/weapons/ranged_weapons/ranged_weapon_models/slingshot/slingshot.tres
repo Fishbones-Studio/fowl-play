@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_g1vt4")
-damage = 25
+damage = 40
 windup_time = 0.5
 attack_duration = 0.0
-cooldown_time = 1.5
+cooldown_time = 2.5
 allow_continuous_fire = true
 allow_early_release = true
 fire_rate_per_second = 0.0
@@ -17,14 +17,20 @@ handle_attack_end_by_state = false
 loop_animation = false
 name = "Slingshot"
 purchasable = true
+is_free = false
 drop_chance = 15
-cost = 150
+cost = 100
 currency_type = 0
-description = "Hold the attack button to line up the perfect shot. Take as much time as you need! Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s. Upon exploding, the egg leaves behind a [color=orange]temporary fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
+description = "Hold the attack button to line up the perfect shot. Take as much time as you need!
+
+Release to launch a powerful explosive egg that deals %s [color=yellow]Base Damage[/color] on impact after a brief windup of %s.
+
+Upon exploding, the egg leaves behind a [color=orange]temporary fire pool[/color]. Watch out, as it [color=orange]hurts both you and enemies[/color]!  
 
 After firing, the slingshot requires %s to recover before it can be used again.  
 
 This weapon %s and %s."
+short_description = "The user aims and launches an explosive egg that deals [color=yellow]moderate[/color] damage on impact and creates a [color=yellow]Fire Pool[/color] damaging all nearby targets."
 icon = ExtResource("1_26unw")
 model_uid = "uid://dp3a4dva535bj"
 metadata/_custom_type_script = "uid://dm0sr7j8y5j30"

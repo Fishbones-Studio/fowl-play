@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource("1_r24ob")
 max_health = 1000.0
-max_stamina = 2.0
+max_stamina = 100.0
 attack = 0.0
-defense = 20
+defense = 40
 speed = 12.0
 weight = 10.0
 health_regen = 0
-stamina_regen = 0
+stamina_regen = 5
 weight_factor = 0.01
 defense_multiplier = 0.05
 defense_decelerator = 9.0

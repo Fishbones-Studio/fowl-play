@@ -3,7 +3,7 @@ extends BTCondition
 
 @export var target_var: StringName = &"target" # Blackboard variable name
 @export var comparison: ComparisonEnums.ComparisonType = ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL
-@export var height_threshold: float = 3.0
+@export var height_threshold: float = 4.5
 @export var use_relative: bool = true  # Compare to agent's height or absolute world Y
 @export var target_on_floor: bool = true
 
@@ -24,7 +24,7 @@ func _generate_name() -> String:
 			comp_text = "<="
 		ComparisonEnums.ComparisonType.GREATER_THAN_OR_EQUAL:
 			comp_text = ">="
-	
+
 	return "Height ➜ %s %s %.1f" % [LimboUtility.decorate_var(target_var), comp_text, height_threshold]
 
 
@@ -34,6 +34,9 @@ func _enter() -> void:
 
 
 func _tick(_delta: float) -> Status:
+	if not agent.visible:
+		return FAILURE
+
 	var target: ChickenPlayer = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
 		return FAILURE

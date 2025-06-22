@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://co473aij70n7k"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_qrjwk"]
+[ext_resource type="Script" uid="uid://cdtfevhqwqlnt" path="res://entities/enemies/timmy/timmy.gd" id="2_v7jq4"]
+[ext_resource type="PackedScene" uid="uid://cc5c5n4tntrob" path="res://entities/enemies/timmy/art/timmy.glb" id="3_ivelv"]
+[ext_resource type="Resource" uid="uid://bdn6jo27frodb" path="res://entities/enemies/timmy/timmy_stats.tres" id="3_v7w0k"]
+[ext_resource type="BehaviorTree" uid="uid://k7wyinj46uqk" path="res://entities/enemies/ai/trees/timmy.tres" id="5_ttlev"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="6_5qjni"]
+[ext_resource type="Script" uid="uid://c8jt5ajgc4dod" path="res://entities/weapons/ranged_weapons/ranged_weapon_handlers/current_ranged_weapon.gd" id="7_6lo8p"]
+[ext_resource type="PackedScene" uid="uid://8owdwg4pu4ht" path="res://entities/weapons/ranged_weapons/ranged_weapon_models/minigun/minigun.tscn" id="8_jsm6r"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="9_5qjni"]
+[ext_resource type="Resource" uid="uid://c612o2d6cro3c" path="res://entities/abilities/ability_models/crescent_slash/crescent_slash.tres" id="10_6lo8p"]
+[ext_resource type="Texture2D" uid="uid://cbn5erf1c6dx5" path="res://entities/enemies/timmy/art/icon/timmy_icon.png" id="11_5qjni"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qatkl"]
+radius = 1.375
+height = 6.0
+
+[node name="Timmy" instance=ExtResource("1_qrjwk")]
+script = ExtResource("2_v7jq4")
+min_hover_height = 2.4
+max_hover_height = 6.6
+hover_speed = 3.3
+stats = ExtResource("3_v7w0k")
+dialogue_path = "res://entities/enemies/timmy/dialogue"
+name_label_template_string = "%s the Goose"
+
+[node name="timmy" parent="Model" index="0" instance=ExtResource("3_ivelv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+
+[node name="Skeleton3D" parent="Model/timmy/Armature" index="0"]
+bones/1/rotation = Quaternion(-0.0600498, 0.88451, 0.462615, -0.00481577)
+bones/2/rotation = Quaternion(-0.180408, -0.698588, 0.198449, 0.663359)
+bones/3/rotation = Quaternion(1.37277e-05, 0.00370759, 0.00370765, 0.999986)
+bones/6/rotation = Quaternion(1.88628e-05, -0.263934, -0.00612756, 0.964521)
+bones/15/rotation = Quaternion(0.608175, 0.789837, -0.0341642, -0.0715082)
+bones/16/rotation = Quaternion(-0.152271, -0.0633618, 0.627185, 0.761208)
+bones/17/rotation = Quaternion(0.603147, 0.562482, -0.423732, -0.374538)
+bones/18/rotation = Quaternion(0.100591, 0.0211582, -0.0971377, 0.989949)
+bones/19/rotation = Quaternion(-0.476393, -0.423732, 0.562481, 0.526417)
+bones/20/rotation = Quaternion(-0.0864337, -0.000724936, 0.180866, 0.979702)
+bones/21/rotation = Quaternion(-0.0333183, 0.286847, 0.957181, -0.0203193)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+shape = SubResource("CapsuleShape3D_qatkl")
+
+[node name="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("5_ttlev")
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("6_5qjni")]
+
+[node name="RangedWeapon" type="Node3D" parent="EnemyWeaponController" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 1.5, -0.3)
+script = ExtResource("7_6lo8p")
+ranged_weapon_scene = ExtResource("8_jsm6r")
+
+[node name="EnemyAbilityController" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 0)
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("9_5qjni")]
+ability_resource = ExtResource("10_6lo8p")
+
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("11_5qjni")
+
+[node name="StateAudioPlayer" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1)
+
+[node name="IntervalAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -1)
+sounds_folder = "res://entities/enemies/timmy/sound/random"
+
+[editable path="Model/timmy"]

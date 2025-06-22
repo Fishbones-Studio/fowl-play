@@ -11,10 +11,11 @@ var _dash_direction: Vector3
 
 @onready var dash_duration_timer: Timer = $DashDurationTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
+@onready var dash_sfx: AudioStreamPlayer3D = %ChickenMovementPlayer
 
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	super(prev_state)
+	
 
 	_stamina_cost = movement_component.dash_stamina_cost
 
@@ -24,6 +25,8 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		SignalManager.player_transition_state.emit(previous_state.state_type, information)
 		return
 
+	super(prev_state)
+	
 	player.stats.drain_stamina(_stamina_cost)
 
 	movement_component.dash_available = false
@@ -37,8 +40,13 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	# Fire the OneShot request
 	animation_tree.set("parameters/DashOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
+	# Play sound only if dash is actually performed
+	if dash_sfx:
+		dash_sfx.play()
+
 	dash_duration_timer.start()
 	dash_cooldown_timer.start()
+
 
 
 func physics_process(delta: float) -> void:

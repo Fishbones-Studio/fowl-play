@@ -1,4 +1,5 @@
-class_name EquipedItemSlot extends PanelContainer
+class_name EquipedItemSlot 
+extends PanelContainer
 
 @export var empty_slot_texture: Texture2D
 
@@ -12,6 +13,14 @@ var normal_stylebox: StyleBoxFlat = preload("uid://ceyysiao8q2tl")
 
 func _ready() -> void:
 	focus_mode = Control.FOCUS_ALL
+	mouse_entered.connect(
+		func():
+			focus_entered.emit()
+	)
+	mouse_exited.connect(
+		func():
+			focus_exited.emit()
+	)
 
 
 func display_item(_item: BaseResource) -> void:
@@ -34,7 +43,6 @@ func display_item(_item: BaseResource) -> void:
 
 
 func _on_focus_entered() -> void:
-	print("focus entered")
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", hover_stylebox)
@@ -46,5 +54,3 @@ func _on_focus_exited() -> void:
 	if not theme:
 		theme = Theme.new()
 	theme.set_stylebox("panel", "PanelContainer", normal_stylebox)
-
-	SignalManager.preview_shop_item.emit(null)

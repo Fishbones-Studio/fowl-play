@@ -3,17 +3,19 @@
 [ext_resource type="Script" uid="uid://c0iufpwqou4uq" path="res://ui/poultry_man_menu/chicken_inventory/equiped_item_slot/equiped_item_slot.gd" id="1_abcde"]
 
 [node name="EquippedItemSlot" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
 script = ExtResource("1_abcde")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="ItemIcon" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 

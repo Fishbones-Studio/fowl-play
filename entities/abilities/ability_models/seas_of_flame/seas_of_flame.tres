@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://blc88hxvg3otq"]
 
-[ext_resource type="Texture2D" uid="uid://blpntkncy22f7" path="res://entities/abilities/ability_models/seas_of_flame/seas_of_flame.png" id="1_ihale"]
+[ext_resource type="Texture2D" uid="uid://blpntkncy22f7" path="res://entities/abilities/ability_models/seas_of_flame/art/seas_of_flame.png" id="1_ihale"]
 [ext_resource type="Script" uid="uid://cqht6vad2p0dc" path="res://entities/abilities/ability_resource.gd" id="2_opwiw"]
 
 [resource]
@@ -8,10 +8,18 @@ script = ExtResource("2_opwiw")
 cooldown = 15.0
 name = "Seas of Flame"
 purchasable = true
+is_free = false
 drop_chance = 15
-cost = 150
+cost = 100
 currency_type = 0
-description = "The user sets the seas ablaze, sacrificing [color=yellow]25%%[/color] of Max Health to unleash an AoE attack within a [color=yellow]25 meter[/color] radius. Targets caught in the flames are inflicted with Burn, taking damage over time. Can only be used while on the ground and has a cooldown of %s."
+description = "The user sets the seas ablaze, sacrificing [color=yellow]20%%[/color] of [color=orange]Max Health[/color] to unleash an AoE attack within a [color=yellow]20 meter[/color] radius.
+
+Targets caught in the flames are afflicted with [color=red]Burn[/color], taking damage every [color=yellow]0.2 seconds[/color] for [color=yellow]2 seconds[/color]. 
+
+The damage scales with [color=yellow]100%%[/color] of the user's [color=orange]Health[/color], starting at a peak multiplier of [color=yellow]175%%[/color] and gradually decreases to its original value over time.
+
+Can only be used while [color=orange]on the ground[/color] and has a cooldown of %s."
+short_description = "The user [color=yellow]consumes a portion[/color] of their health to unleash an AoE firestorm, applying [color=red]Burn[/color] that deals [color=yellow]moderate[/color] damage over time, with damage scaling based on the user's [color=orange]Health[/color]."
 icon = ExtResource("1_ihale")
 model_uid = "uid://df1clah7xvv32"
 metadata/_custom_type_script = "uid://cqht6vad2p0dc"

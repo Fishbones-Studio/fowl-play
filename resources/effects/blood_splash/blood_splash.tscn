@@ -1,0 +1,103 @@
+[gd_scene load_steps=18 format=3 uid="uid://db55kjv7kn4oc"]
+
+[ext_resource type="Script" uid="uid://dinpse4k1qunk" path="res://resources/effects/blood_splash/blood_splash.gd" id="1_q3yji"]
+[ext_resource type="Shader" uid="uid://c34ou8qriu6ih" path="res://resources/shaders/splash.gdshader" id="2_q3yji"]
+[ext_resource type="Shader" uid="uid://djswkiq0eiyqy" path="res://resources/shaders/splatter.gdshader" id="3_n76hd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1oh5o"]
+noise_type = 3
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nj7ij"]
+noise = SubResource("FastNoiseLite_1oh5o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3yji"]
+render_priority = 0
+shader = ExtResource("2_q3yji")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_nj7ij")
+shader_parameter/distortion_amount = 0.1
+shader_parameter/noise_power = 5.0
+shader_parameter/base_alpha = 0.8
+shader_parameter/angle_influence = 0.5
+shader_parameter/gradient_strength = 2.0
+
+[sub_resource type="Curve" id="Curve_bki1m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nrfwl"]
+curve = SubResource("Curve_bki1m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaa30"]
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_nrfwl")
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ftujp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q3yji"]
+noise_type = 3
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n76hd"]
+noise = SubResource("FastNoiseLite_q3yji")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_424jk"]
+render_priority = 0
+shader = ExtResource("3_n76hd")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_n76hd")
+shader_parameter/splatter_scale = 2.0
+shader_parameter/distortion_amount = 0.1
+shader_parameter/edge_variation = 1.0
+shader_parameter/noise_power = 1.0
+
+[sub_resource type="Curve" id="Curve_4urvo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.151596, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vabdn"]
+curve = SubResource("Curve_4urvo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a2m3c"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_vabdn")
+
+[sub_resource type="QuadMesh" id="QuadMesh_vv82n"]
+orientation = 1
+
+[node name="BloodSplash" type="Node3D"]
+script = ExtResource("1_q3yji")
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779464, 0)
+material_override = SubResource("ShaderMaterial_q3yji")
+emitting = false
+amount = 100
+sub_emitter = NodePath("../Splatter")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eaa30")
+draw_pass_1 = SubResource("QuadMesh_ftujp")
+
+[node name="Splatter" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779464, 0)
+material_override = SubResource("ShaderMaterial_424jk")
+cast_shadow = 0
+emitting = false
+amount = 350
+lifetime = 30.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_a2m3c")
+draw_pass_1 = SubResource("QuadMesh_vv82n")
+
+[connection signal="finished" from="Splatter" to="." method="_on_splatter_finished"]

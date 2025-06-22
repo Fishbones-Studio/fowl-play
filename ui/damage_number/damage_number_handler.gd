@@ -16,6 +16,8 @@ extends Marker3D
 
 
 func display_damage(value: int) -> void:
+	if value == 0: return
+
 	var damage_number: DamageNumber = damage_number_resource.instantiate()
 
 	var spawn_position: Vector3 = global_position + Vector3(
@@ -27,7 +29,7 @@ func display_damage(value: int) -> void:
 	add_child(damage_number)
 
 	damage_number.global_position = spawn_position
-	damage_number.label.text = str(value)
+	damage_number.label.text = str(abs(value))
 	damage_number.label.font_size = base_size * randi_range(1, size_variation)
 	damage_number.label.modulate = damage_color if value >= 0 else heal_color
 

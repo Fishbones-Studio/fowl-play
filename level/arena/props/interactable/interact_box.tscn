@@ -1,41 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://rou530ix2je3"]
+[gd_scene load_steps=5 format=3 uid="uid://rou530ix2je3"]
 
 [ext_resource type="Script" uid="uid://bhlgtdwbupe1q" path="res://level/arena/props/interactable/interact_box.gd" id="1_fpr1w"]
 [ext_resource type="Script" uid="uid://di546rbu7b42s" path="res://ui/3d_label/custom_layer_label_3d.gd" id="2_bf2km"]
 [ext_resource type="Texture2D" uid="uid://bbol6h77ljri" path="res://resources/controller-icons/interact.tres" id="2_pkj54"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xq2d5"]
-size = Vector3(4, 2, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brd77"]
 size = Vector3(6, 4.66492, 8.33762)
 
 [node name="InteractBox" type="StaticBody3D"]
 collision_layer = 32
-collision_mask = 31
+collision_mask = 6
 script = ExtResource("1_fpr1w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_xq2d5")
 
 [node name="NameLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.859308, 0.511458, 0, -0.511458, 0.859308, 0, 1.65892, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 layers = 0
 modulate = Color(0, 1, 0.188235, 1)
 text = "PlaceHolder"
-font_size = 63
+font_size = 200
 script = ExtResource("2_bf2km")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 32
-collision_mask = 63
+collision_mask = 2
 
 [node name="DetectionArea" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332458, -0.320999)
 shape = SubResource("BoxShape3D_brd77")
 
-[node name="InteractUi" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="InteractUi" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
@@ -45,7 +44,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InteractUi"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/InteractUi"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -59,20 +58,21 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 165
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InteractUi/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InteractUi/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InteractUi/VBoxContainer/HBoxContainer"]
+[node name="InteractLabel" type="Label" parent="CanvasLayer/InteractUi/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Press          to interact"
 
-[node name="Sprite2D" type="Sprite2D" parent="InteractUi/VBoxContainer/HBoxContainer"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/InteractUi/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 position = Vector2(66, 7)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_pkj54")
 
-[node name="VBoxContainer" type="VSeparator" parent="InteractUi/VBoxContainer"]
+[node name="VBoxContainer" type="VSeparator" parent="CanvasLayer/InteractUi/VBoxContainer"]
 layout_mode = 2
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

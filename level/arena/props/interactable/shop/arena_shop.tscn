@@ -2,19 +2,36 @@
 
 [ext_resource type="Script" uid="uid://bbthkpmh03j4g" path="res://level/arena/props/interactable/shop/arena_shop.gd" id="1_5pok6"]
 [ext_resource type="PackedScene" uid="uid://rou530ix2je3" path="res://level/arena/props/interactable/interact_box.tscn" id="1_xq2d5"]
+[ext_resource type="PackedScene" uid="uid://18tmfpnik0vd" path="res://entities/enemies/insighter/art/insighter.glb" id="3_kto4y"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brd77"]
-albedo_color = Color(0.0489061, 0.0997902, 0.10584, 0.952941)
-
-[sub_resource type="BoxMesh" id="BoxMesh_brd77"]
-material = SubResource("StandardMaterial3D_brd77")
+[sub_resource type="SphereShape3D" id="SphereShape3D_kto4y"]
+radius = 1.75
 
 [node name="ArenaShop" instance=ExtResource("1_xq2d5")]
 script = ExtResource("1_5pok6")
+dialogue_file = "uid://djkgsd2n3tf0m"
+dialogue_directory = ""
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
-transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = SubResource("BoxMesh_brd77")
+[node name="insighter" parent="." index="0" instance=ExtResource("3_kto4y")]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0.5, 0)
+
+[node name="Skeleton3D" parent="insighter/Armature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0.000393661, 0.707107, -0.000393594)
+bones/1/rotation = Quaternion(0.707107, 0.000393594, 0.707107, 0.000393594)
+bones/2/rotation = Quaternion(-3.55483e-09, 3.63408e-08, 0.0164768, 0.999864)
+bones/3/rotation = Quaternion(3.74863e-09, -2.03517e-08, -0.0159202, 0.999873)
+bones/4/position = Vector3(0.789193, -0.559539, 0.803955)
+bones/4/rotation = Quaternion(0.174826, 0.263962, 0.752147, 0.577958)
+bones/5/rotation = Quaternion(0.0118424, -0.000231475, -0.00347466, 0.999924)
+bones/6/position = Vector3(0.839534, -0.85045, -0.739377)
+bones/6/rotation = Quaternion(-0.759836, 0.267271, 0.278839, 0.522938)
+bones/7/rotation = Quaternion(-0.0167451, -0.747819, -0.0105161, 0.663608)
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_kto4y")
 
 [node name="NameLabel" parent="." index="2"]
 text = "Open Shop"
+label_look_at_player = true
+
+[editable path="insighter"]

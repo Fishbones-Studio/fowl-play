@@ -1,13 +1,19 @@
 class_name UpgradeShopItem
 extends BaseShopItem
 
+signal purchased
+signal purchase_cancelled
+
 @onready var item_icon: TextureRect = %ItemIcon
-@onready var name_label: Label = %NameLabel
+@onready var name_label: RichTextLabel = %NameLabel
 @onready var currency_icon: TextureRect = %CurrencyIcon
 @onready var cost_label: Label = %CostLabel
 
 
 func _ready() -> void:
+	GameManager.prosperity_eggs_changed.connect(func(_new_value: int): _update_name_label(name_label))
+	purchased.connect(_on_purchase_completed)
+	purchase_cancelled.connect(func(): purchase_in_progress = false)
 	super()
 
 
@@ -24,7 +30,7 @@ func set_item_data(item: Resource) -> void:
 
 func populate_visual_fields() -> void:
 	if shop_item.icon: item_icon.texture = shop_item.icon
-	name_label.text = shop_item.name
+	_update_name_label(name_label)
 	currency_icon.texture = prosperity_egg_icon if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS else feathers_of_rebirth_icon
 	cost_label.text = str(shop_item.cost)
 
@@ -35,6 +41,14 @@ func attempt_purchase() -> void:
 
 	purchase_in_progress = true
 
+	SignalManager.add_ui_scene.emit(UIEnums.UI.UPGRADE_SHOP_CONFIRMATION, {
+		"purchased_signal": purchased,
+		"purchase_cancelled": purchase_cancelled,
+		"shop_item": shop_item
+	})
+
+
+func _on_purchase_completed() -> void:
 	GameManager.chicken_player.stats.apply_upgrade(shop_item)
 
 	if shop_item.currency_type == CurrencyEnums.CurrencyTypes.PROSPERITY_EGGS:
@@ -42,5 +56,5 @@ func attempt_purchase() -> void:
 	elif shop_item.currency_type == CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
 		GameManager.feathers_of_rebirth -= shop_item.cost
 
-	self.visible = false
-	super()
+	super.attempt_purchase()
+	queue_free()

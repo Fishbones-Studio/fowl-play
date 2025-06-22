@@ -2,7 +2,7 @@
 ## Handles settings data persistance:
 ## - Settings (Controls, Key Bindings, Graphics, Audio)
 #################################################################################
-class_name SettingsManager
+class_name SettingsManager 
 extends Node
 
 const SETTINGS_CONFIG_PATH: String = "user://settings.cfg"
@@ -21,7 +21,7 @@ static var action_to_remap: String = ""
 
 
 ## Load all saved settings from the user's configuration file.
-static func load_settings( viewport: Viewport, window: Window, item: String = "") -> void:
+static func load_settings(viewport: Viewport, window: Window, item: String = "") -> void:
 	var config := ConfigFile.new()
 
 	# Attempt to load config file - if failed, use defaults for requested section
@@ -77,24 +77,41 @@ static func load_settings( viewport: Viewport, window: Window, item: String = ""
 
 
 static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, window: Window) -> void:
-	DisplayServer.window_set_size(settings["resolution"])
-	DisplayServer.window_set_mode(settings["display_mode"])
-	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
-	DisplayServer.window_set_vsync_mode(settings["v_sync"])
+	var res_changed: bool = false
+
+	if DisplayServer.window_get_mode() != settings["display_mode"]:
+		DisplayServer.window_set_mode(settings["display_mode"])
+		res_changed = true
+
+	if settings["display_mode"] not in [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN]: 
+		if DisplayServer.window_get_size() != settings["resolution"]:
+			DisplayServer.window_set_size(settings["resolution"])
+			res_changed = true
+
+	if DisplayServer.window_get_mode() not in [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN]:
+		if DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS) != settings["borderless"]:
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, settings["borderless"])
+			res_changed = true
+
+	if DisplayServer.window_get_vsync_mode() != settings["v_sync"]:
+		DisplayServer.window_set_vsync_mode(settings["v_sync"])
+
 	Engine.max_fps = settings["fps"]
 	viewport.msaa_3d = settings["msaa"]
 	viewport.screen_space_aa = settings["fxaa"]
 	viewport.use_taa = settings["taa"]
 	viewport.scaling_3d_scale = settings["render_scale"]
 	viewport.scaling_3d_mode = settings["render_mode"]
-	DisplayUtils.center_window(window)
+
+	if res_changed:
+		DisplayUtils.center_window(window)
 
 
-# Method to get a specific setting from the config file
+## Method to get a specific setting from the config file
 static func get_setting(section: String, key: String, default : Variant) -> Variant:
 	var config := ConfigFile.new()
 	if config.load(SETTINGS_CONFIG_PATH) == OK and config.has_section(section):
 		return config.get_value(section, key, default)
 	else:
 		push_warning("Failed to load setting '%s' from section '%s'." % [key, section])
-		return null
+		return default

@@ -22,7 +22,7 @@ func process(delta: float) -> void:
 	# Ensure we have an animation player and the specified idle animation
 	if (
 		weapon_node.animation_player
-		and weapon_node.animation_player.has_animation(ANIMATION_NAME)
+		and weapon_node.animation_player.has_animation(animation_name)
 	):
 		# Only countdown and play if no other animation is currently running
 		if not weapon_node.animation_player.is_playing():
@@ -30,7 +30,7 @@ func process(delta: float) -> void:
 				time_until_next_idle -= delta
 			else:
 				# Time's up, play the idle animation
-				weapon_node.animation_player.play(ANIMATION_NAME)
+				weapon_node.animation_player.play(animation_name)
 				weapon_node.animation_player.queue("RESET")
 				# Reset the timer for the next random interval
 				_reset_idle_timer()
@@ -43,7 +43,7 @@ func _reset_idle_timer() -> void:
 	else:
 		# Fallback to min_interval if max is not greater than min
 		time_until_next_idle = min_idle_interval
-		
+
 	# Take the current animation length into account
 	if weapon_node.animation_player && weapon_node.animation_player.is_playing():
 		time_until_next_idle += weapon_node.animation_player.get_current_animation_length()

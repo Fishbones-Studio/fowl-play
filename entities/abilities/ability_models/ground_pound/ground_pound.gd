@@ -1,8 +1,8 @@
 extends Ability
 
 @export var descent_velocity: float = -50.0
-@export var knockback_force: float = 1
-@export var knockback_force_upwards: float = 1
+@export var knockback_force: float = 2.0
+@export var knockback_force_upwards: float = 1.5
 @export var damage_scaler: int = 9
 
 var damage: float:
@@ -10,16 +10,19 @@ var damage: float:
 		var stats: LivingEntityStats = ability_holder.stats
 		return damage_scaler * stats.weight
 
+var _hit_bodies: Array = []
 var _particles_emitted: bool = false
 
 @onready var hit_area: Area3D = $HitArea
-@onready var cpu_particles: CPUParticles3D = %CPUParticles3D
+@onready var gpu_particles: GPUParticles3D = %GPUParticles3D
 
 
-func activate() -> void:
-	if ability_holder.is_on_floor():
+func activate(force_activate: bool = false) -> void:
+	if ability_holder.is_on_floor() and not force_activate:
 		print("Cannot perform %s while on the ground." % name)
 		return
+
+	_hit_bodies.clear()
 
 	_toggle_collision_masks(true, hit_area)
 
@@ -37,35 +40,40 @@ func _on_cooldown_timer_timeout() -> void:
 	_particles_emitted = false
 
 
-func _on_hit_area_body_entered(body: Node3D) -> void:
-	 # If target body is player or enemy
-	if body.collision_layer in [2, 4]:
-		SignalManager.weapon_hit_target.emit(
-			body,
-			damage,
-			DamageEnums.DamageTypes.NORMAL,
-			{"knockback": _calculate_knockback(body)
-			},
-		)
+func _physics_process(_delta: float) -> void:
+	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
+		_pound()
 
-	cpu_particles.emitting = true
+
+func _pound() -> void:
+	sound_effect.play()
+	gpu_particles.emitting = true
+
+	# Make it deal two instances of damage
+	await get_tree().create_timer(0.2).timeout
+
+	for body in hit_area.get_overlapping_bodies():
+		if body in _hit_bodies:
+			continue
+
+		if body.collision_layer in [2, 4]:  # Player or Enemy
+			SignalManager.weapon_hit_target.emit(
+					body,
+					damage,
+					DamageEnums.DamageTypes.NORMAL,
+					{
+						"knockback": _calculate_knockback(body),
+					},
+				)
+			_hit_bodies.append(body)
+
 	_particles_emitted = true
 
 	# resetting vertical velocity
 	ability_holder.velocity.y = 0
 
+	_hit_bodies.clear()
 	_toggle_collision_masks(false, hit_area)
-
-
-func _physics_process(_delta: float) -> void:
-	# Handles edge case where character lands without hitting an enemy
-	if ability_holder.is_on_floor() and not _particles_emitted and on_cooldown:
-		await get_tree().create_timer(0.2).timeout
-
-		cpu_particles.emitting = true
-		_particles_emitted = true
-
-		_toggle_collision_masks(false, hit_area)
 
 
 func _calculate_knockback(body: Node3D) -> Vector3:
@@ -77,10 +85,11 @@ func _calculate_knockback(body: Node3D) -> Vector3:
 			max(1, sign(dir.y)) * knockback_force_upwards,
 			sign(dir.z) * knockback_force,
 		)
+		var knockback_y: float = knockback.y * max(ability_holder.stats.weight, 7)
 
 		return Vector3(
 				knockback.x,
-				knockback.y * max(ability_holder.stats.weight, 7),
+				knockback_y if is_zero_approx(body.velocity.y) else knockback_y / 2.5,
 				knockback.z,
 				)
 

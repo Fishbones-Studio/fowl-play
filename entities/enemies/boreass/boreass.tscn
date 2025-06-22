@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3vj6us77coyt"]
+
+[ext_resource type="PackedScene" uid="uid://d2n75tu7hm7w0" path="res://entities/enemies/enemy.tscn" id="1_cemmm"]
+[ext_resource type="Resource" uid="uid://ctwi8uky13t5i" path="res://entities/enemies/boreass/boreass_stats.tres" id="3_7ghaq"]
+[ext_resource type="BehaviorTree" uid="uid://bc7ucld3pg5s8" path="res://entities/enemies/ai/trees/boreass.tres" id="4_0uh03"]
+[ext_resource type="PackedScene" uid="uid://dq8e8ywfo7w7j" path="res://entities/enemies/boreass/art/ice_fox.glb" id="4_qhcpj"]
+[ext_resource type="PackedScene" uid="uid://d4f8lcshn8fb4" path="res://entities/abilities/ability_slot.tscn" id="5_72x12"]
+[ext_resource type="PackedScene" uid="uid://dsbwyfawptt0o" path="res://entities/weapons/melee_weapons/melee_weapon_handlers/melee_weapon.tscn" id="5_ak1y5"]
+[ext_resource type="PackedScene" uid="uid://dldj0suybdnhl" path="res://entities/weapons/melee_weapons/melee_weapon_models/dagger/dagger.tscn" id="5_wbtjo"]
+[ext_resource type="Resource" uid="uid://dx4h8wfqycags" path="res://entities/abilities/ability_models/ground_pound/ground_pound.tres" id="6_psoce"]
+[ext_resource type="Resource" uid="uid://k14ny7psycd5" path="res://entities/abilities/ability_models/glacial_prism/glacial_prism.tres" id="7_psoce"]
+[ext_resource type="Texture2D" uid="uid://ch6bp7ywe40sd" path="res://entities/enemies/boreass/art/icon/boreass_icon.png" id="10_rsrg3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ak1y5"]
+radius = 1.5
+height = 5.5
+
+[node name="Boreass" instance=ExtResource("1_cemmm")]
+stats = ExtResource("3_7ghaq")
+dialogue_path = "res://entities/enemies/boreass/dialogue"
+name_label_template_string = "%s, Detonator of Foxes"
+
+[node name="ice_fox" parent="Model" index="0" instance=ExtResource("4_qhcpj")]
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/ice_fox/Armature" index="0"]
+bones/0/position = Vector3(9.72681e-17, 0.0401244, 0.438088)
+bones/0/rotation = Quaternion(0.0261233, -1.2326e-32, 1.8489e-32, 0.999659)
+bones/1/rotation = Quaternion(-0.089308, -4.93038e-32, 1.97215e-31, 0.996004)
+bones/2/rotation = Quaternion(-0.126968, 0.0239403, -0.00306536, 0.991613)
+bones/3/rotation = Quaternion(-0.105884, -0.00322933, -0.00477105, 0.994362)
+bones/4/rotation = Quaternion(0.3364, 0.00111036, 0.0144607, 0.941608)
+bones/5/position = Vector3(0.390304, 0.326228, 0.195334)
+bones/5/rotation = Quaternion(0.397772, -0.0106252, 0.0845974, 0.913514)
+bones/6/rotation = Quaternion(-0.00112761, 0.533545, -0.00156628, 0.84577)
+bones/7/rotation = Quaternion(0.0036542, -0.496359, 0.0025199, 0.868106)
+bones/8/position = Vector3(-0.325318, 0.326228, 0.16076)
+bones/8/rotation = Quaternion(0.404897, -0.0346724, 0.0507204, 0.912296)
+bones/9/rotation = Quaternion(-0.0012139, -0.212975, -0.0022904, 0.977054)
+bones/10/rotation = Quaternion(0.00370827, 0.167471, 0.00207622, 0.985868)
+bones/11/rotation = Quaternion(0.991003, 0.0975823, 0.0594745, -0.0696683)
+bones/12/rotation = Quaternion(0.0518644, 0.015922, -0.00222554, 0.998525)
+bones/13/rotation = Quaternion(0.343308, -0.00637174, 0.0327726, 0.93863)
+bones/14/position = Vector3(0.35, 0.0169294, 0.193466)
+bones/14/rotation = Quaternion(0.821826, 0.015212, -0.0241252, 0.569025)
+bones/15/rotation = Quaternion(0.358202, 0.0321167, 0.0166374, 0.932943)
+bones/16/position = Vector3(-0.286131, 0.0169295, 0.193466)
+bones/16/rotation = Quaternion(0.928562, -0.00191422, 0.0344176, 0.369573)
+bones/17/rotation = Quaternion(0.00318805, -0.0378926, -0.000136582, 0.999277)
+bones/18/position = Vector3(0.403791, -1.1553, 1.70258)
+bones/18/rotation = Quaternion(0.956746, -0.000177324, 0.000583153, -0.290925)
+bones/19/rotation = Quaternion(0.999863, -5.82125e-10, 0.016582, -7.46103e-09)
+bones/21/rotation = Quaternion(0.940087, 0.0108966, 0.000988537, -0.340758)
+bones/22/position = Vector3(-0.339456, -1.38077, 1.82695)
+bones/22/rotation = Quaternion(0.988849, -9.07707e-05, 0.00060272, -0.148922)
+bones/23/position = Vector3(0.00391914, -0.0818625, 0.120812)
+bones/24/position = Vector3(-0.00688382, -0.0927176, -0.447167)
+bones/24/rotation = Quaternion(0.940069, -0.00826431, -0.00595776, -0.340832)
+bones/25/rotation = Quaternion(0.999863, 1.4036e-11, 0.016582, -2.98057e-08)
+bones/26/position = Vector3(0.208134, 3.58033, 1.07645)
+bones/26/rotation = Quaternion(0.871163, -0.0675221, -0.130941, 0.468369)
+bones/27/position = Vector3(0.0582697, 0.020302, 0.132151)
+bones/28/position = Vector3(-0.112507, -0.0174697, -0.460881)
+bones/28/rotation = Quaternion(0.92375, -0.045056, -0.135419, -0.355413)
+bones/30/position = Vector3(-0.494953, 4.10901, 1.35597)
+bones/30/rotation = Quaternion(0.919389, -0.0518788, -0.129715, 0.367703)
+bones/31/position = Vector3(0.250151, 0.251256, 0.644418)
+bones/32/position = Vector3(0.079444, 0.213485, 0.051366)
+bones/32/rotation = Quaternion(0.925157, -0.0550348, -0.125441, -0.354005)
+bones/33/rotation = Quaternion(0.995026, 5.29396e-23, -0.0996115, -6.28657e-23)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ak1y5")
+
+[node name="DamageNumberHandler" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15096, -1.68246)
+
+[node name="BloodSplashHandler" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0468, -0.556412)
+
+[node name="BTPlayer" parent="." index="5"]
+behavior_tree = ExtResource("4_0uh03")
+
+[node name="MeleeWeapon" parent="EnemyWeaponController" index="0" instance=ExtResource("5_ak1y5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.842227, 1.17218, -2.31409)
+melee_weapon_scene = ExtResource("5_wbtjo")
+weapon_collision_mask = 2
+
+[node name="AbilitySlot" parent="EnemyAbilityController" index="0" instance=ExtResource("5_72x12")]
+ability_resource = ExtResource("6_psoce")
+
+[node name="AbilitySlot2" parent="EnemyAbilityController" index="1" instance=ExtResource("5_72x12")]
+ability_resource = ExtResource("7_psoce")
+
+[node name="Icon" parent="CanvasLayer/HealthBarContainer/HBoxContainer" index="0"]
+texture = ExtResource("10_rsrg3")
+
+[node name="StateAudioPlayer" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, -2.9)
+
+[node name="IntervalAudioPlayer" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, -2.9)
+sounds_folder = "res://entities/enemies/boreass/sound/random"
+
+[editable path="Model/ice_fox"]
