@@ -39,8 +39,22 @@ Elder Centipede: After I crush you, I'll send you back home to your mommy, so yo
 ~ explore_backstory
 Elder Centipede: Real strength is not just about muscle or speed.
 Elder Centipede: It’s about surviving every battle, no matter the wounds, no matter the pain. True power comes from scars you earned, lessons carved into your bones.
-Elder Centipede: [[In the past, I’ve massacred thousands of challengers, and each of them thought they had a chance against me. |Every fool who’s faced me has been [shake rate=15 level=8]torn apart[/shake] by my strength. |I’ve left a trail of broken bodies in my wake.]]
-Elder Centipede: [[Every single one was torn apart by my strength. I still hear their screams lingering in my mind. |Their cries echo in this arena, a testament to my power. |The weak perish, and the strong—like me—[color=red]prevail.[/color]]]
+Elder Centipede: In the past, I’ve massacred thousands of challengers, and each of them thought they had a chance against me.
+Elder Centipede: Every single one was torn apart by my strength. I still hear their screams lingering in my mind.
+- Why do you keep fighting if you are the strongest?
+	Elder Centipede: Let me impose you a question.
+	Elder Centipede: How many breads have you eaten in your life?
+	- I don't know.
+		Elder Centipede: Exactly. It's such a trivial thing not even worth remembering.
+		=> continue_backstory
+	- I don't eat bread.
+		Elder Centipede: ..
+		=> continue_backstory
+	- What is bread?
+		Elder Centipede: Are you a dumbass?
+		=> continue_backstory
+
+~ continue_backstory
 Elder Centipede: [[No one escapes my wrath, and no one leaves unscattered. |You’ll join the others, broken and forgotten. |Your fate is sealed, weakling.]]
 Elder Centipede: [[Got any last words before I [shake rate=20 level=10]completely annihilate you[/shake]? |Speak now, or forever hold your peace—because you won’t survive this. |Your final words will be your epitaph.]]
 - How did you become so strong?
