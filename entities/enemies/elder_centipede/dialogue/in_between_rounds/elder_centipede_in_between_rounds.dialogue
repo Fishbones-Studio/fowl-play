@@ -1,15 +1,15 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
-	Elder Centipede: [[Your scent is familiar.|You’ve faced the [color=red]“Great” Elder Centipede[/color] before.|Do you really want to be humiliated again?]]
-	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake]|Your bones will join the others beneath my legs.|This time, I’ll make sure you don’t crawl away.]]
+	Elder Centipede: [[Your scent is familiar.|You’ve faced the [color=red]“Great” Elder Centipede[/color] before. |Do you really want to be humiliated again?]]
+	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake] |Your bones will join the others beneath my legs. |This time, I’ll make sure you don’t crawl away.]]
 else:
-	Elder Centipede: [[Oh? Fresh meat has appeared.|Another fool dares to challenge me.|Weakling.]]
-	Elder Centipede: [[Consider yourself [color=orange]"lucky,"[/color] as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY.|You won’t leave this arena intact. Feel honored, weakling.|I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST.[/shake]]]
+	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool dares to challenge me.|Weakling.]]
+	Elder Centipede: [[Consider yourself [color=orange]"lucky,"[/color] as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY. |You won’t leave this arena intact. Feel honored, weakling. |I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST.[/shake]]]
 - Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue
-Elder Centipede: [[Look at you... trembling like an insect.|Did you get lost on your way to the training area?|Is this a joke? Did someone send me a warm-up act?]]
+Elder Centipede: [[Look at you... trembling like an insect. |Did you get lost on your way to the training area? |Is this a joke? Did someone send me a warm-up act?]]
 - I look stronger than my appereance lets on.
 	Elder Centipede: [shake rate=10 level=5]HAHAHAHA.[/shake] Don't make me laugh. You are a just a little maggot disguised as a chicken, you don't understand what real strength means. Not in the slightest.
 	- What's so funny? Do you think you can beat me?
