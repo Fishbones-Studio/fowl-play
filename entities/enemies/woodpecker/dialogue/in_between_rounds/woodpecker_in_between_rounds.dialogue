@@ -1,4 +1,3 @@
-
 ~ start
 if SaveManager.get_enemy_encounter_count("woodpecker") > 0:
 	Woodpecker: [[You return. As expected. Another chance to observe.|Back again? I anticipated this.|Persistent, aren’t you? More data for my research.]]

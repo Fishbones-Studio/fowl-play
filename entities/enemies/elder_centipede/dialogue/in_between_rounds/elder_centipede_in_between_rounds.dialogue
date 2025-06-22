@@ -1,4 +1,3 @@
-import "uid://b8js24eelbiop" as snippets
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
 	Elder Centipede: [[Your scent is familiar. |You’ve faced the [color=red]“Great” Elder Centipede[/color] before. |Do you really want to be humiliated again?]]

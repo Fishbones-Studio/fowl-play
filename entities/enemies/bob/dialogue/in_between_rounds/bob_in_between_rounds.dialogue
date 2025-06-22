@@ -1,4 +1,3 @@
-import "uid://b8js24eelbiop" as snippets
 ~ start
 if SaveManager.get_enemy_encounter_count("bob") > 0:
 	Bob: [[You. Back.|Again?|Can’t stay away.]]

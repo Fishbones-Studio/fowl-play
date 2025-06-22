@@ -1,4 +1,3 @@
-import "uid://b8js24eelbiop" as snippets
 ~ start
 if SaveManager.get_enemy_encounter_count("boreass") > 0:
 	Boreass: [[Oh! You’re back! [color=orange]Yay![/color]|Back for more playtime?|My [color=orange]favorite friend[/color] returns!]]
