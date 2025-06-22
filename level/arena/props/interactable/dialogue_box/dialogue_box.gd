@@ -37,14 +37,9 @@ func _resolve_dialogue_path() -> void:
 
 	# A directory has been assigned, but no specific file. Find the first '.dialogue' file in it.
 	if not dialogue_directory.is_empty():
-		if not DirAccess.dir_exists_absolute(dialogue_directory):
-			push_warning(
-				"Dialogue directory does not exist: %s" % dialogue_directory
-			)
-			return
-
-		# Use DirAccess.get_files_at() to get a list of files.
-		var files := DirAccess.get_files_at(dialogue_directory)
+		# Use ResourceLoader.list_directory() to get a list of resource files.
+		var files := ResourceLoader.list_directory(dialogue_directory)
+		print("Files in dialogue directory '%s':" % dialogue_directory)
 		for file_name in files:
 			# Only care about files ending with the dialogue extension.
 			if file_name.ends_with(".dialogue"):
@@ -65,7 +60,6 @@ func _resolve_dialogue_path() -> void:
 	push_warning(
 		"No dialogue file or directory has been set for this DialogueBox."
 	)
-
 
 func interact() -> void:
 	if dialogue_resource_path.is_empty():
