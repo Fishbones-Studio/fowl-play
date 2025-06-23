@@ -6,7 +6,7 @@ var _rounds_won_this_run: int
 
 
 func _ready() -> void:
-	_rounds_won_this_run = SaveManager.get_loaded_rounds_won()
+	_rounds_won_this_run = SaveManager.get_loaded_total_rounds_won()
 	title.text = "Sacrifice Chicken"
 	description.text = FOR_LABEL_TEMPLATE_TEXT % _rounds_won_this_run
 	super()
