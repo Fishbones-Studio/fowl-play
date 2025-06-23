@@ -42,13 +42,11 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	# TODO: some popup about save state being possibly behind
 	_return_to_main_menu()
 
 
 func _on_forfeit_button_pressed() -> void:
-	GameManager.reset_game()
-	_return_to_game_menu()
+	SignalManager.add_ui_scene.emit(UIEnums.UI.FORFEIT_CONFIRMATION)
 
 
 func _on_poultry_menu_button_pressed() -> void:
