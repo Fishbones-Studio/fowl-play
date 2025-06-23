@@ -22,8 +22,8 @@ func _ready() -> void:
 func _on_play_sound(sound: AudioStream, _sound_name: String) -> void:
 	stream = sound
 	# Set random position in 3D space
-	var random_angle := randf_range(0, 2 * PI)
-	var random_distance := randf_range(min_random_distance, max_random_distance)
+	var random_angle: float = randf_range(0, 2 * PI)
+	var random_distance: float = randf_range(min_random_distance, max_random_distance)
 	position = Vector3(
 		cos(random_angle) * random_distance,
 		cos(random_angle) * random_distance,

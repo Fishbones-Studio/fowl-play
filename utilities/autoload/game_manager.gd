@@ -86,7 +86,7 @@ var infinite_damage: bool = false:
 
 
 ## Applies or removes cheat effects based on current toggle states.
-func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntityStats, apply_only_when_on := false) -> LivingEntityStats:
+func apply_cheat_settings(stats : LivingEntityStats, default_stats : LivingEntityStats, apply_only_when_on: bool = false) -> LivingEntityStats:
 	if apply_only_when_on && !(infinite_health or infinite_damage):
 		print("Cheat settings not applied, both cheats are off.")
 		return stats

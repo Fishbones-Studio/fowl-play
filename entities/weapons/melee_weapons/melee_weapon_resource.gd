@@ -12,7 +12,7 @@ extends BaseResource
 @export var stun_time: float
 # Animation Variables
 @export_group("Animation")
-@export var loop_animation := false
+@export var loop_animation: bool = false
 
 
 func _init() -> void:

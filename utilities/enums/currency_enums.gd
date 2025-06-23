@@ -6,7 +6,7 @@ enum CurrencyTypes {
 }
 
 
-static func type_to_string(currency_type: CurrencyTypes, short:= false) -> String:
+static func type_to_string(currency_type: CurrencyTypes, short: bool = false) -> String:
 	var currency_string: String = CurrencyTypes.keys()[currency_type]
 	if short:
 		var parts: PackedStringArray    = currency_string.split("_")

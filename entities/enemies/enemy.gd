@@ -83,7 +83,7 @@ func _apply_gravity(delta: float) -> void:
 	velocity.y += movement_component.get_gravity(velocity) * delta
 
 
-func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:
+func play_state_audio(audio_stream: AudioStream, stop_interval: bool = true) -> void:
 	if stop_interval:
 		# Stop the interval audio and timer
 		interval_audio_player.stop()
@@ -98,7 +98,7 @@ func play_state_audio(audio_stream: AudioStream, stop_interval := true) -> void:
 		state_audio_player.finished.connect(_on_state_audio_finished, CONNECT_ONE_SHOT)
 
 
-func _on_state_audio_finished(resume_interval := true) -> void:
+func _on_state_audio_finished(resume_interval: bool = true) -> void:
 	if resume_interval:
 		# Resume interval timer
 		interval_audio_player.random_player.timer.start()

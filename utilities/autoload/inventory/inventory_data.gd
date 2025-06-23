@@ -7,7 +7,7 @@ extends Resource
 @export var items: Array[BaseResource] = []
 
 ## Bool to trigger recalculation of items_sorted
-var recalc_items_sorted := true
+var recalc_items_sorted: bool = true
 ## Sorted inventory
 var items_sorted_flattened : Array :
 	get: 

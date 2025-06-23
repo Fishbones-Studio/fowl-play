@@ -9,7 +9,7 @@ extends Node3D
 			current_weapon = null
 			return
 		# Custom setter to validate the scene type
-		var temp_weapon_instance := value.instantiate()
+		var temp_weapon_instance: Node3D = value.instantiate()
 		if value and value.can_instantiate() and temp_weapon_instance is MeleeWeapon:
 			melee_weapon_scene = value
 			current_weapon = temp_weapon_instance

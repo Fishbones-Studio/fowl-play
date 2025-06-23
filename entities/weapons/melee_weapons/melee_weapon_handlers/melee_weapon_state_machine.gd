@@ -78,7 +78,7 @@ func _transition_to_next_state(target_state: WeaponEnums.WeaponState, informatio
 
 	if weapon and weapon.animation_player:
 		# Animation handling
-		var has_current_anim := current_state.animation_name != null \
+		var has_current_anim: bool = current_state.animation_name != null \
 				and not current_state.animation_name.is_empty() \
 				and weapon \
 				and weapon.animation_player.has_animation(current_state.animation_name)

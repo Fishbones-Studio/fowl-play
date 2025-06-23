@@ -38,7 +38,7 @@ func _resolve_dialogue_path() -> void:
 	# A directory has been assigned, but no specific file. Find the first '.dialogue' file in it.
 	if not dialogue_directory.is_empty():
 		# Use ResourceLoader.list_directory() to get a list of resource files.
-		var files := ResourceLoader.list_directory(dialogue_directory)
+		var files: PackedStringArray = ResourceLoader.list_directory(dialogue_directory)
 		print("Files in dialogue directory '%s':" % dialogue_directory)
 		for file_name in files:
 			# Only care about files ending with the dialogue extension.

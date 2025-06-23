@@ -79,11 +79,12 @@ func _ready() -> void:
 
 
 func reparent_to_entity(new_parent: Node) -> void:
-	var offset := Vector3(
+	var offset: Vector3 = Vector3(
 		entity_follow_horizontal_offset,
 		entity_follow_height,
 		entity_follow_distance
 	)
+
 	var intended_global_transform := Transform3D(
 		basis,
 		new_parent.global_transform.origin + offset

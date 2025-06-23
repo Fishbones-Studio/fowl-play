@@ -22,7 +22,7 @@ static var action_to_remap: String = ""
 
 ## Load all saved settings from the user's configuration file.
 static func load_settings(viewport: Viewport, window: Window, item: String = "") -> void:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 
 	# Attempt to load config file - if failed, use defaults for requested section
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
@@ -109,9 +109,28 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 
 ## Method to get a specific setting from the config file
 static func get_setting(section: String, key: String, default : Variant) -> Variant:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 	if config.load(SETTINGS_CONFIG_PATH) == OK and config.has_section(section):
 		return config.get_value(section, key, default)
 	else:
 		push_warning("Failed to load setting '%s' from section '%s'." % [key, section])
 		return default
+
+
+static func remove_setting_from_config(section_name: String) -> bool:
+	var config: ConfigFile = ConfigFile.new()
+
+	# Load the config file
+	if config.load(SETTINGS_CONFIG_PATH) != OK:
+		push_error("Error: Could not load config file!")
+		return false
+
+	# Check if the section exists before removing
+	if config.has_section(section_name):
+		config.erase_section(section_name)
+		config.save(SETTINGS_CONFIG_PATH)
+		print_rich("[color=orange]Removed section: %s[/color]" % section_name)
+		return true
+	else:
+		printerr("Section does not exist: ", section_name)
+		return false

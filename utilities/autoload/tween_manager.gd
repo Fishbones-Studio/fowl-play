@@ -40,7 +40,7 @@ func create_move_tween(
 	assert(node != null, "Target node cannot be null")
 	assert(axis.to_lower() in ["x", "y", "z"], "Axis must be 'x', 'y', or 'z'")
 
-	var property := "position:%s" % axis.to_lower()
+	var property: String = "position:%s" % axis.to_lower()
 
 	if not tween: tween = node.create_tween()
 	tween.tween_property(node, property, distance, duration)\
