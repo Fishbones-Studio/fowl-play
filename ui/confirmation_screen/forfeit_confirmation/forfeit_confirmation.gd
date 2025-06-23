@@ -3,7 +3,7 @@ extends ConfirmationScreen
 
 func _ready() -> void:
 	title.text = "Forfeit"
-	description.text = "Are you sure you want to forfeit? You will [color=yellow]lose all your current equipment[/color] and any progress made in the arena."
+	description.text = "Are you sure you want to forfeit? [color=yellow]This will remove all your current equipment and reset your rounds fought and won back to zero.[/color]"
 	super()
 
 
