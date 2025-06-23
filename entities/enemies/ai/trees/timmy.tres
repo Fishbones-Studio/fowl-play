@@ -73,7 +73,6 @@ min_duration = 1.1
 max_duration = 1.9
 
 [sub_resource type="BTParallel" id="BTParallel_78ech"]
-num_successes_required = 2
 children = [SubResource("BTAction_gdjfc"), SubResource("BTRandomWait_sha4y")]
 
 [sub_resource type="BTAction" id="BTAction_sgv08"]
