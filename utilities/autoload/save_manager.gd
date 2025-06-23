@@ -17,7 +17,7 @@ var _loaded_game_data: Dictionary = {}
 
 
 func _load_game_config() -> ConfigFile:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 	config.load(SAVE_GAME_PATH)
 	return config
 
@@ -62,7 +62,7 @@ func get_default_upgrades() -> Dictionary[StatsEnums.UpgradeTypes, int]:
 
 func save_player_stats(stats: LivingEntityStats) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
 	_save_game_config(config)
 	_loaded_game_data["stats"] = stats
@@ -73,7 +73,7 @@ func save_player_upgrades(
 	upgrades: Dictionary[StatsEnums.UpgradeTypes, int]
 ) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	# ConfigFile will save enum keys as their integer values
 	config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
 	_save_game_config(config)
@@ -83,7 +83,7 @@ func save_player_upgrades(
 
 func save_currency(value: int, currency_type: CurrencyEnums.CurrencyTypes) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	
 	match currency_type:
 		CurrencyEnums.CurrencyTypes.FEATHERS_OF_REBIRTH:
@@ -109,7 +109,7 @@ func save_rounds_one_by_one() -> void:
 
 func save_rounds_won(rounds: int) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	config.set_value(PLAYER_SAVE_SECTION, "rounds_won", rounds)
 	_save_game_config(config)
 	_loaded_game_data["rounds_won"] = rounds
@@ -119,7 +119,7 @@ func save_rounds_won(rounds: int) -> void:
 # Helper for total_rounds_won (world section, persists)
 func save_total_rounds_won(total_rounds: int) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	config.set_value(WORLD_SAVE_SECTION, "total_rounds_won", total_rounds)
 	_save_game_config(config)
 	_loaded_game_data["total_rounds_won"] = total_rounds
@@ -140,7 +140,7 @@ func save_enemy_encounter(enemy_name: String) -> void:
 
 func save_enemy_encounters(encounters: Dictionary[String, int]) -> void:
 	_ensure_game_data_loaded()
-	var config := _load_game_config()
+	var config: ConfigFile = _load_game_config()
 	config.set_value(WORLD_SAVE_SECTION, "enemy_encounters", encounters)
 	_save_game_config(config)
 	_loaded_game_data["enemy_encounters"] = encounters.duplicate()
@@ -151,7 +151,7 @@ func load_game_data() -> Dictionary:
 	if not _loaded_game_data.is_empty():
 		return _loaded_game_data
 
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 
 	var final_stats: LivingEntityStats
 	var final_upgrades: Dictionary
@@ -300,7 +300,7 @@ func _create_default_save_file(
 	feathers: int,
 	eggs: int
 ) -> void:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 	config.set_value(PLAYER_SAVE_SECTION, "stats", stats.to_dict())
 	config.set_value(PLAYER_SAVE_SECTION, "upgrades", upgrades)
 	config.set_value(PLAYER_SAVE_SECTION, "rounds_won", rounds_won)
@@ -478,12 +478,15 @@ func get_loaded_total_rounds_won() -> int:
 func get_loaded_enemy_encounters() -> Dictionary[String, int]:
 	_ensure_game_data_loaded()
 	var encounters_variant = _loaded_game_data.get("enemy_encounters")
+
 	if encounters_variant is Dictionary[String, int]:
-		return (encounters_variant as Dictionary[String, int]).duplicate()
+		return encounters_variant.duplicate()
+
 	elif encounters_variant is Dictionary:
 		# Attempt to cast and validate if it's a generic dictionary
-		var dict_form := {} as Dictionary[String, int]
-		var all_valid_entries : bool = true
+		var dict_form: Dictionary[String, int] = {}
+		var all_valid_entries: bool = true
+
 		for k in (encounters_variant as Dictionary):
 			var v = (encounters_variant as Dictionary)[k]
 			if k is String and typeof(v) == TYPE_INT:

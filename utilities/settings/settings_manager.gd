@@ -22,7 +22,7 @@ static var action_to_remap: String = ""
 
 ## Load all saved settings from the user's configuration file.
 static func load_settings(viewport: Viewport, window: Window, item: String = "") -> void:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 
 	# Attempt to load config file - if failed, use defaults for requested section
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
@@ -109,7 +109,7 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 
 ## Method to get a specific setting from the config file
 static func get_setting(section: String, key: String, default : Variant) -> Variant:
-	var config := ConfigFile.new()
+	var config: ConfigFile = ConfigFile.new()
 	if config.load(SETTINGS_CONFIG_PATH) == OK and config.has_section(section):
 		return config.get_value(section, key, default)
 	else:

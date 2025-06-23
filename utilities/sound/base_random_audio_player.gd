@@ -72,7 +72,7 @@ func _get_next_random_stream() -> AudioStream:
 	if _available_streams.is_empty():
 		return null
 
-	var next_index := _current_stream_index
+	var next_index: int = _current_stream_index
 	if _available_streams.size() > 1 and avoid_repeats:
 		while next_index == _current_stream_index:
 			next_index = randi() % _available_streams.size()

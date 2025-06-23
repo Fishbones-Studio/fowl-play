@@ -124,7 +124,7 @@ func _on_swap_abilities_button_pressed() -> void:
 
 	# Whack
 	if ability1_index != -1 and ability2_index != -1:
-		var temp := Inventory.inventory_data.items[ability1_index]
+		var temp: BaseResource = Inventory.inventory_data.items[ability1_index]
 		Inventory.inventory_data.items[ability1_index] = Inventory.inventory_data.items[ability2_index]
 		Inventory.inventory_data.items[ability2_index] = temp
 

@@ -12,8 +12,8 @@ func get_icon_texture(action: String) -> Texture2D:
 	if _icon_cache.has(action):
 		return _icon_cache[action]
 
-	var path := "res://resources/controller-icons/%s.tres" % action
-	var tex := ResourceLoader.load(path, "Texture2D", ResourceLoader.CACHE_MODE_IGNORE)
+	var path: String = "res://resources/controller-icons/%s.tres" % action
+	var tex: Resource = ResourceLoader.load(path, "Texture2D", ResourceLoader.CACHE_MODE_IGNORE)
 	if tex and tex is Texture2D:
 		_icon_cache[action] = tex
 		return tex

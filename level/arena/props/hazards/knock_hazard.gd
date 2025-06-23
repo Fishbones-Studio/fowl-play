@@ -36,7 +36,7 @@ func _on_hazard_area_body_entered(body: Node3D) -> void:
 
 
 func calculate_knockback(direction: Vector3, body: CharacterBody3D) -> Vector3:
-	var horizontal_component := func(axis: float) -> float:
+	var horizontal_component: Callable = func(axis: float) -> float:
 		var magnitude: float = abs(axis) * knockback_force
 		magnitude = clamp(magnitude, minimum_horizontal_knockback, maximum_horizontal_knockback)
 		return magnitude * sign(axis)

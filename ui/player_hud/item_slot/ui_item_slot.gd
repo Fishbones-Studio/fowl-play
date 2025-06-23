@@ -31,7 +31,7 @@ func _ready() -> void:
 	item_background.color = item_background_colour if item_background_colour else item_background.color
 
 	# Create a new StyleBoxFlat for the fill
-	var fill_stylebox := StyleBoxFlat.new()
+	var fill_stylebox: StyleBoxFlat = StyleBoxFlat.new()
 	fill_stylebox.bg_color = cooldown_colour if cooldown_colour else Color(1, 1, 1) # fallback colour
 	
 	# Apply the stylebox override to the ProgressBar's fill

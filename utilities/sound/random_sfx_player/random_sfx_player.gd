@@ -10,7 +10,7 @@ func play_random() -> void:
 		)
 		return
 
-	var next_sfx_stream := _get_next_random_stream()
+	var next_sfx_stream: AudioStream = _get_next_random_stream()
 	if next_sfx_stream:
 		stream = next_sfx_stream
 		play()

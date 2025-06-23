@@ -95,11 +95,11 @@ func _process_scene_resources_for_preloading(packed_scene: PackedScene) -> void:
 	# Batch process collected materials by creating temporary meshes
 	if not materials_to_batch_process.is_empty():
 		var temp_mesh_instances_batch: Array[MeshInstance3D] = []
-		var temp_mesh_res := BoxMesh.new() # Create one mesh resource to reuse
+		var temp_mesh_res: BoxMesh = BoxMesh.new() # Create one mesh resource to reuse
 		temp_mesh_res.size = Vector3(0.01, 0.01, 0.01) # Make it very small
 
 		for material_to_process in materials_to_batch_process:
-			var temp_mesh_instance := MeshInstance3D.new()
+			var temp_mesh_instance: MeshInstance3D = MeshInstance3D.new()
 			temp_mesh_instance.mesh = temp_mesh_res
 			temp_mesh_instance.set_surface_override_material(0, material_to_process)
 			
@@ -130,7 +130,7 @@ func _process_scene_resources_for_preloading(packed_scene: PackedScene) -> void:
 
 func _recursive_collect_materials(node: Node, collected_materials_list: Array[Material]) -> void:
 	if node is MeshInstance3D:
-		var mi := node as MeshInstance3D
+		var mi: MeshInstance3D = node
 		for i in range(mi.get_surface_override_material_count()):
 			var mat: Material = mi.get_surface_override_material(i)
 			if mat and not (mat.get_instance_id() in _processed_materials) and not collected_materials_list.has(mat):
@@ -142,7 +142,7 @@ func _recursive_collect_materials(node: Node, collected_materials_list: Array[Ma
 					collected_materials_list.append(mat)
 
 	elif node is GPUParticles3D:
-		var gpu_particles := node as GPUParticles3D
+		var gpu_particles: GPUParticles3D = node
 		if gpu_particles.process_material:
 			var mat: Material = gpu_particles.process_material
 			if mat and not (mat.get_instance_id() in _processed_materials) and not collected_materials_list.has(mat):
@@ -162,7 +162,7 @@ func _recursive_collect_materials(node: Node, collected_materials_list: Array[Ma
 						collected_materials_list.append(mat_surf)
 
 	elif node is CPUParticles3D:
-		var cpu_particles := node as CPUParticles3D
+		var cpu_particles: CPUParticles3D = node
 		var material_to_check: Material = cpu_particles.material_override
 		if material_to_check and not (material_to_check.get_instance_id() in _processed_materials) and not collected_materials_list.has(material_to_check):
 			collected_materials_list.append(material_to_check)
