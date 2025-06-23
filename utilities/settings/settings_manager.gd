@@ -115,3 +115,22 @@ static func get_setting(section: String, key: String, default : Variant) -> Vari
 	else:
 		push_warning("Failed to load setting '%s' from section '%s'." % [key, section])
 		return default
+
+
+static func remove_setting_from_config(section_name: String) -> bool:
+	var config: ConfigFile = ConfigFile.new()
+
+	# Load the config file
+	if config.load(SETTINGS_CONFIG_PATH) != OK:
+		push_error("Error: Could not load config file!")
+		return false
+
+	# Check if the section exists before removing
+	if config.has_section(section_name):
+		config.erase_section(section_name)
+		config.save(SETTINGS_CONFIG_PATH)
+		print_rich("[color=orange]Removed section: %s[/color]" % section_name)
+		return true
+	else:
+		printerr("Section does not exist: ", section_name)
+		return false
