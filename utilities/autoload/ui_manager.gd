@@ -20,7 +20,7 @@ var previous_ui: Control # Previously active UI control (for navigation history)
 var ui_list: Dictionary[UIEnums.UI, Control] = {}
 
 # Pause state with setter that manages game pause
-var paused := false:
+var paused: bool = false:
 	set(value):
 		# Prevent setting pause state if it's already the target value
 		if paused == value:

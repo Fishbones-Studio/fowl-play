@@ -5,7 +5,7 @@ extends BaseState
 @export_group("Audio")
 @export var state_audio_file: AudioStream
 @export var state_audio_player: AudioStreamPlayer3D
-@export var loop_audio := false
+@export var loop_audio: bool = false
 @export var state_audio_db: float = 0.0 ## Additional decibel control for this state
 
 var player: ChickenPlayer

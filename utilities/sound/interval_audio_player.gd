@@ -115,7 +115,7 @@ func _play_random_audio() -> void:
 	print("Playing random audio")
 
 	# Select next audio ensuring no immediate repeats if avoid_repeats is true
-	var next_index := current_index
+	var next_index: int = current_index
 	if available_audio.size() > 1 and avoid_repeats:
 		while next_index == current_index:
 			next_index = randi() % available_audio.size()
@@ -133,7 +133,7 @@ func _play_random_audio() -> void:
 
 
 func _schedule_next_playback(audio: AudioStream) -> void:
-	var interval := randf_range(min_interval, max_interval)
+	var interval: float = randf_range(min_interval, max_interval)
 	if audio != null: # Ensure audio is valid before getting length
 		timer.start(interval + audio.get_length()) # Wait until current audio ends + random interval
 	else:

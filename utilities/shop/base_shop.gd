@@ -121,16 +121,16 @@ func _get_weighted_random_items(
 	items: Array[BaseResource], count: int
 ) -> Array[BaseResource]:
 	var selected: Array[BaseResource] = []
-	var pool := items.duplicate()
+	var pool: Array[BaseResource] = items.duplicate()
 	while selected.size() < count and pool.size() > 0:
-		var total_weight := 0
+		var total_weight: int = 0
 		for item_res in pool: # item_res is BaseResource
 			total_weight += item_res.drop_chance
 		if total_weight == 0:
 			break
-		var r := randi() % total_weight
-		var cumulative := 0
-		var chosen_index := -1
+		var r: int = randi() % total_weight
+		var cumulative: int = 0
+		var chosen_index: int = -1
 		for i in pool.size():
 			cumulative += pool[i].drop_chance
 			if r < cumulative:
@@ -160,7 +160,7 @@ func _select_one_per_type(items: Array[BaseResource]) -> Array[BaseResource]:
 			else:
 				typed_items.append(item)
 
-		var chosen := _get_weighted_random_items(typed_items, 1)
+		var chosen: Array[BaseResource] = _get_weighted_random_items(typed_items, 1)
 		if chosen.size() > 0:
 			selected.append(chosen[0])
 	return selected
@@ -178,7 +178,7 @@ func _fill_remaining(
 	for item in selected_items:
 		if item in pool: # Ensure item is actually in pool before erasing
 			pool.erase(item)
-	var remaining_items := _get_weighted_random_items(pool, count)
+	var remaining_items: Array[BaseResource] = _get_weighted_random_items(pool, count)
 	return selected_items + remaining_items
 
 

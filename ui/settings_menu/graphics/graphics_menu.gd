@@ -287,8 +287,7 @@ func _set_graphics_values() -> void:
 
 
 func _on_restore_defaults_button_up() -> void:
-	if FileAccess.file_exists(config_path):
-		DirAccess.remove_absolute(config_path)
+	SettingsManager.remove_setting_from_config(config_name)
 
 	_load_graphics_items()
 

@@ -74,7 +74,7 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 
 	# Determine input action based on item type and state
 	if item in melee_items or item in ranged_items:
-		var item_slot := _get_item_slot_for_item(item)
+		var item_slot: UiItemSlot = _get_item_slot_for_item(item)
 		if item_slot and item_slot.active:
 			return "attack"
 		else:
@@ -88,7 +88,7 @@ func _get_input_action_for_item(item: BaseResource) -> String:
 
 # Finds and returns the item slot UI element for a given item
 func _get_item_slot_for_item(item: BaseResource) -> UiItemSlot:
-	var index := Inventory.inventory_data.items_sorted_flattened.find(item)
+	var index: int = Inventory.inventory_data.items_sorted_flattened.find(item)
 	if index >= 0 and index * 2 < get_child_count():
 		return get_child(index * 2) as UiItemSlot
 	return null
@@ -116,8 +116,9 @@ func _init_item_slots(items: Array) -> void:
 			continue
 
 		# Create new item slot and controller icon
-		var item_slot := ITEM_SLOT.instantiate() as UiItemSlot
-		var controller_slot := ITEM_CONTROLLER_ICON_SLOT.instantiate() as Control
+		var item_slot: UiItemSlot = ITEM_SLOT.instantiate()
+		var controller_slot: Control = ITEM_CONTROLLER_ICON_SLOT.instantiate()
+
 		if not item_slot or not controller_slot:
 			continue
 

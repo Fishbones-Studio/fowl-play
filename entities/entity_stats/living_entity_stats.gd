@@ -172,7 +172,7 @@ func to_dict() -> Dictionary:
 
 ## Create a new LivingEntityStats instance from a Dictionary.
 static func from_dict(data: Dictionary) -> LivingEntityStats:
-	var new_stats := LivingEntityStats.new()
+	var new_stats: LivingEntityStats = LivingEntityStats.new()
 
 	# Load Base Stats
 	new_stats.max_health = data.get("max_health", 300.0)

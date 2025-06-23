@@ -73,7 +73,7 @@ func _create_raycast(
 	direction: Vector3,
 	max_range: float
 ) -> RayCast3D:
-	var raycast := RayCast3D.new()
+	var raycast: RayCast3D = RayCast3D.new()
 	raycast.enabled = true
 	raycast.target_position = direction * max_range
 	raycast.collision_mask = 0b0111
@@ -81,7 +81,7 @@ func _create_raycast(
 	get_tree().root.add_child(raycast)
 	raycast.global_position = origin
 
-	var timer := Timer.new()
+	var timer: Timer = Timer.new()
 	raycast.add_child(timer)
 	timer.wait_time = 0.1
 	timer.one_shot = true

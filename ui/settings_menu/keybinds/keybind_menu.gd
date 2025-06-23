@@ -260,8 +260,7 @@ func _on_restore_defaults_button_up() -> void:
 	# Restore default bindings and remove config file
 	InputMap.load_from_project_settings()
 
-	if FileAccess.file_exists(config_path):
-		DirAccess.remove_absolute(config_path)
+	SettingsManager.remove_setting_from_config(config_name)
 
 	_create_action_list()
 

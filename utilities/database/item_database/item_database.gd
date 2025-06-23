@@ -16,7 +16,7 @@ static func load_scene_resources(
 	for subdir in subdirs:
 		if not subdir.ends_with("/"):
 			continue
-		var subdir_path := path.path_join(subdir.trim_suffix("/"))
+		var subdir_path: String = path.path_join(subdir.trim_suffix("/"))
 		var files: PackedStringArray = ResourceLoader.list_directory(subdir_path)
 		var tres_file: String = ""
 		var tscn_file: String = ""
@@ -34,7 +34,7 @@ static func load_scene_resources(
 			if resource is BaseResource:
 				temp_items.append(resource)
 		elif tscn_file != "" and resource_property != "":
-			var scene := ResourceLoader.load(subdir_path.path_join(tscn_file)) as PackedScene
+			var scene: Resource = ResourceLoader.load(subdir_path.path_join(tscn_file))
 			if scene:
 				var instance: Node = scene.instantiate()
 				if instance and instance.has_method("get"):

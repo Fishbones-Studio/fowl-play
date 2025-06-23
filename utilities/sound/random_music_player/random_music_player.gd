@@ -2,7 +2,7 @@
 class_name RandomMusicPlayer
 extends BaseRandomAudioPlayer
 
-const MIN_DB := -80.0 ## Minimum volume in decibels, used for fade out and hacky way to 'silence' the player
+const MIN_DB: float = -80.0 ## Minimum volume in decibels, used for fade out and hacky way to 'silence' the player
 
 @export var fade_duration: float = 1.0
 @export var playback_delay: float = 0.5 ## Delay before starting the next track fade
@@ -52,7 +52,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var current_tree_paused_state := get_tree().paused
+	var current_tree_paused_state: bool = get_tree().paused
 	if current_tree_paused_state != is_game_paused:
 		is_game_paused = current_tree_paused_state
 		_on_pause_state_changed(is_game_paused)
@@ -86,7 +86,7 @@ func _on_pause_state_changed(paused: bool) -> void:
 
 
 func _add_pause_eq_effect() -> void:
-	var bus_index := AudioServer.get_bus_index(bus)
+	var bus_index: int = AudioServer.get_bus_index(bus)
 	if bus_index == -1:
 		push_warning(
 			"RandomMusicPlayer: Could not find audio bus '%s' to add EQ." % bus
@@ -103,7 +103,7 @@ func _add_pause_eq_effect() -> void:
 		else:
 			return
 
-	var eq_effect := AudioEffectEQ.new()
+	var eq_effect: AudioEffectEQ = AudioEffectEQ.new()
 	eq_effect.set_band_gain_db(0, pause_eq_band_0_db)
 	eq_effect.set_band_gain_db(1, pause_eq_band_1_db)
 	eq_effect.set_band_gain_db(2, pause_eq_band_2_db)
@@ -118,7 +118,7 @@ func _add_pause_eq_effect() -> void:
 func _remove_pause_eq_effect() -> void:
 	if _eq_effect_index == -1: return
 
-	var bus_index := AudioServer.get_bus_index(bus)
+	var bus_index: int = AudioServer.get_bus_index(bus)
 	if bus_index == -1:
 		_eq_effect_index = -1; return
 
@@ -172,7 +172,8 @@ func _play_next_track_with_fade() -> void:
 	if stopped:
 		transitioning = false
 		return
-	var next_music_stream := _get_next_random_stream()
+
+	var next_music_stream: AudioStream = _get_next_random_stream()
 
 	if next_music_stream:
 		stream = next_music_stream

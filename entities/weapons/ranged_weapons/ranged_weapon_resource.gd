@@ -15,7 +15,7 @@ extends BaseResource
 @export var handle_attack_end_by_state: bool = false # for ranged weapons that need to handle attack end in the state itself
 # Animation Variables
 @export_group("Animation")
-@export var loop_animation := false
+@export var loop_animation: bool = false
 
 
 func _init() -> void:

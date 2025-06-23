@@ -65,7 +65,7 @@ func exit() -> void:
 func _fire_bullet() -> void:
 	# Calculate spawn position with rotating offset
 	var angle_rad : float = deg_to_rad(_current_angle)
-	var offset := Vector3(
+	var offset: Vector3 = Vector3(
 		cos(angle_rad) * barrel_radius,
 		sin(angle_rad) * barrel_radius,
 		0
@@ -84,7 +84,7 @@ func _fire_bullet() -> void:
 
 
 func _create_raycast(origin: Vector3, direction: Vector3, max_range: float) -> RayCast3D:
-	var raycast := RayCast3D.new()
+	var raycast: RayCast3D = RayCast3D.new()
 	raycast.enabled = true
 	raycast.target_position = direction * max_range
 	raycast.collision_mask = 0b0111 # check for collisions on layer 1 (world), layer 2 (player) and layer 3 (enemy)
@@ -94,7 +94,7 @@ func _create_raycast(origin: Vector3, direction: Vector3, max_range: float) -> R
 	raycast.global_position = origin
 
 	# Creating a timer to automatically remove the raycast
-	var timer := Timer.new()
+	var timer: Timer = Timer.new()
 	raycast.add_child(timer)
 	timer.wait_time = 0.1
 	timer.one_shot = true
@@ -108,8 +108,8 @@ func _create_raycast(origin: Vector3, direction: Vector3, max_range: float) -> R
 
 
 func _create_trajectory_visualization(origin: Vector3, direction: Vector3, max_range: float) -> void:
-	var trajectory_mesh := ImmediateMesh.new()
-	var mesh_instance := MeshInstance3D.new()
+	var trajectory_mesh: ImmediateMesh = ImmediateMesh.new()
+	var mesh_instance: MeshInstance3D = MeshInstance3D.new()
 	mesh_instance.mesh = trajectory_mesh
 	mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
@@ -120,15 +120,15 @@ func _create_trajectory_visualization(origin: Vector3, direction: Vector3, max_r
 	trajectory_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	trajectory_mesh.surface_set_color(Color(1.0, 0.5, 0.0, 0.3))  # Tracers
 
-	var radius := 0.1  # Tracer thickness
-	var segments := 6
+	var radius: float = 0.1  # Tracer thickness
+	var segments: int = 6
 	var start_verts: Array[Vector3] = []
 	var end_verts: Array[Vector3] = []
-	var ortho := _find_orthogonal_vector(direction)
+	var ortho: Vector3 = _find_orthogonal_vector(direction)
 
 	for i in segments:
-		var angle := float(i) / segments * TAU
-		var circle_vec := ortho.rotated(direction, angle) * radius
+		var angle: float = float(i) / segments * TAU
+		var circle_vec: Vector3 = ortho.rotated(direction, angle) * radius
 		start_verts.append(circle_vec)
 		end_verts.append(direction * max_range + circle_vec)
 
@@ -136,7 +136,7 @@ func _create_trajectory_visualization(origin: Vector3, direction: Vector3, max_r
 	trajectory_mesh.surface_end()
 
 	# Creating a timer to automatically remove the mesh
-	var timer := Timer.new()
+	var timer: Timer = Timer.new()
 	mesh_instance.add_child(timer)
 	timer.wait_time = 0.15
 	timer.one_shot = true
@@ -162,7 +162,7 @@ func _generate_cylinder_geometry(
 	segments: int
 ) -> void:
 	for i in segments:
-		var next_i := (i + 1) % segments
+		var next_i: int = (i + 1) % segments
 
 		# Side triangles
 		mesh.surface_add_vertex(start_verts[i])

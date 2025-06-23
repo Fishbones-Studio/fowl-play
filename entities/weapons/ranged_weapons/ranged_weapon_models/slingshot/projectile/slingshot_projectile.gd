@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var time_out: float = 2.0
 @export var invincibility_time: float = 0.1
-@export_range(0.01, 2.0, 0.01) var fire_pool_damage_modifier := 0.2
+@export_range(0.01, 2.0, 0.01) var fire_pool_damage_modifier: float = 0.2
 @export var hazard: PackedScene = preload("uid://cw81sd3kyuelj")
 
 var base_damage: int = 0

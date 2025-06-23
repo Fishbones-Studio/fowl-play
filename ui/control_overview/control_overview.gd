@@ -18,7 +18,7 @@ func _on_keybind_changed(keybind : String) -> void:
 	var keybind_name: StringName = StringName(keybind)
 	if _icon_nodes.has(keybind_name):
 		var texture_rect: TextureRect = _icon_nodes[keybind_name]
-		var controller_texture_icon := ControllerIconTexture.new()
+		var controller_texture_icon: ControllerIconTexture = ControllerIconTexture.new()
 		controller_texture_icon.path = keybind_name
 		texture_rect.texture = controller_texture_icon
 
@@ -31,8 +31,8 @@ func _update_control_visuals() -> void:
 	_icon_nodes.clear()
 
 	for keybind_name: StringName in control_text_dict.keys():
-		var texture_rect := TextureRect.new()
-		var controller_texture_icon := ControllerIconTexture.new()
+		var texture_rect: TextureRect = TextureRect.new()
+		var controller_texture_icon: ControllerIconTexture = ControllerIconTexture.new()
 		controller_texture_icon.path = keybind_name
 		texture_rect.texture = controller_texture_icon
 		texture_rect.custom_minimum_size = Vector2(48, 48)
@@ -40,7 +40,7 @@ func _update_control_visuals() -> void:
 		control_container.add_child(texture_rect)
 		_icon_nodes[keybind_name] = texture_rect
 
-		var label := Label.new()
+		var label: Label = Label.new()
 		label.text = control_text_dict[keybind_name]
 		label.theme_type_variation = "HeaderSmall"
 		control_container.add_child(label)
