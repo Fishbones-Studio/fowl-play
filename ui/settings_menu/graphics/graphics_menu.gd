@@ -80,14 +80,14 @@ var graphics_settings: Dictionary = {}
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
 @onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
-@onready var preload_shaders_materials : ContentItemCheckButton = %PreloadShadersMaterials
+@onready var preload_shaders_materials: ContentItemCheckButton = %PreloadShadersMaterials
 
-@onready var restore_defaults_button : RestoreDefaultsButton = %RestoreDefaultsButton
-@onready var content_container : VBoxContainer = %ContentContainer
+@onready var restore_defaults_button: RestoreDefaultsButton = %RestoreDefaultsButton
+@onready var content_container: VBoxContainer = %ContentContainer
 
 
 func _ready() -> void:
-	_load_graphics_items_only()
+	_load_graphics_items()
 
 
 func _input(event: InputEvent) -> void:
@@ -97,7 +97,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _load_graphics_settings() -> void:
-	SettingsManager.load_settings(get_viewport(),get_window(), config_name)
+	SettingsManager.load_settings(get_viewport(), get_window(), config_name)
+	get_tree().process_frame
 	_set_graphics_values()
 
 
@@ -112,17 +113,6 @@ func _save_graphics_settings() -> void:
 	SignalManager.graphics_settings_changed.emit()
 
 
-func _set_resolution(index: int) -> void:
-	var value: Vector2i = RESOLUTIONS.values()[index]
-	DisplayServer.window_set_size(value)
-	DisplayUtils.center_window(get_window())
-
-	resolution.options.selected = index
-	graphics_settings["resolution"] = value
-
-	_save_graphics_settings()
-
-
 func _set_display_mode(index: int) -> void:
 	var value: DisplayServer.WindowMode = DISPLAY_MODES.values()[index]
 	DisplayServer.window_set_mode(value)
@@ -131,6 +121,17 @@ func _set_display_mode(index: int) -> void:
 	graphics_settings["display_mode"] = value
 
 	_update_resolution_visibility()
+	_save_graphics_settings()
+
+
+func _set_resolution(index: int) -> void:
+	var value: Vector2i = RESOLUTIONS.values()[index]
+	DisplayServer.window_set_size(value)
+	DisplayUtils.center_window(get_window())
+
+	resolution.options.selected = index
+	graphics_settings["resolution"] = value
+
 	_save_graphics_settings()
 
 
@@ -245,13 +246,13 @@ func _set_preload_shaders(value: bool) -> void:
 
 # Separated loading items from setting up focus navigation
 func _load_graphics_items_only() -> void:
-	resolution.options.clear()
-	for res_text in RESOLUTIONS:
-		resolution.options.add_item(res_text)
-
 	display_mode.options.clear()
 	for dis_text in DISPLAY_MODES:
 		display_mode.options.add_item(dis_text)
+
+	resolution.options.clear()
+	for res_text in RESOLUTIONS:
+		resolution.options.add_item(res_text)
 
 	v_sync.options.clear()
 	for v_text in V_SYNC:
@@ -284,13 +285,12 @@ func _load_graphics_items_only() -> void:
 
 func _load_graphics_items() -> void:
 	_load_graphics_items_only()
-	_setup_focus_navigation()
 	_load_graphics_settings()
 
 
 func _set_graphics_values() -> void:
-	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	display_mode.options.select(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
+	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	v_sync.options.select(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	fps.options.select(FPS.values().find(Engine.max_fps))
@@ -313,34 +313,12 @@ func _on_restore_defaults_button_up() -> void:
 
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
-	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_MINIMIZED
-	resolution.disabled = !resolution.visible
+	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_WINDOWED
+	borderless.visible = resolution.visible
 
-
-func _setup_focus_navigation() -> void:
-	# Collect only visible Control nodes in the content container
-	var nodes: Array = []
-
-	for child in content_container.get_children():
-		if child is Control and child.is_visible_in_tree():
-			nodes.append(child)
-
-	# Append the restore button only if it's visible
-	if restore_defaults_button.is_visible_in_tree():
-		nodes.append(restore_defaults_button)
-
-	var count: int = nodes.size()
-	if count == 0:
-		return
-
-	# Wire up top/bottom neighbors and next/previous in a circular list
-	for i in range(count):
-		var ctrl: Control = nodes[i]
-		var prev: Control = nodes[(i - 1 + count) % count]
-		var next: Control = nodes[(i + 1)      % count]
-
-		ctrl.focus_neighbor_top = prev.get_path()
-		ctrl.focus_neighbor_bottom = next.get_path()
-		ctrl.focus_next = next.get_path()
-		ctrl.focus_previous = prev.get_path()
-		ctrl.focus_mode = Control.FOCUS_ALL
+	if resolution.visible:
+		resolution.focus_mode = Control.FOCUS_ALL
+		borderless.focus_mode = Control.FOCUS_ALL
+	else:
+		resolution.focus_mode = Control.FOCUS_NONE
+		borderless.focus_mode = Control.FOCUS_NONE

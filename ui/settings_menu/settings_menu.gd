@@ -37,9 +37,10 @@ func _ready() -> void:
 
 	super()
 
+
 func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
 		_on_close_button_pressed()
 
 
@@ -64,24 +65,17 @@ func _update_content(sidebar_item: SideBarItem) -> void:
 	for child in content.get_children():
 		content.remove_child(child)
 
-	var submenu : Control
 	match sidebar_item:
 		controls:
-			submenu = controls_menu.instantiate()
+			content.add_child(controls_menu.instantiate())
 		key_bindings:
-			submenu = keybinds_menu.instantiate()
+			content.add_child(keybinds_menu.instantiate())
 		graphics:
-			submenu = graphics_menu.instantiate()
+			content.add_child(graphics_menu.instantiate())
 		audio:
-			submenu = audio_menu.instantiate()
+			content.add_child(audio_menu.instantiate())
 		cheat:
-			submenu = cheat_menu.instantiate()
-			
-	if not submenu:
-		push_error("SettingsMenu - Somehow no submenu could be added")
-		return
-	content.add_child(submenu)
-	submenu.back_requested.connect(_on_submenu_back_requested)
+			content.add_child(cheat_menu.instantiate())
 
 	settings_label.text = "Settings / " + _format_text(sidebar_item.name)
 
@@ -91,7 +85,7 @@ func _format_text(text: String) -> String:
 	var result: String = ""
 
 	for i in range(text.length()):
-		var character: String = text[i]
+		var character = text[i]
 
 		if character == character.to_upper() and i > 0 and text[i-1] != " ":
 			result += " "
@@ -99,14 +93,6 @@ func _format_text(text: String) -> String:
 		result += character
 
 	return result
-	
-func _on_submenu_back_requested() -> void:
-	# Return focus to the sidebar
-	if focused_sidebar_item:
-		if focused_sidebar_item.has_focus():
-			_on_close_button_pressed()
-		else:
-			focused_sidebar_item.grab_focus()
 
 
 func _on_content_focus_entered() -> void:
