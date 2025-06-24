@@ -80,10 +80,10 @@ var graphics_settings: Dictionary = {}
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
 @onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
-@onready var preload_shaders_materials : ContentItemCheckButton = %PreloadShadersMaterials
+@onready var preload_shaders_materials: ContentItemCheckButton = %PreloadShadersMaterials
 
-@onready var restore_defaults_button : RestoreDefaultsButton = %RestoreDefaultsButton
-@onready var content_container : VBoxContainer = %ContentContainer
+@onready var restore_defaults_button: RestoreDefaultsButton = %RestoreDefaultsButton
+@onready var content_container: VBoxContainer = %ContentContainer
 
 
 func _ready() -> void:
@@ -281,11 +281,12 @@ func _load_graphics_items_only() -> void:
 	for mode_text in RENDER_MODE:
 		render_mode.options.add_item(mode_text)
 
+	_load_graphics_settings()
+
 
 func _load_graphics_items() -> void:
 	_load_graphics_items_only()
 	_setup_focus_navigation()
-	_load_graphics_settings()
 
 
 func _set_graphics_values() -> void:
@@ -299,8 +300,7 @@ func _set_graphics_values() -> void:
 	taa.options.select(TAA.values().find(get_viewport().use_taa))
 	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
-	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", 2)
-	post_processing_strength.set_value(saved_step if saved_step != null else 2)
+	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
 	preload_shaders_materials.set_pressed_no_signal(SettingsManager.get_setting("graphics", "preload_shaders", true))
 
 	_update_resolution_visibility()
@@ -313,8 +313,10 @@ func _on_restore_defaults_button_up() -> void:
 
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
-	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_MINIMIZED
-	resolution.disabled = !resolution.visible
+	resolution.visible = selected_mode not in [
+		DisplayServer.WINDOW_MODE_FULLSCREEN,
+		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+	]
 
 
 func _setup_focus_navigation() -> void:
