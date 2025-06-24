@@ -76,7 +76,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_4d8fe"]
 resource_name = "Cooldown"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,7 +84,7 @@ tracks/0/path = NodePath("WeaponHitBox:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, -3.75246, 1.5708), Vector3(0, -6.28319, 0)]
@@ -96,7 +96,7 @@ tracks/1/path = NodePath("WeaponHitBox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(3, 1),
 "update": 0,
 "values": [Vector3(2, 0.5, 1.5), Vector3(0, 1, 0)]
