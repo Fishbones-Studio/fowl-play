@@ -37,7 +37,8 @@ func _on_button_focus_entered(index: int) -> void:
 			if _next_item:
 				primary_button.focus_neighbor_bottom = _next_item.primary_button.get_path()
 			primary_button.focus_neighbor_right = secondary_button.get_path()
-			primary_button.focus_neighbor_left = controller_button.get_path()
+			if controller_panel.visible:
+				primary_button.focus_neighbor_left = controller_button.get_path()
 		2:
 			if _prev_item:
 				secondary_button.focus_neighbor_top = _prev_item.secondary_button.get_path()
