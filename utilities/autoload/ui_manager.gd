@@ -46,7 +46,6 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
-		print("Going Menu Back")
 		var focused: Control = get_viewport().gui_get_focus_owner()
 
 		if focused is LineEdit or focused is TextEdit:
@@ -56,7 +55,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		_handle_ui_cancel_action()
 	elif Input.is_action_just_pressed("pause"):
-		print("Handling Pause")
 		handle_pause()
 
 

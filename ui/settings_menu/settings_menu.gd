@@ -37,10 +37,9 @@ func _ready() -> void:
 
 	super()
 
-# TODO: Fix/workaround
-func _unhandled_input(_event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
-	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("pause"):
 		_on_close_button_pressed()
 
 
@@ -104,7 +103,10 @@ func _format_text(text: String) -> String:
 func _on_submenu_back_requested() -> void:
 	# Return focus to the sidebar
 	if focused_sidebar_item:
-		focused_sidebar_item.grab_focus()
+		if focused_sidebar_item.has_focus():
+			_on_close_button_pressed()
+		else:
+			focused_sidebar_item.grab_focus()
 
 
 func _on_content_focus_entered() -> void:

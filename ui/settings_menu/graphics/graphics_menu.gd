@@ -1,5 +1,9 @@
 ################################################################################
 ## Script to display and manage graphics settings in a UI.
+##
+## This script handles the graphics settings UI, allowing users to adjust and 
+## save their graphics preferences. Handles resolution, window mode, borderless 
+## toggle, VSync, and FPS limits.
 ################################################################################
 extends Control
 
@@ -81,15 +85,11 @@ var graphics_settings: Dictionary = {}
 @onready var restore_defaults_button : RestoreDefaultsButton = %RestoreDefaultsButton
 @onready var content_container : VBoxContainer = %ContentContainer
 
-# Track if the menu is active for input handling
-var is_menu_active: bool = false
 
 func _ready() -> void:
 	_load_graphics_items_only()
 
 func _input(event: InputEvent) -> void:
-	if not is_menu_active:
-		return
 	if event.is_action_pressed("ui_cancel"):
 		back_requested.emit()
 		UIManager.get_viewport().set_input_as_handled()
@@ -137,6 +137,14 @@ func _set_borderless(value: bool) -> void:
 
 	_save_graphics_settings()
 
+
+## Vsync is enabled by default.
+## Vertical synchronization locks framerate and makes screen tearing not visible
+## at the cost of higher input latency and stuttering when the framerate target
+## is not met.Adaptive V-Sync automatically disables V-Sync when the framerate 
+## target is not met, and enables V-Sync otherwise. This prevents suttering and 
+## reduces input latency when the framerate target is not met, at the cost of 
+## visible tearing.
 func _set_vsync(index: int) -> void:
 	var value: DisplayServer.VSyncMode = V_SYNC.values()[index]
 	DisplayServer.window_set_vsync_mode(value)
@@ -146,6 +154,10 @@ func _set_vsync(index: int) -> void:
 
 	_save_graphics_settings()
 
+
+## The rendering FPS affects the appearance of TAA, as higher framerates allow 
+## it to converge faster. On high refresh rate monitors, TAA ghosting issues 
+## may appear less noticeable as a result (if the GPU can keep up).
 func _set_fps(index: int) -> void:
 	var value: int = FPS.values()[index]
 	Engine.set_max_fps(value)
@@ -155,6 +167,9 @@ func _set_fps(index: int) -> void:
 
 	_save_graphics_settings()
 
+	
+## Multi-sample anti-aliasing. High quality, but slow. It also does not smooth 
+## out the edges of transparent (alpha scissor) textures.
 func _set_msaa(index: int) -> void:
 	var value: Viewport.MSAA = MSAA.values()[index]
 	get_viewport().msaa_3d = value
@@ -164,6 +179,9 @@ func _set_msaa(index: int) -> void:
 
 	_save_graphics_settings()
 
+
+## Fast approximate anti-aliasing. Much faster than MSAA (and works on alpha 
+## scissor edges), but blurs the whole scene rendering slightly.
 func _set_fxaa(index: int) -> void:
 	var value: Viewport.ScreenSpaceAA = FXAA.values()[index]
 	get_viewport().screen_space_aa = value
@@ -173,6 +191,10 @@ func _set_fxaa(index: int) -> void:
 
 	_save_graphics_settings()
 
+
+## Temporal antialiasing. Smooths out everything including specular aliasing, 
+## but can introduce ghosting artifacts and blurring in motion. 
+## Moderate performance cost.
 func _set_taa(index: int) -> void:
 	var value: bool = TAA.values()[index]
 	get_viewport().use_taa = value
@@ -182,6 +204,7 @@ func _set_taa(index: int) -> void:
 
 	_save_graphics_settings()
 
+## Render scale is a technique to render the scene at a lower resolution and upscale it to the display resolution.
 func _set_render_scale(index: int) -> void:
 	var value: float = RENDER_SCALE.values()[index]
 	get_viewport().scaling_3d_scale = value
@@ -191,6 +214,7 @@ func _set_render_scale(index: int) -> void:
 
 	_save_graphics_settings()
 
+## Slider for the post processing effect
 func _set_render_mode(index: int) -> void:
 	var value: Viewport.Scaling3DMode = RENDER_MODE.values()[index]
 	get_viewport().scaling_3d_mode = value
@@ -275,6 +299,7 @@ func _on_restore_defaults_button_up() -> void:
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
 	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_MINIMIZED
+	resolution.disabled = !resolution.visible
 
 func _setup_focus_navigation() -> void:
 	# Collect only visible Control nodes in the content container
