@@ -12,7 +12,7 @@ signal back_requested
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
-	"1280x800 - HD SteamDeck" : Vector2i(1280, 800),
+	"1280x800 - HD SteamDeck": Vector2i(1280, 800),
 	"1366x768 - HD": Vector2i(1366, 768),
 	"1600x900 - HD+": Vector2i(1600, 900),
 	"1920x1080 - Full HD": Vector2i(1920, 1080),
@@ -20,10 +20,10 @@ const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"3840x2160 - 4K": Vector2i(3840, 2160),
 }
 const DISPLAY_MODES: Dictionary[String, DisplayServer.WindowMode] = {
-	"Windowed" : DisplayServer.WINDOW_MODE_WINDOWED,
-	"Maximized" : DisplayServer.WINDOW_MODE_MAXIMIZED,
-	"Fullscreen" : DisplayServer.WINDOW_MODE_FULLSCREEN,
-	"Exlusive Fullscreen" : DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	"Windowed": DisplayServer.WINDOW_MODE_WINDOWED,
+	"Maximized": DisplayServer.WINDOW_MODE_MAXIMIZED,
+	"Fullscreen": DisplayServer.WINDOW_MODE_FULLSCREEN,
+	"Exlusive Fullscreen": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 }
 const V_SYNC: Dictionary[String, DisplayServer.VSyncMode] = {
 	"Disabled": DisplayServer.VSYNC_DISABLED,
