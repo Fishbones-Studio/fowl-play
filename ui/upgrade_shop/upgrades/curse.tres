@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://g21vkb2cv6lr"]
+
+[ext_resource type="Texture2D" uid="uid://dww6fduu2q0mj" path="res://ui/upgrade_shop/art/health_reduction.png" id="1_tdqhb"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="2_fnbno"]
+
+[resource]
+script = ExtResource("2_fnbno")
+health_bonus = -100
+stamina_bonus = 0
+attack_bonus = 20
+defense_bonus = 80
+speed_bonus = 0
+weight_bonus = 2.0
+name = "Curse"
+purchasable = true
+is_free = true
+drop_chance = 20
+cost = 50
+currency_type = 0
+description = "The user suffers a ruthless curse, decreasing [color=orange]Health[/color] by %s while increasing [color=orange]Attack[/color] by %s, [color=orange]Defense[/color] by %s and [color=orange]Weight[/color] by %s."
+short_description = ""
+icon = ExtResource("1_tdqhb")
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"
