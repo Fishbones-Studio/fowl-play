@@ -138,7 +138,7 @@ func _instantiate_and_add_scene(
 	if resource is PackedScene:
 		var new_scene: Node = resource.instantiate()
 		add_child(new_scene)
-		
+
 		# Pass parameters to scene using 'setup' method
 		if not _loading_params.is_empty():
 			if new_scene.has_method("setup"):
