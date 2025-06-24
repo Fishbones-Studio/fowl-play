@@ -104,7 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, -1, 0.9)
 [node name="Spikes" type="Node3D" parent="NavigationRegion3D/SewerArena"]
 
 [node name="Marker3D" type="Marker3D" parent="NavigationRegion3D/SewerArena/Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.44325, 2.63456, 0.709622)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.443, 2.5, 0.71)
 script = ExtResource("13_m3nah")
 spawn_chance = 80
 hazard_scene = ExtResource("5_l5lfc")
