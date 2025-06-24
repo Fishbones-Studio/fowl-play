@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://4nagoemq66ri"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://4nagoemq66ri"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_kxwa4"]
+[ext_resource type="Texture2D" uid="uid://bm6555c6xaw1t" path="res://ui/upgrade_shop/art/speed_increase.png" id="1_tlseb"]
 
 [resource]
 script = ExtResource("1_kxwa4")
@@ -18,5 +19,6 @@ cost = 50
 currency_type = 0
 description = "The user flaps its wings and takes off from the roost, increasing [color=orange]Speed[/color] by %s."
 short_description = ""
+icon = ExtResource("1_tlseb")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

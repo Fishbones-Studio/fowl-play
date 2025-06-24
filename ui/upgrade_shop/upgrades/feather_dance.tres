@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://b1q1he8w1i2db"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://b1q1he8w1i2db"]
 
+[ext_resource type="Texture2D" uid="uid://bm6555c6xaw1t" path="res://ui/upgrade_shop/art/speed_increase.png" id="1_1wxc6"]
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_qhdv6"]
 
 [resource]
@@ -18,5 +19,6 @@ cost = 150
 currency_type = 0
 description = "The user ruffles its feathers and increases its [color=orange]Speed[/color] by %s."
 short_description = ""
+icon = ExtResource("1_1wxc6")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
