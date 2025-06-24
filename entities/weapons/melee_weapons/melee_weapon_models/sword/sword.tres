@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_tqsw4")
-damage = 50
+damage = 35
 windup_time = 0.3
 attack_duration = 0.5
-cooldown_time = 0.4
-stun_time = 1.5
+cooldown_time = 0.6
+stun_time = 1.0
 loop_animation = false
 name = "Sword"
 purchasable = true
