@@ -37,11 +37,10 @@ func _ready() -> void:
 
 	super()
 
-
+# TODO: Fix/workaround
 func _unhandled_input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
 	if Input.is_action_just_pressed("pause") or Input.is_action_just_pressed("ui_cancel"):
-		print("Setingaesewiopjejeiejioijpoefpijo")
 		_on_close_button_pressed()
 
 
