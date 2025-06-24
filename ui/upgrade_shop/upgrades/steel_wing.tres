@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://b26qad14sv3bq"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://b26qad14sv3bq"]
 
+[ext_resource type="Texture2D" uid="uid://ckc0ghrkeajvh" path="res://ui/upgrade_shop/art/defense_increase.png" id="1_fqt50"]
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_nq4pi"]
 
 [resource]
@@ -18,5 +19,6 @@ cost = 100
 currency_type = 0
 description = "The user’s wings become as strong as steel, increasing [color=orange]Defense[/color] by %s."
 short_description = ""
+icon = ExtResource("1_fqt50")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
