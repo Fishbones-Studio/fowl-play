@@ -501,7 +501,7 @@ shape = SubResource("ConvexPolygonShape3D_lp22n")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="sewer_arena/Cube_003/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_oye4v")
 
-[node name="AnimationPlayer" parent="sewer_arena" index="110"]
+[node name="AnimationPlayer" parent="sewer_arena" index="32"]
 autoplay = "Spin"
 
 [node name="FloorCollisionShape" type="CollisionShape3D" parent="."]
