@@ -170,7 +170,7 @@ func _on_item_pressed(index: int) -> void:
 
 # Keyboard/Controller navigation
 func _on_move_selection(direction: int) -> void:
-	# --- MODIFIED: Use the last detected navigation device ---
+	# Use the last detected navigation device
 	_switch_input_mode(last_nav_device)
 
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")
@@ -195,7 +195,7 @@ func _on_move_selection(direction: int) -> void:
 
 
 func _on_navigate_up() -> void:
-	# --- MODIFIED: Use the last detected navigation device ---
+	# Use the last detected navigation device
 	_switch_input_mode(last_nav_device)
 
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")

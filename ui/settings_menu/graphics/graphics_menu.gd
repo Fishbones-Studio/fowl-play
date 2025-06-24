@@ -7,6 +7,8 @@
 ################################################################################
 extends Control
 
+signal back_requested
+
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
@@ -84,6 +86,10 @@ var graphics_settings: Dictionary = {}
 func _ready() -> void:
 	_load_graphics_items()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		back_requested.emit()
+		UIManager.get_viewport().set_input_as_handled()
 
 func _load_graphics_settings() -> void:
 	SettingsManager.load_settings(get_viewport(),get_window(), config_name)

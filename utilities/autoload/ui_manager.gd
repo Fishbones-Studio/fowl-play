@@ -44,14 +44,9 @@ func _ready() -> void:
 	
 	layer = 3
 
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		handle_pause()
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
+		print("Going Menu Back")
 		var focused: Control = get_viewport().gui_get_focus_owner()
 
 		if focused is LineEdit or focused is TextEdit:
@@ -60,6 +55,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		_handle_ui_cancel_action()
+	elif Input.is_action_just_pressed("pause"):
+		print("Handling Pause")
+		handle_pause()
 
 
 ## Loads a game scene with a loading screen, then switches to HUD and target game scene
