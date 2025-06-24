@@ -1833,6 +1833,24 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 }
+},
+"materials": {
+"Material.005": {
+"use_external/enabled": true,
+"use_external/path": "res://level/arena/sewer_arena/art/Material.005.tres"
+},
+"Material.007": {
+"use_external/enabled": true,
+"use_external/path": "res://level/arena/sewer_arena/art/Material.007.tres"
+},
+"material.sanctuaryoffirebloom": {
+"use_external/enabled": true,
+"use_external/path": "res://level/arena/sewer_arena/art/material.sanctuaryoffirebloom.tres"
+},
+"material.seasofflame": {
+"use_external/enabled": true,
+"use_external/path": "res://level/arena/sewer_arena/art/material.seasofflame.tres"
+}
 }
 }
 gltf/naming_version=1

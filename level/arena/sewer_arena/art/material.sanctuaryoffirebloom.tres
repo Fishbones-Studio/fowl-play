@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cra8aptxkjuvn"]
+
+[ext_resource type="Texture2D" uid="uid://d4fqdjoos5g2q" path="res://entities/abilities/ability_models/sanctuary_of_firebloom/art/sanctuary_of_firebloom.png" id="1_1w27f"]
+
+[resource]
+resource_name = "material.sanctuaryoffirebloom"
+cull_mode = 2
+albedo_texture = ExtResource("1_1w27f")
+roughness = 0.5
