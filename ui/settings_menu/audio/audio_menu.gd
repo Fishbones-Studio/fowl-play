@@ -23,10 +23,12 @@ func _ready() -> void:
 
 	_load_audio_settings()
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		back_requested.emit()
 		UIManager.get_viewport().set_input_as_handled()
+
 
 func _load_audio_settings() -> void:
 	SettingsManager.load_settings(get_viewport(), get_window(), config_name)

@@ -12,7 +12,7 @@ signal back_requested
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
-	"1280x800 - HD SteamDeck" : Vector2i(1280, 800),
+	"1280x800 - HD SteamDeck": Vector2i(1280, 800),
 	"1366x768 - HD": Vector2i(1366, 768),
 	"1600x900 - HD+": Vector2i(1600, 900),
 	"1920x1080 - Full HD": Vector2i(1920, 1080),
@@ -20,10 +20,10 @@ const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"3840x2160 - 4K": Vector2i(3840, 2160),
 }
 const DISPLAY_MODES: Dictionary[String, DisplayServer.WindowMode] = {
-	"Windowed" : DisplayServer.WINDOW_MODE_WINDOWED,
-	"Maximized" : DisplayServer.WINDOW_MODE_MAXIMIZED,
-	"Fullscreen" : DisplayServer.WINDOW_MODE_FULLSCREEN,
-	"Exlusive Fullscreen" : DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	"Windowed": DisplayServer.WINDOW_MODE_WINDOWED,
+	"Maximized": DisplayServer.WINDOW_MODE_MAXIMIZED,
+	"Fullscreen": DisplayServer.WINDOW_MODE_FULLSCREEN,
+	"Exlusive Fullscreen": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 }
 const V_SYNC: Dictionary[String, DisplayServer.VSyncMode] = {
 	"Disabled": DisplayServer.VSYNC_DISABLED,
@@ -80,14 +80,14 @@ var graphics_settings: Dictionary = {}
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
 @onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
-@onready var preload_shaders_materials : ContentItemCheckButton = %PreloadShadersMaterials
+@onready var preload_shaders_materials: ContentItemCheckButton = %PreloadShadersMaterials
 
-@onready var restore_defaults_button : RestoreDefaultsButton = %RestoreDefaultsButton
-@onready var content_container : VBoxContainer = %ContentContainer
+@onready var restore_defaults_button: RestoreDefaultsButton = %RestoreDefaultsButton
+@onready var content_container: VBoxContainer = %ContentContainer
 
 
 func _ready() -> void:
-	_load_graphics_items_only()
+	_load_graphics_items()
 
 
 func _input(event: InputEvent) -> void:
@@ -98,6 +98,7 @@ func _input(event: InputEvent) -> void:
 
 func _load_graphics_settings() -> void:
 	SettingsManager.load_settings(get_viewport(),get_window(), config_name)
+	get_tree().process_frame
 	_set_graphics_values()
 
 
@@ -112,17 +113,6 @@ func _save_graphics_settings() -> void:
 	SignalManager.graphics_settings_changed.emit()
 
 
-func _set_resolution(index: int) -> void:
-	var value: Vector2i = RESOLUTIONS.values()[index]
-	DisplayServer.window_set_size(value)
-	DisplayUtils.center_window(get_window())
-
-	resolution.options.selected = index
-	graphics_settings["resolution"] = value
-
-	_save_graphics_settings()
-
-
 func _set_display_mode(index: int) -> void:
 	var value: DisplayServer.WindowMode = DISPLAY_MODES.values()[index]
 	DisplayServer.window_set_mode(value)
@@ -131,6 +121,17 @@ func _set_display_mode(index: int) -> void:
 	graphics_settings["display_mode"] = value
 
 	_update_resolution_visibility()
+	_save_graphics_settings()
+
+
+func _set_resolution(index: int) -> void:
+	var value: Vector2i = RESOLUTIONS.values()[index]
+	DisplayServer.window_set_size(value)
+	DisplayUtils.center_window(get_window())
+
+	resolution.options.selected = index
+	graphics_settings["resolution"] = value
+
 	_save_graphics_settings()
 
 
@@ -245,13 +246,13 @@ func _set_preload_shaders(value: bool) -> void:
 
 # Separated loading items from setting up focus navigation
 func _load_graphics_items_only() -> void:
-	resolution.options.clear()
-	for res_text in RESOLUTIONS:
-		resolution.options.add_item(res_text)
-
 	display_mode.options.clear()
 	for dis_text in DISPLAY_MODES:
 		display_mode.options.add_item(dis_text)
+
+	resolution.options.clear()
+	for res_text in RESOLUTIONS:
+		resolution.options.add_item(res_text)
 
 	v_sync.options.clear()
 	for v_text in V_SYNC:
@@ -281,16 +282,17 @@ func _load_graphics_items_only() -> void:
 	for mode_text in RENDER_MODE:
 		render_mode.options.add_item(mode_text)
 
+	_load_graphics_settings()
+
 
 func _load_graphics_items() -> void:
 	_load_graphics_items_only()
 	_setup_focus_navigation()
-	_load_graphics_settings()
 
 
 func _set_graphics_values() -> void:
-	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	display_mode.options.select(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
+	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	v_sync.options.select(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	fps.options.select(FPS.values().find(Engine.max_fps))
@@ -299,8 +301,7 @@ func _set_graphics_values() -> void:
 	taa.options.select(TAA.values().find(get_viewport().use_taa))
 	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
-	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", 2)
-	post_processing_strength.set_value(saved_step if saved_step != null else 2)
+	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
 	preload_shaders_materials.set_pressed_no_signal(SettingsManager.get_setting("graphics", "preload_shaders", true))
 
 	_update_resolution_visibility()
@@ -313,8 +314,11 @@ func _on_restore_defaults_button_up() -> void:
 
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
-	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_MINIMIZED
-	resolution.disabled = !resolution.visible
+	resolution.visible = selected_mode not in [
+		DisplayServer.WINDOW_MODE_FULLSCREEN,
+		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+	]
+	borderless.visible = resolution.visible
 
 
 func _setup_focus_navigation() -> void:
@@ -337,7 +341,7 @@ func _setup_focus_navigation() -> void:
 	for i in range(count):
 		var ctrl: Control = nodes[i]
 		var prev: Control = nodes[(i - 1 + count) % count]
-		var next: Control = nodes[(i + 1)      % count]
+		var next: Control = nodes[(i + 1) % count]
 
 		ctrl.focus_neighbor_top = prev.get_path()
 		ctrl.focus_neighbor_bottom = next.get_path()
