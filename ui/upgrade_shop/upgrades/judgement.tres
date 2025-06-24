@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://ccl8itsbjyt5g"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://ccl8itsbjyt5g"]
 
+[ext_resource type="Texture2D" uid="uid://bbevnes47ws5i" path="res://ui/main_menu/art/background_enemy_layer.png" id="1_n4exx"]
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_ykcvr"]
 
 [resource]
@@ -18,5 +19,6 @@ cost = 500
 currency_type = 0
 description = "The user is gazed by the creator of the world, █████. Increases the user's [color=orange]Health[/color] by %s, [color=orange]Stamina[/color] by %s, [color=orange]Attack[/color] by %s, and [color=orange]Defense[/color] by %s. Additionally, the user becomes nimbler, increasing [color=orange]Speed[/color] by %s."
 short_description = ""
+icon = ExtResource("1_n4exx")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

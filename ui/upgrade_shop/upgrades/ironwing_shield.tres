@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://cnsgc4c4vlnq"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://cnsgc4c4vlnq"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_64pnc"]
+[ext_resource type="Texture2D" uid="uid://ckc0ghrkeajvh" path="res://ui/upgrade_shop/art/defense_increase.png" id="1_pj10k"]
 
 [resource]
 script = ExtResource("1_64pnc")
@@ -18,5 +19,6 @@ cost = 50
 currency_type = 0
 description = "The user’s wings forge into an unbreakable shield, increasing [color=orange]Defense[/color] by %s."
 short_description = ""
+icon = ExtResource("1_pj10k")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
