@@ -85,7 +85,7 @@ func _on_loading_started(_next_ui: UIEnums.UI, _next_ui_params: Dictionary) -> v
 	visible = true
 	fact_label.text = CHICKEN_FACTS.pick_random()
 	background_art.texture = background_textures.pick_random()
-	_update_loading_text()  
+	call_deferred("_update_loading_text")
 
 
 func _on_progress_updated(progress: float) -> void:
