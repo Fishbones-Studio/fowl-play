@@ -339,7 +339,7 @@ func _setup_focus_navigation() -> void:
 	for i in range(count):
 		var ctrl: Control = nodes[i]
 		var prev: Control = nodes[(i - 1 + count) % count]
-		var next: Control = nodes[(i + 1)      % count]
+		var next: Control = nodes[(i + 1) % count]
 
 		ctrl.focus_neighbor_top = prev.get_path()
 		ctrl.focus_neighbor_bottom = next.get_path()
