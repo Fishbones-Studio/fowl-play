@@ -12,7 +12,7 @@ signal back_requested
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
-	"1280X800 - HD SteamDeck" : Vector2i(1280, 800),
+	"1280x800 - HD SteamDeck" : Vector2i(1280, 800),
 	"1366x768 - HD": Vector2i(1366, 768),
 	"1600x900 - HD+": Vector2i(1600, 900),
 	"1920x1080 - Full HD": Vector2i(1920, 1080),
