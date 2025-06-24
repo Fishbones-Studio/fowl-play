@@ -44,13 +44,13 @@ func _process(delta) -> void:
 
 
 func _update_loading_text() -> void:
-	if not visible: 
+	if not visible or not is_inside_tree():
 		return
 
 	dot_count = (dot_count + 1) % 4
 	loading_text.text = "Now Loading" + ".".repeat(dot_count)
 
-	get_tree().create_timer(0.3).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
+	get_tree().create_timer(0.2).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
 
 
 func _load_background_textures() -> Array[CompressedTexture2D]:
@@ -74,7 +74,7 @@ func _load_background_textures() -> Array[CompressedTexture2D]:
 	return textures
 
 
-func _on_loading_started(_next_ui : UIEnums.UI, _next_ui_params : Dictionary) -> void:
+func _on_loading_started(_next_ui: UIEnums.UI, _next_ui_params: Dictionary) -> void:
 	next_ui = _next_ui
 	next_ui_params = _next_ui_params
 
@@ -85,7 +85,7 @@ func _on_loading_started(_next_ui : UIEnums.UI, _next_ui_params : Dictionary) ->
 	visible = true
 	fact_label.text = CHICKEN_FACTS.pick_random()
 	background_art.texture = background_textures.pick_random()
-	_update_loading_text()  
+	call_deferred("_update_loading_text")
 
 
 func _on_progress_updated(progress: float) -> void:
