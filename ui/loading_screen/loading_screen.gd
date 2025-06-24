@@ -50,7 +50,7 @@ func _update_loading_text() -> void:
 	dot_count = (dot_count + 1) % 4
 	loading_text.text = "Now Loading" + ".".repeat(dot_count)
 
-	get_tree().create_timer(0.3).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
+	get_tree().create_timer(0.2).timeout.connect(_update_loading_text, CONNECT_ONE_SHOT)
 
 
 func _load_background_textures() -> Array[CompressedTexture2D]:
