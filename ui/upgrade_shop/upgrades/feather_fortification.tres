@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://csigu3g8gqs65"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://csigu3g8gqs65"]
 
+[ext_resource type="Texture2D" uid="uid://clrj8renlv1b" path="res://ui/upgrade_shop/art/health_increase.png" id="1_oo2j7"]
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_yghjs"]
 
 [resource]
@@ -18,5 +19,6 @@ cost = 100
 currency_type = 0
 description = "The user’s feathers toughen, providing extra resilience and increasing [color=orange]Health[/color] by %s."
 short_description = ""
+icon = ExtResource("1_oo2j7")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

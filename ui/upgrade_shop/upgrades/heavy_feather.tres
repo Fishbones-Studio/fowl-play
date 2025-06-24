@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://3hev0w12a2b2"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://3hev0w12a2b2"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_5tno4"]
+[ext_resource type="Texture2D" uid="uid://ooxqps7ugn4j" path="res://ui/upgrade_shop/art/weight_increase.png" id="1_oyoqh"]
 
 [resource]
 script = ExtResource("1_5tno4")
@@ -18,5 +19,6 @@ cost = 100
 currency_type = 0
 description = "The user’s feathers grow dense and heavy, increasing [color=orange]Weight[/color] by %s."
 short_description = ""
+icon = ExtResource("1_oyoqh")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
