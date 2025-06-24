@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bn5egceyajnf6"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://bn5egceyajnf6"]
 
+[ext_resource type="Texture2D" uid="uid://b1ggeple3clh0" path="res://ui/upgrade_shop/art/stamina_increase.png" id="1_77lfk"]
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_xoy4j"]
 
 [resource]
@@ -18,5 +19,6 @@ cost = 200
 currency_type = 0
 description = "The user quietly focuses its mind and calms its spirit, increasing [color=orange]Stamina[/color] by %s and [color=orange]Attack[/color] by %s."
 short_description = ""
+icon = ExtResource("1_77lfk")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

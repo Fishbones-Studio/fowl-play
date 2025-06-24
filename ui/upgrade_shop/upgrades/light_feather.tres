@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bemb84fkpw1pp"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://bemb84fkpw1pp"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_5kktv"]
+[ext_resource type="Texture2D" uid="uid://c4mbprkq7bqf" path="res://ui/upgrade_shop/art/weight_reduction.png" id="1_luhse"]
 
 [resource]
 script = ExtResource("1_5kktv")
@@ -18,5 +19,6 @@ cost = 100
 currency_type = 0
 description = "The user’s feathers become light as a breeze, decreasing [color=orange]Weight[/color] by %s."
 short_description = ""
+icon = ExtResource("1_luhse")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"
