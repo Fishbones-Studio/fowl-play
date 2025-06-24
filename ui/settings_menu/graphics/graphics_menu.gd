@@ -10,6 +10,7 @@ extends Control
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
+	"1280X800 - HD SteamDeck" : Vector2i(1280, 800),
 	"1366x768 - HD": Vector2i(1366, 768),
 	"1600x900 - HD+": Vector2i(1600, 900),
 	"1920x1080 - Full HD": Vector2i(1920, 1080),
@@ -31,6 +32,7 @@ const FPS: Dictionary[String, int] = {
 	"30": 30,
 	"60": 60,
 	"120": 120,
+	"180": 180,
 	"240": 240,
 	"Unlimited": 0,
 }
@@ -295,7 +297,4 @@ func _on_restore_defaults_button_up() -> void:
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
 
-	resolution.visible = selected_mode not in [
-		DisplayServer.WINDOW_MODE_FULLSCREEN,
-		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
-	]
+	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_MINIMIZED

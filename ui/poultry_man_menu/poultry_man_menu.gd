@@ -10,6 +10,7 @@ var is_keyboard_navigation_active: bool = false
 var is_mouse_hovering: bool = false
 var focusable_items: Array[Focusable3D] = []
 var is_updating_focus: bool = false # Used to prevent focus loops
+var last_top_row_index: int = 1 # Default to a central item
 
 var menu_actions: Dictionary[StringName, UIEnums.UI] = {
 	&"Arenas": UIEnums.UI.ARENAS,
@@ -50,6 +51,9 @@ func _connect_input_signals() -> void:
 		return
 	input_handler.selection_moved.connect(_on_move_selection)
 	input_handler.current_item_selected.connect(_on_select_current_item)
+	# connections for the vertical navigation signals
+	input_handler.navigate_up_pressed.connect(_on_navigate_up)
+	input_handler.navigate_down_pressed.connect(_on_navigate_down)
 	input_handler.keyboard_navigation_activated.connect(
 		_on_keyboard_navigation_activated
 	)
@@ -64,6 +68,10 @@ func _set_initial_focus() -> void:
 	# Find the index of the default item (e.g., "Flyer")
 	var default_index: int = _find_item_index_by_name(default_focused_item_name)
 	current_index = max(0, default_index) # Fallback to 0 if not found
+	# Set the initial top row index if starting there
+	var arenas_index: int = _find_item_index_by_name(&"Arenas")
+	if current_index != arenas_index:
+		last_top_row_index = current_index
 	is_keyboard_navigation_active = true # Act as if keyboard nav is active for initial focus
 	highlight_current_item() # Highlight and grab focus of the initial item
 
@@ -151,11 +159,51 @@ func _on_move_selection(direction: int) -> void:
 	is_mouse_hovering = false
 	is_keyboard_navigation_active = true
 
+	#  only allow horizontal movement on the top row
+	var arenas_index: int = _find_item_index_by_name(&"Arenas")
+	if current_index == arenas_index:
+		return # Don't move left/right if on Arenas
+
 	# Calculate new index, wrapping around the array
 	current_index = wrapi(current_index + direction, 0, focusable_items.size())
 
+	# If we wrapped onto the Arenas item, skip it
+	if current_index == arenas_index:
+		current_index = wrapi(
+			current_index + direction, 0, focusable_items.size()
+		)
+
+	# Remember this position as the last one on the top row
+	last_top_row_index = current_index
+
 	# Highlight the newly selected item
 	highlight_current_item()
+
+
+# Handler for navigating UP
+func _on_navigate_up() -> void:
+	var arenas_index: int = _find_item_index_by_name(&"Arenas")
+	# Only act if we are currently on the Arenas item
+	if current_index == arenas_index:
+		is_mouse_hovering = false
+		is_keyboard_navigation_active = true
+		# Jump back to the last remembered item on the top row
+		current_index = last_top_row_index
+		highlight_current_item()
+
+
+# Handler for navigating DOWN
+func _on_navigate_down() -> void:
+	var arenas_index: int = _find_item_index_by_name(&"Arenas")
+	# Only act if we are NOT on the Arenas item
+	if current_index != arenas_index:
+		is_mouse_hovering = false
+		is_keyboard_navigation_active = true
+		# Before we jump, store our current position
+		last_top_row_index = current_index
+		# Jump to the Arenas item
+		current_index = arenas_index
+		highlight_current_item()
 
 
 func _on_select_current_item() -> void:
@@ -204,7 +252,8 @@ func _preload_items() -> void:
 	print("Adding UI menu items in poultry man menu...")
 	# For all menu_actions, call SignalManager.add_ui_scene
 	for scene_enum_value in menu_actions.values():
-		if scene_enum_value == UIEnums.UI.CHICKEN_SACRIFICE: continue # TODO: Crack
+		if scene_enum_value == UIEnums.UI.CHICKEN_SACRIFICE:
+			continue # TODO: Crack
 		SignalManager.add_ui_scene.emit(scene_enum_value, {}, false)
 	print("UI loaded for poultry man menu")
 
@@ -229,7 +278,8 @@ func highlight_current_item() -> void:
 	# Ensure current_index is valid before attempting to access focusable_items
 	if current_index < 0 or current_index >= focusable_items.size():
 		# This might happen if items are removed dynamically, adjust current_index
-		if focusable_items.is_empty(): return
+		if focusable_items.is_empty():
+			return
 		current_index = wrapi(current_index, 0, focusable_items.size())
 
 	is_updating_focus = true
