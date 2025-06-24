@@ -21,10 +21,12 @@ var controls_settings: Array[Dictionary] = []
 func _ready() -> void:
 	_load_controls_settings()
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		back_requested.emit()
 		UIManager.get_viewport().set_input_as_handled()
+
 
 func _load_controls_settings() -> void:
 	var config = ConfigFile.new()

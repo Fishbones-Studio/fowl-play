@@ -37,6 +37,7 @@ func _ready() -> void:
 
 	super()
 
+
 func _input(_event: InputEvent) -> void:
 	# Remove settings menu, and make pause focusable again, if conditions are true
 	if Input.is_action_just_pressed("pause"):
@@ -99,7 +100,8 @@ func _format_text(text: String) -> String:
 		result += character
 
 	return result
-	
+
+
 func _on_submenu_back_requested() -> void:
 	# Return focus to the sidebar
 	if focused_sidebar_item:

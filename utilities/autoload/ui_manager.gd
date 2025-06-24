@@ -41,8 +41,14 @@ func _ready() -> void:
 
 	# Initialize with main menu
 	_on_add_ui_scene(UIEnums.UI.MAIN_MENU)
-	
+
 	layer = 3
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		handle_pause()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") && _is_any_visible():
@@ -54,8 +60,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		_handle_ui_cancel_action()
-	elif Input.is_action_just_pressed("pause"):
-		handle_pause()
 
 
 ## Loads a game scene with a loading screen, then switches to HUD and target game scene
