@@ -317,6 +317,7 @@ func _update_resolution_visibility() -> void:
 		DisplayServer.WINDOW_MODE_FULLSCREEN,
 		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 	]
+	borderless.visible = resolution.visible
 
 
 func _setup_focus_navigation() -> void:
