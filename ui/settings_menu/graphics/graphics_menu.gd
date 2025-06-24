@@ -87,7 +87,7 @@ var graphics_settings: Dictionary = {}
 
 
 func _ready() -> void:
-	_load_graphics_items_only()
+	_load_graphics_items()
 
 
 func _input(event: InputEvent) -> void:
@@ -291,8 +291,8 @@ func _load_graphics_items() -> void:
 
 
 func _set_graphics_values() -> void:
-	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	display_mode.options.select(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
+	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	v_sync.options.select(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	fps.options.select(FPS.values().find(Engine.max_fps))
