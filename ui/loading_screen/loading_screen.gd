@@ -44,7 +44,7 @@ func _process(delta) -> void:
 
 
 func _update_loading_text() -> void:
-	if not visible: 
+	if not visible or not is_inside_tree():
 		return
 
 	dot_count = (dot_count + 1) % 4
@@ -74,7 +74,7 @@ func _load_background_textures() -> Array[CompressedTexture2D]:
 	return textures
 
 
-func _on_loading_started(_next_ui : UIEnums.UI, _next_ui_params : Dictionary) -> void:
+func _on_loading_started(_next_ui: UIEnums.UI, _next_ui_params: Dictionary) -> void:
 	next_ui = _next_ui
 	next_ui_params = _next_ui_params
 
