@@ -19,6 +19,9 @@ var focusable_items: Array[Focusable3D] = []
 var currently_focused_item: Focusable3D = null
 var last_top_row_index: int = 1 # Default to a central item
 
+# Variable to track the last non-mouse input device
+var last_nav_device: InputMode = InputMode.KEYBOARD
+
 var menu_actions: Dictionary[StringName, UIEnums.UI] = {
 	&"Arenas": UIEnums.UI.ARENAS,
 	&"EquipmentShop": UIEnums.UI.POULTRYMAN_SHOP,
@@ -34,6 +37,14 @@ func _ready() -> void:
 	_connect_input_signals()
 	_set_initial_focus()
 	_preload_items()
+
+
+# Use _input to track the last used device type
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		last_nav_device = InputMode.KEYBOARD
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		last_nav_device = InputMode.CONTROLLER
 
 
 func _initialize_focusable_items() -> void:
@@ -55,26 +66,29 @@ func _initialize_focusable_items() -> void:
 func _connect_input_signals() -> void:
 	if not input_handler:
 		return
-		
+
 	input_handler.selection_moved.connect(_on_move_selection)
 	input_handler.current_item_selected.connect(_on_select_current_item)
 	input_handler.navigate_up_pressed.connect(_on_navigate_up)
 	input_handler.navigate_down_pressed.connect(_on_navigate_down)
-	input_handler.keyboard_navigation_activated.connect(_on_keyboard_navigation_activated)
-	input_handler.keyboard_navigation_deactivated.connect(_on_keyboard_navigation_deactivated)
+	input_handler.keyboard_navigation_activated.connect(
+		_on_keyboard_navigation_activated
+	)
 
 
 func _set_initial_focus() -> void:
 	if focusable_items.is_empty():
 		return
-		
-	var default_index: int = _find_item_index_by_name(default_focused_item_name)
+
+	var default_index: int = _find_item_index_by_name(
+		default_focused_item_name
+	)
 	current_index = max(0, default_index)
-	
+
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")
 	if current_index != arenas_index:
 		last_top_row_index = current_index
-	
+
 	# Start in keyboard mode with initial focus
 	_switch_input_mode(InputMode.KEYBOARD)
 	_set_focus_to_index(current_index)
@@ -84,11 +98,11 @@ func _set_initial_focus() -> void:
 func _set_focus_to_item(item: Focusable3D) -> void:
 	if currently_focused_item == item:
 		return # Already focused
-		
+
 	# Unfocus current item
 	if currently_focused_item != null:
 		currently_focused_item.unfocus()
-	
+
 	# Focus new item
 	currently_focused_item = item
 	if item != null:
@@ -98,7 +112,7 @@ func _set_focus_to_item(item: Focusable3D) -> void:
 func _set_focus_to_index(index: int) -> void:
 	if index < 0 or index >= focusable_items.size():
 		return
-		
+
 	current_index = index
 	_set_focus_to_item(focusable_items[index])
 
@@ -113,12 +127,17 @@ func _clear_focus() -> void:
 func _switch_input_mode(new_mode: InputMode) -> void:
 	if current_input_mode == new_mode:
 		return
-		
-	var old_mode : InputMode = current_input_mode
+
+	var old_mode: InputMode = current_input_mode
 	current_input_mode = new_mode
-	
-	print("Input mode changed: ", InputMode.keys()[old_mode], " -> ", InputMode.keys()[new_mode])
-	
+
+	print(
+		"Input mode changed: ",
+		InputMode.keys()[old_mode],
+		" -> ",
+		InputMode.keys()[new_mode]
+	)
+
 	match new_mode:
 		InputMode.MOUSE:
 			# Mouse mode - focus is handled by mouse events
@@ -151,14 +170,19 @@ func _on_item_pressed(index: int) -> void:
 
 # Keyboard/Controller navigation
 func _on_move_selection(direction: int) -> void:
-	_switch_input_mode(InputMode.KEYBOARD) # Could be CONTROLLER based on input source
-	
+	# --- MODIFIED: Use the last detected navigation device ---
+	_switch_input_mode(last_nav_device)
+
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")
 	if current_index == arenas_index:
 		return # Don't move left/right if on Arenas
 
 	# Calculate new index, wrapping around the array
-	var new_index: int = wrapi(current_index + direction, 0, focusable_items.size())
+	var new_index: int = wrapi(
+		current_index + direction,
+		0,
+		focusable_items.size()
+	)
 
 	# If we wrapped onto the Arenas item, skip it
 	if new_index == arenas_index:
@@ -166,21 +190,23 @@ func _on_move_selection(direction: int) -> void:
 
 	# Remember this position as the last one on the top row
 	last_top_row_index = new_index
-	
+
 	_set_focus_to_index(new_index)
 
 
 func _on_navigate_up() -> void:
-	_switch_input_mode(InputMode.KEYBOARD)
-	
+	# --- MODIFIED: Use the last detected navigation device ---
+	_switch_input_mode(last_nav_device)
+
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")
 	if current_index == arenas_index:
 		_set_focus_to_index(last_top_row_index)
 
 
 func _on_navigate_down() -> void:
-	_switch_input_mode(InputMode.KEYBOARD)
-	
+	# Use the last detected navigation device
+	_switch_input_mode(last_nav_device)
+
 	var arenas_index: int = _find_item_index_by_name(&"Arenas")
 	if current_index != arenas_index:
 		last_top_row_index = current_index
@@ -188,22 +214,17 @@ func _on_navigate_down() -> void:
 
 
 func _on_keyboard_navigation_activated() -> void:
-	_switch_input_mode(InputMode.KEYBOARD)
-
-
-func _on_keyboard_navigation_deactivated() -> void:
-	# Only switch to NONE if we're not hovering with mouse
-	if current_input_mode != InputMode.MOUSE:
-		_switch_input_mode(InputMode.NONE)
+	# Use the last detected navigation device
+	_switch_input_mode(last_nav_device)
 
 
 func _on_select_current_item() -> void:
 	if not _is_valid_selection():
 		return
-		
+
 	var selected_item: Focusable3D = focusable_items[current_index]
 	var item_name: StringName = selected_item.name
-	
+
 	if item_name in menu_actions:
 		UIManager.toggle_ui(menu_actions[item_name])
 		UIManager.get_viewport().set_input_as_handled()
@@ -222,7 +243,9 @@ func _find_item_index_by_name(item_name: StringName) -> int:
 
 func _get_focusable_items() -> Array[Focusable3D]:
 	var items: Dictionary = {}
-	var group_nodes: Array[Node] = get_tree().get_nodes_in_group("focusable_items")
+	var group_nodes: Array[Node] = get_tree().get_nodes_in_group(
+		"focusable_items"
+	)
 
 	for node in group_nodes:
 		if node is Focusable3D and is_ancestor_of(node):
@@ -268,12 +291,12 @@ func _is_valid_selection() -> bool:
 	if focusable_items.is_empty():
 		printerr("Cannot select item, focusable_items list is empty!")
 		return false
-		
+
 	if current_index < 0 or current_index >= focusable_items.size():
 		printerr("Current index out of bounds: ", current_index)
 		current_index = 0
 		return not focusable_items.is_empty()
-		
+
 	return true
 
 
