@@ -314,10 +314,7 @@ func _on_restore_defaults_button_up() -> void:
 
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
-	resolution.visible = selected_mode not in [
-		DisplayServer.WINDOW_MODE_FULLSCREEN,
-		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
-	]
+	resolution.visible = selected_mode == DisplayServer.WINDOW_MODE_WINDOWED
 	borderless.visible = resolution.visible
 
 
