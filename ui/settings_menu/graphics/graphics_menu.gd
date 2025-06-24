@@ -7,9 +7,12 @@
 ################################################################################
 extends Control
 
+signal back_requested
+
 const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"1152x648 - HD": Vector2i(1152, 648),
 	"1280x720 - HD": Vector2i(1280, 720),
+	"1280x800 - HD SteamDeck": Vector2i(1280, 800),
 	"1366x768 - HD": Vector2i(1366, 768),
 	"1600x900 - HD+": Vector2i(1600, 900),
 	"1920x1080 - Full HD": Vector2i(1920, 1080),
@@ -17,10 +20,10 @@ const RESOLUTIONS: Dictionary[String, Vector2i] = {
 	"3840x2160 - 4K": Vector2i(3840, 2160),
 }
 const DISPLAY_MODES: Dictionary[String, DisplayServer.WindowMode] = {
-	"Windowed" : DisplayServer.WINDOW_MODE_WINDOWED,
-	"Maximized" : DisplayServer.WINDOW_MODE_MAXIMIZED,
-	"Fullscreen" : DisplayServer.WINDOW_MODE_FULLSCREEN,
-	"Exlusive Fullscreen" : DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	"Windowed": DisplayServer.WINDOW_MODE_WINDOWED,
+	"Maximized": DisplayServer.WINDOW_MODE_MAXIMIZED,
+	"Fullscreen": DisplayServer.WINDOW_MODE_FULLSCREEN,
+	"Exlusive Fullscreen": DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
 }
 const V_SYNC: Dictionary[String, DisplayServer.VSyncMode] = {
 	"Disabled": DisplayServer.VSYNC_DISABLED,
@@ -31,6 +34,7 @@ const FPS: Dictionary[String, int] = {
 	"30": 30,
 	"60": 60,
 	"120": 120,
+	"180": 180,
 	"240": 240,
 	"Unlimited": 0,
 }
@@ -76,16 +80,25 @@ var graphics_settings: Dictionary = {}
 @onready var render_scale: ContentItemDropdown = %RenderScale
 @onready var render_mode: ContentItemDropdown = %RenderMode
 @onready var post_processing_strength: ContentItemSlider = %PostProcessingStrength
-@onready var preload_shaders_materials : ContentItemCheckButton = %PreloadShadersMaterials
+@onready var preload_shaders_materials: ContentItemCheckButton = %PreloadShadersMaterials
+
+@onready var restore_defaults_button: RestoreDefaultsButton = %RestoreDefaultsButton
+@onready var content_container: VBoxContainer = %ContentContainer
 
 
 func _ready() -> void:
 	_load_graphics_items()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		back_requested.emit()
+		UIManager.get_viewport().set_input_as_handled()
+
+
 func _load_graphics_settings() -> void:
 	SettingsManager.load_settings(get_viewport(),get_window(), config_name)
-
+	get_tree().process_frame
 	_set_graphics_values()
 
 
@@ -100,17 +113,6 @@ func _save_graphics_settings() -> void:
 	SignalManager.graphics_settings_changed.emit()
 
 
-func _set_resolution(index: int) -> void:
-	var value: Vector2i = RESOLUTIONS.values()[index]
-	DisplayServer.window_set_size(value)
-	DisplayUtils.center_window(get_window())
-
-	resolution.options.selected = index
-	graphics_settings["resolution"] = value
-
-	_save_graphics_settings()
-
-
 func _set_display_mode(index: int) -> void:
 	var value: DisplayServer.WindowMode = DISPLAY_MODES.values()[index]
 	DisplayServer.window_set_mode(value)
@@ -119,6 +121,17 @@ func _set_display_mode(index: int) -> void:
 	graphics_settings["display_mode"] = value
 
 	_update_resolution_visibility()
+	_save_graphics_settings()
+
+
+func _set_resolution(index: int) -> void:
+	var value: Vector2i = RESOLUTIONS.values()[index]
+	DisplayServer.window_set_size(value)
+	DisplayUtils.center_window(get_window())
+
+	resolution.options.selected = index
+	graphics_settings["resolution"] = value
+
 	_save_graphics_settings()
 
 
@@ -199,6 +212,7 @@ func _set_taa(index: int) -> void:
 	_save_graphics_settings()
 
 
+## Render scale is a technique to render the scene at a lower resolution and upscale it to the display resolution.
 func _set_render_scale(index: int) -> void:
 	var value: float = RENDER_SCALE.values()[index]
 	get_viewport().scaling_3d_scale = value
@@ -209,6 +223,7 @@ func _set_render_scale(index: int) -> void:
 	_save_graphics_settings()
 
 
+## Slider for the post processing effect
 func _set_render_mode(index: int) -> void:
 	var value: Viewport.Scaling3DMode = RENDER_MODE.values()[index]
 	get_viewport().scaling_3d_mode = value
@@ -219,23 +234,25 @@ func _set_render_mode(index: int) -> void:
 	_save_graphics_settings()
 
 
-## Slider for the post processing effect
 func _on_post_processing_strength_slider_value_changed(value) -> void:
 	graphics_settings["pp_shader"] = value
 	_save_graphics_settings()
+
 
 func _set_preload_shaders(value: bool) -> void:
 	graphics_settings["preload_shaders"] = value
 	_save_graphics_settings()
 
-func _load_graphics_items() -> void:
-	resolution.options.clear()
-	for res_text in RESOLUTIONS:
-		resolution.options.add_item(res_text)
 
+# Separated loading items from setting up focus navigation
+func _load_graphics_items_only() -> void:
 	display_mode.options.clear()
 	for dis_text in DISPLAY_MODES:
 		display_mode.options.add_item(dis_text)
+
+	resolution.options.clear()
+	for res_text in RESOLUTIONS:
+		resolution.options.add_item(res_text)
 
 	v_sync.options.clear()
 	for v_text in V_SYNC:
@@ -262,15 +279,20 @@ func _load_graphics_items() -> void:
 		render_scale.options.add_item(scale_text)
 
 	render_mode.options.clear()
-	for scale_text in RENDER_MODE:
-		render_mode.options.add_item(scale_text)
+	for mode_text in RENDER_MODE:
+		render_mode.options.add_item(mode_text)
 
 	_load_graphics_settings()
 
 
+func _load_graphics_items() -> void:
+	_load_graphics_items_only()
+	_setup_focus_navigation()
+
+
 func _set_graphics_values() -> void:
-	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	display_mode.options.select(DISPLAY_MODES.values().find(DisplayServer.window_get_mode()))
+	resolution.options.select(max(RESOLUTIONS.values().find(DisplayServer.window_get_size()), 0))
 	borderless.set_pressed_no_signal(DisplayServer.window_get_flag(DisplayServer.WINDOW_FLAG_BORDERLESS))
 	v_sync.options.select(V_SYNC.values().find(DisplayServer.window_get_vsync_mode()))
 	fps.options.select(FPS.values().find(Engine.max_fps))
@@ -279,8 +301,7 @@ func _set_graphics_values() -> void:
 	taa.options.select(TAA.values().find(get_viewport().use_taa))
 	render_scale.options.select(RENDER_SCALE.values().find(max(snappedf(get_viewport().scaling_3d_scale, 0.01), 0.5)))
 	render_mode.options.select(RENDER_MODE.values().find(get_viewport().scaling_3d_mode))
-	var saved_step = SettingsManager.get_setting("graphics", "pp_shader", 2)
-	post_processing_strength.set_value(saved_step if saved_step != null else 2)
+	post_processing_strength.set_value(SettingsManager.get_setting("graphics", "pp_shader", 2))
 	preload_shaders_materials.set_pressed_no_signal(SettingsManager.get_setting("graphics", "preload_shaders", true))
 
 	_update_resolution_visibility()
@@ -288,14 +309,42 @@ func _set_graphics_values() -> void:
 
 func _on_restore_defaults_button_up() -> void:
 	SettingsManager.remove_setting_from_config(config_name)
-
 	_load_graphics_items()
 
 
 func _update_resolution_visibility() -> void:
 	var selected_mode: DisplayServer.WindowMode = DISPLAY_MODES.values()[display_mode.options.selected]
-
 	resolution.visible = selected_mode not in [
 		DisplayServer.WINDOW_MODE_FULLSCREEN,
 		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 	]
+	borderless.visible = resolution.visible
+
+
+func _setup_focus_navigation() -> void:
+	# Collect only visible Control nodes in the content container
+	var nodes: Array = []
+
+	for child in content_container.get_children():
+		if child is Control and child.is_visible_in_tree():
+			nodes.append(child)
+
+	# Append the restore button only if it's visible
+	if restore_defaults_button.is_visible_in_tree():
+		nodes.append(restore_defaults_button)
+
+	var count: int = nodes.size()
+	if count == 0:
+		return
+
+	# Wire up top/bottom neighbors and next/previous in a circular list
+	for i in range(count):
+		var ctrl: Control = nodes[i]
+		var prev: Control = nodes[(i - 1 + count) % count]
+		var next: Control = nodes[(i + 1) % count]
+
+		ctrl.focus_neighbor_top = prev.get_path()
+		ctrl.focus_neighbor_bottom = next.get_path()
+		ctrl.focus_next = next.get_path()
+		ctrl.focus_previous = prev.get_path()
+		ctrl.focus_mode = Control.FOCUS_ALL

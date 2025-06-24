@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeResource" load_steps=2 format=3 uid="uid://bsa5rpr5w33dp"]
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://bsa5rpr5w33dp"]
 
 [ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="1_7g2vd"]
+[ext_resource type="Texture2D" uid="uid://c361ap5d02fsk" path="res://ui/upgrade_shop/art/attack_increase.png" id="1_crdq1"]
 
 [resource]
 script = ExtResource("1_7g2vd")
@@ -18,5 +19,6 @@ cost = 100
 currency_type = 0
 description = "The user’s beak grows stronger and more powerful, increasing [color=orange]Attack[/color] by %s."
 short_description = ""
+icon = ExtResource("1_crdq1")
 model_uid = ""
 metadata/_custom_type_script = "uid://dr34raogtpfqd"

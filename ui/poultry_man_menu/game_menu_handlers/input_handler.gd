@@ -3,12 +3,17 @@ extends Node
 
 signal selection_moved(direction: int)
 signal current_item_selected()
+# signals for vertical navigation
+signal navigate_up_pressed()
+signal navigate_down_pressed()
 signal keyboard_navigation_activated()
 signal keyboard_navigation_deactivated()
 
 const STICK_THRESHOLD: float = 0.5
 const STICK_COOLDOWN_TIME: float = 0.3
 const HORIZONTAL_AXIS: int = 0
+# the vertical axis for the controller stick
+const VERTICAL_AXIS: int = 1
 
 # controller checks, timers
 var is_controller_connected: bool = false
@@ -20,14 +25,14 @@ var directional_actions: Array[StringName] = [
 	&"ui_left",
 	&"ui_right",
 	&"joypad_button_left",
-	&"joypad_button_right"
+	&"joypad_button_right",
 ]
 
 var action_directions: Dictionary[StringName, int] = {
 	&"ui_left": 1,
 	&"ui_right": -1,
 	&"joypad_button_left": 1,
-	&"joypad_button_right": -1
+	&"joypad_button_right": -1,
 }
 
 
@@ -63,6 +68,11 @@ func _handle_input_event(event: InputEvent) -> void:
 	elif _is_directional_action_pressed(event):
 		var direction: int = _get_direction_from_event(event)
 		_handle_directional_input(direction)
+	# Checks for ui_up and ui_down
+	elif event.is_action_pressed(&"ui_up"):
+		_handle_vertical_input(true) # true for up
+	elif event.is_action_pressed(&"ui_down"):
+		_handle_vertical_input(false) # false for down
 	elif event.is_action_pressed(&"ui_accept"):
 		_handle_accept_input()
 
@@ -73,16 +83,17 @@ func _handle_mouse_motion() -> void:
 
 
 func _handle_joypad_motion(event: InputEventJoypadMotion) -> void:
-	if not _is_horizontal_stick_input(event):
+	# handle both horizontal and vertical stick movement
+	if not can_move_with_stick or abs(event.axis_value) < STICK_THRESHOLD:
 		return
 
-	if can_move_with_stick and abs(event.axis_value) > STICK_THRESHOLD:
+	if event.axis == HORIZONTAL_AXIS:
 		var direction: int = -sign(event.axis_value)
 		_handle_controller_navigation(direction)
-
-
-func _is_horizontal_stick_input(event: InputEventJoypadMotion) -> bool:
-	return event.axis == HORIZONTAL_AXIS
+	elif event.axis == VERTICAL_AXIS:
+		var is_up: bool = event.axis_value < 0
+		_handle_vertical_input(is_up)
+		_start_stick_cooldown()
 
 
 func _handle_controller_navigation(direction: int) -> void:
@@ -112,6 +123,17 @@ func _handle_directional_input(direction: int) -> void:
 	_activate_controller_usage()
 	_activate_keyboard_navigation()
 	_emit_selection_moved(direction)
+
+
+# function to handle vertical input
+func _handle_vertical_input(is_up: bool) -> void:
+	_set_mouse_mode_hidden()
+	_activate_controller_usage()
+	_activate_keyboard_navigation()
+	if is_up:
+		navigate_up_pressed.emit()
+	else:
+		navigate_down_pressed.emit()
 
 
 func _handle_accept_input() -> void:

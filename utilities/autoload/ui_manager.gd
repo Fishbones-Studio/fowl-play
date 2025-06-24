@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	# Initialize with main menu
 	_on_add_ui_scene(UIEnums.UI.MAIN_MENU)
-	
+
 	layer = 3
 
 

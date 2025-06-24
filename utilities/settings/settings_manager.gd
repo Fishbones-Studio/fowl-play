@@ -108,7 +108,7 @@ static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, w
 
 
 ## Method to get a specific setting from the config file
-static func get_setting(section: String, key: String, default : Variant) -> Variant:
+static func get_setting(section: String, key: String, default: Variant) -> Variant:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(SETTINGS_CONFIG_PATH) == OK and config.has_section(section):
 		return config.get_value(section, key, default)

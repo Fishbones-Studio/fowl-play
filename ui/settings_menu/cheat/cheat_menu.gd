@@ -6,6 +6,8 @@
 ################################################################################
 extends Control
 
+signal back_requested
+
 enum ToggleCheats{
 	INFINITE_HEALTH,
 	INFINITE_DAMAGE
@@ -35,6 +37,12 @@ func _ready() -> void:
 	# Create Checkboxes
 	_create_cheat_toggle(ToggleCheats.INFINITE_HEALTH,  GameManager.infinite_health)
 	_create_cheat_toggle(ToggleCheats.INFINITE_DAMAGE, GameManager.infinite_damage)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		back_requested.emit()
+		UIManager.get_viewport().set_input_as_handled()
 
 
 func _create_cheat_field(
