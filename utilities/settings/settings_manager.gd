@@ -75,11 +75,12 @@ static func load_settings(viewport: Viewport, window: Window, item: String = "")
 					AudioServer.set_bus_volume_db(bus_idx, volume_db)
 				else:
 					push_warning("Audio bus '%s' not found." % audio_bus_name)
-					
+
+
 static func ensure_default_settings_saved() -> void:
-	var config := ConfigFile.new()
-	var err := config.load(SETTINGS_CONFIG_PATH)
-	var is_empty := err != OK or config.get_sections().is_empty()
+	var config: ConfigFile= ConfigFile.new()
+	var err: Error = config.load(SETTINGS_CONFIG_PATH)
+	var is_empty: bool = err != OK or config.get_sections().is_empty()
 	if not is_empty:
 		return
 
