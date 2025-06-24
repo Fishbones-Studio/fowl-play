@@ -6,7 +6,7 @@
 script = ExtResource("1_ubm2d")
 default_settings = {
 "borderless": false,
-"display_mode": 2,
+"display_mode": 4,
 "fps": 0,
 "fxaa": 0,
 "msaa": 0,

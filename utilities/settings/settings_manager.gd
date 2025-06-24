@@ -23,6 +23,7 @@ static var action_to_remap: String = ""
 ## Load all saved settings from the user's configuration file.
 static func load_settings(viewport: Viewport, window: Window, item: String = "") -> void:
 	var config: ConfigFile = ConfigFile.new()
+	ensure_default_settings_saved()
 
 	# Attempt to load config file - if failed, use defaults for requested section
 	if config.load(SETTINGS_CONFIG_PATH) != OK:
@@ -74,6 +75,32 @@ static func load_settings(viewport: Viewport, window: Window, item: String = "")
 					AudioServer.set_bus_volume_db(bus_idx, volume_db)
 				else:
 					push_warning("Audio bus '%s' not found." % audio_bus_name)
+
+
+static func ensure_default_settings_saved() -> void:
+	var config: ConfigFile= ConfigFile.new()
+	var err: Error = config.load(SETTINGS_CONFIG_PATH)
+	var is_empty: bool = err != OK or config.get_sections().is_empty()
+	if not is_empty:
+		return
+
+	# Graphics defaults
+	if DEFAULT_GRAPHICS_SETTINGS:
+		for key in DEFAULT_GRAPHICS_SETTINGS.default_settings.keys():
+			config.set_value(
+				SETTINGS_CFG_NAME_GRAPHICS,
+				key,
+				DEFAULT_GRAPHICS_SETTINGS.default_settings[key]
+			)
+	else:
+		push_error("Default graphics settings resource not loaded.")
+
+	# Audio defaults
+	config.set_value(SETTINGS_CFG_NAME_AUDIO, "Master", 100.0)
+	config.set_value(SETTINGS_CFG_NAME_AUDIO, "Music", 100.0)
+	config.set_value(SETTINGS_CFG_NAME_AUDIO, "SFX",   100.0)
+
+	config.save(SETTINGS_CONFIG_PATH)
 
 
 static func _apply_graphics_settings(settings: Dictionary, viewport: Viewport, window: Window) -> void:
