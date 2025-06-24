@@ -6,6 +6,8 @@
 ################################################################################
 extends Control
 
+signal back_requested
+
 const MAX_INPUT_COUNT: int = 5
 
 var config_path: String = "user://settings.cfg" ## path to the config file, on windows saved at C:\Users\<user>\AppData\Roaming\Godot\app_userdata\fowl-play\keybinds.cfg
@@ -85,6 +87,9 @@ func _input(event: InputEvent) -> void:
 
 		if Input.is_action_just_pressed("ui_accept"):
 			_activate_focused_button()
+		elif event.is_action_pressed("ui_cancel"):
+			back_requested.emit()
+			UIManager.get_viewport().set_input_as_handled()
 
 
 func _save_input_settings() -> void:

@@ -14,11 +14,13 @@ var _loading_params: Dictionary = {}
 @onready var shader : PostProcess = $Shader
 @onready var subviewport : LayerSubViewPort = %LayerViewPort
 
+
 func _ready() -> void:
 	SignalManager.switch_game_scene.connect(_on_switch_game_scene)
 	SignalManager.remove_all_game_scenes.connect(_remove_all_game_scenes)
 	# Disable processing by default, enable only when loading
 	set_process(false)
+
 
 # This function runs every frame, but only when set_process(true) is called. We use it to check the status of the background loading.
 func _process(_delta: float) -> void:
@@ -77,6 +79,7 @@ func _process(_delta: float) -> void:
 			_loading_scene_path = ""
 			_loading_params = {}  # Clear params on failure
 			set_process(false)
+
 
 func _on_switch_game_scene(scene_enum: SceneEnums.Scenes, params: Dictionary) -> void:
 	# If already loading something, the new request will overwrite the old one's tracking.
@@ -138,7 +141,7 @@ func _instantiate_and_add_scene(
 	if resource is PackedScene:
 		var new_scene: Node = resource.instantiate()
 		add_child(new_scene)
-		
+
 		# Pass parameters to scene using 'setup' method
 		if not _loading_params.is_empty():
 			if new_scene.has_method("setup"):
@@ -161,11 +164,14 @@ func _instantiate_and_add_scene(
 		)
 		_loading_params = {}  # Clear params on error
 
+
 func _remove_all_game_scenes() -> void:
 	for child in get_children():
 		if child is PostProcess or child is CanvasLayer : continue
 		child.queue_free()
+
 	set_process(false)
 	subviewport.active_camera = null
+
 	# Clear any pending parameters when removing all scenes
 	_loading_params = {}

@@ -76,7 +76,7 @@ func focus() -> void:
 				null,
 				item,
 				Vector3(object_scales[item] * highlight_scale_factor),
-				0.2,
+				0.1,
 				TweenManager.DEFAULT_TRANSITION,
 				Tween.EASE_OUT
 			)
