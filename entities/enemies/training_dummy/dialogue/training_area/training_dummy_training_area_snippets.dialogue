@@ -45,7 +45,6 @@ Training Dummy: What else is on your mind?
 - I have another question. => explain_initial_questions
 - I've heard enough. => END
 
-
 ~ explain_the_operators_detailed
 Training Dummy: The Poultry Men are a varied group, from different backgrounds, but united by their ambition and willingness to operate outside conventional laws. Each may have their own territory, their own methods for 'training' and 'enhancing' their fighters. They are shrewd, often ruthless, and deeply embedded in this underground economy. They are the visible hand that guides you towards the arena.
 => explain_overall_purpose 
