@@ -1,20 +1,22 @@
 extends Focusable3D
 
-@onready var animation_player: AnimationPlayer = %SawAnimationPlayer
-@onready var saw_sound_player: AudioStreamPlayer3D = $SawSoundPlayer
-
-const ANIM_NAME := "Grind"
-const FADE_IN_TIME := 0.25 # seconds
-const FADE_OUT_TIME := 0.5 # seconds
+const ANIM_NAME: StringName= &"Grind"
+const FADE_IN_TIME: float = 0.25 # seconds
+const FADE_OUT_TIME: float = 0.5 # seconds
 
 var fade_tween: Tween = null
 var is_animation_playing: bool = false
+
+@onready var animation_player: AnimationPlayer = %SawAnimationPlayer
+@onready var saw_sound_player: AudioStreamPlayer3D = $SawSoundPlayer
+
 
 func _ready() -> void:
 	super()
 	saw_sound_player.stream.loop = true
 	saw_sound_player.volume_db = -80 # Start muted
 	animation_player.speed_scale = 0.0 # Start paused
+
 
 func focus() -> void:
 	super()
@@ -32,6 +34,7 @@ func focus() -> void:
 	fade_tween.tween_property(saw_sound_player, "volume_db", 0, FADE_IN_TIME)
 	fade_tween.tween_property(animation_player, "speed_scale", 1.0, FADE_IN_TIME)
 
+
 func unfocus() -> void:
 	super()
 	# Stop any running tween
@@ -43,6 +46,7 @@ func unfocus() -> void:
 	fade_tween.tween_property(saw_sound_player, "volume_db", -80, FADE_OUT_TIME)
 	fade_tween.tween_property(animation_player, "speed_scale", 0.0, FADE_OUT_TIME)
 	fade_tween.tween_callback(Callable(self, "_on_fade_out_complete"))
+
 
 func _on_fade_out_complete() -> void:
 	saw_sound_player.stop()
