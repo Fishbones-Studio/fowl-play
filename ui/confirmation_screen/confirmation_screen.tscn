@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://7atjxrx8a47x"]
+[gd_scene load_steps=5 format=3 uid="uid://7atjxrx8a47x"]
 
 [ext_resource type="Script" uid="uid://d0pruh8tcyysg" path="res://ui/confirmation_screen/confirmation_screen.gd" id="1_aev1a"]
 [ext_resource type="Shader" uid="uid://du66ruvwxrmji" path="res://ui/pause_menu/shaders/color_rect_bg_blur.gdshader" id="1_waiyw"]
+[ext_resource type="Script" uid="uid://dlven4erreb1j" path="res://ui/buttons/custom_button.gd" id="3_sdgtp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aev1a"]
 shader = ExtResource("1_waiyw")
@@ -103,6 +104,7 @@ layout_mode = 2
 focus_neighbor_right = NodePath("../ConfirmButton")
 theme_type_variation = &"ConfirmationButton"
 text = "Cancel"
+script = ExtResource("3_sdgtp")
 
 [node name="ConfirmButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -111,6 +113,7 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../CancelButton")
 theme_type_variation = &"ConfirmationButton"
 text = "Confirm"
+script = ExtResource("3_sdgtp")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/CancelButton" to="." method="on_cancel_button_pressed"]

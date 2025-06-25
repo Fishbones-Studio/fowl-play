@@ -15,8 +15,6 @@ var _dash_direction: Vector3
 
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
-	
-
 	_stamina_cost = movement_component.dash_stamina_cost
 
 	# Handle state transitions
@@ -26,7 +24,6 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		return
 
 	super(prev_state)
-	
 	player.stats.drain_stamina(_stamina_cost)
 
 	movement_component.dash_available = false

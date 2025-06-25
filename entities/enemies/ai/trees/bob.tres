@@ -39,8 +39,8 @@ damage_threshold_in_percentage = 10.0
 time_span = 10.0
 
 [sub_resource type="BBNode" id="BBNode_4q5wn"]
-saved_value = NodePath("Model/chicken_centipede/AnimationPlayer")
-resource_name = "Model/chicken_centipede/AnimationPlayer"
+saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
+resource_name = "Model/ball_chicken/AnimationPlayer"
 
 [sub_resource type="BTPlayAnimation" id="BTPlayAnimation_atlog"]
 animation_player = SubResource("BBNode_4q5wn")
