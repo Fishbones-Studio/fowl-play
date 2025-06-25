@@ -393,7 +393,6 @@ shape = SubResource("BoxShape3D_c5q5f")
 [node name="StaticBody3D" type="StaticBody3D" parent="flying_arena/Cylinder" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="flying_arena/Cylinder/StaticBody3D"]
-visible = false
 shape = SubResource("ConcavePolygonShape3D_7d67g")
 
 [node name="CeilingCollisionShape" type="CollisionShape3D" parent="."]
