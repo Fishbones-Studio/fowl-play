@@ -12,9 +12,6 @@ func _ready() -> void:
 	if cancel_button:
 		cancel_button.grab_focus()
 
-	cancel_button.pivot_offset = cancel_button.size / 2
-	confirm_button.pivot_offset = confirm_button.size / 2
-
 
 func _input(_event: InputEvent) -> void:
 	if (Input.is_action_just_pressed("pause") \
