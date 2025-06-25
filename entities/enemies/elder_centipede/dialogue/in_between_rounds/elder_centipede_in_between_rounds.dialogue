@@ -1,10 +1,10 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
 	Elder Centipede: [[Your scent is familiar.|You’ve faced the [color=red]"Great" Elder Centipede[/color] before.|Do you really want to be humiliated again?]]
-	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake] |Your bones will join the others beneath my legs.|This time, I’ll make sure you don’t crawl away.]]
+	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence[/shake].|Your bones will join the others beneath my legs.|This time, I’ll make sure you don’t crawl away.]]
 else:
 	Elder Centipede: [[Oh? Fresh meat has appeared.|Another fool dares to challenge me.|Weakling.]]
-	Elder Centipede: [[Consider yourself "lucky", as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY!|You won’t leave this arena intact. Feel honored, weakling.|I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST![/shake]]]
+	Elder Centipede: [[Consider yourself "lucky", as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY!|You won’t leave this arena intact. Feel honored, weakling.|I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST[/shake]!]]
 - Attack => END
 - Talk => standard_dialogue
 
