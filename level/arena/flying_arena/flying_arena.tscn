@@ -405,6 +405,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 45, 0)
 volume_db = -12.0
 unit_size = 400.0
 max_db = 2.0
+pause_eq_enabled = true
 audio_folder = "res://level/arena/sewer_arena/music"
 
 [editable path="flying_arena"]

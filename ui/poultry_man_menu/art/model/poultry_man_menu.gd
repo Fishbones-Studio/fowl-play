@@ -1,9 +1,7 @@
 extends Node3D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
+@onready var saw_animation_player: AnimationPlayer = %LampAnimationPlayer
 
 
 func _ready() -> void:
-	animation_player.play("Swing")
-	animation_player_2.play("Grind")
+	saw_animation_player.play("Swing")

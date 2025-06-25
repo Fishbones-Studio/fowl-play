@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://21r458rvciqo"]
+[gd_scene load_steps=51 format=3 uid="uid://21r458rvciqo"]
 
 [ext_resource type="Script" uid="uid://c8375hpeiji3m" path="res://ui/poultry_man_menu/poultry_man_menu.gd" id="1_jhi5u"]
 [ext_resource type="AudioStream" uid="uid://u8ngk4gdx4uw" path="res://ui/poultry_man_menu/art/wind_main.mp3" id="2_bfy7c"]
@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://dmviygh54a6ly" path="res://ui/poultry_man_menu/art/model/arm/poultry_man_arm_right.glb" id="19_7e3wk"]
 [ext_resource type="AudioStream" uid="uid://c1ycybicii0om" path="res://ui/poultry_man_menu/sound/left-arm.ogg" id="19_n3git"]
 [ext_resource type="AudioStream" uid="uid://dllryj41gagph" path="res://ui/poultry_man_menu/sound/right-arm.ogg" id="20_3pnaw"]
+[ext_resource type="Script" uid="uid://de5q5vq0l1wly" path="res://ui/poultry_man_menu/sacrifice.gd" id="24_ki07v"]
+[ext_resource type="AudioStream" uid="uid://so531km3puqc" path="res://level/arena/props/hazards/saws/sounds/circular_saw.ogg" id="25_iaclp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qvty8"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -146,6 +148,8 @@ _data = {
 &"Idle_2": SubResource("Animation_3pnaw")
 }
 
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_7e3wk"]
+
 [sub_resource type="Animation" id="Animation_7e3wk"]
 resource_name = "Idle_1"
 length = 5.0
@@ -254,6 +258,8 @@ _data = {
 &"Idle_1": SubResource("Animation_7e3wk"),
 &"Idle_2": SubResource("Animation_ki07v")
 }
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ki07v"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c6cgu"]
 points = PackedVector3Array(-0.967689, 0.4143, -1.82565, 0.395357, 0.9859, 0.988379, 0.367832, 0.4143, 0.931552, -0.995214, 0.9859, 0.988379, 0.395357, 0.9859, -1.88248, -0.995214, 0.9859, -1.88248, 0.367832, 0.4143, -1.82565, -0.967689, 0.4143, 0.931552)
@@ -369,7 +375,7 @@ script = ExtResource("11_qvty8")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
 [node name="GrinderBlade" parent="Model" index="6"]
-transform = Transform3D(-0.718156, 2.04904, -0.00900463, 1.95494e-07, -0.00954157, -2.17125, -2.04907, -0.718145, 0.00315573, -3.98633, 5.65492, -13.5797)
+transform = Transform3D(-1.05237, 1.89917, -0.00834605, 1.94807e-07, -0.00954156, -2.17125, -1.8992, -1.05236, 0.00462445, -3.98633, 5.65492, -13.5797)
 
 [node name="chicken_default" parent="Model/Cage" index="0" instance=ExtResource("15_c6cgu")]
 transform = Transform3D(0.00326291, -0.144718, 0.397023, -0.0990172, 4.25722, 1.55261, -0.422475, -0.00979091, -9.6777e-05, -0.0996747, 8.56139, -0.0486827)
@@ -424,12 +430,14 @@ font_size = 200
 script = ExtResource("11_qvty8")
 metadata/_custom_type_script = "uid://di546rbu7b42s"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
+[node name="LampAnimationPlayer" type="AnimationPlayer" parent="Model"]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_78wky")
 }
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Model"]
+[node name="SawAnimationPlayer" type="AnimationPlayer" parent="Model"]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_28ypn")
 }
@@ -476,7 +484,7 @@ autoplay = "Idle_2"
 
 [node name="FingerTapLeft" type="AudioStreamPlayer3D" parent="Arms/poultry_man_arm_left"]
 transform = Transform3D(1.66667, -1.04308e-07, -5.96046e-08, 1.49012e-08, 1.66667, 4.84288e-08, 2.98023e-08, -2.23517e-08, 1.66667, -9.524, -0.146149, 0.805871)
-stream = ExtResource("19_n3git")
+stream = SubResource("AudioStreamPolyphonic_7e3wk")
 volume_db = -15.0
 bus = &"SFX"
 
@@ -504,7 +512,7 @@ autoplay = "Idle_1"
 
 [node name="FingerTapRight" type="AudioStreamPlayer3D" parent="Arms/poultry_man_arm_right"]
 transform = Transform3D(1.66667, -4.47035e-08, -1.3113e-06, -1.49012e-08, 1.66667, -2.42144e-08, 1.19209e-07, 3.72529e-09, 1.66667, -11, 0, 0.499999)
-stream = ExtResource("20_3pnaw")
+stream = SubResource("AudioStreamPolyphonic_ki07v")
 volume_db = -20.0
 bus = &"SFX"
 
@@ -582,7 +590,7 @@ shape = SubResource("BoxShape3D_qvty8")
 
 [node name="Sacrifice" type="StaticBody3D" parent="MenuItems" node_paths=PackedStringArray("focusable_objects", "label")]
 transform = Transform3D(-1.82267, 0, -0.748354, 0, 1.97032, 0, 0.748354, 0, -1.82267, 13.2331, -0.63457, -3.45688)
-script = ExtResource("6_dqtu2")
+script = ExtResource("24_ki07v")
 focusable_objects = [NodePath("../../Model/GrinderBlade"), NodePath("../../Model/Grinder")]
 label = NodePath("../../Model/Grinder/SacrificeLabel")
 highlight_color = Color(1, 1, 0, 1)
@@ -592,6 +600,10 @@ index = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MenuItems/Sacrifice"]
 transform = Transform3D(1.1, 0, 1.49012e-07, 0, 1.1, 0, -1.49012e-07, 0, 1.1, 0.0469136, 0.113227, 0.0192618)
 shape = SubResource("ConvexPolygonShape3D_28ypn")
+
+[node name="SawSoundPlayer" type="AudioStreamPlayer3D" parent="MenuItems/Sacrifice"]
+transform = Transform3D(0.507532, 0, 0, 0, 0.507532, 0, 0, 0, 0.507532, -0.5, 3.9, 0)
+stream = ExtResource("25_iaclp")
 
 [node name="Arenas" type="StaticBody3D" parent="MenuItems" node_paths=PackedStringArray("focusable_objects", "label")]
 transform = Transform3D(0.710821, -0.0311728, 0.966314, 0.354008, 1.12447, -0.224133, -0.899673, 0.417834, 0.675279, 2.70725, 1.88347, 2.81235)
