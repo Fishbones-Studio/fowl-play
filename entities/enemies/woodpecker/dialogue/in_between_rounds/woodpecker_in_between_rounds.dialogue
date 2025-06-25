@@ -10,11 +10,11 @@ else:
 
 ~ standard_dialogue
 - What are you?
-	Woodpecker: [[A question of identity. Practical, here.|I was once smaller. Simpler. Not this.|Now? I’m [color=red]forced evolution[/color]. A warning, not a triumph.]]
+	Woodpecker: [[A question of identity. Practical, here.|I was once smaller. Simpler. Not this.|Now? I’m forced evolution. A warning, not a triumph.]]
 	Woodpecker: [[They wanted power. They got me. My mind survived, ironically.|I remember everything, trapped in this shell.|A thinking mind, bound by instinct and this beak.]]
 	=> discuss_mutation
 - You're hideously mutated.
-	Woodpecker: [[Blunt, but true.|Hideous? By some standards. But all life mutates.|The real change is [color=red]inside[/color].]]
+	Woodpecker: [[Blunt, but true.|Hideous? By some standards. But all life mutates.|The real change is inside.]]
 	Woodpecker: [[This form has its uses, though the cost is high.|You think I chose this? To become... this?|Look closer. There’s more than ugliness here.]]
 	=> discuss_mutation
 - I'm here to fight.
@@ -23,9 +23,9 @@ else:
 	=> proceed_to_fight
 
 ~ discuss_mutation
-Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wavelengths you can’t imagine. [color=blue]Unsettling, aren’t they?[/color]|The pain is constant. A low hum under every thought.]]
+Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wavelengths you can’t imagine. Unsettling, aren’t they?|The pain is constant. A low hum under every thought.]]
 - Who did this to you?
-	Woodpecker: [[The architects of this arena. The ones above.|They tried to weaponize nature. They succeeded, in a way.|I am their [color=red]masterpiece[/color]—and their mistake.]]
+	Woodpecker: [[The architects of this arena. The ones above.|They tried to weaponize nature. They succeeded, in a way.|I am their masterpiece—and their mistake.]]
 	Woodpecker: [[They underestimated the mind’s resilience.|They thought they could make a tool.|But I remember. And I resent.]]
 	=> continue_discussion
 - Is there any way to reverse it?
@@ -33,7 +33,7 @@ Woodpecker: [[This beak was once for food. Now, it’s a weapon.|My eyes see wav
 	Woodpecker: [[My only hope is an end to this, or to master this power.|Control is difficult, with these urges.|It’s a challenge, even for me.]]
 	=> continue_discussion
 - What kind of advantages does this give you?
-	Woodpecker: [[I’m more durable. My body is tough.|Stronger, able to strike with force.|My senses are [color=blue]overwhelming[/color], but useful.]]
+	Woodpecker: [[I’m more durable. My body is tough.|Stronger, able to strike with force.|My senses are overwhelming, but useful.]]
 	Woodpecker: [[I see weaknesses you try to hide. I can predict your moves.|Grotesque, yes, but efficient.|Not beautiful—just effective.]]
 	=> continue_discussion
 

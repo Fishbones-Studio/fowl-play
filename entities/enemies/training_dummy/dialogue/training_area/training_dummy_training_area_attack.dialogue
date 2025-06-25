@@ -5,7 +5,7 @@ Training Dummy: Ah, you've returned! Are you here to test the satisfying [i]thwa
 
 ~ starting_options
 - What am I doing here? 
-	Training Dummy: Okay I'll explain. But only if you hit me afterwards.
+	Training Dummy: Okay I'll explain. But only if you hit me afterwards. *winks*
 	=>< snippets/explain_game_story_intro
 	=> starting_options
 - I have some questions about combat. => ask_combat
