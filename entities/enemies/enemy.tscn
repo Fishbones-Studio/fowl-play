@@ -106,11 +106,11 @@ one_shot = true
 
 [node name="StateAudioPlayer" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
+unit_size = 35.0
 bus = &"SFX"
 
 [node name="IntervalAudioPlayer" parent="." instance=ExtResource("10_sb13e")]
 unique_name_in_owner = true
-bus = &"SFX"
 sounds_folder = ""
 min_random_distance = 0.0
 max_random_distance = 0.0

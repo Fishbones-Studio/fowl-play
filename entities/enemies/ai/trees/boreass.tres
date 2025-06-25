@@ -76,7 +76,7 @@ file_to_play = "uid://ec8u4kiec2x8"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = -8.0
+audio_volume = -15.0
 
 [sub_resource type="BTParallel" id="BTParallel_vs2s8"]
 children = [SubResource("BTPlayAnimation_wrjj1"), SubResource("BTAction_mjbxb")]

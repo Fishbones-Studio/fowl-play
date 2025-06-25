@@ -1,8 +1,9 @@
 class_name BasePlayerMovementState
 extends BaseState
 
+@export_group("State Config")
 @export var state_type: PlayerEnums.PlayerStates
-@export_group("Audio")
+@export_group("State Audio")
 @export var state_audio_file: AudioStream
 @export var state_audio_player: AudioStreamPlayer3D
 @export var loop_audio: bool = false
@@ -21,11 +22,7 @@ func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 	previous_state = prev_state
 	if state_audio_player and state_audio_file:
 		# Set looping based on the variable
-		if state_audio_file is AudioStreamWAV:
-			state_audio_file.loop = loop_audio
-		elif state_audio_file is AudioStreamMP3:
-			state_audio_file.loop = loop_audio
-		elif state_audio_file is AudioStreamOggVorbis:
+		if state_audio_file is AudioStreamWAV or AudioStreamMP3 or AudioStreamOggVorbis:
 			state_audio_file.loop = loop_audio
 		# Set decibel volume
 		state_audio_player.volume_db = state_audio_db
