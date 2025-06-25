@@ -1,15 +1,15 @@
 ~ start
 if SaveManager.get_enemy_encounter_count("elder_centipede") > 0:
-	Elder Centipede: [[Your scent is familiar.|You’ve faced the [color=red]“Great” Elder Centipede[/color] before. |Do you really want to be humiliated again?]]
-	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake] |Your bones will join the others beneath my legs. |This time, I’ll make sure you don’t crawl away.]]
+	Elder Centipede: [[Your scent is familiar.|You’ve faced the [color=red]"Great" Elder Centipede[/color] before.|Do you really want to be humiliated again?]]
+	Elder Centipede: [[I will... [shake rate=15 level=8]ERASE your existence.[/shake] |Your bones will join the others beneath my legs.|This time, I’ll make sure you don’t crawl away.]]
 else:
-	Elder Centipede: [[Oh? Fresh meat has appeared. |Another fool dares to challenge me.|Weakling.]]
-	Elder Centipede: [[Consider yourself [color=orange]"lucky,"[/color] as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY. |You won’t leave this arena intact. Feel honored, weakling. |I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST[/shake].]]
+	Elder Centipede: [[Oh? Fresh meat has appeared.|Another fool dares to challenge me.|Weakling.]]
+	Elder Centipede: [[Consider yourself "lucky", as I, the [color=red]"Great" Elder Centipede[/color], WILL NOT SHOW MERCY!|You won’t leave this arena intact. Feel honored, weakling.|I WILL [shake rate=20 level=10]GRIND YOUR BONES TO DUST![/shake]]]
 - Attack => END
 - Talk => standard_dialogue
 
 ~ standard_dialogue
-Elder Centipede: [[Look at you... trembling like an insect. |Did you get lost on your way to the training area? |Is this a joke? Did someone send me a warm-up act?]]
+Elder Centipede: [[Look at you... trembling like an insect.|Did you get lost on your way to the training area?|Is this a joke? Did someone send me a warm-up act?]]
 - I look stronger than my appereance lets on.
 	Elder Centipede: [shake rate=10 level=5]HAHAHAHA.[/shake] Don't make me laugh. You are a just a little maggot disguised as a chicken, you don't understand what real strength means. Not in the slightest.
 	- What's so funny? Do you think you can beat me?
@@ -21,19 +21,19 @@ Elder Centipede: [[Look at you... trembling like an insect. |Did you get lost on
 Elder Centipede: You? Beat me? [shake rate=10 level=5]HAHAHA.[/shake] You don’t stand a chance against me.
 Elder Centipede: You are just a tiny chicken, flapping around like you matter, but you are just some mutated chicken meat for the weahlty elites.
 Elder Centipede: After I crush you, I'll send you back home to your mommy, so you can suck her on her breasts like a little chick.
-- You talk too much. Let's see if you can actually fight. *Approaches Elder Centipede*
+- You talk too much. Let's see if you can actually fight. *approaches Elder Centipede*
 	Elder Centipede: Oh? You're approaching me? Instead of running away, you're coming right to me?
 	- I can't beat the shit out of you without getting closer.
-		Elder Centipede: Then get as close as you need to. *Smiles intensely*
+		Elder Centipede: Then get as close as you need to. *smiles intensely*
 		=> END
 - Keep talking. That ego's the only thing you've got that is big.
 	Elder Centipede: What a foul mouth you have.
-	Elder Centipede: [shake rate=15 level=8]DO YOU NOT UNDERSTAND WHO ARE YOU SPEAKING TO? I AM THE ONE WHO RULES THIS ARENA.[/shake]
+	Elder Centipede: [shake rate=15 level=8]DO YOU NOT UNDERSTAND WHO ARE YOU SPEAKING TO? I AM THE ONE WHO RULES THIS ARENA![/shake]
 	Elder Centipede: When I'm finished with you, I will squeeze every last drop of blood from your lifeless body. Then I will drink it all.
 	Elder Centipede: Your screams will be nothing but a whisper beneath my feet.
 	- Is that supposed to scare me? Try harder.
 		Elder Centipede: Huh. Confident, aren’t you? That’s the first thing I’ll rip from you.
-		Elder Centipede: [shake rate=15 level=8]PREPARE TO BE EXTINGUISHED BY THE "GREAT" ELDER CENTIPEDE.[/shake]
+		Elder Centipede: [shake rate=15 level=8]PREPARE TO BE EXTINGUISHED BY THE [color=red]"GREAT" ELDER CENTIPEDE[/color]![/shake]
 		=> END
 
 ~ explore_backstory
@@ -55,27 +55,27 @@ Elder Centipede: Every single one was torn apart by my strength. I still hear th
 		=> continue_backstory
 
 ~ continue_backstory
-Elder Centipede: [[No one escapes my wrath, and no one leaves unscattered. |You’ll join the others, broken and forgotten. |Your fate is sealed, weakling.]]
-Elder Centipede: [[Got any last words before I [shake rate=20 level=10]completely annihilate you[/shake]? |Speak now, or forever hold your peace—because you won’t survive this. |Your final words will be your epitaph.]]
+Elder Centipede: [[No one escapes my wrath, and no one leaves unscattered.|You’ll join the others, broken and forgotten.|Your fate is sealed, weakling.]]
+Elder Centipede: [[Got any last words before I [shake rate=20 level=10]completely annihilate you[/shake]?|Speak now, or forever hold your peace—because you won’t survive this.|Your final words will be your epitaph.]]
 - How did you become so strong?
-	Elder Centipede: [[How? I was born strong. The weak are born to serve, and I was born to rule. |The scientists tried to enhance me, but I was already [color=red]perfect.[/color] |They merely unlocked what was already there—my true potential.]]
-	Elder Centipede: [[I was the first. The prototype. The one they feared to touch. |They thought they could control me. [shake rate=10 level=5]Foolish.[/shake] |Now, I control them. The arena is my domain.]]
-	Elder Centipede: [[They wanted a weapon. They got a god. |I am their creation. Their masterpiece. |But I am no slave. I am the master.]]
+	Elder Centipede: [[How? I was born strong. The weak are born to serve, and I was born to rule.|The scientists tried to enhance me, but I was already perfect.|They merely unlocked what was already there—my true potential.]]
+	Elder Centipede: [[I was the first. The prototype. The one they feared to touch.|They thought they could control me. [shake rate=10 level=5]Foolish.[/shake]|Now, I control them. The arena is my domain.]]
+	Elder Centipede: [[They wanted a weapon. They got a god.|I am their creation. Their masterpiece.|But I am no slave. I am the master.]]
 	=> continue_or_end
 - What do you think of the other fighters?
-	Elder Centipede: [[Them? [color=red]Worms.[/color] All of them. |They’re nothing but fodder for my strength. |I don’t even see them as worthy opponents—just obstacles to crush.]]
-	Elder Centipede: [[They think they’re strong, but they’re nothing compared to me. |I’ve crushed champions, heroes, and legends. |They’re all the same—weak, pathetic, and destined to die.]]
-	Elder Centipede: [[They fight for survival. I fight for dominance. |They are insects. I am the apex. |They will fall. I will rise.]]
+	Elder Centipede: [[Them? Worms. All of them.|They’re nothing but fodder for my strength.|I don’t even see them as worthy opponents—just obstacles to crush.]]
+	Elder Centipede: [[They think they’re strong, but they’re nothing compared to me.|I’ve crushed champions, heroes, and legends.|They’re all the same—weak, pathetic, and destined to die.]]
+	Elder Centipede: [[They fight for survival. I fight for dominance.|They are insects. I am the apex.|They will fall. I will rise.]]
 	=> continue_or_end
 - Do you ever lose?
-	Elder Centipede: [[Lose? [shake rate=10 level=5]HAHAHA.[/shake] The concept is foreign to me. |I’ve never lost. I’ve never even been challenged. |The idea of losing is as absurd as a worm defeating a god.]]
-	Elder Centipede: [[If I ever lost, the world would end. |But that will never happen. I am [color=red]eternal.[/color] |I am invincible. I am the Elder Centipede.]]
-	Elder Centipede: [[The arena is my kingdom. The weak are my subjects. |I rule here. I always have. |And I always will.]]
+	Elder Centipede: [[Lose? [shake rate=10 level=5]HAHAHA.[/shake] The concept is foreign to me.|I’ve never lost. I’ve never even been challenged.|The idea of losing is as absurd as a worm defeating a god.]]
+	Elder Centipede: [[If I ever lost, the world would end.|But that will never happen. I am eternal.|I am invincible. I am the Elder Centipede.]]
+	Elder Centipede: [[The arena is my kingdom. The weak are my subjects.|I rule here. I always have.|And I always will.]]
 	=> continue_or_end
 - What’s your goal?
-	Elder Centipede: [[Goal? To dominate. |To crush. To destroy. |To prove my supremacy.]]
-	Elder Centipede: [[I am the apex predator. The strongest. |The weak exist to serve me. |The strong exist to fall before me.]]
-	Elder Centipede: [[I will rule this arena. I will rule the world. |All will bow before the Elder Centipede. |All will know my name.]]
+	Elder Centipede: [[Goal? To dominate.|To crush. To destroy.|To prove my supremacy.]]
+	Elder Centipede: [[I am the apex predator. The strongest.|The weak exist to serve me.|The strong exist to fall before me.]]
+	Elder Centipede: [[I will rule this arena. I will rule the world.|All will bow before the Elder Centipede.|All will know my name.]]
 	=> continue_or_end
 
 ~ continue_or_end
@@ -86,6 +86,6 @@ Elder Centipede: [[No more talk.|Enough. Your turn.|Time to end this.]]
 	=> END
 - You're just a monster.
 	Elder Centipede: [[Monster? Yes, I am.|Yes. They made me.|And I’ll make you one too.]]
-	Elder Centipede: [[Stronger now. [color=red]Stronger than you.[/color]|You’ll see. You’ll feel it.|You’re just prey.]]
+	Elder Centipede: [[Stronger now. Stronger than you.|You’ll see. You’ll feel it.|You’re just prey.]]
 	=> END
 - Attack => END
