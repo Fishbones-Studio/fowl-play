@@ -11,12 +11,12 @@ else:
 ~ standard_dialogue
 - What happened to you?
 	Bob: [[What... happened?|They did.|Ones above.]]
-	Bob: [[Changed me.|Made this.|[shake rate=10 level=5]Spikes hurt.[/shake]]]
+	Bob: [[[shake rate=10 level=5]Spikes hurt[/shake].|Changed me.|Made this.]]
 	Bob: [[Wasn’t always... this.|Once... normal.|Now... monster.]]
 	=> explore_mutations
 - You look different.
 	Bob: [[Different?|Not same.|Not me.]]
-	Bob: [[See too much.|[color=red]Spikes.[/color]|Never stops.]]
+	Bob: [[[color=red]Spikes.[/color]|See too much.|Never stops.]]
 	Bob: [[Wasn’t... like this.|Before... clean.|Now... broken.]]
 	=> explore_mutations
 - Are you in pain?
@@ -27,7 +27,7 @@ else:
 
 ~ explore_mutations
 Bob: [[Look. Me.|See what they did.|Power?]]
-Bob: [[Too many eyes.|[color=red]Spikes for them.[/color]|Want rest.]]
+Bob: [[[color=red]Spikes for them.[/color]|Too many eyes.|Want rest.]]
 Bob: [[Was... experiment.|Now... weapon.|Hate... them.]]
 - Who did this to you?
 	Bob: [[Them.|Ones watching.|Up there.]]
