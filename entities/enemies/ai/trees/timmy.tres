@@ -55,7 +55,7 @@ file_to_play = "uid://1o8urvftqxb3"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 6.0
+audio_volume = 10.0
 
 [sub_resource type="BTParallel" id="BTParallel_bygkv"]
 children = [SubResource("BTPlayAnimation_ct4d5"), SubResource("BTAction_bh04r")]
@@ -103,7 +103,7 @@ file_to_play = "uid://bhdsnw4rvgv8d"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 6.0
+audio_volume = 10.0
 
 [sub_resource type="BTParallel" id="BTParallel_rdov3"]
 children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_bexc2")]
@@ -289,7 +289,7 @@ file_to_play = "uid://bhdsnw4rvgv8d"
 is_repeating = true
 wait_for_completion = false
 pause_interval_player = false
-audio_volume = 6.0
+audio_volume = 10.0
 
 [sub_resource type="BTSequence" id="BTSequence_78ech"]
 children = [SubResource("BTAction_n1u5v"), SubResource("BTAction_bygkv")]
