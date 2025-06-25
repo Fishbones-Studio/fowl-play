@@ -361,7 +361,7 @@ transform = Transform3D(-0.762289, 0, 0.647223, 0, 1, 0, -0.647223, 0, -0.762289
 shape = SubResource("BoxShape3D_7e27t")
 
 [node name="CollisionShape3D28" type="CollisionShape3D" parent="flying_arena/Cylinder_001/StaticBody3D"]
-transform = Transform3D(-0.653374, 0, 0.757022, 0, 1, 0, -0.757022, 0, -0.653374, 7.62, 0.3, -108.887)
+transform = Transform3D(-0.653381, 0, 0.75703, 0, 1, 0, -0.75703, 0, -0.653381, 7.62, 0.3, -108.887)
 shape = SubResource("BoxShape3D_tk6p8")
 
 [node name="CollisionShape3D29" type="CollisionShape3D" parent="flying_arena/Cylinder_001/StaticBody3D"]
