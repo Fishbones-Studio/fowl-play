@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnopd21r0xr54"]
+
+[ext_resource type="Texture2D" uid="uid://blpntkncy22f7" path="res://entities/abilities/ability_models/seas_of_flame/art/seas_of_flame.png" id="1_b0256"]
+
+[resource]
+resource_name = "material.seasofflame"
+cull_mode = 2
+albedo_texture = ExtResource("1_b0256")
+roughness = 0.5
