@@ -79,7 +79,7 @@ size = Vector3(2, 20, 2)
 size = Vector3(2, 20, 2)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qo3bk"]
-height = 0.3
+height = 1.0
 radius = 15.0
 
 [node name="BasicArena" type="Node3D"]
@@ -244,7 +244,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -31, 0, -31)
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.773814, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("CylinderShape3D_qo3bk")
 
 [node name="floor" parent="Floor" instance=ExtResource("4_t02p4")]

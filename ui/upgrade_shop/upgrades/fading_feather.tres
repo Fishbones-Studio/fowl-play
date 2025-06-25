@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeResource" load_steps=3 format=3 uid="uid://dpqs5tgupk4k6"]
+
+[ext_resource type="Texture2D" uid="uid://dww6fduu2q0mj" path="res://ui/upgrade_shop/art/health_reduction.png" id="1_cmms3"]
+[ext_resource type="Script" uid="uid://dr34raogtpfqd" path="res://ui/upgrade_shop/upgrade_resource.gd" id="2_g08iv"]
+
+[resource]
+script = ExtResource("2_g08iv")
+health_bonus = -50
+stamina_bonus = 0
+attack_bonus = 30
+defense_bonus = 0
+speed_bonus = 0
+weight_bonus = 0.0
+name = "Fading Feather"
+purchasable = true
+is_free = true
+drop_chance = 30
+cost = 80
+currency_type = 0
+description = "The user plucks its own feathers, decreasing [color=orange]Health[/color] by %s and increasing [color=orange]Attack[/color] by %s."
+short_description = ""
+icon = ExtResource("1_cmms3")
+model_uid = ""
+metadata/_custom_type_script = "uid://dr34raogtpfqd"
