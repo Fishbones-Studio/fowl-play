@@ -1,7 +1,7 @@
 extends BasePlayerMovementState
 
 # Time for to hold for glide (in seconds)
-@export var glide_hold_threshold: float = 0.1
+@export var glide_hold_threshold: float = 0.2
 
 var _jump_press_time: float = 0.0
 var _is_jump_held: bool = false

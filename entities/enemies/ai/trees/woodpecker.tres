@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=65 format=3 uid="uid://dn83muanle5ic"]
+[gd_resource type="BehaviorTree" load_steps=68 format=3 uid="uid://dn83muanle5ic"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_qws7o"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ta6uh"]
@@ -119,6 +119,14 @@ custom_name = "Pursue"
 children = [SubResource("BTParallel_f1ys2")]
 metadata/_weight_ = 5.0
 
+[sub_resource type="BTAction" id="BTAction_nupj8"]
+script = ExtResource("4_8n2b3")
+file_to_play = "uid://gp1w2v0n3g0x"
+is_repeating = true
+wait_for_completion = false
+pause_interval_player = true
+audio_volume = 4.0
+
 [sub_resource type="BBNode" id="BBNode_bs3vf"]
 saved_value = NodePath("Model/woodpecker/AnimationPlayer")
 resource_name = "Model/woodpecker/AnimationPlayer"
@@ -134,15 +142,20 @@ script = ExtResource("2_ta6uh")
 min_wait_time = 0.0
 max_wait_time = 0.0
 
+[sub_resource type="BTWait" id="BTWait_8n2b3"]
+duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_xl814"]
+children = [SubResource("BTPlayAnimation_ii3fn"), SubResource("BTAction_8n2b3"), SubResource("BTWait_8n2b3")]
+
+[sub_resource type="BTParallel" id="BTParallel_hnjin"]
+children = [SubResource("BTAction_nupj8"), SubResource("BTSequence_xl814")]
+
 [sub_resource type="BTAction" id="BTAction_bs3vf"]
 script = ExtResource("7_h0qwm")
 ignore_cooldown = true
 slot = 1
 force_activate = false
-
-[sub_resource type="BTDelay" id="BTDelay_gwx8i"]
-seconds = 3.0
-children = [SubResource("BTAction_bs3vf")]
 
 [sub_resource type="BBNode" id="BBNode_xl814"]
 saved_value = NodePath("Model/woodpecker/AnimationPlayer")
@@ -159,7 +172,7 @@ stun_time = 2.0
 
 [sub_resource type="BTSequence" id="BTSequence_nupj8"]
 custom_name = "Set the seas ablaze!"
-children = [SubResource("BTPlayAnimation_ii3fn"), SubResource("BTAction_8n2b3"), SubResource("BTDelay_gwx8i"), SubResource("BTPlayAnimation_bs3vf"), SubResource("BTAction_jldam")]
+children = [SubResource("BTParallel_hnjin"), SubResource("BTAction_bs3vf"), SubResource("BTPlayAnimation_bs3vf"), SubResource("BTAction_jldam")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_f1ys2"]
 start_cooled = true
