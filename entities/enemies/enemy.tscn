@@ -127,7 +127,7 @@ max_random_distance = 0.0
 [node name="HurtAudioPlayer" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("9_56i32")
-volume_db = 50.0
+volume_db = 20.0
 unit_size = 40.0
 max_db = 6.0
 bus = &"SFX"
