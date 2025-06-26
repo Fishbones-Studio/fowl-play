@@ -98,6 +98,13 @@ func _enter_waiting() -> void:
 			"display_text": current_round_string
 		}
 	)
+	
+	# Hacky way to always show hud again when entering the round
+	var hud : Control = UIManager.ui_list.get(UIEnums.UI.PLAYER_HUD)
+	if not hud:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.PLAYER_HUD, {})
+	elif not hud.visible:
+		hud.visible = true
 
 	GameManager.chicken_player.global_position = player_spawn_position.global_position
 	GameManager.chicken_player.look_at(enemy_spawn_position.global_position)
