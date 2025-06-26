@@ -20,7 +20,11 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 	# Handle state transitions
 	if not movement_component.dash_available or player.stats.current_stamina < _stamina_cost:
 		print("Dash available: ", movement_component.dash_available)
-		SignalManager.player_transition_state.emit(previous_state.state_type, information)
+		if prev_state:
+			SignalManager.player_transition_state.emit(prev_state.state_type, information)
+		else:
+			# Fallback to Idle state
+			SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.IDLE_STATE, information)
 		return
 
 	super(prev_state)
