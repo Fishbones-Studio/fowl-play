@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp6kapk2aa5pp"
-path.s3tc="res://.godot/imported/insighter_Body Base Color.png-ebef2b76df7257c0e9abbb9fa908411a.s3tc.ctex"
-path.etc2="res://.godot/imported/insighter_Body Base Color.png-ebef2b76df7257c0e9abbb9fa908411a.etc2.ctex"
+path.s3tc="res://.godot/imported/insighter_Body Base Color.png-070124c3b022f1e7b36804f9905f9657.s3tc.ctex"
+path.etc2="res://.godot/imported/insighter_Body Base Color.png-070124c3b022f1e7b36804f9905f9657.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter_Body Base Color.png"
-dest_files=["res://.godot/imported/insighter_Body Base Color.png-ebef2b76df7257c0e9abbb9fa908411a.s3tc.ctex", "res://.godot/imported/insighter_Body Base Color.png-ebef2b76df7257c0e9abbb9fa908411a.etc2.ctex"]
+source_file="res://level/arena/props/interactable/shop/art/insighter_Body Base Color.png"
+dest_files=["res://.godot/imported/insighter_Body Base Color.png-070124c3b022f1e7b36804f9905f9657.s3tc.ctex", "res://.godot/imported/insighter_Body Base Color.png-070124c3b022f1e7b36804f9905f9657.etc2.ctex"]
 
 [params]
 

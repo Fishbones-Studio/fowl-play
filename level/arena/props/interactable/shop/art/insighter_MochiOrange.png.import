@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqbs3f5mgumdw"
-path.s3tc="res://.godot/imported/insighter_Arm Left Base Color.png-72c55d2e0afe0c8acef28285e8413ba3.s3tc.ctex"
-path.etc2="res://.godot/imported/insighter_Arm Left Base Color.png-72c55d2e0afe0c8acef28285e8413ba3.etc2.ctex"
+uid="uid://bne1mipax4so"
+path.s3tc="res://.godot/imported/insighter_MochiOrange.png-a6c697186c8f21e180cd77cbf8a326a4.s3tc.ctex"
+path.etc2="res://.godot/imported/insighter_MochiOrange.png-a6c697186c8f21e180cd77cbf8a326a4.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1651f4e115e6f92fb33eccd131cb4402"
+"md5": "6ca39a72cae650829fd1099acf05c297"
 }
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter_Arm Left Base Color.png"
-dest_files=["res://.godot/imported/insighter_Arm Left Base Color.png-72c55d2e0afe0c8acef28285e8413ba3.s3tc.ctex", "res://.godot/imported/insighter_Arm Left Base Color.png-72c55d2e0afe0c8acef28285e8413ba3.etc2.ctex"]
+source_file="res://level/arena/props/interactable/shop/art/insighter_MochiOrange.png"
+dest_files=["res://.godot/imported/insighter_MochiOrange.png-a6c697186c8f21e180cd77cbf8a326a4.s3tc.ctex", "res://.godot/imported/insighter_MochiOrange.png-a6c697186c8f21e180cd77cbf8a326a4.etc2.ctex"]
 
 [params]
 
