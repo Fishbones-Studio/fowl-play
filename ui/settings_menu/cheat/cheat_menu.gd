@@ -90,7 +90,7 @@ func _create_cheat_toggle(
 	instance.set_text(label_text)
 	# Set initial state without triggering the signal
 	instance.set_pressed_no_signal(initial_state)
-	
+
 	# Connect signal after adding to scene tree
 	instance.toggled.connect(_on_cheat_toggled.bind(cheat))
 
