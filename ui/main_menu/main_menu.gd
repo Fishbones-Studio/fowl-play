@@ -9,9 +9,12 @@ var _total_scenes_to_preload: int = 0
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var loading_label: Label = %LoadingLabel
 @onready var loading_progress: ProgressBar = %LoadingProgress
+@onready var version_label : Label = %VersionLabel
 
 
 func _ready() -> void:
+	version_label.text = ProjectSettings.get_setting("application/config/version")
+	
 	SettingsManager.load_settings(get_viewport(), get_window())
 
 	if not music_player.playing:
