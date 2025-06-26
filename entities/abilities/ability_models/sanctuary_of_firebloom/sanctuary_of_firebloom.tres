@@ -10,7 +10,7 @@ name = "Sanctuary of Firebloom"
 purchasable = true
 is_free = false
 drop_chance = 5
-cost = 200
+cost = 250
 currency_type = 0
 description = "The user calls forth the divine powers of ███, unleashing [color=yellow]5 consecutive[/color] devastating AoE blasts that rain down from the sky, exploding in a [color=yellow]4.5 meter[/color] radius around the nearest target within [color=yellow]100 meters[/color]. The blasts deals damage to anyone caught within range.
 
