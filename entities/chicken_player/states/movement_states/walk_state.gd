@@ -1,5 +1,6 @@
 extends BasePlayerMovementState
 
+
 func enter(prev_state: BasePlayerMovementState, _info: Dictionary = {}) -> void:
 	super(prev_state)
 

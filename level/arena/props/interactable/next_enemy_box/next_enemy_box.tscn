@@ -10,6 +10,7 @@ dialogue_directory = ""
 
 [node name="NameLabel" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 8, 0)
+visibility_range_end = 100.0
 text = "Enter Fight"
 label_look_at_player = true
 
