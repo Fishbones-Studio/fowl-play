@@ -19,7 +19,7 @@ name = "Slingshot"
 purchasable = true
 is_free = false
 drop_chance = 15
-cost = 100
+cost = 125
 currency_type = 0
 description = "Hold the attack button to line up the perfect shot. Take as much time as you need!
 

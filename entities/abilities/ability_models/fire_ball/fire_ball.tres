@@ -10,7 +10,7 @@ name = "Fire Ball"
 purchasable = true
 is_free = false
 drop_chance = 20
-cost = 150
+cost = 175
 currency_type = 0
 description = "The user hurls a fiery projectile straight ahead, damaging all targets in its path.
 

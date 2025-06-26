@@ -15,7 +15,7 @@ name = "Light Feather"
 purchasable = true
 is_free = true
 drop_chance = 45
-cost = 100
+cost = 20
 currency_type = 0
 description = "The user’s feathers become light as a breeze, decreasing [color=orange]Weight[/color] by %s."
 short_description = ""

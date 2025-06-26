@@ -10,7 +10,7 @@ name = "Glacial Prism"
 purchasable = true
 is_free = false
 drop_chance = 20
-cost = 150
+cost = 175
 currency_type = 0
 description = "The user summons devastating Ice Crystals directly on top of the closest target within [color=yellow]50 meters[/color], shattering on impact in a [color=yellow]8 meter[/color] radius.
 
