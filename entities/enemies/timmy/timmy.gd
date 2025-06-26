@@ -16,7 +16,7 @@ var _base_height: float = 0.0
 var _sway_offset: Vector2 = Vector2.ZERO
 
 
-func _ready():
+func _ready() -> void:
 	_base_height = global_position.y
 	_sway_offset = Vector2(
 		randf_range(-sway_offset, sway_offset), 
