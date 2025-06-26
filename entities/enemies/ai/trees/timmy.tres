@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=88 format=3 uid="uid://k7wyinj46uqk"]
+[gd_resource type="BehaviorTree" load_steps=94 format=3 uid="uid://k7wyinj46uqk"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_sk4mh"]
 [ext_resource type="Script" uid="uid://buntnywdkftvf" path="res://entities/enemies/ai/tasks/in_range.gd" id="2_sgv08"]
@@ -24,8 +24,8 @@ target_var = &"target"
 
 [sub_resource type="BTCondition" id="BTCondition_yj2r8"]
 script = ExtResource("10_sgv08")
-comparison = 4
-threshold = 15.0
+comparison = 1
+threshold = 20.0
 use_percentage = true
 
 [sub_resource type="BTCondition" id="BTCondition_sp7rb"]
@@ -33,11 +33,6 @@ script = ExtResource("2_sgv08")
 target_var = &"target"
 distance_min = 0.0
 distance_max = 10.0
-
-[sub_resource type="BTParallel" id="BTParallel_yj2r8"]
-num_successes_required = 2
-repeat = true
-children = [SubResource("BTCondition_yj2r8"), SubResource("BTCondition_sp7rb")]
 
 [sub_resource type="BBNode" id="BBNode_yj2r8"]
 saved_value = NodePath("Model/timmy/AnimationPlayer")
@@ -73,14 +68,13 @@ min_duration = 1.1
 max_duration = 1.9
 
 [sub_resource type="BTParallel" id="BTParallel_78ech"]
-num_successes_required = 2
 children = [SubResource("BTAction_gdjfc"), SubResource("BTRandomWait_sha4y")]
 
 [sub_resource type="BTAction" id="BTAction_sgv08"]
 script = ExtResource("8_sp7rb")
 target_var = &"target"
 flank_distance = 25.0
-vertical_offset = 5.0
+vertical_offset = 1.0
 clearance_radius = 1.0
 departure_telegraph = true
 arrival_telegraph = true
@@ -113,13 +107,23 @@ children = [SubResource("BTPlayAnimation_8qtte"), SubResource("BTAction_bexc2")]
 script = ExtResource("5_sk4mh")
 target_var = &"target"
 retreat_distance = 50.0
-speed_factor = 5.0
+speed_factor = 8.0
 rotation_speed = 20.0
 duration = 2.0
 pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 face_moving_direction = false
+
+[sub_resource type="BBNode" id="BBNode_sha4y"]
+saved_value = NodePath("Model/timmy/AnimationPlayer")
+resource_name = "Model/timmy/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_rm485"]
+animation_player = SubResource("BBNode_sha4y")
+animation_name = &"Idle"
+blend = 0.2
+speed = 12.0
 
 [sub_resource type="BTAction" id="BTAction_rm485"]
 script = ExtResource("6_ct4d5")
@@ -131,11 +135,11 @@ min_wait_time = 2.0
 max_wait_time = 2.0
 
 [sub_resource type="BTParallel" id="BTParallel_bh04r"]
-num_successes_required = 2
-children = [SubResource("BTAction_rm485"), SubResource("BTAction_jkeyo")]
+num_successes_required = 3
+children = [SubResource("BTPlayAnimation_rm485"), SubResource("BTAction_rm485"), SubResource("BTAction_jkeyo")]
 
 [sub_resource type="BTSequence" id="BTSequence_rm485"]
-children = [SubResource("BTParallel_yj2r8"), SubResource("BTParallel_bygkv"), SubResource("BTParallel_78ech"), SubResource("BTAction_sgv08"), SubResource("BTParallel_rdov3"), SubResource("BTAction_sp7rb"), SubResource("BTParallel_bh04r")]
+children = [SubResource("BTCondition_yj2r8"), SubResource("BTCondition_sp7rb"), SubResource("BTParallel_bygkv"), SubResource("BTParallel_78ech"), SubResource("BTAction_sgv08"), SubResource("BTParallel_rdov3"), SubResource("BTAction_sp7rb"), SubResource("BTParallel_bh04r")]
 
 [sub_resource type="BTSequence" id="BTSequence_ct4d5"]
 custom_name = "Blink"
@@ -203,10 +207,31 @@ weapon_offset = Vector3(1.175, -2, 0)
 max_down_angle = -45.0
 max_up_angle = 45.0
 
-[sub_resource type="BTParallel" id="BTParallel_sp7rb"]
-num_successes_required = 2
-repeat = true
+[sub_resource type="BTSequence" id="BTSequence_jkeyo"]
 children = [SubResource("BTCondition_sgv08"), SubResource("BTAction_sk4mh")]
+
+[sub_resource type="BTCondition" id="BTCondition_bexc2"]
+script = ExtResource("2_sgv08")
+target_var = &"target"
+distance_min = 0.0
+distance_max = 55.0
+
+[sub_resource type="BTInvert" id="BTInvert_bh04r"]
+children = [SubResource("BTCondition_bexc2")]
+
+[sub_resource type="BTAction" id="BTAction_rdov3"]
+script = ExtResource("7_rm485")
+target_var = &"target"
+tolerance = 50.0
+speed_factor = 1.0
+duration = 0.0
+ignore_y = true
+pathfinding = true
+immediate_response = true
+path_update_interval = 0.05
+
+[sub_resource type="BTSequence" id="BTSequence_bygkv"]
+children = [SubResource("BTInvert_bh04r"), SubResource("BTAction_rdov3")]
 
 [sub_resource type="BTAction" id="BTAction_78ech"]
 script = ExtResource("4_sha4y")
@@ -225,12 +250,17 @@ start_state = 2
 children = [SubResource("BTAction_78ech"), SubResource("BTAction_lk6lr")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_sp7rb"]
-duration = 8.0
+duration = 6.0
 children = [SubResource("BTParallel_sha4y")]
+
+[sub_resource type="BTParallel" id="BTParallel_sp7rb"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTSequence_jkeyo"), SubResource("BTSequence_bygkv"), SubResource("BTCooldown_sp7rb")]
 
 [sub_resource type="BTSequence" id="BTSequence_yj2r8"]
 custom_name = "Fire the Minigun!"
-children = [SubResource("BTParallel_sp7rb"), SubResource("BTCooldown_sp7rb")]
+children = [SubResource("BTParallel_sp7rb")]
 
 [sub_resource type="BTParallel" id="BTParallel_sgv08"]
 num_successes_required = 2
@@ -313,8 +343,8 @@ tolerance = 5.0
 speed_factor = 0.0
 duration = 0.0
 ignore_y = true
-pathfinding = false
-immediate_response = false
+pathfinding = true
+immediate_response = true
 path_update_interval = 0.05
 
 [sub_resource type="BTCondition" id="BTCondition_78ech"]

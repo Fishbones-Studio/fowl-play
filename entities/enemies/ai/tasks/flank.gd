@@ -39,6 +39,8 @@ var _current_telegraph_instance: GPUParticles3D = null
 var _space_state: PhysicsDirectSpaceState3D = null
 var _clearance_shape: Shape3D = null
 var _telegraph_resource: PackedScene = preload("uid://bi7ih1it2v747")
+var _half_timer: SceneTreeTimer = null
+var _end_timer: SceneTreeTimer = null
 
 
 # Display a customized name (requires @tool).
@@ -158,7 +160,11 @@ func _tick(_delta: float) -> Status:
 			return RUNNING # Will transition to SUCCESS in the very next tick
 
 		State.FINISHED:
-			agent.look_at(target.global_position)
+			agent.look_at(Vector3(
+				target.global_position.x,
+				agent.global_position.y,
+				target.global_position.z
+			))
 			# Action is complete, return SUCCESS
 			return SUCCESS
 
@@ -170,8 +176,7 @@ func _exit() -> void:
 	_cleanup_telegraph()
 
 	# Ensure agent state is reset
-	if not agent.visible: # If agent was invisible, make it visible
-		agent.visible = true
+	agent.visible = true
 	agent.apply_gravity = true # Ensure gravity is re-enabled
 	agent.velocity = Vector3.ZERO # Stop any lingering velocity
 
@@ -181,7 +186,7 @@ func _exit() -> void:
 
 
 func _get_safe_flank_position(target: ChickenPlayer) -> Vector3:
-	var base_dir: Vector3 = -target.global_transform.basis.z.normalized()
+	var base_dir: Vector3 = -target.global_basis.z.normalized()
 	var test_angles: Array[float] = [180.0, 90.0, -90.0, 45.0, -45.0, 0.0]
 
 	test_angles.shuffle()
@@ -263,12 +268,18 @@ func _create_telegraph_effect(telegraph_type: Type, telegraph_position: Vector3)
 	_current_telegraph_instance.emitting = true
 
 	# Create a separate timer for the halfway point visibility change
-	var half_timer: SceneTreeTimer = agent.get_tree().create_timer(_current_telegraph_instance.lifetime * 0.5)
-	half_timer.timeout.connect(_on_telegraph_halfway.bind(telegraph_type))
+	if _half_timer: 
+		if _half_timer.timeout.is_connected(_on_telegraph_halfway):
+			_half_timer.timeout.disconnect(_on_telegraph_halfway)
+	_half_timer = agent.get_tree().create_timer(_current_telegraph_instance.lifetime * 0.5)
+	_half_timer.timeout.connect(_on_telegraph_halfway.bind(telegraph_type), CONNECT_ONE_SHOT)
 
 	# Create a separate timer for the end of the telegraph
-	var end_timer: SceneTreeTimer = agent.get_tree().create_timer(total_telegraph_time)
-	end_timer.timeout.connect(_on_telegraph_finished.bind(_current_telegraph_instance, telegraph_type))
+	if _end_timer: 
+		if _end_timer.timeout.is_connected(_on_telegraph_halfway):
+			_end_timer.timeout.disconnect(_on_telegraph_halfway)
+	_end_timer = agent.get_tree().create_timer(total_telegraph_time)
+	_end_timer.timeout.connect(_on_telegraph_finished.bind(_current_telegraph_instance, telegraph_type), CONNECT_ONE_SHOT)
 
 
 func _on_telegraph_finished(instance: Variant, telegraph_type: Type) -> void:
@@ -284,7 +295,6 @@ func _on_telegraph_finished(instance: Variant, telegraph_type: Type) -> void:
 		if agent.visible: agent.visible = false
 	elif telegraph_type == Type.ARRIVAL:
 		_current_state = State.FINISHED # Action completes here
-
 
 
 func _on_telegraph_halfway(telegraph_type: Type) -> void:
@@ -303,6 +313,16 @@ func _cleanup_telegraph() -> void:
 	if _current_telegraph_instance and is_instance_valid(_current_telegraph_instance):
 		_current_telegraph_instance.queue_free()
 	_current_telegraph_instance = null
+
+	if _half_timer: 
+		if _half_timer.timeout.is_connected(_on_telegraph_halfway):
+			_half_timer.timeout.disconnect(_on_telegraph_halfway)
+		_half_timer = null
+
+	if _end_timer: 
+		if _end_timer.timeout.is_connected(_on_telegraph_finished):
+			_end_timer.timeout.disconnect(_on_telegraph_finished)
+		_end_timer = null
 
 
 func _log_error(message: String) -> void:

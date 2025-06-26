@@ -3,36 +3,49 @@ extends Enemy
 const RAY_LENGTH: float = 100.0
 
 @export_group("Hover Settings")
-@export var min_hover_height: float = 2.4
-@export var max_hover_height: float = 6.6
-@export var hover_speed: float = 3.3
+@export var hover_height: float = 2.0
+@export var hover_speed: float = 6.0
+@export var sway_amount: float = 0.3
+@export var sway_speed: float = 1.5
+@export var bob_amount: float = 0.2 
+@export var bob_speed: float = 2.0
+@export var sway_offset: float = 1.0
 
-var _current_hover_height: float = min_hover_height
-var _ascending: bool = true
+var _time: float = 0.0
+var _base_height: float = 0.0
+var _sway_offset: Vector2 = Vector2.ZERO
+
+
+func _ready() -> void:
+	_base_height = global_position.y
+	_sway_offset = Vector2(
+		randf_range(-sway_offset, sway_offset), 
+		randf_range(-sway_offset, sway_offset)
+	)
+
+	super()
 
 
 func _apply_gravity(delta: float) -> void:
-	var origin: Vector3 = global_transform.origin
+	_time += delta
+
+	var bob: float = -sin(_time * bob_speed) * bob_amount
+	var origin: Vector3 = global_position
 	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
 
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, target)
+	query.collision_mask = 1 << 0 # Only detects world
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var result: Dictionary = space_state.intersect_ray(query)
 
 	if result:
-		_current_hover_height = clamp(_current_hover_height, min_hover_height, max_hover_height)
+		var ground_position: Vector3 = result["position"]
 
-		if _ascending:
-			_current_hover_height += hover_speed * delta
-			if _current_hover_height >= max_hover_height:
-				_current_hover_height = max_hover_height
-				_ascending = false
+		# Apply hover height with bobbing and vertical offset
+		var desired_height: float = ground_position.y + hover_height + bob
+		if desired_height > origin.y:
+			velocity.y += hover_speed * delta
 		else:
-			_current_hover_height -= hover_speed * delta
-			if _current_hover_height <= min_hover_height:
-				_current_hover_height = min_hover_height
-				_ascending = true
-
-		var desired_y: float = result.position.y + _current_hover_height
-		origin.y = lerp(origin.y, desired_y, hover_speed * delta)
-		global_transform.origin = origin
+			velocity.y -= hover_speed * delta
+	else:
+		velocity.y += hover_speed * delta
