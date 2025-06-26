@@ -1200,19 +1200,19 @@ recursive = true
 [node name="Skeleton3D" parent="chicken_default/Armature" index="0"]
 bones/0/rotation = Quaternion(0.94836, -0.0072778, 0.0130621, 0.316844)
 bones/1/rotation = Quaternion(-0.108072, 2.62971e-05, -0.0212845, 0.993915)
-bones/2/rotation = Quaternion(-0.508012, -0.00264828, 0.00855473, 0.861303)
-bones/3/rotation = Quaternion(-0.529281, -0.0183287, -0.016818, 0.848082)
-bones/4/rotation = Quaternion(-0.163779, -0.274869, -0.0874241, 0.943388)
-bones/5/rotation = Quaternion(-0.176581, -0.000238139, -0.563883, 0.806756)
-bones/6/rotation = Quaternion(-0.457971, -0.0877825, -0.646751, 0.603547)
-bones/7/rotation = Quaternion(-0.246268, -0.00196918, 0.600187, 0.761002)
-bones/8/rotation = Quaternion(-0.451216, 0.149174, 0.65766, 0.584494)
+bones/2/rotation = Quaternion(-0.510061, -0.0035448, 0.0075002, 0.860098)
+bones/3/rotation = Quaternion(-0.521966, -0.0148566, -0.0135709, 0.852729)
+bones/4/rotation = Quaternion(-0.153389, -0.33133, -0.0865846, 0.926928)
+bones/5/rotation = Quaternion(-0.179484, 0.0019731, -0.565648, 0.804875)
+bones/6/rotation = Quaternion(-0.444938, -0.0647739, -0.667092, 0.593988)
+bones/7/rotation = Quaternion(-0.24961, -0.0047495, 0.601983, 0.758478)
+bones/8/rotation = Quaternion(-0.422578, 0.00197582, 0.740568, 0.522478)
 bones/9/rotation = Quaternion(0.233059, -0.0156083, 0.163116, 0.958558)
-bones/10/rotation = Quaternion(0.306699, -0.0176117, -0.0516913, 0.950239)
-bones/11/rotation = Quaternion(0.181382, 0.00871287, -0.115504, 0.976567)
+bones/10/rotation = Quaternion(0.294307, -0.0153831, -0.0504501, 0.954254)
+bones/11/rotation = Quaternion(0.180955, 0.00830958, -0.114591, 0.976758)
 bones/12/rotation = Quaternion(0.200151, 0.0372475, 0.160925, 0.965741)
 bones/13/position = Vector3(1.47203e-16, 0.662945, -1.02438)
-bones/13/rotation = Quaternion(-0.173186, 0.0454962, 0.0993065, 0.978813)
+bones/13/rotation = Quaternion(-0.172625, 0.0505329, 0.106523, 0.977906)
 
 [node name="AnimationPlayer" parent="chicken_default" index="1"]
 libraries = {
@@ -1323,6 +1323,7 @@ one_shot = true
 
 [node name="Fall" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("state_audio_player")]
 script = ExtResource("11_jgbvq")
+glide_hold_threshold = 0.2
 state_type = 7
 state_audio_file = ExtResource("19_yoq0e")
 state_audio_player = NodePath("../../ChickenMovementPlayer")
