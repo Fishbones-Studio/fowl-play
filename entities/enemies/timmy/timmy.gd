@@ -29,7 +29,7 @@ func _ready():
 func _apply_gravity(delta: float) -> void:
 	_time += delta
 
-	var bob: float = sin(_time * bob_speed) * bob_amount
+	var bob: float = -sin(_time * bob_speed) * bob_amount
 	var origin: Vector3 = global_position
 	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
 
