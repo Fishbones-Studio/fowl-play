@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=86 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=87 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="2_ovltl"]
@@ -193,6 +193,7 @@ pause_interval_player = true
 audio_volume = 0.0
 
 [sub_resource type="BTSequence" id="BTSequence_7icws"]
+custom_name = "Play Audio"
 children = [SubResource("BTAction_rme62"), SubResource("BTAction_wg5pp")]
 
 [sub_resource type="BBNode" id="BBNode_mkwy1"]
@@ -257,6 +258,17 @@ children = [SubResource("BTRepeatUntilFailure_ykixg")]
 [sub_resource type="BTParallel" id="BTParallel_m26ws"]
 children = [SubResource("BTAction_j7hde"), SubResource("BTAlwaysFail_d6hvj")]
 
+[sub_resource type="BTSequence" id="BTSequence_b8d52"]
+custom_name = "Charge!"
+children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws")]
+
+[sub_resource type="BTSequence" id="BTSequence_4q5wn"]
+children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
+
+[sub_resource type="BTParallel" id="BTParallel_atlog"]
+custom_name = "Attack"
+children = [SubResource("BTSequence_7icws"), SubResource("BTSequence_4q5wn")]
+
 [sub_resource type="BBNode" id="BBNode_arvsx"]
 saved_value = NodePath("Model/ball_chicken/AnimationPlayer")
 resource_name = "Model/ball_chicken/AnimationPlayer"
@@ -277,25 +289,27 @@ min_wait_time = 6.0
 max_wait_time = 6.0
 
 [sub_resource type="BTParallel" id="BTParallel_157vn"]
+custom_name = "Stun After"
 children = [SubResource("BTAction_ovltl"), SubResource("BTAction_wwppe")]
 
-[sub_resource type="BTSequence" id="BTSequence_b8d52"]
-custom_name = "Charge!"
-children = [SubResource("BTPlayAnimation_2bbcu"), SubResource("BTParallel_m26ws"), SubResource("BTPlayAnimation_rme62"), SubResource("BTParallel_157vn")]
-
-[sub_resource type="BTSequence" id="BTSequence_4q5wn"]
-children = [SubResource("BTSequence_g0ry3"), SubResource("BTSequence_b8d52")]
-
-[sub_resource type="BTParallel" id="BTParallel_atlog"]
-custom_name = "Charge attack"
-children = [SubResource("BTSequence_7icws"), SubResource("BTSequence_4q5wn")]
+[sub_resource type="BTSequence" id="BTSequence_wwppe"]
+custom_name = "Charge Attack"
+children = [SubResource("BTParallel_atlog"), SubResource("BTPlayAnimation_rme62"), SubResource("BTParallel_157vn")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_yvhtp"]
 duration = 12.0
 start_cooled = true
 custom_name = "Charge attack  cooldown: 10s"
-children = [SubResource("BTParallel_atlog")]
+children = [SubResource("BTSequence_wwppe")]
 metadata/_weight_ = 1.0
+
+[sub_resource type="BTAction" id="BTAction_4q5wn"]
+script = ExtResource("9_mkwy1")
+file_to_play = "uid://qjkl6qf4hywu"
+is_repeating = false
+wait_for_completion = true
+pause_interval_player = true
+audio_volume = 0.0
 
 [sub_resource type="BTAction" id="BTAction_kbctg"]
 script = ExtResource("7_wwppe")
@@ -308,7 +322,7 @@ reached_peak = false
 [sub_resource type="BTAction" id="BTAction_ykixg"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
-tolerance = 2.0
+tolerance = 14.0
 speed_factor = 5.0
 duration = 0.0
 ignore_y = true
@@ -316,12 +330,9 @@ pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
-[sub_resource type="BTRepeat" id="BTRepeat_m26ws"]
-forever = true
-children = [SubResource("BTAction_ykixg")]
-
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
-children = [SubResource("BTAction_kbctg"), SubResource("BTRepeat_m26ws")]
+num_successes_required = 2
+children = [SubResource("BTAction_4q5wn"), SubResource("BTAction_kbctg"), SubResource("BTAction_ykixg")]
 
 [sub_resource type="BTAction" id="BTAction_atlog"]
 script = ExtResource("12_mkwy1")
@@ -357,7 +368,6 @@ children = [SubResource("BTParallel_d6hvj"), SubResource("BTAction_atlog"), SubR
 metadata/_weight_ = 0.985075
 
 [sub_resource type="BTCooldown" id="BTCooldown_kbctg"]
-duration = 0.0
 start_cooled = true
 custom_name = "Earthquake cooldown: 10s"
 children = [SubResource("BTSequence_sv4kc")]

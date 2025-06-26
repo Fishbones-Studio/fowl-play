@@ -137,6 +137,8 @@ draw_pass_1 = SubResource("QuadMesh_udvao")
 
 [node name="SoundEffect" parent="." index="2"]
 stream = ExtResource("9_031v6")
+volume_db = 5.0
+unit_size = 30.0
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]

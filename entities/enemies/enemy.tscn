@@ -12,6 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://ck8yr85ffg28t" path="res://utilities/sound/interval_random_sfx_player/interval_random_sfx_player.tscn" id="10_sb13e"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_ipr6v"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = "The chicken player."
+var/aggro_distance/name = &"aggro_distance"
+var/aggro_distance/type = 3
+var/aggro_distance/value = 0.0
+var/aggro_distance/hint = 0
+var/aggro_distance/hint_string = "The distance for the enemy to become aggressive."
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56i32"]
 shader = ExtResource("7_56i32")
@@ -114,6 +123,14 @@ unique_name_in_owner = true
 sounds_folder = ""
 min_random_distance = 0.0
 max_random_distance = 0.0
+
+[node name="HurtAudioPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_56i32")
+volume_db = 20.0
+unit_size = 40.0
+max_db = 6.0
+bus = &"SFX"
 
 [connection signal="damage_taken" from="." to="DamageNumberHandler" method="display_damage"]
 [connection signal="timeout" from="ImmobileTimer" to="." method="_on_immobile_timer_timeout"]
