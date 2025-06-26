@@ -2,6 +2,11 @@ class_name ControllerMappings
 
 const ASSETS_PATH: String = "res://addons/controller_icons/assets/"
 
+const CONTROLLER_NAMES_XBOX: Array[String] = ["xbox", "x-input", "valve", "neptune", "steamdeck", "steam deck", "steam"] # For steam deck as well since they have the same icon names
+const CONTROLLER_NAMES_SONY: Array[String] = ["ps4", "ps3", "ps5", "dualsense", "sony", "dualshock"]
+const CONTROLLER_NAMES_SWITCH: Array[String] = ["switch", "nintendo"]
+
+
 const JOYPAD_MAPPINGS: Dictionary[String, Dictionary] = {
 	"buttons": {
 		0: {"xboxseries": "a", "ps5": "cross", "switch": "b"},
@@ -33,6 +38,20 @@ const JOYPAD_MAPPINGS: Dictionary[String, Dictionary] = {
 }
 
 
+static func get_controller_name(controller_name: String) -> String:
+	for name in CONTROLLER_NAMES_XBOX:
+		if name in controller_name:
+			return "xboxseries"
+	for name in CONTROLLER_NAMES_SONY:
+		if name in controller_name:
+			return "ps5"
+	for name in CONTROLLER_NAMES_SWITCH:
+		if name in controller_name:
+			return "switch"
+
+	return ""
+
+
 static func get_asset(type: String, index: int) -> Array[String]:
 	# Validate input type
 	if type not in ["buttons", "axes"] or index not in JOYPAD_MAPPINGS[type]:
@@ -50,12 +69,7 @@ static func get_asset(type: String, index: int) -> Array[String]:
 	# Get the mapping for this input
 	var mapping: Dictionary = JOYPAD_MAPPINGS[type][index]
 
-	if "xbox" in controller_name or "x-input" in controller_name:
-		controller_name = "xboxseries"
-	elif "playstation" in controller_name or "dualsense" in controller_name or "dual shock" in controller_name:
-		controller_name = "ps5"
-	elif "switch" in controller_name or "nintendo" in controller_name:
-		controller_name = "switch"
+	controller_name = get_controller_name(controller_name)
 
 	# Build paths for all platforms
 	var paths: Array[String] = []
