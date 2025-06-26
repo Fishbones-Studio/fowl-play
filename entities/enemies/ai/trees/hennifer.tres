@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=109 format=3 uid="uid://cjwfnys8g6i4y"]
+[gd_resource type="BehaviorTree" load_steps=116 format=3 uid="uid://cjwfnys8g6i4y"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_p83x8"]
 [ext_resource type="Script" uid="uid://c7xx8urep15p8" path="res://entities/enemies/ai/tasks/stop_movement.gd" id="2_ba5to"]
@@ -220,7 +220,7 @@ script = ExtResource("4_schhj")
 target_var = &"target"
 rotation_speed = 10.0
 angle_threshold = 5.0
-duration = 0.0
+duration = 10.0
 face_away = false
 
 [sub_resource type="BTAction" id="BTAction_f2bow"]
@@ -234,11 +234,16 @@ pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
 
+[sub_resource type="BTParallel" id="BTParallel_kpifs"]
+num_successes_required = 2
+repeat = true
+children = [SubResource("BTAction_cgerr"), SubResource("BTAction_f2bow")]
+
 [sub_resource type="BTCondition" id="BTCondition_yoxl1"]
 script = ExtResource("3_fxtff")
 target_var = &"target"
 distance_min = 0.0
-distance_max = 5.0
+distance_max = 7.0
 
 [sub_resource type="BTAction" id="BTAction_pyqya"]
 script = ExtResource("6_pia2r")
@@ -248,14 +253,19 @@ start_state = 2
 [sub_resource type="BTSequence" id="BTSequence_xlk6v"]
 children = [SubResource("BTCondition_yoxl1"), SubResource("BTAction_pyqya")]
 
+[sub_resource type="BTRepeatUntilSuccess" id="BTRepeatUntilSuccess_v6hs5"]
+children = [SubResource("BTSequence_xlk6v")]
+
 [sub_resource type="BTParallel" id="BTParallel_qjxos"]
-num_successes_required = 2
-num_failures_required = 2
-repeat = true
-children = [SubResource("BTAction_cgerr"), SubResource("BTAction_f2bow"), SubResource("BTSequence_xlk6v")]
+children = [SubResource("BTParallel_kpifs"), SubResource("BTRepeatUntilSuccess_v6hs5")]
+
+[sub_resource type="BTAction" id="BTAction_augj3"]
+script = ExtResource("2_ba5to")
+min_wait_time = 1.0
+max_wait_time = 1.0
 
 [sub_resource type="BTSequence" id="BTSequence_504pj"]
-children = [SubResource("BTSequence_k7lfl"), SubResource("BTParallel_4he0i"), SubResource("BTParallel_qjxos")]
+children = [SubResource("BTSequence_k7lfl"), SubResource("BTParallel_4he0i"), SubResource("BTParallel_qjxos"), SubResource("BTAction_augj3")]
 
 [sub_resource type="BTParallel" id="BTParallel_viady"]
 children = [SubResource("BTAlwaysFail_wv527"), SubResource("BTAlwaysFail_5c880"), SubResource("BTAlwaysFail_k7lfl"), SubResource("BTAlwaysFail_cofkk"), SubResource("BTSequence_504pj")]
@@ -324,6 +334,16 @@ children = [SubResource("BTAction_k7lfl"), SubResource("BTPlayAnimation_l0rnk"),
 [sub_resource type="BTWait" id="BTWait_i6i68"]
 duration = 0.1
 
+[sub_resource type="BBNode" id="BBNode_sxcr3"]
+saved_value = NodePath("Model/chicken_hennifer/AnimationPlayer")
+resource_name = "Model/chicken_hennifer/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_v6hs5"]
+animation_player = SubResource("BBNode_sxcr3")
+animation_name = &"Walking"
+blend = 0.2
+speed = 2.0
+
 [sub_resource type="BTAction" id="BTAction_b566n"]
 script = ExtResource("13_504pj")
 file_to_play = "uid://bf5lhyfrveakg"
@@ -348,35 +368,42 @@ children = [SubResource("BTDelay_n7fk8")]
 [sub_resource type="BTAction" id="BTAction_qjixf"]
 script = ExtResource("4_schhj")
 target_var = &"target"
-rotation_speed = 4.0
+rotation_speed = 12.0
 angle_threshold = 2.0
 duration = 0.0
 face_away = false
-
-[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_sxcr3"]
-children = [SubResource("BTAction_qjixf")]
 
 [sub_resource type="BTAction" id="BTAction_7xuyr"]
 script = ExtResource("5_mnhi0")
 target_var = &"target"
 tolerance = 5.0
-speed_factor = 1.0
+speed_factor = 10.0
 duration = 10.0
 ignore_y = true
 pathfinding = true
 immediate_response = true
 path_update_interval = 0.05
 
-[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_b566n"]
-children = [SubResource("BTAction_7xuyr")]
+[sub_resource type="BTParallel" id="BTParallel_l7wqg"]
+children = [SubResource("BTAction_qjixf"), SubResource("BTAction_7xuyr")]
+
+[sub_resource type="BTWait" id="BTWait_t8vjl"]
+duration = 1.5
+
+[sub_resource type="BTSequence" id="BTSequence_shlr8"]
+children = [SubResource("BTParallel_l7wqg"), SubResource("BTWait_t8vjl")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_v6hs5"]
+forever = true
+children = [SubResource("BTSequence_shlr8")]
 
 [sub_resource type="BTParallel" id="BTParallel_hcbj7"]
-num_failures_required = 3
-children = [SubResource("BTAction_b566n"), SubResource("BTRepeat_vidql"), SubResource("BTAlwaysFail_sxcr3"), SubResource("BTAlwaysFail_b566n")]
+num_successes_required = 2
+children = [SubResource("BTAction_b566n"), SubResource("BTRepeat_vidql"), SubResource("BTRepeat_v6hs5")]
 
 [sub_resource type="BTSequence" id="BTSequence_qjixf"]
 custom_name = "Shank"
-children = [SubResource("BTWait_i6i68"), SubResource("BTParallel_hcbj7")]
+children = [SubResource("BTWait_i6i68"), SubResource("BTPlayAnimation_v6hs5"), SubResource("BTParallel_hcbj7")]
 
 [sub_resource type="BTSequence" id="BTSequence_kwr7b"]
 custom_name = "Flank and shank"
