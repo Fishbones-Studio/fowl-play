@@ -321,7 +321,6 @@ volume_db = -10.0
 music_folder = "res://ui/poultry_man_menu/art/random_music/"
 
 [node name="RandomSFXPlayer" parent="Audio" instance=ExtResource("4_iajuv")]
-process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8, -15)
 sounds_folder = "res://ui/poultry_man_menu/sound/random_sounds"
 max_random_distance = 20.0

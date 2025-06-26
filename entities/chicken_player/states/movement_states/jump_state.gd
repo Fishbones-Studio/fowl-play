@@ -1,8 +1,10 @@
 extends BasePlayerMovementState
 
 @export var air_jumps: int = 1
+@export var jump_buffer_time: float = 0.15  # Time before allowing next jump
 
 var _air_jumps_used: int = 0
+var _jump_timer: float = 0.0
 
 func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) -> void:
 	super(prev_state)
@@ -13,6 +15,7 @@ func enter(prev_state: BasePlayerMovementState, information: Dictionary = {}) ->
 		_air_jumps_used += 1 # Else increment air jumps used
 
 	movement_component.jump_available = air_jumps > _air_jumps_used
+	_jump_timer = 0.0  # Reset timer on state enter
 
 	animation_tree.get("parameters/MovementStateMachine/playback").travel(self.name)
 
@@ -24,11 +27,14 @@ func input(_event: InputEvent) -> void:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.DASH_STATE, {})
 		return
 	
-	if get_jump_velocity() > 0 and _air_jumps_used < air_jumps:
+	# Allow double jump if enough time has passed and air jumps are available
+	if Input.is_action_just_pressed("jump") and _jump_timer >= jump_buffer_time and _air_jumps_used < air_jumps:
 		SignalManager.player_transition_state.emit(PlayerEnums.PlayerStates.JUMP_STATE, {})
 
 
 func process(delta: float) -> void:
+	_jump_timer += delta  # Increment timer
+	
 	if is_sprinting():
 		player.stats.drain_stamina(movement_component.sprint_stamina_cost * delta)
 	else:

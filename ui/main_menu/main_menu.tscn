@@ -182,6 +182,13 @@ icon = ExtResource("4_3c04x")
 icon_alignment = 1
 expand_icon = true
 
+[node name="VersionLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0.0.0"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_s4pem")
 volume_db = -8.0
