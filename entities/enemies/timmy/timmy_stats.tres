@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_epyd4")
-max_health = 300.0
+max_health = 225.0
 max_stamina = 50.0
 attack = 10.0
 defense = 60
