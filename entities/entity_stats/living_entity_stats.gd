@@ -39,12 +39,12 @@ extends Resource
 var current_health: float:
 	set(value):
 		# Clamp based on the *current* max_health
-		current_health = clamp(value, 0, max_health)
+		current_health = clamp(value, 0.0, max_health)
 
 var current_stamina: float:
 	set(value):
 		# Clamp based on the *current* max_stamina
-		current_stamina = clamp(value, 0, max_stamina)
+		current_stamina = clamp(value, 0.0, max_stamina)
 
 
 # Initialize stats, setting health and stamina to max
@@ -132,11 +132,11 @@ func apply_stat_effect(stat_name: StringName, percent: float) -> float:
 
 ## Applies in run upgrade effect to holder stats
 func apply_upgrade(upgrade: UpgradeResource) -> void:
-	max_health += upgrade.health_bonus
-	current_health += upgrade.health_bonus
+	max_health = max(1.0, max_health + upgrade.health_bonus)
+	current_health = clamp(current_health + upgrade.health_bonus, 1.0, max_health)
 
 	max_stamina += upgrade.stamina_bonus
-	current_stamina += upgrade.stamina_bonus
+	current_stamina = clamp(current_stamina + upgrade.stamina_bonus, 0.0, max_stamina)
 
 	attack += upgrade.attack_bonus
 
@@ -145,10 +145,6 @@ func apply_upgrade(upgrade: UpgradeResource) -> void:
 	speed += upgrade.speed_bonus
 
 	weight += upgrade.weight_bonus
-
-	# Ensure current values are clamped after potential changes
-	current_health = clamp(current_health, 0, max_health)
-	current_stamina = clamp(current_stamina, 0, max_stamina)
 
 
 ## Convert the current state of this resource to a Dictionary for saving.

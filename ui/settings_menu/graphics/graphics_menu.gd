@@ -98,7 +98,7 @@ func _input(event: InputEvent) -> void:
 
 func _load_graphics_settings() -> void:
 	SettingsManager.load_settings(get_viewport(),get_window(), config_name)
-	get_tree().process_frame
+	await get_tree().process_frame
 	_set_graphics_values()
 
 

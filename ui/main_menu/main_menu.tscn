@@ -132,6 +132,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
 focus_neighbor_left = NodePath("../../ButtonContainer/QuitButton")
+focus_neighbor_top = NodePath("../../ButtonContainer/ResetButton")
 focus_next = NodePath("../../ButtonContainer/SettingsButton")
 focus_previous = NodePath("../../ButtonContainer/QuitButton")
 theme_type_variation = &"MainMenuLabelButton"
@@ -184,10 +185,12 @@ expand_icon = true
 
 [node name="VersionLabel" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "0.0.0"
+vertical_alignment = 1
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_s4pem")
