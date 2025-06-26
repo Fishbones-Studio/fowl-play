@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2exspaush4qi"
-path.s3tc="res://.godot/imported/insighter_MochiGreen.png-448fac9939127aaf6d5e2dc628038d17.s3tc.ctex"
-path.etc2="res://.godot/imported/insighter_MochiGreen.png-448fac9939127aaf6d5e2dc628038d17.etc2.ctex"
+uid="uid://c8vvvecik0fs8"
+path.s3tc="res://.godot/imported/insighter_MochiRed.png-e74da737320629e90085feb914aa4b04.s3tc.ctex"
+path.etc2="res://.godot/imported/insighter_MochiRed.png-e74da737320629e90085feb914aa4b04.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "6258bce935101bd87a605e10395107ae"
+"md5": "e872f211558de77c45848c5d9c58dc12"
 }
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter_MochiGreen.png"
-dest_files=["res://.godot/imported/insighter_MochiGreen.png-448fac9939127aaf6d5e2dc628038d17.s3tc.ctex", "res://.godot/imported/insighter_MochiGreen.png-448fac9939127aaf6d5e2dc628038d17.etc2.ctex"]
+source_file="res://level/arena/props/interactable/shop/art/insighter_MochiRed.png"
+dest_files=["res://.godot/imported/insighter_MochiRed.png-e74da737320629e90085feb914aa4b04.s3tc.ctex", "res://.godot/imported/insighter_MochiRed.png-e74da737320629e90085feb914aa4b04.etc2.ctex"]
 
 [params]
 

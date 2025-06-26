@@ -35,3 +35,9 @@ func create_shop_item(selected_item : BaseResource) -> BaseShopItem:
 
 func _on_close_button_pressed()-> void:
 	UIManager.toggle_ui(UIEnums.UI.IN_ARENA_SHOP)
+	# Hacky way to always show hud again when entering the round
+	var hud : Control = UIManager.ui_list.get(UIEnums.UI.PLAYER_HUD)
+	if not hud:
+		SignalManager.add_ui_scene.emit(UIEnums.UI.PLAYER_HUD, {})
+	elif not hud.visible:
+		hud.visible = true
