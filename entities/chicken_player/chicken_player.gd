@@ -28,6 +28,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if UIManager.game_input_blocked:
+		return
 	movement_state_machine.input(event)
 
 
