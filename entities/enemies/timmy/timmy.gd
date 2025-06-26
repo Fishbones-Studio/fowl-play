@@ -44,8 +44,8 @@ func _apply_gravity(delta: float) -> void:
 		# Apply hover height with bobbing and vertical offset
 		var desired_height: float = ground_position.y + hover_height + bob
 		if desired_height > origin.y:
-			velocity.y -= hover_speed * delta
-		else:
 			velocity.y += hover_speed * delta
+		else:
+			velocity.y -= hover_speed * delta
 	else:
-		velocity.y -= hover_speed * delta
+		velocity.y += hover_speed * delta
