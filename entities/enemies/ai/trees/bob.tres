@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" load_steps=88 format=3 uid="uid://g7414dn5u4kw"]
+[gd_resource type="BehaviorTree" load_steps=87 format=3 uid="uid://g7414dn5u4kw"]
 
 [ext_resource type="Script" uid="uid://cx4cr5k5q32jh" path="res://entities/enemies/ai/tasks/get_target.gd" id="1_gf8jg"]
 [ext_resource type="Script" uid="uid://bufx3c4udrfdq" path="res://entities/enemies/ai/tasks/stunned.gd" id="2_ovltl"]
@@ -322,7 +322,7 @@ reached_peak = false
 [sub_resource type="BTAction" id="BTAction_ykixg"]
 script = ExtResource("5_mkwy1")
 target_var = &"target"
-tolerance = 2.0
+tolerance = 14.0
 speed_factor = 5.0
 duration = 0.0
 ignore_y = true
@@ -330,13 +330,9 @@ pathfinding = false
 immediate_response = false
 path_update_interval = 0.05
 
-[sub_resource type="BTRepeat" id="BTRepeat_m26ws"]
-forever = true
-children = [SubResource("BTAction_ykixg")]
-
 [sub_resource type="BTParallel" id="BTParallel_d6hvj"]
 num_successes_required = 2
-children = [SubResource("BTAction_4q5wn"), SubResource("BTAction_kbctg"), SubResource("BTRepeat_m26ws")]
+children = [SubResource("BTAction_4q5wn"), SubResource("BTAction_kbctg"), SubResource("BTAction_ykixg")]
 
 [sub_resource type="BTAction" id="BTAction_atlog"]
 script = ExtResource("12_mkwy1")

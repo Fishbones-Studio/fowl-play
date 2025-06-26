@@ -32,14 +32,14 @@ var _original_interval_volume: float
 @onready var state_audio_player: AudioStreamPlayer3D = %StateAudioPlayer
 @onready var interval_audio_player: IntervalSFXPlayer3D = %IntervalAudioPlayer
 @onready var bt_player: BTPlayer = %BTPlayer
-@onready var hurt_audio_player : AudioStreamPlayer3D = %HurtAudioPlayer
+@onready var hurt_audio_player: AudioStreamPlayer3D = %HurtAudioPlayer
 
 
 func _ready() -> void:
 	if not stats:
 		push_error("Enemy stats resource is not assigned! Please assign a LivingEntityStats resource to the enemy.")
 		return
-		
+
 	if hurt_sound:
 		hurt_audio_player.stream = hurt_sound
 	else:
@@ -119,17 +119,17 @@ func _on_state_audio_finished(resume_interval: bool = true) -> void:
 func play_hurt_audio() -> void:
 	if not hurt_sound:
 		return
-	
+
 	# Mute interval audio player
 	interval_audio_player.volume_db = -80.0  # Effectively mute
-	
+
 	# Lower state audio player volume
 	state_audio_player.volume_db = _original_state_volume - 12.0  # Lower by 12dB
-	
+
 	# Play hurt sound
 	hurt_audio_player.stream = hurt_sound
 	hurt_audio_player.play()
-	
+
 	# Connect to finished signal to restore volumes
 	if not hurt_audio_player.finished.is_connected(_on_hurt_audio_finished):
 		hurt_audio_player.finished.connect(_on_hurt_audio_finished, CONNECT_ONE_SHOT)
@@ -168,7 +168,7 @@ func _take_damage(target: PhysicsBody3D, damage: float, damage_type: DamageEnums
 			immobile_time = 0.0
 
 		hurt_ticks.append(Time.get_ticks_msec())
-		
+
 		# Play hurt sound using dedicated hurt audio player
 		play_hurt_audio()
 
