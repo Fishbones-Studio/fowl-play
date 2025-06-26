@@ -4,7 +4,7 @@ const RAY_LENGTH: float = 100.0
 
 @export_group("Hover Settings")
 @export var hover_height: float = 2.0
-@export var hover_speed: float = 3.3
+@export var hover_speed: float = 6.0
 @export var sway_amount: float = 0.3
 @export var sway_speed: float = 1.5
 @export var bob_amount: float = 0.2 
@@ -36,27 +36,26 @@ func _apply_gravity(delta: float) -> void:
 	)
 	var bob: float = sin(_time * bob_speed) * bob_amount
 
-	var origin: Vector3 = global_transform.origin
+	var origin: Vector3 = global_position
 	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
 
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, target)
 	query.collision_mask = 1 << 0 # Only detects world
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	var result: Dictionary= space_state.intersect_ray(query)
+	var result: Dictionary = space_state.intersect_ray(query)
 
 	if result:
 		var ground_position: Vector3 = result["position"]
+
 		# Apply hover height with bobbing and vertical offset
 		var desired_height: float = ground_position.y + hover_height + bob
-		origin.y = lerp(origin.y, desired_height, hover_speed * delta)
-
-		# Apply horizontal sway with offset
-		origin.x = lerp(origin.x, origin.x + sway.x, hover_speed * delta * 0.5)
-		origin.z = lerp(origin.z, origin.z + sway.y, hover_speed * delta * 0.5)
+		if desired_height > origin.y:
+			velocity.y -= hover_speed * delta
+		else:
+			velocity.y += hover_speed * delta
 	else:
-		# If no ground detected, descend
-		origin.y = lerp(origin.y, origin.y - 1.0 + bob, hover_speed * delta * 0.3)
-		origin.x += sway.x * delta * 2.0
-		origin.z += sway.y * delta * 2.0
+		velocity.y -= hover_speed * delta
 
-	global_position = origin
+	# Apply horizontal sway with offset
+	origin.x = lerp(origin.x, origin.x + sway.x, sway_speed * delta)
+	origin.z = lerp(origin.z, origin.z + sway.y, sway_speed * delta)

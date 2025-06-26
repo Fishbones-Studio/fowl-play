@@ -18,8 +18,8 @@ height = 6.0
 
 [node name="Timmy" instance=ExtResource("1_qrjwk")]
 script = ExtResource("2_v7jq4")
-hover_height = 3.0
-hover_speed = 3.3
+hover_height = 2.0
+hover_speed = 6.0
 sway_amount = 0.3
 sway_speed = 1.5
 bob_amount = 0.2
@@ -40,10 +40,10 @@ bones/6/rotation = Quaternion(1.88628e-05, -0.263934, -0.00612756, 0.964521)
 bones/15/rotation = Quaternion(0.608175, 0.789837, -0.0341642, -0.0715082)
 bones/16/rotation = Quaternion(-0.152271, -0.0633618, 0.627185, 0.761208)
 bones/17/rotation = Quaternion(0.603147, 0.562482, -0.423732, -0.374538)
-bones/18/rotation = Quaternion(0.100591, 0.0211582, -0.0971377, 0.989949)
+bones/18/rotation = Quaternion(0.102429, -0.00862861, 0.191323, 0.97613)
 bones/19/rotation = Quaternion(-0.476393, -0.423732, 0.562481, 0.526417)
-bones/20/rotation = Quaternion(-0.0864337, -0.000724936, 0.180866, 0.979702)
-bones/21/rotation = Quaternion(-0.0333183, 0.286847, 0.957181, -0.0203193)
+bones/20/rotation = Quaternion(-0.0755333, -0.0420241, -0.310335, 0.946689)
+bones/21/rotation = Quaternion(-0.044801, 0.120769, 0.991654, 0.00545608)
 
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
