@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bui4rhhn3h7rl"
-path.s3tc="res://.godot/imported/insighter_EyeLeft Base Color.png-506c24c3563a10c08714c95be2548f33.s3tc.ctex"
-path.etc2="res://.godot/imported/insighter_EyeLeft Base Color.png-506c24c3563a10c08714c95be2548f33.etc2.ctex"
+uid="uid://bq0mr2cvlt0up"
+path.s3tc="res://.godot/imported/insighter_EyeRight Base Color.png-eeab6bf5c3157c5411d9932f185622cb.s3tc.ctex"
+path.etc2="res://.godot/imported/insighter_EyeRight Base Color.png-eeab6bf5c3157c5411d9932f185622cb.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "03eb3d3d4b1ef65e0d301a6215269049"
+"md5": "50d8e9b3e642042893be224bee6640bf"
 }
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter_EyeLeft Base Color.png"
-dest_files=["res://.godot/imported/insighter_EyeLeft Base Color.png-506c24c3563a10c08714c95be2548f33.s3tc.ctex", "res://.godot/imported/insighter_EyeLeft Base Color.png-506c24c3563a10c08714c95be2548f33.etc2.ctex"]
+source_file="res://level/arena/props/interactable/shop/art/insighter_EyeRight Base Color.png"
+dest_files=["res://.godot/imported/insighter_EyeRight Base Color.png-eeab6bf5c3157c5411d9932f185622cb.s3tc.ctex", "res://.godot/imported/insighter_EyeRight Base Color.png-eeab6bf5c3157c5411d9932f185622cb.etc2.ctex"]
 
 [params]
 
