@@ -2,7 +2,7 @@ class_name ControllerMappings
 
 const ASSETS_PATH: String = "res://addons/controller_icons/assets/"
 
-const CONTROLLER_NAMES_XBOX: Array[String] = ["xbox", "x-input"]
+const CONTROLLER_NAMES_XBOX: Array[String] = ["xbox", "x-input", "valve", "neptune", "steamdeck", "steam deck", "steam"] # For steam deck as well since they have the same icon names
 const CONTROLLER_NAMES_SONY: Array[String] = ["ps4", "ps3", "ps5", "dualsense", "sony", "dualshock"]
 const CONTROLLER_NAMES_SWITCH: Array[String] = ["switch", "nintendo"]
 
