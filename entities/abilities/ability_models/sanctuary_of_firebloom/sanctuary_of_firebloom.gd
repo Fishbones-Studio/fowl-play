@@ -3,10 +3,9 @@ extends Ability
 @export var max_blasts: int = 5
 @export var blast_interval: float = 0.25
 @export var blast_increment: float = 0.05
-@export var final_blast_multplier: float = 2.0
 @export var stun_time: float = 0.15
 
-var damage: float:
+var base_damage: float:
 	get:
 		var stats: LivingEntityStats = ability_holder.stats
 		return (max_blasts / blast_interval) * (1.0 + (stats.attack / 100))
@@ -39,7 +38,7 @@ func activate(_force_activate: bool = false) -> void:
 
 	_hit_bodies.clear()
 	_blast_count = 0
-	_current_damage = damage
+	_current_damage = base_damage
 
 	_toggle_collision_masks(true, hit_area, true)
 
@@ -92,14 +91,14 @@ func _on_blast_timer_timeout() -> void:
 
 	_blast_count += 1
 	if _blast_count < max_blasts:
-		_current_damage = damage * (1.0 + (_blast_count * blast_increment))
+		_current_damage = base_damage * (1.0 + (_blast_count * blast_increment))
 		blast_timer.start()
 		sound_effect.play()
 	elif _blast_count == max_blasts:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
 		_play_blast_sound_effect(max_blasts)
-		_current_damage = damage * final_blast_multplier
+		_current_damage = base_damage * ((1.0 + 2 * (_blast_count * blast_increment)))
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false

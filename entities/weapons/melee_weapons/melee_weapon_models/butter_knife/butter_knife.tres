@@ -15,7 +15,7 @@ name = "Butter Knife"
 purchasable = true
 is_free = false
 drop_chance = 40
-cost = 75
+cost = 100
 currency_type = 0
 description = "Deals %s Base Damage with a quick stab after winding up for %s. The attack lasts %s, then enters a cooldown state for %s, and stuns targets hit for %s."
 short_description = "The user delivers [color=yellow]quick stabs[/color] in rapid succession, dealing [color=yellow]minor[/color] damage and applying a [color=yellow]light[/color] stun to targets."

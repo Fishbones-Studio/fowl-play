@@ -19,7 +19,7 @@ name = "Feather"
 purchasable = true
 is_free = false
 drop_chance = 70
-cost = 100
+cost = 50
 currency_type = 0
 description = "A stolen feather, still burning with its owner's wrath, its color now faded by sorrow. 
 

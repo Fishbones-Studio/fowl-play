@@ -15,7 +15,7 @@ name = "Silent Roost"
 purchasable = true
 is_free = true
 drop_chance = 30
-cost = 75
+cost = 150
 currency_type = 0
 description = "The user regains energy silently, increasing [color=orange]Stamina[/color] by %s."
 short_description = ""

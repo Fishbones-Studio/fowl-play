@@ -15,7 +15,7 @@ name = "Protectors Peck"
 purchasable = true
 is_free = true
 drop_chance = 95
-cost = 125
+cost = 150
 currency_type = 0
 description = "The user’s peck is fortified by a guardian force, increasing [color=orange]Defense[/color] by %s."
 short_description = ""

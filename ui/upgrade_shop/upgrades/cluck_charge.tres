@@ -15,7 +15,7 @@ name = "Cluck Charge"
 purchasable = true
 is_free = true
 drop_chance = 40
-cost = 75
+cost = 100
 currency_type = 0
 description = "The user gains a powerful burst of energy, increasing [color=orange]Stamina[/color] by %s."
 short_description = ""

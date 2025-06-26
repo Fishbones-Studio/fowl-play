@@ -15,7 +15,7 @@ name = "Quickstep"
 purchasable = true
 is_free = true
 drop_chance = 25
-cost = 175
+cost = 200
 currency_type = 0
 description = "The user moves with greater swiftness, increasing [color=orange]Speed[/color] by %s."
 short_description = ""

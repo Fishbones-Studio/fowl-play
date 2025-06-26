@@ -14,8 +14,8 @@ weight_bonus = 0.0
 name = "Feather Fortification"
 purchasable = true
 is_free = true
-drop_chance = 60
-cost = 80
+drop_chance = 80
+cost = 100
 currency_type = 0
 description = "The user’s feathers toughen, providing extra resilience and increasing [color=orange]Health[/color] by %s."
 short_description = ""

@@ -15,7 +15,7 @@ name = "Ironwing Shield"
 purchasable = true
 is_free = true
 drop_chance = 75
-cost = 25
+cost = 50
 currency_type = 0
 description = "The user’s wings forge into an unbreakable shield, increasing [color=orange]Defense[/color] by %s."
 short_description = ""

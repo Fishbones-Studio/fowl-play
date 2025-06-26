@@ -15,7 +15,7 @@ name = "Steel Wing"
 purchasable = true
 is_free = true
 drop_chance = 20
-cost = 50
+cost = 100
 currency_type = 0
 description = "The user’s wings become as strong as steel, increasing [color=orange]Defense[/color] by %s."
 short_description = ""

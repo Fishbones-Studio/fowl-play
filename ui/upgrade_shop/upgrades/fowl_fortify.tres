@@ -15,7 +15,7 @@ name = "Fowl Fortify"
 purchasable = true
 is_free = true
 drop_chance = 85
-cost = 150
+cost = 200
 currency_type = 0
 description = "The user’s fighting spirit strengthens their body and claws, increasing [color=orange]Attack[/color] by %s and [color=orange]Defense[/color] by %s."
 short_description = ""

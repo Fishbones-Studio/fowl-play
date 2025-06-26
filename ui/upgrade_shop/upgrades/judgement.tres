@@ -7,8 +7,8 @@
 script = ExtResource("1_ykcvr")
 health_bonus = 100
 stamina_bonus = 100
-attack_bonus = 25
-defense_bonus = 50
+attack_bonus = 20
+defense_bonus = 40
 speed_bonus = 2
 weight_bonus = 0.0
 name = "Judgement"

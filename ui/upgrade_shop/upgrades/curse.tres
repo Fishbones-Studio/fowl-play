@@ -15,7 +15,7 @@ name = "Curse"
 purchasable = true
 is_free = true
 drop_chance = 20
-cost = 90
+cost = 50
 currency_type = 0
 description = "The user suffers a ruthless curse, decreasing [color=orange]Health[/color] by %s while increasing [color=orange]Attack[/color] by %s, [color=orange]Defense[/color] by %s and [color=orange]Weight[/color] by %s."
 short_description = ""
