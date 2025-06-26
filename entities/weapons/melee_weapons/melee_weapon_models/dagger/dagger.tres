@@ -15,7 +15,7 @@ name = "Dagger"
 purchasable = true
 is_free = false
 drop_chance = 12
-cost = 100
+cost = 125
 currency_type = 0
 description = "Deals %s Base Damage per hit after winding up for %s. The attack lasts %s, then enters a cooldown state for %s, and stuns targets hit for %s.
 

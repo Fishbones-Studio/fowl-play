@@ -15,7 +15,7 @@ name = "Feather Dance"
 purchasable = true
 is_free = true
 drop_chance = 50
-cost = 150
+cost = 140
 currency_type = 0
 description = "The user ruffles its feathers and increases its [color=orange]Speed[/color] by %s."
 short_description = ""

@@ -15,7 +15,7 @@ name = "Heavy Feather"
 purchasable = true
 is_free = true
 drop_chance = 30
-cost = 100
+cost = 40
 currency_type = 0
 description = "The user’s feathers grow dense and heavy, increasing [color=orange]Weight[/color] by %s."
 short_description = ""

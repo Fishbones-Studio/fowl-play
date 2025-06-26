@@ -15,7 +15,7 @@ name = "Wish"
 purchasable = true
 is_free = true
 drop_chance = 95
-cost = 50
+cost = 20
 currency_type = 0
 description = "The user’s wish grants greater toughness, increasing [color=orange]Health[/color] by %s."
 short_description = ""

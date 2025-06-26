@@ -34,7 +34,7 @@ script = ExtResource("2_7fey8")
 health_consumption = 20
 damage_duration = 2.0
 damage_interval = 0.2
-peak_burn_modifier = 175
+peak_burn_modifier = 150
 max_multiplier = 10.0
 current_ability = ExtResource("3_nqrm3")
 

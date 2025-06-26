@@ -15,7 +15,7 @@ name = "Swift Roost"
 purchasable = true
 is_free = true
 drop_chance = 50
-cost = 50
+cost = 45
 currency_type = 0
 description = "The user flaps its wings and takes off from the roost, increasing [color=orange]Speed[/color] by %s."
 short_description = ""
