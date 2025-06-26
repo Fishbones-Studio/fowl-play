@@ -3,7 +3,7 @@ extends Ability
 @export var max_blasts: int = 5
 @export var blast_interval: float = 0.25
 @export var blast_increment: float = 0.05
-@export var final_blast_multplier: float = 2.0
+@export var final_blast_multplier: float = 1.5
 @export var stun_time: float = 0.15
 
 var damage: float:
@@ -99,7 +99,7 @@ func _on_blast_timer_timeout() -> void:
 		gpu_particles.explosiveness = 1.0
 		gpu_particles.amount = max_blasts
 		_play_blast_sound_effect(max_blasts)
-		_current_damage = damage * final_blast_multplier
+		_current_damage = damage * ((1.0 + final_blast_multplier * (_blast_count * blast_increment)))
 		blast_timer.start()
 	else:
 		gpu_particles.emitting = false
