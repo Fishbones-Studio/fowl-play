@@ -29,13 +29,7 @@ func _ready():
 func _apply_gravity(delta: float) -> void:
 	_time += delta
 
-	# Calculate offsets
-	var sway: Vector2 = Vector2(
-		sin(_time * sway_speed + _sway_offset.x) * sway_amount,
-		cos(_time * sway_speed * 0.8 + _sway_offset.y) * sway_amount
-	)
 	var bob: float = sin(_time * bob_speed) * bob_amount
-
 	var origin: Vector3 = global_position
 	var target: Vector3 = origin - Vector3.UP * RAY_LENGTH
 
