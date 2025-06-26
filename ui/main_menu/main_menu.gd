@@ -13,7 +13,7 @@ var _total_scenes_to_preload: int = 0
 
 
 func _ready() -> void:
-	version_label.text = "Version %s" % ProjectSettings.get_setting("application/config/version")
+	version_label.text = "Version: %s" % ProjectSettings.get_setting("application/config/version")
 
 	SettingsManager.load_settings(get_viewport(), get_window())
 
