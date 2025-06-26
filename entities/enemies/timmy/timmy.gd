@@ -55,7 +55,3 @@ func _apply_gravity(delta: float) -> void:
 			velocity.y += hover_speed * delta
 	else:
 		velocity.y -= hover_speed * delta
-
-	# Apply horizontal sway with offset
-	origin.x = lerp(origin.x, origin.x + sway.x, sway_speed * delta)
-	origin.z = lerp(origin.z, origin.z + sway.y, sway_speed * delta)
