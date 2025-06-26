@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://18tmfpnik0vd"
-path="res://.godot/imported/insighter.glb-8c860171e37f3ee3aec4eab72878d688.scn"
+path="res://.godot/imported/insighter.glb-be4ece19bb5a302ed0060e33db6e9d21.scn"
 
 [deps]
 
-source_file="res://entities/enemies/insighter/art/insighter.glb"
-dest_files=["res://.godot/imported/insighter.glb-8c860171e37f3ee3aec4eab72878d688.scn"]
+source_file="res://level/arena/props/interactable/shop/art/insighter.glb"
+dest_files=["res://.godot/imported/insighter.glb-be4ece19bb5a302ed0060e33db6e9d21.scn"]
 
 [params]
 
