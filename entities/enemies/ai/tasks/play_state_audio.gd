@@ -26,11 +26,12 @@ extends BTAction
 @export var audio_volume: float = 0.0 :
 	set(value):
 		audio_volume = value
-		if agent && agent.state_audio_player:
+		if agent and agent.state_audio_player:
 			agent.state_audio_player.volume_db = value
 
 var audio_started: bool = false
 var audio_completed: bool = false
+
 
 func _generate_name() -> String:
 	if file_to_play.is_empty():
@@ -41,6 +42,7 @@ func _generate_name() -> String:
 
 	# Format the final string for the Behavior Tree editor.
 	return "PlayEnemyAudio: %s%s" % [file_name, type_suffix]
+
 
 func _enter() -> void:
 	# Reset state
