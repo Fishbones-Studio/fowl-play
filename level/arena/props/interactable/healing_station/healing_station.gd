@@ -13,6 +13,7 @@ func _ready() -> void:
 
 
 func interact() -> void:
+	await get_tree().process_frame
 	SignalManager.add_ui_scene.emit(UIEnums.UI.HEALING_CONFIRMATION, {
 		"heal_purchased_signal": heal_purchased,
 		"health": health,
